@@ -10,6 +10,11 @@ targets:
   windows:
     var:
       configure_opt: '--target=[% c("arch") %]-w64-mingw32 --disable-multilib --enable-deterministic-archives'
+  linux-cross:
+    var:
+      # gold is disabled on cross-compiles until we upgrade to glibc 2.26 and
+      # binutils 2.28
+      configure_opt: '--target=[% c("var/crosstarget") %] --disable-multilib --enable-deterministic-archives --enable-plugins'
 
 input_files:
   - URL: https://ftp.gnu.org/gnu/binutils/binutils-[% c("version") %].tar.xz

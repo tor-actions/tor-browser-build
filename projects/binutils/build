@@ -23,7 +23,11 @@ cd [% project %]-[% c("version") %]
 make -j[% c("num_procs") %] MAKEINFO=true
 make install MAKEINFO=true
 
-[% IF c("var/linux") %]
+# gold is disabled for linux-cross, because of
+# https://sourceware.org/bugzilla/show_bug.cgi?id=14995
+# Once we upgrade to glibc 2.26, we might be able to enable gold for
+# linux-cross.
+[% IF c("var/linux") && ! c("var/linux-cross") %]
   # Make sure gold is used with the hardening wrapper for full RELRO, see #13031.
   cd $distdir/bin
   rm ld
