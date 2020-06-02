@@ -62,6 +62,7 @@ Tor Browser 9.5 -- June 2 2020
  * OS X
    * Bug 32505: Tighten our rules in our entitlements file for macOS
  * Linux
+   * Bug 27903: Tor Browser 8 does not respect gtk3 settings
    * Bug 34315: Avoid reading policies from /etc/firefox on Linux
  * Android
    * Bug 26529: Notify user about possible proxy-bypass before opening external app
