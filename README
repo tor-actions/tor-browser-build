@@ -4,12 +4,10 @@ Tor Browser Build
 Installing build dependencies
 -----------------------------
 
-To build Tor Browser, you need a Linux distribution that has support
-for runc (such as Debian Buster, Ubuntu 16.04, Fedora 30, etc ...).
-
-Your user account should have sudo access, which is required to be able
-to extract container file systems, start containers and copy files to and
-from containers.
+To build Tor Browser, you need a recent Linux distribution with support
+for user_namespaces(7) (such as Debian Buster, Ubuntu 16.04, Fedora 30,
+etc ...). You will need to install the uidmap package, providing the
+newuidmap and newgidmap commands.
 
 The sources of most components are downloaded using git, which needs to
 be installed.
@@ -40,11 +38,19 @@ If you are running Debian or Ubuntu, you can install them with:
                   libio-captureoutput-perl libjson-perl libpath-tiny-perl \
                   libstring-shellquote-perl libsort-versions-perl \
                   libdigest-sha-perl libdata-uuid-perl libdata-dump-perl \
-                  libfile-copy-recursive-perl libfile-slurp-perl git runc
+                  libfile-copy-recursive-perl libfile-slurp-perl git \
+                  uidmap
 
 The build system is based on rbm, which is included as a git submodule
 in the rbm/ directory. You can fetch the rbm git submodule by running
 'make submodule-update'.
+
+The build uses user_namespaces(7), which are disabled by default on Debian.
+To enable them you can use the following command as root:
+
+  # sysctl -w kernel.unprivileged_userns_clone=1
+
+You can enable them permanently by adding the setting to /etc/sysctl.d/
 
 
 Starting a build

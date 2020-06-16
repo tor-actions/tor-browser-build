@@ -70,9 +70,9 @@ remote_get: |
     SET dst = shell_quote(c('get_dst', { error_if_undef => 1 }));
   -%]
   mkdir -p "[% dst %]"
-  sudo tar -C "[% c("var/container/dir") %]/rootfs" -czf "[% dst %]/[% c("filename") %]" .
+  [% c("rbmdir") %]/container archive '[% c("var/container/dir") %]' "[% dst %]/[% c("filename") %]"
 
 input_files:
-  - project: debootstrap-image
+  - project: mmdebstrap-image
     target:
       - '[% c("var/container/suite") %]-[% c("var/container/arch") %]'

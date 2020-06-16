@@ -1,0 +1,30 @@
+diff --git a/mmdebstrap b/mmdebstrap
+index 9b7d892..5d85a74 100755
+--- a/mmdebstrap
++++ b/mmdebstrap
+@@ -204,6 +204,7 @@ sub get_tar_compressor {
+ }
+ 
+ sub test_unshare {
++    return 1;
+     my $verbose = shift;
+     if ($EFFECTIVE_USER_ID == 0) {
+         my $msg = "cannot use unshare mode when executing as root";
+@@ -382,7 +383,7 @@ sub get_unshare_cmd {
+     my $idmap = shift;
+ 
+     my $unshare_flags
+-      = $CLONE_NEWUSER | $CLONE_NEWNS | $CLONE_NEWPID | $CLONE_NEWUTS
++      = $CLONE_NEWNS | $CLONE_NEWPID | $CLONE_NEWUTS
+       | $CLONE_NEWIPC;
+ 
+     if (0) {
+@@ -457,6 +458,8 @@ sub get_unshare_cmd {
+                     $gidmapcmd .= " $hostid $nsid $range";
+                 }
+             }
++	    $uidmapcmd = "";
++	    $gidmapcmd = "";
+             my $idmapcmd = '';
+             if ($uidmapcmd ne "") {
+                 0 == system "newuidmap $ppid $uidmapcmd"

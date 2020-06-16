@@ -305,6 +305,29 @@ The path to the container should be printed on the screen in case you
 want to backup its rootfs to be able to look at it later.
 
 
+Manually removing old containers
+--------------------------------
+
+When a build finishes or when you exit a debugging shell, the old
+container should automatically be removed. In some cases however, for
+example your computer is rebooted in the middle of a build, some old
+container directories may be left in the tmp directory. Some of the
+files in the container directories are owned by subordinate user ids
+(see the subuid man page), which will prevent you from removing them
+with your normal user id. To remove them you can open a container
+shell (a new User namespace) using the following command:
+
+   $ ./rbm/container run -- /bin/bash
+
+From this shell you should be able to remove the old containers
+directories in the tmp directory.
+
+It is also possible to pass the rm command directly without opening a
+shell:
+
+   $ ./rbm/container run -- rm -Rf ./tmp/rbm-*
+
+
 Testing an rbm patch
 --------------------
 
