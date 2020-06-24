@@ -3,6 +3,7 @@ Tor Browser 9.5.1 -- June 30 2020
    * Update Firefox to 68.10.0esr
    * Update NoScript to 11.0.32
    * Translations update
+   * Bug 40009: Improve tor's client auth stability
  * Windows + OS X + Linux
    * Bug 34361: "Prioritize .onion sites when known" appears under General
    * Bug 34362: Improve Onion Service Authentication prompt
