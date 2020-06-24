@@ -91,6 +91,10 @@ openssldir=/var/tmp/dist/openssl/openssl
 [% END %]
 
 cd /var/tmp/build/[% project %]-[% c('version') %]
+
+# Cherry-pick patch until 0.4.3.6 is released.
+patch -p1 < $rootdir/0001-hs-v3-Improve-accessor-semantic-of-client-cached-obj.patch
+
 # add git hash to micro-revision.i for #24995
 echo '"[% c("abbrev", { abbrev_length => 16 }) %]"' > micro-revision.i
 ./autogen.sh

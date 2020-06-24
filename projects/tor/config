@@ -68,3 +68,4 @@ input_files:
   - name: zstd
     project: zstd
     enable: '[% c("var/android") %]'
+  - filename: 0001-hs-v3-Improve-accessor-semantic-of-client-cached-obj.patch
