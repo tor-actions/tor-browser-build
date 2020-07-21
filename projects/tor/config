@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %]'
-version: 0.4.3.5
+version: 0.4.3.6
 git_hash: 'tor-[% c("version") %]'
 git_url: https://git.torproject.org/tor.git
 git_submodule: 1
@@ -68,4 +68,3 @@ input_files:
   - name: zstd
     project: zstd
     enable: '[% c("var/android") %]'
-  - filename: 0001-hs-v3-Improve-accessor-semantic-of-client-cached-obj.patch
