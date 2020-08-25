@@ -6,7 +6,7 @@ Tor Browser 9.5.4 -- August 25 2020
  * Windows + OS X + Linux
    * Bug 40019: Onion-Location should not be processed on .onion webpages [tor-browser]
  * OS X
-   * Bug 40015: Tor Browser is broken on MacOS 11 Big Sur
+   * Bug 40015: Tor Browser is broken on MacOS 11 Big Sur [tor-browser]
 
 Tor Browser 9.5.3 -- July 28 2020
  * All Platforms
