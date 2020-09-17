@@ -3,7 +3,7 @@ rbm=./rbm/rbm
 all: release
 
 release: submodule-update
-	$(rbm) build release --target release --target torbrowser-all
+	$(rbm) build release --target release --target torbrowser-all-desktop
 
 release-android: submodule-update
 	$(rbm) build release --target release --target torbrowser-all-android
