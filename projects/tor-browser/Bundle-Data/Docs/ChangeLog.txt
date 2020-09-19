@@ -23,7 +23,6 @@ Tor Browser 10.0 -- September 22 2020
    * Bug 30682: Disable Intermediate CA Preloading
    * Bug 30812: Exempt about: pages from Resist Fingerprinting
    * Bug 31918+33533+40024+40037: Rebase Tor Browser esr68 patches for ESR 78 [tor-browser]
-   * Bug 32017: Use ExtensionStorageIDB again
    * Bug 32612: Update MAR_CHANNEL_ID for the alpha
    * Bug 32886: Separate treatment of @media interaction features for desktop and android
    * Bug 33534: Review FF release notes from FF69 to latest (FF78)
