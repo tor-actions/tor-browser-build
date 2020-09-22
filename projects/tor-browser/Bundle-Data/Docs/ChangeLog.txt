@@ -68,8 +68,7 @@ Tor Browser 10.0 -- September 22 2020
    * Bug 40102: Fix UI bugs in Tor Browser 10.0 alpha [tor-browser]
    * Bug 40106: Cannot install addons in full screen mode [tor-browser]
    * Bug 40109: Playing video breaks after reloading pages [tor-browser]
-   * Big 40119: Enable v3 extension blocklisting again [tor-browser]
-   * Translations update
+   * Bug 40119: Enable v3 extension blocklisting again [tor-browser]
  * Windows
    * Bug 33855: Don't use site's icon as window icon in Windows in private mode
    * Bug 40061: Omit the Windows default browser agent from the build [tor-browser]
