@@ -3,7 +3,6 @@ Tor Browser 10.0a8 -- October 8 2020
    * Update Fenix to 81.1.2
    * Update Tor to 0.4.4.5
    * Update NoScript to 11.0.46
-   * Update HTTPS Everywhere to 2020.08.13
    * Bug 10394: Let Tor Browser update HTTPS Everywhere
    * Bug 11154: Disable TLS 1.0 (and 1.1) by default
    * Bug 16931: Sanitize the add-on blocklist update URL
@@ -123,9 +122,9 @@ Tor Browser 10.0a8 -- October 8 2020
      * Bug 34187: Update zlib to use Android NDK 20
      * Bug 40010: Add nss project for application-services [tor-browser-build]
      * Bug 40011: Add sqlcipher for application-services [tor-browser-build]
-     * Bug 40029: Clean-up all projects to remove fennec bits we don't need for fenix
+     * Bug 40029: Clean-up all projects to remove fennec bits we don't need for fenix [tor-browser-build]
      * Bug 40031: Add licenses for kcp-go and smux. [tor-browser-build]
-     * Bug 40039: Remove version_path in nss project
+     * Bug 40039: Remove version_path in nss project [tor-browser-build]
      * Bug 40040: Wire geckoview, application-services, android-components, and fenix together [tor-browser-build]
      * Bug 40054: Adapt build.android script in tor-browser project for fenix [tor-browser-build]
      * Bug 40055: Integrate building Glean in offline mode [tor-browser-build]
@@ -142,7 +141,7 @@ Tor Browser 10.0a8 -- October 8 2020
      * Bug 40085+40086: classes.dex files are not reproducible in Fenix [tor-browser-build]
      * Bug 40087: Deterministically add HTTPS Everywhere into omni.ja [tor-browser-build]
      * Bug 40088+40117: Use MOZ_BUILD_DATE for extension manifest timestamps [tor-browser-build]
-     * Bug 40093: Ensure application-services libs do not include libc networking symbols
+     * Bug 40093: Ensure application-services libs do not include libc networking symbols [tor-browser-build]
      * Bug 40094: Aarch64 fenix rust cross-compilation fails [tor-browser-build]
      * Bug 40095: The pattern for the apk variable in build.android is matching too much [tor-browser-build]
      * Bug 40101: Pick up Fenix 81.1.1 [tor-browser-build]
