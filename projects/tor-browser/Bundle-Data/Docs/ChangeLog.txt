@@ -14,6 +14,8 @@ Tor Browser 10.0.1 -- October 13 2020
    * Windows + OS X + Linux
      * Bump Go to 1.14.9
      * Bump openssl to 1.1.1h
+   * Windows
+	 * Bug 40051: Remove SOURCE_DATE_EPOCH patch
 
 Tor Browser 10.0 -- September 22 2020
  * Windows + OS X + Linux
