@@ -4,6 +4,8 @@ Tor Browser 10.0.2 -- October 20 2020
    * Update NoScript to 11.1.3
    * Bug 40192: Backport Mozilla Bug 1658881
    * Translations update
+ * Linux
+   * Bug 40193: Add `AT_EMPTY_PATH` definition
 
 Tor Browser 10.0.1 -- October 13 2020
  * Windows + OS X + Linux
