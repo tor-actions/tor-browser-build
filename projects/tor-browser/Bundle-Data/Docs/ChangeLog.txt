@@ -2,10 +2,10 @@ Tor Browser 10.0.2 -- October 20 2020
  * Windows + OS X + Linux
    * Update Firefox to 78.4.0esr
    * Update NoScript to 11.1.3
-   * Bug 40192: Backport Mozilla Bug 1658881
+   * Bug 40192: Backport Mozilla Bug 1658881 [tor-browser]
    * Translations update
  * Linux
-   * Bug 40193: Add `AT_EMPTY_PATH` definition
+   * Bug 40193: Add `AT_EMPTY_PATH` definition [tor-browser]
 
 Tor Browser 10.0.1 -- October 13 2020
  * Windows + OS X + Linux
@@ -24,7 +24,7 @@ Tor Browser 10.0.1 -- October 13 2020
      * Bump Go to 1.14.9
      * Bump openssl to 1.1.1h
    * Windows
-	 * Bug 40051: Remove SOURCE_DATE_EPOCH patch [tor-browser-build]
+     * Bug 40051: Remove SOURCE_DATE_EPOCH patch [tor-browser-build]
 
 Tor Browser 10.0 -- September 22 2020
  * Windows + OS X + Linux
@@ -76,7 +76,6 @@ Tor Browser 10.0 -- September 22 2020
    * Bug 40006: Fix new identity for 81 [torbutton]
    * Bug 40007: Move SecurityPrefs initialization to the StartupObserver component [torbutton]
    * Bug 40008: Style fixes for 78 [torbutton]
-   * Bug 40016: Update Snowflake to discover NAT type [tor-browser-build]
    * Bug 40017: Audit Firefox 68-78 diff for proxy issues [tor-browser]
    * Bug 40022: Update new icons in Tor Browser branding [tor-browser]
    * Bug 40025: Revert add-on permissions due to Mozilla's 1560059 [tor-browser]
