@@ -4,6 +4,7 @@ Tor Browser 10.0a9 -- October 26 2020
    * Update NoScript to 11.1.3
    * Update OpenSSL to 1.1.1h
    * Bug 30605: Honor privacy.spoof_english
+   * Bug 40003: Block starting Tor when setup is not complete [tor-android-service]
    * Bug 40004: "Tor Browser" string is used instead of "Alpha"/"Nightly" for non en-US locales [tor-android-service]
    * Bug 40016: Allow inheriting from AddonCollectionProvider [android-components]
    * Bug 40017: Rebase android-components patches to 60 [android-components]
