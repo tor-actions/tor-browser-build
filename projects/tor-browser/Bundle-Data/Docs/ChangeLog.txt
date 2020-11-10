@@ -1,9 +1,9 @@
 Tor Browser 10.0.4 -- November 9 2020
  * Android
+   * Pick up fix for Mozilla's bug 1675905 (with GeckoView 82.0.3)
    * Update NoScript to 11.1.5
    * Bug 40022: EOY November Update - Matching [torbutton]
    * Bug 40106: EOY November Update - Matching [fenix]
-   * Bug 40219: Backport Mozilla Bug 1675905 [tor-browser]
    * Translations update
  * Build System
    * Android
