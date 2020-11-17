@@ -35,6 +35,7 @@
 # 2) Let LD_LIBRARY_PATH point to the mar-tools directory
 # 3) Let NSS_DB_DIR point to the directory containing the database with the
 #    signing certificate to check against.
+# 4) Let CHANNEL be the expected update channel
 #
 #    To create the database to use for signature checking import the
 #    release*.der certificate of your choice found in
@@ -63,6 +64,12 @@ fi
 if [ -z "$NSS_DB_DIR" ]
 then
   echo "The path to your nssdb directory is missing!"
+  exit 1
+fi
+
+if [ -z "$CHANNEL" ]
+then
+  echo "The update channel is missing! ([nightly|alpha|release])"
   exit 1
 fi
 
@@ -96,6 +103,11 @@ for f in *.mar; do
            "corrupted!"
       badsigned_mars=$((badsigned_mars +1))
     fi
+  fi
+
+  # Test 1.5: Is the MAR file correctly signed by the correct channel key?
+  if [ ! "$($SIGNMAR -T "$f" | grep "MAR channel name")" = "    - MAR channel name: torbrowser-torproject-${CHANNEL}" ]; then
+      echo "$f contains wrong update channel!"
   fi
 
   # Test 2: Do we get the old SHA-256 sum after stripping the MAR signature? We

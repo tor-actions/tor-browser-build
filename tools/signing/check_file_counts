@@ -1,0 +1,168 @@
+#!/bin/bash
+
+#set -x
+#set -e
+
+VERSION=$1
+LANG_COUNT=$2
+INCREMENTAL_VERSIONS="$3"
+SIGNERS="$4"
+
+if [ "$#" -ne 4 ]; then
+    echo "<version> <lang_count> <incrementals> <signers>"
+    exit
+fi
+
+INSTALL_PLATFORMS="tor-browser-linux32-${VERSION}_\*.tar.xz tor-browser-linux64-${VERSION}_\*.tar.xz torbrowser-install-${VERSION}_\*.exe torbrowser-install-win64-${VERSION}_\*.exe TorBrowser-${VERSION}-osx64_\*.dmg"
+
+MAR_PLATFORMS="linux32 linux64 win32 win64 osx64"
+MAR_TOOLS_PLATFORMS="linux32 linux64 win32 win64 mac64"
+
+total_count=0
+remaining_files=$(ls)
+
+for p in ${INSTALL_PLATFORMS}; do
+  expand_p=$(echo "${p}" | sed 's/\\\*/*/g')
+  test "$(ls ${expand_p} 2>/dev/null | wc -l)" = "${LANG_COUNT}" || echo "${p} not ${LANG_COUNT}"
+  total_count=$(( total_count + LANG_COUNT ))
+  for f in ${expand_p}; do
+    remaining_files=$(echo "${remaining_files}" | sed 's/ '"${f}"' / /')
+  done
+done
+
+for p in ${INSTALL_PLATFORMS}; do
+  expand_p="$(echo "${p}" | sed 's/\\\*/*/g')"
+  test "$(ls ${expand_p}.asc 2>/dev/null | wc -l)" = "${LANG_COUNT}" || echo "${p}.asc not ${LANG_COUNT}"
+  total_count=$(( total_count + LANG_COUNT ))
+  for f in ${expand_p}; do
+    remaining_files=$(echo "${remaining_files}" | sed 's/ '"${f}.asc"' / /')
+  done
+done
+
+p=tor-browser-"${VERSION}"-android-\*-multi\*.apk
+expand_p="$(echo "${p}" | sed 's/\\\\\*/*/g')"
+test "$(ls ${expand_p} 2>/dev/null | wc -l)" = 8 || echo "${p} not 8"
+total_count=$(( total_count + 8 ))
+for f in ${expand_p}; do
+  remaining_files=$(echo "${remaining_files}" | sed 's/ '"${f}"' / /')
+done
+test "$(ls ${expand_p}.asc 2>/dev/null | wc -l)" = 8 || echo "${p}.asc not 8"
+total_count=$(( total_count + 8 ))
+for f in ${expand_p}; do
+  remaining_files=$(echo "${remaining_files}" | sed 's/ '"${f}.asc"' / /')
+done
+
+for p in ${MAR_PLATFORMS}; do
+  count=$(ls tor-browser-"${p}"-"${VERSION}"_*.mar 2>/dev/null | wc -l)
+  test "${count}" -eq "${LANG_COUNT}" || echo "${p} not ${LANG_COUNT} (found $count)"
+  total_count=$(( total_count + count ))
+  for f in tor-browser-"${p}"-"${VERSION}"_*.mar; do
+    remaining_files=$(echo "${remaining_files}" | sed 's/ '"${f}"' / /')
+  done
+done
+
+for p in ${MAR_TOOLS_PLATFORMS}; do
+  test -f mar-tools-"${p}".zip || echo mar-tools-"${p}".zip does not exit
+  total_count=$(( total_count + 1 ))
+  remaining_files=$(echo "${remaining_files}" | sed 's/ 'mar-tools-"${p}".zip' / /')
+done
+
+for p in ${MAR_TOOLS_PLATFORMS}; do
+  test -f mar-tools-"${p}".zip.asc || echo mar-tools-"${p}".zip.asc does not exit
+  total_count=$(( total_count + 1 ))
+  remaining_files=$(echo "${remaining_files}" | sed 's/ 'mar-tools-"${p}".zip.asc' / /')
+done
+
+for p in ${MAR_PLATFORMS}; do
+  for i in ${INCREMENTAL_VERSIONS}; do
+    count="$(ls tor-browser-"${p}"-"${i}"-"${VERSION}"_*.mar 2>/dev/null | wc -l)"
+    test "${count}" -eq "${LANG_COUNT}" || echo "${p} ${i} incrementals not ${LANG_COUNT} (found $count)"
+    total_count=$(( total_count + count ))
+    for f in tor-browser-"${p}"-"${i}"-"${VERSION}"_*.mar; do
+      remaining_files=$(echo "${remaining_files}" | sed 's/ '"${f}"' / /')
+    done
+  done
+done
+
+for f in tor-win32-*.zip tor-win64-*.zip; do
+  test -f "${f}" || echo "${f} does not exist"
+  test -f "${f}.asc" || echo "${f}.asc does not exist"
+  total_count=$(( total_count + 2 ))
+  remaining_files=$(echo "${remaining_files}" | sed 's/[ ]*'"${f}"'[ ]*/ /')
+  remaining_files=$(echo "${remaining_files}" | sed 's/[ ]*'"${f}.asc"'[ ]*/ /')
+done
+
+for f in sha256sums-unsigned-build.txt sha256sums-unsigned-build.incrementals.txt sha256sums-signed-build.txt sha256sums-signed-build.incrementals.txt; do
+  test -f ${f} || echo ${f} does not exist
+  test -f ${f}.asc || echo ${f}.asc does not exist
+  total_count=$(( total_count + 2 ))
+  #remaining_files=$(echo ${remaining_files} | sed 's/ '${f}' / /')
+  remaining_files=$(echo "${remaining_files}" | sed 's/ '${f}' / /')
+  remaining_files=$(echo "${remaining_files}" | sed 's/ '${f}.asc' / /')
+done
+
+for s in ${SIGNERS}; do
+  for f in sha256sums-unsigned-build.txt sha256sums-unsigned-build.incrementals.txt; do
+    test -f "${f}.asc-${s}" || echo "${f}.asc-${s} does not exist"
+    total_count=$(( total_count + 1 ))
+    remaining_files="$(echo "${remaining_files}" | sed 's/ '"${f}.asc-${s}"' / /')"
+  done
+done
+
+for f in sha256sums-unsigned-build.txt sha256sums-unsigned-build.incrementals.txt; do
+  for s in "${f}".asc-*; do
+    gpg2 --quiet --verify "${s}" ${f}
+  done
+done
+
+for f in sha256sums-signed-build.txt sha256sums-signed-build.incrementals.txt; do
+  gpg2 --quiet --verify ${f}.asc ${f}
+done
+
+for f in sha256sums-signed-build.txt sha256sums-signed-build.incrementals.txt; do
+  sha256sum --quiet -c $f
+done
+
+f=geckodriver-linux64.tar.xz
+test -f ${f} || echo ${f} does not exist
+test -f ${f}.asc || echo ${f}.asc does not exist
+total_count=$(( total_count + 2 ))
+remaining_files="$(echo "${remaining_files}" | sed 's/[ ]*'"${f}"'[ ]*/ /')"
+remaining_files="$(echo "${remaining_files}" | sed 's/[ ]*'"${f}.asc"'[ ]*/ /')"
+
+for f in tor-browser-linux64-debug.tar.xz tor-linux32-debug.tar.xz tor-linux64-debug.tar.xz; do
+  test -f ${f} || echo ${f} does not exist
+  test -f ${f}.asc || echo ${f}.asc does not exist
+  total_count=$(( total_count + 2 ))
+  remaining_files="$(echo "${remaining_files}" | sed 's/[ ]*'"${f}"'[ ]*/ /')"
+  remaining_files="$(echo "${remaining_files}" | sed 's/[ ]*'"${f}.asc"'[ ]*/ /')"
+done
+
+test "$(ls src-firefox-tor-browser-*.tar.xz 2>/dev/null | wc -l)" = 1 || echo src-firefox-tor-browser-*.tar.xz is wrong
+test "$(ls src-firefox-tor-browser-*.tar.xz.asc 2>/dev/null | wc -l)" = 1 || echo src-firefox-tor-browser-*.tar.xz.asc is wrong
+total_count=$(( total_count + 2 ))
+f="$(ls src-firefox-tor-browser-*.tar.xz)"
+remaining_files="$(echo "${remaining_files}" | sed 's/[ ]*'"${f}"'[ ]*/ /')"
+remaining_files="$(echo "${remaining_files}" | sed 's/[ ]*'"${f}.asc"'[ ]*/ /')"
+
+test "$(ls src-tor-launcher-*.tar.xz 2>/dev/null | wc -l)" = 1 || echo src-tor-launcher-*.tar.xz is wrong
+test "$(ls src-tor-launcher-*.tar.xz.asc 2>/dev/null | wc -l)" = 1 || echo src-tor-launcher-*.tar.xz.asc is wrong
+total_count=$(( total_count + 2 ))
+f="$(ls src-tor-launcher-*.tar.xz)"
+remaining_files="$(echo "${remaining_files}" | sed 's/[ ]*'"${f}"'[ ]*/ /')"
+remaining_files="$(echo "${remaining_files}" | sed 's/[ ]*'"${f}.asc"'[ ]*/ /')"
+
+test "$(ls langpacks-tor-browser-linux64-*.tar.xz 2>/dev/null | wc -l)" = 1 || echo langpacks-tor-browser-linux64-*.tar.xz is wrong
+test "$(ls langpacks-tor-browser-linux64-*.tar.xz.asc 2>/dev/null | wc -l)" = 1 || echo langpacks-tor-browser-linux64-*.tar.xz.asc is wrong
+total_count=$(( total_count + 2 ))
+f="$(ls langpacks-tor-browser-linux64-*.tar.xz)"
+remaining_files="$(echo "${remaining_files}" | sed 's/[ ]*'"${f}"'[ ]*/ /')"
+remaining_files="$(echo "${remaining_files}" | sed 's/[ ]*'"${f}.asc"'[ ]*/ /')"
+
+# Expected file endings
+file_count_by_ending="$(ls ./*.tar.xz{,.asc} ./*.zip{,.asc} ./*.exe{,.asc} ./*.mar ./*.dmg{,.asc} ./*.apk{,.asc} ./*.txt{,.asc} ./*.txt.asc-* | wc -l)"
+test "${file_count_by_ending}" -eq ${total_count} || echo "Unexpected file endings: counted ${file_count_by_ending} vs ${total_count}"
+
+test "$(ls | wc -l)" -eq ${total_count} || echo "wrong total count: $(ls | wc -l) vs ${total_count}"
+echo "${remaining_files}"
+echo done.
