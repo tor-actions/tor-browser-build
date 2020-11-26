@@ -1,20 +1,20 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
 filename: 'fenix-[% c("version") %]-[% c("var/build_id") %].tar.gz'
-git_hash: 'tor-browser-[% c("var/fenix_version") %]-[% c("var/torbrowser_branch") %]-1-build3'
+git_hash: 'tor-browser-[% c("var/fenix_version") %]-[% c("var/torbrowser_branch") %]-1-build1'
 git_url: https://gitlab.torproject.org/tpo/applications/fenix.git
 tag_gpg_id: 1
 gpg_keyring: torbutton.gpg
 variant: Release
 
 var:
-  fenix_version: 83.0.0b2
-  torbrowser_branch: 10.5
+  fenix_version: 83.1.0
+  torbrowser_branch: 10.0
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   container:
     use_container: 1
   # This should be updated when the list of gradle dependencies is changed.
-  gradle_dependencies_version: 10
+  gradle_dependencies_version: 12
   # Switch to make it easier to grab all dependencies during a dry-run.
   fetch_gradle_dependencies: 0
 
