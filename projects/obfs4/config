@@ -39,3 +39,4 @@ input_files:
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
     enable: '[% c("var/android") %]'
+  - filename: update_azure_hpkp.patch

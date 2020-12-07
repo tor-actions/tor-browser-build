@@ -29,6 +29,7 @@ mkdir -p "$GOPATH/src/gitlab.com/yawning"
 ln -sf "$PWD" "$GOPATH/src/gitlab.com/yawning/obfs4.git"
 
 cd obfs4proxy
+patch -p1 < $rootdir/update_azure_hpkp.patch
 go build -ldflags '-s'
 cp -a obfs4proxy[% IF c("var/windows") %].exe[% END %] $PTDIR
 
