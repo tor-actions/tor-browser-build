@@ -1,3 +1,7 @@
+Tor Browser 10.0.6 -- December 8 2020
+ * Windows + OS X + Linux
+   * Bug 40175: Update obfs4proxy's TLS certificate public key pinning [tor-browser-build]
+
 Tor Browser 10.0.5 -- November 17 2020
  * Windows + OS X + Linux
    * Update Firefox to 78.5.0esr
