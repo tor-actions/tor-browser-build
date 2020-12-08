@@ -1,3 +1,16 @@
+Tor Browser 10.0.7 -- December 15 2020
+ * Windows + OS X + Linux
+   * Update Firefox to 78.6.0esr
+   * Update HTTPS Everywhere to 2020.11.17
+   * Bug 40166: Disable security.certerrors.mitm.auto_enable_enterprise_roots [tor-browser]
+   * Bug 40176: Update openssl to 1.1.1i [tor-browser-build]
+ * Linux
+   * Bug 40226: Crash on Fedora Workstation Rawhide GNOME [tor-browser]
+ * Build System
+   * Windows + OS X + Linux
+     * Bug 40139: Pick up rbm commit for bug 40008 [tor-browser-build]
+     * Bug 40161: Update Go compiler to 1.14.13 [tor-browser-build]
+
 Tor Browser 10.0.6 -- December 8 2020
  * Windows + OS X + Linux
    * Bug 40175: Update obfs4proxy's TLS certificate public key pinning [tor-browser-build]
