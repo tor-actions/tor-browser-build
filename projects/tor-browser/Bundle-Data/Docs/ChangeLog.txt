@@ -1,3 +1,31 @@
+Tor Browser 10.5a6 -- December 15 2020
+ * All Platforms
+   * Update NoScript to 11.1.6
+   * Bug 40175: Update obfs4proxy's TLS certificate public key pinning [tor-browser-build]
+   * Bug 40176: Update openssl to 1.1.1i [tor-browser-build]
+ * Windows + OS X + Linux
+   * Update Firefox to 78.6.0esr
+   * Update HTTPS Everywhere to 2020.11.17
+   * Update Tor to 0.4.5.2-alpha
+   * Bug 33803: Add a secondary nightly MAR signing key [tor-browser]
+   * Bug 40138: Move our primary nightly MAR signing key to tor-browser [tor-browser-build]
+   * Bug 40159: Update snowflake to ece43cbf [tor-browser-build]
+ * Android
+   * Update Fenix to 84.1.0
+ * Linux
+   * Bug 40226: Crash on Fedora Workstation Rawhide GNOME [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 40169: Update apt package cache after calling pre_pkginst, too [tor-browser-build]
+     * Bug 40183: Pick up Go 1.15.6 [tor-browser-build]
+   * Windows + OS X + Linux
+     * Bug 40081: Build Mozilla code with --enable-rust-simd [tor-browser-build]
+     * Bug 40166: Update apt cache before calling pre_pkginst in container-image config [tor-browser-build]
+   * Android
+     * Bug 40184: Update Fenix and deps to 84.1.0 [tor-browser-build]
+   * OS X
+     * Bug 40147: Remove RANLIB workaround once we pick up 0.4.5.2-alpha [tor-browser-build]
+
 Tor Browser 10.5a5 -- December 7 2020
  * Android
    * Update Fenix to 84.0.0-beta.2
@@ -14,7 +42,6 @@ Tor Browser 10.5a5 -- December 7 2020
      * Bug 40081: Build Mozilla code with --enable-rust-simd [tor-browser-build]
      * Bug 40128: Allow updating Fenix allowed_addons.json [tor-browser-build]
      * Bug 40140: Create own Gradle project [tor-browser-build]
-     * Bug 40147: Remove RANLIB workaround once we pick up 0.4.5.2-alpha [tor-browser-build]
      * Bug 40155: Update toolchain for Fenix 84 [tor-browser-build]
      * Bug 40156: Update Fenix and dependencies to 84.0.0-beta2 [tor-browser-build]
      * Bug 40161: Pick up Go 1.15.5 [tor-browser-build]
