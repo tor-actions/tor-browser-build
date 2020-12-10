@@ -6,6 +6,7 @@ use POSIX qw(setlocale LC_ALL);
 use File::Path qw(make_path);
 use File::Temp;
 use File::Copy;
+use File::Copy::Recursive qw(dirmove);
 use File::Basename;
 use LWP::Simple;
 use Path::Tiny;
@@ -153,7 +154,8 @@ sub fetch_version {
         download_file("$urldir/$file", "$tmpdir/$file", $sums{$file});
     }
     make_path("$topdir/nightly/$publish_dir");
-    move $tmpdir, $destdir;
+    dirmove($tmpdir, $destdir)
+        or exit_error "Error moving $tmpdir to $destdir: $!";
     chmod 0755, $destdir;
 }
 
@@ -222,7 +224,8 @@ sub update_responses {
        system("$topdir/tools/update-responses/update_responses") == 0;
     path("$topdir/nightly/updates/$publish_dir/nightly")->remove_tree({ safe => 0 });
     make_path("$topdir/nightly/updates/$publish_dir");
-    move($htdocsdir, "$topdir/nightly/updates/$publish_dir/nightly");
+    dirmove($htdocsdir, "$topdir/nightly/updates/$publish_dir/nightly")
+        or exit_error "Error moving $htdocsdir to $topdir/nightly/updates/$publish_dir/nightly: $!";
 }
 
 sub remove_oldversions {
