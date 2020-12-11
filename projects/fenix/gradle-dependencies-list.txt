@@ -461,6 +461,8 @@ dbc2bb04ecb002b9f4046263ccad996f4a3d3c59a0cc98837e300a6700571f7c | https://jcent
 4f8992dde784509e80917cabbc8406a7137e5f2ba2c1ae5b7250fc182a45bd88 | https://jcenter.bintray.com/com/squareup/okhttp3/okhttp/4.9.0/okhttp-4.9.0.pom
 e58c97406a6bb1138893750299ac63c6aa04b38b6b49eae1bfcad1a63ef9ba1b | https://jcenter.bintray.com/com/squareup/okio/okio/2.2.2/okio-2.2.2.jar
 fd621988f7f6957025735dc6dd090b00a20f3a3bb8d77ca79036077f629b140b | https://jcenter.bintray.com/com/squareup/okio/okio/2.2.2/okio-2.2.2.pom
+4496b06e73982fcdd8a5393f46e5df2ce2fa4465df5895454cac68a32f09bbc8 | https://jcenter.bintray.com/com/squareup/okio/okio/2.8.0/okio-2.8.0.jar
+26214068fd4c7f437ac8fe8576802a9a9dc151c457582807ad9af2af2e8c9481 | https://jcenter.bintray.com/com/squareup/okio/okio/2.8.0/okio-2.8.0.pom
 1d8518e3ac7532a104e4f7be77def37c982e530723c6bdb3d67708cce2b0c2c4 | https://jcenter.bintray.com/com/sun/activation/all/1.2.0/all-1.2.0.pom
 993302b16cd7056f21e779cc577d175a810bb4900ef73cd8fbf2b50f928ba9ce | https://jcenter.bintray.com/com/sun/activation/javax.activation/1.2.0/javax.activation-1.2.0.jar
 f879b6e945854c6900b0dbee1c8384d7ab3de7e157fd7ac84937405c416d2a5e | https://jcenter.bintray.com/com/sun/activation/javax.activation/1.2.0/javax.activation-1.2.0.pom
