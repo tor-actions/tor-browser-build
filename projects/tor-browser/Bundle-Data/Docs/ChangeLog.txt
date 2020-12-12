@@ -1,3 +1,22 @@
+Tor Browser 10.0.7 -- December 15 2020
+ * Android
+   * Update Fenix to 84.1.0
+   * Update HTTPS Everywhere to 2020.11.17
+   * Update NoScript to 11.1.6
+   * Bug 40166: Disable security.certerrors.mitm.auto_enable_enterprise_roots [tor-browser]
+   * Bug 40176: Update openssl to 1.1.1i [tor-browser-build]
+ * Build System
+   * Android
+     * Bug 40128: Allow updating Fenix allowed_addons.json [tor-browser-build]
+     * Bug 40139: Pick up rbm commit for bug 40008 [tor-browser-build]
+     * Bug 40140: Create own Gradle project [tor-browser-build]
+     * Bug 40155: Update toolchain for Fenix 84 [tor-browser-build]
+     * Bug 40156: Update Fenix and dependencies to 84.0.0-beta2 [tor-browser-build]
+     * Bug 40161: Update Go compiler to 1.14.13 [tor-browser-build]
+     * Bug 40163: Avoid checking hash of .pom files [tor-browser-build]
+     * Bug 40171: Include all uniffi-rs artifacts into application-services [tor-browser-build]
+     * Bug 40184: Update Fenix and deps to 84.1.0 [tor-browser-build]
+
 Tor Browser 10.0.6 -- December 8 2020
  * Android
    * Bug 40175: Update obfs4proxy's TLS certificate public key pinning [tor-browser-build]
