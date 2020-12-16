@@ -4,6 +4,10 @@ distdir=/var/tmp/dist/[% project %]
 mkdir -p $distdir
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/cmake') %]
 export PATH="/var/tmp/dist/cmake/bin:$PATH"
+[% IF c("var/android") %]
+  tar -C /var/tmp/dist -xf [% c('input_files_by_name/ninja') %]
+  export PATH=/var/tmp/dist/ninja:$PATH
+[% END %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/previous_rust') %]
 cd /var/tmp/dist/rust-[% c('var/previous_version') %]-x86_64-unknown-linux-gnu
 ./install.sh --prefix=$distdir-rust-old
