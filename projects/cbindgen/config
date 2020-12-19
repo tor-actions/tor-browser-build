@@ -2,7 +2,7 @@
 version: '[% c("var/cbindgen_version") %]'
 git_url: https://github.com/eqrion/cbindgen
 git_hash: '[% c("var/cbindgen_hash") %]'
-filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 
 var:
   cbindgen_version: 0.14.1
