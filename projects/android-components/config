@@ -8,7 +8,7 @@ gpg_keyring: torbutton.gpg
 variant: '[% IF c("var/release") %]Release[% ELSE %]Beta[% END %]'
 
 var:
-  android_components_version: 67.0.17
+  android_components_version: 70.0.0
   torbrowser_branch: 10.0
   container:
     use_container: 1
@@ -47,5 +47,5 @@ input_files:
   - filename: mavenLocal.patch
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
   - URL: https://people.torproject.org/~gk/mirrors/sources/glean-parser-[% c('var/glean_parser') %].tar.bz2
-    sha256sum: bdbb421fdcc9b66aebe8f41b33e254cab722355c59c0f43f10a8322d7d6da6a4
+    sha256sum: 19dbdd4958022a1a638e0217489ab722fe7d4f588f1978a4ae162f93e75694c2
     enable: '[% !c("var/fetch_gradle_dependencies") %]'

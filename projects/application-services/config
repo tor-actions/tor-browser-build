@@ -19,6 +19,8 @@ var:
   application_services: 1
   # Switch to make it easier to grab all dependencies during a dry-run.
   fetch_gradle_dependencies: 0
+  # application-services is still stuck on an older glean_parser version.
+  glean_parser: 1.28.6
 
 input_files:
   - project: container-image
