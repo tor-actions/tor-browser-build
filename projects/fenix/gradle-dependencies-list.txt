@@ -1069,8 +1069,8 @@ c15cd963cdc54dd257be6f3bf72e797a7d8f93ab6c4d92590dfdd59a468a6078 | https://maven
 82027e4094929ec4bb9e5ee61b5e536333025c00975dded304952770d89e0f68 | https://maven.mozilla.org/maven2/org/mozilla/components/ui-tabcounter/70.0.0/ui-tabcounter-70.0.0.pom
 28efed984b2ee3a66ffcf4a60d648ed048fb4f73ba533c73b6567f03d91cd46f | https://maven.mozilla.org/maven2/org/mozilla/components/ui-widgets/70.0.0/ui-widgets-70.0.0.aar
 35947da6512fd35bd9c4c6ff7569a78bb6f3bf871c1a3e4e330d0774f9bc5405 | https://maven.mozilla.org/maven2/org/mozilla/components/ui-widgets/70.0.0/ui-widgets-70.0.0.pom
-fe2ad1edc54b6934e4ea81bbd8a238c6707c510dfe0efe96e832d0da5c16debd | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview-beta/85.0.20201214185926/geckoview-beta-85.0.20201214185926.aar
-6a2aa21ceb6083f8b36990b4fec0eef4c610a70e6b6a5b5e2c45b3fab4c8b037 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview-beta/85.0.20201214185926/geckoview-beta-85.0.20201214185926.pom
+7e8ab993e6e5d1a705f1879476873094402b3759a1c1eecd429a5d5a2a727108 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview-beta/85.0.20201215185920/geckoview-beta-85.0.20201215185920.aar
+14bfd8b909f47d082843c487bc55146de8fe59e64bfd7ffd9e88e8a01aa358d6 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview-beta/85.0.20201215185920/geckoview-beta-85.0.20201215185920.pom
 c0846392b7f8a8762122f9a9bc1221e311226e84e015cfaa2f057b0437a9ac97 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview/84.0.20201211215739/geckoview-84.0.20201211215739.aar
 8fae8d4945c9e5e5ca6d32d5e0f9d0b4a4c8cd02ede6c361b7c2cdc960e008c0 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview/84.0.20201211215739/geckoview-84.0.20201211215739.pom
 97a9d151ad636acc68eeda046866f0ac24e6f7bf2a81a6b938a3386cc73be529 | https://maven.mozilla.org/maven2/org/mozilla/telemetry/glean-forUnitTests/33.1.2/glean-forUnitTests-33.1.2.jar
