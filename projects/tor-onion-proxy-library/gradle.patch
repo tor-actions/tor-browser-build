@@ -1,18 +1,18 @@
-From 66fc98ddb787d22787e79fc2e422076a42b64ad4 Mon Sep 17 00:00:00 2001
+From a39b5c7b089c249f1ba04c297babe22d2bcd75f2 Mon Sep 17 00:00:00 2001
 From: Georg Koppen <gk@torproject.org>
-Date: Mon, 18 May 2020 10:12:01 +0000
-Subject: [PATCH] Bug 33558: Update TOPL to use updated Android toolchain
+Date: Sat, 26 Dec 2020 21:17:59 +0000
+Subject: [PATCH] test
 
 
 diff --git a/android/build.gradle b/android/build.gradle
-index a8d9bdc..696f62e 100644
+index a8d9bdc..e0eb541 100644
 --- a/android/build.gradle
 +++ b/android/build.gradle
 @@ -7,6 +7,7 @@ buildscript {
          mavenLocal()
          mavenCentral()
          google()
-+        maven { url "https://repo.spring.io/plugins-release" }
++        jcenter()
      }
      dependencies {
          classpath "com.android.tools.build:gradle:${androidplugin}"
@@ -42,14 +42,14 @@ index a8d9bdc..696f62e 100644
              pom.withXml {
                  def dependenciesNode = asNode().appendNode('dependencies')
 diff --git a/android_tor_installer/build.gradle b/android_tor_installer/build.gradle
-index 554fd49..1913fa9 100644
+index 554fd49..92e84d4 100644
 --- a/android_tor_installer/build.gradle
 +++ b/android_tor_installer/build.gradle
 @@ -7,6 +7,7 @@ buildscript {
          mavenLocal()
          mavenCentral()
          google()
-+        maven { url "https://repo.spring.io/plugins-release" }
++        jcenter()
      }
      dependencies {
          classpath "com.android.tools.build:gradle:${androidplugin}"
@@ -67,6 +67,28 @@ index 554fd49..1913fa9 100644
          versionCode 1
          versionName "0.0.3"
  
+@@ -48,7 +49,7 @@ repositories {
+     mavenLocal()
+     mavenCentral()
+     google()
+-    maven { url "https://repo.spring.io/plugins-release" }
++    jcenter()
+     maven { url "https://raw.githubusercontent.com/guardianproject/gpmaven/master" }
+ 
+ }
+diff --git a/build.gradle b/build.gradle
+index a269024..43b9e13 100644
+--- a/build.gradle
++++ b/build.gradle
+@@ -8,7 +8,7 @@ subprojects {
+   repositories {
+     mavenLocal()
+     mavenCentral()
+-    maven { url "https://repo.spring.io/plugins-release" }
++    jcenter()
+   }
+ }
+ 
 -- 
-2.26.2
+2.30.0.rc2
 
