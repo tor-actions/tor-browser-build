@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %]'
-git_hash: 242f9828ef8f7570a0494e6f805554300b770965
+git_hash: 603775f877f6e294e25f053a4d1fc10dce96e9bf
 git_url: https://git.torproject.org/tor-android-service.git
 git_submodule: 1
 
@@ -11,7 +11,7 @@ var:
   container:
     use_container: 1
   # this should be updated when the list of gradle dependencies is changed
-  gradle_dependencies_version: 4
+  gradle_dependencies_version: 5
 
 input_files:
   - project: container-image
