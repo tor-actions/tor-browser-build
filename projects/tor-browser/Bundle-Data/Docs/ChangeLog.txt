@@ -1,3 +1,10 @@
+Tor Browser 10.0.8 -- January 12 2021
+ * Windows + OS X + Linux
+   * Update Firefox to 78.6.1esr
+   * Update NoScript to 11.1.7
+ * OS X
+   * Bug 40262: Browser tabs crashing on the new Macbooks with the M1 chip [tor-browser]
+
 Tor Browser 10.0.7 -- December 15 2020
  * Windows + OS X + Linux
    * Update Firefox to 78.6.0esr
