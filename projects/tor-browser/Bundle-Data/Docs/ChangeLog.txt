@@ -1,3 +1,11 @@
+Tor Browser 10.0.8 -- January 12 2021
+ * Android
+   * Update Fenix to 84.1.4
+   * Update NoScript to 11.1.7
+ * Build System
+   * Android
+     * Bug 40195: repo.spring.io is not usable anymore [tor-browser-build]
+
 Tor Browser 10.0.7 -- December 15 2020
  * Android
    * Update Fenix to 84.1.0
