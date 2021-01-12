@@ -16,3 +16,4 @@ nss_certname: nightly-marsigner
 gpg_keyring: keyring/torbrowser-nightly.gpg
 rsync_dest: /srv/tbb-nightlies-master.torproject.org/htdocs/nightly-updates/
 post_rsync_cmd: 'unset LD_PRELOAD && /usr/local/bin/static-update-component nightlies.tbb.torproject.org'
+tmp_dir: /home/tbb-nightlies/tmp
