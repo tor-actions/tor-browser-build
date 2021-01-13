@@ -18,6 +18,8 @@ use JSON;
 umask(0022);
 $ENV{"LC_ALL"} = "C";
 setlocale(LC_ALL, "C");
+# autoflush STDOUT to have logs in the right order (see bug #40203)
+STDOUT->autoflush(1);
 
 sub exit_error {
     print STDERR "Error: ", $_[0], "\n";
