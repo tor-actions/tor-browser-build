@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
-version: 67.0.0
-git_hash: 6a234c2b1e1972f11e585551d4cf2e40e84bf16f
+version: 67.2.0
+git_hash: 4cc798c8cd8a1e38ce88e0bb22a05692be63b164
 git_url: https://github.com/mozilla/application-services
 git_submodule: 1
 
@@ -19,6 +19,8 @@ var:
   application_services: 1
   # Switch to make it easier to grab all dependencies during a dry-run.
   fetch_gradle_dependencies: 0
+  # application-services is still stuck on an older glean_parser version.
+  glean_parser: 1.28.6
 
 input_files:
   - project: container-image
@@ -26,43 +28,10 @@ input_files:
     name: '[% c("var/compiler") %]'
   - project: gradle
     name: gradle
-  # We need the torbrowser-* targets for Rust and Rust-dependent projects, see:
-  # #40094.
   - project: rust
-    name: rust-armv7
-    target_prepend:
-      - torbrowser-android-armv7
-  - project: rust
-    name: rust-aarch64
-    target_prepend:
-      - torbrowser-android-aarch64
-  - project: rust
-    name: rust-x86
-    target_prepend:
-      - torbrowser-android-x86
-  - project: rust
-    name: rust-x86_64
-    target_prepend:
-      - torbrowser-android-x86_64
-  # `uniffi-rs` provides us with a host tool, yet we still need to include
-  # artifacts for all architectures to avoid unnecessary rebuilding later on.
-  # See: tor-browser-build#40171.
+    name: rust
   - project: uniffi-rs
-    name: uniffi-rs-armv7
-    target_prepend:
-      - torbrowser-android-armv7
-  - project: uniffi-rs
-    name: uniffi-rs-aarch64
-    target_prepend:
-      - torbrowser-android-aarch64
-  - project: uniffi-rs
-    name: uniffi-rs-x86
-    target_prepend:
-      - torbrowser-android-x86
-  - project: uniffi-rs
-    name: uniffi-rs-x86_64
-    target_prepend:
-      - torbrowser-android-x86_64
+    name: uniffi-rs
   - project: nss
     name: nss-armv7
     target_prepend:

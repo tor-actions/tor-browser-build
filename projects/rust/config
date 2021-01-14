@@ -11,17 +11,13 @@ var:
 targets:
   android:
     var:
-      current_version: 1.47.0
-      previous_version: 1.46.0
+      current_version: 1.48.0
+      previous_version: 1.47.0
       arch_deps:
         - libssl-dev
         - pkg-config
         - zlib1g-dev
-      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --target=[% c("var/cross_prefix") %] --set=target.[% c("var/cross_prefix") %].cc=[% c("var/CC") %] --set=target.[% c("var/cross_prefix") %].ar=[% c("var/cross_prefix") %]-ar
-
-  android-armv7:
-    var:
-      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --target=[% IF pc(c("origin_project"), "var/application_services") %]armv7-linux-androideabi[% ELSE %]thumbv7neon-linux-androideabi[% END %] --set=target.[% IF pc(c("origin_project"), "var/application_services") %]armv7-linux-androideabi[% ELSE %]thumbv7neon-linux-androideabi[% END %].cc=[% c("var/CC") %] --set=target.[% IF pc(c("origin_project"), "var/application_services") %]armv7-linux-androideabi[% ELSE %]thumbv7neon-linux-androideabi[% END %].ar=[% c("var/cross_prefix") %]-ar
+      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --target=x86_64-unknown-linux-gnu,armv7-linux-androideabi,thumbv7neon-linux-androideabi,aarch64-linux-android,i686-linux-android,x86_64-linux-android --set=target.armv7-linux-androideabi.cc=armv7a-linux-androideabi16-clang --set=target.armv7-linux-androideabi.ar=armv7a-linux-androideabi-ar --set=target.thumbv7neon-linux-androideabi.cc=armv7a-linux-androideabi16-clang --set=target.thumbv7neon-linux-androideabi.ar=armv7a-linux-androideabi-ar --set=target.aarch64-linux-android.cc=aarch64-linux-android21-clang --set=target.aarch64-linux-android.ar=aarch64-linux-android-ar --set=target.i686-linux-android.cc=i686-linux-android16-clang --set=target.i686-linux-android.ar=i686-linux-android-ar --set=target.x86_64-linux-android.cc=x86_64-linux-android21-clang --set=target.x86_64-linux-android.ar=x86_64-linux-android-ar
 
   linux:
     var:
@@ -83,6 +79,9 @@ input_files:
   - project: container-image
   - project: cmake
     name: cmake
+  - project: ninja
+    name: ninja
+    enable: '[% c("var/android") %]'
   - project: '[% c("var/compiler") %]'
     name: '[% c("var/compiler") %]'
   - URL: 'https://static.rust-lang.org/dist/rustc-[% c("var/current_version") %]-src.tar.gz'
