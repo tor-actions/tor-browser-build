@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
-version: 1.4.4
+version: 1.4.8
 git_url: https://github.com/facebook/zstd.git
-git_hash: 10f0e6993f9d2f682da6d04aa2385b7d53cbb4ee
+git_hash: 97a3da1df009d4dc67251de0c4b1c9d7fe286fc1
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 
 var:
