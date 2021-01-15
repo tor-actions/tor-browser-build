@@ -1,3 +1,16 @@
+Tor Browser 10.0.8 -- January 12 2021
+ * All Platforms
+   * Update NoScript to 11.1.7
+ * Windows + OS X + Linux
+   * Update Firefox to 78.6.1esr
+ * Android
+   * Update Fenix to 84.1.4
+ * OS X
+   * Bug 40262: Browser tabs crashing on the new Macbooks with the M1 chip [tor-browser]
+ * Build System
+   * Android
+     * Bug 40195: repo.spring.io is not usable anymore [tor-browser-build]
+
 Tor Browser 10.5a6 -- December 15 2020
  * All Platforms
    * Update NoScript to 11.1.6
@@ -25,6 +38,35 @@ Tor Browser 10.5a6 -- December 15 2020
      * Bug 40184: Update Fenix and deps to 84.1.0 [tor-browser-build]
    * OS X
      * Bug 40147: Remove RANLIB workaround once we pick up 0.4.5.2-alpha [tor-browser-build]
+
+Tor Browser 10.0.7 -- December 15 2020
+ * All Platforms
+   * Update HTTPS Everywhere to 2020.11.17
+   * Bug 40166: Disable security.certerrors.mitm.auto_enable_enterprise_roots [tor-browser]
+   * Bug 40176: Update openssl to 1.1.1i [tor-browser-build]
+ * Windows + OS X + Linux
+   * Update Firefox to 78.6.0esr
+ * Android
+   * Update Fenix to 84.1.0
+   * Update NoScript to 11.1.6
+ * Linux
+   * Bug 40226: Crash on Fedora Workstation Rawhide GNOME [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 40139: Pick up rbm commit for bug 40008 [tor-browser-build]
+     * Bug 40161: Update Go compiler to 1.14.13 [tor-browser-build]
+   * Android
+     * Bug 40128: Allow updating Fenix allowed_addons.json [tor-browser-build]
+     * Bug 40140: Create own Gradle project [tor-browser-build]
+     * Bug 40155: Update toolchain for Fenix 84 [tor-browser-build]
+     * Bug 40156: Update Fenix and dependencies to 84.0.0-beta2 [tor-browser-build]
+     * Bug 40163: Avoid checking hash of .pom files [tor-browser-build]
+     * Bug 40171: Include all uniffi-rs artifacts into application-services [tor-browser-build]
+     * Bug 40184: Update Fenix and deps to 84.1.0 [tor-browser-build]
+
+Tor Browser 10.0.6 -- December 8 2020
+ * All Platforms
+   * Bug 40175: Update obfs4proxy's TLS certificate public key pinning [tor-browser-build]
 
 Tor Browser 10.5a5 -- December 7 2020
  * Android
