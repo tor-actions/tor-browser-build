@@ -1,23 +1,27 @@
 Tor Browser 10.5a7 -- January 19 2021
  * All Platforms
    * Update NoScript to 11.1.8
-   * Bug 40165: Update zstd to 1.4.8 [tor-browser-build]
    * Bug 40204: Update Tor to 0.4.5.3-rc
    * Translations update
  * Windows + OS X + Linux
+   * Update Firefox to 78.6.1esr
    * Bug 40287: Switch DDG search from POST to GET [tor-browser]
    * Bug 40297: Rebase 10.5 patches onto 78.6.1esr [tor-browser]
  * Android
    * Bug 40036: Rebase patches onto v70.0.11 [android-components]
    * Bug 40134: Rebase patches onto v85.0.0-beta.7 [fenix]
    * Bug 40293: Rebase patches onto 85.0b9-build1 [tor-browser]
+   * Bug 40165: Update zstd to 1.4.8 [tor-browser-build]
  * OS X
    * Bug 40262: Browser tabs crashing on the new Macbooks with the M1 chip [tor-browser]
  * Build System
    * All Platforms
-     * Bug 40194: Remove osname part in cbindgen filename
+     * Bug 40194: Remove osname part in cbindgen filename [tor-browser-build]
    * Android
-     * Bug 40162: Build Fenix instrumented tests apk
+     * Bug 40162: Build Fenix instrumented tests apk [tor-browser-build]
+     * Bug 40190: Update toolchain for Fenix 85 [tor-browser-build]
+     * Bug 40191: Update Fenix and dependencies to 85.0.0-beta1 [tor-browser-build]
+     * Bug 40193: Build all mobile Rust targets in a single step [tor-browser-build]
      * Bug 40195: repo.spring.io is not usable anymore [tor-browser-build]
 
 Tor Browser 10.0.8 -- January 12 2021
