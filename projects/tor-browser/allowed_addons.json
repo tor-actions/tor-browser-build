@@ -17,7 +17,7 @@
             "picture_url": "https://addons.cdn.mozilla.net/user-media/userpics/13/13299/13299734.png?modified=1565722641"
           }
         ],
-        "average_daily_users": 532335,
+        "average_daily_users": 557182,
         "categories": {
           "android": [
             "experimental",
@@ -237,10 +237,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.5643,
-          "bayesian_average": 4.562593737590973,
-          "count": 3156,
-          "text_count": 1045
+          "average": 4.562,
+          "bayesian_average": 4.5603163051620115,
+          "count": 3242,
+          "text_count": 1071
         },
         "ratings_url": "https://addons.mozilla.org/en-US/android/addon/darkreader/reviews/",
         "requires_payment": false,
@@ -334,7 +334,7 @@
         ],
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/android/addon/darkreader/",
-        "weekly_downloads": 30532
+        "weekly_downloads": 25347
       },
       "notes": null
     },
@@ -350,7 +350,7 @@
             "picture_url": "https://addons.cdn.mozilla.net/user-media/userpics/5/5474/5474073.png?modified=1469820907"
           }
         ],
-        "average_daily_users": 738238,
+        "average_daily_users": 731941,
         "categories": {
           "firefox": [
             "privacy-security"
@@ -480,10 +480,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.6134,
-          "bayesian_average": 4.610851576716928,
-          "count": 2139,
-          "text_count": 550
+          "average": 4.615,
+          "bayesian_average": 4.612461607979137,
+          "count": 2179,
+          "text_count": 554
         },
         "ratings_url": "https://addons.mozilla.org/en-US/android/addon/https-everywhere/reviews/",
         "requires_payment": false,
@@ -516,7 +516,7 @@
         ],
         "type": "extension",
         "url": "https://www.eff.org/https-everywhere",
-        "weekly_downloads": 15301
+        "weekly_downloads": 17926
       },
       "notes": null
     },
@@ -532,7 +532,7 @@
             "picture_url": "https://addons.cdn.mozilla.net/user-media/userpics/6/6937/6937656.png?modified=1550343990"
           }
         ],
-        "average_daily_users": 197484,
+        "average_daily_users": 199663,
         "categories": {
           "android": [
             "security-privacy"
@@ -745,10 +745,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.7993,
-          "bayesian_average": 4.794509964201113,
-          "count": 1186,
-          "text_count": 304
+          "average": 4.7995,
+          "bayesian_average": 4.794687251543521,
+          "count": 1202,
+          "text_count": 305
         },
         "ratings_url": "https://addons.mozilla.org/en-US/android/addon/decentraleyes/reviews/",
         "requires_payment": false,
@@ -784,7 +784,7 @@
           "ru": "Защищает Вас от отслеживания через «бесплатные», централизованные CDN. Предотвращает отслеживание через множество запросов к CDN (а-ля GHL, MaxCDN, YandexCDN и т.п.), «доставляя» локальные файлы, чтобы не ломать сайты. Дополняет контент-фильтры.",
           "sv-SE": "Skyddar dig mot att spåras av \"gratis\" centraliserad innehållsleverans. Det hindrar att förfrågningar görs till nätverk som Google Hosted Libraries och tillhandahåller lokala filer, så att sidor inte går sönder. Kompletterar vanliga blockerare.",
           "tr": "Sizi içerik dağıtımıyla yapılan merkezi ve \"ücretsiz\" takipten korur. Google Yerleşimli Kütüphaneler gibi ağlara erişimi engelleyip bunlar yerine siteler için gerekli yerel dosyaları sunar. Olağan içerik engelleyicileri işlevsel olarak tamamlar.",
-          "uk": "Захищає вас від стеження \"безкоштовними\", централізованими мережами доставки контенту. Блокує безліч запитів до мереж як-от Google Hosted Libraries, й взамін надає локальні файли для забезпечення справності сайтів. Доповнює звичні блокатори контенту.",
+          "uk": "Захищає вас від стеження \"безкоштовними\", централізованими мережами доставки контенту. Блокує безліч запитів до мереж, як-от Google Hosted Libraries, взамін надає локальні файли для забезпечення справності сайтів. Доповнює звичні блокатори контенту.",
           "zh-CN": "保护您免受集中式的内容交付网络（CDN）的跟踪。它可以拦截许多种链向 CDN 的请求，转而指向本地提供的文件，从而防止网站功能受损。辅助常规的内容过滤规则。",
           "zh-TW": "保護您不受「免費」、中心化的內容傳遞網路（CDN）的追蹤。此附加元件可防止您的瀏覽器送出請求到 Google Hosted Libraries 這類的服務，並在本機提供程式庫以達到相同的效果，而不造成網頁錯誤。可補充一般內容封鎖器的功能。"
         },
@@ -843,7 +843,7 @@
         ],
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/android/addon/decentraleyes/",
-        "weekly_downloads": 4997
+        "weekly_downloads": 5986
       },
       "notes": null
     },
@@ -859,7 +859,7 @@
             "picture_url": "https://addons.cdn.mozilla.net/user-media/userpics/5/5474/5474073.png?modified=1469820907"
           }
         ],
-        "average_daily_users": 952327,
+        "average_daily_users": 957110,
         "categories": {
           "android": [
             "security-privacy"
@@ -871,7 +871,7 @@
         "contributions_url": "https://www.paypal.me/SupportEFF?utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2014-05-01T18:23:16Z",
         "current_version": {
-          "id": 5112079,
+          "id": 5147400,
           "compatibility": {
             "firefox": {
               "min": "52.0",
@@ -882,19 +882,19 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/privacy-badger17/versions/5112079",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/privacy-badger17/versions/5147400",
           "files": [
             {
-              "id": 3656444,
-              "created": "2020-10-07T17:10:45Z",
-              "hash": "sha256:da9d488a9ee75347b73931a7d0136540292cd3db8aa0bfe4c273503291f7019e",
+              "id": 3691765,
+              "created": "2020-12-09T22:01:55Z",
+              "hash": "sha256:635ded379b5c3259d7bf0997689215bcb0f1bbb77f9289f33b0c01b0cddc7ff0",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 1240482,
+              "size": 1277059,
               "status": "public",
-              "url": "https://addons.mozilla.org/android/downloads/file/3656444/privacy_badger-2020.10.7-an+fx.xpi",
+              "url": "https://addons.mozilla.org/android/downloads/file/3691765/privacy_badger-2020.12.10-an+fx.xpi",
               "permissions": [
                 "tabs",
                 "http://*/*",
@@ -1330,10 +1330,10 @@
             "url": "http://www.gnu.org/licenses/gpl-3.0.html"
           },
           "release_notes": {
-            "en-US": "<ul><li>Disabled learning (by default) to address privacy concerns. Visit <a href=\"https://outgoing.prod.mozaws.net/v1/dd9daec91f441e755b8ec63a96a996dbbda9efaaac5a567994d6c78c680bdf20/https%3A//www.eff.org/badger-evolution\" rel=\"nofollow\">https://www.eff.org/badger-evolution</a> to learn more.</li><li>Added support for Global Privacy Control, a new specification that lets you tell companies you'd like to opt out of data sharing and selling. Visit <a href=\"https://outgoing.prod.mozaws.net/v1/f5433e6e384e33b2921d74ea02a8ada23fd2a7a9e1dd4c0382bc0cbb9dbc0864/https%3A//globalprivacycontrol.org/\" rel=\"nofollow\">https://globalprivacycontrol.org/</a> to learn more.</li><li>Added a new section to the options page to display the browser settings that Privacy Badger overrides for privacy reasons</li><li>Fixed various site breakages</li><li>Improved translations (Simplified Chinese, Dutch, Finnish, Hebrew, Italian, Russian, Spanish, Ukrainian)</li></ul>"
+            "en-US": "<ul><li>Added a direct link to widget content to replacements for widgets like YouTube, Vimeo, SoundCloud and Spotify. You can click this link to watch a video (for example) without sharing the page you are on with the video provider. You can also right-click the link to copy the link URL.</li><li>Fixed \"fbclid\" tracking parameter removal on Facebook</li><li>Enabled Google Search link unwrapping on Firefox for Android</li><li>Fixed various site breakages</li><li>Improved translations (Dutch, Esperanto, French, German, Hebrew, Polish, Russian, Swedish, Turkish, Ukrainian)</li></ul>"
           },
           "reviewed": null,
-          "version": "2020.10.7"
+          "version": "2020.12.10"
         },
         "default_locale": "en-US",
         "description": {
@@ -1357,7 +1357,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2020-10-08T08:20:41Z",
+        "last_updated": "2020-12-14T10:25:28Z",
         "name": {
           "en-US": "Privacy Badger"
         },
@@ -1403,10 +1403,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.7821,
-          "bayesian_average": 4.778771863974202,
-          "count": 1707,
-          "text_count": 408
+          "average": 4.7854,
+          "bayesian_average": 4.782091117459344,
+          "count": 1743,
+          "text_count": 412
         },
         "ratings_url": "https://addons.mozilla.org/en-US/android/addon/privacy-badger17/reviews/",
         "requires_payment": false,
@@ -1425,7 +1425,7 @@
         "tags": [],
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/android/addon/privacy-badger17/",
-        "weekly_downloads": 15338
+        "weekly_downloads": 39119
       },
       "notes": null
     },
@@ -1441,7 +1441,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 4915921,
+        "average_daily_users": 4880622,
         "categories": {
           "android": [
             "security-privacy"
@@ -1453,7 +1453,7 @@
         "contributions_url": "",
         "created": "2015-04-25T07:26:22Z",
         "current_version": {
-          "id": 5135389,
+          "id": 5156717,
           "compatibility": {
             "firefox": {
               "min": "55.0",
@@ -1464,19 +1464,19 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/ublock-origin/versions/5135389",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/ublock-origin/versions/5156717",
           "files": [
             {
-              "id": 3679754,
-              "created": "2020-11-17T13:08:46Z",
-              "hash": "sha256:d9eef701b99866565708fe69b5855c1634187630e9e223e810f10e482545e6c0",
+              "id": 3701081,
+              "created": "2020-12-29T13:58:02Z",
+              "hash": "sha256:5b94fd7f749319a6ff6d83dd20b05b29e733446465aff2ab7669499a3e8fb9cc",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 2801972,
+              "size": 2748800,
               "status": "public",
-              "url": "https://addons.mozilla.org/android/downloads/file/3679754/ublock_origin-1.31.0-an+fx.xpi",
+              "url": "https://addons.mozilla.org/android/downloads/file/3701081/ublock_origin-1.32.4-an+fx.xpi",
               "permissions": [
                 "dns",
                 "menus",
@@ -1532,10 +1532,10 @@
             "url": "http://www.gnu.org/licenses/gpl-3.0.html"
           },
           "release_notes": {
-            "en-US": "See <a href=\"https://outgoing.prod.mozaws.net/v1/ad6e491ded735345270ee88f63016f80b30a14a1e1f38bb05f1e63a112d6ecb8/https%3A//github.com/gorhill/uBlock/releases/tag/1.31.0\" rel=\"nofollow\">release notes</a>.\n\n<b>New:</b>\n\n<b>Click-to-load</b>\n\nSupport to replace embedded frames with a click-to-load widget. Examples of usage:\n\n<code>||<a href=\"https://outgoing.prod.mozaws.net/v1/6f77a09441a6af61d6a5a78db00417d7f6fa5eade30c9ccdc0ca28c7a21d0146/http%3A//youtube.com/embed/%243p%2Cframe%2Credirect=click2load.html\" rel=\"nofollow\">youtube.com/embed/$3p,frame,redirect=click2load.html</a>\n||<a href=\"https://outgoing.prod.mozaws.net/v1/5d656ee5ac41d8489285a0dc824f318ad24771561065baefba09a6703181b6ba/http%3A//scribd.com/embeds/%243p%2Cframe%2Credirect=click2load.html\" rel=\"nofollow\">scribd.com/embeds/$3p,frame,redirect=click2load.html</a>\n||<a href=\"https://outgoing.prod.mozaws.net/v1/c21551ebf05dc74e4faf00f50497b02fb52b8c860355bf66d776224e675fc72b/http%3A//player.vimeo.com/video/%243p%2Cframe%2Credirect=click2load.html\" rel=\"nofollow\">player.vimeo.com/video/$3p,frame,redirect=click2load.html</a></code>\n\nUsers of medium mode can experiment with a redirect rule to reveal embedded frames in a page:\n\n<code>*$3p,frame,redirect-rule=click2load.html</code>\n\nOr if you want to have click-to-load only for embedded widgets from specific origins being blocked (reminder: <a href=\"https://outgoing.prod.mozaws.net/v1/82e9714a02fcaa78100672185283fe1c7cbdb5ff5ede9dfd95be0f66d0202075/https%3A//github.com/gorhill/uBlock/wiki/Static-filter-syntax%23redirect-rule\" rel=\"nofollow\"><code>redirect-rule</code></a> does not create a block filter):\n\n<code> ||<a href=\"https://outgoing.prod.mozaws.net/v1/ada5d641241ba08f41ca8e2e95aebee8f706b1e658a0f63afb0327ee843252c8/http%3A//youtube.com/embed/%243p%2Cframe%2Credirect-rule=click2load.html\" rel=\"nofollow\">youtube.com/embed/$3p,frame,redirect-rule=click2load.html</a></code>\n\n<b>Changes:</b>\n\nResources redirected to local, neutered versions will no longer be collapsed as would occur if those resources were only blocked. This change is to enable implementation of the new click-to-load feature.\n\nCloud storage compression is now enabled by default.\n\n<b>Closed as fixed:</b>\n\n<ul><li><a href=\"https://outgoing.prod.mozaws.net/v1/d9f510b2fb029955173d9be41f90545747de3591b9be114e7ce1274be62b0e1b/https%3A//github.com/uBlockOrigin/uBlock-issues/issues/1304\" rel=\"nofollow\">Unable to scroll down to the last line in My Filters pane on Firefox for Android</a></li><li><a href=\"https://outgoing.prod.mozaws.net/v1/d700dd030a4e03713d042957c88336b36bd6ba0f73e409daeac24f29b661f6bd/https%3A//github.com/uBlockOrigin/uBlock-issues/issues/1345\" rel=\"nofollow\">\"Home\" button on Strict blocking page works incorrectly in some cases</a></li><li><a href=\"https://outgoing.prod.mozaws.net/v1/84c6f75ee567b34cd4aa3aec1a6f31cddf583f0867426b0b8e9ad5452abaf514/https%3A//github.com/uBlockOrigin/uBlock-issues/issues/1281\" rel=\"nofollow\">Implement a version of \"{{origin}}\" that uses the whole URL and not just the domain</a></li><li><a href=\"https://outgoing.prod.mozaws.net/v1/62d1c11a39a31be9bc951a6d4aaa723368205a3d54489e9edb7dedbf743e4ad2/https%3A//github.com/uBlockOrigin/uBlock-issues/issues/1280\" rel=\"nofollow\">cosmetic filter <code>## selector</code> is valid in element picker only</a></li><li><a href=\"https://outgoing.prod.mozaws.net/v1/818f69764248823cab44bd9117c37f456562a8cf1c67b8ba92c8b23b7226c59e/https%3A//github.com/uBlockOrigin/uBlock-issues/issues/760\" rel=\"nofollow\">Implement <code>$queryprune</code> parameter</a></li><li><a href=\"https://outgoing.prod.mozaws.net/v1/c79eb691e9a7fc0a59d72e00e29b986bf686c8926255150d320d8e060601f516/https%3A//github.com/uBlockOrigin/uAssets/pull/4115\" rel=\"nofollow\">Calling callback if provided for google analytics mock</a></li><li><a href=\"https://outgoing.prod.mozaws.net/v1/5e6a994e0da5171446cff1a75b87aefb329f7d82397537a3fdd0a94ac5590717/https%3A//github.com/gorhill/uBlock/issues/3590\" rel=\"nofollow\">Redirection syntax issue</a></li><li><a href=\"https://outgoing.prod.mozaws.net/v1/5d2e7632a8795a7c45baab376148f651eec9b2a5a250e708fcc99ee5712852b5/https%3A//github.com/gorhill/uBlock/issues/2848\" rel=\"nofollow\">Use user styles to collapse the placeholder of blocked resources</a></li><li><a href=\"https://outgoing.prod.mozaws.net/v1/b07e12c0e3d2f25d7675fa413bfe53d87e212450bffaee5b3f6d31497c5b8680/https%3A//github.com/gorhill/uBlock/issues/1390\" rel=\"nofollow\">Make load-on-demand smarter for blocked large media elements</a></li></ul>\n<b>Notable commits with no entry in issue tracker:</b>\n\n<ul><li><a href=\"https://outgoing.prod.mozaws.net/v1/f7a3990dd4ed5c5e5108863ab916d03ebf59def4ce817135178a51c9e5c1be2d/https%3A//github.com/gorhill/uBlock/commit/a223031b9851874db04b4c6ccb469586f8bb9556\" rel=\"nofollow\">Work around Firefox's <code>data:</code> favIconUrl leak</a></li><li><a href=\"https://outgoing.prod.mozaws.net/v1/6d652733de4a3b67966235794851835c0738a1308643241b3870b8572a31e017/https%3A//github.com/gorhill/uBlock/commit/13f92756befaa9a8d3ba1615bd7abc7075758c67\" rel=\"nofollow\">Make json-prune scriptlet also trap Response.json() calls</a></li><li><a href=\"https://outgoing.prod.mozaws.net/v1/3e21e48016cc0cc59127b5ba039722b18a8bedbe657b7b139d66c721439e48e4/https%3A//github.com/gorhill/uBlock/commit/efea83a825bad1fff5f506ecd9f57e0579249410\" rel=\"nofollow\">Incrementally improve static filtering parser</a></li><li><a href=\"https://outgoing.prod.mozaws.net/v1/300d566bae935dfe7caa7f26a6f449120fc0d16f6ccc0a7ea458fc47dfe5f82c/https%3A//github.com/gorhill/uBlock/commit/b265f2644d7c5eb353b5fc123e67f9419f1c998d\" rel=\"nofollow\">Coallesce origin hit filters into their own bucket</a><ul><li><a href=\"https://outgoing.prod.mozaws.net/v1/90c37955cca74165527bf305c54e5df68b4a18003207a8ebbcf2f340ec5f0025/https%3A//github.com/gorhill/uBlock/commit/4afb3dc149e70577509eb9bba5b1737223d42329\" rel=\"nofollow\">Allow <code>domain=</code> with entity values into pre-test buckets</a></li><li><a href=\"https://outgoing.prod.mozaws.net/v1/7108e88d163783823d57170458f542c706c7e83f50fb4dd029731d8eee4fe01f/https%3A//github.com/gorhill/uBlock/commit/1d679143d23a24d6bdaab14614f8118a167c57d3\" rel=\"nofollow\">Enable origin-hit coalescing optimisation for modifier filters</a></li></ul></li><li><a href=\"https://outgoing.prod.mozaws.net/v1/475c486ecbde642be209825abb7fd6fe36366ce77a5a1cac3385a23204e27e83/https%3A//github.com/gorhill/uBlock/commit/157cef6034a8ec926c1e59c7e77f0a1fcbef473c\" rel=\"nofollow\">Re-classify <code>redirect=</code> option as a modifier option</a></li><li><a href=\"https://outgoing.prod.mozaws.net/v1/ef8c8465e5abf4f11c31c8a4c92ec262be7e889b6476e6f0dda22cdae1c9907c/https%3A//github.com/gorhill/uBlock/commit/0bbf5b52abfa58fbd0cb505063011b57409aada1\" rel=\"nofollow\">Improve token extraction from regex-based filters</a></li><li><a href=\"https://outgoing.prod.mozaws.net/v1/6d598749fe7ac25e19168f52d44d4e984f8f7ce9b4f116cdb995ad1a8fa86e02/https%3A//github.com/gorhill/uBlock/commit/4c5197322f7f4c74412f01747e7e0c5e2a023677\" rel=\"nofollow\">Improve specificity slider in element picker</a></li><li><a href=\"https://outgoing.prod.mozaws.net/v1/c794932ff392735e9a64897732e68373cf9a3346ddeaeb9b34e4f1b2dd9ab0c8/https%3A//github.com/gorhill/uBlock/commit/a095b8325046e725c7d3e58943660ac3848d910a\" rel=\"nofollow\">Use a CodeMirror editor instance in element picker</a></li><li><a href=\"https://outgoing.prod.mozaws.net/v1/54ee032bd2c27f255a30badca5c689591784376b49f1e8339b8fdde1829f4781/https%3A//github.com/gorhill/uBlock/commit/59169209850c54c31d94990f0c956281fe43eb03\" rel=\"nofollow\">Add support for click-to-load of embedded frames</a></li><li><a href=\"https://outgoing.prod.mozaws.net/v1/ae0b4b1e1056107154420d9e267976afc4c3b4d0689c0abddbcc563ffc6ea730/https%3A//github.com/gorhill/uBlock/commit/fef375a5942402591671f1b6c3052a407b9802af\" rel=\"nofollow\">Minor improvements to syntax highlight of static filters</a></li></ul>\n<a href=\"https://outgoing.prod.mozaws.net/v1/e68ac420535993cfc64cadf07cb49eb66dcce1451edc73f462ff7fb2b10c5266/https%3A//github.com/gorhill/uBlock/compare/1.30.6...1.31.0\" rel=\"nofollow\">Commits history since 1.30.6</a>."
+            "en-US": "<a href=\"https://outgoing.prod.mozaws.net/v1/9fa7d3c9ad42a6b694799cc29274f9b7089f1e6b2ed3a78ca956c1f3849ec14a/https%3A//github.com/gorhill/uBlock/releases/tag/1.32.4\" rel=\"nofollow\">Complete release notes</a>.\n\n<b>Closed as fixed:</b>\n\n<ul><li><a href=\"https://outgoing.prod.mozaws.net/v1/396d45d7f82e1bf630b3f16ab1f6be4d60ae2d0ca40701483578aa94921c4064/https%3A//github.com/uBlockOrigin/uBlock-issues/issues/1424\" rel=\"nofollow\">Problems with asterisk in the destination of hostname-based rules</a></li></ul>\n<a href=\"https://outgoing.prod.mozaws.net/v1/345396c53b050d1081014dc73d56f95d30eb255faf2fa8e099e3b18bd5385e33/https%3A//github.com/gorhill/uBlock/compare/1.32.2...1.32.4\" rel=\"nofollow\">Commits history since 1.32.2</a>."
           },
           "reviewed": null,
-          "version": "1.31.0"
+          "version": "1.32.4"
         },
         "default_locale": "en-US",
         "description": {
@@ -1625,7 +1625,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2020-12-12T19:45:13Z",
+        "last_updated": "2021-01-10T17:45:12Z",
         "name": {
           "ar": "uBlock Origin",
           "bg": "uBlock Origin",
@@ -1770,10 +1770,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.7308,
-          "bayesian_average": 4.730368456265662,
-          "count": 13011,
-          "text_count": 4374
+          "average": 4.7336,
+          "bayesian_average": 4.733167386436881,
+          "count": 13174,
+          "text_count": 4396
         },
         "ratings_url": "https://addons.mozilla.org/en-US/android/addon/ublock-origin/reviews/",
         "requires_payment": false,
@@ -1827,7 +1827,7 @@
         "tags": [],
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/android/addon/ublock-origin/",
-        "weekly_downloads": 117604
+        "weekly_downloads": 118723
       },
       "notes": null
     },
@@ -1843,7 +1843,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 44743,
+        "average_daily_users": 54258,
         "categories": {
           "android": [
             "photos-media"
@@ -1956,10 +1956,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.5098,
-          "bayesian_average": 4.504325143252171,
-          "count": 969,
-          "text_count": 368
+          "average": 4.5077,
+          "bayesian_average": 4.502207031980669,
+          "count": 979,
+          "text_count": 370
         },
         "ratings_url": "https://addons.mozilla.org/en-US/android/addon/video-background-play-fix/reviews/",
         "requires_payment": false,
@@ -1984,7 +1984,7 @@
         ],
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/android/addon/video-background-play-fix/",
-        "weekly_downloads": 35
+        "weekly_downloads": 63
       },
       "notes": null
     },
@@ -2000,7 +2000,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 97046,
+        "average_daily_users": 95297,
         "categories": {
           "android": [
             "experimental",
@@ -2139,9 +2139,9 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.4965,
-          "bayesian_average": 4.478095502811583,
-          "count": 286,
+          "average": 4.4948,
+          "bayesian_average": 4.476468114105913,
+          "count": 291,
           "text_count": 81
         },
         "ratings_url": "https://addons.mozilla.org/en-US/android/addon/privacy-possum/reviews/",
@@ -2167,7 +2167,7 @@
         ],
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/android/addon/privacy-possum/",
-        "weekly_downloads": 1304
+        "weekly_downloads": 1408
       },
       "notes": null
     },
@@ -2183,7 +2183,7 @@
             "picture_url": "https://addons.cdn.mozilla.net/user-media/userpics/12/12929/12929064.png?modified=1557684554"
           }
         ],
-        "average_daily_users": 150262,
+        "average_daily_users": 157802,
         "categories": {
           "android": [
             "photos-media",
@@ -2197,7 +2197,7 @@
         "contributions_url": "https://www.paypal.me/ArminSebastian/5?utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2017-06-17T15:23:33Z",
         "current_version": {
-          "id": 5146105,
+          "id": 5157708,
           "compatibility": {
             "firefox": {
               "min": "68.0",
@@ -2208,19 +2208,19 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/search_by_image/versions/5146105",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/search_by_image/versions/5157708",
           "files": [
             {
-              "id": 3690470,
-              "created": "2020-12-07T19:45:57Z",
-              "hash": "sha256:2987a5f9c9b043de969f166d8f2275e3c2147fe2e3d186eb8a13f8cc5bd3c45d",
+              "id": 3702070,
+              "created": "2021-01-01T08:38:36Z",
+              "hash": "sha256:6f8f8d89ad294069232dff6a8a076763466c8d594289a74310dd8e8805c2cda7",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 639063,
+              "size": 639916,
               "status": "public",
-              "url": "https://addons.mozilla.org/android/downloads/file/3690470/search_by_image-3.4.2-an+fx.xpi",
+              "url": "https://addons.mozilla.org/android/downloads/file/3702070/search_by_image-3.4.3-an+fx.xpi",
               "permissions": [
                 "contextMenus",
                 "storage",
@@ -2271,7 +2271,7 @@
             "en-US": "Learn more about this release from the <a href=\"https://outgoing.prod.mozaws.net/v1/034fc31c913b4c441795892fe3d65db9f7edbe64b225782c051d3e956eacba86/https%3A//github.com/dessant/search-by-image/blob/master/CHANGELOG.md\" rel=\"nofollow\">changelog</a>."
           },
           "reviewed": null,
-          "version": "3.4.2"
+          "version": "3.4.3"
         },
         "default_locale": "en-US",
         "description": {
@@ -2293,7 +2293,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2020-12-08T09:48:37Z",
+        "last_updated": "2021-01-05T08:57:27Z",
         "name": {
           "en-US": "Search by Image"
         },
@@ -2405,10 +2405,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.6575,
-          "bayesian_average": 4.650311244599122,
-          "count": 765,
-          "text_count": 161
+          "average": 4.6604,
+          "bayesian_average": 4.653397289169066,
+          "count": 798,
+          "text_count": 168
         },
         "ratings_url": "https://addons.mozilla.org/en-US/android/addon/search_by_image/reviews/",
         "requires_payment": false,
@@ -2443,7 +2443,7 @@
         ],
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/android/addon/search_by_image/",
-        "weekly_downloads": 3363
+        "weekly_downloads": 8987
       },
       "notes": null
     },
@@ -2466,7 +2466,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 25981,
+        "average_daily_users": 31964,
         "categories": {
           "android": [
             "other"
@@ -2748,10 +2748,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.4545,
-          "bayesian_average": 4.4488466955050585,
-          "count": 924,
-          "text_count": 250
+          "average": 4.4492,
+          "bayesian_average": 4.443594465372142,
+          "count": 944,
+          "text_count": 254
         },
         "ratings_url": "https://addons.mozilla.org/en-US/android/addon/google-search-fixer/reviews/",
         "requires_payment": false,
@@ -2770,7 +2770,7 @@
         "tags": [],
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/android/addon/google-search-fixer/",
-        "weekly_downloads": 45
+        "weekly_downloads": 69
       },
       "notes": null
     },
@@ -2786,7 +2786,7 @@
             "picture_url": "https://addons.cdn.mozilla.net/user-media/userpics/0/0/143.png?modified=1506804587"
           }
         ],
-        "average_daily_users": 411625,
+        "average_daily_users": 407188,
         "categories": {
           "android": [
             "performance",
@@ -2800,7 +2800,7 @@
         "contributions_url": "https://www.paypal.me/NoScript?utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2005-05-13T10:51:32Z",
         "current_version": {
-          "id": 5147387,
+          "id": 5161029,
           "compatibility": {
             "firefox": {
               "min": "59.0",
@@ -2811,19 +2811,19 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/noscript/versions/5147387",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/noscript/versions/5161029",
           "files": [
             {
-              "id": 3691752,
-              "created": "2020-12-09T21:34:16Z",
-              "hash": "sha256:3e3e00026db6a65cd5eebbe4a2c214fd7ef437c8f4d17fa591c85f61eab9d1e5",
+              "id": 3705391,
+              "created": "2021-01-07T22:41:19Z",
+              "hash": "sha256:86bcf1540cdfa04614288fb6ebb1b7f37dc962f233641ebb9c6e8827a0123870",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 602842,
+              "size": 628730,
               "status": "public",
-              "url": "https://addons.mozilla.org/android/downloads/file/3691752/noscript_security_suite-11.1.6-an+fx.xpi",
+              "url": "https://addons.mozilla.org/android/downloads/file/3705391/noscript_security_suite-11.1.8-an+fx.xpi",
               "permissions": [
                 "contextMenus",
                 "storage",
@@ -2870,10 +2870,10 @@
             "url": "http://www.gnu.org/licenses/gpl-2.0.html"
           },
           "release_notes": {
-            "en-US": "(cc @lastknight, @raistolo)v 11.1.6\n============================================================\nx Better handling of concurrent prompts issues (thanks\n  billarbor for reporting)\nx Remove z-index boosting from ancestors when placeholder is\n  collapsed or replaced (issue #162)\nx Fixed permission keyboard shortcuts being triggered with\n  modifiers like CTRL (thanks barbaz for report)\nx More accurate blockage reporting, with better filtering of\n  page's own CSP effects\nx [UI] Fixed bug in CUSTOM sites filtering (thanks barbaz\n  for reporting)\nx Fixed bug in automatic HTML events build-time updates\nx Updated HTML events\nx Updated TLDs\nx [L10n] Updated sv_SE\nx Better handling 0 width / 0 height media placeholders"
+            "en-US": "v 11.1.8\n============================================================\nx [XSS] Fix for old pre-screening optimization exploitable\nto bypass the filter in recent browsers - thanks Tsubasa\nFUJII (@reinforchu) for reporting\nx Replace DOM-based entity decoding with the he.js pure JS\nlibrary\nx Updated copyright statement\nx Updated browser-polyfill.js\nx Removed obsolete fastclick.js dependency\nx [l10n] Updated de (thanks ib and Musonius)\nx Updated TLDs"
           },
           "reviewed": null,
-          "version": "11.1.6"
+          "version": "11.1.8"
         },
         "default_locale": "en-US",
         "description": {
@@ -2923,7 +2923,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2020-12-10T21:35:10Z",
+        "last_updated": "2021-01-15T17:30:09Z",
         "name": {
           "de": "NoScript",
           "el": "NoScript",
@@ -3011,10 +3011,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.5317,
-          "bayesian_average": 4.530138906447172,
-          "count": 3421,
-          "text_count": 2374
+          "average": 4.5418,
+          "bayesian_average": 4.5402139765882055,
+          "count": 3424,
+          "text_count": 2366
         },
         "ratings_url": "https://addons.mozilla.org/en-US/android/addon/noscript/reviews/",
         "requires_payment": false,
@@ -3070,7 +3070,7 @@
         ],
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/android/addon/noscript/",
-        "weekly_downloads": 10596
+        "weekly_downloads": 10849
       },
       "notes": null
     },
@@ -3086,7 +3086,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 127980,
+        "average_daily_users": 126953,
         "categories": {
           "android": [
             "performance",
@@ -3225,10 +3225,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.1117,
-          "bayesian_average": 4.107520342079109,
-          "count": 1137,
-          "text_count": 545
+          "average": 4.1056,
+          "bayesian_average": 4.101394551282457,
+          "count": 1146,
+          "text_count": 551
         },
         "ratings_url": "https://addons.mozilla.org/en-US/android/addon/youtube-high-definition/reviews/",
         "requires_payment": false,
@@ -3266,7 +3266,7 @@
         ],
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/android/addon/youtube-high-definition/",
-        "weekly_downloads": 1947
+        "weekly_downloads": 1939
       },
       "notes": null
     }
