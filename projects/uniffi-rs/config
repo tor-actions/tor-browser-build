@@ -15,3 +15,4 @@ input_files:
   # `cargo vendor vendor` in the `uniffi-rs` directory has vendored the sources.
   - URL: https://people.torproject.org/~gk/mirrors/sources/uniffi-rs-vendor-[% c('version') %].tar.bz2
     sha256sum: 71d912237208c35a762b3c812afe0a758823792dd745c1253314bcccc1694b7f
+  - filename: btreeset.patch
