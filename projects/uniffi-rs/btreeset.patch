@@ -1,0 +1,31 @@
+diff --git a/uniffi_bindgen/src/interface/types.rs b/uniffi_bindgen/src/interface/types.rs
+index 6448d58..b7efd22 100644
+--- a/uniffi_bindgen/src/interface/types.rs
++++ b/uniffi_bindgen/src/interface/types.rs
+@@ -26,7 +26,7 @@
+ use anyhow::bail;
+ use anyhow::Result;
+ use std::convert::TryFrom;
+-use std::{collections::hash_map::Entry, collections::HashMap, collections::HashSet};
++use std::{collections::hash_map::Entry, collections::HashMap, collections::BTreeSet};
+ 
+ use super::Attributes;
+ 
+@@ -71,7 +71,7 @@ pub enum FFIType {
+ /// Represents all the different high-level types that can be used in a component interface.
+ /// At this level we identify user-defined types by name, without knowing any details
+ /// of their internal structure apart from what type of thing they are (record, enum, etc).
+-#[derive(Debug, Clone, Eq, PartialEq, Hash)]
++#[derive(Debug, Clone, Eq, PartialEq, Hash, PartialOrd, Ord)]
+ pub enum Type {
+     // Primitive types.
+     UInt8,
+@@ -195,7 +195,7 @@ pub(crate) struct TypeUniverse {
+     // Named type definitions (including aliases).
+     type_definitions: HashMap<String, Type>,
+     // All the types in the universe, by canonical type name.
+-    all_known_types: HashSet<Type>,
++    all_known_types: BTreeSet<Type>,
+ }
+ 
+ impl TypeUniverse {

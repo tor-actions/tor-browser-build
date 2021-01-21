@@ -22,6 +22,14 @@ replace-with = "vendored-sources"
 directory = "/var/tmp/build/uniffi-rs/vendor"
 EOF
 
+# We change the data type of the `all_known_types` Set from HashSet to BTreeSet.
+# Uniffi iterates over the elements of this set, and iteration over a HashSet occurs
+# in an arbitrary order, while iteration over a BTreeSet orders in a defined (and
+# deterministic) order. This patch solves a build reproducibility issue, see
+# tor-browser-build#40208.
+#
+# Upstream bug: https://github.com/mozilla/uniffi-rs/issues/374
+patch -p1 < $rootdir/btreeset.patch
 # We usually use --frozen but there is no Cargo.lock file available. Thus resort
 # to --offline.
 cargo build --release --offline --target x86_64-unknown-linux-gnu
