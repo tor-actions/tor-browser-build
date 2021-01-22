@@ -1,3 +1,16 @@
+Tor Browser 10.0.9 -- January 26 2021
+ * Android
+   * Update Fenix to 85.1.0
+   * Update NoScript to 11.1.9
+   * Bug 40137: Remove EOY 2020 Campaign [fenix]
+   * Bug 40165: Update zstd to 1.4.8 [tor-browser-build]
+ * Build System
+   * Android
+     * Bug 40190: Update toolchain for Fenix 85 [tor-browser-build]
+     * Bug 40191: Update Fenix and dependencies to 85.0.0-beta1 [tor-browser-build]
+     * Bug 40193: Build all mobile Rust targets in a single step [tor-browser-build]
+     * Bug 40208: Mitigate uniffi non-deterministic code generation [tor-browser-build]
+
 Tor Browser 10.0.8 -- January 12 2021
  * Android
    * Update Fenix to 84.1.4
