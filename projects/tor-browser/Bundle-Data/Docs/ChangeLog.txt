@@ -1,7 +1,7 @@
 Tor Browser 10.0.9 -- January 26 2021
  * Windows + OS X + Linux
    * Update Firefox to 78.7.0esr
-   * Update NoScript to 11.1.8
+   * Update NoScript to 11.1.9
    * Bug 40249: Remove EOY 2020 Campaign [tor-browser]
  * Build System
    * Windows + OS X + Linux
