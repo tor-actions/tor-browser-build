@@ -17,7 +17,7 @@
             "picture_url": "https://addons.cdn.mozilla.net/user-media/userpics/13/13299/13299734.png?modified=1565722641"
           }
         ],
-        "average_daily_users": 557182,
+        "average_daily_users": 566381,
         "categories": {
           "android": [
             "experimental",
@@ -31,7 +31,7 @@
         "contributions_url": "https://opencollective.com/darkreader?utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2017-09-19T07:03:00Z",
         "current_version": {
-          "id": 5140581,
+          "id": 5168569,
           "compatibility": {
             "firefox": {
               "min": "54.0",
@@ -42,19 +42,19 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/darkreader/versions/5140581",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/darkreader/versions/5168569",
           "files": [
             {
-              "id": 3684946,
-              "created": "2020-11-26T18:46:09Z",
-              "hash": "sha256:5f2a2449524f5ab05c2e8568d2678c6b25795e87ce77ebc9448e13e8184e3c5f",
+              "id": 3712931,
+              "created": "2021-01-21T17:44:16Z",
+              "hash": "sha256:3388ad0c1e91e9fcb5103df1286bb5df0caf192aaf2a85a34acb046ca96b78a1",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 511783,
+              "size": 518564,
               "status": "public",
-              "url": "https://addons.mozilla.org/android/downloads/file/3684946/dark_reader-4.9.26-an+fx.xpi",
+              "url": "https://addons.mozilla.org/android/downloads/file/3712931/dark_reader-4.9.27-an+fx.xpi",
               "permissions": [
                 "storage",
                 "tabs",
@@ -97,10 +97,10 @@
             "url": "http://www.opensource.org/licenses/mit-license.php"
           },
           "release_notes": {
-            "en-US": "- Dynamic mode bug fixes.\n- Users' fixes for websites."
+            "en-US": "- Dynamic mode improvements.\n- Thunderbird support.\n- Users' fixes for websites.\n- Users' translation improvements."
           },
           "reviewed": null,
-          "version": "4.9.26"
+          "version": "4.9.27"
         },
         "default_locale": "en-US",
         "description": {
@@ -123,15 +123,15 @@
           "pt-BR": "Esta extensão ajuda seus olhos a relaxarem ao criar e aplicar o modo escuro aos sites que você visita. O Dark Reader inverte as cores brilhantes, tornando-as de alto contraste e deixando-as fáceis de serem lidas à noite.\n\nVocê pode ajustar o brilho, o contraste, os tons de sépia, o modo escuro, as configurações de fonte e a lista negra.\n\nO Dark Reader não exibe anúncios e não compartilha os dados de seus usuários. O código-fonte é totalmente aberto (open-source) <a href=\"https://outgoing.prod.mozaws.net/v1/2a8020ee7fe5fea69148ed86ae4a26da4fc907d75110066fa5b5d0416670e666/https%3A//github.com/darkreader/darkreader\" rel=\"nofollow\">https://github.com/darkreader/darkreader</a>\n\nAntes de instalar esta extensão, desative extensões semelhantes. Divirta-se!",
           "pt-PT": "Esta extensão de cuidados com os olhos ativa o modo noturno criando temas escuros para sites. O Dark Reader inverte as cores brilhantes, tornando-as de alto contraste e fáceis de ler à noite.\n\nVocê pode ajustar o brilho, o contraste, o filtro sépia, o modo escuro, as configurações de fonte e a lista de ignorados.\n\nO Dark Reader não exibe anúncios e não envia dados do usuário em nenhum lugar. É totalmente open-source <a href=\"https://outgoing.prod.mozaws.net/v1/2a8020ee7fe5fea69148ed86ae4a26da4fc907d75110066fa5b5d0416670e666/https%3A//github.com/darkreader/darkreader\" rel=\"nofollow\">https://github.com/darkreader/darkreader</a>\n\nAntes de instalar desativar extensões semelhantes. Visualização agradável!",
           "ro": "Această extensie, care se îngrijește de ochii tăi, permite activarea modului de noapte creând pe loc o temă întunecată pentru siteuri. Dark Reader inversează culorile luminoase mărindu-le contrastul și făcându-le ușor de citit noptea.\n\nPoți ajusta luminozitatea, contrastul, filtrul sepia, modul întunecat, setările fontului si lista siteurilor de ignorat.\n\nDark Reader nu afișează reclame și nu trimite datele utilizatorului nicăieri. Este în întregime open-source <a href=\"https://outgoing.prod.mozaws.net/v1/2a8020ee7fe5fea69148ed86ae4a26da4fc907d75110066fa5b5d0416670e666/https%3A//github.com/darkreader/darkreader\" rel=\"nofollow\">https://github.com/darkreader/darkreader</a>\n\nÎnainte de instalare dezactivează extensile similare. Vizionare plăcută!",
-          "ru": "Это расширение переводит браузер в ночной режим. Дарк Ридер заменяет светлый фон тёмным, что снижает усталость глаз при долгой работе за компьютером либо при просмотре веб-страниц ночью.\n\nИмеется возможность настраивать яркость, контрастность, шрифт, режим инверсии, режим наложения жёлтого фильтра (сепия).\n\nDark Reader не встраивает рекламу и не собирает пользовательские данные. Весь исходный код открыт <a href=\"https://outgoing.prod.mozaws.net/v1/2a8020ee7fe5fea69148ed86ae4a26da4fc907d75110066fa5b5d0416670e666/https%3A//github.com/darkreader/darkreader\" rel=\"nofollow\">https://github.com/darkreader/darkreader</a>\n\nПеред установкой отключите подобные расширения. Приятного просмотра!",
+          "ru": "Это расширение переводит браузер в ночной режим. Дарк Ридер заменяет светлый фон тёмным, что снижает усталость глаз при долгой работе за компьютером либо при просмотре веб-страниц ночью.\n\nИмеется возможность настраивать яркость, контрастность, шрифт, режим инверсии, режим наложения жёлтого фильтра (сепия).\n\nДарк Ридер не встраивает рекламу и не собирает пользовательские данные. Весь исходный код открыт <a href=\"https://outgoing.prod.mozaws.net/v1/2a8020ee7fe5fea69148ed86ae4a26da4fc907d75110066fa5b5d0416670e666/https%3A//github.com/darkreader/darkreader\" rel=\"nofollow\">https://github.com/darkreader/darkreader</a>\n\nПеред установкой отключите подобные расширения. Приятного просмотра!",
           "sk": "Toto rozšírenie je šetrné k očiam, vytvára nočný režim pre stránky za pochodu. Dark Reader invertuje jasné farby a robí ich kontrastnejšími, čím sa zlepšuje ich čitateľnosť v noci.\n\nUpravovať môžete jas, kontrast, sépiový filter, tmavý režim, nastavenia písma a zoznam ignorovaných stránok.\n\nDark Reader je bez reklám a nikam neodosiela žiadne dáta užívateľov. Má plne otvorený zdrojový kód <a href=\"https://outgoing.prod.mozaws.net/v1/2a8020ee7fe5fea69148ed86ae4a26da4fc907d75110066fa5b5d0416670e666/https%3A//github.com/darkreader/darkreader\" rel=\"nofollow\">https://github.com/darkreader/darkreader</a>\n\nPred inštaláciou zakážte podobné rozšírenia. Užite si sledovanie!",
-          "sv-SE": "Detta ögonbeskyddande tillägg aktiverar nattläge och skapar mörka teman för webbplatser. Dark Reader ersätter ljusa färger med mörka färger som har hög kontrast och gör läsning på kvällen enkel.\n\nDu kan justera ljusstyrka, kontrast, sepia filter, mörkt läge, teckensnitt och ignoreringslista.\n\nDark Reader visar inte reklam och skickar inte ut användares data. Den har helt öppen källkod <a href=\"https://outgoing.prod.mozaws.net/v1/2a8020ee7fe5fea69148ed86ae4a26da4fc907d75110066fa5b5d0416670e666/https%3A//github.com/darkreader/darkreader\" rel=\"nofollow\">https://github.com/darkreader/darkreader</a>\n\nAvaktivera liknande tillägg innan du installerar. Njut av upplevelsen!",
+          "sv-SE": "Detta ögonskonande tillägg aktiverar ett nattläge som skapar mörka teman på webbplatser. Dark Reader inverterar ljusa färger för att skapa hög kontrast och göra det enkelt att läsa på natten.\n\nDu kan justera ljusstyrkan, kontrasten, sepiafiltret, mörkt läge, typsnitt och ignoreringslistan.\n\nDark Reader visar inte reklam och skickar inte användardata någonstans. Den har helt öppen källkod <a href=\"https://outgoing.prod.mozaws.net/v1/2a8020ee7fe5fea69148ed86ae4a26da4fc907d75110066fa5b5d0416670e666/https%3A//github.com/darkreader/darkreader\" rel=\"nofollow\">https://github.com/darkreader/darkreader</a>\n\nInaktivera liknande tillägg innan du installerar. Trevlig läsning!",
           "th": "นี้เป็นส่วนเสริมที่คอยดูแลสายตาของคุณด้วยการเปิดโหมดกลางคืน และสร้างธีมมืดให้กับทุกๆเว็บ Dark Reader จะสลับสีสว่างๆให้เป็นสีดำหรือสีมืด และทำให้ง่ายต่อการอ่านตอนกลางคืน\n\nคุณสามารถปรับแต่งความสว่าง, คอนทราสต์, สีซีเปีย, โหมดมืด, ตั้งค่าฟอนต์ และทำรายการยกเว้นได้\n\nDark Reader ไม่แสดงโฆษณา และไม่ส่งข้อมูลของผู้ใช้เด็ดขาด ตัวส่วนเสริมเป็นโอเพนซอร์สโดยสมบูรณ์ดูได้ที่ <a href=\"https://outgoing.prod.mozaws.net/v1/2a8020ee7fe5fea69148ed86ae4a26da4fc907d75110066fa5b5d0416670e666/https%3A//github.com/darkreader/darkreader\" rel=\"nofollow\">https://github.com/darkreader/darkreader</a>\n\nก่อนที่จะติดตั้ง ปิดส่วนเสริมที่ทำหน้าที่เหมือนๆกันก่อนนะ ขอให้สนุกกับธีมสีมืดนะ!",
           "tr": "Bu göz bakım eklentisi web siteleri için anında koyu temalar oluşturarak gece modunu etkinleştirir. Dark Reader parlak renkleri ters çevirerek yüksek kontrast oluşturur ve geceleri okumayı kolaylaştırır.\n\nParlaklığı, kontrastı, sepya filtresini, koyu modu, yazı tipi ayarlarını ve yoksayma listesini ayarlayabilirsiniz.\n\nDark Reader, reklam göstermez ve kullanıcının verilerini hiçbir yere göndermez. Tamamen açık kaynak kodludur. <a href=\"https://outgoing.prod.mozaws.net/v1/2a8020ee7fe5fea69148ed86ae4a26da4fc907d75110066fa5b5d0416670e666/https%3A//github.com/darkreader/darkreader\" rel=\"nofollow\">https://github.com/darkreader/darkreader</a>\n\nYüklemeden önce benzer uzantıları devre dışı bırakın. Gezintinin tadını çıkarın!",
           "uk": "Це розширення для догляду за очима дозволяє створювати темні вигляди для мережевих сайтів. Dark Reader інвертує яскраві барви, роблячи їх контрастними і такими що легко читаються вночі.\n\nВи можете налаштувати яскравість, контраст, сепію, темний вигляд, налаштування вигляду тексту та список нехтування.\n\nDark Reader не містить рекламу і не надсилає дані користувача нікуди. Це розширення з відкритим кодом <a href=\"https://outgoing.prod.mozaws.net/v1/2a8020ee7fe5fea69148ed86ae4a26da4fc907d75110066fa5b5d0416670e666/https%3A//github.com/darkreader/darkreader\" rel=\"nofollow\">https://github.com/darkreader/darkreader</a>\n\nПеред встановленням відімкніть подібні розширення. Насолоджуйтесь переглядом!",
           "vi": "Tiện ích chăm sóc mắt này cho phép chế độ ban đêm tạo chủ đề tối cho các trang web đang hoạt động. Dark Reader đảo ngược màu sắc tươi sáng làm cho chúng có độ tương phản cao và dễ đọc vào ban đêm.\n\nBạn có thể điều chỉnh độ sáng, độ tương phản, bộ lọc màu nâu đỏ, chế độ tối, cài đặt phông chữ và danh sách bỏ qua.\n\nDark Reader không hiển thị quảng cáo và không gửi dữ liệu của người dùng ở bất cứ đâu. Nó hoàn toàn là mã nguồn mở <a href=\"https://outgoing.prod.mozaws.net/v1/2a8020ee7fe5fea69148ed86ae4a26da4fc907d75110066fa5b5d0416670e666/https%3A//github.com/darkreader/darkreader\" rel=\"nofollow\">https://github.com/darkreader/darkreader</a>\n\nTrước khi bạn cài đặt vô hiệu hóa các phần mở rộng tương tự. Thích xem!",
           "zh-CN": "这是一个护眼扩展程序，通过实时生成黑暗主题，为每一个网站启用夜间模式。 Dark Reader 反转明亮的颜色，使网页内容具有高对比度并易于在夜间阅读。\n\n您可以调整亮度、对比度，应用棕褐色滤镜、黑暗模式，设置字体和忽略的网站列表。\n\nDark Reader 无广告，也不会向任何地方发送用户的数据。它完全开源 <a href=\"https://outgoing.prod.mozaws.net/v1/2a8020ee7fe5fea69148ed86ae4a26da4fc907d75110066fa5b5d0416670e666/https%3A//github.com/darkreader/darkreader\" rel=\"nofollow\">https://github.com/darkreader/darkreader</a>\n\n安装前请禁用类似的扩展。冲浪愉快！",
-          "zh-TW": "這是一個護眼擴展程序，通過實時生成黑色主題，為每一個網站啟用夜間模式。 Dark Reader反轉明亮的顏色，使其網頁內容具有高對比度並且易於在夜間閱讀。\n\n您可以調整亮度，對比度，應用棕褐色濾鏡，黑暗模式，設置字體和忽略的網站列表。\n\nDark Reader 沒有廣告，也不會在任何地方發送用戶的數據。它完全開源於 <a href=\"https://outgoing.prod.mozaws.net/v1/2a8020ee7fe5fea69148ed86ae4a26da4fc907d75110066fa5b5d0416670e666/https%3A//github.com/darkreader/darkreader\" rel=\"nofollow\">https://github.com/darkreader/darkreader</a>\n\n安裝前停止使用類似的擴展，以避免衝突。瀏覽愉快！"
+          "zh-TW": "這是一個護眼擴充套件，通過即時產深深色主題，為每一個網站啟用夜間模式。 Dark Reader 反轉明亮的顏色，使其網頁內容具有高對比度並且易於在夜間閱讀。\n\n您可以調整亮度，對比度，套用棕褐色濾鏡，深色模式，設定字體和忽略的網站列表。\n\nDark Reader 沒有廣告，也不會在任何地方發送用戶的資料。它完全開源於 <a href=\"https://outgoing.prod.mozaws.net/v1/2a8020ee7fe5fea69148ed86ae4a26da4fc907d75110066fa5b5d0416670e666/https%3A//github.com/darkreader/darkreader\" rel=\"nofollow\">https://github.com/darkreader/darkreader</a>\n\n安裝前請先停止使用類似的擴充套件，以避免衝突。瀏覽愉快！"
         },
         "developer_comments": null,
         "edit_url": "https://addons.mozilla.org/en-US/developers/addon/darkreader/edit",
@@ -164,7 +164,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2020-11-27T12:36:26Z",
+        "last_updated": "2021-01-22T09:16:27Z",
         "name": {
           "ar": "Dark Reader",
           "bn": "Dark Reader",
@@ -237,10 +237,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.562,
-          "bayesian_average": 4.5603163051620115,
-          "count": 3242,
-          "text_count": 1071
+          "average": 4.5614,
+          "bayesian_average": 4.5597207572687815,
+          "count": 3258,
+          "text_count": 1077
         },
         "ratings_url": "https://addons.mozilla.org/en-US/android/addon/darkreader/reviews/",
         "requires_payment": false,
@@ -269,7 +269,7 @@
           "ro": "Dark themeTemă întunecată pentru orice site. Ai grijă de ochii tăi, folosește Dark Reader pentru cititul noaptea și de zi cu zi. for every website. Care your eyes, use Dark Reader for night and daily browsing.",
           "ru": "Тёмная тема для каждого сайта. Берегите зрение, используйте Дарк Ридер для ночного или ежедневного просмотра веб-страниц.",
           "sk": "Tmavý režim pre každú stránku. Šetrite svoje oči a používajte tmavý motív po celý deň.",
-          "sv-SE": "Mörkt läge för varje webbplats. Ta hand om dina ögon, använd ett mörkt tema för nattlig och daglig surfning.",
+          "sv-SE": "Mörkt läge på alla webbplatser. Ta hand om dina ögon och använd ett mörkt tema för att surfa på natten och dagen.",
           "th": "เปลี่ยนเป็นโหมดมืดให้กับทุกๆเว็บเพื่อปกป้องสายตาของคุณ ใช้ธีมสีมืดสำหรับตอนกลางคืนและการท่องเว็บในชีวิตประจำวัน",
           "tr": "Her web sitesi için koyu mod. Gözlerinize iyi bakın, gece ve günlük gezinti için koyu renk tema kullanın.",
           "uk": "Темний вигляд для кожного мережевого сайту. Піклуйтеся про свої очі, використовуйте темний вид для нічного та щоденного перегляду.",
@@ -291,6 +291,7 @@
           "nl": "darkreaderapp@gmail.com",
           "pl": "darkreaderapp@gmail.com",
           "pt-BR": "darkreaderapp@gmail.com",
+          "ru": "darkreaderapp@gmail.com",
           "sk": "darkreaderapp@gmail.com",
           "sv-SE": "darkreaderapp@gmail.com",
           "th": "darkreaderapp@gmail.com",
@@ -314,6 +315,7 @@
           "nl": "https://github.com/darkreader/darkreader",
           "pl": "https://github.com/darkreader/darkreader",
           "pt-BR": "https://github.com/darkreader/darkreader",
+          "ru": "https://github.com/darkreader/darkreader",
           "sk": "https://github.com/darkreader/darkreader",
           "sv-SE": "https://github.com/darkreader/darkreader",
           "th": "https://github.com/darkreader/darkreader",
@@ -334,7 +336,7 @@
         ],
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/android/addon/darkreader/",
-        "weekly_downloads": 25347
+        "weekly_downloads": 25282
       },
       "notes": null
     },
@@ -350,7 +352,7 @@
             "picture_url": "https://addons.cdn.mozilla.net/user-media/userpics/5/5474/5474073.png?modified=1469820907"
           }
         ],
-        "average_daily_users": 731941,
+        "average_daily_users": 739840,
         "categories": {
           "firefox": [
             "privacy-security"
@@ -480,9 +482,9 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.615,
-          "bayesian_average": 4.612461607979137,
-          "count": 2179,
+          "average": 4.6133,
+          "bayesian_average": 4.610763496975475,
+          "count": 2185,
           "text_count": 554
         },
         "ratings_url": "https://addons.mozilla.org/en-US/android/addon/https-everywhere/reviews/",
@@ -516,7 +518,7 @@
         ],
         "type": "extension",
         "url": "https://www.eff.org/https-everywhere",
-        "weekly_downloads": 17926
+        "weekly_downloads": 17897
       },
       "notes": null
     },
@@ -532,7 +534,7 @@
             "picture_url": "https://addons.cdn.mozilla.net/user-media/userpics/6/6937/6937656.png?modified=1550343990"
           }
         ],
-        "average_daily_users": 199663,
+        "average_daily_users": 202121,
         "categories": {
           "android": [
             "security-privacy"
@@ -745,10 +747,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.7995,
-          "bayesian_average": 4.794687251543521,
-          "count": 1202,
-          "text_count": 305
+          "average": 4.8002,
+          "bayesian_average": 4.7954104566041265,
+          "count": 1211,
+          "text_count": 306
         },
         "ratings_url": "https://addons.mozilla.org/en-US/android/addon/decentraleyes/reviews/",
         "requires_payment": false,
@@ -843,7 +845,7 @@
         ],
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/android/addon/decentraleyes/",
-        "weekly_downloads": 5986
+        "weekly_downloads": 6066
       },
       "notes": null
     },
@@ -859,7 +861,7 @@
             "picture_url": "https://addons.cdn.mozilla.net/user-media/userpics/5/5474/5474073.png?modified=1469820907"
           }
         ],
-        "average_daily_users": 957110,
+        "average_daily_users": 976267,
         "categories": {
           "android": [
             "security-privacy"
@@ -1403,10 +1405,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.7854,
-          "bayesian_average": 4.782091117459344,
-          "count": 1743,
-          "text_count": 412
+          "average": 4.7834,
+          "bayesian_average": 4.780097856300104,
+          "count": 1750,
+          "text_count": 413
         },
         "ratings_url": "https://addons.mozilla.org/en-US/android/addon/privacy-badger17/reviews/",
         "requires_payment": false,
@@ -1425,7 +1427,7 @@
         "tags": [],
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/android/addon/privacy-badger17/",
-        "weekly_downloads": 39119
+        "weekly_downloads": 38261
       },
       "notes": null
     },
@@ -1441,7 +1443,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 4880622,
+        "average_daily_users": 4971335,
         "categories": {
           "android": [
             "security-privacy"
@@ -1625,7 +1627,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2021-01-10T17:45:12Z",
+        "last_updated": "2021-01-22T14:50:11Z",
         "name": {
           "ar": "uBlock Origin",
           "bg": "uBlock Origin",
@@ -1771,9 +1773,9 @@
         },
         "ratings": {
           "average": 4.7336,
-          "bayesian_average": 4.733167386436881,
-          "count": 13174,
-          "text_count": 4396
+          "bayesian_average": 4.733167443332824,
+          "count": 13208,
+          "text_count": 4402
         },
         "ratings_url": "https://addons.mozilla.org/en-US/android/addon/ublock-origin/reviews/",
         "requires_payment": false,
@@ -1827,7 +1829,7 @@
         "tags": [],
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/android/addon/ublock-origin/",
-        "weekly_downloads": 118723
+        "weekly_downloads": 118274
       },
       "notes": null
     },
@@ -1843,7 +1845,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 54258,
+        "average_daily_users": 55478,
         "categories": {
           "android": [
             "photos-media"
@@ -1956,10 +1958,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.5077,
-          "bayesian_average": 4.502207031980669,
+          "average": 4.5087,
+          "bayesian_average": 4.503205611529312,
           "count": 979,
-          "text_count": 370
+          "text_count": 369
         },
         "ratings_url": "https://addons.mozilla.org/en-US/android/addon/video-background-play-fix/reviews/",
         "requires_payment": false,
@@ -1984,7 +1986,7 @@
         ],
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/android/addon/video-background-play-fix/",
-        "weekly_downloads": 63
+        "weekly_downloads": 59
       },
       "notes": null
     },
@@ -2000,7 +2002,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 95297,
+        "average_daily_users": 95688,
         "categories": {
           "android": [
             "experimental",
@@ -2139,10 +2141,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.4948,
-          "bayesian_average": 4.476468114105913,
-          "count": 291,
-          "text_count": 81
+          "average": 4.4829,
+          "bayesian_average": 4.46463504208983,
+          "count": 292,
+          "text_count": 82
         },
         "ratings_url": "https://addons.mozilla.org/en-US/android/addon/privacy-possum/reviews/",
         "requires_payment": false,
@@ -2167,7 +2169,7 @@
         ],
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/android/addon/privacy-possum/",
-        "weekly_downloads": 1408
+        "weekly_downloads": 1591
       },
       "notes": null
     },
@@ -2183,7 +2185,7 @@
             "picture_url": "https://addons.cdn.mozilla.net/user-media/userpics/12/12929/12929064.png?modified=1557684554"
           }
         ],
-        "average_daily_users": 157802,
+        "average_daily_users": 161350,
         "categories": {
           "android": [
             "photos-media",
@@ -2405,9 +2407,9 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.6604,
-          "bayesian_average": 4.653397289169066,
-          "count": 798,
+          "average": 4.6609,
+          "bayesian_average": 4.653940298348592,
+          "count": 805,
           "text_count": 168
         },
         "ratings_url": "https://addons.mozilla.org/en-US/android/addon/search_by_image/reviews/",
@@ -2443,7 +2445,7 @@
         ],
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/android/addon/search_by_image/",
-        "weekly_downloads": 8987
+        "weekly_downloads": 8564
       },
       "notes": null
     },
@@ -2466,7 +2468,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 31964,
+        "average_daily_users": 32912,
         "categories": {
           "android": [
             "other"
@@ -2748,9 +2750,9 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.4492,
-          "bayesian_average": 4.443594465372142,
-          "count": 944,
+          "average": 4.4419,
+          "bayesian_average": 4.436303974414219,
+          "count": 946,
           "text_count": 254
         },
         "ratings_url": "https://addons.mozilla.org/en-US/android/addon/google-search-fixer/reviews/",
@@ -2770,7 +2772,7 @@
         "tags": [],
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/android/addon/google-search-fixer/",
-        "weekly_downloads": 69
+        "weekly_downloads": 53
       },
       "notes": null
     },
@@ -2786,7 +2788,7 @@
             "picture_url": "https://addons.cdn.mozilla.net/user-media/userpics/0/0/143.png?modified=1506804587"
           }
         ],
-        "average_daily_users": 407188,
+        "average_daily_users": 410215,
         "categories": {
           "android": [
             "performance",
@@ -2800,7 +2802,7 @@
         "contributions_url": "https://www.paypal.me/NoScript?utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2005-05-13T10:51:32Z",
         "current_version": {
-          "id": 5161029,
+          "id": 5166141,
           "compatibility": {
             "firefox": {
               "min": "59.0",
@@ -2811,19 +2813,19 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/noscript/versions/5161029",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/noscript/versions/5166141",
           "files": [
             {
-              "id": 3705391,
-              "created": "2021-01-07T22:41:19Z",
-              "hash": "sha256:86bcf1540cdfa04614288fb6ebb1b7f37dc962f233641ebb9c6e8827a0123870",
+              "id": 3710503,
+              "created": "2021-01-17T22:30:16Z",
+              "hash": "sha256:5f68a63637e286433089aeb3b6a0aa930317dd988184876b5d6dcff2ca07bb34",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 628730,
+              "size": 600156,
               "status": "public",
-              "url": "https://addons.mozilla.org/android/downloads/file/3705391/noscript_security_suite-11.1.8-an+fx.xpi",
+              "url": "https://addons.mozilla.org/android/downloads/file/3710503/noscript_security_suite-11.1.9-an+fx.xpi",
               "permissions": [
                 "contextMenus",
                 "storage",
@@ -2870,10 +2872,10 @@
             "url": "http://www.gnu.org/licenses/gpl-2.0.html"
           },
           "release_notes": {
-            "en-US": "v 11.1.8\n============================================================\nx [XSS] Fix for old pre-screening optimization exploitable\nto bypass the filter in recent browsers - thanks Tsubasa\nFUJII (@reinforchu) for reporting\nx Replace DOM-based entity decoding with the he.js pure JS\nlibrary\nx Updated copyright statement\nx Updated browser-polyfill.js\nx Removed obsolete fastclick.js dependency\nx [l10n] Updated de (thanks ib and Musonius)\nx Updated TLDs"
+            "en-US": "v 11.1.9\n============================================================\nx Return null when webgl is not allowed (thanks Matthew \n  Finkel for patch)\nx [XSS] Fixed memoization bug resulting in performance \n  degradation on some payloads\nx [XSS] Include call stack in debugging log output\nx [XSS] Skip naps when InjectionChecker runs in its own \n  worker\nx Shortcut for easier XSS filter testing\nx More lenient filter to add a new entry to per-site \n  permissions\nx [L10n] Updated de\nx Replace script-embedded bitmap with css-embedded SVG as \n  the placeholder logo\nx Updated TLDs\nx Remove source map reference causing console noise\nx Fix per-site permissions UI glitches when base domain is \n  added to existing subdomain (thanks barbaz for reporting)"
           },
           "reviewed": null,
-          "version": "11.1.8"
+          "version": "11.1.9"
         },
         "default_locale": "en-US",
         "description": {
@@ -2923,7 +2925,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2021-01-15T17:30:09Z",
+        "last_updated": "2021-01-19T08:35:13Z",
         "name": {
           "de": "NoScript",
           "el": "NoScript",
@@ -3011,10 +3013,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.5418,
-          "bayesian_average": 4.5402139765882055,
-          "count": 3424,
-          "text_count": 2366
+          "average": 4.5416,
+          "bayesian_average": 4.540012526012674,
+          "count": 3429,
+          "text_count": 2367
         },
         "ratings_url": "https://addons.mozilla.org/en-US/android/addon/noscript/reviews/",
         "requires_payment": false,
@@ -3070,7 +3072,7 @@
         ],
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/android/addon/noscript/",
-        "weekly_downloads": 10849
+        "weekly_downloads": 11292
       },
       "notes": null
     },
@@ -3086,7 +3088,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 126953,
+        "average_daily_users": 127688,
         "categories": {
           "android": [
             "performance",
@@ -3225,10 +3227,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.1056,
-          "bayesian_average": 4.101394551282457,
-          "count": 1146,
-          "text_count": 551
+          "average": 4.1071,
+          "bayesian_average": 4.102893844607107,
+          "count": 1148,
+          "text_count": 550
         },
         "ratings_url": "https://addons.mozilla.org/en-US/android/addon/youtube-high-definition/reviews/",
         "requires_payment": false,
@@ -3266,7 +3268,7 @@
         ],
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/android/addon/youtube-high-definition/",
-        "weekly_downloads": 1939
+        "weekly_downloads": 1836
       },
       "notes": null
     }

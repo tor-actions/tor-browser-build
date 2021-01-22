@@ -1,3 +1,26 @@
+Tor Browser 10.5a8 -- January 26 2021
+ * All Platforms
+   * Update NoScript to 11.1.9
+   * Update Tor to 0.4.5.4-rc
+ * Windows + OS X + Linux
+   * Update Firefox to 78.7.0esr
+   * Bug 40249: Remove EOY 2020 Campaign [tor-browser]
+   * Bug 40307: Rebase 10.5 patches onto 78.7.0esr [tor-browser]
+ * Android
+   * Update Fenix to 85.1.0
+   * Bug 40037: Rebase 10.5 patches onto 70.0.16 [android-components]
+   * Bug 40137: Remove EOY 2020 Campaign [fenix]
+   * Bug 40139: Rebase 10.5 patches onto 85.1.0 [fenix]
+   * Bug 40305: Rebase 10.5 patches onto 85.0 [tor-browser]
+ * Build System
+   * All Platforms
+     * Update Go to 1.15.7
+     * Bug 33693: Change snowflake and meek dummy address [tor-browser]
+   * Android
+     * Bug 40208: Mitigate uniffi non-deterministic code generation [tor-browser-build]
+   * Linux
+     * Bug 40112: Strip libstdc++ we ship [tor-browser-build]
+
 Tor Browser 10.5a7 -- January 19 2021
  * All Platforms
    * Update NoScript to 11.1.8
