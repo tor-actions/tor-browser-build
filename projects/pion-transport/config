@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
 git_url: https://github.com/pion/transport
-git_hash: 95bf2d4e3f04b8d658048d1de02b30a27c8acc18 # v0.8.10
+git_hash: 1d35d73d3858e1d4f2d0bb9f1da455f4731541b4 #v0.12.2
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 
 build: '[% c("projects/go/var/build_go_lib") %]'
@@ -11,6 +11,7 @@ var:
     use_container: 1
   go_lib: github.com/pion/transport
   go_lib_deps:
+    - goxnet
     - pion-logging
     - testify
   go_lib_install:
@@ -18,11 +19,12 @@ var:
     - github.com/pion/transport/test
     - github.com/pion/transport/vnet
 
-
 input_files:
   - project: container-image
   - name: go
     project: go
+  - name: goxnet
+    project: goxnet
   - name: pion-logging
     project: pion-logging
   - name: testify

@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
 git_url: https://github.com/pion/srtp
-git_hash: 57349fe0710b65080a26d8855aa18689364560c3 # v1.2.7
+git_hash: 1c72ec6b73db20dcdf3e0828e20bb01d72d988c4 #v2.0.1
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 
 build: '[% c("projects/go/var/build_go_lib") %]'
@@ -11,7 +11,6 @@ var:
     use_container: 1
   go_lib: github.com/pion/srtp
   go_lib_deps:
-    - go-spew
     - pion-logging
     - pion-rtcp
     - pion-rtp
@@ -22,8 +21,6 @@ input_files:
   - project: container-image
   - name: go
     project: go
-  - name: go-spew
-    project: go-spew
   - name: pion-logging
     project: pion-logging
   - name: pion-rtcp

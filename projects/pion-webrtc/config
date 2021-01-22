@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
 git_url: https://github.com/pion/webrtc
-git_hash: 1f448413f22d6c32d690db594748d8ad5d3812f5 # v2.2.3
+git_hash: a54b74cdb736d07a6014da939fd0bac6d5fc4137 #v3.0.0
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 
 build: '[% c("projects/go/var/build_go_lib") %]'
@@ -9,13 +9,16 @@ build: '[% c("projects/go/var/build_go_lib") %]'
 var:
   container:
     use_container: 1
-  go_lib: github.com/pion/webrtc
+  go_lib: github.com/pion/webrtc/v3
   go_lib_deps:
     - agouti
+    - goxnet
     - pion-datachannel
     - pion-dtls
     - pion-ice
+    - pion-interceptor
     - pion-logging
+    - pion-randutil
     - pion-rtcp
     - pion-rtp
     - pion-sctp
@@ -30,14 +33,20 @@ input_files:
     project: go
   - name: agouti
     project: agouti
+  - name: goxnet
+    project: goxnet
   - name: pion-datachannel
     project: pion-datachannel
   - name: pion-dtls
     project: pion-dtls
   - name: pion-ice
     project: pion-ice
+  - name: pion-interceptor
+    project: pion-interceptor
   - name: pion-logging
     project: pion-logging
+  - name: pion-randutil
+    project: pion-randutil
   - name: pion-rtcp
     project: pion-rtcp
   - name: pion-rtp
