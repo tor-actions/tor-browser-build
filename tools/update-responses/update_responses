@@ -4,7 +4,7 @@ use strict;
 use feature "state";
 use English;
 use FindBin;
-use YAML qw(LoadFile);
+use YAML::XS qw(LoadFile);
 use File::Slurp;
 use File::Path qw(make_path);
 use Digest::SHA qw(sha256_hex);
