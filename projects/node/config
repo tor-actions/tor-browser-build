@@ -10,8 +10,8 @@ var:
 targets:
   android:
     var:
-      node_version: 10.22.1
-      node_hash: f47f4725dcae137b26f8e2a7d0ab2c2c7f1f47e4f96834e6a9242f157132255f
+      node_version: 10.23.1
+      node_hash: 88aa16f5af79615b183ca55ed81393763169e75d1fb96013cf1831895c6cedfa
 
 input_files:
   - project: container-image

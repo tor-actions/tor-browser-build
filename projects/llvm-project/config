@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-version: 11.0.0
-git_hash: 176249bd6732a8044d457092ed932768724a6f06
+version: 11.0.1
+git_hash: 43ff75f2c3feef64f9d73328230d34dac8832a9
 git_url: https://github.com/llvm/llvm-project
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
