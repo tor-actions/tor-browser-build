@@ -4,6 +4,7 @@ Tor Browser 10.0.9 -- January 26 2021
    * Update NoScript to 11.1.9
    * Bug 40137: Remove EOY 2020 Campaign [fenix]
    * Bug 40165: Update zstd to 1.4.8 [tor-browser-build]
+   * Bug 40308: Disable network state partitioning until audit [tor-browser]
  * Build System
    * Android
      * Bug 40190: Update toolchain for Fenix 85 [tor-browser-build]
