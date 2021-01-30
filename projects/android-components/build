@@ -26,6 +26,11 @@ EOF
   cp -r $gradle_repo/dl/android/maven2/* $gradle_repo
   cp -r $gradle_repo/maven2/* $gradle_repo
   cp -r $gradle_repo/m2/* $gradle_repo
+  # Put the Kotlin/Native compiler at the right place, see:
+  # tor-browser-build#40217.
+  kotlin_dir=/home/rbm/.konan
+  mkdir $kotlin_dir
+  find $gradle_repo -type f -name kotlin-native-prebuilt-linux*tar.gz -exec tar -C $kotlin_dir -xaf {} \;
   tar -C $distdir -xf [% c('input_files_by_name/application-services') %]
   # XXX: We could be smarter and just copy over the projects that are needed
   # according to the Gradle dependencies list.
