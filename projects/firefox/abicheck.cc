@@ -3,9 +3,9 @@
  * This program is useful in determining if the libstdc++.so.6 installed
  * on the system is recent enough. Specifically, this program requires
  * `GLIBCXX_3.4.28` which should be provided by libstdc++.so.6 from
- * gcc >= 9.3.0. If the program executes successfully, that means we
- * should use the system version of libstdc++.so.6 and if not, that means
- * we should use the bundled version.
+ * GCC >= 9.3.0 (we are good here as well with GCC 10.2.0). If the program
+ * executes successfully, that means we should use the system version of
+ * libstdc++.so.6 and if not, that means we should use the bundled version.
  *
  * We use std::pmr::monotonic_buffer_resource in order to require
  * GLIBCXX_3.4.28:
