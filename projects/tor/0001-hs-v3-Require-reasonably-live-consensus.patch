@@ -1,0 +1,672 @@
+From a363b64e82bc1dac2409a65dee0606c4b66f71fc Mon Sep 17 00:00:00 2001
+From: David Goulet <dgoulet@torproject.org>
+Date: Mon, 11 Jan 2021 16:01:22 -0500
+Subject: [PATCH 1/3] hs-v3: Require reasonably live consensus
+
+Some days before this commit, the network experienced a DDoS on the directory
+authorities that prevented them to generate a consensus for more than 5 hours
+straight.
+
+That in turn entirely disabled onion service v3, client and service side, due
+to the subsystem requiring a live consensus to function properly.
+
+We know require a reasonably live consensus which means that the HSv3
+subsystem will to its job for using the best consensus tor can find. If the
+entire network is using an old consensus, than this should be alright.
+
+If the service happens to use a live consensus while a client is not, it
+should still work because the client will use the current SRV it sees which
+might be the previous SRV for the service for which it still publish
+descriptors for.
+
+If the service is using an old one and somehow can't get a new one while
+clients are on a new one, then reachability issues might arise. However, this
+is a situation we already have at the moment since the service will simply not
+work if it doesn't have a live consensus while a client has one.
+
+Fixes #40237
+
+Signed-off-by: David Goulet <dgoulet@torproject.org>
+
+diff --git a/changes/ticket40237 b/changes/ticket40237
+new file mode 100644
+index 0000000000..fc32f59cd4
+--- /dev/null
++++ b/changes/ticket40237
+@@ -0,0 +1,5 @@
++  o Major bugfixes (onion service v3):
++    - Stop requiring a live consensus for v3 clients and services to work. The
++      use of a reasonably live consensus will allow v3 to work properly in most
++      cases if the network failed to generate a consensus for more than 2 hours
++      in a row. Fixes bug 40237; bugfix on 0.3.5.1-alpha.
+diff --git a/src/core/mainloop/mainloop.c b/src/core/mainloop/mainloop.c
+index e4e17f6b76..b4dbedbfe4 100644
+--- a/src/core/mainloop/mainloop.c
++++ b/src/core/mainloop/mainloop.c
+@@ -2154,7 +2154,8 @@ hs_service_callback(time_t now, const or_options_t *options)
+   /* We need to at least be able to build circuits and that we actually have
+    * a working network. */
+   if (!have_completed_a_circuit() || net_is_disabled() ||
+-      networkstatus_get_live_consensus(now) == NULL) {
++      !networkstatus_get_reasonably_live_consensus(now,
++                                         usable_consensus_flavor())) {
+     goto end;
+   }
+ 
+diff --git a/src/feature/hs/hs_cache.c b/src/feature/hs/hs_cache.c
+index 44cd2505fd..ef5e88e947 100644
+--- a/src/feature/hs/hs_cache.c
++++ b/src/feature/hs/hs_cache.c
+@@ -17,6 +17,7 @@
+ #include "feature/hs/hs_common.h"
+ #include "feature/hs/hs_client.h"
+ #include "feature/hs/hs_descriptor.h"
++#include "feature/nodelist/microdesc.h"
+ #include "feature/nodelist/networkstatus.h"
+ #include "feature/rend/rendcache.h"
+ 
+@@ -739,7 +740,9 @@ cached_client_descriptor_has_expired(time_t now,
+   /* We use the current consensus time to see if we should expire this
+    * descriptor since we use consensus time for all other parts of the protocol
+    * as well (e.g. to build the blinded key and compute time periods). */
+-  const networkstatus_t *ns = networkstatus_get_live_consensus(now);
++  const networkstatus_t *ns =
++    networkstatus_get_reasonably_live_consensus(now,
++      usable_consensus_flavor());
+   /* If we don't have a recent consensus, consider this entry expired since we
+    * will want to fetch a new HS desc when we get a live consensus. */
+   if (!ns) {
+diff --git a/src/feature/hs/hs_client.c b/src/feature/hs/hs_client.c
+index fc1fd76efc..0f6109195b 100644
+--- a/src/feature/hs/hs_client.c
++++ b/src/feature/hs/hs_client.c
+@@ -29,6 +29,7 @@
+ #include "feature/hs/hs_descriptor.h"
+ #include "feature/hs/hs_ident.h"
+ #include "feature/nodelist/describe.h"
++#include "feature/nodelist/microdesc.h"
+ #include "feature/nodelist/networkstatus.h"
+ #include "feature/nodelist/nodelist.h"
+ #include "feature/nodelist/routerset.h"
+@@ -1302,9 +1303,10 @@ can_client_refetch_desc(const ed25519_public_key_t *identity_pk,
+     goto cannot;
+   }
+ 
+-  /* Without a live consensus we can't do any client actions. It is needed to
+-   * compute the hashring for a service. */
+-  if (!networkstatus_get_live_consensus(approx_time())) {
++  /* Without a usable consensus we can't do any client actions. It is needed
++   * to compute the hashring for a service. */
++  if (!networkstatus_get_reasonably_live_consensus(approx_time(),
++                                         usable_consensus_flavor())) {
+     log_info(LD_REND, "Can't fetch descriptor for service %s because we "
+                       "are missing a live consensus. Stalling connection.",
+              safe_str_client(ed25519_fmt(identity_pk)));
+diff --git a/src/feature/hs/hs_common.c b/src/feature/hs/hs_common.c
+index 4639cdb68a..86d3fcab7d 100644
+--- a/src/feature/hs/hs_common.c
++++ b/src/feature/hs/hs_common.c
+@@ -27,6 +27,7 @@
+ #include "feature/hs/hs_service.h"
+ #include "feature/hs_common/shared_random_client.h"
+ #include "feature/nodelist/describe.h"
++#include "feature/nodelist/microdesc.h"
+ #include "feature/nodelist/networkstatus.h"
+ #include "feature/nodelist/nodelist.h"
+ #include "feature/nodelist/routerset.h"
+@@ -276,7 +277,9 @@ hs_get_time_period_num(time_t now)
+   if (now != 0) {
+     current_time = now;
+   } else {
+-    networkstatus_t *ns = networkstatus_get_live_consensus(approx_time());
++    networkstatus_t *ns =
++      networkstatus_get_reasonably_live_consensus(approx_time(),
++                                                  usable_consensus_flavor());
+     current_time = ns ? ns->valid_after : approx_time();
+   }
+ 
+@@ -1107,7 +1110,8 @@ hs_in_period_between_tp_and_srv,(const networkstatus_t *consensus, time_t now))
+   time_t srv_start_time, tp_start_time;
+ 
+   if (!consensus) {
+-    consensus = networkstatus_get_live_consensus(now);
++    consensus = networkstatus_get_reasonably_live_consensus(now,
++                                                  usable_consensus_flavor());
+     if (!consensus) {
+       return 0;
+     }
+@@ -1352,7 +1356,9 @@ hs_get_responsible_hsdirs(const ed25519_public_key_t *blinded_pk,
+   sorted_nodes = smartlist_new();
+ 
+   /* Make sure we actually have a live consensus */
+-  networkstatus_t *c = networkstatus_get_live_consensus(approx_time());
++  networkstatus_t *c =
++    networkstatus_get_reasonably_live_consensus(approx_time(),
++                                                usable_consensus_flavor());
+   if (!c || smartlist_len(c->routerstatus_list) == 0) {
+       log_warn(LD_REND, "No live consensus so we can't get the responsible "
+                "hidden service directories.");
+diff --git a/src/feature/hs/hs_service.c b/src/feature/hs/hs_service.c
+index a42879a48f..2f3f45f252 100644
+--- a/src/feature/hs/hs_service.c
++++ b/src/feature/hs/hs_service.c
+@@ -23,6 +23,7 @@
+ #include "feature/hs_common/shared_random_client.h"
+ #include "feature/keymgt/loadkey.h"
+ #include "feature/nodelist/describe.h"
++#include "feature/nodelist/microdesc.h"
+ #include "feature/nodelist/networkstatus.h"
+ #include "feature/nodelist/nickname.h"
+ #include "feature/nodelist/node_select.h"
+@@ -2504,7 +2505,8 @@ should_rotate_descriptors(hs_service_t *service, time_t now)
+ 
+   tor_assert(service);
+ 
+-  ns = networkstatus_get_live_consensus(now);
++  ns = networkstatus_get_reasonably_live_consensus(now,
++                                                   usable_consensus_flavor());
+   if (ns == NULL) {
+     goto no_rotation;
+   }
+@@ -3188,10 +3190,8 @@ should_service_upload_descriptor(const hs_service_t *service,
+   }
+ 
+   /* Don't upload desc if we don't have a live consensus */
+-  if (!networkstatus_get_live_consensus(now)) {
+-    msg = tor_strdup("No live consensus");
+-    log_cant_upload_desc(service, desc, msg,
+-                         LOG_DESC_UPLOAD_REASON_NO_LIVE_CONSENSUS);
++  if (!networkstatus_get_reasonably_live_consensus(now,
++                                            usable_consensus_flavor())) {
+     goto cannot;
+   }
+ 
+diff --git a/src/feature/hs_common/shared_random_client.c b/src/feature/hs_common/shared_random_client.c
+index c2ea5afe32..4e8a2942fc 100644
+--- a/src/feature/hs_common/shared_random_client.c
++++ b/src/feature/hs_common/shared_random_client.c
+@@ -13,6 +13,7 @@
+ #include "app/config/config.h"
+ #include "feature/dirauth/authmode.h"
+ #include "feature/dirauth/voting_schedule.h"
++#include "feature/nodelist/microdesc.h"
+ #include "feature/nodelist/networkstatus.h"
+ #include "lib/encoding/binascii.h"
+ 
+@@ -55,7 +56,9 @@ int
+ get_voting_interval(void)
+ {
+   int interval;
+-  networkstatus_t *consensus = networkstatus_get_live_consensus(time(NULL));
++  networkstatus_t *consensus =
++    networkstatus_get_reasonably_live_consensus(time(NULL),
++                                                usable_consensus_flavor());
+ 
+   if (consensus) {
+     /* Ideally we have a live consensus and we can just use that. */
+@@ -147,7 +150,8 @@ sr_get_current(const networkstatus_t *ns)
+   if (ns) {
+     consensus = ns;
+   } else {
+-    consensus = networkstatus_get_live_consensus(approx_time());
++    consensus = networkstatus_get_reasonably_live_consensus(approx_time(),
++                                                  usable_consensus_flavor());
+   }
+   /* Ideally we would never be asked for an SRV without a live consensus. Make
+    * sure this assumption is correct. */
+@@ -170,7 +174,8 @@ sr_get_previous(const networkstatus_t *ns)
+   if (ns) {
+     consensus = ns;
+   } else {
+-    consensus = networkstatus_get_live_consensus(approx_time());
++    consensus = networkstatus_get_reasonably_live_consensus(approx_time(),
++                                                  usable_consensus_flavor());
+   }
+   /* Ideally we would never be asked for an SRV without a live consensus. Make
+    * sure this assumption is correct. */
+@@ -242,13 +247,14 @@ sr_state_get_start_time_of_current_protocol_run(void)
+   int voting_interval = get_voting_interval();
+   time_t beginning_of_curr_round;
+ 
+-  /* This function is not used for voting purposes, so if we have a live
+-     consensus, use its valid-after as the beginning of the current round.
+-     If we have no consensus but we're an authority, use our own
+-     schedule.  Otherwise, try using our view of the voting interval
+-     to figure out when the current round _should_ be starting.
+-  */
+-  networkstatus_t *ns = networkstatus_get_live_consensus(approx_time());
++  /* This function is not used for voting purposes, so if we have a reasonably
++   * live consensus, use its valid-after as the beginning of the current
++   * round. If we have no consensus but we're an authority, use our own
++   * schedule. Otherwise, try using our view of the voting interval to figure
++   * out when the current round _should_ be starting. */
++  networkstatus_t *ns =
++    networkstatus_get_reasonably_live_consensus(approx_time(),
++                                                usable_consensus_flavor());
+   if (ns) {
+     beginning_of_curr_round = ns->valid_after;
+   } else if (authdir_mode(get_options()) || ASSUME_AUTHORITY_SCHEDULING) {
+diff --git a/src/feature/nodelist/nodelist.c b/src/feature/nodelist/nodelist.c
+index 7454f342f9..6ee1d11cae 100644
+--- a/src/feature/nodelist/nodelist.c
++++ b/src/feature/nodelist/nodelist.c
+@@ -362,7 +362,7 @@ node_set_hsdir_index(node_t *node, const networkstatus_t *ns)
+   tor_assert(node);
+   tor_assert(ns);
+ 
+-  if (!networkstatus_is_live(ns, now)) {
++  if (!networkstatus_consensus_reasonably_live(ns, now)) {
+     static struct ratelim_t live_consensus_ratelim = RATELIM_INIT(30 * 60);
+     log_fn_ratelim(&live_consensus_ratelim, LOG_INFO, LD_GENERAL,
+                    "Not setting hsdir index with a non-live consensus.");
+diff --git a/src/test/test_hs_cache.c b/src/test/test_hs_cache.c
+index f25bba3584..379f23ec72 100644
+--- a/src/test/test_hs_cache.c
++++ b/src/test/test_hs_cache.c
+@@ -462,9 +462,10 @@ test_hsdir_revision_counter_check(void *arg)
+ static networkstatus_t mock_ns;
+ 
+ static networkstatus_t *
+-mock_networkstatus_get_live_consensus(time_t now)
++mock_networkstatus_get_reasonably_live_consensus(time_t now, int flavor)
+ {
+   (void) now;
++  (void) flavor;
+   return &mock_ns;
+ }
+ 
+@@ -485,8 +486,8 @@ test_client_cache(void *arg)
+   /* Initialize HSDir cache subsystem */
+   init_test();
+ 
+-  MOCK(networkstatus_get_live_consensus,
+-       mock_networkstatus_get_live_consensus);
++  MOCK(networkstatus_get_reasonably_live_consensus,
++       mock_networkstatus_get_reasonably_live_consensus);
+ 
+   /* Set consensus time */
+   parse_rfc1123_time("Sat, 26 Oct 1985 13:00:00 UTC",
+diff --git a/src/test/test_hs_client.c b/src/test/test_hs_client.c
+index ae5cc5ed84..fd84293dc2 100644
+--- a/src/test/test_hs_client.c
++++ b/src/test/test_hs_client.c
+@@ -66,16 +66,18 @@ static networkstatus_t mock_ns;
+ 
+ /* Always return NULL. */
+ static networkstatus_t *
+-mock_networkstatus_get_live_consensus_false(time_t now)
++mock_networkstatus_get_reasonably_live_consensus_false(time_t now, int flavor)
+ {
+   (void) now;
++  (void) flavor;
+   return NULL;
+ }
+ 
+ static networkstatus_t *
+-mock_networkstatus_get_live_consensus(time_t now)
++mock_networkstatus_get_reasonably_live_consensus(time_t now, int flavor)
+ {
+   (void) now;
++  (void) flavor;
+   return &mock_ns;
+ }
+ 
+@@ -379,8 +381,8 @@ test_client_pick_intro(void *arg)
+   ed25519_keypair_t service_kp;
+   hs_descriptor_t *desc = NULL;
+ 
+-  MOCK(networkstatus_get_live_consensus,
+-       mock_networkstatus_get_live_consensus);
++  MOCK(networkstatus_get_reasonably_live_consensus,
++       mock_networkstatus_get_reasonably_live_consensus);
+ 
+   (void) arg;
+ 
+@@ -632,15 +634,15 @@ test_descriptor_fetch(void *arg)
+   get_options_mutable()->FetchHidServDescriptors = 1;
+ 
+   /* 2. We don't have a live consensus. */
+-  MOCK(networkstatus_get_live_consensus,
+-       mock_networkstatus_get_live_consensus_false);
++  MOCK(networkstatus_get_reasonably_live_consensus,
++       mock_networkstatus_get_reasonably_live_consensus_false);
+   ret = hs_client_refetch_hsdesc(&service_pk);
+-  UNMOCK(networkstatus_get_live_consensus);
++  UNMOCK(networkstatus_get_reasonably_live_consensus);
+   tt_int_op(ret, OP_EQ, HS_CLIENT_FETCH_MISSING_INFO);
+ 
+   /* From now on, return a live consensus. */
+-  MOCK(networkstatus_get_live_consensus,
+-       mock_networkstatus_get_live_consensus);
++  MOCK(networkstatus_get_reasonably_live_consensus,
++       mock_networkstatus_get_reasonably_live_consensus);
+ 
+   /* 3. Not enough dir information. */
+   MOCK(router_have_minimum_dir_info,
+@@ -682,7 +684,7 @@ test_descriptor_fetch(void *arg)
+ 
+  done:
+   connection_free_minimal(ENTRY_TO_CONN(ec));
+-  UNMOCK(networkstatus_get_live_consensus);
++  UNMOCK(networkstatus_get_reasonably_live_consensus);
+   UNMOCK(router_have_minimum_dir_info);
+   hs_free_all();
+ }
+@@ -880,8 +882,8 @@ test_desc_has_arrived_cleanup(void *arg)
+ 
+   hs_init();
+ 
+-  MOCK(networkstatus_get_live_consensus,
+-       mock_networkstatus_get_live_consensus);
++  MOCK(networkstatus_get_reasonably_live_consensus,
++       mock_networkstatus_get_reasonably_live_consensus);
+   MOCK(connection_mark_unattached_ap_,
+        mock_connection_mark_unattached_ap_);
+   MOCK(router_have_minimum_dir_info,
+@@ -953,7 +955,7 @@ test_desc_has_arrived_cleanup(void *arg)
+   tor_free(desc_str);
+   hs_free_all();
+ 
+-  UNMOCK(networkstatus_get_live_consensus);
++  UNMOCK(networkstatus_get_reasonably_live_consensus);
+   UNMOCK(connection_mark_unattached_ap_);
+   UNMOCK(router_have_minimum_dir_info);
+ }
+@@ -974,8 +976,8 @@ test_close_intro_circuits_new_desc(void *arg)
+ 
+   /* This is needed because of the client cache expiration timestamp is based
+    * on having a consensus. See cached_client_descriptor_has_expired(). */
+-  MOCK(networkstatus_get_live_consensus,
+-       mock_networkstatus_get_live_consensus);
++  MOCK(networkstatus_get_reasonably_live_consensus,
++       mock_networkstatus_get_reasonably_live_consensus);
+ 
+   /* Set consensus time */
+   parse_rfc1123_time("Sat, 26 Oct 1985 13:00:00 UTC",
+@@ -1101,7 +1103,7 @@ test_close_intro_circuits_new_desc(void *arg)
+   hs_descriptor_free(desc1);
+   hs_descriptor_free(desc2);
+   hs_free_all();
+-  UNMOCK(networkstatus_get_live_consensus);
++  UNMOCK(networkstatus_get_reasonably_live_consensus);
+ }
+ 
+ static void
+diff --git a/src/test/test_hs_common.c b/src/test/test_hs_common.c
+index 9202074e25..e3d130fb32 100644
+--- a/src/test/test_hs_common.c
++++ b/src/test/test_hs_common.c
+@@ -360,9 +360,10 @@ mock_networkstatus_get_latest_consensus(void)
+ }
+ 
+ static networkstatus_t *
+-mock_networkstatus_get_live_consensus(time_t now)
++mock_networkstatus_get_reasonably_live_consensus(time_t now, int flavor)
+ {
+   (void) now;
++  (void) flavor;
+ 
+   tt_assert(mock_ns);
+ 
+@@ -382,6 +383,8 @@ test_responsible_hsdirs(void *arg)
+ 
+   MOCK(networkstatus_get_latest_consensus,
+        mock_networkstatus_get_latest_consensus);
++  MOCK(networkstatus_get_reasonably_live_consensus,
++       mock_networkstatus_get_reasonably_live_consensus);
+ 
+   ns = networkstatus_get_latest_consensus();
+ 
+@@ -418,6 +421,8 @@ test_responsible_hsdirs(void *arg)
+   smartlist_clear(ns->routerstatus_list);
+   networkstatus_vote_free(mock_ns);
+   cleanup_nodelist();
++
++  UNMOCK(networkstatus_get_reasonably_live_consensus);
+ }
+ 
+ static void
+@@ -467,6 +472,8 @@ test_desc_reupload_logic(void *arg)
+ 
+   hs_init();
+ 
++  MOCK(networkstatus_get_reasonably_live_consensus,
++       mock_networkstatus_get_reasonably_live_consensus);
+   MOCK(router_have_minimum_dir_info,
+        mock_router_have_minimum_dir_info);
+   MOCK(get_or_state,
+@@ -911,9 +918,11 @@ static smartlist_t *service_responsible_hsdirs = NULL;
+ static smartlist_t *client_responsible_hsdirs = NULL;
+ 
+ static networkstatus_t *
+-mock_networkstatus_get_live_consensus_service(time_t now)
++mock_networkstatus_get_reasonably_live_consensus_service(time_t now,
++                                                         int flavor)
+ {
+   (void) now;
++  (void) flavor;
+ 
+   if (mock_service_ns) {
+     return mock_service_ns;
+@@ -929,13 +938,14 @@ mock_networkstatus_get_live_consensus_service(time_t now)
+ static networkstatus_t *
+ mock_networkstatus_get_latest_consensus_service(void)
+ {
+-  return mock_networkstatus_get_live_consensus_service(0);
++  return mock_networkstatus_get_reasonably_live_consensus_service(0, 0);
+ }
+ 
+ static networkstatus_t *
+-mock_networkstatus_get_live_consensus_client(time_t now)
++mock_networkstatus_get_reasonably_live_consensus_client(time_t now, int flavor)
+ {
+   (void) now;
++  (void) flavor;
+ 
+   if (mock_client_ns) {
+     return mock_client_ns;
+@@ -951,7 +961,7 @@ mock_networkstatus_get_live_consensus_client(time_t now)
+ static networkstatus_t *
+ mock_networkstatus_get_latest_consensus_client(void)
+ {
+-  return mock_networkstatus_get_live_consensus_client(0);
++  return mock_networkstatus_get_reasonably_live_consensus_client(0, 0);
+ }
+ 
+ /* Mock function because we are not trying to test the close circuit that does
+@@ -1411,8 +1421,8 @@ run_reachability_scenario(const reachability_cfg_t *cfg, int num_scenario)
+    * === Client setup ===
+    */
+ 
+-  MOCK(networkstatus_get_live_consensus,
+-       mock_networkstatus_get_live_consensus_client);
++  MOCK(networkstatus_get_reasonably_live_consensus,
++       mock_networkstatus_get_reasonably_live_consensus_client);
+   MOCK(networkstatus_get_latest_consensus,
+        mock_networkstatus_get_latest_consensus_client);
+ 
+@@ -1436,14 +1446,14 @@ run_reachability_scenario(const reachability_cfg_t *cfg, int num_scenario)
+   tt_int_op(smartlist_len(client_responsible_hsdirs), OP_EQ, 6);
+ 
+   UNMOCK(networkstatus_get_latest_consensus);
+-  UNMOCK(networkstatus_get_live_consensus);
++  UNMOCK(networkstatus_get_reasonably_live_consensus);
+ 
+   /*
+    * === Service setup ===
+    */
+ 
+-  MOCK(networkstatus_get_live_consensus,
+-       mock_networkstatus_get_live_consensus_service);
++  MOCK(networkstatus_get_reasonably_live_consensus,
++       mock_networkstatus_get_reasonably_live_consensus_service);
+   MOCK(networkstatus_get_latest_consensus,
+        mock_networkstatus_get_latest_consensus_service);
+ 
+@@ -1470,7 +1480,7 @@ run_reachability_scenario(const reachability_cfg_t *cfg, int num_scenario)
+   tt_int_op(smartlist_len(service_responsible_hsdirs), OP_EQ, 8);
+ 
+   UNMOCK(networkstatus_get_latest_consensus);
+-  UNMOCK(networkstatus_get_live_consensus);
++  UNMOCK(networkstatus_get_reasonably_live_consensus);
+ 
+   /* Some testing of the values we just got from the client and service. */
+   tt_mem_op(&client_blinded_pk, OP_EQ, &service_blinded_pk,
+@@ -1721,8 +1731,8 @@ test_client_service_hsdir_set_sync(void *arg)
+ 
+   MOCK(networkstatus_get_latest_consensus,
+        mock_networkstatus_get_latest_consensus);
+-  MOCK(networkstatus_get_live_consensus,
+-       mock_networkstatus_get_live_consensus);
++  MOCK(networkstatus_get_reasonably_live_consensus,
++       mock_networkstatus_get_reasonably_live_consensus);
+   MOCK(get_or_state,
+        get_or_state_replacement);
+   MOCK(hs_desc_encode_descriptor,
+diff --git a/src/test/test_hs_service.c b/src/test/test_hs_service.c
+index 80383baff8..630cfef1fe 100644
+--- a/src/test/test_hs_service.c
++++ b/src/test/test_hs_service.c
+@@ -83,9 +83,10 @@
+ static networkstatus_t mock_ns;
+ 
+ static networkstatus_t *
+-mock_networkstatus_get_live_consensus(time_t now)
++mock_networkstatus_get_reasonably_live_consensus(time_t now, int flavor)
+ {
+   (void) now;
++  (void) flavor;
+   return &mock_ns;
+ }
+ 
+@@ -1375,8 +1376,8 @@ test_rotate_descriptors(void *arg)
+   hs_init();
+   MOCK(get_or_state, get_or_state_replacement);
+   MOCK(circuit_mark_for_close_, mock_circuit_mark_for_close);
+-  MOCK(networkstatus_get_live_consensus,
+-       mock_networkstatus_get_live_consensus);
++  MOCK(networkstatus_get_reasonably_live_consensus,
++       mock_networkstatus_get_reasonably_live_consensus);
+ 
+   /* Descriptor rotation happens with a consensus with a new SRV. */
+ 
+@@ -1464,7 +1465,7 @@ test_rotate_descriptors(void *arg)
+   hs_free_all();
+   UNMOCK(get_or_state);
+   UNMOCK(circuit_mark_for_close_);
+-  UNMOCK(networkstatus_get_live_consensus);
++  UNMOCK(networkstatus_get_reasonably_live_consensus);
+ }
+ 
+ /** Test building descriptors: picking intro points, setting up their link
+@@ -1484,8 +1485,8 @@ test_build_update_descriptors(void *arg)
+ 
+   MOCK(get_or_state,
+        get_or_state_replacement);
+-  MOCK(networkstatus_get_live_consensus,
+-       mock_networkstatus_get_live_consensus);
++  MOCK(networkstatus_get_reasonably_live_consensus,
++       mock_networkstatus_get_reasonably_live_consensus);
+ 
+   dummy_state = or_state_new();
+ 
+@@ -1715,8 +1716,8 @@ test_build_descriptors(void *arg)
+ 
+   MOCK(get_or_state,
+        get_or_state_replacement);
+-  MOCK(networkstatus_get_live_consensus,
+-       mock_networkstatus_get_live_consensus);
++  MOCK(networkstatus_get_reasonably_live_consensus,
++       mock_networkstatus_get_reasonably_live_consensus);
+ 
+   dummy_state = or_state_new();
+ 
+@@ -1816,8 +1817,8 @@ test_upload_descriptors(void *arg)
+   hs_init();
+   MOCK(get_or_state,
+        get_or_state_replacement);
+-  MOCK(networkstatus_get_live_consensus,
+-       mock_networkstatus_get_live_consensus);
++  MOCK(networkstatus_get_reasonably_live_consensus,
++       mock_networkstatus_get_reasonably_live_consensus);
+ 
+   dummy_state = or_state_new();
+ 
+diff --git a/src/test/test_shared_random.c b/src/test/test_shared_random.c
+index 148eb5cf90..9e49e835c9 100644
+--- a/src/test/test_shared_random.c
++++ b/src/test/test_shared_random.c
+@@ -167,6 +167,15 @@ mock_networkstatus_get_live_consensus(time_t now)
+   return &mock_consensus;
+ }
+ 
++/* Mock function to immediately return our local 'mock_consensus'. */
++static networkstatus_t *
++mock_networkstatus_get_reasonably_live_consensus(time_t now, int flavor)
++{
++  (void) now;
++  (void) flavor;
++  return &mock_consensus;
++}
++
+ static void
+ test_get_state_valid_until_time(void *arg)
+ {
+@@ -179,6 +188,8 @@ test_get_state_valid_until_time(void *arg)
+ 
+   MOCK(networkstatus_get_live_consensus,
+        mock_networkstatus_get_live_consensus);
++  MOCK(networkstatus_get_reasonably_live_consensus,
++       mock_networkstatus_get_reasonably_live_consensus);
+ 
+   retval = parse_rfc1123_time("Mon, 20 Apr 2015 01:00:00 UTC",
+                               &mock_consensus.fresh_until);
+@@ -235,7 +246,7 @@ test_get_state_valid_until_time(void *arg)
+   }
+ 
+  done:
+-  UNMOCK(networkstatus_get_live_consensus);
++  UNMOCK(networkstatus_get_reasonably_live_consensus);
+ }
+ 
+ /** Test the function that calculates the start time of the current SRV
+@@ -251,6 +262,8 @@ test_get_start_time_of_current_run(void *arg)
+ 
+   MOCK(networkstatus_get_live_consensus,
+        mock_networkstatus_get_live_consensus);
++  MOCK(networkstatus_get_reasonably_live_consensus,
++       mock_networkstatus_get_reasonably_live_consensus);
+ 
+   retval = parse_rfc1123_time("Mon, 20 Apr 2015 01:00:00 UTC",
+                               &mock_consensus.fresh_until);
+@@ -335,6 +348,7 @@ test_get_start_time_of_current_run(void *arg)
+   /* Next test is testing it without a consensus to use the testing voting
+    * interval . */
+   UNMOCK(networkstatus_get_live_consensus);
++  UNMOCK(networkstatus_get_reasonably_live_consensus);
+ 
+   /* Now let's alter the voting schedule and check the correctness of the
+    * function. Voting interval of 10 seconds, means that an SRV protocol run
+@@ -366,8 +380,8 @@ test_get_start_time_functions(void *arg)
+   (void) arg;
+   int retval;
+ 
+-  MOCK(networkstatus_get_live_consensus,
+-       mock_networkstatus_get_live_consensus);
++  MOCK(networkstatus_get_reasonably_live_consensus,
++       mock_networkstatus_get_reasonably_live_consensus);
+ 
+   retval = parse_rfc1123_time("Mon, 20 Apr 2015 01:00:00 UTC",
+                               &mock_consensus.fresh_until);
+@@ -388,7 +402,7 @@ test_get_start_time_functions(void *arg)
+             start_time_of_protocol_run);
+ 
+  done:
+-  UNMOCK(networkstatus_get_live_consensus);
++  UNMOCK(networkstatus_get_reasonably_live_consensus);
+ }
+ 
+ static void
+-- 
+2.25.1
+
