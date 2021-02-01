@@ -68,3 +68,6 @@ input_files:
   - name: zstd
     project: zstd
     enable: '[% c("var/android") %]'
+  - filename: '0001-hs-v3-Require-reasonably-live-consensus.patch'
+  - filename: '0002-tests-Fix-unit-tests-after-merge-of-40237.patch'
+  - filename: '0003-Pick-up-merge-conflict-resolutions.patch'
