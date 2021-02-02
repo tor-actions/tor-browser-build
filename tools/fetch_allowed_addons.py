@@ -31,7 +31,7 @@ def patch_https_everywhere(addons):
 
 def main(argv):
   amo_collection = argv[0] if argv else '83a9cccfe6e24a34bd7b155ff9ee32'
-  url = 'https://addons.mozilla.org/api/v4/accounts/account/mozilla/collections/' + amo_collection + '/addons/'
+  url = 'https://services.addons.mozilla.org/api/v4/accounts/account/mozilla/collections/' + amo_collection + '/addons/'
   data = json.loads(fetch(url))
   fetch_and_embed_icons(data)
   patch_https_everywhere(data)
