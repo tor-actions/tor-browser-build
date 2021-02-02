@@ -1,3 +1,9 @@
+Tor Browser 10.0.10 -- February 3 2021
+ * Windows + OS X + Linux
+   * Update NoScript to 11.2
+   * Update HTTPS Everywhere to 2021.1.27
+   * Bug 40224: Backport Tor patch for v3 onion services [tor-browser-build]
+
 Tor Browser 10.0.9 -- January 26 2021
  * Windows + OS X + Linux
    * Update Firefox to 78.7.0esr
