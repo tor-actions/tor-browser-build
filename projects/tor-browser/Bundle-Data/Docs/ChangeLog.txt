@@ -1,3 +1,10 @@
+Tor Browser 10.0.10 -- February 3 2021
+ * Android
+   * Update NoScript to 11.2
+   * Update HTTPS Everywhere to 2021.1.27
+   * Pick up fix for Mozilla's bug 1688783
+   * Bug 40224: Backport Tor patch for v3 onion services [tor-browser-build]
+
 Tor Browser 10.0.9 -- January 26 2021
  * Android
    * Update Fenix to 85.1.0
