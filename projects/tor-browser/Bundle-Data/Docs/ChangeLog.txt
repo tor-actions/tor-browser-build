@@ -1,3 +1,23 @@
+Tor Browser 10.5a9 -- February 5 2021
+ * Android
+   * Update Fenix to 86.0.0-beta.2
+   * Update HTTPS Everywhere to 2021.1.27
+   * Update NoScript to 11.2
+   * Bug 40041: Rebase android-components patches for Fenix 86 beta 2 builds [android-components]
+   * Bug 40109: Reduce requested permissions [fenix]
+   * Bug 40141: Hide EME site permission [fenix]
+   * Bug 40143: Use deterministic date in Test apk [fenix]
+   * Bug 40146: Rebase Fenix patches to Fenix 86 beta 2 [fenix]
+   * Bug 40188: Build and ship snowflake only if it is enabled [tor-browser-build}
+   * Bug 40212: Bump version of snowflake and webrtc [tor-browser-build]
+   * Bug 40308: Disable network partitioning until we evaluate dFPI [tor-browser]
+   * Bug 40309: Avoid using regional OS locales [tor-browser]
+   * Bug 40320: Rebase tor-browser patches to 86.0b5 [tor-browser]
+ * Build System
+   * Android
+     * Bug 40214: Update AMO Collection URL [tor-browser-build]
+     * Bug 40217: Update components for switch to mozilla86-based Fenix [tor-browser-build]
+
 Tor Browser 10.5a8 -- January 26 2021
  * All Platforms
    * Update NoScript to 11.1.9
