@@ -1,3 +1,7 @@
+Tor Browser 10.5a10 -- February 7 2021
+ * Windows
+   * Update Firefox to 78.7.1esr
+
 Tor Browser 10.5a9 -- February 5 2021
  * Android
    * Update Fenix to 86.0.0-beta.2
