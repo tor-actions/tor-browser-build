@@ -18,6 +18,15 @@ Tor Browser 10.5a9 -- February 5 2021
      * Bug 40214: Update AMO Collection URL [tor-browser-build]
      * Bug 40217: Update components for switch to mozilla86-based Fenix [tor-browser-build]
 
+Tor Browser 10.0.10 -- February 3 2021
+ * All Platforms
+   * Update NoScript to 11.2
+   * Update HTTPS Everywhere to 2021.1.27
+   * Bug 40224: Backport Tor patch for v3 onion services [tor-browser-build]
+ * Android
+   * Pick up fix for Mozilla's bug 1688783
+   * Pick up fix for Mozilla's bug 1688017
+
 Tor Browser 10.5a8 -- January 26 2021
  * All Platforms
    * Update NoScript to 11.1.9
@@ -40,6 +49,26 @@ Tor Browser 10.5a8 -- January 26 2021
      * Bug 40208: Mitigate uniffi non-deterministic code generation [tor-browser-build]
    * Linux
      * Bug 40112: Strip libstdc++ we ship [tor-browser-build]
+
+Tor Browser 10.0.9 -- January 26 2021
+ * All Platforms
+   * Update NoScript to 11.1.9
+ * Windows + OS X + Linux
+   * Update Firefox to 78.7.0esr
+   * Bug 40249: Remove EOY 2020 Campaign [tor-browser]
+ * Android
+   * Update Fenix to 85.1.0
+   * Bug 40137: Remove EOY 2020 Campaign [fenix]
+   * Bug 40165: Update zstd to 1.4.8 [tor-browser-build]
+   * Bug 40308: Disable network state partitioning until audit [tor-browser]
+ * Build System
+   * All Platforms
+     * Update Go to 1.14.14
+   * Android
+     * Bug 40190: Update toolchain for Fenix 85 [tor-browser-build]
+     * Bug 40191: Update Fenix and dependencies to 85.0.0-beta1 [tor-browser-build]
+     * Bug 40193: Build all mobile Rust targets in a single step [tor-browser-build]
+     * Bug 40208: Mitigate uniffi non-deterministic code generation [tor-browser-build]
 
 Tor Browser 10.5a7 -- January 19 2021
  * All Platforms
