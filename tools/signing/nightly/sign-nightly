@@ -45,6 +45,15 @@ my $topdir = "$FindBin::Bin/../../..";
     }
 }
 
+sub print_time {
+    my $dt = DateTime->now;
+    print $dt->ymd, " ", $dt->hms, " - ", @_;
+}
+
+END {
+    print_time "Exiting sign-nightly (pid: $$)\n";
+}
+
 sub run_alone {
     my $pidfile = "$FindBin::Bin/lock";
     if (-f $pidfile) {
@@ -250,6 +259,7 @@ sub sync_dest {
     }
 }
 
+print_time "Starting sign-nightly (pid: $$)\n";
 run_alone;
 my $some_updates = 0;
 foreach my $publish_dir (@{$config->{publish_dirs}}) {
