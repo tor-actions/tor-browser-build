@@ -93,10 +93,6 @@ openssldir=/var/tmp/dist/openssl/openssl
 [% END %]
 
 cd /var/tmp/build/[% project %]-[% c('version') %]
-# Patch Tor 0.4.4.6 with the fix for tpo/core/tor#40237
-patch -p1 < $rootdir/0001-hs-v3-Require-reasonably-live-consensus.patch
-patch -p1 < $rootdir/0002-tests-Fix-unit-tests-after-merge-of-40237.patch
-patch -p1 < $rootdir/0003-Pick-up-merge-conflict-resolutions.patch
 # add git hash to micro-revision.i for #24995
 echo '"[% c("abbrev", { abbrev_length => 16 }) %]"' > micro-revision.i
 ./autogen.sh
