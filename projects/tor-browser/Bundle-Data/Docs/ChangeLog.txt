@@ -1,3 +1,12 @@
+Tor Browser 10.0.12 -- February 23 2021
+ * Windows + OS X + Linux
+   * Update Firefox to 78.8.0esr
+   * Update NoScript to 11.2.2
+   * Update Openssl to 1.1.1j
+   * Update Tor to 0.4.5.6
+   * Bug 40026: Create survey banner on about:tor for desktop [torbutton]
+   * Bug 40287: Switch DDG search from POST to GET [tor-browser]
+
 Tor Browser 10.0.11 -- February 6 2021
  * Windows
    * Update Firefox to 78.7.1esr
