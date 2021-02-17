@@ -39,17 +39,17 @@ pre: |
 targets:
   jessie-amd64:
     var:
-      minimal_apt_version: 1.0.9.8.6
-      # https://lists.debian.org/debian-lts-announce/2020/05/msg00013.html
+      minimal_apt_version: 1.0.9.8.7
+      # CVE-2020-27350
       apt_packages_baseurl: https://deb.freexian.com/extended-lts/pool/main/a/apt
-      apt_package_filename: apt_1.0.9.8.6_amd64.deb
-      apt_package_sha256sum: f82ba7ad03a33bed6644777260d28156a0ed0119aeafe657ef1f849330455f5b
-      apt_utils_package_filename: apt-utils_1.0.9.8.6_amd64.deb
-      apt_utils_package_sha256sum: 14cb23047ef9d83b0d026c4d5b0eb5e7b06cca36067d19155e9ea14982b09d61
-      libapt_inst_package_filename: libapt-inst1.5_1.0.9.8.6_amd64.deb
-      libapt_inst_package_sha256sum: 332b7453774ad3d141ce459d0c7a8438f16588c0df987e13c388b45740142c76
-      libapt_pkg_package_filename: libapt-pkg4.12_1.0.9.8.6_amd64.deb
-      libapt_pkg_package_sha256sum: c2e17b87284e8c7e162a390d8bba08870729040c2ec0e73eb6631b846dd013c0
+      apt_package_filename: apt_1.0.9.8.7_amd64.deb
+      apt_package_sha256sum: 02d5c6240e3410234e91facd4279c1acdce1523b583e05fac7ad64bdc75db7c7
+      apt_utils_package_filename: apt-utils_1.0.9.8.7_amd64.deb
+      apt_utils_package_sha256sum: aa6f0cc7cf2e7cc6e5c56782019cd651d26b01d280aef4d25288587e198ff2d3
+      libapt_inst_package_filename: libapt-inst1.5_1.0.9.8.7_amd64.deb
+      libapt_inst_package_sha256sum: a85c99a64f3d6cdde5bf0849649c2d5f21c7513987854628659ea014bc3eb214
+      libapt_pkg_package_filename: libapt-pkg4.12_1.0.9.8.7_amd64.deb
+      libapt_pkg_package_sha256sum: 0db2410376516f3420594647afc72dc99b48a44877eae4e8c79444a8244e988f
 
       container:
         suite: jessie
