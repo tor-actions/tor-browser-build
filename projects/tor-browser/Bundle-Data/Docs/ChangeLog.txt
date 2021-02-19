@@ -1,6 +1,28 @@
+Tor Browser 10.5a11 -- February 23 2021
+ * All Platforms
+   * Update NoScript to 11.2.2
+   * Update Openssl to 1.1.1j
+   * Update Tor to 0.4.5.6
+ * Windows + OS X + Linux
+   * Update Firefox to 78.8.0esr
+   * Bug 40029: Create survey banner on about:tor for snowflake [torbutton]
+ * OS X + Linux
+   * Update HTTPS Everywhere to 2021.1.27
+   * Bug 40212: Bump version of snowflake and webrtc [tor-browser-build]
+ * Android
+   * Update Firefox to 86.1.0
+   * Bug 40144: Hide Download Manager [fenix]
+   * Bug 40148: Create survey banner on about:tor for Snowflake [fenix]
+   * Bug 40344: Set privacy.window.name.update.enabled=false [tor-browser]
+ * Build System
+   * Linux
+     * Bug 40235: Bump apt for Jessie containers [tor-browser-build]
+
 Tor Browser 10.5a10 -- February 7 2021
  * Windows
    * Update Firefox to 78.7.1esr
+   * Update HTTPS Everywhere to 2021.1.27
+   * Bug 40212: Bump version of snowflake and webrtc [tor-browser-build]
 
 Tor Browser 10.0.11 -- February 6 2021
  * Windows
