@@ -565,21 +565,6 @@ sub download_version {
     my %sums = map { chomp; reverse split '  ', $_ }
                  read_file "$destdir/sha256sums-signed-build.txt";
 
-    my $martools = 'mar-tools-linux64.zip';
-    exit_error "Error downloading $urldir/$martools\n"
-        unless getstore("$urldir/$martools", "$tmpdir/$martools") == 200;
-    exit_error "Error downloading $urldir/$martools.asc\n"
-        unless getstore("$urldir/$martools.asc", "$tmpdir/$martools.asc") == 200;
-    if (system('gpg', '--no-default-keyring', '--keyring',
-            "$FindBin::Bin/$config->{download}{gpg_keyring}", '--verify',
-            "$tmpdir/$martools.asc", "$tmpdir/$martools")) {
-        exit_error "Error checking gpg signature for $version/$martools";
-    }
-    exit_error "Wrong checksum for $version/$martools"
-        unless $sums{$martools} eq sha256_hex(read_file("$tmpdir/$martools"));
-    move "$tmpdir/$martools", "$destdir/$martools";
-    move "$tmpdir/$martools.asc", "$destdir/$martools.asc";
-
     foreach my $file (sort grep { $_ =~ m/\.mar$/ } keys %sums) {
         print "Downloading $file\n";
         exit_error "Error downloading $urldir/$file\n"
