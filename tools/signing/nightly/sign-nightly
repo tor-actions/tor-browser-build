@@ -89,7 +89,11 @@ sub get_last_build_version {
     my $yesterday = 'tbb-nightly.' . $dt_yesterday->ymd('.');
     for my $version ($today, $yesterday) {
         my $url = "$config->{builds_url}/$version/$publish_dir/sha256sums-unsigned-build.incrementals.txt";
-        return $version if get($url);
+        if ($url =~ m|^/|) {
+            return $version if -f $url;
+        } else {
+            return $version if get($url);
+        }
     }
     return undef;
 }
@@ -119,18 +123,24 @@ sub get_new_version {
     return $last_ver;
 }
 
-sub download_file {
+sub get_file {
+    my ($url, $file) = @_;
+    return copy($url, $file) if $url =~ m|^/|;
+    return getstore($url, $file) == 200;
+}
+
+sub get_file_sha256sum {
     my ($url, $file, $sha256sum) = @_;
-    my $retries = 5;
+    my $retries = $url =~ m|^/| ? 1 : 5;
     while ($retries > 0) {
         $retries--;
-        print "Downloading $url\n";
-        next unless getstore("$url", "$file.tmp") == 200;
+        print "Getting $url\n";
+        next unless get_file($url, "$file.tmp");
         next unless $sha256sum eq sha256_hex(path("$file.tmp")->slurp_raw);
         move("$file.tmp", $file);
         return 1;
     }
-    exit_error "Error downloading $url";
+    exit_error "Error getting $url";
 }
 
 sub fetch_version {
@@ -143,10 +153,10 @@ sub fetch_version {
     my $gpg_keyring = basedir_path($config->{gpg_keyring}, $topdir);
     for my $file (qw/sha256sums-unsigned-build.txt sha256sums-unsigned-build.incrementals.txt/) {
         my $url = "$urldir/$file";
-        exit_error "Error downloading $url"
-                unless getstore($url, "$tmpdir/$file") == 200;
-        exit_error "Error downloading $url.asc"
-                unless getstore("$url.asc", "$tmpdir/$file.asc") == 200;
+        exit_error "Error getting $url"
+                unless get_file($url, "$tmpdir/$file");
+        exit_error "Error getting $url.asc"
+                unless get_file("$url.asc", "$tmpdir/$file.asc");
         exit_error "Error checking gpg signature for $url"
                 if system('gpg', '--no-default-keyring', '--keyring', $gpg_keyring,
                           '--verify', "$tmpdir/$file.asc",
@@ -159,10 +169,10 @@ sub fetch_version {
         );
     my @build_infos_file = grep { $_ =~ m/build-infos-.*\.json/ } keys %sums;
     exit_error "Missing build-infos.json in $urldir" unless @build_infos_file;
-    download_file("$urldir/$build_infos_file[0]",
+    get_file_sha256sum("$urldir/$build_infos_file[0]",
                   "$tmpdir/build-infos.json", $sums{$build_infos_file[0]});
     foreach my $file (sort grep { $_ =~ m/\.mar$/ } keys %sums) {
-        download_file("$urldir/$file", "$tmpdir/$file", $sums{$file});
+        get_file_sha256sum("$urldir/$file", "$tmpdir/$file", $sums{$file});
     }
     make_path("$topdir/nightly/$publish_dir");
     dirmove($tmpdir, $destdir)
