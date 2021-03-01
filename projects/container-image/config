@@ -24,6 +24,7 @@ targets:
 
 pre: |
   #!/bin/sh
+  # Version: 2
   # [% c('var/container/suite') %]
   set -e
   export DEBIAN_FRONTEND=noninteractive
