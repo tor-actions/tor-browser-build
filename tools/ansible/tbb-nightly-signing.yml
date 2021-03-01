@@ -1,6 +1,0 @@
----
-
-- hosts: tbb-nightly-signing
-  roles:
-      - role: tbb-nightly-signing
-      - role: unattended-upgrades
