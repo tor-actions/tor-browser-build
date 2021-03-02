@@ -1,3 +1,7 @@
+Tor Browser 10.0.13 -- March 3 2021
+ * Linux
+   * Bug 40328: Fix instability after upgrading to glibc 2.33
+
 Tor Browser 10.0.12 -- February 23 2021
  * Windows + OS X + Linux
    * Update Firefox to 78.8.0esr
