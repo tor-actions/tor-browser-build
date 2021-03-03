@@ -11,7 +11,7 @@ ac_add_options --enable-official-branding
 
 ac_add_options --enable-application=mobile/android
 ac_add_options --target=arm-linux-androideabi
-ac_add_options --with-android-ndk=/var/tmp/dist/android-toolchain/android-ndk/android-ndk-r20
+ac_add_options --with-android-ndk=/var/tmp/dist/android-toolchain/android-ndk/android-ndk-r21d
 ac_add_options --with-android-sdk=/var/tmp/dist/android-toolchain/android-sdk-linux
 ac_add_options --with-gradle=/var/tmp/dist/android-toolchain/gradle/gradle/bin/gradle
 
