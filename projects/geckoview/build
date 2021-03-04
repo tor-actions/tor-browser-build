@@ -5,6 +5,8 @@ distdir=/var/tmp/dist
 mkdir -p /var/tmp/build
 mkdir -p $distdir/[% project %]
 
+tar -C $GRADLE_HOME -xf $rootdir/[% c('input_files_by_name/gradle') %]
+
 # We need to have the get-moz-build-date script available in the container
 # but we can't include it via input_files as it is a script shared between
 # projects.
