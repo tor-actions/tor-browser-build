@@ -20,8 +20,6 @@ unzip -qq [% c("input_files_by_name/gradle564") %] -d $GRADLE_HOME
 unzip -qq [% c("input_files_by_name/gradle511") %] -d $GRADLE_HOME
 # application-services is using a comparatively new Gradle, bundle it, too.
 unzip -qq [% c("input_files_by_name/gradle63") %] -d $GRADLE_HOME
-# Fenix switched to a fairly recent Gradle, add it as well.
-unzip -qq [% c("input_files_by_name/gradle651") %] -d $GRADLE_HOME
 
 # NDK Archive
 for version in [% c("var/android_ndk_version") %][% c("var/android_ndk_revision") %] [% c("var/android_ndk_version_old") %]; do
