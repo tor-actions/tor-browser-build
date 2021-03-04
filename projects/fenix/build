@@ -6,6 +6,8 @@ builddir=/var/tmp/build/[% project %]
 mkdir -p $distdir/[% project %]
 mkdir -p /var/tmp/build
 
+tar -C $GRADLE_HOME -xf $rootdir/[% c('input_files_by_name/gradle') %]
+
 cat > get-moz-build-date << "EOF"
 [% INCLUDE "get-moz-build-date" %]
 EOF
@@ -40,7 +42,7 @@ cp $rootdir/[% c('input_files_by_name/tor-android-service') %]/* app/
 # XXX We need the build variant in lower case. Do something smarter here.
 v=[% c("variant") %]
 [% IF c("var/fetch_gradle_dependencies") %]
-  $GRADLE_HOME/gradle-6.5.1/bin/gradle --debug --no-daemon app:assemble[% c('variant') %] app:assembleAndroidTest -x lint -PtestBuildType=${v,}
+  $GRADLE_HOME/gradle/bin/gradle --debug --no-daemon app:assemble[% c('variant') %] app:assembleAndroidTest -x lint -PtestBuildType=${v,}
 [% ELSE %]
   # Add our localized strings
   [% FOREACH lang = c('var/locales_mobile');
@@ -65,7 +67,7 @@ v=[% c("variant") %]
   fi
 
   version_name='[% c("var/torbrowser_version") %] ([% c("var/fenix_version") %]-[% c("variant") %])'
-  $GRADLE_HOME/gradle-6.5.1/bin/gradle --offline --no-daemon -PversionName="$version_name" -Dmaven.repo.local=$gradle_repo app:assemble[% c('variant') %] app:assembleAndroidTest -x lint -PtestBuildType=${v,}
+  $GRADLE_HOME/gradle/bin/gradle --offline --no-daemon -PversionName="$version_name" -Dmaven.repo.local=$gradle_repo app:assemble[% c('variant') %] app:assembleAndroidTest -x lint -PtestBuildType=${v,}
   cp app/build/outputs/apk/${v,}/*.apk $distdir/[% project %]
   cp app/build/outputs/apk/androidTest/${v,}/app-${v,}-androidTest.apk $distdir/[% project %]
 
