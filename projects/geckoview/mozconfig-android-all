@@ -7,4 +7,4 @@ ac_add_options --disable-compile-environment
 ac_add_options --enable-update-channel=beta
 
 ac_add_options --with-android-sdk=/var/tmp/dist/android-toolchain/android-sdk-linux
-ac_add_options --with-gradle=/var/tmp/dist/android-toolchain/gradle/gradle-5.1.1/bin/gradle
+ac_add_options --with-gradle=/var/tmp/dist/android-toolchain/gradle/gradle/bin/gradle

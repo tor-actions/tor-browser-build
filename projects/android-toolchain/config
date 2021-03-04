@@ -33,7 +33,6 @@ var:
   android_ndk_version_old: 20
   android_ndk_revision: d
   gradle564: 5.6.4
-  gradle511: 5.1.1
 input_files:
   - project: container-image
   - URL: '[% c("var/google_repo") %]/build-tools_r[% c("version") %]-linux.zip'
@@ -63,6 +62,3 @@ input_files:
   - URL: https://services.gradle.org/distributions/gradle-[% c("var/gradle564") %]-bin.zip
     name: gradle564
     sha256sum: 1f3067073041bc44554d0efe5d402a33bc3d3c93cc39ab684f308586d732a80d
-  - URL: https://services.gradle.org/distributions/gradle-[% c("var/gradle511") %]-bin.zip
-    name: gradle511
-    sha256sum: 4953323605c5d7b89e97d0dc7779e275bccedefcdac090aec123375eae0cc798
