@@ -32,7 +32,6 @@ var:
   android_ndk_version: 21
   android_ndk_version_old: 20
   android_ndk_revision: d
-  gradle63: 6.3
   gradle564: 5.6.4
   gradle511: 5.1.1
 input_files:
@@ -61,9 +60,6 @@ input_files:
   - URL: '[% c("var/google_repo") %]/android-ndk-r[% c("var/android_ndk_version_old") %]-linux-x86_64.zip'
     name: android_ndk_compiler_old
     sha256sum: 57435158f109162f41f2f43d5563d2164e4d5d0364783a9a6fab3ef12cb06ce0
-  - URL: https://services.gradle.org/distributions/gradle-[% c("var/gradle63") %]-bin.zip
-    name: gradle63
-    sha256sum: 038794feef1f4745c6347107b6726279d1c824f3fc634b60f86ace1e9fbd1768
   - URL: https://services.gradle.org/distributions/gradle-[% c("var/gradle564") %]-bin.zip
     name: gradle564
     sha256sum: 1f3067073041bc44554d0efe5d402a33bc3d3c93cc39ab684f308586d732a80d

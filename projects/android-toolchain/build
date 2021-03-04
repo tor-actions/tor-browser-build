@@ -18,8 +18,6 @@ unzip -qq [% c("input_files_by_name/android_ndk_compiler_old")%] -d $NDK_HOME
 unzip -qq [% c("input_files_by_name/gradle564") %] -d $GRADLE_HOME
 # GeckoView is still using an older Gradle, bundle it, too.
 unzip -qq [% c("input_files_by_name/gradle511") %] -d $GRADLE_HOME
-# application-services is using a comparatively new Gradle, bundle it, too.
-unzip -qq [% c("input_files_by_name/gradle63") %] -d $GRADLE_HOME
 
 # NDK Archive
 for version in [% c("var/android_ndk_version") %][% c("var/android_ndk_revision") %] [% c("var/android_ndk_version_old") %]; do
