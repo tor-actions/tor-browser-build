@@ -17,6 +17,7 @@ var:
   # Switch to make it easier to grab all dependencies during a dry-run.
   # Note: Use the commit before support for new GeckoView interfaces gets added.
   fetch_gradle_dependencies: 0
+  gradle_version: 6.6.1
 
 targets:
   nightly:

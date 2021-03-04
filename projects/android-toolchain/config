@@ -19,7 +19,13 @@ var:
     export GRADLE_HOME=/var/tmp/dist/[% project %]/gradle
     export ANDROID_HOME=$ANDROID_SDK_HOME
     export GRADLE_USER_HOME=$GRADLE_HOME
-    export PATH=$PATH:$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin:$GRADLE_HOME/gradle-[% c("var/gradle564") %]/bin
+    # In the PATH we set $GRADLE_HOME/gradle/bin (not included in
+    # android-toolchain) before $GRADLE_HOME/gradle-[% c("var/gradle564") %]/bin
+    # (which is included in android-toolchain)).
+    #
+    # Project which need a specific gradle version can use the gradle
+    # project and extract it in $GRADLE_HOME/gradle/bin
+    export PATH=$PATH:$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin:$GRADLE_HOME/gradle/bin:$GRADLE_HOME/gradle-[% c("var/gradle564") %]/bin
   google_repo: https://dl.google.com/android/repository
   android_api_level: 29
   android_platform_revision: 04
