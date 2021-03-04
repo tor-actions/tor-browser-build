@@ -12,15 +12,11 @@ var:
   gradle_dependencies_version: 4
   # This should be updated when the list of rust dependencies is changed.
   rust_vendor_version: 3
-  # For armv7 we need a different target than the default one we use for
-  # GeckoView. We set this variable so the Rust project in the `input_files`
-  # below can set the correct target when built for use in this project,
-  # querying `origin_project`.
-  application_services: 1
   # Switch to make it easier to grab all dependencies during a dry-run.
   fetch_gradle_dependencies: 0
   # application-services is still stuck on an older glean_parser version.
   glean_parser: 1.28.6
+  gradle_version: 6.5
 
 input_files:
   - project: container-image
