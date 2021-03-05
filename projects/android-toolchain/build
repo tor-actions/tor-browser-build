@@ -3,19 +3,17 @@
 export PROJECT_PATH=/var/tmp/dist/[% project %]
 export SDK_HOME=$PROJECT_PATH/android-sdk-linux
 export NDK_HOME=$PROJECT_PATH/android-ndk
-export GRADLE_HOME=$PROJECT_PATH/gradle
 android_release_dir=android-10
 android_release_dir_old=android-9
 
 # Make directories
-mkdir -p $NDK_HOME $SDK_HOME $GRADLE_HOME
+mkdir -p $NDK_HOME $SDK_HOME
 
 # Compiler Archives
 unzip -qq [% c("input_files_by_name/android_sdk_tools") %] -d $SDK_HOME
 unzip -qq [% c("input_files_by_name/android_ndk_compiler")%] -d $NDK_HOME
 # GeckoView is still using an older Android NDK, bundle it, too.
 unzip -qq [% c("input_files_by_name/android_ndk_compiler_old")%] -d $NDK_HOME
-unzip -qq [% c("input_files_by_name/gradle564") %] -d $GRADLE_HOME
 
 # NDK Archive
 for version in [% c("var/android_ndk_version") %][% c("var/android_ndk_revision") %] [% c("var/android_ndk_version_old") %]; do

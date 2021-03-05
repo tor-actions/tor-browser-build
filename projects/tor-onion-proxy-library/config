@@ -14,11 +14,14 @@ var:
     use_container: 1
   # this should be updated when the list of gradle dependencies is changed
   gradle_dependencies_version: 5
+  gradle_version: 5.6.4
 
 input_files:
   - project: container-image
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
+  - project: gradle
+    name: gradle
   - project: obfs4
     name: obfs4-armv7
     target_prepend:

@@ -19,20 +19,14 @@ var:
     export GRADLE_HOME=/var/tmp/dist/[% project %]/gradle
     export ANDROID_HOME=$ANDROID_SDK_HOME
     export GRADLE_USER_HOME=$GRADLE_HOME
-    # In the PATH we set $GRADLE_HOME/gradle/bin (not included in
-    # android-toolchain) before $GRADLE_HOME/gradle-[% c("var/gradle564") %]/bin
-    # (which is included in android-toolchain)).
-    #
-    # Project which need a specific gradle version can use the gradle
-    # project and extract it in $GRADLE_HOME/gradle/bin
-    export PATH=$PATH:$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin:$GRADLE_HOME/gradle/bin:$GRADLE_HOME/gradle-[% c("var/gradle564") %]/bin
+    export PATH=$PATH:$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin:$GRADLE_HOME/gradle/bin
+    mkdir -p "$GRADLE_HOME"
   google_repo: https://dl.google.com/android/repository
   android_api_level: 29
   android_platform_revision: 04
   android_ndk_version: 21
   android_ndk_version_old: 20
   android_ndk_revision: d
-  gradle564: 5.6.4
 input_files:
   - project: container-image
   - URL: '[% c("var/google_repo") %]/build-tools_r[% c("version") %]-linux.zip'
@@ -59,6 +53,3 @@ input_files:
   - URL: '[% c("var/google_repo") %]/android-ndk-r[% c("var/android_ndk_version_old") %]-linux-x86_64.zip'
     name: android_ndk_compiler_old
     sha256sum: 57435158f109162f41f2f43d5563d2164e4d5d0364783a9a6fab3ef12cb06ce0
-  - URL: https://services.gradle.org/distributions/gradle-[% c("var/gradle564") %]-bin.zip
-    name: gradle564
-    sha256sum: 1f3067073041bc44554d0efe5d402a33bc3d3c93cc39ab684f308586d732a80d
