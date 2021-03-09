@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
-version: 67.2.0
-git_hash: 4cc798c8cd8a1e38ce88e0bb22a05692be63b164
+version: 71.0.0
+git_hash: 1ee6b32f3ee569036fdf1015cf7ffc01ded2860f
 git_url: https://github.com/mozilla/application-services
 git_submodule: 1
 
@@ -9,13 +9,11 @@ var:
   container:
     use_container: 1
   # This should be updated when the list of gradle dependencies is changed.
-  gradle_dependencies_version: 4
+  gradle_dependencies_version: 5
   # This should be updated when the list of rust dependencies is changed.
-  rust_vendor_version: 3
+  rust_vendor_version: 4
   # Switch to make it easier to grab all dependencies during a dry-run.
   fetch_gradle_dependencies: 0
-  # application-services is still stuck on an older glean_parser version.
-  glean_parser: 1.28.6
   gradle_version: 6.5
 
 input_files:
@@ -68,12 +66,14 @@ input_files:
     exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
   - URL: https://people.torproject.org/~gk/mirrors/sources/glean-parser-[% c('var/glean_parser') %].tar.bz2
-    sha256sum: bdbb421fdcc9b66aebe8f41b33e254cab722355c59c0f43f10a8322d7d6da6a4
+    sha256sum: 19dbdd4958022a1a638e0217489ab722fe7d4f588f1978a4ae162f93e75694c2
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
-  # `cargo vendor vendor` in the `application-services` directory has vendored
-  # the sources.
-  - URL: https://people.torproject.org/~gk/mirrors/sources/application-services-vendor-[% c('var/rust_vendor_version') %].tar.bz2
-    sha256sum: f2d08275920c6e163617d5f102abc0665fd0f74550a400b1970b5b25bcabd3ef
+  # `cargo vendor vendor -s components/external/nimbus-sdk/nimbus/Cargo.toml`
+  # in the `application-services` directory has vendored the sources,
+  # after applying update-cargo-lock.patch, viaduct-workaround.patch and
+  # viaduct-workaround2.patch
+  - URL: https://people.torproject.org/~boklm/mirrors/sources/application-services-vendor-[% c('var/rust_vendor_version') %].tar.bz2
+    sha256sum: 500d0fa471c8ad2037c4bbe648e716e77da1ff1fc5678542b144cd257a34abbf
   - filename: no-git.patch
   - filename: mavenLocal.patch
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
