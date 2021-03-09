@@ -27,6 +27,8 @@ var:
   google_repo: https://dl.google.com/android/repository
   android_api_level: 29
   android_platform_revision: 04
+  android_api_level_new: 30
+  android_platform_revision_new: 03
   android_ndk_version: 21
   android_ndk_revision: d
 input_files:
@@ -40,6 +42,12 @@ input_files:
   - URL: '[% c("var/google_repo") %]/platform-[% c("var/android_api_level") %]_r[% c("var/android_platform_revision") %].zip'
     name: platform
     sha256sum: c9eaf2ce4e8fa6f5a8036bd3c95363d003733bf0a1bd349718cadf802db44c69
+  - URL: '[% c("var/google_repo") %]/build-tools_r[% c("var/android_api_level_new") %]-linux.zip'
+    name: build_tools_new
+    sha256sum: ed3b7f9b2d15e90a12c2e739adb749d7d834e2f953e677380206bd14db135c6c
+  - URL: '[% c("var/google_repo") %]/platform-[% c("var/android_api_level_new") %]_r[% c("var/android_platform_revision_new") %].zip'
+    name: platform_new
+    sha256sum: f3f5b75744dbf6ee6ed3e8174a71e513bfee502d0bc3463ea97e517bff68d84e
   # ./mach bootstrap is fetching the latest version, so it does not seem to
   # matter which particular version we are using. Pin to the one fitting best to
   # SDK version/build-tools version.
