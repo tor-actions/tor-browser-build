@@ -1,3 +1,7 @@
+Tor Browser 10.0.13 -- March 3 2021
+ * Linux
+   * Bug 40328: Fix instability after upgrading to glibc 2.33
+
 Tor Browser 10.5a11 -- February 23 2021
  * All Platforms
    * Update NoScript to 11.2.2
@@ -17,6 +21,28 @@ Tor Browser 10.5a11 -- February 23 2021
  * Build System
    * Linux
      * Bug 40235: Bump apt for Jessie containers [tor-browser-build]
+
+Tor Browser 10.0.12 -- February 23 2021
+ * All Platforms
+   * Update NoScript to 11.2.2
+   * Update Openssl to 1.1.1j
+   * Update Tor to 0.4.5.6
+ * Windows + OS X + Linux
+   * Update Firefox to 78.8.0esr
+   * Bug 40026: Create survey banner on about:tor for desktop [torbutton]
+   * Bug 40287: Switch DDG search from POST to GET [tor-browser]
+ * Android
+   * Update Firefox to 86.1.0
+   * Bug 40138: Create survey banner on about:tor for Android [fenix]
+   * Bug 40144: Hide Download Manager [fenix]
+   * Bug 40171: Make WebRequest and GeckoWebExecutor First-Party aware [tor-browser]
+   * Bug 40188: Build and ship snowflake only if it is enabled [tor-browser-build]
+   * Bug 40309: Avoid using regional OS locales [tor-browser]
+   * Bug 40344: Set privacy.window.name.update.enabled=false [tor-browser]
+ * Build System
+   * Android
+     * Bug 40214: Update AMO Collection URL [tor-browser-build]
+     * Bug 40217: Update components for switch to mozilla86-based Fenix [tor-browser-build]
 
 Tor Browser 10.5a10 -- February 7 2021
  * Windows
