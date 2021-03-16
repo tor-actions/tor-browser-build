@@ -7,6 +7,11 @@ var:
     use_container: 1
 
 targets:
+  # We use the windows-clang target for the binutils we use for building
+  # clang during windows builds. See projects/clang/config.
+  windows-clang:
+    var:
+      configure_opt: '--disable-multilib --enable-gold --enable-deterministic-archives --enable-plugins'
   windows:
     var:
       configure_opt: '--target=[% c("arch") %]-w64-mingw32 --disable-multilib --enable-deterministic-archives'

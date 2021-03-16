@@ -4,6 +4,12 @@ filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 gpg_keyring: clang.gpg
 sig_ext: sig
 
+targets:
+  windows:
+    # We use clang 11 for Windows builds:
+    # https://hg.mozilla.org/releases/mozilla-esr78/rev/cc840a008393
+    version: 11.0.1
+
 input_files:
   - URL: 'https://github.com/llvm/llvm-project/releases/download/llvmorg-[% c("version") %]/llvm-[% c("version") %].src.tar.xz'
     name: llvm
@@ -30,5 +36,4 @@ input_files:
     name: libunwind
     file_gpg_id: 1
   - filename: 43909.patch
-  - filename: no-seh.patch
-    enable: '[% c("var/windows-i686") %]'
+    enable: '[% ! c("var/windows") %]'

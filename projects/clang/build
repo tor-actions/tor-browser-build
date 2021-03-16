@@ -10,6 +10,8 @@ export PATH="/var/tmp/dist/cmake/bin:$PATH"
   [% pc('gcc', 'var/setup', { compiler_tarfile => c('input_files_by_name/gcc'),
                               hardened_gcc => 0 }) %]
   ln -s gcc /var/tmp/dist/gcc/bin/cc
+[% END -%]
+[% IF c("var/linux") || c("var/windows") -%]
   tar -C /var/tmp/dist -xf [% c('input_files_by_name/binutils') %]
   export PATH="/var/tmp/dist/binutils/bin:$PATH"
 [% END -%]
