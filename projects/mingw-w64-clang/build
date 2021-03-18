@@ -60,6 +60,7 @@ default_win32_winnt=0x601
 
 cd $builddir/mingw-w64-clang
 patch -p1 < $rootdir/mingw-winrt.patch
+patch -p1 < $rootdir/mingw-dwrite_3.patch
 
 cd mingw-w64-headers
 mkdir build && cd build
@@ -164,6 +165,9 @@ cmake -DCMAKE_BUILD_TYPE=Release \
 make -j[% c("buildconf/num_procs") %] VERBOSE=1
 
 # libcxx
+# the build expects ../llvm to exist so we add a symlink
+# See https://gitlab.torproject.org/tpo/applications/tor-browser-build/-/merge_requests/240#note_2729207
+ln -s /var/tmp/build/clang-source /var/tmp/build/clang-source/projects/llvm
 cd $builddir/clang-source/projects/libcxx
 mkdir build && cd build
 cmake -DCMAKE_BUILD_TYPE=Release \
