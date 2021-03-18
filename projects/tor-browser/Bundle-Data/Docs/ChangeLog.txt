@@ -1,3 +1,22 @@
+Tor Browser 10.5a12 -- March 20 2021
+ * Android
+   * Update Fenix to 87.0.0-beta.2
+   * Update NoScript to 11.2.3
+   * Update Tor to 0.4.6.1-alpha
+   * Translations update
+   * Bug 40030: DuckDuckGo redirect to html doesn't work [torbutton]
+   * Bug 40043: Rebase android-components patches for Fenix 87 beta 2 builds [android-components]
+   * Bug 40045: Add External App Prompt for Sharing Images [android-components]
+   * Bug 40150: Rebase Fenix patches to Fenix 87 beta 2 [fenix]
+   * Bug 40361: Rebase tor-browser patches to 87.0b4 [tor-browser]
+ * Build System
+   * Android
+     * Update Go to 1.15.10
+     * Bug 23631: Use rootless containers [tor-browser-build]
+     * Bug 40016: getfpaths is not setting origin_project [rbm]
+     * Bug 40172: Move Gradle compilers out of android-toolchain to own gradle project [tor-browser-build]
+     * Bug 40241: Update components for mozilla87-based Fenix [tor-browser-build]
+
 Tor Browser 10.0.13 -- March 3 2021
  * Linux
    * Bug 40328: Fix instability after upgrading to glibc 2.33
