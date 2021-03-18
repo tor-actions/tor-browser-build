@@ -1,3 +1,13 @@
+Tor Browser 10.0.14 -- March 23 2021
+ * Windows + OS X + Linux
+   * Update Firefox to 78.9.0esr
+   * Update NoScript to 11.2.3
+   * Update Tor to 0.4.5.7
+   * Bug 40031: Remove survey banner on TB-stable [torbutton]
+ * Build System
+   * Windows
+     * Bug 40249: Bump mingw-w64 and clang for Firefox 78.9 [tor-browser-build]
+
 Tor Browser 10.0.13 -- March 3 2021
  * Linux
    * Bug 40328: Fix instability after upgrading to glibc 2.33 [tor-browser]
