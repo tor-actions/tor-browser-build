@@ -10,22 +10,17 @@ tar -xf $rootdir/[% c('input_files_by_name/compiler-rt') %]
 tar -xf $rootdir/[% c('input_files_by_name/libunwind') %]
 
 mv llvm-[% c("version") %].src llvm
-# LLVM has reproducibility issues when optimizing bitcode, which we need to
-# patch. See: #32053 for more details.
-patch -p1 < $rootdir/43909.patch
+[% IF ! c("var/windows") -%]
+  # LLVM has reproducibility issues when optimizing bitcode, which we need to
+  # patch. See: #32053 for more details.
+  patch -p1 < $rootdir/43909.patch
+[% END -%]
 mv clang-[% c("version") %].src llvm/tools/clang
 # Having clang-tidy available seems like a good idea
 mv clang-tools-extra-[% c("version") %].src llvm/tools/clang/tools/extra
 mv libcxx-[% c("version") %].src llvm/projects/libcxx
 mv libcxxabi-[% c("version") %].src llvm/projects/libcxxabi
 mv lld-[% c("version") %].src llvm/tools/lld
-[% IF c("var/windows-i686") %]
-  # mingw-w64 does not support SEH on 32bit systems. Make it possible to
-  # explicitly disable it.
-  cd llvm/tools
-  patch -p1 < $rootdir/no-seh.patch
-  cd ../../
-[% END %]
 mv compiler-rt-[% c("version") %].src llvm/projects/compiler-rt
 # We need libunwind only for mingw-w64-clang, don't include it as tightly by
 # putting it into projects/
