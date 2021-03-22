@@ -60,7 +60,7 @@ cd /var/tmp/build/rustc-[% c('version') %]-src
 
 mkdir build
 cd build
-../configure --prefix=$distdir [% c("var/configure_opt") %]
+../configure --prefix=$distdir --disable-docs --disable-compiler-docs [% c("var/configure_opt") %]
 
 make -j[% c("buildconf/num_procs") %]
 make install
