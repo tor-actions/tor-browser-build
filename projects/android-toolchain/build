@@ -20,7 +20,7 @@ unzip -qq [% c("input_files_by_name/android_ndk_compiler")%] -d $NDK_HOME
 # so we only have to take care of one. See: #33557 (comment 2674649).
 cd $NDK_HOME/android-ndk-r[% c("var/android_ndk_version") %][% c("var/android_ndk_revision") %]/toolchains/llvm/prebuilt/linux-x86_64/bin
 for f in `ls arm-linux-androideabi-*`; do
-    ln -s $f ${f//arm-linux-androideabi/armv7a-linux-androideabi}
+  ln -s $f ${f//arm-linux-androideabi/armv7a-linux-androideabi}
 done
 
 # Tool Archives
