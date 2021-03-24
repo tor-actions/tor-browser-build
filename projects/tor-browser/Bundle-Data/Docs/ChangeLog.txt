@@ -6,6 +6,12 @@ Tor Browser 10.5a13 -- March 24 2021
    * Translations update
    * Bug 40030: DuckDuckGo redirect to html doesn't work [torbutton]
    * Bug 40032: Remove Snowflake survey banner from TB-alpha [torbutton]
+ * Android
+   * Update Fenix to 87.0.0
+   * Bug 40047: Rebase android-components patches for Fenix 87.0.0 [android-components]
+   * Bug 40153: Rebase Fenix patches to Fenix 87.0.0 [fenix]
+   * Bug 40365: Rebase 10.5 patches on 87.0 [tor-browser]
+   * Bug 40383: Disable dom.enable_event_timing [tor-browser]
  * Build System
    * Windows + OS X + Linux
      * Update Go to 1.15.10

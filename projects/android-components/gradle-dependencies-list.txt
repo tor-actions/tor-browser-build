@@ -220,7 +220,6 @@ c729c7be0cc06323bda829d460666e79dbd43b799a21089a44bd3b293dc253b5 | https://dl.go
 1f72f836339d03c6eb013f65075e76ca87075a577578eb4f95f74a3a5d253128 | https://dl.google.com/dl/android/maven2/androidx/viewpager/viewpager/1.0.0/viewpager-1.0.0.pom
 e95c0031d4cc247cd48196c6287e58d2cee54d9c79b85afea7c90920330275af | https://dl.google.com/dl/android/maven2/androidx/viewpager2/viewpager2/1.0.0/viewpager2-1.0.0.aar
 4063bca7fe94fe65c98f4168f97ae10e02da0248598ad3ac21c432c7f608a17a | https://dl.google.com/dl/android/maven2/androidx/viewpager2/viewpager2/1.0.0/viewpager2-1.0.0.pom
-7cbb32f2fe880d407d4c53268bcd554c11dc9316a1d6cd556a08fe45a4631f22 | https://dl.google.com/dl/android/maven2/androidx/work/work-runtime-ktx/2.2.0/work-runtime-ktx-2.2.0.pom
 290d2e9c1a22388b3f0c3dbc204a6176f8c49174126de884820befa83899f129 | https://dl.google.com/dl/android/maven2/androidx/work/work-runtime-ktx/2.4.0/work-runtime-ktx-2.4.0.aar
 3eb66e171b40c9cd2a9b9d9cd61a62d90e4a515491619a8d0a95e98866624b97 | https://dl.google.com/dl/android/maven2/androidx/work/work-runtime-ktx/2.4.0/work-runtime-ktx-2.4.0.pom
 7801441cb973fb007ef311d3db35c3b3c9d011cef890357e7ca33890833354e5 | https://dl.google.com/dl/android/maven2/androidx/work/work-runtime/2.4.0/work-runtime-2.4.0.aar
@@ -437,12 +436,12 @@ d1741144ed2ea215a84f5d94d779cafcfaf778cce8cc7224437a2884cb1101bc | https://maven
 7b0a3bd6d32c8002f785db8fdbf3b08e3541366e784cac1304cb3f49642b916a | https://maven.mozilla.org/maven2/org/mozilla/components/support-ktx/71.0.0/support-ktx-71.0.0.pom
 f7bf27270904abd8639b543151b6eaf268b821b8e6235c8decf8031e02ec8648 | https://maven.mozilla.org/maven2/org/mozilla/components/support-utils/71.0.0/support-utils-71.0.0.aar
 0b80acf7d1dd0d9484b0e82cd1a04ae57270d7f7e6b339ce39424554d48798e3 | https://maven.mozilla.org/maven2/org/mozilla/components/support-utils/71.0.0/support-utils-71.0.0.pom
-f53d800a8e1a38932fb6d2ce07dea3c0c413e5480a4bda6aadfce9947e7258c5 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview-beta/87.0.20210228185859/geckoview-beta-87.0.20210228185859.aar
-f7d2e354e61287384cd20065f9198153fdaa4da385bb3fb83ae425924b76c278 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview-beta/87.0.20210228185859/geckoview-beta-87.0.20210228185859.pom
+587abedeb0d539781c3a64e1d97f94e4e58598d59a110ec35a5291f5c471f441 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview-beta/87.0.20210311161514/geckoview-beta-87.0.20210311161514.aar
+04a3e6fb38caf74c58fe80b36ba585aba5ba4a22d06e40ffc2d9f7a47015fa99 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview-beta/87.0.20210311161514/geckoview-beta-87.0.20210311161514.pom
 005dc96a0f19c75ac3e83661a4c4e4b6b39fd71ab4d26d4903735fa860da8293 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview-nightly/88.0.20210223085042/geckoview-nightly-88.0.20210223085042.aar
 cce46579b4a5fd731d5c12f62170287bec4f1ed8a2f24e8cb9a31998c1ea59ab | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview-nightly/88.0.20210223085042/geckoview-nightly-88.0.20210223085042.pom
-079b282dab3efbdd44aa8f93b73fa3afafefe95b35c8b6a173a07a095a1c2979 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview/86.0.20210222142601/geckoview-86.0.20210222142601.aar
-708b41da358580a47e8eeb0512ea4039ec4bd662fd8d72ae1e448f17698bf237 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview/86.0.20210222142601/geckoview-86.0.20210222142601.pom
+e019974021cfdc86752984eba6309e7f865e3efe6d4ad40a012be212f4925251 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview/87.0.20210315170302/geckoview-87.0.20210315170302.aar
+66ad663a2b60d756dadefa2024f664b7befe6fb22535da80aa88b024fe9b64f5 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview/87.0.20210315170302/geckoview-87.0.20210315170302.pom
 c9a1855277e7863529fd20a6bdfd09659b472026a98b547b5fa6a19c5ef0d67e | https://maven.mozilla.org/maven2/org/mozilla/telemetry/glean-forUnitTests/34.1.0/glean-forUnitTests-34.1.0.jar
 22cc8c400823e3fc8eda2e644083b137a9fe867333845ea29c57051349afbb3a | https://maven.mozilla.org/maven2/org/mozilla/telemetry/glean-forUnitTests/34.1.0/glean-forUnitTests-34.1.0.pom
 60e34ac4879aa0f8e32fb117669b09ee8946aa34e9372cfe0008995807e876a7 | https://maven.mozilla.org/maven2/org/mozilla/telemetry/glean-gradle-plugin/34.1.0/glean-gradle-plugin-34.1.0.jar
