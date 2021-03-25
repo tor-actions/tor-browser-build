@@ -1,3 +1,8 @@
+Tor Browser 10.0.15 -- March 26 2021
+ * Windows + OS X + Linux
+   * Update Openssl to 1.1.1k
+   * Bug 40030: Add 'noscript' capability to NoScript [torbutton]
+
 Tor Browser 10.0.14 -- March 23 2021
  * Windows + OS X + Linux
    * Update Firefox to 78.9.0esr
