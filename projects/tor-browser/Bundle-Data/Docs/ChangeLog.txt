@@ -19,7 +19,7 @@ Tor Browser 10.5a13 -- March 24 2021
      * Bug 23631: Use rootless containers [tor-browser-build]
      * Bug 40016: getfpaths is not setting origin_project [rbm]
    * Windows
-	 * Bug 40252: Bump mingw-w64 and clang for Firefox 78.9 [tor-browser-build]
+     * Bug 40252: Bump mingw-w64 and clang for Firefox 78.9 [tor-browser-build]
 
 Tor Browser 10.5a12 -- March 20 2021
  * Android
