@@ -2,6 +2,7 @@ Tor Browser 10.5a13 -- March 24 2021
  * Windows + OS X + Linux
    * Update Firefox to 78.9.0esr
    * Update NoScript to 11.2.3
+   * Update Openssl to 1.1.1k
    * Update Tor to 0.4.6.1-alpha
    * Translations update
    * Bug 40030: DuckDuckGo redirect to html doesn't work [torbutton]
