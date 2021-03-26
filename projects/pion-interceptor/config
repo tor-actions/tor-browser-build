@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
 git_url: https://github.com/pion/interceptor
-git_hash: edb026a5dc1a8002a2159eca4ed1a2838c2f70b0 #v0.0.9
+git_hash: bc30165ae456af3e8a9ae25e1c3d25dc3a7ccc41 #v0.0.10
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 
 build: '[% c("projects/go/var/build_go_lib") %]'
