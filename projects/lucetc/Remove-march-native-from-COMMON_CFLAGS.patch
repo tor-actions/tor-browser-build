@@ -1,0 +1,24 @@
+From ce82762aef3f8cdbdd340f39f95d2491f69a7da0 Mon Sep 17 00:00:00 2001
+From: Nicolas Vigier <boklm@torproject.org>
+Date: Mon, 29 Mar 2021 13:42:48 +0200
+Subject: [PATCH] Remove -march=native from COMMON_CFLAGS
+
+The -march=native flag is causing an error on some hardware. It can also
+make the build non-reproducible when not building on the same hardware.
+---
+ lucet-builtins/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lucet-builtins/Makefile b/lucet-builtins/Makefile
+index 6ddbcfd..de7e540 100644
+--- a/lucet-builtins/Makefile
++++ b/lucet-builtins/Makefile
+@@ -7,7 +7,7 @@ LIBBUILTINS_OBJS:=$(addprefix build/, \
+ 	strcmp.o \
+ 	strlen.o )
+ 
+-COMMON_CFLAGS:= --std=gnu99 -Ofast -Wall -Werror -march=native -fPIC \
++COMMON_CFLAGS:= --std=gnu99 -Ofast -Wall -Werror -fPIC \
+ 	-I../lucet-runtime/include
+ 
+ default: build/libbuiltins.so
