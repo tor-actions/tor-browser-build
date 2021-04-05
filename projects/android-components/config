@@ -53,6 +53,9 @@ input_files:
 
 steps:
   list_toolchain_updates:
+    git_url: https://github.com/mozilla-mobile/android-components.git
+    git_hash: v74.0.6
+    tag_gpg_id: 0
     var:
       container:
         use_container: 0
