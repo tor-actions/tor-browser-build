@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
 git_url: https://github.com/pion/srtp
-git_hash: 1c72ec6b73db20dcdf3e0828e20bb01d72d988c4 #v2.0.1
+git_hash: 73e8a03e17f465c872c47c2e8c8a400a7aa78fa2 #v2.0.2
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 
 build: '[% c("projects/go/var/build_go_lib") %]'
