@@ -1,8 +1,10 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
-version: 29.0.2
-version_old: 28.0.3
+version: '[% c("var/version_28") %]+[% c("var/version_29") %]+[% c("var/version_30") %]'
 var:
+  version_30: 30.0.2
+  version_29: 29.0.2
+  version_28: 28.0.3
   container:
     use_container: 1
   deps:
@@ -25,36 +27,36 @@ var:
     export PATH=$PATH:$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin:$GRADLE_HOME/gradle/bin
     mkdir -p "$GRADLE_HOME"
   google_repo: https://dl.google.com/android/repository
-  android_api_level: 29
-  android_platform_revision: 04
-  android_api_level_new: 30
-  android_platform_revision_new: 03
+  android_api_level: 30
+  android_platform_revision: 03
+  android_api_level_29: 29
+  android_platform_revision_29: 04
   android_ndk_version: 21
   android_ndk_revision: d
   sdk_tools_version: 4333796
 input_files:
   - project: container-image
-  - URL: '[% c("var/google_repo") %]/build-tools_r[% c("version") %]-linux.zip'
+  - URL: '[% c("var/google_repo") %]/build-tools_r[% c("var/version_30") %]-linux.zip'
     name: build_tools
+    sha256sum: 565af786dc0cc1941002174fb945122eabd080b222cd4c7c3d9a2ae0fabf5dc4
+  - URL: '[% c("var/google_repo") %]/build-tools_r[% c("var/version_29") %]-linux.zip'
+    name: build_tools_29
     sha256sum: 1e9393cbfd4a4b82e30e7f55ab38db4a5a3259db93d5821c63597bc74522fa08
-  - URL: '[% c("var/google_repo") %]/build-tools_r[% c("version_old") %]-linux.zip'
-    name: build_tools_old
+  - URL: '[% c("var/google_repo") %]/build-tools_r[% c("var/version_28") %]-linux.zip'
+    name: build_tools_28
     sha256sum: 7954956a40633c88f693d638cbc23f68e9e2499dc7a4b7dfdaf6a3e91387749a
+  - URL: '[% c("var/google_repo") %]/platform-[% c("var/android_api_level_29") %]_r[% c("var/android_platform_revision_29") %].zip'
+    name: platform_29
+    sha256sum: c9eaf2ce4e8fa6f5a8036bd3c95363d003733bf0a1bd349718cadf802db44c69
   - URL: '[% c("var/google_repo") %]/platform-[% c("var/android_api_level") %]_r[% c("var/android_platform_revision") %].zip'
     name: platform
-    sha256sum: c9eaf2ce4e8fa6f5a8036bd3c95363d003733bf0a1bd349718cadf802db44c69
-  - URL: '[% c("var/google_repo") %]/build-tools_r[% c("var/android_api_level_new") %]-linux.zip'
-    name: build_tools_new
-    sha256sum: ed3b7f9b2d15e90a12c2e739adb749d7d834e2f953e677380206bd14db135c6c
-  - URL: '[% c("var/google_repo") %]/platform-[% c("var/android_api_level_new") %]_r[% c("var/android_platform_revision_new") %].zip'
-    name: platform_new
     sha256sum: f3f5b75744dbf6ee6ed3e8174a71e513bfee502d0bc3463ea97e517bff68d84e
   # ./mach bootstrap is fetching the latest version, so it does not seem to
   # matter which particular version we are using. Pin to the one fitting best to
   # SDK version/build-tools version.
-  - URL: '[% c("var/google_repo") %]/platform-tools_r[% c("version") %]-linux.zip'
+  - URL: '[% c("var/google_repo") %]/platform-tools_r[% c("var/version_30") %]-linux.zip'
     name: platform_tools
-    sha256sum: 633b6dfa245f5dc58d15da9ead655bcd14de5784196ec0f0dc7e37a5acb61be4
+    sha256sum: f7306a7c66d8149c4430aff270d6ed644c720ea29ef799dc613d3dc537485c6e
   - URL: '[% c("var/google_repo") %]/sdk-tools-linux-[% c("var/sdk_tools_version") %].zip'
     name: android_sdk_tools
     sha256sum: 92ffee5a1d98d856634e8b71132e8a95d96c83a63fde1099be3d86df3106def9

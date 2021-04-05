@@ -44,7 +44,7 @@ if (m/build_tools_version\\s*=\\s*"([^"]+)"/) {
 }
 EOF
 needed=$(cat build/moz.configure/android-sdk.configure | perl -ne "$p")
-current='[% pc("android-toolchain", "version") %]'
+current='[% pc("android-toolchain", "var/version_30") %]'
 check_update_needed build_tools "$needed" "$current"
 
 

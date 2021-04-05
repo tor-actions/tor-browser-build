@@ -3,9 +3,9 @@
 export PROJECT_PATH=/var/tmp/dist/[% project %]
 export SDK_HOME=$PROJECT_PATH/android-sdk-linux
 export NDK_HOME=$PROJECT_PATH/android-ndk
-android_release_dir=android-10
-android_release_dir_old=android-9
-android_release_dir_new=android-11
+android_release_dir_9=android-9
+android_release_dir_10=android-10
+android_release_dir_11=android-11
 
 # Make directories
 mkdir -p $NDK_HOME $SDK_HOME
@@ -26,27 +26,27 @@ done
 # Tool Archives
 cd $SDK_HOME
 unzip -qq $HOME/[% c("input_files_by_name/build_tools") %] -d $SDK_HOME
-mkdir -p build-tools/[% c("version") %]
-mv $android_release_dir/* build-tools/[% c("version") %]
+mkdir -p build-tools/[% c("var/version_30") %]
+mv $android_release_dir_11/* build-tools/[% c("var/version_30") %]
+
+unzip -qq $HOME/[% c("input_files_by_name/platform") %] -d $SDK_HOME
+mkdir -p platforms/android-[% c("var/android_api_level") %]
+mv $android_release_dir_11/* platforms/android-[% c("var/android_api_level") %]
 
 # Apart from GeckoView all other projects do still need build-tools 28.0.3 as
 # they are using the Gradle plugin 3.2.1 - 3.6.0 without specifying
 # `buildToolsVersion`.
-unzip -qq $HOME/[% c("input_files_by_name/build_tools_old") %] -d $SDK_HOME
-mkdir -p build-tools/[% c("version_old") %]
-mv $android_release_dir_old/* build-tools/[% c("version_old") %]
+unzip -qq $HOME/[% c("input_files_by_name/build_tools_28") %] -d $SDK_HOME
+mkdir -p build-tools/[% c("var/version_28") %]
+mv $android_release_dir_9/* build-tools/[% c("var/version_28") %]
 
-unzip -qq $HOME/[% c("input_files_by_name/platform") %] -d $SDK_HOME
-mkdir -p platforms/android-[% c("var/android_api_level") %]
-mv $android_release_dir/* platforms/android-[% c("var/android_api_level") %]
+unzip -qq $HOME/[% c("input_files_by_name/build_tools_29") %] -d $SDK_HOME
+mkdir -p build-tools/[% c("var/version_29") %]
+mv $android_release_dir_10/* build-tools/[% c("var/version_29") %]
 
-unzip -qq $HOME/[% c("input_files_by_name/build_tools_new") %] -d $SDK_HOME
-mkdir -p build-tools/[% c("var/android_api_level_new") %]
-mv $android_release_dir_new/* build-tools/[% c("var/android_api_level_new") %]
-
-unzip -qq $HOME/[% c("input_files_by_name/platform_new") %] -d $SDK_HOME
-mkdir -p platforms/android-[% c("var/android_api_level_new") %]
-mv $android_release_dir_new/* platforms/android-[% c("var/android_api_level_new") %]
+unzip -qq $HOME/[% c("input_files_by_name/platform_29") %] -d $SDK_HOME
+mkdir -p platforms/android-[% c("var/android_api_level_29") %]
+mv $android_release_dir_10/* platforms/android-[% c("var/android_api_level_29") %]
 
 unzip -qq $HOME/[% c("input_files_by_name/platform_tools") %] -d $SDK_HOME
 
@@ -56,7 +56,7 @@ mkdir emulator
 cp tools/emulator emulator/
 
 # Cleanup
-rm -fR $android_release_dir $android_release_dir_old $android_release_dir_new
+rm -fR $android_release_dir_9 $android_release_dir_10 $android_release_dir_11
 
 # Archive dist directory
 cd /var/tmp/dist
