@@ -81,3 +81,10 @@ input_files:
   - filename: viaduct-workaround.patch
   - filename: viaduct-workaround2.patch
   - filename: update-cargo-lock.patch
+
+steps:
+  list_toolchain_updates:
+    input_files: []
+    var:
+      container:
+        use_container: 0

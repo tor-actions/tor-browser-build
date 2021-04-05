@@ -50,3 +50,23 @@ input_files:
   - URL: https://people.torproject.org/~gk/mirrors/sources/glean-parser-[% c('var/glean_parser') %].tar.bz2
     sha256sum: 19dbdd4958022a1a638e0217489ab722fe7d4f588f1978a4ae162f93e75694c2
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
+
+steps:
+  list_toolchain_updates:
+    var:
+      container:
+        use_container: 0
+      get_glean_version: |
+        #!/bin/bash
+        read -d '' p << 'EOF' || true
+        if (m/const\\sval\\smozilla_glean\\s=\\s"([^"]+)"/) {
+          print $1;
+          exit;
+        }
+        EOF
+        perl -ne "$p" < buildSrc/src/main/java/Dependencies.kt
+      glean_version: '[% exec(c("var/get_glean_version")) %]'
+    input_files:
+      - name: glean
+        project: glean
+        pkg_type: src
