@@ -201,6 +201,18 @@ dmg2mar-alpha: submodule-update
 	tools/update-responses/download_missing_versions alpha
 	CHECK_CODESIGNATURE_EXISTS=1 MAR_SKIP_EXISTING=1 tools/update-responses/gen_incrementals alpha
 
+list_toolchain_updates-fenix: submodule-update
+	$(rbm) build fenix --step list_toolchain_updates --target nightly --target torbrowser-android-armv7
+
+list_toolchain_updates-android-components: submodule-update
+	$(rbm) build android-components --step list_toolchain_updates --target nightly --target torbrowser-android-armv7
+
+list_toolchain_updates-application-services: submodule-update
+	$(rbm) build application-services --step list_toolchain_updates --target nightly --target torbrowser-android-armv7
+
+list_toolchain_updates-geckoview: submodule-update
+	$(rbm) build geckoview --step list_toolchain_updates --target nightly --target torbrowser-android-armv7
+
 submodule-update:
 	git submodule update --init
 

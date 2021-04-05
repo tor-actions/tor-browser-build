@@ -1,0 +1,97 @@
+#!/bin/bash
+
+# ndkVersion
+read -d '' p << 'EOF' || true
+if (m/^\\s*ndkVersion:\\s"([^"]*)",/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat build.gradle | perl -ne "$p")
+current='21.3.6528147'
+check_update_needed ndkVersion "$needed" "$current"
+
+
+# compileSdkVersion
+read -d '' p << 'EOF' || true
+if (m/^\\s*compileSdkVersion:\\s([^"]*),/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat build.gradle | perl -ne "$p")
+current=29
+check_update_needed compileSdkVersion "$needed" "$current"
+
+
+# minSdkVersion
+read -d '' p << 'EOF' || true
+if (m/^\\s*minSdkVersion:\\s([^"]*),/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat build.gradle | perl -ne "$p")
+current=21
+check_update_needed minSdkVersion "$needed" "$current"
+
+
+# gradle
+read -d '' p << 'EOF' || true
+if (m|distributionUrl=https\\\\://services.gradle.org/distributions/gradle-(.*)-.*.zip|) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat gradle/wrapper/gradle-wrapper.properties | perl -ne "$p")
+current='[% c("var/gradle_version") %]'
+check_update_needed gradle "$needed" "$current"
+
+
+# nss-nspr
+read -d '' p << 'EOF' || true
+if (m/NSS_ARCHIVE="nss-(.*-with-nspr-.*)\\.tar\\.gz"/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat libs/build-all.sh | perl -ne "$p")
+current='[% pc("nss", "version") %]-with-nspr-[% pc("nss", "nspr_version") %]'
+check_update_needed nss-nspr "$needed" "$current"
+
+
+# sqlcipher
+read -d '' p << 'EOF' || true
+if (m/SQLCIPHER_VERSION="([^"]+)"/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat libs/build-all.sh | perl -ne "$p")
+current='[% pc("sqlcipher", "version") %]'
+check_update_needed sqlcipher "$needed" "$current"
+
+
+# android-gradle-plugin
+read -d '' p << 'EOF' || true
+if (m/^\\s*ext\\.android_gradle_plugin_version\\s=\\s'([^']*)'/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat build.gradle | perl -ne "$p")
+current='4.0.1'
+check_update_needed android-gradle-plugin "$needed" "$current"
+
+
+# android-components
+read -d '' p << 'EOF' || true
+if (m/^\\s*ext\\.android_components_version\\s=\\s'([^']*)'/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat build.gradle | perl -ne "$p")
+current=71.0.0
+check_update_needed android-components "$needed" "$current"
+

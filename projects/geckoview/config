@@ -137,6 +137,11 @@ steps:
         target_prepend:
           - torbrowser-android-x86_64
 
+  list_toolchain_updates:
+    input_files: []
+    var:
+      container:
+        use_container: 0
 
 targets:
   nightly:

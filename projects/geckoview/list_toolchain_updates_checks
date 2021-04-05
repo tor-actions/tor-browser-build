@@ -1,0 +1,202 @@
+#!/bin/bash
+
+# ndk version
+read -d '' p << 'EOF' || true
+if (m/^\\s*NDK_VERSION\\s*=\\s*"(.+)"/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat python/mozboot/mozboot/android.py | perl -ne "$p")
+current='r[% pc("android-toolchain", "var/android_ndk_version") %][% pc("android-toolchain", "var/android_ndk_revision") %]'
+check_update_needed ndk_version "$needed" "$current"
+
+
+# rust
+read -d '' p << 'EOF' || true
+my $d = YAML::XS::LoadFile('taskcluster/ci/toolchain/rust.yml');
+foreach my $t (keys %$d) {
+  if ($d->{$t}{run}{'toolchain-alias'} eq 'linux64-rust-android') {
+    my $channel;
+    foreach my $arg (@{$d->{$t}{run}{arguments}}) {
+      if ($arg eq '--channel') {
+        $channel = 1;
+        next;
+      }
+      if ($channel) {
+        print $arg;
+        exit;
+      }
+    }
+  }
+}
+EOF
+needed=$(perl -MYAML::XS -e "$p")
+current='[% pc("rust", "version") %]'
+check_update_needed rust "$needed" "$current"
+
+
+# build_tools
+read -d '' p << 'EOF' || true
+if (m/build_tools_version\\s*=\\s*"([^"]+)"/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat build/moz.configure/android-sdk.configure | perl -ne "$p")
+current='[% pc("android-toolchain", "version") %]'
+check_update_needed build_tools "$needed" "$current"
+
+
+# target_sdk
+read -d '' p << 'EOF' || true
+if (m/target_sdk_version\\s*=\\s*"(.+)"/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat build/moz.configure/android-sdk.configure | perl -ne "$p")
+current='[% pc("android-toolchain", "var/android_api_level") %]'
+check_update_needed target_sdk "$needed" "$current"
+
+
+# sdk-tools
+read -d '' p << 'EOF' || true
+if (m|https://dl\\.google\\.com/android/repository/sdk-tools-.+-([^-]+).zip|) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat python/mozboot/mozboot/android.py | perl -ne "$p")
+current='[% pc("android-toolchain", "var/sdk_tools_version") %]'
+check_update_needed sdk-tools "$needed" "$current"
+
+
+# min-android
+read -d '' p << 'EOF' || true
+use Path::Tiny;
+use Digest::SHA qw(sha256_hex);
+my $f;
+my $min_indent;
+foreach (path('build/moz.configure/android-ndk.configure')->lines_utf8) {
+  if ($_ eq "def min_android_version(target):\\n") {
+    $f = $_;
+    next;
+  } else {
+    next unless $f;
+  }
+  m/^(\\s*)/;
+  my $indent = length $1;
+  $min_indent = $indent unless $min_indent;
+  last if $indent < $min_indent;
+  $f .= $_;
+}
+print substr(sha256_hex($f), 0, 10);
+EOF
+needed=$(perl -e "$p")
+# We can't easily parse the min_android_version function.
+# Instead we get a checksum of the function, and manually check it when
+# it was updated.
+# Current value of min_android_version is:
+#  21 on aarch64, x86_64
+#  16 on other archs
+current=303de6de36
+check_update_needed min-android "$needed" "$current"
+
+
+# min_sdk
+read -d '' p << 'EOF' || true
+if (m/^\\s*MOZ_ANDROID_MIN_SDK_VERSION\\s*=\\s*([^\\s]+)/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat mobile/android/confvars.sh | perl -ne "$p")
+current=16
+check_update_needed min_sdk "$needed" "$current"
+
+
+# gradle
+read -d '' p << 'EOF' || true
+if (m|distributionUrl=https\\\\://services.gradle.org/distributions/gradle-(.*)-all.zip|) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat gradle/wrapper/gradle-wrapper.properties | perl -ne "$p")
+current='[% c("var/gradle_version") %]'
+check_update_needed gradle "$needed" "$current"
+
+
+# cbindgen
+read -d '' p << 'EOF' || true
+if (m/^\\s*cbindgen_min_version\\s*=\\s*Version\\("([^"]+)"\\)/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat build/moz.configure/bindgen.configure | perl -ne "$p")
+current='[% pc("cbindgen", "version") %]'
+check_update_needed cbindgen "$needed" "$current"
+
+
+# nasm
+read -d '' p << 'EOF' || true
+if (m/^\\s*MODERN_NASM_VERSION\\s*=\\s*LooseVersion\\("([^"]+)"\\)/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat python/mozboot/mozboot/base.py | perl -ne "$p")
+current='2.14'
+check_update_needed nasm "$needed" "$current"
+
+
+# clang
+read -d '' p << 'EOF' || true
+my $d = YAML::XS::LoadFile('taskcluster/ci/toolchain/clang.yml');
+my $clang_toolchain;
+foreach my $t (keys %$d) {
+  if ($d->{$t}{run}{'toolchain-alias'} eq 'linux64-clang-android-cross') {
+    foreach my $fetch (@{$d->{$t}{fetches}{fetch}}) {
+      $clang_toolchain = $fetch if $fetch =~ m/^clang-.*/;
+    }
+    last;
+  }
+}
+
+if (!$clang_toolchain) {
+  print STDERR "Error: could not find clang toolchain";
+  exit 1;
+}
+
+my $fetch = YAML::XS::LoadFile('taskcluster/ci/fetch/toolchains.yml');
+print $fetch->{$clang_toolchain}{fetch}{revision};
+EOF
+needed=$(perl -MYAML::XS -e "$p")
+current='[% pc("llvm-project", "git_hash") %]'
+check_update_needed clang "$needed" "$current"
+
+
+# node
+read -d '' p << 'EOF' || true
+if (m/^\\s*NODE_MIN_VERSION\\s*=\\s*StrictVersion\\("([^"]+)"\\)/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat python/mozbuild/mozbuild/nodeutil.py | perl -ne "$p")
+current='[% pc("node", "version") %]'
+check_update_needed node "$needed" "$current"
+
+
+# python
+read -d '' p << 'EOF' || true
+if (m/find_python3_executable\\(min_version\\s*=\\s*"([^"]+)"/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat build/moz.configure/init.configure | perl -ne "$p")
+current=3.6.0
+check_update_needed python "$needed" "$current"

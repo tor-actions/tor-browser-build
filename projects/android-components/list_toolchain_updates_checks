@@ -1,0 +1,85 @@
+#!/bin/bash
+
+# compileSdkVersion
+read -d '' p << 'EOF' || true
+if (m/compileSdkVersion:\\s+(.*)$/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat .config.yml | perl -ne "$p")
+current=30
+check_update_needed compileSdkVersion "$needed" "$current"
+
+
+# targetSdkVersion
+read -d '' p << 'EOF' || true
+if (m/targetSdkVersion:\\s+(.*)$/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat .config.yml | perl -ne "$p")
+current=30
+check_update_needed targetSdkVersion "$needed" "$current"
+
+
+# minSdkVersion
+read -d '' p << 'EOF' || true
+if (m/minSdkVersion:\\s+(.*)$/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat .config.yml | perl -ne "$p")
+current=21
+check_update_needed minSdkVersion "$needed" "$current"
+
+
+# application-services
+read -d '' p << 'EOF' || true
+if (m/const\\sval\\smozilla_appservices\\s=\\s"([^"]+)"/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat buildSrc/src/main/java/Dependencies.kt | perl -ne "$p")
+current='[% pc("application-services", "version") %]'
+check_update_needed application-services "$needed" "$current"
+
+
+# glean_parser
+read -d '' p << 'EOF' || true
+if (m/^\\s*"glean_parser==([^"]+)",/) {
+  print $1;
+  exit;
+}
+EOF
+tar xf $rootdir/[% c('input_files_by_name/glean') %]
+needed=$(cat glean-[% c("var/glean_version") %]/glean-core/python/setup.py | perl -ne "$p")
+current='[% c("var/glean_parser") %]'
+check_update_needed glean_parser "$needed" "$current"
+
+
+# gradle
+read -d '' p << 'EOF' || true
+if (m|distributionUrl=https\\\\://services.gradle.org/distributions/gradle-(.*)-all.zip|) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat gradle/wrapper/gradle-wrapper.properties | perl -ne "$p")
+current='[% c("var/gradle_version") %]'
+check_update_needed gradle "$needed" "$current"
+
+
+# android-gradle-plugin
+read -d '' p << 'EOF' || true
+if (m/const\\s+val\\s+android_gradle_plugin\\s+=\\s+"([^"]+)"/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat buildSrc/src/main/java/Dependencies.kt | perl -ne "$p")
+current='4.0.1'
+check_update_needed android-gradle-plugin "$needed" "$current"

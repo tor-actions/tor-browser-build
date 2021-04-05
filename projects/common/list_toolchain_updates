@@ -1,0 +1,38 @@
+#!/usr/bin/bash
+
+set -e
+
+rootdir="$(pwd)"
+no_updates="$rootdir/no_updates.txt"
+updates="$rootdir/updates.txt"
+
+tar -xf [% project %]-[% c('version') %].tar.gz
+cd [% project %]-[% c('version') %]
+
+function check_update_needed() {
+  name="$1"
+  v1="$2"
+  v2="$3"
+  if test "$v1" = "$v2"
+  then
+    echo "* $name ($v1)" >> "$no_updates"
+  else
+    echo "* $name needs to be updated to $v1 (currently at $v2)" >> "$updates"
+  fi
+}
+
+[% INCLUDE list_toolchain_updates_checks %]
+
+echo '### Component: [% project %] ([% c("git_hash") %])'
+
+if test -f "$updates"
+then
+  echo "The following components need to be updated:"
+  cat "$updates"
+  echo
+fi
+if test -f "$no_updates"
+then
+  echo "The following components don't need to be updated:"
+  cat "$no_updates"
+fi

@@ -61,3 +61,10 @@ input_files:
     name: tor-android-service
   - project: tor-onion-proxy-library
     name: topl
+
+steps:
+  list_toolchain_updates:
+    input_files: []
+    var:
+      container:
+        use_container: 0

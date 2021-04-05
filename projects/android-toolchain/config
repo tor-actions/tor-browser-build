@@ -31,6 +31,7 @@ var:
   android_platform_revision_new: 03
   android_ndk_version: 21
   android_ndk_revision: d
+  sdk_tools_version: 4333796
 input_files:
   - project: container-image
   - URL: '[% c("var/google_repo") %]/build-tools_r[% c("version") %]-linux.zip'
@@ -54,7 +55,7 @@ input_files:
   - URL: '[% c("var/google_repo") %]/platform-tools_r[% c("version") %]-linux.zip'
     name: platform_tools
     sha256sum: 633b6dfa245f5dc58d15da9ead655bcd14de5784196ec0f0dc7e37a5acb61be4
-  - URL: '[% c("var/google_repo") %]/sdk-tools-linux-4333796.zip'
+  - URL: '[% c("var/google_repo") %]/sdk-tools-linux-[% c("var/sdk_tools_version") %].zip'
     name: android_sdk_tools
     sha256sum: 92ffee5a1d98d856634e8b71132e8a95d96c83a63fde1099be3d86df3106def9
   - URL: '[% c("var/google_repo") %]/android-ndk-r[% c("var/android_ndk_version") %][% c("var/android_ndk_revision") %]-linux-x86_64.zip'
