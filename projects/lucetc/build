@@ -47,6 +47,8 @@ replace-with = "vendored-sources"
 directory = "/var/tmp/build/lucetc/vendor"
 EOF
 
+patch -p1 < $rootdir/Remove-march-native-from-COMMON_CFLAGS.patch
+
 make -j[% c("buildconf/num_procs") %] build
 # XXX: Should not be needed, just the lucetc binary, see: taskcluster/scripts/misc/build-lucetc.sh
 make install
