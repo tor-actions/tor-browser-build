@@ -1,7 +1,7 @@
-From 5020520a2b240512284a7396e99ed22c54042257 Mon Sep 17 00:00:00 2001
+From 4a7eb7890108939993444ad350dd064dc7448160 Mon Sep 17 00:00:00 2001
 From: Georg Koppen <gk@torproject.org>
 Date: Wed, 2 Dec 2020 09:26:24 +0000
-Subject: [PATCH 1/2] Bug 40156: viaduct*-workaround
+Subject: [PATCH] Bug 40156: viaduct*-workaround
 
 See: https://github.com/mozilla/application-services/issues/3732.
 ---
@@ -9,7 +9,7 @@ See: https://github.com/mozilla/application-services/issues/3732.
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/nimbus/Cargo.toml b/nimbus/Cargo.toml
-index b19acc9..fd267b5 100644
+index 4dc51b3..0e30dd0 100644
 --- a/nimbus/Cargo.toml
 +++ b/nimbus/Cargo.toml
 @@ -26,7 +26,7 @@ serde_derive = "1"
@@ -20,9 +20,9 @@ index b19acc9..fd267b5 100644
 +viaduct = { path = "../../../viaduct" }
  thiserror = "1"
  url = "2.1"
- rkv = "0.15"
-@@ -41,7 +41,7 @@ uniffi = { version = "0.7", optional = true }
- uniffi_build = { version = "0.7", features = [ "builtin-bindgen" ], optional = true }
+ rkv = "0.17"
+@@ -41,7 +41,7 @@ uniffi = { version = "^0.8.0", optional = true }
+ uniffi_build = { version = "^0.8.0", features = [ "builtin-bindgen" ], optional = true }
  
  [dev-dependencies]
 -viaduct-reqwest = { git = "https://github.com/mozilla/application-services", rev = "8a576fbe79199fa8664f64285524017f74ebcc5f"}
