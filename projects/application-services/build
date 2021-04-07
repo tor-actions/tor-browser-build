@@ -52,7 +52,6 @@ EOF
 patch -p1 < $rootdir/update-cargo-lock.patch
 cd components/external/nimbus-sdk
 patch -p1 < $rootdir/viaduct-workaround.patch
-patch -p1 < $rootdir/viaduct-workaround2.patch
 cd ../../../
 
 # Move NSS and SQLCipher to the right place

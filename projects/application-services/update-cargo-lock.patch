@@ -1,14 +1,14 @@
-From cdcce5ffd9e49d4648dd6b23a6dfbc8011352883 Mon Sep 17 00:00:00 2001
+From 3d6b82d24bcf05b26c69702f6dcb1a0ac91c13a1 Mon Sep 17 00:00:00 2001
 From: Georg Koppen <gk@torproject.org>
 Date: Fri, 27 Nov 2020 09:55:49 +0000
 Subject: [PATCH] update cargo.lock
 
 ---
- Cargo.lock | 390 +++++++++++++++++++++++++++++++++++++----------------
- 1 file changed, 273 insertions(+), 117 deletions(-)
+ Cargo.lock | 384 +++++++++++++++++++++++++++++++++++++----------------
+ 1 file changed, 267 insertions(+), 117 deletions(-)
 
 diff --git a/Cargo.lock b/Cargo.lock
-index 813c475c..20b6e4d0 100644
+index 69d2dae0..2c1a3aa3 100644
 --- a/Cargo.lock
 +++ b/Cargo.lock
 @@ -86,9 +86,9 @@ checksum = "23b62fc65de8e4e7f52534fb52b0f3ed04746ae267519eef2a83941e8085068b"
@@ -176,7 +176,7 @@ index 813c475c..20b6e4d0 100644
  
  [[package]]
  name = "cpuid-bool"
-@@ -548,7 +577,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
+@@ -559,7 +588,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
  checksum = "dca26ee1f8d361640700bde38b2c37d8c22b3ce2d360e1fc1c74ea4b0aa7d775"
  dependencies = [
   "cfg-if 1.0.0",
@@ -185,7 +185,7 @@ index 813c475c..20b6e4d0 100644
  ]
  
  [[package]]
-@@ -559,18 +588,18 @@ checksum = "94af6efb46fef72616855b036a624cf27ba656ffc9be1b9a3c931cfc7749a9a9"
+@@ -570,18 +599,18 @@ checksum = "94af6efb46fef72616855b036a624cf27ba656ffc9be1b9a3c931cfc7749a9a9"
  dependencies = [
   "cfg-if 1.0.0",
   "crossbeam-epoch",
@@ -208,7 +208,7 @@ index 813c475c..20b6e4d0 100644
   "lazy_static",
   "memoffset",
   "scopeguard",
-@@ -578,26 +607,20 @@ dependencies = [
+@@ -589,26 +618,20 @@ dependencies = [
  
  [[package]]
  name = "crossbeam-utils"
@@ -241,7 +241,7 @@ index 813c475c..20b6e4d0 100644
  
  [[package]]
  name = "csv"
-@@ -743,7 +766,7 @@ version = "1.2.1"
+@@ -754,7 +777,7 @@ version = "1.2.1"
  source = "registry+https://github.com/rust-lang/crates.io-index"
  checksum = "53d97f19730c1eb3332d0657d0f3ca72795d77c61d8eb26bdd7f15edc0c61eb2"
  dependencies = [
@@ -250,7 +250,7 @@ index 813c475c..20b6e4d0 100644
   "byteorder",
   "once_cell",
   "serde",
-@@ -1039,6 +1062,16 @@ version = "0.1.1"
+@@ -1042,6 +1065,16 @@ version = "0.1.1"
  source = "registry+https://github.com/rust-lang/crates.io-index"
  checksum = "00b0228411908ca8685dba7fc2cdd70ec9990a6e753e89b6ac91a84c40fbaf4b"
  
@@ -267,7 +267,7 @@ index 813c475c..20b6e4d0 100644
  [[package]]
  name = "fuchsia-cprng"
  version = "0.1.1"
-@@ -1061,53 +1094,59 @@ version = "0.3.3"
+@@ -1064,53 +1097,59 @@ version = "0.3.3"
  source = "registry+https://github.com/rust-lang/crates.io-index"
  checksum = "3dcaa9ae7725d12cdb85b3ad99a434db70b468c09ded17e012d86b5c1010f7a7"
  
@@ -340,7 +340,7 @@ index 813c475c..20b6e4d0 100644
   "pin-utils",
   "slab",
  ]
-@@ -1117,7 +1156,7 @@ name = "fxa-client"
+@@ -1120,7 +1159,7 @@ name = "fxa-client"
  version = "0.1.0"
  dependencies = [
   "anyhow",
@@ -349,7 +349,7 @@ index 813c475c..20b6e4d0 100644
   "error-support",
   "ffi-support 0.4.2 (registry+https://github.com/rust-lang/crates.io-index)",
   "hex",
-@@ -1278,7 +1317,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
+@@ -1275,7 +1314,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
  checksum = "7539c8d8699bae53238aacd3f93cfb0bcaef77b85dc963902b9367c5d7a84c48"
  dependencies = [
   "anyhow",
@@ -358,7 +358,7 @@ index 813c475c..20b6e4d0 100644
   "log 0.4.11",
   "once_cell",
   "thiserror",
-@@ -1367,7 +1406,7 @@ dependencies = [
+@@ -1364,7 +1403,7 @@ dependencies = [
   "httparse",
   "httpdate",
   "itoa",
@@ -367,7 +367,7 @@ index 813c475c..20b6e4d0 100644
   "socket2",
   "tokio",
   "tower-service",
-@@ -1494,7 +1533,7 @@ dependencies = [
+@@ -1491,7 +1530,7 @@ dependencies = [
  name = "jwcrypto"
  version = "0.1.0"
  dependencies = [
@@ -376,7 +376,7 @@ index 813c475c..20b6e4d0 100644
   "rc_crypto",
   "serde",
   "serde_derive",
-@@ -1527,6 +1566,19 @@ version = "1.4.0"
+@@ -1524,6 +1563,19 @@ version = "1.4.0"
  source = "registry+https://github.com/rust-lang/crates.io-index"
  checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
  
@@ -600,7 +600,7 @@ index 813c475c..20b6e4d0 100644
   "web-sys",
   "winreg",
  ]
-@@ -2852,14 +2929,14 @@ dependencies = [
+@@ -2829,14 +2906,14 @@ dependencies = [
  
  [[package]]
  name = "rust-argon2"
@@ -619,7 +619,7 @@ index 813c475c..20b6e4d0 100644
  ]
  
  [[package]]
-@@ -2902,6 +2979,12 @@ dependencies = [
+@@ -2879,6 +2956,12 @@ dependencies = [
   "winapi 0.3.9",
  ]
  
@@ -632,7 +632,7 @@ index 813c475c..20b6e4d0 100644
  [[package]]
  name = "scopeguard"
  version = "1.1.0"
-@@ -2910,9 +2993,9 @@ checksum = "d29ab0c6d3fc0ee92fe66e2d99f700eab17a8d57d1c1d3b748380fb20baa78cd"
+@@ -2887,9 +2970,9 @@ checksum = "d29ab0c6d3fc0ee92fe66e2d99f700eab17a8d57d1c1d3b748380fb20baa78cd"
  
  [[package]]
  name = "security-framework"
@@ -644,7 +644,7 @@ index 813c475c..20b6e4d0 100644
  dependencies = [
   "bitflags 1.2.1",
   "core-foundation",
-@@ -2923,9 +3006,9 @@ dependencies = [
+@@ -2900,9 +2983,9 @@ dependencies = [
  
  [[package]]
  name = "security-framework-sys"
@@ -656,7 +656,7 @@ index 813c475c..20b6e4d0 100644
  dependencies = [
   "core-foundation-sys",
   "libc",
-@@ -3018,6 +3101,18 @@ dependencies = [
+@@ -2995,6 +3078,18 @@ dependencies = [
   "url",
  ]
  
@@ -675,7 +675,7 @@ index 813c475c..20b6e4d0 100644
  [[package]]
  name = "sha2"
  version = "0.9.2"
-@@ -3051,11 +3146,11 @@ checksum = "fe0f37c9e8f3c5a4a66ad655a93c74daac4ad00c441533bf5c6e7990bb42604e"
+@@ -3028,11 +3123,11 @@ checksum = "fe0f37c9e8f3c5a4a66ad655a93c74daac4ad00c441533bf5c6e7990bb42604e"
  
  [[package]]
  name = "socket2"
@@ -690,20 +690,7 @@ index 813c475c..20b6e4d0 100644
   "libc",
   "redox_syscall",
   "winapi 0.3.9",
-@@ -3072,6 +3167,12 @@ dependencies = [
-  "rusqlite",
- ]
- 
-+[[package]]
-+name = "static_assertions"
-+version = "1.1.0"
-+source = "registry+https://github.com/rust-lang/crates.io-index"
-+checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
-+
- [[package]]
- name = "strsim"
- version = "0.8.0"
-@@ -3104,9 +3205,9 @@ dependencies = [
+@@ -3087,9 +3182,9 @@ dependencies = [
  
  [[package]]
  name = "syn"
@@ -715,7 +702,7 @@ index 813c475c..20b6e4d0 100644
  dependencies = [
   "proc-macro2",
   "quote",
-@@ -3117,7 +3218,7 @@ dependencies = [
+@@ -3100,7 +3195,7 @@ dependencies = [
  name = "sync-guid"
  version = "0.1.0"
  dependencies = [
@@ -724,7 +711,7 @@ index 813c475c..20b6e4d0 100644
   "rand 0.7.3",
   "rusqlite",
   "serde",
-@@ -3129,7 +3230,7 @@ name = "sync-test"
+@@ -3112,7 +3207,7 @@ name = "sync-test"
  version = "0.1.0"
  dependencies = [
   "anyhow",
@@ -733,7 +720,7 @@ index 813c475c..20b6e4d0 100644
   "env_logger",
   "fxa-client",
   "interrupt-support",
-@@ -3157,7 +3258,7 @@ version = "0.1.0"
+@@ -3140,7 +3235,7 @@ version = "0.1.0"
  dependencies = [
   "anyhow",
   "base16",
@@ -742,7 +729,7 @@ index 813c475c..20b6e4d0 100644
   "env_logger",
   "error-support",
   "ffi-support 0.4.2 (registry+https://github.com/rust-lang/crates.io-index)",
-@@ -3324,6 +3425,12 @@ dependencies = [
+@@ -3295,6 +3390,12 @@ dependencies = [
   "viaduct",
  ]
  
@@ -755,7 +742,7 @@ index 813c475c..20b6e4d0 100644
  [[package]]
  name = "tempdir"
  version = "0.3.7"
-@@ -3371,18 +3478,18 @@ dependencies = [
+@@ -3342,18 +3443,18 @@ dependencies = [
  
  [[package]]
  name = "termcolor"
@@ -778,7 +765,7 @@ index 813c475c..20b6e4d0 100644
  dependencies = [
   "libc",
   "winapi 0.3.9",
-@@ -3458,6 +3565,15 @@ dependencies = [
+@@ -3429,6 +3530,15 @@ dependencies = [
   "winapi 0.3.9",
  ]
  
@@ -794,7 +781,7 @@ index 813c475c..20b6e4d0 100644
  [[package]]
  name = "tinytemplate"
  version = "1.1.0"
-@@ -3470,15 +3586,24 @@ dependencies = [
+@@ -3441,15 +3551,24 @@ dependencies = [
  
  [[package]]
  name = "tinyvec"
@@ -823,7 +810,7 @@ index 813c475c..20b6e4d0 100644
  dependencies = [
   "bytes",
   "fnv",
-@@ -3488,7 +3613,7 @@ dependencies = [
+@@ -3459,7 +3578,7 @@ dependencies = [
   "memchr",
   "mio",
   "num_cpus",
@@ -832,7 +819,7 @@ index 813c475c..20b6e4d0 100644
   "slab",
  ]
  
-@@ -3512,7 +3637,7 @@ dependencies = [
+@@ -3483,7 +3602,7 @@ dependencies = [
   "futures-core",
   "futures-sink",
   "log 0.4.11",
@@ -841,7 +828,7 @@ index 813c475c..20b6e4d0 100644
   "tokio",
  ]
  
-@@ -3533,13 +3658,13 @@ checksum = "e987b6bf443f4b5b3b6f38704195592cca41c5bb7aedd3c3693c7081f8289860"
+@@ -3504,13 +3623,13 @@ checksum = "e987b6bf443f4b5b3b6f38704195592cca41c5bb7aedd3c3693c7081f8289860"
  
  [[package]]
  name = "tracing"
@@ -859,7 +846,7 @@ index 813c475c..20b6e4d0 100644
   "tracing-core",
  ]
  
-@@ -3604,18 +3729,18 @@ dependencies = [
+@@ -3575,18 +3694,18 @@ dependencies = [
  
  [[package]]
  name = "unicode-normalization"
@@ -882,16 +869,16 @@ index 813c475c..20b6e4d0 100644
  
  [[package]]
  name = "unicode-width"
-@@ -3647,7 +3772,7 @@ dependencies = [
+@@ -3618,7 +3737,7 @@ dependencies = [
   "ffi-support 0.4.2 (registry+https://github.com/rust-lang/crates.io-index)",
   "lazy_static",
   "log 0.4.11",
 - "paste 1.0.2",
 + "paste 1.0.3",
+  "static_assertions",
  ]
  
- [[package]]
-@@ -3678,10 +3803,11 @@ dependencies = [
+@@ -3662,10 +3781,11 @@ dependencies = [
  
  [[package]]
  name = "url"
@@ -905,7 +892,7 @@ index 813c475c..20b6e4d0 100644
   "idna",
   "matches",
   "percent-encoding",
-@@ -3843,6 +3969,30 @@ version = "0.2.68"
+@@ -3827,6 +3947,30 @@ version = "0.2.68"
  source = "registry+https://github.com/rust-lang/crates.io-index"
  checksum = "1d649a3145108d7d3fbcde896a468d1bd636791823c9921135218ad89be08307"
  
@@ -936,16 +923,16 @@ index 813c475c..20b6e4d0 100644
  [[package]]
  name = "web-sys"
  version = "0.3.45"
-@@ -3906,7 +4056,7 @@ version = "0.11.0"
+@@ -3890,7 +4034,7 @@ version = "0.12.0"
  source = "registry+https://github.com/rust-lang/crates.io-index"
- checksum = "8a7d4f9feb723a800d8f7b74edc9fa44ff35cb0b2ec64886714362f423427f37"
+ checksum = "610950904727748ca09682e857f0d6d6437f0ca862f32f9229edba8cec8b2635"
  dependencies = [
 - "nom",
 + "nom 5.1.2",
  ]
  
  [[package]]
-@@ -3986,6 +4136,12 @@ dependencies = [
+@@ -3970,6 +4114,12 @@ dependencies = [
   "winapi-build",
  ]
  

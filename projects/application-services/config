@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
-version: 71.0.0
-git_hash: 1ee6b32f3ee569036fdf1015cf7ffc01ded2860f
+version: 74.0.1
+git_hash: ad7b64fa03eeeb00815125e635d1fb8809befd40
 git_url: https://github.com/mozilla/application-services
 git_submodule: 1
 
@@ -11,7 +11,7 @@ var:
   # This should be updated when the list of gradle dependencies is changed.
   gradle_dependencies_version: 5
   # This should be updated when the list of rust dependencies is changed.
-  rust_vendor_version: 4
+  rust_vendor_version: 5
   # Switch to make it easier to grab all dependencies during a dry-run.
   fetch_gradle_dependencies: 0
   gradle_version: 6.5
@@ -70,21 +70,19 @@ input_files:
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
   # `cargo vendor vendor -s components/external/nimbus-sdk/nimbus/Cargo.toml`
   # in the `application-services` directory has vendored the sources,
-  # after applying update-cargo-lock.patch, viaduct-workaround.patch and
-  # viaduct-workaround2.patch
+  # after applying update-cargo-lock.patch and viaduct-workaround.patch
   - URL: https://people.torproject.org/~boklm/mirrors/sources/application-services-vendor-[% c('var/rust_vendor_version') %].tar.bz2
-    sha256sum: 500d0fa471c8ad2037c4bbe648e716e77da1ff1fc5678542b144cd257a34abbf
+    sha256sum: 5f1c9e1bc0db283e88516bd1d78187145bacbf4aeb72972ac09875c1147d2215
   - filename: no-git.patch
   - filename: mavenLocal.patch
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
   - filename: target.patch
   - filename: viaduct-workaround.patch
-  - filename: viaduct-workaround2.patch
   - filename: update-cargo-lock.patch
 
 steps:
   list_toolchain_updates:
-    git_hash: 'v74.0.1'
+    #git_hash: 'v74.0.1'
     input_files: []
     var:
       container:
