@@ -7,3 +7,47 @@ version: '[% pc(c("origin_project"), "var/glean_version", { step => "list_toolch
 src: |
   #!/bin/bash
   mv -f [% project %]-[% c('version') %].tar.gz [% dest_dir %]/[% c('filename') %]
+
+steps:
+  create_glean_deps_tarball:
+    git_url: ''
+    version: 2.2.0
+    filename: 'glean-wheels-[% c("version") %].tar.xz'
+    build_log: '-'
+    var:
+      container:
+        use_container: 1
+    create_glean_deps_tarball: |
+      #!/bin/bash
+      [% c("var/set_default_env") -%]
+      [% pc('python', 'var/setup', { python_tarfile => c('input_files_by_name/python') }) %]
+      mkdir glean-wheels
+      cd glean-wheels
+      [% IF c("var/use_torsocks") %]torsocks [% END%]python3 -m pip download glean_parser==[% c("version") %]
+      cd ..
+      [% c('tar', {
+          tar_src => [ 'glean-wheels' ],
+          tar_args => '-cJf ' _ dest_dir _ '/' _ c('filename'),
+          }) %]
+      cd '[% dest_dir %]'
+      sha256sum [% c('filename') %]
+      echo 'The file is ready to be uploaded:'
+      echo '  scp -p out/glean/[% c("filename") %] people.torproject.org:public_html/mirrors/sources/'
+    input_files:
+      - project: container-image
+        pkg_type: build
+      - project: python
+        name: python
+        pkg_type: build
+
+targets:
+  with_torsocks:
+    var:
+      # The `container-image` project looks at the deps list in origin_project
+      # in the same step (build), so we cannot put this inside the
+      # `create_glean_deps_tarball` step.
+      # rbm#40020 should allow us to fix that.
+      deps:
+        - torsocks
+        - xz-utils
+      use_torsocks: 1
