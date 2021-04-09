@@ -1,3 +1,13 @@
+Tor Browser 10.5a14 -- April 11 2021
+ * All Platforms
+   * Update NoScript to 11.2.4
+   * Translations update
+   * Bug 40261: Bump versions of snowflake and webrtc [tor-browser-build]
+   * Bug 40263: Update domain front for Snowflake [tor-browser-build]
+   * Bug 40390: Add Burmese as a new locale [tor-browser]
+ * Windows + OS X + Linux
+   * Bug 40007: Update domain fronting config for Moat [tor-launcher]
+
 Tor Browser 10.5a13 -- March 24 2021
  * Windows + OS X + Linux
    * Update Firefox to 78.9.0esr
