@@ -44,7 +44,7 @@ patch -p1 < $rootdir/git.patch
   gradle --debug --no-daemon assemble
 [% ELSE %]
   # Prepare Glean dependencies for offline build
-  tar -xjf $rootdir/glean-parser-[% c('var/glean_parser') %].tar.bz2
+  tar -xf $rootdir/[% c('input_files_by_name/glean') %]
   # We need to set `LC_ALL` and `LANG` to something that is not ASCII as encoding
   # otherwise `click` barfs. See: https://click.palletsprojects.com/python3/
   export LC_ALL=C.UTF-8
