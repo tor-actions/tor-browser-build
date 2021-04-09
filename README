@@ -30,10 +30,11 @@ You also need a few perl modules installed:
 - Digest::SHA
 - Data::UUID
 - Data::Dump
+- DateTime
 
 If you are running Debian or Ubuntu, you can install them with:
 
-# apt-get install libyaml-libyaml-perl libtemplate-perl \
+# apt-get install libyaml-libyaml-perl libtemplate-perl libdatetime-perl \
                   libio-handle-util-perl libio-all-perl \
                   libio-captureoutput-perl libjson-perl libpath-tiny-perl \
                   libstring-shellquote-perl libsort-versions-perl \
