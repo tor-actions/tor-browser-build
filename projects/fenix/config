@@ -8,17 +8,18 @@ gpg_keyring: torbutton.gpg
 variant: Beta
 
 var:
-  fenix_version: 87.0.0
+  fenix_version: 88.0.0b4
   torbrowser_branch: 10.5
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   container:
     use_container: 1
   # This should be updated when the list of gradle dependencies is changed.
-  gradle_dependencies_version: 23
+  gradle_dependencies_version: 24
   # Switch to make it easier to grab all dependencies during a dry-run.
   # Note: Use the commit that integrates Tor.
   fetch_gradle_dependencies: 0
   gradle_version: 6.5.1
+  glean_parser: 2.2.0
 
 targets:
   nightly:
@@ -52,8 +53,9 @@ input_files:
     name: gradle-dependencies
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
     exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
-  - URL: https://people.torproject.org/~gk/mirrors/sources/glean-parser-[% c('var/glean_parser') %].tar.bz2
-    sha256sum: 19dbdd4958022a1a638e0217489ab722fe7d4f588f1978a4ae162f93e75694c2
+  - URL: https://people.torproject.org/~boklm/mirrors/sources/glean-wheels-[% c('var/glean_parser') %].tar.xz
+    name: glean
+    sha256sum: 24ceaaadaf155445e8ad135173d894e05c0745b41ab5fee150f9548550acf2a6
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
   - filename: mavenLocal.patch
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
@@ -64,9 +66,9 @@ input_files:
 
 steps:
   list_toolchain_updates:
-    git_url: https://github.com/mozilla-mobile/fenix.git
-    git_hash: v88.0.0-beta.4
-    tag_gpg_id: 0
+    #git_url: https://github.com/mozilla-mobile/fenix.git
+    #git_hash: v88.0.0-beta.4
+    #tag_gpg_id: 0
     input_files: []
     var:
       container:

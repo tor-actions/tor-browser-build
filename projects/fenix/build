@@ -42,7 +42,7 @@ cp $rootdir/[% c('input_files_by_name/tor-android-service') %]/* app/
 # XXX We need the build variant in lower case. Do something smarter here.
 v=[% c("variant") %]
 [% IF c("var/fetch_gradle_dependencies") %]
-  $GRADLE_HOME/gradle/bin/gradle --debug --no-daemon app:assemble[% c('variant') %] app:assembleAndroidTest -x lint -PtestBuildType=${v,}
+  $GRADLE_HOME/gradle/bin/gradle --debug --no-daemon app:assemble[% c('variant') %] app:assembleAndroidTest -x lint -PtestBuildType=${v,} -PdisableOptimization
 [% ELSE %]
   # Add our localized strings
   [% FOREACH lang = c('var/locales_mobile');
@@ -52,7 +52,7 @@ v=[% c("variant") %]
   [% END %]
 
   # Prepare Glean dependencies for offline build
-  tar -xjf $rootdir/glean-parser-[% c('var/glean_parser') %].tar.bz2
+  tar -xf $rootdir/[% c('input_files_by_name/glean') %]
   # We need to set `LC_ALL` and `LANG` to something that is not ASCII as encoding
   # otherwise `click` barfs. See: https://click.palletsprojects.com/python3/
   export LC_ALL=C.UTF-8
@@ -67,7 +67,10 @@ v=[% c("variant") %]
   fi
 
   version_name='[% c("var/torbrowser_version") %] ([% c("var/fenix_version") %]-[% c("variant") %])'
-  $GRADLE_HOME/gradle/bin/gradle --offline --no-daemon -PversionName="$version_name" -Dmaven.repo.local=$gradle_repo app:assemble[% c('variant') %] app:assembleAndroidTest -x lint -PtestBuildType=${v,}
+  # We need -PdisableOptimization for building tests. See:
+  # https://gitlab.torproject.org/tpo/applications/tor-browser-build/-/issues/40259#note_2732325
+  $GRADLE_HOME/gradle/bin/gradle --offline --no-daemon -PversionName="$version_name" -Dmaven.repo.local=$gradle_repo app:assemble[% c('variant') %] -x lint -PtestBuildType=${v,}
+  $GRADLE_HOME/gradle/bin/gradle --offline --no-daemon -PversionName="$version_name" -Dmaven.repo.local=$gradle_repo app:assembleAndroidTest -x lint -PtestBuildType=${v,} -PdisableOptimization
   cp app/build/outputs/apk/${v,}/*.apk $distdir/[% project %]
   cp app/build/outputs/apk/androidTest/${v,}/app-${v,}-androidTest.apk $distdir/[% project %]
 
