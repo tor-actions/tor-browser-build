@@ -219,6 +219,15 @@ create_glean_deps_tarball: submodule-update
 create_glean_deps_tarball-with_torsocks: submodule-update
 	$(rbm) build glean --step create_glean_deps_tarball --target alpha --target torbrowser-android-armv7 --target with_torsocks
 
+get_gradle_dependencies_list-fenix: submodule-update
+	$(rbm) build fenix --step get_gradle_dependencies_list --target nightly --target torbrowser-android-armv7
+
+get_gradle_dependencies_list-application-services: submodule-update
+	$(rbm) build application-services --step get_gradle_dependencies_list --target nightly --target torbrowser-android-armv7
+
+get_gradle_dependencies_list-android-components: submodule-update
+	$(rbm) build android-components --step get_gradle_dependencies_list --target nightly --target torbrowser-android-armv7
+
 submodule-update:
 	git submodule update --init
 

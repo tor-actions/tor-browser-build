@@ -15,9 +15,6 @@ var:
     use_container: 1
   # This should be updated when the list of gradle dependencies is changed.
   gradle_dependencies_version: 24
-  # Switch to make it easier to grab all dependencies during a dry-run.
-  # Note: Use the commit that integrates Tor.
-  fetch_gradle_dependencies: 0
   gradle_version: 6.5.1
   glean_parser: 2.2.0
 
@@ -35,30 +32,22 @@ input_files:
     name: gradle
   - name: android-components
     project: android-components
-    enable: '[% !c("var/fetch_gradle_dependencies") %]'
   - name: application-services
     project: application-services
-    enable: '[% !c("var/fetch_gradle_dependencies") %]'
   - name: geckoview
     project: geckoview
     pkg_type: merge_aars
-    enable: '[% !c("var/fetch_gradle_dependencies") %]'
   - name: python
     project: python
-    enable: '[% !c("var/fetch_gradle_dependencies") %]'
   - name: tba-translation
     project: tba-translation
-    enable: '[% !c("var/fetch_gradle_dependencies") %]'
   - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
     name: gradle-dependencies
-    enable: '[% !c("var/fetch_gradle_dependencies") %]'
     exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
   - URL: https://people.torproject.org/~boklm/mirrors/sources/glean-wheels-[% c('var/glean_parser') %].tar.xz
     name: glean
     sha256sum: 24ceaaadaf155445e8ad135173d894e05c0745b41ab5fee150f9548550acf2a6
-    enable: '[% !c("var/fetch_gradle_dependencies") %]'
   - filename: mavenLocal.patch
-    enable: '[% !c("var/fetch_gradle_dependencies") %]'
   - project: tor-android-service
     name: tor-android-service
   - project: tor-onion-proxy-library
@@ -73,3 +62,25 @@ steps:
     var:
       container:
         use_container: 0
+
+  get_gradle_dependencies_list:
+    filename: 'gradle-dependencies-list-[% c("var/fenix_version") %].txt'
+    get_gradle_dependencies_list: '[% INCLUDE build %]'
+    var:
+      fetch_gradle_dependencies: 1
+    input_files:
+      - project: container-image
+        pkg_type: build
+      - filename: gen_gradle_deps_file.sh
+      - name: '[% c("var/compiler") %]'
+        project: '[% c("var/compiler") %]'
+        pkg_type: build
+      - project: gradle
+        name: gradle
+        pkg_type: build
+      - project: tor-android-service
+        name: tor-android-service
+        pkg_type: build
+      - project: tor-onion-proxy-library
+        name: topl
+        pkg_type: build
