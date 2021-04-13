@@ -3,9 +3,17 @@ If additional Android dependencies are required by the project's build, then
 the Gradle build will fail due to missing dependencies. To find out what the
 missing dependencies are take the following steps.
 
-If the dependencies for `application-services`, `android-components`, or `fenix`
-are needed, set the `fetch_gradle_dependencies` flag in their `config` files to
-`1`.
+1) Updating gradle dependencies for `application-services`, `android-components`
+   or `fenix`
+
+The following makefile rules can be used:
+
+  make get_gradle_dependencies_list-application-services
+  make get_gradle_dependencies_list-android-components
+  make get_gradle_dependencies_list-fenix
+
+which should create the gradle-dependencies-list.txt files in the
+corresponding out/$project directory, using nightly's branch.
 
 Note: `android-components` and `fenix` require modified `geckoview` and
 `android-components` artifacts to compile successfully. In order to generate the
@@ -18,7 +26,16 @@ breaks). For `fenix` dependencies there is still a manual processing required
 afterwards right now as e.g. our tor-android-service related artifacts are not
 picked up.
 
-For the firefox project, comment out the following line in the project's build file:
+
+2) Updating gradle dependencies for `geckoview`, `tor-android-service`
+   or `tor-onion-proxy-library`
+
+The `geckoview`, `tor-android-service` and `tor-onion-proxy-library`
+projects don't have (yet) a makefile rule to generate their
+gradle-dependencies-list.txt file, so a few more steps are needed.
+
+For the geckoview project, comment out the following line in the project's
+build file:
 
    export GRADLE_MAVEN_REPOSITORIES="file://$gradle_repo"
 
@@ -34,11 +51,14 @@ Finally, allow network access during the build by setting
 
 Dependent artifacts will show up as downloads in the logs. You can pull out
 these dependencies into a list by passing the log file to the gradle dependency
-list script in the tools directory:
+list script in the projects/common directory:
 
-`./gen_gradle_deps_file.sh /path/to/log/file`
+`projects/common/gen_gradle_deps_file.sh /path/to/log/file`
 
-Copy the resulting `gradle-dependencies-list.txt` over the one in the respective
-project. Then, in the project's config file, increment the
-`var/gradle_dependencies_version` and make sure to restore the project's build
-file back to original or set `fetch_gradle_dependencies` to `0` again.
+
+3) Copying the resulting `gradle-dependencies-list.txt`
+
+Copy the resulting `gradle-dependencies-list.txt` (from step 1. or 2.)
+over the one in the respective project. Then, in the project's config
+file, increment the `var/gradle_dependencies_version` and make sure to
+restore the project's build file back to original if you modified it.

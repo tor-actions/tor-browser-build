@@ -41,7 +41,9 @@ patch -p1 < $rootdir/git.patch
   # XXX: fetching deps for `assembleGeckoBeta -x lint` by using that same target
   # results in some missing dependencies for yet unknown reasons. Thus, we use
   # `assemble` instead for now.
-  gradle --debug --no-daemon assemble
+  gradle --debug --no-daemon assemble > gradle.log 2>&1 || ( cat gradle.log; exit 1 )
+  $rootdir/gen_gradle_deps_file.sh gradle.log
+  mv gradle-dependencies-list.txt '[% dest_dir _ "/" _ c("filename") %]'
 [% ELSE %]
   # Prepare Glean dependencies for offline build
   tar -xf $rootdir/[% c('input_files_by_name/glean') %]

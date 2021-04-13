@@ -42,7 +42,12 @@ cp $rootdir/[% c('input_files_by_name/tor-android-service') %]/* app/
 # XXX We need the build variant in lower case. Do something smarter here.
 v=[% c("variant") %]
 [% IF c("var/fetch_gradle_dependencies") %]
-  $GRADLE_HOME/gradle/bin/gradle --debug --no-daemon app:assemble[% c('variant') %] app:assembleAndroidTest -x lint -PtestBuildType=${v,} -PdisableOptimization
+  $GRADLE_HOME/gradle/bin/gradle --debug --no-daemon app:assemble[% c('variant') %] \
+    app:assembleAndroidTest -x lint -PtestBuildType=${v,} -PdisableOptimization \
+    > gradle.log 2>&1 \
+    || ( cat gradle.log; exit 1 )
+  $rootdir/gen_gradle_deps_file.sh gradle.log
+  mv gradle-dependencies-list.txt '[% dest_dir _ "/" _ c("filename") %]'
 [% ELSE %]
   # Add our localized strings
   [% FOREACH lang = c('var/locales_mobile');
