@@ -1,3 +1,11 @@
+Tor Browser 10.0.16 -- April 20 2021
+ * Windows + OS X + Linux
+   * Update Firefox to 78.10.0esr
+   * Update NoScript to 11.2.4
+   * Bug 40007: Update domain fronting config for Moat [tor-launcher]
+   * Bug 40390: Add Burmese as a new locale [tor-browser]
+   * Bug 40408: Disallow SVG Context Paint in all web content [tor-browser]
+
 Tor Browser 10.0.15 -- March 26 2021
  * Windows + OS X + Linux
    * Update Openssl to 1.1.1k
