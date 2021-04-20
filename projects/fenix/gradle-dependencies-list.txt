@@ -1,4 +1,4 @@
-# On how to update dependencies see projects/common/how-to-create-gradle-dependencies-list.txt
+# On how to update dependencies see doc/how-to-create-gradle-dependencies-list.txt
 # Don't forget to update var/gradle_dependencies_version when modifying this file
 sha256sum | url
 1996c36d3d2d62db5020b8ec634b5f854b1a698960c3552e1a00c69221baeabe | https://dl.google.com/dl/android/maven2/androidx/activity/activity-ktx/1.1.0/activity-ktx-1.1.0.aar

@@ -1,4 +1,4 @@
-# On how to update dependencies see projects/common/how-to-create-gradle-dependencies-list.txt
+# On how to update dependencies see doc/how-to-create-gradle-dependencies-list.txt
 # Don't forget to update var/gradle_dependencies_version when modifying this file
 sha256sum | url
 d1bc9842455c2e534415d88c44df4d52413b478db9093a1ba36324f705f44c3d | https://dl.google.com/dl/android/maven2/androidx/activity/activity/1.0.0/activity-1.0.0.aar

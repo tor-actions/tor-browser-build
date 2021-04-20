@@ -1,4 +1,4 @@
-# On how to update dependencies see projects/common/how-to-create-gradle-dependencies-list.txt
+# On how to update dependencies see doc/how-to-create-gradle-dependencies-list.txt
 # Don't forget to update var/gradle_dependencies_version when modifying this file
 sha256sum | url
 3a616a32f433e9e23f556b38575c31b013613d3ae85206263b7625fe1f4c151a | https://dl.google.com/dl/android/maven2/android/arch/core/common/1.1.1/common-1.1.1.jar
