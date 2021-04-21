@@ -23,5 +23,14 @@ input_files:
   - name: rust
     project: rust
   # `cargo vendor vendor` in the `cbindgen` directory has vendored the sources.
+  # Use `make cargo_vendor-cbindgen` or `make cargo_vendor-cbindgen-android`
+  # (for the Android version) to re-generate the vendor tarball
   - URL: https://people.torproject.org/~gk/mirrors/sources/cbindgen-vendor-[% c('version') %].tar.bz2
     sha256sum: '[% c("var/cbindgen_vendor_hash") %]'
+
+steps:
+  cargo_vendor:
+    filename: '[% project %]-vendor-[% c("version") %].tar.bz2'
+    input_files:
+      - project: container-image
+        pkg_type: build

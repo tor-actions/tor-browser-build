@@ -228,6 +228,21 @@ get_gradle_dependencies_list-application-services: submodule-update
 get_gradle_dependencies_list-android-components: submodule-update
 	$(rbm) build android-components --step get_gradle_dependencies_list --target nightly --target torbrowser-android-armv7
 
+cargo_vendor-application-services: submodule-update
+	$(rbm) build application-services --step cargo_vendor --target nightly
+
+cargo_vendor-cbindgen-android: submodule-update
+	$(rbm) build cbindgen --step cargo_vendor --target nightly --target android
+
+cargo_vendor-cbindgen: submodule-update
+	$(rbm) build cbindgen --step cargo_vendor --target nightly
+
+cargo_vendor-lucetc: submodule-update
+	$(rbm) build lucetc --step cargo_vendor --target nightly
+
+cargo_vendor-uniffi-rs: submodule-update
+	$(rbm) build uniffi-rs --step cargo_vendor --target nightly
+
 submodule-update:
 	git submodule update --init
 
