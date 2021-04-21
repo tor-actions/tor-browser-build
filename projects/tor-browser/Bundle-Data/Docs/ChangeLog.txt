@@ -1,3 +1,18 @@
+Tor Browser 10.5a15 -- April 23 2021
+ * All Platforms
+   * Update Tor to 0.4.6.2-alpha
+ * Windows + OS X + Linux
+   * Update Firefox to 78.10.0esr
+   * Bug 40408: Disallow SVG Context Paint in all web content [tor-browser]
+ * Android
+   * Update Fenix to 88.1.0
+   * Bug 40050: Rebase android-components patches for Fenix 88 [android-components]
+   * Bug 40157: Rebase Fenix patches to Fenix 88.1.0 [fenix]
+   * Bug 40399: Rebase 10.5 patches on 88.0 [tor-browser]
+ * Build System
+   * Windows + OS X + Linux
+    * Bug 40259: Update components for mozilla88-based Fenix [tor-browser-build]
+
 Tor Browser 10.5a14 -- April 11 2021
  * All Platforms
    * Update NoScript to 11.2.4

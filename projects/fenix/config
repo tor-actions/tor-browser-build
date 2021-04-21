@@ -8,7 +8,7 @@ gpg_keyring: torbutton.gpg
 variant: Beta
 
 var:
-  fenix_version: 88.0.0b4
+  fenix_version: 88.1.0
   torbrowser_branch: 10.5
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   container:
