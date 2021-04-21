@@ -27,8 +27,14 @@ input_files:
     project: rust
   - name: wasi-sysroot
     project: wasi-sysroot
-  # `cargo vendor vendor` in the `lucetc-sandbox-compiler` directory has vendored
-  # the sources.
+  # Use `make cargo_vendor-lucetc` to re-generate the vendor tarball
   - URL: https://people.torproject.org/~gk/mirrors/sources/lucetc-vendor.tar.bz2
     sha256sum: 12ba97fca12177e7ed5b5409fcfdbd31dc7db2e82282768d99dee5bcb1b1246a
   - filename: Remove-march-native-from-COMMON_CFLAGS.patch
+
+steps:
+  cargo_vendor:
+    filename: '[% project %]-vendor-[% c("version") %].tar.bz2'
+    input_files:
+      - project: container-image
+        pkg_type: build
