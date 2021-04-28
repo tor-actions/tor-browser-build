@@ -11,8 +11,8 @@ var:
 targets:
   android:
     var:
-      current_version: 1.50.0
-      previous_version: 1.49.0
+      current_version: 1.51.0
+      previous_version: 1.50.0
       arch_deps:
         - libssl-dev
         - pkg-config
