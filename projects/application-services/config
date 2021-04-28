@@ -92,6 +92,7 @@ input_files:
   - filename: update-cargo-lock.patch
   - filename: gen_gradle_deps_file.sh
     enable: '[% c("var/fetch_gradle_dependencies") %]'
+  - filename: 0001-Store-the-universe-of-known-types-in-an-ordered-BTre.patch
 
 steps:
   list_toolchain_updates:
