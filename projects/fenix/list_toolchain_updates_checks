@@ -20,7 +20,7 @@ if (m/const\\s+val\\s+targetSdkVersion\\s+=\\s+([^"]+)/) {
 }
 EOF
 needed=$(cat buildSrc/src/main/java/Config.kt | perl -ne "$p")
-current=29
+current=30
 check_update_needed targetSdkVersion "$needed" "$current"
 
 
@@ -32,7 +32,7 @@ if (m/const\\s+val\\s+compileSdkVersion\\s+=\\s+([^"]+)/) {
 }
 EOF
 needed=$(cat buildSrc/src/main/java/Config.kt | perl -ne "$p")
-current=29
+current=30
 check_update_needed compileSdkVersion "$needed" "$current"
 
 
