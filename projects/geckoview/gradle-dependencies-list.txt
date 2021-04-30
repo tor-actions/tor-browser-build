@@ -1,4 +1,4 @@
-# On how to update dependencies see projects/common/how-to-create-gradle-dependencies-list.txt
+# On how to update dependencies see doc/how-to-create-gradle-dependencies-list.txt
 # Don't forget to update var/gradle_dependencies_version when modifying this file
 sha256sum | url
 857db5645aaefbd7fbe9ba6454b072bc0518ebaba08a93d5eae89a9850e949c4 | https://jcenter.bintray.com/com/getkeepsafe/dexcount/dexcount-gradle-plugin/0.8.2/dexcount-gradle-plugin-0.8.2.jar

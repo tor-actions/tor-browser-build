@@ -32,7 +32,7 @@
 
 # Usage:
 # 1) Point to a log file with all the dependency download attempts (for its
-#    generation see: projects/common/how-to-create-gradle-dependencies-list.txt)
+#    generation see: doc/how-to-create-gradle-dependencies-list.txt)
 # 2) Double-check that you get the same SHA-256 sums when downloaded from a
 #    different network location. E.g. by using `torsocks` with this script after
 #    having made a copy of `gradle-dependencies-list.txt` from 1) and comparing
@@ -57,7 +57,7 @@ do
 done < dl-attempts
 
 # Step 3: Add the header at the beginning of the final dependency file.
-echo "# On how to update dependencies see projects/common/how-to-create-gradle\
+echo "# On how to update dependencies see doc/how-to-create-gradle\
 -dependencies-list.txt" > gradle-dependencies-list.txt
 echo "# Don't forget to update var/gradle_dependencies_version when modifying \
 this file" >> gradle-dependencies-list.txt
