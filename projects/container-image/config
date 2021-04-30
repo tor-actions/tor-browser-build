@@ -5,8 +5,8 @@ pkg_type: build
 var:
   container:
     use_container: 1
-    suite: '[% pc(c("origin_project"), "var/container/suite") %]'
-    arch: '[% pc(c("origin_project"), "var/container/arch") %]'
+    suite: '[% pc(c("origin_project"), "var/container/suite", { step => c("origin_step") }) %]'
+    arch: '[% pc(c("origin_project"), "var/container/arch", { step => c("origin_step") }) %]'
 
 lsb_release:
   id: Debian
@@ -31,8 +31,8 @@ pre: |
   # Update the package cache so the container installs the most recent
   # version of required packages.
   apt-get update -y -q
-  [% IF pc(c('origin_project'), 'var/pre_pkginst') -%]
-  [% pc(c('origin_project'), 'var/pre_pkginst') %]
+  [% IF pc(c('origin_project'), 'var/pre_pkginst', { step => c('origin_step') }) -%]
+  [% pc(c('origin_project'), 'var/pre_pkginst', { step => c('origin_step') }) %]
   # Update the package cache again because `pre_pkginst` may change the
   # package manager configuration.
   apt-get update -y -q
@@ -40,14 +40,14 @@ pre: |
   apt-get upgrade -y -q
   [%
      deps = [];
-     IF pc(c('origin_project'), 'var/deps');
-       CALL deps.import(pc(c('origin_project'), 'var/deps'));
+     IF pc(c('origin_project'), 'var/deps', { step => c('origin_step') });
+       CALL deps.import(pc(c('origin_project'), 'var/deps', { step => c('origin_step') }));
      END;
-     IF pc(c('origin_project'), 'var/arch_deps');
-       CALL deps.import(pc(c('origin_project'), 'var/arch_deps'));
+     IF pc(c('origin_project'), 'var/arch_deps', { step => c('origin_step') });
+       CALL deps.import(pc(c('origin_project'), 'var/arch_deps', { step => c('origin_step') }));
      END;
      IF deps.size;
-       IF pc(c('origin_project'), 'var/sort_deps');
+       IF pc(c('origin_project'), 'var/sort_deps', { step => c('origin_step') });
          deps = deps.sort;
        END;
        FOREACH pkg IN deps;
@@ -59,8 +59,8 @@ pre: |
        END;
      END;
   -%]
-  [% IF pc(c('origin_project'), 'var/post_pkginst') -%]
-  [% pc(c('origin_project'), 'var/post_pkginst') %]
+  [% IF pc(c('origin_project'), 'var/post_pkginst', { step => c('origin_step') }) -%]
+  [% pc(c('origin_project'), 'var/post_pkginst', { step => c('origin_step') }) %]
   [% END -%]
 
 remote_get: |

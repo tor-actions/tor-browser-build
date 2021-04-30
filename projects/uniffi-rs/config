@@ -12,7 +12,14 @@ input_files:
   - project: container-image
   - name: rust
     project: rust
-  # `cargo vendor vendor` in the `uniffi-rs` directory has vendored the sources.
+  # Use `make cargo_vendor-uniffi-rs` to re-generate the vendor tarball
   - URL: https://people.torproject.org/~boklm/mirrors/sources/uniffi-rs-vendor-[% c('version') %].tar.bz2
     sha256sum: 8f201df618b3e7bcaaf01a87e0d55171605b80abeb1b660fe4dd0b9bfc10a0d8
   - filename: btreeset.patch
+
+steps:
+  cargo_vendor:
+    filename: '[% project %]-vendor-[% c("version") %].tar.bz2'
+    input_files:
+      - project: container-image
+        pkg_type: build

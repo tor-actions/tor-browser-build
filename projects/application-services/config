@@ -79,9 +79,7 @@ input_files:
   - URL: https://people.torproject.org/~gk/mirrors/sources/glean-parser-[% c('var/glean_parser') %].tar.bz2
     sha256sum: 19dbdd4958022a1a638e0217489ab722fe7d4f588f1978a4ae162f93e75694c2
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
-  # `cargo vendor vendor -s components/external/nimbus-sdk/nimbus/Cargo.toml`
-  # in the `application-services` directory has vendored the sources,
-  # after applying update-cargo-lock.patch and viaduct-workaround.patch
+  # Use `make cargo_vendor-application-services` to re-generate the vendor tarball
   - URL: https://people.torproject.org/~boklm/mirrors/sources/application-services-vendor-[% c('var/rust_vendor_version') %].tar.bz2
     sha256sum: 5f1c9e1bc0db283e88516bd1d78187145bacbf4aeb72972ac09875c1147d2215
   - filename: no-git.patch
@@ -107,3 +105,16 @@ steps:
     get_gradle_dependencies_list: '[% INCLUDE build %]'
     var:
       fetch_gradle_dependencies: 1
+
+  cargo_vendor:
+    filename: '[% project %]-vendor-[% c("version") %].tar.bz2'
+    var:
+      cargo_vendor_opts: '-s components/external/nimbus-sdk/nimbus/Cargo.toml'
+      pre_cargo_vendor: |
+        patch -p1 < $rootdir/update-cargo-lock.patch
+        patch -d components/external/nimbus-sdk -p1 < $rootdir/viaduct-workaround.patch
+    input_files:
+      - project: container-image
+        pkg_type: build
+      - filename: viaduct-workaround.patch
+      - filename: update-cargo-lock.patch
