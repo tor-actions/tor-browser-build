@@ -45,7 +45,7 @@ if (m/const\\s+val\\s+minSdkVersion\\s+=\\s+([^"]+)/) {
 EOF
 needed=$(cat buildSrc/src/main/java/Config.kt | perl -ne "$p")
 current=21
-check_update_needed compileSdkVersion "$needed" "$current"
+check_update_needed minSdkVersion "$needed" "$current"
 
 
 # gradle
