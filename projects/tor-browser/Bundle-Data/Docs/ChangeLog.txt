@@ -12,8 +12,16 @@ Tor Browser 10.5a15 -- April 23 2021
  * Build System
    * All Platforms
      * Update Go to 1.15.11
-   * Windows + OS X + Linux
+   * Android
     * Bug 40259: Update components for mozilla88-based Fenix [tor-browser-build]
+
+Tor Browser 10.0.16 -- April 20 2021
+ * Windows + OS X + Linux
+   * Update Firefox to 78.10.0esr
+   * Update NoScript to 11.2.4
+   * Bug 40007: Update domain fronting config for Moat [tor-launcher]
+   * Bug 40390: Add Burmese as a new locale [tor-browser]
+   * Bug 40408: Disallow SVG Context Paint in all web content [tor-browser]
 
 Tor Browser 10.5a14 -- April 11 2021
  * All Platforms
@@ -24,6 +32,27 @@ Tor Browser 10.5a14 -- April 11 2021
    * Bug 40390: Add Burmese as a new locale [tor-browser]
  * Windows + OS X + Linux
    * Bug 40007: Update domain fronting config for Moat [tor-launcher]
+
+Tor Browser 10.0.15 -- April 7 2021
+ * All Platforms
+   * Update Openssl to 1.1.1k
+   * Bug 40030: Add 'noscript' capability to NoScript [torbutton]
+ * Android
+   * Update Fenix to 87.0.0
+   * Update NoScript to 11.2.4
+   * Update Tor to 0.4.5.7
+   * Translations update
+   * Bug 40045: Add External App Prompt for Sharing Images [android-components]
+   * Bug 40047: Rebase android-components patches for Fenix 87.0.0 [android-components]
+   * Bug 40151: Remove survey banner on TBA-stable [fenix]
+   * Bug 40153: Rebase Fenix patches to Fenix 87.0.0 [fenix]
+   * Bug 40365: Rebase 10.5 patches on 87.0 [tor-browser]
+   * Bug 40383: Disable dom.enable_event_timing [tor-browser]
+ * Build System
+   * Android
+     * Bug 40162: Build Fenix instrumented tests apk [tor-browser-build]
+     * Bug 40172: Move Gradle compilers out of android-toolchain to own gradle project [tor-browser-build]
+     * Bug 40241: Update components for mozilla87-based Fenix [tor-browser-build]
 
 Tor Browser 10.5a13 -- March 24 2021
  * Windows + OS X + Linux
@@ -47,6 +76,16 @@ Tor Browser 10.5a13 -- March 24 2021
      * Bug 40016: getfpaths is not setting origin_project [rbm]
    * Windows
      * Bug 40252: Bump mingw-w64 and clang for Firefox 78.9 [tor-browser-build]
+
+Tor Browser 10.0.14 -- March 23 2021
+ * Windows + OS X + Linux
+   * Update Firefox to 78.9.0esr
+   * Update NoScript to 11.2.3
+   * Update Tor to 0.4.5.7
+   * Bug 40031: Remove survey banner on TB-stable [torbutton]
+ * Build System
+   * Windows
+     * Bug 40249: Bump mingw-w64 and clang for Firefox 78.9 [tor-browser-build]
 
 Tor Browser 10.5a12 -- March 20 2021
  * Android
