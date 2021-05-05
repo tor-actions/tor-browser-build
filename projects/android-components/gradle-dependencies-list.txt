@@ -389,8 +389,8 @@ cd7d0e09420351e9e69277083b263c8f0aad75a4bac3153776caf1424efae653 | https://maven
 e1913ae393cae4186dd8603fbbf11f7b76720a216ce3132319a13d57d575f558 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview-beta/88.0.20210410185959/geckoview-beta-88.0.20210410185959.pom
 d622b92149ed8477aca47dabe0fd53de75191a29ff4d79a0cfc718736bb4aa2a | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview-nightly/89.0.20210323094659/geckoview-nightly-89.0.20210323094659.aar
 8d6bc0c248af8f3d1f4f45abd4e04bf76044fbce518ca3c384ff83fe9acb38b4 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview-nightly/89.0.20210323094659/geckoview-nightly-89.0.20210323094659.pom
-4fa3e2cb40e9546b75deb79d829873de9aa85e6b0b0023da4f365eb2a06a9785 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview/88.0.20210415204500/geckoview-88.0.20210415204500.aar
-52142b340ab2dbdd60c914e3c81e84896dba8a0fd40d89adee183a078c24ee7a | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview/88.0.20210415204500/geckoview-88.0.20210415204500.pom
+72a76c4fa3ae7f124803ec831cf3b9789310bf7db1d79f2f8bf32ae258981292 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview/88.0.20210504152106/geckoview-88.0.20210504152106.aar
+5f4bba20be1099c4a1f156099155fe159efcedf796130874315f02a99260bee5 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview/88.0.20210504152106/geckoview-88.0.20210504152106.pom
 1eb5321d64bdd07865bd8599b6b981193b54661f25bbb8e3ccdc6f8210c9ae38 | https://maven.mozilla.org/maven2/org/mozilla/telemetry/glean-forUnitTests/35.0.0/glean-forUnitTests-35.0.0.jar
 f62de54f66aa4086100f26884927dbff06a1cbea7fb17010312d10d71cea3f01 | https://maven.mozilla.org/maven2/org/mozilla/telemetry/glean-forUnitTests/35.0.0/glean-forUnitTests-35.0.0.pom
 624e642862770feb72c22cd80cd96f0e5d53340ded862987b3ec9c537c8bed29 | https://maven.mozilla.org/maven2/org/mozilla/telemetry/glean-gradle-plugin/35.0.0/glean-gradle-plugin-35.0.0.jar
@@ -412,10 +412,6 @@ bdce53a751fdb27af6608039df81214ba22d902ed4169540a3daeb5828c99cad | https://plugi
 785f12a193912d77fe3b8714567ad5f01d727512a47c5a43aef57852cc1bc9e2 | https://plugins.gradle.org/m2/org/gradle/kotlin/plugins/1.3.6/plugins-1.3.6.pom
 ace2a10dc8e2d5fd34925ecac03e4988b2c0f851650c94b8cef49ba1bd111478 | https://plugins.gradle.org/m2/org/jetbrains/annotations/13.0/annotations-13.0.jar
 965aeb2bedff369819bdde1bf7a0b3b89b8247dd69c88b86375d76163bb8c397 | https://plugins.gradle.org/m2/org/jetbrains/annotations/13.0/annotations-13.0.pom
-77d7638a32bcae42c929eea307c9a3b48ae1a5abd00cd29f7abf6d51079d83a9 | https://plugins.gradle.org/m2/org/jetbrains/dokka/dokka-android-gradle-plugin/0.9.17/dokka-android-gradle-plugin-0.9.17.jar
-92f058aef966deca25ddcf1b1ad028d822f94891bf61491ebc914a08a3481e86 | https://plugins.gradle.org/m2/org/jetbrains/dokka/dokka-android-gradle-plugin/0.9.17/dokka-android-gradle-plugin-0.9.17.pom
-e9215460b1bb674b616cb9c8f1a1b172cdd7b3f4749662d864ebd3f319f0d73d | https://plugins.gradle.org/m2/org/jetbrains/dokka/dokka-gradle-plugin/0.9.17/dokka-gradle-plugin-0.9.17.jar
-f41e2f85d75abe256ae3f522066ad40ff9b3dc90b0f6e455508a90ba78046871 | https://plugins.gradle.org/m2/org/jetbrains/dokka/dokka-gradle-plugin/0.9.17/dokka-gradle-plugin-0.9.17.pom
 affb7c85a3c87bdcf69ff1dbb84de11f63dc931293934bc08cd7ab18de083601 | https://plugins.gradle.org/m2/org/jetbrains/intellij/deps/trove4j/1.0.20181211/trove4j-1.0.20181211.jar
 310a6aa2d90534c32b8f46f1fc98cd0edae95dcdfca23e2847e5efa9ae0c019a | https://plugins.gradle.org/m2/org/jetbrains/intellij/deps/trove4j/1.0.20181211/trove4j-1.0.20181211.pom
 30278f88cfefb7bb328bedd73374242f8e3e55211e53884e4820dba271132fab | https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-android-extensions/1.3.72/kotlin-android-extensions-1.3.72.jar
@@ -817,6 +813,10 @@ fde386a7905173a1b103de6ab820727584b50d0e32282e2797787c20a64ffa93 | https://repo.
 6d535f94efb663bdb682c9f27a50335394688009642ba7a9677504bc1be4129b | https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-parent/1.3/hamcrest-parent-1.3.pom
 1345f11ba606d15603d6740551a8c21947c0215640770ec67271fe78bea97cf5 | https://repo.maven.apache.org/maven2/org/jdom/jdom2/2.0.6/jdom2-2.0.6.jar
 47b23a79fe336b741b82434c6e049d68165256e405e75c10921fd72fa8a65d8d | https://repo.maven.apache.org/maven2/org/jdom/jdom2/2.0.6/jdom2-2.0.6.pom
+77847bd6b80f4f5932ad1e18f952641d3808a6866ae461fcc50f986dab14775a | https://repo.maven.apache.org/maven2/org/jetbrains/dokka/dokka-android-gradle-plugin/0.9.17/dokka-android-gradle-plugin-0.9.17.jar
+9c71162ce6428340e1e098f03b5fef504f0326c5577cc53517672765f853b624 | https://repo.maven.apache.org/maven2/org/jetbrains/dokka/dokka-android-gradle-plugin/0.9.17/dokka-android-gradle-plugin-0.9.17.pom
+bbed1d9f552cc5f99a6d7d2ea8181e54e11f7a02ae7dddf899533ff37ca93d6e | https://repo.maven.apache.org/maven2/org/jetbrains/dokka/dokka-gradle-plugin/0.9.17/dokka-gradle-plugin-0.9.17.jar
+61894e448d1982b955802bd8b45816c252c0180b3c1cd8e296f78a078ce684b2 | https://repo.maven.apache.org/maven2/org/jetbrains/dokka/dokka-gradle-plugin/0.9.17/dokka-gradle-plugin-0.9.17.pom
 303c422700f79d5d13d528b978c6abd9cd136d78d9f7f6f2556e85a81892f9f1 | https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-android-extensions-runtime/1.3.71/kotlin-android-extensions-runtime-1.3.71.jar
 648025c01c56b234a7458cb6048ae8fcfa941f9ea8ebf059090733237b9df9b6 | https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-android-extensions-runtime/1.3.71/kotlin-android-extensions-runtime-1.3.71.pom
 f120750af0c9e0c6024c3c76469fd4638ef898fc5bc2d4c49f2fe17568f47b9e | https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-android-extensions-runtime/1.4.10/kotlin-android-extensions-runtime-1.4.10.pom
