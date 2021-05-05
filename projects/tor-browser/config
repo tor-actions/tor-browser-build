@@ -78,9 +78,9 @@ input_files:
     enable: '[% c("var/snowflake") && ! c("var/android") %]'
   - filename: Bundle-Data
     enable: '[% ! c("var/android") %]'
-  - URL: https://addons.cdn.mozilla.net/user-media/addons/722/noscript_security_suite-11.2.4-an+fx.xpi
+  - URL: https://addons.cdn.mozilla.net/user-media/addons/722/noscript_security_suite-11.2.6-an+fx.xpi
     name: noscript
-    sha256sum: 278ee526d7c3ce5236c1a04aa5b6605c81b82399b846e43cdf6f93f11fef1ec9
+    sha256sum: d089f1db05570fef88b54feb723585a4a52b22e3956bb49d28279fa00f4dfd21
   - filename: 'RelativeLink/start-tor-browser.desktop'
     enable: '[% c("var/linux") %]'
   - filename: 'RelativeLink/execdesktop'

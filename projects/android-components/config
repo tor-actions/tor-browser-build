@@ -8,12 +8,12 @@ gpg_keyring: torbutton.gpg
 variant: '[% IF c("var/release") %]Release[% ELSE %]Beta[% END %]'
 
 var:
-  android_components_version: 74.0.11
+  android_components_version: 74.0.13
   torbrowser_branch: 10.5
   container:
     use_container: 1
   # This should be updated when the list of gradle dependencies is changed.
-  gradle_dependencies_version: 23
+  gradle_dependencies_version: 24
   gradle_version: 6.6.1
   glean_parser: 2.2.0
 
