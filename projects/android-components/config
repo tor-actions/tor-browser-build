@@ -8,12 +8,12 @@ gpg_keyring: torbutton.gpg
 variant: '[% IF c("var/release") %]Release[% ELSE %]Beta[% END %]'
 
 var:
-  android_components_version: 74.0.13
+  android_components_version: 75.0.22
   torbrowser_branch: 10.0
   container:
     use_container: 1
   # This should be updated when the list of gradle dependencies is changed.
-  gradle_dependencies_version: 24
+  gradle_dependencies_version: 25
   gradle_version: 6.6.1
   glean_parser: 2.2.0
   git_branch: '[% project %]-[% c("var/android_components_version") %]-[% c("var/torbrowser_branch") %]-1'
@@ -58,9 +58,9 @@ input_files:
 
 steps:
   list_toolchain_updates:
-    git_url: https://github.com/mozilla-mobile/android-components.git
-    git_hash: v75.0.11
-    tag_gpg_id: 0
+    #git_url: https://github.com/mozilla-mobile/android-components.git
+    #git_hash: v75.0.22
+    #tag_gpg_id: 0
     var:
       container:
         use_container: 0

@@ -49,7 +49,6 @@ a67c52c9ddfaff2ffb2fd4b97cd94fa382e837ea8a5874d029e0a04fa63e5caf | https://dl.go
 78309600ba6fe4473c045976906649b25b3c9a49b14642f8a8a7dcd9e1afe7c8 | https://dl.google.com/dl/android/maven2/androidx/core/core-ktx/1.3.2/core-ktx-1.3.2.aar
 ba6a806bc1a6faf0cbae08397b3f781feca293ff2b5f3aa600b3d2db142e5ab4 | https://dl.google.com/dl/android/maven2/androidx/core/core-ktx/1.3.2/core-ktx-1.3.2.pom
 384d529ad668ada4808de29b29a6348f0007c2841ad79cae9a5a089bd68810f5 | https://dl.google.com/dl/android/maven2/androidx/core/core/1.0.0/core-1.0.0.pom
-76c7cfbe596fe3c09a6983bf1c89e889299c08ac9a3b52ce5182a088d056647e | https://dl.google.com/dl/android/maven2/androidx/core/core/1.1.0/core-1.1.0.aar
 dae46132cdcd46b798425f7cb78fd65890869b6d26101ccdcd43461a4f51754c | https://dl.google.com/dl/android/maven2/androidx/core/core/1.1.0/core-1.1.0.pom
 1c6b6626f15185d8f4bc7caac759412a1ab6e851ecf7526387d9b9fadcabdb63 | https://dl.google.com/dl/android/maven2/androidx/core/core/1.3.0/core-1.3.0.aar
 3ea5d60db139d9fbc5c5f7ac06d779fb75dafe71b0931bc9db863231294bc2d5 | https://dl.google.com/dl/android/maven2/androidx/core/core/1.3.0/core-1.3.0.pom
@@ -159,6 +158,8 @@ c3a321133e616b46cf5ad07191aeebf4affdb73abee455851d39f7b4db7acb36 | https://dl.go
 8831c06417fab6a9690c25f6e4b347b2e8c03cf6d47337be9c57e75b7fb23e6a | https://dl.google.com/dl/android/maven2/androidx/recyclerview/recyclerview/1.0.0/recyclerview-1.0.0.pom
 f0d2b5a67d0a91ee1b1c73ef2b636a81f3563925ddd15a1d4e1c41ec28de7a4f | https://dl.google.com/dl/android/maven2/androidx/recyclerview/recyclerview/1.1.0/recyclerview-1.1.0.aar
 fe321062a6e4e168b9c2b39a1137564c8784a2e5849402729768d5d7c4d972ef | https://dl.google.com/dl/android/maven2/androidx/recyclerview/recyclerview/1.1.0/recyclerview-1.1.0.pom
+f68c432db998efac90b9e7f41c1510f097b82220766524d45d04f9b64c6e4d87 | https://dl.google.com/dl/android/maven2/androidx/recyclerview/recyclerview/1.2.0/recyclerview-1.2.0.aar
+8b3980162e37ea8bd61207e0ba2e74b7c28b4eecd142bb5021d3e4ac27607eaf | https://dl.google.com/dl/android/maven2/androidx/recyclerview/recyclerview/1.2.0/recyclerview-1.2.0.pom
 2b130dd4a1d3d91b6701ed33096d389f01c4fc1197a7acd6b91724ddc5acfc06 | https://dl.google.com/dl/android/maven2/androidx/room/room-common/2.2.5/room-common-2.2.5.jar
 fbb37fcf02b35ba7a909fffb52ce4ccb36874f03c1f927f6338b68ef9f1d6b7a | https://dl.google.com/dl/android/maven2/androidx/room/room-common/2.2.5/room-common-2.2.5.pom
 b504b252dc8b15a0e8255d4c355363675b0d79aa40b4ccbb5ea58fabb184df81 | https://dl.google.com/dl/android/maven2/androidx/room/room-compiler/2.2.5/room-compiler-2.2.5.jar
@@ -344,7 +345,6 @@ efe2431a01a188d3037d02a08e60900ec7406de626e4bd5b4995f28d409c0ebd | https://dl.go
 24bd1b4a8f81aea76ae30054df6343b5c0abc27024a5f6fb9c6ee7d4ffb86533 | https://dl.google.com/dl/android/maven2/com/google/firebase/firebase-measurement-connector/18.0.0/firebase-measurement-connector-18.0.0.pom
 d7a2ff3a2fdbd0801f832df3de81dab06d9db7e4a57dfa6d768e7c6e5fa22280 | https://dl.google.com/dl/android/maven2/com/google/firebase/firebase-messaging/20.3.0/firebase-messaging-20.3.0.aar
 79b705ecf5140d3a2601b44ef058b4588878432eb6fb2f9d65da0551cb0a8e20 | https://dl.google.com/dl/android/maven2/com/google/firebase/firebase-messaging/20.3.0/firebase-messaging-20.3.0.pom
-e953cbf59b797ceb11ce312e8da19bb8afc013ef548d8946711c116bc2500482 | https://download.jetbrains.com/kotlin/native/builds/releases/1.4.30/linux/kotlin-native-prebuilt-linux-1.4.30.tar.gz
 6d600e6f04708c1393db6a3fb57ee273068fd8e7f95dcc32c184e3c2bb767599 | https://maven.mozilla.org/maven2/org/mozilla/appservices/autofill/74.0.1/autofill-74.0.1.aar
 ca74e10892b729a0026257b89e953c03e77e44582d1686f65e8796d969ba16fd | https://maven.mozilla.org/maven2/org/mozilla/appservices/autofill/74.0.1/autofill-74.0.1.pom
 5c40c0df6784f1d6ae1748196945c3c314d626153c81fc626c9dfd9847719bfa | https://maven.mozilla.org/maven2/org/mozilla/appservices/full-megazord-forUnitTests/74.0.1/full-megazord-forUnitTests-74.0.1.jar
@@ -385,12 +385,12 @@ d1741144ed2ea215a84f5d94d779cafcfaf778cce8cc7224437a2884cb1101bc | https://maven
 7b0a3bd6d32c8002f785db8fdbf3b08e3541366e784cac1304cb3f49642b916a | https://maven.mozilla.org/maven2/org/mozilla/components/support-ktx/71.0.0/support-ktx-71.0.0.pom
 f7bf27270904abd8639b543151b6eaf268b821b8e6235c8decf8031e02ec8648 | https://maven.mozilla.org/maven2/org/mozilla/components/support-utils/71.0.0/support-utils-71.0.0.aar
 0b80acf7d1dd0d9484b0e82cd1a04ae57270d7f7e6b339ce39424554d48798e3 | https://maven.mozilla.org/maven2/org/mozilla/components/support-utils/71.0.0/support-utils-71.0.0.pom
-cd7d0e09420351e9e69277083b263c8f0aad75a4bac3153776caf1424efae653 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview-beta/88.0.20210410185959/geckoview-beta-88.0.20210410185959.aar
-e1913ae393cae4186dd8603fbbf11f7b76720a216ce3132319a13d57d575f558 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview-beta/88.0.20210410185959/geckoview-beta-88.0.20210410185959.pom
-d622b92149ed8477aca47dabe0fd53de75191a29ff4d79a0cfc718736bb4aa2a | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview-nightly/89.0.20210323094659/geckoview-nightly-89.0.20210323094659.aar
-8d6bc0c248af8f3d1f4f45abd4e04bf76044fbce518ca3c384ff83fe9acb38b4 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview-nightly/89.0.20210323094659/geckoview-nightly-89.0.20210323094659.pom
-72a76c4fa3ae7f124803ec831cf3b9789310bf7db1d79f2f8bf32ae258981292 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview/88.0.20210504152106/geckoview-88.0.20210504152106.aar
-5f4bba20be1099c4a1f156099155fe159efcedf796130874315f02a99260bee5 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview/88.0.20210504152106/geckoview-88.0.20210504152106.pom
+f505022a34ce4fb702b870ad67a9d8e034e01a1aea254639f28bb4ea4c39277f | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview-beta/89.0.20210523073042/geckoview-beta-89.0.20210523073042.aar
+fc20b0295ed1842656fb728387a5759ce88853964e762121193662fe14d1c656 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview-beta/89.0.20210523073042/geckoview-beta-89.0.20210523073042.pom
+b72463d7806c54aa4e249fbd67994ad4aa4b60bd9682033f38d6f6baa1f78a7f | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview-nightly/90.0.20210420095122/geckoview-nightly-90.0.20210420095122.aar
+995e64a86fb059b9a03fb9694daf15a0cb45979e7154fc9b3fb518fcc0fae301 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview-nightly/90.0.20210420095122/geckoview-nightly-90.0.20210420095122.pom
+c35990d69effd8de43596536f1c831a29cd6083e98308942cfb17f6b53afae44 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview/89.0.20210527174632/geckoview-89.0.20210527174632.aar
+d6311287b00e2ee57d45ab8d1ba54b781be78e9db36de36b3ba7360cea3314d7 | https://maven.mozilla.org/maven2/org/mozilla/geckoview/geckoview/89.0.20210527174632/geckoview-89.0.20210527174632.pom
 1eb5321d64bdd07865bd8599b6b981193b54661f25bbb8e3ccdc6f8210c9ae38 | https://maven.mozilla.org/maven2/org/mozilla/telemetry/glean-forUnitTests/35.0.0/glean-forUnitTests-35.0.0.jar
 f62de54f66aa4086100f26884927dbff06a1cbea7fb17010312d10d71cea3f01 | https://maven.mozilla.org/maven2/org/mozilla/telemetry/glean-forUnitTests/35.0.0/glean-forUnitTests-35.0.0.pom
 624e642862770feb72c22cd80cd96f0e5d53340ded862987b3ec9c537c8bed29 | https://maven.mozilla.org/maven2/org/mozilla/telemetry/glean-gradle-plugin/35.0.0/glean-gradle-plugin-35.0.0.jar
