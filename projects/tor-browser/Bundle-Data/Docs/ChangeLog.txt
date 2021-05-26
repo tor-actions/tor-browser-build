@@ -1,3 +1,13 @@
+Tor Browser 10.0.17 -- June 1 2021
+ * Windows + OS X + Linux
+   * Update Firefox to 78.11.0esr
+   * Update HTTPS Everywhere to 2021.4.15
+   * Update NoScript to 11.2.8
+   * Update Tor to 0.4.5.8
+   * Bug 27002: (Mozilla 1673237) Always allow SVGs on about: pages [tor-browser]
+   * Bug 40432: Prevent probing installed applications [tor-browser]
+   * Bug 40037: Announce v2 onion service deprecation on about:tor [torbutton]
+
 Tor Browser 10.0.16 -- April 20 2021
  * Windows + OS X + Linux
    * Update Firefox to 78.10.0esr
