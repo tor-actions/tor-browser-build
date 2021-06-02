@@ -1,3 +1,26 @@
+Tor Browser 10.5a16 -- June 5 2021
+ * All Platforms
+   * Update NoScript to 11.2.8
+   * Update Tor to 0.4.6.4-rc
+   * Bug 40432: Prevent probing installed applications [tor-browser]
+ * Windows + OS X + Linux
+   * Update Firefox to 78.11.0esr
+   * Bug 27476: Implement about:torconnect captive portal within Tor Browser [tor-browser]
+   * Bug 40037: Announce v2 onion service deprecation on about:tor [torbutton]
+   * Bug 40428: Correct minor Cryptocurrency warning string typo [tor-browser]
+ * Android
+   * Update Fenix to 89.1.1
+   * Bug 40055: Rebase android-componets patches on 75.0.22 for Fenix 89 [android-components]
+   * Bug 40165: Announce v2 onion service deprecation on about:tor [fenix]
+   * Bug 40169: Rebase fenix patches to fenix v89.1.1 [fenix]
+   * Bug 40170: Error building tor-browser-89.1.1-10.5-1 [fenix]
+   * Bug 40453: Rebase tor-browser patches to 89.0 [tor-browser]
+ * Build System
+   * All Platforms
+     * Update Go to 1.15.12
+   * Android
+     * Bug 40290: Update components for mozilla89-based Fenix [tor-browser-build]
+
 Tor Browser 10.5a15 -- April 23 2021
  * All Platforms
    * Update Tor to 0.4.6.2-alpha
