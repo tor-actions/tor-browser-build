@@ -1,3 +1,7 @@
+Tor Browser 10.0.18 -- June 16 2021
+ * Windows + OS X + Linux
+   * Update Tor to 0.4.5.9
+
 Tor Browser 10.0.17 -- June 1 2021
  * Windows + OS X + Linux
    * Update Firefox to 78.11.0esr
