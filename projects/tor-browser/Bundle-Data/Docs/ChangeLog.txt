@@ -1,3 +1,20 @@
+Tor Browser 10.0.18 -- June 16 2021
+ * Android
+   * Update Fenix to 89.1.1
+   * Update NoScript to 11.2.8
+   * Update Tor to 0.4.5.9
+   * Bug 40055: Rebase android-componets patches on 75.0.22 for Fenix 89 [android-components]
+   * Bug 40165: Announce v2 onion service deprecation on about:tor [fenix]
+   * Bug 40166: Hide "Normal" tab (again) and Sync tab in TabTray [fenix]
+   * Bug 40167: Hide "Save to Collection" in menu [fenix]
+   * Bug 40169: Rebase fenix patches to fenix v89.1.1 [fenix]
+   * Bug 40170: Error building tor-browser-89.1.1-10.5-1 [fenix]
+   * Bug 40432: Prevent probing installed applications [tor-browser]
+   * Bug 40470: Rebase 10.0 patches onto 89.0 [tor-browser]
+ * Build System
+   * Android
+     * Bug 40290: Update components for mozilla89-based Fenix [tor-browser-build]
+
 Tor Browser 10.0.16 -- May 7 2021
  * Android
    * Update Fenix to 88.1.3

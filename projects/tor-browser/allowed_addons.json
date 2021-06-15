@@ -17,7 +17,7 @@
             "picture_url": "https://addons.cdn.mozilla.net/user-media/userpics/13/13299/13299734.png?modified=1565722641"
           }
         ],
-        "average_daily_users": 612002,
+        "average_daily_users": 618525,
         "categories": {
           "android": [
             "experimental",
@@ -31,7 +31,7 @@
         "contributions_url": "https://opencollective.com/darkreader?utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2017-09-19T07:03:00Z",
         "current_version": {
-          "id": 5219368,
+          "id": 5239111,
           "compatibility": {
             "firefox": {
               "min": "54.0",
@@ -42,19 +42,19 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/darkreader/versions/5219368",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/darkreader/versions/5239111",
           "files": [
             {
-              "id": 3763728,
-              "created": "2021-04-21T13:54:44Z",
-              "hash": "sha256:6d0d1ec5ba638bd0b897d3ff2b2e785770302b58c4ba0e735e10b3f9c4227bf6",
+              "id": 3783471,
+              "created": "2021-05-28T13:29:07Z",
+              "hash": "sha256:49e7ec13cfdb953dfb785a2442582788e895a5623956d0b7dff02f59db2e3159",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 535888,
+              "size": 541560,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/3763728/dark_reader-4.9.32-an+fx.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/3783471/dark_reader-4.9.33-an+fx.xpi",
               "permissions": [
                 "storage",
                 "tabs",
@@ -97,10 +97,10 @@
             "url": "http://www.opensource.org/licenses/mit-license.php"
           },
           "release_notes": {
-            "en-US": "- Dynamic mode bug fixes.\n- Users' fixes for websites."
+            "en-US": "- Fixed disability to switch on sites in Global Dark List.\n- Bug fixes.\n- Users' fixes for websites."
           },
           "reviewed": null,
-          "version": "4.9.32"
+          "version": "4.9.33"
         },
         "default_locale": "en-US",
         "description": {
@@ -164,7 +164,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2021-04-21T15:04:05Z",
+        "last_updated": "2021-05-28T14:02:13Z",
         "name": {
           "ar": "Dark Reader",
           "bn": "Dark Reader",
@@ -205,12 +205,12 @@
               2400,
               1500
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/201/201069.png?modified=1616526463",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/201/201069.png?modified=1622132776",
             "thumbnail_size": [
               533,
               333
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/201/201069.jpg?modified=1616526463"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/201/201069.jpg?modified=1622132776"
           },
           {
             "id": 201070,
@@ -221,12 +221,12 @@
               2400,
               1500
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/201/201070.png?modified=1616526471",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/201/201070.png?modified=1622132783",
             "thumbnail_size": [
               533,
               333
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/201/201070.jpg?modified=1616526471"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/201/201070.jpg?modified=1622132783"
           }
         ],
         "promoted": {
@@ -237,10 +237,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.5588,
-          "bayesian_average": 4.557413617113341,
-          "count": 3586,
-          "text_count": 1181
+          "average": 4.5624,
+          "bayesian_average": 4.561026694848363,
+          "count": 3686,
+          "text_count": 1197
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/reviews/",
         "requires_payment": false,
@@ -337,7 +337,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/versions/",
-        "weekly_downloads": 22377
+        "weekly_downloads": 27610
       },
       "notes": null
     },
@@ -353,7 +353,7 @@
             "picture_url": "https://addons.cdn.mozilla.net/user-media/userpics/5/5474/5474073.png?modified=1469820907"
           }
         ],
-        "average_daily_users": 727486,
+        "average_daily_users": 698723,
         "categories": {
           "android": [
             "security-privacy"
@@ -470,12 +470,12 @@
               1280,
               800
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/214/214771.png?modified=1616525822",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/214/214771.png?modified=1622132223",
             "thumbnail_size": [
               533,
               333
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/214/214771.jpg?modified=1616525822"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/214/214771.jpg?modified=1622132223"
           }
         ],
         "promoted": {
@@ -486,10 +486,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.6654,
-          "bayesian_average": 4.662905382291137,
-          "count": 2047,
-          "text_count": 402
+          "average": 4.6667,
+          "bayesian_average": 4.664191031220402,
+          "count": 2070,
+          "text_count": 406
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/https-everywhere/reviews/",
         "requires_payment": false,
@@ -523,7 +523,7 @@
         "type": "extension",
         "url": "https://www.eff.org/https-everywhere",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/https-everywhere/versions/",
-        "weekly_downloads": 13172
+        "weekly_downloads": 15743
       },
       "notes": null
     },
@@ -539,7 +539,7 @@
             "picture_url": "https://addons.cdn.mozilla.net/user-media/userpics/6/6937/6937656.png?modified=1550343990"
           }
         ],
-        "average_daily_users": 203144,
+        "average_daily_users": 198433,
         "categories": {
           "android": [
             "security-privacy"
@@ -720,12 +720,12 @@
               700,
               521
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/137/137406.png?modified=1616526098",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/137/137406.png?modified=1622132453",
             "thumbnail_size": [
               533,
               397
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/137/137406.jpg?modified=1616526098"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/137/137406.jpg?modified=1622132453"
           },
           {
             "id": 205808,
@@ -736,12 +736,12 @@
               700,
               521
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/205/205808.png?modified=1616526100",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/205/205808.png?modified=1622132454",
             "thumbnail_size": [
               533,
               397
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/205/205808.jpg?modified=1616526100"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/205/205808.jpg?modified=1622132454"
           }
         ],
         "promoted": {
@@ -752,10 +752,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.8015,
-          "bayesian_average": 4.796715220442379,
-          "count": 1103,
-          "text_count": 216
+          "average": 4.8009,
+          "bayesian_average": 4.796133815218068,
+          "count": 1125,
+          "text_count": 217
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/reviews/",
         "requires_payment": false,
@@ -851,7 +851,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/versions/",
-        "weekly_downloads": 4579
+        "weekly_downloads": 5230
       },
       "notes": null
     },
@@ -867,7 +867,7 @@
             "picture_url": "https://addons.cdn.mozilla.net/user-media/userpics/5/5474/5474073.png?modified=1469820907"
           }
         ],
-        "average_daily_users": 973105,
+        "average_daily_users": 936346,
         "categories": {
           "android": [
             "security-privacy"
@@ -879,7 +879,7 @@
         "contributions_url": "https://www.paypal.me/SupportEFF?utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2014-05-01T18:23:16Z",
         "current_version": {
-          "id": 5175365,
+          "id": 5247789,
           "compatibility": {
             "firefox": {
               "min": "52.0",
@@ -890,19 +890,19 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/privacy-badger17/versions/5175365",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/privacy-badger17/versions/5247789",
           "files": [
             {
-              "id": 3719726,
-              "created": "2021-02-02T19:07:00Z",
-              "hash": "sha256:a9ab465df193e474416844d968ed36991e855b2bd9d965624045cd73373651a6",
+              "id": 3792149,
+              "created": "2021-06-08T18:48:00Z",
+              "hash": "sha256:72579f77035a5146b7332e39a28063c6bb48ca7284d5b1383cab24dca65372a8",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 1237132,
+              "size": 1379278,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/3719726/privacy_badger-2021.2.2-an+fx.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/3792149/privacy_badger-2021.6.8-an+fx.xpi",
               "permissions": [
                 "tabs",
                 "http://*/*",
@@ -1338,10 +1338,10 @@
             "url": "http://www.gnu.org/licenses/gpl-3.0.html"
           },
           "release_notes": {
-            "en-US": "<ul><li>Added a dark theme. To see it, enable dark mode in operating system or device preferences.</li><li>Added a section to the Widget Replacement tab on the options page to manage the list of widgets that were set to be always allowed on certain sites</li><li>Disabled network prefetching/preloading to improve privacy</li><li>Added replacements for Dailymotion and <a href=\"https://outgoing.prod.mozaws.net/v1/f586f988c08c7656e54a255a11f28fbc10a9ad0caade1ac73aa2c065a9592d48/http%3A//OK.ru\" rel=\"nofollow\">OK.ru</a> video player widgets</li><li>Fixed various site breakages</li><li>Improved translations (Simplified Chinese, Czech, French, Hebrew)</li></ul>"
+            "en-US": "<ul><li>Disabled Google's Federated Learning of Cohorts (FLoC). To learn more, visit <a href=\"https://outgoing.prod.mozaws.net/v1/b53e836b99444d8d9da04dc38e94534a633129503d75cde0ec3c8641addb557f/https%3A//www.eff.org/deeplinks/2021/03/googles-floc-terrible-idea\" rel=\"nofollow\">https://www.eff.org/deeplinks/2021/03/googles-floc-terrible-idea</a></li><li>Improved tracker detection and blocking by looking up known CNAME tracker aliases. Thanks to AdGuard for providing the CNAME DNS data behind this feature.</li><li>You can now see in the popup when first-party protections such as link unwrapping are active on the site you are on</li><li>Fixed various site breakages</li><li>Added Greek and Hungarian translations</li><li>Improved translations (Simplified Chinese, Esperanto, Hebrew, Korean, European Portuguese, Turkish, Swedish)</li></ul>"
           },
           "reviewed": null,
-          "version": "2021.2.2"
+          "version": "2021.6.8"
         },
         "default_locale": "en-US",
         "description": {
@@ -1365,7 +1365,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2021-02-02T19:18:34Z",
+        "last_updated": "2021-06-10T13:59:18Z",
         "name": {
           "en-US": "Privacy Badger"
         },
@@ -1379,12 +1379,12 @@
               1920,
               1080
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/225/225184.png?modified=1616525996",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/225/225184.png?modified=1622132341",
             "thumbnail_size": [
               533,
               300
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/225/225184.jpg?modified=1616525996"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/225/225184.jpg?modified=1622132341"
           },
           {
             "id": 171793,
@@ -1395,12 +1395,12 @@
               700,
               394
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/171/171793.png?modified=1616525996",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/171/171793.png?modified=1622132342",
             "thumbnail_size": [
               533,
               300
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/171/171793.jpg?modified=1616525996"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/171/171793.jpg?modified=1622132342"
           }
         ],
         "promoted": {
@@ -1411,10 +1411,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.7895,
-          "bayesian_average": 4.786580314622787,
-          "count": 1805,
-          "text_count": 369
+          "average": 4.7897,
+          "bayesian_average": 4.786792504987446,
+          "count": 1840,
+          "text_count": 370
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/reviews/",
         "requires_payment": false,
@@ -1434,7 +1434,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/versions/",
-        "weekly_downloads": 17013
+        "weekly_downloads": 18813
       },
       "notes": null
     },
@@ -1450,7 +1450,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 4907631,
+        "average_daily_users": 4756801,
         "categories": {
           "android": [
             "security-privacy"
@@ -1634,7 +1634,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2021-05-04T07:47:26Z",
+        "last_updated": "2021-06-14T11:45:30Z",
         "name": {
           "ar": "uBlock Origin",
           "bg": "uBlock Origin",
@@ -1683,12 +1683,12 @@
               1011,
               758
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/238/238546.png?modified=1616526158",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/238/238546.png?modified=1622132421",
             "thumbnail_size": [
               533,
               400
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/238/238546.jpg?modified=1616526158"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/238/238546.jpg?modified=1622132421"
           },
           {
             "id": 238548,
@@ -1699,12 +1699,12 @@
               1011,
               758
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/238/238548.png?modified=1616526159",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/238/238548.png?modified=1622132423",
             "thumbnail_size": [
               533,
               400
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/238/238548.jpg?modified=1616526159"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/238/238548.jpg?modified=1622132423"
           },
           {
             "id": 238547,
@@ -1715,12 +1715,12 @@
               1011,
               758
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/238/238547.png?modified=1616526160",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/238/238547.png?modified=1622132425",
             "thumbnail_size": [
               533,
               400
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/238/238547.jpg?modified=1616526160"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/238/238547.jpg?modified=1622132425"
           },
           {
             "id": 238549,
@@ -1731,12 +1731,12 @@
               1011,
               758
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/238/238549.png?modified=1616526162",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/238/238549.png?modified=1622132426",
             "thumbnail_size": [
               533,
               400
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/238/238549.jpg?modified=1616526162"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/238/238549.jpg?modified=1622132426"
           },
           {
             "id": 238552,
@@ -1747,12 +1747,12 @@
               970,
               1800
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/238/238552.png?modified=1616526165",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/238/238552.png?modified=1622132430",
             "thumbnail_size": [
               216,
               400
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/238/238552.jpg?modified=1616526165"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/238/238552.jpg?modified=1622132430"
           },
           {
             "id": 230370,
@@ -1763,12 +1763,12 @@
               800,
               600
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/230/230370.png?modified=1616526166",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/230/230370.png?modified=1622132432",
             "thumbnail_size": [
               533,
               400
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/230/230370.jpg?modified=1616526166"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/230/230370.jpg?modified=1622132432"
           }
         ],
         "promoted": {
@@ -1779,10 +1779,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.767,
-          "bayesian_average": 4.766553668766709,
-          "count": 11750,
-          "text_count": 3228
+          "average": 4.7669,
+          "bayesian_average": 4.766455131988787,
+          "count": 11981,
+          "text_count": 3280
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/reviews/",
         "requires_payment": false,
@@ -1837,7 +1837,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/versions/",
-        "weekly_downloads": 113254
+        "weekly_downloads": 119731
       },
       "notes": null
     },
@@ -1853,7 +1853,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 59717,
+        "average_daily_users": 56485,
         "categories": {
           "android": [
             "photos-media"
@@ -1973,10 +1973,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.5177,
-          "bayesian_average": 4.512746722127399,
-          "count": 991,
-          "text_count": 375
+          "average": 4.518,
+          "bayesian_average": 4.513007828193196,
+          "count": 1000,
+          "text_count": 379
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/reviews/",
         "requires_payment": false,
@@ -2004,7 +2004,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/versions/",
-        "weekly_downloads": 268
+        "weekly_downloads": 302
       },
       "notes": null
     },
@@ -2020,7 +2020,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 90104,
+        "average_daily_users": 92508,
         "categories": {
           "android": [
             "experimental",
@@ -2143,12 +2143,12 @@
               640,
               400
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/201/201244.png?modified=1616526789",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/201/201244.png?modified=1622133085",
             "thumbnail_size": [
               533,
               333
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/201/201244.jpg?modified=1616526789"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/201/201244.jpg?modified=1622133085"
           }
         ],
         "promoted": {
@@ -2159,10 +2159,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.4969,
-          "bayesian_average": 4.48168428583015,
-          "count": 320,
-          "text_count": 89
+          "average": 4.4878,
+          "bayesian_average": 4.472736788863273,
+          "count": 328,
+          "text_count": 91
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/reviews/",
         "requires_payment": false,
@@ -2188,7 +2188,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/versions/",
-        "weekly_downloads": 1221
+        "weekly_downloads": 7447
       },
       "notes": null
     },
@@ -2204,7 +2204,7 @@
             "picture_url": "https://addons.cdn.mozilla.net/user-media/userpics/12/12929/12929064.png?modified=1618084385"
           }
         ],
-        "average_daily_users": 171484,
+        "average_daily_users": 168723,
         "categories": {
           "android": [
             "photos-media",
@@ -2218,7 +2218,7 @@
         "contributions_url": "https://www.paypal.com/donate?hosted_button_id=GLL4UNSNU6SQN&utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2017-06-17T15:23:33Z",
         "current_version": {
-          "id": 5222866,
+          "id": 5250699,
           "compatibility": {
             "firefox": {
               "min": "68.0",
@@ -2229,19 +2229,19 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/search_by_image/versions/5222866",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/search_by_image/versions/5250699",
           "files": [
             {
-              "id": 3767226,
-              "created": "2021-04-27T19:37:13Z",
-              "hash": "sha256:2419da33e09e330f7f03af1aa3d5725f54324f74f774fa55dc07a088c979ff96",
+              "id": 3795059,
+              "created": "2021-06-13T15:38:54Z",
+              "hash": "sha256:7854169e59df5907b7ab9fed8cd47755157bbfee3c605ecc938bff5ee411713c",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 653389,
+              "size": 653530,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/3767226/search_by_image-3.6.2-an+fx.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/3795059/search_by_image-3.6.3-an+fx.xpi",
               "permissions": [
                 "contextMenus",
                 "storage",
@@ -2292,7 +2292,7 @@
             "en-US": "Learn more about this release from the <a href=\"https://outgoing.prod.mozaws.net/v1/034fc31c913b4c441795892fe3d65db9f7edbe64b225782c051d3e956eacba86/https%3A//github.com/dessant/search-by-image/blob/master/CHANGELOG.md\" rel=\"nofollow\">changelog</a>."
           },
           "reviewed": null,
-          "version": "3.6.2"
+          "version": "3.6.3"
         },
         "default_locale": "en-US",
         "description": {
@@ -2314,7 +2314,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2021-04-28T06:05:03Z",
+        "last_updated": "2021-06-14T12:40:31Z",
         "name": {
           "en-US": "Search by Image"
         },
@@ -2326,12 +2326,12 @@
               1280,
               800
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/230/230000.png?modified=1616526401",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/230/230000.png?modified=1622132702",
             "thumbnail_size": [
               533,
               333
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/230/230000.jpg?modified=1616526401"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/230/230000.jpg?modified=1622132702"
           },
           {
             "id": 230001,
@@ -2340,12 +2340,12 @@
               1280,
               800
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/230/230001.png?modified=1616526403",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/230/230001.png?modified=1622132704",
             "thumbnail_size": [
               533,
               333
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/230/230001.jpg?modified=1616526403"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/230/230001.jpg?modified=1622132704"
           },
           {
             "id": 230002,
@@ -2354,12 +2354,12 @@
               1280,
               800
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/230/230002.png?modified=1616526405",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/230/230002.png?modified=1622132706",
             "thumbnail_size": [
               533,
               333
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/230/230002.jpg?modified=1616526405"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/230/230002.jpg?modified=1622132706"
           },
           {
             "id": 230003,
@@ -2368,12 +2368,12 @@
               1280,
               800
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/230/230003.png?modified=1616526407",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/230/230003.png?modified=1622132707",
             "thumbnail_size": [
               533,
               333
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/230/230003.jpg?modified=1616526407"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/230/230003.jpg?modified=1622132707"
           },
           {
             "id": 230004,
@@ -2382,12 +2382,12 @@
               1280,
               800
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/230/230004.png?modified=1616526408",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/230/230004.png?modified=1622132709",
             "thumbnail_size": [
               533,
               333
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/230/230004.jpg?modified=1616526408"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/230/230004.jpg?modified=1622132709"
           },
           {
             "id": 230005,
@@ -2396,12 +2396,12 @@
               1280,
               800
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/230/230005.png?modified=1616526410",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/230/230005.png?modified=1622132711",
             "thumbnail_size": [
               533,
               333
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/230/230005.jpg?modified=1616526410"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/230/230005.jpg?modified=1622132711"
           },
           {
             "id": 230006,
@@ -2410,12 +2410,12 @@
               1280,
               800
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/230/230006.png?modified=1616526413",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/230/230006.png?modified=1622132713",
             "thumbnail_size": [
               533,
               333
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/230/230006.jpg?modified=1616526413"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/230/230006.jpg?modified=1622132713"
           }
         ],
         "promoted": {
@@ -2426,10 +2426,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.6555,
-          "bayesian_average": 4.649806788971981,
-          "count": 894,
-          "text_count": 177
+          "average": 4.6609,
+          "bayesian_average": 4.655303908197723,
+          "count": 926,
+          "text_count": 178
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/reviews/",
         "requires_payment": false,
@@ -2465,7 +2465,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/versions/",
-        "weekly_downloads": 3821
+        "weekly_downloads": 3805
       },
       "notes": null
     },
@@ -2488,7 +2488,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 39630,
+        "average_daily_users": 41474,
         "categories": {
           "android": [
             "other"
@@ -2770,10 +2770,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.456,
-          "bayesian_average": 4.451164313203212,
-          "count": 1000,
-          "text_count": 272
+          "average": 4.4563,
+          "bayesian_average": 4.45147537731217,
+          "count": 1019,
+          "text_count": 278
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/reviews/",
         "requires_payment": false,
@@ -2793,7 +2793,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/versions/",
-        "weekly_downloads": 70
+        "weekly_downloads": 62
       },
       "notes": null
     },
@@ -2809,7 +2809,7 @@
             "picture_url": "https://addons.cdn.mozilla.net/user-media/userpics/0/0/143.png?modified=1506804587"
           }
         ],
-        "average_daily_users": 375892,
+        "average_daily_users": 354691,
         "categories": {
           "android": [
             "performance",
@@ -2823,7 +2823,7 @@
         "contributions_url": "https://www.paypal.me/NoScript?utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2005-05-13T10:51:32Z",
         "current_version": {
-          "id": 5226253,
+          "id": 5234587,
           "compatibility": {
             "firefox": {
               "min": "59.0",
@@ -2834,19 +2834,19 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/noscript/versions/5226253",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/noscript/versions/5234587",
           "files": [
             {
-              "id": 3770613,
-              "created": "2021-05-04T07:27:00Z",
-              "hash": "sha256:d089f1db05570fef88b54feb723585a4a52b22e3956bb49d28279fa00f4dfd21",
+              "id": 3778947,
+              "created": "2021-05-19T22:20:26Z",
+              "hash": "sha256:4744f9d99acbe9dec3557765edd9173272b4681c8425228fb6af52493f853467",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 622976,
+              "size": 623185,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/3770613/noscript_security_suite-11.2.6-an+fx.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/3778947/noscript_security_suite-11.2.8-an+fx.xpi",
               "permissions": [
                 "contextMenus",
                 "storage",
@@ -2893,10 +2893,10 @@
             "url": "http://www.gnu.org/licenses/gpl-2.0.html"
           },
           "release_notes": {
-            "en-US": "v 11.2.6\n============================================================\nx [nscl] Various webgl blocking enhancements\nx Remove also sticky-positioned elements with click+DEL on\n  scriptless pages (thanks skriptimaahinen for RFE)\nx [L10n] Updated bn, br, ca, da, de, el, es, fr, he, is, it,\n  ja, lt, mk, ms, nb, nl, pl, pt_BR, ru, sq, sv_SE, tr,\n  zh_CN, zh_TW\nx Fixed race condition causing external CSS not to be\n  rendered sometimes when unrestricted CSS is disabled\nx Avoid document rewriting for noscript meta refresh\n  emulation in most cases\nx [nscl] Fixed XHTML pages broken when served with\n  application/xml MIME type and no \"object\" capability\nx [nscl] Switch early content script configuration to use\n  /nscl/service/DocStartInjection.js\nx Configurable \"unrestricted CSS\" capability to for sites\n  where the CSS PP0 mitigation should be disabled\n  (e.g TRUSTED)\nx [nscl] Fix CSS PP0 mitigation still interfering with some\n  WebExtensions (thanks barbaz for report)\nx [XSS] Increased sensitivity and specificity of risky\n  operator pre-checks"
+            "en-US": "v 11.2.8\n============================================================\nx Quiet down unnecessary debug logging (issue #191)\nx [L10n] Updated he, de\nx Fix meta refresh sometimes ignored on Firefox 78 ESR\n  (issue #192, thanks hackerncoder for report)\nx Chromium-specific build-time customizations"
           },
           "reviewed": null,
-          "version": "11.2.6"
+          "version": "11.2.8"
         },
         "default_locale": "en-US",
         "description": {
@@ -2946,7 +2946,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2021-05-04T12:31:44Z",
+        "last_updated": "2021-06-03T21:50:28Z",
         "name": {
           "de": "NoScript",
           "el": "NoScript",
@@ -2970,12 +2970,12 @@
               291,
               244
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/0/846.png?modified=1616525857",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/0/846.png?modified=1622132240",
             "thumbnail_size": [
               291,
               244
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/0/846.jpg?modified=1616525857"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/0/846.jpg?modified=1622132240"
           },
           {
             "id": 1060,
@@ -2986,12 +2986,12 @@
               423,
               447
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/1/1060.png?modified=1616525857",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/1/1060.png?modified=1622132241",
             "thumbnail_size": [
               379,
               400
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/1/1060.jpg?modified=1616525857"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/1/1060.jpg?modified=1622132241"
           },
           {
             "id": 1062,
@@ -3002,12 +3002,12 @@
               457,
               428
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/1/1062.png?modified=1616525857",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/1/1062.png?modified=1622132241",
             "thumbnail_size": [
               427,
               400
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/1/1062.jpg?modified=1616525857"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/1/1062.jpg?modified=1622132241"
           },
           {
             "id": 52395,
@@ -3018,12 +3018,12 @@
               504,
               385
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/52/52395.png?modified=1616525857",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/52/52395.png?modified=1622132241",
             "thumbnail_size": [
               504,
               385
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/52/52395.jpg?modified=1616525857"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/52/52395.jpg?modified=1622132241"
           }
         ],
         "promoted": {
@@ -3034,10 +3034,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.365,
-          "bayesian_average": 4.36234415371495,
-          "count": 1778,
-          "text_count": 723
+          "average": 4.3777,
+          "bayesian_average": 4.375009152628478,
+          "count": 1790,
+          "text_count": 720
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/reviews/",
         "requires_payment": false,
@@ -3094,7 +3094,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/versions/",
-        "weekly_downloads": 8743
+        "weekly_downloads": 8530
       },
       "notes": null
     },
@@ -3110,7 +3110,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 119252,
+        "average_daily_users": 112947,
         "categories": {
           "android": [
             "performance",
@@ -3227,12 +3227,12 @@
               256,
               256
             ],
-            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/104/104784.png?modified=1616525833",
+            "image_url": "https://addons.cdn.mozilla.net/user-media/previews/full/104/104784.png?modified=1622132581",
             "thumbnail_size": [
               256,
               256
             ],
-            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/104/104784.jpg?modified=1616525833"
+            "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/previews/thumbs/104/104784.jpg?modified=1622132581"
           }
         ],
         "promoted": {
@@ -3243,10 +3243,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 3.9145,
-          "bayesian_average": 3.910179019078069,
-          "count": 959,
-          "text_count": 346
+          "average": 3.9112,
+          "bayesian_average": 3.9069077075903924,
+          "count": 980,
+          "text_count": 351
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/reviews/",
         "requires_payment": false,
@@ -3285,7 +3285,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/versions/",
-        "weekly_downloads": 1671
+        "weekly_downloads": 2107
       },
       "notes": null
     }
