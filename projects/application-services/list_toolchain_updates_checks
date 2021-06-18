@@ -74,7 +74,7 @@ check_update_needed sqlcipher "$needed" "$current"
 
 # android-gradle-plugin
 read -d '' p << 'EOF' || true
-if (m/^\\s*ext\\.android_gradle_plugin_version\\s=\\s'([^']*)'/) {
+if (m/^\\s*android_gradle_plugin_version\\s=\\s'([^']*)'/) {
   print $1;
   exit;
 }
@@ -86,7 +86,7 @@ check_update_needed android-gradle-plugin "$needed" "$current"
 
 # android-components
 read -d '' p << 'EOF' || true
-if (m/^\\s*ext\\.android_components_version\\s=\\s'([^']*)'/) {
+if (m/^\\s*android_components_version\\s=\\s'([^']*)'/) {
   print $1;
   exit;
 }
