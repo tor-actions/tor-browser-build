@@ -1,3 +1,21 @@
+Tor Browser 10.5a17 -- June 27 2021
+ * All Platforms
+   * Update NoScript to 11.2.9
+   * Update Tor to 0.4.6.5
+   * Update Tor Launcher to 0.2.29
+ * Windows + OS X + Linux
+   * Bug 34345: "Don't Bootstrap" Startup Mode
+   * Bug 40302: Update version of snowflake [tor-browser-build]
+   * Bug 40455: Block or recover background requests after bootstrap [tor-browser]
+   * Bug 40456: Update the SecureDrop HTTPS-Everywhere update channel [tor-browser]
+   * Bug 40475: Include clearing CORS preflight cache [tor-browser]
+   * Bug 40478: Onion alias url rewrite is broken [tor-browser]
+ * Build System
+   * All Platforms
+     * Update Go to 1.15.13
+   * Android
+     * Bug 40313: Use apt-get to install openjdk-8 .deb files with their dependencies [tor-browser-build]
+
 Tor Browser 10.5a16 -- June 5 2021
  * All Platforms
    * Update NoScript to 11.2.8
