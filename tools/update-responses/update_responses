@@ -424,8 +424,10 @@ sub write_downloads_json {
     @channels = keys %{$config->{channels}} unless @channels;
     foreach my $channel (@channels) {
         my $version = $config->{channels}{$channel};
+        my $tag = get_config($config, $version, 'any', 'tag');
         my $data = {
             version => $version,
+            tag => $tag,
             downloads => get_version_downloads($config, $version),
         };
         write_htdocs($channel, 'downloads.json',

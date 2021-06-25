@@ -50,6 +50,7 @@ versions:
         win64:
             minSupportedOSVersion: 6.1
 mar_compression: xz
+tag: 'tbb-[% c("var/torbrowser_version") %]-[% c("var/torbrowser_build") %]'
 htaccess_rewrite_rules:
     alpha: |
         # bug 26569: Redirect pre-8.0a9 alpha users to a separate update directory
