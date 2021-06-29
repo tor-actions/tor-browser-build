@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
-version: 74.0.1
-git_hash: ad7b64fa03eeeb00815125e635d1fb8809befd40
+version: 77.0.2
+git_hash: dd09c25f14dbf45f1637ed8dca2d1e5ff668479f
 git_url: https://github.com/mozilla/application-services
 git_submodule: 1
 
@@ -9,10 +9,9 @@ var:
   container:
     use_container: 1
   # This should be updated when the list of gradle dependencies is changed.
-  gradle_dependencies_version: 5
-  # This should be updated when the list of rust dependencies is changed.
-  rust_vendor_version: 5
+  gradle_dependencies_version: 6
   gradle_version: 6.5
+  glean_parser: 2.2.0
 
 input_files:
   - project: container-image
@@ -76,18 +75,16 @@ input_files:
     name: gradle-dependencies
     exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
-  - URL: https://people.torproject.org/~gk/mirrors/sources/glean-parser-[% c('var/glean_parser') %].tar.bz2
-    sha256sum: 19dbdd4958022a1a638e0217489ab722fe7d4f588f1978a4ae162f93e75694c2
+  - URL: https://people.torproject.org/~boklm/mirrors/sources/glean-wheels-[% c('var/glean_parser') %].tar.xz
+    sha256sum: 24ceaaadaf155445e8ad135173d894e05c0745b41ab5fee150f9548550acf2a6
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
   # Use `make cargo_vendor-application-services` to re-generate the vendor tarball
-  - URL: https://people.torproject.org/~boklm/mirrors/sources/application-services-vendor-[% c('var/rust_vendor_version') %].tar.bz2
-    sha256sum: 5f1c9e1bc0db283e88516bd1d78187145bacbf4aeb72972ac09875c1147d2215
+  - URL: https://people.torproject.org/~boklm/mirrors/sources/application-services-vendor-[% c('version') %].tar.bz2
+    sha256sum: 313c1e9b164ce9905eafe29a913edb617379e6d153ce28fa751d9f544e6e87c8
   - filename: no-git.patch
   - filename: mavenLocal.patch
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
   - filename: target.patch
-  - filename: viaduct-workaround.patch
-  - filename: update-cargo-lock.patch
   - filename: gen_gradle_deps_file.sh
     enable: '[% c("var/fetch_gradle_dependencies") %]'
   - filename: 0001-Store-the-universe-of-known-types-in-an-ordered-BTre.patch
@@ -123,13 +120,6 @@ steps:
 
   cargo_vendor:
     filename: '[% project %]-vendor-[% c("version") %].tar.bz2'
-    var:
-      cargo_vendor_opts: '-s components/external/nimbus-sdk/nimbus/Cargo.toml'
-      pre_cargo_vendor: |
-        patch -p1 < $rootdir/update-cargo-lock.patch
-        patch -d components/external/nimbus-sdk -p1 < $rootdir/viaduct-workaround.patch
     input_files:
       - project: container-image
         pkg_type: build
-      - filename: viaduct-workaround.patch
-      - filename: update-cargo-lock.patch
