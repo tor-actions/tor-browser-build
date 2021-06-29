@@ -99,6 +99,21 @@ steps:
     var:
       container:
         use_container: 0
+      get_android_components_version: |
+        #!/bin/bash
+        read -d '' p << 'EOF' || true
+        if (m/^\\s*android_components_version\\s=\\s'([^']*)'/) {
+          print $1;
+          exit;
+        }
+        EOF
+        perl -ne "$p" < build.gradle
+      android_components_version: '[% exec(c("var/get_android_components_version")) %]'
+      glean_version: '[% pc("android-components", "var/glean_version", { git_hash => "v" _ c("var/android_components_version") }) %]'
+    input_files:
+      - name: glean
+        project: glean
+        pkg_type: src
 
   get_gradle_dependencies_list:
     filename: 'gradle-dependencies-list-[% c("version") %].txt'
