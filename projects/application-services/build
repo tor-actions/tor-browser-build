@@ -34,7 +34,7 @@ tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
 # Prepare the offline build.
 # Move the directory for hardcoding the path in .cargo/config.
 mv /var/tmp/build/[% project %]-[% c('version') %] $builddir
-tar -C $builddir -xjf application-services-vendor-[% c('var/rust_vendor_version') %].tar.bz2
+tar -C $builddir -xjf application-services-vendor-[% c('version') %].tar.bz2
 cd $builddir
 # Make sure our vendored crates are used for offline builds.
 cat >> .cargo/config << 'EOF'
@@ -57,11 +57,6 @@ sed -i \
     's/e39e61458d0d28c2b3425852c8a55625cc185ce806fbc7c0c6682f8cc93dec8d/0909e5214eedf1f2e709909176b1cbda39887002b26388535c3bc551fb04da1b/' \
     uniffi_bindgen/.cargo-checksum.json
 popd
-
-patch -p1 < $rootdir/update-cargo-lock.patch
-cd components/external/nimbus-sdk
-patch -p1 < $rootdir/viaduct-workaround.patch
-cd ../../../
 
 # Move NSS and SQLCipher to the right place
 # XXX: Maybe merge with the loop above.
@@ -97,7 +92,7 @@ patch -p1 < $rootdir/target.patch
   mv gradle-dependencies-list.txt '[% dest_dir _ "/" _ c("filename") %]'
 [% ELSE %]
   # Prepare Glean dependencies for offline build
-  tar -xjf $rootdir/glean-parser-[% c('var/glean_parser') %].tar.bz2
+  tar -xf $rootdir/glean-wheels-[% c('var/glean_parser') %].tar.xz
   # We need to set `LC_ALL` and `LANG` to something that is not ASCII as encoding
   # otherwise `click` barfs. See: https://click.palletsprojects.com/python3/
   export LC_ALL=C.UTF-8
