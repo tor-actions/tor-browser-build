@@ -16,6 +16,24 @@ Tor Browser 10.5a17 -- June 27 2021
    * Android
      * Bug 40313: Use apt-get to install openjdk-8 .deb files with their dependencies [tor-browser-build]
 
+Tor Browser 10.0.18 -- June 16 2021
+ * All Platforms
+   * Update Tor to 0.4.5.9
+ * Android
+   * Update Fenix to 89.1.1
+   * Update NoScript to 11.2.8
+   * Bug 40055: Rebase android-componets patches on 75.0.22 for Fenix 89 [android-components]
+   * Bug 40165: Announce v2 onion service deprecation on about:tor [fenix]
+   * Bug 40166: Hide "Normal" tab (again) and Sync tab in TabTray [fenix]
+   * Bug 40167: Hide "Save to Collection" in menu [fenix]
+   * Bug 40169: Rebase fenix patches to fenix v89.1.1 [fenix]
+   * Bug 40170: Error building tor-browser-89.1.1-10.5-1 [fenix]
+   * Bug 40432: Prevent probing installed applications [tor-browser]
+   * Bug 40470: Rebase 10.0 patches onto 89.0 [tor-browser]
+ * Build System
+   * Android
+     * Bug 40290: Update components for mozilla89-based Fenix [tor-browser-build]
+
 Tor Browser 10.5a16 -- June 5 2021
  * All Platforms
    * Update NoScript to 11.2.8
@@ -39,6 +57,16 @@ Tor Browser 10.5a16 -- June 5 2021
    * Android
      * Bug 40290: Update components for mozilla89-based Fenix [tor-browser-build]
 
+Tor Browser 10.0.17 -- June 1 2021
+ * Windows + OS X + Linux
+   * Update Firefox to 78.11.0esr
+   * Update HTTPS Everywhere to 2021.4.15
+   * Update NoScript to 11.2.8
+   * Update Tor to 0.4.5.8
+   * Bug 27002: (Mozilla 1673237) Always allow SVGs on about: pages [tor-browser]
+   * Bug 40432: Prevent probing installed applications [tor-browser]
+   * Bug 40037: Announce v2 onion service deprecation on about:tor [torbutton]
+
 Tor Browser 10.5a15 -- April 23 2021
  * All Platforms
    * Update Tor to 0.4.6.2-alpha
@@ -55,6 +83,22 @@ Tor Browser 10.5a15 -- April 23 2021
      * Update Go to 1.15.11
    * Android
     * Bug 40259: Update components for mozilla88-based Fenix [tor-browser-build]
+
+Tor Browser 10.0.16 -- May 7 2021
+ * Android
+   * Update Fenix to 88.1.3
+   * Update HTTPS Everywhere to 2021.4.15
+   * Update NoScript to 11.2.6
+   * Translations update
+   * Bug 40052: Rebase android-components patches for Fenix 88 [android-components]
+   * Bug 40162: Disable Numbus experiments [fenix]
+   * Bug 40163: Rebase Fenix patches to Fenix 88.1.3 [fenix]
+   * Bug 40423: Disable http/3 [tor-browser]
+   * Bug 40425: Rebase 10.5 patches on 88.0.1 [tor-browser]
+ * Build System
+   * Android
+     * Bug 40259: Update components for mozilla88-based Fenix [tor-browser-build]
+     * Bug 40293: Patch app-services' vendored uniffi_bindgen [tor-browser-build]
 
 Tor Browser 10.0.16 -- April 20 2021
  * Windows + OS X + Linux
