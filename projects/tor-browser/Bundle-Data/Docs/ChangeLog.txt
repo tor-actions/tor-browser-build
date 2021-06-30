@@ -36,6 +36,7 @@ Tor Browser 10.0.18 -- June 16 2021
 
 Tor Browser 10.5a16 -- June 5 2021
  * All Platforms
+   * Update HTTPS Everywhere to 2021.4.15
    * Update NoScript to 11.2.8
    * Update Tor to 0.4.6.4-rc
    * Bug 40432: Prevent probing installed applications [tor-browser]
@@ -470,6 +471,8 @@ Tor Browser 10.0.5 -- November 27 2020
  * Android
    * Update Fenix to 83.1.0
    * Translations update
+   * Bug 40152: Top Crash: android.database.sqlite.SQLiteConstraintException [tor-browser-build]
+   * Bug 40205: Replace occurrence of EmptyCString with 0-length _ns literal [tor-browser]
  * Build System
    * Android
      * Bug 40126: Update toolchains for Fenix 83 [tor-browser-build]
