@@ -127,6 +127,8 @@ Tor Browser 10.0.5 -- November 27 2020
    * Update Fenix to 83.1.0
    * Update Tor to 0.4.4.6
    * Translations update
+   * Bug 40152: Top Crash: android.database.sqlite.SQLiteConstraintException [tor-browser-build]
+   * Bug 40205: Replace occurrence of EmptyCString with 0-length _ns literal [tor-browser]
    * Bug 40212: Add new default bridge [tor-browser]
  * Build System
    * Android
