@@ -9,7 +9,7 @@ variant: Beta
 
 var:
   fenix_version: 90.0.0b6
-  torbrowser_branch: 10.5
+  torbrowser_branch: 11.0
   git_branch: 'tor-browser-[% c("var/fenix_version") %]-[% c("var/torbrowser_branch") %]-1'
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   container:

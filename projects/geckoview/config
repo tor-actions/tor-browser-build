@@ -9,7 +9,7 @@ gpg_keyring: torbutton.gpg
 
 var:
   geckoview_version: 90.0b12
-  torbrowser_branch: 10.5
+  torbrowser_branch: 11.0
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   deps:
     - build-essential
