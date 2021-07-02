@@ -36,6 +36,19 @@ current=21
 check_update_needed minSdkVersion "$needed" "$current"
 
 
+# glean_parser
+read -d '' p << 'EOF' || true
+if (m/^\\s*"glean_parser==([^"]+)",/) {
+  print $1;
+  exit;
+}
+EOF
+tar xf $rootdir/[% c('input_files_by_name/glean') %]
+needed=$(cat glean-[% c("var/glean_version") %]/glean-core/python/setup.py | perl -ne "$p")
+current='[% c("var/glean_parser") %]'
+check_update_needed glean_parser "$needed" "$current"
+
+
 # gradle
 read -d '' p << 'EOF' || true
 if (m|distributionUrl=https\\\\://services.gradle.org/distributions/gradle-(.*)-.*.zip|) {
@@ -82,16 +95,4 @@ EOF
 needed=$(cat build.gradle | perl -ne "$p")
 current='4.0.1'
 check_update_needed android-gradle-plugin "$needed" "$current"
-
-
-# android-components
-read -d '' p << 'EOF' || true
-if (m/^\\s*android_components_version\\s=\\s'([^']*)'/) {
-  print $1;
-  exit;
-}
-EOF
-needed=$(cat build.gradle | perl -ne "$p")
-current=71.0.0
-check_update_needed android-components "$needed" "$current"
 

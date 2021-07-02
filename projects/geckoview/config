@@ -8,7 +8,7 @@ git_submodule: 1
 gpg_keyring: torbutton.gpg
 
 var:
-  geckoview_version: 89.0
+  geckoview_version: 90.0b12
   torbrowser_branch: 10.5
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   deps:
@@ -138,9 +138,9 @@ steps:
           - torbrowser-android-x86_64
 
   list_toolchain_updates:
-    git_url: https://github.com/mozilla/gecko-dev.git
-    # 90.0b9
-    git_hash: 92485800ccb404788bfd215e59c3850b314d3905
+    #git_url: https://github.com/mozilla/gecko-dev.git
+    # 90.0b12
+    #git_hash: 5e8ffbe1bf6d448cb235cb0a64a56646a6537b22
     tag_gpg_id: 0
     input_files: []
     var:
