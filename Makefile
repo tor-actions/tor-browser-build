@@ -204,6 +204,15 @@ dmg2mar-alpha: submodule-update
 list_toolchain_updates-fenix: submodule-update
 	$(rbm) build fenix --step list_toolchain_updates --target nightly --target torbrowser-android-armv7
 
+list_toolchain_updates-firefox-linux: submodule-update
+	$(rbm) build firefox --step list_toolchain_updates --target nightly --target torbrowser-linux-x86_64
+
+list_toolchain_updates-firefox-windows: submodule-update
+	$(rbm) build firefox --step list_toolchain_updates --target nightly --target torbrowser-windows-x86_64
+
+list_toolchain_updates-firefox-macos: submodule-update
+	$(rbm) build firefox --step list_toolchain_updates --target nightly --target torbrowser-osx-x86_64
+
 list_toolchain_updates-android-components: submodule-update
 	$(rbm) build android-components --step list_toolchain_updates --target nightly --target torbrowser-android-armv7
 

@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
-filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
-version: 10.11-1
+filename: '[% project %]-[% c("version") %]-1-[% c("var/build_id") %].tar.gz'
+version: 10.11
 var:
   container:
     use_container: 1
@@ -29,7 +29,7 @@ input_files:
   # Instructions on how to create the SDK tarball can be found at:
   # build/macosx/cross-mozconfig.common
   - name: SDK
-    URL: https://people.torproject.org/~gk/mirrors/sources/MacOSX10.11.sdk.tar.bz2
+    URL: 'https://people.torproject.org/~gk/mirrors/sources/MacOSX[% c("version") %].sdk.tar.bz2'
     sha256sum: d11e410d757d023be66d2fe7eaa85a1d232da3ac04f177eff3d8b8275cd9ffca
   - name: clang-source
     project: clang-source

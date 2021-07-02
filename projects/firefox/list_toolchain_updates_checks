@@ -1,0 +1,194 @@
+#!/bin/bash
+
+# rust
+[% IF c("var/linux");
+     SET toolchain_alias='linux64-rust';
+   ELSIF c("var/windows");
+     SET toolchain_alias='mingw32-rust';
+   ELSIF c("var/osx");
+     SET toolchain_alias='linux64-rust-macos';
+   END; %]
+read -d '' p << 'EOF' || true
+my $d = YAML::XS::LoadFile('taskcluster/ci/toolchain/rust.yml');
+foreach my $t (keys %$d) {
+  if ($d->{$t}{run}{'toolchain-alias'} eq '[% toolchain_alias %]') {
+    my $channel;
+    foreach my $arg (@{$d->{$t}{run}{arguments}}) {
+      if ($arg eq '--channel') {
+        $channel = 1;
+        next;
+      }
+      if ($channel) {
+        print $arg;
+        exit;
+      }
+    }
+  }
+}
+EOF
+needed=$(perl -MYAML::XS -e "$p")
+current='[% pc("rust", "version") %]'
+check_update_needed rust "$needed" "$current"
+
+# cbindgen
+read -d '' p << 'EOF' || true
+if (m/^\\s*cbindgen_min_version\\s*=\\s*Version\\("([^"]+)"\\)/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat build/moz.configure/bindgen.configure | perl -ne "$p")
+current='[% pc("cbindgen", "version") %]'
+check_update_needed cbindgen "$needed" "$current"
+
+
+# nasm
+read -d '' p << 'EOF' || true
+if (m/^\\s*MODERN_NASM_VERSION\\s*=\\s*LooseVersion\\("([^"]+)"\\)/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat python/mozboot/mozboot/base.py | perl -ne "$p")
+current='2.14'
+check_update_needed nasm "$needed" "$current"
+
+
+# clang
+[% IF c("var/linux");
+     SET toolchain_alias='linux64-clang';
+   ELSIF c("var/windows");
+     SET toolchain_alias='linux64-clang-mingw-x64';
+   ELSIF c("var/osx");
+     SET toolchain_alias='macosx64-clang';
+   END; %]
+read -d '' p << 'EOF' || true
+my $d = YAML::XS::LoadFile('taskcluster/ci/toolchain/clang.yml');
+my $clang_toolchain;
+foreach my $t (keys %$d) {
+  if ($d->{$t}{run}{'toolchain-alias'} eq '[% toolchain_alias %]') {
+    foreach my $fetch (@{$d->{$t}{fetches}{fetch}}) {
+      $clang_toolchain = $fetch if $fetch =~ m/^clang-.*/;
+    }
+    last;
+  }
+}
+
+if (!$clang_toolchain) {
+  print STDERR "Error: could not find clang toolchain";
+  exit 1;
+}
+
+my $fetch = YAML::XS::LoadFile('taskcluster/ci/fetch/toolchains.yml');
+print $fetch->{$clang_toolchain}{fetch}{revision};
+EOF
+needed=$(perl -MYAML::XS -e "$p")
+current='[% pc("llvm-project", "git_hash") %]'
+check_update_needed clang "$needed" "$current"
+
+
+# node
+read -d '' p << 'EOF' || true
+if (m/^\\s*NODE_MIN_VERSION\\s*=\\s*StrictVersion\\("([^"]+)"\\)/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat python/mozbuild/mozbuild/nodeutil.py | perl -ne "$p")
+current='[% pc("node", "version") %]'
+check_update_needed node "$needed" "$current"
+
+
+# python
+read -d '' p << 'EOF' || true
+if (m/find_python3_executable\\(min_version\\s*=\\s*"([^"]+)"/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat build/moz.configure/init.configure | perl -ne "$p")
+current=3.6.0
+check_update_needed python "$needed" "$current"
+
+
+[% IF c("var/osx") %]
+# macosx-sdk
+read -d '' p << 'EOF' || true
+my $d = YAML::XS::LoadFile('taskcluster/ci/toolchain/clang.yml');
+my $clang_toolchain;
+foreach my $t (keys %$d) {
+  if ($d->{$t}{run}{'toolchain-alias'} eq 'macosx64-clang') {
+    foreach my $toolchain (@{$d->{$t}{fetches}{toolchain}}) {
+      if ($toolchain =~ m/^macosx64-sdk-(.+)$/) {
+        print $1;
+        exit;
+      }
+    }
+    last;
+  }
+}
+EOF
+needed=$(perl -MYAML::XS -e "$p")
+current='[% pc("macosx-toolchain", "version") %]'
+check_update_needed macos-sdk "$needed" "$current"
+
+# End of macOS checks
+[% END -%]
+
+
+[% IF c("var/windows") %]
+# mingw-w64
+read -d '' p << 'EOF' || true
+my $d = YAML::XS::LoadFile('taskcluster/ci/fetch/toolchains.yml');
+print $d->{'mingw-w64'}{fetch}{revision};
+EOF
+needed=$(perl -MYAML::XS -e "$p")
+current='[% pc("mingw-w64", "git_hash") %]'
+check_update_needed mingw-w64 "$needed" "$current"
+
+
+# llvm-mingw
+read -d '' p << 'EOF' || true
+my $d = YAML::XS::LoadFile('taskcluster/ci/fetch/toolchains.yml');
+print $d->{'llvm-mingw'}{fetch}{revision};
+EOF
+needed=$(perl -MYAML::XS -e "$p")
+current='[% pc("llvm-mingw", "git_hash") %]'
+check_update_needed llvm-mingw "$needed" "$current"
+
+
+# fxc2
+read -d '' p << 'EOF' || true
+my $d = YAML::XS::LoadFile('taskcluster/ci/fetch/toolchains.yml');
+print $d->{fxc2}{fetch}{revision};
+EOF
+needed=$(perl -MYAML::XS -e "$p")
+current='[% pc("fxc2", "git_hash") %]'
+check_update_needed fxc2 "$needed" "$current"
+
+# End of Windows checks
+[% END -%]
+
+
+[% IF c("var/rlbox") %]
+# wasi-sdk
+read -d '' p << 'EOF' || true
+my $d = YAML::XS::LoadFile('taskcluster/ci/fetch/toolchains.yml');
+print $d->{'wasi-sdk'}{fetch}{revision};
+EOF
+needed=$(perl -MYAML::XS -e "$p")
+current='[% pc("wasi-sysroot", "git_hash") %]'
+check_update_needed wasi-sdk "$needed" "$current"
+
+
+# lucetc
+read -d '' p << 'EOF' || true
+my $d = YAML::XS::LoadFile('taskcluster/ci/fetch/toolchains.yml');
+print $d->{'lucetc-source'}{fetch}{revision};
+EOF
+needed=$(perl -MYAML::XS -e "$p")
+current='[% pc("lucetc", "git_hash") %]'
+check_update_needed lucetc "$needed" "$current"
+
+# End RLBox
+[% END -%]
