@@ -20,6 +20,8 @@ var:
   glean_parser: 3.2.0
 
 targets:
+  release:
+    variant: Release
   nightly:
     git_hash: '[% c("var/git_branch") %]'
     tag_gpg_id: 0
