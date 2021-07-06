@@ -5,7 +5,7 @@ git_hash: 'tor-browser-[% c("var/fenix_version") %]-[% c("var/torbrowser_branch"
 git_url: https://gitlab.torproject.org/tpo/applications/fenix.git
 tag_gpg_id: 1
 gpg_keyring: torbutton.gpg
-variant: Beta
+variant: Release
 
 var:
   fenix_version: 89.1.1

@@ -1,3 +1,7 @@
+Tor Browser 10.5 -- July 7 2021
+ * Android
+   * Bug 40324: Change Fenix variant to Release [fenix]
+
 Tor Browser 10.5 -- July 6 2021
  * All Platforms
    * Update NoScript to 11.2.9
