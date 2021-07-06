@@ -1,7 +1,7 @@
 Tor Browser 10.5 -- July 6 2021
  * All Platforms
    * Update NoScript to 11.2.9
-   * Update Tor Launcher to 0.2.29
+   * Update Tor Launcher to 0.2.30
    * Translations update
    * Bug 25483: Provide Snowflake based on Pion for Windows, macOS, and Linux
    * Bug 33761: Remove unnecessary snowflake dependencies
@@ -20,6 +20,7 @@ Tor Browser 10.5 -- July 6 2021
    * Bug 40011: Rename tor-browser-brand.ftl to brand.ftl [torbutton]
    * Bug 40012: Fix about:tor not loading some images in 82 [torbutton]
    * Bug 40138: Move our primary nightly MAR signing key to tor-browser [tor-browser-build]
+   * Bug 40209: Implement Basic Crypto Safety [tor-browser]
    * Bug 40428: Correct minor Cryptocurrency warning string typo [tor-browser]
    * Bug 40429: Update Onboarding for 10.5 [tor-browser]
    * Bug 40455: Block or recover background requests after bootstrap [tor-browser]
@@ -269,6 +270,7 @@ Tor Browser 10.5a11 -- February 23 2021
  * Windows + OS X + Linux
    * Update Firefox to 78.8.0esr
    * Bug 40029: Create survey banner on about:tor for snowflake [torbutton]
+   * Bug 40209: Implement Basic Crypto Safety [tor-browser]
  * OS X + Linux
    * Update HTTPS Everywhere to 2021.1.27
    * Bug 40212: Bump version of snowflake and webrtc [tor-browser-build]
