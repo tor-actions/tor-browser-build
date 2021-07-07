@@ -1,4 +1,4 @@
-Tor Browser 10.5 -- July 7 2021
+Tor Browser 10.5.1 -- July 7 2021
  * Android
    * Bug 40324: Change Fenix variant to Release [fenix]
 
