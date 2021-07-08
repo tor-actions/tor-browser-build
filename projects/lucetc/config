@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 version: '[% c("abbrev") %]'
-git_hash: a0a1ce981638109f1f76cd1eecf17a0436a20055
+git_hash: d582d76bf0d17984501f3933688bf7a1eb5cf208
 git_url: https://github.com/PLSysSec/lucet_sandbox_compiler/
 git_submodule: 1
 
@@ -28,8 +28,9 @@ input_files:
   - name: wasi-sysroot
     project: wasi-sysroot
   # Use `make cargo_vendor-lucetc` to re-generate the vendor tarball
-  - URL: https://people.torproject.org/~gk/mirrors/sources/lucetc-vendor.tar.bz2
-    sha256sum: 12ba97fca12177e7ed5b5409fcfdbd31dc7db2e82282768d99dee5bcb1b1246a
+  - name: lucetc-vendor
+    URL: 'https://people.torproject.org/~boklm/mirrors/sources/lucetc-vendor-[% c("version") %].tar.bz2'
+    sha256sum: 6b044ed76bc8870040174c8fbfa49c3a791b3aba7d32dd00cad541025eb16077
   - filename: Remove-march-native-from-COMMON_CFLAGS.patch
 
 steps:

@@ -35,7 +35,7 @@ tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
 # Now prepare the offline build
 # Move the directory for hardcoding the path in .cargo/config
 mv /var/tmp/build/[% project %]-[% c('version') %] $builddir
-tar -C $builddir -xjf lucetc-vendor.tar.bz2
+tar -C $builddir -xf [% c('input_files_by_name/lucetc-vendor') %]
 cd $builddir
 # .cargo exists already, let's just add to it
 cat >> .cargo/config << 'EOF'

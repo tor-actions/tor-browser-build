@@ -36,3 +36,6 @@ input_files:
   - project: llvm-project
     name: clang-source
     enable: '[% c("var/ff91esr") %]'
+  - project: python
+    name: python
+    enable: '[% c("var/linux") %]'

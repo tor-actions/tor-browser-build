@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 version: '[% c("abbrev") %]'
-git_hash: 5225b05436ce57f01fe649f411f3ff701246628b
+git_hash: b36c433738f0c29160a5ac1c1cee1b1b884bf4a0
 git_url: https://github.com/CraneStation/wasi-sdk
 git_submodule: 1
 
@@ -27,4 +27,3 @@ input_files:
     project: cmake
   - name: ninja
     project: ninja
-  - filename: no-git.patch

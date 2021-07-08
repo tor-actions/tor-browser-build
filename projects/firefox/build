@@ -49,7 +49,7 @@ export LLVM_CONFIG="/var/tmp/dist/clang/bin/llvm-config"
     rtdir=/var/tmp/dist/macosx-toolchain/clang/lib/clang/[% pc("clang", "version") %]/lib/wasi
   [% END-%]
   mkdir -p $rtdir
-  cp /var/tmp/dist/wasi-sysroot/lib/clang/9.0.0/lib/wasi/libclang_rt.builtins-wasm32.a $rtdir
+  cp /var/tmp/dist/wasi-sysroot/lib/clang/11.0.0/lib/wasi/libclang_rt.builtins-wasm32.a $rtdir
   tar -C /var/tmp/dist -xf [% c('input_files_by_name/lucetc') %]
   export PATH="/var/tmp/dist/lucetc/bin:$PATH"
   export WASM_SANDBOXED_LIBRARIES=graphite,ogg
@@ -107,6 +107,8 @@ tar -C browser/extensions -xf $rootdir/[% c('input_files_by_name/tor-launcher') 
 
 rm -f configure
 rm -f js/src/configure
+
+export MACH_USE_SYSTEM_PYTHON=1
 
 # Android does not support --enable-bundled-fonts option
 ./mach configure --with-tor-browser-version=[% c("var/torbrowser_version") %] --with-distribution-id=org.torproject --enable-update-channel=[% c("var/channel") %] --enable-bundled-fonts --with-branding=[% c("var/branding_directory") %]
@@ -200,10 +202,10 @@ cd $distdir
     # No need for an unstripped geckodriver
     strip geckodriver
   [% END %]
-  mkdir -p $distdir/Debug/Browser/gtk2
+  mkdir -p $distdir/Debug/Browser
   # Strip and generate debuginfo for the firefox binary that we keep, all *.so
   # files, the plugin-container, and the updater (see ticket #10126)
-  for LIB in Browser/*.so Browser/gtk2/*.so Browser/firefox.real Browser/plugin-container Browser/updater
+  for LIB in Browser/*.so Browser/firefox.real Browser/plugin-container Browser/updater
   do
       objcopy --only-keep-debug $LIB Debug/$LIB
       strip $LIB

@@ -21,13 +21,16 @@ tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
 
 mv /var/tmp/build/[% project %]-[% c('version') %] $builddir
 cd $builddir
-# We have no .git in our tar ball but the Makefile depends on that. Just
-# hard-code the version for now.
-patch -p1 < $rootdir/no-git.patch
+# We have no .git in our tar ball but the script version.sh used by
+# the Makefile depends on that. We replace the script.
+cat > 'version.sh' << EOF
+#!/bin/sh
+echo '[% c("abbrev") %]'
+EOF
 
 # XXX: We don't want to use the clang 9.0 wasi-sdk would use, see:
 # https://bugzilla.mozilla.org/show_bug.cgi?id=1605708
-make -j[% c("buildconf/num_procs") %] PREFIX=$distdir/[% project %]
+make -j[% c("buildconf/num_procs") %] PREFIX=$distdir/[% project %] DESTDIR=/
 
 cd $distdir
 [% c('tar', {

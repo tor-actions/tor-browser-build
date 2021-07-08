@@ -14,6 +14,9 @@ cd /var/tmp/dist/rust-[% c('var/previous_version') %]-x86_64-unknown-linux-gnu
 export PATH="$distdir-rust-old/bin:$PATH"
 
 [% pc(c('var/compiler'), 'var/setup', { compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')) }) %]
+[% IF c("var/linux") -%]
+  [% pc('python', 'var/setup', { python_tarfile => c('input_files_by_name/python') }) %]
+[% END -%]
 
 [% IF c("var/osx") %]
   # We need to clear `CC` and `LDFLAGS` as they are used for the host platform
