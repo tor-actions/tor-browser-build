@@ -46,6 +46,13 @@ cd /var/tmp/build/rustc-[% c('version') %]-src
   cd src/llvm-project
   patch -p1 < $rootdir/[% c('input_files_by_name/43909') %]
   cd ../../
+[% ELSE -%]
+  # Patches for fixing:
+  #  https://github.com/rust-lang/rust/issues/86436
+  #  https://github.com/rust-lang/rust/pull/86568
+  #  https://github.com/rust-lang/rust/issues/86999
+  # This can be removed when updating to >= 1.54.0.
+  patch -p1 < $rootdir/fix-build-1.53.0.patch
 [% END %]
 
 [% IF c("var/windows-i686") %]

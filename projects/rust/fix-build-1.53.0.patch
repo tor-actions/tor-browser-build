@@ -1,0 +1,88 @@
+commit 601d24810e89efd42f7cd69d4a7ccecd4e35364d
+Author: Eric Huss <eric@huss.org>
+Date:   Tue Jun 22 22:10:25 2021 -0700
+
+    Don't dist miri on stable or beta.
+
+diff --git a/src/bootstrap/dist.rs b/src/bootstrap/dist.rs
+index 71ed0af4a7c..e0c33f73577 100644
+--- a/src/bootstrap/dist.rs
++++ b/src/bootstrap/dist.rs
+@@ -1171,6 +1171,9 @@ impl Step for Miri {
+     }
+ 
+     fn run(self, builder: &Builder<'_>) -> Option<GeneratedTarball> {
++        if !builder.build.unstable_features() {
++            return None;
++        }
+         let compiler = self.compiler;
+         let target = self.target;
+         assert!(builder.config.extended);
+
+
+commit 6aa79a34d87252deaae11e75663e5740a22f14ea
+Author: Eric Huss <eric@huss.org>
+Date:   Wed Jun 23 07:03:42 2021 -0700
+
+    Comment and include rust-analyzer.
+
+diff --git a/src/bootstrap/dist.rs b/src/bootstrap/dist.rs
+index e0c33f73577..19895baf08f 100644
+--- a/src/bootstrap/dist.rs
++++ b/src/bootstrap/dist.rs
+@@ -1072,6 +1072,12 @@ impl Step for RustAnalyzer {
+     }
+ 
+     fn run(self, builder: &Builder<'_>) -> Option<GeneratedTarball> {
++        // This prevents rust-analyzer from being built for "dist" or "install"
++        // on the stable/beta channels. It is a nightly-only tool and should
++        // not be included.
++        if !builder.build.unstable_features() {
++            return None;
++        }
+         let compiler = self.compiler;
+         let target = self.target;
+         assert!(builder.config.extended);
+@@ -1171,6 +1177,9 @@ impl Step for Miri {
+     }
+ 
+     fn run(self, builder: &Builder<'_>) -> Option<GeneratedTarball> {
++        // This prevents miri from being built for "dist" or "install"
++        // on the stable/beta channels. It is a nightly-only tool and should
++        // not be included.
+         if !builder.build.unstable_features() {
+             return None;
+         }
+
+
+   Disable rust-analyzer
+
+diff --git a/src/bootstrap/builder.rs b/src/bootstrap/builder.rs
+index cff1ec843ff..3767b0387a0 100644
+--- a/src/bootstrap/builder.rs
++++ b/src/bootstrap/builder.rs
+@@ -482,7 +482,6 @@ impl<'a> Builder<'a> {
+                 install::Std,
+                 install::Cargo,
+                 install::Rls,
+-                install::RustAnalyzer,
+                 install::Rustfmt,
+                 install::RustDemangler,
+                 install::Clippy,
+diff --git a/src/bootstrap/install.rs b/src/bootstrap/install.rs
+index 13ee909afd5..a38fc9e95eb 100644
+--- a/src/bootstrap/install.rs
++++ b/src/bootstrap/install.rs
+@@ -164,12 +164,6 @@ install!((self, builder, _config),
+             );
+         }
+     };
+-    RustAnalyzer, "rust-analyzer", Self::should_build(_config), only_hosts: true, {
+-        let tarball = builder
+-            .ensure(dist::RustAnalyzer { compiler: self.compiler, target: self.target })
+-            .expect("missing rust-analyzer");
+-        install_sh(builder, "rust-analyzer", self.compiler.stage, Some(self.target), &tarball);
+-    };
+     Clippy, "clippy", Self::should_build(_config), only_hosts: true, {
+         let tarball = builder.ensure(dist::Clippy { compiler: self.compiler, target: self.target });
+         install_sh(builder, "clippy", self.compiler.stage, Some(self.target), &tarball);
