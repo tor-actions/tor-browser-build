@@ -13,7 +13,7 @@ var:
     use_container: 1
 
 targets:
-  android:
+  ff91esr:
     var:
       cbindgen_version: 0.19.0
       cbindgen_hash: d9e490ce8b836194595bd30611253a7028059da2

@@ -25,7 +25,7 @@ export LLVM_HOME=$(pwd)
 mkdir build
 cd build
 # XXX: remove duplicated parts while fixing tor-browser-build#40048
-[% IF ! c("var/android") %]
+[% IF ! c("var/ff91esr") %]
   cmake .. -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=$distdir \
                                -DCMAKE_BUILD_TYPE:STRING=Release \
        [% IF c("var/rlbox") -%]-DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=WebAssembly \[% END -%]

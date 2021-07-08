@@ -8,7 +8,7 @@ var:
     use_container: 1
 
 targets:
-  android:
+  ff91esr:
     var:
       llvm_version: '[% pc("llvm-project", "version") %]'
 
@@ -32,7 +32,7 @@ input_files:
     name: cmake
   - project: clang-source
     name: clang-source
-    enable: '[% ! c("var/android") %]'
+    enable: '[% ! c("var/ff91esr") %]'
   - project: llvm-project
     name: clang-source
-    enable: '[% c("var/android") %]'
+    enable: '[% c("var/ff91esr") %]'

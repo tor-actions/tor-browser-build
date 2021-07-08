@@ -9,10 +9,12 @@ var:
     use_container: 1
 
 targets:
-  android:
+  ff91esr:
     var:
       current_version: 1.52.0
       previous_version: 1.51.0
+  android:
+    var:
       arch_deps:
         - libssl-dev
         - pkg-config
@@ -81,7 +83,7 @@ input_files:
     name: cmake
   - project: ninja
     name: ninja
-    enable: '[% c("var/android") %]'
+    enable: '[% c("var/ff91esr") %]'
   - project: '[% c("var/compiler") %]'
     name: '[% c("var/compiler") %]'
   - URL: 'https://static.rust-lang.org/dist/rustc-[% c("var/current_version") %]-src.tar.gz'
@@ -98,4 +100,4 @@ input_files:
     enable: '[% c("var/windows-i686") %]'
   - filename: 43909.patch
     name: 43909
-    enable: '[% ! c("var/android") %]'
+    enable: '[% ! c("var/ff91esr") %]'
