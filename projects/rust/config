@@ -11,8 +11,8 @@ var:
 targets:
   ff91esr:
     var:
-      current_version: 1.52.0
-      previous_version: 1.51.0
+      current_version: 1.53.0
+      previous_version: 1.52.0
   android:
     var:
       arch_deps:
@@ -101,3 +101,8 @@ input_files:
   - filename: 43909.patch
     name: 43909
     enable: '[% ! c("var/ff91esr") %]'
+
+    # Fix for https://github.com/rust-lang/rust/issues/86436
+    # Taken from https://github.com/rust-lang/rust/pull/86568 (merged it 1.54.0)
+  - filename: fix-build-1.53.0.patch
+    enable: '[% c("var/ff91esr") %]'
