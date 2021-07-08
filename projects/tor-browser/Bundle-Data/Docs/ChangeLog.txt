@@ -1,3 +1,73 @@
+Tor Browser 10.5.1 -- July 7 2021
+ * Android
+   * Bug 40324: Change Fenix variant to Release [fenix]
+
+Tor Browser 10.5 -- July 6 2021
+ * All Platforms
+   * Update NoScript to 11.2.9
+   * Update Tor Launcher to 0.2.30
+   * Translations update
+   * Bug 25483: Provide Snowflake based on Pion for Windows, macOS, and Linux
+   * Bug 33761: Remove unnecessary snowflake dependencies
+   * Bug 40064: Bump libevent to 2.1.12 [tor-browser-build]
+   * Bug 40137: Migrate https-everywhere storage to idb [tor-browser]
+   * Bug 40261: Bump versions of snowflake and webrtc [tor-browser-build]
+   * Bug 40263: Update domain front for Snowflake [tor-browser-build]
+   * Bug 40302: Update version of snowflake [tor-browser-build]
+   * Bug 40030: DuckDuckGo redirect to html doesn't work [torbutton]
+ * Windows + OS X + Linux
+   * Bug 27476: Implement about:torconnect captive portal within Tor Browser [tor-browser]
+   * Bug 32228: Bookmark TPO support domains in Tor Browser
+   * Bug 33803: Add a secondary nightly MAR signing key [tor-browser]
+   * Bug 33954: Consider different approach for Bug 2176
+   * Bug 34345: "Don't Bootstrap" Startup Mode
+   * Bug 40011: Rename tor-browser-brand.ftl to brand.ftl [torbutton]
+   * Bug 40012: Fix about:tor not loading some images in 82 [torbutton]
+   * Bug 40138: Move our primary nightly MAR signing key to tor-browser [tor-browser-build]
+   * Bug 40209: Implement Basic Crypto Safety [tor-browser]
+   * Bug 40428: Correct minor Cryptocurrency warning string typo [tor-browser]
+   * Bug 40429: Update Onboarding for 10.5 [tor-browser]
+   * Bug 40455: Block or recover background requests after bootstrap [tor-browser]
+   * Bug 40456: Update the SecureDrop HTTPS-Everywhere update channel [tor-browser]
+   * Bug 40475: Include clearing CORS preflight cache [tor-browser]
+   * Bug 40478: Onion alias url rewrite is broken [tor-browser]
+   * Bug 40484: Bootstrapping page show Quickstart text [tor-browser]
+   * Bug 40490: BridgeDB bridge captcha selection is broken in alpha [tor-browser]
+   * Bug 40495: Onion pattern is focusable by click on about:torconnect [tor-browser]
+   * Bug 40499: Onion Alias doesn't work with TOR_SKIP_LAUNCH [tor-browser]
+ * Android
+   * Bug 30318: Integrate snowflake into mobile Tor Browser
+   * Bug 40206: Disable the /etc/hosts parser [tor-browser]
+ * Linux
+   * Bug 40089: Remove CentOS 6 support for Tor Browser 10.5 [tor-browser]
+ * Build System
+   * All Platforms
+     * Update Go to 1.15.13
+     * Bug 23631: Use rootless containers [tor-browser-build]
+     * Bug 33693: Change snowflake and meek dummy address [tor-browser]
+     * Bug 40016: getfpaths is not setting origin_project [rbm]
+     * Bug 40169: Update apt package cache after calling pre_pkginst, too [tor-browser-build]
+     * Bug 40194: Remove osname part in cbindgen filename [tor-browser-build]
+   * Windows + OS X + Linux
+     * Bug 40081: Build Mozilla code with --enable-rust-simd [tor-browser-build]
+     * Bug 40104: Use our TMPDIR when creating our .mar files [tor-browser-build]
+     * Bug 40133: Bump Rust version for ESR 78 to 1.43.0 [tor-browser-build]
+     * Bug 40166: Update apt cache before calling pre_pkginst in container-image config [tor-browser-build]
+   * Android
+     * Bug 28672: Android reproducible build of Snowflake
+     * Bug 40313: Use apt-get to install openjdk-8 .deb files with their dependencies [tor-browser-build]
+   * Windows
+     * Bug 34360: Bump binutils to 2.35.1
+     * Bug 40131: Remove unused binutils patches [tor-browser-build]
+   * Linux
+     * Bug 26238: Move to Debian Jessie for our Linux builds
+     * Bug 31729: Support Wayland
+     * Bug 40041: Remove CentOS 6 support for 10.5 series [tor-browser-build]
+     * Bug 40103: Add i386 pkg-config path for linux-i686 [tor-browser-build]
+     * Bug 40112: Strip libstdc++ we ship [tor-browser-build]
+     * Bug 40118: Add missing libdrm dev package to firefox container [tor-browser-build]
+     * Bug 40235: Bump apt for Jessie containers [tor-browser-build]
+
 Tor Browser 10.5a17 -- June 27 2021
  * All Platforms
    * Update NoScript to 11.2.9
@@ -204,6 +274,7 @@ Tor Browser 10.5a11 -- February 23 2021
  * Windows + OS X + Linux
    * Update Firefox to 78.8.0esr
    * Bug 40029: Create survey banner on about:tor for snowflake [torbutton]
+   * Bug 40209: Implement Basic Crypto Safety [tor-browser]
  * OS X + Linux
    * Update HTTPS Everywhere to 2021.1.27
    * Bug 40212: Bump version of snowflake and webrtc [tor-browser-build]
