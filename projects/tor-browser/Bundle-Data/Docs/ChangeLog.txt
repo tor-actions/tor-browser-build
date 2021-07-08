@@ -1,3 +1,13 @@
+Tor Browser 11.0a1 -- July 9 2021
+ * Android
+   * Bug 40172: Find the Quit button [fenix]
+   * Bug 40173: Rebase fenix patches to fenix v90.0.0-beta.6 [fenix]
+   * Bug 40179: Show Snowflake bridge option on Release [fenix]
+ * Build System
+   * Android
+     * Bug 40312: Update components for mozilla90 [tor-browser-build]
+     * Bug 40323: Remove unused gomobile project [tor-browser-build]
+
 Tor Browser 10.5.1 -- July 7 2021
  * Android
    * Bug 40324: Change Fenix variant to Release [fenix]
