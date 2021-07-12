@@ -49,15 +49,6 @@ directory = "/var/tmp/build/application-services/vendor"
 offline=true
 EOF
 
-# Bug 40293: Patch vendored uniffi_bindgen.
-pushd /var/tmp/build/application-services/vendor/
-patch -p1 < $rootdir/0001-Store-the-universe-of-known-types-in-an-ordered-BTre.patch
-# Update the expected checksum in the vendored source.
-sed -i \
-    's/e39e61458d0d28c2b3425852c8a55625cc185ce806fbc7c0c6682f8cc93dec8d/0909e5214eedf1f2e709909176b1cbda39887002b26388535c3bc551fb04da1b/' \
-    uniffi_bindgen/.cargo-checksum.json
-popd
-
 # Move NSS and SQLCipher to the right place
 # XXX: Maybe merge with the loop above.
 archs="armv7 aarch64 x86 x86_64"

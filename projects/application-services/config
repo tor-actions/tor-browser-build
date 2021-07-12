@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
-version: 77.0.2
-git_hash: dd09c25f14dbf45f1637ed8dca2d1e5ff668479f
+version: 79.0.0
+git_hash: 89ea9cfa6eaa0763d17ec9aa04098839d028004c
 git_url: https://github.com/mozilla/application-services
 git_submodule: 1
 
@@ -80,18 +80,17 @@ input_files:
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
   # Use `make cargo_vendor-application-services` to re-generate the vendor tarball
   - URL: https://people.torproject.org/~boklm/mirrors/sources/application-services-vendor-[% c('version') %].tar.bz2
-    sha256sum: 313c1e9b164ce9905eafe29a913edb617379e6d153ce28fa751d9f544e6e87c8
+    sha256sum: 386f0f94452f4a6185e9db094a157c67684c259b38e6f6d62805eaed30f20e58
   - filename: no-git.patch
   - filename: mavenLocal.patch
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
   - filename: target.patch
   - filename: gen_gradle_deps_file.sh
     enable: '[% c("var/fetch_gradle_dependencies") %]'
-  - filename: 0001-Store-the-universe-of-known-types-in-an-ordered-BTre.patch
 
 steps:
   list_toolchain_updates:
-    git_hash: 'v77.0.2'
+    git_hash: 'v79.0.0'
     input_files: []
     var:
       container:
