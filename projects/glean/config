@@ -11,7 +11,7 @@ src: |
 steps:
   create_glean_deps_tarball:
     git_url: ''
-    version: 3.2.0
+    version: 3.4.0
     filename: 'glean-wheels-[% c("version") %].tar.xz'
     build_log: '-'
     var:
