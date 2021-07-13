@@ -138,9 +138,9 @@ steps:
           - torbrowser-android-x86_64
 
   list_toolchain_updates:
-    #git_url: https://github.com/mozilla/gecko-dev.git
-    # 90.0b12
-    #git_hash: 5e8ffbe1bf6d448cb235cb0a64a56646a6537b22
+    git_url: https://github.com/mozilla/gecko-dev.git
+    # beta
+    git_hash: beta
     tag_gpg_id: 0
     input_files: []
     var:
