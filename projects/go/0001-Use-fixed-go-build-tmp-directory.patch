@@ -11,7 +11,7 @@ diff --git a/src/cmd/go/internal/work/action.go b/src/cmd/go/internal/work/actio
 index 33b7818fb2..5e369d0f53 100644
 --- a/src/cmd/go/internal/work/action.go
 +++ b/src/cmd/go/internal/work/action.go
-@@ -249,9 +249,13 @@ func (b *Builder) Init() {
+@@ -252,9 +252,13 @@ func (b *Builder) Init() {
  	if cfg.BuildN {
  		b.WorkDir = "$WORK"
  	} else {
