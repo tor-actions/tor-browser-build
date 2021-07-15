@@ -15,7 +15,7 @@ index 33b7818fb2..5e369d0f53 100644
  	if cfg.BuildN {
  		b.WorkDir = "$WORK"
  	} else {
--		tmp, err := ioutil.TempDir(cfg.Getenv("GOTMPDIR"), "go-build")
+-		tmp, err := os.MkdirTemp(cfg.Getenv("GOTMPDIR"), "go-build")
 -		if err != nil {
 -			base.Fatalf("go: creating work dir: %v", err)
 +		tmp := filepath.Join(cfg.Getenv("GOTMPDIR"), "go-build-workdir")
