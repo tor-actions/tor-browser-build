@@ -1,4 +1,4 @@
-Tor Browser 11.0a2 -- July 17 2021
+Tor Browser 11.0a2 -- July 19 2021
  * All Platforms
    * Update HTTPS Everywhere to 2021.7.13
  * Windows + OS X + Linux
@@ -10,6 +10,7 @@ Tor Browser 11.0a2 -- July 17 2021
    * Bug 40524: Update DuckDuckGo onion site URL in search preferences and onboarding [tor-browser]
  * Android
    * Update Fenix to 90.1.1
+   * Bug 40062: Update DuckDuckGo onion search plugin [android-components]
    * Bug 40177: Hide Tor icons in settings [fenix]
  * Build System
    * All Platforms
