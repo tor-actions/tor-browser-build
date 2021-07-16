@@ -1,3 +1,16 @@
+Tor Browser 10.5.3 -- July 17 2021
+ * Android
+   * Update HTTPS Everywhere to 2021.7.13
+   * Update Fenix to 90.1.1
+   * Bug 40172: Find the Quit button [fenix]
+   * Bug 40173: Rebase fenix patches to fenix v90.0.0-beta.6 [fenix]
+   * Bug 40177: Hide Tor icons in settings [fenix]
+   * Bug 40179: Show Snowflake bridge option on Release [fenix]
+   * Bug 40180: Rebase fenix patches to fenix v90.1.1 [fenix]
+ * Build System
+   * Android
+     * Bug 40312: Update components for mozilla90 [tor-browser-build]
+
 Tor Browser 10.5.2 -- July 13 2021
  * Windows + OS X + Linux
    * Update Firefox to 78.12.0esr

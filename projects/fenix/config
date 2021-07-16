@@ -1,21 +1,21 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
 filename: 'fenix-[% c("version") %]-[% c("var/build_id") %].tar.gz'
-git_hash: 'tor-browser-[% c("var/fenix_version") %]-[% c("var/torbrowser_branch") %]-1-build2'
+git_hash: 'tor-browser-[% c("var/fenix_version") %]-[% c("var/torbrowser_branch") %]-1-build1'
 git_url: https://gitlab.torproject.org/tpo/applications/fenix.git
 tag_gpg_id: 1
 gpg_keyring: torbutton.gpg
 variant: Release
 
 var:
-  fenix_version: 90.0.0b6
+  fenix_version: 90.1.1
   torbrowser_branch: 10.5
   git_branch: 'tor-browser-[% c("var/fenix_version") %]-[% c("var/torbrowser_branch") %]-1'
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   container:
     use_container: 1
   # This should be updated when the list of gradle dependencies is changed.
-  gradle_dependencies_version: 28
+  gradle_dependencies_version: 29
   gradle_version: 6.5.1
   glean_parser: 3.2.0
 
