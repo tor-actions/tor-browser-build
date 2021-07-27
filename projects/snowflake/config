@@ -12,8 +12,6 @@ input_files:
   - project: container-image
   - name: go
     project: go
-  - name: uniuri
-    project: uniuri
   - name: goptlib
     project: goptlib
   - name: pion-webrtc
