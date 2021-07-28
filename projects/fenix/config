@@ -8,16 +8,16 @@ gpg_keyring: torbutton.gpg
 variant: Release
 
 var:
-  fenix_version: 90.1.1
+  fenix_version: 91.0.0b5
   torbrowser_branch: 10.5
   git_branch: 'tor-browser-[% c("var/fenix_version") %]-[% c("var/torbrowser_branch") %]-1'
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   container:
     use_container: 1
   # This should be updated when the list of gradle dependencies is changed.
-  gradle_dependencies_version: 29
+  gradle_dependencies_version: 30
   gradle_version: 6.5.1
-  glean_parser: 3.2.0
+  glean_parser: 3.4.0
 
 targets:
   nightly:
@@ -47,7 +47,7 @@ input_files:
     exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
   - URL: https://people.torproject.org/~boklm/mirrors/sources/glean-wheels-[% c('var/glean_parser') %].tar.xz
     name: glean
-    sha256sum: d87e7049b56d6c4ccb0788f495f1ac9b635bb32074ff66e579fdd3e888ebc0e9
+    sha256sum: b74c9184dd2ee4c84a6e9766cd754cd07fc9be7233a1cdaa35bba6bd169beb75
   - filename: mavenLocal.patch
   - project: tor-android-service
     name: tor-android-service
