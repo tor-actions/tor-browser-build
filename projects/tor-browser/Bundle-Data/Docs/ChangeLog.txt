@@ -1,3 +1,15 @@
+Tor Browser 11.0a3 -- August 5 2021
+ * Android
+   * Update NoScript to 11.2.11
+   * Bug 40176: TBA: sometimes I only see the banner and can't tap on the address bar [fenix]
+   * Bug 40185: Use NimbusDisabled [fenix]
+   * Bug 40181: Remove V2 Deprecation banner on about:tor for Android [fenix]
+   * Bug 40184: Rebase fenix patches to fenix v91.0.0-beta.5 [fenix]
+   * Bug 40063: Move custom search providers [android-components]
+ * Build System
+   * Android
+     * Bug 40331: Update components for mozilla91 [tor-browser-build]
+
 Tor Browser 11.0a2 -- July 19 2021
  * All Platforms
    * Update HTTPS Everywhere to 2021.7.13
