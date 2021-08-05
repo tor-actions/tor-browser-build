@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 git_url: https://git.code.sf.net/p/mingw-w64/mingw-w64
-git_hash: 660e09f3cb20f181b6d6435cb623d65a3922a063
+git_hash: cdb052f1d4056cd510cb83197b55868427b87476
 version: '[% c("abbrev") %]'
 
 var:
@@ -18,9 +18,10 @@ input_files:
     name: clang
   - project: cmake
     name: cmake
-  - project: clang-source
-    name: clang-source
+  - project: llvm-project
+    name: llvm-project
   - project: llvm-mingw
     name: llvm-mingw
   - filename: mingw-winrt.patch
   - filename: mingw-dwrite_3.patch
+  - filename: mingw-unknown.patch

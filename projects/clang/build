@@ -12,7 +12,7 @@ export PATH="/var/tmp/dist/cmake/bin:$PATH"
   ln -s gcc /var/tmp/dist/gcc/bin/cc
   [% pc('python', 'var/setup', { python_tarfile => c('input_files_by_name/python') }) %]
 [% END -%]
-[% IF c("var/linux") || c("var/android") || c("var/windows") -%]
+[% IF c("var/linux") || c("var/android") -%]
   tar -C /var/tmp/dist -xf [% c('input_files_by_name/binutils') %]
   export PATH="/var/tmp/dist/binutils/bin:$PATH"
 [% END -%]

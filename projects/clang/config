@@ -20,14 +20,6 @@ input_files:
   - name: binutils
     project: binutils
     enable: '[% c("var/linux") %] || [% c("var/android") %]'
-  # We build our own binutils as the one from buster has a regression:
-  # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=953423
-  # https://sourceware.org/bugzilla/show_bug.cgi?id=24458
-  - name: binutils
-    project: binutils
-    enable: '[% c("var/windows") %]'
-    target_prepend:
-     - windows-clang
   - project: cmake
     name: cmake
   - project: clang-source

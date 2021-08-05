@@ -12,6 +12,10 @@ targets:
     var:
       node_version: 10.23.1
       node_hash: 88aa16f5af79615b183ca55ed81393763169e75d1fb96013cf1831895c6cedfa
+  windows:
+    var:
+      arch_deps:
+        - python2
 
 input_files:
   - project: container-image

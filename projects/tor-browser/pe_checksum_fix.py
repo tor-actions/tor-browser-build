@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Copyright (c) 2015-2017, The Tor Project, Inc.
 #
@@ -45,12 +45,12 @@ Thanks to a cypherpunk for this workaround idea.
 
 import pefile;
 
-f = open('torbrowser-install-tmp.exe')
+f = open('torbrowser-install-tmp.exe', 'rb')
 exe = f.read()
 f.close()
 remainder = len(exe) % 8
 if remainder > 0:
-    exe += '\0' * (8 - remainder)
+    exe += bytes('\0' * (8 - remainder), 'utf-8')
 pef = pefile.PE(data=exe, fast_load=True)
 pef.OPTIONAL_HEADER.CheckSum = pef.generate_checksum()
 pef.write(filename='torbrowser-install-tmp2.exe')
