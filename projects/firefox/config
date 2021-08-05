@@ -41,8 +41,7 @@ steps:
 
   list_toolchain_updates:
     git_url: https://github.com/mozilla/gecko-dev.git
-    # < 91.0a1
-    git_hash: f351e19360729b351bfc7c1386d6e4ca4ea676e2
+    git_hash: esr91
     tag_gpg_id: 0
     input_files: []
     var:
