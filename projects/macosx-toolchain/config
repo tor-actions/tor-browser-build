@@ -1,13 +1,13 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-1-[% c("var/build_id") %].tar.gz'
-version: 10.11
+version: 10.12
 var:
   container:
     use_container: 1
   setup: |
     mkdir -p /var/tmp/dist
     tar -C /var/tmp/dist -xf $rootdir/[% c("compiler_tarfile") %]
-    export sysrootdir=/var/tmp/dist/[% project %]/MacOSX10.11.sdk/
+    export sysrootdir=/var/tmp/dist/[% project %]/MacOSX[% c("version") %].sdk/
     export clangdir=/var/tmp/dist/[% project %]/clang
     export cctoolsdir=/var/tmp/dist/[% project %]/cctools/bin
     export PATH="$clangdir/bin:$cctoolsdir:$PATH"
@@ -30,8 +30,8 @@ input_files:
   # build/macosx/cross-mozconfig.common
   - name: SDK
     URL: 'https://people.torproject.org/~gk/mirrors/sources/MacOSX[% c("version") %].sdk.tar.bz2'
-    sha256sum: d11e410d757d023be66d2fe7eaa85a1d232da3ac04f177eff3d8b8275cd9ffca
-  - name: clang-source
-    project: clang-source
+    sha256sum: d2ef4ae4f85675c08795d33f283e307b6299184d78d4b10bdbea39df6dca7d94
+  - name: llvm-project
+    project: llvm-project
   - filename: compiler-rt-cross-compile.patch
   - filename: compiler-rt-no-codesign.patch

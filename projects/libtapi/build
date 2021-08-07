@@ -36,7 +36,8 @@ cmake $builddir/src/llvm \
       -DCMAKE_INSTALL_PREFIX=$distdir \
       -DLLVM_TARGETS_TO_BUILD="X86;ARM;AArch64" \
       -DTAPI_REPOSITORY_STRING=$TAPI_REPOSITORY \
-      -DTAPI_FULL_VERSION=$TAPI_VERSION
+      -DTAPI_FULL_VERSION=$TAPI_VERSION \
+      -DPYTHON_EXECUTABLE=/usr/bin/python3
 
 ninja clangBasic
 ninja libtapi install-libtapi install-tapi-headers
