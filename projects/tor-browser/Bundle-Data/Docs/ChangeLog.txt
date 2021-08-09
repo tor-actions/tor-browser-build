@@ -1,3 +1,22 @@
+Tor Browser 10.5.5 -- August 18 2021
+ * All Platforms
+   * Update Tor to 0.4.5.10
+ * Linux
+   * Bug 40582: Tor Browser 10.5.2 tabs always crash on Fedora Xfce Rawhide [tor-browser]
+ * Android
+   * Update Fenix to 91.2.0
+   * Update NoScript to 11.2.11
+   * Bug 40063: Move custom search providers [android-components]
+   * Bug 40176: TBA: sometimes I only see the banner and can't tap on the address bar [fenix]
+   * Bug 40181: Remove V2 Deprecation banner on about:tor for Android [fenix]
+   * Bug 40184: Rebase fenix patches to fenix v91.0.0-beta.5 [fenix]
+   * Bug 40185: Use NimbusDisabled [fenix]
+   * Bug 40186: Hide Credit Cards in Settings [fenix]
+ * Build System
+   * Android
+     * Update Go to 1.15.15
+     * Bug 40331: Update components for mozilla91 [tor-browser-build]
+
 Tor Browser 10.5.4 -- August 10 2021
  * Windows + OS X + Linux
    * Update Firefox to 78.13.0esr
