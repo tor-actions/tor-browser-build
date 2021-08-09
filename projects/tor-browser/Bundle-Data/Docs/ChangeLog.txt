@@ -1,3 +1,19 @@
+Tor Browser 11.0a4 -- August 11 2021
+ * All Platforms
+ * Windows + OS X + Linux
+   * Update Firefox to 78.13.0esr
+   * Bug 40041: Remove V2 Deprecation banner on about:tor for desktop [torbutton]
+   * Bug 40534: Cannot open URLs on command line with Tor Browser 10.5 [tor-browser]
+   * Bug 40547: UX: starting in offline mode can result in difficulty to connect later [tor-browser]
+   * Bug 40561: Refactor about:torconnect implementation [tor-browser]
+   * Bug 40567: RFPHelper is not init until after about:torconnect bootstraps [tor-browser]
+ * Android
+   * Update Fenix to 91.1.0
+   * Bug 40186: Hide Credit Cards in Settings [fenix]
+ * Build System
+   * All Platforms
+     * Update Go to 1.16.7
+
 Tor Browser 11.0a3 -- August 5 2021
  * Android
    * Update NoScript to 11.2.11
