@@ -1,3 +1,11 @@
+Tor Browser 11.0a5 -- August 19 2021
+ * All Platforms
+   * Update Tor to 0.4.6.7
+ * Linux
+   * Bug 40582: Tor Browser 10.5.2 tabs always crash on Fedora Xfce Rawhide [tor-browser]
+ * Android
+   * Update Fenix to 91.2.0
+
 Tor Browser 11.0a4 -- August 11 2021
  * All Platforms
  * Windows + OS X + Linux
