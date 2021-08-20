@@ -1,4 +1,4 @@
-Tor Browser 11.0a5 -- August 19 2021
+Tor Browser 11.0a5 -- August 22 2021
  * All Platforms
    * Update Tor to 0.4.6.7
  * Linux
