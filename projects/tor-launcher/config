@@ -20,7 +20,7 @@ steps:
         use_container: 0
 
 targets:
-  nightly:
+  ff91esr:
     version: '[% c("abbrev") %]'
     git_hash: master
     tag_gpg_id: 0
