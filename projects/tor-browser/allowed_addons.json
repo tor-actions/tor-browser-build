@@ -17,7 +17,7 @@
             "picture_url": "https://addons.cdn.mozilla.net/user-media/userpics/13/13299/13299734.png?modified=1565722641"
           }
         ],
-        "average_daily_users": 644430,
+        "average_daily_users": 661457,
         "categories": {
           "android": [
             "experimental",
@@ -237,10 +237,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.5625,
-          "bayesian_average": 4.561144198825585,
-          "count": 3781,
-          "text_count": 1229
+          "average": 4.5641,
+          "bayesian_average": 4.562755895987041,
+          "count": 3838,
+          "text_count": 1244
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/reviews/",
         "requires_payment": false,
@@ -329,7 +329,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/versions/",
-        "weekly_downloads": 20979
+        "weekly_downloads": 21102
       },
       "notes": null
     },
@@ -345,7 +345,7 @@
             "picture_url": "https://addons.cdn.mozilla.net/user-media/userpics/5/5474/5474073.png?modified=1469820907"
           }
         ],
-        "average_daily_users": 698997,
+        "average_daily_users": 704025,
         "categories": {
           "android": [
             "security-privacy"
@@ -478,10 +478,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.6638,
-          "bayesian_average": 4.661285021224816,
-          "count": 2091,
-          "text_count": 414
+          "average": 4.6632,
+          "bayesian_average": 4.66069632192248,
+          "count": 2111,
+          "text_count": 415
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/https-everywhere/reviews/",
         "requires_payment": false,
@@ -508,7 +508,7 @@
         "type": "extension",
         "url": "https://www.eff.org/https-everywhere",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/https-everywhere/versions/",
-        "weekly_downloads": 13184
+        "weekly_downloads": 12652
       },
       "notes": null
     },
@@ -524,7 +524,7 @@
             "picture_url": "https://addons.cdn.mozilla.net/user-media/userpics/6/6937/6937656.png?modified=1550343990"
           }
         ],
-        "average_daily_users": 203826,
+        "average_daily_users": 207951,
         "categories": {
           "android": [
             "security-privacy"
@@ -737,10 +737,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.8026,
-          "bayesian_average": 4.797832558455313,
-          "count": 1140,
-          "text_count": 221
+          "average": 4.8002,
+          "bayesian_average": 4.795452199110953,
+          "count": 1151,
+          "text_count": 223
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/reviews/",
         "requires_payment": false,
@@ -814,11 +814,16 @@
           "zh-CN": "https://decentraleyes.org",
           "zh-TW": "https://decentraleyes.org"
         },
-        "tags": [],
+        "tags": [
+          "anti tracker",
+          "content blocker",
+          "privacy",
+          "security"
+        ],
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/versions/",
-        "weekly_downloads": 4748
+        "weekly_downloads": 4400
       },
       "notes": null
     },
@@ -834,7 +839,7 @@
             "picture_url": "https://addons.cdn.mozilla.net/user-media/userpics/5/5474/5474073.png?modified=1469820907"
           }
         ],
-        "average_daily_users": 919041,
+        "average_daily_users": 928678,
         "categories": {
           "android": [
             "security-privacy"
@@ -846,7 +851,7 @@
         "contributions_url": "https://www.paypal.me/SupportEFF?utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2014-05-01T18:23:16Z",
         "current_version": {
-          "id": 5247789,
+          "id": 5282284,
           "compatibility": {
             "firefox": {
               "min": "52.0",
@@ -857,19 +862,19 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/privacy-badger17/versions/5247789",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/privacy-badger17/versions/5282284",
           "files": [
             {
-              "id": 3792149,
-              "created": "2021-06-08T18:48:00Z",
-              "hash": "sha256:72579f77035a5146b7332e39a28063c6bb48ca7284d5b1383cab24dca65372a8",
+              "id": 3826636,
+              "created": "2021-08-17T21:36:14Z",
+              "hash": "sha256:b7a4ad974856a4a1e1dd286d67f3e029bb74036e6b6f518451c2a1640bf769da",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 1379278,
+              "size": 1381527,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/3792149/privacy_badger-2021.6.8-an+fx.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/3826636/privacy_badger-2021.8.17-an+fx.xpi",
               "permissions": [
                 "tabs",
                 "http://*/*",
@@ -878,7 +883,6 @@
                 "webRequest",
                 "webRequestBlocking",
                 "storage",
-                "cookies",
                 "privacy",
                 "https://*.facebook.com/*",
                 "http://*.facebook.com/*",
@@ -1305,10 +1309,10 @@
             "url": "http://www.gnu.org/licenses/gpl-3.0.html"
           },
           "release_notes": {
-            "en-US": "<ul><li>Disabled Google's Federated Learning of Cohorts (FLoC). To learn more, visit <a href=\"https://outgoing.prod.mozaws.net/v1/b53e836b99444d8d9da04dc38e94534a633129503d75cde0ec3c8641addb557f/https%3A//www.eff.org/deeplinks/2021/03/googles-floc-terrible-idea\" rel=\"nofollow\">https://www.eff.org/deeplinks/2021/03/googles-floc-terrible-idea</a></li><li>Improved tracker detection and blocking by looking up known CNAME tracker aliases. Thanks to AdGuard for providing the CNAME DNS data behind this feature.</li><li>You can now see in the popup when first-party protections such as link unwrapping are active on the site you are on</li><li>Fixed various site breakages</li><li>Added Greek and Hungarian translations</li><li>Improved translations (Simplified Chinese, Esperanto, Hebrew, Korean, European Portuguese, Turkish, Swedish)</li></ul>"
+            "en-US": "2021.8.17 is a bug fix release to fix link clicking on various websites. Notes for 2021.8.11:\n\n<ul><li>Improved buttons in the popup: Disable and Report are larger and use less text, Donate is now a link</li><li>Removed \"Prevent WebRTC from leaking local IP address\" from the options page. If you previously enabled this setting, it remains available for now. However, the setting is now deprecated and will be removed in a future update. To learn more, visit <a href=\"https://outgoing.prod.mozaws.net/v1/af49a1a8134f54e070543c835f324c55c326cee5babfe379ca8a7e0882ff97e0/https%3A//github.com/EFForg/privacybadger/issues/2782\" rel=\"nofollow\">https://github.com/EFForg/privacybadger/issues/2782</a></li><li>Improved dark theme in Chrome</li><li>Fixed various site breakages</li><li>Improved translations (Simplified Chinese, Esperanto, French, German, Greek, Hebrew, Italian, Polish, Spanish, Swedish, Ukrainian)</li></ul>"
           },
           "reviewed": null,
-          "version": "2021.6.8"
+          "version": "2021.8.17"
         },
         "default_locale": "en-US",
         "description": {
@@ -1332,7 +1336,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2021-06-10T13:59:18Z",
+        "last_updated": "2021-08-18T09:03:50Z",
         "name": {
           "en-US": "Privacy Badger"
         },
@@ -1378,10 +1382,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.79,
-          "bayesian_average": 4.787096578335282,
-          "count": 1867,
-          "text_count": 372
+          "average": 4.7917,
+          "bayesian_average": 4.788806543982308,
+          "count": 1887,
+          "text_count": 376
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/reviews/",
         "requires_payment": false,
@@ -1405,7 +1409,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/versions/",
-        "weekly_downloads": 16478
+        "weekly_downloads": 15952
       },
       "notes": null
     },
@@ -1421,7 +1425,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 4802067,
+        "average_daily_users": 4899877,
         "categories": {
           "android": [
             "security-privacy"
@@ -1605,7 +1609,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2021-08-03T18:10:45Z",
+        "last_updated": "2021-08-27T15:05:49Z",
         "name": {
           "ar": "uBlock Origin",
           "bg": "uBlock Origin",
@@ -1750,10 +1754,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.7677,
-          "bayesian_average": 4.767258229630384,
-          "count": 12211,
-          "text_count": 3334
+          "average": 4.7674,
+          "bayesian_average": 4.766958863380986,
+          "count": 12311,
+          "text_count": 3351
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/reviews/",
         "requires_payment": false,
@@ -1808,7 +1812,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/versions/",
-        "weekly_downloads": 104095
+        "weekly_downloads": 113962
       },
       "notes": null
     },
@@ -1824,7 +1828,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 75482,
+        "average_daily_users": 78944,
         "categories": {
           "android": [
             "photos-media"
@@ -1944,10 +1948,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.5214,
-          "bayesian_average": 4.5163761769011925,
-          "count": 1007,
-          "text_count": 382
+          "average": 4.5203,
+          "bayesian_average": 4.51525768651512,
+          "count": 1009,
+          "text_count": 381
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/reviews/",
         "requires_payment": false,
@@ -1969,7 +1973,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/versions/",
-        "weekly_downloads": 252
+        "weekly_downloads": 349
       },
       "notes": null
     },
@@ -1985,7 +1989,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 95478,
+        "average_daily_users": 95431,
         "categories": {
           "android": [
             "experimental",
@@ -2124,10 +2128,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.4567,
-          "bayesian_average": 4.4419080387168455,
-          "count": 335,
-          "text_count": 94
+          "average": 4.4718,
+          "bayesian_average": 4.456933270509478,
+          "count": 337,
+          "text_count": 95
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/reviews/",
         "requires_payment": false,
@@ -2147,7 +2151,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/versions/",
-        "weekly_downloads": 1498
+        "weekly_downloads": 1484
       },
       "notes": null
     },
@@ -2163,7 +2167,7 @@
             "picture_url": "https://addons.cdn.mozilla.net/user-media/userpics/12/12929/12929064.png?modified=1618084385"
           }
         ],
-        "average_daily_users": 184338,
+        "average_daily_users": 186586,
         "categories": {
           "android": [
             "photos-media",
@@ -2385,10 +2389,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.6538,
-          "bayesian_average": 4.648338870899628,
-          "count": 959,
-          "text_count": 188
+          "average": 4.655,
+          "bayesian_average": 4.649572141760124,
+          "count": 971,
+          "text_count": 193
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/reviews/",
         "requires_payment": false,
@@ -2409,7 +2413,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/versions/",
-        "weekly_downloads": 5098
+        "weekly_downloads": 3454
       },
       "notes": null
     },
@@ -2432,7 +2436,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 54815,
+        "average_daily_users": 58115,
         "categories": {
           "android": [
             "other"
@@ -2714,9 +2718,9 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.4583,
-          "bayesian_average": 4.4534654745605655,
-          "count": 1030,
+          "average": 4.4575,
+          "bayesian_average": 4.452669484127272,
+          "count": 1036,
           "text_count": 281
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/reviews/",
@@ -2737,7 +2741,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/versions/",
-        "weekly_downloads": 23
+        "weekly_downloads": 29
       },
       "notes": null
     },
@@ -2753,7 +2757,7 @@
             "picture_url": "https://addons.cdn.mozilla.net/user-media/userpics/0/0/143.png?modified=1506804587"
           }
         ],
-        "average_daily_users": 352126,
+        "average_daily_users": 351112,
         "categories": {
           "android": [
             "performance",
@@ -2890,7 +2894,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2021-07-29T21:05:38Z",
+        "last_updated": "2021-08-25T21:20:48Z",
         "name": {
           "de": "NoScript",
           "el": "NoScript",
@@ -2978,9 +2982,9 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.3841,
-          "bayesian_average": 4.381399656724418,
-          "count": 1807,
+          "average": 4.3838,
+          "bayesian_average": 4.381087184465328,
+          "count": 1811,
           "text_count": 722
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/reviews/",
@@ -3017,7 +3021,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/versions/",
-        "weekly_downloads": 8077
+        "weekly_downloads": 8234
       },
       "notes": null
     },
@@ -3033,7 +3037,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 121156,
+        "average_daily_users": 122541,
         "categories": {
           "android": [
             "performance",
@@ -3166,10 +3170,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 3.9103,
-          "bayesian_average": 3.906014033763375,
-          "count": 992,
-          "text_count": 359
+          "average": 3.9125,
+          "bayesian_average": 3.9081909928823353,
+          "count": 994,
+          "text_count": 358
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/reviews/",
         "requires_payment": false,
@@ -3188,7 +3192,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/versions/",
-        "weekly_downloads": 1948
+        "weekly_downloads": 1402
       },
       "notes": null
     }
