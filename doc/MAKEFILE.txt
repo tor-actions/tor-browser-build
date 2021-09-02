@@ -8,9 +8,11 @@ Build Tor Browser for the release channel, for all supported platforms.
 The resulting build can be found in directory release/$version.
 
 release-{linux-x86_64,linux-i686,windows-i686,osx-x86_64,android-armv7,
-         android-x86,android-x86_64,android-aarch64}
+         android-x86,android-x86_64,android-aarch64,desktop,android}
 -----------------------------------------------------------------------
-Same as release, for the selected platform only.
+Same as release, for the selected platform only. The "desktop" platform
+means Linux, Windows and macOS. The "android" platform means android for
+all architectures we support.
 
 alpha
 -----
@@ -18,7 +20,7 @@ Build Tor Browser for the alpha channel, for all supported platforms.
 The resulting build can be found in directory alpha/$version.
 
 alpha-{linux-x86_64,linux-i686,windows-i686,osx-x86_64,android-armv7,
-       android-x86,android-x86_64,android-aarch64}
+       android-x86,android-x86_64,android-aarch64,desktop,android}
 ---------------------------------------------------------------------
 Same as alpha, for the selected platform only.
 
@@ -32,7 +34,7 @@ components.
 The resulting build can be found in directory nightly/$date
 
 nightly-{linux-x86_64,linux-i686,windows-i686,osx-x86_64,android-armv7,
-         android-x86,android-x86_64,android-aarch64}
+         android-x86,android-x86_64,android-aarch64,desktop,android}
 -----------------------------------------------------------------------
 Same as nightly, for the selected platform only.
 
