@@ -21,42 +21,30 @@ cd /var/tmp/build/[% project %]-[% c('version') %]
 # build will pull down the correct android tool versions
 patch -p1 < $rootdir/gradle.patch
 patch -p1 < $rootdir/0001-Bug-33931-Filter-bridges-in-stream-by-type.patch
-[% IF c("var/snowflake") %]
-  patch -p1 < $rootdir/0001-Bug-30318-Add-snowflake-support.patch
-[% END %]
+patch -p1 < $rootdir/0001-Bug-30318-Add-snowflake-support.patch
 
 [% FOREACH arch = ['armv7', 'aarch64', 'x86', 'x86_64'] -%]
   # Extract obfs4proxy from TorBrowser/Tor/PluggableTransports/obfs4proxy
   tar --strip-components=4 -xf $rootdir/[% c('input_files_by_name/obfs4-' _ arch) %]
 
-  [% IF c("var/snowflake") %]
-    # Extract snowflake from TorBrowser/Tor/PluggableTransports/snowflake
-    tar --strip-components=4 -xf $rootdir/[% c('input_files_by_name/snowflake-' _ arch) %]
-  [% END %]
+  # Extract snowflake from TorBrowser/Tor/PluggableTransports/snowflake
+  tar --strip-components=4 -xf $rootdir/[% c('input_files_by_name/snowflake-' _ arch) %]
   # Overwrite the obfs4proxy binary provided by Pluto and add Snowflake
   [% IF arch == "armv7" -%]
     cp obfs4proxy external/pluto/bin/armeabi-v7a/
     cp obfs4proxy external/pluto/bin/armeabi/
-    [% IF c("var/snowflake") %]
-      cp snowflake-client external/pluto/bin/armeabi-v7a/
-      cp snowflake-client external/pluto/bin/armeabi/
-    [% END %]
+    cp snowflake-client external/pluto/bin/armeabi-v7a/
+    cp snowflake-client external/pluto/bin/armeabi/
   [% ELSIF arch == "aarch64" -%]
     cp obfs4proxy external/pluto/bin/arm64-v8a/
-    [% IF c("var/snowflake") %]
-      cp snowflake-client external/pluto/bin/arm64-v8a/
-    [% END %]
+    cp snowflake-client external/pluto/bin/arm64-v8a/
   [% ELSE -%]
     cp obfs4proxy external/pluto/bin/[% arch %]/
-    [% IF c("var/snowflake") %]
-      cp snowflake-client external/pluto/bin/[% arch %]/
-    [% END %]
+    cp snowflake-client external/pluto/bin/[% arch %]/
   [% END -%]
 
   rm obfs4proxy
-  [% IF c("var/snowflake") %]
-    rm snowflake-client
-  [% END %]
+  rm snowflake-client
 [% END -%]
 
 # Build Android Libraries and Apps

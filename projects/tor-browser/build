@@ -48,9 +48,7 @@ MARTOOLS=$rootdir/mar-tools
 mv [% c('input_files_by_name/noscript') %] "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi"
 
 tar -C "$TBDIR" -xf [% c('input_files_by_name/obfs4') %]
-[% IF c("var/snowflake") %]
-  tar -C "$TBDIR" -xf [% c('input_files_by_name/snowflake') -%]
-[% END -%]
+tar -C "$TBDIR" -xf [% c('input_files_by_name/snowflake') -%]
 
 tar -C "$TBDIR[% IF c("var/osx") %]/Contents/Resources[% END %]" -xf [% c('input_files_by_name/fonts') %]
 
@@ -135,12 +133,7 @@ cp -a Bundle-Data/Docs/* "$TBDIR/$DOCSPATH"
 tar -C Bundle-Data/[% bundledata_osname %] [% IF ! c("var/namecoin") %]--exclude=*Electrum-NMC* --exclude=*ncprop279*[% END %] -c . | tar -C "$TBDIR[% IF ! c("var/osx") %]/TorBrowser[% END %]" -x
 
 cat Bundle-Data/PTConfigs/[% bundledata_osname %]/torrc-defaults-appendix >> "$TBDIR/$TORCONFIGPATH/torrc-defaults"
-[% IF ! c("var/snowflake") %]
-  grep -v 'default_bridge\.snowflake' Bundle-Data/PTConfigs/bridge_prefs.js \
-    >> "$GENERATEDPREFSPATH"
-[% ELSE %]
-  cat Bundle-Data/PTConfigs/bridge_prefs.js >> "$GENERATEDPREFSPATH"
-[% END %]
+cat Bundle-Data/PTConfigs/bridge_prefs.js >> "$GENERATEDPREFSPATH"
 
 [% IF ! c("var/multi_lingual") %]
   echo 'pref("extensions.torlauncher.prompt_for_locale", false);' >> "$GENERATEDPREFSPATH"
