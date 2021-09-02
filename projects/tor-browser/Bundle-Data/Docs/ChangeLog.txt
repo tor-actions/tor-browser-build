@@ -1,3 +1,8 @@
+Tor Browser 10.5.6 -- September 7 2021
+ * Windows + OS X + Linux
+   * Update Openssl to 1.1.1l
+   * Update Firefox to 78.14.0esr
+
 Tor Browser 10.5.5 -- August 18 2021
  * All Platforms
    * Update Tor to 0.4.5.10
