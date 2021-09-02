@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-version: 2.35.1
+version: 2.35.2
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 var:
   configure_opt: '--disable-multilib --enable-gold --enable-deterministic-archives --enable-plugins'
