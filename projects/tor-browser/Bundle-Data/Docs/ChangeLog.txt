@@ -2,6 +2,9 @@ Tor Browser 10.5.6 -- September 7 2021
  * Windows + OS X + Linux
    * Update Openssl to 1.1.1l
    * Update Firefox to 78.14.0esr
+ * Build System
+   * OS X
+     * Bug 40358: Make OpenSSL 1.1.1l buildable for macOS [tor-browser-build]
 
 Tor Browser 10.5.5 -- August 18 2021
  * All Platforms
