@@ -32,3 +32,5 @@ input_files:
     project: '[% c("var/compiler") %]'
   - URL: 'https://www.openssl.org/source/openssl-[% c("version") %].tar.gz'
     sha256sum: 892a0875b9872acd04a9fde79b1f943075d5ea162415de3047c327df33fbaee5
+  - filename: 0001-Revert-apple-getentropy-removal.patch
+    enable: '[% c("var/osx") %]'
