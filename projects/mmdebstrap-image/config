@@ -50,6 +50,13 @@ targets:
         suite: buster
         arch: amd64
 
+  bullseye-amd64:
+    var:
+      minimal_apt_version: 2.2.4
+      container:
+        suite: bullseye
+        arch: amd64
+
 input_files:
   - project: mmdebstrap
     name: mmdebstrap
