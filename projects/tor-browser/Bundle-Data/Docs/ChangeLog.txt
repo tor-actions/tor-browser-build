@@ -1,7 +1,11 @@
 Tor Browser 11.0a7 -- September 10 2021
+ * All Platforms
+   * Update Openssl to 1.1.1l
  * Windows + OS X + Linux
    * Update Firefox to 78.14.0esr
    * Bug 40597: Implement TorSettings module [tor-browser]
+ * Android
+   * Bug 40611: Rebase geckoview patches onto 92.0 [tor-browser]
 * OS X
    * Bug 40358: Make OpenSSL 1.1.1l buildable for macOS [tor-browser-build]
 
