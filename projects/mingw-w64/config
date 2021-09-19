@@ -19,7 +19,7 @@ var:
 targets:
   windows-i686:
     var:
-      libgcc_dll: libgcc_s_sjlj-1.dll
+      libgcc_dll: libgcc_s_dw2-1.dll
       arch_deps:
         - g++-mingw-w64-i686
   windows-x86_64:

@@ -58,16 +58,6 @@ cd /var/tmp/build/rustc-[% c('version') %]-src
   patch -p1 < $rootdir/fix-build-1.53.0.patch
 [% END %]
 
-[% IF c("var/windows-i686") %]
-  # Cross-compiling for Windows 32bit is currently not possible without any
-  # patches. The reason for that is libstd expecting DWARF unwinding while most
-  # toolchains on Linux, targeting Windows 32bit, use SjLj unwinding.
-  # See: https://github.com/rust-lang/rust/issues/12859 for discussion about
-  # that and https://github.com/rust-lang/rust/pull/49633 for a newer attempt to
-  # fix this problem. We apply the patch from neersighted.
-  patch -p1 < $rootdir/unwind.patch
-[% END %]
-
 mkdir build
 cd build
 ../configure --prefix=$distdir --disable-docs --disable-compiler-docs [% c("var/configure_opt") %]

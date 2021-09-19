@@ -99,8 +99,6 @@ input_files:
   - project: python
     name: python
     enable: '[% c("var/linux") %]'
-  - filename: unwind.patch
-    enable: '[% c("var/windows-i686") %]'
   - filename: 43909.patch
     name: 43909
     enable: '[% ! c("var/ff91esr") %]'
