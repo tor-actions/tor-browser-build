@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-git_url: https://git.schwanenlied.me/yawning/bsaes.git
+git_url: https://gitlab.com/yawning/bsaes.git
 version: '[% c("abbrev") %]'
 git_hash: 26d1add596b6d800bdeeb3bc3b2c7b316c056b6d
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
