@@ -2,16 +2,12 @@
 version: '[% c("var/node_version") %]'
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 var:
-  node_version: 10.21.0
-  node_hash: 26b01fa28338cacaa8a66d7963ab2514e81678c268ab52ec55dcf937aadcb73b
+  node_version: 10.23.1
+  node_hash: 88aa16f5af79615b183ca55ed81393763169e75d1fb96013cf1831895c6cedfa
   container:
     use_container: 1
 
 targets:
-  ff91esr:
-    var:
-      node_version: 10.23.1
-      node_hash: 88aa16f5af79615b183ca55ed81393763169e75d1fb96013cf1831895c6cedfa
   windows:
     var:
       arch_deps:

@@ -3,14 +3,9 @@ version: '[% c("var/llvm_version") %]'
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 
 var:
-  llvm_version: '[% pc("clang-source", "version") %]'
+  llvm_version: '[% pc("llvm-project", "version") %]'
   container:
     use_container: 1
-
-targets:
-  ff91esr:
-    var:
-      llvm_version: '[% pc("llvm-project", "version") %]'
 
 input_files:
   - project: container-image
@@ -22,12 +17,8 @@ input_files:
     enable: '[% c("var/linux") %] || [% c("var/android") %]'
   - project: cmake
     name: cmake
-  - project: clang-source
-    name: clang-source
-    enable: '[% ! c("var/ff91esr") %]'
   - project: llvm-project
     name: clang-source
-    enable: '[% c("var/ff91esr") %]'
   - project: python
     name: python
     enable: '[% c("var/linux") %]'

@@ -3,16 +3,12 @@ filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 version: '[% c("var/current_version") %]'
 
 var:
-  current_version: 1.43.0
-  previous_version: 1.42.0
+  current_version: 1.53.0
+  previous_version: 1.52.0
   container:
     use_container: 1
 
 targets:
-  ff91esr:
-    var:
-      current_version: 1.53.0
-      previous_version: 1.52.0
   android:
     var:
       arch_deps:
@@ -83,7 +79,6 @@ input_files:
     name: cmake
   - project: ninja
     name: ninja
-    enable: '[% c("var/ff91esr") %]'
   - project: '[% c("var/compiler") %]'
     name: '[% c("var/compiler") %]'
   - URL: 'https://static.rust-lang.org/dist/rustc-[% c("var/current_version") %]-src.tar.gz'
@@ -99,11 +94,7 @@ input_files:
   - project: python
     name: python
     enable: '[% c("var/linux") %]'
-  - filename: 43909.patch
-    name: 43909
-    enable: '[% ! c("var/ff91esr") %]'
 
     # Fix for https://github.com/rust-lang/rust/issues/86436
     # Taken from https://github.com/rust-lang/rust/pull/86568 (merged it 1.54.0)
   - filename: fix-build-1.53.0.patch
-    enable: '[% c("var/ff91esr") %]'

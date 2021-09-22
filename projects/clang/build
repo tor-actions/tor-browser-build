@@ -23,21 +23,13 @@ cd clang-source
 export LLVM_HOME=$(pwd)
 mkdir build
 cd build
-# XXX: remove duplicated parts while fixing tor-browser-build#40048
-[% IF ! c("var/ff91esr") %]
-  cmake .. -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=$distdir \
-                               -DCMAKE_BUILD_TYPE:STRING=Release \
-       [% IF c("var/rlbox") -%]-DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=WebAssembly[% END %] \
-                               $LLVM_HOME
-[% ELSE %]
-  cmake ../llvm -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=$distdir \
-                                    -DCMAKE_BUILD_TYPE=Release \
+cmake ../llvm -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=$distdir \
+                                  -DCMAKE_BUILD_TYPE=Release \
             [% IF c("var/android") -%]
-                                    -DLLVM_TARGETS_TO_BUILD="X86;ARM;AArch64" \
+                                  -DLLVM_TARGETS_TO_BUILD="X86;ARM;AArch64" \
             [% END -%]
             [% IF c("var/rlbox") -%]-DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=WebAssembly[% END %] \
-                                    -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;compiler-rt;libcxx;libcxxabi;lld"
-[% END -%]
+                                  -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;compiler-rt;libcxx;libcxxabi;lld"
 make -j[% c("buildconf/num_procs") %]
 make install
 cd /var/tmp/dist
