@@ -1,3 +1,8 @@
+Tor Browser 10.5.7 -- September 24 2021
+ * Android
+   * Update Openssl to 1.1.1l
+   * Bug 40639: Rebase geckoview patches onto 92.0 build3 [tor-browser]
+
 Tor Browser 10.5.6 -- September 7 2021
  * Windows + OS X + Linux
    * Update Openssl to 1.1.1l
