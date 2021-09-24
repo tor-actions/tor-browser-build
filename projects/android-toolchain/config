@@ -9,7 +9,7 @@ var:
     use_container: 1
   deps:
     - unzip
-    - python
+    - python3
   setup: |
     mkdir -p /var/tmp/dist
     tar -C /var/tmp/dist -xf $rootdir/[% c("compiler_tarfile") %]

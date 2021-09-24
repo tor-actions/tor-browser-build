@@ -16,6 +16,10 @@ targets:
     var:
       arch_deps:
         - python2
+  android:
+    var:
+      arch_deps:
+        - python2
 
 input_files:
   - project: container-image
