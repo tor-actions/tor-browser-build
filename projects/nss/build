@@ -44,6 +44,8 @@ patch -p2 < $rootdir/config.patch
 # side.
 patch -p2 < $rootdir/bug_13028.patch
 
+patch -p1 < $rootdir/use-python3.patch
+
 # Building NSPR
 mkdir $builddir/nspr_build
 cd $builddir/nspr_build
@@ -72,7 +74,8 @@ gyp -f ninja-android "$builddir/nss/nss.gyp" \
   -Dsign_libs=0 \
   -Denable_sslkeylogfile=0 \
   -Ddisable_tests=1 \
-  -Ddisable_libpkix=1
+  -Ddisable_libpkix=1 \
+  -Dpython=python3
 
 gendir="$builddir/nss/out/Release"
 ninja -C "$gendir"
