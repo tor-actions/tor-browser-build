@@ -19,10 +19,6 @@ var:
     - zip
     - autoconf2.13
     - yasm
-    # We are building our own version of Python 3.6, which is required
-    # for the build. However mach still requires Python 2.7, so we
-    # install this version using the package.
-    - python
     - pkg-config
   container:
     use_container: 1
@@ -96,11 +92,15 @@ targets:
     var:
       martools_filename: mar-tools-mac64.zip
       arch_deps:
+        - python3
+        - python3-distutils
         - rsync
 
   windows:
     var:
       arch_deps:
+        - python3
+        - python3-distutils
         - wine
       compiler: mingw-w64-clang
 
@@ -142,6 +142,7 @@ input_files:
     name: nasm
   - project: python
     name: python
+    enable: '[% c("var/linux") %]'
   - project: clang
     name: clang
   - project: fxc2

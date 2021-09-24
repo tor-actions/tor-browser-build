@@ -17,13 +17,14 @@ mkdir -p [% dest_dir _ '/' _ c('filename') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/rust') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/cbindgen') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/nasm') %]
-tar -C /var/tmp/dist -xf [% c('input_files_by_name/python') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/node') %]
-export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/nasm/bin:/var/tmp/dist/python/bin:/var/tmp/dist/node/bin:$PATH"
+export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/nasm/bin:/var/tmp/dist/node/bin:$PATH"
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/clang') %]
 export LLVM_CONFIG="/var/tmp/dist/clang/bin/llvm-config"
 
 [% IF c("var/linux") %]
+  tar -C /var/tmp/dist -xf [% c('input_files_by_name/python') %]
+  export PATH="/var/tmp/dist/python/bin:$PATH"
   tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/binutils') %]
   export PATH="/var/tmp/dist/binutils/bin:$PATH"
   # Use clang for everything on Linux now if we don't build with ASan.
@@ -124,7 +125,7 @@ export MACH_USE_SYSTEM_PYTHON=1
   # Adjust the Info.plist file
   INFO_PLIST="$distdir/Tor Browser.app/Contents/Info.plist"
   mv "$INFO_PLIST" tmp.plist
-  python $rootdir/fix-info-plist.py '[% c("var/torbrowser_version") %]' '[% c("var/copyright_year") %]' < tmp.plist > "$INFO_PLIST"
+  python3 $rootdir/fix-info-plist.py '[% c("var/torbrowser_version") %]' '[% c("var/copyright_year") %]' < tmp.plist > "$INFO_PLIST"
   rm -f tmp.plist
 [% END %]
 
