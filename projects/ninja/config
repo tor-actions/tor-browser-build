@@ -14,3 +14,4 @@ input_files:
     enable: '[% c("var/linux") %]'
   - name: python
     project: python
+    enable: '[% c("var/linux") %]'
