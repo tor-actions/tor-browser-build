@@ -132,6 +132,24 @@ needed=$(perl -MYAML::XS -e "$p")
 current='[% pc("macosx-toolchain", "version") %]'
 check_update_needed macos-sdk "$needed" "$current"
 
+# cctools
+read -d '' p << 'EOF' || true
+my $d = YAML::XS::LoadFile('taskcluster/ci/fetch/toolchains.yml');
+print $d->{'cctools-port'}{fetch}{revision};
+EOF
+needed=$(perl -MYAML::XS -e "$p")
+current='[% pc("cctools", "git_hash") %]'
+check_update_needed cctools "$needed" "$current"
+
+# libtapi
+read -d '' p << 'EOF' || true
+my $d = YAML::XS::LoadFile('taskcluster/ci/fetch/toolchains.yml');
+print $d->{'libtapi'}{fetch}{revision};
+EOF
+needed=$(perl -MYAML::XS -e "$p")
+current='[% pc("libtapi", "git_hash") %]'
+check_update_needed libtapi "$needed" "$current"
+
 # End of macOS checks
 [% END -%]
 
