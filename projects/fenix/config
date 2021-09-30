@@ -18,6 +18,8 @@ var:
   gradle_dependencies_version: 32
   gradle_version: 6.5.1
   glean_parser: 3.4.0
+  arch_deps:
+    - python3-venv
 
 targets:
   release:
@@ -40,16 +42,14 @@ input_files:
   - name: geckoview
     project: geckoview
     pkg_type: merge_aars
-  - name: python
-    project: python
   - name: tba-translation
     project: tba-translation
   - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
     name: gradle-dependencies
     exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
-  - URL: https://people.torproject.org/~boklm/mirrors/sources/glean-wheels-[% c('var/glean_parser') %].tar.xz
+  - URL: https://people.torproject.org/~boklm/mirrors/sources/glean-wheels-[% c('var/glean_parser') %]-build2.tar.xz
     name: glean
-    sha256sum: b74c9184dd2ee4c84a6e9766cd754cd07fc9be7233a1cdaa35bba6bd169beb75
+    sha256sum: 6bbf3a9ffa939ca87e00b486f2020ab5cf9dea772f1d37b048f666fed38f98c1
   - filename: mavenLocal.patch
   - project: tor-android-service
     name: tor-android-service

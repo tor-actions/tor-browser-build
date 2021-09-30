@@ -17,6 +17,8 @@ var:
   gradle_version: 6.6.1
   glean_parser: 3.4.0
   git_branch: '[% project %]-[% c("var/android_components_version") %]-[% c("var/torbrowser_branch") %]-1'
+  arch_deps:
+    - python3-venv
 
 targets:
   nightly:
@@ -39,9 +41,6 @@ input_files:
   - name: application-services
     project: application-services
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
-  - name: python
-    project: python
-    enable: '[% !c("var/fetch_gradle_dependencies") %]'
   - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
     name: gradle-dependencies
     exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
@@ -49,9 +48,9 @@ input_files:
   - filename: git.patch
   - filename: mavenLocal.patch
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
-  - URL: https://people.torproject.org/~boklm/mirrors/sources/glean-wheels-[% c('var/glean_parser') %].tar.xz
+  - URL: https://people.torproject.org/~boklm/mirrors/sources/glean-wheels-[% c('var/glean_parser') %]-build2.tar.xz
     name: glean
-    sha256sum: b74c9184dd2ee4c84a6e9766cd754cd07fc9be7233a1cdaa35bba6bd169beb75
+    sha256sum: 6bbf3a9ffa939ca87e00b486f2020ab5cf9dea772f1d37b048f666fed38f98c1
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
   - filename: gen_gradle_deps_file.sh
     enable: '[% c("var/fetch_gradle_dependencies") %]'

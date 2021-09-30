@@ -8,11 +8,22 @@ src: |
   #!/bin/bash
   mv -f [% project %]-[% c('version') %].tar.gz [% dest_dir %]/[% c('filename') %]
 
+var:
+  # The `container-image` project looks at the deps list in origin_project
+  # in the same step (build), so we cannot put this inside the
+  # `create_glean_deps_tarball` step.
+  # rbm#40020 should allow us to fix that.
+  deps:
+    - python3
+    - python3-pip
+    - torsocks
+    - xz-utils
+
 steps:
   create_glean_deps_tarball:
     git_url: ''
     version: 3.4.0
-    filename: 'glean-wheels-[% c("version") %].tar.xz'
+    filename: 'glean-wheels-[% c("version") %]-build2.tar.xz'
     build_log: '-'
     var:
       container:
@@ -20,10 +31,11 @@ steps:
     create_glean_deps_tarball: |
       #!/bin/bash
       [% c("var/set_default_env") -%]
-      [% pc('python', 'var/setup', { python_tarfile => c('input_files_by_name/python') }) %]
       mkdir glean-wheels
       cd glean-wheels
       [% IF c("var/use_torsocks") %]torsocks [% END%]python3 -m pip download glean_parser==[% c("version") %]
+      # Get pyyaml, needed for building application-services
+      [% IF c("var/use_torsocks") %]torsocks [% END%]python3 -m pip download pyyaml==5.3.1
       cd ..
       [% c('tar', {
           tar_src => [ 'glean-wheels' ],
@@ -36,18 +48,7 @@ steps:
     input_files:
       - project: container-image
         pkg_type: build
-      - project: python
-        name: python
-        pkg_type: build
 
 targets:
   with_torsocks:
-    var:
-      # The `container-image` project looks at the deps list in origin_project
-      # in the same step (build), so we cannot put this inside the
-      # `create_glean_deps_tarball` step.
-      # rbm#40020 should allow us to fix that.
-      deps:
-        - torsocks
-        - xz-utils
       use_torsocks: 1

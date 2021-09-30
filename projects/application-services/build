@@ -22,7 +22,6 @@ cd $rootdir
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
 
 [% IF !c('var/fetch_gradle_dependencies') %]
-  [% pc('python', 'var/setup', { python_tarfile => c('input_files_by_name/python') }) %]
   gradle_repo=$rootdir/[% c('input_files_by_name/gradle-dependencies') %]
   cp -r $gradle_repo/dl/android/maven2/* $gradle_repo
   cp -r $gradle_repo/m2/* $gradle_repo
@@ -75,6 +74,7 @@ patch -p1 < $rootdir/no-git.patch
 # XXX: We don't build the code for Linux for now as this involves additional
 # complexity. That's needed for running unit tests later on, though.
 patch -p1 < $rootdir/target.patch
+export RUST_ANDROID_GRADLE_PYTHON_COMMAND=python3
 [% IF c('var/fetch_gradle_dependencies') %]
   # XXX: `assemble` is still not enough to see all fetched dependencies via
   # Gradle's --debug. See: tor-browser-build#40056.
@@ -83,7 +83,7 @@ patch -p1 < $rootdir/target.patch
   mv gradle-dependencies-list.txt '[% dest_dir _ "/" _ c("filename") %]'
 [% ELSE %]
   # Prepare Glean dependencies for offline build
-  tar -xf $rootdir/glean-wheels-[% c('var/glean_parser') %].tar.xz
+  tar -xf $rootdir/[% c('input_files_by_name/glean-wheels') %]
   # We need to set `LC_ALL` and `LANG` to something that is not ASCII as encoding
   # otherwise `click` barfs. See: https://click.palletsprojects.com/python3/
   export LC_ALL=C.UTF-8

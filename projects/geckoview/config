@@ -17,10 +17,8 @@ var:
     - zip
     - autoconf2.13
     - yasm
-    # We are building our own version of Python 3.6, which is required
-    # for the build. However mach still requires Python 2.7, so we
-    # install this version using the package.
-    - python
+    - python3
+    - python3-distutils
     - pkg-config
   container:
     use_container: 1
@@ -48,8 +46,7 @@ steps:
       EOF
 
       tar -C $distdir -xf [% c('input_files_by_name/node') %]
-      tar -C $distdir -xf [% c('input_files_by_name/python') %]
-      export PATH="/var/tmp/dist/node/bin:/var/tmp/dist/python/bin:$PATH"
+      export PATH="/var/tmp/dist/node/bin:$PATH"
 
       tar -C $builddir -xf [% c('input_files_by_name/geckoview_armv7') %]
       tar -C $builddir -xf [% c('input_files_by_name/geckoview_aarch64') %]
@@ -107,9 +104,6 @@ steps:
         pkg_type: build
       - project: node
         name: node
-        pkg_type: build
-      - project: python
-        name: python
         pkg_type: build
       - filename: mozconfig-android-all
         name: mozconfig
@@ -170,8 +164,6 @@ input_files:
     name: node
   - project: nasm
     name: nasm
-  - project: python
-    name: python
   - project: clang
     name: clang
   - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'

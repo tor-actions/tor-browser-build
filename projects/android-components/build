@@ -13,7 +13,6 @@ cat > get-moz-build-date << "EOF"
 EOF
 
 [% IF !c("var/fetch_gradle_dependencies") %]
-  [% pc('python', 'var/setup', { python_tarfile => c('input_files_by_name/python') }) %]
   tar -C $distdir -xf [% c('input_files_by_name/geckoview') %]
   gradle_repo=$rootdir/[% c('input_files_by_name/gradle-dependencies') %]
   # This overwrites the release, beta, and nightly geckoview .aar files in our
