@@ -27,11 +27,9 @@ var:
     - rsync
     - zip
     - unzip
+    - python3
+    - python3-distutils
   pre_pkginst: ''
 
 input_files:
   - project: container-image
-  - project: python
-    name: python
-    target_prepend:
-      - common-bullseye
