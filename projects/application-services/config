@@ -12,6 +12,8 @@ var:
   gradle_dependencies_version: 6
   gradle_version: 6.5
   glean_parser: 2.2.0
+  arch_deps:
+    - python3-venv
 
 input_files:
   - project: container-image
@@ -68,15 +70,13 @@ input_files:
     pkg_type: build
     target_prepend:
       - android-x86_64
-  - name: python
-    project: python
-    enable: '[% !c("var/fetch_gradle_dependencies") %]'
   - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
     name: gradle-dependencies
     exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
-  - URL: https://people.torproject.org/~boklm/mirrors/sources/glean-wheels-[% c('var/glean_parser') %].tar.xz
-    sha256sum: 24ceaaadaf155445e8ad135173d894e05c0745b41ab5fee150f9548550acf2a6
+  - URL: https://people.torproject.org/~boklm/mirrors/sources/glean-wheels-[% c('var/glean_parser') %]-build2.tar.xz
+    name: glean-wheels
+    sha256sum: 75107e7f84152806fde2070d1830174919a7a2ef54c774a1925a92dd4e20d0f7
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
   # Use `make cargo_vendor-application-services` to re-generate the vendor tarball
   - URL: https://people.torproject.org/~boklm/mirrors/sources/application-services-vendor-[% c('version') %].tar.bz2
