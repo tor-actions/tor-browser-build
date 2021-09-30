@@ -1,6 +1,12 @@
 Tor Browser 10.5.8 -- October 5 2021
  * Windows + OS X + Linux
    * Update Firefox to 78.15.0esr
+   * Bug 40049: Add banner for VPN survey to about:tor [torbutton]
+ * Android
+   * Bug 40193: Add banner for VPN survey to Android homepage [fenix]
+ * Build System
+   * All Platforms
+     * Bug 40363: Change bsaes git url [tor-browser-build]
 
 Tor Browser 10.5.7 -- September 24 2021
  * Android
