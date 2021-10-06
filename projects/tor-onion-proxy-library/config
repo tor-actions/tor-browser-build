@@ -42,26 +42,21 @@ input_files:
     name: snowflake-armv7
     target_prepend:
       - android-armv7
-    enable: '[% c("var/snowflake") %]'
   - project: snowflake
     name: snowflake-aarch64
     target_prepend:
       - android-aarch64
-    enable: '[% c("var/snowflake") %]'
   - project: snowflake
     name: snowflake-x86
     target_prepend:
       - android-x86
-    enable: '[% c("var/snowflake") %]'
   - project: snowflake
     name: snowflake-x86_64
     target_prepend:
       - android-x86_64
-    enable: '[% c("var/snowflake") %]'
   - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
     name: gradle-dependencies
     exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
   - filename: gradle.patch
   - filename: 0001-Bug-33931-Filter-bridges-in-stream-by-type.patch
   - filename: 0001-Bug-30318-Add-snowflake-support.patch
-    enable: '[% c("var/snowflake") %]'

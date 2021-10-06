@@ -14,9 +14,6 @@ tar -C $GRADLE_HOME -xf $rootdir/[% c('input_files_by_name/gradle') %]
 tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
 
 cd /var/tmp/build/[% project %]-[% c('version') %]
-[% IF ! c("var/snowflake") %]
-  patch -p1 < $rootdir/0001-Revert-Bug-30318-Add-snowflake-support.patch
-[% END %]
 # Replace pre-packaged tor library with the latest build
 rm -fR service/src/main/jniLibs/*
 [% FOREACH arch = ['armv7', 'aarch64', 'x86', 'x86_64'] -%]
