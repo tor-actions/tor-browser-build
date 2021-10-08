@@ -1,3 +1,7 @@
+Tor Browser 11.0a8 -- October 10 2021
+ * Android
+   * Bug 40052: Skip L10nRegistry source registration on Android [torbutton]
+
 Tor Browser 11.0a7 -- September 10 2021
  * All Platforms
    * Update Openssl to 1.1.1l
