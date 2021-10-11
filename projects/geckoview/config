@@ -8,7 +8,7 @@ git_submodule: 1
 gpg_keyring: torbutton.gpg
 
 var:
-  geckoview_version: 92.0
+  geckoview_version: 93.0
   torbrowser_branch: 11.0
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   deps:
@@ -23,8 +23,8 @@ var:
   container:
     use_container: 1
   # this should be updated when the list of gradle dependencies is changed
-  gradle_dependencies_version: 6
-  gradle_version: 5.1.1
+  gradle_dependencies_version: 7
+  gradle_version: 6.9.1
 
 steps:
   merge_aars:
@@ -74,13 +74,15 @@ steps:
 
       export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
       gradle_repo=/var/tmp/dist/gradle-dependencies
-      export GRADLE_MAVEN_REPOSITORIES="file://$gradle_repo"
+      export GRADLE_MAVEN_REPOSITORIES="file://$gradle_repo","file://$gradle_repo/maven2"
       export GRADLE_FLAGS="--no-daemon --offline"
       mv $rootdir/[% c('input_files_by_name/gradle-dependencies') %] $gradle_repo
       cp -r $gradle_repo/m2/* $gradle_repo
 
       # We unbreak mach, see: https://bugzilla.mozilla.org/show_bug.cgi?id=1656993.
       export MACH_USE_SYSTEM_PYTHON=1
+      # Create .mozbuild to avoid interactive prompt in configure
+      mkdir "$HOME/.mozbuild"
       # We still need to specify --tor-browser-version due to bug 34005.
       ./mach configure --with-tor-browser-version=[% c("var/torbrowser_version") %]
       ./mach build --verbose

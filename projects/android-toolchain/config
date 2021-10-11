@@ -33,7 +33,13 @@ var:
   android_platform_revision_29: 04
   android_ndk_version: 21
   android_ndk_revision: d
+  # XXX: In commit 83fffa1198c3cbeffec45028971896876e2133a5 mozilla
+  # replaced sdk-tools with commandlinetools. We try to do the same here,
+  # but it seems sdk-tools is still being used in the build, so we can't
+  # remove sdk-tools yet.
   sdk_tools_version: 4333796
+  commandlinetools_version: 7302050
+  commandlinetools_version_string: 4.0
 input_files:
   - project: container-image
   - URL: '[% c("var/google_repo") %]/build-tools_r[% c("var/version_30") %]-linux.zip'
@@ -60,6 +66,9 @@ input_files:
   - URL: '[% c("var/google_repo") %]/sdk-tools-linux-[% c("var/sdk_tools_version") %].zip'
     name: android_sdk_tools
     sha256sum: 92ffee5a1d98d856634e8b71132e8a95d96c83a63fde1099be3d86df3106def9
+  - URL: '[% c("var/google_repo") %]/commandlinetools-linux-[% c("var/commandlinetools_version") %]_latest.zip'
+    name: android_commandlinetools
+    sha256sum: 7a00faadc0864f78edd8f4908a629a46d622375cbe2e5814e82934aebecdb622
   - URL: '[% c("var/google_repo") %]/android-ndk-r[% c("var/android_ndk_version") %][% c("var/android_ndk_revision") %]-linux-x86_64.zip'
     name: android_ndk_compiler
     sha256sum: dd6dc090b6e2580206c64bcee499bc16509a5d017c6952dcd2bed9072af67cbd

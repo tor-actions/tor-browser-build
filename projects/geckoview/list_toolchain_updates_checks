@@ -60,16 +60,25 @@ current='[% pc("android-toolchain", "var/android_api_level") %]'
 check_update_needed target_sdk "$needed" "$current"
 
 
-# sdk-tools
+# cmdline-tools
 read -d '' p << 'EOF' || true
-if (m|https://dl\\.google\\.com/android/repository/sdk-tools-.+-([^-]+).zip|) {
-  print $1;
-  exit;
+my $v, $s;
+while (<>) {
+  if (m/^\\s*CMDLINE_TOOLS_VERSION_STRING\\s*=\\s*"(.+)"/) {
+    $s = $1;
+  }
+  if (m/^\\s*CMDLINE_TOOLS_VERSION\\s*=\\s*"(.+)"/) {
+    $v = $1;
+  }
+  if ($v && $s) {
+    print "$s-$v";
+    exit;
+  }
 }
 EOF
-needed=$(cat python/mozboot/mozboot/android.py | perl -ne "$p")
-current='[% pc("android-toolchain", "var/sdk_tools_version") %]'
-check_update_needed sdk-tools "$needed" "$current"
+needed=$(cat python/mozboot/mozboot/android.py | perl -e "$p")
+current='[% pc("android-toolchain", "var/commandlinetools_version_string") %]-[% pc("android-toolchain", "var/commandlinetools_version") %]'
+check_update_needed cmdline-tools "$needed" "$current"
 
 
 # min-android
