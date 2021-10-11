@@ -59,7 +59,7 @@ input_files:
 steps:
   list_toolchain_updates:
     git_url: https://github.com/mozilla-mobile/fenix.git
-    git_hash: releases_v91.0.0
+    git_hash: releases_v93.0.0
     #tag_gpg_id: 0
     input_files: []
     var:

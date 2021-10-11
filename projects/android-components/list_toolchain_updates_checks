@@ -63,7 +63,7 @@ check_update_needed glean_parser "$needed" "$current"
 
 # gradle
 read -d '' p << 'EOF' || true
-if (m|distributionUrl=https\\\\://services.gradle.org/distributions/gradle-(.*)-all.zip|) {
+if (m|distributionUrl=https\\\\://services.gradle.org/distributions/gradle-(.*)-bin.zip|) {
   print $1;
   exit;
 }
