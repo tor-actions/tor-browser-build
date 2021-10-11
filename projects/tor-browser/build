@@ -396,7 +396,7 @@ cp $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip "$OUTDIR"/
         makensis torbrowser.nsi
         # Working around NSIS braindamage
         mv torbrowser-install.exe torbrowser-install-tmp.exe
-        python $rootdir/pe_checksum_fix.py
+        python3 $rootdir/pe_checksum_fix.py
         mv torbrowser-install-tmp2.exe torbrowser-install.exe
         rm torbrowser-install-tmp.exe
         mv torbrowser-install.exe $OUTDIR/torbrowser-install[% IF c("var/windows-x86_64") %]-win64[% END %]-[% c("var/torbrowser_version") %]_[% lang %].exe
