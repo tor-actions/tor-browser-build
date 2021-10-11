@@ -37,7 +37,7 @@ fi
 
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
 gradle_repo=/var/tmp/dist/gradle-dependencies
-export GRADLE_MAVEN_REPOSITORIES="file://$gradle_repo"
+export GRADLE_MAVEN_REPOSITORIES="file://$gradle_repo","file://$gradle_repo/maven2"
 export GRADLE_FLAGS="--no-daemon --offline"
 # Move the Gradle repo to a hard-coded location. The location is embedded in
 # the file chrome/toolkit/content/global/buildconfig.html so it needs to be
@@ -50,6 +50,8 @@ rm -f js/src/configure
 
 # We unbreak mach, see: https://bugzilla.mozilla.org/show_bug.cgi?id=1656993.
 export MACH_USE_SYSTEM_PYTHON=1
+# Create .mozbuild to avoid interactive prompt in configure
+mkdir "$HOME/.mozbuild"
 ./mach configure --with-tor-browser-version=[% c("var/torbrowser_version") %]
 ./mach build --verbose
 

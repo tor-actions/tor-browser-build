@@ -12,6 +12,9 @@ mkdir -p $NDK_HOME $SDK_HOME
 
 # Compiler Archives
 unzip -qq [% c("input_files_by_name/android_sdk_tools") %] -d $SDK_HOME
+mkdir -p $SDK_HOME/cmdline-tools
+unzip -qq [% c("input_files_by_name/android_commandlinetools") %] -d $SDK_HOME/cmdline-tools
+mv $SDK_HOME/cmdline-tools/cmdline-tools $SDK_HOME/cmdline-tools/[% c("var/commandlinetools_version_string") %]
 unzip -qq [% c("input_files_by_name/android_ndk_compiler")%] -d $NDK_HOME
 
 # NDK Archive

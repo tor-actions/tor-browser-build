@@ -11,6 +11,8 @@ var:
 targets:
   android:
     var:
+      current_version: 1.54.0
+      previous_version: 1.53.0
       arch_deps:
         - libssl-dev
         - pkg-config
@@ -98,3 +100,4 @@ input_files:
     # Fix for https://github.com/rust-lang/rust/issues/86436
     # Taken from https://github.com/rust-lang/rust/pull/86568 (merged it 1.54.0)
   - filename: fix-build-1.53.0.patch
+    enable: '[% ! c("var/android") %]'

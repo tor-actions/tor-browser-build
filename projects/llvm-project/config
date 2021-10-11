@@ -3,3 +3,8 @@ version: 12.0.0
 git_hash: d28af7c654d8db0b68c175db5ce212d74fb5e9bc
 git_url: https://github.com/llvm/llvm-project
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
+
+targets:
+  android:
+    version: 12.0.1
+    git_hash: fed41342a82f5a3a9201819a82bf7a48313e296b
