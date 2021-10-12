@@ -1,3 +1,26 @@
+Tor Browser 11.0a8 -- October 10 2021
+ * Android
+    * Bug 40052: Skip L10nRegistry source registration on Android [torbutton]
+
+Tor Browser 10.5.9 -- October 9 2021
+ * Android
+   * Bug 40052: Skip L10nRegistry source registration on Android [torbutton]
+
+Tor Browser 10.5.8 -- October 5 2021
+ * Windows + OS X + Linux
+   * Update Firefox to 78.15.0esr
+   * Bug 40049: Add banner for VPN survey to about:tor [torbutton]
+ * Android
+   * Bug 40193: Add banner for VPN survey to Android homepage [fenix]
+ * Build System
+   * All Platforms
+     * Bug 40363: Change bsaes git url [tor-browser-build]
+
+Tor Browser 10.5.7 -- September 24 2021
+ * Android
+   * Update Openssl to 1.1.1l
+   * Bug 40639: Rebase geckoview patches onto 92.0 build3 [tor-browser]
+
 Tor Browser 11.0a7 -- September 10 2021
  * All Platforms
    * Update Openssl to 1.1.1l
@@ -8,6 +31,14 @@ Tor Browser 11.0a7 -- September 10 2021
    * Bug 40611: Rebase geckoview patches onto 92.0 [tor-browser]
 * OS X
    * Bug 40358: Make OpenSSL 1.1.1l buildable for macOS [tor-browser-build]
+
+Tor Browser 10.5.6 -- September 7 2021
+ * Windows + OS X + Linux
+   * Update Openssl to 1.1.1l
+   * Update Firefox to 78.14.0esr
+ * Build System
+   * OS X
+     * Bug 40358: Make OpenSSL 1.1.1l buildable for macOS [tor-browser-build]
 
 Tor Browser 11.0a6 -- September 2 2021
  * Android
@@ -20,6 +51,25 @@ Tor Browser 11.0a5 -- August 22 2021
    * Bug 40582: Tor Browser 10.5.2 tabs always crash on Fedora Xfce Rawhide [tor-browser]
  * Android
    * Update Fenix to 91.2.0
+
+Tor Browser 10.5.5 -- August 18 2021
+ * All Platforms
+   * Update Tor to 0.4.5.10
+ * Linux
+   * Bug 40582: Tor Browser 10.5.2 tabs always crash on Fedora Xfce Rawhide [tor-browser]
+ * Android
+   * Update Fenix to 91.2.0
+   * Update NoScript to 11.2.11
+   * Bug 40063: Move custom search providers [android-components]
+   * Bug 40176: TBA: sometimes I only see the banner and can't tap on the address bar [fenix]
+   * Bug 40181: Remove V2 Deprecation banner on about:tor for Android [fenix]
+   * Bug 40184: Rebase fenix patches to fenix v91.0.0-beta.5 [fenix]
+   * Bug 40185: Use NimbusDisabled [fenix]
+   * Bug 40186: Hide Credit Cards in Settings [fenix]
+ * Build System
+   * Android
+     * Update Go to 1.15.15
+     * Bug 40331: Update components for mozilla91 [tor-browser-build]
 
 Tor Browser 11.0a4 -- August 11 2021
  * All Platforms
@@ -36,6 +86,17 @@ Tor Browser 11.0a4 -- August 11 2021
  * Build System
    * All Platforms
      * Update Go to 1.16.7
+
+Tor Browser 10.5.4 -- August 10 2021
+ * Windows + OS X + Linux
+   * Update Firefox to 78.13.0esr
+   * Update NoScript to 11.2.11
+   * Bug 40041: Remove V2 Deprecation banner on about:tor for desktop [torbutton]
+   * Bug 40506: Saved Logins not available in 10.5 [tor-browser]
+   * Bug 40524: Update DuckDuckGo onion site URL in search preferences and onboarding [tor-browser]
+ * Build System
+   * Windows + OS X + Linux
+     * Update Go to 1.15.14
 
 Tor Browser 11.0a3 -- August 5 2021
  * Android
