@@ -1,3 +1,45 @@
+Tor Browser 11.0a9 -- October 15 2021
+ * Windows + OS X + Linux
+   * Update Firefox to 91.2.0esr
+   * Update Tor to 0.4.7.1-alpha
+   * Bug 40004: Convert tl-protocol to async. [tor-launcher]
+   * Bug 40012: Watch all requested tor events [tor-launcher]
+   * Bug 40027: Make torbutton_send_ctrl_cmd async [torbutton]
+   * Bug 40042: Add missing parameter of createTransport [torbutton]
+   * Bug 40043: Delete all plugin-related protections [torbutton]
+   * Bug 40045: Teach the controller about status_client [torbutton]
+   * Bug 40046: Support arbitrary watch events [torbutton]
+   * Bug 40047: New string for Security Level panel [torbutton]
+   * Bug 40048: Protonify Circuit Display Panel [torbutton]
+   * Bug 40600: Multiple pages as home page unreliable in 11.0a4 [tor-browser]
+   * Bug 40616: UX: multiple about:torconnect [tor-browser]
+   * Bug 40624: TorConnect banner always visible in about:preferences#tor even after bootstrap [tor-browser]
+   * Bug 40626: Update Security Level styling to match Proton UI [tor-browser]
+   * Bug 40628: Checkbox wrong color in about:torconnect in dark mode theme [tor-browser]
+   * Bug 40630: Update New Identity and New Circuit icons [tor-browser]
+   * Bug 40631: site identity icons are not being displayed properly [tor-browser]
+   * Bug 40632: Proton'ify Circuit Display Panel [tor-browser]
+   * Bug 40634: Style updates for Onion Error Pages [tor-browser]
+   * Bug 40636: Fix about:torconnect 'Connect' border radius in about:preferences#tor [tor-browser]
+ * Build System
+   * Windows + OS X + Linux
+     * Update Go to 1.16.9
+     * Bug 40048: Remove projects/clang-source [tor-browser-build]
+     * Bug 40347: Make the list of toolchain updates needed for firefox91 [tor-browser-build]
+     * Bug 40363: Change bsaes git url [tor-browser-build]
+   * Windows + Linux
+     * Bug 40357: Update binutils to 2.35.2 [tor-browser-build]
+   * Windows
+     * Bug 28240: switch from SJLJ exception handling to Dwarf2 in mingw for win32 [tor-browser-build]
+     * Bug 40306: Update Windows toolchain to switch to mozilla91 [tor-browser-build]
+     * Bug 40376: Use python3 for running pe_checksum_fix.py [tor-browser-build]
+   * OS X
+     * Bug 40307: Update macOS toolchain to switch to mozilla91 [tor-browser-build]
+   * Linux
+     * Bug 40222: Bump GCC to 10.3.0 for Linux [tor-browser-build]
+     * Bug 40305: Update Linux toolchain to switch to mozilla91 [tor-browser-build]
+     * Bug 40353: Temporarily disable rlbox for linux builds [tor-browser-build]
+
 Tor Browser 11.0a8 -- October 10 2021
  * Android
     * Bug 40052: Skip L10nRegistry source registration on Android [torbutton]
