@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
-version: 79.0.0
-git_hash: 89ea9cfa6eaa0763d17ec9aa04098839d028004c
+version: 82.1.0
+git_hash: b0e7775ab12eeb4251f09cdfaab9ddaea22b4438
 git_url: https://github.com/mozilla/application-services
 git_submodule: 1
 
@@ -9,9 +9,9 @@ var:
   container:
     use_container: 1
   # This should be updated when the list of gradle dependencies is changed.
-  gradle_dependencies_version: 6
-  gradle_version: 6.5
-  glean_parser: 2.2.0
+  gradle_dependencies_version: 7
+  gradle_version: 6.7.1
+  glean_parser: 3.4.0
   arch_deps:
     - python3-venv
 
@@ -50,6 +50,11 @@ input_files:
     pkg_type: build
     target_prepend:
       - android-x86_64
+  - project: nss
+    name: nss-linux-x86_64
+    pkg_type: build
+    target_prepend:
+      - nss-linux-x86_64
   - project: sqlcipher
     name: sqlcipher-armv7
     pkg_type: build
@@ -70,21 +75,26 @@ input_files:
     pkg_type: build
     target_prepend:
       - android-x86_64
+  - project: sqlcipher
+    name: sqlcipher-linux-x86_64
+    pkg_type: build
+    target_prepend:
+      - sqlcipher-linux-x86_64
+      - nss-linux-x86_64
   - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
     name: gradle-dependencies
     exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
   - URL: https://people.torproject.org/~boklm/mirrors/sources/glean-wheels-[% c('var/glean_parser') %]-build2.tar.xz
     name: glean-wheels
-    sha256sum: 75107e7f84152806fde2070d1830174919a7a2ef54c774a1925a92dd4e20d0f7
+    sha256sum: 6bbf3a9ffa939ca87e00b486f2020ab5cf9dea772f1d37b048f666fed38f98c1
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
   # Use `make cargo_vendor-application-services` to re-generate the vendor tarball
   - URL: https://people.torproject.org/~boklm/mirrors/sources/application-services-vendor-[% c('version') %].tar.bz2
-    sha256sum: 386f0f94452f4a6185e9db094a157c67684c259b38e6f6d62805eaed30f20e58
+    sha256sum: e75d17a6cf9481c3f1d18c9b1fff8b38a7a8266dd40e559d2ecac5d58f709e7a
   - filename: no-git.patch
   - filename: mavenLocal.patch
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
-  - filename: target.patch
   - filename: gen_gradle_deps_file.sh
     enable: '[% c("var/fetch_gradle_dependencies") %]'
 

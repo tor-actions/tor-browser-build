@@ -1,33 +1,38 @@
 #!/bin/bash
 [% c("var/set_default_env") -%]
-[% pc(c('var/compiler'), 'var/setup', { compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')) }) %]
+[% IF ! c("var/nss-linux-x86_64") -%]
+  [% pc(c('var/compiler'), 'var/setup', { compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')) }) %]
+[% END -%]
 distdir=/var/tmp/dist/nss
 builddir=/var/tmp/build/[% project %]
-mkdir /var/tmp/build
+mkdir -p /var/tmp/build /var/tmp/dist
+
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/ninja') %]
 export PATH=/var/tmp/dist/ninja:$PATH
 
-nspr_64=""
-[% IF c("var/cross_prefix") == "armv7a-linux-androideabi" -%]
-  gyp_arch="arm"
-[% ELSIF c("var/cross_prefix") == "i686-linux-android" -%]
-  gyp_arch="ia32"
-[% ELSIF c("var/cross_prefix") == "x86_64-linux-android" -%]
-  gyp_arch="x64"
-  nspr_64="--enable-64bit"
-[% ELSIF c("var/cross_prefix") == "aarch64-linux-android" -%]
-  gyp_arch="arm64"
-  nspr_64="--enable-64bit"
-[% END -%]
+[% IF ! c("var/nss-linux-x86_64") -%]
+  nspr_64=""
+  [% IF c("var/cross_prefix") == "armv7a-linux-androideabi" -%]
+    gyp_arch="arm"
+  [% ELSIF c("var/cross_prefix") == "i686-linux-android" -%]
+    gyp_arch="ia32"
+  [% ELSIF c("var/cross_prefix") == "x86_64-linux-android" -%]
+    gyp_arch="x64"
+    nspr_64="--enable-64bit"
+  [% ELSIF c("var/cross_prefix") == "aarch64-linux-android" -%]
+    gyp_arch="arm64"
+    nspr_64="--enable-64bit"
+  [% END -%]
 
-export AR="[% c('var/cross_prefix') %]-ar"
-# XXX: Mozilla really uses the NDK_API_VERSION here, which is weird.
-export CC="[% c('var/cross_prefix') %][% pc('android-toolchain', 'var/android_ndk_version') %]-clang"
-export CXX="[% c('var/cross_prefix') %][% pc('android-toolchain', 'var/android_ndk_version') %]-clang++"
-export LD="[% c('var/cross_prefix') %]-ld"
-export NM="[% c('var/cross_prefix') %]-nm"
-export RANLIB="[% c('var/cross_prefix') %]-ranlib"
-export READELF="[% c('var/cross_prefix') %]-readelf"
+  export AR="[% c('var/cross_prefix') %]-ar"
+  # XXX: Mozilla really uses the NDK_API_VERSION here, which is weird.
+  export CC="[% c('var/cross_prefix') %][% pc('android-toolchain', 'var/android_ndk_version') %]-clang"
+  export CXX="[% c('var/cross_prefix') %][% pc('android-toolchain', 'var/android_ndk_version') %]-clang++"
+  export LD="[% c('var/cross_prefix') %]-ld"
+  export NM="[% c('var/cross_prefix') %]-nm"
+  export RANLIB="[% c('var/cross_prefix') %]-ranlib"
+  export READELF="[% c('var/cross_prefix') %]-readelf"
+[% END -%]
 
 tar -C /var/tmp/build -xf [% c('input_files_by_name/nss') %]
 mv /var/tmp/build/[% project %]-[% c('version') %] $builddir
@@ -46,39 +51,53 @@ patch -p2 < $rootdir/bug_13028.patch
 
 patch -p1 < $rootdir/use-python3.patch
 
-# Building NSPR
-mkdir $builddir/nspr_build
-cd $builddir/nspr_build
-../nspr/configure \
-  $nspr_64 \
-  --target=[% IF c("arch") == "armv7" %]arm-linux-androideabi[% ELSE %][% c("var/cross_prefix") %][% END %] \
-  --disable-debug \
-  --enable-optimize
-make
-cd ..
+[% IF c("var/nss-linux-x86_64") -%]
+  patch -p1 < $rootdir/use-python3-build-sh.patch
+  $builddir/nss/build.sh \
+    -v \
+    --opt \
+    --static \
+    --disable-tests \
+    -Ddisable_dbm=1 \
+    -Dsign_libs=0 \
+    -Ddisable_libpkix=1 \
+    -Dpython=python3
+  mv $builddir/dist/Release "$builddir/nss_build"
+[% ELSE -%]
+  # Building NSPR
+  mkdir $builddir/nspr_build
+  cd $builddir/nspr_build
+  ../nspr/configure \
+    $nspr_64 \
+    --target=[% IF c("arch") == "armv7" %]arm-linux-androideabi[% ELSE %][% c("var/cross_prefix") %][% END %] \
+    --disable-debug \
+    --enable-optimize
+  make
+  cd ..
 
-# Building NSS
-mkdir $builddir/nss_build
-gyp -f ninja-android "$builddir/nss/nss.gyp" \
-  --depth "$builddir/nss/" \
-  --generator-output=. \
-  -DOS=android \
-  -Dnspr_lib_dir="$builddir/nspr_build/dist/lib" \
-  -Dnspr_include_dir="$builddir/nspr_build/dist/include/nspr" \
-  -Dnss_dist_dir="$builddir/nss_build" \
-  -Dnss_dist_obj_dir="$builddir/nss_build" \
-  -Dhost_arch="$gyp_arch" \
-  -Dtarget_arch="$gyp_arch" \
-  -Dstatic_libs=1 \
-  -Ddisable_dbm=1 \
-  -Dsign_libs=0 \
-  -Denable_sslkeylogfile=0 \
-  -Ddisable_tests=1 \
-  -Ddisable_libpkix=1 \
-  -Dpython=python3
+  # Building NSS
+  mkdir $builddir/nss_build
+  gyp -f ninja-android "$builddir/nss/nss.gyp" \
+    --depth "$builddir/nss/" \
+    --generator-output=. \
+    -DOS=android \
+    -Dnspr_lib_dir="$builddir/nspr_build/dist/lib" \
+    -Dnspr_include_dir="$builddir/nspr_build/dist/include/nspr" \
+    -Dnss_dist_dir="$builddir/nss_build" \
+    -Dnss_dist_obj_dir="$builddir/nss_build" \
+    -Dhost_arch="$gyp_arch" \
+    -Dtarget_arch="$gyp_arch" \
+    -Dstatic_libs=1 \
+    -Ddisable_dbm=1 \
+    -Dsign_libs=0 \
+    -Denable_sslkeylogfile=0 \
+    -Ddisable_tests=1 \
+    -Ddisable_libpkix=1 \
+    -Dpython=python3
 
-gendir="$builddir/nss/out/Release"
-ninja -C "$gendir"
+  gendir="$builddir/nss/out/Release"
+  ninja -C "$gendir"
+[% END -%]
 
 mkdir -p $distdir/include/nss
 mkdir -p $distdir/lib
@@ -87,6 +106,7 @@ cp -p -L "$builddir/nss_build/lib/libcerthi.a" "$distdir/lib"
 cp -p -L "$builddir/nss_build/lib/libcryptohi.a" "$distdir/lib"
 cp -p -L "$builddir/nss_build/lib/libfreebl_static.a" "$distdir/lib"
 cp -p -L "$builddir/nss_build/lib/libnss_static.a" "$distdir/lib"
+cp -p -L "$builddir/nss_build/lib/libmozpkix.a" "$distdir/lib"
 cp -p -L "$builddir/nss_build/lib/libnssb.a" "$distdir/lib"
 cp -p -L "$builddir/nss_build/lib/libnssdev.a" "$distdir/lib"
 cp -p -L "$builddir/nss_build/lib/libnsspki.a" "$distdir/lib"
@@ -98,34 +118,53 @@ cp -p -L "$builddir/nss_build/lib/libsmime.a" "$distdir/lib"
 cp -p -L "$builddir/nss_build/lib/libsoftokn_static.a" "$distdir/lib"
 cp -p -L "$builddir/nss_build/lib/libssl.a" "$distdir/lib"
 
-# HW specific.
-# https://searchfox.org/nss/rev/08c4d05078d00089f8d7540651b0717a9d66f87e/lib/freebl/freebl.gyp#278-296
-[% IF c("var/cross_prefix") == "i686-linux-android" || c("var/cross_prefix") == "x86_64-linux-android"-%]
-  cp -p -L "$builddir/nss_build/lib/libgcm-aes-x86_c_lib.a" "$distdir/lib"
-[% END %]
-[% IF c("var/cross_prefix") == "armv7a-linux-androideabi" || c("var/cross_prefix") == "aarch64-linux-android"-%]
-  cp -p -L "$builddir/nss_build/lib/libarmv8_c_lib.a" "$distdir/lib"
-[% END %]
-[% IF c("var/cross_prefix") == "aarch64-linux-android" -%]
-  cp -p -L "$builddir/nss_build/lib/libgcm-aes-aarch64_c_lib.a" "$distdir/lib"
-[% END %]
-[% IF c("var/cross_prefix") == "armv7a-linux-androideabi" -%]
-  cp -p -L "$builddir/nss_build/lib/libgcm-aes-arm32-neon_c_lib.a" "$distdir/lib"
-[% END %]
-# https://searchfox.org/nss/rev/08c4d05078d00089f8d7540651b0717a9d66f87e/lib/freebl/freebl.gyp#315-324
-# https://searchfox.org/nss/rev/08c4d05078d00089f8d7540651b0717a9d66f87e/lib/freebl/freebl.gyp#43-47
-[% IF c("var/cross_prefix") == "x86_64-linux-android"-%]
+[% IF c("var/nss-linux-x86_64") -%]
   cp -p -L "$builddir/nss_build/lib/libintel-gcm-wrap_c_lib.a" "$distdir/lib"
   cp -p -L "$builddir/nss_build/lib/libintel-gcm-s_lib.a" "$distdir/lib"
   cp -p -L "$builddir/nss_build/lib/libhw-acc-crypto-avx.a" "$distdir/lib"
   cp -p -L "$builddir/nss_build/lib/libhw-acc-crypto-avx2.a" "$distdir/lib"
-[% END %]
-cp -p -L "$builddir/nspr_build/dist/lib/libplc4.a" "$distdir/lib"
-cp -p -L "$builddir/nspr_build/dist/lib/libplds4.a" "$distdir/lib"
-cp -p -L "$builddir/nspr_build/dist/lib/libnspr4.a" "$distdir/lib"
+  cp -p -L "$builddir/nss_build/lib/libgcm-aes-x86_c_lib.a" "$distdir/lib"
+[% ELSE -%]
+  # HW specific.
+  # https://searchfox.org/nss/rev/08c4d05078d00089f8d7540651b0717a9d66f87e/lib/freebl/freebl.gyp#278-296
+  [% IF c("var/cross_prefix") == "i686-linux-android" || c("var/cross_prefix") == "x86_64-linux-android"-%]
+    cp -p -L "$builddir/nss_build/lib/libgcm-aes-x86_c_lib.a" "$distdir/lib"
+  [% END %]
+  [% IF c("var/cross_prefix") == "armv7a-linux-androideabi" || c("var/cross_prefix") == "aarch64-linux-android"-%]
+    cp -p -L "$builddir/nss_build/lib/libarmv8_c_lib.a" "$distdir/lib"
+  [% END %]
+  [% IF c("var/cross_prefix") == "aarch64-linux-android" -%]
+    cp -p -L "$builddir/nss_build/lib/libgcm-aes-aarch64_c_lib.a" "$distdir/lib"
+  [% END %]
+  [% IF c("var/cross_prefix") == "armv7a-linux-androideabi" -%]
+    cp -p -L "$builddir/nss_build/lib/libgcm-aes-arm32-neon_c_lib.a" "$distdir/lib"
+  [% END %]
+  # https://searchfox.org/nss/rev/08c4d05078d00089f8d7540651b0717a9d66f87e/lib/freebl/freebl.gyp#315-324
+  # https://searchfox.org/nss/rev/08c4d05078d00089f8d7540651b0717a9d66f87e/lib/freebl/freebl.gyp#43-47
+  [% IF c("var/cross_prefix") == "x86_64-linux-android"-%]
+    cp -p -L "$builddir/nss_build/lib/libintel-gcm-wrap_c_lib.a" "$distdir/lib"
+    cp -p -L "$builddir/nss_build/lib/libintel-gcm-s_lib.a" "$distdir/lib"
+    cp -p -L "$builddir/nss_build/lib/libhw-acc-crypto-avx.a" "$distdir/lib"
+    cp -p -L "$builddir/nss_build/lib/libhw-acc-crypto-avx2.a" "$distdir/lib"
+  [% END %]
+[% END -%]
 
-cp -p -L -R "$builddir/nss_build/public/nss/"* "$distdir/include/nss"
-cp -p -L -R "$builddir/nspr_build/dist/include/nspr/"* "$distdir/include/nss"
+[% IF c("var/nss-linux-x86_64") -%]
+  nspr_libdir="$builddir/nss_build/lib"
+  nss_include_dir="$builddir/dist/public/nss/"
+  nspr_include_dir="$builddir/nss_build/include/nspr/"
+[% ELSE -%]
+  nspr_libdir="$builddir/nspr_build/dist/lib"
+  nss_include_dir="$builddir/nss_build/public/nss/"
+  nspr_include_dir="$builddir/nspr_build/dist/include/nspr/"
+[% END -%]
+
+cp -p -L "$nspr_libdir/libplc4.a" "$distdir/lib"
+cp -p -L "$nspr_libdir/libplds4.a" "$distdir/lib"
+cp -p -L "$nspr_libdir/libnspr4.a" "$distdir/lib"
+
+cp -p -L -R "$nss_include_dir/"* "$distdir/include/nss"
+cp -p -L -R "$nspr_include_dir/"* "$distdir/include/nss"
 
 cd /var/tmp/dist
 [% c('tar', {

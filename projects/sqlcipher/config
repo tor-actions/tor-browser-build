@@ -10,6 +10,12 @@ var:
     - build-essential
     - tcl
 
+targets:
+  sqlcipher-linux-x86_64:
+    var:
+      osname: linux-x86_64
+      sqlcipher-linux-x86_64: 1
+
 input_files:
   - project: container-image
   - name: '[% c("var/compiler") %]'
