@@ -33,6 +33,7 @@ var:
   android_platform_revision_29: 04
   android_ndk_version: 21
   android_ndk_revision: d
+  android_ndk_version_build: 21.3.6528147
   # XXX: In commit 83fffa1198c3cbeffec45028971896876e2133a5 mozilla
   # replaced sdk-tools with commandlinetools. We try to do the same here,
   # but it seems sdk-tools is still being used in the build, so we can't

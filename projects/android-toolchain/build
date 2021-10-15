@@ -16,6 +16,7 @@ mkdir -p $SDK_HOME/cmdline-tools
 unzip -qq [% c("input_files_by_name/android_commandlinetools") %] -d $SDK_HOME/cmdline-tools
 mv $SDK_HOME/cmdline-tools/cmdline-tools $SDK_HOME/cmdline-tools/[% c("var/commandlinetools_version_string") %]
 unzip -qq [% c("input_files_by_name/android_ndk_compiler")%] -d $NDK_HOME
+ln -s $NDK_HOME/android-ndk-r[% c("var/android_ndk_version") %][% c("var/android_ndk_revision") %] $NDK_HOME/[% c("var/android_ndk_version_build") %]
 
 # NDK Archive
 # Adjust cross compilation prefix for armv7a. Unfortunately, the compiler cross
