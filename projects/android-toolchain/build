@@ -2,7 +2,7 @@
 [% c("var/set_default_env") -%]
 export PROJECT_PATH=/var/tmp/dist/[% project %]
 export SDK_HOME=$PROJECT_PATH/android-sdk-linux
-export NDK_HOME=$PROJECT_PATH/android-ndk
+export NDK_HOME=$SDK_HOME/ndk
 android_release_dir_9=android-9
 android_release_dir_10=android-10
 android_release_dir_11=android-11
