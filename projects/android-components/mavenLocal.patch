@@ -1,17 +1,17 @@
-From d1263dbcc33e3f587abbc4bbf8c24c0bb567f194 Mon Sep 17 00:00:00 2001
+From 563526695139d07ec8192c71c99270b0de3e33ff Mon Sep 17 00:00:00 2001
 From: Georg Koppen <gk@torproject.org>
 Date: Wed, 20 May 2020 14:18:12 +0000
 Subject: [PATCH] mavenLocal() fixes
 
 ---
  build.gradle             | 2 ++
- buildSrc/build.gradle    | 1 +
+ buildSrc/build.gradle    | 2 ++
  buildSrc/settings.gradle | 7 ++++++-
  settings.gradle          | 7 +++++++
- 4 files changed, 16 insertions(+), 1 deletion(-)
+ 4 files changed, 17 insertions(+), 1 deletion(-)
 
 diff --git a/build.gradle b/build.gradle
-index f412f91f4..944a19e9a 100644
+index eb19f4a217..c86abd5559 100644
 --- a/build.gradle
 +++ b/build.gradle
 @@ -6,6 +6,7 @@ import static org.gradle.api.tasks.testing.TestResult.ResultType
@@ -22,7 +22,7 @@ index f412f91f4..944a19e9a 100644
          if (project.hasProperty("googleRepo")) {
              maven {
                  name "Google"
-@@ -39,6 +40,7 @@ plugins {
+@@ -40,6 +41,7 @@ plugins {
  
  allprojects {
      repositories {
@@ -31,19 +31,20 @@ index f412f91f4..944a19e9a 100644
              maven {
                  name "Google"
 diff --git a/buildSrc/build.gradle b/buildSrc/build.gradle
-index c9f83be52..c01e9ab01 100644
+index b2af6cdea2..67a25b7841 100644
 --- a/buildSrc/build.gradle
 +++ b/buildSrc/build.gradle
-@@ -7,6 +7,7 @@ plugins {
+@@ -7,6 +7,8 @@ plugins {
  }
  
  repositories {
 +    mavenLocal()
-     mavenCentral()
- 
++
      if (project.hasProperty("centralRepo")) {
+         maven {
+             name "MavenCentral"
 diff --git a/buildSrc/settings.gradle b/buildSrc/settings.gradle
-index c31ad3840..fb6526db3 100644
+index c31ad3840d..fb6526db30 100644
 --- a/buildSrc/settings.gradle
 +++ b/buildSrc/settings.gradle
 @@ -1,10 +1,15 @@
@@ -65,7 +66,7 @@ index c31ad3840..fb6526db3 100644
 \ No newline at end of file
 +}
 diff --git a/settings.gradle b/settings.gradle
-index e1204312f..428e9ddcd 100644
+index e1204312f5..428e9ddcdf 100644
 --- a/settings.gradle
 +++ b/settings.gradle
 @@ -4,8 +4,15 @@
