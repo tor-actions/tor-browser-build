@@ -1,3 +1,13 @@
+Tor Browser 10.5.10 -- October 23 2021
+ * All Platforms
+   * Translations Update
+ * Windows + OS X + Linux
+   * Revert bug 40049 [torbutton]
+   * Bug 40051: Implement 2021 Year End Campaign look in about:tor [torbutton]
+ * Android
+   * Revert bug 40193 [fenix]
+   * Bug 40194: Add 2021 YEC home screen [fenix]
+
 Tor Browser 10.5.9 -- October 9 2021
  * Android
    * Bug 40052: Skip L10nRegistry source registration on Android [torbutton]

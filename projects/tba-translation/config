@@ -3,5 +3,5 @@ filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 git_url: https://git.torproject.org/translation.git
 # We need to bump the commit before releasing but just pointing to a branch
 # might cause too much rebuidling of the Firefox part.
-git_hash: 91ff9c1637358b8e31c63796e837af4a91f1680b
+git_hash: d66f8c0f3bffc6b93b4f7d6a482b01441f6e9112
 version: '[% c("abbrev") %]'
