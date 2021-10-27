@@ -16,7 +16,7 @@ var:
     use_container: 1
   # This should be updated when the list of gradle dependencies is changed.
   gradle_dependencies_version: 32
-  gradle_version: 6.5.1
+  gradle_version: 7.0.2
   glean_parser: 3.4.0
   arch_deps:
     - python3-venv
