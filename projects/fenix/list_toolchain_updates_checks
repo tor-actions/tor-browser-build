@@ -68,6 +68,6 @@ if (m/const\\s+val\\s+android_gradle_plugin\\s+=\\s+"([^"]+)"/) {
 }
 EOF
 needed=$(cat buildSrc/src/main/java/Dependencies.kt | perl -ne "$p")
-current='4.0.1'
+current='7.0.0'
 check_update_needed android-gradle-plugin "$needed" "$current"
 
