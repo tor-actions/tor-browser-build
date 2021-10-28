@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
-version: 82.1.0
-git_hash: b0e7775ab12eeb4251f09cdfaab9ddaea22b4438
+version: 85.4.0
+git_hash: b9601a76c7d47aa54c60b81c783571630d4962bf
 git_url: https://github.com/mozilla/application-services
 git_submodule: 1
 
@@ -91,7 +91,7 @@ input_files:
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
   # Use `make cargo_vendor-application-services` to re-generate the vendor tarball
   - URL: https://people.torproject.org/~boklm/mirrors/sources/application-services-vendor-[% c('version') %].tar.bz2
-    sha256sum: e75d17a6cf9481c3f1d18c9b1fff8b38a7a8266dd40e559d2ecac5d58f709e7a
+    sha256sum: 54f9c8185789ab45cd46e9845a71181c5e7938e26b1b33b3f2f891f0b5cf73b6
   - filename: no-git.patch
   - filename: mavenLocal.patch
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
