@@ -243,8 +243,8 @@ fdd93302c2eb94bbe6007caa28d072246d2875cda5cb774bb6299416b94d74a6 | https://maven
 c9fff541d51c11195de305c50bbfe4d1dfc97841983d95f6d7101112603515ab | https://maven.google.com/com/google/android/material/material/1.0.0/material-1.0.0.pom
 2deaa8c40f27c8af158ae2c2132927cd9be345deb1450da49aca29cb168289cd | https://maven.google.com/com/google/testing/platform/core-proto/0.0.8-alpha01/core-proto-0.0.8-alpha01.jar
 501e7a6b743cf4e81643ce31e2850f37477494a689513e756e059c688773867f | https://maven.google.com/com/google/testing/platform/core-proto/0.0.8-alpha01/core-proto-0.0.8-alpha01.pom
-f715b19c918900ad34be8f2e2372d97b1c5fff579a383f0b2dad9581df443ea4 | https://plugins.gradle.org/m2/com/koushikdutta/async/androidasync/2.2.1/androidasync-2.2.1.aar
-522714e46eb74d494c94e37e17114030e618a7560141720998d82f363d1fcd47 | https://plugins.gradle.org/m2/com/koushikdutta/async/androidasync/2.2.1/androidasync-2.2.1.pom
+440a25cd719ed1c40ee48d1ec1fb8a32193e25ddd9b7fa5bbd4e252f9cf8083d | https://plugins.gradle.org/m2/com/koushikdutta/async/androidasync/3.1.0/androidasync-3.1.0.aar
+5d5c55f1ed2ab04d538223d23a39d78c66df4c96f87f634ad7078417b79d3372 | https://plugins.gradle.org/m2/com/koushikdutta/async/androidasync/3.1.0/androidasync-3.1.0.pom
 f38510e048be4795658064b8735fdfa4954e54d05af875de7edc738bba326fe4 | https://plugins.gradle.org/m2/com/koushikdutta/async/androidasync/maven-metadata.xml
 b4fe5dab42c4d69f50fbe67507ff58f84897670b6f54d5249c23072c881813cb | https://plugins.gradle.org/m2/org/mozilla/apilint/apilint/0.4.4/apilint-0.4.4.jar
 a367da6e019475666500af411ffa3f3acee7036b1adee039dc2be21ab9ffbe5e | https://plugins.gradle.org/m2/org/mozilla/apilint/apilint/0.4.4/apilint-0.4.4.pom
