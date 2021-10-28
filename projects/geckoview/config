@@ -1,15 +1,15 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
 filename: 'geckoview-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
-git_hash: 'tor-browser-[% c("var/geckoview_version") %]-[% c("var/torbrowser_branch") %]-1-build1'
+git_hash: 'geckoview-[% c("var/geckoview_version") %]-[% c("var/torbrowser_branch") %]-1-build1'
 tag_gpg_id: 1
 git_url: https://git.torproject.org/tor-browser.git
 git_submodule: 1
 gpg_keyring: torbutton.gpg
 
 var:
-  geckoview_version: 93.0
-  torbrowser_branch: 11.0
+  geckoview_version: 94.0
+  torbrowser_branch: 11.5
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   deps:
     - build-essential
@@ -23,7 +23,7 @@ var:
   container:
     use_container: 1
   # this should be updated when the list of gradle dependencies is changed
-  gradle_dependencies_version: 7
+  gradle_dependencies_version: 8
   gradle_version: 6.9.1
 
 steps:
@@ -144,7 +144,7 @@ steps:
 
 targets:
   nightly:
-    git_hash: 'tor-browser-[% c("var/geckoview_version") %]-[% c("var/torbrowser_branch") %]-1'
+    git_hash: 'geckoview-[% c("var/geckoview_version") %]-[% c("var/torbrowser_branch") %]-1'
     tag_gpg_id: 0
 
 input_files:
