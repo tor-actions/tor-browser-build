@@ -85,9 +85,9 @@ input_files:
     name: gradle-dependencies
     exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
-  - URL: https://people.torproject.org/~boklm/mirrors/sources/glean-wheels-[% c('var/glean_parser') %]-build2.tar.xz
+  - URL: '[% pc("glean", "var/glean_wheels_url/" _ c("var/glean_parser"), { error_if_undef => 1 }) %]'
     name: glean-wheels
-    sha256sum: 6bbf3a9ffa939ca87e00b486f2020ab5cf9dea772f1d37b048f666fed38f98c1
+    sha256sum: '[% pc("glean", "var/glean_wheels_sha256sum/" _ c("var/glean_parser"), { error_if_undef => 1 }) %]'
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
   # Use `make cargo_vendor-application-services` to re-generate the vendor tarball
   - URL: https://people.torproject.org/~boklm/mirrors/sources/application-services-vendor-[% c('version') %].tar.bz2
