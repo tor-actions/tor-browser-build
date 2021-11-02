@@ -1,3 +1,30 @@
+Tor Browser 11.0a10 - November 8 2021
+ * Windows + OS X + Linux
+   * Update Firefox to 91.3.0esr
+   * Update Tor to 0.4.7.2-alpha
+   * Bug 32624: localStorage is not shared between tabs [tor-browser]
+   * Bug 33125: Remove xpinstall.whitelist.add* as they don't do anything anymore [tor-browser]
+   * Bug 34188: Cleanup extensions.* prefs [tor-browser]
+   * Bug 40053: investigate fingerprinting potential of extended TextMetrics interface [tor-browser]
+   * Bug 40083: Make sure Region.jsm fetching is disabled [tor-browser]
+   * Bug 40177: Clean up obsolete preferences in our 000-tor-browser.js [tor-browser]
+   * Bug 40220: Make sure tracker cookie purging is disabled [tor-browser]
+   * Bug 40342: Set `gfx.bundled-fonts.activate = 1` to preserve current bundled fonts behaviour [tor-browser]
+   * Bug 40463: Disable network.http.windows10-sso.enabled in FF 91 [tor-browser]
+   * Bug 40483: Deutsche Welle v2 redirect [tor-browser]
+   * Bug 40548: Set network.proxy.failover_direct to false in FF 91 [tor-browser]
+   * Bug 40630: New Identity and New Circuit icons [tor-browser]
+   * Bug 40641: Update Security Level selection in about:preferences to match style as tracking protection option bubbles [tor-browser]
+   * Bug 40648: Replace onion pattern divs/css with tiling SVG [tor-browser]
+   * Bug 40653: Onion Available text not aligned correctly in toolbar in ESR91 [tor-browser]
+   * Bug 40655: esr91 is suggesting to make Tor Browser the default browse [tor-browser]
+   * Bug 40657: esr91 is missing "New identity" in hamburger menu [tor-browser]
+   * Bug 40680: Prepare update to localized assets for YEC [tor-browser]
+ * Build System
+   * Windows + OS X + Linux
+     * Bug 40366: Use bullseye to build https-everywhere
+     * Bug 40368: Use system's python3 for https-everywhere
+
 Tor Browser 11.0a9 -- October 15 2021
  * Windows + OS X + Linux
    * Update Firefox to 91.2.0esr
