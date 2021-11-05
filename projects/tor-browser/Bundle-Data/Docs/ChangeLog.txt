@@ -1,4 +1,4 @@
-Tor Browser 11.0a10 - November 8 2021
+Tor Browser 11.0a10 - November 4 2021
  * Windows + OS X + Linux
    * Update Firefox to 91.3.0esr
    * Update Tor to 0.4.7.2-alpha
@@ -22,8 +22,8 @@ Tor Browser 11.0a10 - November 8 2021
    * Bug 40680: Prepare update to localized assets for YEC [tor-browser]
  * Build System
    * Windows + OS X + Linux
-     * Bug 40366: Use bullseye to build https-everywhere
-     * Bug 40368: Use system's python3 for https-everywhere
+     * Bug 40366: Use bullseye to build https-everywhere [tor-browser-build]
+     * Bug 40368: Use system's python3 for https-everywhere [tor-browser-build]
 
 Tor Browser 11.0a9 -- October 15 2021
  * Windows + OS X + Linux
