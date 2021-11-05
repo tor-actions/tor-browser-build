@@ -25,6 +25,16 @@ Tor Browser 11.0a10 - November 4 2021
      * Bug 40366: Use bullseye to build https-everywhere [tor-browser-build]
      * Bug 40368: Use system's python3 for https-everywhere [tor-browser-build]
 
+Tor Browser 10.5.10 -- October 23 2021
+ * All Platforms
+   * Translations Update
+ * Windows + OS X + Linux
+   * Revert bug 40049 [torbutton]
+   * Bug 40051: Implement 2021 Year End Campaign look in about:tor [torbutton]
+ * Android
+   * Revert bug 40193 [fenix]
+   * Bug 40194: Add 2021 YEC home screen [fenix]
+
 Tor Browser 11.0a9 -- October 15 2021
  * Windows + OS X + Linux
    * Update Firefox to 91.2.0esr
