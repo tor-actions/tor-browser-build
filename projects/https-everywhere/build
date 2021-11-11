@@ -2,6 +2,11 @@
 [% c("var/set_default_env") -%]
 tar xf [% project %]-[% c('version') %].tar.gz
 cd [% project %]-[% c('version') %]
+
+[% IF c("var/windows") %]
+  patch -p1 < $rootdir/0001-Bug-40383-Disable-https-e-wasm-ruleset.patch
+[% END -%]
+
 ./make.sh
 # Since 5.0.2 a .xpi for AMO is built, too. We don't need it.
 rm pkg/*-amo.xpi

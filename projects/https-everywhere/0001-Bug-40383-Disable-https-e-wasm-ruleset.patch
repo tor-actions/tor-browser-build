@@ -1,0 +1,26 @@
+From 647aa186351f7a6ee6050e0a3a2bde7ccf5a8192 Mon Sep 17 00:00:00 2001
+From: Matthew Finkel <sysrqb@torproject.org>
+Date: Wed, 10 Nov 2021 20:00:18 +0000
+Subject: [PATCH] Bug 40383: Disable https-e wasm ruleset
+
+---
+ chromium/background-scripts/rules.js | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/chromium/background-scripts/rules.js b/chromium/background-scripts/rules.js
+index 7f0a5b5506..55a3f75094 100644
+--- a/chromium/background-scripts/rules.js
++++ b/chromium/background-scripts/rules.js
+@@ -216,7 +216,8 @@ RuleSets.prototype = {
+     this.store = store;
+     this.ruleActiveStates = await this.store.get_promise('ruleActiveStates', {});
+     try {
+-      this.wasm_rs = wasm.RuleSets.new();
++      // Bug 40383: Disable wasm ruleset for now.
++      //this.wasm_rs = wasm.RuleSets.new();
+     } catch(e) {
+       util.log(util.WARN, 'Falling back to pure JS implementation: ' + e);
+     }
+-- 
+2.25.1
+
