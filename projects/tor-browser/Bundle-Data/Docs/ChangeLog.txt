@@ -1,3 +1,13 @@
+Tor Browser 11.0.1 - November 14 2021
+ * Windows + OS X + Linux
+   * Tor Launcher 0.2.32
+   * Bug 40059: YEC activist sign empty in about:tor on RTL locales [torbutton]
+   * Bug 40383: Workaround issue in https-e wasm [tor-browser-build]
+   * Bug 40438: Add Blockchair as a search engine [tor-browser]
+   * Bug 40689: Change Blockchair Search provider's HTTP method [tor-browser]
+   * Bug 40690: Browser chrome breaks when private browsing mode is turned off [tor-browser]
+   * Bug 40700: Switch Firefox recommendations off by default [tor-browser]
+
 Tor Browser 11.0 - November 8 2021
  * Windows + OS X + Linux
    * Update Firefox to 91.3.0esr
