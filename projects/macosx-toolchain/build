@@ -5,20 +5,37 @@ mkdir $builddir
 distdir=/var/tmp/dist/[% project %]
 mkdir -p "$distdir"
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/cmake') %]
+tar -C /var/tmp/dist -xf [% c('input_files_by_name/ninja') %]
 tar -C $distdir -xf [% c('input_files_by_name/clang') %]
 tar -C $distdir -xf [% c('input_files_by_name/SDK') %]
 tar -C $distdir -xf [% c('input_files_by_name/cctools') %]
 tar -C $builddir -xf [% c('input_files_by_name/llvm-project') %]
 
-arch=x86_64
+arch=[% c("var/osx_arch") %]
 clangdir=$distdir/clang/bin
 cctoolsdir=$distdir/cctools/bin
 sysrootdir=$distdir/MacOSX[% c("version") %].sdk/
-target=x86_64-apple-darwin
+target=[% c("var/build_target") %]
 # We still need to put the cctoolsdir on the path. That's because of `lipo`. See
 # the respective comment in the cctools build script.
-export PATH="/var/tmp/dist/cmake/bin:$cctoolsdir:$PATH"
+export PATH="/var/tmp/dist/ninja:/var/tmp/dist/cmake/bin:$cctoolsdir:$PATH"
 export MACOSX_DEPLOYMENT_TARGET=[% c("var/macosx_deployment_target") %]
+
+[% IF c("var/osx-aarch64") -%]
+  # wrapper taken from:
+  # tor-browser.git/taskcluster/scripts/misc/build-llvm-common.sh
+  clangwrappersdir=$distdir/clang/wrappers
+  mkdir $clangwrappersdir
+  compiler_wrapper() {
+    echo exec $clangdir/$1 -mcpu=apple-m1 \"\$@\" > $clangwrappersdir/$1
+    chmod +x $clangwrappersdir/$1
+  }
+  compiler_wrapper clang
+  compiler_wrapper clang++
+  clang=$clangwrappersdir/clang
+[% ELSE -%]
+  clang=$clangdir/clang
+[% END -%]
 
 cd $builddir/clang-source
 patch -p1 < $rootdir/compiler-rt-cross-compile.patch
@@ -29,20 +46,18 @@ mkdir build_compiler_rt
 cd build_compiler_rt
 
 # And we build compiler-rt by following taskcluster/scripts/misc/build-compiler-rt.sh.
-cmake -G "Unix Makefiles" \
-      -DCMAKE_C_COMPILER=$clangdir/clang \
-      -DCMAKE_CXX_COMPILER=$clangdir/clang++ \
+cmake -GNinja \
+      -DCMAKE_C_COMPILER=$clang \
+      -DCMAKE_CXX_COMPILER=$clang++ \
       -DCMAKE_C_COMPILER_TARGET=$target \
       -DCMAKE_CXX_COMPILER_TARGET=$target \
       -DCMAKE_ASM_COMPILER_TARGET=$target \
       -DCMAKE_AR=$clangdir/llvm-ar \
       -DCMAKE_RANLIB=$clangdir/llvm-ranlib \
-      -DCMAKE_C_FLAGS="[% c('var/FLAGS') %] -I$sysrootdir/usr/include -iframework $sysrootdir/System/Library/Frameworks" \
-      -DCMAKE_CXX_FLAGS="-stdlib=libc++ [% c('var/FLAGS') %] -I$sysrootdir/usr/include -iframework $sysrootdir/System/Library/Frameworks" \
-      -DCMAKE_ASM_FLAGS="[% c('var/FLAGS') %] -I$sysrootdir/usr/include -iframework $sysrootdir/System/Library/Frameworks" \
-      -DCMAKE_EXE_LINKER_FLAGS="[% c('var/LDFLAGS') %]" \
-      -DCMAKE_SHARED_LINKER_FLAGS="[% c('var/LDFLAGS') %]" \
+      -DCMAKE_EXE_LINKER_FLAGS="-fuse-ld=lld" \
+      -DCMAKE_SHARED_LINKER_FLAGS="-fuse-ld=lld" \
       -DCMAKE_BUILD_TYPE=Release \
+      -DLLVM_DEFAULT_TARGET_TRIPLE=$target \
       -DLLVM_ENABLE_ASSERTIONS=OFF \
       -DCMAKE_INSTALL_PREFIX=$distdir/clang/lib/clang/[% pc("clang", "version") %]/ \
       -DLLVM_CONFIG_PATH=$clangdir/llvm-config \
@@ -50,68 +65,63 @@ cmake -G "Unix Makefiles" \
       -DCOMPILER_RT_ENABLE_IOS=OFF \
       -DCOMPILER_RT_BUILD_LIBFUZZER=OFF \
       -DCOMPILER_RT_BUILD_ORC=OFF \
-      -DCOMPILER_RT_BUILD_SANITIZERS=OFF \
       -DCOMPILER_RT_ENABLE_TVOS=OFF \
       -DCOMPILER_RT_ENABLE_WATCHOS=OFF \
       -DCOMPILER_RT_BUILD_XRAY=OFF \
-      -DCMAKE_LINKER=$cctoolsdir/$target-ld \
-      -DCMAKE_LIPO=$cctoolsdir/lipo \
+      -DCMAKE_LINKER=$clangdir/ld64.lld \
+      -DCMAKE_LIPO=$clangdir/llvm-lipo \
       -DCMAKE_SYSTEM_NAME=Darwin \
       -DCMAKE_SYSTEM_VERSION=$MACOSX_DEPLOYMENT_TARGET \
       -DDARWIN_macosx_OVERRIDE_SDK_VERSION=$MACOSX_DEPLOYMENT_TARGET \
+      -DCMAKE_OSX_ARCHITECTURES=$arch \
       -DDARWIN_osx_ARCHS=$arch \
       -DDARWIN_osx_SYSROOT=$sysrootdir \
       -DDARWIN_osx_BUILTIN_ARCHS=$arch \
       -DCMAKE_OSX_SYSROOT=$sysrootdir \
-      -DCMAKE_FIND_ROOT_PATH=$sysrootdir \
-      -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER \
-      -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY \
-      -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
-      -DDARWIN_osx_BUILTIN_ARCHS=$arch \
       $builddir/clang-source/compiler-rt
 
-make -j[% c("num_procs") %]
-make install
+ninja -j[% c("num_procs") %] -v install
 
 cd $builddir/clang-source
 
-cmake -G "Unix Makefiles" -S runtimes -B build \
+cmake -GNinja -S runtimes -B build \
       -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind" \
-      -DCMAKE_C_COMPILER=$clangdir/clang \
-      -DCMAKE_CXX_COMPILER=$clangdir/clang++ \
+      -DCMAKE_C_COMPILER=$clang \
+      -DCMAKE_CXX_COMPILER=$clang++ \
       -DCMAKE_C_COMPILER_TARGET=$target \
       -DCMAKE_CXX_COMPILER_TARGET=$target \
       -DCMAKE_ASM_COMPILER_TARGET=$target \
       -DCMAKE_AR=$clangdir/llvm-ar \
       -DCMAKE_RANLIB=$clangdir/llvm-ranlib \
-      -DCMAKE_C_FLAGS="-target x86_64-apple-darwin -B $cctoolsdir -isysroot $sysrootdir -I$sysrootdir/usr/include -iframework $sysrootdir/System/Library/Frameworks" \
-      -DCMAKE_CXX_FLAGS="-stdlib=libc++ -target x86_64-apple-darwin -B $cctoolsdir -isysroot $sysrootdir -I$sysrootdir/usr/include -iframework $sysrootdir/System/Library/Frameworks" \
-      -DCMAKE_ASM_FLAGS="-target x86_64-apple-darwin -B $cctoolsdir -isysroot $sysrootdir -I$sysrootdir/usr/include -iframework $sysrootdir/System/Library/Frameworks" \
+      -DCMAKE_C_FLAGS="-target $target -B $cctoolsdir -isysroot $sysrootdir -I$sysrootdir/usr/include -iframework $sysrootdir/System/Library/Frameworks" \
+      -DCMAKE_CXX_FLAGS="-stdlib=libc++ -target $target -B $cctoolsdir -isysroot $sysrootdir -I$sysrootdir/usr/include -iframework $sysrootdir/System/Library/Frameworks" \
+      -DCMAKE_ASM_FLAGS="-target $target -B $cctoolsdir -isysroot $sysrootdir -I$sysrootdir/usr/include -iframework $sysrootdir/System/Library/Frameworks" \
       -DCMAKE_EXE_LINKER_FLAGS="-Wl,-syslibroot,$sysrootdir -Wl,-dead_strip -Wl,-pie" \
       -DCMAKE_SHARED_LINKER_FLAGS="-Wl,-syslibroot,$sysrootdir -Wl,-dead_strip -Wl,-pie" \
       -DCMAKE_BUILD_TYPE=Release \
+      -DLLVM_DEFAULT_TARGET_TRIPLE=$target \
       -DLLVM_ENABLE_ASSERTIONS=OFF \
       -DCMAKE_INSTALL_PREFIX=$distdir/clang \
       -DCMAKE_LINKER=$cctoolsdir/$target-ld \
+      -DCMAKE_LIPO=$clangdir/llvm-lipo \
       -DCMAKE_SYSTEM_NAME=Darwin \
       -DCMAKE_SYSTEM_VERSION=$MACOSX_DEPLOYMENT_TARGET \
       -DDARWIN_macosx_OVERRIDE_SDK_VERSION=$MACOSX_DEPLOYMENT_TARGET \
+      -DCMAKE_OSX_ARCHITECTURES=$arch \
       -DDARWIN_osx_ARCHS=$arch \
       -DDARWIN_osx_BUILTIN_ARCHS=$arch \
       -DCMAKE_OSX_SYSROOT=$sysrootdir \
       -DCMAKE_FIND_ROOT_PATH=$sysrootdir \
       -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER \
       -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY \
-      -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
-      -DDARWIN_osx_BUILTIN_ARCHS=$arch \
+      -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY
 
 cd build
-make -j[% c("num_procs") %]
-make install
+ninja -j[% c("num_procs") %] -v install
 
 cd $distdir/cctools/bin
-ln -s ../../clang/bin/clang x86_64-apple-darwin-clang
-ln -s ../../clang/bin/clang++ x86_64-apple-darwin-clang++
+ln -s ../../clang/bin/clang $target-clang
+ln -s ../../clang/bin/clang++ $target-clang++
 
 cd /var/tmp/dist
 [% c('tar', {

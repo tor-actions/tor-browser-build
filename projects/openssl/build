@@ -11,7 +11,7 @@ export CC='gcc -m32'
 # OpenSSL prepends the host triple to $CC
 [% IF c("var/osx") -%]
   # Tricking OpenSSL into using our clang as cross-compiler
-  ln -s $clangdir/bin/clang $clangdir/bin/x86_64-apple-darwin-cc
+  ln -s $clangdir/bin/clang $clangdir/bin/[% c("var/build_target") %]-cc
   export CC="cc [% c("var/FLAGS") %]"
 [% END -%]
 [% IF c("var/windows") -%]

@@ -108,9 +108,9 @@ targets:
         # To support Wayland mode
         - libdrm-dev:i386
 
-  osx-x86_64:
+  osx:
     var:
-      martools_filename: mar-tools-mac64.zip
+      martools_filename: 'mar-tools-mac-[% c("var/osx_arch") %].zip'
       arch_deps:
         - python3
         - python3-distutils

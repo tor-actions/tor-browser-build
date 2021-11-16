@@ -17,7 +17,7 @@ targets:
   windows-x86_64:
     var:
       ff_arch: win64
-  osx-x86_64:
+  osx:
     var:
       ff_arch: mac
 

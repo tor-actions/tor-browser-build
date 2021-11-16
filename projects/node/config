@@ -12,7 +12,7 @@ targets:
     var:
       arch_deps:
         - python2
-  osx-x86_64:
+  osx:
     var:
       arch_deps:
         - python2

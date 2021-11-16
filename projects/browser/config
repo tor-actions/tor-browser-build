@@ -29,6 +29,13 @@ targets:
   osx-x86_64:
     var:
       mar_osname: osx64
+      dmg_name: osx64
+  osx-aarch64:
+    var:
+      mar_osname: osx64-aarch64
+      dmg_name: osx64-aarch64
+  osx:
+    var:
       arch_deps:
         - genisoimage
         - faketime

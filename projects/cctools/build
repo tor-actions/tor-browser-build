@@ -31,6 +31,12 @@ cp $CLANG_DIR/bin/dsymutil $distdir/bin/x86_64-apple-darwin-dsymutil
 # various build scripts based on cmake want to find `lipo` without a prefix
 cp $distdir/bin/x86_64-apple-darwin-lipo $distdir/bin/lipo
 
+# We build cctools for x86_64 and add aarch64 symlinks, following what
+# Mozilla is doing in taskcluster/scripts/misc/build-cctools-port.sh
+(cd $distdir/bin/; for i in x86_64-apple-darwin-*; do
+    ln $i aarch64${i#x86_64}
+done)
+
 cd /var/tmp/dist
 [% c('tar', {
         tar_src => [ project ],

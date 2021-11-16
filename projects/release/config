@@ -63,6 +63,9 @@ targets:
   browser-osx-x86_64:
     var:
       browser-osx-x86_64: 1
+  browser-osx-aarch64:
+    var:
+      browser-osx-aarch64: 1
   browser-src:
     var:
       browser-src: '[% ! c("var/testbuild") %]'
@@ -191,6 +194,13 @@ input_files:
    target:
      - '[% c("var/build_target") %]'
      - '[% c("var/browser_type") %]-osx-x86_64'
+
+ - name: osx-aarch64
+   project: browser
+   enable: '[% c("var/browser-osx-aarch64") %]'
+   target:
+     - '[% c("var/build_target") %]'
+     - '[% c("var/browser_type") %]-osx-aarch64'
 
  - name: windows-expert-bundle
    project: tor

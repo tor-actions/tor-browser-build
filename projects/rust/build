@@ -37,13 +37,13 @@ export PATH="$distdir-rust-prebuilt/bin:$PATH"
   # We need to adapt our CFLAGS and make sure our flags are passed down to all
   # dependencies. Using `CFLAGS_x86_apple-darwin` did not do the trick, so resort
   # to a wrapper script.
-  cat > $distdir/helper/x86_64-apple-darwin-clang << 'EOF'
+  cat > $distdir/helper/[% c("var/build_target") %]-clang << 'EOF'
 #!/bin/sh
 BASEDIR=/var/tmp/dist/macosx-toolchain
-$BASEDIR/cctools/bin/x86_64-apple-darwin-clang -target x86_64-apple-darwin -B $BASEDIR/cctools/bin -isysroot $sysrootdir -Wl,-syslibroot,$sysrootdir -Wl,-dead_strip -Wl,-pie "$@"
+$BASEDIR/cctools/bin/[% c("var/build_target") %]-clang -target [% c("var/build_target") %] -B $BASEDIR/cctools/bin -isysroot $sysrootdir -Wl,-syslibroot,$sysrootdir -Wl,-dead_strip -Wl,-pie [% IF c('var/osx-aarch64') %]-mcpu=apple-m1[% END %] "$@"
 EOF
 
-  chmod +x $distdir/helper/x86_64-apple-darwin-clang
+  chmod +x $distdir/helper/[% c("var/build_target") %]-clang
   export PATH=$distdir/helper:$PATH
 [% END %]
 

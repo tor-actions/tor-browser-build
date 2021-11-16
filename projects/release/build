@@ -31,6 +31,9 @@ mkdir -p "$destdir"
 [% IF c("var/browser-osx-x86_64") -%]
   mv [% c('input_files_by_name/osx-x86_64') %]/* "$destdir"/
 [% END -%]
+[% IF c("var/browser-osx-aarch64") -%]
+  mv [% c('input_files_by_name/osx-aarch64') %]/* "$destdir"/
+[% END -%]
 [% IF c("var/browser-linux-i686") -%]
   mv [% c('input_files_by_name/linux-i686') %]/* "$destdir"/
 [% END -%]

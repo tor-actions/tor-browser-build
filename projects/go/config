@@ -82,8 +82,13 @@ targets:
       GOARCH: amd64
   osx-x86_64:
     var:
-      GOOS: darwin
       GOARCH: amd64
+  osx-aarch64:
+    var:
+      GOARCH: arm64
+  osx:
+    var:
+      GOOS: darwin
   linux:
     var:
       GOOS: linux

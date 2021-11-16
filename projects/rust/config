@@ -56,13 +56,13 @@ targets:
       # binaries do.
       configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/clang --set rust.jemalloc --target=x86_64-unknown-linux-gnu,i686-unknown-linux-gnu --set target.x86_64-unknown-linux-gnu.linker=clang --set target.x86_64-unknown-linux-gnu.ar=llvm-ar --set target.x86_64-unknown-linux-gnu.ranlib=llvm-ranlib --set target.i686-unknown-linux-gnu.linker=clang --set target.i686-unknown-linux-gnu.ar=llvm-ar --set target.i686-unknown-linux-gnu.ranlib=llvm-ranlib
 
-  osx-x86_64:
+  osx:
     var:
       arch_deps:
         - libssl-dev
         - pkg-config
         - zlib1g-dev
-      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/macosx-toolchain/clang --set rust.jemalloc --target=x86_64-unknown-linux-gnu,x86_64-apple-darwin --set=target.x86_64-apple-darwin.cc=x86_64-apple-darwin-clang --set target.x86_64-unknown-linux-gnu.linker=clang --set target.x86_64-unknown-linux-gnu.ar=llvm-ar --set target.x86_64-unknown-linux-gnu.ranlib=llvm-ranlib
+      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/macosx-toolchain/clang --set rust.jemalloc --target=x86_64-unknown-linux-gnu,[% c("var/build_target") %] --set=target.[% c("var/build_target") %].cc=[% c("var/build_target") %]-clang --set target.x86_64-unknown-linux-gnu.linker=clang --set target.x86_64-unknown-linux-gnu.ar=llvm-ar --set target.x86_64-unknown-linux-gnu.ranlib=llvm-ranlib
 
   windows:
     var:

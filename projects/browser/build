@@ -299,7 +299,7 @@ cd $distdir
 [% ELSIF c("var/osx") %]
   [% c('var/ddmg', {
         dmg_src => '"$PKG_DIR"',
-        dmg_out => '$OUTDIR/' _ c('var/ProjectName') _ '-' _ c("var/torbrowser_version") _ '-osx64_${PKG_LOCALE}.dmg',
+        dmg_out => '$OUTDIR/' _ c('var/ProjectName') _ '-' _ c("var/torbrowser_version") _ '-' _ c("var/dmg_name") _ '_${PKG_LOCALE}.dmg',
     }) %]
 [% ELSIF c("var/windows") %]
   find "$PKG_DIR" -exec [% c("touch") %] {} \;
@@ -424,7 +424,7 @@ cp $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip "$OUTDIR"/
            END; -%]
         [% c('var/ddmg', {
           dmg_src => tbdir,
-          dmg_out => '$OUTDIR/' _ c('var/ProjectName') _ '-' _ c("var/torbrowser_version") _ '-osx64_' _ lang _ '.dmg',
+          dmg_out => '$OUTDIR/' _ c('var/ProjectName') _ '-' _ c("var/torbrowser_version") _ '-' _ c("var/dmg_name") _ '_' _ lang _ '.dmg',
         }) %]
       [% ELSIF c("var/windows") %]
         find "[% tbdir %]" -exec [% c("touch") %] {} \;
