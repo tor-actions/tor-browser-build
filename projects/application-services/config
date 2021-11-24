@@ -100,7 +100,7 @@ input_files:
 
 steps:
   list_toolchain_updates:
-    git_hash: 'v85.4.0'
+    git_hash: 'v86.0.1'
     input_files: []
     var:
       container:
