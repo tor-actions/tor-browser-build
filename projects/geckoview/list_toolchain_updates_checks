@@ -167,20 +167,30 @@ my $d = YAML::XS::LoadFile('taskcluster/ci/toolchain/clang.yml');
 my $clang_toolchain;
 foreach my $t (keys %$d) {
   if ($d->{$t}{run}{'toolchain-alias'} eq 'linux64-clang-android-cross') {
-    foreach my $fetch (@{$d->{$t}{fetches}{fetch}}) {
-      $clang_toolchain = $fetch if $fetch =~ m/^clang-.*/;
+    foreach my $fetch (@{$d->{$t}{fetches}{toolchain}}) {
+      $clang_toolchain = $fetch if $fetch =~ m/^.*-clang-.*/;
     }
     last;
   }
 }
 
 if (!$clang_toolchain) {
-  print STDERR "Error: could not find clang toolchain";
+  print STDERR "Error: could not find clang toolchain\\n";
+  exit 1;
+}
+
+my $clang_fetch;
+foreach my $fetch (@{$d->{$clang_toolchain}{fetches}{fetch}}) {
+  $clang_fetch = $fetch if $fetch =~ m/^clang-.*/;
+}
+
+if (!$clang_fetch) {
+  print STDERR "Error: could not find clang fetch\\n";
   exit 1;
 }
 
 my $fetch = YAML::XS::LoadFile('taskcluster/ci/fetch/toolchains.yml');
-print $fetch->{$clang_toolchain}{fetch}{revision};
+print $fetch->{$clang_fetch}{fetch}{revision};
 EOF
 needed=$(perl -MYAML::XS -e "$p")
 current='[% pc("llvm-project", "git_hash") %]'
