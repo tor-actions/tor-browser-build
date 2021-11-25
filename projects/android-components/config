@@ -8,7 +8,7 @@ gpg_keyring: torbutton.gpg
 variant: '[% IF c("var/release") %]Release[% ELSE %]Beta[% END %]'
 
 var:
-  android_components_version: 94.0.12
+  android_components_version: 95.0.10
   torbrowser_branch: 11.5
   container:
     use_container: 1
