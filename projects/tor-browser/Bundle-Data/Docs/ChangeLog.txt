@@ -1,6 +1,8 @@
 Tor Browser 11.0.1 - December 7 2021
  * Windows + OS X + Linux
    * Update Firefox to 91.4.0esr
+   * Bug 40318: Remove check for DISPLAY env var in start-tor-browser [tor-browser-build]
+   * Bug 40386: Add new default obfs4 bridge "deusexmachina" [tor-browser-build]
    * Bug 40682: Disable network.proxy.allow_bypass [tor-browser]
  * Linux
    * Bug 40387: Remove some fonts on Linux [tor-browser-build]
