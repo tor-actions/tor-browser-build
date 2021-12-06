@@ -1,3 +1,89 @@
+Tor Browser 11.0.2 - December 7 2021
+ * Windows + OS X + Linux
+   * Update Firefox to 91.4.0esr
+   * Bug 40318: Remove check for DISPLAY env var in start-tor-browser [tor-browser-build]
+   * Bug 40386: Add new default obfs4 bridge "deusexmachina" [tor-browser-build]
+   * Bug 40682: Disable network.proxy.allow_bypass [tor-browser]
+ * Linux
+   * Bug 40387: Remove some fonts on Linux [tor-browser-build]
+
+Tor Browser 11.0.1 - November 14 2021
+ * Windows + OS X + Linux
+   * Tor Launcher 0.2.32
+   * Bug 40059: YEC activist sign empty in about:tor on RTL locales [torbutton]
+   * Bug 40383: Workaround issue in https-e wasm [tor-browser-build]
+   * Bug 40438: Add Blockchair as a search engine [tor-browser]
+   * Bug 40689: Change Blockchair Search provider's HTTP method [tor-browser]
+   * Bug 40690: Browser chrome breaks when private browsing mode is turned off [tor-browser]
+   * Bug 40700: Switch Firefox recommendations off by default [tor-browser]
+
+Tor Browser 11.0 - November 8 2021
+ * Windows + OS X + Linux
+   * Update Firefox to 91.3.0esr
+   * Update Tor to tor-0.4.6.8
+   * Bug 32624: localStorage is not shared between tabs [tor-browser]
+   * Bug 33125: Remove xpinstall.whitelist.add* as they don't do anything anymore [tor-browser]
+   * Bug 34188: Cleanup extensions.* prefs [tor-browser]
+   * Bug 40004: Convert tl-protocol to async. [tor-launcher]
+   * Bug 40012: Watch all requested tor events [tor-launcher]
+   * Bug 40027: Make torbutton_send_ctrl_cmd async [torbutton]
+   * Bug 40042: Add missing parameter of createTransport [torbutton]
+   * Bug 40043: Delete all plugin-related protections [torbutton]
+   * Bug 40045: Teach the controller about status_client [torbutton]
+   * Bug 40046: Support arbitrary watch events [torbutton]
+   * Bug 40047: New string for Security Level panel [torbutton]
+   * Bug 40048: Protonify Circuit Display Panel [torbutton]
+   * Bug 40053: investigate fingerprinting potential of extended TextMetrics interface [tor-browser]
+   * Bug 40083: Make sure Region.jsm fetching is disabled [tor-browser]
+   * Bug 40177: Clean up obsolete preferences in our 000-tor-browser.js [tor-browser]
+   * Bug 40220: Make sure tracker cookie purging is disabled [tor-browser]
+   * Bug 40342: Set `gfx.bundled-fonts.activate = 1` to preserve current bundled fonts behaviour [tor-browser]
+   * Bug 40463: Disable network.http.windows10-sso.enabled in FF 91 [tor-browser]
+   * Bug 40483: Deutsche Welle v2 redirect [tor-browser]
+   * Bug 40534: Cannot open URLs on command line with Tor Browser 10.5 [tor-browser]
+   * Bug 40547: UX: starting in offline mode can result in difficulty to connect later [tor-browser]
+   * Bug 40548: Set network.proxy.failover_direct to false in FF 91 [tor-browser]
+   * Bug 40561: Refactor about:torconnect implementation [tor-browser]
+   * Bug 40567: RFPHelper is not init until after about:torconnect bootstraps [tor-browser]
+   * Bug 40597: Implement TorSettings module [tor-browser]
+   * Bug 40600: Multiple pages as home page unreliable in 11.0a4 [tor-browser]
+   * Bug 40616: UX: multiple about:torconnect [tor-browser]
+   * Bug 40624: TorConnect banner always visible in about:preferences#tor even after bootstrap [tor-browser]
+   * Bug 40626: Update Security Level styling to match Proton UI [tor-browser]
+   * Bug 40628: Checkbox wrong color in about:torconnect in dark mode theme [tor-browser]
+   * Bug 40630: Update New Identity and New Circuit icons [tor-browser]
+   * Bug 40631: site identity icons are not being displayed properly [tor-browser]
+   * Bug 40632: Proton'ify Circuit Display Panel [tor-browser]
+   * Bug 40634: Style updates for Onion Error Pages [tor-browser]
+   * Bug 40636: Fix about:torconnect 'Connect' border radius in about:preferences#tor [tor-browser]
+   * Bug 40641: Update Security Level selection in about:preferences to match style as tracking protection option bubbles [tor-browser]
+   * Bug 40648: Replace onion pattern divs/css with tiling SVG [tor-browser]
+   * Bug 40653: Onion Available text not aligned correctly in toolbar in ESR91 [tor-browser]
+   * Bug 40655: esr91 is suggesting to make Tor Browser the default browse [tor-browser]
+   * Bug 40657: esr91 is missing "New identity" in hamburger menu [tor-browser]
+   * Bug 40680: Prepare update to localized assets for YEC [tor-browser]
+   * Bug 40686: Update Onboarding link for 11.0 [tor-browser]
+ * Build System
+   * Windows + OS X + Linux
+     * Update Go to 1.16.9
+     * Bug 40048: Remove projects/clang-source [tor-browser-build]
+     * Bug 40347: Make the list of toolchain updates needed for firefox91 [tor-browser-build]
+     * Bug 40363: Change bsaes git url [tor-browser-build]
+     * Bug 40366: Use bullseye to build https-everywhere [tor-browser-build]
+     * Bug 40368: Use system's python3 for https-everywhere [tor-browser-build]
+   * Windows + Linux
+     * Bug 40357: Update binutils to 2.35.2 [tor-browser-build]
+   * Windows
+     * Bug 28240: switch from SJLJ exception handling to Dwarf2 in mingw for win32 [tor-browser-build]
+     * Bug 40306: Update Windows toolchain to switch to mozilla91 [tor-browser-build]
+     * Bug 40376: Use python3 for running pe_checksum_fix.py [tor-browser-build]
+   * OS X
+     * Bug 40307: Update macOS toolchain to switch to mozilla91 [tor-browser-build]
+   * Linux
+     * Bug 40222: Bump GCC to 10.3.0 for Linux [tor-browser-build]
+     * Bug 40305: Update Linux toolchain to switch to mozilla91 [tor-browser-build]
+     * Bug 40353: Temporarily disable rlbox for linux builds [tor-browser-build]
+
 Tor Browser 11.0a10 - November 4 2021
  * Windows + OS X + Linux
    * Update Firefox to 91.3.0esr
