@@ -33,5 +33,3 @@ var:
 
 input_files:
   - project: container-image
-  - filename: 0001-Bug-40383-Disable-https-e-wasm-ruleset.patch
-    enable: '[% c("var/windows") %]'
