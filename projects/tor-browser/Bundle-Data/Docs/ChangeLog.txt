@@ -1,3 +1,31 @@
+Tor Browser 11.5a1 - December 13 2021
+ * Windows + OS X + Linux
+   * Update Firefox to 91.4.0esr
+   * Tor Launcher 0.2.32
+   * Bug 40059: YEC activist sign empty in about:tor on RTL locales [torbutton]
+   * Bug 40386: Add new default obfs4 bridge "deusexmachina" [tor-browser-build]
+   * Bug 40438: Add Blockchair as a search engine [tor-browser]
+   * Bug 40646: Revert tor-browser#40475 and inherit upstream fix [tor-browser]
+   * Bug 40680: Prepare update to localized assets for YEC [tor-browser]
+   * Bug 40682: Disable network.proxy.allow_bypass [tor-browser]
+   * Bug 40684: Misc UI bug fixes in 11.0a10 [tor-browser]
+   * Bug 40686: Update Onboarding link for 11.0 [tor-browser]
+   * Bug 40689: Change Blockchair Search provider's HTTP method [tor-browser]
+   * Bug 40690: Browser chrome breaks when private browsing mode is turned off [tor-browser]
+   * Bug 40691: Make quickstart checkbox gray when "off" on about:torconnect [tor-browser]
+   * Bug 40698: Addon menus missing content in TB11 [tor-browser]
+   * Bug 40700: Switch Firefox recommendations off by default [tor-browser]
+   * Bug 40705: "visit our website" link on about:tbupdate pointing to different locations [tor-browser]
+   * Bug 40706: Fix issue in HTTPS-Everywhere WASM [tor-browser]
+   * Bug 40714: Next button closes "How do circuits work?" onboarding tour [tor-browser]
+   * Bug 40718: Application Menu items should be sentence case [tor-browser]
+   * Bug 40721: Tabs crashing on certain pages in TB11 on Win 10 [tor-browser]
+   * Bug 40725: about:torconnect missing identity block content on TB11 [tor-browser]
+   * Translations update
+ * Linux
+   * Bug 40318: Remove check for DISPLAY env var in start-tor-browser [tor-browser-build]
+   * Bug 40387: Remove some fonts on Linux [tor-browser-build]
+
 Tor Browser 11.0.2 - December 7 2021
  * Windows + OS X + Linux
    * Update Firefox to 91.4.0esr
@@ -34,6 +62,7 @@ Tor Browser 11.0 - November 8 2021
    * Bug 40047: New string for Security Level panel [torbutton]
    * Bug 40048: Protonify Circuit Display Panel [torbutton]
    * Bug 40053: investigate fingerprinting potential of extended TextMetrics interface [tor-browser]
+   * Bug 40057: Error popup when using New Identity feature [torbutton]
    * Bug 40083: Make sure Region.jsm fetching is disabled [tor-browser]
    * Bug 40177: Clean up obsolete preferences in our 000-tor-browser.js [tor-browser]
    * Bug 40220: Make sure tracker cookie purging is disabled [tor-browser]
@@ -59,9 +88,10 @@ Tor Browser 11.0 - November 8 2021
    * Bug 40641: Update Security Level selection in about:preferences to match style as tracking protection option bubbles [tor-browser]
    * Bug 40648: Replace onion pattern divs/css with tiling SVG [tor-browser]
    * Bug 40653: Onion Available text not aligned correctly in toolbar in ESR91 [tor-browser]
-   * Bug 40655: esr91 is suggesting to make Tor Browser the default browse [tor-browser]
+   * Bug 40655: esr91 is suggesting to make Tor Browser the default browser [tor-browser]
    * Bug 40657: esr91 is missing "New identity" in hamburger menu [tor-browser]
    * Bug 40680: Prepare update to localized assets for YEC [tor-browser]
+   * Bug 40684: Misc UI bug fixes in 11.0a10
    * Bug 40686: Update Onboarding link for 11.0 [tor-browser]
  * Build System
    * Windows + OS X + Linux
@@ -74,7 +104,7 @@ Tor Browser 11.0 - November 8 2021
    * Windows + Linux
      * Bug 40357: Update binutils to 2.35.2 [tor-browser-build]
    * Windows
-     * Bug 28240: switch from SJLJ exception handling to Dwarf2 in mingw for win32 [tor-browser-build]
+     * Bug 28240: Switch from SJLJ exception handling to Dwarf2 in mingw for win32 [tor-browser-build]
      * Bug 40306: Update Windows toolchain to switch to mozilla91 [tor-browser-build]
      * Bug 40376: Use python3 for running pe_checksum_fix.py [tor-browser-build]
    * OS X
@@ -92,6 +122,7 @@ Tor Browser 11.0a10 - November 4 2021
    * Bug 33125: Remove xpinstall.whitelist.add* as they don't do anything anymore [tor-browser]
    * Bug 34188: Cleanup extensions.* prefs [tor-browser]
    * Bug 40053: investigate fingerprinting potential of extended TextMetrics interface [tor-browser]
+   * Bug 40057: Error popup when using New Identity feature [torbutton]
    * Bug 40083: Make sure Region.jsm fetching is disabled [tor-browser]
    * Bug 40177: Clean up obsolete preferences in our 000-tor-browser.js [tor-browser]
    * Bug 40220: Make sure tracker cookie purging is disabled [tor-browser]
