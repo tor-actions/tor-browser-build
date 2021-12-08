@@ -4,6 +4,7 @@ Tor Browser 11.5a1 - December 13 2021
    * Tor Launcher 0.2.32
    * Bug 40059: YEC activist sign empty in about:tor on RTL locales [torbutton]
    * Bug 40386: Add new default obfs4 bridge "deusexmachina" [tor-browser-build]
+   * Bug 40393: Point to a forked version of pion/dtls with fingerprinting fix [tor-browser-build]
    * Bug 40438: Add Blockchair as a search engine [tor-browser]
    * Bug 40646: Revert tor-browser#40475 and inherit upstream fix [tor-browser]
    * Bug 40680: Prepare update to localized assets for YEC [tor-browser]
