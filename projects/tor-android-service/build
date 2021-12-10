@@ -12,6 +12,7 @@ mkdir -p /var/tmp/build $output_dir
 [% pc(c('var/compiler'), 'var/setup', { compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')) }) %]
 tar -C $GRADLE_HOME -xf $rootdir/[% c('input_files_by_name/gradle') %]
 tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
+unzip -d $rootdir $rootdir/[% c('input_files_by_name/jetifier') %]
 
 cd /var/tmp/build/[% project %]-[% c('version') %]
 # Replace pre-packaged tor library with the latest build
@@ -27,5 +28,8 @@ cp $rootdir/[% c('input_files_by_name/topl') %]/*{.aar,.jar} service/libs/
 # Build Android Libraries and Apps
 gradle --offline --no-daemon -P androidplugin=3.6.0 -P appcompatVersion=28.0.0 -P compileVersion=29 -P targetVersion=29 -P minVersion=16 -Dmaven.repo.local=$gradle_repo assembleRelease -x lint
 
-# Package
-cp jsocksAndroid/build/outputs/aar/* service/build/outputs/aar/* $output_dir
+# Bug 40398: Manually jetify each archive and save it in $output_dir
+for aar in jsocksAndroid/build/outputs/aar/* service/build/outputs/aar/*; do
+  fn=`basename $aar`
+  $rootdir/jetifier-standalone/bin/jetifier-standalone -l info -i $aar -o $output_dir/$fn
+done
