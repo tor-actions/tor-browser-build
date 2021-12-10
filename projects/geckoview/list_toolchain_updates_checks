@@ -180,12 +180,32 @@ check_update_needed clang "$needed" "$current"
 
 # node
 read -d '' p << 'EOF' || true
-if (m/^\\s*NODE_MIN_VERSION\\s*=\\s*StrictVersion\\("([^"]+)"\\)/) {
-  print $1;
-  exit;
+sub l {
+  ref $_[0] eq 'ARRAY' ? $_[0] : [ $_[0] ];
 }
+
+my $d = YAML::XS::LoadFile('taskcluster/ci/toolchain/node.yml');
+my $node_toolchain;
+T: foreach my $t (keys %$d) {
+  foreach my $alias (@{l($d->{$t}{run}{'toolchain-alias'})}) {
+    if ($alias eq 'linux64-node') {
+      foreach my $fetch (@{$d->{$t}{fetches}{fetch}}) {
+        if ($fetch =~ m/^nodejs-.*/) {
+          $node_toolchain = $fetch;
+          last T;
+        }
+      }
+    }
+  }
+}
+
+exit 1 unless $node_toolchain;
+
+my $fetch = YAML::XS::LoadFile('taskcluster/ci/fetch/toolchains.yml');
+my ($version) = $fetch->{$node_toolchain}{fetch}{url} =~ m|^https://nodejs.org/dist/v([^/]+)/|;
+print "$version\\n";
 EOF
-needed=$(cat python/mozbuild/mozbuild/nodeutil.py | perl -ne "$p")
+needed=$(perl -MYAML::XS -e "$p")
 current='[% pc("node", "version") %]'
 check_update_needed node "$needed" "$current"
 
