@@ -23,6 +23,7 @@ var:
     - NotoSansEthiopic-Regular.ttf
     - NotoSansGeorgian-Regular.ttf
     - NotoSansGujarati-Regular.ttf
+    - NotoSansGurmukhi-Regular.ttf
     - NotoSansHebrew-Regular.ttf
     - NotoSansKannada-Regular.ttf
     - NotoSansKhmer-Regular.ttf
@@ -30,6 +31,7 @@ var:
     - NotoSansMalayalam-Regular.ttf
     - NotoSansMyanmar-Regular.ttf
     - NotoSansOriya-Regular.ttf
+    - NotoSansSinhala-Regular.ttf
     - NotoSansTamil-Regular.ttf
     - NotoSansTelugu-Regular.ttf
     - NotoSansThaana-Regular.ttf
