@@ -1,0 +1,53 @@
+#!/usr/bin/perl -w
+
+# This script reads the ChangeLog.txt file and outputs it to stdout
+# in the format for the blog post.
+
+use strict;
+use FindBin;
+
+sub version_type {
+  return $_[0] =~ 'a' ? 'alpha' : 'release';
+}
+
+my ($changelog, $current_tbversion, $last_tbversion);
+
+if (!open(CHANGELOG, '<', "$FindBin::Bin/../ChangeLog.txt")) {
+  print STDERR "Error opening changelog file\n";
+  exit 1;
+}
+
+foreach (<CHANGELOG>) {
+  if (m/^Tor Browser ([^\s]+) -/) {
+    if ($current_tbversion) {
+      $last_tbversion = $1;
+      last if version_type($current_tbversion) eq version_type($last_tbversion);
+      next;
+    }
+    $current_tbversion = $1;
+    next;
+  }
+
+  next if $last_tbversion;
+
+  # Remove one space at the begining of all lines
+  s/^\s//;
+
+  # Replace '*' by '-'
+  s/^(\s*)\*/$1-/;
+
+  s/&/&amp;/; s/</&lt;/; s/>/&gt;/;
+
+  # Change bug numbers to links
+  s|Bug (\d+): ([^\[]+) \[([^\]]+)\]|[Bug $3#$1](https://gitlab.torproject.org/tpo/applications/$3/-/issues/$1): $2|;
+
+  $changelog .= $_;
+}
+
+my $changelog_branch = 'master';
+if (! ( $current_tbversion =~ m/a/ ) ) {
+  my @v = split(/\./, $current_tbversion);
+  $changelog_branch = "maint-$v[0].$v[1]";
+}
+print "The full changelog since [Tor Browser $last_tbversion](https://gitweb.torproject.org/builders/tor-browser-build.git/plain/projects/tor-browser/Bundle-Data/Docs/ChangeLog.txt?h=$changelog_branch) is:\n\n";
+print $changelog;
