@@ -22,6 +22,7 @@ Tor Browser 11.5a1 - December 13 2021
    * Bug 40725: about:torconnect missing identity block content on TB11 [tor-browser]
    * Translations update
  * Windows
+   * Bug 40389: Remove workaround for HTTPS-Everywhere WASM breakage [tor-browser-build]
    * Bug 40698: Addon menus missing content in TB11 [tor-browser]
    * Bug 40706: Fix issue in HTTPS-Everywhere WASM [tor-browser]
    * Bug 40721: Tabs crashing on certain pages in TB11 on Win 10 [tor-browser]
