@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Copyright (c) 2020, The Tor Project, Inc.
 #
@@ -47,13 +47,31 @@ cat $log | grep "Performing HTTP" | grep -o "https://.*" | \
   grep -vE "\.module|maven-metadata\.xml" | sort | uniq > dl-attempts
 
 # Step 2: Fetch all the dependencies and calculate the SHA-256 sum
+declare -A URLs
+function dl_url {
+  local url="$1"
+  test -n "${URLs[$url]}" && return 0
+  URLs[$url]=1
+  wget -U "" $url
+  test $? -eq 0 || return 1
+  local fn=$(basename "$url")
+  local sha256=`sha256sum $fn | cut -d ' ' -f 1`
+  echo "$sha256 | $url" >> deps
+  rm $fn
+}
+
 while read line
 do
-  wget -U "" $line
-  fn=$(basename "$line")
-  sha256=`sha256sum $fn | cut -d ' ' -f 1`
-  echo "$sha256 | $line" >> deps
-  rm $fn
+  dl_url "$line"
+  # If we downloaded a .pom file, also try to get corresponding .jar and
+  # .aar files
+  bname=$(basename "$line" .pom)
+  dname=$(dirname "$line")
+  if test "$line" != "$dname/$bname"
+  then
+    dl_url "$dname/$bname.aar"
+    dl_url "$dname/$bname.jar"
+  fi
 done < dl-attempts
 
 # Step 3: Add the header at the beginning of the final dependency file.
