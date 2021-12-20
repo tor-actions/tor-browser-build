@@ -15,7 +15,7 @@ Tor Browser 11.0.3 - December 20 2021
    * Bug 40721: Tabs crashing on certain pages in TB11 on Win 10 [tor-browser]
    * Bug 40742: Remove workaround for fixing --disable-maintenance-service build bustage [tor-browser]
  * Linux
-   * Bug 40387: Fonts of the GUI do not render after update [tor-browser]
+   * Bug 40387: Fonts of the GUI do not render after update [tor-browser-build]
    * Bug 40685: Monospace font in browser chrome [tor-browser]
  * Build System
    * Windows + OS X + Linux
