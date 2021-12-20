@@ -53,6 +53,7 @@ Tor Browser 11.0 - November 8 2021
  * Windows + OS X + Linux
    * Update Firefox to 91.3.0esr
    * Update Tor to tor-0.4.6.8
+   * Bug 27845: New window height is aftected by bookmarks toolbar with icons [tor-browser]
    * Bug 32624: localStorage is not shared between tabs [tor-browser]
    * Bug 33125: Remove xpinstall.whitelist.add* as they don't do anything anymore [tor-browser]
    * Bug 34188: Cleanup extensions.* prefs [tor-browser]
@@ -160,6 +161,7 @@ Tor Browser 11.0a9 -- October 15 2021
  * Windows + OS X + Linux
    * Update Firefox to 91.2.0esr
    * Update Tor to 0.4.7.1-alpha
+   * Bug 27845: New window height is aftected by bookmarks toolbar with icons [tor-browser]
    * Bug 40004: Convert tl-protocol to async. [tor-launcher]
    * Bug 40012: Watch all requested tor events [tor-launcher]
    * Bug 40027: Make torbutton_send_ctrl_cmd async [torbutton]
