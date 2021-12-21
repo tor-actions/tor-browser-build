@@ -1,3 +1,28 @@
+Tor Browser 11.0.3 - December 20 2021
+ * Windows + OS X + Linux
+   * Update Firefox to 91.4.1esr
+   * Update Tor to 0.4.6.9
+   * Update OpenSSL to 1.1.1m
+   * Bug 40393: Point to a forked version of pion/dtls with fingerprinting fix [tor-browser-build]
+   * Bug 40394: Bump version of Snowflake to 221f1c41 [tor-browser-build]
+   * Bug 40646: Revert tor-browser#40475 and inherit upstream fix [tor-browser]
+   * Bug 40705: "visit our website" link on about:tbupdate pointing to different locations [tor-browser]
+   * Bug 40736: Disable third-party cookies in Private Browsing Mode [tor-browser]
+ * Windows
+   * Bug 40389: Remove workaround for HTTPS-Everywhere WASM breakage [tor-browser-build]
+   * Bug 40698: Addon menus missing content in TB11 [tor-browser]
+   * Bug 40706: Fix issue in HTTPS-Everywhere WASM [tor-browser]
+   * Bug 40721: Tabs crashing on certain pages in TB11 on Win 10 [tor-browser]
+   * Bug 40742: Remove workaround for fixing --disable-maintenance-service build bustage [tor-browser]
+ * Linux
+   * Bug 40387: Fonts of the GUI do not render after update [tor-browser-build]
+   * Bug 40685: Monospace font in browser chrome [tor-browser]
+ * Build System
+   * Windows + OS X + Linux
+     * Bug 40403: Update Go to 1.16.12 [tor-browser-build]
+   * OS X
+     * Bug 40390: Remove workaround for macOS OpenSSL build breakage [tor-browser-build]
+
 Tor Browser 11.5a1 - December 13 2021
  * Windows + OS X + Linux
    * Update Firefox to 91.4.0esr
@@ -26,6 +51,7 @@ Tor Browser 11.5a1 - December 13 2021
    * Bug 40698: Addon menus missing content in TB11 [tor-browser]
    * Bug 40706: Fix issue in HTTPS-Everywhere WASM [tor-browser]
    * Bug 40721: Tabs crashing on certain pages in TB11 on Win 10 [tor-browser]
+   * Bug 40668: Document is freezing with file: scheme [tor-browser]
  * Linux
    * Bug 40318: Remove check for DISPLAY env var in start-tor-browser [tor-browser-build]
    * Bug 40387: Remove some fonts on Linux [tor-browser-build]
@@ -43,11 +69,13 @@ Tor Browser 11.0.1 - November 14 2021
  * Windows + OS X + Linux
    * Tor Launcher 0.2.32
    * Bug 40059: YEC activist sign empty in about:tor on RTL locales [torbutton]
-   * Bug 40383: Workaround issue in https-e wasm [tor-browser-build]
    * Bug 40438: Add Blockchair as a search engine [tor-browser]
    * Bug 40689: Change Blockchair Search provider's HTTP method [tor-browser]
    * Bug 40690: Browser chrome breaks when private browsing mode is turned off [tor-browser]
    * Bug 40700: Switch Firefox recommendations off by default [tor-browser]
+ * Windows
+   * Bug 40383: Workaround issue in https-e wasm [tor-browser-build]
+   * Bug 40668: Document is freezing with file: scheme [tor-browser]
 
 Tor Browser 11.0 - November 8 2021
  * Windows + OS X + Linux
