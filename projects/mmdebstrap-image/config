@@ -43,6 +43,13 @@ targets:
         suite: jessie
         arch: amd64
 
+  buster-amd64:
+    var:
+      minimal_apt_version: 1.8.2
+      container:
+        suite: buster
+        arch: amd64
+
   bullseye-amd64:
     var:
       minimal_apt_version: 2.2.4
