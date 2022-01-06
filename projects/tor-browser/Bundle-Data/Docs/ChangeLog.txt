@@ -1,3 +1,13 @@
+Tor Browser 11.0.4 - January 11 2022
+ * Windows + OS X + Linux
+   * Update Firefox to 91.5.0esr
+   * Update NoScript to 11.2.14
+   * Bug 40405: Rotate deusexmachina IP address [tor-browser-build]
+   * Bug 40756: Fix up wrong observer removals [tor-browser]
+   * Bug 40758: Remove YEC takeover from about:tor [torbutton]
+ * Linux
+   * Bug 40399: Bring back Noto Sans Gurmukhi and Sinhala fonts [tor-browser-build]
+
 Tor Browser 11.0.3 - December 20 2021
  * Windows + OS X + Linux
    * Update Firefox to 91.4.1esr
