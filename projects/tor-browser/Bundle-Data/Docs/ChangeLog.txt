@@ -1,3 +1,29 @@
+Tor Browser 11.5a2 - January 11 2022
+ * Windows + OS X + Linux
+   * Update Firefox to 91.5.0esr
+   * Update Tor to 0.4.7.3-alpha
+   * Update OpenSSL to 1.1.1m
+   * Update NoScript to 11.2.14
+   * Bug 40405: Rotate deusexmachina IP address [tor-browser-build]
+   * Bug 40645: Migrate Moat APIs to Moat.jsm module [tor-browser]
+   * Bug 40684: Misc UI bug fixes [tor-browser]
+   * Bug 40736: Disable third-party cookies in Private Browsing Mode [tor-browser]
+   * Bug 40756: Fix up wrong observer removals [tor-browser]
+   * Bug 40758: Remove YEC takeover from about:tor [torbutton]
+   * Translations update
+ * Windows
+   * Bug 40742: Remove workaround for fixing --disable-maintenance-service build bustage [tor-browser]
+   * Bug 40753: Revert fix for Youtube videos not playing on Windows [tor-browser]
+ * Linux
+   * Bug 40387: Fonts of the GUI do not render after update [tor-browser-build]
+   * Bug 40399: Bring back Noto Sans Gurmukhi and Sinhala fonts [tor-browser-build]
+   * Bug 40685: Monospace font in browser chrome [tor-browser]
+ * Build System
+   * Windows + OS X + Linux
+     * Bug 40345: Update Go to 1.17.5 [tor-browser-build]
+   * OS X
+     * Bug 40390: Remove workaround for macOS OpenSSL build breakage [tor-browser-build]
+
 Tor Browser 11.0.3 - December 20 2021
  * Windows + OS X + Linux
    * Update Firefox to 91.4.1esr
