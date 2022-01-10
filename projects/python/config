@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 version: 3.6.8
-filename: 'python-[% c("lsb_release/id") %]-[% c("lsb_release/release") %]-[% c("var/build_id") %].tar.gz'
+filename: 'python-[% c("var/build_id") %].tar.gz'
 var:
   container:
     use_container: 1
