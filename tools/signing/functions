@@ -1,0 +1,16 @@
+function exit_error {
+  for msg in "$@"
+  do
+    echo "$msg" > /dev/stderr
+  done
+  exit 1
+}
+
+function var_is_defined {
+  for var in "$@"
+  do
+    test -n "${!var}" || exit_error "$var is not defined (see set-config* files)"
+  done
+}
+
+. "$script_dir/set-config"
