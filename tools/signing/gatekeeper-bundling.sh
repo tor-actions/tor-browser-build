@@ -30,20 +30,40 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-TORBROWSER_VERSION=$1
-if [ -z $TORBROWSER_VERSION ];
-then
-  echo "Please call this script with a Tor Browser version!"
-  exit 1
-fi
-BUNDLE_LOCALES="ar ca cs da de el en-US es-AR es-ES fa fr ga-IE he hu id is it ja ka ko mk nb-NO nl pl pt-BR ro ru sv-SE tr vi zh-CN zh-TW"
-builddir=/path/to/the/build/dir
-mkdir $builddir/$TORBROWSER_VERSION-signed
-for LANG in $BUNDLE_LOCALES
+set -e
+
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source "$script_dir/functions"
+
+which genisoimage > /dev/null || \
+  exit_error 'genisoimage is missing. You should install the genisoimage package.'
+test -f $faketime_path || \
+  exit_error "$faketime_path is missing"
+test -d $macos_stapled_dir || \
+  exit_error "The stapled macos zip files should be placed in directory $macos_stapled_dir"
+libdmg_file="$script_dir/../../out/libdmg-hfsplus/libdmg-hfsplus-dfd5e5cc3dc1-c9296e.tar.gz"
+test -f "$libdmg_file" || \
+  exit_error "$libdmg_file is missing." \
+             "You can build it with:" \
+             "  ./rbm/rbm build --target no_containers libdmg-hfsplus" \
+             "See var/deps in projects/libdmg-hfsplus/config for the list of build dependencies"
+
+test -d "$macos_signed_dir" || mkdir "$macos_signed_dir"
+tmpdir="$macos_stapled_dir/tmp"
+rm -Rf "$tmpdir"
+mkdir "$tmpdir"
+cp -rT "$script_dir/../../projects/tor-browser/Bundle-Data/mac-applications.dmg" "$tmpdir/dmg"
+
+tar -C "$tmpdir" -xf "$libdmg_file"
+export PATH="$PATH:$tmpdir/libdmg-hfsplus"
+
+for lang in $bundle_locales
 do
-  cd $builddir/dmg
-  unzip -q $builddir/$TORBROWSER_VERSION/tb-${TORBROWSER_VERSION}_$LANG-stapled.zip
+  cd $tmpdir/dmg
+  unzip -q $macos_stapled_dir/tb-${tbb_version}_$lang-stapled.zip
   cd ..
-  $builddir/ddmg.sh $builddir/$TORBROWSER_VERSION-signed/TorBrowser-${TORBROWSER_VERSION}-osx64_$LANG.dmg $builddir/dmg/
+  $script_dir/ddmg.sh $macos_signed_dir/TorBrowser-${tbb_version}-osx64_$lang.dmg $tmpdir/dmg/
   rm -rf 'dmg/Tor Browser.app'
 done
+
+rm -Rf "$tmpdir"
