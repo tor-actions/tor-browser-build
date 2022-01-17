@@ -1,0 +1,6 @@
+ssh_host_builder=tbbuild
+ssh_host_linux_signer=linux-signer-notor
+ssh_host_macos_signer=mac-signer-notor
+ssh_host_staticiforme=staticiforme.torproject.org
+
+builder_tor_browser_build_dir=/home/user/tor-browser-build
