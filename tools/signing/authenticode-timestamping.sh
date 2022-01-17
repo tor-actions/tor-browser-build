@@ -32,10 +32,30 @@
 
 set -e
 
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source "$script_dir/functions"
+
+osslsigncode_file="$script_dir/../../out/osslsigncode/osslsigncode-e72a1937d1a1-25066d.tar.gz"
+
+test -f "$osslsigncode_file" ||
+  exit_error "$osslsigncode_file is missing." \
+             "You can build it with:" \
+             "  ./rbm/rbm build osslsigncode" \
+             "See var/deps in projects/osslsigncode/config for the list of build dependencies"
+
+which rename > /dev/null 2>&1 ||
+  exit_error '`rename` is missing.'
+
+tmp_dir="$signed_dir/$tbb_version/tmp-timestamp"
+mkdir "$tmp_dir"
+tar -C "$tmp_dir" -xf "$osslsigncode_file"
+export PATH="$PATH:$tmp_dir/osslsigncode/bin"
+
+cd "$signed_dir/$tbb_version"
 COUNT=0
 for i in `find . -name "*.exe" -print`
 do
-  /path/to/patched/osslsigncode add \
+  osslsigncode add \
                  -t http://timestamp.digicert.com \
                  -p socks://127.0.0.1:9050 \
                  $i $i-timestamped
@@ -44,3 +64,5 @@ do
 done
 echo "Timestamped $COUNT .exe files, now renaming"
 rename -f 's/-timestamped//' *-timestamped
+
+rm -Rf "$tmp_dir"
