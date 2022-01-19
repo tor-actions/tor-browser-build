@@ -1,5 +1,5 @@
 diff --git a/chrome/content/tor-circuit-display.js b/chrome/content/tor-circuit-display.js
-index 119f6fca..477b0302 100644
+index d6034384..120d32a0 100644
 --- a/chrome/content/tor-circuit-display.js
 +++ b/chrome/content/tor-circuit-display.js
 @@ -48,7 +48,11 @@ let credentialsToNodeDataMap = new Map(),
@@ -118,7 +118,7 @@ index 119f6fca..477b0302 100644
  
      // Hide the note about guards if we are using a bridge.
      document.getElementById("circuit-guard-note-container").style.display =
-@@ -450,6 +491,7 @@ let setupDisplay = function (enablePrefName) {
+@@ -454,6 +495,7 @@ let setupDisplay = function (enablePrefName) {
        stopCollectingIsolationData = null,
        stopCollectingBrowserCredentials = null,
        stopEnsuringCorrectPopupDimensions = null,
@@ -126,7 +126,7 @@ index 119f6fca..477b0302 100644
        stop = function() {
          syncDisplayWithSelectedTab(false);
          if (myController) {
-@@ -462,6 +504,9 @@ let setupDisplay = function (enablePrefName) {
+@@ -466,6 +508,9 @@ let setupDisplay = function (enablePrefName) {
            if (stopEnsuringCorrectPopupDimensions) {
              stopEnsuringCorrectPopupDimensions();
            }
@@ -136,11 +136,11 @@ index 119f6fca..477b0302 100644
            myController = null;
          }
        },
-@@ -475,6 +520,7 @@ let setupDisplay = function (enablePrefName) {
-             stop();
-           });
-           syncDisplayWithSelectedTab(true);
-+          stopCollectingBitTargets = collectBitTargets(myController);
-           stopCollectingIsolationData = collectIsolationData(myController, updateCircuitDisplay);
-           stopCollectingBrowserCredentials = collectBrowserCredentials();
-           stopEnsuringCorrectPopupDimensions = ensureCorrectPopupDimensions();
+@@ -474,6 +519,7 @@ let setupDisplay = function (enablePrefName) {
+           try {
+             myController = await wait_for_controller();
+             syncDisplayWithSelectedTab(true);
++            stopCollectingBitTargets = collectBitTargets(myController);
+             stopCollectingIsolationData = collectIsolationData(myController, updateCircuitDisplay);
+             stopCollectingBrowserCredentials = collectBrowserCredentials();
+             stopEnsuringCorrectPopupDimensions = ensureCorrectPopupDimensions();
