@@ -135,7 +135,7 @@ steps:
 
   list_toolchain_updates:
     git_url: https://github.com/mozilla/gecko-dev.git
-    git_hash: beta
+    git_hash: release
     tag_gpg_id: 0
     input_files: []
     var:

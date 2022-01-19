@@ -8,7 +8,7 @@ if (m/compileSdkVersion:\\s+(.*)$/) {
 }
 EOF
 needed=$(cat .config.yml | perl -ne "$p")
-current=30
+current=31
 check_update_needed compileSdkVersion "$needed" "$current"
 
 
