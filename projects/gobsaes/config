@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 git_url: https://gitlab.com/yawning/bsaes.git
 version: '[% c("abbrev") %]'
-git_hash: 26d1add596b6d800bdeeb3bc3b2c7b316c056b6d
+git_hash: 0a714cd429ec754482b4001e918db30cd2094405
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 
 build: '[% c("projects/go/var/build_go_lib") %]'
@@ -9,7 +9,9 @@ build: '[% c("projects/go/var/build_go_lib") %]'
 var:
   container:
     use_container: 1
-  go_lib: git.schwanenlied.me/yawning/bsaes.git
+  go_lib: gitlab.com/yawning/bsaes.git
+  go_lib_deps:
+    - goxsys
 
 targets:
   android:
@@ -21,6 +23,8 @@ input_files:
   - project: container-image
   - name: go
     project: go
+  - name: goxsys
+    project: goxsys
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
     enable: '[% c("var/android") %]'
