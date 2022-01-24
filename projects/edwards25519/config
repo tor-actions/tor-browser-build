@@ -1,0 +1,17 @@
+# vim: filetype=yaml sw=2
+version: '[% c("abbrev") %]'
+git_url: https://github.com/FiloSottile/edwards25519.git
+git_hash: 390f27c3be2014e4912ce88c6a1fff52ec60428b
+filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+
+build: '[% c("projects/go/var/build_go_lib") %]'
+
+var:
+  container:
+    use_container: 1
+  go_lib: filippo.io/edwards25519
+
+input_files:
+  - project: container-image
+  - name: go
+    project: go

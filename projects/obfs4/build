@@ -13,7 +13,8 @@ mkdir -p $PTDIR
 [% END -%]
 
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/goptlib') %]
-tar -C /var/tmp/dist -xf [% c('input_files_by_name/ed25519') %]
+tar -C /var/tmp/dist -xf [% c('input_files_by_name/edwards25519') %]
+tar -C /var/tmp/dist -xf [% c('input_files_by_name/edwards25519-extra') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/siphash') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/goxcrypto') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/goxnet') %]

@@ -1,9 +1,7 @@
 # vim: filetype=yaml sw=2
-git_url: https://gitlab.com/yawning/utls.git
-version: 0.0.12-1
-git_hash: 'v[% c("version") %]'
-tag_gpg_id: 1
-gpg_keyring: yawning.gpg
+version: '[% c("abbrev") %]'
+git_url: https://gitlab.com/yawning/edwards25519-extra.git
+git_hash: 2f91fcc9fbdb888f3c795849b6777940135559b7
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 
 build: '[% c("projects/go/var/build_go_lib") %]'
@@ -11,17 +9,14 @@ build: '[% c("projects/go/var/build_go_lib") %]'
 var:
   container:
     use_container: 1
-  go_lib: gitlab.com/yawning/utls.git
+  go_lib: gitlab.com/yawning/edwards25519-extra.git
   go_lib_deps:
     - goxcrypto
-    - gocompress
-    - gobsaes
-
-targets:
-  android:
-    var:
-      build_go_lib_pre: |
-        [% pc(c('var/compiler'), 'var/setup', { compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')) }) %]
+    - edwards25519
+  go_lib_install:
+    - gitlab.com/yawning/edwards25519-extra.git/elligator2
+    - gitlab.com/yawning/edwards25519-extra.git/h2c
+    - gitlab.com/yawning/edwards25519-extra.git/vrf
 
 input_files:
   - project: container-image
@@ -29,10 +24,8 @@ input_files:
     project: go
   - name: goxcrypto
     project: goxcrypto
-  - name: gocompress
-    project: gocompress
-  - name: gobsaes
-    project: gobsaes
+  - name: edwards25519
+    project: edwards25519
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
     enable: '[% c("var/android") %]'

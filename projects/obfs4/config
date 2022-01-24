@@ -1,8 +1,8 @@
 # vim: filetype=yaml sw=2
-version: 0.0.11
-git_url: https://git.torproject.org/pluggable-transports/obfs4.git
-git_hash: 40245c4a1cf221395c59d1f4bf274127045352f9
-tag_gpg_id: 0
+version: 0.0.12
+git_url: https://gitlab.com/yawning/obfs4.git
+git_hash: 'obfs4proxy-[% c("version") %]'
+tag_gpg_id: 1
 gpg_keyring: yawning.gpg
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 
@@ -22,8 +22,10 @@ input_files:
     project: go
   - name: goptlib
     project: goptlib
-  - name: ed25519
-    project: ed25519
+  - name: edwards25519
+    project: edwards25519
+  - name: edwards25519-extra
+    project: edwards25519-extra
   - name: siphash
     project: siphash
   - name: goxcrypto
