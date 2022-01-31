@@ -10,6 +10,12 @@ var:
   container:
     use_container: 1
 
+targets:
+  nightly:
+    git_hash: master
+    version: '[% c("abbrev") %]'
+    tag_gpg_id: 0
+
 input_files:
   - project: container-image
   - name: go
