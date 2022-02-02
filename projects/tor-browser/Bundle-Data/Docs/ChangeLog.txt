@@ -1,3 +1,25 @@
+Tor Browser 11.0.5 - February 3 2022
+ * Android
+   * Update Fenix to 94.1.1
+   * Update Tor to 0.4.6.9
+   * Update NoScript to 11.2.16
+   * Update OpenSSL to 1.1.1m
+   * Bug 40006: Add new default obfs4 bridge "deusexmachina" [tor-android-service]
+   * Bug 40198: Spoof English toggle now overlaps with locale list [fenix]
+   * Bug 40393: Point to a forked version of pion/dtls with fingerprinting fix [tor-browser-build]
+   * Bug 40394: Bump version of Snowflake to 221f1c41 [tor-browser-build]
+   * Bug 40398: Jetify tor-android-service packages [tor-browser-build]
+   * Bug 40682: Disable network.proxy.allow_bypass [tor-browser]
+   * Bug 40736: Disable third-party cookies in Private Browsing Mode [tor-browser]
+ * Build System
+   * Android
+     * Bug 40366: Use bullseye to build https-everywhere [tor-browser-build]
+     * Bug 40368: Use system's python3 for android builds [tor-browser-build]
+     * Bug 40373: Update components for mozilla93 [tor-browser-build]
+     * Bug 40379: Update components for mozilla94 [tor-browser-build]
+     * Bug 40395: Update node to 12.22.1 [tor-browser-build]
+     * Bug 40403: Update Go to 1.16.12 [tor-browser-build]
+
 Tor Browser 11.0.4 - January 11 2022
  * Windows + OS X + Linux
    * Update Firefox to 91.5.0esr

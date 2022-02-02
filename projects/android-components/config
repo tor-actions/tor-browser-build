@@ -9,7 +9,7 @@ variant: '[% IF c("var/release") %]Release[% ELSE %]Beta[% END %]'
 
 var:
   android_components_version: 94.0.12
-  torbrowser_branch: 11.5
+  torbrowser_branch: 11.0
   container:
     use_container: 1
   # This should be updated when the list of gradle dependencies is changed.
