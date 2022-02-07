@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Copyright (c) 2018, The Tor Project, Inc.
 #
@@ -30,11 +30,17 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-# Usage:
-# 1) Change into the directory containing the files to be hashed
-# 2) Run /path/to/hash_signed_bundles.sh
+# This script will generate sha256sums-signed-build.txt and
+# sha256sums-signed-build.incrementals.txt files in the signed directory.
+
+set -e
+
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source "$script_dir/functions"
 
 export LC_ALL=C
+
+cd "$signed_version_dir"
 
 rm -f sha256sums-signed-build.txt sha256sums-signed-build.incrementals.txt
 sha256sum `ls -1 | grep -v '\.incremental\.mar$' | grep -v '^sha256sums*' | \
