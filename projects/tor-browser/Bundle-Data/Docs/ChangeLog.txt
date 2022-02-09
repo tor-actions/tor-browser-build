@@ -1,3 +1,57 @@
+Tor Browser 11.5a4 - February 15 2022
+ * Windows + OS X + Linux
+   * Update Firefox to 91.6.0esr
+   * Update NoScript to 11.2.19
+   * Tor Launcher 0.2.33
+   * Bug 40562: Reorganize patchset [tor-browser]
+   * Bug 40598: Remove legacy settings read from TorSettings module [tor-browser]
+   * Bug 40679: Missing features on first-time launch in esr91 [tor-browser]
+   * Added extensions.torlauncher.launch_delay debug pref to simulate slow tor daemon launch [tor-launcher]
+   * Bug 40752: Misleading UX when about:tor as New Tab [tor-browser]
+   * Bug 40775: about:ion should no tbe labeled as a Tor Browser page [tor-browser]
+   * Bug 40793: moved Tor configuration options from old-configure.in to moz.configure [tor-browser]
+   * Bug 40795: Revert Deutsche Welle v2 redirect [tor-browser]
+ * Build System
+   * Windows + OS X + Linux
+     * Update Go to 1.17.6
+     * Bug 40416: Pick up obfsproxy 0.0.12 [tor-browser-build]
+
+Tor Browser 11.0.6 - February 8 2022
+ * Windows + OS X + Linux
+   * Update Firefox to 91.6.0esr
+   * Update NoScript to 11.2.16
+   * Tor Launcher 0.2.33
+   * Bug 40795: Revert Deutsche Welle v2 redirect [tor-browser]
+   * Bug 40679: Missing features on first-time launch in esr91 [tor-browser]
+   * Added extensions.torlauncher.launch_delay debug pref to simulate slow tor daemon launch [tor-launcher]
+  * Build System
+   * Windows + OS X + Linux + Android
+    * Update Go to 1.16.13
+    * Bug 40413: Removed lsb_release from Python build script [tor-browser-build]
+    * Bug 40416: Pick up obfsproxy 0.0.12 [tor-browser-build]
+
+Tor Browser 11.0.5 - February 3 2022
+ * Android
+   * Update Fenix to 94.1.1
+   * Update Tor to 0.4.6.9
+   * Update NoScript to 11.2.16
+   * Update OpenSSL to 1.1.1m
+   * Bug 40006: Add new default obfs4 bridge "deusexmachina" [tor-android-service]
+   * Bug 40198: Spoof English toggle now overlaps with locale list [fenix]
+   * Bug 40393: Point to a forked version of pion/dtls with fingerprinting fix [tor-browser-build]
+   * Bug 40394: Bump version of Snowflake to 221f1c41 [tor-browser-build]
+   * Bug 40398: Jetify tor-android-service packages [tor-browser-build]
+   * Bug 40682: Disable network.proxy.allow_bypass [tor-browser]
+   * Bug 40736: Disable third-party cookies in Private Browsing Mode [tor-browser]
+ * Build System
+   * Android
+     * Bug 40366: Use bullseye to build https-everywhere [tor-browser-build]
+     * Bug 40368: Use system's python3 for android builds [tor-browser-build]
+     * Bug 40373: Update components for mozilla93 [tor-browser-build]
+     * Bug 40379: Update components for mozilla94 [tor-browser-build]
+     * Bug 40395: Update node to 12.22.1 [tor-browser-build]
+     * Bug 40403: Update Go to 1.16.12 [tor-browser-build]
+
 Tor Browser 11.5a3 - January 14 2022
  * Android
    * Update Fenix to 94.1.1
@@ -19,6 +73,7 @@ Tor Browser 11.5a3 - January 14 2022
      * Bug 40373: Update components for mozilla93 [tor-browser-build]
      * Bug 40379: Update components for mozilla94 [tor-browser-build]
      * Bug 40395: Update node to 12.22.1 [tor-browser-build]
+     * Bug 40413: Removed lsb_release from Python build script [tor-browser-build]
 
 Tor Browser 11.5a2 - January 11 2022
  * Windows + OS X + Linux
