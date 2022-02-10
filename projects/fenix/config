@@ -8,16 +8,16 @@ gpg_keyring: torbutton.gpg
 variant: Beta
 
 var:
-  fenix_version: 94.1.1
+  fenix_version: 96.3.0
   torbrowser_branch: 11.5
   git_branch: 'tor-browser-[% c("var/fenix_version") %]-[% c("var/torbrowser_branch") %]-1'
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   container:
     use_container: 1
   # This should be updated when the list of gradle dependencies is changed.
-  gradle_dependencies_version: 33
+  gradle_dependencies_version: 34
   gradle_version: 7.0.2
-  glean_parser: 4.0.0
+  glean_parser: 4.2.0
   arch_deps:
     - python3-venv
 

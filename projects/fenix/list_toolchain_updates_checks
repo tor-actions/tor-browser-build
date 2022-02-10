@@ -70,4 +70,3 @@ EOF
 needed=$(cat buildSrc/src/main/java/Dependencies.kt | perl -ne "$p")
 current='7.0.0'
 check_update_needed android-gradle-plugin "$needed" "$current"
-
