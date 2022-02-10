@@ -8,7 +8,7 @@ git_submodule: 1
 gpg_keyring: torbutton.gpg
 
 var:
-  geckoview_version: 94.0
+  geckoview_version: 96.0
   torbrowser_branch: 11.0
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   deps:
@@ -23,7 +23,7 @@ var:
   container:
     use_container: 1
   # this should be updated when the list of gradle dependencies is changed
-  gradle_dependencies_version: 8
+  gradle_dependencies_version: 9
   gradle_version: 6.9.1
 
 steps:
@@ -84,7 +84,7 @@ steps:
       # Create .mozbuild to avoid interactive prompt in configure
       mkdir "$HOME/.mozbuild"
       # We still need to specify --tor-browser-version due to bug 34005.
-      ./mach configure --with-tor-browser-version=[% c("var/torbrowser_version") %]
+      ./mach configure --with-tor-browser-version=[% c("var/torbrowser_version") %] --with-java-bin-path="$JAVA_HOME/bin" --without-wasm-sandboxed-libraries
       ./mach build --verbose
       find obj-* -regex '.*geckoview.*[0-9].\(aar\|pom\)' -exec cp {} $distdir/[% project %] \;
 
