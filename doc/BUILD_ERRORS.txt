@@ -43,3 +43,22 @@ rm /etc/resolv.conf
 Restart network-manager
 
 sudo service network-manager restart
+
+
+Could not find uid in /etc/subuid
+---------------------------------
+
+In some cases you can have the error:
+
+  Error: Error starting remote:
+  Error: Could not find uid in /etc/subuid
+  Error: failed to set uidmap
+
+The user you use to build needs to have a range of subordinate uids and
+gids in /etc/subuid and /etc/subgid. Most of the time they are added by
+default when the user is created. If it was not the case, you can use
+usermod(8) with the --add-subuids and --add-subgids options. See also
+the subuid(5) and subgid(5) man pages.
+
+Note that the root user is not exempted from the requirement for a
+valid /etc/subuid and /etc/subgid entry, if you are building as root.

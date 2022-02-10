@@ -53,6 +53,12 @@ To enable them you can use the following command as root:
 
 You can enable them permanently by adding the setting to /etc/sysctl.d/
 
+The user you use to build needs to have a range of subordinate uids and
+gids in /etc/subuid and /etc/subgid. Most of the time they are added by
+default when the user is created. If it was not the case, you can use
+usermod(8) with the --add-subuids and --add-subgids options. See also
+the subuid(5) and subgid(5) man pages.
+
 
 Starting a build
 ----------------
