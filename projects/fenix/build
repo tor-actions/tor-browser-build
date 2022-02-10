@@ -38,6 +38,10 @@ cd $builddir-[% c("version") %]
 cp $rootdir/[% c('input_files_by_name/topl') %]/* app/
 cp $rootdir/[% c('input_files_by_name/tor-android-service') %]/* app/
 
+# Avoid call to `getGitHash()`, which will fail b/c it invokes git, which is absent in
+# the build container. Instead just inject the commit hash, which we know!
+sed -i 's/\\"${Config.getGitHash()}\\"/\\"[% c('abbrev') %]\\"/' app/build.gradle
+
 # XXX We need the build variant in lower case. Do something smarter here.
 v=[% c("variant") %]
 [% IF c("var/fetch_gradle_dependencies") %]
