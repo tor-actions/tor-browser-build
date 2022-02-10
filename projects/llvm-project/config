@@ -4,7 +4,17 @@ git_hash: d28af7c654d8db0b68c175db5ce212d74fb5e9bc
 git_url: https://github.com/llvm/llvm-project
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 
-targets:
-  android:
-    version: 13.0.0
-    git_hash: d7b669b3a30345cfcdb2fde2af6f48aa4b94845d
+# TODO (aguestuser|2022-02-10):
+# - we want to use version 13.0.0 for android builds
+# - BUT: we are unable to build geckoview v96.0.x if we do so, b/c `clang_rt` errors
+#   as per: https://gitlab.torproject.org/tpo/applications/tor-browser-build/-/merge_requests/405#note_2776669
+# - for now, we revert to 12.0.0 for nightly, but plan to resolve issues using 13.0.0
+#   before tagging next alpha release (11.5a5)
+
+########################
+# use this later! ----v
+########################
+# targets:
+#   android:
+#     version: 13.0.0
+#     git_hash: d7b669b3a30345cfcdb2fde2af6f48aa4b94845d
