@@ -35,7 +35,12 @@ EOF
 tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
 
 cd $builddir-[% c('version') %]
-patch -p1 < $rootdir/git.patch
+
+# Avoid call to `getGitHash()`, which will fail b/c it invokes git, which is absent in
+# the build container. Instead just inject the commit hash, which we know!
+sed -i 's/getGitHash()/\"[% c('abbrev') %]\"/' components/support/base/build.gradle
+sed -i 's/tag = getGitHash()/tag = \"[% c('abbrev') %]\"/' publish.gradle
+
 [% IF c("var/fetch_gradle_dependencies") %]
   # XXX: fetching deps for `assembleGeckoBeta -x lint` by using that same target
   # results in some missing dependencies for yet unknown reasons. Thus, we use
