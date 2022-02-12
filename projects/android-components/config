@@ -45,7 +45,6 @@ input_files:
     name: gradle-dependencies
     exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
-  - filename: git.patch
   - filename: mavenLocal.patch
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
   - URL: '[% pc("glean", "var/glean_wheels_url/" _ c("var/glean_parser"), { error_if_undef => 1 }) %]'
