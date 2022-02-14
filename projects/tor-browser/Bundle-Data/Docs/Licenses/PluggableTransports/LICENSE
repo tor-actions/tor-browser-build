@@ -194,16 +194,6 @@ For details about the Go License, please see LICENSE.GO.
 
 ===============================================================================
 
-agl/ed25519
-
-Copyright 2013 The Go Authors. All rights reserved.
-Use of this source code is governed by a BSD-style
-license that can be found in the LICENSE file.
-
-For details about the Go License, please see LICENSE.GO.
-
-===============================================================================
-
 dchest/siphash
 
 To the extent possible under law, the authors have dedicated all
