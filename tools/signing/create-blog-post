@@ -1,0 +1,61 @@
+#!/bin/bash
+set -e
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source "$script_dir/functions"
+source "$script_dir/set-config.blog"
+
+var_is_defined blog_publish_user blog_directory
+
+content_dir="$blog_directory/content/blog"
+test -d "$content_dir" || exit_error "$content_dir is not a direcotry"
+
+blog_dir="$content_dir/new-release-tor-browser-"$(echo $tbb_version | sed 's/\.//g')
+
+test -d "$blog_dir" && exit_error "$blog_dir already exists"
+
+mkdir "$blog_dir"
+echo "Created directory $blog_dir"
+
+if test "$tbb_version_type" = "release"
+then
+  lead=../../../assets/static/images/blog/tor-browser-11.jpg
+else
+  lead=../../../assets/static/images/blog/tor-browser_0_0.png
+fi
+ln -s "$lead" "$blog_dir/lead.jpg"
+echo "Created $blog_dir/lead.jpg -> $lead"
+
+
+if test "$tbb_version_type" = "release"
+then
+  title="New Release: Tor Browser $tbb_version"
+  download_page='https://www.torproject.org/download/'
+else
+  title="New Alpha Release: Tor Browser $tbb_version"
+  download_page='https://www.torproject.org/download/alpha/'
+fi
+
+contents_lr="$blog_dir/contents.lr"
+cat > "$contents_lr" << EOF
+title: $title
+---
+pub_date: $(date +%Y-%m-%d)
+---
+author: $blog_publish_user
+---
+categories:
+
+applications
+releases
+---
+summary: Tor Browser $tbb_version is now available from the Tor Browser download page and also from our distribution directory.
+---
+body:
+Tor Browser $tbb_version is now available from the [Tor Browser download page]($download_page) and also from our [distribution directory](https://www.torproject.org/dist/torbrowser/$tbb_version/).
+
+This version includes important [security updates](https://www.mozilla.org/en-US/security/advisories/) to Firefox.
+
+EOF
+
+$script_dir/../changelog-format-blog-post >> "$contents_lr"
+echo "Created $contents_lr"
