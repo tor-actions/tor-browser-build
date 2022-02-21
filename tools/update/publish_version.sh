@@ -14,21 +14,9 @@ if [ -z "${PREV_TORBROWSER_VERSION}" ]; then
 	exit 1
 fi
 
-TORBROWSER_UPDATE_CHANNEL=$3
-if [ -z "${TORBROWSER_UPDATE_CHANNEL}" ]; then
-    echo "please specify the release channel (release|alpha)"
-	exit 1
-fi
-
 wget --continue -nH --cut-dirs=2 -r -l 1 "https://people.torproject.org/~sysrqb/builds/${TORBROWSER_VERSION}"
 #wget --continue -nH --cut-dirs=2 -r -l 1 "https://people.torproject.org/~gk/builds/${TORBROWSER_VERSION}"
 rm "${TORBROWSER_VERSION}/index.html*"
-
-# Rename the update responses directory to .old to make it easier to
-# revert in case of problem (see the file RollingBackUpdate for more
-# details about this)
-rm -rf "/srv/aus1-master.torproject.org/htdocs/torbrowser/update_3/${TORBROWSER_UPDATE_CHANNEL}.old"
-mv /srv/aus1-master.torproject.org/htdocs/torbrowser/update_3/"${TORBROWSER_UPDATE_CHANNEL}"{,.old}
 
 date
 mv "${TORBROWSER_VERSION}" /srv/dist-master.torproject.org/htdocs/torbrowser/
