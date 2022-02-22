@@ -32,7 +32,7 @@ if (m/const\\s+val\\s+compileSdkVersion\\s+=\\s+([^"]+)/) {
 }
 EOF
 needed=$(cat buildSrc/src/main/java/Config.kt | perl -ne "$p")
-current=30
+current=31
 check_update_needed compileSdkVersion "$needed" "$current"
 
 
@@ -70,4 +70,3 @@ EOF
 needed=$(cat buildSrc/src/main/java/Dependencies.kt | perl -ne "$p")
 current='7.0.0'
 check_update_needed android-gradle-plugin "$needed" "$current"
-

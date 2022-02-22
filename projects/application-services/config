@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
-version: 85.4.0
-git_hash: b9601a76c7d47aa54c60b81c783571630d4962bf
+version: 86.2.2
+git_hash: 8c36c7c49e577b92af9328577ccae6795c3b909d
 git_url: https://github.com/mozilla/application-services
 git_submodule: 1
 
@@ -9,9 +9,9 @@ var:
   container:
     use_container: 1
   # This should be updated when the list of gradle dependencies is changed.
-  gradle_dependencies_version: 7
+  gradle_dependencies_version: 8
   gradle_version: 6.7.1
-  glean_parser: 3.4.0
+  glean_parser: 4.0.0
   arch_deps:
     - python3-venv
 
@@ -91,7 +91,7 @@ input_files:
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
   # Use `make cargo_vendor-application-services` to re-generate the vendor tarball
   - URL: https://people.torproject.org/~boklm/mirrors/sources/application-services-vendor-[% c('version') %].tar.bz2
-    sha256sum: 54f9c8185789ab45cd46e9845a71181c5e7938e26b1b33b3f2f891f0b5cf73b6
+    sha256sum: 5f202dcc07b31df5a375b07163c4c3bd4574ac272bfc55d65d3c8369b36730a5
   - filename: no-git.patch
   - filename: mavenLocal.patch
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
@@ -100,7 +100,7 @@ input_files:
 
 steps:
   list_toolchain_updates:
-    git_hash: 'v85.4.0'
+    git_hash: 'v86.2.2'
     input_files: []
     var:
       container:

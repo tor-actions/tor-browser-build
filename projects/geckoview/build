@@ -52,7 +52,7 @@ rm -f js/src/configure
 export MACH_USE_SYSTEM_PYTHON=1
 # Create .mozbuild to avoid interactive prompt in configure
 mkdir "$HOME/.mozbuild"
-./mach configure --with-tor-browser-version=[% c("var/torbrowser_version") %]
+./mach configure --with-tor-browser-version=[% c("var/torbrowser_version") %] --with-java-bin-path="$JAVA_HOME/bin" --without-wasm-sandboxed-libraries
 ./mach build --verbose
 
 # We don't want to have the debug .aar but the one that has `$channel`, `$arch`,

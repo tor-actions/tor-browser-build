@@ -26,10 +26,16 @@ var:
     export PATH=$PATH:$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin:$GRADLE_HOME/gradle/bin
     mkdir -p "$GRADLE_HOME"
   google_repo: https://dl.google.com/android/repository
-  android_api_level: 30
-  android_platform_revision: 03
+  android_api_level: 31
+  android_platform_revision: 01
+  android_release_dir: android-12
+  android_api_level_30: 30
+  android_platform_revision_30: 03
+  android_release_dir_30: android-11
   android_api_level_29: 29
   android_platform_revision_29: 04
+  android_release_dir_29: android-10
+  android_release_dir_28: android-9
   android_ndk_version: 21
   android_ndk_revision: d
   android_ndk_version_build: 21.3.6528147
@@ -54,9 +60,12 @@ input_files:
   - URL: '[% c("var/google_repo") %]/platform-[% c("var/android_api_level_29") %]_r[% c("var/android_platform_revision_29") %].zip'
     name: platform_29
     sha256sum: c9eaf2ce4e8fa6f5a8036bd3c95363d003733bf0a1bd349718cadf802db44c69
+  - URL: '[% c("var/google_repo") %]/platform-[% c("var/android_api_level_30") %]_r[% c("var/android_platform_revision_30") %].zip'
+    name: platform_30
+    sha256sum: f3f5b75744dbf6ee6ed3e8174a71e513bfee502d0bc3463ea97e517bff68d84e
   - URL: '[% c("var/google_repo") %]/platform-[% c("var/android_api_level") %]_r[% c("var/android_platform_revision") %].zip'
     name: platform
-    sha256sum: f3f5b75744dbf6ee6ed3e8174a71e513bfee502d0bc3463ea97e517bff68d84e
+    sha256sum: 1d69fe1d7f9788d82ff3a374faf4f6ccc9d1d372aa84a86b5bcfb517523b0b3f
   # ./mach bootstrap is fetching the latest version, so it does not seem to
   # matter which particular version we are using. Pin to the one fitting best to
   # SDK version/build-tools version.
