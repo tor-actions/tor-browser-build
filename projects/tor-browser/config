@@ -116,3 +116,9 @@ input_files:
     enable: '[% c("var/android") %]'
   - filename: verify_allowed_addons.py
     enable: '[% c("var/android") && c("var/verify_allowed_addons") %]'
+  - filename: bridges_list.obfs4.txt
+    enable: '[% ! c("var/android") %]'
+  - filename: bridges_list.meek-azure.txt
+    enable: '[% ! c("var/android") %]'
+  - filename: bridges_list.snowflake.txt
+    enable: '[% ! c("var/android") %]'

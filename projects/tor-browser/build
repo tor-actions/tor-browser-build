@@ -135,6 +135,19 @@ tar -C Bundle-Data/[% bundledata_osname %] [% IF ! c("var/namecoin") %]--exclude
 cat Bundle-Data/PTConfigs/[% bundledata_osname %]/torrc-defaults-appendix >> "$TBDIR/$TORCONFIGPATH/torrc-defaults"
 cat Bundle-Data/PTConfigs/bridge_prefs.js >> "$GENERATEDPREFSPATH"
 
+function bridges_conf {
+  local pt="$1"
+  local i=1
+  while read -r line
+  do
+    echo "pref(\"extensions.torlauncher.default_bridge.$pt.$i\", \"$line\");" >> "$GENERATEDPREFSPATH"
+    i=$((i + 1))
+  done < "$rootdir/bridges_list.$pt.txt"
+}
+bridges_conf obfs4
+bridges_conf meek-azure
+bridges_conf snowflake
+
 [% IF ! c("var/multi_lingual") %]
   echo 'pref("extensions.torlauncher.prompt_for_locale", false);' >> "$GENERATEDPREFSPATH"
 [% END %]
