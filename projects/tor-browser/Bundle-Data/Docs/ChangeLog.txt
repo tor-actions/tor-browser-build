@@ -1,3 +1,20 @@
+Tor Browser 11.5a5 - March 1 2022
+ * Android
+   * Update Fenix to 96.3.0
+   * Update Tor to 0.4.7.4-alpha
+   * Update NoScript to 11.3.4
+   * Bug 40075: Fix problem preventing file downloads on Android Q and above [android-components]
+   * Bug 40432: Support bug reports by displaying Android Components commit hash in "About Tor Browser" display [tor-browser-build]
+ * Build System
+   * Android
+     * Update Go to 1.17.7
+     * Bug 40056: Download .aar and .jar files for all .pom files [tor-browser-build]
+     * Bug 40385: Update components for mozilla95 [tor-browser-build]
+     * Bug 40418: Update components for mozilla96 [tor-browser-build]
+     * Bug 40435: Remove default obfs4 bridge "deusexmachina" [tor-browser-build]
+     * Bug 40436: Use intermediate files for default bridge lines [tor-browser-build]
+     * Bug 40438: Use the same list of bridges for desktop and android [tor-browser-build]
+
 Tor Browser 11.5a4 - February 15 2022
  * Windows + OS X + Linux
    * Update Firefox to 91.6.0esr
