@@ -25,6 +25,10 @@ rm -fR service/src/main/jniLibs/*
 rm service/libs/*
 cp $rootdir/[% c('input_files_by_name/topl') %]/*{.aar,.jar} service/libs/
 
+# Update bridges list
+cat $rootdir/bridges_list.obfs4.txt $rootdir/bridges_list.meek-azure.txt \
+  $rootdir/bridges_list.snowflake.txt > service/src/main/assets/common/bridges.txt
+
 # Build Android Libraries and Apps
 gradle --offline --no-daemon -P androidplugin=3.6.0 -P appcompatVersion=28.0.0 -P compileVersion=29 -P targetVersion=29 -P minVersion=16 -Dmaven.repo.local=$gradle_repo assembleRelease -x lint
 
