@@ -45,3 +45,6 @@ input_files:
   - URL: 'https://dl.google.com/dl/android/studio/jetifier-zips/1.0.0-beta10/jetifier-standalone.zip'
     name: jetifier
     sha256sum: 38186db9c9d1b745890b3d35c0667da1cac146ceb3c26aae5bf0802119472c1b
+  - filename: bridges_list.obfs4.txt
+  - filename: bridges_list.meek-azure.txt
+  - filename: bridges_list.snowflake.txt
