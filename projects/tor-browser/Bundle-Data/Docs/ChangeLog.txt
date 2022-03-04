@@ -1,7 +1,7 @@
 Tor Browser 11.0.7 - March 8 2022
  * Windows + OS X + Linux
    * Update Tor to 0.4.6.10
-   * Update NoScript ot 11.3.7
+   * Update NoScript to 11.3.7
    * Bug 40435: Remove default bridge "deusexmachina" [tor-browser-build]
    * Bug 40440: Bump version of snowflake to include PT LOG events [tor-browser-build]
    * Bug 40684: Misc UI bugs in 11.0a10 [tor-browser]
@@ -9,9 +9,11 @@ Tor Browser 11.0.7 - March 8 2022
    * Bug 40691: Make quickstart checkbox grey when "off" on about:torconnect [tor-browser]
    * Bug 40714: Next button closes "How do circuits work?" onboarding tour [tor-browser]
    * Bug 40824: Drop 16439 Patch (android screencasting disable)
+   * Bug 40826: Cherry-pick fixes for Mozilla bug 1758062
  * Build System
    * Windows + OS X + Linux
      * Update Go to 1.16.14
+     * Bug 40441: Add Austin as valid git-tag signer
 
 Tor Browser 11.0.6 - February 8 2022
  * Windows + OS X + Linux
