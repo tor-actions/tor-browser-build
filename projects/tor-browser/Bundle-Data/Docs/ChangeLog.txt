@@ -1,3 +1,16 @@
+Tor Browser 11.5a6 - March 8 2022
+ * Windows + OS X + Linux
+   * Update Tor to 0.4.7.4-alpha
+   * Update NoScript to 11.3.7
+   * Bug 19850: Disable Plaintext HTTP Clearnet Connections [tor-browser]
+   * Bug 40440: Bump version of snowflake to include PT LOG events [tor-browser-build]
+   * Bug 40819: Update Firefox to 91.7.0esr
+   * Bug 40824: Drop 16539 Patch (android screencasting disable) [tor-browser]
+   * Bug 40826: Cherry-pick fixes for Mozilla bug 1758062
+ * Build System
+   * Windows + OS X + Linux
+     * Update Go to 1.17.8
+     * Bug 40441: Add Austin as a valid git-tag signer [tor-browser-build]
 Tor Browser 11.5a5 - March 1 2022
  * Android
    * Update Fenix to 96.3.0
@@ -14,6 +27,7 @@ Tor Browser 11.5a5 - March 1 2022
      * Bug 40435: Remove default obfs4 bridge "deusexmachina" [tor-browser-build]
      * Bug 40436: Use intermediate files for default bridge lines [tor-browser-build]
      * Bug 40438: Use the same list of bridges for desktop and android [tor-browser-build]
+     * Bug 40441: Add Austin as a valid git-tag signer [tor-browser-build]
 
 Tor Browser 11.5a4 - February 15 2022
  * Windows + OS X + Linux
@@ -37,6 +51,7 @@ Tor Browser 11.0.6 - February 8 2022
  * Windows + OS X + Linux
    * Update Firefox to 91.6.0esr
    * Update NoScript to 11.2.16
+   * Update OpenSSL to 1.1.1m
    * Tor Launcher 0.2.33
    * Bug 40795: Revert Deutsche Welle v2 redirect [tor-browser]
    * Bug 40679: Missing features on first-time launch in esr91 [tor-browser]
