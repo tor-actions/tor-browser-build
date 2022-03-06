@@ -4,9 +4,10 @@ Tor Browser 11.5a6 - March 8 2022
    * Update NoScript to 11.3.7
    * Bug 19850: Disable Plaintext HTTP Clearnet Connections [tor-browser]
    * Bug 40440: Bump version of snowflake to include PT LOG events [tor-browser-build]
-   * Bug 40819: Update Firefox to 91.7.0esr
+   * Bug 40819: Update Firefox to 91.7.0esr [tor-browser]
    * Bug 40824: Drop 16539 Patch (android screencasting disable) [tor-browser]
-   * Bug 40826: Cherry-pick fixes for Mozilla bug 1758062
+   * Bug 40825: Redirect HTTPS-Only error page when not connected [tor-browser]
+   * Bug 40826: Cherry-pick fixes for Mozilla bug 1758062 [tor-browser]
  * Build System
    * Windows + OS X + Linux
      * Update Go to 1.17.8
