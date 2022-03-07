@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# This script runs `make dmg2mar-release` or `make dmg2mar-alpha`, after
+# moving the signed dmg files from the $tbb_version-macos-signed directory
+# to the normal signed directory.
+# It should be run after `gatekeeper-bundling.sh`.
+
+set -e
+
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source "$script_dir/functions"
+
+cd "$script_dir/../.."
+
+version=$(./rbm/rbm showconf tor-browser --target alpha --target torbrowser-linux-x86_64 var/torbrowser_version)
+test "$version" = "$tbb_version" || \
+  exit_error "Incorrect tor browser version: $version != $tbb_version"
+
+test -d "$macos_signed_dir" || \
+  exit_error "$macos_signed_dir does not exist"
+
+nb_locales=$(echo $bundle_locales | wc -w)
+nb_bundles=$(ls -1 "$macos_signed_dir"/TorBrowser-*.dmg | wc -l)
+test "$nb_locales" -eq "$nb_bundles" || \
+  exit_error "Wrong number of bundles: $nb_locales != $nb_bundles"
+
+mv -vf "$macos_signed_dir"/TorBrowser-*.dmg "$signed_version_dir"/
+
+make dmg2mar-$tbb_version_type
