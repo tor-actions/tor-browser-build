@@ -1,3 +1,16 @@
+Tor Browser 11.0.9 - March 15 2022
+ * Windows + OS X + Linux
+   * Bug 40802: Client Auth dialog is broken in Tor Browser 11.0.6, works in 11.0.4 [tor-browser]
+   * Bug 40831: Upgrade to OpenSSL 1.1.1n [tor-browser]
+   * Bug 40830: cherry-pick fix for bugzilla 1758156 [tor-browser]
+  * Build System
+   * Windows + OS X + Linux
+     * Update Go to 1.17.8
+     * Bug 40422: Remove projects/ed25519 [tor-browser-build]
+     * Bug 40431: added license info for edwards25519 and edwards25519-extra [tor-browser-build]
+     * Bug 40436: Use intermediate files for default bridge lines [tor-browser-build]
+     * Bug 40438: Use the same list of bridges for desktop and android [tor-browser-build]
+
 Tor Browser 11.0.8 - March 11 2022
  * Android
    * Update Fenix to 96.3.0
