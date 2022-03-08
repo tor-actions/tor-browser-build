@@ -1,3 +1,12 @@
+Tor Browser 11.5a7 - March 9 2022
+ * Android
+   * Update Tor to 0.4.7.4-alpha
+   * Update NoScript to 11.3.7
+   * Bug 40829: port fixes for Mozilla security advisory mfsa2022-09 to Android [tor-browser]
+ * Build System
+   * Android
+     * Update Go to 1.17.8
+
 Tor Browser 11.5a6 - March 8 2022
  * Windows + OS X + Linux
    * Update Tor to 0.4.7.4-alpha
@@ -12,6 +21,7 @@ Tor Browser 11.5a6 - March 8 2022
    * Windows + OS X + Linux
      * Update Go to 1.17.8
      * Bug 40441: Add Austin as a valid git-tag signer [tor-browser-build]
+
 Tor Browser 11.5a5 - March 1 2022
  * Android
    * Update Fenix to 96.3.0
@@ -7372,5 +7382,3 @@ Tor Browser Bundle 3.0alpha1 -- June 17 2013
  * Mac:
    * Use 'Toolchain4' fork by Ray Donnelley to cross-compile the bundles from
      Ubuntu
-
-
