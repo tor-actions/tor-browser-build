@@ -1,6 +1,5 @@
 Tor Browser 11.5a7 - March 9 2022
  * Android
-   * Update Tor to 0.4.7.4-alpha
    * Update NoScript to 11.3.7
    * Bug 40829: port fixes for Mozilla security advisory mfsa2022-09 to Android [tor-browser]
  * Build System
