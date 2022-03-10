@@ -1,3 +1,24 @@
+Tor Browser 11.0.8 - March 11 2022
+ * Android
+   * Update Fenix to 96.3.0
+   * Update Tor to 0.4.6.10
+   * Update NoScript to 11.3.7
+   * Bug 40075: Fix bug preventing downloads on Android Q and higher [android-components]
+   * Bug 40829: Port fixes for Mozilla security advisory mfsa2022-09 to Android [tor-browser]
+ * Build System
+   * Android
+     * Update Go to 1.16.15
+     * Bug 40056: Download .aar and .jar files for all .pom files [tor-browser-build]
+     * Bug 40298: Add documentation about subuid and subgid [tor-browser-build]
+     * Bug 40385: Add android platform-31_r0 [tor-browser-build]
+     * Bug 40422: Remove projects/ed25519 [tor-browser-build]
+     * Bug 40431: added license info for edwards25519 and edwards25519-extra [tor-browser-build]
+     * Bug 40432: Support bug reports by displaying Android Components commit hash in "About Tor Browser" display [tor-browser-build]
+     * Bug 40436: Use intermediate files for default bridge lines [tor-browser-build]
+     * Bug 40438: Use the same list of bridges for desktop and android [tor-browser-build]
+     * Bug 40440: Bump version of snowflake to to include PT LOG events [tor-browser-build]
+     * Bug 40441: Add aguestuser as valid git-tag signer [tor-browser-build]
+
 Tor Browser 11.0.7 - March 8 2022
  * Windows + OS X + Linux
    * Update Tor to 0.4.6.10
@@ -7247,5 +7268,3 @@ Tor Browser Bundle 3.0alpha1 -- June 17 2013
  * Mac:
    * Use 'Toolchain4' fork by Ray Donnelley to cross-compile the bundles from
      Ubuntu
-
-
