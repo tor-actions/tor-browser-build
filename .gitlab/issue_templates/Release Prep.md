@@ -79,7 +79,6 @@ Tor Browser Alpha (and Nightly) are on the `master` branch, while Stable lives i
 - [ ] Check for openssl updates here : https://github.com/openssl/openssl/tags
     - [ ] ***(Optional)*** If new 1.X.Y series tag available, update `projects/openssl/config`
         - [ ] `version` : update to next 1.X.Y release tag
-        - [ ] `input_files/URL` : update to next source tarball
         - [ ] `input_files/sha256sum` : update to sha256 sum of source tarball
 - [ ] Check for tor updates here : https://gitlab.torproject.org/tpo/core/tor/-/tags ; Tor Browser Alpha uses `-alpha` tagged tor, while stable uses the stable series
     - [ ] ***(Optional)*** If new tor version is available, update `projects/tor/config`
