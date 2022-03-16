@@ -1,38 +1,31 @@
-set -x
+#!/bin/bash
+set -e
 
-TORBROWSER_VERSION=$1
-if [ -z "$TORBROWSER_VERSION" ];
-then
-  echo "Please call this script with a Tor Browser version!"
-  exit 1
-fi
-ENTITLEMENTS=/Users/torbrowser/signing/alpha.entitlements.xml
-if [ -z "$BUNDLE_LOCALES" ];
-then
-  BUNDLE_LOCALES="ar ca cs da de el en-US es-AR es-ES fa fr ga-IE he hu id is it ja ka ko lt mk ms my nb-NO nl pl pt-BR ro ru sv-SE th tr vi zh-CN zh-TW"
-fi
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source "$script_dir/functions"
+
+ENTITLEMENTS="$script_dir/$tbb_version_type.entitlements.xml"
 
 function check_signature() {
   LANG=$1
-  TORBROWSER_VERSION=$2
-  UNZIP=$3
+  UNZIP=$2
   local failed_open=0
   local failed_exec=0
   if [ ${UNZIP} -eq 1 ]
   then
     test -d test_${LANG} && rm -r test_${LANG}
-    unzip -d test_${LANG} -q tb-${TORBROWSER_VERSION}_$LANG.zip
+    unzip -d test_${LANG} -q tb-${tbb_version}_$LANG.zip
     pushd test_${LANG}
   fi
   echo "Checking $LANG..."
   spctl -vvvv --assess --type open --context context:primary-signature 'Tor Browser.app/'
   if [ $? -ne 3 ]; then
-    echo tb-${TORBROWSER_VERSION}_$LANG.zip not signed correctly. Failed open.
+    echo tb-${tbb_version}_$LANG.zip not signed correctly. Failed open.
     failed_open=1
   fi
   spctl -vvvv --assess --type exec --context context:primary-signature 'Tor Browser.app/'
   if [ $? -ne 0 ]; then
-    echo tb-${TORBROWSER_VERSION}_$LANG.zip not signed correctly. Failed exec.
+    echo tb-${tbb_version}_$LANG.zip not signed correctly. Failed exec.
     failed_exec=1
   fi
   if [ ${UNZIP} -eq 1 ]
@@ -46,12 +39,24 @@ function check_signature() {
   fi
 }
 
-for LANG in $BUNDLE_LOCALES
+cd ~/${tbb_version}
+
+if test -n "$KEYCHAIN_PW"
+then
+  KPW="-p $KEYCHAIN_PW"
+fi
+
+security unlock $KPW /Users/torbrowser/Library/Keychains/tbb-signing-alpha.keychain
+security unlock $KPW /Users/torbrowser/Library/Keychains/tbb-signing-2021.keychain
+
+unset KPW KEYCHAIN_PW
+
+for LANG in $bundle_locales
 do
-  if [ -f tb-${TORBROWSER_VERSION}_${LANG}.zip ]
+  if [ -f tb-${tbb_version}_${LANG}.zip ]
   then
-    echo "Deleting tb-${TORBROWSER_VERSION}_${LANG}.zip"
-    rm tb-${TORBROWSER_VERSION}_${LANG}.zip
+    echo "Deleting tb-${tbb_version}_${LANG}.zip"
+    rm tb-${tbb_version}_${LANG}.zip
   fi
   if [ -d "Tor Browser.app" ]
   then
@@ -62,12 +67,13 @@ do
     echo "DMG already mounted. Please correct."
     exit 1
   fi
-  hdiutil attach TorBrowser-${TORBROWSER_VERSION}-osx64_$LANG.dmg
+  hdiutil attach TorBrowser-${tbb_version}-osx64_$LANG.dmg
   cp -rf "/Volumes/Tor Browser/Tor Browser.app" "Tor Browser.app"
   echo "Signing Tor Browser_$LANG.app"
   codesign -vvv --deep -o runtime --entitlements="$ENTITLEMENTS" --timestamp -f -s "Developer ID Application: The Tor Project, Inc (MADPSAYN6T)" "Tor Browser.app/"
   echo "codesign exit code: $?"
-  check_signature $LANG $TORBROWSER_VERSION 0
+  set +e
+  check_signature $LANG 0
   if [ $? -eq 1 ]
   then
     echo Signature verification failed.
@@ -75,26 +81,18 @@ do
     hdiutil detach "/Volumes/Tor Browser"
     exit 1
   fi
-  echo "Zipping up"
-  zip -qr tb-${TORBROWSER_VERSION}_${LANG}.zip "Tor Browser.app"
+  set -e
+  echo "Zipping up tb-${tbb_version}_${LANG}.zip"
+  zip -qr tb-${tbb_version}_${LANG}.zip "Tor Browser.app"
   rm -rf "Tor Browser.app"
   hdiutil detach "/Volumes/Tor Browser"
-  check_signature $LANG $TORBROWSER_VERSION 1
+  set +e
+  check_signature $LANG 1
   if [ $? -eq 1 ]
   then
-    echo Signature verification failed.
+    echo Signature verification failed ($LANG).
     rm -r "Tor Browser.app"
+    exit 1
   fi
+  set -e
 done
-#for LANG in $BUNDLE_LOCALES
-#do
-#  hdiutil attach TorBrowser-${TORBROWSER_VERSION}-osx64_$LANG.dmg
-#  cp -rf "/Volumes/Tor Browser/Tor Browser.app" "Tor Browser.app"
-#  echo "Signing Tor Browser_$LANG.app"
-#  codesign -vvv --deep -o runtime --entitlements="$ENTITLEMENTS" --timestamp -f -s "Developer ID Application: The Tor Project, Inc (MADPSAYN6T)" "Tor Browser.app/"
-#  #codesign -vvv --deep -o runtime --entitlements="$ENTITLEMENTS" --timestamp=none -f -s "Developer ID Application: The Tor Project, Inc (MADPSAYN6T)" "Tor Browser.app/"
-#  echo "Zipping up"
-#  zip -qr tb-${TORBROWSER_VERSION}_${LANG}.zip "Tor Browser.app"
-#  rm -rf "Tor Browser.app"
-#  hdiutil detach "/Volumes/Tor Browser"
-#done
