@@ -1,40 +1,44 @@
+#!/bin/bash
 set -e
-set -x
+
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source "$script_dir/functions"
+source "$script_dir/set-config.macos-notarization"
 
 ALTOOL=~/Xcode.app/Contents/SharedFrameworks/ContentDeliveryServices.framework/Versions/A/Frameworks/AppStoreService.framework/Versions/A/Support/altool
-TORBROWSER_VERSION=$1
-if [ -z "$TORBROWSER_VERSION" ];
-then
-  echo "Please call this script with a Tor Browser version!"
-  exit 1
-fi
+
+cd ~/${tbb_version}
+
 if [ -z "${PW}" ]; then
+  echo "Please enter notarization password:"
   stty -echo; read PW; stty echo; export PW
 fi
-if [ -z "$BUNDLE_LOCALES" ];
-then
-  BUNDLE_LOCALES="ar ca cs da de el en-US es-AR es-ES fa fr ga-IE he hu id is it ja ka ko lt mk ms my nb-NO nl pl pt-BR ro ru sv-SE th tr vi zh-CN zh-TW"
-fi
-for LANG in $BUNDLE_LOCALES
+
+for LANG in $bundle_locales
 do
+  if test -f ${LANG}/tb-${tbb_version}_$LANG.zip.uuid
+  then
+    echo "Skipping ${LANG}/tb-${tbb_version}_$LANG.zip"
+    continue;
+  fi
   if test -d ${LANG}; then
-    mv ${LANG}/tb-${TORBROWSER_VERSION}_$LANG.zip ./
+    mv ${LANG}/tb-${tbb_version}_$LANG.zip ./
     rm -r ${LANG}/
   fi
   mkdir $LANG
   cd $LANG
-  mv ../tb-${TORBROWSER_VERSION}_$LANG.zip .
-  unzip -q tb-${TORBROWSER_VERSION}_$LANG.zip
+  mv ../tb-${tbb_version}_$LANG.zip .
+  unzip -q tb-${tbb_version}_$LANG.zip
   echo "Notarizing $LANG..."
-  #xcrun altool --notarize-app --verbose -t osx -f tb-${TORBROWSER_VERSION}_$LANG.zip --primary-bundle-id org.torproject.torbrowser -u boklm@torproject.org -p @env:PW --output-format xml | tee tb-${TORBROWSER_VERSION}_$LANG.zip.log 2>&1
-  $ALTOOL --notarize-app --verbose -t osx -f tb-${TORBROWSER_VERSION}_$LANG.zip --primary-bundle-id org.torproject.torbrowser -u boklm@torproject.org -p @env:PW --output-format xml | tee tb-${TORBROWSER_VERSION}_$LANG.zip.log 2>&1
+  $ALTOOL --notarize-app --verbose -t osx -f tb-${tbb_version}_$LANG.zip --primary-bundle-id org.torproject.torbrowser -u "$macos_notarization_user" -p @env:PW --output-format xml | tee tb-${tbb_version}_$LANG.zip.log 2>&1
 
-  request_uuid=`grep -A1 RequestUUID tb-${TORBROWSER_VERSION}_$LANG.zip.log | grep -o '[0-9a-f]\+[0-9a-f-]\+'`
+  request_uuid=`grep -A1 RequestUUID tb-${tbb_version}_$LANG.zip.log | grep -o '[0-9a-f]\+[0-9a-f-]\+'`
   if [ -z "${request_uuid}" ]; then
     echo "Request UUID not present. Notarization failed"
     exit 1
   fi
-  echo ${request_uuid} > tb-${TORBROWSER_VERSION}_$LANG.zip.uuid
+  echo ${request_uuid} > tb-${tbb_version}_$LANG.zip.uuid
+  echo "Notarization done for $LANG."
 
   cd ..
 done
