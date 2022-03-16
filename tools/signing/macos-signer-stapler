@@ -1,19 +1,18 @@
+#!/bin/bash
+set -e
+
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source "$script_dir/functions"
+
 STAPLER=/Users/torbrowser/Xcode.app/Contents//Developer/usr/bin/stapler
-TORBROWSER_VERSION=$1
-if [ -z "$TORBROWSER_VERSION" ];
-then
-  echo "Please call this script with a Tor Browser version!"
-  exit 1
-fi
-if [ -z "$BUNDLE_LOCALES" ];
-then
-  BUNDLE_LOCALES="ar ca cs da de el en-US es-AR es-ES fa fr ga-IE he hu id is it ja ka ko lt mk ms my nb-NO nl pl pt-BR ro ru sv-SE th tr vi zh-CN zh-TW"
-fi
-for LANG in $BUNDLE_LOCALES
+
+cd ~/${tbb_version}
+
+for LANG in $bundle_locales
 do
   echo "Stapling $LANG..."
   cd $LANG
   $STAPLER staple Tor\ Browser.app
-  zip -qr ../tb-${TORBROWSER_VERSION}_$LANG-stapled.zip Tor\ Browser.app
+  zip -qr ../tb-${tbb_version}_$LANG-stapled.zip Tor\ Browser.app
   cd ..
 done
