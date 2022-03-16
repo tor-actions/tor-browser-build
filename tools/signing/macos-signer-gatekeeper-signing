@@ -1,34 +1,4 @@
-#!/bin/bash
-
-# Copyright (c) 2019, The Tor Project, Inc.
-#
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are
-# met:
-
-#     * Redistributions of source code must retain the above copyright
-# notice, this list of conditions and the following disclaimer.
-#
-#     * Redistributions in binary form must reproduce the above
-# copyright notice, this list of conditions and the following disclaimer
-# in the documentation and/or other materials provided with the
-# distribution.
-#
-#     * Neither the names of the copyright owners nor the names of its
-# contributors may be used to endorse or promote products derived from
-# this software without specific prior written permission.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-# A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-# OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-# DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-# THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+set -x
 
 TORBROWSER_VERSION=$1
 if [ -z "$TORBROWSER_VERSION" ];
@@ -36,16 +6,95 @@ then
   echo "Please call this script with a Tor Browser version!"
   exit 1
 fi
-ENTITLEMENTS=/path/to/stable.entitlements.xml
-BUNDLE_LOCALES="ar ca cs da de el en-US es-AR es-ES fa fr ga-IE he hu id is it ja ka ko mk nb-NO nl pl pt-BR ro ru sv-SE tr vi zh-CN zh-TW"
+ENTITLEMENTS=/Users/torbrowser/signing/alpha.entitlements.xml
+if [ -z "$BUNDLE_LOCALES" ];
+then
+  BUNDLE_LOCALES="ar ca cs da de el en-US es-AR es-ES fa fr ga-IE he hu id is it ja ka ko lt mk ms my nb-NO nl pl pt-BR ro ru sv-SE th tr vi zh-CN zh-TW"
+fi
+
+function check_signature() {
+  LANG=$1
+  TORBROWSER_VERSION=$2
+  UNZIP=$3
+  local failed_open=0
+  local failed_exec=0
+  if [ ${UNZIP} -eq 1 ]
+  then
+    test -d test_${LANG} && rm -r test_${LANG}
+    unzip -d test_${LANG} -q tb-${TORBROWSER_VERSION}_$LANG.zip
+    pushd test_${LANG}
+  fi
+  echo "Checking $LANG..."
+  spctl -vvvv --assess --type open --context context:primary-signature 'Tor Browser.app/'
+  if [ $? -ne 3 ]; then
+    echo tb-${TORBROWSER_VERSION}_$LANG.zip not signed correctly. Failed open.
+    failed_open=1
+  fi
+  spctl -vvvv --assess --type exec --context context:primary-signature 'Tor Browser.app/'
+  if [ $? -ne 0 ]; then
+    echo tb-${TORBROWSER_VERSION}_$LANG.zip not signed correctly. Failed exec.
+    failed_exec=1
+  fi
+  if [ ${UNZIP} -eq 1 ]
+  then
+    popd
+    rm -r test_${LANG}
+  fi
+  if [ ${failed_open} -ne 0 -o ${failed_exec} -ne 0 ]
+  then
+    return 1
+  fi
+}
+
 for LANG in $BUNDLE_LOCALES
 do
+  if [ -f tb-${TORBROWSER_VERSION}_${LANG}.zip ]
+  then
+    echo "Deleting tb-${TORBROWSER_VERSION}_${LANG}.zip"
+    rm tb-${TORBROWSER_VERSION}_${LANG}.zip
+  fi
+  if [ -d "Tor Browser.app" ]
+  then
+    echo "Deleting Tor Browser.app"
+    rm -r "Tor Browser.app"
+  fi
+  if [ -d '/Volumes/Tor Browser' ]; then
+    echo "DMG already mounted. Please correct."
+    exit 1
+  fi
   hdiutil attach TorBrowser-${TORBROWSER_VERSION}-osx64_$LANG.dmg
   cp -rf "/Volumes/Tor Browser/Tor Browser.app" "Tor Browser.app"
   echo "Signing Tor Browser_$LANG.app"
-  codesign -vvv --deep -o runtime --entitlements="$ENTITLEMENTS" --timestamp -f -s "$ID" "Tor Browser.app/"
+  codesign -vvv --deep -o runtime --entitlements="$ENTITLEMENTS" --timestamp -f -s "Developer ID Application: The Tor Project, Inc (MADPSAYN6T)" "Tor Browser.app/"
+  echo "codesign exit code: $?"
+  check_signature $LANG $TORBROWSER_VERSION 0
+  if [ $? -eq 1 ]
+  then
+    echo Signature verification failed.
+    rm -r "Tor Browser.app"
+    hdiutil detach "/Volumes/Tor Browser"
+    exit 1
+  fi
   echo "Zipping up"
   zip -qr tb-${TORBROWSER_VERSION}_${LANG}.zip "Tor Browser.app"
   rm -rf "Tor Browser.app"
   hdiutil detach "/Volumes/Tor Browser"
+  check_signature $LANG $TORBROWSER_VERSION 1
+  if [ $? -eq 1 ]
+  then
+    echo Signature verification failed.
+    rm -r "Tor Browser.app"
+  fi
 done
+#for LANG in $BUNDLE_LOCALES
+#do
+#  hdiutil attach TorBrowser-${TORBROWSER_VERSION}-osx64_$LANG.dmg
+#  cp -rf "/Volumes/Tor Browser/Tor Browser.app" "Tor Browser.app"
+#  echo "Signing Tor Browser_$LANG.app"
+#  codesign -vvv --deep -o runtime --entitlements="$ENTITLEMENTS" --timestamp -f -s "Developer ID Application: The Tor Project, Inc (MADPSAYN6T)" "Tor Browser.app/"
+#  #codesign -vvv --deep -o runtime --entitlements="$ENTITLEMENTS" --timestamp=none -f -s "Developer ID Application: The Tor Project, Inc (MADPSAYN6T)" "Tor Browser.app/"
+#  echo "Zipping up"
+#  zip -qr tb-${TORBROWSER_VERSION}_${LANG}.zip "Tor Browser.app"
+#  rm -rf "Tor Browser.app"
+#  hdiutil detach "/Volumes/Tor Browser"
+#done
