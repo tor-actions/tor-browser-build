@@ -4,9 +4,6 @@ Tor Browser 11.5a8 - March 15 2022
    * Bug 40460: Upgrade to OpenSSL 1.1.1n [tor-browser]
    * Bug 40802: Client Auth dialog is broken in Tor Browser 11.06, works in 11.04 [tor-browser]
    * Bug 40830: cherry-pick fix for bugzilla 1758156
- * Build System
-   * Windows + OS X + Linux
-     * Update Go to 1.18
 
 Tor Browser 11.5a7 - March 9 2022
  * Android
