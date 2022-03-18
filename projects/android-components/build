@@ -18,7 +18,7 @@ EOF
   # This overwrites the release, beta, and nightly geckoview .aar files in our
   # gradle-dependencies directory to be sure that only the one we provide is
   # getting used when building beta/release code.
-  find $gradle_repo -type f -name geckoview*.aar -exec cp -f $distdir/geckoview/geckoview*.aar {} \;
+  find $gradle_repo -type f -name geckoview*omni*.aar -exec cp -f $distdir/geckoview/geckoview*omni*.aar {} \;
   cp -r $gradle_repo/dl/android/maven2/* $gradle_repo
   cp -r $gradle_repo/maven2/* $gradle_repo
   cp -r $gradle_repo/m2/* $gradle_repo
@@ -64,7 +64,8 @@ sed -i 's/tag = getGitHash()/tag = \"[% c('abbrev') %]\"/' publish.gradle
     exit 1
   fi
 
-  gradle_args="--offline --no-daemon -Dmaven.repo.local=$gradle_repo"
+  # Increase the maximum memory usage, for when compiling with --disable-install-strip
+  gradle_args="--offline --no-daemon -Dmaven.repo.local=$gradle_repo -Dorg.gradle.jvmargs=-Xmx8g"
 
   gradle $gradle_args assembleGecko -x lint
   gradle $gradle_args publish
