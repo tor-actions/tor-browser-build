@@ -18,7 +18,7 @@ EOF
   # This overwrites the release, beta, and nightly geckoview .aar files in our
   # gradle-dependencies directory to be sure that only the one we provide is
   # getting used when building beta/release code.
-  find $gradle_repo -type f -name geckoview*.aar -exec cp -f $distdir/geckoview/geckoview*.aar {} \;
+  find $gradle_repo -type f -name geckoview*omni*.aar -exec cp -f $distdir/geckoview/geckoview*omni*.aar {} \;
   cp -r $gradle_repo/dl/android/maven2/* $gradle_repo
   cp -r $gradle_repo/maven2/* $gradle_repo
   cp -r $gradle_repo/m2/* $gradle_repo
@@ -28,6 +28,9 @@ EOF
   cp -rf $distdir/application-services/maven/org $gradle_repo
   tar -C $distdir -xf [% c('input_files_by_name/android-components') %]
   cp -rf $distdir/android-components/maven/org $gradle_repo
+  nimbusdir=$builddir-[% c("version") %]/app/build/bin/nimbus
+  mkdir -p $nimbusdir
+  cp $distdir/application-services/nimbus-fml $nimbusdir/
   tar -C $distdir -xf $rootdir/[% c('input_files_by_name/tba-translation') %]
 [% END %]
 tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
@@ -74,7 +77,9 @@ v=[% c("variant") %]
     exit 1
   fi
 
-  version_name='[% c("var/torbrowser_version") %] ([% c("var/fenix_version") %]-[% c("variant") %])'
+  # We put the tor-browser version last to avoid int-parsing errors when consumers of project.versionName
+  # assume it starts with a major version number, as it does for all Mozilla version names.
+  version_name='[% c("var/fenix_version") %]-[% c("variant") %] ([% c("var/torbrowser_version") %])'
   # We need -PdisableOptimization for building tests. See:
   # https://gitlab.torproject.org/tpo/applications/tor-browser-build/-/issues/40259#note_2732325
   $GRADLE_HOME/gradle/bin/gradle --offline --no-daemon -PversionName="$version_name" -Dmaven.repo.local=$gradle_repo app:assemble[% c('variant') %] -x lint -PtestBuildType=${v,}
