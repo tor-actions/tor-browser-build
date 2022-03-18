@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
-version: 86.2.2
-git_hash: 8c36c7c49e577b92af9328577ccae6795c3b909d
+version: 91.1.1
+git_hash: 17942945873cdb8be56a9316d3cb8a611b3ef321
 git_url: https://github.com/mozilla/application-services
 git_submodule: 1
 
@@ -9,7 +9,7 @@ var:
   container:
     use_container: 1
   # This should be updated when the list of gradle dependencies is changed.
-  gradle_dependencies_version: 8
+  gradle_dependencies_version: 9
   gradle_version: 6.7.1
   glean_parser: 4.0.0
   arch_deps:
@@ -90,8 +90,8 @@ input_files:
     sha256sum: '[% pc("glean", "var/glean_wheels_sha256sum/" _ c("var/glean_parser"), { error_if_undef => 1 }) %]'
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
   # Use `make cargo_vendor-application-services` to re-generate the vendor tarball
-  - URL: https://people.torproject.org/~boklm/mirrors/sources/application-services-vendor-[% c('version') %].tar.bz2
-    sha256sum: 5f202dcc07b31df5a375b07163c4c3bd4574ac272bfc55d65d3c8369b36730a5
+  - URL: https://people.torproject.org/~aguestuser/mirrors/sources/application-services-vendor-[% c('version') %].tar.bz2
+    sha256sum: 621fef6c07bbb0b165cbc4dfa44176ff7d1d04557f7c418a0a809a29099c6440
   - filename: no-git.patch
   - filename: mavenLocal.patch
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
@@ -131,4 +131,7 @@ steps:
     filename: '[% project %]-vendor-[% c("version") %].tar.bz2'
     input_files:
       - project: container-image
+        pkg_type: build
+      - project: rust
+        name: rust
         pkg_type: build

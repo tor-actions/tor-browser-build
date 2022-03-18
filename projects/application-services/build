@@ -19,7 +19,7 @@ tar -xf $rootdir/[% c('input_files_by_name/uniffi-rs') %]
 export PATH=/var/tmp/dist/rust/bin:/var/tmp/dist/uniffi-rs:$PATH
 cd $rootdir
 
-export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
 
 [% IF !c('var/fetch_gradle_dependencies') %]
   gradle_repo=$rootdir/[% c('input_files_by_name/gradle-dependencies') %]
@@ -95,8 +95,15 @@ export RUST_ANDROID_GRADLE_PYTHON_COMMAND=python3
   gradle $gradle_flags assembleRelease
   gradle $gradle_flags publish
 
-  cd build
+  pushd components/support/nimbus-fml
+  cargo build --release
+  popd
+
+  pushd build
   find maven -regex '.*[0-9].\(aar\|pom\)' -exec cp --parents {} $distdir \;
+  popd
+
+  cp target/release/nimbus-fml $distdir
 
   cd /var/tmp/dist
   [% c('tar', {

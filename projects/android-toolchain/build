@@ -41,6 +41,11 @@ unzip -qq $HOME/[% c("input_files_by_name/build_tools_28") %] -d $SDK_HOME
 mkdir -p build-tools/[% c("var/version_28") %]
 mv [% c("var/android_release_dir_28") %]/* build-tools/[% c("var/version_28") %]
 
+# Application Services currently needs build tools 30.0.2
+unzip -qq $HOME/[% c("input_files_by_name/build_tools_30") %] -d $SDK_HOME
+mkdir -p build-tools/[% c("var/version_30") %]
+mv [% c("var/android_release_dir_30") %]/* build-tools/[% c("var/version_30") %]
+
 unzip -qq $HOME/[% c("input_files_by_name/build_tools_29") %] -d $SDK_HOME
 mkdir -p build-tools/[% c("var/version_29") %]
 mv [% c("var/android_release_dir_29") %]/* build-tools/[% c("var/version_29") %]

@@ -39,3 +39,6 @@ steps:
     input_files:
       - project: container-image
         pkg_type: build
+      - project: rust
+        name: rust
+        pkg_type: build

@@ -250,19 +250,19 @@ get_gradle_dependencies_list-android-components: submodule-update
 	$(rbm) build android-components --step get_gradle_dependencies_list --target nightly --target torbrowser-android-armv7
 
 cargo_vendor-application-services: submodule-update
-	$(rbm) build application-services --step cargo_vendor --target nightly
+	$(rbm) build application-services --step cargo_vendor --target nightly --target torbrowser-android-armv7
 
 cargo_vendor-cbindgen-android: submodule-update
-	$(rbm) build cbindgen --step cargo_vendor --target nightly --target android
+	$(rbm) build cbindgen --step cargo_vendor --target nightly --target torbrowser-android-armv7
 
 cargo_vendor-cbindgen: submodule-update
-	$(rbm) build cbindgen --step cargo_vendor --target nightly
+	$(rbm) build cbindgen --step cargo_vendor --target nightly --target torbrowser-linux-x86_64
 
 cargo_vendor-lucetc: submodule-update
-	$(rbm) build lucetc --step cargo_vendor --target nightly
+	$(rbm) build lucetc --step cargo_vendor --target nightly --target torbrowser-linux-x86_64
 
 cargo_vendor-uniffi-rs: submodule-update
-	$(rbm) build uniffi-rs --step cargo_vendor --target nightly
+	$(rbm) build uniffi-rs --step cargo_vendor --target nightly --target torbrowser-linux-x86_64
 
 submodule-update:
 	git submodule update --init
@@ -275,4 +275,3 @@ clean: submodule-update
 
 clean-dry-run: submodule-update
 	./tools/clean-old --dry-run
-
