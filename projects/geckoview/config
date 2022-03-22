@@ -1,14 +1,14 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
 filename: 'geckoview-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
-git_hash: 'geckoview-[% c("var/geckoview_version") %]-[% c("var/torbrowser_branch") %]-1-build2'
+git_hash: 'geckoview-[% c("var/geckoview_version") %]-[% c("var/torbrowser_branch") %]-2-build1'
 tag_gpg_id: 1
 git_url: https://git.torproject.org/tor-browser.git
 git_submodule: 1
 gpg_keyring: torbutton.gpg
 
 var:
-  geckoview_version: 96.0
+  geckoview_version: 99.0b3
   torbrowser_branch: 11.5
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   deps:
@@ -20,11 +20,13 @@ var:
     - python3
     - python3-distutils
     - pkg-config
+    - openjdk-11-jdk-headless
   container:
     use_container: 1
   # this should be updated when the list of gradle dependencies is changed
-  gradle_dependencies_version: 9
-  gradle_version: 6.9.1
+  # see doc/how-to-create-gradle-dependencies-list.txt
+  gradle_dependencies_version: 10
+  gradle_version: 7.3
 
 steps:
   merge_aars:
@@ -72,7 +74,7 @@ steps:
           exit 1
       fi
 
-      export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+      export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
       gradle_repo=/var/tmp/dist/gradle-dependencies
       export GRADLE_MAVEN_REPOSITORIES="file://$gradle_repo","file://$gradle_repo/maven2"
       export GRADLE_FLAGS="--no-daemon --offline"
@@ -86,7 +88,7 @@ steps:
       # We still need to specify --tor-browser-version due to bug 34005.
       ./mach configure --with-tor-browser-version=[% c("var/torbrowser_version") %] --with-java-bin-path="$JAVA_HOME/bin" --without-wasm-sandboxed-libraries
       ./mach build --verbose
-      find obj-* -regex '.*geckoview.*[0-9].\(aar\|pom\)' -exec cp {} $distdir/[% project %] \;
+      find obj-* -regex '.*geckoview.*omni.*\(aar\|pom\)' -exec cp {} $distdir/[% project %] \;
 
       cd $distdir/
       [% c('tar', {
@@ -144,7 +146,7 @@ steps:
 
 targets:
   nightly:
-    git_hash: 'geckoview-[% c("var/geckoview_version") %]-[% c("var/torbrowser_branch") %]-1'
+    git_hash: 'geckoview-[% c("var/geckoview_version") %]-[% c("var/torbrowser_branch") %]-2'
     tag_gpg_id: 0
 
 input_files:

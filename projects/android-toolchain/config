@@ -1,7 +1,8 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
-version: '[% c("var/version_28") %]+[% c("var/version_29") %]+[% c("var/version_30") %]'
+version: '[% c("var/version_28") %]+[% c("var/version_29") %]+[% c("var/version_30") %]+[% c("var/version_31") %]'
 var:
+  version_31: 31.0.0
   version_30: 30.0.2
   version_29: 29.0.2
   version_28: 28.0.3
@@ -44,12 +45,15 @@ var:
   # but it seems sdk-tools is still being used in the build, so we can't
   # remove sdk-tools yet.
   sdk_tools_version: 4333796
-  commandlinetools_version: 7302050
-  commandlinetools_version_string: 4.0
+  commandlinetools_version: 7583922
+  commandlinetools_version_string: 5.0
 input_files:
   - project: container-image
-  - URL: '[% c("var/google_repo") %]/build-tools_r[% c("var/version_30") %]-linux.zip'
+  - URL: '[% c("var/google_repo") %]/build-tools_r31-linux.zip'
     name: build_tools
+    sha256sum: f90c22f5562638a2e00762e1711eebd55e7f0a05232b65200d387307d057bfe8
+  - URL: '[% c("var/google_repo") %]/build-tools_r[% c("var/version_30") %]-linux.zip'
+    name: build_tools_30
     sha256sum: 565af786dc0cc1941002174fb945122eabd080b222cd4c7c3d9a2ae0fabf5dc4
   - URL: '[% c("var/google_repo") %]/build-tools_r[% c("var/version_29") %]-linux.zip'
     name: build_tools_29
@@ -77,7 +81,7 @@ input_files:
     sha256sum: 92ffee5a1d98d856634e8b71132e8a95d96c83a63fde1099be3d86df3106def9
   - URL: '[% c("var/google_repo") %]/commandlinetools-linux-[% c("var/commandlinetools_version") %]_latest.zip'
     name: android_commandlinetools
-    sha256sum: 7a00faadc0864f78edd8f4908a629a46d622375cbe2e5814e82934aebecdb622
+    sha256sum: 124f2d5115eee365df6cf3228ffbca6fc3911d16f8025bebd5b1c6e2fcfa7faf
   - URL: '[% c("var/google_repo") %]/android-ndk-r[% c("var/android_ndk_version") %][% c("var/android_ndk_revision") %]-linux-x86_64.zip'
     name: android_ndk_compiler
     sha256sum: dd6dc090b6e2580206c64bcee499bc16509a5d017c6952dcd2bed9072af67cbd

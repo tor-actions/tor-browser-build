@@ -27,8 +27,8 @@ done
 # Tool Archives
 cd $SDK_HOME
 unzip -qq $HOME/[% c("input_files_by_name/build_tools") %] -d $SDK_HOME
-mkdir -p build-tools/[% c("var/version_30") %]
-mv [% c("var/android_release_dir_30") %]/* build-tools/[% c("var/version_30") %]
+mkdir -p build-tools/[% c("var/version_31") %]
+mv [% c("var/android_release_dir") %]/* build-tools/[% c("var/version_31") %]
 
 unzip -qq $HOME/[% c("input_files_by_name/platform") %] -d $SDK_HOME
 mkdir -p platforms/android-[% c("var/android_api_level") %]

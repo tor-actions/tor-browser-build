@@ -44,7 +44,7 @@ if (m/build_tools_version\\s*=\\s*"([^"]+)"/) {
 }
 EOF
 needed=$(cat build/moz.configure/android-sdk.configure | perl -ne "$p")
-current='[% pc("android-toolchain", "var/version_30") %]'
+current='[% pc("android-toolchain", "var/version_31") %]'
 check_update_needed build_tools "$needed" "$current"
 
 
@@ -165,12 +165,14 @@ check_update_needed nasm "$needed" "$current"
 read -d '' p << 'EOF' || true
 my $d = YAML::XS::LoadFile('taskcluster/ci/toolchain/clang.yml');
 my $clang_toolchain;
-foreach my $t (keys %$d) {
-  if ($d->{$t}{run}{'toolchain-alias'} eq 'linux64-clang-android-cross') {
-    foreach my $fetch (@{$d->{$t}{fetches}{toolchain}}) {
-      $clang_toolchain = $fetch if $fetch =~ m/^.*-clang-.*/;
+TOOLCHAIN: foreach my $t (keys %$d) {
+  foreach my $alias (@{$d->{$t}{run}{'toolchain-alias'}}) {
+    if ($alias eq 'linux64-clang') {
+      foreach my $fetch (@{$d->{$t}{fetches}{toolchain}}) {
+        $clang_toolchain = $fetch if $fetch =~ m/^.*-clang-.*/;
+      }
+      last TOOLCHAIN;
     }
-    last;
   }
 }
 
