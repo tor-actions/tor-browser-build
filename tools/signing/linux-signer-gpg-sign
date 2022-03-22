@@ -1,6 +1,12 @@
 #!/bin/bash
+set -e
 
-read -sp "Enter passphrase: " pass
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source "$script_dir/functions"
+
+cd ~/"$tbb_version"
+
+test -n "$GPG_PASS" || read -sp "Enter gpg passphrase: " GPG_PASS
 for i in `find . -name "*.dmg" -o -name "*.exe" -o -name "*.tar.xz" -o -name "*.txt" -o -name "*.zip" -o -name "*.tar.gz" -o -name "*.apk" | sort`
 do
   if test -f "$i.asc"
@@ -9,6 +15,5 @@ do
     rm -f "$i.asc"
   fi
   echo "Signing $i"
-  echo "$pass" | gpg -absu 0xe53d989a9e2d47bf! --passphrase-fd 0 $i
-  test $? || echo "Signing $i failed"
+  echo "$GPG_PASS" | gpg -absu 0xe53d989a9e2d47bf! --passphrase-fd 0 $i
 done
