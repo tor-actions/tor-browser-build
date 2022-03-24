@@ -2,8 +2,8 @@
 [% c("var/set_default_env") -%]
 distdir=/var/tmp/dist/fonts
 mkdir -p $distdir
-tar xf [% project %]-[% c("version") %].tar.gz
-ln -s [% project %]-[% c("version") %] noto-fonts
+unzip -o 720e34851382ee3c1ef024d8dffb68ffbfb234c2.zip
+mv noto-fonts-* noto-fonts
 mkdir -p $distdir
 [% FOREACH fontfile = c("var/noto_fonts_hinted");
      GET 'cp "noto-fonts/hinted/' _ fontfile _ '" $distdir' _ "\n";
