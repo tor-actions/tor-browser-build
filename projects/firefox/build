@@ -111,7 +111,6 @@ rm -f js/src/configure
 
 export MACH_USE_SYSTEM_PYTHON=1
 
-# Android does not support --enable-bundled-fonts option
 ./mach configure --with-tor-browser-version=[% c("var/torbrowser_version") %] --with-distribution-id=org.torproject --enable-update-channel=[% c("var/channel") %] --enable-bundled-fonts --with-branding=[% c("var/branding_directory") %]
 
 ./mach build --verbose
