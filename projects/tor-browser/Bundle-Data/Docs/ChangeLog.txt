@@ -1,3 +1,14 @@
+Tor Browser 11.0.10 - April 5 2022
+ * Windows + OS X + Linux
+   * Update Firefox to 91.8.0esr
+   * Update NoScript to 11.4.3
+   * Bug 14939: Support ipv6 address in Tor Circuit Display [tor-browser]
+   * Bug 40469: Update zlib to 1.2.12 (CVE-2018-25032) [tor-browser-build]
+   * Bug 40718: Application Menu items should be sentence case [tor-browser]
+   * Bug 40725: about:torconnect missing identity block content on TB11 [tor-browser]
+   * Bug 40776: Capitalize the "T" in "Tor" in application menu [tor-browser]
+   * Bug 40862: Backport 1760674 [tor-browser]
+
 Tor Browser 11.0.9 - March 15 2022
  * Windows + OS X + Linux
    * Bug 40802: Client Auth dialog is broken in Tor Browser 11.0.6, works in 11.0.4 [tor-browser]
@@ -34,6 +45,7 @@ Tor Browser 11.0.8 - March 11 2022
 
 Tor Browser 11.0.7 - March 8 2022
  * Windows + OS X + Linux
+   * Update Firefox to 91.7.0esr
    * Update Tor to 0.4.6.10
    * Update NoScript to 11.3.7
    * Bug 40435: Remove default bridge "deusexmachina" [tor-browser-build]
