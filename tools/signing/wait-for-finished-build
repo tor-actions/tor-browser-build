@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+# This script will wait until a build is finished on ssh_host_builder.
+#
+# You can use this to start downloading a build immediately after it
+# finished with something like:
+#  $ ./wait-for-finished-build && ./sync-builder-unsigned-to-local-signed
+#
+set -e
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source "$script_dir/functions"
+
+var_is_defined ssh_host_builder builder_tor_browser_build_dir
+
+while true
+do
+  ssh "$ssh_host_builder" test -f "$builder_tor_browser_build_dir/$tbb_version_type/unsigned/$tbb_version-build$tbb_version_build/sha256sums-unsigned-build.incrementals.txt" && \
+    exit 0
+  echo "$(date -Iseconds): Waiting for build to finish..."
+  sleep 5m
+done
