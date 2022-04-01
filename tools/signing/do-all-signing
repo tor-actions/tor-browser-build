@@ -1,0 +1,186 @@
+#!/bin/bash
+set -e
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source "$script_dir/functions"
+
+NON_INTERACTIVE=1
+steps_dir="$signed_version_dir.steps"
+test -d "$steps_dir" || mkdir -p "$steps_dir"
+
+test -f "$steps_dir/macos-signer-gatekeeper-signing.done" ||
+  read -sp "Enter macos keychain passphrase: " KEYCHAIN_PW
+echo
+test -f "$steps_dir/macos-signer-notarization.done" ||
+  read -sp "Enter macos notarization passphrase: " NOTARIZATION_PW
+echo
+test -f "$steps_dir/linux-signer-signmars.done" ||
+  read -sp "Enter nssdb7 (mar signing) passphrase: " NSSPASS
+echo
+test -f "$steps_dir/linux-signer-authenticode-signing.done" ||
+  read -sp "Enter windows authenticode (yubihsm) passphrase: " YUBIPASS
+echo
+test -f "$steps_dir/linux-signer-gpg-sign.done" ||
+  read -sp "Enter gpg passphrase: " GPG_PASS
+echo
+
+function wait-for-finished-build {
+  "$script_dir/wait-for-finished-build"
+}
+
+function sync-builder-unsigned-to-local-signed {
+  "$script_dir/sync-builder-unsigned-to-local-signed"
+}
+
+function sync-scripts-to-macos-signer {
+  "$script_dir/sync-scripts-to-macos-signer"
+}
+
+function macos-signer-gatekeeper-signing {
+  "$script_dir/sync-macos-local-to-macos-signer"
+  ssh "$ssh_host_macos_signer" 'bash -s' << EOF
+  export KEYCHAIN_PW=$KEYCHAIN_PW
+  ~/signing-$tbb_version_type/macos-signer-gatekeeper-signing
+EOF
+  unset KEYCHAIN_PW
+}
+
+function macos-signer-notarization {
+  ssh "$ssh_host_macos_signer" 'bash -s' << EOF
+  export PW=$NOTARIZATION_PW
+  ~/signing-$tbb_version_type/macos-signer-notarization
+EOF
+  unset NOTARIZATION_PW
+}
+
+function macos-signer-stapler {
+  ssh "$ssh_host_macos_signer" "~/signing-$tbb_version_type/macos-signer-stapler"
+  "$script_dir/sync-macos-signer-stapled-to-macos-local-stapled"
+}
+
+function gatekeeper-bundling {
+  "$script_dir/gatekeeper-bundling.sh"
+}
+
+function dmg2mar {
+  "$script_dir/dmg2mar"
+}
+
+function sync-scripts-to-linux-signer {
+  "$script_dir/sync-scripts-to-linux-signer"
+}
+
+function linux-signer-signmars {
+  "$script_dir/sync-local-to-linux-signer"
+  ssh "$ssh_host_linux_signer" 'bash -s' << EOF
+  export NSSPASS=$NSSPASS
+  ~/signing-$tbb_version_type/linux-signer-signmars
+EOF
+  unset NSSPASS
+}
+
+function sync-after-signmars {
+  "$script_dir/sync-linux-signer-to-local"
+}
+
+function download-unsigned-sha256sums-gpg-signatures-from-people-tpo {
+  "$script_dir/download-unsigned-sha256sums-gpg-signatures-from-people-tpo"
+}
+
+function linux-signer-authenticode-signing {
+  ssh "$ssh_host_linux_signer" 'bash -s' << EOF
+  export YUBIPASS='$YUBIPASS'
+  ~/signing-$tbb_version_type/linux-signer-authenticode-signing
+EOF
+  unset YUBIPASS
+}
+
+function sync-after-authenticode-signing {
+  "$script_dir/sync-linux-signer-to-local"
+}
+
+function authenticode-timestamping {
+  "$script_dir/authenticode-timestamping.sh"
+}
+
+function sync-after-authenticode-timestamping {
+  "$script_dir/sync-local-to-linux-signer"
+}
+
+function hash_signed_bundles {
+  "$script_dir/hash_signed_bundles.sh"
+}
+
+function sync-after-hash {
+  "$script_dir/sync-local-to-linux-signer"
+}
+
+function linux-signer-gpg-sign {
+  ssh "$ssh_host_linux_signer" 'bash -s' << EOF
+  export GPG_PASS=$GPG_PASS
+  ~/signing-$tbb_version_type/linux-signer-gpg-sign
+EOF
+}
+
+function sync-after-gpg-sign {
+  "$script_dir/sync-linux-signer-to-local"
+}
+
+function sync-local-to-staticiforme {
+  "$script_dir/sync-local-to-staticiforme"
+}
+
+function sync-scripts-to-staticiforme {
+  "$script_dir/sync-scripts-to-staticiforme"
+}
+
+function staticiforme-prepare-cdn-dist-upload {
+  ssh "$ssh_host_staticiforme" "signing-$tbb_version_type/staticiforme-prepare-cdn-dist-upload"
+}
+
+function upload-update_responses-to-staticiforme {
+  "$script_dir/upload-update_responses-to-staticiforme"
+}
+
+function finished-signing-clean-macos-signer {
+  "$script_dir/finished-signing-clean-macos-signer"
+}
+
+function finished-signing-clean-linux-signer {
+  "$script_dir/finished-signing-clean-linux-signer"
+}
+
+function do_step {
+  test -f "$steps_dir/$1.done" && return 0
+  echo "$(date -Iseconds) - Starting step: $1"
+  $1 | tee "$steps_dir/$1.log" 2>&1
+  test ${PIPESTATUS[0]} -eq 0
+  touch "$steps_dir/$1.done"
+  echo "$(date -Iseconds) - Finished step: $1"
+}
+
+do_step wait-for-finished-build
+do_step sync-builder-unsigned-to-local-signed
+do_step sync-scripts-to-macos-signer
+do_step macos-signer-gatekeeper-signing
+do_step macos-signer-notarization
+do_step macos-signer-stapler
+do_step gatekeeper-bundling
+do_step dmg2mar
+do_step sync-scripts-to-linux-signer
+do_step linux-signer-signmars
+do_step sync-after-signmars
+do_step linux-signer-authenticode-signing
+do_step sync-after-authenticode-signing
+do_step authenticode-timestamping
+do_step sync-after-authenticode-timestamping
+do_step hash_signed_bundles
+do_step sync-after-hash
+do_step linux-signer-gpg-sign
+do_step sync-after-gpg-sign
+do_step download-unsigned-sha256sums-gpg-signatures-from-people-tpo
+do_step sync-local-to-staticiforme
+do_step sync-scripts-to-staticiforme
+do_step staticiforme-prepare-cdn-dist-upload
+do_step upload-update_responses-to-staticiforme
+do_step finished-signing-clean-macos-signer
+do_step finished-signing-clean-linux-signer
