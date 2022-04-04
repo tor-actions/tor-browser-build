@@ -15,3 +15,4 @@ input_files:
   - project: container-image
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
+  - filename: 0001-Fix-configure-issue-that-discarded-provided-CC-defin.patch
