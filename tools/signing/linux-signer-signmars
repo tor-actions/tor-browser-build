@@ -11,7 +11,7 @@ script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "$script_dir/functions"
 
 if [ -z "${NSS_DB_DIR+x}" ]; then
-  NSS_DB_DIR=/home/gk/marsigning/nssdb7
+  NSS_DB_DIR=/home/boklm/marsigning/nssdb7
 fi
 
 if [ -z "${NSS_CERTNAME+x}" ]; then
