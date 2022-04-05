@@ -1,3 +1,16 @@
+Tor Browser 11.5a9 - April 12 2022
+* Windows + OS X + Linux
+   * Update Firefox to 91.8.0esr
+   * Update NoScript to 11.4.4
+   * Update Tor Launcher 0.2.34
+   * Update Tor to 0.4.7.5-alpha
+   * Bug 34366: The onion-location mechanism does not redirect to full URL [tor-browser]
+   * Bug 40469: Update zlib to 1.2.12 (CVE-2018-25032) [tor-browser-build]
+   * Bug 40773: Update the about:torconnect frontend page to match additional UI flows [tor-browser]
+   * Bug 40774: Update about:preferences page to match new UI designs [tor-browser]
+   * Bug 40822: Rebase tor-browser 11.5a9 to 91.8 Firefox [tor-browser]
+   * Bug 40862: Backport 1760674 [tor-browser]
+
 Tor Browser 11.5a8 - March 15 2022
  * Windows + OS X + Linux
    * Bug 14939: Support ipv6 addresses in Tor Circuit Display [tor-browser]
@@ -15,6 +28,7 @@ Tor Browser 11.5a7 - March 9 2022
 
 Tor Browser 11.5a6 - March 8 2022
  * Windows + OS X + Linux
+   * Update Firefox to 91.7.0esr
    * Update Tor to 0.4.7.4-alpha
    * Update NoScript to 11.3.7
    * Bug 19850: Disable Plaintext HTTP Clearnet Connections [tor-browser]
