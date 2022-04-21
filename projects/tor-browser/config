@@ -45,8 +45,6 @@ targets:
   android:
     build: '[% INCLUDE build.android %]'
     var:
-      arch_deps:
-        - apksigner
       verify_allowed_addons: 1
 
 input_files:
@@ -100,6 +98,9 @@ input_files:
     enable: '[% c("var/windows") %]'
   # To generate a new keystore, see how-to-generate-keystore.txt
   - filename: android-qa.keystore
+    enable: '[% c("var/android") %]'
+  - name: '[% c("var/compiler") %]'
+    project: '[% c("var/compiler") %]'
     enable: '[% c("var/android") %]'
   - name: electrum-nmc
     project: electrum-nmc
