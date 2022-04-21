@@ -24,7 +24,7 @@ var:
     export NDK_HOST_TAG=linux-x86_64
     export GRADLE_HOME=/var/tmp/dist/[% project %]/gradle
     export GRADLE_USER_HOME=$GRADLE_HOME
-    export PATH=$PATH:$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin:$GRADLE_HOME/gradle/bin
+    export PATH=$PATH:$ANDROID_HOME/build-tools/[% c("var/version_31") %]:$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin:$GRADLE_HOME/gradle/bin
     mkdir -p "$GRADLE_HOME"
   google_repo: https://dl.google.com/android/repository
   android_api_level: 31
