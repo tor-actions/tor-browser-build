@@ -11,7 +11,7 @@ input_files:
   - project: container-image
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
-    enable: '[% c("var/linux") %]'
+    enable: '[% c("var/linux") || c("var/android") %]'
   - name: binutils
     project: binutils
     enable: '[% c("var/linux") || c("var/android") %]'

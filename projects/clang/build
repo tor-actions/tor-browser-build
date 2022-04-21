@@ -12,6 +12,9 @@ export PATH="/var/tmp/dist/cmake/bin:$PATH"
   ln -s gcc /var/tmp/dist/gcc/bin/cc
   [% pc('python', 'var/setup', { python_tarfile => c('input_files_by_name/python') }) %]
 [% END -%]
+[% IF c("var/android") %]
+  [% pc(c('var/compiler'), 'var/setup', { compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')) }) %]
+[% END -%]
 [% IF c("var/linux") || c("var/android") -%]
   tar -C /var/tmp/dist -xf [% c('input_files_by_name/binutils') %]
   export PATH="/var/tmp/dist/binutils/bin:$PATH"
@@ -32,6 +35,41 @@ cmake ../llvm -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=$distdir \
                                   -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;compiler-rt;libcxx;libcxxabi;lld"
 make -j[% c("buildconf/num_procs") %]
 make install
+
+[% IF c("var/android") -%]
+  rtdistdir=/var/tmp/build/rtdist
+  mkdir $rtdistdir
+
+  make_compilerrt () {
+    cd ..
+    mkdir "build-compilerrt-$1"
+    cd "build-compilerrt-$1"
+    cmake ../compiler-rt/ -G "Unix Makefiles" \
+      -DCMAKE_INSTALL_PREFIX=$rtdistdir \
+      -DCMAKE_SYSTEM_NAME=Android \
+      -DCMAKE_ANDROID_ARCH_ABI=$1 \
+      -DCMAKE_ANDROID_NDK="/var/tmp/dist/android-toolchain/android-sdk-linux/ndk/android-ndk-r21d" \
+      -DCMAKE_C_FLAGS="$3 -fuse-ld=lld --rtlib=compiler-rt" \
+      -DCMAKE_CXX_FLAGS="$3 -fuse-ld=lld --rtlib=compiler-rt" \
+      -DCMAKE_EXE_LINKER_FLAGS="-L/var/tmp/dist/android-toolchain/android-sdk-linux/ndk/android-ndk-r21d/toolchains/llvm/prebuilt/linux-x86_64/$2" \
+      -DCOMPILER_RT_BUILD_BUILTINS=ON \
+      -DCOMPILER_RT_BUILD_LIBFUZZER=OFF \
+      -DCOMPILER_RT_BUILD_MEMPROF=OFF \
+      -DCOMPILER_RT_BUILD_PROFILE=OFF \
+      -DCOMPILER_RT_BUILD_SANITIZERS=OFF \
+      -DCOMPILER_RT_BUILD_XRAY=OFF
+    make -j[% c("buildconf/num_procs") %]
+    make install
+  }
+
+  make_compilerrt "armeabi-v7a" "arm-linux-androideabi/lib" "-DARMEABI_V7A"
+  make_compilerrt "arm64-v8a" "aarch64-linux-android/lib64"
+  make_compilerrt "x86" "i686-linux-android/lib"
+  make_compilerrt "x86_64" "x86_64-linux-android/lib64"
+
+  mv $rtdistdir/lib/android/*.a $distdir/lib/clang/[% c("var/llvm_version") %]/lib/linux/
+[% END -%]
+
 cd /var/tmp/dist
 [% c('tar', {
         tar_src => [ project ],
