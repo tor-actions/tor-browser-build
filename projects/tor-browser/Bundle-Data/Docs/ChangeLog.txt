@@ -1,3 +1,14 @@
+Tor Browser 11.0.11 - May 3 2022
+ * Windows + OS X + Linux
+   * Update Firefox to 91.9.0esr
+   * Update NoScript to 11.4.5
+   * Bug 21484: Remove or hide "What's New" link from About dialog [tor-browser]
+   * Bug 34366: The onion-location mechanism does not redirect to full URL [tor-browser]
+   * Bug 40482: Remove smallerrichard builtin bridge [tor-browser-build]
+ * Build System
+   * Windows + OS X + Linux
+     * Update Go to 1.17.9
+
 Tor Browser 11.0.10 - April 5 2022
  * Windows + OS X + Linux
    * Update Firefox to 91.8.0esr
