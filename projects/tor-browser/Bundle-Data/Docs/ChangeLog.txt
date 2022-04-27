@@ -1,3 +1,18 @@
+Tor Browser 11.5a10 - April 26 2022
+ * Android
+    * Update Fenix to 99.03b
+    * Update NoScript to 11.4.5
+    * Update Tor to 0.4.7.7
+    * Update OpenSSL to 1.1.1n
+    * Bug 40212: Tor Browser crashing on launch [fenix]
+    * Bug 40433: Bump LLVM to 13.0.1 for android builds [tor-browser-build]
+    * Bug 40469: Update zlib to 1.2.12 (CVE-2018-25032) [tor-browser-build]
+    * Bug 40470: Fix zlib build issue for android [tor-browser-build]
+    * Bug 40830: cherry-picked Bugzilla 1760674 on GV 99 TBA 11.5 [tor-browser]
+ * Build System
+   * Android
+     * Update Go to 1.18.1
+
 Tor Browser 11.5a9 - April 12 2022
 * Windows + OS X + Linux
    * Update Firefox to 91.8.0esr
