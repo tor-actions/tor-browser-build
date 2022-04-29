@@ -45,7 +45,6 @@ targets:
   android:
     build: '[% INCLUDE build.android %]'
     var:
-      android_toolchain_version: 31.0.0
       verify_allowed_addons: 1
 
 input_files:

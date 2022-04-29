@@ -32,8 +32,11 @@ mv $rootdir/allowed_addons.json $assets_dir/allowed_addons.json
         zip_args => '$apk',
     }) %]
 
+aligned_apk=$(basename $apk .apk)_aligned.apk
+zipalign -vp 4 $apk $aligned_apk
+
 # Sign a QA build. This .apk is not a debug version and doesn't contain a debug
 # flag in the manifest.
-apksigner sign --verbose --min-sdk-version [% c("var/android_min_api") %] --ks $rootdir/android-qa.keystore --out $qa_apk --in $apk --ks-key-alias androidqakey --key-pass pass:android --ks-pass pass:android
+apksigner sign --verbose --min-sdk-version [% c("var/android_min_api") %] --ks $rootdir/android-qa.keystore --out $qa_apk --in $aligned_apk --ks-key-alias androidqakey --key-pass pass:android --ks-pass pass:android
 
 apksigner sign --verbose --min-sdk-version [% c("var/android_min_api") %] --ks $rootdir/android-qa.keystore --out $test_out_apk --in $test_in_apk  --ks-key-alias androidqakey --key-pass pass:android --ks-pass pass:android
