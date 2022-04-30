@@ -15,13 +15,10 @@ pre: |
   rootdir=$(pwd)
   export DEBIAN_FRONTEND=noninteractive
   apt-get update -y -q
-  apt-get install -y -q debian-archive-keyring ubuntu-keyring mmdebstrap gnupg patch
+  apt-get install -y -q debian-archive-keyring ubuntu-keyring mmdebstrap gnupg
 
   export SOURCE_DATE_EPOCH='[% c("timestamp") %]'
   tar -xf [% c('input_files_by_name/mmdebstrap') %]
-  # As a user namespace inside an other user namespace doesn't seem to work,
-  # we patch mmdebstrap to avoid creating a new user namespace
-  patch -d mmdebstrap -p1 < mmdebstrap-no-user-ns.patch
   ./mmdebstrap/mmdebstrap --mode=unshare [% c("var/container/mmdebstrap_opt") %] [% c("var/container/suite") %] output.tar.gz [% c("var/container/debian_mirror") %]
 
   [% IF c("var/minimal_apt_version") -%]
@@ -60,4 +57,3 @@ input_files:
   - URL: 'https://cdimage.ubuntu.com/ubuntu-base/releases/[% c("var/ubuntu_version") %]/release/ubuntu-base-[% c("var/ubuntu_version") %]-base-amd64.tar.gz'
     filename: 'container-image_ubuntu-base-[% c("var/ubuntu_version") %]-base-amd64.tar.gz'
     sha256sum: df6fe77cee11bd216ac532f0ee082bdc4da3c0cc1f1d9cb20f3f743196bc4b07
-  - filename: mmdebstrap-no-user-ns.patch
