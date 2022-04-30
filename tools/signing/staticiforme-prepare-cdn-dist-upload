@@ -1,0 +1,36 @@
+#!/bin/bash
+set -e
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source "$script_dir/functions"
+
+dist_dir="/srv/dist-master.torproject.org/htdocs/torbrowser/$tbb_version"
+cat > "$dist_dir/.htaccess" << 'EOF'
+RewriteEngine On
+RewriteRule ^sha256sums.txt$ sha256sums-unsigned-build.txt
+RewriteRule ^sha256sums.txt.asc$ sha256sums-unsigned-build.txt.asc
+RewriteRule ^sha256sums.incrementals.txt$ sha256sums-unsigned-build.incrementals.txt
+RewriteRule ^sha256sums.incrementals.txt.asc$ sha256sums-unsigned-build.incrementals.txt.asc
+EOF
+chgrp -R tb-release "$dist_dir"
+chmod 775 "$dist_dir"
+chmod 664 "$dist_dir"/*
+chmod 664 "$dist_dir/.htaccess"
+
+cdn_dir="/srv/cdn-master.torproject.org/htdocs/aus1/torbrowser/$tbb_version"
+if test -d "$cdn_dir"
+then
+  echo "Error: $cdn_dir already exists" >&2
+  exit 1
+fi
+mkdir "$cdn_dir"
+chgrp tb-release "$cdn_dir"
+chmod 775 "$cdn_dir"
+cd "$cdn_dir"
+for marfile in "$dist_dir"/*.mar; do
+  ln -f "$marfile" .
+done
+
+echo "$tbb_version is ready to upload to cdn.tpo and dist.tpo"
+echo "You should remove the old version(s) before starting the upload with:"
+echo '  static-update-component cdn.torproject.org && static-update-component dist.torproject.org'
+echo '(preferably using screen or tmux)'
