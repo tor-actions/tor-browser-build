@@ -1,20 +1,34 @@
 #!/bin/bash
 set -e
 
-export YUBIHSM_PKCS11_CONF=~/yubihsm_pkcs11.conf
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source "$script_dir/functions"
 
-read -sp "Enter passphrase: " pass
+cd ~/"$tbb_version"
+
+test -n "${YUBIPASS:-}" || read -s -p "Authenticode (yubihsm) password:" YUBIPASS
 echo
+
+tmpdir=$(mktemp -d)
+chgrp yubihsm "$tmpdir"
+chmod g+rwx "$tmpdir"
+
+cwd=$(pwd)
 for i in `find . -name "*.exe" -print`
 do
-  /home/yubihsm/osslsigncode/osslsigncode \
+  echo "Signing $i"
+  echo export 'YUBIHSM_PKCS11_CONF=~/yubihsm_pkcs11.conf' \; \
+       /home/yubihsm/osslsigncode/osslsigncode \
                  -pkcs11engine /usr/lib/engines/engine_pkcs11.so \
                  -pkcs11module /usr/local/lib/yubihsm_pkcs11.so \
-                 -pass "$pass" \
+                 -pass "'$YUBIPASS'" \
                  -h sha256 \
                  -certs /home/yubihsm/tpo-cert.crt \
                  -key 1c40 \
-                 $i $i-signed
+                 "$cwd/$i" "$tmpdir/$i" \
+                 | sudo su - yubihsm
+  mv -vf "$tmpdir/$i" "$cwd/$i"
 done
-unset pass
-rename -f 's/-signed//' *-signed
+
+unset YUBIPASS
+rmdir "$tmpdir"
