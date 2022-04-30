@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source "$script_dir/functions"
+
+var_is_defined ssh_host_staticiforme
+
+rsync $rsync_options "$script_dir/" "$ssh_host_staticiforme:signing-$tbb_version_type/"
