@@ -15,5 +15,5 @@ do
     rm -f "$i.asc"
   fi
   echo "Signing $i"
-  echo "$GPG_PASS" | gpg -absu 0xe53d989a9e2d47bf! --passphrase-fd 0 $i
+  echo "$GPG_PASS" | gpg -absu 0xe53d989a9e2d47bf! --batch --no-tty --passphrase-fd 0 $i
 done
