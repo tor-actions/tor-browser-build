@@ -10,7 +10,8 @@ do
     tmpfile=$(mktemp)
     chmod 644 "$tmpfile"
     wget -q -O "$tmpfile" "https://people.torproject.org/~$builder/builds/$tbb_version-build$tbb_version_build/$file" || \
-      wget -q -O "$tmpfile" "https://people.torproject.org/~$builder/builds/tor-browser/$tbb_version-build$tbb_version_build/$file" && \
+      wget -q -O "$tmpfile" "https://people.torproject.org/~$builder/builds/tor-browser/release/unsigned/$tbb_version-build$tbb_version_build/$file" && \
       mv "$tmpfile" "$signed_version_dir/$file-$builder" && echo "Added $file-$builder"
   done
 done
+exit 0
