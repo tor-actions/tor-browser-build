@@ -17,7 +17,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/13/13299/13299734.png?modified=1565722641"
           }
         ],
-        "average_daily_users": 775190,
+        "average_daily_users": 793613,
         "categories": {
           "android": [
             "experimental",
@@ -31,7 +31,7 @@
         "contributions_url": "https://opencollective.com/darkreader?utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2017-09-19T07:03:00Z",
         "current_version": {
-          "id": 5360273,
+          "id": 5398965,
           "compatibility": {
             "firefox": {
               "min": "54.0",
@@ -42,7 +42,7 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/darkreader/versions/5360273",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/darkreader/versions/5398965",
           "is_strict_compatibility_enabled": false,
           "license": {
             "id": 22,
@@ -53,22 +53,22 @@
             "url": "http://www.opensource.org/licenses/mit-license.php"
           },
           "release_notes": {
-            "en-US": "- Revert reducing brightness for images (due to some performance issues).\n- Users' fixes for websites."
+            "en-US": "- Fix working in Firefox Nightly 101.\n- Users' fixes for websites."
           },
           "reviewed": null,
-          "version": "4.9.45",
+          "version": "4.9.50",
           "files": [
             {
-              "id": 3904618,
-              "created": "2022-02-05T17:44:16Z",
-              "hash": "sha256:7df6f5a6c07d3740ed26be3c24fdd1719b77e685506e2642f756ce3538b3cc7f",
+              "id": 3943310,
+              "created": "2022-05-01T15:46:13Z",
+              "hash": "sha256:e726c87b43dc7965a07a8d88396ea966cd3ab5d9d03743d938cda34081d4e067",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 592244,
+              "size": 602516,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/3904618/dark_reader-4.9.45-an+fx.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/3943310/dark_reader-4.9.50-an+fx.xpi",
               "permissions": [
                 "alarms",
                 "contextMenus",
@@ -143,7 +143,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2022-02-07T12:07:52Z",
+        "last_updated": "2022-05-02T11:07:49Z",
         "name": {
           "ar": "Dark Reader",
           "bn": "Dark Reader",
@@ -216,10 +216,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.5566,
-          "bayesian_average": 4.55533575946384,
-          "count": 4272,
-          "text_count": 1379
+          "average": 4.557,
+          "bayesian_average": 4.55574861267684,
+          "count": 4375,
+          "text_count": 1404
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/reviews/",
         "requires_payment": false,
@@ -310,7 +310,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/versions/",
-        "weekly_downloads": 24442
+        "weekly_downloads": 22195
       },
       "notes": null
     },
@@ -326,7 +326,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/5/5474/5474073.png?modified=1469820907"
           }
         ],
-        "average_daily_users": 709151,
+        "average_daily_users": 695797,
         "categories": {
           "android": [
             "security-privacy"
@@ -335,7 +335,7 @@
             "privacy-security"
           ]
         },
-        "contributions_url": "https://www.paypal.me/SupportEFF?utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
+        "contributions_url": "https://paypal.me/SupportEFF?utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2010-09-16T15:09:10Z",
         "current_version": {
           "id": 5265391,
@@ -459,10 +459,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.6626,
-          "bayesian_average": 4.660090918691468,
-          "count": 2211,
-          "text_count": 442
+          "average": 4.6656,
+          "bayesian_average": 4.663080639806801,
+          "count": 2234,
+          "text_count": 445
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/https-everywhere/reviews/",
         "requires_payment": false,
@@ -491,7 +491,7 @@
         "type": "extension",
         "url": "https://www.eff.org/https-everywhere",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/https-everywhere/versions/",
-        "weekly_downloads": 11705
+        "weekly_downloads": 9753
       },
       "notes": null
     },
@@ -507,7 +507,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/6/6937/6937656.png?modified=1550343990"
           }
         ],
-        "average_daily_users": 233331,
+        "average_daily_users": 234829,
         "categories": {
           "android": [
             "security-privacy"
@@ -722,9 +722,9 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.8149,
-          "bayesian_average": 4.810140210386015,
-          "count": 1210,
+          "average": 4.8146,
+          "bayesian_average": 4.809875824477429,
+          "count": 1235,
           "text_count": 227
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/reviews/",
@@ -810,7 +810,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/versions/",
-        "weekly_downloads": 4175
+        "weekly_downloads": 4449
       },
       "notes": null
     },
@@ -826,7 +826,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/5/5474/5474073.png?modified=1469820907"
           }
         ],
-        "average_daily_users": 1026172,
+        "average_daily_users": 1009921,
         "categories": {
           "android": [
             "security-privacy"
@@ -835,7 +835,7 @@
             "privacy-security"
           ]
         },
-        "contributions_url": "https://www.paypal.me/SupportEFF?utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
+        "contributions_url": "https://paypal.me/SupportEFF?utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2014-05-01T18:23:16Z",
         "current_version": {
           "id": 5327937,
@@ -1348,10 +1348,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.7919,
-          "bayesian_average": 4.789081982045261,
-          "count": 2033,
-          "text_count": 405
+          "average": 4.7934,
+          "bayesian_average": 4.790568375054024,
+          "count": 2052,
+          "text_count": 408
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/reviews/",
         "requires_payment": false,
@@ -1375,7 +1375,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/versions/",
-        "weekly_downloads": 27335
+        "weekly_downloads": 14982
       },
       "notes": null
     },
@@ -1391,7 +1391,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 5503481,
+        "average_daily_users": 5545019,
         "categories": {
           "android": [
             "security-privacy"
@@ -1403,7 +1403,7 @@
         "contributions_url": "",
         "created": "2015-04-25T07:26:22Z",
         "current_version": {
-          "id": 5368975,
+          "id": 5388847,
           "compatibility": {
             "firefox": {
               "min": "68.0",
@@ -1414,7 +1414,7 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/ublock-origin/versions/5368975",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/ublock-origin/versions/5388847",
           "is_strict_compatibility_enabled": false,
           "license": {
             "id": 6,
@@ -1425,22 +1425,22 @@
             "url": "http://www.gnu.org/licenses/gpl-3.0.html"
           },
           "release_notes": {
-            "en-US": "See complete release notes for <a href=\"https://outgoing.prod.mozaws.net/v1/86f1ffdef48173aff3a0df9bee31e8c3ce2a6d5fd2304c1748e3eab78478da6e/https%3A//github.com/gorhill/uBlock/releases/tag/1.41.8\" rel=\"nofollow\">1.41.8</a>.\n\n<b>Fixes:</b>\n\n<ul><li><a href=\"https://outgoing.prod.mozaws.net/v1/30f023b5828c1bee8ffd2bb503c6eeec652d94f08ba8b8753f0254303775de4d/https%3A//github.com/gorhill/uBlock/commit/38855b1ff6bd67b96a531414b26a57477b70b8c3\" rel=\"nofollow\">Fix testing a 8-bit integer instead of a 32-bit integer in PSL library</a></li></ul>\n<a href=\"https://outgoing.prod.mozaws.net/v1/807dd6fb0db5f5b9fffcc0e463d770141430b9d807dce50b948f41237eae3f4d/https%3A//github.com/gorhill/uBlock/compare/1.41.6...1.41.8\" rel=\"nofollow\">Commits history since last version</a>."
+            "en-US": "See complete release notes for <a href=\"https://outgoing.prod.mozaws.net/v1/e39683c322e9d7e4e31e3522131aae62906b8fd5d77558ffcc9b0eb562b94fc8/https%3A//github.com/gorhill/uBlock/releases/tag/1.42.4\" rel=\"nofollow\">1.42.4</a>.\n\n<b>Fixes:</b>\n\n<ul><li><a href=\"https://outgoing.prod.mozaws.net/v1/8b044853fe1cef57d52c89b3d4095fec7b19013ec4d7ebd4b006230756eb4554/https%3A//github.com/gorhill/uBlock/commit/a1788e64bc3c4e23a289002bbc21b34c547e6231\" rel=\"nofollow\">Need local URL to enabled-by-default quick-fixes list</a><ul><li>This fix prevents uBO from fetching quick-fixes list from remote server the first time it is launched after being installed for the first time.</li></ul></li></ul>\n<a href=\"https://outgoing.prod.mozaws.net/v1/62498d9e0dac85d35c0b4c2eb2fbd1233037ae7924be576301e8e9e5a00c9dc2/https%3A//github.com/gorhill/uBlock/compare/1.41.0...1.42.4\" rel=\"nofollow\">Commits history since last version</a>."
           },
           "reviewed": null,
-          "version": "1.41.8",
+          "version": "1.42.4",
           "files": [
             {
-              "id": 3913320,
-              "created": "2022-02-23T12:03:38Z",
-              "hash": "sha256:527c7527116a6c6ffddb963cdfb901518d56f624cfc922f6eab32916b24e8f5d",
+              "id": 3933192,
+              "created": "2022-04-07T13:36:54Z",
+              "hash": "sha256:bc3c335c961269cb40dd11551788d0d8674aefcacdc8fbdf6c19845eaea339ce",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 2993631,
+              "size": 3021270,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/3913320/ublock_origin-1.41.8-an+fx.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/3933192/ublock_origin-1.42.4-an+fx.xpi",
               "permissions": [
                 "dns",
                 "menus",
@@ -1460,7 +1460,8 @@
                 "https://filterlists.com/*",
                 "https://forums.lanik.us/*",
                 "https://github.com/*",
-                "https://*.github.io/*"
+                "https://*.github.io/*",
+                "https://*.letsblock.it/*"
               ],
               "optional_permissions": []
             }
@@ -1554,7 +1555,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2022-02-27T13:56:27Z",
+        "last_updated": "2022-04-28T15:11:30Z",
         "name": {
           "ar": "uBlock Origin",
           "bg": "uBlock Origin",
@@ -1699,10 +1700,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.7724,
-          "bayesian_average": 4.77197024787755,
-          "count": 13275,
-          "text_count": 3560
+          "average": 4.7728,
+          "bayesian_average": 4.772373226765186,
+          "count": 13554,
+          "text_count": 3607
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/reviews/",
         "requires_payment": false,
@@ -1764,7 +1765,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/versions/",
-        "weekly_downloads": 122432
+        "weekly_downloads": 116987
       },
       "notes": null
     },
@@ -1780,7 +1781,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 91327,
+        "average_daily_users": 106587,
         "categories": {
           "android": [
             "photos-media"
@@ -1877,10 +1878,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.5125,
-          "bayesian_average": 4.507365641865589,
-          "count": 1036,
-          "text_count": 393
+          "average": 4.5167,
+          "bayesian_average": 4.511530099488967,
+          "count": 1045,
+          "text_count": 394
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/reviews/",
         "requires_payment": false,
@@ -1902,7 +1903,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/versions/",
-        "weekly_downloads": 255
+        "weekly_downloads": 591
       },
       "notes": null
     },
@@ -1918,7 +1919,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 94269,
+        "average_daily_users": 92221,
         "categories": {
           "android": [
             "experimental",
@@ -2036,10 +2037,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.4206,
-          "bayesian_average": 4.406871326205544,
-          "count": 378,
-          "text_count": 106
+          "average": 4.4062,
+          "bayesian_average": 4.392565500892123,
+          "count": 384,
+          "text_count": 108
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/reviews/",
         "requires_payment": false,
@@ -2061,7 +2062,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/versions/",
-        "weekly_downloads": 1523
+        "weekly_downloads": 1302
       },
       "notes": null
     },
@@ -2074,10 +2075,10 @@
             "name": "Armin Sebastian",
             "url": "https://addons.mozilla.org/en-US/firefox/user/12929064/",
             "username": "dessant",
-            "picture_url": "https://addons.mozilla.org/user-media/userpics/12/12929/12929064.png?modified=1618084385"
+            "picture_url": "https://addons.mozilla.org/user-media/userpics/12/12929/12929064.png?modified=1651263207"
           }
         ],
-        "average_daily_users": 205132,
+        "average_daily_users": 204109,
         "categories": {
           "android": [
             "photos-media",
@@ -2091,7 +2092,7 @@
         "contributions_url": "https://www.paypal.com/donate?hosted_button_id=GLL4UNSNU6SQN&utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2017-06-17T15:23:33Z",
         "current_version": {
-          "id": 5346569,
+          "id": 5398759,
           "compatibility": {
             "firefox": {
               "min": "68.0",
@@ -2102,7 +2103,7 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/search_by_image/versions/5346569",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/search_by_image/versions/5398759",
           "is_strict_compatibility_enabled": false,
           "license": {
             "id": 6,
@@ -2116,21 +2117,22 @@
             "en-US": "Learn more about this release from the <a href=\"https://outgoing.prod.mozaws.net/v1/034fc31c913b4c441795892fe3d65db9f7edbe64b225782c051d3e956eacba86/https%3A//github.com/dessant/search-by-image/blob/master/CHANGELOG.md\" rel=\"nofollow\">changelog</a>."
           },
           "reviewed": null,
-          "version": "4.5.0",
+          "version": "4.9.0",
           "files": [
             {
-              "id": 3890914,
-              "created": "2022-01-08T16:57:01Z",
-              "hash": "sha256:2b0406167991bf6aa8e297fa28390f93a368d82ee78d94ba11508a6adb977012",
+              "id": 3943104,
+              "created": "2022-04-30T18:52:51Z",
+              "hash": "sha256:552a8eaf8ff48ae605d0ad1ac79479260b344405157fdd5a4c46fa3ea1edd65b",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 681142,
+              "size": 705110,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/3890914/search_by_image-4.5.0-an+fx.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/3943104/search_by_image-4.9.0-an+fx.xpi",
               "permissions": [
                 "alarms",
+                "clipboardRead",
                 "contextMenus",
                 "storage",
                 "unlimitedStorage",
@@ -2150,7 +2152,7 @@
         },
         "default_locale": "en-US",
         "description": {
-          "en-US": "Search by Image is a browser extension for Firefox that makes effortless reverse image searches possible, and comes with support for more than 30 search engines.\n\nSearch by Image is an open source project made possible thanks to a community of awesome supporters. If you'd like to support the continued development of the extension, please consider contributing with <a href=\"https://outgoing.prod.mozaws.net/v1/41c106361a7c39f9d2001c93119b0d734fe2515f827c52b675c98ec9293c7912/https%3A//armin.dev/go/patreon%3Fpr=search-by-image&amp;src=amo\" rel=\"nofollow\">Patreon</a>, <a href=\"https://outgoing.prod.mozaws.net/v1/d401358dba8a5fc523e092e5f0a30df2e47898c9461dfe8530e3d765d03ec34c/https%3A//armin.dev/go/paypal%3Fpr=search-by-image&amp;src=amo\" rel=\"nofollow\">PayPal</a> or <a href=\"https://outgoing.prod.mozaws.net/v1/0dc030db8e27048be301cc63fcc0b39a33473a79428a9f66353fc90cb933541f/https%3A//armin.dev/go/bitcoin%3Fpr=search-by-image&amp;src=amo\" rel=\"nofollow\">Bitcoin</a>.\n\nThe extension helps journalists and researchers verify the authenticity of images, and assists in the identification of false information on social media. Search by Image is also popular among photographers, helping artists explore how their work is shared on the web, while shoppers find it valuable for discovering similar products at discounted prices.\n\nThe extension enables you to search for images from the context menu and the browser toolbar with the help of a diverse set of reverse image search engines, which can be toggled and reordered from the extension's options. Visit the wiki for the full list of supported search engines.\n\n<a href=\"https://outgoing.prod.mozaws.net/v1/a1f33afb4059aef86430eb9249e5a6024756138e53dc9117ae49eaf455990b69/https%3A//github.com/dessant/search-by-image/wiki/Search-engines\" rel=\"nofollow\">https://github.com/dessant/search-by-image/wiki/Search-engines</a>\n\nImages positioned at the selected area are detected regardless of how they were embedded in the page. The extension also supports uploading local images, searching for video frames, capturing details within images, and searching for images from private sites.\n\nA handful of search modes are offered that serve different use cases. The search mode can be set independently for the context menu and the browser toolbar from the extension's options.\n\n<b>Search modes:</b>\n<ul>  <li><b>Select URL</b>: select an image on the page, then search for the image URL. This is the default search mode.</li>  <li><b>Select image</b>: select an image on the page, then fetch the image, possibly from the browser cache, and search for it. This search mode is preferred for sites which do not allow the direct linking of images, such as private sites.</li>  <li><b>Capture</b>: select and capture a page area, then search for it.</li>  <li><b>Browse</b>: select an image from your device, then search for it.</li>  <li><b>URL</b>: search for an image URL.</li></ul>\nThe image you select during a search is sent to the requested third-party service, such as Google Images. Visit the extension's <a href=\"https://addons.mozilla.org/en-US/firefox/addon/search_by_image/privacy/\" rel=\"nofollow\">privacy policy</a> for more information.\n\nThe extension is also available for <a href=\"https://outgoing.prod.mozaws.net/v1/7ed09b9ef47c6ca28528b04a7fc4f9d47d06cbe14963b3b2078b69c752144ac6/https%3A//chrome.google.com/webstore/detail/search-by-image/cnojnbdhbhnkbcieeekonklommdnndci\" rel=\"nofollow\">Chrome</a> and <a href=\"https://outgoing.prod.mozaws.net/v1/32275a8494767c60b0f8570f5f7abcf126ad0a6351f4a5deccac0f396007ac46/https%3A//apps.apple.com/us/app/search-by-image-for-safari/id1544552106\" rel=\"nofollow\">Safari</a>.\n\n<b>Reviews are not monitored for bug reports, please use GitHub for issues and feature requests.</b>\n<a href=\"https://outgoing.prod.mozaws.net/v1/409bf55345207cc65f09ea6142e4b4cd069323e76f635076bfc139da6d46de4d/https%3A//github.com/dessant/search-by-image\" rel=\"nofollow\">https://github.com/dessant/search-by-image</a>"
+          "en-US": "Search by Image is a browser extension for Firefox that makes effortless reverse image searches possible, and comes with support for more than 30 search engines.\n\nSearch by Image is an open source project made possible thanks to a community of awesome supporters. If you'd like to support the continued development of the extension, please consider contributing with <a href=\"https://outgoing.prod.mozaws.net/v1/41c106361a7c39f9d2001c93119b0d734fe2515f827c52b675c98ec9293c7912/https%3A//armin.dev/go/patreon%3Fpr=search-by-image&amp;src=amo\" rel=\"nofollow\">Patreon</a>, <a href=\"https://outgoing.prod.mozaws.net/v1/d401358dba8a5fc523e092e5f0a30df2e47898c9461dfe8530e3d765d03ec34c/https%3A//armin.dev/go/paypal%3Fpr=search-by-image&amp;src=amo\" rel=\"nofollow\">PayPal</a> or <a href=\"https://outgoing.prod.mozaws.net/v1/0dc030db8e27048be301cc63fcc0b39a33473a79428a9f66353fc90cb933541f/https%3A//armin.dev/go/bitcoin%3Fpr=search-by-image&amp;src=amo\" rel=\"nofollow\">Bitcoin</a>.\n\nThe extension helps journalists and researchers verify the authenticity of images, and assists in the identification of false information on social media. Search by Image is also popular among photographers, helping artists explore how their work is shared on the web, while shoppers find it valuable for discovering similar products at discounted prices.\n\nThe extension enables you to search for images from the context menu and the browser toolbar with the help of a diverse set of reverse image search engines, which can be toggled and reordered from the extension's options. Visit the wiki for the full list of supported search engines.\n\n<a href=\"https://outgoing.prod.mozaws.net/v1/a1f33afb4059aef86430eb9249e5a6024756138e53dc9117ae49eaf455990b69/https%3A//github.com/dessant/search-by-image/wiki/Search-engines\" rel=\"nofollow\">https://github.com/dessant/search-by-image/wiki/Search-engines</a>\n\nImages positioned at the selected area are detected regardless of how they were embedded in the page. The extension also supports searching with images from your device, images from private sites, and captured areas of the page.\n\nA handful of search modes are offered that serve different use cases. The search mode can be set independently for the context menu and the browser toolbar from the extension's options.\n\n<b>Search modes:</b>\n<ul>  <li><b>Select URL</b>: select an image on the page and search with the image URL. This is the default search mode.</li>  <li><b>Select image</b>: select an image on the page and search with the image file. This search mode is preferred for sites which do not allow the direct linking of images, such as private sites.</li>  <li><b>Capture</b>: search with a captured area of the page.</li>  <li><b>Browse</b>: search with an image from your device. Pasting images from the clipboard is also supported on desktop platforms.</li>  <li><b>URL</b>: search with an image URL.</li></ul>\nThe image you select during a search is sent to the requested service, such as Google Images. Visit the extension's <a href=\"https://addons.mozilla.org/en-US/firefox/addon/search_by_image/privacy/\" rel=\"nofollow\">privacy policy</a> for more information.\n\nThe extension is also available for <a href=\"https://outgoing.prod.mozaws.net/v1/7ed09b9ef47c6ca28528b04a7fc4f9d47d06cbe14963b3b2078b69c752144ac6/https%3A//chrome.google.com/webstore/detail/search-by-image/cnojnbdhbhnkbcieeekonklommdnndci\" rel=\"nofollow\">Chrome</a> and <a href=\"https://outgoing.prod.mozaws.net/v1/32275a8494767c60b0f8570f5f7abcf126ad0a6351f4a5deccac0f396007ac46/https%3A//apps.apple.com/us/app/search-by-image-for-safari/id1544552106\" rel=\"nofollow\">Safari</a>.\n\n<b>Reviews are not monitored for bug reports, please use GitHub for issues and feature requests.</b>\n<a href=\"https://outgoing.prod.mozaws.net/v1/409bf55345207cc65f09ea6142e4b4cd069323e76f635076bfc139da6d46de4d/https%3A//github.com/dessant/search-by-image\" rel=\"nofollow\">https://github.com/dessant/search-by-image</a>"
         },
         "developer_comments": null,
         "edit_url": "https://addons.mozilla.org/en-US/developers/addon/search_by_image/edit",
@@ -2168,7 +2170,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2022-01-10T20:04:05Z",
+        "last_updated": "2022-05-02T07:17:20Z",
         "name": {
           "en-US": "Search by Image"
         },
@@ -2294,10 +2296,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.6548,
-          "bayesian_average": 4.649595094734144,
-          "count": 1063,
-          "text_count": 212
+          "average": 4.6458,
+          "bayesian_average": 4.6407308861424434,
+          "count": 1104,
+          "text_count": 222
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/reviews/",
         "requires_payment": false,
@@ -2318,7 +2320,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/versions/",
-        "weekly_downloads": 3586
+        "weekly_downloads": 3858
       },
       "notes": null
     },
@@ -2341,7 +2343,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 72882,
+        "average_daily_users": 76445,
         "categories": {
           "android": [
             "other"
@@ -2623,10 +2625,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.4405,
-          "bayesian_average": 4.435747960459745,
-          "count": 1101,
-          "text_count": 296
+          "average": 4.4461,
+          "bayesian_average": 4.441335281324523,
+          "count": 1114,
+          "text_count": 299
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/reviews/",
         "requires_payment": false,
@@ -2646,7 +2648,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/versions/",
-        "weekly_downloads": 47
+        "weekly_downloads": 67
       },
       "notes": null
     },
@@ -2662,7 +2664,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/0/0/143.png?modified=1506804587"
           }
         ],
-        "average_daily_users": 358576,
+        "average_daily_users": 345771,
         "categories": {
           "android": [
             "performance",
@@ -2673,10 +2675,10 @@
             "web-development"
           ]
         },
-        "contributions_url": "https://www.paypal.me/NoScript?utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
+        "contributions_url": "https://www.paypal.com/donate/?hosted_button_id=9ERKTU5MBH4EW&utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2005-05-13T10:51:32Z",
         "current_version": {
-          "id": 5371832,
+          "id": 5392767,
           "compatibility": {
             "firefox": {
               "min": "59.0",
@@ -2687,7 +2689,7 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/noscript/versions/5371832",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/noscript/versions/5392767",
           "is_strict_compatibility_enabled": false,
           "license": {
             "id": 13,
@@ -2698,22 +2700,22 @@
             "url": "http://www.gnu.org/licenses/gpl-2.0.html"
           },
           "release_notes": {
-            "en-US": "v 11.3.7\n============================================================\nx Always avoid DNS resolution when a HTTP(S) proxy is used\n  (thanks nojake for reporting)"
+            "en-US": "v 11.4.5\n============================================================\nx Improved preset sizing\nx Reduce toolbar bottom shaded line tickness\nx [L10n] Updated he\nx Various user-driven visual tweaks\nx Fixed vintage icon brightness in automatic light mode\nx Minor icon tweaks"
           },
           "reviewed": null,
-          "version": "11.3.7",
+          "version": "11.4.5",
           "files": [
             {
-              "id": 3916177,
-              "created": "2022-03-02T10:26:41Z",
-              "hash": "sha256:6e5af18ce46bfc496fb027581d3d37a0edb95df158d053a5d9a1f89b8093bc49",
+              "id": 3937112,
+              "created": "2022-04-15T22:22:17Z",
+              "hash": "sha256:2a43901bfdb9250d30b805e77acd9a344ba557bc325ad6fc4f95c80cba21b840",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 677785,
+              "size": 903018,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/3916177/noscript_security_suite-11.3.7-an+fx.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/3937112/noscript_security_suite-11.4.5-an+fx.xpi",
               "permissions": [
                 "contextMenus",
                 "storage",
@@ -2771,15 +2773,15 @@
           "sk": "http://noscript.net",
           "zh-CN": "http://noscript.net"
         },
-        "icon_url": "data:image/png;base64,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",
+        "icon_url": "data:image/png;base64,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",
         "icons": {
-          "32": "https://addons.mozilla.org/user-media/addon_icons/0/722-32.png?modified=mcrushed",
-          "64": "https://addons.mozilla.org/user-media/addon_icons/0/722-64.png?modified=mcrushed",
-          "128": "https://addons.mozilla.org/user-media/addon_icons/0/722-128.png?modified=mcrushed"
+          "32": "https://addons.mozilla.org/user-media/addon_icons/0/722-32.png?modified=2d7f0f7b",
+          "64": "https://addons.mozilla.org/user-media/addon_icons/0/722-64.png?modified=2d7f0f7b",
+          "128": "https://addons.mozilla.org/user-media/addon_icons/0/722-128.png?modified=2d7f0f7b"
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2022-03-08T22:11:46Z",
+        "last_updated": "2022-04-18T05:48:35Z",
         "name": {
           "de": "NoScript",
           "el": "NoScript",
@@ -2795,68 +2797,52 @@
         },
         "previews": [
           {
-            "id": 846,
+            "id": 267408,
             "caption": {
-              "en-US": "Enable JavaScript only where you're sure it is safe, with ONE CLICK!"
+              "en-US": "You are finally in control, and can decide by yourself which sites you TRUST. Don't let any unknown or UNTRUSTED sites to execute scripts and use other potentially dangerous capabilities in your browser!"
             },
             "image_size": [
-              291,
-              244
+              960,
+              727
             ],
-            "image_url": "https://addons.mozilla.org/user-media/previews/full/0/846.png?modified=1622132240",
+            "image_url": "https://addons.mozilla.org/user-media/previews/full/267/267408.png?modified=1647682230",
             "thumbnail_size": [
-              291,
-              244
-            ],
-            "thumbnail_url": "https://addons.mozilla.org/user-media/previews/thumbs/0/846.jpg?modified=1622132240"
-          },
-          {
-            "id": 1060,
-            "caption": {
-              "en-US": "NoScript can block any kind of potentially dangerous active content, not just JavaScript!"
-            },
-            "image_size": [
-              423,
-              447
-            ],
-            "image_url": "https://addons.mozilla.org/user-media/previews/full/1/1060.png?modified=1622132241",
-            "thumbnail_size": [
-              379,
+              528,
               400
             ],
-            "thumbnail_url": "https://addons.mozilla.org/user-media/previews/thumbs/1/1060.jpg?modified=1622132241"
+            "thumbnail_url": "https://addons.mozilla.org/user-media/previews/thumbs/267/267408.jpg?modified=1647682230"
           },
           {
-            "id": 1062,
+            "id": 267511,
             "caption": {
-              "en-US": "NoScript's ClearClick module is the first and only client-side protection against Clickjacking!"
+              "en-US": "You can globally configure permissions for all the websites (DEFAULT preset), those you trust (TRUSTED) and those which you don't trust (UNTRUSTED). Then you can CUSTOMize them further for each site, if you want."
             },
             "image_size": [
-              457,
-              428
+              717,
+              542
             ],
-            "image_url": "https://addons.mozilla.org/user-media/previews/full/1/1062.png?modified=1622132241",
+            "image_url": "https://addons.mozilla.org/user-media/previews/full/267/267511.png?modified=1647682230",
             "thumbnail_size": [
-              427,
+              529,
               400
             ],
-            "thumbnail_url": "https://addons.mozilla.org/user-media/previews/thumbs/1/1062.jpg?modified=1622132241"
+            "thumbnail_url": "https://addons.mozilla.org/user-media/previews/thumbs/267/267511.jpg?modified=1647682230"
           },
           {
-            "id": 52395,
+            "id": 267512,
             "caption": {
-              "en-US": "NoScript's powerful XSS filter has been the first and is still the most effective."
+              "en-US": "Both dark and light color schemes are supported!"
             },
             "image_size": [
-              504,
-              385
+              717,
+              542
             ],
-            "image_url": "https://addons.mozilla.org/user-media/previews/full/52/52395.png?modified=1622132241",
+            "image_url": "https://addons.mozilla.org/user-media/previews/full/267/267512.png?modified=1647682230",
             "thumbnail_size": [
-              504,
-              385
+              529,
+              400
             ],
-            "thumbnail_url": "https://addons.mozilla.org/user-media/previews/thumbs/52/52395.jpg?modified=1622132241"
+            "thumbnail_url": "https://addons.mozilla.org/user-media/previews/thumbs/267/267512.jpg?modified=1647682230"
           }
         ],
         "promoted": {
@@ -2867,10 +2853,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.4071,
-          "bayesian_average": 4.40433905661055,
-          "count": 1879,
-          "text_count": 737
+          "average": 4.395,
+          "bayesian_average": 4.392296975026919,
+          "count": 1939,
+          "text_count": 776
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/reviews/",
         "requires_payment": false,
@@ -2902,11 +2888,19 @@
           "el": "http://noscript.net/forum",
           "en-US": "https://noscript.net/forum"
         },
-        "tags": [],
+        "tags": [
+          "ad blocker",
+          "anti malware",
+          "anti tracker",
+          "antivirus",
+          "content blocker",
+          "privacy",
+          "security"
+        ],
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/versions/",
-        "weekly_downloads": 8172
+        "weekly_downloads": 7287
       },
       "notes": null
     },
@@ -2922,7 +2916,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 128388,
+        "average_daily_users": 130395,
         "categories": {
           "android": [
             "performance",
@@ -3034,10 +3028,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 3.9094,
-          "bayesian_average": 3.905078706075454,
-          "count": 1038,
-          "text_count": 371
+          "average": 3.9049,
+          "bayesian_average": 3.900588745078466,
+          "count": 1052,
+          "text_count": 376
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/reviews/",
         "requires_payment": false,
@@ -3056,7 +3050,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/versions/",
-        "weekly_downloads": 1582
+        "weekly_downloads": 1188
       },
       "notes": null
     }

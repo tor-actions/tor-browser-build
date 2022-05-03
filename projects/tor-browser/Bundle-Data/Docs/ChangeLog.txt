@@ -1,3 +1,15 @@
+Tor Browser 11.0.12 - May 12 2022
+ * Android
+   * Update NoScript to 11.4.5
+   * Update OpenSSL to 1.1.1o
+   * Bug 40202: Install fails for nightly testbuild on emulator running Android API v30 [fenix]
+   * Bug 40212: Tor Browser crashing on launch [fenix]
+   * Bug 40908: Rebase to Geckoview v96.0.3 for TBA 11.0 [tor-browser]
+   * Bug 40913: Investigate+possible revert fix for Bugzilla 1732388 [tor-browser]
+ * Build System
+   * Android
+     * Update Go to 1.17.9
+
 Tor Browser 11.0.11 - May 3 2022
  * Windows + OS X + Linux
    * Update Firefox to 91.9.0esr
