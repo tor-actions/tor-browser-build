@@ -1,3 +1,17 @@
+Tor Browser 11.5a11 - May 4 2022
+* Windows + OS X + Linux
+  * Update Firefox to 91.9.0esr
+  * Update NoScript to 11.4.5
+  * Update Tor to 0.4.7.7
+  * Update OpenSSL to 1.1.1o
+  * Bug 21484: Remove or hide "What's New" link from About dialog [tor-browser]
+  * Bug 40482: Remove smallerrichard builtin bridge [tor-browser-build]
+  * Bug 40886: Amend about:tor on Nightly and Alpha to encourage testing [tor-browser]
+  * Bug 40887: Implement amends to torconnect and Connection Settings following 11.5a9 [tor-browser]
+* Build System
+  * All Platforms
+    * Bug 40319: Add build tag to downloads.json [tor-browser-build]
+
 Tor Browser 11.5a10 - April 26 2022
  * Android
     * Update Fenix to 99.03b
