@@ -97,6 +97,8 @@ input_files:
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
   - filename: gen_gradle_deps_file.sh
     enable: '[% c("var/fetch_gradle_dependencies") %]'
+  # Delete when this patch is included upstream
+  - filename: bug40485.patch
 
 steps:
   list_toolchain_updates:

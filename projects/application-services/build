@@ -76,6 +76,7 @@ do
 done
 
 patch -p1 < $rootdir/no-git.patch
+patch -p1 < $rootdir/bug40485.patch
 export RUST_ANDROID_GRADLE_PYTHON_COMMAND=python3
 [% IF c('var/fetch_gradle_dependencies') %]
   # XXX: `assemble` is still not enough to see all fetched dependencies via
