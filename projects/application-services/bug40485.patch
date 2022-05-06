@@ -1,0 +1,54 @@
+diff --git a/components/support/nimbus-fml/src/parser.rs b/components/support/nimbus-fml/src/parser.rs
+index 1de9a301..19d29373 100644
+--- a/components/support/nimbus-fml/src/parser.rs
++++ b/components/support/nimbus-fml/src/parser.rs
+@@ -2,7 +2,7 @@
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+ 
+-use std::{collections::HashMap, path::Path};
++use std::{collections::BTreeMap, collections::HashMap, path::Path};
+ 
+ use serde::{Deserialize, Serialize};
+ use serde_json::json;
+@@ -22,7 +22,7 @@ pub(crate) struct EnumVariantBody {
+ #[derive(Debug, Deserialize, Serialize, Clone)]
+ pub(crate) struct EnumBody {
+     description: String,
+-    variants: HashMap<String, EnumVariantBody>,
++    variants: BTreeMap<String, EnumVariantBody>,
+ }
+ 
+ #[derive(Debug, Deserialize, Serialize, Clone)]
+@@ -39,26 +39,26 @@ pub(crate) struct FieldBody {
+ pub(crate) struct ObjectBody {
+     description: String,
+     failable: Option<bool>,
+-    fields: HashMap<String, FieldBody>,
++    fields: BTreeMap<String, FieldBody>,
+ }
+ 
+ #[derive(Debug, Deserialize, Serialize, Clone, Default)]
+ pub(crate) struct Types {
+-    enums: HashMap<String, EnumBody>,
+-    objects: HashMap<String, ObjectBody>,
++    enums: BTreeMap<String, EnumBody>,
++    objects: BTreeMap<String, ObjectBody>,
+ }
+ 
+ #[derive(Debug, Deserialize, Serialize, Clone)]
+ pub(crate) struct FeatureBody {
+     description: String,
+-    variables: HashMap<String, FieldBody>,
++    variables: BTreeMap<String, FieldBody>,
+     #[serde(alias = "defaults")]
+     default: Option<serde_json::Value>,
+ }
+ #[derive(Debug, Deserialize, Serialize, Clone, Default)]
+ pub(crate) struct ManifestFrontEnd {
+     types: Types,
+-    features: HashMap<String, FeatureBody>,
++    features: BTreeMap<String, FeatureBody>,
+     channels: Vec<String>,
+ }
+ 

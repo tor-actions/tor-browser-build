@@ -77,6 +77,9 @@ v=[% c("variant") %]
     exit 1
   fi
 
+  # Bug 40485: Inject deterministic build date into Glean.
+  echo "ext.gleanBuildDate = \"0\"" >> app/build.gradle
+
   # We put the tor-browser version last to avoid int-parsing errors when consumers of project.versionName
   # assume it starts with a major version number, as it does for all Mozilla version names.
   version_name='[% c("var/fenix_version") %]-[% c("variant") %] ([% c("var/torbrowser_version") %])'
