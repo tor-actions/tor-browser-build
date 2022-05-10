@@ -35,6 +35,10 @@ function sync-scripts-to-macos-signer {
   "$script_dir/sync-scripts-to-macos-signer"
 }
 
+function macos-signer-enable-network-proxy-settings {
+  ssh "$ssh_host_macos_signer" 'networksetup -setsecurewebproxystate Ethernet on'
+}
+
 function macos-signer-gatekeeper-signing {
   "$script_dir/sync-macos-local-to-macos-signer"
   ssh "$ssh_host_macos_signer" 'bash -s' << EOF
@@ -55,6 +59,10 @@ EOF
 function macos-signer-stapler {
   ssh "$ssh_host_macos_signer" "~/signing-$tbb_version_type/macos-signer-stapler"
   "$script_dir/sync-macos-signer-stapled-to-macos-local-stapled"
+}
+
+function macos-signer-disable-network-proxy-settings {
+  ssh "$ssh_host_macos_signer" 'networksetup -setsecurewebproxystate Ethernet off'
 }
 
 function gatekeeper-bundling {
@@ -161,9 +169,11 @@ function do_step {
 do_step wait-for-finished-build
 do_step sync-builder-unsigned-to-local-signed
 do_step sync-scripts-to-macos-signer
+do_step macos-signer-enable-network-proxy-settings
 do_step macos-signer-gatekeeper-signing
 do_step macos-signer-notarization
 do_step macos-signer-stapler
+do_step macos-signer-disable-network-proxy-settings
 do_step gatekeeper-bundling
 do_step dmg2mar
 do_step sync-scripts-to-linux-signer
