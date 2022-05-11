@@ -4,6 +4,7 @@ Tor Browser 11.5a11 - May 4 2022
   * Update NoScript to 11.4.5
   * Update Tor to 0.4.7.7
   * Update OpenSSL to 1.1.1o
+  * Update Tor Launcher to 0.2.35
   * Bug 21484: Remove or hide "What's New" link from About dialog [tor-browser]
   * Bug 40482: Remove smallerrichard builtin bridge [tor-browser-build]
   * Bug 40886: Amend about:tor on Nightly and Alpha to encourage testing [tor-browser]
