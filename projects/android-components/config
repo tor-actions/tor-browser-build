@@ -36,8 +36,11 @@ input_files:
     pkg_type: build
   - name: geckoview
     project: geckoview
+    enable: '[% !c("var/fetch_gradle_dependencies") && c("var/android_single_arch") %]'
+  - name: geckoview
+    project: geckoview
     pkg_type: merge_aars
-    enable: '[% !c("var/fetch_gradle_dependencies") %]'
+    enable: '[% !c("var/fetch_gradle_dependencies") && !c("var/android_single_arch") %]'
   - name: application-services
     project: application-services
     enable: '[% !c("var/fetch_gradle_dependencies") %]'

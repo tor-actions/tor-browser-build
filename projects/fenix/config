@@ -41,7 +41,11 @@ input_files:
     project: application-services
   - name: geckoview
     project: geckoview
+    enable: '[% c("var/android_single_arch") %]'
+  - name: geckoview
+    project: geckoview
     pkg_type: merge_aars
+    enable: '[% !c("var/android_single_arch") %]'
   - name: tba-translation
     project: tba-translation
   - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'

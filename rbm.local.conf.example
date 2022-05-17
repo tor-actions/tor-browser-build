@@ -97,6 +97,10 @@ targets:
       ### Uncomment this if you want to create mar files in your test build.
       #build_mar: 1
 
+      ### Uncomment this if you want to enable the merge_aars step in your test
+      ### build, meaning that GeckoView will be compiled for all architectures.
+      #android_single_arch: 0
+
   nightly:
 
     ### By default 'fetch' is set to 1 for nightly builds, meaning that new
