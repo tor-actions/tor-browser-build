@@ -83,6 +83,16 @@ find chrome/ | sort | zip -X -@ "$TBDIR[% IF c("var/osx") %]/Contents/Resources[
 popd
 rm -rf $TMP_HTTPS_EVERYWHERE_PATH
 
+# Include the Tor Browser manual
+TMP_MANUAL_PATH=$rootdir/tmp_manual/
+mkdir $TMP_MANUAL_PATH
+pushd $TMP_MANUAL_PATH
+tar -xf $rootdir/[% c('input_files_by_name/manual') %]
+find . -exec [% c("var/touch") %] {} \;
+find chrome/ | sort | zip -X -@ "$TBDIR[% IF c("var/osx") %]/Contents/Resources[% END %]/browser/omni.ja"
+popd
+rm -rf $TMP_MANUAL_PATH
+
 tar -C "$TBDIR[% IF ! c("var/osx") %]/TorBrowser[% END %]" -xf [% c('input_files_by_name/tor') %]/tor.tar.gz
 [% IF c("var/namecoin") %]
   # Extract Electrum-NMC

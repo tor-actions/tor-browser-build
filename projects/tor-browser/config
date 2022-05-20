@@ -123,3 +123,6 @@ input_files:
     enable: '[% ! c("var/android") %]'
   - filename: bridges_list.snowflake.txt
     enable: '[% ! c("var/android") %]'
+  - project: manual
+    name: manual
+    enable: '[% ! c("var/android") %]'

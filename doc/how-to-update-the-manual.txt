@@ -1,0 +1,8 @@
+1. Go to https://gitlab.torproject.org/tpo/web/manual/-/jobs/
+2. Open the latest build stage
+3. Download the artifacts (they come in a .zip file).
+4. Rename it to manual_$PIPELINEID.zip
+5. Upload it to people.tpo
+6. Update projects/manual/config
+   6.1 Change the version to $PIPELINEID
+   6.2 Update the URL if it was different from the previous uploader

@@ -1,0 +1,11 @@
+#!/bin/bash
+[% c("var/set_default_env") -%]
+
+mkdir -p chrome/browser/content/browser/manual
+unzip $rootdir/[% c('input_files_by_name/manual') %]
+python3 $rootdir/[% c('input_files_by_name/package_script') %] public chrome/browser/content/browser/manual
+
+[% c('tar', {
+        tar_src => [ 'chrome' ],
+        tar_args => '-czf ' _ dest_dir _ '/' _ c('filename'),
+    }) %]
