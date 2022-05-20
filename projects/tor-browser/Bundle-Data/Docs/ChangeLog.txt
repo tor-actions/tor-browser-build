@@ -1,3 +1,16 @@
+Tor Browser 11.0.13 - May 20 2022
+ * Android
+   * Bug 40212: Tor Browser crashing on launch [fenix]
+ * All Platforms
+   * Update Tor to 0.4.7.7
+   * Bug 40967: Integrate Mozilla fix for Bug 1770137 [tor-browser]
+   * Bug 40968: Integrate Mozilla fix fo rBug 1770048 [tor-browser]
+ * Build System
+   * All Platforms
+     * Update Go to 1.17.10
+     * Bug 40319: Add build tag to downloads.json [tor-browser-build]
+     * Bug 40486: Add tools/signing/do-all-signing script, and other signing scripts improvements [tor-browser-build]
+
 Tor Browser 11.0.12 - May 12 2022
  * Android
    * Update NoScript to 11.4.5
