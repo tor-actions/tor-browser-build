@@ -1,6 +1,6 @@
-Tor Browser 11.5a10 - April 26 2022
+Tor Browser 11.5a10 - May 20 2022
  * Android
-    * Update Fenix to 99.03b
+    * Update Fenix to 99.0.0b3
     * Update NoScript to 11.4.5
     * Update Tor to 0.4.7.7
     * Update OpenSSL to 1.1.1o
