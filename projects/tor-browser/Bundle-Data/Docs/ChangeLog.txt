@@ -1,3 +1,21 @@
+Tor Browser 11.5a12 - May 21 2022
+ * Windows + OS X + Linux
+   * Bug 40309: Avoid using regional OS locales [tor-browser]
+   * Bug 40912: Hide screenshots menu since we don't support it [tor-browser]
+   * Bug 40916: Remove the browser.download.panel.shown preference [tor-browser]
+   * Bug 40918: In 11.5a11 the breadcrumbs are visible on the first bootstrap [tor-browser]
+   * Bug 40923: Consume country code to improve error report [tor-browser]
+ * All Platforms
+   * Bug 40967: Integrate Mozilla fix for Bug 1770137 [tor-browser]
+   * Bug 40968: Integrate Mozilla fix for Bug 1770048 [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 40476: Add tools/signing/do-all-signing script, and other signing scripts improvements [tor-browser-build]
+   * Android
+     * Update Go to 1.18.2
+   * Windows + OS X + Linux
+     * Update Go to 1.17.10
+
 Tor Browser 11.5a11 - May 4 2022
 * Windows + OS X + Linux
   * Update Firefox to 91.9.0esr
