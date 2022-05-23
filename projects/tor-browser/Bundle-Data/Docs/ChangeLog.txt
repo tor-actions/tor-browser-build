@@ -4,7 +4,7 @@ Tor Browser 11.0.13 - May 20 2022
  * All Platforms
    * Update Tor to 0.4.7.7
    * Bug 40967: Integrate Mozilla fix for Bug 1770137 [tor-browser]
-   * Bug 40968: Integrate Mozilla fix fo rBug 1770048 [tor-browser]
+   * Bug 40968: Integrate Mozilla fix for Bug 1770048 [tor-browser]
  * Build System
    * All Platforms
      * Update Go to 1.17.10
