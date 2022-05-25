@@ -10,12 +10,8 @@ var:
   container:
     use_container: 1
   go_lib: github.com/pion/stun
-  go_lib_deps:
-    - goerrors
 
 input_files:
   - project: container-image
   - name: go
     project: go
-  - name: goerrors
-    project: goerrors

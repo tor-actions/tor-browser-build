@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
-git_url: https://gopkg.in/yaml.v2
-git_hash: 0b1645d91e851e735d3e23330303ce81f70adbe3 #v2.3.0
+git_url: https://gopkg.in/yaml.v3
+git_hash: 9f266ea9e77c4c7aab4cf02650570e7c7b3031a5 # v3.0.0
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 
 build: '[% c("projects/go/var/build_go_lib") %]'
