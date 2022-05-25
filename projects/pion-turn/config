@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
 git_url: https://github.com/pion/turn
-git_hash: 73942c387bd12c0d200bb0c6813421cb352cf77c #v2.0.5
+git_hash: ed2e7a9679b43e4040ae932b705d6cbd95536db4 #v2.0.8
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 
 build: '[% c("projects/go/var/build_go_lib") %]'
