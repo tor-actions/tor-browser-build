@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
-git_url: https://github.com/cohosh/dtls
-git_hash: 2f8ef4e48879f1129b3432c9ac04d2f4aad8049e #ru fingerprinting fix
+git_url: https://github.com/pion/dtls
+git_hash: d2f797183a9f044ce976e6df6f362662ca722412 #v2.1.5
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 
 build: '[% c("projects/go/var/build_go_lib") %]'
