@@ -6,6 +6,7 @@ Tor Browser 11.5a12 - May 21 2022
    * Bug 40918: In 11.5a11 the breadcrumbs are visible on the first bootstrap [tor-browser]
    * Bug 40923: Consume country code to improve error report [tor-browser]
  * All Platforms
+   * Bug 40474: Bump version of pion/webrtc to v3.1.41 [tor-browser-build]
    * Bug 40967: Integrate Mozilla fix for Bug 1770137 [tor-browser]
    * Bug 40968: Integrate Mozilla fix for Bug 1770048 [tor-browser]
  * Build System
