@@ -17,38 +17,76 @@ Tor Browser 11.5a12 - May 21 2022
    * Windows + OS X + Linux
      * Update Go to 1.17.10
 
-Tor Browser 11.5a11 - May 4 2022
-* Windows + OS X + Linux
-  * Update Firefox to 91.9.0esr
-  * Update NoScript to 11.4.5
-  * Update Tor to 0.4.7.7
-  * Update OpenSSL to 1.1.1o
-  * Update Tor Launcher to 0.2.35
-  * Bug 21484: Remove or hide "What's New" link from About dialog [tor-browser]
-  * Bug 40482: Remove smallerrichard builtin bridge [tor-browser-build]
-  * Bug 40886: Amend about:tor on Nightly and Alpha to encourage testing [tor-browser]
-  * Bug 40887: Implement amends to torconnect and Connection Settings following 11.5a9 [tor-browser]
-* Build System
-  * All Platforms
-    * Bug 40319: Add build tag to downloads.json [tor-browser-build]
-
-Tor Browser 11.5a10 - April 26 2022
+Tor Browser 11.0.13 - May 20 2022
  * Android
-    * Update Fenix to 99.03b
+   * Bug 40212: Tor Browser crashing on launch [fenix]
+ * All Platforms
+   * Update Tor to 0.4.7.7
+   * Bug 40967: Integrate Mozilla fix for Bug 1770137 [tor-browser]
+   * Bug 40968: Integrate Mozilla fix for Bug 1770048 [tor-browser]
+ * Build System
+   * All Platforms
+     * Update Go to 1.17.10
+     * Bug 40319: Add build tag to downloads.json [tor-browser-build]
+     * Bug 40476: Add tools/signing/do-all-signing script, and other signing scripts improvements [tor-browser-build]
+
+Tor Browser 11.5a10 - May 20 2022
+ * Android
+    * Update Fenix to 99.0.0b3
     * Update NoScript to 11.4.5
     * Update Tor to 0.4.7.7
-    * Update OpenSSL to 1.1.1n
+    * Update OpenSSL to 1.1.1o
     * Bug 40212: Tor Browser crashing on launch [fenix]
     * Bug 40433: Bump LLVM to 13.0.1 for android builds [tor-browser-build]
     * Bug 40469: Update zlib to 1.2.12 (CVE-2018-25032) [tor-browser-build]
     * Bug 40470: Fix zlib build issue for android [tor-browser-build]
+    * Bug 40682: Set network.proxy.allow_bypass to false [tor-browser]
     * Bug 40830: cherry-picked Bugzilla 1760674 on GV 99 TBA 11.5 [tor-browser]
  * Build System
    * Android
      * Update Go to 1.18.1
+     * Bug 40485: Resolve Android reproducibility issues [tor-browser-build]
+
+ Tor Browser 11.0.12 - May 12 2022
+  * Android
+    * Update NoScript to 11.4.5
+    * Update OpenSSL to 1.1.1o
+    * Bug 40202: Install fails for nightly testbuild on emulator running Android API v30 [fenix]
+    * Bug 40212: Tor Browser crashing on launch [fenix]
+    * Bug 40908: Rebase to Geckoview v96.0.3 for TBA 11.0 [tor-browser]
+    * Bug 40913: Investigate+possible revert fix for Bugzilla 1732388 [tor-browser]
+  * Build System
+    * Android
+     * Update Go to 1.17.9
+
+Tor Browser 11.5a11 - May 4 2022
+ * Windows + OS X + Linux
+   * Update Firefox to 91.9.0esr
+   * Update NoScript to 11.4.5
+   * Update Tor to 0.4.7.7
+   * Update OpenSSL to 1.1.1o
+   * Update Tor Launcher to 0.2.35
+   * Bug 21484: Remove or hide "What's New" link from About dialog [tor-browser]
+   * Bug 40482: Remove smallerrichard builtin bridge [tor-browser-build]
+   * Bug 40886: Amend about:tor on Nightly and Alpha to encourage testing [tor-browser]
+   * Bug 40887: Implement amends to torconnect and Connection Settings following 11.5a9 [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 40319: Add build tag to downloads.json [tor-browser-build]
+
+Tor Browser 11.0.11 - May 3 2022
+ * Windows + OS X + Linux
+   * Update Firefox to 91.9.0esr
+   * Update NoScript to 11.4.5
+   * Bug 21484: Remove or hide "What's New" link from About dialog [tor-browser]
+   * Bug 34366: The onion-location mechanism does not redirect to full URL [tor-browser]
+   * Bug 40482: Remove smallerrichard builtin bridge [tor-browser-build]
+ * Build System
+   * Windows + OS X + Linux
+     * Update Go to 1.17.9
 
 Tor Browser 11.5a9 - April 12 2022
-* Windows + OS X + Linux
+ * Windows + OS X + Linux
    * Update Firefox to 91.8.0esr
    * Update NoScript to 11.4.4
    * Update Tor Launcher 0.2.34
@@ -60,6 +98,17 @@ Tor Browser 11.5a9 - April 12 2022
    * Bug 40822: Rebase tor-browser 11.5a9 to 91.8 Firefox [tor-browser]
    * Bug 40862: Backport 1760674 [tor-browser]
 
+Tor Browser 11.0.10 - April 5 2022
+ * Windows + OS X + Linux
+   * Update Firefox to 91.8.0esr
+   * Update NoScript to 11.4.3
+   * Bug 14939: Support ipv6 address in Tor Circuit Display [tor-browser]
+   * Bug 40469: Update zlib to 1.2.12 (CVE-2018-25032) [tor-browser-build]
+   * Bug 40718: Application Menu items should be sentence case [tor-browser]
+   * Bug 40725: about:torconnect missing identity block content on TB11 [tor-browser]
+   * Bug 40776: Capitalize the "T" in "Tor" in application menu [tor-browser]
+   * Bug 40862: Backport 1760674 [tor-browser]
+
 Tor Browser 11.5a8 - March 15 2022
  * Windows + OS X + Linux
    * Bug 14939: Support ipv6 addresses in Tor Circuit Display [tor-browser]
@@ -67,13 +116,47 @@ Tor Browser 11.5a8 - March 15 2022
    * Bug 40802: Client Auth dialog is broken in Tor Browser 11.06, works in 11.04 [tor-browser]
    * Bug 40830: cherry-pick fix for bugzilla 1758156
 
+Tor Browser 11.0.9 - March 15 2022
+ * Windows + OS X + Linux
+   * Bug 40802: Client Auth dialog is broken in Tor Browser 11.0.6, works in 11.0.4 [tor-browser]
+   * Bug 40831: Upgrade to OpenSSL 1.1.1n [tor-browser]
+   * Bug 40830: cherry-pick fix for bugzilla 1758156 [tor-browser]
+ * Build System
+   * Windows + OS X + Linux
+     * Update Go to 1.17.8
+     * Bug 40422: Remove projects/ed25519 [tor-browser-build]
+     * Bug 40431: added license info for edwards25519 and edwards25519-extra [tor-browser-build]
+     * Bug 40436: Use intermediate files for default bridge lines [tor-browser-build]
+     * Bug 40438: Use the same list of bridges for desktop and android [tor-browser-build]
+
+Tor Browser 11.0.8 - March 11 2022
+ * Android
+   * Update Fenix to 96.3.0
+   * Update Tor to 0.4.6.10
+   * Update NoScript to 11.3.7
+   * Bug 40075: Fix bug preventing downloads on Android Q and higher [android-components]
+   * Bug 40829: Port fixes for Mozilla security advisory mfsa2022-09 to Android [tor-browser]
+ * Build System
+   * Android
+     * Update Go to 1.16.15
+     * Bug 40056: Download .aar and .jar files for all .pom files [tor-browser-build]
+     * Bug 40298: Add documentation about subuid and subgid [tor-browser-build]
+     * Bug 40385: Add android platform-31_r0 [tor-browser-build]
+     * Bug 40422: Remove projects/ed25519 [tor-browser-build]
+     * Bug 40431: added license info for edwards25519 and edwards25519-extra [tor-browser-build]
+     * Bug 40432: Support bug reports by displaying Android Components commit hash in "About Tor Browser" display [tor-browser-build]
+     * Bug 40436: Use intermediate files for default bridge lines [tor-browser-build]
+     * Bug 40438: Use the same list of bridges for desktop and android [tor-browser-build]
+     * Bug 40440: Bump version of snowflake to to include PT LOG events [tor-browser-build]
+     * Bug 40441: Add aguestuser as valid git-tag signer [tor-browser-build]
+
 Tor Browser 11.5a7 - March 9 2022
  * Android
    * Update NoScript to 11.3.7
    * Bug 40829: port fixes for Mozilla security advisory mfsa2022-09 to Android [tor-browser]
  * Build System
    * Android
-     * Update Go to 1.17.8
+   * Update Go to 1.17.8
 
 Tor Browser 11.5a6 - March 8 2022
  * Windows + OS X + Linux
@@ -90,6 +173,24 @@ Tor Browser 11.5a6 - March 8 2022
    * Windows + OS X + Linux
      * Update Go to 1.17.8
      * Bug 40441: Add Austin as a valid git-tag signer [tor-browser-build]
+
+Tor Browser 11.0.7 - March 8 2022
+ * Windows + OS X + Linux
+   * Update Firefox to 91.7.0esr
+   * Update Tor to 0.4.6.10
+   * Update NoScript to 11.3.7
+   * Bug 40435: Remove default bridge "deusexmachina" [tor-browser-build]
+   * Bug 40440: Bump version of snowflake to include PT LOG events [tor-browser-build]
+   * Bug 40684: Misc UI bugs in 11.0a10 [tor-browser]
+   * Bug 40687: Update message bar styling in about:preferences#tor [tor-browser]
+   * Bug 40691: Make quickstart checkbox grey when "off" on about:torconnect [tor-browser]
+   * Bug 40714: Next button closes "How do circuits work?" onboarding tour [tor-browser]
+   * Bug 40824: Drop 16439 Patch (android screencasting disable)
+   * Bug 40826: Cherry-pick fixes for Mozilla bug 1758062
+ * Build System
+   * Windows + OS X + Linux
+    * Update Go to 1.16.14
+    * Bug 40441: Add Austin as valid git-tag signer
 
 Tor Browser 11.5a5 - March 1 2022
  * Android
