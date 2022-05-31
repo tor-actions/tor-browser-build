@@ -165,7 +165,7 @@ Tor Browser Alpha (and Nightly) are on the `master` branch, while Stable lives i
 ### notify tor-qa
 - [ ] Email tor-qa@lists.torproject.org
     - [ ] Provide links to unsigned builds on `tb-build-03`
-    - [ ] Call out any new funcionality which needs testing
+    - [ ] Call out any new functionality which needs testing
     - [ ] Link to any known issues
 
 ### blog: https://gitlab.torproject.org/tpo/web/blog.git
@@ -183,6 +183,7 @@ Tor Browser Alpha (and Nightly) are on the `master` branch, while Stable lives i
     - [ ] Convert ChangeLog.txt to markdown format used here by : `tor-browser-build/tools/changelog-format-blog-post`
 - [ ] Push to origin as new branch, open 'Draft :' MR
 - [ ] Remove draft from MR once signed-packages are uploaded
+- [ ] Merge
 
 ### website: https://gitlab.torproject.org/tpo/web/tpo.git
 - [ ] `databags/versions.ini` : Update the downloads versions
@@ -193,9 +194,35 @@ Tor Browser Alpha (and Nightly) are on the `master` branch, while Stable lives i
     - `tor-stable`,`tor-alpha` : set by tor devs, do not touch
 - [ ] Push to origin as new branch, open 'Draft :' MR
 - [ ] Remove draft from MR once signed-packages are uploaded
+- [ ] Merge
 
-### signing
-_TODO: boklm's fancy new signing+uploading scripts_
+### signing + publishing
+- [ ] Ensure builders have matching builds
+- [ ] On staging machine, ensure updated:
+  - [ ] `tor-browser-build/tools/signing/set-config`
+    - [ ] `NSS_DB_DIR` : location of the `nssdb7` directory
+  - [ ]  `tor-browser-build/tools/signing/set-config.hosts`
+    - [ ] `ssh_host_builder` : ssh hostname of machine with unsigned builds
+      - **NOTE** : `tor-browser-build` is expected to be in the `$HOME` directory)
+    - [ ] `ssh_host_linux_signer` : ssh hostname of linux signing machine
+    - [ ] `ssh_host_macos_signer` : ssh hostname of macOS signing machine
+  - [ ] `tor-browser-build/tools/signing/set-config.macos-notarization`
+    - [ ] `macos_notarization_user` : the email login for a tor notariser Apple Developer account
+  - [ ] `tor-browser-build/tools/signing/set-config.tbb-version`
+    - [ ] `tbb_version` : tor browser version string, same as `var/torbrowser_version` in `rbm.conf` (examples: `11.5a12`, `11.0.13`)
+    - [ ] `tbb_version_build` : the tor-browser-build build number (if `var/torbrowser_build` in `rbm.conf` is `buildN` then this value is `N`)
+    - [ ] `tbb_version_type` : either `alpha` for alpha releases or `release` for stable releases
+- [ ] run do-all-signing script:
+    - `cd tor-browser-build/tools/signing/`
+    - `./do-all-signing.sh`
+- **NOTE**: at this point the signed desktop binaries should have been copied to `staticiforme`
+- [ ] Update `staticiforme.torproject.org`:
+    - From `screen` session on `staticiforme.torproject.org`
+    - [ ] Static update components : `static-update-component cdn.torproject.org && static-update-component dist.torproject.org`
+    - [ ] Enable update responses :
+      - [ ] alpha: `./deploy_update_responses-alpha.sh`
+      - **OR**
+      - [ ] release: `./deploy_update_responses-release.sh`
 
 </details>
 
