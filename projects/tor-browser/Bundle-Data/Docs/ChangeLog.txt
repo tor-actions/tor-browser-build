@@ -1,3 +1,33 @@
+Tor Browser 11.0.14 - June 2 2022
+ * All Platforms
+   * Updated NoScript to 11.4.6
+   * Bug 40474: Bump version of pion/webrtc to v3.1.41 [tor-browser-build]
+ * Windows + OS X + Linux
+   * Update Firefox to 91.10.0esr
+ * Build System
+   * All Platforms
+     * Update Go to 1.17.11
+     * Bug 40511: Changlog in stable is missing 11.5ax stanzas [tor-browser-build]
+
+Tor Browser 11.5a12 - May 21 2022
+ * Windows + OS X + Linux
+   * Bug 40309: Avoid using regional OS locales [tor-browser]
+   * Bug 40912: Hide screenshots menu since we don't support it [tor-browser]
+   * Bug 40916: Remove the browser.download.panel.shown preference [tor-browser]
+   * Bug 40918: In 11.5a11 the breadcrumbs are visible on the first bootstrap [tor-browser]
+   * Bug 40923: Consume country code to improve error report [tor-browser]
+ * All Platforms
+   * Bug 40474: Bump version of pion/webrtc to v3.1.41 [tor-browser-build]
+   * Bug 40967: Integrate Mozilla fix for Bug 1770137 [tor-browser]
+   * Bug 40968: Integrate Mozilla fix for Bug 1770048 [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 40476: Add tools/signing/do-all-signing script, and other signing scripts improvements [tor-browser-build]
+   * Android
+     * Update Go to 1.18.2
+   * Windows + OS X + Linux
+     * Update Go to 1.17.10
+
 Tor Browser 11.0.13 - May 20 2022
  * Android
    * Bug 40212: Tor Browser crashing on launch [fenix]
@@ -9,19 +39,51 @@ Tor Browser 11.0.13 - May 20 2022
    * All Platforms
      * Update Go to 1.17.10
      * Bug 40319: Add build tag to downloads.json [tor-browser-build]
-     * Bug 40486: Add tools/signing/do-all-signing script, and other signing scripts improvements [tor-browser-build]
+     * Bug 40476: Add tools/signing/do-all-signing script, and other signing scripts improvements [tor-browser-build]
 
-Tor Browser 11.0.12 - May 12 2022
+Tor Browser 11.5a10 - May 20 2022
  * Android
-   * Update NoScript to 11.4.5
-   * Update OpenSSL to 1.1.1o
-   * Bug 40202: Install fails for nightly testbuild on emulator running Android API v30 [fenix]
-   * Bug 40212: Tor Browser crashing on launch [fenix]
-   * Bug 40908: Rebase to Geckoview v96.0.3 for TBA 11.0 [tor-browser]
-   * Bug 40913: Investigate+possible revert fix for Bugzilla 1732388 [tor-browser]
+    * Update Fenix to 99.0.0b3
+    * Update NoScript to 11.4.5
+    * Update Tor to 0.4.7.7
+    * Update OpenSSL to 1.1.1o
+    * Bug 40212: Tor Browser crashing on launch [fenix]
+    * Bug 40433: Bump LLVM to 13.0.1 for android builds [tor-browser-build]
+    * Bug 40469: Update zlib to 1.2.12 (CVE-2018-25032) [tor-browser-build]
+    * Bug 40470: Fix zlib build issue for android [tor-browser-build]
+    * Bug 40682: Set network.proxy.allow_bypass to false [tor-browser]
+    * Bug 40830: cherry-picked Bugzilla 1760674 on GV 99 TBA 11.5 [tor-browser]
  * Build System
    * Android
+     * Update Go to 1.18.1
+     * Bug 40485: Resolve Android reproducibility issues [tor-browser-build]
+
+ Tor Browser 11.0.12 - May 12 2022
+  * Android
+    * Update NoScript to 11.4.5
+    * Update OpenSSL to 1.1.1o
+    * Bug 40202: Install fails for nightly testbuild on emulator running Android API v30 [fenix]
+    * Bug 40212: Tor Browser crashing on launch [fenix]
+    * Bug 40908: Rebase to Geckoview v96.0.3 for TBA 11.0 [tor-browser]
+    * Bug 40913: Investigate+possible revert fix for Bugzilla 1732388 [tor-browser]
+  * Build System
+    * Android
      * Update Go to 1.17.9
+
+Tor Browser 11.5a11 - May 4 2022
+ * Windows + OS X + Linux
+   * Update Firefox to 91.9.0esr
+   * Update NoScript to 11.4.5
+   * Update Tor to 0.4.7.7
+   * Update OpenSSL to 1.1.1o
+   * Update Tor Launcher to 0.2.35
+   * Bug 21484: Remove or hide "What's New" link from About dialog [tor-browser]
+   * Bug 40482: Remove smallerrichard builtin bridge [tor-browser-build]
+   * Bug 40886: Amend about:tor on Nightly and Alpha to encourage testing [tor-browser]
+   * Bug 40887: Implement amends to torconnect and Connection Settings following 11.5a9 [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 40319: Add build tag to downloads.json [tor-browser-build]
 
 Tor Browser 11.0.11 - May 3 2022
  * Windows + OS X + Linux
@@ -34,6 +96,19 @@ Tor Browser 11.0.11 - May 3 2022
    * Windows + OS X + Linux
      * Update Go to 1.17.9
 
+Tor Browser 11.5a9 - April 12 2022
+ * Windows + OS X + Linux
+   * Update Firefox to 91.8.0esr
+   * Update NoScript to 11.4.4
+   * Update Tor Launcher 0.2.34
+   * Update Tor to 0.4.7.5-alpha
+   * Bug 34366: The onion-location mechanism does not redirect to full URL [tor-browser]
+   * Bug 40469: Update zlib to 1.2.12 (CVE-2018-25032) [tor-browser-build]
+   * Bug 40773: Update the about:torconnect frontend page to match additional UI flows [tor-browser]
+   * Bug 40774: Update about:preferences page to match new UI designs [tor-browser]
+   * Bug 40822: Rebase tor-browser 11.5a9 to 91.8 Firefox [tor-browser]
+   * Bug 40862: Backport 1760674 [tor-browser]
+
 Tor Browser 11.0.10 - April 5 2022
  * Windows + OS X + Linux
    * Update Firefox to 91.8.0esr
@@ -45,12 +120,19 @@ Tor Browser 11.0.10 - April 5 2022
    * Bug 40776: Capitalize the "T" in "Tor" in application menu [tor-browser]
    * Bug 40862: Backport 1760674 [tor-browser]
 
+Tor Browser 11.5a8 - March 15 2022
+ * Windows + OS X + Linux
+   * Bug 14939: Support ipv6 addresses in Tor Circuit Display [tor-browser]
+   * Bug 40460: Upgrade to OpenSSL 1.1.1n [tor-browser]
+   * Bug 40802: Client Auth dialog is broken in Tor Browser 11.06, works in 11.04 [tor-browser]
+   * Bug 40830: cherry-pick fix for bugzilla 1758156
+
 Tor Browser 11.0.9 - March 15 2022
  * Windows + OS X + Linux
    * Bug 40802: Client Auth dialog is broken in Tor Browser 11.0.6, works in 11.0.4 [tor-browser]
    * Bug 40831: Upgrade to OpenSSL 1.1.1n [tor-browser]
    * Bug 40830: cherry-pick fix for bugzilla 1758156 [tor-browser]
-  * Build System
+ * Build System
    * Windows + OS X + Linux
      * Update Go to 1.17.8
      * Bug 40422: Remove projects/ed25519 [tor-browser-build]
@@ -79,6 +161,30 @@ Tor Browser 11.0.8 - March 11 2022
      * Bug 40440: Bump version of snowflake to to include PT LOG events [tor-browser-build]
      * Bug 40441: Add aguestuser as valid git-tag signer [tor-browser-build]
 
+Tor Browser 11.5a7 - March 9 2022
+ * Android
+   * Update NoScript to 11.3.7
+   * Bug 40829: port fixes for Mozilla security advisory mfsa2022-09 to Android [tor-browser]
+ * Build System
+   * Android
+   * Update Go to 1.17.8
+
+Tor Browser 11.5a6 - March 8 2022
+ * Windows + OS X + Linux
+   * Update Firefox to 91.7.0esr
+   * Update Tor to 0.4.7.4-alpha
+   * Update NoScript to 11.3.7
+   * Bug 19850: Disable Plaintext HTTP Clearnet Connections [tor-browser]
+   * Bug 40440: Bump version of snowflake to include PT LOG events [tor-browser-build]
+   * Bug 40819: Update Firefox to 91.7.0esr [tor-browser]
+   * Bug 40824: Drop 16539 Patch (android screencasting disable) [tor-browser]
+   * Bug 40825: Redirect HTTPS-Only error page when not connected [tor-browser]
+   * Bug 40826: Cherry-pick fixes for Mozilla bug 1758062 [tor-browser]
+ * Build System
+   * Windows + OS X + Linux
+     * Update Go to 1.17.8
+     * Bug 40441: Add Austin as a valid git-tag signer [tor-browser-build]
+
 Tor Browser 11.0.7 - March 8 2022
  * Windows + OS X + Linux
    * Update Firefox to 91.7.0esr
@@ -94,13 +200,51 @@ Tor Browser 11.0.7 - March 8 2022
    * Bug 40826: Cherry-pick fixes for Mozilla bug 1758062
  * Build System
    * Windows + OS X + Linux
-     * Update Go to 1.16.14
-     * Bug 40441: Add Austin as valid git-tag signer
+    * Update Go to 1.16.14
+    * Bug 40441: Add Austin as valid git-tag signer
+
+Tor Browser 11.5a5 - March 1 2022
+ * Android
+   * Update Fenix to 96.3.0
+   * Update Tor to 0.4.7.4-alpha
+   * Update NoScript to 11.3.4
+   * Bug 40075: Fix problem preventing file downloads on Android Q and above [android-components]
+   * Bug 40432: Support bug reports by displaying Android Components commit hash in "About Tor Browser" display [tor-browser-build]
+ * Build System
+   * Android
+     * Update Go to 1.17.7
+     * Bug 40056: Download .aar and .jar files for all .pom files [tor-browser-build]
+     * Bug 40385: Update components for mozilla95 [tor-browser-build]
+     * Bug 40418: Update components for mozilla96 [tor-browser-build]
+     * Bug 40435: Remove default obfs4 bridge "deusexmachina" [tor-browser-build]
+     * Bug 40436: Use intermediate files for default bridge lines [tor-browser-build]
+     * Bug 40438: Use the same list of bridges for desktop and android [tor-browser-build]
+     * Bug 40441: Add Austin as a valid git-tag signer [tor-browser-build]
+
+Tor Browser 11.5a4 - February 15 2022
+ * Windows + OS X + Linux
+   * Update Firefox to 91.6.0esr
+   * Update NoScript to 11.2.19
+   * Tor Launcher 0.2.33
+   * Bug 40562: Reorganize patchset [tor-browser]
+   * Bug 40598: Remove legacy settings read from TorSettings module [tor-browser]
+   * Bug 40679: Missing features on first-time launch in esr91 [tor-browser]
+   * Added extensions.torlauncher.launch_delay debug pref to simulate slow tor daemon launch [tor-launcher]
+   * Bug 40752: Misleading UX when about:tor as New Tab [tor-browser]
+   * Bug 40775: about:ion should no tbe labeled as a Tor Browser page [tor-browser]
+   * Bug 40793: moved Tor configuration options from old-configure.in to moz.configure [tor-browser]
+   * Bug 40795: Revert Deutsche Welle v2 redirect [tor-browser]
+ * Build System
+   * Windows + OS X + Linux
+     * Update Go to 1.17.6
+     * Bug 40416: Pick up obfsproxy 0.0.12 [tor-browser-build]
 
 Tor Browser 11.0.6 - February 8 2022
  * Windows + OS X + Linux
    * Update Firefox to 91.6.0esr
    * Update NoScript to 11.2.16
+   * Update OpenSSL to 1.1.1m
+   * Tor Launcher 0.2.33
    * Bug 40795: Revert Deutsche Welle v2 redirect [tor-browser]
    * Bug 40679: Missing features on first-time launch in esr91 [tor-browser]
    * Added extensions.torlauncher.launch_delay debug pref to simulate slow tor daemon launch [tor-launcher]
@@ -131,6 +275,56 @@ Tor Browser 11.0.5 - February 3 2022
      * Bug 40379: Update components for mozilla94 [tor-browser-build]
      * Bug 40395: Update node to 12.22.1 [tor-browser-build]
      * Bug 40403: Update Go to 1.16.12 [tor-browser-build]
+
+Tor Browser 11.5a3 - January 14 2022
+ * Android
+   * Update Fenix to 94.1.1
+   * Update NoScript to 11.2.14
+   * Update OpenSSL to 1.1.1m
+   * Update Tor to 0.4.7.3-alpha
+   * Bug 40070: Temporarily redirect DW's v2 address to their new v3 address [android-components]
+   * Bug 40198: Spoof English toggle now overlaps with locale list [fenix]
+   * Bug 40393: Point to a forked version of pion/dtls with fingerprinting fix [tor-browser-build]
+   * Bug 40394: Bump version of Snowflake to 221f1c41 [tor-browser-build]
+   * Bug 40398: Jetify tor-android-service packages [tor-browser-build]
+   * Bug 40682: Disable network.proxy.allow_bypass [tor-browser]
+   * Bug 40736: Disable third-party cookies in Private Browsing Mode [tor-browser]
+ * Build System
+   * Android
+     * Bug 40345: Update Go to 1.17.5 [tor-browser-build]
+     * Bug 40366: Use bullseye to build https-everywhere [tor-browser-build]
+     * Bug 40368: Use system's python3 for android builds [tor-browser-build]
+     * Bug 40373: Update components for mozilla93 [tor-browser-build]
+     * Bug 40379: Update components for mozilla94 [tor-browser-build]
+     * Bug 40395: Update node to 12.22.1 [tor-browser-build]
+     * Bug 40413: Removed lsb_release from Python build script [tor-browser-build]
+
+Tor Browser 11.5a2 - January 11 2022
+ * Windows + OS X + Linux
+   * Update Firefox to 91.5.0esr
+   * Update Tor to 0.4.7.3-alpha
+   * Update OpenSSL to 1.1.1m
+   * Update NoScript to 11.2.14
+   * Bug 40405: Rotate deusexmachina IP address [tor-browser-build]
+   * Bug 40645: Migrate Moat APIs to Moat.jsm module [tor-browser]
+   * Bug 40684: Misc UI bug fixes [tor-browser]
+   * Bug 40736: Disable third-party cookies in Private Browsing Mode [tor-browser]
+   * Bug 40756: Fix up wrong observer removals [tor-browser]
+   * Bug 40758: Remove YEC takeover from about:tor [torbutton]
+   * Translations update
+ * Windows
+   * Bug 40742: Remove workaround for fixing --disable-maintenance-service build bustage [tor-browser]
+   * Bug 40753: Revert fix for Youtube videos not playing on Windows [tor-browser]
+ * Linux
+   * Bug 40387: Fonts of the GUI do not render after update [tor-browser-build]
+   * Bug 40399: Bring back Noto Sans Gurmukhi and Sinhala fonts [tor-browser-build]
+   * Bug 40685: Monospace font in browser chrome [tor-browser]
+ * Build System
+   * Windows + OS X + Linux
+     * Bug 40345: Update Go to 1.17.5 [tor-browser-build]
+     * Bug 40395: Update node to 12.22.1 [tor-browser-build]
+   * OS X
+     * Bug 40390: Remove workaround for macOS OpenSSL build breakage [tor-browser-build]
 
 Tor Browser 11.0.4 - January 11 2022
  * Windows + OS X + Linux
@@ -167,6 +361,39 @@ Tor Browser 11.0.3 - December 20 2021
    * OS X
      * Bug 40390: Remove workaround for macOS OpenSSL build breakage [tor-browser-build]
 
+Tor Browser 11.5a1 - December 13 2021
+ * Windows + OS X + Linux
+   * Update Firefox to 91.4.0esr
+   * Tor Launcher 0.2.32
+   * Bug 40059: YEC activist sign empty in about:tor on RTL locales [torbutton]
+   * Bug 40386: Add new default obfs4 bridge "deusexmachina" [tor-browser-build]
+   * Bug 40393: Point to a forked version of pion/dtls with fingerprinting fix [tor-browser-build]
+   * Bug 40394: Bump version of Snowflake to 221f1c41 [tor-browser-build]
+   * Bug 40438: Add Blockchair as a search engine [tor-browser]
+   * Bug 40646: Revert tor-browser#40475 and inherit upstream fix [tor-browser]
+   * Bug 40680: Prepare update to localized assets for YEC [tor-browser]
+   * Bug 40682: Disable network.proxy.allow_bypass [tor-browser]
+   * Bug 40684: Misc UI bug fixes in 11.0a10 [tor-browser]
+   * Bug 40686: Update Onboarding link for 11.0 [tor-browser]
+   * Bug 40689: Change Blockchair Search provider's HTTP method [tor-browser]
+   * Bug 40690: Browser chrome breaks when private browsing mode is turned off [tor-browser]
+   * Bug 40691: Make quickstart checkbox gray when "off" on about:torconnect [tor-browser]
+   * Bug 40700: Switch Firefox recommendations off by default [tor-browser]
+   * Bug 40705: "visit our website" link on about:tbupdate pointing to different locations [tor-browser]
+   * Bug 40714: Next button closes "How do circuits work?" onboarding tour [tor-browser]
+   * Bug 40718: Application Menu items should be sentence case [tor-browser]
+   * Bug 40725: about:torconnect missing identity block content on TB11 [tor-browser]
+   * Translations update
+ * Windows
+   * Bug 40389: Remove workaround for HTTPS-Everywhere WASM breakage [tor-browser-build]
+   * Bug 40698: Addon menus missing content in TB11 [tor-browser]
+   * Bug 40706: Fix issue in HTTPS-Everywhere WASM [tor-browser]
+   * Bug 40721: Tabs crashing on certain pages in TB11 on Win 10 [tor-browser]
+   * Bug 40668: Document is freezing with file: scheme [tor-browser]
+ * Linux
+   * Bug 40318: Remove check for DISPLAY env var in start-tor-browser [tor-browser-build]
+   * Bug 40387: Remove some fonts on Linux [tor-browser-build]
+
 Tor Browser 11.0.2 - December 7 2021
  * Windows + OS X + Linux
    * Update Firefox to 91.4.0esr
@@ -180,16 +407,19 @@ Tor Browser 11.0.1 - November 14 2021
  * Windows + OS X + Linux
    * Tor Launcher 0.2.32
    * Bug 40059: YEC activist sign empty in about:tor on RTL locales [torbutton]
-   * Bug 40383: Workaround issue in https-e wasm [tor-browser-build]
    * Bug 40438: Add Blockchair as a search engine [tor-browser]
    * Bug 40689: Change Blockchair Search provider's HTTP method [tor-browser]
    * Bug 40690: Browser chrome breaks when private browsing mode is turned off [tor-browser]
    * Bug 40700: Switch Firefox recommendations off by default [tor-browser]
+ * Windows
+   * Bug 40383: Workaround issue in https-e wasm [tor-browser-build]
+   * Bug 40668: Document is freezing with file: scheme [tor-browser]
 
 Tor Browser 11.0 - November 8 2021
  * Windows + OS X + Linux
    * Update Firefox to 91.3.0esr
    * Update Tor to tor-0.4.6.8
+   * Bug 27845: New window height is aftected by bookmarks toolbar with icons [tor-browser]
    * Bug 32624: localStorage is not shared between tabs [tor-browser]
    * Bug 33125: Remove xpinstall.whitelist.add* as they don't do anything anymore [tor-browser]
    * Bug 34188: Cleanup extensions.* prefs [tor-browser]
@@ -203,6 +433,7 @@ Tor Browser 11.0 - November 8 2021
    * Bug 40047: New string for Security Level panel [torbutton]
    * Bug 40048: Protonify Circuit Display Panel [torbutton]
    * Bug 40053: investigate fingerprinting potential of extended TextMetrics interface [tor-browser]
+   * Bug 40057: Error popup when using New Identity feature [torbutton]
    * Bug 40083: Make sure Region.jsm fetching is disabled [tor-browser]
    * Bug 40177: Clean up obsolete preferences in our 000-tor-browser.js [tor-browser]
    * Bug 40220: Make sure tracker cookie purging is disabled [tor-browser]
@@ -228,9 +459,10 @@ Tor Browser 11.0 - November 8 2021
    * Bug 40641: Update Security Level selection in about:preferences to match style as tracking protection option bubbles [tor-browser]
    * Bug 40648: Replace onion pattern divs/css with tiling SVG [tor-browser]
    * Bug 40653: Onion Available text not aligned correctly in toolbar in ESR91 [tor-browser]
-   * Bug 40655: esr91 is suggesting to make Tor Browser the default browse [tor-browser]
+   * Bug 40655: esr91 is suggesting to make Tor Browser the default browser [tor-browser]
    * Bug 40657: esr91 is missing "New identity" in hamburger menu [tor-browser]
    * Bug 40680: Prepare update to localized assets for YEC [tor-browser]
+   * Bug 40684: Misc UI bug fixes in 11.0a10
    * Bug 40686: Update Onboarding link for 11.0 [tor-browser]
  * Build System
    * Windows + OS X + Linux
@@ -243,7 +475,7 @@ Tor Browser 11.0 - November 8 2021
    * Windows + Linux
      * Bug 40357: Update binutils to 2.35.2 [tor-browser-build]
    * Windows
-     * Bug 28240: switch from SJLJ exception handling to Dwarf2 in mingw for win32 [tor-browser-build]
+     * Bug 28240: Switch from SJLJ exception handling to Dwarf2 in mingw for win32 [tor-browser-build]
      * Bug 40306: Update Windows toolchain to switch to mozilla91 [tor-browser-build]
      * Bug 40376: Use python3 for running pe_checksum_fix.py [tor-browser-build]
    * OS X
@@ -261,6 +493,7 @@ Tor Browser 11.0a10 - November 4 2021
    * Bug 33125: Remove xpinstall.whitelist.add* as they don't do anything anymore [tor-browser]
    * Bug 34188: Cleanup extensions.* prefs [tor-browser]
    * Bug 40053: investigate fingerprinting potential of extended TextMetrics interface [tor-browser]
+   * Bug 40057: Error popup when using New Identity feature [torbutton]
    * Bug 40083: Make sure Region.jsm fetching is disabled [tor-browser]
    * Bug 40177: Clean up obsolete preferences in our 000-tor-browser.js [tor-browser]
    * Bug 40220: Make sure tracker cookie purging is disabled [tor-browser]
@@ -294,6 +527,7 @@ Tor Browser 11.0a9 -- October 15 2021
  * Windows + OS X + Linux
    * Update Firefox to 91.2.0esr
    * Update Tor to 0.4.7.1-alpha
+   * Bug 27845: New window height is aftected by bookmarks toolbar with icons [tor-browser]
    * Bug 40004: Convert tl-protocol to async. [tor-launcher]
    * Bug 40012: Watch all requested tor events [tor-launcher]
    * Bug 40027: Make torbutton_send_ctrl_cmd async [torbutton]
@@ -5530,7 +5764,7 @@ Tor Browser 6.5a1-hardened -- June 8 2016
    * Bug 18915+19065: Use our search plugins in localized builds
    * Bug 19176: Zip our language packs deterministically
    * Bug 18811: Fix first-party isolation for blobs URLs in Workers
-   * Bug 18950:	Disable or audit Reader View
+   * Bug 18950: Disable or audit Reader View
    * Bug 18886: Remove Pocket
    * Bug 18619: Tor Browser reports "InvalidStateError" in browser console
    * Bug 18945: Disable monitoring the connected state of Tor Browser users
@@ -5585,7 +5819,7 @@ Tor Browser 6.5a1 -- June 8 2016
    * Bug 18915+19065: Use our search plugins in localized builds
    * Bug 19176: Zip our language packs deterministically
    * Bug 18811: Fix first-party isolation for blobs URLs in Workers
-   * Bug 18950:	Disable or audit Reader View
+   * Bug 18950: Disable or audit Reader View
    * Bug 18886: Remove Pocket
    * Bug 18619: Tor Browser reports "InvalidStateError" in browser console
    * Bug 18945: Disable monitoring the connected state of Tor Browser users
@@ -5674,7 +5908,7 @@ Tor Browser 6.0 -- May 30 2016
    * Bug 18915+19065: Use our search plugins in localized builds
    * Bug 19176: Zip our language packs deterministically
    * Bug 18811: Fix first-party isolation for blobs URLs in Workers
-   * Bug 18950:	Disable or audit Reader View
+   * Bug 18950: Disable or audit Reader View
    * Bug 18886: Remove Pocket
    * Bug 18619: Tor Browser reports "InvalidStateError" in browser console
    * Bug 18945: Disable monitoring the connected state of Tor Browser users
