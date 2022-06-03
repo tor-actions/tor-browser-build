@@ -1,6 +1,8 @@
 <details>
   <summary>Explanation of variables</summary>
 
+- `$(BUILD_SERVER)` : the server the main builder is using to build a tor-browser release
+- `$(STAGING_SERVER)` : the server the signer is using to to run the signing process
 - `$(TOR_LAUNCHER_VERSION)` : version of `tor-launcher`, used in tags
     - example : `0.2.33`
 - `$(ESR_VERSION)` : the Mozilla defined ESR version, used in various places for building tor-browser tags, labels, etc
@@ -157,16 +159,19 @@ Tor Browser Alpha (and Nightly) are on the `master` branch, while Stable lives i
         - [ ] `input_files/sha256sum` for `go` : update sha256sum of archive (sha256 sums are displayed on the go download page)
 - [ ] ***(Android Only)*** Update allowed_addons.json by running (from `tor-browser-build` root)`./tools/fetch_allowed_addons.py > projects/tor-browser/allowed_addons.json
 - [ ] Update `ChangeLog.txt`
+  - [ ] Ensure ChangeLog.txt is sync'd between alpha and stable branches
 - [ ] Open MR with above changes
-- [ ] Begin build on `tb-build-03`
+- [ ] Begin build on `$(BUILD_SERVER)`
 - [ ] Sign/Tag commit : `make signtag-(alpha|release)`
 - [ ] Push tag to origin
 
-### notify tor-qa
-- [ ] Email tor-qa@lists.torproject.org
-    - [ ] Provide links to unsigned builds on `tb-build-03`
+### notify stakeholders
+- [ ] Email tor-qa mailing list: tor-qa@lists.torproject.org
+    - [ ] Provide links to unsigned builds on `$(BUILD_SERVER)`
     - [ ] Call out any new functionality which needs testing
     - [ ] Link to any known issues
+- [ ] Email Tails dev mailing list: tails-dev@boum.org
+    - [ ] Provide links to unsigned builds on `$(BUILD_SERVER)`
 
 ### blog: https://gitlab.torproject.org/tpo/web/blog.git
 
@@ -198,7 +203,7 @@ Tor Browser Alpha (and Nightly) are on the `master` branch, while Stable lives i
 
 ### signing + publishing
 - [ ] Ensure builders have matching builds
-- [ ] On staging machine, ensure updated:
+- [ ] On `$(STAGING_SERVER)`, ensure updated:
   - [ ] `tor-browser-build/tools/signing/set-config`
     - [ ] `NSS_DB_DIR` : location of the `nssdb7` directory
   - [ ]  `tor-browser-build/tools/signing/set-config.hosts`
@@ -212,17 +217,32 @@ Tor Browser Alpha (and Nightly) are on the `master` branch, while Stable lives i
     - [ ] `tbb_version` : tor browser version string, same as `var/torbrowser_version` in `rbm.conf` (examples: `11.5a12`, `11.0.13`)
     - [ ] `tbb_version_build` : the tor-browser-build build number (if `var/torbrowser_build` in `rbm.conf` is `buildN` then this value is `N`)
     - [ ] `tbb_version_type` : either `alpha` for alpha releases or `release` for stable releases
+- [ ] ***(Android Only)*** : *TODO*
 - [ ] run do-all-signing script:
     - `cd tor-browser-build/tools/signing/`
     - `./do-all-signing.sh`
 - **NOTE**: at this point the signed desktop binaries should have been copied to `staticiforme`
 - [ ] Update `staticiforme.torproject.org`:
-    - From `screen` session on `staticiforme.torproject.org`
-    - [ ] Static update components : `static-update-component cdn.torproject.org && static-update-component dist.torproject.org`
-    - [ ] Enable update responses :
-      - [ ] alpha: `./deploy_update_responses-alpha.sh`
-      - **OR**
-      - [ ] release: `./deploy_update_responses-release.sh`
+  - From `screen` session on `staticiforme.torproject.org`
+  - [ ] Static update components : `static-update-component cdn.torproject.org && static-update-component dist.torproject.org`
+  - [ ] Enable update responses :
+    - [ ] alpha: `./deploy_update_responses-alpha.sh`
+    - [ ] release: `./deploy_update_responses-release.sh`
+- [ ] ***(Android Only)*** : Publish APKs to Google Play
+  - [ ] Log into https://play.google.com/apps/publish
+  - Select correct app:
+    - [ ] Tor Browser
+    - [ ] Tor Browser Alpha
+  - [ ] Navigate to `Release > Production` and click `Create new release` button
+  - [ ] Upload the `*.multi.apk` APKs
+  - [ ] If necessary, update the 'Release Name' (should be automatically populated)
+  - [ ] Update Release Notes
+    - [ ] Next to 'Release notes', click `Copy from a previous release`
+    - [ ] Edit blog post url to point to most recent blog post
+  - [ ] Save, review, and configure rollout percentage
+    - [ ] 25% rollout when publishing a scheduled update
+    - [ ] 100% rollout when publishing a security-driven release
+  - [ ] ***Optional*** Update  rollout percentage to 100% after confirmed no major issues
 
 </details>
 
