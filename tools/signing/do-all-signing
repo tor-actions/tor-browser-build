@@ -31,6 +31,18 @@ function sync-builder-unsigned-to-local-signed {
   "$script_dir/sync-builder-unsigned-to-local-signed"
 }
 
+function macos-signer-directory-not-present {
+  # To avoid doing two signings at the same time, or to avoid unknowingly
+  # using parts from a previous signing attempt, we check that the
+  # directory does not exist yet (see tor-browser-build#40497)
+  if ssh "$ssh_host_macos_signer" "test -d $tbb_version"
+  then
+    echo "The directory $tbb_version already exists on $ssh_host_macos_signer"
+    return 1
+  fi
+  return 0
+}
+
 function sync-scripts-to-macos-signer {
   "$script_dir/sync-scripts-to-macos-signer"
 }
@@ -168,6 +180,7 @@ function do_step {
 
 do_step wait-for-finished-build
 do_step sync-builder-unsigned-to-local-signed
+do_step macos-signer-directory-not-present
 do_step sync-scripts-to-macos-signer
 do_step macos-signer-enable-network-proxy-settings
 do_step macos-signer-gatekeeper-signing
