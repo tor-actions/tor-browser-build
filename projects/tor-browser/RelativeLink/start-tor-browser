@@ -344,26 +344,35 @@ cd "${HOME}"
 
 # We pass all additional command-line arguments we get to Firefox.
 #
-# The --class parameter was added to fix bug 11102.
+# The --class parameter was added to fix bug 11102 (X11).
+# The --name parameter was added to fix bug 41015 (Wayland).
+# --class and --name parameters are used to make sure WM_CLASS is set
+# up correctly, to identify itself from plain Firefox windows (and
+# prevent from mixing up with them).
 
 if [ "$show_usage" -eq 1 ]; then
     # Display Firefox help, then our help
-    TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD} ./firefox --class "Tor Browser" \
+    TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD} ./firefox \
+        --class "Tor Browser" --name "Tor Browser" \
         -profile TorBrowser/Data/Browser/profile.default --help 2>/dev/null
     tbb_usage
 elif [ "$detach" -eq 1 ] ; then
-    TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD} ./firefox --class "Tor Browser" \
-       -profile TorBrowser/Data/Browser/profile.default "${@}" > "$logfile" 2>&1 </dev/null &
+    TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD} ./firefox \
+        --class "Tor Browser" --name "Tor Browser" \
+        -profile TorBrowser/Data/Browser/profile.default "${@}" > "$logfile" 2>&1 </dev/null &
     disown "$!"
 elif [ "$log_output" -eq 1 -a "$show_output" -eq 1 ]; then
-    TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD} ./firefox --class "Tor Browser" \
+    TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD} ./firefox \
+        --class "Tor Browser" --name "Tor Browser" \
         -profile TorBrowser/Data/Browser/profile.default "${@}" 2>&1 </dev/null | \
         tee "$logfile"
 elif [ "$show_output" -eq 1 ]; then
-    TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD} ./firefox --class "Tor Browser" \
+    TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD} ./firefox \
+        --class "Tor Browser" --name "Tor Browser" \
         -profile TorBrowser/Data/Browser/profile.default "${@}" < /dev/null
 else
-    TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD} ./firefox --class "Tor Browser" \
+    TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD} ./firefox \
+        --class "Tor Browser" --name "Tor Browser" \
         -profile TorBrowser/Data/Browser/profile.default "${@}" > "$logfile" 2>&1 </dev/null
 fi
 
