@@ -344,8 +344,8 @@ cd "${HOME}"
 
 # We pass all additional command-line arguments we get to Firefox.
 #
-# The --class parameter was added to fix bug 11102 (X11).
-# The --name parameter was added to fix bug 41015 (Wayland).
+# The --class parameter was added to fix bug trac#11102 (X11).
+# The --name parameter was added to fix bug tor-browser-build#40517 (Wayland).
 # --class and --name parameters are used to make sure WM_CLASS is set
 # up correctly, to identify itself from plain Firefox windows (and
 # prevent from mixing up with them).
