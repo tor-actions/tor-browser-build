@@ -21,6 +21,8 @@
     - example : either `0` or `5`; Alpha's is always `(Stable + 5) % 10`
 - `$(FIREFOX_BUILD_N)` : the firefox build revision within a given `tor-browser` branch; this is separate from the `$(TOR_BROWSER_BUILD_N) ` value
     - example : `build1`
+- `$(GECKOVIEW_BUILD_N)` : like `$(FIREFOX_BUILD_N)` but for geckoview branches
+- `$(FENIX_BUILD_N)` : like `$(FIREFOX_BUILD_N)` but for fenix branches
 - `$(TOR_BROWSER_BUILD_N)` : the tor-browser build revision for a given Tor Browser release; used in tagging git commits
     - example : `build2`
     - **NOTE** : `$(FIREFOX_BUILD_N)` and `$(TOR_BROWSER_BUILD_N)` typically are the same, but it is possible for them to diverge. For example :
@@ -115,16 +117,56 @@
 - [ ] Push tag to origin
 
 ### **tba-translation** ***(Optional)***: https://git.torproject.org/translation.git
-_TODO_
+- [ ] Fetch latest and identify new HEAD of `fenix-torbrowserstringsxml` branch
+  - [ ] `origin/fenix-torbrowserstringsxml` : `INSERT COMMIT HASH HERE`
 
 ### **android-components** ***(Optional)***: https://gitlab.torproject.org/tpo/applications/android-components.git
-_TODO_
+- [ ] ***(Optional)*** Rebase to `$(RR_VERSION)`
+  - Upstream git repo : https://github.com/mozilla-mobile/android-components.git
+  - [ ] Identify the `mozilla-mobile` git tag to start from
+    - Seem to be in the form `v$(RR_VERSION)` (for example, `v99.0.3`)
+  - [ ] Create new branch from tag named `android-components-$(RR_VERSION)-$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)-1`
+  - [ ] Push new branch to origin
+  - [ ] Rebase `android-components` patches
+  - [ ] Perform rangediff to ensure nothing weird happened resolving conflicts
+  - [ ] Open MR for the rebase
+  - [ ] Merge + Push
+ - [ ] ***(Optional)*** Backport any required patches to Stable
+  - [ ] cherry-pick patches on top of rebased branch (issues to backport should have `Backport` label and be linked to the associated `Release Prep` issue
+  - [ ] Close associated `Backport` issues
+  - [ ] Open MR for the backport commits
+  - [ ] Merge + Push
+- [ ] Sign/Tag commit:
+  - Tag : `android-components-$(RR_VERSION)-$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)-1-$(BUILD_N)`
+  - Message: `Tagging $(BUILD_N) for $(RR_VERSION)-based (alpha|stable)`
+- [ ] Push tag to origin
 
 ### **tor-android-service** ***(Optional)***: https://git.torproject.org/tor-android-service.git
-_TODO_
+- [ ] Fetch latest and identify new HEAD of `master` branch
+  - [ ] `origin/master` : `INSERT COMMIT HASH HERE`
 
 ### **fenix** ***(Optional)***: https://gitlab.torproject.org/tpo/applications/fenix.git
-_TODO_
+- [ ] ***(Optional)*** Rebase to `$(RR_VERSION)`
+  - Upstream git repo : https://github.com/mozilla-mobile/fenix.git
+  - [ ] Identify the `mozilla-mobile` git tag to start from
+    - Seem to be in the form `v$(RR_VERSION)` (for example, `v96.3.0`)
+  - [ ] Create new branch from tag named `tor-browser-$(RR_VERSION)-$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)-1`
+    - **NOTE** : it is weird but we do use `tor-browser` here rather than `fenix`
+  - [ ] Push new branch to origin
+  - [ ] Rebase `fenix` patches
+  - [ ] Perform rangediff to ensure nothing weird happened resolving conflicts
+  - [ ] Open MR for the rebase
+  - [ ] Merge + Push
+ - ***(Optional)*** Backport any required patches to Stable
+- [ ] ***(Optional)*** Backport any required patches to Stable
+  - [ ] cherry-pick patches on top of rebased branch (issues to backport should have `Backport` label and be linked to the associated `Release Prep` issue
+  - [ ] Close associated `Backport` issues
+  - [ ] Open MR for the backport commits
+  - [ ] Merge + Push
+- [ ] Sign/Tag commit:
+  - Tag : `tor-browser-$(RR_VERSION)-$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)-1-$(BUILD_N)`
+  - Message: `Tagging $(BUILD_N) for $(RR_VERSION)-based (alpha|stable)`
+- [ ] Push tag to origin
 
 </details>
 
@@ -138,10 +180,21 @@ Tor Browser Alpha (and Nightly) are on the `master` branch, while Stable lives i
     - [ ] `var/torbrowser_version` : update to next version
     - [ ] `var/torbrowser_build` : update to `$(TOR_BROWSER_BUILD_N)`
     - [ ] `var/torbrowser_incremental_from` : update to previous version
-        - [ ] **IMPORTANT**: Really actually make sure this is the previous Desktop/Android version or else the `make incrementals-*` step will fail
+        - [ ] **IMPORTANT**: Really actually make sure this is the previous Desktop version or else the `make incrementals-*` step will fail
 - [ ] Update `projects/firefox/config`
-    - [ ] `git_hash` : update the $(FIREFOX_BUILD_N) section to match `tor-browser` tag
+    - [ ] `git_hash` : update the `$(FIREFOX_BUILD_N)` section to match `tor-browser` tag
     - [ ] ***(Optional)*** `var/firefox_platform_version` : update to latest $(ESR_VERSION) if rebased
+- [ ] ***(Android Only)*** Update `projects/geckoview/config`
+    - [ ] `git_hash` : update the `$(GECKOVIEW_BUILD_N)` section to match `geckoview` tag
+    - [ ] ***(Optional)*** `var/geckoview_version` : update to latest `$(RR_VERSION)` if rebased
+- [ ] ***(Android Only, Optional)*** Update `projects/tba-translations/config`:
+  - [ ]  `git_hash` : update with HEAD commit of project's `fenix-torbrowserstringsxml` branch
+- [ ] ***(Android Only, Optional)*** Update `projects/tor-android-service/config`
+  - [ ] `git_hash` : update with HEAD commit of project's `master` branch
+- [ ] ***(Android Only, Optionl)*** Update `projects/fenix/config`
+  - [ ] `git_hash` : update the `$(FENIX_BUILD_N)` section to match `fenix` tag
+  - [ ] ***(Optional)*** `var/fenix_version` : update to latest `$(RR_VERSION)` if rebased
+- [ ] ***(Android Only)*** Update allowed_addons.json by running (from `tor-browser-build` root)`./tools/fetch_allowed_addons.py > projects/tor-browser/allowed_addons.json
 - [ ] Check for NoScript updates here : https://addons.mozilla.org/en-US/firefox/addon/noscript
     - [ ] ***(Optional)*** If version available, update `noscript` section of `input_files` in `projects/tor-browser/config`
         - [ ] `URL`
@@ -157,7 +210,6 @@ Tor Browser Alpha (and Nightly) are on the `master` branch, while Stable lives i
     - [ ] ***(Optional)*** If new go version is available, update `projects/go/config`
         - [ ] `version` : update go version
         - [ ] `input_files/sha256sum` for `go` : update sha256sum of archive (sha256 sums are displayed on the go download page)
-- [ ] ***(Android Only)*** Update allowed_addons.json by running (from `tor-browser-build` root)`./tools/fetch_allowed_addons.py > projects/tor-browser/allowed_addons.json
 - [ ] Update `ChangeLog.txt`
   - [ ] Ensure ChangeLog.txt is sync'd between alpha and stable branches
 - [ ] Open MR with above changes
@@ -217,6 +269,10 @@ Tor Browser Alpha (and Nightly) are on the `master` branch, while Stable lives i
     - [ ] `tbb_version` : tor browser version string, same as `var/torbrowser_version` in `rbm.conf` (examples: `11.5a12`, `11.0.13`)
     - [ ] `tbb_version_build` : the tor-browser-build build number (if `var/torbrowser_build` in `rbm.conf` is `buildN` then this value is `N`)
     - [ ] `tbb_version_type` : either `alpha` for alpha releases or `release` for stable releases
+- [ ] On `$(STAGING_SERVER)` in a separate `screen` session, run the macOS proxy script:
+    - `cd tor-browser-build/tools/signing/`
+    - `./macos-signer-proxy`
+- [ ] On `$(STAGING_SERVER)` in a separate `screen` session, ensure tor daemon is running with SOCKS5 proxy on the default port 9050
 - [ ] ***(Android Only)*** : *TODO*
 - [ ] run do-all-signing script:
     - `cd tor-browser-build/tools/signing/`
