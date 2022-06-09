@@ -3,172 +3,172 @@ rbm=./rbm/rbm
 all: release
 
 release: submodule-update
-	$(rbm) build release --target release --target torbrowser-all
+	$(rbm) build release --target release --target browser-all --target torbrowser
 
 release-android: submodule-update
-	$(rbm) build release --target release --target torbrowser-all-android
+	$(rbm) build release --target release --target browser-all-android --target torbrowser
 
 release-android-armv7: submodule-update
-	$(rbm) build release --target release --target torbrowser-android-armv7
+	$(rbm) build release --target release --target browser-android-armv7 --target torbrowser
 
 release-android-x86: submodule-update
-	$(rbm) build release --target release --target torbrowser-android-x86
+	$(rbm) build release --target release --target browser-android-x86 --target torbrowser
 
 release-android-x86_64: submodule-update
-	$(rbm) build release --target release --target torbrowser-android-x86_64
+	$(rbm) build release --target release --target browser-android-x86_64 --target torbrowser
 
 release-android-aarch64: submodule-update
-	$(rbm) build release --target release --target torbrowser-android-aarch64
+	$(rbm) build release --target release --target browser-android-aarch64 --target torbrowser
 
 release-desktop: submodule-update
-	$(rbm) build release --target release --target torbrowser-all-desktop
+	$(rbm) build release --target release --target browser-all-desktop --target torbrowser
 
 release-linux-x86_64: submodule-update
-	$(rbm) build release --target release --target torbrowser-linux-x86_64
+	$(rbm) build release --target release --target browser-linux-x86_64 --target torbrowser
 
 release-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target release --target torbrowser-linux-x86_64-asan
+	$(rbm) build release --target release --target browser-linux-x86_64-asan --target torbrowser
 
 release-linux-i686: submodule-update
-	$(rbm) build release --target release --target torbrowser-linux-i686
+	$(rbm) build release --target release --target browser-linux-i686 --target torbrowser
 
 release-windows-i686: submodule-update
-	$(rbm) build release --target release --target torbrowser-windows-i686
+	$(rbm) build release --target release --target browser-windows-i686 --target torbrowser
 
 release-windows-x86_64: submodule-update
-	$(rbm) build release --target release --target torbrowser-windows-x86_64
+	$(rbm) build release --target release --target browser-windows-x86_64 --target torbrowser
 
 release-osx-x86_64: submodule-update
-	$(rbm) build release --target release --target torbrowser-osx-x86_64
+	$(rbm) build release --target release --target browser-osx-x86_64 --target torbrowser
 
 release-src: submodule-update
-	$(rbm) build release --target release --target torbrowser-src
+	$(rbm) build release --target release --target browser-src --target torbrowser
 
 alpha: submodule-update
-	$(rbm) build release --target alpha --target torbrowser-all
+	$(rbm) build release --target alpha --target browser-all --target torbrowser
 
 alpha-android: submodule-update
-	$(rbm) build release --target alpha --target torbrowser-all-android
+	$(rbm) build release --target alpha --target browser-all-android --target torbrowser
 
 alpha-android-armv7: submodule-update
-	$(rbm) build release --target alpha --target torbrowser-android-armv7
+	$(rbm) build release --target alpha --target browser-android-armv7 --target torbrowser
 
 alpha-android-x86: submodule-update
-	$(rbm) build release --target alpha --target torbrowser-android-x86
+	$(rbm) build release --target alpha --target browser-android-x86 --target torbrowser
 
 alpha-android-x86_64: submodule-update
-	$(rbm) build release --target alpha --target torbrowser-android-x86_64
+	$(rbm) build release --target alpha --target browser-android-x86_64 --target torbrowser
 
 alpha-android-aarch64: submodule-update
-	$(rbm) build release --target alpha --target torbrowser-android-aarch64
+	$(rbm) build release --target alpha --target browser-android-aarch64 --target torbrowser
 
 alpha-desktop: submodule-update
-	$(rbm) build release --target alpha --target torbrowser-all-desktop
+	$(rbm) build release --target alpha --target browser-all-desktop --target torbrowser
 
 alpha-linux-x86_64: submodule-update
-	$(rbm) build release --target alpha --target torbrowser-linux-x86_64
+	$(rbm) build release --target alpha --target browser-linux-x86_64 --target torbrowser
 
 alpha-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target alpha --target torbrowser-linux-x86_64-asan
+	$(rbm) build release --target alpha --target browser-linux-x86_64-asan --target torbrowser
 
 alpha-linux-i686: submodule-update
-	$(rbm) build release --target alpha --target torbrowser-linux-i686
+	$(rbm) build release --target alpha --target browser-linux-i686 --target torbrowser
 
 alpha-windows-i686: submodule-update
-	$(rbm) build release --target alpha --target torbrowser-windows-i686
+	$(rbm) build release --target alpha --target browser-windows-i686 --target torbrowser
 
 alpha-windows-x86_64: submodule-update
-	$(rbm) build release --target alpha --target torbrowser-windows-x86_64
+	$(rbm) build release --target alpha --target browser-windows-x86_64 --target torbrowser
 
 alpha-osx-x86_64: submodule-update
-	$(rbm) build release --target alpha --target torbrowser-osx-x86_64
+	$(rbm) build release --target alpha --target browser-osx-x86_64 --target torbrowser
 
 alpha-src: submodule-update
-	$(rbm) build release --target alpha --target torbrowser-src
+	$(rbm) build release --target alpha --target browser-src --target torbrowser
 
 nightly: submodule-update
-	$(rbm) build release --target nightly --target torbrowser-all
+	$(rbm) build release --target nightly --target browser-all --target torbrowser
 
 nightly-android: submodule-update
-	$(rbm) build release --target nightly --target torbrowser-all-android
+	$(rbm) build release --target nightly --target browser-all-android --target torbrowser
 
 nightly-android-armv7: submodule-update
-	$(rbm) build release --target nightly --target torbrowser-android-armv7
+	$(rbm) build release --target nightly --target browser-android-armv7 --target torbrowser
 
 nightly-android-x86: submodule-update
-	$(rbm) build release --target nightly --target torbrowser-android-x86
+	$(rbm) build release --target nightly --target browser-android-x86 --target torbrowser
 
 nightly-android-x86_64: submodule-update
-	$(rbm) build release --target nightly --target torbrowser-android-x86_64
+	$(rbm) build release --target nightly --target browser-android-x86_64 --target torbrowser
 
 nightly-android-aarch64: submodule-update
-	$(rbm) build release --target nightly --target torbrowser-android-aarch64
+	$(rbm) build release --target nightly --target browser-android-aarch64 --target torbrowser
 
 nightly-desktop: submodule-update
-	$(rbm) build release --target nightly --target torbrowser-all-desktop
+	$(rbm) build release --target nightly --target browser-all-desktop --target torbrowser
 
 nightly-linux-x86_64: submodule-update
-	$(rbm) build release --target nightly --target torbrowser-linux-x86_64
+	$(rbm) build release --target nightly --target browser-linux-x86_64 --target torbrowser
 
 nightly-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target nightly --target torbrowser-linux-x86_64-asan
+	$(rbm) build release --target nightly --target browser-linux-x86_64-asan --target torbrowser
 
 nightly-linux-i686: submodule-update
-	$(rbm) build release --target nightly --target torbrowser-linux-i686
+	$(rbm) build release --target nightly --target browser-linux-i686 --target torbrowser
 
 nightly-windows-i686: submodule-update
-	$(rbm) build release --target nightly --target torbrowser-windows-i686
+	$(rbm) build release --target nightly --target browser-windows-i686 --target torbrowser
 
 nightly-windows-x86_64: submodule-update
-	$(rbm) build release --target nightly --target torbrowser-windows-x86_64
+	$(rbm) build release --target nightly --target browser-windows-x86_64 --target torbrowser
 
 nightly-osx-x86_64: submodule-update
-	$(rbm) build release --target nightly --target torbrowser-osx-x86_64
+	$(rbm) build release --target nightly --target browser-osx-x86_64 --target torbrowser
 
 nightly-src: submodule-update
-	$(rbm) build release --target nightly --target torbrowser-src
+	$(rbm) build release --target nightly --target browser-src --target torbrowser
 
 testbuild: submodule-update
-	$(rbm) build release --target testbuild --target torbrowser-all
+	$(rbm) build release --target testbuild --target browser-all --target torbrowser
 
 testbuild-android: submodule-update
-	$(rbm) build release --target testbuild --target torbrowser-all-android
+	$(rbm) build release --target testbuild --target browser-all-android --target torbrowser
 
 testbuild-android-armv7: submodule-update
-	$(rbm) build release --target testbuild --target torbrowser-android-armv7
+	$(rbm) build release --target testbuild --target browser-android-armv7 --target torbrowser
 
 testbuild-android-x86: submodule-update
-	$(rbm) build release --target testbuild --target torbrowser-android-x86
+	$(rbm) build release --target testbuild --target browser-android-x86 --target torbrowser
 
 testbuild-android-x86_64: submodule-update
-	$(rbm) build release --target testbuild --target torbrowser-android-x86_64
+	$(rbm) build release --target testbuild --target browser-android-x86_64 --target torbrowser
 
 testbuild-android-aarch64: submodule-update
-	$(rbm) build release --target testbuild --target torbrowser-android-aarch64
+	$(rbm) build release --target testbuild --target browser-android-aarch64 --target torbrowser
 
 testbuild-desktop: submodule-update
-	$(rbm) build release --target testbuild --target torbrowser-all-desktop
+	$(rbm) build release --target testbuild --target browser-all-desktop --target torbrowser
 
 testbuild-linux-x86_64: submodule-update
-	$(rbm) build release --target testbuild --target torbrowser-linux-x86_64
+	$(rbm) build release --target testbuild --target browser-linux-x86_64 --target torbrowser
 
 testbuild-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target testbuild --target torbrowser-linux-x86_64-asan
+	$(rbm) build release --target testbuild --target browser-linux-x86_64-asan --target torbrowser
 
 testbuild-linux-i686: submodule-update
-	$(rbm) build release --target testbuild --target torbrowser-linux-i686
+	$(rbm) build release --target testbuild --target browser-linux-i686 --target torbrowser
 
 testbuild-windows-x86_64: submodule-update
-	$(rbm) build release --target testbuild --target torbrowser-windows-x86_64
+	$(rbm) build release --target testbuild --target browser-windows-x86_64 --target torbrowser
 
 testbuild-windows-i686: submodule-update
-	$(rbm) build release --target testbuild --target torbrowser-windows-i686
+	$(rbm) build release --target testbuild --target browser-windows-i686 --target torbrowser
 
 testbuild-osx-x86_64: submodule-update
-	$(rbm) build release --target testbuild --target torbrowser-osx-x86_64
+	$(rbm) build release --target testbuild --target browser-osx-x86_64 --target torbrowser
 
 testbuild-src: submodule-update
-	$(rbm) build release --target testbuild --target torbrowser-src-testbuild
+	$(rbm) build release --target testbuild --target browser-src-testbuild --target torbrowser
 
 signtag-release: submodule-update
 	$(rbm) build release --step signtag --target release

@@ -9,76 +9,84 @@ var:
   containers_target: with_containers
 
 targets:
-  torbrowser-all:
-    - torbrowser-linux-x86_64
-    - torbrowser-linux-i686
-    - torbrowser-windows-i686
-    - torbrowser-windows-x86_64
-    - torbrowser-osx-x86_64
-    - torbrowser-android-armv7
-    - torbrowser-android-x86
-    - torbrowser-android-x86_64
-    - torbrowser-android-aarch64
-    - torbrowser-src
-  torbrowser-all-desktop:
-    - torbrowser-linux-x86_64
-    - torbrowser-linux-i686
-    - torbrowser-windows-i686
-    - torbrowser-windows-x86_64
-    - torbrowser-osx-x86_64
-    - torbrowser-src
-  torbrowser-all-android:
-    - torbrowser-android-armv7
-    - torbrowser-android-x86
-    - torbrowser-android-x86_64
-    - torbrowser-android-aarch64
-  torbrowser-android-armv7:
+  browser-all:
+    - browser-linux-x86_64
+    - browser-linux-i686
+    - browser-windows-i686
+    - browser-windows-x86_64
+    - browser-osx-x86_64
+    - browser-android-armv7
+    - browser-android-x86
+    - browser-android-x86_64
+    - browser-android-aarch64
+    - browser-src
+  browser-all-desktop:
+    - browser-linux-x86_64
+    - browser-linux-i686
+    - browser-windows-i686
+    - browser-windows-x86_64
+    - browser-osx-x86_64
+    - browser-src
+  browser-all-android:
+    - browser-android-armv7
+    - browser-android-x86
+    - browser-android-x86_64
+    - browser-android-aarch64
+  browser-android-armv7:
     var:
-      torbrowser-android-armv7: 1
-  torbrowser-android-x86:
+      browser-android-armv7: 1
+  browser-android-x86:
     var:
-      torbrowser-android-x86: 1
-  torbrowser-android-x86_64:
+      browser-android-x86: 1
+  browser-android-x86_64:
     var:
-      torbrowser-android-x86_64: 1
-  torbrowser-android-aarch64:
+      browser-android-x86_64: 1
+  browser-android-aarch64:
     var:
-      torbrowser-android-aarch64: 1
-  torbrowser-linux-x86_64:
+      browser-android-aarch64: 1
+  browser-linux-x86_64:
     var:
-      torbrowser-linux-x86_64: 1
-  torbrowser-linux-x86_64-asan:
+      browser-linux-x86_64: 1
+  browser-linux-x86_64-asan:
     var:
-      torbrowser-linux-x86_64: 1
+      browser-linux-x86_64: 1
       asan-build: '-asan'
-  torbrowser-linux-i686:
+  browser-linux-i686:
     var:
-      torbrowser-linux-i686: 1
-  torbrowser-windows-i686:
+      browser-linux-i686: 1
+  browser-windows-i686:
     var:
-      torbrowser-windows-i686: 1
-  torbrowser-windows-x86_64:
+      browser-windows-i686: 1
+  browser-windows-x86_64:
     var:
-      torbrowser-windows-x86_64: 1
-  torbrowser-osx-x86_64:
+      browser-windows-x86_64: 1
+  browser-osx-x86_64:
     var:
-      torbrowser-osx-x86_64: 1
-  torbrowser-src:
+      browser-osx-x86_64: 1
+  browser-src:
     var:
-      torbrowser-src: '[% ! c("var/testbuild") %]'
-  torbrowser-src-testbuild:
+      browser-src: '[% ! c("var/testbuild") %]'
+  browser-src-testbuild:
     var:
-      torbrowser-src: 1
+      browser-src: 1
 
   notarget:
+    - torbrowser
     - release
-    - torbrowser-all
-    - torbrowser-all-android
-    - torbrowser-all-desktop
+    - browser-all
+    - browser-all-android
+    - browser-all-desktop
 
   noversiondir:
     var:
       publish_dir: ''
+
+  torbrowser:
+    var:
+      browser_type: torbrowser
+  basebrowser:
+    var:
+      browser_type: basebrowser
 
   release:
     var:
@@ -99,7 +107,7 @@ targets:
     output_dir: 'testbuild'
     var:
       testbuild: 1
-      build_target: torbrowser-testbuild
+      build_target: '[% c("var/browser_type") %]-testbuild'
       publish_dir: ''
 
   no_containers:
@@ -119,102 +127,104 @@ input_files:
 # Release
  - name: android-armv7
    project: tor-browser
-   enable: '[% c("var/torbrowser-android-armv7") %]'
+   enable: '[% c("var/browser-android-armv7") %]'
    target:
      - '[% c("var/containers_target") %]'
      - '[% c("var/build_target") %]'
-     - torbrowser-android-armv7
+     - '[% c("var/browser_type") %]-android-armv7'
 
  - name: android-x86
    project: tor-browser
-   enable: '[% c("var/torbrowser-android-x86") %]'
+   enable: '[% c("var/browser-android-x86") %]'
    target:
      - '[% c("var/containers_target") %]'
      - '[% c("var/build_target") %]'
-     - torbrowser-android-x86
+     - '[% c("var/browser_type") %]-android-x86'
 
  - name: android-x86_64
    project: tor-browser
-   enable: '[% c("var/torbrowser-android-x86_64") %]'
+   enable: '[% c("var/browser-android-x86_64") %]'
    target:
      - '[% c("var/containers_target") %]'
      - '[% c("var/build_target") %]'
-     - torbrowser-android-x86_64
+     - '[% c("var/browser_type") %]-android-x86_64'
 
  - name: android-aarch64
    project: tor-browser
-   enable: '[% c("var/torbrowser-android-aarch64") %]'
+   enable: '[% c("var/browser-android-aarch64") %]'
    target:
      - '[% c("var/containers_target") %]'
      - '[% c("var/build_target") %]'
-     - torbrowser-android-aarch64
+     - '[% c("var/browser_type") %]-android-aarch64'
 
  - name: linux-x86_64
    project: tor-browser
-   enable: '[% c("var/torbrowser-linux-x86_64") %]'
+   enable: '[% c("var/browser-linux-x86_64") %]'
    target:
      - '[% c("var/build_target") %]'
-     - 'torbrowser-linux-x86_64[% c("var/asan-build") %]'
+     - '[% c("var/browser_type") %]-linux-x86_64[% c("var/asan-build") %]'
 
  - name: linux-i686
    project: tor-browser
-   enable: '[% c("var/torbrowser-linux-i686") %]'
+   enable: '[% c("var/browser-linux-i686") %]'
    target:
      - '[% c("var/build_target") %]'
-     - torbrowser-linux-i686
+     - '[% c("var/browser_type") %]-linux-i686'
 
  - name: windows-i686
    project: tor-browser
-   enable: '[% c("var/torbrowser-windows-i686") %]'
+   enable: '[% c("var/browser-windows-i686") %]'
    target:
      - '[% c("var/build_target") %]'
-     - torbrowser-windows-i686
+     - '[% c("var/browser_type") %]-windows-i686'
 
  - name: windows-x86_64
    project: tor-browser
-   enable: '[% c("var/torbrowser-windows-x86_64") %]'
+   enable: '[% c("var/browser-windows-x86_64") %]'
    target:
      - '[% c("var/build_target") %]'
-     - torbrowser-windows-x86_64
+     - '[% c("var/browser_type") %]-windows-x86_64'
 
  - name: osx-x86_64
    project: tor-browser
-   enable: '[% c("var/torbrowser-osx-x86_64") %]'
+   enable: '[% c("var/browser-osx-x86_64") %]'
    target:
      - '[% c("var/build_target") %]'
-     - torbrowser-osx-x86_64
+     - '[% c("var/browser_type") %]-osx-x86_64'
 
  - name: windows-expert-bundle
    project: tor
-   enable: '[% c("var/torbrowser-windows-i686") %]'
+   enable: '[% c("var/browser-windows-i686") %]'
    target:
      - '[% c("var/build_target") %]'
-     - torbrowser-windows-i686
+     - '[% c("var/browser_type") %]-windows-i686'
      - expert-bundle
 
  - name: windows64-expert-bundle
    project: tor
-   enable: '[% c("var/torbrowser-windows-x86_64") %]'
+   enable: '[% c("var/browser-windows-x86_64") && c("var/tor-browser") %]'
    target:
      - '[% c("var/build_target") %]'
-     - torbrowser-windows-x86_64
+     - '[% c("var/browser_type") %]-windows-x86_64'
      - expert-bundle
 
  - name: src-firefox
    project: firefox
-   enable: '[% c("var/torbrowser-src") %]'
+   enable: '[% c("var/browser-src") %]'
    pkg_type: src-tarballs
    target:
      - '[% c("var/build_target") %]'
-     - torbrowser-src
+     - browser-src
+     - '[% c("var/browser_type") %]'
 
  - name: src-tor-launcher
    project: tor-launcher
-   enable: '[% c("var/torbrowser-src") %]'
+   enable: '[% c("var/browser-src") && c("var/tor-browser") %]'
    pkg_type: src-tarballs
    target:
      - '[% c("var/build_target") %]'
-     - torbrowser-src
+     - browser-src
+     - '[% c("var/browser_type") %]'
 
 steps:
   signtag:
