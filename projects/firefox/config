@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
-filename: 'firefox-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %]'
-git_hash: 'tor-browser-[% c("var/firefox_version") %]-[% c("var/torbrowser_branch") %]-1-build2'
+filename: 'firefox-[% c("var/project-name") %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %]'
+git_hash: '[% c("var/project-name") %]-[% c("var/firefox_version") %]-[% c("var/browser_branch") %]-build[% c("var/browser_build") %]'
 tag_gpg_id: 1
 git_url: https://git.torproject.org/tor-browser.git
 git_submodule: 1
@@ -12,7 +12,8 @@ container:
 var:
   firefox_platform_version: 91.10.0
   firefox_version: '[% c("var/firefox_platform_version") %]esr'
-  torbrowser_branch: 11.5
+  browser_branch: '11.5-1'
+  browser_build: 2
   branding_directory: 'browser/branding/alpha'
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   deps:
@@ -61,7 +62,7 @@ targets:
       branding_directory: 'browser/branding/official'
 
   nightly:
-    git_hash: 'tor-browser-[% c("var/firefox_version") %]-[% c("var/torbrowser_branch") %]-1'
+    git_hash: '[% c("var/project-name") %]-[% c("var/firefox_version") %]-[% c("var/browser_branch") %]'
     tag_gpg_id: 0
     var:
       branding_directory: 'browser/branding/nightly'
@@ -170,6 +171,7 @@ input_files:
     enable: '[% c("var/linux") %]'
   - project: tor-launcher
     name: tor-launcher
+    enable: '[% c("var/tor-browser") %]'
   - filename: namecoin-torbutton.patch
     enable: '[% c("var/namecoin") %]'
     # TorButton patch authored by Arthur Edelstein, from https://github.com/arthuredelstein/torbutton/ branch 2.1.10-namecoin
