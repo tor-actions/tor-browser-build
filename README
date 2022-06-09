@@ -66,9 +66,9 @@ Starting a build
 To start a build, run one of the following commands, depending on the
 channel you want to build:
 
-  $ make release
-  $ make alpha
-  $ make nightly
+  $ make torbrowser-release
+  $ make torbrowser-alpha
+  $ make torbrowser-nightly
 
 You can find the build result in the directory release/unsigned/$version
 or alpha/unsigned/$version for release or alpha builds. The result of
@@ -77,15 +77,15 @@ nightly can be found in the nightly/$version directory.
 If you want to build for a specific platform only, append the platform
 name to the makefile target:
 
-  $ make nightly-linux-x86_64
-  $ make nightly-linux-i686
-  $ make nightly-windows-i686
-  $ make nightly-windows-x86_64
-  $ make nightly-osx-x86_64
-  $ make nightly-android-armv7
-  $ make nightly-android-aarch64
-  $ make nightly-android-x86
-  $ make nightly-android-x86_64
+  $ make torbrowser-nightly-linux-x86_64
+  $ make torbrowser-nightly-linux-i686
+  $ make torbrowser-nightly-windows-i686
+  $ make torbrowser-nightly-windows-x86_64
+  $ make torbrowser-nightly-osx-x86_64
+  $ make torbrowser-nightly-android-armv7
+  $ make torbrowser-nightly-android-aarch64
+  $ make torbrowser-nightly-android-x86
+  $ make torbrowser-nightly-android-x86_64
 
 When you want to quickly do a build to test a change, you can use the
 testbuild makefile target, and find the build in the testbuild directory.

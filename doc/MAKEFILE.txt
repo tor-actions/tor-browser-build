@@ -2,30 +2,32 @@ Description of makefile rules
 =============================
 
 
-release
--------
+torbrowser-release
+------------------
 Build Tor Browser for the release channel, for all supported platforms.
 The resulting build can be found in directory release/$version.
 
-release-{linux-x86_64,linux-i686,windows-i686,osx-x86_64,android-armv7,
-         android-x86,android-x86_64,android-aarch64,desktop,android}
------------------------------------------------------------------------
-Same as release, for the selected platform only. The "desktop" platform
-means Linux, Windows and macOS. The "android" platform means android for
-all architectures we support.
+torbrowser-release-{linux-x86_64,linux-i686,windows-i686,osx-x86_64,
+                    android-armv7, android-x86,android-x86_64,
+                    android-aarch64,desktop,android}
+--------------------------------------------------------------------
+Same as torbrowser-release, for the selected platform only. The "desktop"
+platform means Linux, Windows and macOS. The "android" platform means
+android for all architectures we support.
 
-alpha
------
+torbrowser-alpha
+----------------
 Build Tor Browser for the alpha channel, for all supported platforms.
 The resulting build can be found in directory alpha/$version.
 
-alpha-{linux-x86_64,linux-i686,windows-i686,osx-x86_64,android-armv7,
-       android-x86,android-x86_64,android-aarch64,desktop,android}
----------------------------------------------------------------------
-Same as alpha, for the selected platform only.
+torbrowser-alpha-{linux-x86_64,linux-i686,windows-i686,osx-x86_64,
+                  android-armv7,android-x86,android-x86_64,
+                  android-aarch64,desktop,android}
+------------------------------------------------------------------
+Same as torbrowser-alpha, for the selected platform only.
 
-nightly
--------
+torbrowser-nightly
+------------------
 Build Tor Browser for the nightly channel, for all supported platforms.
 Many of the components will be based on the master branch. You might
 want to run "make fetch" before, to fetch the latest commits from all
@@ -33,25 +35,26 @@ components.
 
 The resulting build can be found in directory nightly/$date
 
-nightly-{linux-x86_64,linux-i686,windows-i686,osx-x86_64,android-armv7,
-         android-x86,android-x86_64,android-aarch64,desktop,android}
------------------------------------------------------------------------
-Same as nightly, for the selected platform only.
+torbrowser-nightly-{linux-x86_64,linux-i686,windows-i686,osx-x86_64,
+                    android-armv7,android-x86,android-x86_64,
+                    android-aarch64,desktop,android}
+--------------------------------------------------------------------
+Same as torbrowser-nightly, for the selected platform only.
 
-testbuild
----------
+torbrowser-testbuild
+--------------------
 Build a Tor Browser test build. To make the build faster, only the en-US
 locale is created, without mar files, and without the source tarballs.
 By default it is based on the alpha channel, but you can change that by
 editing rbm.local.conf. The resulting build can be found in directory
 testbuild.
 
-{release,alpha,nightly,testbuild}-linux-x86_64-asan
-----------------------------------------------------
+torbrowser-{release,alpha,nightly,testbuild}-linux-x86_64-asan
+--------------------------------------------------------------
 Create a build for Linux x86_64 with Address Sanitizer enabled.
 
-{release,alpha,nightly,testbuild}-src
--------------------------------------
+torbrowser-{release,alpha,nightly,testbuild}-src
+------------------------------------------------
 Create source tarballs for firefox, torbutton and tor-launcher.
 
 fetch
