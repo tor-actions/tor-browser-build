@@ -174,10 +174,10 @@ If the component you are looking at has many dependencies, the display
 can take some time as various build_id values need to be computed. If
 you don't care about the accuracy of input and output file names, you
 can add '--target no_build_id' to the command line. For instance, if you
-want to look at the build script for the tor-browser component (which
+want to look at the build script for the browser component (which
 has a lot of dependencies), you can use:
 
-  $ ./rbm/rbm showconf tor build --target alpha --target \
+  $ ./rbm/rbm showconf browser build --target alpha --target \
      torbrowser-linux-x86_64 --target no_build_id
 
 The same type of commands can be used to look at any option values,
