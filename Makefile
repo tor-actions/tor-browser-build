@@ -2,6 +2,10 @@ rbm=./rbm/rbm
 
 all: torbrowser-release
 
+#######################
+# Tor Browser Targets #
+#######################
+
 torbrowser-release: submodule-update
 	$(rbm) build release --target release --target browser-all --target torbrowser
 
@@ -263,6 +267,184 @@ cargo_vendor-lucetc: submodule-update
 
 cargo_vendor-uniffi-rs: submodule-update
 	$(rbm) build uniffi-rs --step cargo_vendor --target nightly --target torbrowser-linux-x86_64
+
+
+########################
+# Base Browser Targets #
+########################
+
+basebrowser-release: submodule-update
+	$(rbm) build release --target release --target browser-all --target basebrowser
+
+basebrowser-release-android: submodule-update
+	$(rbm) build release --target release --target browser-all-android --target basebrowser
+
+basebrowser-release-android-armv7: submodule-update
+	$(rbm) build release --target release --target browser-android-armv7 --target basebrowser
+
+basebrowser-release-android-x86: submodule-update
+	$(rbm) build release --target release --target browser-android-x86 --target basebrowser
+
+basebrowser-release-android-x86_64: submodule-update
+	$(rbm) build release --target release --target browser-android-x86_64 --target basebrowser
+
+basebrowser-release-android-aarch64: submodule-update
+	$(rbm) build release --target release --target browser-android-aarch64 --target basebrowser
+
+basebrowser-release-desktop: submodule-update
+	$(rbm) build release --target release --target browser-all-desktop --target basebrowser
+
+basebrowser-release-linux-x86_64: submodule-update
+	$(rbm) build release --target release --target browser-linux-x86_64 --target basebrowser
+
+basebrowser-release-linux-x86_64-asan: submodule-update
+	$(rbm) build release --target release --target browser-linux-x86_64-asan --target basebrowser
+
+basebrowser-release-linux-i686: submodule-update
+	$(rbm) build release --target release --target browser-linux-i686 --target basebrowser
+
+basebrowser-release-windows-i686: submodule-update
+	$(rbm) build release --target release --target browser-windows-i686 --target basebrowser
+
+basebrowser-release-windows-x86_64: submodule-update
+	$(rbm) build release --target release --target browser-windows-x86_64 --target basebrowser
+
+basebrowser-release-osx-x86_64: submodule-update
+	$(rbm) build release --target release --target browser-osx-x86_64 --target basebrowser
+
+basebrowser-release-src: submodule-update
+	$(rbm) build release --target release --target browser-src --target basebrowser
+
+basebrowser-alpha: submodule-update
+	$(rbm) build release --target alpha --target browser-all --target basebrowser
+
+basebrowser-alpha-android: submodule-update
+	$(rbm) build release --target alpha --target browser-all-android --target basebrowser
+
+basebrowser-alpha-android-armv7: submodule-update
+	$(rbm) build release --target alpha --target browser-android-armv7 --target basebrowser
+
+basebrowser-alpha-android-x86: submodule-update
+	$(rbm) build release --target alpha --target browser-android-x86 --target basebrowser
+
+basebrowser-alpha-android-x86_64: submodule-update
+	$(rbm) build release --target alpha --target browser-android-x86_64 --target basebrowser
+
+basebrowser-alpha-android-aarch64: submodule-update
+	$(rbm) build release --target alpha --target browser-android-aarch64 --target basebrowser
+
+basebrowser-alpha-desktop: submodule-update
+	$(rbm) build release --target alpha --target browser-all-desktop --target basebrowser
+
+basebrowser-alpha-linux-x86_64: submodule-update
+	$(rbm) build release --target alpha --target browser-linux-x86_64 --target basebrowser
+
+basebrowser-alpha-linux-x86_64-asan: submodule-update
+	$(rbm) build release --target alpha --target browser-linux-x86_64-asan --target basebrowser
+
+basebrowser-alpha-linux-i686: submodule-update
+	$(rbm) build release --target alpha --target browser-linux-i686 --target basebrowser
+
+basebrowser-alpha-windows-i686: submodule-update
+	$(rbm) build release --target alpha --target browser-windows-i686 --target basebrowser
+
+basebrowser-alpha-windows-x86_64: submodule-update
+	$(rbm) build release --target alpha --target browser-windows-x86_64 --target basebrowser
+
+basebrowser-alpha-osx-x86_64: submodule-update
+	$(rbm) build release --target alpha --target browser-osx-x86_64 --target basebrowser
+
+basebrowser-alpha-src: submodule-update
+	$(rbm) build release --target alpha --target browser-src --target basebrowser
+
+basebrowser-nightly: submodule-update
+	$(rbm) build release --target nightly --target browser-all --target basebrowser
+
+basebrowser-nightly-android: submodule-update
+	$(rbm) build release --target nightly --target browser-all-android --target basebrowser
+
+basebrowser-nightly-android-armv7: submodule-update
+	$(rbm) build release --target nightly --target browser-android-armv7 --target basebrowser
+
+basebrowser-nightly-android-x86: submodule-update
+	$(rbm) build release --target nightly --target browser-android-x86 --target basebrowser
+
+basebrowser-nightly-android-x86_64: submodule-update
+	$(rbm) build release --target nightly --target browser-android-x86_64 --target basebrowser
+
+basebrowser-nightly-android-aarch64: submodule-update
+	$(rbm) build release --target nightly --target browser-android-aarch64 --target basebrowser
+
+basebrowser-nightly-desktop: submodule-update
+	$(rbm) build release --target nightly --target browser-all-desktop --target basebrowser
+
+basebrowser-nightly-linux-x86_64: submodule-update
+	$(rbm) build release --target nightly --target browser-linux-x86_64 --target basebrowser
+
+basebrowser-nightly-linux-x86_64-asan: submodule-update
+	$(rbm) build release --target nightly --target browser-linux-x86_64-asan --target basebrowser
+
+basebrowser-nightly-linux-i686: submodule-update
+	$(rbm) build release --target nightly --target browser-linux-i686 --target basebrowser
+
+basebrowser-nightly-windows-i686: submodule-update
+	$(rbm) build release --target nightly --target browser-windows-i686 --target basebrowser
+
+basebrowser-nightly-windows-x86_64: submodule-update
+	$(rbm) build release --target nightly --target browser-windows-x86_64 --target basebrowser
+
+basebrowser-nightly-osx-x86_64: submodule-update
+	$(rbm) build release --target nightly --target browser-osx-x86_64 --target basebrowser
+
+basebrowser-nightly-src: submodule-update
+	$(rbm) build release --target nightly --target browser-src --target basebrowser
+
+basebrowser-testbuild: submodule-update
+	$(rbm) build release --target testbuild --target browser-all --target basebrowser
+
+basebrowser-testbuild-android: submodule-update
+	$(rbm) build release --target testbuild --target browser-all-android --target basebrowser
+
+basebrowser-testbuild-android-armv7: submodule-update
+	$(rbm) build release --target testbuild --target browser-android-armv7 --target basebrowser
+
+basebrowser-testbuild-android-x86: submodule-update
+	$(rbm) build release --target testbuild --target browser-android-x86 --target basebrowser
+
+basebrowser-testbuild-android-x86_64: submodule-update
+	$(rbm) build release --target testbuild --target browser-android-x86_64 --target basebrowser
+
+basebrowser-testbuild-android-aarch64: submodule-update
+	$(rbm) build release --target testbuild --target browser-android-aarch64 --target basebrowser
+
+basebrowser-testbuild-desktop: submodule-update
+	$(rbm) build release --target testbuild --target browser-all-desktop --target basebrowser
+
+basebrowser-testbuild-linux-x86_64: submodule-update
+	$(rbm) build release --target testbuild --target browser-linux-x86_64 --target basebrowser
+
+basebrowser-testbuild-linux-x86_64-asan: submodule-update
+	$(rbm) build release --target testbuild --target browser-linux-x86_64-asan --target basebrowser
+
+basebrowser-testbuild-linux-i686: submodule-update
+	$(rbm) build release --target testbuild --target browser-linux-i686 --target basebrowser
+
+basebrowser-testbuild-windows-x86_64: submodule-update
+	$(rbm) build release --target testbuild --target browser-windows-x86_64 --target basebrowser
+
+basebrowser-testbuild-windows-i686: submodule-update
+	$(rbm) build release --target testbuild --target browser-windows-i686 --target basebrowser
+
+basebrowser-testbuild-osx-x86_64: submodule-update
+	$(rbm) build release --target testbuild --target browser-osx-x86_64 --target basebrowser
+
+basebrowser-testbuild-src: submodule-update
+	$(rbm) build release --target testbuild --target browser-src-testbuild --target basebrowser
+
+
+##################
+# Common Targets #
+##################
 
 submodule-update:
 	git submodule update --init

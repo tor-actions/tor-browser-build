@@ -57,6 +57,11 @@ torbrowser-{release,alpha,nightly,testbuild}-src
 ------------------------------------------------
 Create source tarballs for firefox, torbutton and tor-launcher.
 
+basebrowser-*
+-------------
+The same rules for building Tor Browser also exist for building
+Base Browser.
+
 fetch
 -----
 Fetch new commits from all components. This is useful when you want to
