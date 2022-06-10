@@ -26,6 +26,8 @@ ac_add_options --enable-default-toolkit=cairo-gtk3
 ac_add_options --enable-tor-browser-update
 ac_add_options --enable-verify-mar
 
+ac_add_options --with-relative-profile=TorBrowser/Data/Browser
+
 ac_add_options --disable-tests
 ac_add_options --disable-debug
 ac_add_options --disable-crashreporter
@@ -34,6 +36,7 @@ ac_add_options --disable-parental-controls
 # Let's make sure no preference is enabling either Adobe's or Google's CDM.
 ac_add_options --disable-eme
 ac_add_options --enable-proxy-bypass-protection
+ac_add_options --disable-system-policies
 
 # Bug 31448: ld.gold fails if we don't disable debug-symbols
 ac_add_options --disable-debug-symbols

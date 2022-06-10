@@ -32,6 +32,8 @@ ac_add_options --enable-default-toolkit=cairo-gtk3
 ac_add_options --enable-tor-browser-update
 ac_add_options --enable-verify-mar
 
+ac_add_options --with-relative-profile=TorBrowser/Data/Browser
+
 ac_add_options --disable-strip
 ac_add_options --disable-install-strip
 ac_add_options --disable-tests
@@ -41,6 +43,7 @@ ac_add_options --disable-webrtc
 ac_add_options --disable-parental-controls
 ac_add_options --disable-eme
 ac_add_options --enable-proxy-bypass-protection
+ac_add_options --disable-system-policies
 
 # Disable telemetry
 ac_add_options MOZ_TELEMETRY_REPORTING=
