@@ -300,6 +300,9 @@ Tor Browser Alpha (and Nightly) are on the `master` branch, while Stable lives i
     - [ ] 100% rollout when publishing a security-driven release
   - [ ] ***Optional*** Update  rollout percentage to 100% after confirmed no major issues
 
+### tor-announce mailing list
+- [ ] ***(Stable release only)*** : send an email to tor-announce@lists.torproject.org, using the same content as the blog post and subject "Tor Browser $version is released".
+
 </details>
 
 /label ~"Release Prep"
