@@ -72,17 +72,6 @@ RBM_TB_EOF
 
 tar -C ${TB_STAGE_DIR} -xf [% c('input_files_by_name/firefox') %]/tor-browser.tar.gz
 
-# Make unpacked HTTPS Everywhere available in resource://torbutton/content/extensions/https-everywhere/ as TB expects
-TMP_HTTPS_EVERYWHERE_PATH=$rootdir/tmp_https_everywhere/
-mkdir $TMP_HTTPS_EVERYWHERE_PATH
-pushd $TMP_HTTPS_EVERYWHERE_PATH
-mkdir -p chrome/torbutton/content/extensions/https-everywhere/
-unzip $rootdir/[% c('input_files_by_name/https-everywhere') %] -d chrome/torbutton/content/extensions/https-everywhere/
-find . -exec [% c("var/touch") %] {} \;
-find chrome/ | sort | zip -X -@ "$TBDIR[% IF c("var/osx") %]/Contents/Resources[% END %]/omni.ja"
-popd
-rm -rf $TMP_HTTPS_EVERYWHERE_PATH
-
 # Include the Tor Browser manual
 TMP_MANUAL_PATH=$rootdir/tmp_manual/
 mkdir $TMP_MANUAL_PATH

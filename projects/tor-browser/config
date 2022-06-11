@@ -65,6 +65,7 @@ input_files:
     enable: '[% ! c("var/testbuild") && ! c("var/android") %]'
   - project: https-everywhere
     name: https-everywhere
+    enable: '[% c("var/android") %]'
   - project: fonts
     name: fonts
     enable: '[% ! c("var/android") %]'
