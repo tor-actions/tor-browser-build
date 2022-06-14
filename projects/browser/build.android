@@ -3,9 +3,9 @@
 [% pc(c('var/compiler'), 'var/setup', { compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')) }) %]
 assets_dir=assets
 ext_dir=$assets_dir/extensions
-qa_apk=[% dest_dir %]/[% c('filename') %]/tor-browser-[% c("version") %]-[% c("var/osname") %]-multi-qa.apk
+qa_apk=[% dest_dir %]/[% c('filename') %]/[% c("var/project-name") %]-[% c("version") %]-[% c("var/osname") %]-multi-qa.apk
 apk=$rootdir/fenix/app-[% c("var/abi") %]-*.apk
-test_out_apk=[% dest_dir %]/[% c('filename') %]/tor-browser-[% c("version") %]-[% c("var/osname") %]-androidTest.apk
+test_out_apk=[% dest_dir %]/[% c('filename') %]/[% c("var/project-name") %]-[% c("version") %]-[% c("var/osname") %]-androidTest.apk
 test_in_apk=$rootdir/fenix/app-*-androidTest.apk
 
 tar xavf $rootdir/[% c('input_files_by_name/fenix') %]

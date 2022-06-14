@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 version: '[% c("var/torbrowser_version") %]'
-filename: 'tor-browser-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %]'
+filename: '[% c("var/project-name") %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %]'
 container:
   use_container: 1
 
@@ -46,6 +46,12 @@ targets:
     build: '[% INCLUDE build.android %]'
     var:
       verify_allowed_addons: 1
+  torbrowser:
+    var:
+      prefs_file: 000-tor-browser.js
+  basebrowser:
+    var:
+      prefs_file: 001-base-profile.js
 
 input_files:
   - project: container-image
@@ -59,7 +65,7 @@ input_files:
     enable: '[% c("var/android") %]'
   - project: tor
     name: tor
-    enable: '[% ! c("var/android") %]'
+    enable: '[% ! c("var/android") && c("var/tor-browser") %]'
   - project: firefox-langpacks
     name: firefox-langpacks
     enable: '[% ! c("var/testbuild") && ! c("var/android") %]'
@@ -71,19 +77,15 @@ input_files:
     enable: '[% ! c("var/android") %]'
   - project: obfs4
     name: obfs4
-    enable: '[% ! c("var/android") %]'
+    enable: '[% ! c("var/android") && c("var/tor-browser") %]'
   - project: snowflake
     name: snowflake
-    enable: '[% ! c("var/android") %]'
+    enable: '[% ! c("var/android") && c("var/tor-browser") %]'
   - filename: Bundle-Data
     enable: '[% ! c("var/android") %]'
   - URL: https://addons.mozilla.org/firefox/downloads/file/3954910/noscript-11.4.6.xpi
     name: noscript
     sha256sum: 5f917e54a52d7269959976ebb6eb41f1a14c047c30d5f7bd6a401fe4126f0b3a
-  - filename: 'RelativeLink/start-tor-browser.desktop'
-    enable: '[% c("var/linux") %]'
-  - filename: 'RelativeLink/execdesktop'
-    enable: '[% c("var/linux") %]'
   - filename: 'gtk3-settings.ini'
     enable: '[% c("var/linux") %]'
   - project: libdmg-hfsplus
@@ -118,11 +120,11 @@ input_files:
   - filename: verify_allowed_addons.py
     enable: '[% c("var/android") && c("var/verify_allowed_addons") %]'
   - filename: bridges_list.obfs4.txt
-    enable: '[% ! c("var/android") %]'
+    enable: '[% ! c("var/android") && c("var/tor-browser") %]'
   - filename: bridges_list.meek-azure.txt
-    enable: '[% ! c("var/android") %]'
+    enable: '[% ! c("var/android") && c("var/tor-browser") %]'
   - filename: bridges_list.snowflake.txt
-    enable: '[% ! c("var/android") %]'
+    enable: '[% ! c("var/android") && c("var/tor-browser") %]'
   - project: manual
     name: manual
-    enable: '[% ! c("var/android") %]'
+    enable: '[% ! c("var/android") && c("var/tor-browser") %]'

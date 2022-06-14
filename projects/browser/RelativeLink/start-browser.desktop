@@ -1,0 +1,34 @@
+#!/usr/bin/env ./Browser/execdesktop
+#
+# This file is a self-modifying .desktop file that can be run from the shell.
+# It preserves arguments and environment for the start-[% c("var/project-name") %] script.
+#
+# Run './start-[% c("var/project-name") %].desktop --help' to display the full set of options.
+#
+# When invoked from the shell, this file must always be in a [% c("var/Project_Name") %] root
+# directory. When run from the file manager or desktop GUI, it is relocatable.
+#
+# After first invocation, it will update itself with the absolute path to the
+# current [% c("var/Project_Name") %] location, to support relocation of this .desktop file for GUI
+# invocation. You can also add [% c("var/Project_Name") %] to your desktop's application menu
+# by running './start-[% c("var/project-name") %].desktop --register-app'
+#
+# If you use --register-app, and then relocate your [% c("var/Project_Name") %] directory, [% c("var/Project_Name") %]
+# will no longer launch from your desktop's app launcher/dock. However, if you
+# re-run --register-app from inside that new directory, the script
+# will correct the absolute paths and re-register itself.
+#
+# This file will also still function if the path changes when [% c("var/Project_Name") %] is used as a
+# portable app, so long as it is run directly from that new directory, either
+# via the shell or via the file manager.
+
+[Desktop Entry]
+Type=Application
+Name=[% c("var/Project_Name") %] Setup
+GenericName=Web Browser
+Comment=[% c("var/Project_Name") %]  is +1 for privacy and −1 for mass surveillance
+Categories=Network;WebBrowser;Security;
+Exec=sh -c '"$(dirname "$*")"/Browser/start-[% c("var/project-name") %]  --detach || ([ ! -x "$(dirname "$*")"/Browser/start-[% c("var/project-name") %] ] && "$(dirname "$*")"/start-[% c("var/project-name") %] --detach)' dummy %k
+X-[% c("var/ProjectName") %]-ExecShell=./Browser/start-[% c("var/project-name") %] --detach
+Icon=web-browser
+StartupWMClass=[% c("var/Project_Name") %]

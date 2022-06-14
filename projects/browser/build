@@ -20,9 +20,9 @@ GENERATEDPREFSPATH=$rootdir/Bundle-Data/PTConfigs/generated-prefs.js
 touch "$GENERATEDPREFSPATH"
 
 [% IF c("var/osx") %]
-  TBDIR="$TB_STAGE_DIR/Tor Browser.app"
+  TBDIR="$TB_STAGE_DIR/[% c("var/Project_Name") %].app"
 
-  DOCSPATH=Contents/Resources/TorBrowser/Docs
+  DOCSPATH=Contents/Resources/[% c('var/ProjectName') %]/Docs
   EXTSPATH=Contents/Resources/distribution/extensions
   TORBINPATH=Contents/MacOS/Tor
   TORCONFIGPATH=Contents/Resources/TorBrowser/Tor
@@ -32,11 +32,11 @@ touch "$GENERATEDPREFSPATH"
 [% ELSE %]
   TBDIR=$TB_STAGE_DIR/Browser
 
-  DOCSPATH=TorBrowser/Docs
-  EXTSPATH=TorBrowser/Data/Browser/profile.default/extensions
+  DOCSPATH=[% c('var/ProjectName') %]/Docs
+  EXTSPATH=[% c('var/ProjectName') %]/Data/Browser/profile.default/extensions
   TORCONFIGPATH=TorBrowser/Data/Tor
 
-  mkdir -p "$TBDIR/TorBrowser/Data/Browser/Caches"
+  mkdir -p "$TBDIR/[% c('var/ProjectName') %]/Data/Browser/Caches"
 [% END %]
 
 mkdir -p "$TBDIR/$EXTSPATH"
@@ -47,42 +47,57 @@ MARTOOLS=$rootdir/mar-tools
 
 mv [% c('input_files_by_name/noscript') %] "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi"
 
-tar -C "$TBDIR" -xf [% c('input_files_by_name/obfs4') %]
-tar -C "$TBDIR" -xf [% c('input_files_by_name/snowflake') -%]
+[% IF c("var/tor-browser") -%]
+  tar -C "$TBDIR" -xf [% c('input_files_by_name/obfs4') %]
+  tar -C "$TBDIR" -xf [% c('input_files_by_name/snowflake') -%]
+[% END -%]
 
 tar -C "$TBDIR[% IF c("var/osx") %]/Contents/Resources[% END %]" -xf [% c('input_files_by_name/fonts') %]
 
 [% IF c("var/linux") %]
-  cp RelativeLink/* ${TB_STAGE_DIR}/Browser/
-  cp RelativeLink/start-tor-browser.desktop ${TB_STAGE_DIR}/
-  cat > ${TB_STAGE_DIR}/Browser/start-tor-browser << 'RBM_TB_EOF'
-[% INCLUDE 'RelativeLink/start-tor-browser' -%]
+  cat > ${TB_STAGE_DIR}/start-[% c("var/project-name") %].desktop << 'RBM_TB_EOF'
+[% INCLUDE 'RelativeLink/start-browser.desktop' -%]
 RBM_TB_EOF
+  cat > ${TB_STAGE_DIR}/Browser/start-[% c("var/project-name") %] << 'RBM_TB_EOF'
+[% INCLUDE 'RelativeLink/start-browser' -%]
+RBM_TB_EOF
+  cat > ${TB_STAGE_DIR}/Browser/execdesktop << 'RBM_TB_EOF'
+[% INCLUDE 'RelativeLink/execdesktop' -%]
+RBM_TB_EOF
+  chmod +x ${TB_STAGE_DIR}/start-[% c("var/project-name") %].desktop \
+           ${TB_STAGE_DIR}/Browser/start-[% c("var/project-name") %] \
+           ${TB_STAGE_DIR}/Browser/execdesktop
+  cp ${TB_STAGE_DIR}/start-[% c("var/project-name") %].desktop \
+     ${TB_STAGE_DIR}/Browser
   [% IF c("var/namecoin") %]
     pushd ${TB_STAGE_DIR}/Browser/
     patch -p1 < $rootdir/namecoin.patch
     popd
   [% END %]
-  chmod +x ${TB_STAGE_DIR}/Browser/start-tor-browser
   # Make sure we get the desired scrollbar behavior with Gtk3, see bug 27546.
   GTK_SETTINGS_DIR=${TB_STAGE_DIR}/Browser/.config/gtk-3.0
   mkdir -p $GTK_SETTINGS_DIR
   cp $rootdir/gtk3-settings.ini $GTK_SETTINGS_DIR/settings.ini
 [% END %]
 
-tar -C ${TB_STAGE_DIR} -xf [% c('input_files_by_name/firefox') %]/tor-browser.tar.gz
+tar -C ${TB_STAGE_DIR} -xf [% c('input_files_by_name/firefox') %]/browser.tar.gz
 
-# Include the Tor Browser manual
-TMP_MANUAL_PATH=$rootdir/tmp_manual/
-mkdir $TMP_MANUAL_PATH
-pushd $TMP_MANUAL_PATH
-tar -xf $rootdir/[% c('input_files_by_name/manual') %]
-find . -exec [% c("touch") %] {} \;
-find chrome/ | sort | zip -X -@ "$TBDIR[% IF c("var/osx") %]/Contents/Resources[% END %]/browser/omni.ja"
-popd
-rm -rf $TMP_MANUAL_PATH
+[% IF c("var/tor-browser") -%]
+  # Include the Tor Browser manual
+  TMP_MANUAL_PATH=$rootdir/tmp_manual/
+  mkdir $TMP_MANUAL_PATH
+  pushd $TMP_MANUAL_PATH
+  tar -xf $rootdir/[% c('input_files_by_name/manual') %]
+  find . -exec [% c("touch") %] {} \;
+  find chrome/ | sort | zip -X -@ "$TBDIR[% IF c("var/osx") %]/Contents/Resources[% END %]/browser/omni.ja"
+  popd
+  rm -rf $TMP_MANUAL_PATH
+[% END -%]
 
-tar -C "$TBDIR[% IF ! c("var/osx") %]/TorBrowser[% END %]" -xf [% c('input_files_by_name/tor') %]/tor.tar.gz
+[% IF c("var/tor-browser") -%]
+  tar -C "$TBDIR[% IF ! c("var/osx") %]/TorBrowser[% END %]" -xf [% c('input_files_by_name/tor') %]/tor.tar.gz
+[% END -%]
+
 [% IF c("var/namecoin") %]
   # Extract Electrum-NMC
   tar -C "$TBDIR/TorBrowser" -xf [% c('input_files_by_name/electrum-nmc') %]
@@ -112,48 +127,56 @@ tar -C "$TBDIR[% IF ! c("var/osx") %]/TorBrowser[% END %]" -xf [% c('input_files
   mkdir -p $SKELETON_TMP_RESOURCES/browser
   echo "[XRE]" > $SKELETON_TMP_RESOURCES/browser/override.ini
   echo "EnableProfileMigrator=0" >> $SKELETON_TMP_RESOURCES/browser/override.ini
-  mkdir -p $SKELETON_TMP_RESOURCES/TorBrowser/Tor
-  cp -p Bundle-Data/mac/TorBrowser/Data/Tor/torrc-defaults $SKELETON_TMP_RESOURCES/TorBrowser/Tor/
+  [% IF c("var/tor-browser") -%]
+    mkdir -p $SKELETON_TMP_RESOURCES/TorBrowser/Tor
+    cp -p Bundle-Data/mac/TorBrowser/Data/Tor/torrc-defaults $SKELETON_TMP_RESOURCES/TorBrowser/Tor/
+  [% END -%]
   # Place a copy of the bookmarks.html file at the top. It will be moved into
   # browser/omni.ja later
   cp -p Bundle-Data/mac/TorBrowser/Data/Browser/profile.default/bookmarks.html $rootdir
   rm -Rf Bundle-Data/mac
   mv $SKELETON_TMP Bundle-Data/mac
 
-  # Install a "tor" shim that sets the working directory. See #10030.
-  mv "$TBDIR/$TORBINPATH/tor" "$TBDIR/$TORBINPATH/tor.real"
-  cp Bundle-Data/mac-tor.sh "$TBDIR/$TORCONFIGPATH/tor"
+  [% IF c("var/tor-browser") -%]
+    # Install a "tor" shim that sets the working directory. See #10030.
+    mv "$TBDIR/$TORBINPATH/tor" "$TBDIR/$TORBINPATH/tor.real"
+    cp Bundle-Data/mac-tor.sh "$TBDIR/$TORCONFIGPATH/tor"
+  [% END -%]
 
   tar -C Bundle-Data/mac-applications.dmg -c . | tar -C $TB_STAGE_DIR -x
 [% END %]
 
 mkdir -p "$TBDIR/$DOCSPATH"
 cp -a Bundle-Data/Docs/* "$TBDIR/$DOCSPATH"
-tar -C Bundle-Data/[% bundledata_osname %] [% IF ! c("var/namecoin") %]--exclude=*Electrum-NMC* --exclude=*ncprop279*[% END %] -c . | tar -C "$TBDIR[% IF ! c("var/osx") %]/TorBrowser[% END %]" -x
+tar -C Bundle-Data/[% bundledata_osname %] [% IF ! c("var/namecoin") %]--exclude=*Electrum-NMC* --exclude=*ncprop279*[% END %] -c . | tar -C "$TBDIR[% IF ! c("var/osx") %]/[% c('var/ProjectName') %][% END %]" -x
 
-cat Bundle-Data/PTConfigs/[% bundledata_osname %]/torrc-defaults-appendix >> "$TBDIR/$TORCONFIGPATH/torrc-defaults"
-cat Bundle-Data/PTConfigs/bridge_prefs.js >> "$GENERATEDPREFSPATH"
+[% IF c("var/tor-browser") -%]
+  cat Bundle-Data/PTConfigs/[% bundledata_osname %]/torrc-defaults-appendix >> "$TBDIR/$TORCONFIGPATH/torrc-defaults"
+  cat Bundle-Data/PTConfigs/bridge_prefs.js >> "$GENERATEDPREFSPATH"
 
-function bridges_conf {
-  local pt="$1"
-  local i=1
-  while read -r line
-  do
-    echo "pref(\"extensions.torlauncher.default_bridge.$pt.$i\", \"$line\");" >> "$GENERATEDPREFSPATH"
-    i=$((i + 1))
-  done < "$rootdir/bridges_list.$pt.txt"
-}
-bridges_conf obfs4
-bridges_conf meek-azure
-bridges_conf snowflake
+  function bridges_conf {
+    local pt="$1"
+    local i=1
+    while read -r line
+    do
+      echo "pref(\"extensions.torlauncher.default_bridge.$pt.$i\", \"$line\");" >> "$GENERATEDPREFSPATH"
+      i=$((i + 1))
+    done < "$rootdir/bridges_list.$pt.txt"
+  }
+  bridges_conf obfs4
+  bridges_conf meek-azure
+  bridges_conf snowflake
+[% END -%]
 
-[% IF ! c("var/multi_lingual") %]
+[% IF ! c("var/multi_lingual") && c("var/tor-browser") %]
   echo 'pref("extensions.torlauncher.prompt_for_locale", false);' >> "$GENERATEDPREFSPATH"
 [% END %]
 
 [% IF c("var/linux") %]
-  chmod 700 ${TB_STAGE_DIR}/Browser/TorBrowser/Data/Browser
-  chmod 700 ${TB_STAGE_DIR}/Browser/TorBrowser/Data/Tor
+  chmod 700 ${TB_STAGE_DIR}/Browser/[% c('var/ProjectName') %]/Data/Browser
+  [% IF c("var/tor-browser") -%]
+    chmod 700 ${TB_STAGE_DIR}/Browser/TorBrowser/Data/Tor
+  [% END -%]
 [% END %]
 
 [% IF c("var/multi_lingual") %]
@@ -162,18 +185,18 @@ bridges_conf snowflake
   # of the directory that is inside the package (in other words, users will
   # not see tor-browser_ALL after they install Tor Browser).
   PKG_LOCALE="ALL"
-  PKG_DIR="tor-browser"
+  PKG_DIR='[% c("var/project-name") %]'
 [% ELSE %]
   PKG_LOCALE="en-US"
-  PKG_DIR="tor-browser_${PKG_LOCALE}"
+  PKG_DIR="[% c('var/project-name') %]_${PKG_LOCALE}"
 [% END %]
 
 
 pushd "$TBDIR[% IF c("var/osx") %]/Contents/Resources[% END %]/browser/"
-unzip omni.ja defaults/preferences/000-tor-browser.js || [ $? -lt 3 ]
+unzip omni.ja defaults/preferences/[% c("var/prefs_file") %] || [ $? -lt 3 ]
 # Append our built extension-overrides.js to 000-tor-browser.js
-cat "$GENERATEDPREFSPATH" >> defaults/preferences/000-tor-browser.js
-cp defaults/preferences/000-tor-browser.js $rootdir
+cat "$GENERATEDPREFSPATH" >> defaults/preferences/[% c("var/prefs_file") %]
+cp defaults/preferences/[% c("var/prefs_file") %] $rootdir
 [% IF c("var/osx") %]
   # Embed our default bookmarks within the en-US locale.
   mkdir -p chrome/en-US/locale/browser
@@ -184,9 +207,9 @@ cp defaults/preferences/000-tor-browser.js $rootdir
   rm -rf chrome
 [% END %]
 # Set the locale of the bundle.
-echo "pref(\"intl.locale.requested\", \"en-US\");" >> defaults/preferences/000-tor-browser.js
-[% c("touch") %] defaults/preferences/000-tor-browser.js
-zip -Xm omni.ja defaults/preferences/000-tor-browser.js
+echo "pref(\"intl.locale.requested\", \"en-US\");" >> defaults/preferences/[% c("var/prefs_file") %]
+[% c("touch") %] defaults/preferences/[% c("var/prefs_file") %]
+zip -Xm omni.ja defaults/preferences/[% c("var/prefs_file") %]
 rm -rf defaults
 # create tbb_version.json file for #25020
 echo '{"version":"[% c("var/torbrowser_version") %]","architecture":"[% c("var/mar_osname") %]","channel":"[% c("var/channel") %]","locale":"en-US"}' > ../tbb_version.json
@@ -235,14 +258,14 @@ popd
   export PATH="/var/tmp/dist/nsis/bin:$PATH"
 
   mv $rootdir/windows-installer $distdir/windows-installer
-  mv ${TB_STAGE_DIR} $distdir/windows-installer/"Tor Browser"
+  mv ${TB_STAGE_DIR} $distdir/windows-installer/"[% c('var/Project_Name') %]"
   mv $distdir/windows-installer ${TB_STAGE_DIR}
 [% END %]
 
 [% IF c("var/windows") %]
-  TBDIR="$distdir/$PKG_DIR/Tor Browser/Browser"
+  TBDIR="$distdir/$PKG_DIR/[% c("var/Project_Name") %]/Browser"
 [% ELSIF c("var/osx") %]
-  TBDIR="$distdir/$PKG_DIR/Tor Browser.app"
+  TBDIR="$distdir/$PKG_DIR/[% c("var/Project_Name") %].app"
 [% ELSE %]
   TBDIR="$distdir/$PKG_DIR/Browser"
 [% END %]
@@ -261,7 +284,7 @@ cd $distdir
 
 [% IF c("var/build_mar") -%]
   # Create full MAR file and compressed package.
-  [% SET mar_file = 'tor-browser-' _ c("var/mar_osname") _ '-' _ c("var/torbrowser_version") _ '_${PKG_LOCALE}.mar' %]
+  [% SET mar_file = c("var/project-name") _ '-' _ c("var/mar_osname") _ '-' _ c("var/torbrowser_version") _ '_${PKG_LOCALE}.mar' %]
   MAR=$MARTOOLS/mar \
   MOZ_PRODUCT_VERSION=[% c("var/torbrowser_version") %] \
   MAR_CHANNEL_ID=torbrowser-torproject-[% c("var/channel") %] \
@@ -271,23 +294,23 @@ cd $distdir
 [% IF c("var/linux") %]
   [% c('tar', {
         tar_src => [ '$PKG_DIR' ],
-        tar_args => '-cJf $OUTDIR/tor-browser-' _ c("var/mar_osname") _ '-' _ c("var/torbrowser_version") _ '_${PKG_LOCALE}.tar.xz',
+        tar_args => '-cJf $OUTDIR/' _ c("var/project-name") _ '-' _ c("var/mar_osname") _ '-' _ c("var/torbrowser_version") _ '_${PKG_LOCALE}.tar.xz',
     }) %]
 [% ELSIF c("var/osx") %]
   [% c('var/ddmg', {
         dmg_src => '"$PKG_DIR"',
-        dmg_out => '$OUTDIR/TorBrowser-' _ c("var/torbrowser_version") _ '-osx64_${PKG_LOCALE}.dmg',
+        dmg_out => '$OUTDIR/' _ c('var/ProjectName') _ '-' _ c("var/torbrowser_version") _ '-osx64_${PKG_LOCALE}.dmg',
     }) %]
 [% ELSIF c("var/windows") %]
   find "$PKG_DIR" -exec [% c("touch") %] {} \;
   pushd "$PKG_DIR"
-  makensis torbrowser.nsi
+  makensis [% c("var/projectname") %].nsi
   # Working around NSIS braindamage
-  mv torbrowser-install.exe torbrowser-install-tmp.exe
+  mv [% c("var/projectname") %]-install.exe browser-install-tmp.exe
   python3 $rootdir/pe_checksum_fix.py
-  mv torbrowser-install-tmp2.exe torbrowser-install.exe
-  rm torbrowser-install-tmp.exe
-  mv torbrowser-install.exe $OUTDIR/torbrowser-install[% IF c("var/windows-x86_64") %]-win64[% END %]-[% c("var/torbrowser_version") %]_${PKG_LOCALE}.exe
+  mv browser-install-tmp2.exe [% c("var/projectname") %]-install.exe
+  rm browser-install-tmp.exe
+  mv [% c("var/projectname") %]-install.exe $OUTDIR/[% c("var/projectname") %]-install[% IF c("var/windows-x86_64") %]-win64[% END %]-[% c("var/torbrowser_version") %]_${PKG_LOCALE}.exe
   popd
 [% END %]
 rm -rf $distdir/${PKG_DIR}
@@ -295,12 +318,14 @@ SCRIPT_EOF
 
 cp $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip "$OUTDIR"/
 [% IF c("var/linux-x86_64") -%]
-  cp $rootdir/[% c('input_files_by_name/firefox') %]/tor-browser-debug.tar.xz "$OUTDIR"/tor-browser-[% c("var/mar_osname") %]-debug.tar.xz
+  [% IF c("var/tor-browser") -%]
+    cp $rootdir/[% c('input_files_by_name/firefox') %]/browser-debug.tar.xz "$OUTDIR"/[% c("var/project-name") %]-[% c("var/mar_osname") %]-debug.tar.xz
+  [% END -%]
   [% IF !c("var/asan") -%]
     cp $rootdir/[% c('input_files_by_name/firefox') %]/geckodriver-linux64.tar.xz "$OUTDIR"/
   [% END -%]
 [% END -%]
-[% IF c("var/linux") -%]
+[% IF c("var/linux") && c("var/tor-browser") -%]
   cp $rootdir/[% c('input_files_by_name/tor') %]/tor-debug.tar.xz "$OUTDIR"/tor-[% c("var/mar_osname") %]-debug.tar.xz
 [% END -%]
 [% IF c("var/build_infos_json") -%]
@@ -308,7 +333,7 @@ cp $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip "$OUTDIR"/
 [% END -%]
 
 # Create a tarball with all Linux x86_64 language packs (Bug 32676)
-[% IF c("var/linux-x86_64") && ! c("var/multi_lingual") && ! c("var/testbuild") -%]
+[% IF c("var/tor-browser") && c("var/linux-x86_64") && ! c("var/multi_lingual") && ! c("var/testbuild") -%]
   pushd $rootdir/[% c('input_files_by_name/firefox-langpacks') %]
   [% c('tar', {
            tar_src => [ '.' ],
@@ -325,12 +350,12 @@ cp $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip "$OUTDIR"/
   [% FOREACH lang = locales %]
     [% SET lang = tmpl(lang);
        SET xpi = '$rootdir/' _ c('input_files_by_name/firefox-langpacks') _ '/' _ lang _ '.xpi';
-       SET tbdir = '$distdir/tor-browser_' _ lang;
-       SET mar_file = 'tor-browser-' _ c("var/mar_osname") _ '-' _ c("var/torbrowser_version") _ '_' _ lang _ '.mar';
+       SET tbdir = '$distdir/' _ c("var/project-name") _ '_' _ lang;
+       SET mar_file = c("var/project-name") _ '-' _ c("var/mar_osname") _ '-' _ c("var/torbrowser_version") _ '_' _ lang _ '.mar';
        IF c("var/osx");
-         SET browserdir = tbdir _ '/Tor Browser.app';
+         SET browserdir = tbdir _ '/' _ c("var/Project_Name") _ '.app';
        ELSIF c("var/windows");
-         SET browserdir = tbdir _ '/Tor Browser/Browser';
+         SET browserdir = tbdir _ '/' _ c("var/Project_Name") _ '/Browser';
        ELSE;
          SET browserdir = tbdir _ '/Browser';
        END;
@@ -346,7 +371,7 @@ cp $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip "$OUTDIR"/
          END;
        END;
     %]
-      cat > "$scripts_dir/create-tor-browser_[% lang %]" << SCRIPT_EOF
+      cat > "$scripts_dir/create-browser_[% lang %]" << SCRIPT_EOF
 #!/bin/bash
       set -e
       cp -a ${TB_STAGE_DIR} [% tbdir %]
@@ -354,11 +379,11 @@ cp $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip "$OUTDIR"/
 
       pushd "[% browserdir %]/[% IF c("var/osx") %]Contents/Resources/[% END %]browser/"
       mkdir -p defaults/preferences
-      cp $rootdir/000-tor-browser.js defaults/preferences/
+      cp $rootdir/[% c("var/prefs_file") %] defaults/preferences/
       # Set the locale of the bundle.
-      echo "pref(\"intl.locale.requested\", \"[% lang %]\");" >> defaults/preferences/000-tor-browser.js
-      [% c("touch") %] defaults/preferences/000-tor-browser.js
-      zip -Xm omni.ja defaults/preferences/000-tor-browser.js
+      echo "pref(\"intl.locale.requested\", \"[% lang %]\");" >> defaults/preferences/[% c("var/prefs_file") %]
+      [% c("touch") %] defaults/preferences/[% c("var/prefs_file") %]
+      zip -Xm omni.ja defaults/preferences/[% c("var/prefs_file") %]
       rm -rf defaults
       # create tbb_version.json file for #25020
       echo '{"version":"[% c("var/torbrowser_version") %]","architecture":"[% c("var/mar_osname") %]","channel":"[% c("var/channel") %]","locale":"[% lang %]"}' > ../tbb_version.json
@@ -387,10 +412,10 @@ cp $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip "$OUTDIR"/
       [% END -%]
 
       [% IF c("var/linux") %]
-        [% SET tardir = 'tor-browser_' _ lang;
+        [% SET tardir = c("var/project-name") _ '_' _ lang;
           c('tar', {
                 tar_src => [ tardir ],
-                tar_args => '-cJf $OUTDIR/tor-browser-' _ c("var/mar_osname") _ '-' _ c("var/torbrowser_version") _ '_' _ lang _ '.tar.xz',
+                tar_args => '-cJf $OUTDIR/' _ c("var/project-name") _ '-' _ c("var/mar_osname") _ '-' _ c("var/torbrowser_version") _ '_' _ lang _ '.tar.xz',
             }) %]
       [% ELSIF c("var/osx") %]
         [% # Rename the Japanese bundle to not confuse users
@@ -399,18 +424,18 @@ cp $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip "$OUTDIR"/
            END; -%]
         [% c('var/ddmg', {
           dmg_src => tbdir,
-          dmg_out => '$OUTDIR/TorBrowser-' _ c("var/torbrowser_version") _ '-osx64_' _ lang _ '.dmg',
+          dmg_out => '$OUTDIR/' _ c('var/ProjectName') _ '-' _ c("var/torbrowser_version") _ '-osx64_' _ lang _ '.dmg',
         }) %]
       [% ELSIF c("var/windows") %]
         find "[% tbdir %]" -exec [% c("touch") %] {} \;
         pushd "[% tbdir %]"
-        makensis torbrowser.nsi
+        makensis [% c("var/projectname") %].nsi
         # Working around NSIS braindamage
-        mv torbrowser-install.exe torbrowser-install-tmp.exe
+        mv [% c("var/projectname") %]-install.exe browser-install-tmp.exe
         python3 $rootdir/pe_checksum_fix.py
-        mv torbrowser-install-tmp2.exe torbrowser-install.exe
-        rm torbrowser-install-tmp.exe
-        mv torbrowser-install.exe $OUTDIR/torbrowser-install[% IF c("var/windows-x86_64") %]-win64[% END %]-[% c("var/torbrowser_version") %]_[% lang %].exe
+        mv browser-install-tmp2.exe [% c("var/projectname") %]-install.exe
+        rm browser-install-tmp.exe
+        mv [% c("var/projectname") %]-install.exe $OUTDIR/[% c("var/projectname") %]-install[% IF c("var/windows-x86_64") %]-win64[% END %]-[% c("var/torbrowser_version") %]_[% lang %].exe
         popd
       [% END %]
       rm -rf [% tbdir %]

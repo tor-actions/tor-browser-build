@@ -45,7 +45,7 @@ Thanks to a cypherpunk for this workaround idea.
 
 import pefile;
 
-f = open('torbrowser-install-tmp.exe', 'rb')
+f = open('browser-install-tmp.exe', 'rb')
 exe = f.read()
 f.close()
 remainder = len(exe) % 8
@@ -53,4 +53,4 @@ if remainder > 0:
     exe += bytes('\0' * (8 - remainder), 'utf-8')
 pef = pefile.PE(data=exe, fast_load=True)
 pef.OPTIONAL_HEADER.CheckSum = pef.generate_checksum()
-pef.write(filename='torbrowser-install-tmp2.exe')
+pef.write(filename='browser-install-tmp2.exe')

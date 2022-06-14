@@ -5,11 +5,11 @@
 #
 # Copyright 2017 The Tor Project.  See LICENSE for licensing information.
 
-complain_dialog_title="Tor Browser"
+complain_dialog_title="[% c('var/Project_Name') %]"
 
-# Make sure this script wasn't started as 'sh start-tor-browser' or similar.
+# Make sure this script wasn't started as 'sh start-[% c('var/project-name') %]' or similar.
 if [ "x$BASH" = "x" ]; then
-    echo "$complain_dialog_title should be started as './start-tor-browser'"
+    echo "$complain_dialog_title should be started as './start-[% c('var/project-name') %]'"
     echo "Exiting." >&2
     exit 1;
 fi
@@ -83,22 +83,22 @@ complain () {
 }
 
 if [ "`id -u`" -eq 0 ]; then
-	complain "The Tor Browser Bundle should not be run as root.  Exiting."
+	complain "The [% c('var/Project_Name') %] should not be run as root.  Exiting."
 	exit 1
 fi
 
 if test -r /proc/cpuinfo && ! grep -q '^flags\s*:.* sse2' /proc/cpuinfo; then
-        complain "Tor Browser requires a CPU with SSE2 support.  Exiting."
+        complain "[% c('var/Project_Name') %] requires a CPU with SSE2 support.  Exiting."
         exit 1
 fi
 
 tbb_usage () {
-    printf "\nTor Browser Script Options\n"
+    printf "\n[% c('var/Project_Name') %] Script Options\n"
     printf "  --verbose         Display Tor and Firefox output in the terminal\n"
-    printf "  --log [file]      Record Tor and Firefox output in file (default: tor-browser.log)\n"
-    printf "  --detach          Detach from terminal and run Tor Browser in the background.\n"
-    printf "  --register-app    Register Tor Browser as a desktop app for this user\n"
-    printf "  --unregister-app  Unregister Tor Browser as a desktop app for this user\n"
+    printf "  --log [file]      Record Tor and Firefox output in file (default: [% c('var/project-name') %].log)\n"
+    printf "  --detach          Detach from terminal and run [% c('var/Project_Name') %] in the background.\n"
+    printf "  --register-app    Register [% c('var/Project_Name') %] as a desktop app for this user\n"
+    printf "  --unregister-app  Unregister [% c('var/Project_Name') %] as a desktop app for this user\n"
 }
 log_output=0
 show_output=0
@@ -125,14 +125,14 @@ do
           ;;
       -l | --log)
           if [ -z "$2" -o "${2:0:1}" == "-" ]; then
-             printf "Logging Tor Browser debug information to tor-browser.log\n"
-             logfile="../tor-browser.log"
+             printf "Logging [% c('var/Project_Name') %] debug information to [% c('var/project-name') %].log\n"
+             logfile="../[% c('var/project-name') %].log"
           elif [ "${2:0:1}" == "/" -o "${2:0:1}" == "~" ]; then
-             printf "Logging Tor Browser debug information to %s\n" "$2"
+             printf "Logging [% c('var/Project_Name') %] debug information to %s\n" "$2"
              logfile="$2"
              shift
           else
-             printf "Logging Tor Browser debug information to %s\n" "$2"
+             printf "Logging [% c('var/Project_Name') %] debug information to %s\n" "$2"
              logfile="../$2"
              shift
           fi
@@ -203,7 +203,7 @@ if [ -L "$myname" ]; then
 		myname="`readlink -f "$myname" 2>/dev/null`"
 		if [ "$?" -ne 0 ]; then
 			# Ugh.
-			complain "start-tor-browser cannot be run using a symlink on this operating system."
+			complain "start-[% c('var/project-name') %] cannot be run using a symlink on this operating system."
 		fi
 	fi
 fi
@@ -229,26 +229,26 @@ fi
 
 # Fix up .desktop Icon and Exec Paths, and update the .desktop file from the
 # canonical version if it was changed by the updater.
-cp start-tor-browser.desktop ../
-sed -i -e "s,^Name=.*,Name=Tor Browser,g" ../start-tor-browser.desktop
-sed -i -e "s,^Icon=.*,Icon=$PWD/browser/chrome/icons/default/default128.png,g" ../start-tor-browser.desktop
-sed -i -e "s,^Exec=.*,Exec=sh -c '\"$PWD/start-tor-browser\" --detach || ([ !  -x \"$PWD/start-tor-browser\" ] \&\& \"\$(dirname \"\$*\")\"/Browser/start-tor-browser --detach)' dummy %k,g" ../start-tor-browser.desktop
+cp start-[% c('var/project-name') %].desktop ../
+sed -i -e "s,^Name=.*,Name=[% c('var/Project_Name') %],g" ../start-[% c('var/project-name') %].desktop
+sed -i -e "s,^Icon=.*,Icon=$PWD/browser/chrome/icons/default/default128.png,g" ../start-[% c('var/project-name') %].desktop
+sed -i -e "s,^Exec=.*,Exec=sh -c '\"$PWD/start-[% c('var/project-name') %]\" --detach || ([ !  -x \"$PWD/start-[% c('var/project-name') %]\" ] \&\& \"\$(dirname \"\$*\")\"/Browser/start-[% c('var/project-name') %] --detach)' dummy %k,g" ../start-[% c('var/project-name') %].desktop
 
 if [ "$register_desktop_app" -eq 1 ]; then
 	mkdir -p "$HOME/.local/share/applications/"
-	cp ../start-tor-browser.desktop "$HOME/.local/share/applications/"
+	cp ../start-[% c('var/project-name') %].desktop "$HOME/.local/share/applications/"
 	update-desktop-database "$HOME/.local/share/applications/"
-	printf "Tor Browser has been registered as a desktop app for this user in ~/.local/share/applications/\n"
+	printf "[% c('var/Project_Name') %] has been registered as a desktop app for this user in ~/.local/share/applications/\n"
 	exit 0
 fi
 
 if [ "$register_desktop_app" -eq -1 ]; then
-	if [ -e "$HOME/.local/share/applications/start-tor-browser.desktop" ]; then
-		rm -f "$HOME/.local/share/applications/start-tor-browser.desktop"
+	if [ -e "$HOME/.local/share/applications/start-[% c('var/project-name') %].desktop" ]; then
+		rm -f "$HOME/.local/share/applications/start-[% c('var/project-name') %].desktop"
 		update-desktop-database "$HOME/.local/share/applications/"
-		printf "Tor Browser has been removed as a user desktop app (from ~/.local/share/applications/)\n"
+		printf "[% c('var/Project_Name') %] has been removed as a user desktop app (from ~/.local/share/applications/)\n"
 	else
-		printf "Tor Browser does not appear to be a desktop app (not present in ~/.local/share/applications/)\n"
+		printf "[% c('var/Project_Name') %] does not appear to be a desktop app (not present in ~/.local/share/applications/)\n"
 	fi
 	exit 0
 fi
@@ -256,6 +256,7 @@ fi
 HOME="${PWD}"
 export HOME
 
+[% IF c("var/tor-browser") -%]
 SYSARCHITECTURE=$(getconf LONG_BIT)
 TORARCHITECTURE=$(expr "$(file TorBrowser/Tor/tor)" : '.*ELF \([[:digit:]]*\)')
 
@@ -263,6 +264,7 @@ if [ $SYSARCHITECTURE -ne $TORARCHITECTURE ]; then
    complain "Wrong architecture? 32-bit vs. 64-bit."
    exit 1
 fi
+[% END -%]
 
 [% IF c("var/asan") -%]
 # We need to disable LSan which is enabled by default now. Otherwise we'll get
@@ -271,6 +273,7 @@ ASAN_OPTIONS="detect_leaks=0"
 export ASAN_OPTIONS
 [% END -%]
 
+[% IF c("var/tor-browser") -%]
 function setControlPortPasswd() {
     local ctrlPasswd=$1
 
@@ -332,9 +335,10 @@ TOR_CONTROL_PASSWD environment variable."
 # Either set `TOR_CONTROL_PASSWD` before running ./start-tor-browser, or put
 # your password in the following line where the word “secret” is:
 setControlPortPasswd ${TOR_CONTROL_PASSWD:='"secret"'}
+[% END -%]
 
 # Set up custom bundled fonts. See fonts-conf(5).
-export FONTCONFIG_PATH="${HOME}/TorBrowser/Data/fontconfig"
+export FONTCONFIG_PATH="${HOME}/[% c('var/ProjectName') %]/Data/fontconfig"
 export FONTCONFIG_FILE="fonts.conf"
 
 # Avoid overwriting user's dconf values. Fixes #27903.
@@ -352,28 +356,28 @@ cd "${HOME}"
 
 if [ "$show_usage" -eq 1 ]; then
     # Display Firefox help, then our help
-    TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD} ./firefox \
-        --class "Tor Browser" --name "Tor Browser" \
-        -profile TorBrowser/Data/Browser/profile.default --help 2>/dev/null
+    [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./firefox \
+        --class "[% c('var/Project_Name') %]" --name "[% c('var/Project_Name') %]" \
+        -profile [% c('var/ProjectName') %]/Data/Browser/profile.default --help 2>/dev/null
     tbb_usage
 elif [ "$detach" -eq 1 ] ; then
-    TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD} ./firefox \
-        --class "Tor Browser" --name "Tor Browser" \
-        -profile TorBrowser/Data/Browser/profile.default "${@}" > "$logfile" 2>&1 </dev/null &
+    [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./firefox \
+        --class "[% c('var/Project_Name') %]" --name "[% c('var/Project_Name') %]" \
+        -profile [% c('var/ProjectName') %]/Data/Browser/profile.default "${@}" > "$logfile" 2>&1 </dev/null &
     disown "$!"
 elif [ "$log_output" -eq 1 -a "$show_output" -eq 1 ]; then
-    TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD} ./firefox \
-        --class "Tor Browser" --name "Tor Browser" \
-        -profile TorBrowser/Data/Browser/profile.default "${@}" 2>&1 </dev/null | \
+    [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./firefox \
+        --class "[% c('var/Project_Name') %]" --name "[% c('var/Project_Name') %]" \
+        -profile [% c('var/ProjectName') %]/Data/Browser/profile.default "${@}" 2>&1 </dev/null | \
         tee "$logfile"
 elif [ "$show_output" -eq 1 ]; then
-    TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD} ./firefox \
-        --class "Tor Browser" --name "Tor Browser" \
-        -profile TorBrowser/Data/Browser/profile.default "${@}" < /dev/null
+    [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./firefox \
+        --class "[% c('var/Project_Name') %]" --name "[% c('var/Project_Name') %]" \
+        -profile [% c('var/ProjectName') %]/Data/Browser/profile.default "${@}" < /dev/null
 else
-    TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD} ./firefox \
-        --class "Tor Browser" --name "Tor Browser" \
-        -profile TorBrowser/Data/Browser/profile.default "${@}" > "$logfile" 2>&1 </dev/null
+    [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./firefox \
+        --class "[% c('var/Project_Name') %]" --name "[% c('var/Project_Name') %]" \
+        -profile [% c('var/ProjectName') %]/Data/Browser/profile.default "${@}" > "$logfile" 2>&1 </dev/null
 fi
 
 exit $?

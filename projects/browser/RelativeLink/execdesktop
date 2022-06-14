@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-TBB_START_PROG="$(grep '^X-TorBrowser-ExecShell' $1 | tail -1 | sed 's/^X-TorBrowser-ExecShell=//' | sed 's/%.//')"
+TBB_START_PROG="$(grep '^X-[% c("var/ProjectName") %]-ExecShell' $1 | tail -1 | sed 's/^X-[% c("var/ProjectName") %]-ExecShell=//' | sed 's/%.//')"
 
 shift
 
