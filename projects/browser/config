@@ -92,8 +92,7 @@ input_files:
   - project: nsis
     name: nsis
     enable: '[% c("var/windows") %]'
-  - name: tbb-windows-installer
-    project: tbb-windows-installer
+  - filename: windows-installer
     enable: '[% c("var/windows") %]'
   - filename: pe_checksum_fix.py
     enable: '[% c("var/windows") %]'

@@ -234,10 +234,9 @@ popd
   tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/nsis') %]
   export PATH="/var/tmp/dist/nsis/bin:$PATH"
 
-  tar -C $distdir -xf $rootdir/[% c('input_files_by_name/tbb-windows-installer') %]
-
-  mv ${TB_STAGE_DIR} $distdir/tbb-windows-installer/"Tor Browser"
-  mv $distdir/tbb-windows-installer ${TB_STAGE_DIR}
+  mv $rootdir/windows-installer $distdir/windows-installer
+  mv ${TB_STAGE_DIR} $distdir/windows-installer/"Tor Browser"
+  mv $distdir/windows-installer ${TB_STAGE_DIR}
 [% END %]
 
 [% IF c("var/windows") %]
