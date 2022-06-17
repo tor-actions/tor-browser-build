@@ -2,22 +2,34 @@
 [% c("var/set_default_env") -%]
 distdir=/var/tmp/dist/fonts
 mkdir -p $distdir
-unzip -o 720e34851382ee3c1ef024d8dffb68ffbfb234c2.zip
+
 mv noto-fonts-* noto-fonts
-mkdir -p $distdir
-[% FOREACH fontfile = c("var/noto_fonts_hinted");
-     GET 'cp "noto-fonts/hinted/' _ fontfile _ '" $distdir' _ "\n";
-   END; %]
-[% FOREACH fontfile = c("var/noto_fonts_unhinted");
-     GET 'cp "noto-fonts/unhinted/' _ fontfile _ '" $distdir' _ "\n";
-   END; %]
+
+[% FOREACH fontfile = c("var/noto_fonts_common");
+    GET 'cp noto-fonts/' _ fontfile _ ' $distdir/' _ "\n";
+  END; %]
+
+[% IF c("var/linux") %]
+  [% FOREACH fontfile = c("var/noto_fonts_linux");
+      GET 'cp noto-fonts/' _ fontfile _ ' $distdir/' _ "\n";
+    END; %]
+[% END %]
+[% IF c("var/osx") %]
+  [% FOREACH fontfile = c("var/noto_fonts_mac");
+      GET 'cp noto-fonts/' _ fontfile _ ' $distdir/' _ "\n";
+    END; %]
+[% END %]
+[% IF c("var/windows") %]
+  [% FOREACH fontfile = c("var/noto_fonts_windows");
+      GET 'cp noto-fonts/' _ fontfile _ ' $distdir/' _ "\n";
+    END; %]
+[% END %]
 
 [% IF c("var/linux") || c("var/osx") %]
   unzip -o 2.0.0.zip -d STIX
   cp "STIX/stixfonts-2.0.0/archive/STIXv1.1.1/Fonts/STIX-Word/STIXMath-Regular.otf" $distdir/
 [% END %]
 [% IF c("var/linux") %]
-  cp NotoEmoji-Regular.ttf $distdir/
   cp {NotoSansJP-Regular.otf,NotoSansKR-Regular.otf,NotoSansSC-Regular.otf,NotoSansTC-Regular.otf} $distdir/
 [% END %]
 cd /var/tmp/dist

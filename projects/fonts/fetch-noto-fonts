@@ -1,0 +1,29 @@
+#!/bin/bash
+set -e
+
+REPO_DIR="$(mktemp -d)"
+OUT_DIR="[% dest_dir %]/noto-fonts-[% c("var/noto_git_hash") %]-[% c("version") %]"
+
+pushd "$REPO_DIR"
+git init
+git remote add origin https://github.com/googlefonts/noto-fonts.git
+git fetch --depth 1 origin "[% c('var/noto_git_hash') %]"
+git checkout "[% c('var/noto_git_hash') %]"
+
+rm -rf "$OUT_DIR"
+mkdir "$OUT_DIR"
+[%
+  platforms = [c("var/noto_fonts_common"), c("var/noto_fonts_linux"), c("var/noto_fonts_mac"), c("var/noto_fonts_windows")];
+  FOREACH platform = platforms;
+    FOREACH fontfile = platform;
+      GET 'font=$(find hinted -name ' _ fontfile _ ' -print | head -1)' _ "\n";
+      # Do not use find -exec, because if the file does not exist, we have an
+      # error only in the following phases. In this way, we try to fail earlier.
+      GET 'cp -u $font "$OUT_DIR/"' _ "\n";
+    END;
+  END; %]
+
+popd
+rm -rf "$REPO_DIR"
+
+echo "Finished downloading the needed Noto fonts"
