@@ -1,3 +1,38 @@
+Tor Browser 11.0.15 - June 19 2022
+ * All Platforms
+  * Update Tor to 0.4.7.8
+
+Tor Browser 11.5a13 - June 18 2022
+ * All Platforms
+  * Update Tor to 0.4.7.8
+  * Update NoScript to 11.4.6
+  * Update translations
+ * Windows + OS X + Linux
+   * Update Firefox to 91.10.0esr
+   * Update Tor-Launcher to 0.2.36
+   * Bug 11698: Incorporate Tor Browser Manual pages into Tor Browser [tor-browser]
+   * Bug 40458: Implement about:rulesets https-everywhere replacement [tor-browser]
+   * Bug 40527: Remove https-everywhere from tor-browser alpha desktop [tor-browser-build]
+   * Bug 40971: TB Alpha desktop minor issue Help button is not working [tor-browser]
+   * Bug 41023: Update manual URLs [tor-browser]
+ * Linux
+   * Bug 41015: Add --name parameter to correctly setup WM_CLASS when running as native Wayland client [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 40288: Bump mmdebstrap version to 0.8.6 [tor-browser-build]
+     * Bug 40426: Update Ubuntu base image to 22.04 [tor-browser-build]
+     * Bug 40497: Check that directory does not exist before starting macOS signing [tor-browser-build]
+     * Bug 40508: ChangeLog in master is missing 11.0.x changelog stanzas [tor-browser-build]
+     * Bug 40516: Remove aguestuser from tb_builders and torbutton.gpg [tor-browser-build]
+     * Bug 40519: Add Alexis' latest PGP key to https-everywhere key ring [tor-browser-build]
+     * Bug 40523: Add tor-announce to Release Prep template [tor-browser-build]
+   * Android
+     * Update Go to 1.18.3
+   * Windows + OS X + Linux
+     * Update Go to 1.17.10
+     * Bug 34451: Include Tor Browser Manual in packages during build [tor-browser-build]
+     * Bug 40525: Update the mozconfig for tor-browser-91.9-11.5-2 [tor-browser-build]
+
 Tor Browser 11.0.14 - June 2 2022
  * All Platforms
    * Updated NoScript to 11.4.6
