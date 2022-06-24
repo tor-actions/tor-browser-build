@@ -62,7 +62,9 @@ tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
 mkdir -p $distdir/[% IF ! c("var/osx") %]Browser[% END %]
 
 cd /var/tmp/build/[% project %]-[% c("version") %]
-mv -f $rootdir/[% c('input_files_by_name/mozconfig') %] .mozconfig
+cat > .mozconfig << 'MOZCONFIG_EOF'
+[% INCLUDE mozconfig %]
+MOZCONFIG_EOF
 [% IF c("var/asan") -%]
   # Without disabling LSan our build is blowing up:
   # https://bugs.torproject.org/10599#comment:52
@@ -115,7 +117,7 @@ export MACH_USE_SYSTEM_PYTHON=1
 ./mach build stage-package
 
 [% IF c("var/osx") %]
-  cp -a obj-macos/dist/firefox/* $distdir
+  cp -a obj-*/dist/firefox/* $distdir
   [% IF c("var/base-browser") -%]
     mv "$distdir/Firefox.app" "$distdir/[% c('var/Project_Name') %].app"
   [% END -%]

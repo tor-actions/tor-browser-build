@@ -1,0 +1,68 @@
+. $topsrcdir/mozconfig-[% IF c("var/osx"); GET 'macos-x86_64'; ELSE; GET c("var/osname"); END; %][% IF c("var/asan") %]-asan[% END %]
+
+[% IF c("var/linux") -%]
+  # We want to build with clang now and point to the GCC toolchain until #29041 is
+  # fixed. We explicitly need to define the host compiler as well as for some
+  # reason the gcc-toolchain argument does not get passed along otherwise.
+  CC="clang --gcc-toolchain=/var/tmp/dist/gcc"
+  CXX="clang++ --gcc-toolchain=/var/tmp/dist/gcc"
+  HOST_CC=$CC
+  HOST_CXX=$CXX
+
+  export BINDGEN_CFLAGS='--gcc-toolchain=/var/tmp/dist/gcc'
+[% END -%]
+
+[% IF c("var/windows") -%]
+  CROSS_COMPILE=1
+
+  HOST_CC="clang"
+  HOST_CXX="clang++"
+  CC="[% c('arch') %]-w64-mingw32-clang"
+  CXX="[% c('arch') %]-w64-mingw32-clang++"
+  CXXFLAGS="-fms-extensions"
+  AR=llvm-ar
+  RANLIB=llvm-ranlib
+
+  clang_path=/var/tmp/dist/mingw-w64-clang
+
+  # For Stylo
+  BINDGEN_CFLAGS="-I$clang_path/[% c('arch') %]-w64-mingw32/include/c++/v1 -I$clang_path/[% c('arch') %]-w64-mingw32/include"
+[% END -%]
+
+[% IF c("var/osx") -%]
+  TOOLCHAIN_DIR=/var/tmp/dist/macosx-toolchain
+
+  # ld needs libLTO.so from llvm
+  mk_add_options "export LD_LIBRARY_PATH=$TOOLCHAIN_DIR/clang/lib"
+
+  CROSS_CCTOOLS_PATH=$TOOLCHAIN_DIR/cctools
+  CROSS_SYSROOT=$TOOLCHAIN_DIR/MacOSX10.12.sdk
+  CROSS_PRIVATE_FRAMEWORKS=$CROSS_SYSROOT/System/Library/PrivateFrameworks
+  HARDENING_FLAGS="-Werror=format -Werror=format-security -fstack-protector-strong -D_FORTIFY_SOURCE=2"
+  FLAGS="-target x86_64-apple-darwin -B $CROSS_CCTOOLS_PATH/bin -isysroot $CROSS_SYSROOT $HARDENING_FLAGS"
+
+  export CC="$TOOLCHAIN_DIR/clang/bin/clang $FLAGS"
+  export CXX="$TOOLCHAIN_DIR/clang/bin/clang++ $FLAGS"
+  export LLVMCONFIG=$TOOLCHAIN_DIR/clang/bin/llvm-config
+  export LDFLAGS="-Wl,-syslibroot,$CROSS_SYSROOT -Wl,-pie"
+  export BINDGEN_CFLAGS="$FLAGS"
+  export TOOLCHAIN_PREFIX=$CROSS_CCTOOLS_PATH/bin/x86_64-apple-darwin-
+  export DSYMUTIL="$TOOLCHAIN_DIR/clang/bin/dsymutil"
+
+  export HOST_CFLAGS="-g"
+  export HOST_CXXFLAGS="-g"
+  export HOST_LDFLAGS="-g"
+
+  ac_add_options --target=x86_64-apple-darwin
+  export MACOS_SDK_DIR=$CROSS_SYSROOT
+  export MACOS_PRIVATE_FRAMEWORKS_DIR=$CROSS_PRIVATE_FRAMEWORKS
+[% END -%]
+
+[% IF c("var/tor-browser") %]
+  ac_add_options --enable-tor-browser-update
+  ac_add_options --enable-verify-mar
+[% END -%]
+
+ac_add_options --with-relative-profile=[% c('var/ProjectName') %]/Data/Browser
+mk_add_options MOZ_APP_DISPLAYNAME="[% c('var/Project_Name') %]"
+
