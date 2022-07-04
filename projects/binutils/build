@@ -12,7 +12,7 @@ distdir=/var/tmp/dist/binutils
 tar xf [% project %]-[% c("version") %].tar.xz
 cd [% project %]-[% c("version") %]
 ./configure --prefix=$distdir [% c('var/configure_opt') %]
-make -j[% c("buildconf/num_procs") %]
+make -j[% c("num_procs") %]
 make install
 
 [% IF c("var/linux") %]

@@ -14,7 +14,7 @@ tar -xf [% project %]-[% c('version') %].tar.xz
 cd [% project %]-[% c('version') %]
 
 ./configure --prefix=$distdir
-make -j[% c("buildconf/num_procs") %]
+make -j[% c("num_procs") %]
 make install
 
 cd /var/tmp/dist

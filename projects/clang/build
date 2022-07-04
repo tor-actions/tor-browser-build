@@ -33,7 +33,7 @@ cmake ../llvm -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=$distdir \
             [% END -%]
             [% IF c("var/rlbox") -%]-DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=WebAssembly[% END %] \
                                   -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;compiler-rt;libcxx;libcxxabi;lld"
-make -j[% c("buildconf/num_procs") %]
+make -j[% c("num_procs") %]
 make install
 
 [% IF c("var/android") -%]
@@ -58,7 +58,7 @@ make install
       -DCOMPILER_RT_BUILD_PROFILE=OFF \
       -DCOMPILER_RT_BUILD_SANITIZERS=OFF \
       -DCOMPILER_RT_BUILD_XRAY=OFF
-    make -j[% c("buildconf/num_procs") %]
+    make -j[% c("num_procs") %]
     make install
   }
 

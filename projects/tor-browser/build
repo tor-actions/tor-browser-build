@@ -77,7 +77,7 @@ TMP_MANUAL_PATH=$rootdir/tmp_manual/
 mkdir $TMP_MANUAL_PATH
 pushd $TMP_MANUAL_PATH
 tar -xf $rootdir/[% c('input_files_by_name/manual') %]
-find . -exec [% c("var/touch") %] {} \;
+find . -exec [% c("touch") %] {} \;
 find chrome/ | sort | zip -X -@ "$TBDIR[% IF c("var/osx") %]/Contents/Resources[% END %]/browser/omni.ja"
 popd
 rm -rf $TMP_MANUAL_PATH
@@ -178,14 +178,14 @@ cp defaults/preferences/000-tor-browser.js $rootdir
   # Embed our default bookmarks within the en-US locale.
   mkdir -p chrome/en-US/locale/browser
   cp -p $rootdir/bookmarks.html chrome/en-US/locale/browser/
-  [% c("var/touch") %] chrome/en-US/locale/browser/bookmarks.html
+  [% c("touch") %] chrome/en-US/locale/browser/bookmarks.html
   chmod 600 chrome/en-US/locale/browser/bookmarks.html
   zip -Xm omni.ja chrome/en-US/locale/browser/bookmarks.html
   rm -rf chrome
 [% END %]
 # Set the locale of the bundle.
 echo "pref(\"intl.locale.requested\", \"en-US\");" >> defaults/preferences/000-tor-browser.js
-[% c("var/touch") %] defaults/preferences/000-tor-browser.js
+[% c("touch") %] defaults/preferences/000-tor-browser.js
 zip -Xm omni.ja defaults/preferences/000-tor-browser.js
 rm -rf defaults
 # create tbb_version.json file for #25020
@@ -224,7 +224,7 @@ popd
   # app.update.url).
   pushd "$TBDIR[% IF c("var/osx") %]/Contents/Resources/[% END %]"
   echo ${PKG_LOCALE} > update.locale
-  [% c("var/touch") %] update.locale
+  [% c("touch") %] update.locale
   zip -Xm omni.ja update.locale
   popd
 [% END %]
@@ -280,7 +280,7 @@ cd $distdir
         dmg_out => '$OUTDIR/TorBrowser-' _ c("var/torbrowser_version") _ '-osx64_${PKG_LOCALE}.dmg',
     }) %]
 [% ELSIF c("var/windows") %]
-  find "$PKG_DIR" -exec [% c("var/touch") %] {} \;
+  find "$PKG_DIR" -exec [% c("touch") %] {} \;
   pushd "$PKG_DIR"
   makensis torbrowser.nsi
   # Working around NSIS braindamage
@@ -358,7 +358,7 @@ cp $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip "$OUTDIR"/
       cp $rootdir/000-tor-browser.js defaults/preferences/
       # Set the locale of the bundle.
       echo "pref(\"intl.locale.requested\", \"[% lang %]\");" >> defaults/preferences/000-tor-browser.js
-      [% c("var/touch") %] defaults/preferences/000-tor-browser.js
+      [% c("touch") %] defaults/preferences/000-tor-browser.js
       zip -Xm omni.ja defaults/preferences/000-tor-browser.js
       rm -rf defaults
       # create tbb_version.json file for #25020
@@ -370,7 +370,7 @@ cp $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip "$OUTDIR"/
       # recreate precomplete file (needs to be accurate for full MAR updates).
       pushd "[% browserdir %]/[% IF c("var/osx") %]Contents/Resources/[% END %]"
       echo "[% lang %]" > update.locale
-      [% c("var/touch") %] update.locale
+      [% c("touch") %] update.locale
       zip -Xm omni.ja update.locale
       rm -rf dictionaries
       rm -f precomplete
@@ -403,7 +403,7 @@ cp $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip "$OUTDIR"/
           dmg_out => '$OUTDIR/TorBrowser-' _ c("var/torbrowser_version") _ '-osx64_' _ lang _ '.dmg',
         }) %]
       [% ELSIF c("var/windows") %]
-        find "[% tbdir %]" -exec [% c("var/touch") %] {} \;
+        find "[% tbdir %]" -exec [% c("touch") %] {} \;
         pushd "[% tbdir %]"
         makensis torbrowser.nsi
         # Working around NSIS braindamage
@@ -420,4 +420,4 @@ SCRIPT_EOF
 [% END %]
 
 chmod 775 $rootdir/run_scripts "$scripts_dir"/*
-$rootdir/run_scripts [% c("buildconf/num_procs") %] "$scripts_dir"
+$rootdir/run_scripts [% c("num_procs") %] "$scripts_dir"

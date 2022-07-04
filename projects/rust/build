@@ -54,7 +54,7 @@ mkdir build
 cd build
 ../configure --prefix=$distdir --disable-docs --disable-compiler-docs [% c("var/configure_opt") %]
 
-make -j[% c("buildconf/num_procs") %]
+make -j[% c("num_procs") %]
 make install
 cd /var/tmp/dist
 [% c('tar', {

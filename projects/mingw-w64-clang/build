@@ -71,7 +71,7 @@ mkdir build && cd build
              --with-default-msvcrt=ucrt \
              --with-default-win32-winnt=$default_win32_winnt \
              --prefix=$distdir/[% c("arch") %]-w64-mingw32
-make -j[% c("buildconf/num_procs") %] install
+make -j[% c("num_procs") %] install
 
 cd $builddir/mingw-w64-clang/mingw-w64-crt
 mkdir build && cd build
@@ -83,14 +83,14 @@ mkdir build && cd build
              RANLIB=llvm-ranlib \
              DLLTOOL=llvm-dlltool \
              --prefix=$distdir/[% c("arch") %]-w64-mingw32
-make -j[% c("buildconf/num_procs") %]
-make -j[% c("buildconf/num_procs") %] install
+make -j[% c("num_procs") %]
+make -j[% c("num_procs") %] install
 
 cd $builddir/mingw-w64-clang/mingw-w64-tools/widl
 mkdir build && cd build
 ../configure --target=[% c("arch") %]-w64-mingw32 --prefix=$distdir
-make -j[% c("buildconf/num_procs") %]
-make -j[% c("buildconf/num_procs") %] install
+make -j[% c("num_procs") %]
+make -j[% c("num_procs") %] install
 
 # compiler-rt
 cd $builddir/clang-source/compiler-rt
@@ -104,7 +104,7 @@ cmake -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_C_COMPILER_TARGET=$compiler_rt_machine-windows-gnu \
       -DCOMPILER_RT_DEFAULT_TARGET_ONLY=TRUE \
       $builddir/clang-source/compiler-rt/lib/builtins
-  make -j[% c("buildconf/num_procs") %]
+  make -j[% c("num_procs") %]
   rtdir=$distdir/lib/clang/[% pc("llvm-project", "version") %]/lib/windows
   mkdir -p $rtdir
   cp lib/windows/libclang_rt.builtins-$compiler_rt_machine.a $rtdir/
@@ -134,8 +134,8 @@ cmake -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_CXX_FLAGS="-Wno-dll-attribute-on-redeclaration -nostdinc++ -I$builddir/clang-source/libcxx/include -DPSAPI_VERSION=2" \
       -DCMAKE_C_FLAGS="-Wno-dll-attribute-on-redeclaration" \
       $builddir/clang-source/libunwind
-make -j[% c("buildconf/num_procs") %]
-make -j[% c("buildconf/num_procs") %] install
+make -j[% c("num_procs") %]
+make -j[% c("num_procs") %] install
 
 # libcxxabi
 cd $builddir/clang-source/libcxxabi
@@ -163,7 +163,7 @@ cmake -DCMAKE_BUILD_TYPE=Release \
       -DCXX_SUPPORTS_CXX_STD=True \
       -DCMAKE_CXX_FLAGS="-D_LIBCPP_DISABLE_VISIBILITY_ANNOTATIONS -D_LIBCPP_HAS_THREAD_API_WIN32" \
       $builddir/clang-source/libcxxabi
-make -j[% c("buildconf/num_procs") %] VERBOSE=1
+make -j[% c("num_procs") %] VERBOSE=1
 
 # libcxx
 cd $builddir/clang-source/libcxx
@@ -196,8 +196,8 @@ cmake -DCMAKE_BUILD_TYPE=Release \
       -DLIBCXX_CXX_ABI_LIBRARY_PATH=$builddir/clang-source/libcxxabi/build/lib \
       -DCMAKE_CXX_FLAGS="-D_LIBCXXABI_DISABLE_VISIBILITY_ANNOTATIONS" \
       $builddir/clang-source/libcxx
-make -j[% c("buildconf/num_procs") %] VERBOSE=1
-make -j[% c("buildconf/num_procs") %] install
+make -j[% c("num_procs") %] VERBOSE=1
+make -j[% c("num_procs") %] install
 
 # libc++.a depends on libunwind.a. While the linker will automatically link to
 # libc++.a in C++ mode, it won't pick libunwind.a, requiring the caller to

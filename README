@@ -108,13 +108,14 @@ fetching of new commits for nightly builds in rbm.local.conf.
 Number of make processes
 ------------------------
 
-By default the builds are run with 4 processes simultaneously (with
-make -j4). If you want to change the number of processes used, you can
-set the RBM_NUM_PROCS environment variable:
+By default `nproc` is used to determine the number of processes to run
+simultaneously (with make -jN where N is the number returned by `nproc`).
+If you want to change the number of processes used, you can set the
+RBM_NUM_PROCS environment variable:
 
   $ export RBM_NUM_PROCS=8
 
-You can also set the buildconf/num_procs option in rbm.local.conf.
+You can also set the num_procs option in rbm.local.conf.
 
 
 Automated builds

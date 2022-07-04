@@ -24,7 +24,7 @@ perl -pi -e 's/(LIBTOOLIZE -c)/\1 -f/' autogen.sh
     --enable-tapi-support \
     --with-libtapi=$distdir
 
-make -j[% c("buildconf/num_procs") %] install
+make -j[% c("num_procs") %] install
 strip $distdir/bin/*
 # cctools doesn't include dsymutil but clang will need to find it.
 cp $CLANG_DIR/bin/dsymutil $distdir/bin/x86_64-apple-darwin-dsymutil

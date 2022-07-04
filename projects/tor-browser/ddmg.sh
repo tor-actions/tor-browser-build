@@ -2,7 +2,7 @@
 find [% src %] -executable -exec chmod 0755 {} \;
 find [% src %] ! -executable -exec chmod 0644 {} \;
 
-find [% src %] -exec [% c("var/touch") %] {} \;
+find [% src %] -exec [% c("touch") %] {} \;
 
 dmg_tmpdir=\$(mktemp -d)
 [% SET filelist = '"\$dmg_tmpdir/filelist.txt"' %]

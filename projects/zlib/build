@@ -10,16 +10,16 @@ cd /var/tmp/build/[% project %]-[% c('version') %]
 patch -p1 < $rootdir/0001-Fix-configure-issue-that-discarded-provided-CC-defin.patch
 
 [% IF c("var/windows") -%]
-  make BINARY_PATH=$distdir/lib INCLUDE_PATH=$distdir/include LIBRARY_PATH=$distdir/lib -f win32/Makefile.gcc PREFIX=[% c("arch") %]-w64-mingw32- -j[% c("buildconf/num_procs") %] SHARED_MODE=1 LOC="[% c("var/CFLAGS") %] [% c("var/LDFLAGS") %]"
-  make BINARY_PATH=$distdir/lib INCLUDE_PATH=$distdir/include LIBRARY_PATH=$distdir/lib -f win32/Makefile.gcc PREFIX=[% c("arch") %]-w64-mingw32- -j[% c("buildconf/num_procs") %] SHARED_MODE=1 LOC="[% c("var/CFLAGS") %] [% c("var/LDFLAGS") %]" install
+  make BINARY_PATH=$distdir/lib INCLUDE_PATH=$distdir/include LIBRARY_PATH=$distdir/lib -f win32/Makefile.gcc PREFIX=[% c("arch") %]-w64-mingw32- -j[% c("num_procs") %] SHARED_MODE=1 LOC="[% c("var/CFLAGS") %] [% c("var/LDFLAGS") %]"
+  make BINARY_PATH=$distdir/lib INCLUDE_PATH=$distdir/include LIBRARY_PATH=$distdir/lib -f win32/Makefile.gcc PREFIX=[% c("arch") %]-w64-mingw32- -j[% c("num_procs") %] SHARED_MODE=1 LOC="[% c("var/CFLAGS") %] [% c("var/LDFLAGS") %]" install
 [% END -%]
 
 [% IF c("var/android") -%]
   export CHOST=[% c("var/cross_prefix") %]
   export CC=[% c("var/CC") %]
   ./configure --prefix=$distdir
-  make -j[% c("buildconf/num_procs") %]
-  make -j[% c("buildconf/num_procs") %] install
+  make -j[% c("num_procs") %]
+  make -j[% c("num_procs") %] install
   # Only need static libraries
   rm -r $distdir/lib/{*.so*,pkgconfig}
 [% END -%]

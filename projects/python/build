@@ -5,7 +5,7 @@ mkdir -p $distdir
 tar xf [% c('input_files_by_name/python') %]
 cd Python-[% c('version') %]
 ./configure --prefix=$distdir
-make -j[% c("buildconf/num_procs") %]
+make -j[% c("num_procs") %]
 make prefix=$distdir install
 cd /var/tmp/dist
 [% c('tar', {

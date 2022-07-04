@@ -28,13 +28,14 @@
 ### when starting a new build.
 #build_log_append: 0
 
+### The num_procs option can be used to select the number of
+### build processes to run simultaneously. You can also use the
+### RBM_NUM_PROCS environment variable. The default is the number of
+### processing units available, as returned by `nproc`.
+#num_procs: 8
+
 buildconf:
   buildconf: 1
-
-  ### The buildconf/num_procs option can be used to select the number of
-  ### build processes to run simultaneously. You can also use the
-  ### RBM_NUM_PROCS environment variable. The default is 4.
-  #num_procs: 8
 
   ### The buildconf/git_signtag_opt option is useful when you tag a release.
   ### It is used to set the 'git tag' argument to select the keyid for

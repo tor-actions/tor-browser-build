@@ -14,7 +14,7 @@ tar -xf [% c('input_files_by_name/node') %]
 cd node-v[% c('version') %]
 
 ./configure --prefix=$distdir
-make -j[% c("buildconf/num_procs") %]
+make -j[% c("num_procs") %]
 make install
 
 cd /var/tmp/dist
