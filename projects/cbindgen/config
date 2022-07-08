@@ -3,14 +3,14 @@ version: '[% c("var/cbindgen_version") %]'
 git_url: https://github.com/eqrion/cbindgen
 git_hash: '[% c("var/cbindgen_hash") %]'
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
+container:
+  use_container: 1
 
 var:
   cbindgen_version: 0.19.0
   cbindgen_hash: d9e490ce8b836194595bd30611253a7028059da2
   cbindgen_vendor_hash: 7d99c195b180e28ca7499d8744d020b864f952a5ba699716707aec9a06b4ee8b
   cbindgen_vendor_people_tpo_user: boklm
-  container:
-    use_container: 1
 
 input_files:
   - project: container-image

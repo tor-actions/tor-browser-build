@@ -47,7 +47,7 @@ Otherwise, when calling gradle in the project's build script replace the
 `--offline` flag with `--debug` and remove any `-Dmaven.repo.local` arguments.
 
 Finally, allow network access during the build by setting
-`var/container/disable_network/build` to `0` in rbm.conf, and rerun the build.
+`container/disable_network/build` to `0` in rbm.conf, and rerun the build.
 
 Dependent artifacts will show up as downloads in the logs. You can pull out
 these dependencies into a list by passing the log file to the gradle dependency

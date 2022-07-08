@@ -4,14 +4,14 @@ filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %]'
 git_hash: aeb63ebd079b646a3ec1b7b84d755653baa467d7
 git_url: https://github.com/thaliproject/Tor_Onion_Proxy_Library.git
 git_submodule: 1
+container:
+  use_container: 1
 
 var:
   deps:
     - build-essential
     - unzip
     - zip
-  container:
-    use_container: 1
   # this should be updated when the list of gradle dependencies is changed
   gradle_dependencies_version: 5
   gradle_version: 5.6.4

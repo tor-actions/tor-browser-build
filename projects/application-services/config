@@ -4,10 +4,10 @@ version: 91.1.1
 git_hash: 17942945873cdb8be56a9316d3cb8a611b3ef321
 git_url: https://github.com/mozilla/application-services
 git_submodule: 1
+container:
+  use_container: 1
 
 var:
-  container:
-    use_container: 1
   # This should be updated when the list of gradle dependencies is changed.
   gradle_dependencies_version: 9
   gradle_version: 6.7.1
@@ -104,9 +104,9 @@ steps:
   list_toolchain_updates:
     git_hash: 'v91.1.0'
     input_files: []
+    container:
+      use_container: 0
     var:
-      container:
-        use_container: 0
       get_android_components_version: |
         #!/bin/bash
         read -d '' p << 'EOF' || true

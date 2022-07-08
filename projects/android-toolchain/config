@@ -1,13 +1,13 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 version: '[% c("var/version_28") %]+[% c("var/version_29") %]+[% c("var/version_30") %]+[% c("var/version_31") %]'
+container:
+  use_container: 1
 var:
   version_31: 31.0.0
   version_30: 30.0.2
   version_29: 29.0.2
   version_28: 28.0.3
-  container:
-    use_container: 1
   deps:
     - unzip
     - python3

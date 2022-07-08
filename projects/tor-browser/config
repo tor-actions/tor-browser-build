@@ -1,10 +1,10 @@
 # vim: filetype=yaml sw=2
 version: '[% c("var/torbrowser_version") %]'
 filename: 'tor-browser-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %]'
+container:
+  use_container: 1
 
 var:
-  container:
-    use_container: 1
   ddmg: '[% INCLUDE ddmg.sh %]'
   deps:
     - python

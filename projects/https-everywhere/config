@@ -6,6 +6,8 @@ git_submodule: 1
 gpg_keyring: https-everywhere.gpg
 tag_gpg_id: 1
 filename: "[% project %]-[% c('version') %]-[% c('var/build_id') %].xpi"
+container:
+  use_container: 1
 var:
   # HTTPS Everywhere is expected to be the same on all platforms. To avoid
   # building the same thing 4 times, using 4 different container images
@@ -16,7 +18,6 @@ var:
   # the same since there is now nothing platform specific in the build
   # inputs. This allows us to save a little time and disk space.
   container:
-    use_container: 1
     suite: bullseye
     arch: amd64
   deps:

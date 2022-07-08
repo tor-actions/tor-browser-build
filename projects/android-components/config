@@ -6,12 +6,12 @@ git_url: https://gitlab.torproject.org/tpo/applications/android-components.git
 tag_gpg_id: 1
 gpg_keyring: torbutton.gpg
 variant: '[% IF c("var/release") %]Release[% ELSE %]Beta[% END %]'
+container:
+  use_container: 1
 
 var:
   android_components_version: 99.0.3
   torbrowser_branch: 11.5
-  container:
-    use_container: 1
   # This should be updated when the list of gradle dependencies is changed.
   gradle_dependencies_version: 35
   gradle_version: 7.0.2
@@ -62,9 +62,9 @@ steps:
     git_url: https://github.com/mozilla-mobile/android-components.git
     git_hash: releases/99.0
     #tag_gpg_id: 0
+    container:
+      use_container: 0
     var:
-      container:
-        use_container: 0
       get_glean_version: |
         #!/bin/bash
         read -d '' p << 'EOF' || true

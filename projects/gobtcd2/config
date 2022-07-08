@@ -13,12 +13,12 @@ version: '[% c("abbrev") %]'
 git_url: '[% pc("gobtcd", "git_url") %]'
 git_hash: '[% pc("gobtcd", "git_hash") %]'
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+container:
+  use_container: 1
 
 build: '[% c("projects/go/var/build_go_lib") %]'
 
 var:
-  container:
-    use_container: 1
   go_lib: github.com/btcsuite/btcd
   go_lib_install:
     - github.com/btcsuite/btcd/btcec

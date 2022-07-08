@@ -4,12 +4,12 @@ git_url: https://github.com/golang/text
 # v0.3.3
 git_hash: 23ae387dee1f90d29a23c0e87ee0b46038fbed0e
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+container:
+  use_container: 1
 
 build: '[% c("projects/go/var/build_go_lib") %]'
 
 var:
-  container:
-    use_container: 1
   go_lib: golang.org/x/text
 
 input_files:

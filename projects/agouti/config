@@ -6,9 +6,10 @@ filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/buil
 
 build: '[% c("projects/go/var/build_go_lib") %]'
 
+container:
+  use_container: 1
+
 var:
-  container:
-    use_container: 1
   go_lib: github.com/sclevine/agouti
 
 input_files:

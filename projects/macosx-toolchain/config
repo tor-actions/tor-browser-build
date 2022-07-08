@@ -1,9 +1,9 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-1-[% c("var/build_id") %].tar.gz'
 version: 10.12
+container:
+  use_container: 1
 var:
-  container:
-    use_container: 1
   setup: |
     mkdir -p /var/tmp/dist
     tar -C /var/tmp/dist -xf $rootdir/[% c("compiler_tarfile") %]

@@ -4,9 +4,9 @@ filename: '[% project %]-[% c("version") %]-with-nspr-[% c("nspr_version") %]-[%
 # commit in libs/build-all.sh
 version: 3.66
 nspr_version: 4.30
+container:
+  use_container: 1
 var:
-  container:
-    use_container: 1
   deps:
     - build-essential
     - gyp

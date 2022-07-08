@@ -1,9 +1,9 @@
 # vim: filetype=yaml sw=2
 version: 3.06.1
 filename: 'nsis-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+container:
+  use_container: 1
 var:
-  container:
-    use_container: 1
   deps:
     - build-essential
     - libmpc-dev

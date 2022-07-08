@@ -3,12 +3,12 @@ version: '[% c("abbrev") %]'
 git_url: https://github.com/pion/rtp
 git_hash: f47320ba42ace6b75f1f579fc4404c26cf2b0dce #v1.7.13
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+container:
+  use_container: 1
 
 build: '[% c("projects/go/var/build_go_lib") %]'
 
 var:
-  container:
-    use_container: 1
   go_lib: github.com/pion/rtp
   go_lib_deps:
     - pion-randutil

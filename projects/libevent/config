@@ -5,10 +5,10 @@ git_hash: 'release-[% c("version") %]-stable'
 tag_gpg_id: 1
 gpg_keyring: libevent.gpg
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+container:
+  use_container: 1
 
 var:
-  container:
-    use_container: 1
   configure_opt_project: --disable-static
 
 targets:

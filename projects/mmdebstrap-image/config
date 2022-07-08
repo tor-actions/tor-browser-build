@@ -2,12 +2,11 @@
 filename: 'container-image_[% c("var/container/suite") %]-[% c("var/container/arch") %]-[% c("version") %].tar.gz'
 version: 1
 pkg_type: build
+container:
+  use_container: 1
 
 var:
   ubuntu_version: 22.04
-
-  container:
-    use_container: 1
 
 pre: |
   #!/bin/sh

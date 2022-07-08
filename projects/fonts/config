@@ -1,9 +1,9 @@
 # vim: filetype=yaml sw=2
 version: '2'
 filename: "[% project %]-[% c('version') %]-[% c('var/build_id') %].tar.gz"
+container:
+  use_container: 1
 var:
-  container:
-    use_container: 1
   noto_git_hash: 20bc5918912503bc1537a407a694738c33c048aa
   # Use this way so that the script that downloads the fonts can access the
   # lists of all the targets.

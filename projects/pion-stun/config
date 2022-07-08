@@ -3,12 +3,12 @@ version: '[% c("abbrev") %]'
 git_url: https://github.com/pion/stun
 git_hash: 4fa7a9d658b6037114fd35b6cb257979ed474a9b # v0.3.5
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+container:
+  use_container: 1
 
 build: '[% c("projects/go/var/build_go_lib") %]'
 
 var:
-  container:
-    use_container: 1
   go_lib: github.com/pion/stun
 
 input_files:

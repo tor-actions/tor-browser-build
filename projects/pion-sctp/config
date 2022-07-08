@@ -3,12 +3,12 @@ version: '[% c("abbrev") %]'
 git_url: https://github.com/pion/sctp
 git_hash: 7e00bf835f80c3e37a83f4127e14440b647ce316 #v1.8.2
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+container:
+  use_container: 1
 
 build: '[% c("projects/go/var/build_go_lib") %]'
 
 var:
-  container:
-    use_container: 1
   go_lib: github.com/pion/sctp
   go_lib_deps:
     - go-spew

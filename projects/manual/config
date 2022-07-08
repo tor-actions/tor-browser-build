@@ -1,10 +1,12 @@
+# vim: filetype=yaml sw=2
 # To update, see doc/how-to-update-the-manual.txt
 version: 40628
 filename: 'manual-[% c("version") %].tar.gz'
+container:
+  use_container: 1
 
 var:
   container:
-    use_container: 1
     suite: bullseye
     arch: amd64
   deps:

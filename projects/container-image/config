@@ -1,10 +1,11 @@
 # vim: filetype=yaml sw=2
 filename: 'container-image_[% c("var/container/suite") %]-[% c("var/container/arch") %]-[% sha256(c("pre")).substr(0, 12) %].tar.gz'
 pkg_type: build
+container:
+  use_container: 1
 
 var:
   container:
-    use_container: 1
     suite: '[% pc(c("origin_project"), "var/container/suite", { step => c("origin_step") }) %]'
     arch: '[% pc(c("origin_project"), "var/container/arch", { step => c("origin_step") }) %]'
 
@@ -74,7 +75,7 @@ remote_get: |
     SET dst = shell_quote(c('get_dst', { error_if_undef => 1 }));
   -%]
   mkdir -p "[% dst %]"
-  [% c("rbmdir") %]/container archive '[% c("var/container/dir") %]' "[% dst %]/[% c("filename") %]"
+  [% c("rbmdir") %]/container archive '[% c("container/dir") %]' "[% dst %]/[% c("filename") %]"
 
 input_files:
   - project: mmdebstrap-image

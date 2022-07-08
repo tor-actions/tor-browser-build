@@ -6,6 +6,8 @@ tag_gpg_id: 1
 git_url: https://git.torproject.org/tor-browser.git
 git_submodule: 1
 gpg_keyring: torbutton.gpg
+container:
+  use_container: 1
 
 var:
   geckoview_version: 99.0b3
@@ -21,8 +23,6 @@ var:
     - python3-distutils
     - pkg-config
     - openjdk-11-jdk-headless
-  container:
-    use_container: 1
   # this should be updated when the list of gradle dependencies is changed
   # see doc/how-to-create-gradle-dependencies-list.txt
   gradle_dependencies_version: 10
@@ -140,9 +140,8 @@ steps:
     git_hash: beta
     tag_gpg_id: 0
     input_files: []
-    var:
-      container:
-        use_container: 0
+    container:
+      use_container: 0
 
 targets:
   nightly:
