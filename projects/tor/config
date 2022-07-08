@@ -6,10 +6,10 @@ git_url: https://git.torproject.org/tor.git
 git_submodule: 1
 gpg_keyring: tor.gpg
 tag_gpg_id: 1
+container:
+  use_container: 1
 
 var:
-  container:
-    use_container: 1
   deps:
     - build-essential
     - automake

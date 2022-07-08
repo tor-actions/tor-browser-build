@@ -1,9 +1,8 @@
 # vim: filetype=yaml sw=2
 version: 1.16.0
 filename: "[% project %]-[% c('version') %]-[% c('var/build_id') %].tar.gz"
-var:
-  container:
-    use_container: 1
+container:
+  use_container: 1
 input_files:
   - project: container-image
   - URL: https://files.pythonhosted.org/packages/source/d/dnspython/dnspython-[% c("version") %].zip

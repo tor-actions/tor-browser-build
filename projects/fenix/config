@@ -6,14 +6,14 @@ git_url: https://gitlab.torproject.org/tpo/applications/fenix.git
 tag_gpg_id: 1
 gpg_keyring: torbutton.gpg
 variant: Beta
+container:
+  use_container: 1
 
 var:
   fenix_version: 99.0.0b3
   torbrowser_branch: 11.5
   git_branch: 'tor-browser-[% c("var/fenix_version") %]-[% c("var/torbrowser_branch") %]-1'
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
-  container:
-    use_container: 1
   # This should be updated when the list of gradle dependencies is changed.
   gradle_dependencies_version: 35
   gradle_version: 7.0.2
@@ -66,9 +66,8 @@ steps:
     git_hash: releases_v99.0.0
     #tag_gpg_id: 0
     input_files: []
-    var:
-      container:
-        use_container: 0
+    container:
+      use_container: 0
 
   get_gradle_dependencies_list:
     git_hash: '[% c("var/git_branch") %]^{/Add Tor integration and UI}'

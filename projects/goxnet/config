@@ -3,12 +3,12 @@ version: '[% c("abbrev") %]'
 git_url: https://go.googlesource.com/net
 git_hash: da137c7871d730100384dbcf36e6f8fa493aef5b
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+container:
+  use_container: 1
 
 build: '[% c("projects/go/var/build_go_lib") %]'
 
 var:
-  container:
-    use_container: 1
   go_lib: golang.org/x/net
   go_lib_install:
     - golang.org/x/net/ipv4

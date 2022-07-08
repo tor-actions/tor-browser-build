@@ -6,9 +6,8 @@ tag_gpg_id: 1
 gpg_keyring: yawning.gpg
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 
-var:
-  container:
-    use_container: 1
+container:
+  use_container: 1
 
 targets:
   nightly:

@@ -4,9 +4,8 @@ git_url: https://github.com/mozilla/uniffi-rs
 git_hash: ea3ff0402438ef1ebceda4c5fbbbd2ed6a9be227
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 
-var:
-  container:
-    use_container: 1
+container:
+  use_container: 1
 
 input_files:
   - project: container-image

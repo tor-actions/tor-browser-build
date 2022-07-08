@@ -3,10 +3,10 @@ filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 git_url: https://git.code.sf.net/p/mingw-w64/mingw-w64
 git_hash: cdb052f1d4056cd510cb83197b55868427b87476
 version: '[% c("abbrev") %]'
+container:
+  use_container: 1
 
 var:
-  container:
-    use_container: 1
   setup: |
     mkdir -p /var/tmp/dist
     tar -C /var/tmp/dist -xf $rootdir/[% c("compiler_tarfile") %]

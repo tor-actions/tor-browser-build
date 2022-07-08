@@ -3,12 +3,12 @@ version: '[% c("abbrev") %]'
 git_url: https://github.com/pion/interceptor
 git_hash: ec75ceafde7ff8751f8a2a759208a7b349804d97 #v0.1.11
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+container:
+  use_container: 1
 
 build: '[% c("projects/go/var/build_go_lib") %]'
 
 var:
-  container:
-    use_container: 1
   go_lib: github.com/pion/interceptor
   go_lib_deps:
     - pion-logging

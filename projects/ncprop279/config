@@ -1,3 +1,4 @@
+# vim: filetype=yaml sw=2
 #version: '0.0.2'
 # Using latest master branch because we need the stream isolation feature.
 # Once it's in a tagged release, we'll go back to using a version number here.
@@ -8,10 +9,10 @@ git_url:  https://github.com/namecoin/ncprop279.git
 # to a tag here.
 git_hash: '7bdd741d70258407f66aab52b24788f1acccc56b'
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+container:
+  use_container: 1
 
 var:
-  container:
-    use_container: 1
   go_lib_deps:
     - godns
     - goeasyconfig

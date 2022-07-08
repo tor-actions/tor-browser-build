@@ -1,12 +1,12 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 version: '[% c("var/current_version") %]'
+container:
+  use_container: 1
 
 var:
   current_version: 1.53.0
   previous_version: 1.52.0
-  container:
-    use_container: 1
 
 targets:
   android:

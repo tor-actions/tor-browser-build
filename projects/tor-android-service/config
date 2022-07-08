@@ -4,13 +4,13 @@ filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %]'
 git_hash: 0f264c8891904b63057c46a4e3902cc73b6b860c
 git_url: https://git.torproject.org/tor-android-service.git
 git_submodule: 1
+container:
+  use_container: 1
 
 var:
   deps:
     - build-essential
     - unzip
-  container:
-    use_container: 1
   # this should be updated when the list of gradle dependencies is changed
   gradle_dependencies_version: 5
   gradle_version: 5.6.4

@@ -1,11 +1,11 @@
 # vim: filetype=yaml sw=2
 version: '[% c("var/node_version") %]'
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
+container:
+  use_container: 1
 var:
   node_version: 12.22.1
   node_hash: dd650df7773a6ed3e390320ba51ef33cba6499f0e9397709ea3d1debdcbcb989
-  container:
-    use_container: 1
 
 targets:
   windows:

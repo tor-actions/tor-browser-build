@@ -4,9 +4,8 @@ git_url: https://git.torproject.org/pluggable-transports/snowflake.git
 git_hash: 01ae5b56e8399d29aa18605dc9add913d84dc553
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 
-var:
-  container:
-    use_container: 1
+container:
+  use_container: 1
 
 input_files:
   - project: container-image

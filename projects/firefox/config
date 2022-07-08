@@ -6,6 +6,8 @@ tag_gpg_id: 1
 git_url: https://git.torproject.org/tor-browser.git
 git_submodule: 1
 gpg_keyring: torbutton.gpg
+container:
+  use_container: 1
 
 var:
   firefox_platform_version: 91.11.0
@@ -20,8 +22,6 @@ var:
     - autoconf2.13
     - yasm
     - pkg-config
-  container:
-    use_container: 1
 
   rezip: |
     rezip_tmpdir=$(mktemp -d)
@@ -41,9 +41,8 @@ steps:
     filename: 'src-[% project %]-[% c("version") %].tar.xz'
     version: '[% c("git_hash") %]'
     input_files: []
-    var:
-      container:
-        use_container: 0
+    container:
+      use_container: 0
     targets:
       nightly:
         version: '[% c("abbrev") %]'
@@ -53,9 +52,8 @@ steps:
     git_hash: esr91
     tag_gpg_id: 0
     input_files: []
-    var:
-      container:
-        use_container: 0
+    container:
+      use_container: 0
 
 targets:
   release:

@@ -37,9 +37,8 @@ steps:
     version: 5.0.1
     filename: 'glean-wheels-[% c("version") %].tar.xz'
     build_log: '-'
-    var:
-      container:
-        use_container: 1
+    container:
+      use_container: 1
     create_glean_deps_tarball: |
       #!/bin/bash
       [% c("var/set_default_env") -%]

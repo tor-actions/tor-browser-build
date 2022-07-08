@@ -3,12 +3,12 @@ version: '[% c("abbrev") %]'
 git_url: https://github.com/pion/dtls
 git_hash: d2f797183a9f044ce976e6df6f362662ca722412 #v2.1.5
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+container:
+  use_container: 1
 
 build: '[% c("projects/go/var/build_go_lib") %]'
 
 var:
-  container:
-    use_container: 1
   go_lib: github.com/pion/dtls
   go_lib_deps:
     - goxcrypto

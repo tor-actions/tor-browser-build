@@ -3,12 +3,12 @@ version: '[% c("abbrev") %]'
 git_url: https://go.googlesource.com/crypto
 git_hash: 69ecbb4d6d5dab05e49161c6e77ea40a030884e1
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+container:
+  use_container: 1
 
 build: '[% c("projects/go/var/build_go_lib") %]'
 
 var:
-  container:
-    use_container: 1
   go_lib: golang.org/x/crypto
   go_lib_install:
     - golang.org/x/crypto/chacha20poly1305

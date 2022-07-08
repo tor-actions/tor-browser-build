@@ -1,13 +1,14 @@
+# vim: filetype=yaml sw=2
 version: 21
 git_url:  https://github.com/coreos/go-systemd.git
 git_hash: d3cd4ed1dbcf5835feba465b180436db54f20228
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+container:
+  use_container: 1
 
 build: '[% c("projects/go/var/build_go_lib") %]'
 
 var:
-  container:
-    use_container: 1
   go_lib: github.com/coreos/go-systemd
   go_lib_install:
     - github.com/coreos/go-systemd/journal
