@@ -1,5 +1,5 @@
 # To update, see doc/how-to-update-the-manual.txt
-version: 40628
+version: 43737
 filename: 'manual-[% c("version") %].tar.gz'
 
 var:
@@ -16,6 +16,6 @@ input_files:
   - project: container-image
   - URL: 'https://people.torproject.org/~pierov/tbb_files/manual_[% c("version") %].zip'
     name: manual
-    sha256sum: 64bab7e8b26014277b55cf2afc4f676f3a164f466fc33e72aa62004318994c3a
+    sha256sum: 3b1356122d15fb7b27c34812ed5de1859eb86b3755736a6c466b2cc286f38110
   - filename: packagemanual.py
     name: package_script
