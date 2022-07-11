@@ -24,27 +24,25 @@ patch -p1 < $rootdir/0001-Bug-33931-Filter-bridges-in-stream-by-type.patch
 patch -p1 < $rootdir/0001-Bug-30318-Add-snowflake-support.patch
 
 [% FOREACH arch = ['armv7', 'aarch64', 'x86', 'x86_64'] -%]
-  # Extract obfs4proxy from TorBrowser/Tor/PluggableTransports/obfs4proxy
-  tar --strip-components=4 -xf $rootdir/[% c('input_files_by_name/obfs4-' _ arch) %]
+  # Extract tor-expert-bundle
+  tebdir=$rootdir/tor-expert-bundle-[% arch %]
+  mkdir $tebdir
+  tar -C $tebdir -xf $rootdir/[% c('input_files_by_name/tor-expert-bundle-' _ arch) %]
+  ptdir=$tebdir/tor/pluggable_transports
 
-  # Extract snowflake from TorBrowser/Tor/PluggableTransports/snowflake
-  tar --strip-components=4 -xf $rootdir/[% c('input_files_by_name/snowflake-' _ arch) %]
   # Overwrite the obfs4proxy binary provided by Pluto and add Snowflake
   [% IF arch == "armv7" -%]
-    cp obfs4proxy external/pluto/bin/armeabi-v7a/
-    cp obfs4proxy external/pluto/bin/armeabi/
-    cp snowflake-client external/pluto/bin/armeabi-v7a/
-    cp snowflake-client external/pluto/bin/armeabi/
+    cp $ptdir/obfs4proxy external/pluto/bin/armeabi-v7a/
+    cp $ptdir/obfs4proxy external/pluto/bin/armeabi/
+    cp $ptdir/snowflake-client external/pluto/bin/armeabi-v7a/
+    cp $ptdir/snowflake-client external/pluto/bin/armeabi/
   [% ELSIF arch == "aarch64" -%]
-    cp obfs4proxy external/pluto/bin/arm64-v8a/
-    cp snowflake-client external/pluto/bin/arm64-v8a/
+    cp $ptdir/obfs4proxy external/pluto/bin/arm64-v8a/
+    cp $ptdir/snowflake-client external/pluto/bin/arm64-v8a/
   [% ELSE -%]
-    cp obfs4proxy external/pluto/bin/[% arch %]/
-    cp snowflake-client external/pluto/bin/[% arch %]/
+    cp $ptdir/obfs4proxy external/pluto/bin/[% arch %]/
+    cp $ptdir/snowflake-client external/pluto/bin/[% arch %]/
   [% END -%]
-
-  rm obfs4proxy
-  rm snowflake-client
 [% END -%]
 
 # Build Android Libraries and Apps

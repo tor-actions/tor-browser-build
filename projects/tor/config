@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %]'
+filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 version: 0.4.7.10
 git_hash: 'tor-[% c("version") %]'
 git_url: https://gitlab.torproject.org/tpo/core/tor.git
@@ -41,10 +41,6 @@ targets:
     var:
       arch_deps:
         - faketime
-  expert-bundle:
-    var:
-      expert_bundle: 1
-      flag_mwindows: ''
   android:
     var:
       configure_opt_project: '--enable-android --enable-static-openssl --enable-static-libevent --enable-zstd --disable-tool-name-check --disable-system-torrc --disable-system-torrc'

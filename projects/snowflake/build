@@ -2,8 +2,7 @@
 [% c("var/set_default_env") -%]
 [% pc('go', 'var/setup', { go_tarfile => c('input_files_by_name/go') }) %]
 distdir=/var/tmp/dist/[% project %]
-[% c("var/set_PTDIR_DOCSDIR") -%]
-mkdir -p $PTDIR $DOCSDIR
+mkdir -p $distdir
 
 [% IF c("var/android") -%]
   [% pc(c('var/compiler'), 'var/setup', { compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')) }) %]
@@ -32,10 +31,10 @@ ln -sf "$GOPATH/src/github.com/xtaci/kcp-go" "$GOPATH/src/github.com/xtaci/kcp-g
 
 cd client
 go build -ldflags '-s'
-cp -a client[% IF c("var/windows") %].exe[% END %] $PTDIR/snowflake-client[% IF c("var/windows") %].exe[% END %]
+cp -a client[% IF c("var/windows") %].exe[% END %] $distdir/snowflake-client[% IF c("var/windows") %].exe[% END %]
 
 cd ..
-cp -a README.md $DOCSDIR
+cp -a README.md $distdir/README.SNOWFLAKE.md
 
 cd $distdir
 [% c('tar', {

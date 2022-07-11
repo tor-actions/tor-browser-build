@@ -202,22 +202,6 @@ input_files:
      - '[% c("var/build_target") %]'
      - '[% c("var/browser_type") %]-osx-aarch64'
 
- - name: windows-expert-bundle
-   project: tor
-   enable: '[% c("var/browser-windows-i686") %]'
-   target:
-     - '[% c("var/build_target") %]'
-     - '[% c("var/browser_type") %]-windows-i686'
-     - expert-bundle
-
- - name: windows64-expert-bundle
-   project: tor
-   enable: '[% c("var/browser-windows-x86_64") && c("var/tor-browser") %]'
-   target:
-     - '[% c("var/build_target") %]'
-     - '[% c("var/browser_type") %]-windows-x86_64'
-     - expert-bundle
-
  - name: src-firefox
    project: firefox
    enable: '[% c("var/browser-src") %]'

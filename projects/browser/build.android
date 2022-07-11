@@ -40,3 +40,7 @@ zipalign -vp 4 $apk $aligned_apk
 apksigner sign --verbose --min-sdk-version [% c("var/android_min_api") %] --ks $rootdir/android-qa.keystore --out $qa_apk --in $aligned_apk --ks-key-alias androidqakey --key-pass pass:android --ks-pass pass:android
 
 apksigner sign --verbose --min-sdk-version [% c("var/android_min_api") %] --ks $rootdir/android-qa.keystore --out $test_out_apk --in $test_in_apk  --ks-key-alias androidqakey --key-pass pass:android --ks-pass pass:android
+
+[%IF c("var/tor-browser") -%]
+  cp $rootdir/[% c("input_files_by_name/tor-expert-bundle") %] [% dest_dir %]/[% c('filename') %]/
+[% END -%]

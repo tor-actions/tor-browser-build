@@ -2,8 +2,7 @@
 [% c("var/set_default_env") -%]
 [% pc('go', 'var/setup', { go_tarfile => c('input_files_by_name/go') }) %]
 distdir=/var/tmp/dist/[% project %]
-[% c("var/set_PTDIR_DOCSDIR") -%]
-mkdir -p $PTDIR
+mkdir -p $distdir
 
 [% IF c("var/android") -%]
   [% pc(c('var/compiler'), 'var/setup', { compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')) }) %]
@@ -30,7 +29,7 @@ ln -sf "$PWD" "$GOPATH/src/gitlab.com/yawning/obfs4.git"
 
 cd obfs4proxy
 go build -ldflags '-s'
-cp -a obfs4proxy[% IF c("var/windows") %].exe[% END %] $PTDIR
+cp -a obfs4proxy[% IF c("var/windows") %].exe[% END %] $distdir
 
 cd $distdir
 [% c('tar', {

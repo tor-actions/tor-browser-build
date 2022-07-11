@@ -70,9 +70,9 @@ input_files:
   - project: fenix
     name: fenix
     enable: '[% c("var/android") %]'
-  - project: tor
-    name: tor
-    enable: '[% ! c("var/android") && c("var/tor-browser") %]'
+  - project: tor-expert-bundle
+    name: tor-expert-bundle
+    enable: '[% c("var/tor-browser") %]'
   - project: firefox-langpacks
     name: firefox-langpacks
     enable: '[% ! c("var/testbuild") && ! c("var/android") %]'
@@ -82,12 +82,6 @@ input_files:
   - project: fonts
     name: fonts
     enable: '[% ! c("var/android") %]'
-  - project: obfs4
-    name: obfs4
-    enable: '[% ! c("var/android") && c("var/tor-browser") %]'
-  - project: snowflake
-    name: snowflake
-    enable: '[% ! c("var/android") && c("var/tor-browser") %]'
   - filename: Bundle-Data
     enable: '[% ! c("var/android") %]'
   - URL: https://addons.mozilla.org/firefox/downloads/file/4002416/noscript-11.4.11.xpi
@@ -126,12 +120,6 @@ input_files:
     enable: '[% c("var/android") %]'
   - filename: verify_allowed_addons.py
     enable: '[% c("var/android") && c("var/verify_allowed_addons") %]'
-  - filename: bridges_list.obfs4.txt
-    enable: '[% ! c("var/android") && c("var/tor-browser") %]'
-  - filename: bridges_list.meek-azure.txt
-    enable: '[% ! c("var/android") && c("var/tor-browser") %]'
-  - filename: bridges_list.snowflake.txt
-    enable: '[% ! c("var/android") && c("var/tor-browser") %]'
   - project: manual
     name: manual
     enable: '[% ! c("var/android") && c("var/tor-browser") %]'

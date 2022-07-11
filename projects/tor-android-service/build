@@ -18,16 +18,40 @@ cd /var/tmp/build/[% project %]-[% c('version') %]
 # Replace pre-packaged tor library with the latest build
 rm -fR service/src/main/jniLibs/*
 [% FOREACH arch = ['armv7', 'aarch64', 'x86', 'x86_64'] -%]
-  tar -C service/src/main -xf $rootdir/[% c('input_files_by_name/tor-' _ arch) %]/tor.tar.gz
+  # Extract tor-expert-bundle
+  tebdir=$rootdir/tor-expert-bundle-[% arch %]
+  mkdir $tebdir
+  tar -C $tebdir -xf $rootdir/[% c('input_files_by_name/tor-expert-bundle-' _ arch) %]
+
+  # Figure out our android abi from our arch
+  [% IF arch == "armv7" -%]
+    abi=armeabi-v7a
+  [% ELSIF arch == "aarch64" -%]
+    abi=arm64-v8a
+  [% ELSE -%]
+    abi=[% arch %]
+  [% END -%]
+
+  # Deploy the tor bin
+  mkdir -p service/src/main/jniLibs/$abi
+  cp $tebdir/tor/libTor.so service/src/main/jniLibs/$abi/libTor.so
+
+  # Copy over data (all archs have thesame data, so we only need to do this once)
+  [% IF arch == "armv7" -%]
+    # Copy over geoip(6)
+    mkdir -p service/src/main/assets/common
+    mv $tebdir/data/{geoip,geoip6} service/src/main/assets/common
+
+    # Update bridges list
+    ptdir=$tebdir/tor/pluggable_transports
+    cat $ptdir/bridges_list.obfs4.txt $ptdir/bridges_list.meek-azure.txt \
+      $ptdir/bridges_list.snowflake.txt > service/src/main/assets/common/bridges.txt
+  [% END -%]
 [% END -%]
 
 # Replace libraries with the config dependencies
 rm service/libs/*
 cp $rootdir/[% c('input_files_by_name/topl') %]/*{.aar,.jar} service/libs/
-
-# Update bridges list
-cat $rootdir/bridges_list.obfs4.txt $rootdir/bridges_list.meek-azure.txt \
-  $rootdir/bridges_list.snowflake.txt > service/src/main/assets/common/bridges.txt
 
 # Build Android Libraries and Apps
 gradle --offline --no-daemon -P androidplugin=3.6.0 -P appcompatVersion=28.0.0 -P compileVersion=29 -P targetVersion=29 -P minVersion=16 -Dmaven.repo.local=$gradle_repo assembleRelease -x lint

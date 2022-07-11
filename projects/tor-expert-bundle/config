@@ -1,0 +1,18 @@
+# vim: filetype=yaml sw=2
+filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+version: '[% c("var/torbrowser_version") %]'
+
+container:
+  use_container: 1
+
+input_files:
+  - project: container-image
+  - name: tor
+    project: tor
+  - name: obfs4
+    project: obfs4
+  - name: snowflake
+    project: snowflake
+  - filename: bridges_list.obfs4.txt
+  - filename: bridges_list.meek-azure.txt
+  - filename: bridges_list.snowflake.txt

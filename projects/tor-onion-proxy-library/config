@@ -22,36 +22,20 @@ input_files:
     project: '[% c("var/compiler") %]'
   - project: gradle
     name: gradle
-  - project: obfs4
-    name: obfs4-armv7
+  - project: tor-expert-bundle
+    name: tor-expert-bundle-armv7
     target_prepend:
       - android-armv7
-  - project: obfs4
-    name: obfs4-aarch64
+  - project: tor-expert-bundle
+    name: tor-expert-bundle-aarch64
     target_prepend:
       - android-aarch64
-  - project: obfs4
-    name: obfs4-x86
+  - project: tor-expert-bundle
+    name: tor-expert-bundle-x86
     target_prepend:
       - android-x86
-  - project: obfs4
-    name: obfs4-x86_64
-    target_prepend:
-      - android-x86_64
-  - project: snowflake
-    name: snowflake-armv7
-    target_prepend:
-      - android-armv7
-  - project: snowflake
-    name: snowflake-aarch64
-    target_prepend:
-      - android-aarch64
-  - project: snowflake
-    name: snowflake-x86
-    target_prepend:
-      - android-x86
-  - project: snowflake
-    name: snowflake-x86_64
+  - project: tor-expert-bundle
+    name: tor-expert-bundle-x86_64
     target_prepend:
       - android-x86_64
   - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'

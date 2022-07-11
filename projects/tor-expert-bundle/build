@@ -1,0 +1,30 @@
+#!/bin/bash
+[% c("var/set_default_env") -%]
+distdir=/var/tmp/dist/[% project %]
+mkdir -p $distdir
+cd $distdir
+
+tar -xkf $rootdir/[% c('input_files_by_name/tor') %]
+
+cd tor
+mkdir pluggable_transports && cd pluggable_transports
+
+tar -xkf $rootdir/[% c('input_files_by_name/obfs4') %]
+tar -xkf $rootdir/[% c('input_files_by_name/snowflake') %]
+
+# copy in bridge lines for each pluggable transport
+mv $rootdir/bridges_list.obfs4.txt .
+mv $rootdir/bridges_list.meek-azure.txt .
+mv $rootdir/bridges_list.snowflake.txt .
+
+cd $distdir
+[%
+  SET tar_src = [ "tor", "data" ];
+  IF c("var/linux");
+   tar_src.push("debug");
+  END;
+  c('tar', {
+    tar_src => tar_src,
+    tar_args => '-czvf' _ dest_dir _ '/' _ c('filename'),
+  });
+%]

@@ -18,15 +18,9 @@ mkdir -p "$destdir"
 [% END -%]
 [% IF c("var/browser-windows-i686") -%]
   mv [% c('input_files_by_name/windows-i686') %]/* "$destdir"/
-  [% IF c("var/tor-browser") -%]
-    mv [% c('input_files_by_name/windows-expert-bundle') %]/* "$destdir"/
-  [% END -%]
 [% END -%]
 [% IF c("var/browser-windows-x86_64") -%]
   mv [% c('input_files_by_name/windows-x86_64') %]/* "$destdir"/
-  [% IF c("var/tor-browser") -%]
-    mv [% c('input_files_by_name/windows64-expert-bundle') %]/* "$destdir"/
-  [% END -%]
 [% END -%]
 [% IF c("var/browser-osx-x86_64") -%]
   mv [% c('input_files_by_name/osx-x86_64') %]/* "$destdir"/

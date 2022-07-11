@@ -34,6 +34,7 @@ touch "$GENERATEDPREFSPATH"
 
   DOCSPATH=[% c('var/ProjectName') %]/Docs
   EXTSPATH=[% c('var/ProjectName') %]/Data/Browser/profile.default/extensions
+  TORBINPATH=TorBrowser/Tor
   TORCONFIGPATH=TorBrowser/Data/Tor
 
   mkdir -p "$TBDIR/[% c('var/ProjectName') %]/Data/Browser/Caches"
@@ -48,8 +49,39 @@ MARTOOLS=$rootdir/mar-tools
 mv [% c('input_files_by_name/noscript') %] "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi"
 
 [% IF c("var/tor-browser") -%]
-  tar -C "$TBDIR" -xf [% c('input_files_by_name/obfs4') %]
-  tar -C "$TBDIR" -xf [% c('input_files_by_name/snowflake') -%]
+  tar -xvf [% c('input_files_by_name/tor-expert-bundle') %]
+
+  # geoip(6) and anything else that belongs in the data dir from the expert bundle
+  mkdir -p "$TBDIR/$TORCONFIGPATH"
+  mv data/{geoip,geoip6} "$TBDIR/$TORCONFIGPATH"
+
+  # Bridge lists will be consumed later in `bridges_conf`
+  mv tor/pluggable_transports/bridges_list.*.txt $rootdir
+
+  # Snowflake's README is the only documentation shipped in tor-expert-bundle
+  mkdir -p "$TBDIR/$DOCSPATH/snowflake"
+  find tor
+  mv tor/pluggable_transports/README.SNOWFLAKE.md "$TBDIR/$DOCSPATH/snowflake/README.md"
+
+  # Move the PTs to where TB expects them
+  mkdir -p "$TBDIR/$TORBINPATH"
+  mv tor/pluggable_transports "$TBDIR/$TORBINPATH/PluggableTransports"
+
+  # Move tor and dependencies to where TB expects them
+  mv tor/* "$TBDIR/$TORBINPATH"
+
+  # on linux, libstdc++ lives in it's own directory
+  [% IF c("var/linux") %]
+    find $TBDIR/$TORBINPATH
+    mkdir -p "$TBDIR/$TORBINPATH/libstdc++"
+    mv "$TBDIR/$TORBINPATH"/libstdc++.so.* "$TBDIR/$TORBINPATH/libstdc++"
+  [% END %]
+
+  # the expert bundle includes tor-gencert, which isn't needed for browser releases
+  [% IF c("var/windows") %]
+    rm "$TBDIR/$TORBINPATH/tor-gencert.exe"
+  [% END %]
+
 [% END -%]
 
 tar -C "$TBDIR[% IF c("var/osx") %]/Contents/Resources[% END %]" -xf [% c('input_files_by_name/fonts') %]
@@ -94,9 +126,6 @@ tar -C ${TB_STAGE_DIR} -xf [% c('input_files_by_name/firefox') %]/browser.tar.gz
   rm -rf $TMP_MANUAL_PATH
 [% END -%]
 
-[% IF c("var/tor-browser") -%]
-  tar -C "$TBDIR[% IF ! c("var/osx") %]/TorBrowser[% END %]" -xf [% c('input_files_by_name/tor') %]/tor.tar.gz
-[% END -%]
 
 [% IF c("var/namecoin") %]
   # Extract Electrum-NMC
@@ -325,8 +354,8 @@ cp $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip "$OUTDIR"/
     cp $rootdir/[% c('input_files_by_name/firefox') %]/geckodriver-linux64.tar.xz "$OUTDIR"/
   [% END -%]
 [% END -%]
-[% IF c("var/linux") && c("var/tor-browser") -%]
-  cp $rootdir/[% c('input_files_by_name/tor') %]/tor-debug.tar.xz "$OUTDIR"/tor-[% c("var/mar_osname") %]-debug.tar.xz
+[%IF c("var/tor-browser") -%]
+  cp $rootdir/[% c("input_files_by_name/tor-expert-bundle") %] "$OUTDIR"/
 [% END -%]
 [% IF c("var/build_infos_json") -%]
   cp $rootdir/[% c('input_files_by_name/firefox') %]/build-infos.json "$OUTDIR"/build-infos-[% c("var/mar_osname") %].json
