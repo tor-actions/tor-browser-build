@@ -1,0 +1,7 @@
+# The following line should be uncommented and updated:
+
+#ssh_host_pkgstage=tbbuild
+#pkgstage_tor_browser_build_dir=/home/user/tor-browser-build
+#android_signing_key_dir=/path/to/signing/key/dir
+
+var_is_defined ssh_host_pkgstage android_signing_key_dir

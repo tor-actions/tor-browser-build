@@ -47,11 +47,13 @@ var:
   sdk_tools_version: 4333796
   commandlinetools_version: 7583922
   commandlinetools_version_string: 5.0
+  build_tools_filename: build-tools_r31-linux.zip
+  build_tools_sha256sum: f90c22f5562638a2e00762e1711eebd55e7f0a05232b65200d387307d057bfe8
 input_files:
   - project: container-image
-  - URL: '[% c("var/google_repo") %]/build-tools_r31-linux.zip'
+  - URL: '[% c("var/google_repo") %]/[% c("var/build_tools_filename") %]'
     name: build_tools
-    sha256sum: f90c22f5562638a2e00762e1711eebd55e7f0a05232b65200d387307d057bfe8
+    sha256sum: '[% c("var/build_tools_sha256sum") %]'
   - URL: '[% c("var/google_repo") %]/build-tools_r[% c("var/version_30") %]-linux.zip'
     name: build_tools_30
     sha256sum: 565af786dc0cc1941002174fb945122eabd080b222cd4c7c3d9a2ae0fabf5dc4
@@ -85,3 +87,18 @@ input_files:
   - URL: '[% c("var/google_repo") %]/android-ndk-r[% c("var/android_ndk_version") %][% c("var/android_ndk_revision") %]-linux-x86_64.zip'
     name: android_ndk_compiler
     sha256sum: dd6dc090b6e2580206c64bcee499bc16509a5d017c6952dcd2bed9072af67cbd
+steps:
+  # The get_build_tools step is used by tools/signing/android-signing
+  get_build_tools:
+    filename: 'android-[% c("var/build_tools_filename") %]'
+    get_build_tools: |
+      #!/bin/bash
+      set -e
+      mv -v [% c("input_files_by_name/build_tools") %] [% dest_dir _ '/' _ c('filename') %]
+    var:
+      container:
+        use_container: 0
+    input_files:
+      - URL: '[% c("var/google_repo") %]/[% c("var/build_tools_filename") %]'
+        name: build_tools
+        sha256sum: '[% c("var/build_tools_sha256sum") %]'

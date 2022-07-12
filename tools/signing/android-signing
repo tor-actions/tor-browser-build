@@ -1,23 +1,64 @@
 #!/bin/bash
 
 # Sign apk for each target architecture.
-# This script requires two command line arguments.
-# Usage: android-signing <version> <path/to/signing/key>
+# This script does not require command line argument, but it needs 
+# some configuration options to be set in set-config.android-signing:
+#  - ssh_host_pkgstage is the host which you use for staging packages
+#    during signing. The script will download the unsigned .apk files
+#    from this host, and upload the signed .apk there
+#  - pkgstage_tor_browser_build_dir: this is the path to tor-browser-build
+#    on pkgstage
+#  - android_signing_key_dir: the local path where the android signing
+#    keys are located. That directory should contains files tba_alpha.p12
+#    and tba_release.p12 for alpha and release signing keys.
+# The Tor Browser version is taken from set-config.tbb-version
 
-# In addition, hard-coding the path to an Android SDK build-tools version, as
-# BUILD_TOOLS, is required.
-
-set -x
 set -e
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source "$script_dir/functions"
+source "$script_dir/set-config.android-signing"
 
-VERSION=$1
-SIGNING_KEY_PATH=$2
-
-# TODO set correctly.
-BUILD_TOOLS=/path/to/build-tools/version
-export PATH="${BUILD_TOOLS}:${PATH}"
-
+topdir="$script_dir/../.."
 ARCHS="armv7 aarch64 x86 x86_64"
+
+android_signing_key_path="$android_signing_key_dir/tba_$tbb_version_type.p12"
+test -f "$android_signing_key_path" || exit_error "$android_signing_key_path is missing"
+
+check_installed_packages() {
+  local packages='unzip openjdk-11-jdk-headless openjdk-11-jre-headless'
+  for package in $packages
+  do
+    dpkg -s "$package" | grep -q '^Status: install ok installed$' || \
+      exit_error "package $package is missing"
+  done
+}
+
+setup_build_tools() {
+  local rbm="$topdir/rbm/rbm"
+  local build_tools_zipfile="$topdir/out/android-toolchain/$("$rbm" showconf --step get_build_tools android-toolchain filename)"
+  if ! test -f "$build_tools_zipfile"; then
+    "$rbm" build --step get_build_tools android-toolchain
+    test -f "$build_tools_zipfile" || exit_error "$build_tools_zipfile is missing"
+  fi
+  local build_tools_dir=$(mktemp -d)
+  trap "rm -Rf $build_tools_dir" EXIT
+  unzip -d "$build_tools_dir" "$build_tools_zipfile"
+  test -f "$build_tools_dir"/android-12/apksigner || \
+    exit_error "$build_tools_dir/android-12/apksigner is missing"
+  export PATH="$build_tools_dir/android-12:${PATH}"
+}
+
+download_unsigned_apks() {
+  apks_dir=$(mktemp -d)
+  trap "rm -Rf $apks_dir" EXIT
+  rsync -avH "$ssh_host_pkgstage:$pkgstage_tor_browser_build_dir/$tbb_version_type/signed/$tbb_version/*-qa.apk" "$apks_dir/"
+}
+
+upload_signed_apks() {
+  rsync -avH --exclude="*-qa.apk" --exclude="*-unaligned.apk" \
+    --exclude="*-unsigned.apk" "$apks_dir/" \
+    "$ssh_host_pkgstage:$pkgstage_tor_browser_build_dir/$tbb_version_type/signed/$tbb_version/"
+}
 
 # Sign individual apk
 sign_apk() {
@@ -57,7 +98,7 @@ sign_apk() {
 
     # Step 3: Sign
     # Use this command if reading key from file
-    apksigner sign --verbose -ks ${SIGNING_KEY_PATH} --ks-type pkcs12 --ks-pass env:KSPASS --debuggable-apk-permitted=false --out "${SIGNED_APK}" "${UNSIGNED_APK}"
+    apksigner sign --verbose -ks ${android_signing_key_path} --ks-type pkcs12 --ks-pass env:KSPASS --debuggable-apk-permitted=false --out "${SIGNED_APK}" "${UNSIGNED_APK}"
 
     # Or, use below command if using a hardware token
     # apksigner sign --verbose --provider-class sun.security.pkcs11.SunPKCS11 --provider-arg pkcs11_java.cfg --ks NONE --ks-type PKCS11 --debuggable-apk-permitted=false --out "${SIGNED_APK}" "${UNSIGNED_APK}"
@@ -81,18 +122,18 @@ sign_apk() {
 # Rename and verify signing certificate
 finalize() {
   for arch in ${ARCHS}; do
-      mv tor-browser-${VERSION}-android-${arch}-multi{-qa,}.apk
+      mv tor-browser-${tbb_version}-android-${arch}-multi{-qa,}.apk
   done
 
   for arch in ${ARCHS}; do
-      verified=`apksigner verify --print-certs --verbose tor-browser-${VERSION}-android-${arch}-multi.apk`
+      verified=`apksigner verify --print-certs --verbose tor-browser-${tbb_version}-android-${arch}-multi.apk`
       scheme_v1=
       scheme_v2=
       cert_digest=
       pubkey_digest=
 
       # Verify the expected signing key was used, Alpha verses Release based on the filename.
-      if `echo ${VERSION} | grep -q a`; then
+      if test "$tbb_version_type" = "alpha"; then
           scheme_v1="Verified using v1 scheme (JAR signing): true"
           scheme_v2="Verified using v2 scheme (APK Signature Scheme v2): true"
           cert_digest="Signer #1 certificate SHA-256 digest: 15f760b41acbe4783e667102c9f67119be2af62fab07763f9d57f01e5e1074e1"
@@ -117,15 +158,7 @@ finalize() {
   echo Done.
 }
 
-if [ -z "$VERSION" ]; then
-    echo Provide version number
-    exit
-fi
-
-if [ -z "${SIGNING_KEY_PATH}" ]; then
-    echo Provide the path to the signing key: release or alpha
-    exit
-fi
+check_installed_packages
 
 if [ -z "$KSPASS" ]; then
     echo "Enter keystore passphrase"
@@ -133,9 +166,17 @@ if [ -z "$KSPASS" ]; then
     export KSPASS
 fi
 
+setup_build_tools
+
+download_unsigned_apks
+
+cd $apks_dir
+
 # Sign all packages
 for arch in ${ARCHS}; do
-    sign_apk tor-browser-${VERSION}-android-${arch}-multi-qa.apk
+    sign_apk tor-browser-${tbb_version}-android-${arch}-multi-qa.apk
 done
 
 finalize
+
+upload_signed_apks
