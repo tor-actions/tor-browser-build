@@ -58,7 +58,7 @@
 - [ ] Sign/Tag commit :
     - Tag : `$(TOR_LAUNCHER_VERSION)`
     - Message `Tagging $(TOR_LAUNCHER_VERSION)`
-- [ ] Push `master` and tag to origin
+- [ ] Push `main` and tag to origin
 
 ### tor-browser: https://git.torproject.org/tor-browser.git
 - [ ] ***(Optional)*** Rebase to `$(ESR_VERSION)`
@@ -174,7 +174,7 @@
     <summary>Build/Signing/Publishing</summary>
 
 ### tor-browser-build: https://git.torproject.org/builders/tor-browser-build.git
-Tor Browser Alpha (and Nightly) are on the `master` branch, while Stable lives in the various `$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)-maint` (and possibly more specific) branches
+Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in the various `$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)-maint` (and possibly more specific) branches
 
 - [ ] Update `rbm.conf`
     - [ ] `var/torbrowser_version` : update to next version

@@ -363,7 +363,7 @@ introduced by the testbuild target is the output directory.
 By default the testbuild is based on the alpha build. All the options
 can have a different definition for the alpha, release and nightly builds.
 Usually the git_hash option has a different definition for the nightly
-builds in order to point to the master branch.
+builds in order to point to the main branch.
 
 If you want your testbuild target to create builds based on nightly
 rather than alpha, you can edit your rbm.local.conf file and uncomment

@@ -44,7 +44,7 @@ foreach (<CHANGELOG>) {
   $changelog .= $_;
 }
 
-my $changelog_branch = 'master';
+my $changelog_branch = 'main';
 if (! ( $current_tbversion =~ m/a/ ) ) {
   my @v = split(/\./, $current_tbversion);
   $changelog_branch = "maint-$v[0].$v[1]";

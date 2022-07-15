@@ -29,7 +29,7 @@ Same as torbrowser-alpha, for the selected platform only.
 torbrowser-nightly
 ------------------
 Build Tor Browser for the nightly channel, for all supported platforms.
-Many of the components will be based on the master branch. You might
+Many of the components will be based on the main branch. You might
 want to run "make fetch" before, to fetch the latest commits from all
 components.
 

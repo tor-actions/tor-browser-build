@@ -69,10 +69,10 @@ var:
   #        - torbrowser-all
   #
   ### If you are doing 'release' builds in the maint-7.0 branch and
-  ### 'alpha' builds in the master branch, you can use the following
+  ### 'alpha' builds in the main branch, you can use the following
   ### configuration:
   #clean:
-  #  master:
+  #  main:
   #    - project: release
   #      target:
   #        - alpha
