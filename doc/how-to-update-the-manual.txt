@@ -5,4 +5,5 @@
 5. Upload it to people.tpo
 6. Update projects/manual/config
    6.1 Change the version to $PIPELINEID
-   6.2 Update the URL if it was different from the previous uploader
+   6.2 Update the hash in the input_files section
+   6.3 Update the URL if it was different from the previous uploader
