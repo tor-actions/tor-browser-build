@@ -1,3 +1,19 @@
+Tor Browser 11.5.1 - July 26 2022
+ * Windows + OS X + Linux
+   * Update Firefox to 91.12.0esr
+   * Bug 41049: QR codes in connection settings aren't recognized by some readers in dark theme [tor-browser]
+   * Bug 41050: "Continue to HTTP Site" button doesn't work on IP addresses [tor-browser]
+   * Bug 41053: remove HTTPS-Everywhere entry from browser.uiCustomization.state pref [tor-browser]
+   * Bug 41054: Improve color contrast of purple elements in connection settings in dark theme [tor-browser]
+   * Bug 41055: Icon fix from #40834 is missing in 11.5 stable [tor-browser]
+   * Bug 41058: Hide `currentBridges` description when the section itself is hidden [tor-browser]
+   * Bug 41059: Bridge cards aren't displaying, and toggle themselves off [tor-browser]
+ * Build System
+   * Windows + OS X + Linux
+     * Update Go to 1.17.12
+     * Bug 40547: Remove container/remote_* from rbm.conf [tor-browser-build]
+     * Bug 40584: Update tor-browser manual to latest [tor-browser-build]
+
 Tor Browser 11.5 - July 7 2022
  * All Platforms
    * Update OpenSSL to 1.1.1q

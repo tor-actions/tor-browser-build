@@ -10,7 +10,7 @@ container:
   use_container: 1
 
 var:
-  firefox_platform_version: 91.11.0
+  firefox_platform_version: 91.12.0
   firefox_version: '[% c("var/firefox_platform_version") %]esr'
   torbrowser_branch: 11.5
   branding_directory: 'browser/branding/alpha'

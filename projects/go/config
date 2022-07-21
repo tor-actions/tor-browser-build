@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-version: 1.17.11
+version: 1.17.12
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 container:
   use_container: 1
@@ -118,7 +118,7 @@ input_files:
   - URL: 'https://golang.org/dl/go[% c("version") %].src.tar.gz'
     enable: '[% ! c("var/android") %]'
     name: go
-    sha256sum: ac2649a65944c6a5abe55054000eee3d77196880da36a3555f62e06540e8eb54
+    sha256sum: 0d51b5b3f280c0f01f534598c0219db5878f337da6137a9ee698777413607209
   - URL: 'https://golang.org/dl/go[% c("version") %].src.tar.gz'
     enable: '[% c("var/android") %]'
     name: go
