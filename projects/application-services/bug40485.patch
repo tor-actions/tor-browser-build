@@ -1,5 +1,5 @@
 diff --git a/components/support/nimbus-fml/src/parser.rs b/components/support/nimbus-fml/src/parser.rs
-index 1de9a301..19d29373 100644
+index 2498445c..dbc814a3 100644
 --- a/components/support/nimbus-fml/src/parser.rs
 +++ b/components/support/nimbus-fml/src/parser.rs
 @@ -2,7 +2,7 @@
@@ -11,8 +11,8 @@ index 1de9a301..19d29373 100644
  
  use serde::{Deserialize, Serialize};
  use serde_json::json;
-@@ -22,7 +22,7 @@ pub(crate) struct EnumVariantBody {
- #[derive(Debug, Deserialize, Serialize, Clone)]
+@@ -24,7 +24,7 @@ pub(crate) struct EnumVariantBody {
+ #[serde(deny_unknown_fields)]
  pub(crate) struct EnumBody {
      description: String,
 -    variants: HashMap<String, EnumVariantBody>,
@@ -20,7 +20,7 @@ index 1de9a301..19d29373 100644
  }
  
  #[derive(Debug, Deserialize, Serialize, Clone)]
-@@ -39,26 +39,26 @@ pub(crate) struct FieldBody {
+@@ -43,23 +43,23 @@ pub(crate) struct FieldBody {
  pub(crate) struct ObjectBody {
      description: String,
      failable: Option<bool>,
@@ -29,14 +29,18 @@ index 1de9a301..19d29373 100644
  }
  
  #[derive(Debug, Deserialize, Serialize, Clone, Default)]
+ #[serde(deny_unknown_fields)]
  pub(crate) struct Types {
+     #[serde(default)]
 -    enums: HashMap<String, EnumBody>,
--    objects: HashMap<String, ObjectBody>,
 +    enums: BTreeMap<String, EnumBody>,
+     #[serde(default)]
+-    objects: HashMap<String, ObjectBody>,
 +    objects: BTreeMap<String, ObjectBody>,
  }
  
  #[derive(Debug, Deserialize, Serialize, Clone)]
+ #[serde(deny_unknown_fields)]
  pub(crate) struct FeatureBody {
      description: String,
 -    variables: HashMap<String, FieldBody>,
@@ -44,11 +48,12 @@ index 1de9a301..19d29373 100644
      #[serde(alias = "defaults")]
      default: Option<serde_json::Value>,
  }
- #[derive(Debug, Deserialize, Serialize, Clone, Default)]
- pub(crate) struct ManifestFrontEnd {
-     types: Types,
+@@ -71,7 +71,7 @@ pub(crate) struct ManifestFrontEnd {
+     #[serde(default)]
+     #[serde(rename = "types")]
+     legacy_types: Option<Types>,
 -    features: HashMap<String, FeatureBody>,
 +    features: BTreeMap<String, FeatureBody>,
      channels: Vec<String>,
- }
  
+     // If a types attribute isn't explicitly expressed,

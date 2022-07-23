@@ -6,5 +6,5 @@ filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 
 targets:
   android:
-    version: 13.0.1
-    git_hash: 75e33f71c2dae584b13a7d1186ae0a038ba98838
+    version: 14.0.4
+    git_hash: 29f1039a7285a5c3a9c353d054140bf2556d4c4d

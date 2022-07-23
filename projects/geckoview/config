@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
 filename: 'geckoview-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
-git_hash: 'geckoview-[% c("var/geckoview_version") %]-[% c("var/torbrowser_branch") %]-2-build4'
+git_hash: 'geckoview-[% c("var/geckoview_version") %]-[% c("var/torbrowser_branch") %]-1-build1'
 tag_gpg_id: 1
 git_url: https://git.torproject.org/tor-browser.git
 git_submodule: 1
@@ -10,8 +10,8 @@ container:
   use_container: 1
 
 var:
-  geckoview_version: 99.0b3
-  torbrowser_branch: 11.5
+  geckoview_version: 102.0.1
+  torbrowser_branch: 12.0
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   deps:
     - build-essential
@@ -25,7 +25,7 @@ var:
     - openjdk-11-jdk-headless
   # this should be updated when the list of gradle dependencies is changed
   # see doc/how-to-create-gradle-dependencies-list.txt
-  gradle_dependencies_version: 10
+  gradle_dependencies_version: 11
   gradle_version: 7.3
 
 steps:
@@ -82,7 +82,7 @@ steps:
       cp -r $gradle_repo/m2/* $gradle_repo
 
       # We unbreak mach, see: https://bugzilla.mozilla.org/show_bug.cgi?id=1656993.
-      export MACH_USE_SYSTEM_PYTHON=1
+      export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
       # Create .mozbuild to avoid interactive prompt in configure
       mkdir "$HOME/.mozbuild"
       # We still need to specify --tor-browser-version due to bug 34005.
@@ -145,7 +145,7 @@ steps:
 
 targets:
   nightly:
-    git_hash: 'geckoview-[% c("var/geckoview_version") %]-[% c("var/torbrowser_branch") %]-2'
+    git_hash: 'geckoview-[% c("var/geckoview_version") %]-[% c("var/torbrowser_branch") %]-1'
     tag_gpg_id: 0
 
 input_files:

@@ -29,34 +29,38 @@ cmake ../llvm -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=$distdir \
                                   -DLLVM_TARGETS_TO_BUILD="X86;ARM;AArch64" \
             [% END -%]
             [% IF c("var/rlbox") -%]-DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=WebAssembly[% END %] \
-                                  -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;compiler-rt;libcxx;libcxxabi;lld"
+                                  -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;compiler-rt;lld"
 make -j[% c("num_procs") %]
 make install
+cd ..
 
 [% IF c("var/android") -%]
+  echo "Compiling compiler-rt (Android only)"
   rtdistdir=/var/tmp/build/rtdist
   mkdir $rtdistdir
 
   make_compilerrt () {
-    cd ..
     mkdir "build-compilerrt-$1"
     cd "build-compilerrt-$1"
     cmake ../compiler-rt/ -G "Unix Makefiles" \
       -DCMAKE_INSTALL_PREFIX=$rtdistdir \
+      -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_SYSTEM_NAME=Android \
       -DCMAKE_ANDROID_ARCH_ABI=$1 \
-      -DCMAKE_ANDROID_NDK="/var/tmp/dist/android-toolchain/android-sdk-linux/ndk/android-ndk-r21d" \
+      -DCMAKE_ANDROID_NDK="$ANDROID_NDK_HOME" \
       -DCMAKE_C_FLAGS="$3 -fuse-ld=lld --rtlib=compiler-rt" \
       -DCMAKE_CXX_FLAGS="$3 -fuse-ld=lld --rtlib=compiler-rt" \
-      -DCMAKE_EXE_LINKER_FLAGS="-L/var/tmp/dist/android-toolchain/android-sdk-linux/ndk/android-ndk-r21d/toolchains/llvm/prebuilt/linux-x86_64/$2" \
+      -DCMAKE_EXE_LINKER_FLAGS="-L$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/$2" \
       -DCOMPILER_RT_BUILD_BUILTINS=ON \
       -DCOMPILER_RT_BUILD_LIBFUZZER=OFF \
       -DCOMPILER_RT_BUILD_MEMPROF=OFF \
+      -DCOMPILER_RT_BUILD_ORC=OFF \
       -DCOMPILER_RT_BUILD_PROFILE=OFF \
       -DCOMPILER_RT_BUILD_SANITIZERS=OFF \
       -DCOMPILER_RT_BUILD_XRAY=OFF
     make -j[% c("num_procs") %]
     make install
+    cd ..
   }
 
   make_compilerrt "armeabi-v7a" "arm-linux-androideabi/lib" "-DARMEABI_V7A"
@@ -64,7 +68,7 @@ make install
   make_compilerrt "x86" "i686-linux-android/lib"
   make_compilerrt "x86_64" "x86_64-linux-android/lib64"
 
-  mv $rtdistdir/lib/android/*.a $distdir/lib/clang/[% c("var/llvm_version") %]/lib/linux/
+  mv $rtdistdir/lib/linux/libclang_rt.builtins-*-android.a $distdir/lib/clang/[% c("var/llvm_version") %]/lib/linux/
 [% END -%]
 
 cd /var/tmp/dist

@@ -1,7 +1,8 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
-version: 91.1.1
-git_hash: 17942945873cdb8be56a9316d3cb8a611b3ef321
+# Remember to update the Cargo vendor archive, when updating
+version: 93.1.0
+git_hash: ae2bb5ae89f9818230bbc003819fc7b9775aae26
 git_url: https://github.com/mozilla/application-services
 git_submodule: 1
 container:
@@ -90,8 +91,9 @@ input_files:
     sha256sum: '[% pc("glean", "var/glean_wheels_sha256sum/" _ c("var/glean_parser"), { error_if_undef => 1 }) %]'
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
   # Use `make cargo_vendor-application-services` to re-generate the vendor tarball
-  - URL: https://people.torproject.org/~aguestuser/mirrors/sources/application-services-vendor-[% c('version') %].tar.bz2
-    sha256sum: 621fef6c07bbb0b165cbc4dfa44176ff7d1d04557f7c418a0a809a29099c6440
+  - name: cargo_vendor
+    URL: https://people.torproject.org/~pierov/mirrors/sources/application-services-vendor-[% c('version') %].tar.xz
+    sha256sum: cc426afe8cc3602f223213a93d3c1dffc156793b68b9c8a89f41715068d533fb
   - filename: no-git.patch
   - filename: mavenLocal.patch
     enable: '[% !c("var/fetch_gradle_dependencies") %]'
@@ -102,7 +104,7 @@ input_files:
 
 steps:
   list_toolchain_updates:
-    git_hash: 'v91.1.0'
+    git_hash: 'v[% c("version") %]'
     input_files: []
     container:
       use_container: 0
@@ -130,7 +132,7 @@ steps:
       fetch_gradle_dependencies: 1
 
   cargo_vendor:
-    filename: '[% project %]-vendor-[% c("version") %].tar.bz2'
+    filename: '[% project %]-vendor-[% c("version") %].tar.xz'
     input_files:
       - project: container-image
         pkg_type: build

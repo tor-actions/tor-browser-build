@@ -115,13 +115,13 @@ check_update_needed min-android "$needed" "$current"
 
 # min_sdk
 read -d '' p << 'EOF' || true
-if (m/^\\s*MOZ_ANDROID_MIN_SDK_VERSION\\s*=\\s*([^\\s]+)/) {
+if (m/^\\s*min_sdk_version="[^"]+" if geckoview_lite else "([^"]+)"/) {
   print $1;
   exit;
 }
 EOF
-needed=$(cat mobile/android/confvars.sh | perl -ne "$p")
-current=16
+needed=$(cat build/moz.configure/android-sdk.configure | perl -ne "$p")
+current=21
 check_update_needed min_sdk "$needed" "$current"
 
 
@@ -151,13 +151,12 @@ check_update_needed cbindgen "$needed" "$current"
 
 # nasm
 read -d '' p << 'EOF' || true
-if (m/^\\s*MODERN_NASM_VERSION\\s*=\\s*LooseVersion\\("([^"]+)"\\)/) {
-  print $1;
-  exit;
-}
+my $nasm = YAML::XS::LoadFile('taskcluster/ci/toolchain/nasm.yml');
+my $linux64 = 'linux64-nasm';
+print substr $nasm->{$linux64}{'fetches'}{'fetch'}[0], 5;
 EOF
-needed=$(cat python/mozboot/mozboot/base.py | perl -ne "$p")
-current='2.14'
+needed=$(perl -MYAML::XS -e "$p")
+current='2.15.05'
 check_update_needed nasm "$needed" "$current"
 
 
@@ -233,11 +232,11 @@ check_update_needed node "$needed" "$current"
 
 # python
 read -d '' p << 'EOF' || true
-if (m/find_python3_executable\\(min_version\\s*=\\s*"([^"]+)"/) {
+if (m/^\\s*"Bootstrap currently only runs on Python ([^"]+)\\."/) {
   print $1;
   exit;
 }
 EOF
-needed=$(cat build/moz.configure/init.configure | perl -ne "$p")
-current=3.6.0
+needed=$(cat python/mozboot/bin/bootstrap.py | perl -ne "$p")
+current="3.5+"
 check_update_needed python "$needed" "$current"

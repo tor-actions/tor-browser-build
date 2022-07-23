@@ -1,16 +1,16 @@
 # vim: filetype=yaml sw=2
 version: '[% c("var/cbindgen_version") %]'
 git_url: https://github.com/eqrion/cbindgen
-git_hash: '[% c("var/cbindgen_hash") %]'
+git_hash: '[% c("var/cbindgen_git_hash") %]'
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 container:
   use_container: 1
 
 var:
-  cbindgen_version: 0.19.0
-  cbindgen_hash: d9e490ce8b836194595bd30611253a7028059da2
-  cbindgen_vendor_hash: 7d99c195b180e28ca7499d8744d020b864f952a5ba699716707aec9a06b4ee8b
-  cbindgen_vendor_people_tpo_user: boklm
+  cbindgen_version: 0.23.0
+  cbindgen_git_hash: 798cfab52bced65a749443faa16990ec3a8e0cfe
+  cbindgen_vendor_hash: 90fc3483753d296c6fc1a406f5cae412f7f74cd6719e9c800a2ffc6cd18b6e69
+  cbindgen_vendor_people_tpo_user: pierov
 
 input_files:
   - project: container-image
@@ -19,12 +19,13 @@ input_files:
   # `cargo vendor vendor` in the `cbindgen` directory has vendored the sources.
   # Use `make cargo_vendor-cbindgen` or `make cargo_vendor-cbindgen-android`
   # (for the Android version) to re-generate the vendor tarball
-  - URL: https://people.torproject.org/~[% c('var/cbindgen_vendor_people_tpo_user') %]/mirrors/sources/cbindgen-vendor-[% c('version') %].tar.bz2
+  - name: cbindgen_vendor
+    URL: https://people.torproject.org/~[% c('var/cbindgen_vendor_people_tpo_user') %]/mirrors/sources/cbindgen-vendor-[% c('version') %].tar.xz
     sha256sum: '[% c("var/cbindgen_vendor_hash") %]'
 
 steps:
   cargo_vendor:
-    filename: '[% project %]-vendor-[% c("version") %].tar.bz2'
+    filename: '[% project %]-vendor-[% c("version") %].tar.xz'
     input_files:
       - project: container-image
         pkg_type: build
