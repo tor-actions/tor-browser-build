@@ -22,6 +22,8 @@ EOF
   cp -r $gradle_repo/dl/android/maven2/* $gradle_repo
   cp -r $gradle_repo/maven2/* $gradle_repo
   cp -r $gradle_repo/m2/* $gradle_repo
+  mkdir /home/rbm/.m2
+  ln -s $gradle_repo /home/rbm/.m2/repository
   # Put the Kotlin/Native compiler at the right place, see:
   # tor-browser-build#40217.
   kotlin_dir=/home/rbm/.konan
@@ -66,6 +68,11 @@ sed -i 's/tag = getGitHash()/tag = \"[% c('abbrev') %]\"/' publish.gradle
 
   # Increase the maximum memory usage, for when compiling with --disable-install-strip
   gradle_args="--offline --no-daemon -Dmaven.repo.local=$gradle_repo -Dorg.gradle.jvmargs=-Xmx8g"
+
+  # See taskcluster/scripts/toolchain/android-gradle-dependencies.sh at line 36.
+  # We hit the same problem when we run online to discover dependencies, but
+  # since it works also for offline builds, we just leave it here
+  gradle $gradle_args support-sync-telemetry:assemble
 
   gradle $gradle_args assembleGecko -x lint
   gradle $gradle_args publish

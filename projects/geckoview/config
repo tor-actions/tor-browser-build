@@ -25,7 +25,7 @@ var:
     - openjdk-11-jdk-headless
   # this should be updated when the list of gradle dependencies is changed
   # see doc/how-to-create-gradle-dependencies-list.txt
-  gradle_dependencies_version: 10
+  gradle_dependencies_version: 11
   gradle_version: 7.3
 
 steps:
@@ -82,7 +82,7 @@ steps:
       cp -r $gradle_repo/m2/* $gradle_repo
 
       # We unbreak mach, see: https://bugzilla.mozilla.org/show_bug.cgi?id=1656993.
-      export MACH_USE_SYSTEM_PYTHON=1
+      export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
       # Create .mozbuild to avoid interactive prompt in configure
       mkdir "$HOME/.mozbuild"
       # We still need to specify --tor-browser-version due to bug 34005.
@@ -145,7 +145,7 @@ steps:
 
 targets:
   nightly:
-    git_hash: 'geckoview-[% c("var/geckoview_version") %]-[% c("var/torbrowser_branch") %]-2'
+    git_hash: 'geckoview-[% c("var/geckoview_version") %]-[% c("var/torbrowser_branch") %]-1'
     tag_gpg_id: 0
 
 input_files:

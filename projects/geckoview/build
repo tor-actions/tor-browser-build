@@ -48,8 +48,8 @@ cp -r $gradle_repo/m2/* $gradle_repo
 rm -f configure
 rm -f js/src/configure
 
-# We unbreak mach, see: https://bugzilla.mozilla.org/show_bug.cgi?id=1656993.
-export MACH_USE_SYSTEM_PYTHON=1
+# We unbreak mach, see: https://bugzilla.mozilla.org/show_bug.cgi?id=1656993 and https://bugzilla.mozilla.org/show_bug.cgi?id=1755516
+export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
 # Create .mozbuild to avoid interactive prompt in configure
 mkdir "$HOME/.mozbuild"
 ./mach configure --with-tor-browser-version=[% c("var/torbrowser_version") %] --with-java-bin-path="$JAVA_HOME/bin" --without-wasm-sandboxed-libraries

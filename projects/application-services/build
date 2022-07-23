@@ -33,7 +33,7 @@ tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
 # Prepare the offline build.
 # Move the directory for hardcoding the path in .cargo/config.
 mv /var/tmp/build/[% project %]-[% c('version') %] $builddir
-tar -C $builddir -xjf application-services-vendor-[% c('version') %].tar.bz2
+tar -C $builddir -xf $rootdir/[% c('input_files_by_name/cargo_vendor') %]
 cd $builddir
 # Make sure our vendored crates are used for offline builds.
 cat >> .cargo/config << 'EOF'
