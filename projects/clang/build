@@ -23,13 +23,19 @@ cd clang-source
 export LLVM_HOME=$(pwd)
 mkdir build
 cd build
-cmake ../llvm -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=$distdir \
-                                  -DCMAKE_BUILD_TYPE=Release \
+# LLVM_ENABLE_ZLIB solves the "contains a compressed section, but zlib is not available" on lld
+# LLVM_INSTALL_UTILS allows this LLVM to be used to compile Rust
+cmake ../llvm -G "Unix Makefiles" \
+              -DCMAKE_INSTALL_PREFIX=$distdir \
+              -DCMAKE_BUILD_TYPE=Release \
             [% IF c("var/android") || c("var/osx") -%]
-                                  -DLLVM_TARGETS_TO_BUILD="X86;ARM;AArch64" \
+              -DLLVM_TARGETS_TO_BUILD="X86;ARM;AArch64" \
             [% END -%]
             [% IF c("var/rlbox") -%]-DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=WebAssembly[% END %] \
-                                  -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;compiler-rt;lld"
+              -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;compiler-rt;lld" \
+              -DLLVM_ENABLE_ZLIB=ON \
+              -DLLVM_INSTALL_UTILS=ON \
+
 make -j[% c("num_procs") %]
 make install
 cd ..

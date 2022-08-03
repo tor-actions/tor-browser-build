@@ -44,13 +44,12 @@ check_update_needed cbindgen "$needed" "$current"
 
 # nasm
 read -d '' p << 'EOF' || true
-if (m/^\\s*MODERN_NASM_VERSION\\s*=\\s*LooseVersion\\("([^"]+)"\\)/) {
-  print $1;
-  exit;
-}
+my $nasm = YAML::XS::LoadFile('taskcluster/ci/toolchain/nasm.yml');
+my $linux64 = 'linux64-nasm';
+print substr $nasm->{$linux64}{'fetches'}{'fetch'}[0], 5;
 EOF
-needed=$(cat python/mozboot/mozboot/base.py | perl -ne "$p")
-current='2.14'
+needed=$(perl -MYAML::XS -e "$p")
+current='2.15.05'
 check_update_needed nasm "$needed" "$current"
 
 
@@ -65,22 +64,34 @@ check_update_needed nasm "$needed" "$current"
 read -d '' p << 'EOF' || true
 my $d = YAML::XS::LoadFile('taskcluster/ci/toolchain/clang.yml');
 my $clang_toolchain;
-foreach my $t (keys %$d) {
-  if ($d->{$t}{run}{'toolchain-alias'} eq '[% toolchain_alias %]') {
-    foreach my $fetch (@{$d->{$t}{fetches}{fetch}}) {
-      $clang_toolchain = $fetch if $fetch =~ m/^clang-.*/;
+TOOLCHAIN: foreach my $t (keys %$d) {
+  foreach my $alias (@{$d->{$t}{run}{'toolchain-alias'}}) {
+    if ($alias eq 'linux64-clang') {
+      foreach my $fetch (@{$d->{$t}{fetches}{toolchain}}) {
+        $clang_toolchain = $fetch if $fetch =~ m/^.*-clang-.*/;
+      }
+      last TOOLCHAIN;
     }
-    last;
   }
 }
 
 if (!$clang_toolchain) {
-  print STDERR "Error: could not find clang toolchain";
+  print STDERR "Error: could not find clang toolchain\\n";
+  exit 1;
+}
+
+my $clang_fetch;
+foreach my $fetch (@{$d->{$clang_toolchain}{fetches}{fetch}}) {
+  $clang_fetch = $fetch if $fetch =~ m/^clang-.*/;
+}
+
+if (!$clang_fetch) {
+  print STDERR "Error: could not find clang fetch\\n";
   exit 1;
 }
 
 my $fetch = YAML::XS::LoadFile('taskcluster/ci/fetch/toolchains.yml');
-print $fetch->{$clang_toolchain}{fetch}{revision};
+print $fetch->{$clang_fetch}{fetch}{revision};
 EOF
 needed=$(perl -MYAML::XS -e "$p")
 current='[% pc("llvm-project", "git_hash") %]'
@@ -119,15 +130,15 @@ current='[% pc("node", "version") %]'
 check_update_needed node "$needed" "$current"
 
 
-# python
+# Python
 read -d '' p << 'EOF' || true
-if (m/find_python3_executable\\(min_version\\s*=\\s*"([^"]+)"/) {
+if (m/^\\s*"Bootstrap currently only runs on Python ([^"]+)\\."/) {
   print $1;
   exit;
 }
 EOF
-needed=$(cat build/moz.configure/init.configure | perl -ne "$p")
-current=3.6.0
+needed=$(cat python/mozboot/bin/bootstrap.py | perl -ne "$p")
+current="3.5+" # 3.6.0
 check_update_needed python "$needed" "$current"
 
 
@@ -183,16 +194,6 @@ EOF
 needed=$(perl -MYAML::XS -e "$p")
 current='[% pc("mingw-w64", "git_hash") %]'
 check_update_needed mingw-w64 "$needed" "$current"
-
-
-# llvm-mingw
-read -d '' p << 'EOF' || true
-my $d = YAML::XS::LoadFile('taskcluster/ci/fetch/toolchains.yml');
-print $d->{'llvm-mingw'}{fetch}{revision};
-EOF
-needed=$(perl -MYAML::XS -e "$p")
-current='[% pc("llvm-mingw", "git_hash") %]'
-check_update_needed llvm-mingw "$needed" "$current"
 
 
 # fxc2

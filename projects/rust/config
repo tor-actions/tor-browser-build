@@ -5,8 +5,8 @@ container:
   use_container: 1
 
 var:
-  current_version: 1.53.0
-  previous_version: 1.52.0
+  current_version: 1.60.0
+  previous_version: 1.59.0
 
 targets:
   android:
@@ -96,8 +96,3 @@ input_files:
   - project: python
     name: python
     enable: '[% c("var/linux") %]'
-
-    # Fix for https://github.com/rust-lang/rust/issues/86436
-    # Taken from https://github.com/rust-lang/rust/pull/86568 (merged it 1.54.0)
-  - filename: fix-build-1.53.0.patch
-    enable: '[% ! c("var/android") %]'

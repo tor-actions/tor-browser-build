@@ -10,10 +10,10 @@ container:
   use_container: 1
 
 var:
-  firefox_platform_version: 91.12.0
+  firefox_platform_version: 102.2.0
   firefox_version: '[% c("var/firefox_platform_version") %]esr'
   browser_branch: '12.0-1'
-  browser_build: 2
+  browser_build: 1
   branding_directory: 'browser/branding/alpha'
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   deps:
@@ -50,7 +50,7 @@ steps:
 
   list_toolchain_updates:
     git_url: https://github.com/mozilla/gecko-dev.git
-    git_hash: esr91
+    git_hash: esr102
     tag_gpg_id: 0
     input_files: []
     container:
@@ -80,10 +80,12 @@ targets:
         - libdbus-glib-1-dev
         - libxt-dev
         - hardening-wrapper
-        # To pass configure since ESR 31.
+        # To pass configure since ESR 31
         - libpulse-dev
         # To pass configure since ESR 52
         - libx11-xcb-dev
+        # To pass configure since ESR 102
+        - libasound2-dev
         # To support Wayland mode
         - libdrm-dev
 
@@ -97,10 +99,12 @@ targets:
         - libdbus-glib-1-dev:i386
         - libxt-dev:i386
         - hardening-wrapper
-        # To pass configure since ESR 31.
+        # To pass configure since ESR 31
         - libpulse-dev:i386
         # To pass configure since ESR 52
         - libx11-xcb-dev:i386
+        # To pass configure since ESR 102
+        - libasound2-dev:i386
         # To support Wayland mode
         - libdrm-dev:i386
 

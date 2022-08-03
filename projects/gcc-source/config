@@ -1,0 +1,7 @@
+# vim: filetype=yaml sw=2
+version: 10.3.0
+filename: 'gcc-[% c("version") %].tar.xz'
+input_files:
+  - URL: 'https://ftp.gnu.org/gnu/gcc/gcc-[% c("version") %]/gcc-[% c("version") %].tar.xz'
+    sha256sum: 64f404c1a650f27fc33da242e1f2df54952e3963a49e06e73f6940f3223ac344
+    name: gcc

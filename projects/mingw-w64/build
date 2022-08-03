@@ -21,7 +21,7 @@ make install
 cd /var/tmp/build
 mkdir gcc
 cd gcc
-tar xJf $rootdir/gcc-[% c("var/gcc_version") %].tar.xz
+tar -xf $rootdir/[% c("input_files_by_name/gcc") %]
 # LDFLAGS_FOR_TARGET does not work for some reason. Thus, we take
 # CFLAGS_FOR_TARGET.
 export CFLAGS_FOR_TARGET="-Wl,--nxcompat -Wl,--dynamicbase -Wl,--no-insert-timestamp [% c('var/flag_noSEH') %]"
@@ -34,7 +34,8 @@ mkdir -p /var/tmp/build/builddir/mingw-w64/mingw-w64-crt32
 cd /var/tmp/build/builddir/mingw-w64/mingw-w64-crt32
 /var/tmp/build/[% project %]-[% c("version") %]/mingw-w64-crt/configure \
                  --host=[% c("arch") %]-w64-mingw32 --prefix=$distdir/[% c("arch") %]-w64-mingw32
-make -j[% c("num_procs") %]
+# Do not compile in parallel because we had some failures when doing so
+make
 make install
 
 mkdir -p /var/tmp/build/builddir/mingw-w64/mingw-w64-pthread

@@ -1,12 +1,11 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 git_url: https://git.code.sf.net/p/mingw-w64/mingw-w64
-git_hash: cdb052f1d4056cd510cb83197b55868427b87476
-version: '[% c("abbrev") %]'
+git_hash: aa08f56da559016f10336dddca85d59f9bdc9e02
+version: '[% pc("gcc-source", "version") %]'
 container:
   use_container: 1
 var:
-  gcc_version: 10.3.0
   deps:
     - automake
     - build-essential
@@ -29,7 +28,7 @@ targets:
         - g++-mingw-w64-x86-64
 input_files:
   - project: container-image
-  - URL: 'https://ftp.gnu.org/gnu/gcc/gcc-[% c("var/gcc_version") %]/gcc-[% c("var/gcc_version") %].tar.xz'
-    sha256sum: 64f404c1a650f27fc33da242e1f2df54952e3963a49e06e73f6940f3223ac344
+  - project: gcc-source
+    name: gcc
   - name: binutils
     project: binutils
