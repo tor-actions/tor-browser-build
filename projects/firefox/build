@@ -61,6 +61,9 @@ tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
 
 mkdir -p $distdir/[% IF ! c("var/osx") %]Browser[% END %]
 
+tar -xf $rootdir/[% c('input_files_by_name/translation-base-browser') %]
+transl_base_browser=$rootdir/translation-base-browser
+
 cd /var/tmp/build/[% project %]-[% c("version") %]
 cat > .mozconfig << 'MOZCONFIG_EOF'
 [% INCLUDE mozconfig %]
@@ -105,6 +108,24 @@ fi
   # Set update url for nightly (#33402 / #40033)
   sed -i 's|^URL=https://aus1\.torproject\.org/.*|URL=https://nightlies.tbb.torproject.org/nightly-updates/updates/nightly-[% c("var/osname") %]/%CHANNEL%/%BUILD_TARGET%/%VERSION%/%LOCALE%|' build/application.ini.in
 [% END -%]
+
+add_translation () {
+  transl_dir=$1
+  component=$2
+  lang=$3
+  filename=$4
+
+  mkdir "browser/components/$component/locale/$lang"
+  cp "$transl_dir/$lang/$filename" "browser/components/$component/locale/$lang/"
+  echo "% locale $component $lang %locale/$lang/" >> "browser/components/$component/jar.mn"
+  echo "    locale/$lang/$filename (locale/$lang/$filename)" >> "browser/components/$component/jar.mn"
+}
+
+[% FOREACH lang = c('var/locales') %]
+  [% SET lang = tmpl(lang) %]
+  add_translation $transl_base_browser newidentity '[% lang %]' newIdentity.properties
+  add_translation $transl_base_browser securitylevel '[% lang %]' securityLevel.properties
+[% END %]
 
 rm -f configure
 rm -f js/src/configure
