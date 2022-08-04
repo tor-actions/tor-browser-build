@@ -205,6 +205,10 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
     - [ ] ***(Optional)*** If version available, update `noscript` section of `input_files` in `projects/browser/config`
         - [ ] `URL`
         - [ ] `sha256sum`
+- [ ] Update the translation branches
+  - [ ] Go to https://gitlab.torproject.org/tpo/translation/-/tree/base-browser/
+  - [ ] Copy the hash of the last commit
+  - [ ] Paste it into `projects/translation-base-browser/config`
 - [ ] Check for openssl updates here : https://github.com/openssl/openssl/tags
     - [ ] ***(Optional)*** If new 1.X.Y series tag available, update `projects/openssl/config`
         - [ ] `version` : update to next 1.X.Y release tag
@@ -216,6 +220,16 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
     - [ ] ***(Optional)*** If new go version is available, update `projects/go/config`
         - [ ] `version` : update go version
         - [ ] `input_files/sha256sum` for `go` : update sha256sum of archive (sha256 sums are displayed on the go download page)
+- [ ] ***(Optional)*** Update the manual
+  - [ ] Go to https://gitlab.torproject.org/tpo/web/manual/-/jobs/
+  - [ ] Open the latest build stage
+  - [ ] Download the artifacts (they come in a .zip file).
+  - [ ] Rename it to `manual_$PIPELINEID.zip`
+  - [ ] Upload it to people.tpo
+  - [ ] Update `projects/manual/config`
+    - [ ] Change the version to `$PIPELINEID`
+    - [ ] Update the hash in the input_files section
+    - [ ] Update the URL if you have uploaded to a different people.tpo home
 - [ ] Update `ChangeLog.txt`
   - [ ] Ensure ChangeLog.txt is sync'd between alpha and stable branches
 - [ ] Open MR with above changes
