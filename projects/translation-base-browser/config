@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 git_url: https://git.torproject.org/translation.git
-git_hash: d2eaf8a92c17afbe065cdb4d47d0084785f496da
+git_hash: b6abe5178338634a1a059824de8478ada9d89140
 version: '[% c("abbrev") %]'
