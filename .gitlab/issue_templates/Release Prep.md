@@ -45,7 +45,7 @@
 - [ ] ***(Optional)*** Update translations :
   - **NOTE** : mandatory if we have added new string dependencies
   -  [ ] `./import-translations.sh`
-  -  [ ] Commit with message `Translation updates
+  -  [ ] Commit with message `Translation updates`
      - **NOTE** : only add files which are already being tracked
   -  [ ] *(Optional)* Backport to maintenance branch if present
 - [ ] fixup! `tor-browser`'s `Bug 10760 : Integrate TorButton to TorBrowser core` issue to point to updated `torbutton` commit
@@ -54,6 +54,7 @@
 - [ ] ***(Optional)*** Update translations:
   - **NOTE** : mandatory if we have added new string dependencies
   - [ ] ./localization/import-translations.sh
+  - [ ] Commit with message `Translation updates`
 - [ ] Update `install.rdf` file with new version
 - [ ] Sign/Tag commit :
     - Tag : `$(TOR_LAUNCHER_VERSION)`
@@ -75,7 +76,10 @@
     - [ ] Perform rangediff to ensure nothing weird happened resolving conflicts
         - `git range-diff $(ESR_TAG_PREV)..$(TOR_BROWSER_BRANCH_PREV) $(ESR_TAG)..$(TOR_BROWSER_BRANCH)`
     - [ ] Open MR for the rebase
-- [ ] _TODO: tag base firefox no-tor browser_
+- [ ] ***(Alpha Only)*** Sign/Tag base-browser commit:
+    **NOTE** : Currently we are using the `Bug 27511: Add new identity button to toolbar` commit as the dividing line between `base-browser` and `tor-browser`
+    - Tag : `base-browser-$(ESR_VERSION)esr-$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)-1-build1
+    - Message: `Tagging build1 for $(ESR_VERSION)esr-based (alpha|stable)`
 - [ ] ***(Optional)*** Backport any required patches to Stable
     - [ ] cherry-pick patches on top of rebased branch (issues to backport should have `Backport` label and be linked to the associated `Release Prep` issue
     - [ ] Close associated `Backport` issues
@@ -84,6 +88,8 @@
     - Tag : `tor-browser-$(ESR_VERSION)esr-$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)-1-$(FIREFOX_BUILD_N)`
     - Message : `Tagging $(FIREFOX_BUILD_N) for $(ESR_VERSION)esr-based (alpha|stable)`
 - [ ] Push tag to origin
+- [ ] ***(Alpha Only)*** Update Gitlab Default Branch to new Alpha branch
+     - https://gitlab.torproject.org/tpo/applications/tor-browser/-/settings/repository
 
 </details>
 
@@ -196,7 +202,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
   - [ ] ***(Optional)*** `var/fenix_version` : update to latest `$(RR_VERSION)` if rebased
 - [ ] ***(Android Only)*** Update allowed_addons.json by running (from `tor-browser-build` root)`./tools/fetch_allowed_addons.py > projects/tor-browser/allowed_addons.json
 - [ ] Check for NoScript updates here : https://addons.mozilla.org/en-US/firefox/addon/noscript
-    - [ ] ***(Optional)*** If version available, update `noscript` section of `input_files` in `projects/tor-browser/config`
+    - [ ] ***(Optional)*** If version available, update `noscript` section of `input_files` in `projects/browser/config`
         - [ ] `URL`
         - [ ] `sha256sum`
 - [ ] Check for openssl updates here : https://github.com/openssl/openssl/tags
