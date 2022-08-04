@@ -122,9 +122,14 @@ add_translation () {
 }
 
 [% FOREACH lang = c('var/locales') %]
-  [% SET lang = tmpl(lang) %]
-  add_translation $transl_base_browser newidentity '[% lang %]' newIdentity.properties
-  add_translation $transl_base_browser securitylevel '[% lang %]' securityLevel.properties
+  lang='[% tmpl(lang) %]'
+  [% IF c("var/osx") -%]
+  if [ "$lang" == "ja-JP-mac" ]; then
+    lang="ja"
+  fi
+  [% END-%]
+  add_translation $transl_base_browser newidentity $lang newIdentity.properties
+  add_translation $transl_base_browser securitylevel $lang securityLevel.properties
 [% END %]
 
 rm -f configure
