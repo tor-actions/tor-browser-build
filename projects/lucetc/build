@@ -2,11 +2,8 @@
 [% c("var/set_default_env") -%]
 # XXX: Do we need the GCC part here if we set CC to clang anyway?
 [% IF c("var/linux") %]
-  # We need a link to our GCC, otherwise the system cc gets used which points to
-  # /usr/bin/gcc.
   [% pc('gcc', 'var/setup', { compiler_tarfile => c('input_files_by_name/gcc'),
                               hardened_gcc => 0 }) %]
-  ln -s gcc /var/tmp/dist/gcc/bin/cc
   tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/binutils') %]
   export PATH="/var/tmp/dist/binutils/bin:$PATH"
 [% END -%]

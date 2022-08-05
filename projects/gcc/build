@@ -23,6 +23,9 @@ cd /var/tmp/build/[% project %]-[% c("version") %]
 ./configure --prefix=$distdir [% c("var/configure_opt") %]
 make -j[% c("num_procs") %]
 make install
+# tor-browser-build#31321: we need a link to our GCC, to prevent some projects
+# from using system cc, which points to /usr/bin/gcc.
+ln -s gcc $distdir/bin/cc
 cd /var/tmp/dist
 [% c('tar', {
         tar_src => [ project ],
