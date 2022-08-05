@@ -1,23 +1,17 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
-version: '[% c("var/current_version") %]'
+version: '1.60.0'
 container:
   use_container: 1
-
-var:
-  current_version: 1.60.0
-  previous_version: 1.59.0
 
 targets:
   android:
     var:
-      current_version: 1.60.0
-      previous_version: 1.59.0
       arch_deps:
         - libssl-dev
         - pkg-config
         - zlib1g-dev
-      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --target=x86_64-unknown-linux-gnu,armv7-linux-androideabi,thumbv7neon-linux-androideabi,aarch64-linux-android,i686-linux-android,x86_64-linux-android --set=target.armv7-linux-androideabi.cc=armv7a-linux-androideabi16-clang --set=target.armv7-linux-androideabi.ar=armv7a-linux-androideabi-ar --set=target.thumbv7neon-linux-androideabi.cc=armv7a-linux-androideabi16-clang --set=target.thumbv7neon-linux-androideabi.ar=armv7a-linux-androideabi-ar --set=target.aarch64-linux-android.cc=aarch64-linux-android21-clang --set=target.aarch64-linux-android.ar=aarch64-linux-android-ar --set=target.i686-linux-android.cc=i686-linux-android16-clang --set=target.i686-linux-android.ar=i686-linux-android-ar --set=target.x86_64-linux-android.cc=x86_64-linux-android21-clang --set=target.x86_64-linux-android.ar=x86_64-linux-android-ar
+      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/clang --set rust.jemalloc --target=x86_64-unknown-linux-gnu,armv7-linux-androideabi,thumbv7neon-linux-androideabi,aarch64-linux-android,i686-linux-android,x86_64-linux-android --set=target.armv7-linux-androideabi.cc=armv7a-linux-androideabi16-clang --set=target.armv7-linux-androideabi.ar=armv7a-linux-androideabi-ar --set=target.thumbv7neon-linux-androideabi.cc=armv7a-linux-androideabi16-clang --set=target.thumbv7neon-linux-androideabi.ar=armv7a-linux-androideabi-ar --set=target.aarch64-linux-android.cc=aarch64-linux-android21-clang --set=target.aarch64-linux-android.ar=aarch64-linux-android-ar --set=target.i686-linux-android.cc=i686-linux-android16-clang --set=target.i686-linux-android.ar=i686-linux-android-ar --set=target.x86_64-linux-android.cc=x86_64-linux-android21-clang --set=target.x86_64-linux-android.ar=x86_64-linux-android-ar
 
   linux:
     var:
@@ -39,25 +33,28 @@ targets:
       #
       # `--enable-extended` to build not only rustc but cargo as well
       #
-      # `--enable-llvm-static-stdcpp` to take a libstdc++ on Jessie into account
-      # which is too old and if used gives undefined reference errors
-      #
       # `--release-channel=stable` to just include stable features in the
       # compiler
       #
       # `--sysconfdir=etc` to avoid install failures as |make install| wants to
       # write to /etc otherwise
       #
+      # `--llvm-root=/var/tmp/dist/clang` to avoid building LLVM again while
+      # building Rust
+      #
+      # --set rust.jemalloc to use jemalloc. This option is used also in the
+      # prebuilt binaries, and without it the build never ends on Debian Jessie
+      # (see tor-browser-build#40591)
+      #
       # the `target` triple to explicitly specify the architecture and platform
       # for the compiler/std lib. Ideally, it should not be needed unless one is
       # cross-compiling, but compiling `alloc_jemalloc` fails without that in a
       # 32bit container. "--host=x86_64-unknown-linux-gnu" is used in its
       # configure script in this case.
-      # `--set=` to explicitly specify the C compiler. We need to compile the
-      # bundled LLVM and it wants to use `cc`. However, we don't have that in
-      # our compiled GCC resulting in weird errors due to C and C++ compiler
-      # version mismatch. We avoid that with this configure option.
-      configure_opt: --enable-local-rust --enable-vendor --enable-extended --enable-llvm-static-stdcpp --release-channel=stable --sysconfdir=etc --target=x86_64-unknown-linux-gnu,i686-unknown-linux-gnu --set=target.x86_64-unknown-linux-gnu.cc=gcc --set=target.i686-unknown-linux-gnu.cc=gcc
+      #
+      # Finally, we tell Rust to use some tools from LLVM, like the prebuilt
+      # binaries do.
+      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/clang --set rust.jemalloc --target=x86_64-unknown-linux-gnu,i686-unknown-linux-gnu --set target.x86_64-unknown-linux-gnu.linker=clang --set target.x86_64-unknown-linux-gnu.ar=llvm-ar --set target.x86_64-unknown-linux-gnu.ranlib=llvm-ranlib --set target.i686-unknown-linux-gnu.linker=clang --set target.i686-unknown-linux-gnu.ar=llvm-ar --set target.i686-unknown-linux-gnu.ranlib=llvm-ranlib
 
   osx-x86_64:
     var:
@@ -65,7 +62,7 @@ targets:
         - libssl-dev
         - pkg-config
         - zlib1g-dev
-      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --target=x86_64-unknown-linux-gnu,x86_64-apple-darwin --set=target.x86_64-apple-darwin.cc=x86_64-apple-darwin-clang
+      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/macosx-toolchain/clang --set rust.jemalloc --target=x86_64-unknown-linux-gnu,x86_64-apple-darwin --set=target.x86_64-apple-darwin.cc=x86_64-apple-darwin-clang --set target.x86_64-unknown-linux-gnu.linker=clang --set target.x86_64-unknown-linux-gnu.ar=llvm-ar --set target.x86_64-unknown-linux-gnu.ranlib=llvm-ranlib
 
   windows:
     var:
@@ -73,23 +70,32 @@ targets:
         - libssl-dev
         - pkg-config
         - zlib1g-dev
-      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --target=x86_64-unknown-linux-gnu,[% c("arch") %]-pc-windows-gnu
+      # See tor-browser-build#29320
+      compiler: mingw-w64
+      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/clang --target=x86_64-unknown-linux-gnu,[% c("arch") %]-pc-windows-gnu --set target.x86_64-unknown-linux-gnu.linker=clang --set target.x86_64-unknown-linux-gnu.ar=llvm-ar --set target.x86_64-unknown-linux-gnu.ranlib=llvm-ranlib
 
 input_files:
   - project: container-image
+  - name: binutils
+    project: binutils
   - project: cmake
     name: cmake
-  - project: ninja
-    name: ninja
   - project: '[% c("var/compiler") %]'
     name: '[% c("var/compiler") %]'
-  - URL: 'https://static.rust-lang.org/dist/rustc-[% c("var/current_version") %]-src.tar.gz'
+  - project: clang
+    name: clang
+    # On Windows we the basic Clang without additional Windows stuff because we
+    # want to be sure GCC is used to compile Rust (Rust has a hard depedency on
+    # libgcc, and the GNU/LLVM is a tier 3 platform supported only for x86_64).
+    # macOS does not need Clang because it comes already with its compiler.
+    enable: '[% c("var/linux") || c("var/android") || c("var/windows") %]'
+  - URL: 'https://static.rust-lang.org/dist/rustc-[% c("version") %]-src.tar.gz'
     name: rust
     sig_ext: asc
     file_gpg_id: 1
     gpg_keyring: rust.gpg
-  - URL: 'https://static.rust-lang.org/dist/rust-[% c("var/previous_version") %]-x86_64-unknown-linux-gnu.tar.xz'
-    name: previous_rust
+  - URL: 'https://static.rust-lang.org/dist/rust-[% c("version") %]-x86_64-unknown-linux-gnu.tar.xz'
+    name: rust_prebuilt
     sig_ext: asc
     file_gpg_id: 1
     gpg_keyring: rust.gpg

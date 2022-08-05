@@ -4,16 +4,27 @@ distdir=/var/tmp/dist/[% project %]
 mkdir -p $distdir
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/cmake') %]
 export PATH="/var/tmp/dist/cmake/bin:$PATH"
-tar -C /var/tmp/dist -xf [% c('input_files_by_name/ninja') %]
-export PATH=/var/tmp/dist/ninja:$PATH
-tar -C /var/tmp/dist -xf [% c('input_files_by_name/previous_rust') %]
-cd /var/tmp/dist/rust-[% c('var/previous_version') %]-x86_64-unknown-linux-gnu
-./install.sh --prefix=$distdir-rust-old
-export PATH="$distdir-rust-old/bin:$PATH"
+tar -C /var/tmp/dist -xf [% c('input_files_by_name/binutils') %]
+export PATH=/var/tmp/dist/binutils/bin:$PATH
+tar -C /var/tmp/dist -xf [% c('input_files_by_name/rust_prebuilt') %]
+cd /var/tmp/dist/rust-[% c('version') %]-x86_64-unknown-linux-gnu
+./install.sh --prefix=$distdir-rust-prebuilt
+export PATH="$distdir-rust-prebuilt/bin:$PATH"
 
 [% pc(c('var/compiler'), 'var/setup', { compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')) }) %]
+[% IF c("var/linux") || c("var/android") || c("var/windows") -%]
+  # See the config file for more details on why we do that also on Windows
+  tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/clang') %]
+  export PATH=/var/tmp/dist/clang/bin:$PATH
+[% END -%]
 [% IF c("var/linux") -%]
   [% pc('python', 'var/setup', { python_tarfile => c('input_files_by_name/python') }) %]
+  export LLVM_CONFIG="/var/tmp/dist/clang/bin/llvm-config"
+  export CC=clang
+  export CXX=clang++
+  export CFLAGS='--gcc-toolchain=/var/tmp/dist/gcc'
+  export CXXFLAGS='--gcc-toolchain=/var/tmp/dist/gcc'
+  export RUSTFLAGS="-L/var/tmp/dist/gcc/lib64"
 [% END -%]
 
 [% IF c("var/osx") %]
@@ -48,6 +59,15 @@ cd build
 make -j[% c("num_procs") %]
 make install
 cd /var/tmp/dist
+
+[% IF c("var/linux") -%]
+  # When we compile some Rust-only projects such as cbindgen, we do not include
+  # the C/C++ compilers and their modern libstdc++ library.
+  # For simplicity, we keep it also with Rust, and add it to LD_LIBRARY_PATH
+  # if needed.
+  cp gcc/lib64/libstdc++.so* rust/lib/
+[% END -%]
+
 [% c('tar', {
         tar_src => [ project ],
         tar_args => '-czf ' _ dest_dir _ '/' _ c('filename'),
