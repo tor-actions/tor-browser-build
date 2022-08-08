@@ -12,7 +12,7 @@ source "$script_dir/functions"
 
 cd "$script_dir/../.."
 
-version=$(./rbm/rbm showconf tor-browser --target alpha --target torbrowser-linux-x86_64 var/torbrowser_version)
+version=$(./rbm/rbm showconf browser --target alpha --target torbrowser-linux-x86_64 var/torbrowser_version)
 test "$version" = "$tbb_version" || \
   exit_error "Incorrect tor browser version: $version != $tbb_version"
 

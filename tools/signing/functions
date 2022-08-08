@@ -14,7 +14,7 @@ function var_is_defined {
 }
 
 function check_torbrowser_version_var {
-  local tbver=$("$script_dir/../../rbm/rbm" showconf tor-browser var/torbrowser_version)
+  local tbver=$("$script_dir/../../rbm/rbm" showconf browser var/torbrowser_version)
   test "$tbver" != "$tbb_version" && exit_error "Wrong tbb_version: $tbver != $tbb_version"
   return 0
 }

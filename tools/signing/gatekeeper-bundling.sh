@@ -52,7 +52,7 @@ test -d "$macos_signed_dir" || mkdir "$macos_signed_dir"
 tmpdir="$macos_stapled_dir/tmp"
 rm -Rf "$tmpdir"
 mkdir "$tmpdir"
-cp -rT "$script_dir/../../projects/tor-browser/Bundle-Data/mac-applications.dmg" "$tmpdir/dmg"
+cp -rT "$script_dir/../../projects/browser/Bundle-Data/mac-applications.dmg" "$tmpdir/dmg"
 
 tar -C "$tmpdir" -xf "$libdmg_file"
 export PATH="$PATH:$tmpdir/libdmg-hfsplus"
