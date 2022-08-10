@@ -20,7 +20,6 @@ build_targets:
         - WINNT_x86-gcc3-x86
         - WINNT_x86-gcc3-x64
     win64: WINNT_x86_64-gcc3-x64
-    osx32: Darwin_x86-gcc3
     osx64: Darwin_x86_64-gcc3
 channels:
     [% c('var/channel') %]: [% c("var/torbrowser_version") %]
@@ -36,18 +35,21 @@ versions:
    FOREACH v IN incr_from -%]
           - [% v %]
 [% END -%]
+        # for example, osx32: osx64
         migrate_archs:
-          osx32: osx64
+        # for example, pt-PT: pt-BR
         migrate_langs:
-            pt-PT: pt-BR
         minSupportedInstructionSet: SSE2
-        osx32:
-            minSupportedOSVersion: 13.0.0
+        # minSupportedOsVersion on macOS corresponds to the Darwin version ( https://en.wikipedia.org/wiki/Darwin_(operating_system) )
         osx64:
-            minSupportedOSVersion: 13.0.0
+            # macOS v10.12.0
+            minSupportedOSVersion: 16.0.0
+        # minSupportedOsVersion on Windows corresponds to the operating system version ( https://docs.microsoft.com/en-us/windows/win32/sysinfo/operating-system-version )
         win32:
+            # Windows 7
             minSupportedOSVersion: 6.1
         win64:
+            # Windows 7
             minSupportedOSVersion: 6.1
 mar_compression: xz
 tag: 'tbb-[% c("var/torbrowser_version") %]-[% c("var/torbrowser_build") %]'
