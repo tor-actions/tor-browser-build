@@ -122,7 +122,6 @@ targets:
         - python3
         - python3-distutils
         - wine
-      compiler: mingw-w64-clang
 
   windows-i686:
     var:

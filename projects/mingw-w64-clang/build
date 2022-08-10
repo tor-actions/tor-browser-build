@@ -31,8 +31,12 @@ DIR="\$(cd "\$(dirname "\$0")" && pwd)"
 EOF
 chmod +x [% c("arch") %]-w64-mingw32-clang++
 
+ln -s [% c("arch") %]-w64-mingw32-clang [% c("arch") %]-w64-mingw32-cc
+ln -s [% c("arch") %]-w64-mingw32-clang++ [% c("arch") %]-w64-mingw32-cxx
+ln -s llvm-ar [% c("arch") %]-w64-mingw32-ar
 ln -s llvm-nm [% c("arch") %]-w64-mingw32-nm
 ln -s llvm-strip [% c("arch") %]-w64-mingw32-strip
+ln -s llvm-ranlib [% c("arch") %]-w64-mingw32-ranlib
 ln -s llvm-readobj [% c("arch") %]-w64-mingw32-readobj
 ln -s llvm-objcopy [% c("arch") %]-w64-mingw32-objcopy
 ln -s llvm-windres [% c("arch") %]-w64-mingw32-windres
@@ -176,6 +180,40 @@ EOF
 }
 
 merge_libs $distdir/[% c("arch") %]-w64-mingw32/lib/libc++.a $distdir/[% c("arch") %]-w64-mingw32/lib/libunwind.a
+
+# libssp
+# See build-libssp.sh in llvm-mingw
+cd $rootdir
+tar -xf [% c('input_files_by_name/gcc') %]
+cd gcc-*/libssp
+cp $rootdir/libssp-Makefile Makefile
+
+# gcc/libssp's configure script runs checks for flags that clang doesn't
+# implement. We actually just need to set a few HAVE defines and compile
+# the .c sources.
+cp config.h.in config.h
+for i in HAVE_FCNTL_H HAVE_INTTYPES_H HAVE_LIMITS_H HAVE_MALLOC_H \
+    HAVE_MEMMOVE HAVE_MEMORY_H HAVE_MEMPCPY HAVE_STDINT_H HAVE_STDIO_H \
+    HAVE_STDLIB_H HAVE_STRINGS_H HAVE_STRING_H HAVE_STRNCAT HAVE_STRNCPY \
+    HAVE_SYS_STAT_H HAVE_SYS_TYPES_H HAVE_UNISTD_H HAVE_USABLE_VSNPRINTF \
+    HAVE_HIDDEN_VISIBILITY; do
+    cat config.h | sed 's/^#undef '$i'$/#define '$i' 1/' > tmp
+    mv tmp config.h
+done
+cat ssp/ssp.h.in | sed 's/@ssp_have_usable_vsnprintf@/define/' > ssp/ssp.h
+
+arch='[% c("arch") %]'
+mkdir -p build-$arch
+cd build-$arch
+make -f ../Makefile -j[% c("num_procs") %] CROSS=$arch-w64-mingw32-
+mkdir -p "$distdir/$arch-w64-mingw32/bin"
+cp libssp.a "$distdir/$arch-w64-mingw32/lib"
+cp libssp_nonshared.a "$distdir/$arch-w64-mingw32/lib"
+# We are interested only in static libraries, but if needed the dynamic ones
+# can be used, too, just by uncommenting the following two lines.
+# cp libssp.dll.a "$distdir/$arch-w64-mingw32/lib"
+# cp libssp-0.dll "$distdir/$arch-w64-mingw32/bin"
+cd ..
 
 # Packaging up everything
 cd $distdir

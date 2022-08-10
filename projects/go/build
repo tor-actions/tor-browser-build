@@ -58,7 +58,7 @@ cd /var/tmp/dist/go/src
   # https://github.com/golang/go/issues/15457
   CC_FOR_TARGET="$(pwd)/cc-for-target"
   echo "#!/bin/sh" > "$CC_FOR_TARGET"
-  echo "exec [% c("arch") %]-w64-mingw32-gcc [% c("var/CFLAGS") %] [% c("var/LDFLAGS") %] \"\$@\"" >> "$CC_FOR_TARGET"
+  echo "exec [% c("arch") %]-w64-mingw32-cc [% c("var/CFLAGS") %] [% c("var/LDFLAGS") %] \"\$@\"" >> "$CC_FOR_TARGET"
   chmod +x "$CC_FOR_TARGET"
   CGO_ENABLED=1 CC_FOR_TARGET="$CC_FOR_TARGET" CC= CFLAGS= LDFLAGS= ./make.bash
 [% ELSIF c("var/android") -%]

@@ -27,3 +27,4 @@ input_files:
   - filename: mingw-unknown.patch
   - filename: mingw-uiautomationcoreapi.patch
   - filename: mingw-windows_foundation.patch
+  - filename: libssp-Makefile

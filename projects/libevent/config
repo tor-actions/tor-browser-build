@@ -16,6 +16,9 @@ targets:
     var:
       arch_deps:
         - faketime
+  windows:
+    var:
+      configure_opt_project: --disable-shared
   android:
     var:
       configure_opt_project: --disable-shared

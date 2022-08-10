@@ -9,9 +9,6 @@ mkdir -p [% dest_dir _ '/' _ c('filename') %]
   # Setting up fxc2
   tar -C /var/tmp/dist -xf [% c('input_files_by_name/fxc2') %]
   export PATH="/var/tmp/dist/fxc2/bin:$PATH"
-  # Setting up stack protector support
-  tar -C /var/tmp/dist -xf [% c('input_files_by_name/mingw-w64') %]
-  cp /var/tmp/dist/mingw-w64/gcclibs/{libssp.a,libssp_nonshared.a} /var/tmp/dist/mingw-w64-clang/[% c("arch") %]-w64-mingw32/lib/
 [% END -%]
 
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/rust') %]
