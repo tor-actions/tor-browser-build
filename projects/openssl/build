@@ -8,15 +8,22 @@ cd /var/tmp/build/[% project %]-[% c('version') %]
 [% IF c("var/osname") == "linux-i686" -%]
 export CC='gcc -m32'
 [% END %]
+# OpenSSL prepends the host triple to $CC
 [% IF c("var/osx") -%]
   # Tricking OpenSSL into using our clang as cross-compiler
   ln -s $clangdir/bin/clang $clangdir/bin/x86_64-apple-darwin-cc
   export CC="cc [% c("var/FLAGS") %]"
 [% END -%]
+[% IF c("var/windows") -%]
+  # Otherwise it falls back to gcc. This way we can remain generic and switch
+  # from GCC to Clang and vice versa.
+  export CC=cc
+[% END -%]
 export SOURCE_DATE_EPOCH='[% c("timestamp") %]'
 ./Configure [% c('var/configure_opts') %]
-make
-make DESTDIR="$distdir" install
+make -j[% c("num_procs") %]
+# https://github.com/openssl/openssl/issues/8170
+make -j[% c("num_procs") %] DESTDIR="$distdir" install
 cd /var/tmp/dist
 ln -s '[% c("var/openssldir") %]' openssl/openssl
 [% c('tar', {
