@@ -24,8 +24,6 @@ input_files:
     project: cctools
   - name: cmake
     project: cmake
-  - name: ninja
-    project: ninja
   # Instructions on how to create the SDK tarball can be found at:
   # build/macosx/cross-mozconfig.common
   - name: SDK
