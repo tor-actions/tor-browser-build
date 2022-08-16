@@ -7,10 +7,11 @@ container:
   use_container: 1
 
 var:
-  cbindgen_version: 0.23.0
-  cbindgen_git_hash: 798cfab52bced65a749443faa16990ec3a8e0cfe
-  cbindgen_vendor_hash: 90fc3483753d296c6fc1a406f5cae412f7f74cd6719e9c800a2ffc6cd18b6e69
-  cbindgen_vendor_people_tpo_user: pierov
+  cbindgen_version: 0.19.0
+  cbindgen_git_hash: d9e490ce8b836194595bd30611253a7028059da2
+  cbindgen_vendor_hash: 7d99c195b180e28ca7499d8744d020b864f952a5ba699716707aec9a06b4ee8b
+  cbindgen_vendor_people_tpo_user: boklm
+  vendor_compress: bz2
 
 input_files:
   - project: container-image
@@ -20,8 +21,17 @@ input_files:
   # Use `make cargo_vendor-cbindgen` or `make cargo_vendor-cbindgen-android`
   # (for the Android version) to re-generate the vendor tarball
   - name: cbindgen_vendor
-    URL: https://people.torproject.org/~[% c('var/cbindgen_vendor_people_tpo_user') %]/mirrors/sources/cbindgen-vendor-[% c('version') %].tar.xz
+    URL: https://people.torproject.org/~[% c('var/cbindgen_vendor_people_tpo_user') %]/mirrors/sources/cbindgen-vendor-[% c('version') %].tar.[% c('var/vendor_compress') %]
     sha256sum: '[% c("var/cbindgen_vendor_hash") %]'
+
+targets:
+  android:
+    var:
+      cbindgen_version: 0.23.0
+      cbindgen_git_hash: 798cfab52bced65a749443faa16990ec3a8e0cfe
+      cbindgen_vendor_hash: 90fc3483753d296c6fc1a406f5cae412f7f74cd6719e9c800a2ffc6cd18b6e69
+      cbindgen_vendor_people_tpo_user: pierov
+      vendor_compress: xz
 
 steps:
   cargo_vendor:
