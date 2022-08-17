@@ -17,7 +17,7 @@ patch -p1 < $rootdir/no-insert-timestamp.patch
 [% IF c("var/windows-x86_64") %]
   # Seems like setting TARGET_ARCH is not enough so we need to patch build.cpp
   # manually; this is confirmed by a comment in the same file.
-  sed -i 's/m_target_type=TARGET_X86ANSI/m_target_type=TARGET_AMD64/' Source/build.cpp
+  sed -i 's/m_target_type=TARGET_X86UNICODE/m_target_type=TARGET_AMD64/' Source/build.cpp
   [% SET target = "amd64" %]
 [% ELSE %]
   [% SET target = "x86" %]
@@ -29,6 +29,10 @@ patch -p1 < $rootdir/no-insert-timestamp.patch
         _ " TARGET_ARCH=" _ target
         _ " ZLIB_W32=/var/tmp/build/zlib/"
         _ ' PREFIX=/var/tmp/dist/nsis' -%]
+# Parallel compilation might result in errors, but they seems to be recoverable,
+# so we first run scons in parallel, and suppress any error, then we try again,
+# but the second time they make the build fail.
+scons [% scons_args %] -j[% c("num_procs") %] || true
 scons [% scons_args %]
 scons [% scons_args %] install
 cd /var/tmp/dist
