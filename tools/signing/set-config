@@ -1,7 +1,7 @@
 . "$script_dir/set-config.tbb-version"
 . "$script_dir/set-config.hosts"
 
-bundle_locales="ar ca cs da de el en-US es-AR es-ES fa fr ga-IE he hu id is it ja ka ko lt mk ms my nb-NO nl pl pt-BR ro ru sv-SE th tr vi zh-CN zh-TW"
+bundle_locales="ar ca cs da de el en-US es-AR es-ES fa fr ga-IE he hu id is it ja ka ko lt mk ms my nb-NO nl pl pt-BR ro ru sv-SE th tr uk vi zh-CN zh-TW"
 
 signed_dir="$script_dir/../../$tbb_version_type/signed"
 signed_version_dir="$signed_dir/$tbb_version"
