@@ -1,3 +1,65 @@
+Tor Browser 11.5.2 - August 23 2022
+ * All Platforms
+   * Update Tor to 0.4.7.10
+   * Update NoScript to 11.4.9
+ * Windows + macOS + Linux
+   * Update Firefox to 91.13.0esr
+   * Bug 27719: Treat unsafe renegotiation as broken [tor-browser]
+   * Bug 40242: Tor Browser has two default bridges that share a fingerprint, and Tor ignores one [tor-browser]
+   * Bug 41067: Cherry-pick fixes for HTTPS-Only mode [tor-browser]
+   * Bug 41070: Google vanished from default search options from 11.0.10 onwards [tor-browser]
+   * Bug 41075: The Tor Browser is showing caution sign but your document said it won't [tor-browser]
+   * Bug 41089: Add tor-browser build scripts + Makefile to tor-browser [tor-browser]
+   * Bug 41095: "Learn more" link in onboarding slideshow still points to 11.0 release post [tor-browser]
+ * Build System
+   * Windows + macOS + Linux
+     * Update Go to 1.17.3
+   * Android
+     * Update Go to 1.18.5
+
+Tor Browser 12.0a1 - August 9 2022
+ * Windows + OS X + Linux
+   * Update Firefox to 91.12.0esr
+   * Update Tor-Launcher to 0.2.38
+   * Update Translations
+   * Update OpenSSL to 1.1.1q
+   * Update Manual
+   * Bug 21740: Make sure Mozilla's own emoji font on Windows/Linux does not interfere with our font fingerprinting defense [tor-browser]
+   * Bug 27719: Treat unsafe renegotiation as broken [tor-browser]
+   * Bug 40584: Update tor-browser manual to latest [tor-browser-build]
+   * Bug 40966: Investigate problems with Twemoji Mozilla [tor-browser]
+   * Bug 41011: The Internet and Tor status are visible when opening the settings [tor-browser]
+   * Bug 41035: OnionAliasService should use threadsafe ISupports [tor-browser]
+   * Bug 41036: Add a preference to disable OnionAlias [tor-browser]
+   * Bug 41037: User onboarding still points to about:preferences#tor [tor-browser]
+   * Bug 41044: Content exceeding the height of the connection settings modals [tor-browser]
+   * Bug 41049: QR codes in connection settings aren't recognized by some readers in dark theme [tor-browser]
+   * Bug 41050: "Continue to HTTP Site" button doesn't work on IP addresses [tor-browser]
+   * Bug 41053: remove HTTPS-Everywhere entry from browser.uiCustomization.state pref [tor-browser]
+   * Bug 41054: Improve color contrast of purple elements in connection settings in dark theme [tor-browser]
+   * Bug 41055: Icon fix from #40834 is missing in 11.5 stable [tor-browser]
+   * Bug 41058: Hide `currentBridges` description when the section itself is hidden [tor-browser]
+   * Bug 41059: Bridge cards aren't displaying, and toggle themselves off [tor-browser]
+   * Bug 41067: Cherry-pick fixes for HTTPS-Only mode [tor-browser]
+   * Bug 41070: Google vanished from default search options from 11.0.10 onwards [tor-browser]
+   * Bug 41089: Add tor-browser build scripts + Makefile to tor-browser [tor-browser]
+   * Bug 41095: "Learn more" link in onboarding slideshow still points to 11.0 release post [tor-browser]
+ * Windows
+   * Bug 30589: Tor Browser on Windows is lacking fonts to render some kind of scripts [tor-browser]
+   * Bug 41039: Set 'startHidden' flag on tor process in tor-launcher [tor-browser]
+ * OS X
+   * Bug 41004: The Bangla font does not display correctly on MacOs [tor-browser]
+ * Linux
+   * Bug 41043: Investigate why STIX Two becomes the default font on Linux [tor-browser]
+ * Build System
+   * Windows + OS X + Linux
+     * Update Go to 1.17.13
+     * Bug 40499: Update firefox to enable building from new 'base-browser' tag [tor-browser-build]
+     * Bug 40500: Add base-browser package project [tor-browser-build]
+     * Bug 40501: Makefile updates to support building base-browser packages [tor-browser-build]
+     * Bug 40547: Remove container/remote_* from rbm.conf [tor-browser-build]
+     * Bug 40581: Update reference to master branches [tor-browser-build]
+
 Tor Browser 11.5.1 - July 26 2022
  * Windows + OS X + Linux
    * Update Firefox to 91.12.0esr
@@ -23,6 +85,7 @@ Tor Browser 11.5 - July 7 2022
    * Update Translations
    * Bug 11698: Incorporate Tor Browser Manual pages into Tor Browser [tor-browser]
    * Bug 19850: Disable Plaintext HTTP Clearnet Connections [tor-browser]
+   * Bug 21740: Make sure Mozilla's own emoji font on Windows/Linux does not interfere with our font fingerprinting defense [tor-browser]
    * Bug 30589: Allowed fonts to render a bunch of missing scripts [tor-browser]
    * Bug 40458: Implement about:rulesets https-everywhere replacement [tor-browser]
    * Bug 40527: Remove https-everywhere from tor-browser alpha desktop [tor-browser-build]
