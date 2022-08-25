@@ -1,0 +1,17 @@
+# vim: filetype=yaml sw=2
+version: '[% c("abbrev") %]'
+git_url: https://github.com/sergeyfrolov/bsbuffer
+git_hash: 94e85abb850729a5f54f383e8175e62931d04748
+filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+container:
+  use_container: 1
+
+build: '[% c("projects/go/var/build_go_lib") %]'
+
+var:
+  go_lib: github.com/sergeyfrolov/bsbuffer
+
+input_files:
+  - project: container-image
+  - name: go
+    project: go

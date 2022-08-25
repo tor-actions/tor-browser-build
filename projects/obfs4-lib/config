@@ -1,0 +1,39 @@
+# vim: filetype=yaml sw=2
+version: '[% c("abbrev") %]'
+git_url: https://gitlab.com/yawning/obfs4.git
+git_hash: 77af0cba934d73c4baeb709560bcfc9a9fbc661c
+filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+container:
+  use_container: 1
+
+build: '[% c("projects/go/var/build_go_lib") %]'
+
+var:
+  go_lib: gitlab.com/yawning/obfs4.git
+  go_lib_deps:
+    - edwards25519
+    - edwards25519-extra
+    - goptlib
+    - goxcrypto
+    - goxnet
+    - siphash
+  go_lib_install:
+    - gitlab.com/yawning/obfs4.git/common/ntor
+    - gitlab.com/yawning/obfs4.git/transports/obfs4
+
+input_files:
+  - project: container-image
+  - name: go
+    project: go
+  - name: edwards25519
+    project: edwards25519
+  - name: edwards25519-extra
+    project: edwards25519-extra
+  - name: goptlib
+    project: goptlib
+  - name: goxcrypto
+    project: goxcrypto
+  - name: goxnet
+    project: goxnet
+  - name: siphash
+    project: siphash

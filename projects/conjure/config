@@ -1,0 +1,21 @@
+# vim: filetype=yaml sw=2
+version: '[% c("abbrev") %]'
+git_url: https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/conjure.git
+git_hash: b7d485734c3ab09ef3da818abb4b39ec27ef3a73
+filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+container:
+  use_container: 1
+
+input_files:
+  - project: container-image
+  - name: go
+    project: go
+  - name: goptlib
+    project: goptlib
+  - name: gotapdance
+    project: gotapdance
+  - name: snowflake-lib
+    project: snowflake-lib
+  - name: '[% c("var/compiler") %]'
+    project: '[% c("var/compiler") %]'
+    enable: '[% c("var/android") %]'

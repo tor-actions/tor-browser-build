@@ -1,0 +1,47 @@
+# vim: filetype=yaml sw=2
+version: '[% c("abbrev") %]'
+git_url: https://github.com/refraction-networking/gotapdance
+git_hash: 14162bd2967839d5d873645881f4a4761fb7bb48 #v1.3.0
+filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+container:
+  use_container: 1
+
+build: '[% c("projects/go/var/build_go_lib") %]'
+
+var:
+  go_lib: github.com/refraction-networking/gotapdance
+  go_lib_deps:
+    - bsbuffer
+    - goprotobuf
+    - goptlib
+    - goxcrypto
+    - goxnet
+    - logrus
+    - obfs4-lib
+    - refraction-utls
+    - weightedrand
+  go_lib_install:
+    - github.com/refraction-networking/gotapdance/tapdance
+
+input_files:
+  - project: container-image
+  - name: go
+    project: go
+  - name: bsbuffer
+    project: bsbuffer
+  - name: goprotobuf
+    project: goprotobuf
+  - name: goptlib
+    project: goptlib
+  - name: goxcrypto
+    project: goxcrypto
+  - name: goxnet
+    project: goxnet
+  - name: logrus
+    project: logrus
+  - name: obfs4-lib
+    project: obfs4-lib
+  - name: refraction-utls
+    project: refraction-utls
+  - name: weightedrand
+    project: weightedrand
