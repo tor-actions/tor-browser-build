@@ -184,16 +184,14 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
 - [ ] Update `rbm.conf`
   - [ ] `var/torbrowser_version` : update to next version
   - [ ] `var/torbrowser_build` : update to `$(TOR_BROWSER_BUILD_N)`
-- [ ] `var/torbrowser_incremental_from` : update to previous version
-  - [ ] **IMPORTANT**: Really *actually* make sure this is the previous Desktop version or else the `make incrementals-*` step will fail
+  - [ ] `var/torbrowser_incremental_from` : update to previous version
+    - [ ] **IMPORTANT**: Really *actually* make sure this is the previous Desktop version or else the `make incrementals-*` step will fail
 - [ ] Update `projects/firefox/config`
   - [ ] `git_hash` : update the `$(BUILD_N)` section to match `tor-browser` tag
   - [ ] ***(Optional)*** `var/firefox_platform_version` : update to latest `$(ESR_VERSION)` if rebased
 - [ ] ***(Android Only)*** Update `projects/geckoview/config`
   - [ ] `git_hash` : update the `$(BUILD_N)` section to match `geckoview` tag
   - [ ] ***(Optional)*** `var/geckoview_version` : update to latest `$(RR_VERSION)` if rebased
-- [ ] Update `projects/translation-base-browser/config`
-  - [ ] `git_hash` : update with `HEAD` commit of project's `base-browser` branch
 - [ ] ***(Android Only, Optional)*** Update `projects/tba-translations/config`:
   - [ ]  `git_hash` : update with `HEAD` commit of project's `fenix-torbrowserstringsxml` branch
 - [ ] ***(Android Only, Optional)*** Update `projects/tor-android-service/config`
@@ -201,9 +199,9 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
 - [ ] ***(Android Only, Optional)*** Update `projects/fenix/config`
   - [ ] `git_hash` : update the `$(BUILD_N)` section to match `fenix` tag
   - [ ] ***(Optional)*** `var/fenix_version` : update to latest `$(RR_VERSION)` if rebased
-- [ ] ***(Android Only)*** Update allowed_addons.json by running (from `tor-browser-build` root)`./tools/fetch_allowed_addons.py > projects/tor-browser/allowed_addons.json
+- [ ] ***(Android Only)*** Update allowed_addons.json by running (from `tor-browser-build` root)`./tools/fetch_allowed_addons.py > projects/tor-browser/allowed_addons.json`
 - [ ] Check for NoScript updates here : https://addons.mozilla.org/en-US/firefox/addon/noscript
-  - [ ] ***(Optional)*** If new version available, update `noscript` section of `input_files` in `projects/browser/config`
+  - [ ] ***(Optional)*** If new version available, update `noscript` section of `input_files` in `projects/tor-browser/config`
     - [ ] `URL`
     - [ ] `sha256sum`
 - [ ] Check for OpenSSL updates here : https://github.com/openssl/openssl/tags
@@ -324,5 +322,3 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
 - [ ] Send an email to tor-announce@lists.torproject.org, using the same content as the blog post and subject "Tor Browser $version is released".
 
 </details>
-
-/label ~"Release Prep"
