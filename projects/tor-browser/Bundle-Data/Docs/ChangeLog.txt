@@ -1,3 +1,9 @@
+Tor Browser 11.5.3 - August 29 2022
+ * Android
+   * Bug 40225: Bundled extensions don't get updated with Android Tor Browser
+   updates (they stay stuck at the first installed version) [fenix]
+   * Bug 41156: User-installed addons are broken on Android [tor-browser]
+
 Tor Browser 11.5.2 - August 23 2022
  * All Platforms
    * Update Tor to 0.4.7.10
