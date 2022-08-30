@@ -59,11 +59,11 @@
 
 ### **tba-translation** : https://git.torproject.org/translation.git
 - [ ] Fetch latest and identify new `HEAD` of `fenix-torbrowserstringsxml` branch
-  - [ ] `origin/fenix-torbrowserstringsxml` : `<INSERT_COMMIT_HASH_HERE>`
+  - [ ] `origin/fenix-torbrowserstringsxml` : `<INSERT COMMIT HASH HERE>`
 
 ### **tor-android-service** ***(Optional)***: https://git.torproject.org/tor-android-service.git
 - [ ] Fetch latest and identify new `HEAD` of `main` branch
-  - [ ] `origin/main` : `<INSERT_COMMIT_HASH_HERE>`
+  - [ ] `origin/main` : `<INSERT COMMIT HASH HERE>`
 
 ### ***Security Vulnerabilities Backport*** : https://www.mozilla.org/en-US/security/advisories/
 - [ ] Go through any `Security Vulnerabilities fixed in Firefox $(RR_VERSION)` (or similar) and create list of CVEs which affect Android that need to be a backported
@@ -114,8 +114,13 @@
       - Message : `Hg tag $(ESR_TAG)`
   - [ ] Push new branch and tag to origin
   - [ ] Rebase `tor-browser` patches
-  - [ ] Perform rangediff to ensure nothing weird happened resolving conflicts
-    - `git range-diff $(ESR_TAG_PREV)..$(TOR_BROWSER_BRANCH_PREV) $(ESR_TAG)..$(TOR_BROWSER_BRANCH)`
+  - [ ] Compare patch-sets (ensure nothing *weird* happened during rebase):
+    - [ ] rangediff: `git range-diff $(ESR_TAG_PREV)..$(TOR_BROWSER_BRANCH_PREV) $(ESR_TAG)..$(TOR_BROWSER_BRANCH)`
+    - [ ] diff of diffs:
+        -  Do the diff between `current_patchset.diff` and `rebased_patchset.diff` with your preferred `$(DIFF_TOOL)` and look at differences on lines that starts with + or -
+        - [ ] `git diff $(ESR_TAG_PREV)..$(TOR_BROWSER_BRANCH_PREV) > current_patchset.diff`
+        - [ ] `git diff $(ESR_TAG)..$(TOR_BROWSER_BRANCH) > rebased_patchset.diff`
+        - [ ] `$(DIFF_TOOL) current_patchset.dif rebased_patchset.deff`
   - [ ] Open MR for the rebase
 - [ ] Sign/Tag `base-browser` commit:
   - **NOTE** : Currently we are using the `Bug 27511: Add new identity button to toolbar` commit as the dividing line between `base-browser` and `tor-browser`
@@ -139,8 +144,8 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
 - [ ] Update `rbm.conf`
   - [ ] `var/torbrowser_version` : update to next version
   - [ ] `var/torbrowser_build` : update to `$(TOR_BROWSER_BUILD_N)`
-- [ ] `var/torbrowser_incremental_from` : update to previous version
-  - [ ] **IMPORTANT**: Really *actually* make sure this is the previous Desktop version or else the `make incrementals-*` step will fail
+  - [ ] ***(Desktop Only)*** `var/torbrowser_incremental_from` : update to previous Desktop version
+    - [ ] **IMPORTANT**: Really *actually* make sure this is the previous Desktop version or else the `make incrementals-*` step will fail
 - [ ] Update `projects/firefox/config`
   - [ ] `git_hash` : update the `$(BUILD_N)` section to match `tor-browser` tag
   - [ ] ***(Optional)*** `var/firefox_platform_version` : update to latest `$(ESR_VERSION)` if rebased
@@ -154,13 +159,15 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
 - [ ] Update `projects/tor-android-service/config`
   - [ ] `git_hash` : update with `HEAD` commit of project's `main` branch
 - [ ] Update `projects/application-services/config`:
-  - [ ] `git_hash` : update the `$(BUILD_N)` section to match alpha `application-services` tag
+  **NOTE** we don't have any of our own patches for this project
+  - [ ] `git_hash` : update to appropriate git commit associated with $(ESR_VERSION)
 - [ ] Update `projects/android-components/config`:
   - [ ] `git_hash` : update the `$(BUILD_N)` section to match alpha `android-components` tag
 - [ ] Update `projects/fenix/config`
   - [ ] `git_hash` : update the `$(BUILD_N)` section to match `fenix` tag
   - [ ] ***(Optional)*** `var/fenix_version` : update to latest `$(ESR_VERSION)` if rebased
-- [ ] Update allowed_addons.json by running (from `tor-browser-build` root) `./tools/fetch_allowed_addons.py > projects/tor-browser/allowed_addons.json`
+- [ ] Update allowed_addons.json by running (from `tor-browser-build` root):
+  - `./tools/fetch_allowed_addons.py > projects/tor-browser/allowed_addons.json`
 - [ ] Check for NoScript updates here : https://addons.mozilla.org/en-US/firefox/addon/noscript
   - [ ] ***(Optional)*** If new version available, update `noscript` section of `input_files` in `projects/browser/config`
     - [ ] `URL`
@@ -259,15 +266,17 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
 - **NOTE**: at this point the signed binaries should have been copied to `staticiforme`
 - [ ] Update `staticiforme.torproject.org`:
   - From `screen` session on `staticiforme.torproject.org`:
+  - [ ] Remove old release data from following places:
+    - **NOTE** : Skip this step if the current release is Android or Desktop *only*
+    - [ ] `/srv/cdn-master.torproject.org/htdocs/aus1/torbrowser`
+    - [ ] `/srv/dist-master.torproject.org/htdocs/torbrowser`
   - [ ] Static update components : `static-update-component cdn.torproject.org && static-update-component dist.torproject.org`
   - [ ] Enable update responses :
     - [ ] alpha: `./deploy_update_responses-alpha.sh`
     - [ ] release: `./deploy_update_responses-release.sh`
 - [ ] Publish APKs to Google Play:
   - [ ] Log into https://play.google.com/apps/publish
-  - Select correct app:
-    - [ ] Tor Browser
-    - [ ] Tor Browser Alpha
+  - [ ] Select `Tor Browser (Alpha)` app
   - [ ] Navigate to `Release > Production` and click `Create new release` button
   - [ ] Upload the `*.multi.apk` APKs
   - [ ] If necessary, update the 'Release Name' (should be automatically populated)
@@ -277,8 +286,12 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
   - [ ] Save, review, and configure rollout percentage
     - [ ] 25% rollout when publishing a scheduled update
     - [ ] 100% rollout when publishing a security-driven release
-  - [ ] Update  rollout percentage to 100% after confirmed no major issues
+  - [ ] Update rollout percentage to 100% after confirmed no major issues
+
+### tor-announce mailing list
+- [ ] Send an email to tor-announce@lists.torproject.org, using the same content as the blog post and subject "Tor Browser $version is released".
 
 </details>
 
 /label ~"Release Prep"
+

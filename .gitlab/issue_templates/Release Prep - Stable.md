@@ -41,15 +41,16 @@
 
 ### **torbutton** ***(Optional)***: https://git.torproject.org/torbutton.git
 - [ ] ***(Optional)*** Update translations :
-  - **NOTE** : mandatory if we have added new string dependencies
-  -  [ ] `./import-translations.sh`
-  -  [ ] Commit with message `Translation updates`
-     - **NOTE** : only add files which are already being tracked
+  - **NOTE** We only update strings in stable if a backported feature depends on new strings
+  - [ ] `./import-translations.sh`
+    - **NOTE** : if there are no new strings imported then we are done here
+  - [ ] Commit with message `Translation updates`
+    - **NOTE** : only add files which are already being tracked
 - [ ] fixup! `tor-browser`'s `Bug 10760 : Integrate TorButton to TorBrowser core` issue to point to updated `torbutton` commit
 
 ### **tor-launcher** ***(Optional)***: https://git.torproject.org/tor-launcher.git
 - [ ] ***(Optional)*** Update translations:
-  - **NOTE** : mandatory if we have added new string dependencies
+  - **NOTE** We only update strings in stable if a backported feature depends on new strings
   - [ ] ./localization/import-translations.sh
   - [ ] Commit with message `Translation updates`
 - [ ] Update `install.rdf` file with new version
@@ -78,7 +79,7 @@
         - [ ] `git diff $(ESR_TAG)..$(TOR_BROWSER_BRANCH) > rebased_patchset.diff`
         - [ ] `$(DIFF_TOOL) current_patchset.dif rebased_patchset.deff`
   - [ ] Open MR for the rebase
-- [ ] ***(Optional)*** Backport any required patches to Stable
+- [ ] ***(Optional)*** Backport any required Alpha patches to Stable
   - [ ] cherry-pick patches on top of rebased branch (issues to backport should have `Backport` label and be linked to the associated `Release Prep` issue)
   - [ ] Close associated `Backport` issues
   - [ ] Open MR for the backport commits
@@ -123,12 +124,22 @@
 - [ ] Push tag to `origin`
 
 ### **tba-translation** ***(Optional)***: https://git.torproject.org/translation.git
+- **NOTE** We only update strings in stable if a backported feature depends on new strings
 - [ ] Fetch latest and identify new `HEAD` of `fenix-torbrowserstringsxml` branch
-  - [ ] `origin/fenix-torbrowserstringsxml` :`<INSERT COMMIT HASH HERE>`
+  - [ ] `origin/fenix-torbrowserstringsxml` : `<INSERT COMMIT HASH HERE>`
 
+### **tor-android-service** ***(Optional)***: https://git.torproject.org/tor-android-service.git
+- [ ] Fetch latest and identify new `HEAD` of `main` branch
+  - [ ] `origin/main` : `<INSERT COMMIT HASH HERE>`
+
+### **application-services** : *TODO: we need to setup a gitlab copy of this repo that we can apply security backports to*
+- [ ] ***(Optional)*** Backport any Android-specific security fixes from Firefox rapid-release
+- [ ] Sign/Tag commit:
+  - Tag : `application-services-$(ESR_VERSION)-$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)-1-$(BUILD_N)`
+  - Message: `Tagging $(BUILD_N) for $(ESR_VERSION)-based (alpha|stable)`
+- [ ] Push tag to `origin`
 ### **android-components** ***(Optional)***: https://gitlab.torproject.org/tpo/applications/android-components.git
 - [ ] ***(Optional)*** Rebase to `$(RR_VERSION)`
-  - Upstream git repo : https://github.com/mozilla-mobile/android-components.git
   - [ ] Identify the `mozilla-mobile` git tag to start from by first updating `fenix` and then checking which `android-components` tag is used in `buildSrc/src/main/java/AndroidComponents.kt`
     - Alternatively search for commit message like `Update Android-Components`
   - [ ] Create new branch from tag named `android-components-$(RR_VERSION)-$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)-1`
@@ -137,19 +148,15 @@
   - [ ] Perform rangediff to ensure nothing weird happened resolving conflicts
   - [ ] Open MR for the rebase
   - [ ] Merge + Push
- - [ ] ***(Optional)*** Backport any required patches to Stable
+- [ ] ***(Optional)*** Backport any required patches to Stable
   - [ ] cherry-pick patches on top of rebased branch (issues to backport should have `Backport` label and be linked to the associated `Release Prep` issue)
   - [ ] Close associated `Backport` issues
   - [ ] Open MR for the backport commits
   - [ ] Merge + Push
-- [ ] Sign/Tag commit:
+ [ ] Sign/Tag commit:
   - Tag : `android-components-$(RR_VERSION)-$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)-1-$(BUILD_N)`
   - Message: `Tagging $(BUILD_N) for $(RR_VERSION)-based (alpha|stable)`
-- [ ] Push tag to origin
-
-### **tor-android-service** ***(Optional)***: https://git.torproject.org/tor-android-service.git
-- [ ] Fetch latest and identify new `HEAD` of `main` branch
-  - [ ] `origin/main` : `<INSERT COMMIT HASH HERE>`
+  - [ ] Push tag to origin
 
 ### **fenix** ***(Optional)***: https://gitlab.torproject.org/tpo/applications/fenix.git
 - [ ] ***(Optional)*** Rebase to `$(RR_VERSION)`
@@ -184,9 +191,9 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
 - [ ] Update `rbm.conf`
   - [ ] `var/torbrowser_version` : update to next version
   - [ ] `var/torbrowser_build` : update to `$(TOR_BROWSER_BUILD_N)`
-  - [ ] `var/torbrowser_incremental_from` : update to previous version
+  - [ ] ***(Desktop Only)*** `var/torbrowser_incremental_from` : update to previous Desktop version
     - [ ] **IMPORTANT**: Really *actually* make sure this is the previous Desktop version or else the `make incrementals-*` step will fail
-- [ ] Update `projects/firefox/config`
+- [ ] ***(Desktop Only)*** Update `projects/firefox/config`
   - [ ] `git_hash` : update the `$(BUILD_N)` section to match `tor-browser` tag
   - [ ] ***(Optional)*** `var/firefox_platform_version` : update to latest `$(ESR_VERSION)` if rebased
 - [ ] ***(Android Only)*** Update `projects/geckoview/config`
@@ -196,10 +203,17 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
   - [ ]  `git_hash` : update with `HEAD` commit of project's `fenix-torbrowserstringsxml` branch
 - [ ] ***(Android Only, Optional)*** Update `projects/tor-android-service/config`
   - [ ] `git_hash` : update with `HEAD` commit of project's `main` branch
+- [ ] ***(Android Only, Optional)*** Update `projects/application-services/config`:
+  **NOTE** we don't have any of our own patches for this project
+  - [ ] `git_hash` : update to appropriate git commit associated with $(RR_VERSION)
+- [ ] ***(Android Only, Optional)*** Update `projects/android-components/config`
+  - [ ] `git_hash` : update the `$(BUILD_N)` section to match `android-components` tag
+  - [ ] ***(Optional)*** `var/android_components_version` : update to latest `$(RR_VERSION)` if rebased
 - [ ] ***(Android Only, Optional)*** Update `projects/fenix/config`
   - [ ] `git_hash` : update the `$(BUILD_N)` section to match `fenix` tag
   - [ ] ***(Optional)*** `var/fenix_version` : update to latest `$(RR_VERSION)` if rebased
-- [ ] ***(Android Only)*** Update allowed_addons.json by running (from `tor-browser-build` root)`./tools/fetch_allowed_addons.py > projects/tor-browser/allowed_addons.json`
+- [ ] ***(Android Only)*** Update allowed_addons.json by running (from `tor-browser-build` root):
+  - `./tools/fetch_allowed_addons.py > projects/tor-browser/allowed_addons.json`
 - [ ] Check for NoScript updates here : https://addons.mozilla.org/en-US/firefox/addon/noscript
   - [ ] ***(Optional)*** If new version available, update `noscript` section of `input_files` in `projects/tor-browser/config`
     - [ ] `URL`
@@ -298,15 +312,17 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
 - **NOTE**: at this point the signed binaries should have been copied to `staticiforme`
 - [ ] Update `staticiforme.torproject.org`:
   - From `screen` session on `staticiforme.torproject.org`:
+  - [ ] Remove old release data from following places:
+    - **NOTE** : Skip this step if the current release is Android or Desktop *only*
+    - [ ] `/srv/cdn-master.torproject.org/htdocs/aus1/torbrowser`
+    - [ ] `/srv/dist-master.torproject.org/htdocs/torbrowser`
   - [ ] Static update components : `static-update-component cdn.torproject.org && static-update-component dist.torproject.org`
   - [ ] Enable update responses :
     - [ ] alpha: `./deploy_update_responses-alpha.sh`
     - [ ] release: `./deploy_update_responses-release.sh`
 - [ ] ***(Android Only)*** : Publish APKs to Google Play:
   - [ ] Log into https://play.google.com/apps/publish
-  - Select correct app:
-    - [ ] Tor Browser
-    - [ ] Tor Browser Alpha
+  - [ ] Select `Tor Browser` app
   - [ ] Navigate to `Release > Production` and click `Create new release` button
   - [ ] Upload the `*.multi.apk` APKs
   - [ ] If necessary, update the 'Release Name' (should be automatically populated)
@@ -322,3 +338,6 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
 - [ ] Send an email to tor-announce@lists.torproject.org, using the same content as the blog post and subject "Tor Browser $version is released".
 
 </details>
+
+/label ~"Release Prep"
+
