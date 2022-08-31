@@ -1,3 +1,77 @@
+Tor Browser 12.0a2 - September 1 2022
+ * All Platforms
+   * Update Firefox to 102.2.0esr
+   * Update Tor to 0.4.7.10
+   * Update NoScript to 11.4.10
+   * Update Translations
+   * Bug 40242: Tor Browser has two default bridges that share a fingerprint, and Tor ignores one [tor-browser]
+ * Windows + macOS + Linux
+   * Update Tor-Launcher to 0.2.39
+   * Update Manual
+   * Bug 40580: Add support for uk (ukranian) locale [tor-browser-build]
+   * Bug 40595: Migrate to 102 on desktop [tor-browser-buid]
+   * Bug 41075: The Tor Browser is showing caution sign but your document said it won't [tor-browser]
+   * Bug 41089: Add tor-browser build scripts + Makefile to tor-browser [tor-browser]
+ * macOS
+   * Bug 41108: Remove privileged macOS installation from 102 [tor-browser]
+ * Android
+   * Bug 40225: Bundled extensions don't get updated with Android Tor Browser updates (they stay stuck at the first installed version) [fenix]
+   * Bug 41094: Enable HTTPS-Only Mode by default in Tor Browser Android [tor-browser]
+   * Bug 41156: User-installed addons are broken on Android [tor-browser]
+   * Bug 41166: Backport fix for CVE-2022-36317: Long URL would hang Firefox for Android (Bug 1759951) [tor-browser]
+   * Bug 41167: Backport fix for CVE-2022-38474: Recording notification not shown when microphone was recording on Android (Bug 1719511) [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 40407: Bump binutils version to pick up security improvements for Windows users [tor-browser-build]
+     * Bug 40591: Rust 1.60 not working to build 102 on Debian Jessie [tor-browser-build]
+     * Bug 40592: Consider re-using our LLVM/Clang to build Rust [tor-browser-build]
+     * Bug 40593: Update signing scripts to take into account new project names and layout [tor-browser-build]
+     * Bug 40607: Add alpha-specific release prep template [tor-browser-build]
+     * Bug 40610: src-*.tar.xz tarballs are missing in https://dist.torproject.org/torbrowser/12.0a1/ [tor-browser-build]
+     * Bug 40612: Migrate Release Prep template to Release Prep - Stable [tor-browser-build]
+   * Windows + macOS + Linux
+     * Bug 41099: Update+comment the update channels in update_responses.config.yaml [tor-browser]
+   * Windows
+     * Bug 29318: Use Clang for everything on Windows [tor-browser-buid]
+     * Bug 29321: Use mingw-w64/clang toolchain to build tor [tor-browser-build]
+     * Bug 29322: Use mingw-w64/clang toolchain to build OpenSSL [tor-browser-build]
+     * Bug 40409: Upgrade NSIS to 3.08 [tor-browser-build]
+   * macOS
+     * Bug 40605: Reworked the macOS toolchain creation [tor-browser-build]
+     * Bug 40620: Update macosx-sdk to 11.0 [tor-browser-build]
+   * Linux
+     * Bug 31321: Add cc -> gcc link to projects/gcc [tor-browser-build]
+   * Android
+     * Update Go to 1.18.5
+     * Bug 40574: Improve tools/signing/android-signing [tor-browser-build]
+     * Bug 40582: Prepared TBA to use Mozilla 102 components [tor-browser-build]
+     * Bug 40604: Bug 40604: Fix binutils build on android [tor-browser-build]
+
+Tor Browser 11.5.3 - August 29 2022
+ * Android
+   * Bug 40225: Bundled extensions don't get updated with Android Tor Browser
+   updates (they stay stuck at the first installed version) [fenix]
+   * Bug 41156: User-installed addons are broken on Android [tor-browser]
+
+Tor Browser 11.5.2 - August 23 2022
+ * All Platforms
+   * Update Tor to 0.4.7.10
+   * Update NoScript to 11.4.9
+ * Windows + macOS + Linux
+   * Update Firefox to 91.13.0esr
+   * Bug 27719: Treat unsafe renegotiation as broken [tor-browser]
+   * Bug 40242: Tor Browser has two default bridges that share a fingerprint, and Tor ignores one [tor-browser]
+   * Bug 41067: Cherry-pick fixes for HTTPS-Only mode [tor-browser]
+   * Bug 41070: Google vanished from default search options from 11.0.10 onwards [tor-browser]
+   * Bug 41075: The Tor Browser is showing caution sign but your document said it won't [tor-browser]
+   * Bug 41089: Add tor-browser build scripts + Makefile to tor-browser [tor-browser]
+   * Bug 41095: "Learn more" link in onboarding slideshow still points to 11.0 release post [tor-browser]
+ * Build System
+   * Windows + macOS + Linux
+     * Update Go to 1.17.3
+   * Android
+     * Update Go to 1.18.5
+
 Tor Browser 12.0a1 - August 9 2022
  * Windows + OS X + Linux
    * Update Firefox to 91.12.0esr
@@ -35,6 +109,7 @@ Tor Browser 12.0a1 - August 9 2022
  * Build System
    * Windows + OS X + Linux
      * Update Go to 1.17.13
+     * Bug 23656: Use mozconfig files from tor-browser.git to build firefox
      * Bug 40499: Update firefox to enable building from new 'base-browser' tag [tor-browser-build]
      * Bug 40500: Add base-browser package project [tor-browser-build]
      * Bug 40501: Makefile updates to support building base-browser packages [tor-browser-build]

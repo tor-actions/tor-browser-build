@@ -10,7 +10,7 @@ container:
   use_container: 1
 
 var:
-  geckoview_version: 102.0.1
+  geckoview_version: 102.2.0esr
   torbrowser_branch: 12.0
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   deps:
@@ -137,7 +137,7 @@ steps:
 
   list_toolchain_updates:
     git_url: https://github.com/mozilla/gecko-dev.git
-    git_hash: beta
+    git_hash: esr102
     tag_gpg_id: 0
     input_files: []
     container:
