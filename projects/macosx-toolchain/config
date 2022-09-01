@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-1-[% c("var/build_id") %].tar.gz'
-version: 10.12
+version: 11.0
 container:
   use_container: 1
 var:
@@ -27,8 +27,8 @@ input_files:
   # Instructions on how to create the SDK tarball can be found at:
   # build/macosx/cross-mozconfig.common
   - name: SDK
-    URL: 'https://people.torproject.org/~gk/mirrors/sources/MacOSX[% c("version") %].sdk.tar.bz2'
-    sha256sum: d2ef4ae4f85675c08795d33f283e307b6299184d78d4b10bdbea39df6dca7d94
+    URL: 'https://people.torproject.org/~boklm/mirrors/sources/MacOSX[% c("version") %].sdk.tar.xz'
+    sha256sum: 8cbe3a79e67b0690f931703ce5c282ac0c7265b451a36ec21cdfa9773f93173c
   - name: llvm-project
     project: llvm-project
   - filename: compiler-rt-cross-compile.patch
