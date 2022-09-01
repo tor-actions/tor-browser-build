@@ -163,6 +163,24 @@ cd build
 make -j[% c("num_procs") %] VERBOSE=1
 make install
 
+# libc++.a depends on libunwind.a. While the linker will automatically link to
+# libc++.a in C++ mode, it won't pick libunwind.a, requiring the caller to
+# explicitly pass -lunwind. To work around that, we merge libunwind.a into
+# libc++.a.
+merge_libs() {
+  cat <<EOF |llvm-ar -M
+CREATE tmp.a
+ADDLIB $1
+ADDLIB $2
+SAVE
+END
+EOF
+  llvm-ranlib tmp.a
+  mv tmp.a $1
+}
+
+merge_libs $distdir/[% c("arch") %]-w64-mingw32/lib/libc++.a $distdir/[% c("arch") %]-w64-mingw32/lib/libunwind.a
+
 # libssp
 # See build-libssp.sh in llvm-mingw
 cd $rootdir
