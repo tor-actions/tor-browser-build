@@ -26,7 +26,7 @@ tar -xf $rootdir/[% c("input_files_by_name/gcc") %]
 # CFLAGS_FOR_TARGET.
 export CFLAGS_FOR_TARGET="-Wl,--nxcompat -Wl,--dynamicbase -Wl,--no-insert-timestamp [% c('var/flag_noSEH') %]"
 # Rust requires enabling pthreads
-gcc-[% c("var/gcc_version") %]/configure --prefix=$distdir --target=[% c("arch") %]-w64-mingw32 --with-gnu-ld --with-gnu-as --disable-multilib --enable-threads=posix --enable-languages=c,c++[% IF c("var/windows-i686") %] --disable-sjlj-exceptions --with-dwarf2[% END %]
+gcc-[% c("version") %]/configure --prefix=$distdir --target=[% c("arch") %]-w64-mingw32 --with-gnu-ld --with-gnu-as --disable-multilib --enable-threads=posix --enable-languages=c,c++[% IF c("var/windows-i686") %] --disable-sjlj-exceptions --with-dwarf2[% END %]
 make -j[% c("num_procs") %] all-gcc
 make install-gcc
 
