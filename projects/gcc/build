@@ -16,11 +16,85 @@
   # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=48817.
   export DEB_BUILD_HARDENING_FORMAT=0
 [% END -%]
-distdir=/var/tmp/dist/[% project %]
+distdir=/var/tmp/dist/[% c("var/distdir") %]
 mkdir /var/tmp/build
-tar -C /var/tmp/build -xf $rootdir/[% c('input_files_by_name/gcc') %]
-cd /var/tmp/build/[% project %]-[% c("version") %]
-./configure --prefix=$distdir [% c("var/configure_opt") %]
+
+[% IF c("var/linux-cross") -%]
+
+  # Install binutils (needed for cross-compiling)
+  mkdir /var/tmp/dist
+  cd /var/tmp/dist
+  tar xf $rootdir/[% c('input_files_by_name/binutils') %]
+  mv binutils $distdir
+  export PATH="$distdir/bin:$PATH"
+
+  # Install Linux headers, see Step 2 of
+  # https://preshing.com/20141119/how-to-build-a-gcc-cross-compiler/
+  # Doing this before gcc configure is intended to solve a limits.h issue
+  cd /var/tmp/build
+  mkdir linux
+  cd linux
+  tar -xJf $rootdir/linux-[% c("var/linux_version") %].tar.xz
+  cd linux-[% c("var/linux_version") %]
+  make ARCH=[% c("arch") %] INSTALL_HDR_PATH=$distdir/[% c("var/crosstarget") %] headers_install
+
+  cd /var/tmp/build
+  mkdir gcc
+  cd gcc
+  tar -xJf $rootdir/[% c('input_files_by_name/gcc') %]
+  # --with-headers is intended to solve a limits.h issue
+  [% project %]-[% c("version") %]/configure --prefix=$distdir --with-headers=$distdir/[% c("var/crosstarget") %]/include/linux [% c("var/configure_opt") %]
+
+  # For cross-compiling to work, we need to partially build GCC, then build
+  # glibc, then come back to finish GCC.
+
+  # Build only the components of GCC that don't need glibc, see Step 3 of
+  # https://preshing.com/20141119/how-to-build-a-gcc-cross-compiler/
+  cd /var/tmp/build/gcc
+  make -j[% c("num_procs") %] all-gcc
+  make install-gcc
+  # Removing sys-include is intended to solve a limits.h issue
+  rm --recursive --force $distdir/[% c("var/crosstarget") %]/sys-include
+
+  # Build glibc headers and startup files, see Step 4 of
+  # https://preshing.com/20141119/how-to-build-a-gcc-cross-compiler/
+  cd /var/tmp/build
+  mkdir glibc
+  cd glibc
+  tar -xJf $rootdir/glibc-[% c("var/glibc_version") %].tar.xz
+  # TODO: Remove --disable-werror once glibc is upgraded to a version that's
+  # designed to work with the GCC version we're using.
+  glibc-[% c("var/glibc_version") %]/configure --prefix=$distdir/[% c("var/crosstarget") %] --build=$MACHTYPE --host=[% c("var/crosstarget") %] --target=[% c("var/crosstarget") %] --with-headers=$distdir/[% c("var/crosstarget") %]/include --disable-multilib --disable-werror libc_cv_forced_unwind=yes
+  make install-bootstrap-headers=yes install-headers
+  make -j[% c("num_procs") %] csu/subdir_lib
+  install csu/crt1.o csu/crti.o csu/crtn.o $distdir/[% c("var/crosstarget") %]/lib
+  [% c("var/crosstarget") %]-gcc -nostdlib -nostartfiles -shared -x c /dev/null -o $distdir/[% c("var/crosstarget") %]/lib/libc.so
+  # stdio_lim.h is intended to solve a limits.h issue
+  touch $distdir/[% c("var/crosstarget") %]/include/gnu/stubs.h $distdir/[% c("var/crosstarget") %]/include/bits/stdio_lim.h
+
+  # Build compiler support library, see Step 5 of
+  # https://preshing.com/20141119/how-to-build-a-gcc-cross-compiler/
+  cd /var/tmp/build/gcc
+  make -j[% c("num_procs") %] all-target-libgcc
+  make install-target-libgcc
+
+  # finish building glibc, see Step 6 of
+  # https://preshing.com/20141119/how-to-build-a-gcc-cross-compiler/
+  cd /var/tmp/build/glibc
+  make -j[% c("num_procs") %]
+  make install
+
+  # We're done with glibc, we can now finish building gcc...
+  cd /var/tmp/build/gcc
+
+[% ELSE -%]
+
+  tar -C /var/tmp/build -xf $rootdir/[% c('input_files_by_name/gcc') %]
+  cd /var/tmp/build/[% project %]-[% c("version") %]
+  ./configure --prefix=$distdir [% c("var/configure_opt") %]
+
+[% END -%]
+
 make -j[% c("num_procs") %]
 make install
 # tor-browser-build#31321: we need a link to our GCC, to prevent some projects
@@ -28,6 +102,6 @@ make install
 ln -s gcc $distdir/bin/cc
 cd /var/tmp/dist
 [% c('tar', {
-        tar_src => [ project ],
+        tar_src => [ c('var/distdir') ],
         tar_args => '-czf ' _ dest_dir _ '/' _ c('filename'),
         }) %]

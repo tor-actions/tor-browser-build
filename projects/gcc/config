@@ -7,14 +7,17 @@ version: '[% pc("gcc-source", "version") %]'
 container:
   use_container: 1
 var:
+  distdir: gcc
   deps:
     - build-essential
     - libmpc-dev
   setup: |
     mkdir -p /var/tmp/dist
     tar -C /var/tmp/dist -xf $rootdir/[% c("compiler_tarfile") %]
-    export PATH="/var/tmp/dist/gcc/bin:$PATH"
-    export LD_LIBRARY_PATH=/var/tmp/dist/gcc/lib64:/var/tmp/dist/gcc/lib32
+    export PATH="/var/tmp/dist/[% c("var/distdir") %]/bin:$PATH"
+    [% IF ! c("var/linux-cross") -%]
+      export LD_LIBRARY_PATH=/var/tmp/dist/[% c("var/distdir") %]/lib64:/var/tmp/dist/[% c("var/distdir") %]/lib32
+    [% END -%]
 
     [% IF c("hardened_gcc") -%]
       # Config options for hardening-wrapper
@@ -25,14 +28,14 @@ var:
       export DEB_BUILD_HARDENING_PIE=1
 
       # Make sure we use the hardening wrapper
-      pushd /var/tmp/dist/gcc/bin
+      pushd /var/tmp/dist/[% c("var/distdir") %]/bin
       cp /usr/bin/hardened-cc ./
-      mv gcc gcc.real
-      mv c++ c++.real
-      mv g++ g++.real
-      ln -sf hardened-cc gcc
-      ln -sf hardened-cc c++
-      ln -sf hardened-cc g++
+      mv [% c("var/target_prefix") %]gcc [% c("var/target_prefix") %]gcc.real
+      mv [% c("var/target_prefix") %]c++ [% c("var/target_prefix") %]c++.real
+      mv [% c("var/target_prefix") %]g++ [% c("var/target_prefix") %]g++.real
+      ln -sf hardened-cc [% c("var/target_prefix") %]gcc
+      ln -sf hardened-cc [% c("var/target_prefix") %]c++
+      ln -sf hardened-cc [% c("var/target_prefix") %]g++
       popd
     [% END -%]
 
@@ -50,8 +53,34 @@ targets:
       arch_deps:
         - hardening-wrapper
         - libc6-dev-i386
+  linux-cross:
+    var:
+      target_prefix: '[% c("var/crosstarget") %]-'
+      distdir: gcc-cross
+      # TODO: Consider upgrading to a glibc that works out of the box with the
+      # GCC version we use. However, removing our glibc version workarounds may
+      # not be desirable since we want to be able to easily bump the GCC
+      # version without worrying about linux-cross breakage.
+      glibc_version: 2.26
+      linux_version: 4.10.1
+      arch_deps:
+        - hardening-wrapper
+        - libc6-dev-i386
+        - gawk
+  linux-arm:
+    var:
+      configure_opt: --disable-multilib --enable-languages=c,c++ --target=arm-linux-gnueabihf --with-arch=armv7-a --with-fpu=vfpv3-d16 --with-float=hard --with-mode=thumb
 
 input_files:
   - project: container-image
   - project: gcc-source
     name: gcc
+  - name: binutils
+    project: binutils
+    enable: '[% c("var/linux-cross") -%]'
+  - URL: 'https://ftp.gnu.org/gnu/glibc/glibc-[% c("var/glibc_version") %].tar.xz'
+    sha256sum: e54e0a934cd2bc94429be79da5e9385898d2306b9eaf3c92d5a77af96190f6bd
+    enable: '[% c("var/linux-cross") -%]'
+  - URL: 'https://www.kernel.org/pub/linux/kernel/v4.x/linux-[% c("var/linux_version") %].tar.xz'
+    sha256sum: 6ca06bb5faf5f83600d7388bb623dae41df2a257de85ad5d1792e03302bc3543
+    enable: '[% c("var/linux-cross") -%]'
