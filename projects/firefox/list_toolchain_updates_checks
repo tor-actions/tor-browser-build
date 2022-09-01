@@ -145,17 +145,11 @@ check_update_needed python "$needed" "$current"
 [% IF c("var/osx") %]
 # macosx-sdk
 read -d '' p << 'EOF' || true
-my $d = YAML::XS::LoadFile('taskcluster/ci/toolchain/clang.yml');
-my $clang_toolchain;
-foreach my $t (keys %$d) {
-  if ($d->{$t}{run}{'toolchain-alias'} eq 'macosx64-clang') {
-    foreach my $toolchain (@{$d->{$t}{fetches}{toolchain}}) {
-      if ($toolchain =~ m/^macosx64-sdk-(.+)$/) {
-        print $1;
-        exit;
-      }
-    }
-    last;
+my $d = YAML::XS::LoadFile('taskcluster/ci/build/macosx.yml');
+foreach my $toolchain (@{$d->{'macosx64-add-on-devel/opt'}{fetches}{toolchain}}) {
+  if ($toolchain =~ m/^macosx64-sdk-(.+)$/) {
+    print $1;
+    exit;
   }
 }
 EOF
