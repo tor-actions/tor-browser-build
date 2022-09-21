@@ -2,7 +2,7 @@
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %]'
 version: 0.4.7.10
 git_hash: 'tor-[% c("version") %]'
-git_url: https://git.torproject.org/tor.git
+git_url: https://gitlab.torproject.org/tpo/core/tor.git
 git_submodule: 1
 gpg_keyring: tor.gpg
 tag_gpg_id: 1
