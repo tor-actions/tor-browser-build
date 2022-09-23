@@ -1,3 +1,32 @@
+Tor Browser 12.0a3 - September 26 2022
+ * All Platforms
+   * Update Firefox to 102.3.0esr
+   * Update NoScript to 11.4.11
+   * Update Translations
+   * Bug 40624: Change placeholder bridge addresses to make snowflake and meek work with ReachableAddresses/FascistFirewall [tor-browser-build]
+   * Bug 41125: Review Mozilla 1732792: retry polling requests without proxy [tor-browser]
+ * Windows + macOS + Linux
+   * Bug 41116: Review Mozilla 1226042: add support for the new 'system-ui' generic font family [tor-browser]
+   * Bug 41283: Toolbar buttons missing their label attribute [tor-browesr]
+   * Bug 41284: Stray security-level- fluent ids [tor-browser]
+   * Bug 41287: New identity button inactive if added after customization [tor-browser]
+   * Bug 41292: moreFromMozilla pane in about:preferences in 12.0a2 [tor-browser]
+   * Bug 41307: font whitelist typos [tor-browser]
+ * Linux
+   * Bug 40626: Define the replacements for generic families on Linux [tor-browser-build]
+   * Bug 41163: Fixing loading of bundled fonts on linux [tor-browser]
+ * Android
+   * Bug 41159: Remove HTTPS-Everywhere extension from esr102-based Tor Browser Android [tor-browser]
+   * Bug 41312: Backport Firefox 105 Android security fixes to 102.3-based Tor Browser [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 40587: Migrate tor-browser-build configs from gitolite to gitlab repos [tor-browser-build]
+     * Bug 41321: Delete various master branches after automated build/testing scripts are updated [tor-browser]
+   * Linux
+     * Bug 40621: Update namecoin patches for linted TorButton [tor-browser-build]
+   * Android
+     * Bug 41304: Add Android-specific targets to makefiles [tor-browser]
+
 Tor Browser 12.0a2 - September 1 2022
  * All Platforms
    * Update Firefox to 102.2.0esr
