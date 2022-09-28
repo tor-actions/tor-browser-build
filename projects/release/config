@@ -14,7 +14,7 @@ targets:
     - browser-linux-i686
     - browser-windows-i686
     - browser-windows-x86_64
-    - browser-osx-x86_64
+    - browser-macos
     - browser-android-armv7
     - browser-android-x86
     - browser-android-x86_64
@@ -25,7 +25,7 @@ targets:
     - browser-linux-i686
     - browser-windows-i686
     - browser-windows-x86_64
-    - browser-osx-x86_64
+    - browser-macos
     - browser-src
   browser-all-android:
     - browser-android-armv7
@@ -60,12 +60,9 @@ targets:
   browser-windows-x86_64:
     var:
       browser-windows-x86_64: 1
-  browser-osx-x86_64:
+  browser-macos:
     var:
-      browser-osx-x86_64: 1
-  browser-osx-aarch64:
-    var:
-      browser-osx-aarch64: 1
+      browser-macos: 1
   browser-src:
     var:
       browser-src: '[% ! c("var/testbuild") %]'
@@ -188,19 +185,12 @@ input_files:
      - '[% c("var/build_target") %]'
      - '[% c("var/browser_type") %]-windows-x86_64'
 
- - name: osx-x86_64
+ - name: macos
    project: browser
-   enable: '[% c("var/browser-osx-x86_64") %]'
+   enable: '[% c("var/browser-macos") %]'
    target:
      - '[% c("var/build_target") %]'
-     - '[% c("var/browser_type") %]-osx-x86_64'
-
- - name: osx-aarch64
-   project: browser
-   enable: '[% c("var/browser-osx-aarch64") %]'
-   target:
-     - '[% c("var/build_target") %]'
-     - '[% c("var/browser_type") %]-osx-aarch64'
+     - '[% c("var/browser_type") %]-macos'
 
  - name: src-firefox
    project: firefox

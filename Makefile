@@ -42,11 +42,8 @@ torbrowser-release-windows-i686: submodule-update
 torbrowser-release-windows-x86_64: submodule-update
 	$(rbm) build release --target release --target browser-windows-x86_64 --target torbrowser
 
-torbrowser-release-osx-x86_64: submodule-update
-	$(rbm) build release --target release --target browser-osx-x86_64 --target torbrowser
-
-torbrowser-release-osx-aarch64: submodule-update
-	$(rbm) build release --target release --target browser-osx-aarch64 --target torbrowser
+torbrowser-release-macos: submodule-update
+	$(rbm) build release --target release --target browser-macos --target torbrowser
 
 torbrowser-release-src: submodule-update
 	$(rbm) build release --target release --target browser-src --target torbrowser
@@ -87,11 +84,8 @@ torbrowser-alpha-windows-i686: submodule-update
 torbrowser-alpha-windows-x86_64: submodule-update
 	$(rbm) build release --target alpha --target browser-windows-x86_64 --target torbrowser
 
-torbrowser-alpha-osx-x86_64: submodule-update
-	$(rbm) build release --target alpha --target browser-osx-x86_64 --target torbrowser
-
-torbrowser-alpha-osx-aarch64: submodule-update
-	$(rbm) build release --target alpha --target browser-osx-aarch64 --target torbrowser
+torbrowser-alpha-macos: submodule-update
+	$(rbm) build release --target alpha --target browser-macos --target torbrowser
 
 torbrowser-alpha-src: submodule-update
 	$(rbm) build release --target alpha --target browser-src --target torbrowser
@@ -132,11 +126,8 @@ torbrowser-nightly-windows-i686: submodule-update
 torbrowser-nightly-windows-x86_64: submodule-update
 	$(rbm) build release --target nightly --target browser-windows-x86_64 --target torbrowser
 
-torbrowser-nightly-osx-x86_64: submodule-update
-	$(rbm) build release --target nightly --target browser-osx-x86_64 --target torbrowser
-
-torbrowser-nightly-osx-aarch64: submodule-update
-	$(rbm) build release --target nightly --target browser-osx-aarch64 --target torbrowser
+torbrowser-nightly-macos: submodule-update
+	$(rbm) build release --target nightly --target browser-macos --target torbrowser
 
 torbrowser-nightly-src: submodule-update
 	$(rbm) build release --target nightly --target browser-src --target torbrowser
@@ -177,11 +168,8 @@ torbrowser-testbuild-windows-x86_64: submodule-update
 torbrowser-testbuild-windows-i686: submodule-update
 	$(rbm) build release --target testbuild --target browser-windows-i686 --target torbrowser
 
-torbrowser-testbuild-osx-x86_64: submodule-update
-	$(rbm) build release --target testbuild --target browser-osx-x86_64 --target torbrowser
-
-torbrowser-testbuild-osx-aarch64: submodule-update
-	$(rbm) build release --target testbuild --target browser-osx-aarch64 --target torbrowser
+torbrowser-testbuild-macos: submodule-update
+	$(rbm) build release --target testbuild --target browser-macos --target torbrowser
 
 torbrowser-testbuild-src: submodule-update
 	$(rbm) build release --target testbuild --target browser-src-testbuild --target torbrowser
@@ -239,7 +227,7 @@ list_toolchain_updates-firefox-windows: submodule-update
 	$(rbm) build firefox --step list_toolchain_updates --target nightly --target torbrowser-windows-x86_64
 
 list_toolchain_updates-firefox-macos: submodule-update
-	$(rbm) build firefox --step list_toolchain_updates --target nightly --target torbrowser-osx-x86_64
+	$(rbm) build firefox --step list_toolchain_updates --target nightly --target torbrowser-macos
 
 list_toolchain_updates-android-components: submodule-update
 	$(rbm) build android-components --step list_toolchain_updates --target nightly --target torbrowser-android-armv7
@@ -321,11 +309,8 @@ basebrowser-release-windows-i686: submodule-update
 basebrowser-release-windows-x86_64: submodule-update
 	$(rbm) build release --target release --target browser-windows-x86_64 --target basebrowser
 
-basebrowser-release-osx-x86_64: submodule-update
-	$(rbm) build release --target release --target browser-osx-x86_64 --target basebrowser
-
-basebrowser-release-osx-aarch64: submodule-update
-	$(rbm) build release --target release --target browser-osx-aarch64 --target basebrowser
+basebrowser-release-macos: submodule-update
+	$(rbm) build release --target release --target browser-macos --target basebrowser
 
 basebrowser-release-src: submodule-update
 	$(rbm) build release --target release --target browser-src --target basebrowser
@@ -366,11 +351,8 @@ basebrowser-alpha-windows-i686: submodule-update
 basebrowser-alpha-windows-x86_64: submodule-update
 	$(rbm) build release --target alpha --target browser-windows-x86_64 --target basebrowser
 
-basebrowser-alpha-osx-x86_64: submodule-update
-	$(rbm) build release --target alpha --target browser-osx-x86_64 --target basebrowser
-
-basebrowser-alpha-osx-aarch64: submodule-update
-	$(rbm) build release --target alpha --target browser-osx-aarch64 --target basebrowser
+basebrowser-alpha-macos: submodule-update
+	$(rbm) build release --target alpha --target browser-macos --target basebrowser
 
 basebrowser-alpha-src: submodule-update
 	$(rbm) build release --target alpha --target browser-src --target basebrowser
@@ -411,11 +393,8 @@ basebrowser-nightly-windows-i686: submodule-update
 basebrowser-nightly-windows-x86_64: submodule-update
 	$(rbm) build release --target nightly --target browser-windows-x86_64 --target basebrowser
 
-basebrowser-nightly-osx-x86_64: submodule-update
-	$(rbm) build release --target nightly --target browser-osx-x86_64 --target basebrowser
-
-basebrowser-nightly-osx-aarch64: submodule-update
-	$(rbm) build release --target nightly --target browser-osx-aarch64 --target basebrowser
+basebrowser-nightly-macos: submodule-update
+	$(rbm) build release --target nightly --target browser-macos --target basebrowser
 
 basebrowser-nightly-src: submodule-update
 	$(rbm) build release --target nightly --target browser-src --target basebrowser
@@ -456,11 +435,8 @@ basebrowser-testbuild-windows-x86_64: submodule-update
 basebrowser-testbuild-windows-i686: submodule-update
 	$(rbm) build release --target testbuild --target browser-windows-i686 --target basebrowser
 
-basebrowser-testbuild-osx-x86_64: submodule-update
-	$(rbm) build release --target testbuild --target browser-osx-x86_64 --target basebrowser
-
-basebrowser-testbuild-osx-aarch64: submodule-update
-	$(rbm) build release --target testbuild --target browser-osx-aarch64 --target basebrowser
+basebrowser-testbuild-macos: submodule-update
+	$(rbm) build release --target testbuild --target browser-macos --target basebrowser
 
 basebrowser-testbuild-src: submodule-update
 	$(rbm) build release --target testbuild --target browser-src-testbuild --target basebrowser

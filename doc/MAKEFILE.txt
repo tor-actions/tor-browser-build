@@ -7,7 +7,7 @@ torbrowser-release
 Build Tor Browser for the release channel, for all supported platforms.
 The resulting build can be found in directory release/$version.
 
-torbrowser-release-{linux-x86_64,linux-i686,windows-i686,osx-x86_64,
+torbrowser-release-{linux-x86_64,linux-i686,windows-i686,macos,
                     android-armv7, android-x86,android-x86_64,
                     android-aarch64,desktop,android}
 --------------------------------------------------------------------
@@ -20,7 +20,7 @@ torbrowser-alpha
 Build Tor Browser for the alpha channel, for all supported platforms.
 The resulting build can be found in directory alpha/$version.
 
-torbrowser-alpha-{linux-x86_64,linux-i686,windows-i686,osx-x86_64,
+torbrowser-alpha-{linux-x86_64,linux-i686,windows-i686,macos,
                   android-armv7,android-x86,android-x86_64,
                   android-aarch64,desktop,android}
 ------------------------------------------------------------------
@@ -35,7 +35,7 @@ components.
 
 The resulting build can be found in directory nightly/$date
 
-torbrowser-nightly-{linux-x86_64,linux-i686,windows-i686,osx-x86_64,
+torbrowser-nightly-{linux-x86_64,linux-i686,windows-i686,macos,
                     android-armv7,android-x86,android-x86_64,
                     android-aarch64,desktop,android}
 --------------------------------------------------------------------

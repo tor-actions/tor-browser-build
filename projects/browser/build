@@ -21,6 +21,8 @@ touch "$GENERATEDPREFSPATH"
 
 [% IF c("var/osx") %]
   TBDIR="$TB_STAGE_DIR/[% c("var/Project_Name") %].app"
+  TBDIR_AARCH64="$TB_STAGE_DIR/[% c("var/Project_Name") %]-aarch64.app"
+  TBDIRS=("$TBDIR" "$TBDIR_AARCH64")
 
   DOCSPATH=Contents/Resources/[% c('var/ProjectName') %]/Docs
   EXTSPATH=Contents/Resources/distribution/extensions
@@ -31,6 +33,7 @@ touch "$GENERATEDPREFSPATH"
   export PATH=/var/tmp/dist/libdmg-hfsplus:$PATH
 [% ELSE %]
   TBDIR=$TB_STAGE_DIR/Browser
+  TBDIRS=("$TBDIR")
 
   DOCSPATH=[% c('var/ProjectName') %]/Docs
   EXTSPATH=[% c('var/ProjectName') %]/Data/Browser/profile.default/extensions
@@ -40,7 +43,10 @@ touch "$GENERATEDPREFSPATH"
   mkdir -p "$TBDIR/[% c('var/ProjectName') %]/Data/Browser/Caches"
 [% END %]
 
-mkdir -p "$TBDIR/$EXTSPATH"
+for tbdir in "${TBDIRS[@]}"
+do
+  mkdir -p "$tbdir/$EXTSPATH"
+done
 
 # Extract the MAR tools.
 unzip -d $rootdir $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip
@@ -49,26 +55,45 @@ MARTOOLS=$rootdir/mar-tools
 mv [% c('input_files_by_name/noscript') %] "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi"
 
 [% IF c("var/tor-browser") -%]
+  function mv_tbdir {
+    declare args=($@)
+    local dest="${args[-1]}"
+    unset args[-1]
+    mv ${args[@]} "$TBDIR/$dest"
+    [% IF c("var/osx") -%]
+      for src in ${args[@]}
+      do
+        mv "aarch64/$src" "$TBDIR_AARCH64/$dest"
+      done
+    [% END -%]
+  }
+
   tar -xvf [% c('input_files_by_name/tor-expert-bundle') %]
+  [% IF c("var/osx") -%]
+    mkdir aarch64
+    tar -C aarch64 -xf [% c('input_files_by_name/tor-expert-bundle-aarch64') %]
+  [% END -%]
 
   # geoip(6) and anything else that belongs in the data dir from the expert bundle
-  mkdir -p "$TBDIR/$TORCONFIGPATH"
-  mv data/{geoip,geoip6} "$TBDIR/$TORCONFIGPATH"
+  mkdir -p "$TBDIR/$TORCONFIGPATH" [% IF c("var/osx") %]"$TBDIR_AARCH64/$TORCONFIGPATH"[% END %]
+  mv_tbdir data/{geoip,geoip6} "$TORCONFIGPATH"
 
   # Bridge lists will be consumed later in `bridges_conf`
   mv tor/pluggable_transports/bridges_list.*.txt $rootdir
+  [% IF c("var/osx") %]
+    rm -f aarch64/tor/pluggable_transports/bridges_list.*.txt
+  [% END -%]
 
   # Snowflake's README is the only documentation shipped in tor-expert-bundle
-  mkdir -p "$TBDIR/$DOCSPATH/snowflake"
-  find tor
-  mv tor/pluggable_transports/README.SNOWFLAKE.md "$TBDIR/$DOCSPATH/snowflake/README.md"
+  mkdir -p "$TBDIR/$DOCSPATH/snowflake" [% IF c("var/osx") %]"$TBDIR_AARCH64/$DOCSPATH/snowflake"[% END %]
+  mv_tbdir tor/pluggable_transports/README.SNOWFLAKE.md "$DOCSPATH/snowflake/README.md"
 
   # Move the PTs to where TB expects them
-  mkdir -p "$TBDIR/$TORBINPATH"
-  mv tor/pluggable_transports "$TBDIR/$TORBINPATH/PluggableTransports"
+  mkdir -p "$TBDIR/$TORBINPATH" [% IF c("var/osx") %]"$TBDIR_AARCH64/$TORBINPATH"[% END %]
+  mv_tbdir tor/pluggable_transports "$TORBINPATH/PluggableTransports"
 
   # Move tor and dependencies to where TB expects them
-  mv tor/* "$TBDIR/$TORBINPATH"
+  mv_tbdir tor/* "$TORBINPATH"
 
   # on linux, libstdc++ lives in it's own directory
   [% IF c("var/linux") %]
@@ -84,7 +109,13 @@ mv [% c('input_files_by_name/noscript') %] "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b
 
 [% END -%]
 
-tar -C "$TBDIR[% IF c("var/osx") %]/Contents/Resources[% END %]" -xf [% c('input_files_by_name/fonts') %]
+for tbdir in "${TBDIRS[@]}"
+do
+  [% IF c("var/osx") -%]
+    tbdir="$tbdir/Contents/Resources"
+  [% END -%]
+  tar -C "$tbdir" -xf [% c('input_files_by_name/fonts') %]
+done
 
 [% IF c("var/linux") %]
   cat > ${TB_STAGE_DIR}/start-[% c("var/project-name") %].desktop << 'RBM_TB_EOF'
@@ -114,6 +145,13 @@ RBM_TB_EOF
 
 tar -C ${TB_STAGE_DIR} -xf [% c('input_files_by_name/firefox') %]/browser.tar.gz
 
+[% IF c("var/osx") -%]
+  # Use symlink in tmp dir to extract "Tor Browser.app" to "Tor Browser-aarch64.app"
+  ff_aarch64=$(mktemp -d)
+  ln -s "$TBDIR_AARCH64" "$ff_aarch64/[% c("var/Project_Name") %].app"
+  tar -C $ff_aarch64 -xf [% c('input_files_by_name/firefox-aarch64') %]/browser.tar.gz
+[% END %]
+
 [% IF c("var/tor-browser") -%]
   # Include the Tor Browser manual
   TMP_MANUAL_PATH=$rootdir/tmp_manual/
@@ -121,7 +159,10 @@ tar -C ${TB_STAGE_DIR} -xf [% c('input_files_by_name/firefox') %]/browser.tar.gz
   pushd $TMP_MANUAL_PATH
   tar -xf $rootdir/[% c('input_files_by_name/manual') %]
   find . -exec [% c("touch") %] {} \;
-  find chrome/ | sort | zip -X -@ "$TBDIR[% IF c("var/osx") %]/Contents/Resources[% END %]/browser/omni.ja"
+  for tbdir in "${TBDIRS[@]}"
+  do
+    find chrome/ | sort | zip -X -@ "$tbdir[% IF c('var/osx') %]/Contents/Resources[% END %]/browser/omni.ja"
+  done
   popd
   rm -rf $TMP_MANUAL_PATH
 [% END -%]
@@ -165,19 +206,30 @@ tar -C ${TB_STAGE_DIR} -xf [% c('input_files_by_name/firefox') %]/browser.tar.gz
 
   [% IF c("var/tor-browser") -%]
     # Install a "tor" shim that sets the working directory. See #10030.
-    mv "$TBDIR/$TORBINPATH/tor" "$TBDIR/$TORBINPATH/tor.real"
-    cp Bundle-Data/mac-tor.sh "$TBDIR/$TORCONFIGPATH/tor"
+    for tbdir in "${TBDIRS[@]}"
+    do
+      mv "$tbdir/$TORBINPATH/tor" "$tbdir/$TORBINPATH/tor.real"
+      cp Bundle-Data/mac-tor.sh "$tbdir/$TORCONFIGPATH/tor"
+    done
   [% END -%]
 
   tar -C Bundle-Data/mac-applications.dmg -c . | tar -C $TB_STAGE_DIR -x
 [% END %]
 
-mkdir -p "$TBDIR/$DOCSPATH"
-cp -a Bundle-Data/Docs/* "$TBDIR/$DOCSPATH"
-tar -C Bundle-Data/[% bundledata_osname %] [% IF ! c("var/namecoin") %]--exclude=*Electrum-NMC* --exclude=*ncprop279*[% END %] -c . | tar -C "$TBDIR[% IF ! c("var/osx") %]/[% c('var/ProjectName') %][% END %]" -x
+for tbdir in "${TBDIRS[@]}"
+do
+  mkdir -p "$tbdir/$DOCSPATH"
+  cp -a Bundle-Data/Docs/* "$tbdir/$DOCSPATH"
+  tar -C Bundle-Data/[% bundledata_osname %] \
+    [% IF ! c("var/namecoin") %]--exclude=*Electrum-NMC* --exclude=*ncprop279*[% END %] \
+    -c . | tar -C "$tbdir[% IF ! c("var/osx") %]/[% c('var/ProjectName') %][% END %]" -x
+done
 
 [% IF c("var/tor-browser") -%]
-  cat Bundle-Data/PTConfigs/[% bundledata_osname %]/torrc-defaults-appendix >> "$TBDIR/$TORCONFIGPATH/torrc-defaults"
+  for tbdir in "${TBDIRS[@]}"
+  do
+    cat Bundle-Data/PTConfigs/[% bundledata_osname %]/torrc-defaults-appendix >> "$tbdir/$TORCONFIGPATH/torrc-defaults"
+  done
   cat Bundle-Data/PTConfigs/bridge_prefs.js >> "$GENERATEDPREFSPATH"
 
   function bridges_conf {
@@ -208,17 +260,21 @@ tar -C Bundle-Data/[% bundledata_osname %] [% IF ! c("var/namecoin") %]--exclude
 PKG_LOCALE="ALL"
 PKG_DIR='[% c("var/project-name") %]'
 
-pushd "$TBDIR[% IF c("var/osx") %]/Contents/Resources[% END %]/browser/"
-unzip omni.ja defaults/preferences/[% c("var/prefs_file") %] || [ $? -lt 3 ]
-# Append our built extension-overrides.js to the preferences file
-cat "$GENERATEDPREFSPATH" >> defaults/preferences/[% c("var/prefs_file") %]
-cp defaults/preferences/[% c("var/prefs_file") %] $rootdir
-[% c("touch") %] defaults/preferences/[% c("var/prefs_file") %]
-zip -Xm omni.ja defaults/preferences/[% c("var/prefs_file") %]
-rm -rf defaults
-# create tbb_version.json file for #25020
-echo '{"version":"[% c("var/torbrowser_version") %]","architecture":"[% c("var/mar_osname") %]","channel":"[% c("var/channel") %]","locale":"en-US"}' > ../tbb_version.json
-popd
+for tbdir in "${TBDIRS[@]}"
+do
+  tbdir="$tbdir[% IF c('var/osx') %]/Contents/Resources[% END %]/browser/"
+  pushd "$tbdir"
+  unzip omni.ja defaults/preferences/[% c("var/prefs_file") %] || [ $? -lt 3 ]
+  # Append our built extension-overrides.js to the preferences file
+  cat "$GENERATEDPREFSPATH" >> defaults/preferences/[% c("var/prefs_file") %]
+  cp defaults/preferences/[% c("var/prefs_file") %] $rootdir
+  [% c("touch") %] defaults/preferences/[% c("var/prefs_file") %]
+  zip -Xm omni.ja defaults/preferences/[% c("var/prefs_file") %]
+  rm -rf defaults
+  # create tbb_version.json file for #25020
+  echo '{"version":"[% c("var/torbrowser_version") %]","architecture":"[% c("var/mar_osname") %]","channel":"[% c("var/channel") %]","locale":"en-US"}' > ../tbb_version.json
+  popd
+done
 
 [% IF c("var/windows") %]
   tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/nsis') %]
@@ -228,6 +284,27 @@ popd
   mv ${TB_STAGE_DIR} $distdir/windows-installer/"[% c('var/Project_Name') %]"
   mv $distdir/windows-installer ${TB_STAGE_DIR}
 [% END %]
+
+[% IF c("var/osx") -%]
+  # unify.py requires lipo, so we need to add cctools in the PATH
+  tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/macosx-toolchain') %]
+  export PATH="/var/tmp/dist/macosx-toolchain/cctools/bin:$PATH"
+  firefox_src=/var/tmp/dist/firefox-src
+  mkdir -p $firefox_src
+  tar -C $firefox_src -xf $rootdir/[% c('input_files_by_name/src-firefox') %]
+  firefox_src=$(echo $firefox_src/firefox-*)
+  # Temporarily move noscript outside of $TBDIR to avoid error when running unify.py:
+  #   File "/var/tmp/dist/firefox-src/firefox-69721baf14f0/python/mozbuild/mozpack/mozjar.py", line 452, in _getreader
+  #     raise JarReaderError(
+  # mozpack.mozjar.JarReaderError: Central directory and file header mismatch. Corrupted archive?
+  #
+  # See https://gitlab.torproject.org/tpo/applications/tor-browser-build/-/issues/40439#note_2838724
+  mv "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi" $rootdir/ns.xpi
+  MOZ_AUTOMATION=1 $firefox_src/mach python $firefox_src/toolkit/mozapps/installer/unify.py "$TBDIR" "$TBDIR_AARCH64"
+  mkdir -p "$TBDIR/$EXTSPATH"
+  mv $rootdir/ns.xpi "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi"
+  rm -Rf "$TBDIR_AARCH64"
+[% END -%]
 
 [% IF c("var/windows") %]
   TBDIR="$distdir/$PKG_DIR/[% c("var/Project_Name") %]/Browser"
@@ -266,7 +343,7 @@ cd $distdir
 [% ELSIF c("var/osx") %]
   [% c('var/ddmg', {
         dmg_src => '"$PKG_DIR"',
-        dmg_out => '$OUTDIR/' _ c('var/ProjectName') _ '-' _ c("var/torbrowser_version") _ '-' _ c("var/dmg_name") _ '_${PKG_LOCALE}.dmg',
+        dmg_out => '$OUTDIR/' _ c('var/ProjectName') _ '-' _ c("var/torbrowser_version") _ '-' _ c("var/mar_osname") _ '_${PKG_LOCALE}.dmg',
     }) %]
 [% ELSIF c("var/windows") %]
   find "$PKG_DIR" -exec [% c("touch") %] {} \;

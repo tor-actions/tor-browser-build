@@ -81,7 +81,7 @@ name to the makefile target:
   $ make torbrowser-nightly-linux-i686
   $ make torbrowser-nightly-windows-i686
   $ make torbrowser-nightly-windows-x86_64
-  $ make torbrowser-nightly-osx-x86_64
+  $ make torbrowser-nightly-macos
   $ make torbrowser-nightly-android-armv7
   $ make torbrowser-nightly-android-aarch64
   $ make torbrowser-nightly-android-x86
