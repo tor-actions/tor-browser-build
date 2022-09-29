@@ -31,7 +31,6 @@ def read_extension_manifest(path):
 def main(argv):
   allowed_addons_path = argv[0]
   noscript_path = argv[1]
-  https_everywhere_path = argv[2]
 
   addons = None
   with open(allowed_addons_path, 'r') as file:
@@ -42,11 +41,9 @@ def main(argv):
     noscript_hash = "sha256:" + hashlib.sha256(file.read()).hexdigest()
 
   noscript_version = read_extension_manifest(noscript_path)["version"]
-  https_everywhere_version = read_extension_manifest(https_everywhere_path)["version"]
 
   verify_extension_hash(addons, '{73a6fe31-595d-460b-a920-fcc0f8843232}', noscript_hash)
   verify_extension_version(addons, '{73a6fe31-595d-460b-a920-fcc0f8843232}', noscript_version)
-  verify_extension_version(addons, 'https-everywhere-eff@eff.org', https_everywhere_version)
 
 if __name__ == "__main__":
    main(sys.argv[1:])

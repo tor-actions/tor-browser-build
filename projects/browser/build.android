@@ -10,19 +10,19 @@ test_in_apk=$rootdir/fenix/app-*-androidTest.apk
 
 tar xavf $rootdir/[% c('input_files_by_name/fenix') %]
 
-# Bundle our extensions. We treat HTTPS-Everywhere and NoScript differently as
-# the former should be an internal extension without getting any updates besides
-# from Tor Browser releases. NoScript will be copied over to the profile folder
-# being a "regular" browser extension.
+# Bundle our extensioni(s).
+# NoScript will be copied over to the profile folder
+# as a "regular" browser extension receiving regular AMO updates.
+noscript_path="$ext_dir/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi"
+
 mkdir -p /var/tmp/build/$ext_dir [% dest_dir _ '/' _ c('filename') %]
 cd /var/tmp/build
-unzip -d $ext_dir/https-everywhere $rootdir/[% c('input_files_by_name/https-everywhere') %]
-mv $rootdir/[% c('input_files_by_name/noscript') %] $ext_dir/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi
+mv $rootdir/[% c('input_files_by_name/noscript') %] "$noscript_path"
 
 [% IF c("var/verify_allowed_addons") %]
-  # Check that allowed_addons.json contains the right versions of NoScript and HTTPS Everywhere
+  # Check that allowed_addons.json contains the right versions of our bundled extension(s).
   # If so, replace the default allowed_addons.json by ours in the apk assets folder.
-  $rootdir/verify_allowed_addons.py "$rootdir/allowed_addons.json" "$ext_dir/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi" "$rootdir/[% c('input_files_by_name/https-everywhere') %]"
+  $rootdir/verify_allowed_addons.py "$rootdir/allowed_addons.json" "$noscript_path"
 [% END %]
 
 mv $rootdir/allowed_addons.json $assets_dir/allowed_addons.json
