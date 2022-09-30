@@ -1,21 +1,21 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
-git_url: https://github.com/golang/text
-# v0.3.3
-git_hash: 23ae387dee1f90d29a23c0e87ee0b46038fbed0e
+git_url: https://github.com/refraction-networking/utls
+git_hash: 0b2885c8c0d4467cfe98136748a9d011d0b8fff0 #v1.0.0
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
-container:
-  use_container: 1
 
 build: '[% c("projects/go/var/build_go_lib") %]'
 
 var:
-  go_lib: golang.org/x/text
-  go_lib_install:
-    - golang.org/x/text
-    - golang.org/x/text/secure/bidirule
+  container:
+    use_container: 1
+  go_lib: github.com/refraction-networking/utls
+  go_lib_deps:
+    - goxcrypto
 
 input_files:
   - project: container-image
   - name: go
     project: go
+  - name: goxcrypto
+    project: goxcrypto
