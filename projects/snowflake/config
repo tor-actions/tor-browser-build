@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
-git_url: https://git.torproject.org/pluggable-transports/snowflake.git
-git_hash: 01ae5b56e8399d29aa18605dc9add913d84dc553
+git_url: https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake.git
+git_hash: 9ce1de4eee4e23c918c7c5e96666ff5c6ddc654e
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 
 container:
@@ -21,6 +21,8 @@ input_files:
     project: kcp-go
   - name: smux
     project: smux
+  - name: refraction-utls
+    project: refraction-utls
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
     enable: '[% c("var/android") %]'
