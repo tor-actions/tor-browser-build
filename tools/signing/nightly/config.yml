@@ -10,7 +10,7 @@ publish_dirs:
     - nightly-linux-i686
     - nightly-windows-x86_64
     - nightly-windows-i686
-    - nightly-osx-x86_64
+    - nightly-macos
 nss_db_dir: nssdb
 nss_certname: nightly-marsigner
 gpg_keyring: keyring/torbrowser-nightly.gpg

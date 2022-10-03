@@ -100,7 +100,7 @@ fi
 
 [% IF c("var/nightly") && c("var/tor-browser") -%]
   # Set update url for nightly (#33402 / #40033)
-  sed -i 's|^URL=https://aus1\.torproject\.org/.*|URL=https://nightlies.tbb.torproject.org/nightly-updates/updates/nightly-[% c("var/osname") %]/%CHANNEL%/%BUILD_TARGET%/%VERSION%/ALL|' build/application.ini.in
+  sed -i 's|^URL=https://aus1\.torproject\.org/.*|URL=https://nightlies.tbb.torproject.org/nightly-updates/updates/nightly-[% c("var/nightly_updates_osname") %]/%CHANNEL%/%BUILD_TARGET%/%VERSION%/ALL|' build/application.ini.in
 [% END -%]
 
 add_translation () {

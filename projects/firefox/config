@@ -16,6 +16,7 @@ var:
   browser_build: 1
   branding_directory: 'browser/branding/alpha'
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
+  nightly_updates_osname: '[% c("var/osname") %]'
   deps:
     - build-essential
     - unzip
@@ -113,6 +114,7 @@ targets:
   osx:
     var:
       martools_filename: 'mar-tools-mac-[% c("var/osx_arch") %].zip'
+      nightly_updates_osname: macos
       arch_deps:
         - python3
         - python3-distutils
