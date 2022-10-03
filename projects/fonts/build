@@ -14,7 +14,7 @@ mv noto-fonts-* noto-fonts
       GET 'cp noto-fonts/' _ fontfile _ ' $distdir/' _ "\n";
     END; %]
 [% END %]
-[% IF c("var/osx") %]
+[% IF c("var/macos") %]
   [% FOREACH fontfile = c("var/noto_fonts_mac");
       GET 'cp noto-fonts/' _ fontfile _ ' $distdir/' _ "\n";
     END; %]
@@ -25,7 +25,7 @@ mv noto-fonts-* noto-fonts
     END; %]
 [% END %]
 
-[% IF c("var/linux") || c("var/osx") %]
+[% IF c("var/linux") || c("var/macos") %]
   unzip -o 2.0.0.zip -d STIX
   cp "STIX/stixfonts-2.0.0/archive/STIXv1.1.1/Fonts/STIX-Word/STIXMath-Regular.otf" $distdir/
 [% END %]

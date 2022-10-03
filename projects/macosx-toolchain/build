@@ -11,7 +11,7 @@ tar -C $distdir -xf [% c('input_files_by_name/SDK') %]
 tar -C $distdir -xf [% c('input_files_by_name/cctools') %]
 tar -C $builddir -xf [% c('input_files_by_name/llvm-project') %]
 
-arch=[% c("var/osx_arch") %]
+arch=[% c("var/macos_arch") %]
 clangdir=$distdir/clang/bin
 cctoolsdir=$distdir/cctools/bin
 sysrootdir=$distdir/MacOSX[% c("version") %].sdk/
@@ -21,7 +21,7 @@ target=[% c("var/build_target") %]
 export PATH="/var/tmp/dist/ninja:/var/tmp/dist/cmake/bin:$cctoolsdir:$PATH"
 export MACOSX_DEPLOYMENT_TARGET=[% c("var/macosx_deployment_target") %]
 
-[% IF c("var/osx-aarch64") -%]
+[% IF c("var/macos-aarch64") -%]
   # wrapper taken from:
   # tor-browser.git/taskcluster/scripts/misc/build-llvm-common.sh
   clangwrappersdir=$distdir/clang/wrappers

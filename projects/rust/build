@@ -27,7 +27,7 @@ export PATH="$distdir-rust-prebuilt/bin:$PATH"
   export RUSTFLAGS="-L/var/tmp/dist/gcc/lib64"
 [% END -%]
 
-[% IF c("var/osx") %]
+[% IF c("var/macos") %]
   # We need to clear `CC` and `LDFLAGS` as they are used for the host platform
   # (i.e. Linux).
   unset CC
@@ -40,7 +40,7 @@ export PATH="$distdir-rust-prebuilt/bin:$PATH"
   cat > $distdir/helper/[% c("var/build_target") %]-clang << 'EOF'
 #!/bin/sh
 BASEDIR=/var/tmp/dist/macosx-toolchain
-$BASEDIR/cctools/bin/[% c("var/build_target") %]-clang -target [% c("var/build_target") %] -B $BASEDIR/cctools/bin -isysroot $sysrootdir -Wl,-syslibroot,$sysrootdir -Wl,-dead_strip -Wl,-pie [% IF c('var/osx-aarch64') %]-mcpu=apple-m1[% END %] "$@"
+$BASEDIR/cctools/bin/[% c("var/build_target") %]-clang -target [% c("var/build_target") %] -B $BASEDIR/cctools/bin -isysroot $sysrootdir -Wl,-syslibroot,$sysrootdir -Wl,-dead_strip -Wl,-pie [% IF c('var/macos-aarch64') %]-mcpu=apple-m1[% END %] "$@"
 EOF
 
   chmod +x $distdir/helper/[% c("var/build_target") %]-clang

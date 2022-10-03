@@ -99,8 +99,8 @@ You can use the following template syntax in the build scripts:
     # do something for linux
   [% ELSIF c("var/windows") -%]
     # do something for windows
-  [% ELSIF c("var/osx") -%]
-    # do something for osx
+  [% ELSIF c("var/macos") -%]
+    # do something for macOS
   [% END -%]
 
 You can also use var/linux-x86_64 and var/linux-i686 for things that
@@ -117,9 +117,9 @@ depending on the target:
     windows-i686:
       var:
         do_something: 'do something for windows'
-    osx-x86_64:
+    macos-x86_64:
       var:
-        do_something: 'do something for osx'
+        do_something: 'do something for macos'
 
 And in the build script, use:
 

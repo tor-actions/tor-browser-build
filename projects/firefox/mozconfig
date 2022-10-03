@@ -1,4 +1,4 @@
-. $topsrcdir/mozconfig-[% IF c("var/osx"); GET 'macos-x86_64'; ELSE; GET c("var/osname"); END; %][% IF c("var/asan") %]-asan[% END %]
+. $topsrcdir/mozconfig-[% IF c("var/macos"); GET 'macos-x86_64'; ELSE; GET c("var/osname"); END; %][% IF c("var/asan") %]-asan[% END %]
 
 [% IF c("var/linux") -%]
   # We want to build with clang now and point to the GCC toolchain until #29041 is
@@ -29,7 +29,7 @@
   BINDGEN_CFLAGS="-I$clang_path/[% c('arch') %]-w64-mingw32/include/c++/v1 -I$clang_path/[% c('arch') %]-w64-mingw32/include"
 [% END -%]
 
-[% IF c("var/osx") -%]
+[% IF c("var/macos") -%]
   TOOLCHAIN_DIR=/var/tmp/dist/macosx-toolchain
 
   # ld needs libLTO.so from llvm
@@ -56,7 +56,7 @@
   ac_add_options --target=[% c('var/build_target') %]
   export MACOS_SDK_DIR=$CROSS_SYSROOT
   export MACOS_PRIVATE_FRAMEWORKS_DIR=$CROSS_PRIVATE_FRAMEWORKS
-  [% IF c("var/osx-aarch64") -%]
+  [% IF c("var/macos-aarch64") -%]
     # As of Clang 13, the default is -mcpu=apple-m1 when using a aarch64-apple-macos target,
     # but we're using apple64-apple-darwin, which defaults to -mcpu=apple-a7, which disables
     # a bunch of # performance-enabling CPU features.

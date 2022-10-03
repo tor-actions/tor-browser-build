@@ -80,13 +80,13 @@ targets:
   windows-x86_64:
     var:
       GOARCH: amd64
-  osx-x86_64:
+  macos-x86_64:
     var:
       GOARCH: amd64
-  osx-aarch64:
+  macos-aarch64:
     var:
       GOARCH: arm64
-  osx:
+  macos:
     var:
       GOOS: darwin
   linux:

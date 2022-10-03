@@ -111,9 +111,9 @@ targets:
         # To support Wayland mode
         - libdrm-dev:i386
 
-  osx:
+  macos:
     var:
-      martools_filename: 'mar-tools-mac-[% c("var/osx_arch") %].zip'
+      martools_filename: 'mar-tools-macos-[% c("var/macos_arch") %].zip'
       nightly_updates_osname: macos
       arch_deps:
         - python3
@@ -144,7 +144,7 @@ input_files:
     name: binutils
     enable: '[% c("var/linux") %]'
   - filename: fix-info-plist.py
-    enable: '[% c("var/osx") %]'
+    enable: '[% c("var/macos") %]'
   - filename: nsis-uninstall.patch
     enable: '[% c("var/windows") %]'
   - project: rust

@@ -56,7 +56,7 @@ targets:
       # binaries do.
       configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/clang --set rust.jemalloc --target=x86_64-unknown-linux-gnu,i686-unknown-linux-gnu --set target.x86_64-unknown-linux-gnu.linker=clang --set target.x86_64-unknown-linux-gnu.ar=llvm-ar --set target.x86_64-unknown-linux-gnu.ranlib=llvm-ranlib --set target.i686-unknown-linux-gnu.linker=clang --set target.i686-unknown-linux-gnu.ar=llvm-ar --set target.i686-unknown-linux-gnu.ranlib=llvm-ranlib
 
-  osx:
+  macos:
     var:
       arch_deps:
         - libssl-dev

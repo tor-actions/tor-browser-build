@@ -41,7 +41,7 @@ export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/nasm/bi
   # Copy it over.
   # https://searchfox.org/mozilla-central/source/build/build-clang/build-clang.py#890,
   # include it directly in our clang
-  [% IF c("var/osx") -%]
+  [% IF c("var/macos") -%]
     rtdir=/var/tmp/dist/macosx-toolchain/clang/lib/clang/[% pc("clang", "version") %]/lib/wasi
   [% ELSIF c("var/windows") -%]
     rtdir=/var/tmp/dist/mingw-w64-clang/lib/clang/[% pc("clang", "version") %]/lib/wasi
@@ -58,7 +58,7 @@ export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/nasm/bi
 
 tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
 
-mkdir -p $distdir/[% IF ! c("var/osx") %]Browser[% END %]
+mkdir -p $distdir/[% IF ! c("var/macos") %]Browser[% END %]
 
 tar -xf $rootdir/[% c('input_files_by_name/translation-base-browser') %]
 transl_base_browser=$rootdir/translation-base-browser
@@ -117,7 +117,7 @@ add_translation () {
 
 [% FOREACH lang = c('var/locales') %]
   lang='[% tmpl(lang) %]'
-  [% IF c("var/osx") -%]
+  [% IF c("var/macos") -%]
   if [ "$lang" == "ja-JP-mac" ]; then
     lang="ja"
   fi
@@ -164,7 +164,7 @@ export LANG=C.UTF-8
   ./mach build stage-package
 [% END %]
 
-[% IF c("var/osx") %]
+[% IF c("var/macos") %]
   cp -a obj-*/dist/firefox/* $distdir
   [% IF c("var/base-browser") -%]
     mv "$distdir/Firefox.app" "$distdir/[% c('var/Project_Name') %].app"
@@ -216,7 +216,7 @@ cp -p config/createprecomplete.py $MARTOOLS/
 cp -p tools/update-packaging/*.sh $MARTOOLS/
 cp -p obj-*/dist/host/bin/mar $MARTOOLS/
 cp -p obj-*/dist/host/bin/mbsdiff $MARTOOLS/
-[% IF c("var/linux") || c("var/osx") %]
+[% IF c("var/linux") || c("var/macos") %]
   cp -p obj-*/dist/bin/signmar $MARTOOLS/
   cp -p obj-*/dist/bin/certutil $MARTOOLS/
   cp -p obj-*/dist/bin/modutil $MARTOOLS/
@@ -271,13 +271,13 @@ cd $distdir
 [% IF c("var/windows") || c("var/linux") %]
   [% c("var/rezip", { rezip_file => 'Browser/omni.ja' }) %]
   [% c("var/rezip", { rezip_file => 'Browser/browser/omni.ja' }) %]
-[% ELSIF c("var/osx") %]
+[% ELSIF c("var/macos") %]
   [% c("var/rezip", { rezip_file => '"' _ c("var/Project_Name") _ '.app/Contents/Resources/omni.ja"' }) %]
   [% c("var/rezip", { rezip_file => '"' _ c("var/Project_Name") _ '.app/Contents/Resources/browser/omni.ja"' }) %]
 [% END %]
 
 [%
-IF c("var/osx");
+IF c("var/macos");
   SET browserdir='"' _ c("var/Project_Name") _ '.app/Contents"';
 ELSE;
   SET browserdir='Browser';

@@ -179,4 +179,4 @@ input_files:
     enable: '[% c("var/linux") %]'
   - URL: https://github.com/stipub/stixfonts/archive/2.0.0.zip
     sha256sum: 4327a16797dabebedce28a9075671730e22c7f74831b24b1fb91e27faec5a235
-    enable: '[% c("var/linux") || c("var/osx") %]'
+    enable: '[% c("var/linux") || c("var/macos") %]'

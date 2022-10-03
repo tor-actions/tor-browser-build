@@ -37,7 +37,7 @@ targets:
         - libtool
         - zlib1g-dev
         - hardening-wrapper
-  osx:
+  macos:
     var:
       arch_deps:
         - faketime

@@ -26,7 +26,7 @@ targets:
   linux-x86_64:
     var:
       mar_osname: linux64
-  osx:
+  macos:
     var:
       mar_osname: macos
       arch_deps:
@@ -66,13 +66,13 @@ input_files:
     enable: '[% ! c("var/android") %]'
   - project: firefox
     name: firefox-aarch64
-    enable: '[% c("var/osx") %]'
+    enable: '[% c("var/macos") %]'
     target_prepend:
-      - osx-aarch64
+      - macos-aarch64
   - project: firefox
     name: src-firefox
     pkg_type: src-tarballs
-    enable: '[% c("var/osx") %]'
+    enable: '[% c("var/macos") %]'
   - project: fenix
     name: fenix
     enable: '[% c("var/android") %]'
@@ -81,9 +81,9 @@ input_files:
     enable: '[% c("var/tor-browser") %]'
   - project: tor-expert-bundle
     name: tor-expert-bundle-aarch64
-    enable: '[% c("var/osx") && c("var/tor-browser") %]'
+    enable: '[% c("var/macos") && c("var/tor-browser") %]'
     target_prepend:
-      - osx-aarch64
+      - macos-aarch64
   - project: fonts
     name: fonts
     enable: '[% ! c("var/android") %]'
@@ -96,7 +96,7 @@ input_files:
     enable: '[% c("var/linux") %]'
   - project: libdmg-hfsplus
     name: libdmg
-    enable: '[% c("var/osx") %]'
+    enable: '[% c("var/macos") %]'
   - project: nsis
     name: nsis
     enable: '[% c("var/windows") %]'
@@ -109,7 +109,7 @@ input_files:
     enable: '[% c("var/android") %]'
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
-    enable: '[% c("var/android") || c("var/osx") %]'
+    enable: '[% c("var/android") || c("var/macos") %]'
   - name: electrum-nmc
     project: electrum-nmc
     enable: '[% c("var/namecoin") %]'

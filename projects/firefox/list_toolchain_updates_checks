@@ -5,7 +5,7 @@
      SET toolchain_alias='linux64-rust';
    ELSIF c("var/windows");
      SET toolchain_alias='mingw32-rust';
-   ELSIF c("var/osx");
+   ELSIF c("var/macos");
      SET toolchain_alias='linux64-rust-macos';
    END; %]
 read -d '' p << 'EOF' || true
@@ -58,7 +58,7 @@ check_update_needed nasm "$needed" "$current"
      SET toolchain_alias='linux64-clang';
    ELSIF c("var/windows");
      SET toolchain_alias='linux64-clang-mingw-x64';
-   ELSIF c("var/osx");
+   ELSIF c("var/macos");
      SET toolchain_alias='macosx64-clang';
    END; %]
 read -d '' p << 'EOF' || true
@@ -142,7 +142,7 @@ current="3.5+" # 3.6.0
 check_update_needed python "$needed" "$current"
 
 
-[% IF c("var/osx") %]
+[% IF c("var/macos") %]
 # macosx-sdk
 read -d '' p << 'EOF' || true
 my $d = YAML::XS::LoadFile('taskcluster/ci/build/macosx.yml');

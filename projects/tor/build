@@ -54,7 +54,7 @@ openssldir=/var/tmp/dist/openssl/openssl
   export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$TORBINDIR"
 [% END %]
 
-[% IF c("var/osx") %]
+[% IF c("var/macos") %]
   cp $libeventdir/lib/libevent-*.dylib "$TORBINDIR"
 [% END %]
 
@@ -70,23 +70,23 @@ find -type f -print0 | xargs -0 [% c("touch") %]
 ./configure --disable-asciidoc --with-libevent-dir="$libeventdir" --with-openssl-dir="$openssldir" \
     [% IF c("var/asan") %]--enable-fragile-hardening[% END %] \
     [% IF c("var/windows") || c("var/android") %]--with-zlib-dir="$zlibdir"[% END %] \
-    [% IF c("var/osx") %]--enable-static-openssl[% END %] \
+    [% IF c("var/macos") %]--enable-static-openssl[% END %] \
     [% IF c("var/windows") %]--enable-static-libevent --enable-static-openssl --enable-static-zlib[% END %] \
     --prefix="$distdir" [% c("var/configure_opt") %]
-[% IF c("var/osx") -%]
+[% IF c("var/macos") -%]
   export LD_PRELOAD=[% c("var/faketime_path") %]
   export FAKETIME="[% USE date; GET date.format(c('timestamp'), format = '%Y-%m-%d %H:%M:%S') %]"
 [% END -%]
 make -j[% c("num_procs") %]
 make install
-[% IF c("var/osx") -%]
+[% IF c("var/macos") -%]
   unset LD_PRELOAD
 [% END -%]
 
 cp $distdir/share/tor/geoip "$TORDATADIR"
 cp $distdir/share/tor/geoip6 "$TORDATADIR"
 
-[% IF c("var/osx") %]
+[% IF c("var/macos") %]
   LIBEVENT_FILE=`basename $libeventdir/lib/libevent-*.dylib`
   cd $distdir
   cp bin/tor "$TORBINDIR"

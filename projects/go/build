@@ -40,7 +40,7 @@ export GOROOT="$distdir"
 cd /var/tmp/dist/go/src
 [% IF c("var/linux") -%]
   ./make.bash
-[% ELSIF c("var/osx") -%]
+[% ELSIF c("var/macos") -%]
   unset LDFLAGS
   rm -Rf $clangdir/helpers
   export CC="$clangdir/bin/clang [% c("var/FLAGS") %]"
