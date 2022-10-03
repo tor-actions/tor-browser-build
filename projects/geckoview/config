@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
 filename: 'geckoview-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
-git_hash: 'geckoview-[% c("var/geckoview_version") %]-[% c("var/torbrowser_branch") %]-1-build1'
+git_hash: 'tor-browser-[% c("var/geckoview_version") %]-[% c("var/torbrowser_branch") %]-1-build1'
 tag_gpg_id: 1
 git_url: https://gitlab.torproject.org/tpo/applications/tor-browser.git
 git_submodule: 1
@@ -145,7 +145,7 @@ steps:
 
 targets:
   nightly:
-    git_hash: 'geckoview-[% c("var/geckoview_version") %]-[% c("var/torbrowser_branch") %]-1'
+    git_hash: 'tor-browser-[% c("var/geckoview_version") %]-[% c("var/torbrowser_branch") %]-2'
     tag_gpg_id: 0
 
 input_files:
