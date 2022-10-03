@@ -13,9 +13,9 @@ if [ "$#" -ne 4 ]; then
     exit
 fi
 
-INSTALL_PLATFORMS="tor-browser-linux32-${VERSION}_\*.tar.xz tor-browser-linux64-${VERSION}_\*.tar.xz torbrowser-install-${VERSION}_\*.exe torbrowser-install-win64-${VERSION}_\*.exe TorBrowser-${VERSION}-osx64_\*.dmg"
+INSTALL_PLATFORMS="tor-browser-linux32-${VERSION}_\*.tar.xz tor-browser-linux64-${VERSION}_\*.tar.xz torbrowser-install-${VERSION}_\*.exe torbrowser-install-win64-${VERSION}_\*.exe TorBrowser-${VERSION}-macos_\*.dmg"
 
-MAR_PLATFORMS="linux32 linux64 win32 win64 osx64"
+MAR_PLATFORMS="linux32 linux64 win32 win64 macos"
 MAR_TOOLS_PLATFORMS="linux32 linux64 win32 win64 mac64"
 
 total_count=0

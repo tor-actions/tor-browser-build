@@ -2,7 +2,7 @@
 tmp_dir: '[% c("tmp_dir") %]'
 create_downloads_json: 1
 appname_marfile: tor-browser
-appname_bundle_osx: TorBrowser
+appname_bundle_macos: TorBrowser
 appname_bundle_linux: tor-browser
 appname_bundle_win32: torbrowser-install
 appname_bundle_win64: torbrowser-install-win64
@@ -20,7 +20,9 @@ build_targets:
         - WINNT_x86-gcc3-x86
         - WINNT_x86-gcc3-x64
     win64: WINNT_x86_64-gcc3-x64
-    osx64: Darwin_x86_64-gcc3
+    macos:
+      - Darwin_x86_64-gcc3
+      - Darwin_aarch64-gcc3
 channels:
     [% c('var/channel') %]: [% c("var/torbrowser_version") %]
 versions:
@@ -41,7 +43,7 @@ versions:
         migrate_langs:
         minSupportedInstructionSet: SSE2
         # minSupportedOsVersion on macOS corresponds to the Darwin version ( https://en.wikipedia.org/wiki/Darwin_(operating_system) )
-        osx64:
+        macos:
             # macOS v10.12.0
             minSupportedOSVersion: 16.0.0
         # minSupportedOsVersion on Windows corresponds to the operating system version ( https://docs.microsoft.com/en-us/windows/win32/sysinfo/operating-system-version )

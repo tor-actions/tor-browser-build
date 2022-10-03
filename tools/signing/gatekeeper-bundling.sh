@@ -62,7 +62,7 @@ do
   cd $tmpdir/dmg
   unzip -q $macos_stapled_dir/tb-${tbb_version}_$lang-stapled.zip
   cd ..
-  $script_dir/ddmg.sh $macos_signed_dir/TorBrowser-${tbb_version}-osx64_$lang.dmg $tmpdir/dmg/
+  $script_dir/ddmg.sh $macos_signed_dir/TorBrowser-${tbb_version}-macos_$lang.dmg $tmpdir/dmg/
   rm -rf 'dmg/Tor Browser.app'
 done
 

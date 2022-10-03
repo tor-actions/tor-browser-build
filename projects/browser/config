@@ -28,7 +28,7 @@ targets:
       mar_osname: linux64
   osx:
     var:
-      mar_osname: osx64
+      mar_osname: macos
       arch_deps:
         - genisoimage
         - faketime

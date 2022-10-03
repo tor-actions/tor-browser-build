@@ -67,7 +67,7 @@ do
     echo "DMG already mounted. Please correct."
     exit 1
   fi
-  hdiutil attach TorBrowser-${tbb_version}-osx64_$LANG.dmg
+  hdiutil attach TorBrowser-${tbb_version}-macos_$LANG.dmg
   cp -rf "/Volumes/Tor Browser/Tor Browser.app" "Tor Browser.app"
   echo "Signing Tor Browser_$LANG.app"
   codesign -vvv --deep -o runtime --entitlements="$ENTITLEMENTS" --timestamp -f -s "Developer ID Application: The Tor Project, Inc (MADPSAYN6T)" "Tor Browser.app/"

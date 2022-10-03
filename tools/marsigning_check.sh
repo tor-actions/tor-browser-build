@@ -124,7 +124,7 @@ for f in *.mar; do
     then
       not_reproduced_mars=$((not_reproduced_mars + 1))
       case "$f" in
-        *osx64*)
+        *macos*)
           not_reproduced_mars_expected=$((not_reproduced_mars_expected + 1))
           ;;
         *) echo "$f does not have the SHA-256 sum of the unsigned MAR file!"

@@ -96,7 +96,7 @@ sub get_dmg_files_from_sha256sums {
     foreach my $line (read_file('sha256sums-unsigned-build.txt')) {
         my (undef, $filename) = split '  ', $line;
         chomp $filename;
-        next unless $filename =~ m/^$appname_dmg-(.+)-osx64_(.+)\.dmg$/;
+        next unless $filename =~ m/^$appname_dmg-(.+)-macos_(.+)\.dmg$/;
         push @files, { filename => $filename, version => $1, lang => $2 };
     }
     return @files;
@@ -111,7 +111,7 @@ sub convert_files {
         # internally on OSX, but the dmg file still uses 'ja' to avoid
         # confusing users.
         my $mar_lang = $file->{lang} eq 'ja' ? 'ja-JP-mac' : $file->{lang};
-        my $output = "$appname_mar-osx64-$file->{version}_$mar_lang.mar";
+        my $output = "$appname_mar-macos-$file->{version}_$mar_lang.mar";
         my $step_name = "$file->{filename} -> $output";
         print "Starting $step_name\n";
         $pm->start($step_name) and next;
@@ -160,7 +160,7 @@ sub remove_incremental_mars {
     foreach my $line (read_file('sha256sums-unsigned-build.incrementals.txt')) {
         my (undef, $filename) = split '  ', $line;
         chomp $filename;
-        next unless $filename =~ m/^$appname_mar-osx64.+\.incremental\.mar$/;
+        next unless $filename =~ m/^$appname_mar-macos.+\.incremental\.mar$/;
         next unless -f $filename;
         print "Removing $filename\n";
         unlink $filename;

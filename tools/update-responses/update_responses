@@ -133,8 +133,8 @@ sub get_version_downloads {
     foreach my $file (readdir $d) {
         next unless -f "$vdir/$file";
         my ($os, $lang);
-        if ($file =~ m/^$config->{appname_bundle_osx}-$version-osx64_(.+).dmg$/) {
-            ($os, $lang) = ('osx64', $1);
+        if ($file =~ m/^$config->{appname_bundle_macos}-$version-macos_(.+).dmg$/) {
+            ($os, $lang) = ('macos', $1);
         } elsif ($file =~ m/^$config->{appname_bundle_linux}-(linux32|linux64)-${version}_(.+).tar.xz$/) {
             ($os, $lang) = ($1, $2);
         } elsif ($file =~ m/^$config->{appname_bundle_win64}-${version}_(.+).exe$/) {
@@ -220,7 +220,7 @@ sub create_incremental_mar {
     extract_mar(mar_filename($config, $appname, $new_version, $os, $lang),
                 "$tmpdir/B", $mar_c_new);
     # bug 26054: make sure previous macOS version is code signed
-    if (!$ENV{NO_CODESIGNATURE} && ($os eq 'osx64')
+    if (!$ENV{NO_CODESIGNATURE} && ($os eq 'macos')
                 && ! -f "$tmpdir/A/Contents/_CodeSignature/CodeResources") {
         exit_error "Missing code signature in $from_version while creating $mar_file";
     }
