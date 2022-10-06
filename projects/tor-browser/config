@@ -77,9 +77,9 @@ input_files:
     enable: '[% ! c("var/android") %]'
   - filename: Bundle-Data
     enable: '[% ! c("var/android") %]'
-  - URL: https://addons.mozilla.org/firefox/downloads/file/3988352/noscript-11.4.9.xpi
+  - URL: https://addons.mozilla.org/firefox/downloads/file/4002416/noscript-11.4.11.xpi
     name: noscript
-    sha256sum: 47a740f90258de755b709168c4985d9fc6721ff7f32f9cfc4c7094316cc5f960
+    sha256sum: d1430ddc3f3bc3a5c403dbf39ff8c8275a2e7ecd4a2f079be39c193d462a2a0b
   - filename: 'RelativeLink/start-tor-browser.desktop'
     enable: '[% c("var/linux") %]'
   - filename: 'RelativeLink/execdesktop'

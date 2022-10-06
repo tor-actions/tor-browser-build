@@ -1,3 +1,103 @@
+Tor Browser 11.5.4 - October 11 2022
+ * All Platforms
+   * Bug 40580: Add support for uk (ukranian) locale [tor-browser-build]
+   * Bug 40629: Bump snowflake version to 9ce1de4eee4e [tor-browser-build]
+   * Bug 40633: Remove Team Cymru hard-coded bridges [tor-browser-build]
+   * Bug 41326: Update preference for remoteRecipes [tor-browser]
+ * Windows + macOS + Linux
+   * Bug 40624: Change placeholder bridge addresses to make snowflake and meek work with ReachableAddresses/FascistFirewall [tor-browser-build]
+   * Bug 41303: YEC 2022 Takeover for Desktop Stable [tor-browser]
+   * Bug 41310: Backport ESR 102.3 security fixes to 91.13-based Tor Browser [tor-browser]
+   * Bug 41323: Tor-ify notification bar gradient colors (branding) [tor-browser]
+   * Bug 41338: The arrow on the search bar should be flipped for RTL languages [tor-browser]
+ * Windows + macOS
+   * Bug 41307: font whitelist typos [tor-browser]
+ * Android
+   * Updated GeckoView to 102.3.0esr
+   * Bug 41302: YEC 2022 Takeover for Android Stable [tor-browser]
+   * Bug 41314: Add YEC 2022 strings to torbutton and fenix [tor-browser]
+ * Build System
+   * Android
+     * Update Go to 1.18.7
+
+Tor Browser 12.0a3 - September 26 2022
+ * All Platforms
+   * Update Firefox to 102.3.0esr
+   * Update NoScript to 11.4.11
+   * Update Translations
+   * Bug 40624: Change placeholder bridge addresses to make snowflake and meek work with ReachableAddresses/FascistFirewall [tor-browser-build]
+   * Bug 41125: Review Mozilla 1732792: retry polling requests without proxy [tor-browser]
+ * Windows + macOS + Linux
+   * Bug 41116: Review Mozilla 1226042: add support for the new 'system-ui' generic font family [tor-browser]
+   * Bug 41283: Toolbar buttons missing their label attribute [tor-browser]
+   * Bug 41284: Stray security-level- fluent ids [tor-browser]
+   * Bug 41287: New identity button inactive if added after customization [tor-browser]
+   * Bug 41292: moreFromMozilla pane in about:preferences in 12.0a2 [tor-browser]
+   * Bug 41307: font whitelist typos [tor-browser]
+ * Linux
+   * Bug 40626: Define the replacements for generic families on Linux [tor-browser-build]
+   * Bug 41163: Fixing loading of bundled fonts on linux [tor-browser]
+ * Android
+   * Bug 41159: Remove HTTPS-Everywhere extension from esr102-based Tor Browser Android [tor-browser]
+   * Bug 41312: Backport Firefox 105 Android security fixes to 102.3-based Tor Browser [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 40587: Migrate tor-browser-build configs from gitolite to gitlab repos [tor-browser-build]
+     * Bug 41321: Delete various master branches after automated build/testing scripts are updated [tor-browser]
+   * Linux
+     * Bug 40621: Update namecoin patches for linted TorButton [tor-browser-build]
+   * Android
+     * Bug 41304: Add Android-specific targets to makefiles [tor-browser]
+
+Tor Browser 12.0a2 - September 1 2022
+ * All Platforms
+   * Update Firefox to 102.2.0esr
+   * Update Tor to 0.4.7.10
+   * Update NoScript to 11.4.10
+   * Update Translations
+   * Bug 40242: Tor Browser has two default bridges that share a fingerprint, and Tor ignores one [tor-browser]
+ * Windows + macOS + Linux
+   * Update Tor-Launcher to 0.2.39
+   * Update Manual
+   * Bug 40580: Add support for uk (ukranian) locale [tor-browser-build]
+   * Bug 40595: Migrate to 102 on desktop [tor-browser-buid]
+   * Bug 41075: The Tor Browser is showing caution sign but your document said it won't [tor-browser]
+   * Bug 41089: Add tor-browser build scripts + Makefile to tor-browser [tor-browser]
+ * macOS
+   * Bug 41108: Remove privileged macOS installation from 102 [tor-browser]
+ * Android
+   * Bug 40225: Bundled extensions don't get updated with Android Tor Browser updates (they stay stuck at the first installed version) [fenix]
+   * Bug 41094: Enable HTTPS-Only Mode by default in Tor Browser Android [tor-browser]
+   * Bug 41156: User-installed addons are broken on Android [tor-browser]
+   * Bug 41166: Backport fix for CVE-2022-36317: Long URL would hang Firefox for Android (Bug 1759951) [tor-browser]
+   * Bug 41167: Backport fix for CVE-2022-38474: Recording notification not shown when microphone was recording on Android (Bug 1719511) [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 40407: Bump binutils version to pick up security improvements for Windows users [tor-browser-build]
+     * Bug 40591: Rust 1.60 not working to build 102 on Debian Jessie [tor-browser-build]
+     * Bug 40592: Consider re-using our LLVM/Clang to build Rust [tor-browser-build]
+     * Bug 40593: Update signing scripts to take into account new project names and layout [tor-browser-build]
+     * Bug 40607: Add alpha-specific release prep template [tor-browser-build]
+     * Bug 40610: src-*.tar.xz tarballs are missing in https://dist.torproject.org/torbrowser/12.0a1/ [tor-browser-build]
+     * Bug 40612: Migrate Release Prep template to Release Prep - Stable [tor-browser-build]
+   * Windows + macOS + Linux
+     * Bug 41099: Update+comment the update channels in update_responses.config.yaml [tor-browser]
+   * Windows
+     * Bug 29318: Use Clang for everything on Windows [tor-browser-buid]
+     * Bug 29321: Use mingw-w64/clang toolchain to build tor [tor-browser-build]
+     * Bug 29322: Use mingw-w64/clang toolchain to build OpenSSL [tor-browser-build]
+     * Bug 40409: Upgrade NSIS to 3.08 [tor-browser-build]
+   * macOS
+     * Bug 40605: Reworked the macOS toolchain creation [tor-browser-build]
+     * Bug 40620: Update macosx-sdk to 11.0 [tor-browser-build]
+   * Linux
+     * Bug 31321: Add cc -> gcc link to projects/gcc [tor-browser-build]
+   * Android
+     * Update Go to 1.18.5
+     * Bug 40574: Improve tools/signing/android-signing [tor-browser-build]
+     * Bug 40582: Prepared TBA to use Mozilla 102 components [tor-browser-build]
+     * Bug 40604: Bug 40604: Fix binutils build on android [tor-browser-build]
+
 Tor Browser 11.5.3 - August 29 2022
  * Android
    * Bug 40225: Bundled extensions don't get updated with Android Tor Browser
