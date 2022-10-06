@@ -49,5 +49,5 @@ if (! ( $current_tbversion =~ m/a/ ) ) {
   my @v = split(/\./, $current_tbversion);
   $changelog_branch = "maint-$v[0].$v[1]";
 }
-print "The full changelog since [Tor Browser $last_tbversion](https://gitweb.torproject.org/builders/tor-browser-build.git/plain/projects/tor-browser/Bundle-Data/Docs/ChangeLog.txt?h=$changelog_branch) is:\n\n";
+print "The full changelog since [Tor Browser $last_tbversion](https://gitweb.torproject.org/builders/tor-browser-build.git/plain/projects/browser/Bundle-Data/Docs/ChangeLog.txt?h=$changelog_branch) is:\n\n";
 print $changelog;

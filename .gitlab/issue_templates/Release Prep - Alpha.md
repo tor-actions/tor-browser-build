@@ -167,7 +167,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
   - [ ] `git_hash` : update the `$(BUILD_N)` section to match `fenix` tag
   - [ ] ***(Optional)*** `var/fenix_version` : update to latest `$(ESR_VERSION)` if rebased
 - [ ] Update allowed_addons.json by running (from `tor-browser-build` root):
-  - `./tools/fetch_allowed_addons.py > projects/tor-browser/allowed_addons.json`
+  - `./tools/fetch_allowed_addons.py > projects/browser/allowed_addons.json`
 - [ ] Check for NoScript updates here : https://addons.mozilla.org/en-US/firefox/addon/noscript
   - [ ] ***(Optional)*** If new version available, update `noscript` section of `input_files` in `projects/browser/config`
     - [ ] `URL`

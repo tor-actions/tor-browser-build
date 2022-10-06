@@ -2,7 +2,7 @@ This file contains the license for the build recipes and tools used in
 the Tor Browser development process, that are included in this repository.
 
 For the license of specific components included in Tor Browser, see
-directory projects/tor-browser/Bundle-Data/Docs/Licenses.
+directory projects/browser/Bundle-Data/Docs/Licenses.
 
 ===============================================================================
 
