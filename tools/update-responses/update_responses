@@ -411,7 +411,7 @@ sub write_htaccess {
                     $htaccess .= "RewriteRule ^$bt/[^\/]+/$lang "
                               .  "$version-$os-$migrate_langs->{$lang}.xml $flags\n";
                 }
-                $htaccess .= "RewriteRule ^$bt/ $version-$os-en-US.xml $flags\n";
+                $htaccess .= "RewriteRule ^$bt/ $version-$os-ALL.xml $flags\n";
             }
         }
         write_htdocs($channel, '.htaccess', $htaccess);

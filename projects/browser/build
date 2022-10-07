@@ -223,7 +223,7 @@ tar -C Bundle-Data/[% bundledata_osname %] [% IF ! c("var/namecoin") %]--exclude
 
 pushd "$TBDIR[% IF c("var/osx") %]/Contents/Resources[% END %]/browser/"
 unzip omni.ja defaults/preferences/[% c("var/prefs_file") %] || [ $? -lt 3 ]
-# Append our built extension-overrides.js to 000-tor-browser.js
+# Append our built extension-overrides.js to the preferences file
 cat "$GENERATEDPREFSPATH" >> defaults/preferences/[% c("var/prefs_file") %]
 cp defaults/preferences/[% c("var/prefs_file") %] $rootdir
 [% IF c("var/osx") %]
@@ -235,8 +235,6 @@ cp defaults/preferences/[% c("var/prefs_file") %] $rootdir
   zip -Xm omni.ja chrome/en-US/locale/browser/bookmarks.html
   rm -rf chrome
 [% END %]
-# Set the locale of the bundle.
-echo "pref(\"intl.locale.requested\", \"en-US\");" >> defaults/preferences/[% c("var/prefs_file") %]
 [% c("touch") %] defaults/preferences/[% c("var/prefs_file") %]
 zip -Xm omni.ja defaults/preferences/[% c("var/prefs_file") %]
 rm -rf defaults
@@ -247,7 +245,11 @@ popd
 [% IF c("var/osx") || c("var/multi_lingual") -%]
   # Prepare our language packs to embed our default bookmarks.
   # See bug 21879 for more details.
-  [% SET locales = c("var/testbuild") ? [] : c("var/locales") -%]
+  [% IF c("var/multi_lingual") -%]
+    [% SET locales = c("var/locales") -%]
+  [% ELSE -%]
+    [% SET locales = c("var/testbuild") ? [] : c("var/locales") -%]
+  [% END -%]
   [% FOREACH lang = locales %]
   [% SET lang = tmpl(lang);
      SET xpi = '$rootdir/' _ c('input_files_by_name/firefox-langpacks') _ '/' _ lang _ '.xpi';

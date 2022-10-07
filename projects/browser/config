@@ -75,7 +75,7 @@ input_files:
     enable: '[% c("var/tor-browser") %]'
   - project: firefox-langpacks
     name: firefox-langpacks
-    enable: '[% ! c("var/testbuild") && ! c("var/android") %]'
+    enable: '[% (!c("var/testbuild") || c("var/multi_lingual")) && ! c("var/android") %]'
   - project: fonts
     name: fonts
     enable: '[% ! c("var/android") %]'
