@@ -14,7 +14,13 @@ Tor Browser 11.5.4 - October 11 2022
    * Bug 41307: font whitelist typos [tor-browser]
  * Android
    * Updated GeckoView to 102.3.0esr
+   * Bug 41089: Add tor-browser build scripts + Makefile to tor-browser [tor-browser]
+   * Bug 41094: Enable HTTPS-Only Mode by default in Tor Browser Android [tor-browser]
+   * Bug 41159: Remove HTTPS-Everywhere extension from esr102-based Tor Browser Android [tor-browser]
+   * Bug 41166: Backport fix for CVE-2022-36317: Long URL would hang Firefox for Android (Bug 1759951) [tor-browser]
+   * Bug 41167: Backport fix for CVE-2022-38474: Recording notification not shown when microphone was recording on Android (Bug 1719511) [tor-browser]
    * Bug 41302: YEC 2022 Takeover for Android Stable [tor-browser]
+   * Bug 41312: Backport Firefox 105 Android security fixes to 102.3-based Tor Browser [tor-browser]
    * Bug 41314: Add YEC 2022 strings to torbutton and fenix [tor-browser]
  * Build System
    * Android
