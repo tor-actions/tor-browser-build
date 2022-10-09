@@ -76,9 +76,6 @@ input_files:
   - project: firefox-langpacks
     name: firefox-langpacks
     enable: '[% ! c("var/testbuild") && ! c("var/android") %]'
-  - project: https-everywhere
-    name: https-everywhere
-    enable: '[% c("var/android") %]'
   - project: fonts
     name: fonts
     enable: '[% ! c("var/android") %]'
