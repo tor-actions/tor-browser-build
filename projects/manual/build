@@ -5,7 +5,15 @@ mkdir -p chrome/browser/content/browser/manual
 unzip $rootdir/[% c('input_files_by_name/manual') %]
 python3 $rootdir/[% c('input_files_by_name/package_script') %] public chrome/browser/content/browser/manual
 
+pushd chrome/browser/content/browser/manual/static
+find -name '*.map' -delete
+rm -rf fonts
+rm -rf css/digital-climate-strike css/images
+# We prune unused images in the Python script, but empty directories remain
+find images -type d -empty -delete
+popd
+
 [% c('tar', {
-        tar_src => [ 'chrome' ],
-        tar_args => '-czf ' _ dest_dir _ '/' _ c('filename'),
-    }) %]
+    tar_src => [ 'chrome' ],
+    tar_args => '-czf ' _ dest_dir _ '/' _ c('filename'),
+  }) %]

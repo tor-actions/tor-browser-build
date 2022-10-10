@@ -2,7 +2,7 @@
 # To update, see doc/how-to-update-the-manual.txt
 # Remember to update also the package's hash, with the version!
 version: 50953
-filename: 'manual-[% c("version") %].tar.gz'
+filename: 'manual-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 container:
   use_container: 1
 

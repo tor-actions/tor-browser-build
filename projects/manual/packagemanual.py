@@ -31,10 +31,20 @@ def clean_urls(match):
     return f'href="#{slug}{anchor}"'
 
 
+remove_images = []
+for p in (source / 'static/images').glob('**/*'):
+    if p.is_file():
+        rel = p.relative_to(source)
+        remove_images.append(rel)
+
 htmls = source.rglob(f'{PAGE_NAME}/index.html')
 for page in htmls:
     with page.open(encoding='utf8') as f:
         contents = f.read()
+
+    remove_images = list(filter(
+        lambda im: contents.find(str(im)) == -1, remove_images))
+
     contents = static_re.sub(f'"{STATIC_PATH}/\\1"', contents)
     contents = link_re.sub(clean_urls, contents)
 
@@ -46,5 +56,14 @@ for page in htmls:
     with (target / dest_name).open('w', encoding='utf8') as f:
         f.write(contents)
 
+
+def ignore_images(path, names):
+    return [
+        n
+        for n in names
+        if Path(path, n).relative_to(source) in remove_images
+    ]
+
+
 shutil.rmtree(target / 'static', ignore_errors=True)
-shutil.copytree(source / 'static', target / 'static')
+shutil.copytree(source / 'static', target / 'static', ignore=ignore_images)
