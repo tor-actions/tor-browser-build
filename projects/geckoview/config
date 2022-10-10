@@ -63,7 +63,7 @@ steps:
       export MOZ_ANDROID_FAT_AAR_X86_64=$builddir/geckoview/*x86_64*.aar
 
       cd $builddir/[% project %]-[% c("version") %]
-      mv -f $rootdir/[% c('input_files_by_name/mozconfig') %] .mozconfig
+      ln -s mozconfig-android-all .mozconfig
 
       eval $(perl $rootdir/get-moz-build-date [% c("var/copyright_year") %] [% c("var/torbrowser_version") %])
       if [ -z $MOZ_BUILD_DATE ]
@@ -84,7 +84,10 @@ steps:
       # Create .mozbuild to avoid interactive prompt in configure
       mkdir "$HOME/.mozbuild"
       # We still need to specify --tor-browser-version due to bug 34005.
-      ./mach configure --with-tor-browser-version=[% c("var/torbrowser_version") %] --with-java-bin-path="$JAVA_HOME/bin" --without-wasm-sandboxed-libraries
+      ./mach configure \
+        --with-tor-browser-version=[% c("var/torbrowser_version") %] \
+        [% IF !c("var/rlbox") -%]--without-wasm-sandboxed-libraries[% END %]
+
       ./mach build --verbose
       find obj-* -regex '.*geckoview.*omni.*\(aar\|pom\)' -exec cp {} $distdir/[% project %] \;
 
@@ -107,8 +110,6 @@ steps:
       - project: node
         name: node
         pkg_type: build
-      - filename: mozconfig-android-all
-        name: mozconfig
       - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
         name: gradle-dependencies
         exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
@@ -152,8 +153,6 @@ input_files:
     project: '[% c("var/compiler") %]'
   - project: gradle
     name: gradle
-  - filename: 'mozconfig-[% c("var/osname") %]'
-    name: mozconfig
   - project: binutils
     name: binutils
   - project: rust
