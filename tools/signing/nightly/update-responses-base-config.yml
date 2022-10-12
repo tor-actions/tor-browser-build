@@ -17,7 +17,7 @@ channels:
 versions:
     nightly_version:
         platformVersion: 68.2.0
-        detailsURL: http://f4amtbsowhix7rrf.onion/
+        detailsURL: http://umj4zbqdfcyevlkgqgpq6foxk3z75zzxsbgt5jqmfxofrbrjh3crbnad.onion/
         migrate_langs:
             pt-PT: pt-BR
         minSupportedInstructionSet: SSE2
