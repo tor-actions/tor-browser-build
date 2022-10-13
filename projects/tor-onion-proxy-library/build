@@ -11,8 +11,10 @@ cp -r $gradle_repo/maven2/* $gradle_repo
 
 mkdir -p /var/tmp/build $output_dir
 
-[% pc(c('var/compiler'), 'var/setup', { compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')) }) %]
-tar -C $GRADLE_HOME -xf $rootdir/[% c('input_files_by_name/gradle') %]
+[% pc(c('var/compiler'), 'var/setup', {
+    compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')),
+    gradle_tarfile => c("input_files_by_name/gradle"),
+  }) %]
 tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
 
 # Patch projects
