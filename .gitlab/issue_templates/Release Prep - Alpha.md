@@ -33,7 +33,7 @@
 <details>
     <summary>Desktop</summary>
 
-### **torbutton** : https://git.torproject.org/torbutton.git
+### **torbutton** : https://gitlab.torproject.org/tpo/applications/torbutton.git
 - [ ] Update translations :
   - [ ] `./import-translations.sh`
     - **NOTE** : if there are no new strings imported then we are done here
@@ -42,7 +42,7 @@
   - [ ] ***(Optional)*** Backport to maintenance branch if present and necessary
 - [ ] fixup! `tor-browser`'s `Bug 10760 : Integrate TorButton to TorBrowser core` issue to point to updated `torbutton` commit
 
-### **tor-launcher** : https://git.torproject.org/tor-launcher.git
+### **tor-launcher** : https://gitlab.torproject.org/tpo/applications/tor-launcher.git
 - [ ] Update translations:
   - [ ] ./localization/import-translations.sh
   - **NOTE** : if there are no new strings imported then we are done here
@@ -57,11 +57,11 @@
 <details>
     <summary>Android</summary>
 
-### **tba-translation** : https://git.torproject.org/translation.git
+### **tba-translation** : https://gitlab.torproject.org/tpo/translation.git
 - [ ] Fetch latest and identify new `HEAD` of `fenix-torbrowserstringsxml` branch
   - [ ] `origin/fenix-torbrowserstringsxml` : `<INSERT COMMIT HASH HERE>`
 
-### **tor-android-service** ***(Optional)***: https://git.torproject.org/tor-android-service.git
+### **tor-android-service** ***(Optional)***: https://gitlab.torproject.org/tpo/applications/tor-android-service.git
 - [ ] Fetch latest and identify new `HEAD` of `main` branch
   - [ ] `origin/main` : `<INSERT COMMIT HASH HERE>`
 
@@ -101,7 +101,7 @@
 <details>
     <summary>Shared</summary>
 
-### tor-browser: https://git.torproject.org/tor-browser.git
+### tor-browser: https://gitlab.torproject.org/tpo/applications/tor-browser.git
 - [ ] ***(Optional)*** Backport any Android-specific security fixes from Firefox rapid-release
 - [ ] ***(Optional)*** Rebase to `$(ESR_VERSION)`
   - [ ] Find the Firefox hg tag here : https://hg.mozilla.org/releases/mozilla-esr102/tags
@@ -138,7 +138,7 @@
 <details>
     <summary>Build/Signing/Publishing</summary>
 
-### tor-browser-build: https://git.torproject.org/builders/tor-browser-build.git
+### tor-browser-build: https://gitlab.torproject.org/tpo/applications/tor-browser-build.git
 Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in the various `$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)-maint` (and possibly more specific) branches
 
 - [ ] Update `rbm.conf`

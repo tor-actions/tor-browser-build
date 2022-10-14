@@ -39,7 +39,7 @@
 <details>
     <summary>Desktop</summary>
 
-### **torbutton** ***(Optional)***: https://git.torproject.org/torbutton.git
+### **torbutton** ***(Optional)***: https://gitlab.torproject.org/tpo/applications/torbutton.git
 - [ ] ***(Optional)*** Update translations :
   - **NOTE** We only update strings in stable if a backported feature depends on new strings
   - [ ] `./import-translations.sh`
@@ -48,7 +48,7 @@
     - **NOTE** : only add files which are already being tracked
 - [ ] fixup! `tor-browser`'s `Bug 10760 : Integrate TorButton to TorBrowser core` issue to point to updated `torbutton` commit
 
-### **tor-launcher** ***(Optional)***: https://git.torproject.org/tor-launcher.git
+### **tor-launcher** ***(Optional)***: https://gitlab.torproject.org/tpo/applications/tor-launcher.git
 - [ ] ***(Optional)*** Update translations:
   - **NOTE** We only update strings in stable if a backported feature depends on new strings
   - [ ] ./localization/import-translations.sh
@@ -59,7 +59,7 @@
   - Message `Tagging $(TOR_LAUNCHER_VERSION)`
 - [ ] Push `main` and tag to origin
 
-### tor-browser: https://git.torproject.org/tor-browser.git
+### tor-browser: https://gitlab.torproject.org/tpo/applications/tor-browser.git
 - [ ] ***(Optional)*** Rebase to `$(ESR_VERSION)`
   - [ ] Find the Firefox hg tag here : https://hg.mozilla.org/releases/mozilla-esr91/tags
     - [ ] `$(ESR_TAG)` : `<INSERT_TAG_HERE>`
@@ -93,7 +93,7 @@
 <details>
     <summary>Android</summary>
 
-### **geckoview**: https://git.torproject.org/tor-browser.git
+### **geckoview**: https://gitlab.torproject.org/tpo/applications/tor-browser.git
 - [ ] ***(Optional)*** Rebase to `$(RR_VERSION)`
   - [ ] Find the Firefox hg tag here : https://hg.mozilla.org/releases/mozilla-release/tags
     - [ ] `$(RR_TAG)` : `<INSERT_TAG_HERE>`
@@ -123,12 +123,12 @@
   - Message : `Tagging $(FIREFOX_BUILD_N) for $(RR_VERSION)-based (alpha|stable)`
 - [ ] Push tag to `origin`
 
-### **tba-translation** ***(Optional)***: https://git.torproject.org/translation.git
+### **tba-translation** ***(Optional)***: https://gitlab.torproject.org/tpo/translation.git
 - **NOTE** We only update strings in stable if a backported feature depends on new strings
 - [ ] Fetch latest and identify new `HEAD` of `fenix-torbrowserstringsxml` branch
   - [ ] `origin/fenix-torbrowserstringsxml` : `<INSERT COMMIT HASH HERE>`
 
-### **tor-android-service** ***(Optional)***: https://git.torproject.org/tor-android-service.git
+### **tor-android-service** ***(Optional)***: https://gitlab.torproject.org/tpo/applications/tor-android-service.git
 - [ ] Fetch latest and identify new `HEAD` of `main` branch
   - [ ] `origin/main` : `<INSERT COMMIT HASH HERE>`
 
@@ -185,7 +185,7 @@
 <details>
     <summary>Build/Signing/Publishing</summary>
 
-### tor-browser-build: https://git.torproject.org/builders/tor-browser-build.git
+### tor-browser-build: https://gitlab.torproject.org/tpo/applications/tor-browser-build.git
 Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in the various `$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)-maint` (and possibly more specific) branches
 
 - [ ] Update `rbm.conf`
