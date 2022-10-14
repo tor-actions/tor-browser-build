@@ -13,6 +13,8 @@ input_files:
     project: obfs4
   - name: snowflake
     project: snowflake
+  - project: webtunnel
+    name: webtunnel
   - filename: bridges_list.obfs4.txt
   - filename: bridges_list.meek-azure.txt
   - filename: bridges_list.snowflake.txt

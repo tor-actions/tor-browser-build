@@ -88,9 +88,13 @@ mv [% c('input_files_by_name/noscript') %] "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b
     rm -f aarch64/tor/pluggable_transports/bridges_list.*.txt
   [% END -%]
 
-  # Snowflake's README is the only documentation shipped in tor-expert-bundle
+  # Snowflake's README is a documentation shipped in tor-expert-bundle
   mkdir -p "$TBDIR/$DOCSPATH/snowflake" [% IF c("var/macos_universal") %]"$TBDIR_AARCH64/$DOCSPATH/snowflake"[% END %]
   mv_tbdir tor/pluggable_transports/README.SNOWFLAKE.md "$DOCSPATH/snowflake/README.md"
+  
+  # WebTunnel's README is a documentation shipped in tor-expert-bundle
+  mkdir -p "$TBDIR/$DOCSPATH/webtunnel" [% IF c("var/macos_universal") %]"$TBDIR_AARCH64/$DOCSPATH/webtunnel"[% END %]
+  mv_tbdir tor/pluggable_transports/README.WEBTUNNEL.md "$DOCSPATH/webtunnel/README.md"
 
   # Move the PTs to where TB expects them
   mkdir -p "$TBDIR/$TORBINPATH" [% IF c("var/macos_universal") %]"$TBDIR_AARCH64/$TORBINPATH"[% END %]

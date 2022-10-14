@@ -1,0 +1,17 @@
+# vim: filetype=yaml sw=2
+version: '[% c("abbrev") %]'
+git_url: https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/webtunnel.git
+git_hash: 2ecf64381bad8a5db45c5871dcad7d12831dca69
+filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+container:
+  use_container: 1
+
+input_files:
+  - project: container-image
+  - name: go
+    project: go
+  - name: goptlib
+    project: goptlib
+  - name: '[% c("var/compiler") %]'
+    project: '[% c("var/compiler") %]'
+    enable: '[% c("var/android") %]'
