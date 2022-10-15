@@ -24,6 +24,7 @@ cd /var/tmp/build/[% project %]-[% c('version') %]
 patch -p1 < $rootdir/gradle.patch
 patch -p1 < $rootdir/0001-Bug-33931-Filter-bridges-in-stream-by-type.patch
 patch -p1 < $rootdir/0001-Bug-30318-Add-snowflake-support.patch
+patch -p1 < $rootdir/0001-Bug-41361-Add-conjure-support.patch
 
 [% FOREACH arch = ['armv7', 'aarch64', 'x86', 'x86_64'] -%]
   # Extract tor-expert-bundle
@@ -38,12 +39,16 @@ patch -p1 < $rootdir/0001-Bug-30318-Add-snowflake-support.patch
     cp $ptdir/obfs4proxy external/pluto/bin/armeabi/
     cp $ptdir/snowflake-client external/pluto/bin/armeabi-v7a/
     cp $ptdir/snowflake-client external/pluto/bin/armeabi/
+    cp $ptdir/conjure-client external/pluto/bin/armeabi-v7a/
+    cp $ptdir/conjure-client external/pluto/bin/armeabi/
   [% ELSIF arch == "aarch64" -%]
     cp $ptdir/obfs4proxy external/pluto/bin/arm64-v8a/
     cp $ptdir/snowflake-client external/pluto/bin/arm64-v8a/
+    cp $ptdir/conjure-client external/pluto/bin/arm64-v8a/
   [% ELSE -%]
     cp $ptdir/obfs4proxy external/pluto/bin/[% arch %]/
     cp $ptdir/snowflake-client external/pluto/bin/[% arch %]/
+    cp $ptdir/conjure-client external/pluto/bin/[% arch %]/
   [% END -%]
 [% END -%]
 
