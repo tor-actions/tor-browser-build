@@ -3,7 +3,8 @@
   "pluggableTransports" : {
     "obfs4proxy" : "ClientTransportPlugin meek_lite,obfs2,obfs3,obfs4,scramblesuit exec ${pt_path}obfs4proxy${pt_extension}",
     "snowflake" : "ClientTransportPlugin snowflake exec ${pt_path}snowflake-client${pt_extension}",
-    "webtunnel" : "ClientTransportPlugin webtunnel exec ${pt_path}webtunnel-client${pt_extension}"
+    "webtunnel" : "ClientTransportPlugin webtunnel exec ${pt_path}webtunnel-client${pt_extension}",
+    "conjure" : "ClientTransportPlugin conjure exec ${pt_path}conjure-client${pt_extension} -registerURL https://registration.refraction.network/api"
   },
   "bridges" : {
     "meek-azure" : [

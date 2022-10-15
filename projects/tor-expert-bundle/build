@@ -12,6 +12,7 @@ mkdir pluggable_transports && cd pluggable_transports
 tar -xkf $rootdir/[% c('input_files_by_name/obfs4') %]
 tar -xkf $rootdir/[% c('input_files_by_name/snowflake') %]
 tar -xkf $rootdir/[% c('input_files_by_name/webtunnel') %]
+tar -xkf $rootdir/[% c('input_files_by_name/conjure') %]
 
 # copy in bridge lines for each pluggable transport
 mv $rootdir/bridges_list.obfs4.txt .
