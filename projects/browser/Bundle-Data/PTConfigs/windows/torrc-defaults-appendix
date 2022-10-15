@@ -6,3 +6,6 @@ ClientTransportPlugin snowflake exec TorBrowser\Tor\PluggableTransports\snowflak
 
 ## webtunnel configuration
 ClientTransportPlugin webtunnel exec TorBrowser\Tor\PluggableTransports\webtunnel-client.exe
+
+## conjure configuration
+ClientTransportPlugin conjure exec TorBrowser\Tor\PluggableTransports\conjure-client.exe -registerURL https://registration.refraction.network/api
