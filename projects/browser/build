@@ -273,17 +273,6 @@ popd
   [% END %]
 [% END %]
 
-[% IF c("var/multi_lingual") %]
-  # Set the update.locale (it is used to replace %LOCALE% within
-  # app.update.url).
-  pushd "$TBDIR[% IF c("var/osx") %]/Contents/Resources/[% END %]"
-  echo ${PKG_LOCALE} > update.locale
-  [% c("touch") %] update.locale
-  zip -Xm omni.ja update.locale
-  popd
-[% END %]
-
-
 [% IF c("var/windows") %]
   tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/nsis') %]
   export PATH="/var/tmp/dist/nsis/bin:$PATH"
