@@ -1,7 +1,8 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
 git_url: https://github.com/golang/sys
-git_hash: fae7ac547cb717d141c433a2a173315e216b64c4
+# hash at the top of the internal-branch.go1.19-vendor branch
+git_hash: 6c1b26c55098eae66ce95ab7c3712ab6cbfff2b7
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 container:
   use_container: 1
