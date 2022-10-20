@@ -145,10 +145,7 @@ f="$(ls src-firefox-tor-browser-*.tar.xz)"
 remaining_files="$(echo "${remaining_files}" | sed 's/[ ]*'"${f}"'[ ]*/ /')"
 remaining_files="$(echo "${remaining_files}" | sed 's/[ ]*'"${f}.asc"'[ ]*/ /')"
 
-test "$(ls src-tor-launcher-*.tar.xz 2>/dev/null | wc -l)" = 1 || echo src-tor-launcher-*.tar.xz is wrong
-test "$(ls src-tor-launcher-*.tar.xz.asc 2>/dev/null | wc -l)" = 1 || echo src-tor-launcher-*.tar.xz.asc is wrong
 total_count=$(( total_count + 2 ))
-f="$(ls src-tor-launcher-*.tar.xz)"
 remaining_files="$(echo "${remaining_files}" | sed 's/[ ]*'"${f}"'[ ]*/ /')"
 remaining_files="$(echo "${remaining_files}" | sed 's/[ ]*'"${f}.asc"'[ ]*/ /')"
 

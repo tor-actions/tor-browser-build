@@ -174,9 +174,6 @@ input_files:
     enable: '[% c("var/linux") %]'
   - filename: start-firefox
     enable: '[% c("var/linux") %]'
-  - project: tor-launcher
-    name: tor-launcher
-    enable: '[% c("var/tor-browser") %]'
   - project: translation-base-browser
     name: translation-base-browser
   - filename: namecoin-torbutton.patch

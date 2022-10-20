@@ -36,7 +36,6 @@ mkdir -p "$destdir"
 [% END -%]
 [% IF c("var/browser-src") -%]
   mv  [% c('input_files_by_name/src-firefox') %]      \
-      [% IF c("var/tor-browser"); GET c('input_files_by_name/src-tor-launcher'); END %] \
       "$destdir"/
 [% END -%]
 cd "$destdir"

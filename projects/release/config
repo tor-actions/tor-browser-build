@@ -211,15 +211,6 @@ input_files:
      - browser-src
      - '[% c("var/browser_type") %]'
 
- - name: src-tor-launcher
-   project: tor-launcher
-   enable: '[% c("var/browser-src") && c("var/tor-browser") %]'
-   pkg_type: src-tarballs
-   target:
-     - '[% c("var/build_target") %]'
-     - browser-src
-     - '[% c("var/browser_type") %]'
-
 steps:
   signtag:
     build_log: '-'

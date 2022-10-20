@@ -55,7 +55,7 @@ Create a build for Linux x86_64 with Address Sanitizer enabled.
 
 torbrowser-{release,alpha,nightly,testbuild}-src
 ------------------------------------------------
-Create source tarballs for firefox, torbutton and tor-launcher.
+Create source tarballs for firefox and torbutton.
 
 basebrowser-*
 -------------

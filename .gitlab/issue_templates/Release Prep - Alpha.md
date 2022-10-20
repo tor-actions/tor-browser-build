@@ -3,8 +3,6 @@
 
 - `$(BUILD_SERVER)` : the server the main builder is using to build a tor-browser release
 - `$(STAGING_SERVER)` : the server the signer is using to to run the signing process
-- `$(TOR_LAUNCHER_VERSION)` : version of `tor-launcher`, used in tags
-    - example : `0.2.33`
 - `$(ESR_VERSION)` : the Mozilla defined ESR version, used in various places for building tor-browser tags, labels, etc
     - example : `91.6.0`
 - `$(RR_VERSION)` : the Mozilla defined Rapid-Release version; Tor Browser for Android is based off of the `$(ESR_VERSION)`, but Mozilla's Firefox for Android is based off of the `$(RR_VERSION)` so we need to keep track of security vulnerabilities to backport from the monthly Rapid-Release train and our frozen ESR train.
@@ -41,16 +39,6 @@
     - **NOTE** : only add files which are already being tracked
   - [ ] ***(Optional)*** Backport to maintenance branch if present and necessary
 - [ ] fixup! `tor-browser`'s `Bug 10760 : Integrate TorButton to TorBrowser core` issue to point to updated `torbutton` commit
-
-### **tor-launcher** : https://gitlab.torproject.org/tpo/applications/tor-launcher.git
-- [ ] Update translations:
-  - [ ] ./localization/import-translations.sh
-  - **NOTE** : if there are no new strings imported then we are done here
-- [ ] Update `install.rdf` file with new version
-- [ ] Sign/Tag commit :
-  - Tag : `$(TOR_LAUNCHER_VERSION)`
-  - Message `Tagging $(TOR_LAUNCHER_VERSION)`
-- [ ] Push `main` and tag to origin
 
 </details>
 
