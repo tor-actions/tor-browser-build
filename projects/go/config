@@ -99,7 +99,6 @@ targets:
     var:
       GOARCH: 386
   android:
-    version: 1.18.5
     var:
       GOOS: android
   android-x86:
@@ -121,13 +120,8 @@ input_files:
     project: '[% c("var/compiler") %]'
     enable: '[% ! c("var/linux") %]'
   - URL: 'https://golang.org/dl/go[% c("version") %].src.tar.gz'
-    enable: '[% ! c("var/android") %]'
     name: go
     sha256sum: 2ce930d70a931de660fdaf271d70192793b1b240272645bf0275779f6704df6b
-  - URL: 'https://golang.org/dl/go[% c("version") %].src.tar.gz'
-    enable: '[% c("var/android") %]'
-    name: go
-    sha256sum: 9920d3306a1ac536cdd2c796d6cb3c54bc559c226fc3cc39c32f1e0bd7f50d2a
   - URL: 'https://golang.org/dl/go[% c("var/go14_version") %].src.tar.gz'
     name: go14
     sha256sum: 9947fc705b0b841b5938c48b22dc33e9647ec0752bae66e50278df4f23f64959
