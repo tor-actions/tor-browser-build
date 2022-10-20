@@ -18,7 +18,7 @@ tar -C /var/tmp/dist -xf [% c('input_files_by_name/edwards25519-extra') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/siphash') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/goxcrypto') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/goxnet') %]
-tar -C /var/tmp/dist -xf [% c('input_files_by_name/goutls') %]
+tar -C /var/tmp/dist -xf [% c('input_files_by_name/refraction-utls') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/goxtext') %]
 
 mkdir -p /var/tmp/build

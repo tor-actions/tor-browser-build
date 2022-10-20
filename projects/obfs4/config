@@ -1,9 +1,9 @@
 # vim: filetype=yaml sw=2
-version: 0.0.12
-git_url: https://gitlab.com/yawning/obfs4.git
+version: 0.0.14-tor2
+git_url: https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/obfs4.git
 git_hash: 'obfs4proxy-[% c("version") %]'
 tag_gpg_id: 1
-gpg_keyring: yawning.gpg
+gpg_keyring: anti-censorship.gpg
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 
 container:
@@ -11,7 +11,7 @@ container:
 
 targets:
   nightly:
-    git_hash: master
+    git_hash: main
     version: '[% c("abbrev") %]'
     tag_gpg_id: 0
 
@@ -31,8 +31,8 @@ input_files:
     project: goxcrypto
   - name: goxnet
     project: goxnet
-  - name: goutls
-    project: goutls
+  - name: refraction-utls
+    project: refraction-utls
   - name: goxtext
     project: goxtext
   - name: '[% c("var/compiler") %]'
