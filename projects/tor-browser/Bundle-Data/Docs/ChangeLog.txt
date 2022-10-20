@@ -1,3 +1,23 @@
+Tor Browser 11.5.5 - October 20 2022
+ * All Platforms
+   * Update Translations
+   * Bug 40649: Update meek default bridge [tor-browser-build]
+   * Bug 40654: Enable uTLS and use the full bridge line for snowflake [tor-browser-build]
+ * Windows + macOS + Linux
+   * Upate Manual
+   * Bug 40465: Onion Authentication fails when connecting to a subdomain [tor-browser]
+   * Bug 41355: Amends to YEC 2022 Takeover Desktop Stable 11.5.5 [tor-browser]
+   * Bug 41359: Backport ESR 102.4 security fixes to 91.13-based Tor Browser [ tor-browser]
+   * Bug 41364: Continued amends to YEC 2022 Takeover Desktop Stable 11.5.5 [tor-browser]
+ * Android
+   * Bug 40650: Rebase geckoview-102.3.0esr-11.5-1 to ESR 102.4 [tor-browser-build]
+   * Bug 41360: Backport Android-specific Firefox 106 to ESR 102.4-based Tor Browser [tor-browser]
+   * Bug 41365: Amends to YEC 2022 Takeover on Android [tor-browser]
+ * Build
+   * Windows + macOS + Linux
+     * Update Go to 1.18.7
+     * Bug 40464: go 1.18 fails to build on macOS [tor-browser-build]
+
 Tor Browser 11.5.4 - October 11 2022
  * All Platforms
    * Bug 40580: Add support for uk (ukranian) locale [tor-browser-build]
