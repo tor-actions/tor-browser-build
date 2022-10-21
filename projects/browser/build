@@ -324,7 +324,10 @@ cp $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip "$OUTDIR"/
   [% END -%]
 [% END -%]
 [%IF c("var/tor-browser") -%]
-  cp $rootdir/[% c("input_files_by_name/tor-expert-bundle") %] "$OUTDIR"/
+  tor_expert_bundle_src="[% c("input_files_by_name/tor-expert-bundle") %]"
+  # strip off trailing "$buildid.tar.gz"
+  tor_expert_bundle_dest=${tor_expert_bundle_src:0:-14}.tar.gz
+  cp $rootdir/[% c("input_files_by_name/tor-expert-bundle") %] "$OUTDIR"/$tor_expert_bundle_dest
 [% END -%]
 [% IF c("var/build_infos_json") -%]
   cp $rootdir/[% c('input_files_by_name/firefox') %]/build-infos.json "$OUTDIR"/build-infos-[% c("var/mar_osname") %].json
