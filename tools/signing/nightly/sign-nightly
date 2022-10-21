@@ -85,9 +85,12 @@ sub basedir_path {
 sub get_last_build_version {
     my ($config, $publish_dir) = @_;
     my $today = 'tbb-nightly.' . DateTime->now->ymd('.');
-    my $dt_yesterday = DateTime->now - DateTime::Duration->new(days => 1);
-    my $yesterday = 'tbb-nightly.' . $dt_yesterday->ymd('.');
-    for my $version ($today, $yesterday) {
+    my @last_days;
+    for my $i (1..5) {
+      my $dt = DateTime->now - DateTime::Duration->new(days => $i);
+      push @last_days, 'tbb-nightly.' . $dt->ymd('.');
+    }
+    for my $version ($today, @last_days) {
         my $url = "$config->{builds_url}/$version/$publish_dir/sha256sums-unsigned-build.incrementals.txt";
         if ($url =~ m|^/|) {
             return $version if -f $url;
