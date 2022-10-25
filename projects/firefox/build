@@ -49,10 +49,7 @@ export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/nasm/bi
     rtdir=/var/tmp/dist/clang/lib/clang/[% pc("clang", "version") %]/lib/wasi
   [% END -%]
   mkdir -p $rtdir
-  cp /var/tmp/dist/wasi-sysroot/lib/clang/11.0.0/lib/wasi/libclang_rt.builtins-wasm32.a $rtdir
-  tar -C /var/tmp/dist -xf [% c('input_files_by_name/lucetc') %]
-  export PATH="/var/tmp/dist/lucetc/bin:$PATH"
-  export WASM_SANDBOXED_LIBRARIES=graphite,ogg
+  cp /var/tmp/dist/wasi-sysroot/lib/clang/*/lib/wasi/libclang_rt.builtins-wasm32.a $rtdir
   export WASI_SYSROOT=/var/tmp/dist/wasi-sysroot/share/wasi-sysroot
 [% END -%]
 

@@ -173,6 +173,9 @@ input_files:
     name: clang
   - project: 'compiler-rt'
     name: 'compiler-rt'
+  - project: wasi-sysroot
+    name: wasi-sysroot
+    enable: '[% c("var/rlbox") %]'
   - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
     name: gradle-dependencies
     exec: '[% INCLUDE "fetch-gradle-dependencies" %]'

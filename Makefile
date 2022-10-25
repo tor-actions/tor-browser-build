@@ -274,9 +274,6 @@ cargo_vendor-cbindgen-android: submodule-update
 cargo_vendor-cbindgen: submodule-update
 	$(rbm) build cbindgen --step cargo_vendor --target nightly --target torbrowser-linux-x86_64
 
-cargo_vendor-lucetc: submodule-update
-	$(rbm) build lucetc --step cargo_vendor --target nightly --target torbrowser-linux-x86_64
-
 cargo_vendor-uniffi-rs: submodule-update
 	$(rbm) build uniffi-rs --step cargo_vendor --target nightly --target torbrowser-linux-x86_64
 

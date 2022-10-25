@@ -213,15 +213,5 @@ needed=$(perl -MYAML::XS -e "$p")
 current='[% pc("wasi-sysroot", "git_hash") %]'
 check_update_needed wasi-sdk "$needed" "$current"
 
-
-# lucetc
-read -d '' p << 'EOF' || true
-my $d = YAML::XS::LoadFile('taskcluster/ci/fetch/toolchains.yml');
-print $d->{'lucetc-source'}{fetch}{revision};
-EOF
-needed=$(perl -MYAML::XS -e "$p")
-current='[% pc("lucetc", "git_hash") %]'
-check_update_needed lucetc "$needed" "$current"
-
 # End RLBox
 [% END -%]

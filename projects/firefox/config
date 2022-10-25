@@ -158,9 +158,6 @@ input_files:
   - project: wasi-sysroot
     name: wasi-sysroot
     enable: '[% c("var/rlbox") %]'
-  - project: lucetc
-    name: lucetc
-    enable: '[% c("var/rlbox") %]'
   - project: node
     name: node
   - project: nasm

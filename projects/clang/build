@@ -24,7 +24,7 @@ cd build
 cmake ../llvm -GNinja \
               -DCMAKE_INSTALL_PREFIX=$distdir \
               -DCMAKE_BUILD_TYPE=Release \
-              -DLLVM_TARGETS_TO_BUILD="X86;ARM;AArch64[% IF c("var/rlbox") -%];WebAssembly[% END %]" \
+              -DLLVM_TARGETS_TO_BUILD="X86;ARM;AArch64;WebAssembly" \
               -DLLVM_ENABLE_PROJECTS="clang;lld" \
               -DLLVM_ENABLE_ZLIB=ON \
               -DLLVM_INSTALL_UTILS=ON \

@@ -1,22 +1,35 @@
 # vim: filetype=yaml sw=2
-filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 version: '[% c("abbrev") %]'
-git_hash: b36c433738f0c29160a5ac1c1cee1b1b884bf4a0
-git_url: https://github.com/CraneStation/wasi-sdk
-git_submodule: 1
+# Notice: we are not enabling submodules because we use the same hacks as
+# Mozilla and re-use the LLVM we already build.
+# So, be sure to update also wasi-libc and wasi-config when you update this
+# git hash!
+git_hash: 37ae6af88201884c8b98a65adcd6d8cd1284f95e
+git_url: https://github.com/WebAssembly/wasi-sdk.git
+git_submodule: 0
 
 container:
   use_container: 1
 
 input_files:
   - project: container-image
-  - name: binutils
-    project: binutils
+  # We do not use GCC, but we need its libsdc++ to run Clang
+  - name: '[% c("var/compiler") %]'
+    project: '[% c("var/compiler") %]'
     enable: '[% c("var/linux") %]'
-  - project: '[% c("var/compiler") %]'
-    name: '[% c("var/compiler") %]'
-    enable: '[% c("var/linux") %]'
+  - name: clang
+    project: clang
+  - project: llvm-project
+    name: clang-source
   - name: cmake
     project: cmake
   - name: ninja
     project: ninja
+  - name: python
+    project: python
+    enable: '[% c("var/linux") %]'
+  - name: wasi-config
+    project: wasi-config
+  - name: wasi-libc
+    project: wasi-libc
