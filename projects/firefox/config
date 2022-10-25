@@ -66,8 +66,8 @@ targets:
       branding_directory: 'browser/branding/official'
 
   nightly:
-    git_hash: '[% c("var/project-name") %]-[% c("var/firefox_version") %]-[% c("var/browser_branch") %]'
-    tag_gpg_id: 0
+    git_hash: '[% c("var/project-name") %]-[% c("var/firefox_version") %]-[% c("var/browser_branch") %][% IF c("var/base-browser") %]-build1[% END %]'
+    tag_gpg_id: '[% c("var/base-browser") %]'
     var:
       branding_directory: 'browser/branding/nightly'
 
