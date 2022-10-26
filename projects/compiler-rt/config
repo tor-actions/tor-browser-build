@@ -7,14 +7,26 @@ container:
 var:
   llvm_version: '[% pc("llvm-project", "version") %]'
 
+targets:
+  android-armv7:
+    var:
+      libdir: 'arm-linux-androideabi/lib'
+  android-aarch64:
+    var:
+      libdir: 'aarch64-linux-android/lib64'
+  android-x86:
+    var:
+      libdir: 'i686-linux-android/lib'
+  android-x86_64:
+    var:
+      libdir: 'x86_64-linux-android/lib64'
+
 input_files:
   - project: container-image
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
-    enable: '[% c("var/linux") %]'
   - name: binutils
     project: binutils
-    enable: '[% c("var/linux") %]'
   - project: cmake
     name: cmake
   - project: llvm-project
