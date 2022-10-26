@@ -162,14 +162,12 @@ input_files:
     enable: '[% c("var/linux") %]'
   - project: clang
     name: clang
+    enable: '[% c("var/linux") %]'
   - project: fxc2
     name: fxc2
     enable: '[% c("var/windows") %]'
     target_prepend:
       - torbrowser-windows-x86_64
-  - name: mingw-w64
-    project: mingw-w64
-    enable: '[% c("var/windows") %]'
   - filename: abicheck.cc
     enable: '[% c("var/linux") %]'
   - filename: start-firefox
