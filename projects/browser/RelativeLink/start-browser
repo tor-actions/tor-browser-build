@@ -317,7 +317,6 @@ TOR_CONTROL_PASSWD environment variable."
 # torrc):
 #
 # SETTING NAME                            VALUE
-# network.security.ports.banned           [...],<SocksPort>,<ControlPort>
 # network.proxy.socks                     127.0.0.1
 # network.proxy.socks_port                <SocksPort>
 # extensions.torbutton.inserted_button    true
