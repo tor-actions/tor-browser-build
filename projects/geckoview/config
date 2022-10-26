@@ -171,6 +171,8 @@ input_files:
     name: nasm
   - project: clang
     name: clang
+  - project: 'compiler-rt'
+    name: 'compiler-rt'
   - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
     name: gradle-dependencies
     exec: '[% INCLUDE "fetch-gradle-dependencies" %]'

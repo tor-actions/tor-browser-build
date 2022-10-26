@@ -3,16 +3,12 @@
 distdir=/var/tmp/dist/[% project %]
 mkdir -p /var/tmp/dist
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/cmake') %]
-export PATH="/var/tmp/dist/cmake/bin:$PATH"
+tar -C /var/tmp/dist -xf [% c('input_files_by_name/ninja') %]
+export PATH="/var/tmp/dist/ninja:/var/tmp/dist/cmake/bin:$PATH"
 [% IF c("var/linux") %]
   [% pc('gcc', 'var/setup', { compiler_tarfile => c('input_files_by_name/gcc'),
                               hardened_gcc => 0 }) %]
   [% pc('python', 'var/setup', { python_tarfile => c('input_files_by_name/python') }) %]
-[% END -%]
-[% IF c("var/android") %]
-  [% pc(c('var/compiler'), 'var/setup', { compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')) }) %]
-[% END -%]
-[% IF c("var/linux") || c("var/android") -%]
   tar -C /var/tmp/dist -xf [% c('input_files_by_name/binutils') %]
   export PATH="/var/tmp/dist/binutils/bin:$PATH"
 [% END -%]
@@ -25,57 +21,15 @@ mkdir build
 cd build
 # LLVM_ENABLE_ZLIB solves the "contains a compressed section, but zlib is not available" on lld
 # LLVM_INSTALL_UTILS allows this LLVM to be used to compile Rust
-cmake ../llvm -G "Unix Makefiles" \
+cmake ../llvm -GNinja \
               -DCMAKE_INSTALL_PREFIX=$distdir \
               -DCMAKE_BUILD_TYPE=Release \
-            [% IF c("var/android") || c("var/macos") -%]
-              -DLLVM_TARGETS_TO_BUILD="X86;ARM;AArch64" \
-            [% END -%]
-            [% IF c("var/rlbox") -%]-DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=WebAssembly[% END %] \
-              -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;compiler-rt;lld" \
+              -DLLVM_TARGETS_TO_BUILD="X86;ARM;AArch64[% IF c("var/rlbox") -%];WebAssembly[% END %]" \
+              -DLLVM_ENABLE_PROJECTS="clang;lld" \
               -DLLVM_ENABLE_ZLIB=ON \
               -DLLVM_INSTALL_UTILS=ON \
 
-make -j[% c("num_procs") %]
-make install
-cd ..
-
-[% IF c("var/android") -%]
-  echo "Compiling compiler-rt (Android only)"
-  rtdistdir=/var/tmp/build/rtdist
-  mkdir $rtdistdir
-
-  make_compilerrt () {
-    mkdir "build-compilerrt-$1"
-    cd "build-compilerrt-$1"
-    cmake ../compiler-rt/ -G "Unix Makefiles" \
-      -DCMAKE_INSTALL_PREFIX=$rtdistdir \
-      -DCMAKE_BUILD_TYPE=Release \
-      -DCMAKE_SYSTEM_NAME=Android \
-      -DCMAKE_ANDROID_ARCH_ABI=$1 \
-      -DCMAKE_ANDROID_NDK="$ANDROID_NDK_HOME" \
-      -DCMAKE_C_FLAGS="$3 -fuse-ld=lld --rtlib=compiler-rt" \
-      -DCMAKE_CXX_FLAGS="$3 -fuse-ld=lld --rtlib=compiler-rt" \
-      -DCMAKE_EXE_LINKER_FLAGS="-L$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/$2" \
-      -DCOMPILER_RT_BUILD_BUILTINS=ON \
-      -DCOMPILER_RT_BUILD_LIBFUZZER=OFF \
-      -DCOMPILER_RT_BUILD_MEMPROF=OFF \
-      -DCOMPILER_RT_BUILD_ORC=OFF \
-      -DCOMPILER_RT_BUILD_PROFILE=OFF \
-      -DCOMPILER_RT_BUILD_SANITIZERS=OFF \
-      -DCOMPILER_RT_BUILD_XRAY=OFF
-    make -j[% c("num_procs") %]
-    make install
-    cd ..
-  }
-
-  make_compilerrt "armeabi-v7a" "arm-linux-androideabi/lib" "-DARMEABI_V7A"
-  make_compilerrt "arm64-v8a" "aarch64-linux-android/lib64"
-  make_compilerrt "x86" "i686-linux-android/lib"
-  make_compilerrt "x86_64" "x86_64-linux-android/lib64"
-
-  mv $rtdistdir/lib/linux/libclang_rt.builtins-*-android.a $distdir/lib/clang/[% c("var/llvm_version") %]/lib/linux/
-[% END -%]
+ninja -j[% c("num_procs") %] -v install
 
 cd /var/tmp/dist
 [% c('tar', {
