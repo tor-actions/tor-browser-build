@@ -4,8 +4,8 @@ filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 container:
   use_container: 1
 var:
-  node_version: 12.22.1
-  node_hash: dd650df7773a6ed3e390320ba51ef33cba6499f0e9397709ea3d1debdcbcb989
+  node_version: 12.22.12
+  node_hash: bc42b7f8495b9bfc7f7850dd180bb02a5bdf139cc232b8c6f02a6967e20714f2
 
 targets:
   windows:
