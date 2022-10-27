@@ -27,6 +27,7 @@ var:
     - goeasyconfig
     - goservice
     - goxnet
+    - gspt
   go_lib_install:
     - github.com/namecoin/ncdns
     - github.com/namecoin/ncdns/backend
@@ -81,3 +82,5 @@ input_files:
     project: godegoutils
   - name: goxnet
     project: goxnet
+  - name: gspt
+    project: gspt
