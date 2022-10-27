@@ -39,6 +39,43 @@ versions:
         migrate_archs:
         # for example, pt-PT: pt-BR
         migrate_langs:
+            ar: ALL
+            ca: ALL
+            cs: ALL
+            da: ALL
+            de: ALL
+            el: ALL
+            en-US: ALL
+            es-AR: ALL
+            es-ES: ALL
+            fa: ALL
+            fr: ALL
+            ga-IE: ALL
+            he: ALL
+            hu: ALL
+            id: ALL
+            is: ALL
+            it: ALL
+            ja: ALL
+            ka: ALL
+            ko: ALL
+            lt: ALL
+            mk: ALL
+            ms: ALL
+            my: ALL
+            nb-NO: ALL
+            nl: ALL
+            pl: ALL
+            pt-BR: ALL
+            ro: ALL
+            ru: ALL
+            sv-SE: ALL
+            th: ALL
+            tr: ALL
+            uk: ALL
+            vi: ALL
+            zh-CN: ALL
+            zh-TW: ALL
         minSupportedInstructionSet: SSE2
         # minSupportedOsVersion on macOS corresponds to the Darwin version ( https://en.wikipedia.org/wiki/Darwin_(operating_system) )
         osx64:
