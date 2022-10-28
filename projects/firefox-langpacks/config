@@ -40,7 +40,7 @@ input_files:
       [% SET ffver = c("var/ff_version");
          SET ffbuild = c("var/ff_build");
          SET ffarch = c("var/ff_arch");
-         SET URL = "https://ftp.mozilla.org/pub/mozilla.org/firefox/candidates/" _ ffver _ '-candidates/' _ ffbuild _ '/' _ ffarch _ '/xpi/' _ lang _ '.xpi';
+         SET URL = "https://ftp.mozilla.org/pub/firefox/candidates/" _ ffver _ '-candidates/' _ ffbuild _ '/' _ ffarch _ '/xpi/' _ lang _ '.xpi';
          SET filename = outdir _ '/' _ lang _ '.xpi'; %]
       test -f [% dest_dir %]/[% filename %] || \
          [% GET c("urlget", { filename => filename _ '-tmp', URL => URL }); %]
