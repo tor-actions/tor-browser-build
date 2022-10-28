@@ -49,6 +49,19 @@ By default it is based on the alpha channel, but you can change that by
 editing rbm.local.conf. The resulting build can be found in directory
 testbuild.
 
+torbrowser-testbuild-{linux-x86_64,linux-i686,windows-i686,macos,
+                    android-armv7,android-x86,android-x86_64,
+                    android-aarch64,desktop,android}
+-----------------------------------------------------------------
+Same as torbrowser-testbuild, for the selected platform only.
+
+
+torbrowser-testbuild-macos-{x86_64,aarch64}
+-------------------------------------------
+By default, macos builds are universal (targeting x86_64 and aarch64).
+With this special testbuild target, you can do a build for a specific
+arch only.
+
 torbrowser-{release,alpha,nightly,testbuild}-linux-x86_64-asan
 --------------------------------------------------------------
 Create a build for Linux x86_64 with Address Sanitizer enabled.

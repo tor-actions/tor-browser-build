@@ -28,7 +28,6 @@ targets:
       mar_osname: linux64
   macos:
     var:
-      mar_osname: macos
       arch_deps:
         - genisoimage
         - faketime
@@ -36,6 +35,15 @@ targets:
         - python3-pip
         - python3-distutils-extra
         - python3-psutil
+  macos-universal:
+    var:
+      mar_osname: macos
+  macos-aarch64:
+    var:
+      mar_osname: macos-aarch64
+  macos-x86_64:
+    var:
+      mar_osname: macos-x86_64
   windows:
     var:
       arch_deps:
@@ -66,7 +74,7 @@ input_files:
     enable: '[% ! c("var/android") %]'
   - project: firefox
     name: firefox-aarch64
-    enable: '[% c("var/macos") %]'
+    enable: '[% c("var/macos_universal") %]'
     target_prepend:
       - macos-aarch64
   - project: firefox
@@ -81,7 +89,7 @@ input_files:
     enable: '[% c("var/tor-browser") %]'
   - project: tor-expert-bundle
     name: tor-expert-bundle-aarch64
-    enable: '[% c("var/macos") && c("var/tor-browser") %]'
+    enable: '[% c("var/macos_universal") && c("var/tor-browser") %]'
     target_prepend:
       - macos-aarch64
   - project: fonts

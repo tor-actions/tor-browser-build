@@ -21,8 +21,12 @@ touch "$GENERATEDPREFSPATH"
 
 [% IF c("var/macos") %]
   TBDIR="$TB_STAGE_DIR/[% c("var/Project_Name") %].app"
-  TBDIR_AARCH64="$TB_STAGE_DIR/[% c("var/Project_Name") %]-aarch64.app"
-  TBDIRS=("$TBDIR" "$TBDIR_AARCH64")
+  [% IF c("var/macos_universal") %]
+    TBDIR_AARCH64="$TB_STAGE_DIR/[% c("var/Project_Name") %]-aarch64.app"
+    TBDIRS=("$TBDIR" "$TBDIR_AARCH64")
+  [% ELSE -%]
+    TBDIRS=("$TBDIR")
+  [% END -%]
 
   DOCSPATH=Contents/Resources/[% c('var/ProjectName') %]/Docs
   EXTSPATH=Contents/Resources/distribution/extensions
@@ -60,7 +64,7 @@ mv [% c('input_files_by_name/noscript') %] "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b
     local dest="${args[-1]}"
     unset args[-1]
     mv ${args[@]} "$TBDIR/$dest"
-    [% IF c("var/macos") -%]
+    [% IF c("var/macos_universal") -%]
       for src in ${args[@]}
       do
         mv "aarch64/$src" "$TBDIR_AARCH64/$dest"
@@ -69,27 +73,27 @@ mv [% c('input_files_by_name/noscript') %] "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b
   }
 
   tar -xvf [% c('input_files_by_name/tor-expert-bundle') %]
-  [% IF c("var/macos") -%]
+  [% IF c("var/macos_universal") -%]
     mkdir aarch64
     tar -C aarch64 -xf [% c('input_files_by_name/tor-expert-bundle-aarch64') %]
   [% END -%]
 
   # geoip(6) and anything else that belongs in the data dir from the expert bundle
-  mkdir -p "$TBDIR/$TORCONFIGPATH" [% IF c("var/macos") %]"$TBDIR_AARCH64/$TORCONFIGPATH"[% END %]
+  mkdir -p "$TBDIR/$TORCONFIGPATH" [% IF c("var/macos_universal") %]"$TBDIR_AARCH64/$TORCONFIGPATH"[% END %]
   mv_tbdir data/{geoip,geoip6} "$TORCONFIGPATH"
 
   # Bridge lists will be consumed later in `bridges_conf`
   mv tor/pluggable_transports/bridges_list.*.txt $rootdir
-  [% IF c("var/macos") %]
+  [% IF c("var/macos_universal") %]
     rm -f aarch64/tor/pluggable_transports/bridges_list.*.txt
   [% END -%]
 
   # Snowflake's README is the only documentation shipped in tor-expert-bundle
-  mkdir -p "$TBDIR/$DOCSPATH/snowflake" [% IF c("var/macos") %]"$TBDIR_AARCH64/$DOCSPATH/snowflake"[% END %]
+  mkdir -p "$TBDIR/$DOCSPATH/snowflake" [% IF c("var/macos_universal") %]"$TBDIR_AARCH64/$DOCSPATH/snowflake"[% END %]
   mv_tbdir tor/pluggable_transports/README.SNOWFLAKE.md "$DOCSPATH/snowflake/README.md"
 
   # Move the PTs to where TB expects them
-  mkdir -p "$TBDIR/$TORBINPATH" [% IF c("var/macos") %]"$TBDIR_AARCH64/$TORBINPATH"[% END %]
+  mkdir -p "$TBDIR/$TORBINPATH" [% IF c("var/macos_universal") %]"$TBDIR_AARCH64/$TORBINPATH"[% END %]
   mv_tbdir tor/pluggable_transports "$TORBINPATH/PluggableTransports"
 
   # Move tor and dependencies to where TB expects them
@@ -145,7 +149,7 @@ RBM_TB_EOF
 
 tar -C ${TB_STAGE_DIR} -xf [% c('input_files_by_name/firefox') %]/browser.tar.gz
 
-[% IF c("var/macos") -%]
+[% IF c("var/macos_universal") -%]
   # Use symlink in tmp dir to extract "Tor Browser.app" to "Tor Browser-aarch64.app"
   ff_aarch64=$(mktemp -d)
   ln -s "$TBDIR_AARCH64" "$ff_aarch64/[% c("var/Project_Name") %].app"
@@ -284,7 +288,7 @@ done
   mv $distdir/windows-installer ${TB_STAGE_DIR}
 [% END %]
 
-[% IF c("var/macos") -%]
+[% IF c("var/macos_universal") -%]
   # unify.py requires lipo, so we need to add cctools in the PATH
   tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/macosx-toolchain') %]
   export PATH="/var/tmp/dist/macosx-toolchain/cctools/bin:$PATH"

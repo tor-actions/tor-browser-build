@@ -171,6 +171,12 @@ torbrowser-testbuild-windows-i686: submodule-update
 torbrowser-testbuild-macos: submodule-update
 	$(rbm) build release --target testbuild --target browser-macos --target torbrowser
 
+torbrowser-testbuild-macos-x86_64: submodule-update
+	$(rbm) build release --target testbuild --target browser-macos-x86_64 --target torbrowser
+
+torbrowser-testbuild-macos-aarch64: submodule-update
+	$(rbm) build release --target testbuild --target browser-macos-aarch64 --target torbrowser
+
 torbrowser-testbuild-src: submodule-update
 	$(rbm) build release --target testbuild --target browser-src-testbuild --target torbrowser
 

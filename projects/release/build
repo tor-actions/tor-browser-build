@@ -25,6 +25,12 @@ mkdir -p "$destdir"
 [% IF c("var/browser-macos") -%]
   mv [% c('input_files_by_name/macos') %]/* "$destdir"/
 [% END -%]
+[% IF c("var/browser-macos-x86_64") -%]
+  mv [% c('input_files_by_name/macos-x86_64') %]/* "$destdir"/
+[% END -%]
+[% IF c("var/browser-macos-aarch64") -%]
+  mv [% c('input_files_by_name/macos-aarch64') %]/* "$destdir"/
+[% END -%]
 [% IF c("var/browser-linux-i686") -%]
   mv [% c('input_files_by_name/linux-i686') %]/* "$destdir"/
 [% END -%]

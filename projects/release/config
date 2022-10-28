@@ -63,6 +63,12 @@ targets:
   browser-macos:
     var:
       browser-macos: 1
+  browser-macos-x86_64:
+    var:
+      browser-macos-x86_64: 1
+  browser-macos-aarch64:
+    var:
+      browser-macos-aarch64: 1
   browser-src:
     var:
       browser-src: '[% ! c("var/testbuild") %]'
@@ -191,6 +197,22 @@ input_files:
    target:
      - '[% c("var/build_target") %]'
      - '[% c("var/browser_type") %]-macos'
+
+ # non-universal macos build
+ - name: macos-x86_64
+   project: browser
+   enable: '[% c("var/browser-macos-x86_64") %]'
+   target:
+     - '[% c("var/build_target") %]'
+     - '[% c("var/browser_type") %]-macos-x86_64'
+
+ # non-universal macos build
+ - name: macos-aarch64
+   project: browser
+   enable: '[% c("var/browser-macos-aarch64") %]'
+   target:
+     - '[% c("var/build_target") %]'
+     - '[% c("var/browser_type") %]-macos-aarch64'
 
  - name: src-firefox
    project: firefox
