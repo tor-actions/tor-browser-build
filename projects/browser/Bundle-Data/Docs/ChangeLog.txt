@@ -38,7 +38,7 @@ Tor Browser 12.0a4 - October 28 2022
    * Bug 41344: Authenticated Onion Services do not prompt for auth key in 12.0 alpha series [tor-browser]
    * Bug 41352: Update or drop the show manual logic in torbutton [tor-browser]
    * Bug 41369: Consider a different list-order for locales in language menu [tor-browser]
-   * Bug 41374: [torconnect] Missing a few strings in the DTD [tor-browser]
+   * Bug 41374: Missing a few torconnect strings in the DTD [tor-browser]
    * Bug 41377: Hide `Search for more languages...` from Language selector in multi-locale build [tor-browser]
    * Bug 41385: Bootstrap failure is logged but not raised up to about:torconnect [tor-browser]
    * Bug 41386: The new tor-launcher has a problem when another Tor is running [tor-browser]
@@ -88,7 +88,7 @@ Tor Browser 12.0a4 - October 28 2022
      * Bug 40669: Remove HTTPS-Everywhere keyring [tor-browser-build]
      * Bug 41357: Enable browser toolbox debugging by default for dev builds [tor-browser]
    * macOS
-     * Bug 40158: Add support for macOS AArch64
+     * Bug 40158: Add support for macOS AArch64 [tor-browser-build]
      * Bug 40464: go 1.18 fails to build on macOS [tor-browser-build]
    * Linux
      * Bug 40659: Error building goservice for linux in nightly build [tor-browser-build]
