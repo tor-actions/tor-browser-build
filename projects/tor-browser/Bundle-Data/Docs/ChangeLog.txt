@@ -1,3 +1,104 @@
+Tor Browser 11.5.7 - November 2 2022
+ * Windows + macOS + Linux
+   * Bug 41413: Backup intl.locale.requested in 11.5.x [tor-browser]
+
+Tor Browser 12.0a4 - October 28 2022
+ * All Plaforms
+   * Update Translations
+   * Bug 24686: In Tor Browser context, should network.http.tailing.enabled be set to false? [tor-browser]
+   * Bug 27127: Audit and enable HTTP/2 push [tor-browser]
+   * Bug 40057: ensure that CSS4 system colors are not a fingerprinting vector [tor-browser]
+   * Bug 40058: ensure no locale leaks from new Intl APIs [tor-browser]
+   * Bug 40251: Clear obsolete prefs after torbutton!27 [tor-browser]
+   * Bug 40406: Remove Presentation API related prefs [tor-browser]
+   * Bug 40465: Onion Authentication fails when connecting to a subdomain [tor-browser]
+   * Bug 40491: Don't auto-pick a v2 address when it's in Onion-Location header [tor-browser]
+   * Bug 40494: Update Startpage and Blockchair onion search providers [tor-browser]
+   * Bug 40629: Bump snowflake version to 9ce1de4eee4e [tor-browser-build]
+   * Bug 40633: Remove Team Cymru hard-coded bridges [tor-browser-build]
+   * Bug 40646: Don't build Español AR anymore [tor-browser-build]
+   * Bug 40649: Update meek default bridge [tor-browser-build]
+   * Bug 40654: Enable uTLS and use the full bridge line for snowflake [tor-browser-build]
+   * Bug 40665: Snowflake bridge parameters are too long (535 bytes) in 11.5.5 [tor-browser-build]
+   * Bug 41098: Compare Tor Browser's and GeckoView's profiles [tor-browser]
+   * Bug 41154: Review Mozilla 1765167: Deprecate Cu.import [tor-browser]
+   * Bug 41164: Add some #define for the base-browser section [tor-browser]
+   * Bug 41306: Typo "will not able" in "Tor unexpectedly exited" dialog [tor-browser]
+   * Bug 41317: Tor Browser leaks banned ports in network.security.ports.banned [tor-browser]
+   * Bug 41326: Update preference for remoteRecipes [tor-browser]
+   * Bug 41345: fonts: windows whitelist contains supplemental fonts [tor-browser]
+   * Bug 41398: Disable Web MIDI API [tor-browser]
+ * Windows + macOS + Linux
+   * Update Firefox to 102.4.0esr
+   * Bug 17400: Decide how to use the multi-lingual Tor Browser in the alpha/release series [tor-browser]
+   * Bug 40638: Visit our website link after build-to-build upgrade in Nightly channel points to old v2 onion [tor-browser-build]
+   * Bug 40648: Do not customize update.locale in multi-lingual builds [tor-browser-build]
+   * Bug 40853: use Subprocess.jsm to launch tor [tor-browser]
+   * Bug 40933: Migrate remaining tor-launcher functionality to tor-browser [tor-browser]
+   * Bug 41117: Review Mozilla 1512851:  Add Share Menu to File Menu on macOS [tor-browser]
+   * Bug 41323: Tor-ify notification bar gradient colors (branding) [tor-browser]
+   * Bug 41337: Add a title to the new identity confirmation [tor-browser]
+   * Bug 41342: Update the New Identity dialog to the proton modal style [tor-browser]
+   * Bug 41344: Authenticated Onion Services do not prompt for auth key in 12.0 alpha series [tor-browser]
+   * Bug 41352: Update or drop the show manual logic in torbutton [tor-browser]
+   * Bug 41369: Consider a different list-order for locales in language menu [tor-browser]
+   * Bug 41374: Missing a few torconnect strings in the DTD [tor-browser]
+   * Bug 41377: Hide `Search for more languages...` from Language selector in multi-locale build [tor-browser]
+   * Bug 41385: Bootstrap failure is logged but not raised up to about:torconnect [tor-browser]
+   * Bug 41386: The new tor-launcher has a problem when another Tor is running [tor-browser]
+   * Bug 41387: New identity and new circuit ended up inside history [tor-browser]
+   * Bug 41400: Missing onionAuthViewKeys causes "Onion Services Keys" dialog to be empty. [tor-browser]
+   * Bug 41401: Missing some mozilla icons because we still loading them from "chrome://browser/skin" rather than "chrome://global/skin/icons" [tor-browser]
+   * Bug 41404: Fix blockchair-onion search extension [tor-browser]
+ * Windows
+   * Bug 41149: Review Mozilla 1762576:  Firefox is not allowing Symantec DLP to inject DLL into the browser for Data Loss Prevention software [tor-browser]
+   * Bug 41278: Create Tor Browser styled pdf logo similar to the vanilla Firefox one [tor-browser]
+ * macOS
+   * Bug 41294: Bookmarks manager broken in 12.0a2 on MacOS [tor-browser]
+   * Bug 41348: cherry-pick macOS OSSpinLock  replacements [tor-browser]
+   * Bug 41370: Find a way to ship custom default bookmarks without changing language-packs on macOS [tor-browser]
+   * Bug 41372: "Japanese" language menu item is localised in multi-locale testbuild (on mac OS) [tor-browser]
+   * Bug 41379: The new tor-launcher is broken also on macOS [tor-browser]
+ * Linux
+   * Bug 40359: Tor Browser Launcher has Wrong Icon [tor-browser]
+ * Android
+   * Update GeckoView to 102.4.0esr
+   * Bug 40631: Stop bundling HTTPS Everywhere on Android [tor-browser-build]
+   * Bug 41360: Backport Android-specific Firefox 106 to ESR 102.4-based Tor Browser [tor-browser]
+   * Bug 41394: Implement a setting to always prefer onion sites [tor-browser]
+ * Build
+   * All Platforms
+     * Update Go to 1.19.2
+     * Bug 23656: Use .mozconfig files in tor-browser repo for rbm builds [tor-browser-build]
+     * Bug 28754: make testbuild-android-armv7 stalls during sha256sum step [tor-browser-build]
+     * Bug 40397: Create a new build target to package tor daemon, pluggable transports and dependencies [tor-browser-build]
+     * Bug 40619: Make sure translations are taken from gitlab.tpo and not git.tpo [tor-browser-build]
+     * Bug 40627: Add boklm to torbutton.gpg [torbrowser-build]
+     * Bug 40634: Update the project/browser path in tools/changelog-format-blog-post and other files [tor-browser-build]
+     * Bug 40636: Remove https-everywhere from projects/browser/config [tor-browser-build]
+     * Bug 40639: Remove tor-launcher references [tor-browser-build]
+     * Bug 40643: Update Richard's key in torbutton.gpg [tor-browser-build]
+     * Bug 40655: Published tor-expert-bundle tar.gz files should not include their tor-browser-build build id [tor-browser-build]
+     * Bug 40656: Improve get_last_build_version in tools/signing/nightly/sign-nightly [tor-browser-build]
+     * Bug 40658: Create an anticensorship team keyring [tor-browser-build]
+     * Bug 40660: Update changelog-format-blog-post script to point gitlab rather than gitolite [tor-browser-build]
+     * Bug 40662: Make base-browser nightly build from tag [tor-browser-build]
+     * Bug 40671: Update langpacks URL [tor-browser-build]
+     * Bug 41308: Use the same branch for Desktop and GeckoView [tor-browser]
+     * Bug 41340: Opt in to some of the NIGHTLY_BUILD features [tor-browser]
+     * Bug 41343: Add -without-wam-sandboxed-libraries to mozconfig-linux-x86_64-dev for local builds [tor-browser]
+     * Bug 40585: Prune the manual more [tor-browser-build]
+     * Bug 40663: Do not ship bookmarks in tor-browser-build anymore [tor-browser-build]
+     * Bug 40669: Remove HTTPS-Everywhere keyring [tor-browser-build]
+     * Bug 41357: Enable browser toolbox debugging by default for dev builds [tor-browser]
+   * macOS
+     * Bug 40158: Add support for macOS AArch64 [tor-browser-build]
+     * Bug 40464: go 1.18 fails to build on macOS [tor-browser-build]
+   * Linux
+     * Bug 40659: Error building goservice for linux in nightly build [tor-browser-build]
+   * Android
+     * Bug 40640: Extract Gradle in the toolchain setup [tor-browser-build]
+
 Tor Browser 11.5.6 - October 25 2022
  * All Plaforms
    * Bug 40665: Shorten snowflake bridge line [tor-browser-build]
