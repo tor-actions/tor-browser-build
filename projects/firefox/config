@@ -37,6 +37,8 @@ var:
     mv -f -- "$rezip_tmpdir/new.zip" [% c("rezip_file") %]
     rm -Rf "$rezip_tmpdir"
 
+  l10n-changesets: '[% exec("cat browser/locales/l10n-changesets.json") %]'
+
 steps:
   src-tarballs:
     filename: 'src-[% project %]-[% c("version") %].tar.xz'

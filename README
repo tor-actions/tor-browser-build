@@ -10,7 +10,7 @@ etc ...). You will need to install the uidmap package, providing the
 newuidmap and newgidmap commands.
 
 The sources of most components are downloaded using git, which needs to
-be installed.
+be installed. The mercurial package is also needed.
 
 You also need a few perl modules installed:
 - YAML::XS
@@ -40,7 +40,7 @@ If you are running Debian or Ubuntu, you can install them with:
                   libstring-shellquote-perl libsort-versions-perl \
                   libdigest-sha-perl libdata-uuid-perl libdata-dump-perl \
                   libfile-copy-recursive-perl libfile-slurp-perl git \
-                  uidmap
+                  mercurial uidmap
 
 The build system is based on rbm, which is included as a git submodule
 in the rbm/ directory. You can fetch the rbm git submodule by running

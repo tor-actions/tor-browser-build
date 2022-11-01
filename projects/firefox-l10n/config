@@ -1,0 +1,45 @@
+# vim: filetype=yaml sw=2
+version: '[% pc("firefox", "abbrev") %]'
+filename: '[% project %]-[% c("var/osname") %]-[% c("version") %]-1'
+link_input_files: 1
+
+steps:
+  fetch_locale:
+    filename: 'l10n-[% c("input_file_var/locale") %]-[% c("hg_hash") %]-[% c("var/build_id") %].tar.xz'
+    version: '[% c("hg_hash") %]'
+    fetch_locale: |
+      [% c("var/set_default_env") -%]
+      tar xf '[% project %]-[% c("version") %].tar.gz'
+      mv [% project %]-[% c("version") %] [% c("input_file_var/locale") %]
+      tar caf '[% dest_dir %]/[% c("filename") %]' [% c("input_file_var/locale") %]
+    input_files: []
+--- |
+  # This part of the file contains options written in perl
+  use JSON;
+  use Path::Tiny;
+  (
+    input_files => sub {
+      my ($project, $options) = @_;
+      my @input_files;
+      my $changesets_json = project_config('firefox', 'var/l10n-changesets', { %$options, origin_project => $project });
+      my $d = decode_json $changesets_json;
+      my $locales = project_config($project, 'var/locales', $options);
+      foreach my $locale (@$locales) {
+        $locale = process_template($project, $locale, '.');
+        next unless my $revision = $d->{$locale}{revision};
+        my $input_file = {
+          name => $locale,
+          project => 'firefox-l10n',
+          pkg_type => 'fetch_locale',
+          hg_hash => $revision,
+          hg_url => "https://hg.mozilla.org/l10n-central/$locale",
+          hg_clone_subdir => $locale,
+          input_file_var => {
+            locale => $locale,
+          },
+        };
+        push @input_files, $input_file;
+      }
+      return [@input_files];
+    },
+  )

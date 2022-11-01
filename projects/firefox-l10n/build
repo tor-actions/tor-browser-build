@@ -1,0 +1,6 @@
+#!/bin/bash
+[% c("var/set_default_env") -%]
+
+rm -Rf '[% dest_dir %]/[% c("filename") %]'
+mkdir -p [% dest_dir %]/[% c("filename") %]
+mv -v *.tar.xz [% dest_dir %]/[% c("filename") %]
