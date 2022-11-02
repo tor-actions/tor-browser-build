@@ -14,4 +14,4 @@ echo "${BASH_ARGV0:-}" | grep -q '\.dry-run$' && DRY_RUN='--dry-run'
 test -z "${NON_INTERACTIVE:-}" || rsync_progress="--progress"
 rsync_options="-avH ${rsync_progress:-} ${DRY_RUN:-}"
 
-tb_builders='boklm gk pierov richard sysrqb'
+tb_builders='boklm dan henry ma1 pierov richard'
