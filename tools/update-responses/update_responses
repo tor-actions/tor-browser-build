@@ -153,6 +153,39 @@ sub get_version_downloads {
     $config->{versions}{$version}{downloads} = $downloads;
 }
 
+sub get_perplatform_downloads {
+    my ($config, $version, $gittag) = @_;
+    my $downloads = {};
+    my $vdir = version_dir($config, $version);
+    my $download_url = "$config->{download}{bundles_url}/$version";
+    opendir(my $d, $vdir) or exit_error "Error opening directory $vdir";
+    foreach my $file (readdir $d) {
+        next unless -f "$vdir/$file";
+        my $os;
+        if ($file =~ m/^$config->{appname_bundle_macos}-$version-macos_(.+).dmg$/) {
+          $os = 'macos';
+        } elsif ($file =~ m/^$config->{appname_bundle_linux}-(linux32|linux64)-${version}_(.+).tar.xz$/) {
+          $os = $1 eq 'linux64' ? 'linux-x86_64' : 'linux-i686';
+        } elsif ($file =~ m/^$config->{appname_bundle_win64}-${version}_(.+).exe$/) {
+          $os = 'windows-x86_64';
+        } elsif ($file =~ m/^$config->{appname_bundle_win32}-${version}_(.+).exe$/) {
+          $os = 'windows-i686';
+        } elsif ($file =~ m/^$config->{appname_bundle_android}-${version}-(android-armv7|android-x86|android-x86_64|android-aarch64)-multi.apk/) {
+          $os = $1;
+        } else {
+            next;
+        }
+        $downloads->{$os} = {
+            version => $version,
+            git_tag => $gittag,
+            binary => "$download_url/$file",
+            sig => "$download_url/$file.asc",
+        };
+    }
+    closedir $d;
+    $config->{versions}{$version}{pp_downloads} = $downloads;
+}
+
 sub extract_mar {
     my ($mar_file, $dest_dir, $compression) = @_;
     my $old_cwd = getcwd;
@@ -432,6 +465,11 @@ sub write_downloads_json {
         };
         write_htdocs($channel, 'downloads.json',
             JSON->new->utf8->canonical->encode($data));
+        my $pp_downloads = get_perplatform_downloads($config, $version, $tag);
+        foreach my $os (keys %{$pp_downloads}) {
+          write_htdocs($channel, "download-$os.json",
+            JSON->new->utf8->canonical->encode($pp_downloads->{$os}));
+        }
     }
 }
 
