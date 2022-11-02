@@ -134,6 +134,12 @@ export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
 # Create .mozbuild to avoid interactive prompt in configure
 mkdir "$HOME/.mozbuild"
 
+l10ncentral="$HOME/.mozbuild/l10n-central"
+mkdir "$l10ncentral"
+for tarball in $rootdir/[% c('input_files_by_name/firefox-l10n') %]/*; do
+  tar -C "$l10ncentral" -xf "$tarball"
+done
+
 # PyYAML tries to read files as ASCII, otherwise
 export LC_ALL=C.UTF-8
 export LANG=C.UTF-8
@@ -146,7 +152,15 @@ export LANG=C.UTF-8
   [% IF !c("var/rlbox") -%]--without-wasm-sandboxed-libraries[% END %] \
 
 ./mach build --verbose
-./mach build stage-package
+[% IF !c("var/testbuild") %]
+  export MOZ_CHROME_MULTILOCALE="[% tmpl(c('var/locales').join(' ')) %]"
+  for AB_CD in $MOZ_CHROME_MULTILOCALE; do
+    ./mach build chrome-$AB_CD
+  done
+  AB_CD=multi ./mach build stage-package
+[% ELSE %]
+  ./mach build stage-package
+[% END %]
 
 [% IF c("var/osx") %]
   cp -a obj-*/dist/firefox/* $distdir

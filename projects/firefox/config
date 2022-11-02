@@ -149,6 +149,9 @@ input_files:
     name: rust
   - project: cbindgen
     name: cbindgen
+  - project: firefox-l10n
+    name: firefox-l10n
+    enable: '[% !c("var/testbuild") %]'
   - project: wasi-sysroot
     name: wasi-sysroot
     enable: '[% c("var/rlbox") %]'
