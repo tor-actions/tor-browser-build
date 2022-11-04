@@ -48,14 +48,6 @@ do
     strip "$LIB"
 done
 
-# Repackage https-everywhere extension
-mkdir _omni/
-unzip tor-browser_en-US/Browser/omni.ja -d _omni/
-cd _omni/
-zip -Xmr ../firefox/omni.ja chrome/torbutton/content/extensions/https-everywhere/
-cd ..
-rm -rf _omni/
-
 # Overwrite extracted tor-browser with locally built files and move to _repackaged folder
 cp -r firefox/* tor-browser_en-US/Browser
 rm -rf firefox "${TOR_FILENAME}"
