@@ -149,13 +149,6 @@ total_count=$(( total_count + 2 ))
 remaining_files="$(echo "${remaining_files}" | sed 's/[ ]*'"${f}"'[ ]*/ /')"
 remaining_files="$(echo "${remaining_files}" | sed 's/[ ]*'"${f}.asc"'[ ]*/ /')"
 
-test "$(ls langpacks-tor-browser-linux64-*.tar.xz 2>/dev/null | wc -l)" = 1 || echo langpacks-tor-browser-linux64-*.tar.xz is wrong
-test "$(ls langpacks-tor-browser-linux64-*.tar.xz.asc 2>/dev/null | wc -l)" = 1 || echo langpacks-tor-browser-linux64-*.tar.xz.asc is wrong
-total_count=$(( total_count + 2 ))
-f="$(ls langpacks-tor-browser-linux64-*.tar.xz)"
-remaining_files="$(echo "${remaining_files}" | sed 's/[ ]*'"${f}"'[ ]*/ /')"
-remaining_files="$(echo "${remaining_files}" | sed 's/[ ]*'"${f}.asc"'[ ]*/ /')"
-
 # Expected file endings
 file_count_by_ending="$(ls ./*.tar.xz{,.asc} ./*.zip{,.asc} ./*.exe{,.asc} ./*.mar ./*.dmg{,.asc} ./*.apk{,.asc} ./*.txt{,.asc} ./*.txt.asc-* | wc -l)"
 test "${file_count_by_ending}" -eq ${total_count} || echo "Unexpected file endings: counted ${file_count_by_ending} vs ${total_count}"

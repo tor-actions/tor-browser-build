@@ -194,10 +194,6 @@ tar -C Bundle-Data/[% bundledata_osname %] [% IF ! c("var/namecoin") %]--exclude
   bridges_conf snowflake
 [% END -%]
 
-[% IF ! c("var/multi_lingual") && c("var/tor-browser") %]
-  echo 'pref("extensions.torlauncher.prompt_for_locale", false);' >> "$GENERATEDPREFSPATH"
-[% END %]
-
 [% IF c("var/linux") %]
   chmod 700 ${TB_STAGE_DIR}/Browser/[% c('var/ProjectName') %]/Data/Browser
   [% IF c("var/tor-browser") -%]
@@ -205,18 +201,12 @@ tar -C Bundle-Data/[% bundledata_osname %] [% IF ! c("var/namecoin") %]--exclude
   [% END -%]
 [% END %]
 
-[% IF c("var/multi_lingual") %]
-  # If we are building a multi-lingual package, use "ALL" in the package name
-  # and as the locale for update purposes. We do not include "ALL" in the name
-  # of the directory that is inside the package (in other words, users will
-  # not see tor-browser_ALL after they install Tor Browser).
-  PKG_LOCALE="ALL"
-  PKG_DIR='[% c("var/project-name") %]'
-[% ELSE %]
-  PKG_LOCALE="en-US"
-  PKG_DIR="[% c('var/project-name') %]_${PKG_LOCALE}"
-[% END %]
-
+# With multi-lingual builds, we use "ALL" in the package name as the locale for
+# update purposes. But we do not include "ALL" in the name of the directory that
+# is inside the package (in other words, users will not see tor-browser_ALL
+# after they install Tor Browser).
+PKG_LOCALE="ALL"
+PKG_DIR='[% c("var/project-name") %]'
 
 pushd "$TBDIR[% IF c("var/osx") %]/Contents/Resources[% END %]/browser/"
 unzip omni.ja defaults/preferences/[% c("var/prefs_file") %] || [ $? -lt 3 ]
@@ -229,27 +219,6 @@ rm -rf defaults
 # create tbb_version.json file for #25020
 echo '{"version":"[% c("var/torbrowser_version") %]","architecture":"[% c("var/mar_osname") %]","channel":"[% c("var/channel") %]","locale":"en-US"}' > ../tbb_version.json
 popd
-
-[% IF c("var/osx") || c("var/multi_lingual") -%]
-  # Prepare our language packs to embed our default bookmarks.
-  # See bug 21879 for more details.
-  [% IF c("var/multi_lingual") -%]
-    [% SET locales = c("var/locales") -%]
-  [% ELSE -%]
-    [% SET locales = c("var/testbuild") ? [] : c("var/locales") -%]
-  [% END -%]
-  [% FOREACH lang = locales %]
-  [% SET lang = tmpl(lang);
-     SET xpi = '$rootdir/' _ c('input_files_by_name/firefox-langpacks') _ '/' _ lang _ '.xpi';
-     %]
-    # If we are building a multi-lingual package, add all of the language packs.
-    [% IF c("var/multi_lingual") %]
-      cp [% xpi %] "$TBDIR/$EXTSPATH/langpack-[% lang %]@firefox.mozilla.org.xpi"
-    [% END %]
-    cd ..
-    rm -rf prep_[% lang %]
-  [% END %]
-[% END %]
 
 [% IF c("var/windows") %]
   tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/nsis') %]
@@ -332,117 +301,6 @@ cp $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip "$OUTDIR"/
 [% IF c("var/build_infos_json") -%]
   cp $rootdir/[% c('input_files_by_name/firefox') %]/build-infos.json "$OUTDIR"/build-infos-[% c("var/mar_osname") %].json
 [% END -%]
-
-# Create a tarball with all Linux x86_64 language packs (Bug 32676)
-[% IF c("var/tor-browser") && c("var/linux-x86_64") && ! c("var/multi_lingual") && ! c("var/testbuild") -%]
-  pushd $rootdir/[% c('input_files_by_name/firefox-langpacks') %]
-  [% c('tar', {
-           tar_src => [ '.' ],
-           tar_args => '-cJf $OUTDIR/langpacks-tor-browser-linux64-' _ c("var/torbrowser_version") _ '.tar.xz',
-     })
-  %]
-  popd
-[% END -%]
-
-# If we did not create a multi-lingual package above, create a package for
-# each locale.
-[% IF ! c("var/multi_lingual") %]
-  [% SET locales = c("var/testbuild") ? [] : c("var/locales") -%]
-  [% FOREACH lang = locales %]
-    [% SET lang = tmpl(lang);
-       SET xpi = '$rootdir/' _ c('input_files_by_name/firefox-langpacks') _ '/' _ lang _ '.xpi';
-       SET tbdir = '$distdir/' _ c("var/project-name") _ '_' _ lang;
-       SET mar_file = c("var/project-name") _ '-' _ c("var/mar_osname") _ '-' _ c("var/torbrowser_version") _ '_' _ lang _ '.mar';
-       IF c("var/osx");
-         SET browserdir = tbdir _ '/' _ c("var/Project_Name") _ '.app';
-       ELSIF c("var/windows");
-         SET browserdir = tbdir _ '/' _ c("var/Project_Name") _ '/Browser';
-       ELSE;
-         SET browserdir = tbdir _ '/Browser';
-       END;
-       SET build_mar = c("var/build_mar");
-       # On nightly we only build mar files for some locales
-       IF c("var/nightly") && c("var/build_mar");
-         build_mar = 0;
-         FOREACH mar_lang = c("var/mar_locales");
-           mar_lang = tmpl(mar_lang);
-           IF mar_lang == lang;
-             build_mar = 1;
-           END;
-         END;
-       END;
-    %]
-      cat > "$scripts_dir/create-browser_[% lang %]" << SCRIPT_EOF
-#!/bin/bash
-      set -e
-      cp -a ${TB_STAGE_DIR} [% tbdir %]
-      cp [% xpi %] "[% browserdir %]/$EXTSPATH/langpack-[% lang %]@firefox.mozilla.org.xpi"
-
-      pushd "[% browserdir %]/[% IF c("var/osx") %]Contents/Resources/[% END %]browser/"
-      mkdir -p defaults/preferences
-      cp $rootdir/[% c("var/prefs_file") %] defaults/preferences/
-      # Set the locale of the bundle.
-      echo "pref(\"intl.locale.requested\", \"[% lang %]\");" >> defaults/preferences/[% c("var/prefs_file") %]
-      [% c("touch") %] defaults/preferences/[% c("var/prefs_file") %]
-      zip -Xm omni.ja defaults/preferences/[% c("var/prefs_file") %]
-      rm -rf defaults
-      # create tbb_version.json file for #25020
-      echo '{"version":"[% c("var/torbrowser_version") %]","architecture":"[% c("var/mar_osname") %]","channel":"[% c("var/channel") %]","locale":"[% lang %]"}' > ../tbb_version.json
-      popd
-
-      # Set the update.locale (it is used to replace %LOCALE% within
-      # app.update.url), remove the en-US spellchecking dictionary, and
-      # recreate precomplete file (needs to be accurate for full MAR updates).
-      pushd "[% browserdir %]/[% IF c("var/osx") %]Contents/Resources/[% END %]"
-      echo "[% lang %]" > update.locale
-      [% c("touch") %] update.locale
-      zip -Xm omni.ja update.locale
-      rm -rf dictionaries
-      rm -f precomplete
-      python $MARTOOLS/createprecomplete.py
-      popd
-
-      cd $distdir
-
-      [% IF build_mar -%]
-        # Create full MAR file and compressed package for this locale.
-        MAR=$MARTOOLS/mar \
-        MOZ_PRODUCT_VERSION=[% c("var/torbrowser_version") %] \
-        MAR_CHANNEL_ID=torbrowser-torproject-[% c("var/channel") %] \
-        $MARTOOLS/make_full_update.sh -q $OUTDIR/[% mar_file %] "[% browserdir %]"
-      [% END -%]
-
-      [% IF c("var/linux") %]
-        [% SET tardir = c("var/project-name") _ '_' _ lang;
-          c('tar', {
-                tar_src => [ tardir ],
-                tar_args => '-cJf $OUTDIR/' _ c("var/project-name") _ '-' _ c("var/mar_osname") _ '-' _ c("var/torbrowser_version") _ '_' _ lang _ '.tar.xz',
-            }) %]
-      [% ELSIF c("var/osx") %]
-        [% # Rename the Japanese bundle to not confuse users
-           IF lang == 'ja-JP-mac';
-             SET lang = 'ja';
-           END; -%]
-        [% c('var/ddmg', {
-          dmg_src => tbdir,
-          dmg_out => '$OUTDIR/' _ c('var/ProjectName') _ '-' _ c("var/torbrowser_version") _ '-' _ c("var/dmg_name") _ '_' _ lang _ '.dmg',
-        }) %]
-      [% ELSIF c("var/windows") %]
-        find "[% tbdir %]" -exec [% c("touch") %] {} \;
-        pushd "[% tbdir %]"
-        makensis [% c("var/projectname") %].nsi
-        # Working around NSIS braindamage
-        mv [% c("var/projectname") %]-install.exe browser-install-tmp.exe
-        python3 $rootdir/pe_checksum_fix.py
-        mv browser-install-tmp2.exe [% c("var/projectname") %]-install.exe
-        rm browser-install-tmp.exe
-        mv [% c("var/projectname") %]-install.exe $OUTDIR/[% c("var/projectname") %]-install[% IF c("var/windows-x86_64") %]-win64[% END %]-[% c("var/torbrowser_version") %]_[% lang %].exe
-        popd
-      [% END %]
-      rm -rf [% tbdir %]
-SCRIPT_EOF
-  [% END %]
-[% END %]
 
 chmod 775 $rootdir/run_scripts "$scripts_dir"/*
 $rootdir/run_scripts [% c("num_procs") %] "$scripts_dir"
