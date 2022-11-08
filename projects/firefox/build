@@ -134,11 +134,13 @@ export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
 # Create .mozbuild to avoid interactive prompt in configure
 mkdir "$HOME/.mozbuild"
 
-l10ncentral="$HOME/.mozbuild/l10n-central"
-mkdir "$l10ncentral"
-for tarball in $rootdir/[% c('input_files_by_name/firefox-l10n') %]/*; do
-  tar -C "$l10ncentral" -xf "$tarball"
-done
+[% IF !c("var/testbuild") -%]
+  l10ncentral="$HOME/.mozbuild/l10n-central"
+  mkdir "$l10ncentral"
+  for tarball in $rootdir/[% c('input_files_by_name/firefox-l10n') %]/*; do
+    tar -C "$l10ncentral" -xf "$tarball"
+  done
+[% END %]
 
 # PyYAML tries to read files as ASCII, otherwise
 export LC_ALL=C.UTF-8
