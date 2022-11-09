@@ -17,12 +17,16 @@ var:
     - patch
 
 targets:
+  linux:
+    var:
+      arch_deps:
+        # Install libc6-i386 to be able to run 32bit mar tools in linux-i686
+        # builds (bug 29812). We don't need it in x86_64 builds, but we
+        # share the container to reduce space used.
+        - libc6-i386
   linux-i686:
     var:
       mar_osname: linux32
-      arch_deps:
-        # Install libc6-i386 to be able to run 32bit mar tools (bug 29812)
-        - libc6-i386
   linux-x86_64:
     var:
       mar_osname: linux64

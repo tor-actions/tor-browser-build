@@ -12,10 +12,6 @@ var:
   configure_opt_project: --disable-static
 
 targets:
-  macos:
-    var:
-      arch_deps:
-        - faketime
   windows:
     var:
       configure_opt_project: --disable-shared

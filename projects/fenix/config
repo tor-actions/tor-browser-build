@@ -20,8 +20,6 @@ var:
   gradle_dependencies_version: 37
   gradle_version: 7.0.2
   glean_parser: 5.0.1
-  arch_deps:
-    - python3-venv
 
 targets:
   release:

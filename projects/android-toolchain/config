@@ -8,9 +8,6 @@ var:
   version_30: 30.0.2
   version_29: 29.0.2
   version_28: 28.0.3
-  deps:
-    - unzip
-    - python3
   setup: |
     mkdir -p /var/tmp/dist
     tar -C /var/tmp/dist -xf $rootdir/[% c("compiler_tarfile") %]

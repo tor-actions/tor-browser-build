@@ -13,8 +13,6 @@ var:
   gradle_dependencies_version: 9
   gradle_version: 6.7.1
   glean_parser: 4.0.0
-  arch_deps:
-    - python3-venv
 
 input_files:
   - project: container-image

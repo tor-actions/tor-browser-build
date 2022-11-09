@@ -19,8 +19,6 @@ var:
   gradle_version: 7.0.2
   glean_parser: 5.0.1
   git_branch: '[% project %]-[% c("var/android_components_version") %]-[% c("var/torbrowser_branch") %]-1'
-  arch_deps:
-    - python3-venv
 
 targets:
   nightly:
