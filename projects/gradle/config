@@ -5,8 +5,6 @@ container:
   use_container: 1
 
 var:
-  deps:
-    - unzip
   gradle_sha256sum:
     5.1.1: 4953323605c5d7b89e97d0dc7779e275bccedefcdac090aec123375eae0cc798
     5.6.4: 1f3067073041bc44554d0efe5d402a33bc3d3c93cc39ab684f308586d732a80d

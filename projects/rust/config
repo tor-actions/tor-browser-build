@@ -7,23 +7,10 @@ container:
 targets:
   android:
     var:
-      arch_deps:
-        - libssl-dev
-        - pkg-config
-        - zlib1g-dev
       configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/clang --set rust.jemalloc --target=x86_64-unknown-linux-gnu,armv7-linux-androideabi,thumbv7neon-linux-androideabi,aarch64-linux-android,i686-linux-android,x86_64-linux-android --set=target.armv7-linux-androideabi.cc=armv7a-linux-androideabi16-clang --set=target.armv7-linux-androideabi.ar=armv7a-linux-androideabi-ar --set=target.thumbv7neon-linux-androideabi.cc=armv7a-linux-androideabi16-clang --set=target.thumbv7neon-linux-androideabi.ar=armv7a-linux-androideabi-ar --set=target.aarch64-linux-android.cc=aarch64-linux-android21-clang --set=target.aarch64-linux-android.ar=aarch64-linux-android-ar --set=target.i686-linux-android.cc=i686-linux-android16-clang --set=target.i686-linux-android.ar=i686-linux-android-ar --set=target.x86_64-linux-android.cc=x86_64-linux-android21-clang --set=target.x86_64-linux-android.ar=x86_64-linux-android-ar
 
   linux:
     var:
-      deps:
-        - libc6-dev-i386
-        - lib32stdc++6
-        - build-essential
-        - python
-        - automake
-        - libssl-dev
-        - pkg-config
-        - hardening-wrapper
       # We use
       # `--enable-local-rust` to avoid downloading the required compiler during
       # build time
@@ -58,21 +45,17 @@ targets:
 
   macos:
     var:
-      arch_deps:
-        - libssl-dev
-        - pkg-config
-        - zlib1g-dev
       configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/macosx-toolchain/clang --set rust.jemalloc --target=x86_64-unknown-linux-gnu,[% c("var/build_target") %] --set=target.[% c("var/build_target") %].cc=[% c("var/build_target") %]-clang --set target.x86_64-unknown-linux-gnu.linker=clang --set target.x86_64-unknown-linux-gnu.ar=llvm-ar --set target.x86_64-unknown-linux-gnu.ranlib=llvm-ranlib
+      arch_deps:
+        - pkg-config
 
   windows:
     var:
-      arch_deps:
-        - libssl-dev
-        - pkg-config
-        - zlib1g-dev
       # See tor-browser-build#29320
       compiler: mingw-w64
       configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/clang --target=x86_64-unknown-linux-gnu,[% c("arch") %]-pc-windows-gnu --set target.x86_64-unknown-linux-gnu.linker=clang --set target.x86_64-unknown-linux-gnu.ar=llvm-ar --set target.x86_64-unknown-linux-gnu.ranlib=llvm-ranlib
+      arch_deps:
+        - pkg-config
 
 input_files:
   - project: container-image

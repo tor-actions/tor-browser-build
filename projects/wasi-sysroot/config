@@ -8,12 +8,6 @@ git_submodule: 1
 container:
   use_container: 1
 
-targets:
-  linux:
-    var:
-      arch_deps:
-        - patch
-
 input_files:
   - project: container-image
   - name: binutils
