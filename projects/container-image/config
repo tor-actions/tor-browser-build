@@ -66,6 +66,7 @@ pre: |
   [% IF pc(c('origin_project'), 'var/post_pkginst', { step => c('origin_step') }) -%]
   [% pc(c('origin_project'), 'var/post_pkginst', { step => c('origin_step') }) %]
   [% END -%]
+  apt-get clean
 
 remote_get: |
   #!/bin/sh
