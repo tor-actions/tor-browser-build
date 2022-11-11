@@ -135,6 +135,8 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
   - [ ] ***(Optional)*** `var/geckoview_version` : update to latest `$(ESR_VERSION)` if rebased
 - [ ] Update `projects/translation-base-browser/config`
   - [ ] `git_hash` : update with `HEAD` commit of project's `base-browser` branch
+- [ ] Update `projects/translation-base-browser-fluent/config`
+  - [ ] `git_hash` : update with `HEAD` commit of project's `basebrowser-newidentityftl` branch
 - [ ] Update `projects/tba-translations/config`:
   - [ ]  `git_hash` : update with `HEAD` commit of project's `fenix-torbrowserstringsxml` branch
 - [ ] ***(Optional)*** Update `projects/tor-android-service/config`

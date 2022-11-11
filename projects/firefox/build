@@ -108,6 +108,11 @@ add_translation () {
   component=$2
   lang=$3
   filename=$4
+  [% IF c("var/macos") -%]
+    if [ "$lang" == "ja-JP-mac" ]; then
+      lang="ja"
+    fi
+  [% END-%]
 
   mkdir "browser/components/$component/locale/$lang"
   cp "$transl_dir/$lang/$filename" "browser/components/$component/locale/$lang/"
@@ -115,16 +120,11 @@ add_translation () {
   echo "    locale/$lang/$filename (locale/$lang/$filename)" >> "browser/components/$component/jar.mn"
 }
 
-[% FOREACH lang = c('var/locales') %]
-  lang='[% tmpl(lang) %]'
-  [% IF c("var/macos") -%]
-  if [ "$lang" == "ja-JP-mac" ]; then
-    lang="ja"
-  fi
-  [% END-%]
+supported_locales="[% tmpl(c('var/locales').join(' ')) %]"
+for lang in $supported_locales; do
   add_translation $transl_base_browser newidentity $lang newIdentity.properties
   add_translation $transl_base_browser securitylevel $lang securityLevel.properties
-[% END %]
+done
 
 rm -f configure
 rm -f js/src/configure
@@ -139,6 +139,18 @@ mkdir "$HOME/.mozbuild"
   mkdir "$l10ncentral"
   for tarball in $rootdir/[% c('input_files_by_name/firefox-l10n') %]/*; do
     tar -C "$l10ncentral" -xf "$tarball"
+  done
+
+  tar -C $rootdir -xf $rootdir/[% c('input_files_by_name/translation-base-browser-fluent') %]
+  base_browser_fluent=$rootdir/translation-base-browser-fluent
+  for lang in $supported_locales; do
+    source_lang="$lang"
+    if [ $lang = "ja-JP-mac" ]; then
+      source_lang="ja"
+    elif [ $lang = "es-ES" ]; then
+      source_lang="es"
+    fi
+    cp "$base_browser_fluent/$source_lang/languageNotification.ftl" "$l10ncentral/$lang/browser/browser/"
   done
 [% END %]
 
@@ -155,7 +167,7 @@ export LANG=C.UTF-8
 
 ./mach build --verbose
 [% IF !c("var/testbuild") %]
-  export MOZ_CHROME_MULTILOCALE="[% tmpl(c('var/locales').join(' ')) %]"
+  export MOZ_CHROME_MULTILOCALE="$supported_locales"
   for AB_CD in $MOZ_CHROME_MULTILOCALE; do
     ./mach build chrome-$AB_CD
   done
