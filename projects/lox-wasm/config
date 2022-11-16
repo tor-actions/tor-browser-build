@@ -1,0 +1,25 @@
+# vim: filetype=yaml sw=2
+# Remember to update also the package's hash, with the version!
+version: "0.1.0"
+git_url: https://gitlab.torproject.org/tpo/anti-censorship/lox-rs
+git_hash: 003d9c886be3cef59c4c61db03e54a90990e2e93
+container:
+  use_container: 1
+
+steps:
+  build:
+    filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
+    input_files:
+      - project: container-image
+        pkg_type: build
+      - project: rust
+        name: rust
+        pkg_type: build
+      - project: wasm-bindgen
+        name: wasm-bindgen
+        pkg_type: build
+      - name: cargo_vendor
+        project: lox-wasm
+        pkg_type: cargo_vendor
+        norec:
+          sha256sum: c4d31f971d406688a08414d471bca6ae2dcea4ce9507ab44a4e54324768c2b22
