@@ -6,7 +6,7 @@ container:
   use_container: 1
 
 var:
-  ubuntu_version: 22.04
+  ubuntu_version: 22.04.1
 
 pre: |
   #!/bin/sh
@@ -55,4 +55,4 @@ input_files:
     name: mmdebstrap
   - URL: 'https://cdimage.ubuntu.com/ubuntu-base/releases/[% c("var/ubuntu_version") %]/release/ubuntu-base-[% c("var/ubuntu_version") %]-base-amd64.tar.gz'
     filename: 'container-image_ubuntu-base-[% c("var/ubuntu_version") %]-base-amd64.tar.gz'
-    sha256sum: df6fe77cee11bd216ac532f0ee082bdc4da3c0cc1f1d9cb20f3f743196bc4b07
+    sha256sum: e1f9200c99da008a473c9ae7b51e13f5ea05dc4c2e12beb43f0f9cbbbf6216f4
