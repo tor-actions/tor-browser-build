@@ -168,9 +168,8 @@ export LANG=C.UTF-8
 ./mach build --verbose
 [% IF !c("var/testbuild") %]
   export MOZ_CHROME_MULTILOCALE="$supported_locales"
-  for AB_CD in $MOZ_CHROME_MULTILOCALE; do
-    ./mach build chrome-$AB_CD
-  done
+  # No quotes on purpose, see https://firefox-source-docs.mozilla.org/build/buildsystem/locales.html#instructions-for-multi-locale-builds
+  ./mach package-multi-locale --locales en-US $MOZ_CHROME_MULTILOCALE
   AB_CD=multi ./mach build stage-package
 [% ELSE %]
   ./mach build stage-package
