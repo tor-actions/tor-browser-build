@@ -1,3 +1,28 @@
+Tor Browser 11.5.8 - November 18 2022
+* All Platforms
+  * Update Translations
+  * Update OpenSSL to 1.1.1s
+  * Update NoScript to 11.4.12
+  * Update tor to 0.4.7.11
+  * Update zlib to 1.2.13
+  * Bug 40622: Update obfs4proxy to 0.0.14 in Tor Browser [tor-browser-build]
+ * Windows + macOS + Linux
+   * Bug 31064: Letterboxing is enabled in priviledged contexts too [tor-browser]
+   * Bug 32411: Consider adding about:tor and others to the list of pages that do not need letterboxing [tor-browser]
+   * Bug 41413: Backup intl.locale.requested in 11.5.x [tor-browser]
+   * Bug 41434: Letterboxing bypass through secondary tab (popup/popunder...) [tor-browser]
+   * Bug 41456: Backport ESR 102.5 security fixes to 91.13-based Tor Browser [tor-browser]
+   * Bug 41460: Migrate new identity and security level preferences in 11.5.8 [tor-browser]
+   * Bug 41463: Backport fix for CVE-2022-43680 [tor-browser]
+ * Android
+   * Update GeckoView to 102.5.0esr
+   * Bug 41461: Backport Android-specific 107-rr security fixes to 102.5-esr based Geckoview [tor-browser]
+ * Build
+   * All Platforms
+     * Update Go to 1.18.8
+     * Bug 40658: Create an anticensorship team keyring [tor-browser-build]
+     * Bug 40690: Revert fix for zlib build break [tor-browser-build]
+
 Tor Browser 11.5.7 - November 2 2022
  * Windows + macOS + Linux
    * Bug 41413: Backup intl.locale.requested in 11.5.x [tor-browser]
