@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
-version: 1.2.12
+version: 1.2.13
 git_hash: 'v[% c("version") %]'
 git_url: https://github.com/madler/zlib.git
 gpg_keyring: zlib.gpg
@@ -15,4 +15,3 @@ input_files:
   - project: container-image
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
-  - filename: 0001-Fix-configure-issue-that-discarded-provided-CC-defin.patch
