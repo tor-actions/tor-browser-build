@@ -84,17 +84,21 @@
 
 ### tor-browser: https://gitlab.torproject.org/tpo/applications/tor-browser.git
 - [ ] ***(Optional)*** Backport any Android-specific security fixes from Firefox rapid-release
+- [ ] ***(Optional, Chemspill)*** Backport security-fixes to both `tor-browser` and `base-browser` branches
 - [ ] ***(Optional)*** Rebase to `$(ESR_VERSION)`
   - [ ] Find the Firefox hg tag here : https://hg.mozilla.org/releases/mozilla-esr102/tags
     - [ ] `$(ESR_TAG)` : `<INSERT_TAG_HERE>`
   - [ ] Identify the hg patch associated with above hg tag, and find the equivalent `gecko-dev` git commit (search by commit message)
     - [ ] `gecko-dev` commit : `<INSERT_COMMIT_HASH_HERE>`
-  - [ ] Create new `tor-browser` branch with the discovered `gecko-dev` commit as `HEAD` named `tor-browser-$(ESR_VERSION)esr-$(TOR_BROWSER_MAJOR).$(TOR-BROWSER_MINOR)-1`
     - [ ] Sign/Tag commit :
       - Tag : `$(ESR_TAG)`
       - Message : `Hg tag $(ESR_TAG)`
-  - [ ] Push new branch and tag to origin
-  - [ ] Rebase `tor-browser` patches
+  - [ ] Create new branches with the discovered `gecko-dev` commit as `HEAD` named:
+    - [ ] `base-browser-$(ESR_VERSION)esr-$(TOR_BROWSER_MAJOR).$(TOR-BROWSER_MINOR)-1`
+    - [ ] `tor-browser-$(ESR_VERSION)esr-$(TOR_BROWSER_MAJOR).$(TOR-BROWSER_MINOR)-1`
+  - [ ] Push new branches and esr tag to origin
+  - [ ] Rebase `base-browser` patches onto the `gecko-dev` commit
+  - [ ] Rebase `tor-browser` patches onto the `base-browser` branch
   - [ ] Compare patch-sets (ensure nothing *weird* happened during rebase):
     - [ ] rangediff: `git range-diff $(ESR_TAG_PREV)..$(TOR_BROWSER_BRANCH_PREV) $(ESR_TAG)..$(TOR_BROWSER_BRANCH)`
     - [ ] diff of diffs:
@@ -105,13 +109,12 @@
   - [ ] Open MR for the rebase
 - [ ] Sign/Tag `base-browser` commit:
   - **NOTE** : Currently we are using the `Bug 40926: Implemented the New Identity feature` commit as the dividing line between `base-browser` and `tor-browser`
-  - **NOTE** : If we need to prepare a release without a rebase that includes a patch that needs to be in the `base-browser` section (such as a Mozilla chemspill release) we will create an entirely new branch with a `-2` suffix (or increment higher as appropriate)
   - Tag : `base-browser-$(ESR_VERSION)esr-$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)-1-build1`
   - Message: `Tagging build1 for $(ESR_VERSION)esr-based alpha`
 - [ ] Sign/Tag `tor-browser` commit :
   - Tag : `tor-browser-$(ESR_VERSION)esr-$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)-1-$(FIREFOX_BUILD_N)`
   - Message : `Tagging $(FIREFOX_BUILD_N) for $(ESR_VERSION)esr-based alpha`
-- [ ] Push tag to `origin`
+- [ ] Push rebased branches and tags to `origin`
 - [ ] Update Gitlab Default Branch to new Alpha branch:  https://gitlab.torproject.org/tpo/applications/tor-browser/-/settings/repository
 
 </details>
@@ -143,7 +146,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
   - [ ] `git_hash` : update with `HEAD` commit of project's `main` branch
 - [ ] ***(Optional)*** Update `projects/application-services/config`:
   **NOTE** we don't have any of our own patches for this project
-  - [ ] `git_hash` : update to appropriate git commit associated with $(ESR_VERSION)
+  - [ ] `git_hash` : update to appropriate git commit associated with `$(ESR_VERSION)`
 - [ ] Update `projects/android-components/config`:
   - [ ] `git_hash` : update the `$(BUILD_N)` section to match alpha `android-components` tag
 - [ ] Update `projects/fenix/config`
@@ -156,9 +159,12 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
     - [ ] `URL`
     - [ ] `sha256sum`
 - [ ] Check for OpenSSL updates here : https://www.openssl.org/source/
-  - [ ] ***(Optional)*** If new 1.X.Y series tag available, update `projects/openssl/config`
-    - [ ] `version` : update to next 1.X.Y release tag
+  - [ ] ***(Optional)*** If new 1.X.Y version available, update `projects/openssl/config`
+    - [ ] `version` : update to next 1.X.Y version
     - [ ] `input_files/sha256sum` : update to sha256 sum of source tarball
+- [ ] Check for zlib updates here: https://github.com/madler/zlib/releases
+  - [ ] **(Optional)** If new tag available, update `projects/zlib/config`
+    - [ ] `version` : update to next release tag
 - [ ] Check for tor updates here : https://gitlab.torproject.org/tpo/core/tor/-/tags ; Tor Browser Alpha uses latest `-alpha` tagged tor (or latest of stable if newer)
   - [ ] ***(Optional)*** Update `projects/tor/config`
     - [ ] `version` : update to next release tag
