@@ -4,7 +4,9 @@ filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 git_hash: '[% project %]-[% c("var/android_components_version") %]-[% c("var/torbrowser_branch") %]-1-build5'
 git_url: https://gitlab.torproject.org/tpo/applications/android-components.git
 tag_gpg_id: 1
-gpg_keyring: torbutton.gpg
+gpg_keyring:
+  - pierov.gpg
+  - richard.gpg
 variant: '[% IF c("var/release") %]Release[% ELSE %]Beta[% END %]'
 container:
   use_container: 1
