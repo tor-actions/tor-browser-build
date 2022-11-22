@@ -1,3 +1,114 @@
+Tor Browser 12.0a5 - November 30 2022
+ * All Platforms
+   * Update Translations
+   * Update OpenSSL to 1.1.1s
+   * Update NoScript to 11.4.13
+   * Update tor to 0.4.7.11
+   * Update zlib to 1.2.13
+   * Bug 17228: Consideration for disabling/trimming referrers within TBB [tor-browser]
+   * Bug 27258: font whitelist means we don't have to set gfx.downloadable_fonts.fallback_delay [tor-browser]
+   * Bug 40183: Consider disabling TLS ciphersuites containing SHA-1 [tor-browser]
+   * Bug 40622: Update obfs4proxy to 0.0.14 in Tor Browser [tor-browser-build]
+   * Bug 40674: Add Secondary Snowflake Bridge [tor-browser-build]
+   * Bug 40783: Review 000-tor-browser.js and 001-base-profile.js for 102 [tor-browser]
+   * Bug 41406: Do not define `--without-wasm-sandboxed-libraries` if `WASI_SYSROOT` is defined [tor-browser]
+   * Bug 41420: Remove brand.dtd customization on nightly [tor-browser]
+   * Bug 41457: Remove more Mozilla permissions [tor-browser]
+   * Bug 41460: Migrate new identity and security level preferences in 11.5.8 [tor-browser]
+   * Bug 41473: Add support for Albanian (sq) [tor-browser]
+ * Windows + macOS + Linux
+   * Update Firefox to 102.5.0esr
+   * Bug 31064: Letterboxing is enabled in priviledged contexts too [tor-browser]
+   * Bug 31821: reapply window.open() clamping [tor-browser]
+   * Bug 32411: Consider adding about:tor and others to the list of pages that do not need letterboxing [tor-browser]
+   * Bug 40081: Letterboxing since 32220 affected by layout.css.devPixelsPerPx [tor-browser]
+   * Bug 40767: 1px white border visible on fullscreen video playback [tor-browser]
+   * Bug 41293: Incomplete branding in German with 12.0a2 [tor-browser]
+   * Bug 41378: Inform users when Tor Browser sets their language automatically [tor-browser]
+   * Bug 41409: Circuit display is broken on Tails [tor-browser]
+   * Bug 41410: Opening and closing HTTPS-Only settings make the identity panel shrink [tor-browser]
+   * Bug 41412: New Identity shows "Tor Browser" instead of "Restart Tor Browser" in unstranslated locales [tor-browser]
+   * Bug 41417: Prompt users to restart after changing language [tor-browser]
+   * Bug 41429: TorConnect and TorSettings are initialized twice [tor-browser]
+   * Bug 41433: Should letterboxing take in account optional components' heights? [tor-browser]
+   * Bug 41434: Letterboxing bypass through secondary tab (popup/popunder...) [tor-browser]
+   * Bug 41436: The new tor-launcher handles arrays in the wrong way [tor-browser]
+   * Bug 41437: Use the new media query for dark theme for the "Connected" pill in bridges [tor-browser]
+   * Bug 41449: Onion authentication's learn more should link to the offline manual [tor-browser]
+   * Bug 41451: Still using requestedLocales in torbutton [tor-browser]
+   * Bug 41455: Tor Browser dev build cannot launch tor [tor-browser]
+   * Bug 41458: Prevent `mach package-multi-locale` from actually creating a package [tor-browser]
+   * Bug 41462: Add anchors to bridge-moji and onion authentication entries [tor-browser]
+   * Bug 41498: The Help panel is empty in 12.0a4 [tor-browser]
+ * Windows
+   * Bug 41426: base-browser nightly fails to build for windows-i686 [tor-browser]
+ * macOS
+   * Bug 23451: Adapt font whitelist to changes on macOS (zh locales) [tor-browser]
+   * Bug 40687: macOS nightly builds with packaged locales fail [tor-browser-build]
+ * Android
+   * Update GeckoView to 102.5.0esr
+   * Bug 40014: Check which of our mobile prefs and configuration changes are still valid for GeckoView [tor-browser]
+   * Bug 41471: Update targetSdkVersion to 31 [tor-browser]
+   * Bug 41481: Tor Browser 11.5.9 for Android crashes on launch on Android 12+ after targetSdkVersion update [tor-browser]
+ * Build System
+   * All Platforms
+     * Update Go to 1.19.3
+     * Bug 40675: Update tb_builders list in set-config [tor-browser-build]
+     * Bug 40667: Update Node.js to 12.22.12 [tor-browser-build]
+     * Bug 40690: Revert fix for zlib build break [tor-browser-build]
+     * Bug 41446: Multi-lingual alpha bundles break make fetch [tor-browser]
+   * Windows + macOS + Linux
+     * Bug 40503: Update Release Prep issue template with base-browser and privacy browser changes [tor-browser-build]
+     * Bug 40641: Fetch Firefox locales from l10n-central [tor-browser-build]
+     * Bug 40685: Remove targets/nightly/var/mar_locales from rbm.conf [tor-browser-build]
+     * Bug 40686: Add a temporary project to fetch Fluent tranlations for base-browser [tor-browser-build]
+     * Bug 40691: Update firefox config to point to base-browser branch rather than a particular tag in nightly [tor-browser-build]
+     * Bug 40699: Fix input_files in projects/firefox-l10n/config [tor-browser-build]
+   * Windows
+     * Bug 40666: Fix compiler depedencies for Firefox on Windows [tor-browser-build]
+   * macOS
+     * Bug 40067: Rename "OS X" to "macOS" [tor-browser-build]
+     * Bug 40439: Create universal x86-64/arm64 mac builds [tor-browser-build]
+
+Tor Browser 11.5.10 - November 28 2022
+ * Android
+   * Update NoScript to 11.4.13
+   * Bug 41481: Tor Browser 11.5.9 for Android crashes on launch on Android 12+ after targetSdkVersion update [tor-browser]
+
+Tor Browser 11.5.9 - November 22 2022
+ * Android
+   * Bug 41471: Update targetSdkVersion to 31 [tor-browser]
+
+Tor Browser 11.5.8 - November 18 2022
+ * All Platforms
+   * Update Translations
+   * Update OpenSSL to 1.1.1s
+   * Update NoScript to 11.4.12
+   * Update tor to 0.4.7.11
+   * Update zlib to 1.2.13
+   * Bug 40622: Update obfs4proxy to 0.0.14 in Tor Browser [tor-browser-build]
+  * Windows + macOS + Linux
+   * Bug 31064: Letterboxing is enabled in priviledged contexts too [tor-browser]
+   * Bug 32411: Consider adding about:tor and others to the list of pages that do not need letterboxing [tor-browser]
+   * Bug 41105: Tor Browser Does Not Clear CORS Preflight Cache despite creating a “New Identity” [tor-browser]
+   * Bug 41413: Backup intl.locale.requested in 11.5.x [tor-browser]
+   * Bug 41434: Letterboxing bypass through secondary tab (popup/popunder...) [tor-browser]
+   * Bug 41456: Backport ESR 102.5 security fixes to 91.13-based Tor Browser [tor-browser]
+   * Bug 41460: Migrate new identity and security level preferences in 11.5.8 [tor-browser]
+   * Bug 41463: Backport fix for CVE-2022-43680 [tor-browser]
+ * Android
+   * Update GeckoView to 102.5.0esr
+   * Bug 41461: Backport Android-specific 107-rr security fixes to 102.5-esr based Geckoview [tor-browser]
+ * Build System
+   * All Platforms
+     * Update Go to 1.18.8
+     * Bug 40658: Create an anticensorship team keyring [tor-browser-build]
+     * Bug 40690: Revert fix for zlib build break [tor-browser-build]
+
+Tor Browser 11.5.7 - November 2 2022
+ * Windows + macOS + Linux
+   * Bug 41413: Backup intl.locale.requested in 11.5.x [tor-browser]
+
 Tor Browser 12.0a4 - October 28 2022
  * All Plaforms
    * Update Translations
@@ -62,12 +173,13 @@ Tor Browser 12.0a4 - October 28 2022
    * Bug 40631: Stop bundling HTTPS Everywhere on Android [tor-browser-build]
    * Bug 41360: Backport Android-specific Firefox 106 to ESR 102.4-based Tor Browser [tor-browser]
    * Bug 41394: Implement a setting to always prefer onion sites [tor-browser]
- * Build
+ * Build System
    * All Platforms
      * Update Go to 1.19.2
      * Bug 23656: Use .mozconfig files in tor-browser repo for rbm builds [tor-browser-build]
      * Bug 28754: make testbuild-android-armv7 stalls during sha256sum step [tor-browser-build]
      * Bug 40397: Create a new build target to package tor daemon, pluggable transports and dependencies [tor-browser-build]
+     * Bug 40585: Prune the manual more [tor-browser-build]
      * Bug 40619: Make sure translations are taken from gitlab.tpo and not git.tpo [tor-browser-build]
      * Bug 40627: Add boklm to torbutton.gpg [torbrowser-build]
      * Bug 40634: Update the project/browser path in tools/changelog-format-blog-post and other files [tor-browser-build]
@@ -79,13 +191,12 @@ Tor Browser 12.0a4 - October 28 2022
      * Bug 40658: Create an anticensorship team keyring [tor-browser-build]
      * Bug 40660: Update changelog-format-blog-post script to point gitlab rather than gitolite [tor-browser-build]
      * Bug 40662: Make base-browser nightly build from tag [tor-browser-build]
+     * Bug 40663: Do not ship bookmarks in tor-browser-build anymore [tor-browser-build]
+     * Bug 40669: Remove HTTPS-Everywhere keyring [tor-browser-build]
      * Bug 40671: Update langpacks URL [tor-browser-build]
      * Bug 41308: Use the same branch for Desktop and GeckoView [tor-browser]
      * Bug 41340: Opt in to some of the NIGHTLY_BUILD features [tor-browser]
      * Bug 41343: Add -without-wam-sandboxed-libraries to mozconfig-linux-x86_64-dev for local builds [tor-browser]
-     * Bug 40585: Prune the manual more [tor-browser-build]
-     * Bug 40663: Do not ship bookmarks in tor-browser-build anymore [tor-browser-build]
-     * Bug 40669: Remove HTTPS-Everywhere keyring [tor-browser-build]
      * Bug 41357: Enable browser toolbox debugging by default for dev builds [tor-browser]
    * macOS
      * Bug 40158: Add support for macOS AArch64 [tor-browser-build]
@@ -114,7 +225,7 @@ Tor Browser 11.5.5 - October 20 2022
    * Bug 40650: Rebase geckoview-102.3.0esr-11.5-1 to ESR 102.4 [tor-browser-build]
    * Bug 41360: Backport Android-specific Firefox 106 to ESR 102.4-based Tor Browser [tor-browser]
    * Bug 41365: Amends to YEC 2022 Takeover on Android [tor-browser]
- * Build
+ * Build System
    * Windows + macOS + Linux
      * Update Go to 1.18.7
      * Bug 40464: go 1.18 fails to build on macOS [tor-browser-build]

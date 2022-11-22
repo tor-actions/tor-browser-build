@@ -97,9 +97,9 @@ input_files:
     enable: '[% ! c("var/android") %]'
   - filename: Bundle-Data
     enable: '[% ! c("var/android") %]'
-  - URL: https://addons.mozilla.org/firefox/downloads/file/4002416/noscript-11.4.11.xpi
+  - URL: https://addons.mozilla.org/firefox/downloads/file/4033638/noscript-11.4.13.xpi
     name: noscript
-    sha256sum: d1430ddc3f3bc3a5c403dbf39ff8c8275a2e7ecd4a2f079be39c193d462a2a0b
+    sha256sum: 078026ae894fe516ce9e61a1084d1b6dc883cd72c51027de342132141ca7f00d
   - filename: 'gtk3-settings.ini'
     enable: '[% c("var/linux") %]'
   - project: libdmg-hfsplus
