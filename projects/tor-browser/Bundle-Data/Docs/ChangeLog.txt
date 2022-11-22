@@ -1,3 +1,7 @@
+Tor Browser 11.5.9 - November 22 2022
+* Android
+  * Bug 41471: Update targetSdkVersion to 31 [tor-browser]
+
 Tor Browser 11.5.8 - November 18 2022
 * All Platforms
   * Update Translations
