@@ -1,3 +1,8 @@
+Tor Brwoser 11.5.10 - November 28 2022
+ * Android
+   * Update NoScript to 11.4.13
+   * Bug 41481: Tor Browser 11.5.9 for Android crashes on launch on Android 12+ after targetSdkVersion update [tor-browser]
+
 Tor Browser 11.5.9 - November 22 2022
 * Android
   * Bug 41471: Update targetSdkVersion to 31 [tor-browser]

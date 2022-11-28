@@ -17,7 +17,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/34/9734/13299734/13299734.png?modified=1565722641"
           }
         ],
-        "average_daily_users": 915286,
+        "average_daily_users": 909198,
         "categories": {
           "android": [
             "experimental",
@@ -221,10 +221,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.5579,
-          "bayesian_average": 4.5566771238117,
-          "count": 4687,
-          "text_count": 1494
+          "average": 4.5582,
+          "bayesian_average": 4.5569804901850635,
+          "count": 4708,
+          "text_count": 1504
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/reviews/",
         "requires_payment": false,
@@ -321,7 +321,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/versions/",
-        "weekly_downloads": 26742
+        "weekly_downloads": 25656
       },
       "notes": null
     },
@@ -337,7 +337,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/73/4073/5474073/5474073.png?modified=1469820907"
           }
         ],
-        "average_daily_users": 680581,
+        "average_daily_users": 669887,
         "categories": {
           "android": [
             "security-privacy"
@@ -464,15 +464,14 @@
         ],
         "promoted": {
           "apps": [
-            "firefox",
-            "android"
+            "firefox"
           ],
-          "category": "recommended"
+          "category": "spotlight"
         },
         "ratings": {
-          "average": 4.6591,
-          "bayesian_average": 4.656546073050549,
-          "count": 2303,
+          "average": 4.6597,
+          "bayesian_average": 4.657149505820861,
+          "count": 2307,
           "text_count": 460
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/https-everywhere/reviews/",
@@ -502,7 +501,7 @@
         "type": "extension",
         "url": "https://www.eff.org/https-everywhere",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/https-everywhere/versions/",
-        "weekly_downloads": 9371
+        "weekly_downloads": 7804
       },
       "notes": null
     },
@@ -518,7 +517,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/56/7656/6937656/6937656.png?modified=1550343990"
           }
         ],
-        "average_daily_users": 258956,
+        "average_daily_users": 256617,
         "categories": {
           "android": [
             "security-privacy"
@@ -733,9 +732,9 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.8196,
-          "bayesian_average": 4.814881708000599,
-          "count": 1297,
+          "average": 4.82,
+          "bayesian_average": 4.815284382393805,
+          "count": 1300,
           "text_count": 235
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/reviews/",
@@ -821,7 +820,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/versions/",
-        "weekly_downloads": 5049
+        "weekly_downloads": 5014
       },
       "notes": null
     },
@@ -837,7 +836,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/73/4073/5474073/5474073.png?modified=1469820907"
           }
         ],
-        "average_daily_users": 1087451,
+        "average_daily_users": 1080325,
         "categories": {
           "android": [
             "security-privacy"
@@ -1359,9 +1358,9 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.7974,
-          "bayesian_average": 4.7945372575845875,
-          "count": 2127,
+          "average": 4.7978,
+          "bayesian_average": 4.794944343168069,
+          "count": 2136,
           "text_count": 419
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/reviews/",
@@ -1386,7 +1385,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/versions/",
-        "weekly_downloads": 30652
+        "weekly_downloads": 23645
       },
       "notes": null
     },
@@ -1402,7 +1401,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 6179567,
+        "average_daily_users": 6109476,
         "categories": {
           "android": [
             "security-privacy"
@@ -1566,7 +1565,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2022-11-17T18:50:18Z",
+        "last_updated": "2022-11-21T14:05:21Z",
         "name": {
           "ar": "uBlock Origin",
           "bg": "uBlock Origin",
@@ -1711,10 +1710,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.777,
-          "bayesian_average": 4.776583448503493,
-          "count": 14553,
-          "text_count": 3822
+          "average": 4.7781,
+          "bayesian_average": 4.777684363250582,
+          "count": 14613,
+          "text_count": 3832
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/reviews/",
         "requires_payment": false,
@@ -1776,7 +1775,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/versions/",
-        "weekly_downloads": 143376
+        "weekly_downloads": 145268
       },
       "notes": null
     },
@@ -1792,7 +1791,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 136775,
+        "average_daily_users": 137691,
         "categories": {
           "android": [
             "photos-media"
@@ -1889,10 +1888,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.5112,
-          "bayesian_average": 4.505934556847595,
-          "count": 1072,
-          "text_count": 398
+          "average": 4.5084,
+          "bayesian_average": 4.503134943951076,
+          "count": 1074,
+          "text_count": 399
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/reviews/",
         "requires_payment": false,
@@ -1914,7 +1913,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/versions/",
-        "weekly_downloads": 342
+        "weekly_downloads": 367
       },
       "notes": null
     },
@@ -1930,7 +1929,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 94602,
+        "average_daily_users": 93297,
         "categories": {
           "android": [
             "experimental",
@@ -2042,10 +2041,10 @@
         ],
         "promoted": null,
         "ratings": {
-          "average": 4.4005,
-          "bayesian_average": 4.386706032404273,
-          "count": 397,
-          "text_count": 111
+          "average": 4.39,
+          "bayesian_average": 4.37632626166722,
+          "count": 400,
+          "text_count": 113
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/reviews/",
         "requires_payment": false,
@@ -2067,7 +2066,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/versions/",
-        "weekly_downloads": 579
+        "weekly_downloads": 578
       },
       "notes": null
     },
@@ -2083,7 +2082,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/64/9064/12929064/12929064.png?modified=1651263207"
           }
         ],
-        "average_daily_users": 242729,
+        "average_daily_users": 241693,
         "categories": {
           "android": [
             "photos-media",
@@ -2097,7 +2096,7 @@
         "contributions_url": "https://www.paypal.com/donate?hosted_button_id=GLL4UNSNU6SQN&utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2017-06-17T15:23:33Z",
         "current_version": {
-          "id": 5482102,
+          "id": 5490272,
           "compatibility": {
             "firefox": {
               "min": "91.0",
@@ -2108,7 +2107,7 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/search_by_image/versions/5482102",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/search_by_image/versions/5490272",
           "is_strict_compatibility_enabled": false,
           "license": {
             "id": 6,
@@ -2122,19 +2121,19 @@
             "en-US": "Learn more about this release from the <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/034fc31c913b4c441795892fe3d65db9f7edbe64b225782c051d3e956eacba86/https%3A//github.com/dessant/search-by-image/blob/master/CHANGELOG.md\" rel=\"nofollow\">changelog</a>."
           },
           "reviewed": null,
-          "version": "5.4.0",
+          "version": "5.4.2",
           "files": [
             {
-              "id": 4026447,
-              "created": "2022-11-05T13:49:24Z",
-              "hash": "sha256:3631a3ef95be1f07e1ab78e4517b8d54f9cfe1c90b50374c0c9e525251d2df8c",
+              "id": 4034617,
+              "created": "2022-11-23T22:15:06Z",
+              "hash": "sha256:327549ce86f8dc27794ece4a065cf673e007eefe716fb188b8c6d28102fca22f",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 805876,
+              "size": 806112,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/4026447/search_by_image-5.4.0.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/4034617/search_by_image-5.4.2.xpi",
               "permissions": [
                 "alarms",
                 "clipboardRead",
@@ -2175,7 +2174,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2022-11-07T08:53:41Z",
+        "last_updated": "2022-11-24T10:36:11Z",
         "name": {
           "en-US": "Search by Image"
         },
@@ -2301,9 +2300,9 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.6445,
-          "bayesian_average": 4.639578825981166,
-          "count": 1190,
+          "average": 4.6475,
+          "bayesian_average": 4.6426080367355835,
+          "count": 1200,
           "text_count": 234
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/reviews/",
@@ -2325,7 +2324,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/versions/",
-        "weekly_downloads": 4715
+        "weekly_downloads": 3908
       },
       "notes": null
     },
@@ -2348,7 +2347,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 96564,
+        "average_daily_users": 97618,
         "categories": {
           "android": [
             "other"
@@ -2630,10 +2629,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.4477,
-          "bayesian_average": 4.442973243831534,
-          "count": 1175,
-          "text_count": 317
+          "average": 4.4413,
+          "bayesian_average": 4.436575665528032,
+          "count": 1176,
+          "text_count": 316
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/reviews/",
         "requires_payment": false,
@@ -2653,7 +2652,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/versions/",
-        "weekly_downloads": 97
+        "weekly_downloads": 37
       },
       "notes": null
     },
@@ -2669,7 +2668,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/43/0143/143/143.png?modified=1506804587"
           }
         ],
-        "average_daily_users": 335004,
+        "average_daily_users": 331471,
         "categories": {
           "android": [
             "performance",
@@ -2683,7 +2682,7 @@
         "contributions_url": "https://www.paypal.com/donate/?hosted_button_id=9ERKTU5MBH4EW&utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2005-05-13T10:51:32Z",
         "current_version": {
-          "id": 5486044,
+          "id": 5489293,
           "compatibility": {
             "firefox": {
               "min": "59.0",
@@ -2694,7 +2693,7 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/noscript/versions/5486044",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/noscript/versions/5489293",
           "is_strict_compatibility_enabled": false,
           "license": {
             "id": 13,
@@ -2705,22 +2704,22 @@
             "url": "http://www.gnu.org/licenses/gpl-2.0.html"
           },
           "release_notes": {
-            "en-US": "v 11.4.12\n============================================================\nx [L10n] Updated is, mk\nx [L10n] New Finnish (fi) locale (thanks RJuho, olavinto and\n  ricky.tigg)\nx [L10n] New Ukrainian (uk) locale (thanks Kataphan, MuS and\n  uniss)\nx [L10n] New Persian (fa) locale (thanks voxp and magnifico)"
+            "en-US": "v 11.4.13\n============================================================\nx Ensure theme changes are synchronized across windows,\n  including private ones (thanks barbaz for reporting)\nx [UI] Ensure prompts are always centered relative to the\n  parent window in multi-monitors setups\nx Switch to \"Modern Red Evil\" icon contributed by fatboy\nx Work-around for Chromium unable to load the placeholder\n  icon\nx Themed placeholders\nx [nscl] Fixed placeholder fallback styles on Gecko\n  embedding documents\nx [L10n] New Romanian (ro) locale (thanks Simona Iacob and\n  Inpresentia I.)"
           },
           "reviewed": null,
-          "version": "11.4.12",
+          "version": "11.4.13",
           "files": [
             {
-              "id": 4030389,
-              "created": "2022-11-14T23:11:19Z",
-              "hash": "sha256:90f1164a87e5ff303b5d60882ee9458e9c1f775c67098b902662f8f4a1c27df6",
+              "id": 4033638,
+              "created": "2022-11-21T22:34:56Z",
+              "hash": "sha256:078026ae894fe516ce9e61a1084d1b6dc883cd72c51027de342132141ca7f00d",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 942951,
+              "size": 948790,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/4030389/noscript-11.4.12.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/4033638/noscript-11.4.13.xpi",
               "permissions": [
                 "contextMenus",
                 "storage",
@@ -2786,7 +2785,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2022-11-17T22:00:14Z",
+        "last_updated": "2022-11-22T09:08:25Z",
         "name": {
           "de": "NoScript",
           "el": "NoScript",
@@ -2858,10 +2857,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.4098,
-          "bayesian_average": 4.407047989508024,
-          "count": 2001,
-          "text_count": 782
+          "average": 4.409,
+          "bayesian_average": 4.406249605020352,
+          "count": 2005,
+          "text_count": 784
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/reviews/",
         "requires_payment": false,
@@ -2905,7 +2904,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/versions/",
-        "weekly_downloads": 7636
+        "weekly_downloads": 7527
       },
       "notes": null
     },
@@ -2921,7 +2920,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 140728,
+        "average_daily_users": 140511,
         "categories": {
           "android": [
             "performance",
@@ -3035,9 +3034,9 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 3.9136,
-          "bayesian_average": 3.90922832913084,
-          "count": 1088,
+          "average": 3.9128,
+          "bayesian_average": 3.90842770432453,
+          "count": 1089,
           "text_count": 388
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/reviews/",
@@ -3057,7 +3056,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/versions/",
-        "weekly_downloads": 1695
+        "weekly_downloads": 1431
       },
       "notes": null
     }
