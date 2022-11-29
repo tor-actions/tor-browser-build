@@ -24,8 +24,8 @@ steps:
       my $changesets_json = project_config('firefox', 'var/l10n-changesets', { %$options, origin_project => $project });
       my $d = decode_json $changesets_json;
       my $locales = project_config($project, 'var/locales', $options);
-      foreach my $locale (@$locales) {
-        $locale = process_template($project, $locale, '.');
+      foreach my $loc (@$locales) {
+        my $locale = process_template($project, $loc, '.');
         next unless my $revision = $d->{$locale}{revision};
         my $input_file = {
           name => $locale,
