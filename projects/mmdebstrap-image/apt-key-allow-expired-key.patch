@@ -1,0 +1,23 @@
+--- o/apt-key	2022-11-30 14:57:12.742026261 +0000
++++ n/apt-key	2022-12-01 08:38:08.170140893 +0000
+@@ -815,11 +815,18 @@
+ 	    create_gpg_home
+ 	fi
+ 	setup_merged_keyring
++	tmpfile=$(mktemp)
++	set +e
+ 	if [ -n "$FORCED_KEYRING" ]; then
+-	    "$GPGV" --homedir "${GPGHOMEDIR}" --keyring "$(dearmor_filename "${FORCED_KEYRING}")" --ignore-time-conflict "$@"
++	    (eval "exec ${GPGSTATUSFD}>$tmpfile"; "$GPGV" --homedir "${GPGHOMEDIR}" --keyring "$(dearmor_filename "${FORCED_KEYRING}")" --ignore-time-conflict "$@")
+ 	else
+-	    "$GPGV" --homedir "${GPGHOMEDIR}" --keyring "${GPGHOMEDIR}/pubring.gpg" --ignore-time-conflict "$@"
++	    (eval "exec ${GPGSTATUSFD}>$tmpfile"; "$GPGV" --homedir "${GPGHOMEDIR}" --keyring "${GPGHOMEDIR}/pubring.gpg" --ignore-time-conflict "$@")
+ 	fi
++	err=$?
++	set -e
++	cat "$tmpfile" | sed 's/^\[GNUPG:\] EXPKEYSIG /\[GNUPG:\] GOODSIG /' >&${GPGSTATUSFD}
++	rm -f "$tmpfile"
++	exit $err
+ 	;;
+     help)
+         usage

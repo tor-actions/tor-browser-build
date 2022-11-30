@@ -16,6 +16,14 @@ pre: |
   apt-get update -y -q
   apt-get install -y -q debian-archive-keyring ubuntu-keyring mmdebstrap gnupg
 
+  [% IF c("var/container/suite") == "jessie" -%]
+    apt-get install -y -q patch
+    cd /usr/bin
+    # The gpg key for jessie is expired. We patch apt-key to accept expired keys.
+    patch -p1 < $rootdir/apt-key-allow-expired-key.patch
+    cd $rootdir
+  [% END -%]
+
   export SOURCE_DATE_EPOCH='[% c("timestamp") %]'
   tar -xf [% c('input_files_by_name/mmdebstrap') %]
   ./mmdebstrap/mmdebstrap --mode=unshare [% c("var/container/mmdebstrap_opt") %] [% c("var/container/suite") %] output.tar.gz [% c("var/container/debian_mirror") %]
@@ -56,3 +64,5 @@ input_files:
   - URL: 'https://cdimage.ubuntu.com/ubuntu-base/releases/[% c("var/ubuntu_version") %]/release/ubuntu-base-[% c("var/ubuntu_version") %]-base-amd64.tar.gz'
     filename: 'container-image_ubuntu-base-[% c("var/ubuntu_version") %]-base-amd64.tar.gz'
     sha256sum: e1f9200c99da008a473c9ae7b51e13f5ea05dc4c2e12beb43f0f9cbbbf6216f4
+  - filename: apt-key-allow-expired-key.patch
+    enable: '[% c("var/container/suite") == "jessie" %]'
