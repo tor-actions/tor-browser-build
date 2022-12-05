@@ -37,9 +37,14 @@ pre: |
   [% IF c("var/linux-cross") -%]
     dpkg --add-architecture [% c("var/arch_debian") %]
   [% END -%]
+  [% IF c("var/container/suite") == "jessie" -%]
+    # We need to use faketime to run `apt-get update` on jessie, because of
+    # expired key. See tor-browser-build#40693
+    dpkg -i ./libfaketime_0.9.6-3_amd64.deb ./faketime_0.9.6-3_amd64.deb
+  [% END -%]
   # Update the package cache again because `pre_pkginst` may change the
   # package manager configuration.
-  apt-get update -y -q
+  [% IF c("var/container/suite") == "jessie" %]faketime '2018-12-24 08:15:42' [% END %]apt-get update -y -q
   [% END -%]
   apt-get upgrade -y -q
   [%
@@ -82,3 +87,9 @@ input_files:
   - project: mmdebstrap-image
     target:
       - '[% c("var/container/suite") %]-[% c("var/container/arch") %]'
+  - URL: http://deb.debian.org/debian/pool/main/f/faketime/faketime_0.9.6-3_amd64.deb
+    sha256sum: 19b2a01a2fae7e6d5a8b741fc0bc626451cb4c2cc884ee79f1136dd3c2c26213
+    enable: '[% c("var/container/suite") == "jessie" %]'
+  - URL: http://deb.debian.org/debian/pool/main/f/faketime/libfaketime_0.9.6-3_amd64.deb
+    sha256sum: 82747d5815b226cfed7f6f9a751bf8c20d457f3ba786add6017d6904dea4fdb4
+    enable: '[% c("var/container/suite") == "jessie" %]'
