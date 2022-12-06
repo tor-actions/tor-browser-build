@@ -475,7 +475,7 @@ sub write_downloads_json {
 
 sub marzip_path {
     my ($config, $version) = @_;
-    for my $osname (qw/linux64 linux32 mac64 win64 win32/) {
+    for my $osname (qw/linux64 linux32 macos-x86_64 win64 win32/) {
         my $marzip = version_dir($config, $version) . "/mar-tools-$osname.zip";
         return $marzip if -f $marzip;
     }
