@@ -15,6 +15,10 @@ targets:
     git_hash: main
     tag_gpg_id: 0
 
+  windows:
+    var:
+      flag_mwindows: '-Wl,--subsystem,console'
+
   linux-i686:
     var:
       libdir: lib32
