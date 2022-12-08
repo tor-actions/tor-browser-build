@@ -29,20 +29,6 @@
 </details>
 
 <details>
-    <summary>Desktop</summary>
-
-### **torbutton** : https://gitlab.torproject.org/tpo/applications/torbutton.git
-- [ ] Update translations :
-  - [ ] `./import-translations.sh`
-    - **NOTE** : if there are no new strings imported then we are done here
-  - [ ] Commit with message `Translation updates`
-    - **NOTE** : only add files which are already being tracked
-  - [ ] ***(Optional)*** Backport to maintenance branch if present and necessary
-- [ ] fixup! `tor-browser`'s `Bug 10760 : Integrate TorButton to TorBrowser core` issue to point to updated `torbutton` commit
-
-</details>
-
-<details>
     <summary>Android</summary>
 
 ### ***Security Vulnerabilities Backport*** : https://www.mozilla.org/en-US/security/advisories/
@@ -83,6 +69,11 @@
     <summary>Shared</summary>
 
 ### tor-browser: https://gitlab.torproject.org/tpo/applications/tor-browser.git
+- [ ] ***(Optional)*** Update torbutton translations in `toolkit/torbutton`
+  - [ ] `./import-translations.sh`
+    - **NOTE** : if there are no new strings imported then we are done here
+  - [ ] Commit as `fixup!` to the `Add TorStrings module for localization` commit
+    - **NOTE** : only add files which are already being tracked
 - [ ] ***(Optional)*** Backport any Android-specific security fixes from Firefox rapid-release
 - [ ] ***(Optional, Chemspill)*** Backport security-fixes to both `tor-browser` and `base-browser` branches
 - [ ] ***(Optional)*** Rebase to `$(ESR_VERSION)`
@@ -108,7 +99,7 @@
         - [ ] `$(DIFF_TOOL) current_patchset.dif rebased_patchset.deff`
   - [ ] Open MR for the rebase
 - [ ] Sign/Tag `base-browser` commit:
-  - **NOTE** : Currently we are using the `Bug 40926: Implemented the New Identity feature` commit as the dividing line between `base-browser` and `tor-browser`
+  - **NOTE** : Currently we are using the `Bug 40926: Implemented the New Identity feature` commit as the final commit of `base-browser` before `tor-browser`
   - Tag : `base-browser-$(ESR_VERSION)esr-$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)-1-build1`
   - Message: `Tagging build1 for $(ESR_VERSION)esr-based alpha`
 - [ ] Sign/Tag `tor-browser` commit :
@@ -120,7 +111,7 @@
 </details>
 
 <details>
-    <summary>Build/Signing/Publishing</summary>
+    <summary>Build</summary>
 
 ### tor-browser-build: https://gitlab.torproject.org/tpo/applications/tor-browser-build.git
 Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in the various `maint-$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)` (and possibly more specific) branches
@@ -195,8 +186,11 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
     - [ ] Provide links to unsigned builds on `$(BUILD_SERVER)`
     - [ ] Call out any new functionality which needs testing
     - [ ] Link to any known issues
-- [ ] Email Tails dev mailing list: tails-dev@boum.org
-    - [ ] Provide links to unsigned builds on `$(BUILD_SERVER)`
+
+</details>
+
+<details>
+  <summary>Signing/Publishing</summary>
 
 ### signing + publishing
 - [ ] Ensure builders have matching builds
@@ -218,7 +212,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
     - `cd tor-browser-build/tools/signing/`
     - `./macos-signer-proxy`
 - [ ] On `$(STAGING_SERVER)` in a separate `screen` session, ensure tor daemon is running with SOCKS5 proxy on the default port 9050
-- [ ] apk signing : *TODO*
+- [ ] apk signing : copy signed `*multi.apk` files to the unsigned build outputs directory
 - [ ] run do-all-signing script:
     - `cd tor-browser-build/tools/signing/`
     - `./do-all-signing.sh`
@@ -236,7 +230,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
   - Select `Tor Browser (Alpha)` app
   - Navigate to `Release > Production` and click `Create new release` button
   - [ ] Upload the `*.multi.apk` APKs
-  - If necessary, update the 'Release Name' (should be automatically populated)
+  - [ ] Update Release Name to Tor Browser version number
   - [ ] Update Release Notes
     - Next to 'Release notes', click `Copy from a previous release`
     - [ ] Edit blog post url to point to most recent blog post
@@ -248,7 +242,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
 ### website: https://gitlab.torproject.org/tpo/web/tpo.git
 - [ ] `databags/versions.ini` : Update the downloads versions
     - `torbrowser-stable/version` : sort of a catch-all for latest stable version
-    - `torbrowser-stable/win32` : tor version in the expert bundle
+    - `torbrowser-alpha/version` : sort of a catch-all for latest stable version
     - `torbrowser-*-stable/version` : platform-specific stable versions
     - `torbrowser-*-alpha/version` : platform-specific alpha versions
     - `tor-stable`,`tor-alpha` : set by tor devs, do not touch
