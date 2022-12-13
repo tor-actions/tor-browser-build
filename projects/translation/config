@@ -1,0 +1,32 @@
+# vim: filetype=yaml sw=2
+filename: '[% project %]-[% c("step") %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
+git_url: https://gitlab.torproject.org/tpo/translation.git
+version: '[% c("abbrev") %]'
+
+steps:
+  base-browser:
+    base-browser: '[% INCLUDE build %]'
+    git_hash: d1aa584f3da4c2fc6bfe5d289e2783705ee7e015
+    targets:
+      nightly:
+        git_hash: 'base-browser'
+  base-browser-fluent:
+    base-browser-fluent: '[% INCLUDE build %]'
+    git_hash: d771fd689978f52053e8a14bb622c936aa938769
+    targets:
+      nightly:
+        git_hash: 'basebrowser-newidentityftl'
+  tor-browser:
+    tor-browser: '[% INCLUDE build %]'
+    git_hash: a73ed9756f5d9a753fb7c3c7676174e4d9b68dee
+    targets:
+      nightly:
+        git_hash: 'tor-browser'
+  fenix:
+    fenix: '[% INCLUDE build %]'
+    # We need to bump the commit before releasing but just pointing to a branch
+    # might cause too much rebuidling of the Firefox part.
+    git_hash: 5e1d058123f3a5d34a59799bd6f80db5d71e563e
+    targets:
+      nightly:
+        git_hash: 'fenix-torbrowserstringsxml'
