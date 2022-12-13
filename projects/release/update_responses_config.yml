@@ -64,6 +64,9 @@ htaccess_rewrite_rules:
     release: |
         # bug 26570: Redirect pre-8.0 stable users to a separate update directory
         RewriteRule ^[^/]+/[4567]\..*/.* https://aus1.torproject.org/torbrowser/update_pre8.0/release/$0 [last]
-        # tor-browser-build#40678: Force all 11.5 users to update through 11.5.8 before 12.0
+        # tor-browser-build#40678: Force all <=11.5.7 users to update through 11.5.8 before 12.0
         RewriteRule ^[^/]+/[89]\..*/.* https://aus1.torproject.org/torbrowser/update_pre12.0/release/$0 [last]
-        RewriteRule ^[^/]+/1[01]\..*/.* https://aus1.torproject.org/torbrowser/update_pre12.0/release/$0 [last]
+        RewriteRule ^[^/]+/10\..*/.* https://aus1.torproject.org/torbrowser/update_pre12.0/release/$0 [last]
+        RewriteRule ^[^/]+/11\.0.*/.* https://aus1.torproject.org/torbrowser/update_pre12.0/release/$0 [last]
+        RewriteRule ^[^/]+/11\.5/.* https://aus1.torproject.org/torbrowser/update_pre12.0/release/$0 [last]
+        RewriteRule ^[^/]+/11\.5\.[01234567]/.* https://aus1.torproject.org/torbrowser/update_pre12.0/release/$0 [last]
