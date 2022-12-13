@@ -3,3 +3,7 @@ filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 git_url: https://gitlab.torproject.org/tpo/translation.git
 git_hash: 7bcd63fc23945231facd75d1316c534c12f08a31
 version: '[% c("abbrev") %]'
+
+targets:
+  nightly:
+    git_hash: 'base-browser'

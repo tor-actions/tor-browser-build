@@ -5,3 +5,7 @@ git_url: https://gitlab.torproject.org/tpo/translation.git
 # might cause too much rebuidling of the Firefox part.
 git_hash: 462686c5f3fc57ba17ea8804c76e425682ed522f
 version: '[% c("abbrev") %]'
+
+targets:
+  nightly:
+    git_hash: 'fenix-torbrowserstringsxml'
