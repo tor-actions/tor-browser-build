@@ -1,9 +1,0 @@
-# vim: filetype=yaml sw=2
-filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
-git_url: https://gitlab.torproject.org/tpo/translation.git
-git_hash: 55b370953218b77f3bee6fc7b819bc8c9a7bb699
-version: '[% c("abbrev") %]'
-
-targets:
-  nightly:
-    git_hash: 'basebrowser-newidentityftl'

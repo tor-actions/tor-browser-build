@@ -32,7 +32,7 @@ EOF
   nimbusdir=$builddir-[% c("version") %]/app/build/bin/nimbus
   mkdir -p $nimbusdir
   cp $distdir/application-services/nimbus-fml $nimbusdir/
-  tar -C $distdir -xf $rootdir/[% c('input_files_by_name/tba-translation') %]
+  tar -C $distdir -xf $rootdir/[% c('input_files_by_name/translation-fenix') %]
 [% END %]
 tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
 
@@ -60,7 +60,7 @@ v=[% c("variant") %]
   [% FOREACH lang = c('var/locales_mobile');
     SET lang = tmpl(lang); %]
     # Copy our torbrowser_strings.xml at the right place
-    cp /var/tmp/dist/tba-translation/[% lang %]/torbrowser_strings.xml app/src/main/res/values-[% lang %]/
+    cp /var/tmp/dist/translation-fenix/[% lang %]/torbrowser_strings.xml app/src/main/res/values-[% lang %]/
   [% END %]
 
   # Prepare Glean dependencies for offline build

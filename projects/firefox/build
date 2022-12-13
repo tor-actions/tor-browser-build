@@ -62,6 +62,10 @@ mkdir -p $distdir/[% IF ! c("var/macos") %]Browser[% END %]
 
 tar -xf $rootdir/[% c('input_files_by_name/translation-base-browser') %]
 transl_base_browser=$rootdir/translation-base-browser
+[% IF c("var/tor-browser") -%]
+  tar -xf $rootdir/[% c('input_files_by_name/translation-tor-browser') %]
+  transl_tor_browser=$rootdir/translation-tor-browser
+[% END -%]
 
 cd /var/tmp/build/[% project %]-[% c("version") %]
 cat > .mozconfig << 'MOZCONFIG_EOF'
@@ -108,11 +112,6 @@ add_translation () {
   component=$2
   lang=$3
   filename=$4
-  [% IF c("var/macos") -%]
-    if [ "$lang" == "ja-JP-mac" ]; then
-      lang="ja"
-    fi
-  [% END-%]
 
   mkdir "browser/components/$component/locale/$lang"
   cp "$transl_dir/$lang/$filename" "browser/components/$component/locale/$lang/"
@@ -121,9 +120,25 @@ add_translation () {
 }
 
 supported_locales="[% tmpl(c('var/locales').join(' ')) %]"
+[% IF c("var/tor-browser") -%]
+  torbutton_locales="toolkit/torbutton/chrome/locale/"
+  torbutton_jar="toolkit/torbutton/jar.mn"
+[% END -%]
 for lang in $supported_locales; do
+  [% IF c("var/macos") -%]
+    if [ "$lang" == "ja-JP-mac" ]; then
+      lang="ja"
+    fi
+  [% END-%]
+
   add_translation $transl_base_browser newidentity $lang newIdentity.properties
   add_translation $transl_base_browser securitylevel $lang securityLevel.properties
+
+  [% IF c("var/tor-browser") -%]
+    mv "$transl_tor_browser/$lang" "$torbutton_locales/"
+    echo "% locale torbutton $lang %locale/$lang/" >> "$torbutton_jar"
+    echo "    locale/$lang (chrome/locale/$lang/*)" >> "$torbutton_jar"
+  [% END -%]
 done
 
 rm -f configure
