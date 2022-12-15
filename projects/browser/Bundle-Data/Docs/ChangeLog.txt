@@ -1,3 +1,23 @@
+Tor Browser 12.0.1 - December 14 2022
+ * Windows + macOS + Linux
+   * Updated Firefox to 102.6esr
+   * Bug 41519: TOR_SOCKS_IPC_PATH environment variable not honored [tor-browser]
+   * Bug 41520: Regression: rearranging  bookmarks / place items by drag & drop doesn't work anymore [tor-browser]
+ * Android
+   * Updated GeckoView to 102.6esr
+ * Build System
+   * All Platforms
+     * Updated Go to 1.19.4
+     * Bug 40653: Build compiler-rt with runtimes instead of the main LLVM build [tor-browser-build]
+     * Bug 40681: Run apt-get clean, after installing packages in projects/container-image/config [tor-browser-build]
+     * Bug 40683: Install more packages in the default containers to reduce the number of custom containers [tor-browser-build]
+     * Bug 40693: Can't build container-image in main [tor-browser-build]
+     * Bug 40705: Add empty commit mentioning that gitolite repo is no longer updated [tor-browser-build]
+   * Windows
+     * Bug 40708: tor.exe in tor-expert-bundle not writing stdout even when run from cmd.exe [tor-browser-build]
+   * Linux
+     * Bug 40689: Update Ubuntu version from projects/mmdebstrap-image/config to 22.04.1 [tor-browser-build]
+
 Tor Browser 12.0 - December 5 2022
  * All Platforms
    * Update Translations

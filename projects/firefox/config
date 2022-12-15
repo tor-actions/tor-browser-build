@@ -12,10 +12,10 @@ container:
   use_container: 1
 
 var:
-  firefox_platform_version: 102.5.0
+  firefox_platform_version: 102.6.0
   firefox_version: '[% c("var/firefox_platform_version") %]esr'
-  browser_branch: '12.0-2'
-  browser_build: 1
+  browser_branch: '12.0-1'
+  browser_build: 2
   branding_directory: 'browser/branding/alpha'
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   nightly_updates_osname: '[% c("var/osname") %]'
