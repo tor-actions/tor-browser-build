@@ -42,7 +42,6 @@ versions:
         migrate_archs:
         # for example, pt-PT: pt-BR
         migrate_langs:
-        minSupportedInstructionSet: SSE2
         # minSupportedOsVersion on macOS corresponds to the Darwin version ( https://en.wikipedia.org/wiki/Darwin_(operating_system) )
         macos:
             # macOS v10.12.0
@@ -51,9 +50,15 @@ versions:
         win32:
             # Windows 7
             minSupportedOSVersion: 6.1
+            minSupportedInstructionSet: SSE2
         win64:
             # Windows 7
             minSupportedOSVersion: 6.1
+            minSupportedInstructionSet: SSE2
+        linux32:
+            minSupportedInstructionSet: SSE2
+        linux64:
+            minSupportedInstructionSet: SSE2
 mar_compression: xz
 tag: 'tbb-[% c("var/torbrowser_version") %]-[% c("var/torbrowser_build") %]'
 htaccess_rewrite_rules:

@@ -21,11 +21,16 @@ versions:
         detailsURL: http://umj4zbqdfcyevlkgqgpq6foxk3z75zzxsbgt5jqmfxofrbrjh3crbnad.onion/
         migrate_langs:
             pt-PT: pt-BR
-        minSupportedInstructionSet: SSE2
         macos:
             minSupportedOSVersion: 16.0.0
         win32:
             minSupportedOSVersion: 6.1
+            minSupportedInstructionSet: SSE2
         win64:
             minSupportedOSVersion: 6.1
+            minSupportedInstructionSet: SSE2
+        linux32:
+            minSupportedInstructionSet: SSE2
+        linux64:
+            minSupportedInstructionSet: SSE2
 mar_compression: xz
