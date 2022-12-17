@@ -179,6 +179,13 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
       - [ ] Update the URL if you have uploaded to a different people.tpo home
 - [ ] Update `ChangeLog.txt`
   - [ ] Ensure ChangeLog.txt is sync'd between alpha and stable branches
+  - [ ] Check the linked issues: ask people to check if any are missing, remove the not fixed ones
+  - [ ] Run `tools/fetch-changelogs.py $(TOR_BROWSER_VERSION)` or `tools/fetch-changelogs.py '#$(ISSUE_NUMBER)'`
+    - Make sure you have `requests` installed (e.g., `apt install python3-requests`)
+    - The first time you run this script you will need to generate an access token; the script will guide you
+  - [ ] Copy the output of the script to the beginning of `ChangeLog.txt` and adjust its output
+    - At the moment, the script does not create a _Build System_ section
+    - If you used the issue number, you will need to write the Tor Browser version manually
 - [ ] Open MR with above changes
 - [ ] Begin build on `$(BUILD_SERVER)` (fix any issues which come up and update MR)
 - [ ] Sign/Tag commit: `make signtag-alpha`
