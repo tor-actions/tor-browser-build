@@ -31,13 +31,13 @@
 <details>
     <summary>Android</summary>
 
-### ***Security Vulnerabilities Backport*** : https://www.mozilla.org/en-US/security/advisories/
-- **NOTE** : this work may have already occurred in the analogous stable release prep issue
+### **Security Vulnerabilities Backport** : https://www.mozilla.org/en-US/security/advisories/
+- **NOTE** : this work usually first occurs during the Tor Browser Stable release, so for alpha we typically only need to update the various `tor-browser-build` configs to point to the right release tags.
 - [ ] Create tor-browser issue `Backport Android-specific Firefox $(RR_VERSION) to ESR $(ESR_VERSION)-based Tor Browser`
   - [ ] Link new backport issue to this release prep issue
 - [ ] Go through any `Security Vulnerabilities fixed in Firefox $(RR_VERSION)` (or similar) and create list of CVEs which affect Android that need to be a backported
   - Potentially Affected Components:
-    - `firefox`
+    - `firefox`/`geckoview`
     - `application-services`
     - `android-components`
     - `fenix`
@@ -88,15 +88,15 @@
     - [ ] `base-browser-$(ESR_VERSION)esr-$(TOR_BROWSER_MAJOR).$(TOR-BROWSER_MINOR)-1`
     - [ ] `tor-browser-$(ESR_VERSION)esr-$(TOR_BROWSER_MAJOR).$(TOR-BROWSER_MINOR)-1`
   - [ ] Push new branches and esr tag to origin
-  - [ ] Rebase `base-browser` patches onto the `gecko-dev` commit
-  - [ ] Rebase `tor-browser` patches onto the `base-browser` branch
+  - [ ] Rebase previous `base-browser` patches onto the `gecko-dev` commit
+  - [ ] Rebase previous `tor-browser` patches onto the new `base-browser` branch
   - [ ] Compare patch-sets (ensure nothing *weird* happened during rebase):
     - [ ] rangediff: `git range-diff $(ESR_TAG_PREV)..$(TOR_BROWSER_BRANCH_PREV) $(ESR_TAG)..$(TOR_BROWSER_BRANCH)`
     - [ ] diff of diffs:
         -  Do the diff between `current_patchset.diff` and `rebased_patchset.diff` with your preferred `$(DIFF_TOOL)` and look at differences on lines that starts with + or -
         - [ ] `git diff $(ESR_TAG_PREV)..$(TOR_BROWSER_BRANCH_PREV) > current_patchset.diff`
         - [ ] `git diff $(ESR_TAG)..$(TOR_BROWSER_BRANCH) > rebased_patchset.diff`
-        - [ ] `$(DIFF_TOOL) current_patchset.dif rebased_patchset.deff`
+        - [ ] `$(DIFF_TOOL) current_patchset.diff rebased_patchset.diff`
   - [ ] Open MR for the rebase
 - [ ] Sign/Tag `base-browser` commit:
   - **NOTE** : Currently we are using the `Bug 40926: Implemented the New Identity feature` commit as the final commit of `base-browser` before `tor-browser`
@@ -119,73 +119,89 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
 - [ ] Update `rbm.conf`
   - [ ] `var/torbrowser_version` : update to next version
   - [ ] `var/torbrowser_build` : update to `$(TOR_BROWSER_BUILD_N)`
-  - [ ] ***(Desktop Only)*** `var/torbrowser_incremental_from` : update to previous Desktop version
+  - [ ] ***(Optional, Desktop)*** `var/torbrowser_incremental_from` : update to previous Desktop version
     - [ ] **IMPORTANT**: Really *actually* make sure this is the previous Desktop version or else the `make incrementals-*` step will fail
-- [ ] Update `projects/firefox/config`
-  - [ ] `git_hash` : update the `$(BUILD_N)` section to match `tor-browser` tag
-  - [ ] ***(Optional)*** `var/firefox_platform_version` : update to latest `$(ESR_VERSION)` if rebased
-- [ ] Update `projects/geckoview/config`
-  - [ ] `git_hash` : update the `$(BUILD_N)` section to match `tor-browser` tag
-  - [ ] ***(Optional)*** `var/geckoview_version` : update to latest `$(ESR_VERSION)` if rebased
-- [ ] Update `projects/translation-base-browser/config`
-  - [ ] `git_hash` : update with `HEAD` commit of project's `base-browser` branch
-- [ ] Update `projects/translation-base-browser-fluent/config`
-  - [ ] `git_hash` : update with `HEAD` commit of project's `basebrowser-newidentityftl` branch
-- [ ] Update `projects/tba-translations/config`:
-  - [ ]  `git_hash` : update with `HEAD` commit of project's `fenix-torbrowserstringsxml` branch
-- [ ] ***(Optional)*** Update `projects/tor-android-service/config`
-  - [ ] `git_hash` : update with `HEAD` commit of project's `main` branch
-- [ ] ***(Optional)*** Update `projects/application-services/config`:
-  **NOTE** we don't have any of our own patches for this project
-  - [ ] `git_hash` : update to appropriate git commit associated with `$(ESR_VERSION)`
-- [ ] Update `projects/android-components/config`:
-  - [ ] `git_hash` : update the `$(BUILD_N)` section to match alpha `android-components` tag
-- [ ] Update `projects/fenix/config`
-  - [ ] `git_hash` : update the `$(BUILD_N)` section to match `fenix` tag
-  - [ ] ***(Optional)*** `var/fenix_version` : update to latest `$(ESR_VERSION)` if rebased
-- [ ] Update allowed_addons.json by running (from `tor-browser-build` root):
-  - `./tools/fetch_allowed_addons.py > projects/browser/allowed_addons.json`
-- [ ] Check for NoScript updates here : https://addons.mozilla.org/en-US/firefox/addon/noscript
-  - [ ] ***(Optional)*** If new version available, update `noscript` section of `input_files` in `projects/browser/config`
-    - [ ] `URL`
-    - [ ] `sha256sum`
-- [ ] Check for OpenSSL updates here : https://www.openssl.org/source/
-  - [ ] ***(Optional)*** If new 1.X.Y version available, update `projects/openssl/config`
-    - [ ] `version` : update to next 1.X.Y version
-    - [ ] `input_files/sha256sum` : update to sha256 sum of source tarball
-- [ ] Check for zlib updates here: https://github.com/madler/zlib/releases
-  - [ ] **(Optional)** If new tag available, update `projects/zlib/config`
-    - [ ] `version` : update to next release tag
-- [ ] Check for tor updates here : https://gitlab.torproject.org/tpo/core/tor/-/tags ; Tor Browser Alpha uses latest `-alpha` tagged tor (or latest of stable if newer)
-  - [ ] ***(Optional)*** Update `projects/tor/config`
-    - [ ] `version` : update to next release tag
-- [ ] Check for go updates here : https://golang.org/dl
-  - **NOTE** : Tor Browser Alpha uses the latest Stable go version, while Tor Browser Stable uses the latest of the previous Stable major series version
-  - [ ] ***(Optional)*** Update `projects/go/config`
-    - [ ] `version` : update go version
-    - [ ] `input_files/sha256sum` for `go` : update sha256sum of archive (sha256 sums are displayed on the go download page)
-- [ ] ***(Optional)*** Update the manual
-  - [ ] Go to https://gitlab.torproject.org/tpo/web/manual/-/jobs/
-  - [ ] Open the latest build stage
-  - [ ] Download the artifacts (they come in a .zip file).
-  - [ ] Rename it to `manual_$PIPELINEID.zip`
-  - [ ] Upload it to people.tpo
-  - [ ] Update `projects/manual/config`
-    - [ ] Change the version to `$PIPELINEID`
-    - [ ] Update the hash in the input_files section
-    - [ ] Update the URL if you have uploaded to a different people.tpo home
+- [ ] ***(Optional)*** Update Desktop-specific build configs
+  - [ ] Update `projects/firefox/config`
+    - [ ] `git_hash` : update the `$(BUILD_N)` section to match `tor-browser` tag
+    - [ ] ***(Optional)*** `var/firefox_platform_version` : update to latest `$(ESR_VERSION)` if rebased
+  - [ ] Update `projects/translation-base-browser/config`
+    - [ ] `git_hash` : update with `HEAD` commit of project's `base-browser` branch
+  - [ ] Update `projects/translation-base-browser-fluent/config`
+    - [ ] `git_hash` : update with `HEAD` commit of project's `basebrowser-newidentityftl` branch
+- [ ] ***(Optional)*** Update Android-specific build configs
+  - [ ] ***(Optional)*** Update `projects/geckoview/config`
+    - [ ] `git_hash` : update the `$(BUILD_N)` section to match `tor-browser` tag
+    - [ ] ***(Optional)*** `var/geckoview_version` : update to latest `$(ESR_VERSION)` if rebased
+  - [ ] Update `projects/tba-translations/config`:
+    - [ ]  `git_hash` : update with `HEAD` commit of project's `fenix-torbrowserstringsxml` branch
+  - [ ] ***(Optional)*** Update `projects/tor-android-service/config`
+    - [ ] `git_hash` : update with `HEAD` commit of project's `main` branch
+  - [ ] ***(Optional)*** Update `projects/application-services/config`:
+    **NOTE** we don't currently have any of our own patches for this project
+    - [ ] `git_hash` : update to appropriate git commit associated with `$(ESR_VERSION)`
+  - [ ] ***(Optional)*** Update `projects/android-components/config`:
+    - [ ] `git_hash` : update the `$(BUILD_N)` section to match alpha `android-components` tag
+  - [ ] ***(Optional)*** Update `projects/fenix/config`
+    - [ ] `git_hash` : update the `$(BUILD_N)` section to match `fenix` tag
+    - [ ] ***(Optional)*** `var/fenix_version` : update to latest `$(ESR_VERSION)` if rebased
+  - [ ] Update allowed_addons.json by running (from `tor-browser-build` root):
+    - `./tools/fetch_allowed_addons.py > projects/browser/allowed_addons.json`
+- [ ] Update common build configs
+  - [ ] Check for NoScript updates here : https://addons.mozilla.org/en-US/firefox/addon/noscript
+    - [ ] ***(Optional)*** If new version available, update `noscript` section of `input_files` in `projects/browser/config`
+      - [ ] `URL`
+      - [ ] `sha256sum`
+  - [ ] Check for OpenSSL updates here : https://www.openssl.org/source/
+    - [ ] ***(Optional)*** If new 1.X.Y version available, update `projects/openssl/config`
+      - [ ] `version` : update to next 1.X.Y version
+      - [ ] `input_files/sha256sum` : update to sha256 sum of source tarball
+  - [ ] Check for zlib updates here: https://github.com/madler/zlib/releases
+    - [ ] **(Optional)** If new tag available, update `projects/zlib/config`
+      - [ ] `version` : update to next release tag
+  - [ ] Check for tor updates here : https://gitlab.torproject.org/tpo/core/tor/-/tags
+    - [ ] ***(Optional)*** Update `projects/tor/config` 
+      - [ ] `version` : update to latest `-alpha` tag or release tag if newer (ping @dgoulet or @ahf if unsure)
+  - [ ] Check for go updates here : https://golang.org/dl
+    - **NOTE** : Tor Browser Alpha uses the latest Stable major series go version
+    - [ ] ***(Optional)*** Update `projects/go/config`
+      - [ ] `version` : update go version
+      - [ ] `input_files/sha256sum` for `go` : update sha256sum of archive (sha256 sums are displayed on the go download page)
+  - [ ] ***(Optional)*** Update the manual
+    - [ ] Go to https://gitlab.torproject.org/tpo/web/manual/-/jobs/
+    - [ ] Open the latest build stage
+    - [ ] Download the artifacts (they come in a .zip file).
+    - [ ] Rename it to `manual_$PIPELINEID.zip`
+    - [ ] Upload it to people.tpo
+    - [ ] Update `projects/manual/config`
+      - [ ] Change the version to `$PIPELINEID`
+      - [ ] Update the hash in the input_files section
+      - [ ] Update the URL if you have uploaded to a different people.tpo home
 - [ ] Update `ChangeLog.txt`
   - [ ] Ensure ChangeLog.txt is sync'd between alpha and stable branches
 - [ ] Open MR with above changes
-- [ ] Begin build on `$(BUILD_SERVER)` (and fix any issues which come up)
-- [ ] Sign/Tag commit : `make signtag-alpha`
+- [ ] Begin build on `$(BUILD_SERVER)` (fix any issues which come up and update MR)
+- [ ] Sign/Tag commit: `make signtag-alpha`
 - [ ] Push tag to origin
+</details>
 
+<details>
+	<summary>Communications</summary>
 ### notify stakeholders
 - [ ] Email tor-qa mailing list: tor-qa@lists.torproject.org
-    - [ ] Provide links to unsigned builds on `$(BUILD_SERVER)`
-    - [ ] Call out any new functionality which needs testing
-    - [ ] Link to any known issues
+  - [ ] Provide links to unsigned builds on `$(BUILD_SERVER)`
+  - [ ] Note any new functionality which needs testing
+  - [ ] Link to any known issues
+- [ ] Email downstream consumers:
+  - Recipients:
+    - [ ] Tails dev mailing list: tails-dev@boum.org
+    - [ ] Guardian Project: nathan@guardianproject.info
+    - [ ] torbrowser-launcher: micah@micahflee.com
+  - [ ] Provide links to unsigned builds on `$(BUILD_SERVER)`
+  - [ ] Note any changes which may affect packaging/downstream integration
+- [ ] Email upstream stakeholders:
+  - [ ] ***(Optional, after ESR migration)*** Cloudflare: ask-research@cloudflare.com
+    - **NOTE** :  We need to provide them with updated user agent string so they can update their internal machinery to prevent Tor Browser users from getting so many CAPTCHAs
 
 </details>
 
