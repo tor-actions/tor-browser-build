@@ -187,6 +187,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
 
 <details>
 	<summary>Communications</summary>
+
 ### notify stakeholders
 - [ ] Email tor-qa mailing list: tor-qa@lists.torproject.org
   - [ ] Provide links to unsigned builds on `$(BUILD_SERVER)`
