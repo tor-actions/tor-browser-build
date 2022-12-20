@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
-git_hash: '[% project %]-[% c("var/android_components_version") %]-[% c("var/torbrowser_branch") %]-1-build5'
+git_hash: '[% project %]-[% c("var/android_components_version") %]-[% c("var/browser_branch") %]-build[% c("var/android_components_build") %]'
 git_url: https://gitlab.torproject.org/tpo/applications/android-components.git
 tag_gpg_id: 1
 gpg_keyring:
@@ -13,7 +13,8 @@ container:
 
 var:
   android_components_version: 102.0.14
-  torbrowser_branch: 12.0
+  browser_branch: 12.5-1
+  android_components_build: 1
   # This should be updated when the list of gradle dependencies is changed.
   gradle_dependencies_version: 37
   gradle_version: 7.0.2

@@ -69,11 +69,6 @@
     <summary>Shared</summary>
 
 ### tor-browser: https://gitlab.torproject.org/tpo/applications/tor-browser.git
-- [ ] ***(Optional)*** Update torbutton translations in `toolkit/torbutton`
-  - [ ] `./import-translations.sh`
-    - **NOTE** : if there are no new strings imported then we are done here
-  - [ ] Commit as `fixup!` to the `Add TorStrings module for localization` commit
-    - **NOTE** : only add files which are already being tracked
 - [ ] ***(Optional)*** Backport any Android-specific security fixes from Firefox rapid-release
 - [ ] ***(Optional, Chemspill)*** Backport security-fixes to both `tor-browser` and `base-browser` branches
 - [ ] ***(Optional)*** Rebase to `$(ESR_VERSION)`
@@ -126,6 +121,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
     - [ ] `git_hash` : update the `$(BUILD_N)` section to match `tor-browser` tag
     - [ ] ***(Optional)*** `var/firefox_platform_version` : update to latest `$(ESR_VERSION)` if rebased
   - [ ] Update `projects/translation/config`:
+    - [ ] run `tools/get-translation-hashes` to get updated hashes
     - [ ] `steps/base-browser/git_hash` : update with `HEAD` commit of project's `base-browser` branch
     - [ ] `steps/base-browser-fluent/git_hash` : update with `HEAD` commit of project's `basebrowser-newidentityftl` branch
     - [ ] `steps/tor-browser/git_hash` : update with `HEAD` commit of project's `tor-browser` branch
@@ -155,7 +151,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
     - [ ] **(Optional)** If new tag available, update `projects/zlib/config`
       - [ ] `version` : update to next release tag
   - [ ] Check for tor updates here : https://gitlab.torproject.org/tpo/core/tor/-/tags
-    - [ ] ***(Optional)*** Update `projects/tor/config` 
+    - [ ] ***(Optional)*** Update `projects/tor/config`
       - [ ] `version` : update to latest `-alpha` tag or release tag if newer (ping dgoulet or ahf if unsure)
   - [ ] Check for go updates here : https://golang.org/dl
     - **NOTE** : Tor Browser Alpha uses the latest Stable major series go version

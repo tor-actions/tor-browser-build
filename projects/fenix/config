@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
 filename: 'fenix-[% c("version") %]-[% c("var/build_id") %].tar.gz'
-git_hash: 'tor-browser-[% c("var/fenix_version") %]-[% c("var/torbrowser_branch") %]-1-build6'
+git_hash: 'tor-browser-[% c("var/fenix_version") %]-[% c("var/browser_branch") %]-build[% c("var/fenix_build") %]'
 git_url: https://gitlab.torproject.org/tpo/applications/fenix.git
 tag_gpg_id: 1
 gpg_keyring:
@@ -13,7 +13,8 @@ container:
 
 var:
   fenix_version: 102.2.1
-  torbrowser_branch: 12.0
+  browser_branch: 12.5-1
+  fenix_build: 1
   git_branch: 'tor-browser-[% c("var/fenix_version") %]-[% c("var/torbrowser_branch") %]-1'
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   # This should be updated when the list of gradle dependencies is changed.

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+cd "$(dirname "$0")/../git_clones/translation"
+git fetch > /dev/null 2>&1
+
+echo -n "base-browser: "
+git rev-parse origin/base-browser
+echo -n "base-browser-fluent: "
+git rev-parse origin/basebrowser-newidentityftl
+echo -n "tor-browser: "
+git rev-parse origin/tor-browser
+echo -n "fenix: "
+git rev-parse origin/fenix-torbrowserstringsxml
