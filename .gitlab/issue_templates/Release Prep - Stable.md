@@ -167,7 +167,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
       - [ ] `version` : update to next release tag
   - [ ] Check for tor updates here : https://gitlab.torproject.org/tpo/core/tor/-/tags
     - [ ] ***(Optional)*** Update `projects/tor/config` 
-      - [ ] `version` : update to latest non `-alpha` tag (ping @dgoulet or @ahf if unsure)
+      - [ ] `version` : update to latest non `-alpha` tag (ping dgoulet or ahf if unsure)
   - [ ] Check for go updates here : https://golang.org/dl
     - **NOTE** : Tor Browser Stable uses the latest of the *previous* Stable major series go version (apart from the transition phase from Tor Browser Alpha to Stable, in which case Tor Browser Stable may use the latest major series go version)
     - [ ] ***(Optional)*** Update `projects/go/config`
