@@ -444,6 +444,12 @@ basebrowser-testbuild-windows-i686: submodule-update
 basebrowser-testbuild-macos: submodule-update
 	$(rbm) build release --target testbuild --target browser-macos --target basebrowser
 
+basebrowser-testbuild-macos-x86_64: submodule-update
+	$(rbm) build release --target testbuild --target browser-macos-x86_64 --target basebrowser
+
+basebrowser-testbuild-macos-aarch64: submodule-update
+	$(rbm) build release --target testbuild --target browser-macos-aarch64 --target basebrowser
+
 basebrowser-testbuild-src: submodule-update
 	$(rbm) build release --target testbuild --target browser-src-testbuild --target basebrowser
 
