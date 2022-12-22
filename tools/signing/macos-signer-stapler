@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+read -n 1 -p "Press enter once notarization is complete..."
+
 script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "$script_dir/functions"
 
