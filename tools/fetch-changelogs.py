@@ -48,6 +48,7 @@ class Issue:
         if not self.platform:
             self.platform = Platform.ALL_PLATFORMS
             self.num_platforms = 4
+        self.is_build = "Build System" in j["labels"]
 
     def get_platforms(self):
         if self.platform == Platform.ALL_PLATFORMS:
@@ -68,6 +69,15 @@ class Issue:
 
     def __lt__(self, other):
         return self.number < other.number
+
+
+def sorted_issues(issues):
+    issues = [sorted(v) for v in issues.values()]
+    return sorted(
+        issues,
+        key=lambda group: (group[0].num_platforms << 8) | group[0].platform,
+        reverse=True,
+    )
 
 
 if len(sys.argv) < 2:
@@ -117,24 +127,28 @@ else:
     version = "????"
     iid = sys.argv[1][1:]
 
+linked = {}
+linked_build = {}
 r = requests.get(
     f"{API_URL}/projects/{PROJECT_ID}/issues/{iid}/links", headers=headers
 )
-linked = {}
 for i in r.json():
     i = Issue(i)
-    if i.platform not in linked:
-        linked[i.platform] = []
-    linked[i.platform].append(i)
-linked = sorted(
-    linked.values(),
-    key=lambda issues: (issues[0].num_platforms << 8) | issues[0].platform,
-    reverse=True,
-)
+    target = linked_build if i.is_build else linked
+    if i.platform not in target:
+        target[i.platform] = []
+    target[i.platform].append(i)
+linked = sorted_issues(linked)
+linked_build = sorted_issues(linked_build)
 
 date = datetime.now().strftime("%B %d %Y")
 print(f"Tor Browser {version} - {date}")
 for issues in linked:
     print(f" * {issues[0].get_platforms()}")
-    for i in sorted(issues):
+    for i in issues:
         print(f"   * {i}")
+print(" * Build System")
+for issues in linked_build:
+    print(f"   * {issues[0].get_platforms()}")
+    for i in issues:
+        print(f"     * {i}")
