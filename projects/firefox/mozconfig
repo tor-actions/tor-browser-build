@@ -71,7 +71,5 @@
   ac_add_options --enable-verify-mar
 [% END -%]
 
-ac_add_options --with-relative-profile=[% c('var/ProjectName') %]/Data/Browser
-mk_add_options MOZ_APP_DISPLAYNAME="[% c('var/Project_Name') %]"
 mk_add_options MOZ_PARALLEL_BUILD=[% c("num_procs") %]
 
