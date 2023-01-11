@@ -211,15 +211,6 @@ tar -C ${TB_STAGE_DIR} -xf [% c('input_files_by_name/firefox') %]/browser.tar.gz
   rm -Rf Bundle-Data/mac
   mv $SKELETON_TMP Bundle-Data/mac
 
-  [% IF c("var/tor-browser") -%]
-    # Install a "tor" shim that sets the working directory. See #10030.
-    for tbdir in "${TBDIRS[@]}"
-    do
-      mv "$tbdir/$TORBINPATH/tor" "$tbdir/$TORBINPATH/tor.real"
-      cp Bundle-Data/mac-tor.sh "$tbdir/$TORCONFIGPATH/tor"
-    done
-  [% END -%]
-
   tar -C Bundle-Data/mac-applications.dmg -c . | tar -C $TB_STAGE_DIR -x
 [% END %]
 
