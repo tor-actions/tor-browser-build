@@ -1,0 +1,22 @@
+#!/bin/bash
+[% c("var/set_default_env") -%]
+distdir=/var/tmp/dist/[% project %]
+mkdir /var/tmp/dist
+tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/clang') %]
+export PATH="/var/tmp/dist/clang/bin:$PATH"
+
+tar -xf diskdev_cmds-[% c("version") %].tar.gz
+cd diskdev_cmds-[% c("version") %]
+
+patch -p1 < $rootdir/only-newfs_include.diff
+
+make -j[% c("num_procs") %]
+
+mkdir -p "$distdir"
+cp newfs_hfs.tproj/newfs_hfs "$distdir/"
+
+cd /var/tmp/dist
+[% c('tar', {
+        tar_src => [ project ],
+        tar_args => '-czf ' _ dest_dir _ '/' _ c('filename'),
+    }) %]
