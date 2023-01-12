@@ -1,0 +1,21 @@
+# vim: filetype=yaml sw=2
+version: 540.1.linux3
+filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
+container:
+  use_container: 1
+var:
+  deps:
+    - build-essential
+    - libssl-dev
+    - uuid-dev
+input_files:
+  # See hfsplus-tools in taskcluster/ci/fetch/toolchains.yml
+  - URL: https://src.fedoraproject.org/repo/pkgs/hfsplus-tools/diskdev_cmds-540.1.linux3.tar.gz/0435afc389b919027b69616ad1b05709/diskdev_cmds-[% c("version") %].tar.gz
+    sha256: b01b203a97f9a3bf36a027c13ddfc59292730552e62722d690d33bd5c24f5497
+  - project: container-image
+  # The project uses a flag that is not supported by GCC
+  - name: clang
+    project: clang
+  # Build only newfs (we do not care of fsck), and remove a header that does not
+  # exist on Linux (at that path) and is not required on Linux either.
+  - filename: only-newfs_include.diff
