@@ -33,7 +33,6 @@ targets:
   macos:
     var:
       arch_deps:
-        - genisoimage
         - faketime
         - python3-dev
         - python3-pip
@@ -106,6 +105,9 @@ input_files:
     sha256sum: 14af6a3cbc269c045f2d950e1e4f7c29981b35a7abc61d2413f5bb8bd7311857
   - filename: 'gtk3-settings.ini'
     enable: '[% c("var/linux") %]'
+  - project: hfsplus-tools
+    name: hfsplus-tools
+    enable: '[% c("var/macos") %]'
   - project: libdmg-hfsplus
     name: libdmg
     enable: '[% c("var/macos") %]'
