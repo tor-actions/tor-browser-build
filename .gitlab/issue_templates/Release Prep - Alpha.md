@@ -121,7 +121,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
     - [ ] `git_hash` : update the `$(BUILD_N)` section to match `tor-browser` tag
     - [ ] ***(Optional)*** `var/firefox_platform_version` : update to latest `$(ESR_VERSION)` if rebased
   - [ ] Update `projects/translation/config`:
-    - [ ] run `tools/get-translation-hashes` to get updated hashes
+    - [ ] run `make list_translation_updates-alpha` to get updated hashes
     - [ ] `steps/base-browser/git_hash` : update with `HEAD` commit of project's `base-browser` branch
     - [ ] `steps/base-browser-fluent/git_hash` : update with `HEAD` commit of project's `basebrowser-newidentityftl` branch
     - [ ] `steps/tor-browser/git_hash` : update with `HEAD` commit of project's `tor-browser` branch

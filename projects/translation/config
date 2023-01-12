@@ -30,3 +30,17 @@ steps:
     targets:
       nightly:
         git_hash: 'fenix-torbrowserstringsxml'
+  list_updates:
+    list_updates: |
+      [%
+        FOREACH component = [ 'base-browser', 'base-browser-fluent', 'tor-browser', 'fenix' ];
+          branch = pc(project, 'git_hash', { step => component, target => [ 'nightly' ] });
+          commit_hash = exec('git rev-parse ' _ branch, { git_hash => branch });
+          IF commit_hash == pc(project, "git_hash", { step => component });
+            GET '* ' _ component _ " is up to date\n";
+          ELSE;
+            GET '* ' _ component _ ' can be updated: ' _ commit_hash _ "\n";
+          END;
+        END;
+        -%]
+    fetch: 1
