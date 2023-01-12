@@ -5,17 +5,26 @@ find [% src %] ! -executable -exec chmod 0644 {} \;
 find [% src %] -exec [% c("touch") %] {} \;
 
 dmg_tmpdir=\$(mktemp -d)
-[% SET filelist = '"\$dmg_tmpdir/filelist.txt"' %]
-pushd [% src %] 
-find . -type f | sed -e 's/^\.\///' | sort | xargs -i echo "{}={}" > [% filelist %]
-find . -type l | sed -e 's/^\.\///' | sort | xargs -i echo "{}={}" >> [% filelist %]
+hfsfile="\$dmg_tmpdir/tbb-uncompressed.dmg"
 
+# hfsplus sets all the times to time(NULL)
 export LD_PRELOAD=[% c("var/faketime_path") %]
 export FAKETIME="[% USE date; GET date.format(c('timestamp'), format = '%Y-%m-%d %H:%M:%S') %]"
 
-genisoimage -D -V "Tor Browser" -no-pad -R -apple -o "\$dmg_tmpdir/tbb-uncompressed.dmg" -path-list [% filelist %] -graft-points -gid 20 -dir-mode 0755 -new-dir-mode 0755
+# Use a similar strategy to Mozilla (they have 1.02, we have 1.1)
+size=\$(du -ms [% src %] | awk '{ print int( \$1 * 1.1 ) }')
+dd if=/dev/zero of="\$hfsfile" bs=1M count=\$size
+newfs_hfs -v "[% c("var/Project_Name") %]" "\$hfsfile"
 
-dmg dmg "\$dmg_tmpdir/tbb-uncompressed.dmg" [% c('dmg_out', { error_if_undef => 1 }) %]
+pushd [% src %]
+
+hfsplus "\$hfsfile" addall .
+# hfsplus does not play well with dangling links
+hfsplus "\$hfsfile" symlink /Applications /Applications
+# Show the volume icon
+hfsplus "\$hfsfile" attr / C
+
+dmg dmg "\$hfsfile" [% c('dmg_out', { error_if_undef => 1 }) %]
 popd
 
 rm -Rf "\$dmg_tmpdir"

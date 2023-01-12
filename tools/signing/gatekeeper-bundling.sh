@@ -35,18 +35,22 @@ set -e
 script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "$script_dir/functions"
 
-which genisoimage > /dev/null || \
-  exit_error 'genisoimage is missing. You should install the genisoimage package.'
 test -f $faketime_path || \
   exit_error "$faketime_path is missing"
 test -d $macos_stapled_dir || \
   exit_error "The stapled macos zip files should be placed in directory $macos_stapled_dir"
-libdmg_file="$script_dir/../../out/libdmg-hfsplus/libdmg-hfsplus-dfd5e5cc3dc1-c9296e.tar.gz"
+libdmg_file="$script_dir/../../out/libdmg-hfsplus/libdmg-hfsplus-2ee327795680-aa3810.tar.gz"
 test -f "$libdmg_file" || \
   exit_error "$libdmg_file is missing." \
              "You can build it with:" \
              "  ./rbm/rbm build --target no_containers libdmg-hfsplus" \
              "See var/deps in projects/libdmg-hfsplus/config for the list of build dependencies"
+# hfsplus-tools needs to be compiled with Clang, so its build id might change
+hfstools_file="$script_dir/../../out/hfsplus-tools/hfsplus-tools-540.1.linux3-*.tar.gz"
+test -f "$hfstools_file" || \
+  exit_error "$hfstools_file is missing." \
+             "You can build it with:" \
+             "  ./rbm/rbm build hfsplus-tools --target alpha --target torbrowser-macos-x86_64"
 
 test -d "$macos_signed_dir" || mkdir "$macos_signed_dir"
 tmpdir="$macos_stapled_dir/tmp"
@@ -55,7 +59,8 @@ mkdir "$tmpdir"
 cp -rT "$script_dir/../../projects/browser/Bundle-Data/mac-applications.dmg" "$tmpdir/dmg"
 
 tar -C "$tmpdir" -xf "$libdmg_file"
-export PATH="$PATH:$tmpdir/libdmg-hfsplus"
+tar -C "$tmpdir" -xf "$hfstools_file"
+export PATH="$PATH:$tmpdir/libdmg-hfsplus:$tmpdir/hfsplus-tools"
 
 for lang in $bundle_locales
 do

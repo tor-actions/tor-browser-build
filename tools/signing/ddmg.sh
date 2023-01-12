@@ -21,20 +21,33 @@ find $src_dir ! -executable -exec chmod 0644 {} \; 2> /dev/null
 find $src_dir -exec touch -m -t 200001010101 {} \; 2> /dev/null
 set -e
 
+VOLUME_LABEL="${VOLUME_LABEL:-Tor Browser}"
+
 dmg_tmpdir=$(mktemp -d)
-filelist="$dmg_tmpdir/filelist.txt"
-cd $src_dir
-find . -type f | sed -e 's/^\.\///' | sort | xargs -i echo "{}={}" > $filelist
-find . -type l | sed -e 's/^\.\///' | sort | xargs -i echo "{}={}" >> $filelist
+hfsfile="$dmg_tmpdir/tbb-uncompressed.dmg"
 
 export LD_PRELOAD=$faketime_path
 export FAKETIME="2000-01-01 01:01:01"
 
 echo "Starting: " $(basename $dest_file)
 
-genisoimage -D -V "Tor Browser" -no-pad -R -apple -o "$dmg_tmpdir/tbb-uncompressed.dmg" -path-list $filelist -graft-points -gid 20 -dir-mode 0755 -new-dir-mode 0755
+# Use a similar strategy to Mozilla (they have 1.02, we have 1.1)
+size=$(du -ms "$src_dir" | awk '{ print int( $1 * 1.1 ) }')
+dd if=/dev/zero of="$hfsfile" bs=1M count=$size
+newfs_hfs -v "$VOLUME_LABEL" "$hfsfile"
 
-dmg dmg "$dmg_tmpdir/tbb-uncompressed.dmg" "$dest_file"
+cd $src_dir
+
+# hfsplus does not play well with dangling links, so remove /Applications, and
+# add it back again with the special command to do so.
+rm -f Applications
+
+hfsplus "$hfsfile" addall .
+hfsplus "$hfsfile" symlink /Applications /Applications
+# Show the volume icon
+hfsplus "$hfsfile" attr / C
+
+dmg dmg "$hfsfile" "$dest_file"
 
 echo "Finished: " $(basename $dest_file)
 

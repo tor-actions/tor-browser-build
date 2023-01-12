@@ -33,8 +33,9 @@ touch "$GENERATEDPREFSPATH"
   TORBINPATH=Contents/MacOS/Tor
   TORCONFIGPATH=Contents/Resources/TorBrowser/Tor
 
+  tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/hfsplus-tools') %]
   tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/libdmg') %]
-  export PATH=/var/tmp/dist/libdmg-hfsplus:$PATH
+  export PATH=/var/tmp/dist/hfsplus-tools:/var/tmp/dist/libdmg-hfsplus:$PATH
 [% ELSE %]
   TBDIR=$TB_STAGE_DIR/Browser
   TBDIRS=("$TBDIR")
