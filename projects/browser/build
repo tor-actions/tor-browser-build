@@ -203,31 +203,18 @@ tar -C ${TB_STAGE_DIR} -xf [% c('input_files_by_name/firefox') %]/browser.tar.gz
    END; %]
 
 [% IF c("var/macos") %]
-  # The Bundle-Data is designed for embedded data, so we need to modify
-  # the structure when we want the data to be outside the app directory.
-  # We also create an override.ini file to disable the profile migrator.
-  SKELETON_TMP=$rootdir/Bundle-Data/mac-skeleton-tmp
-  SKELETON_TMP_RESOURCES=$SKELETON_TMP/Contents/Resources
-  mkdir -p $SKELETON_TMP_RESOURCES/browser
-  echo "[XRE]" > $SKELETON_TMP_RESOURCES/browser/override.ini
-  echo "EnableProfileMigrator=0" >> $SKELETON_TMP_RESOURCES/browser/override.ini
-  [% IF c("var/tor-browser") -%]
-    mkdir -p $SKELETON_TMP_RESOURCES/TorBrowser/Tor
-    cp -p Bundle-Data/mac/TorBrowser/Data/Tor/torrc-defaults $SKELETON_TMP_RESOURCES/TorBrowser/Tor/
-  [% END -%]
-  rm -Rf Bundle-Data/mac
-  mv $SKELETON_TMP Bundle-Data/mac
-
-  tar -C Bundle-Data/mac-applications.dmg -c . | tar -C $TB_STAGE_DIR -x
+  tar -C "Bundle-Data/[% c('var/ProjectName') %].dmg" -c . | tar -C $TB_STAGE_DIR -x
 [% END %]
 
 for tbdir in "${TBDIRS[@]}"
 do
   mkdir -p "$tbdir/$DOCSPATH"
   cp -a Bundle-Data/Docs/* "$tbdir/$DOCSPATH"
-  tar -C Bundle-Data/[% bundledata_osname %] \
-    [% IF ! c("var/namecoin") %]--exclude=*Electrum-NMC* --exclude=*ncprop279*[% END %] \
-    -c . | tar -C "$tbdir[% IF ! c("var/macos") %]/[% c('var/ProjectName') %][% END %]" -x
+  [% IF c("var/tor-browser") -%]
+    tar -C Bundle-Data/[% bundledata_osname %] \
+      [% IF ! c("var/namecoin") %]--exclude=*Electrum-NMC* --exclude=*ncprop279*[% END %] \
+      -c . | tar -C "$tbdir[% IF ! c("var/macos") %]/[% c('var/ProjectName') %][% END %]" -x
+  [% END -%]
 done
 
 [% IF c("var/tor-browser") -%]

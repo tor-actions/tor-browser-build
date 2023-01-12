@@ -92,7 +92,7 @@ if test -r /proc/cpuinfo && ! grep -q '^flags\s*:.* sse2' /proc/cpuinfo; then
         exit 1
 fi
 
-tbb_usage () {
+print_usage () {
     printf "\n[% c('var/Project_Name') %] Script Options\n"
     printf "  --verbose         Display Tor and Firefox output in the terminal\n"
     printf "  --log [file]      Record Tor and Firefox output in file (default: [% c('var/project-name') %].log)\n"
@@ -357,27 +357,22 @@ cd "${HOME}"
 if [ "$show_usage" -eq 1 ]; then
     # Display Firefox help, then our help
     [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./firefox \
-        --class "[% c('var/Project_Name') %]" --name "[% c('var/Project_Name') %]" \
-        -profile [% c('var/ProjectName') %]/Data/Browser/profile.default --help 2>/dev/null
-    tbb_usage
+        --class "[% c('var/Project_Name') %]" --name "[% c('var/Project_Name') %]" --help 2>/dev/null
+    print_usage
 elif [ "$detach" -eq 1 ] ; then
     [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./firefox \
-        --class "[% c('var/Project_Name') %]" --name "[% c('var/Project_Name') %]" \
-        -profile [% c('var/ProjectName') %]/Data/Browser/profile.default "${@}" > "$logfile" 2>&1 </dev/null &
+        --class "[% c('var/Project_Name') %]" --name "[% c('var/Project_Name') %]" "${@}" > "$logfile" 2>&1 </dev/null &
     disown "$!"
 elif [ "$log_output" -eq 1 -a "$show_output" -eq 1 ]; then
     [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./firefox \
-        --class "[% c('var/Project_Name') %]" --name "[% c('var/Project_Name') %]" \
-        -profile [% c('var/ProjectName') %]/Data/Browser/profile.default "${@}" 2>&1 </dev/null | \
+        --class "[% c('var/Project_Name') %]" --name "[% c('var/Project_Name') %]" "${@}" 2>&1 </dev/null | \
         tee "$logfile"
 elif [ "$show_output" -eq 1 ]; then
     [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./firefox \
-        --class "[% c('var/Project_Name') %]" --name "[% c('var/Project_Name') %]" \
-        -profile [% c('var/ProjectName') %]/Data/Browser/profile.default "${@}" < /dev/null
+        --class "[% c('var/Project_Name') %]" --name "[% c('var/Project_Name') %]" "${@}" < /dev/null
 else
     [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./firefox \
-        --class "[% c('var/Project_Name') %]" --name "[% c('var/Project_Name') %]" \
-        -profile [% c('var/ProjectName') %]/Data/Browser/profile.default "${@}" > "$logfile" 2>&1 </dev/null
+        --class "[% c('var/Project_Name') %]" --name "[% c('var/Project_Name') %]" "${@}" > "$logfile" 2>&1 </dev/null
 fi
 
 exit $?
