@@ -19,7 +19,7 @@ var:
   gradle_dependencies_version: 37
   gradle_version: 7.0.2
   glean_parser: 5.0.1
-  git_branch: '[% project %]-[% c("var/android_components_version") %]-[% c("var/torbrowser_branch") %]-1'
+  git_branch: '[% project %]-[% c("var/android_components_version") %]-[% c("var/browser_branch") %]'
 
 targets:
   nightly:

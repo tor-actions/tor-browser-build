@@ -150,7 +150,7 @@ steps:
 
 targets:
   nightly:
-    git_hash: 'tor-browser-[% c("var/geckoview_version") %]-[% c("var/torbrowser_branch") %]-1'
+    git_hash: 'tor-browser-[% c("var/geckoview_version") %]-[% c("var/browser_branch") %]'
     tag_gpg_id: 0
 
 input_files:

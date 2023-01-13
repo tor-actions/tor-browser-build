@@ -15,7 +15,7 @@ var:
   fenix_version: 102.2.1
   browser_branch: 12.5-1
   fenix_build: 1
-  git_branch: 'tor-browser-[% c("var/fenix_version") %]-[% c("var/torbrowser_branch") %]-1'
+  git_branch: 'tor-browser-[% c("var/fenix_version") %]-[% c("var/browser_branch") %]'
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   # This should be updated when the list of gradle dependencies is changed.
   gradle_dependencies_version: 37
