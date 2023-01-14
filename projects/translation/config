@@ -12,13 +12,13 @@ steps:
         git_hash: 'base-browser'
   base-browser-fluent:
     base-browser-fluent: '[% INCLUDE build %]'
-    git_hash: d771fd689978f52053e8a14bb622c936aa938769
+    git_hash: f74c41b6a962021ad3c60da87024688ce9adbe2c
     targets:
       nightly:
         git_hash: 'basebrowser-newidentityftl'
   tor-browser:
     tor-browser: '[% INCLUDE build %]'
-    git_hash: a73ed9756f5d9a753fb7c3c7676174e4d9b68dee
+    git_hash: ba0c6533d46210722d45d1b5c56142e635e0ebb1
     targets:
       nightly:
         git_hash: 'tor-browser'

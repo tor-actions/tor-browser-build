@@ -1,3 +1,90 @@
+Tor Browser 12.0.2 - January 16 2023
+ * All Platforms
+   * Updated tor to 0.4.7.13
+   * Updated NoScript to 11.4.14
+   * Bug 40565: do something with security.tls.version.enable-deprecated [tor-browser]
+   * Bug 40713: Use the new tor-browser l10n branch in Firefox [tor-browser-build]
+   * Bug 40727: Update list of Snowflake STUN servers in default bridge line [tor-browser-build]
+   * Bug 41506: Remove TrustCor root certificates [tor-browser]
+   * Bug 41525: Drop locales from torbutton, since we will inject them in tor-browser-build [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 102.7esr
+   * Bug 26504: Browser version in about:preferences showing the Firefox ESR version [tor-browser]
+   * Bug 32308: Stop inner letterbox jiggling as border is dragged [tor-browser]
+   * Bug 41375: Clean unused strings [tor-browser]
+   * Bug 41393: about:tbupdate semantic and accessibility problems [tor-browser]
+   * Bug 41522: Backport torbutton -> tor-browser migration to 12.0 series [tor-browser]
+   * Bug 41524: about:tbupdate needs UTF-8 [tor-browser]
+   * Bug 41539: Crypto warning weaknesses [tor-browser]
+   * Bug 41549: tor freeze when receiving to many http proxy requests on socks port [tor-browser]
+   * Bug 41561: Maximize warning is broken (regression) [tor-browser]
+   * Bug 41563: Old placeholders used in TorStrings.jsm [tor-browser]
+ * macOS
+   * Bug 40716: Unable to update to 12.0.1 on Apple Silicon-based Mac [tor-browser-build]
+ * Android
+   * Updated GeckoView to 102.7esr
+   * Bug 41571: Backport Android-specific Firefox 109 to ESR 102.7-based Tor Browser [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.19.5
+     * Bug 40735: Add command to list which translation components need to be updated [tor-browser-build]
+     * Bug 40739: tor-expert-bundle should include ClientTransportPlugin torrc lines for each pluggable transport [tor-browser-build]
+   * Windows + macOS + Linux
+     * Bug 40734: Backport the translation project [tor-browser-build]
+   * macOS
+     * Bug 40706: macos-signer-stapler should wait for user interaction before attempting stapling [tor-browser-build]
+
+Tor Browser 12.5a1 - December 21 2022
+ * All Platforms
+   * Updated tor to 0.4.7.12
+   * Bug 40711: Review and expand the stakeholders we communicate major changes to [tor-browser-build]
+   * Bug 41478: Drop the torbutton submodule in 12.5 [tor-browser]
+   * Bug 41514: eslint broken since migrating torbutton [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 102.6esr
+   * Bug 26504: about:preferences shows Firefox's version instead of Tor Browser's
+   * Bug 32308: Stop inner letterbox jiggling as border is dragged [tor-browser]
+   * Bug 40347: URL bar lock icon says connection is not secure when on "view-source:[...].onion" URLs [tor-browser]
+   * Bug 40678: Force all 11.5 users to update through 11.5.8 before 12.0 [tor-browser-build]
+   * Bug 41375: Clean unused strings [tor-browser]
+   * Bug 41435: Add a Tor Browser migration function [tor-browser]
+   * Bug 41448: User `danger` style for primary button in new identity modal [tor-browser]
+   * Bug 41483: Tor Browser says Firefox timed out, confusing users [tor-browser]
+   * Bug 41503: Disable restart in case of reboot and restore in case of crash [tor-browser]
+   * Bug 41520: Regression: rearranging bookmarks / place items by drag & drop doesn't work anymore [tor-browser]
+   * Bug 41524: about:tbupdate needs UTF-8 [tor-browser]
+   * Bug 41525: Drop locales from torbutton, since we will inject them in tor-browser-build [tor-browser]
+ * macOS + Linux
+   * Bug 41519: TOR_SOCKS_IPC_PATH environment variable not honored [tor-browser]
+ * Windows
+   * Bug 40708: tor.exe in tor-expert-bundle not writing stdout even when run from cmd.exe [tor-browser-build]
+ * macOS
+   * Bug 40716: Unable to update to 12.0.1 on Apple Silicon-based Mac [tor-browser-build]
+ * Android
+   * Updated GeckoView to 102.6esr
+   * Bug 41001: Remove remaining security slider code [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.19.4
+     * Bug 40645: Verify we no longer depend on any signed tags from sysrqb and gk, and remove them from torbutton.gpg [tor-browser-build]
+     * Bug 40679: Use the latest translations for nightly builds [tor-browser-build]
+     * Bug 40681: Run apt-get clean, after installing packages in projects/container-image/config [tor-browser-build]
+     * Bug 40683: Install more packages in the default containers to reduce the number of custom containers [tor-browser-build]
+     * Bug 40689: Update Ubuntu version from projects/mmdebstrap-image/config to 22.04.1 [tor-browser-build]
+     * Bug 40717: Create a script to prepare changelogs [tor-browser-build]
+   * Windows + macOS + Linux
+     * Bug 40707: Update update_responses_config.yml to allow 11.5.8 to update to whatever latest is [tor-browser-build]
+     * Bug 40713: Use the new tor-browser l10n branch in Firefox [tor-browser-build]
+   * Linux + Android
+     * Bug 40653: Build compiler-rt with runtimes instead of the main LLVM build [tor-browser-build]
+   * macOS
+     * Bug 40694: aarch64 tor-expert-bundle for macOS is not exported as part of the browser build [tor-browser-build]
+     * Bug 40704: Building nightly macos incrementals fails [tor-browser-build]
+   * Linux
+     * Bug 40693: Can't build container-image in main [tor-browser-build]
+   * Android
+     * Bug 40702: Nightly builds fails with "error: pathspec 'tor-browser-102.5.0esr-12.0-2' did not match any file(s) known to git" [tor-browser-build]
+
 Tor Browser 12.0.1 - December 14 2022
  * Windows + macOS + Linux
    * Updated Firefox to 102.6esr
