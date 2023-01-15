@@ -5,6 +5,11 @@ version: '[% c("var/torbrowser_version") %]'
 container:
   use_container: 1
 
+targets:
+  windows:
+    var:
+      pt_extension: .exe
+
 input_files:
   - project: container-image
   - name: tor
@@ -15,6 +20,7 @@ input_files:
     project: snowflake
   - project: webtunnel
     name: webtunnel
+  - filename: pt_config.json
   - filename: bridges_list.obfs4.txt
   - filename: bridges_list.meek-azure.txt
   - filename: bridges_list.snowflake.txt
