@@ -1,4 +1,4 @@
-;NSIS Installer for Tor Browser Bundle
+;NSIS Installer for Privacy Browser
 ;Written by Moritz Bartl
 ;released under Public Domain
 
@@ -12,14 +12,14 @@
 ;--------------------------------
 ;General
 
-  ; location of Tor Browser bundle to put into installer
-  !define TBBSOURCE ".\Tor Browser\"
+  ; location of Privacy Browser bundle to put into installer
+  !define TBBSOURCE ".\Privacy Browser\"
 
-  Name "Tor Browser"
-  OutFile "torbrowser-install.exe"
+  Name "Privacy Browser"
+  OutFile "privacybrowser-install.exe"
 
   ;Default installation folder
-  InstallDir "$DESKTOP\Tor Browser"
+  InstallDir "$DESKTOP\Privacy Browser"
 
   ;Best (but slowest) compression
   SetCompressor /SOLID lzma
@@ -31,14 +31,14 @@
 ;--------------------------------
 ;Interface Configuration
 
-  !define MUI_ICON   "torbrowser.ico"
+  !define MUI_ICON   "privacybrowser.ico"
   !define MUI_ABORTWARNING
 
 ;--------------------------------
 ;Modern UI settings
   !define MUI_FINISHPAGE_NOREBOOTSUPPORT     ; we don't require a reboot
   !define MUI_FINISHPAGE_RUN
-  !define MUI_FINISHPAGE_RUN_FUNCTION "StartTorBrowser"
+  !define MUI_FINISHPAGE_RUN_FUNCTION "StartPrivacyBrowser"
   !define MUI_FINISHPAGE_SHOWREADME ; misuse for option to create shortcut; less ugly than MUI_PAGE_COMPONENTS
   !define MUI_FINISHPAGE_SHOWREADME_TEXT "&Add Start Menu && Desktop shortcuts"
   !define MUI_FINISHPAGE_SHOWREADME_FUNCTION "CreateShortCuts"
@@ -111,11 +111,6 @@
   !insertmacro MUI_LANGUAGE "Esperanto"
 
 ;--------------------------------
-;Multi Language support: Read strings from separate file
-
-; !include torbrowser-langstrings.nsi
-
-;--------------------------------
 ;Reserve Files
 
   ;If you are using solid compression, files that are required before
@@ -127,19 +122,19 @@
 ;--------------------------------
 ;Installer Sections
 
-Section "Tor Browser Bundle" SecTBB
+Section "Privacy Browser" SecPB
 
   SetOutPath "$INSTDIR"
   File /r "${TBBSOURCE}\*.*"
   SetOutPath "$INSTDIR\Browser"
-  CreateShortCut "$INSTDIR\Start Tor Browser.lnk" "$INSTDIR\Browser\firefox.exe"
+  CreateShortCut "$INSTDIR\Start Privacy Browser.lnk" "$INSTDIR\Browser\privacybrowser.exe"
 
 SectionEnd
 
 Function CreateShortcuts
 
-  CreateShortCut "$SMPROGRAMS\Start Tor Browser.lnk" "$INSTDIR\Browser\firefox.exe"
-  CreateShortCut "$DESKTOP\Start Tor Browser.lnk" "$INSTDIR\Browser\firefox.exe"
+  CreateShortCut "$SMPROGRAMS\Start Privacy Browser.lnk" "$INSTDIR\Browser\privacybrowser.exe"
+  CreateShortCut "$DESKTOP\Start Privacy Browser.lnk" "$INSTDIR\Browser\privacybrowser.exe"
 
 FunctionEnd
 ;--------------------------------
@@ -148,7 +143,7 @@ FunctionEnd
 Function .onInit
 
   ${IfNot} ${AtLeastWin7}
-    MessageBox MB_USERICON|MB_OK "Tor Browser requires at least Windows 7"
+    MessageBox MB_USERICON|MB_OK "Privacy Browser requires at least Windows 7"
     SetErrorLevel 1
     Quit
   ${EndIf}
@@ -159,7 +154,7 @@ Function .onInit
   System::Call "kernel32::IsProcessorFeaturePresent(i 10)i .R7"
 
   ${If} "$R7" == "0"
-    MessageBox MB_OK|MB_ICONSTOP "Sorry, Tor Browser can't be installed. This version of Tor Browser requires a processor with SSE2 support."
+    MessageBox MB_OK|MB_ICONSTOP "Sorry, Privacy Browser can't be installed. This version of Privacy Browser requires a processor with SSE2 support."
     Abort
   ${EndIf}
 
@@ -172,14 +167,14 @@ FunctionEnd
 
 Function CheckIfTargetDirectoryExists
 ${If} ${FileExists} "$INSTDIR\*.*"
- MessageBox MB_YESNO "The destination directory already exists. You can try to upgrade the Tor Browser Bundle, but if you run into any problems, use a new directory instead. Continue?" IDYES NoAbort
-   Abort
- NoAbort:
+  MessageBox MB_YESNO "The destination directory already exists. You can try to upgrade Privacy Browser, but if you run into any problems, use a new directory instead. Continue?" IDYES NoAbort
+    Abort
+  NoAbort:
 ${EndIf}
 FunctionEnd
 
 
-Function StartTorBrowser
-ExecShell "open" "$INSTDIR/Start Tor Browser.lnk"
+Function StartPrivacyBrowser
+ExecShell "open" "$INSTDIR/Start Privacy Browser.lnk"
 FunctionEnd
 

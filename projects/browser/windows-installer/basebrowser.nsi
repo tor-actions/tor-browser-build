@@ -3,7 +3,7 @@
 ;released under Public Domain
 
 ;--------------------------------
-;Modern" UI
+;Modern UI
 
   !include "MUI2.nsh"
   !include "LogicLib.nsh"
@@ -11,16 +11,16 @@
 
 ;--------------------------------
 ;General
- 
+
   ; location of Base Browser bundle to put into installer
-  !define TBBSOURCE ".\Base Browser\"  
+  !define TBBSOURCE ".\Base Browser\"
 
   Name "Base Browser"
   OutFile "basebrowser-install.exe"
 
   ;Default installation folder
   InstallDir "$DESKTOP\Base Browser"
-  
+
   ;Best (but slowest) compression
   SetCompressor /SOLID lzma
   SetCompressorDictSize 32
@@ -117,11 +117,11 @@
 
 ;--------------------------------
 ;Reserve Files
-  
+
   ;If you are using solid compression, files that are required before
   ;the actual installation should be stored first in the data block,
   ;because this will make your installer start faster.
-  
+
   !insertmacro MUI_RESERVEFILE_LANGDLL
 
 ;--------------------------------
@@ -138,7 +138,7 @@ SectionEnd
 
 Function CreateShortcuts
 
-  CreateShortCut "$SMPROGRAMS\Start Base Browser.lnk" "$INSTDIR\Browser\firefox.exe" 
+  CreateShortCut "$SMPROGRAMS\Start Base Browser.lnk" "$INSTDIR\Browser\firefox.exe"
   CreateShortCut "$DESKTOP\Start Base Browser.lnk" "$INSTDIR\Browser\firefox.exe"
 
 FunctionEnd
