@@ -5,7 +5,7 @@ Description of makefile rules
 torbrowser-release
 ------------------
 Build Tor Browser for the release channel, for all supported platforms.
-The resulting build can be found in directory release/$version.
+The resulting build can be found in directory torbrowser/release/$version.
 
 torbrowser-release-{linux-x86_64,linux-i686,windows-i686,macos,
                     android-armv7, android-x86,android-x86_64,
@@ -18,7 +18,7 @@ android for all architectures we support.
 torbrowser-alpha
 ----------------
 Build Tor Browser for the alpha channel, for all supported platforms.
-The resulting build can be found in directory alpha/$version.
+The resulting build can be found in directory torbrowser/alpha/$version.
 
 torbrowser-alpha-{linux-x86_64,linux-i686,windows-i686,macos,
                   android-armv7,android-x86,android-x86_64,
@@ -33,7 +33,7 @@ Many of the components will be based on the main branch. You might
 want to run "make fetch" before, to fetch the latest commits from all
 components.
 
-The resulting build can be found in directory nightly/$date
+The resulting build can be found in directory torbrowser/nightly/$date
 
 torbrowser-nightly-{linux-x86_64,linux-i686,windows-i686,macos,
                     android-armv7,android-x86,android-x86_64,

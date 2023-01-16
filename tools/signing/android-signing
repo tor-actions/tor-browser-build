@@ -51,13 +51,13 @@ setup_build_tools() {
 download_unsigned_apks() {
   apks_dir=$(mktemp -d)
   trap "rm -Rf $apks_dir" EXIT
-  rsync -avH "$ssh_host_pkgstage:$pkgstage_tor_browser_build_dir/$tbb_version_type/signed/$tbb_version/*-qa.apk" "$apks_dir/"
+  rsync -avH "$ssh_host_pkgstage:$pkgstage_tor_browser_build_dir/$projectname/$tbb_version_type/signed/$tbb_version/*-qa.apk" "$apks_dir/"
 }
 
 upload_signed_apks() {
   rsync -avH --exclude="*-qa.apk" --exclude="*-unaligned.apk" \
     --exclude="*-unsigned.apk" "$apks_dir/" \
-    "$ssh_host_pkgstage:$pkgstage_tor_browser_build_dir/$tbb_version_type/signed/$tbb_version/"
+    "$ssh_host_pkgstage:$pkgstage_tor_browser_build_dir/$projectname/$tbb_version_type/signed/$tbb_version/"
 }
 
 # Sign individual apk

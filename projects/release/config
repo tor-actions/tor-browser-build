@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 version: '[% c("var/torbrowser_version") %]'
-output_dir: release
+output_dir: '[% c("var/projectname", { output_dir => "." }) %]/release'
 link_input_files: 1
 
 var:
@@ -99,13 +99,13 @@ targets:
       build_target: release
 
   nightly:
-    output_dir: 'nightly'
+    output_dir: '[% c("var/projectname", { output_dir => "." }) %]/nightly'
     var:
       build_target: nightly
       publish_dir: '[% c("version") %]'
 
   alpha:
-    output_dir: alpha
+    output_dir: '[% c("var/projectname", { output_dir => "." }) %]/alpha'
     var:
       build_target: alpha
 

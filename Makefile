@@ -187,39 +187,39 @@ signtag-alpha: submodule-update
 	$(rbm) build release --step signtag --target alpha
 
 incrementals-release: submodule-update
-	$(rbm) build release --step update_responses_config --target release --target create_unsigned_incrementals
+	$(rbm) build release --step update_responses_config --target release --target create_unsigned_incrementals --target torbrowser
 	tools/update-responses/download_missing_versions release
 	tools/update-responses/gen_incrementals release
-	$(rbm) build release --step hash_incrementals --target release
+	$(rbm) build release --step hash_incrementals --target release --target torbrowser
 
 incrementals-alpha: submodule-update
-	$(rbm) build release --step update_responses_config --target alpha --target create_unsigned_incrementals
+	$(rbm) build release --step update_responses_config --target alpha --target create_unsigned_incrementals --target torbrowser
 	tools/update-responses/download_missing_versions alpha
 	tools/update-responses/gen_incrementals alpha
-	$(rbm) build release --step hash_incrementals --target alpha
+	$(rbm) build release --step hash_incrementals --target alpha --target torbrowser
 
 incrementals-nightly: submodule-update
-	$(rbm) build release --step update_responses_config --target nightly
+	$(rbm) build release --step update_responses_config --target nightly --target torbrowser
 	NO_CODESIGNATURE=1 tools/update-responses/gen_incrementals nightly
-	$(rbm) build release --step hash_incrementals --target nightly
+	$(rbm) build release --step hash_incrementals --target nightly --target torbrowser
 
 update_responses-release: submodule-update
-	$(rbm) build release --step update_responses_config --target release --target signed
-	$(rbm) build release --step create_update_responses_tar --target release --target signed
+	$(rbm) build release --step update_responses_config --target release --target signed --target torbrowser
+	$(rbm) build release --step create_update_responses_tar --target release --target signed --target torbrowser
 
 update_responses-alpha: submodule-update
-	$(rbm) build release --step update_responses_config --target alpha --target signed
-	$(rbm) build release --step create_update_responses_tar --target alpha --target signed
+	$(rbm) build release --step update_responses_config --target alpha --target signed --target torbrowser
+	$(rbm) build release --step create_update_responses_tar --target alpha --target signed --target torbrowser
 
 dmg2mar-release: submodule-update
-	$(rbm) build release --step update_responses_config --target release --target signed
-	$(rbm) build release --step dmg2mar --target release --target signed
+	$(rbm) build release --step update_responses_config --target release --target signed --target torbrowser
+	$(rbm) build release --step dmg2mar --target release --target signed --target torbrowser
 	tools/update-responses/download_missing_versions release
 	CHECK_CODESIGNATURE_EXISTS=1 MAR_SKIP_EXISTING=1 tools/update-responses/gen_incrementals release
 
 dmg2mar-alpha: submodule-update
-	$(rbm) build release --step update_responses_config --target alpha --target signed
-	$(rbm) build release --step dmg2mar --target alpha --target signed
+	$(rbm) build release --step update_responses_config --target alpha --target signed --target torbrowser
+	$(rbm) build release --step dmg2mar --target alpha --target signed --target torbrowser
 	tools/update-responses/download_missing_versions alpha
 	CHECK_CODESIGNATURE_EXISTS=1 MAR_SKIP_EXISTING=1 tools/update-responses/gen_incrementals alpha
 

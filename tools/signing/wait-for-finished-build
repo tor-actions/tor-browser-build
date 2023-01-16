@@ -14,7 +14,7 @@ var_is_defined ssh_host_builder builder_tor_browser_build_dir
 
 while true
 do
-  ssh "$ssh_host_builder" test -f "$builder_tor_browser_build_dir/$tbb_version_type/unsigned/$tbb_version-build$tbb_version_build/sha256sums-unsigned-build.incrementals.txt" && \
+  ssh "$ssh_host_builder" test -f "$builder_tor_browser_build_dir/$projectname/$tbb_version_type/unsigned/$tbb_version-build$tbb_version_build/sha256sums-unsigned-build.incrementals.txt" && \
     exit 0
   echo "$(date -Iseconds): Waiting for build to finish..."
   sleep 5m

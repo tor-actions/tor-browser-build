@@ -2,9 +2,8 @@
 /hg_clones
 /gclient
 /out
-/release
-/alpha
-/nightly
+/torbrowser
+/basebrowser
 /testbuild
 /rbm.local.conf
 /logs
