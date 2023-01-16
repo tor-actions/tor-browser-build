@@ -96,9 +96,9 @@ mar file will be created. If you want to base your testbuild on the latest
 nightly code insted, rename rbm.local.conf.example to rbm.local.conf
 and adapt the torbrowser-testbuild option accordingly.
 
-Similar makefile targets exist for building Base Browser instead of
-Tor Browser. To build Base Browser, replace `torbrowser` by `basebrowser`
-in the target name.
+Similar makefile targets exist for building Base Browser and Privacy Browser
+instead of Tor Browser. To build Base Browser, replace `torbrowser` by
+`basebrowser` in the target name. For Privacy Browser, use `privacybrowser`.
 
 
 Updating git sources

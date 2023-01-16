@@ -180,102 +180,42 @@ torbrowser-testbuild-macos-aarch64: submodule-update
 torbrowser-testbuild-src: submodule-update
 	$(rbm) build release --target testbuild --target browser-src-testbuild --target torbrowser
 
-signtag-release: submodule-update
-	$(rbm) build release --step signtag --target release --target torbrowser
-
-signtag-alpha: submodule-update
-	$(rbm) build release --step signtag --target alpha --target torbrowser
-
-incrementals-release: submodule-update
+torbrowser-incrementals-release: submodule-update
 	$(rbm) build release --step update_responses_config --target release --target create_unsigned_incrementals --target torbrowser
 	tools/update-responses/download_missing_versions release
 	tools/update-responses/gen_incrementals release
 	$(rbm) build release --step hash_incrementals --target release --target torbrowser
 
-incrementals-alpha: submodule-update
+torbrowser-incrementals-alpha: submodule-update
 	$(rbm) build release --step update_responses_config --target alpha --target create_unsigned_incrementals --target torbrowser
 	tools/update-responses/download_missing_versions alpha
 	tools/update-responses/gen_incrementals alpha
 	$(rbm) build release --step hash_incrementals --target alpha --target torbrowser
 
-incrementals-nightly: submodule-update
+torbrowser-incrementals-nightly: submodule-update
 	$(rbm) build release --step update_responses_config --target nightly --target torbrowser
 	NO_CODESIGNATURE=1 tools/update-responses/gen_incrementals nightly
 	$(rbm) build release --step hash_incrementals --target nightly --target torbrowser
 
-update_responses-release: submodule-update
+torbrowser-update_responses-release: submodule-update
 	$(rbm) build release --step update_responses_config --target release --target signed --target torbrowser
 	$(rbm) build release --step create_update_responses_tar --target release --target signed --target torbrowser
 
-update_responses-alpha: submodule-update
+torbrowser-update_responses-alpha: submodule-update
 	$(rbm) build release --step update_responses_config --target alpha --target signed --target torbrowser
 	$(rbm) build release --step create_update_responses_tar --target alpha --target signed --target torbrowser
 
-dmg2mar-release: submodule-update
+torbrowser-dmg2mar-release: submodule-update
 	$(rbm) build release --step update_responses_config --target release --target signed --target torbrowser
 	$(rbm) build release --step dmg2mar --target release --target signed --target torbrowser
 	tools/update-responses/download_missing_versions release
 	CHECK_CODESIGNATURE_EXISTS=1 MAR_SKIP_EXISTING=1 tools/update-responses/gen_incrementals release
 
-dmg2mar-alpha: submodule-update
+torbrowser-dmg2mar-alpha: submodule-update
 	$(rbm) build release --step update_responses_config --target alpha --target signed --target torbrowser
 	$(rbm) build release --step dmg2mar --target alpha --target signed --target torbrowser
 	tools/update-responses/download_missing_versions alpha
 	CHECK_CODESIGNATURE_EXISTS=1 MAR_SKIP_EXISTING=1 tools/update-responses/gen_incrementals alpha
-
-list_translation_updates-release:
-	$(rbm) showconf --target release --step list_updates translation list_updates
-
-list_translation_updates-alpha:
-	$(rbm) showconf --target alpha --step list_updates translation list_updates
-
-list_toolchain_updates-fenix: submodule-update
-	$(rbm) build fenix --step list_toolchain_updates --target nightly --target torbrowser-android-armv7
-
-list_toolchain_updates-firefox-linux: submodule-update
-	$(rbm) build firefox --step list_toolchain_updates --target nightly --target torbrowser-linux-x86_64
-
-list_toolchain_updates-firefox-windows: submodule-update
-	$(rbm) build firefox --step list_toolchain_updates --target nightly --target torbrowser-windows-x86_64
-
-list_toolchain_updates-firefox-macos: submodule-update
-	$(rbm) build firefox --step list_toolchain_updates --target nightly --target torbrowser-macos
-
-list_toolchain_updates-android-components: submodule-update
-	$(rbm) build android-components --step list_toolchain_updates --target nightly --target torbrowser-android-armv7
-
-list_toolchain_updates-application-services: submodule-update
-	$(rbm) build application-services --step list_toolchain_updates --target nightly --target torbrowser-android-armv7
-
-list_toolchain_updates-geckoview: submodule-update
-	$(rbm) build geckoview --step list_toolchain_updates --target nightly --target torbrowser-android-armv7
-
-create_glean_deps_tarball: submodule-update
-	 $(rbm) build glean --step create_glean_deps_tarball --target alpha --target torbrowser-android-armv7
-
-create_glean_deps_tarball-with_torsocks: submodule-update
-	$(rbm) build glean --step create_glean_deps_tarball --target alpha --target torbrowser-android-armv7 --target with_torsocks
-
-get_gradle_dependencies_list-fenix: submodule-update
-	$(rbm) build fenix --step get_gradle_dependencies_list --target nightly --target torbrowser-android-armv7
-
-get_gradle_dependencies_list-application-services: submodule-update
-	$(rbm) build application-services --step get_gradle_dependencies_list --target nightly --target torbrowser-android-armv7
-
-get_gradle_dependencies_list-android-components: submodule-update
-	$(rbm) build android-components --step get_gradle_dependencies_list --target nightly --target torbrowser-android-armv7
-
-cargo_vendor-application-services: submodule-update
-	$(rbm) build application-services --step cargo_vendor --target nightly --target torbrowser-android-armv7
-
-cargo_vendor-cbindgen-android: submodule-update
-	$(rbm) build cbindgen --step cargo_vendor --target nightly --target torbrowser-android-armv7
-
-cargo_vendor-cbindgen: submodule-update
-	$(rbm) build cbindgen --step cargo_vendor --target nightly --target torbrowser-linux-x86_64
-
-cargo_vendor-uniffi-rs: submodule-update
-	$(rbm) build uniffi-rs --step cargo_vendor --target nightly --target torbrowser-linux-x86_64
 
 
 ########################
@@ -457,12 +397,209 @@ basebrowser-testbuild-src: submodule-update
 	$(rbm) build release --target testbuild --target browser-src-testbuild --target basebrowser
 
 
+###########################
+# Privacy Browser Targets #
+###########################
+
+privacybrowser-release: submodule-update
+	$(rbm) build release --target release --target browser-all-desktop --target privacybrowser
+
+privacybrowser-release-desktop: submodule-update
+	$(rbm) build release --target release --target browser-all-desktop --target privacybrowser
+
+privacybrowser-release-linux-x86_64: submodule-update
+	$(rbm) build release --target release --target browser-linux-x86_64 --target privacybrowser
+
+privacybrowser-release-linux-x86_64-asan: submodule-update
+	$(rbm) build release --target release --target browser-linux-x86_64-asan --target privacybrowser
+
+privacybrowser-release-windows-x86_64: submodule-update
+	$(rbm) build release --target release --target browser-windows-x86_64 --target privacybrowser
+
+privacybrowser-release-macos: submodule-update
+	$(rbm) build release --target release --target browser-macos --target privacybrowser
+
+privacybrowser-release-src: submodule-update
+	$(rbm) build release --target release --target browser-src --target privacybrowser
+
+privacybrowser-alpha: submodule-update
+	$(rbm) build release --target alpha --target browser-all-desktop --target privacybrowser
+
+privacybrowser-alpha-desktop: submodule-update
+	$(rbm) build release --target alpha --target browser-all-desktop --target privacybrowser
+
+privacybrowser-alpha-linux-x86_64: submodule-update
+	$(rbm) build release --target alpha --target browser-linux-x86_64 --target privacybrowser
+
+privacybrowser-alpha-linux-x86_64-asan: submodule-update
+	$(rbm) build release --target alpha --target browser-linux-x86_64-asan --target privacybrowser
+
+privacybrowser-alpha-windows-x86_64: submodule-update
+	$(rbm) build release --target alpha --target browser-windows-x86_64 --target privacybrowser
+
+privacybrowser-alpha-macos: submodule-update
+	$(rbm) build release --target alpha --target browser-macos --target privacybrowser
+
+privacybrowser-alpha-src: submodule-update
+	$(rbm) build release --target alpha --target browser-src --target privacybrowser
+
+privacybrowser-nightly: submodule-update
+	$(rbm) build release --target nightly --target browser-all-desktop --target privacybrowser
+
+privacybrowser-nightly-desktop: submodule-update
+	$(rbm) build release --target nightly --target browser-all-desktop --target privacybrowser
+
+privacybrowser-nightly-linux-x86_64: submodule-update
+	$(rbm) build release --target nightly --target browser-linux-x86_64 --target privacybrowser
+
+privacybrowser-nightly-linux-x86_64-asan: submodule-update
+	$(rbm) build release --target nightly --target browser-linux-x86_64-asan --target privacybrowser
+
+privacybrowser-nightly-windows-x86_64: submodule-update
+	$(rbm) build release --target nightly --target browser-windows-x86_64 --target privacybrowser
+
+privacybrowser-nightly-macos: submodule-update
+	$(rbm) build release --target nightly --target browser-macos --target privacybrowser
+
+privacybrowser-nightly-src: submodule-update
+	$(rbm) build release --target nightly --target browser-src --target privacybrowser
+
+privacybrowser-testbuild: submodule-update
+	$(rbm) build release --target testbuild --target browser-all-desktop --target privacybrowser
+
+privacybrowser-testbuild-desktop: submodule-update
+	$(rbm) build release --target testbuild --target browser-all-desktop --target privacybrowser
+
+privacybrowser-testbuild-linux-x86_64: submodule-update
+	$(rbm) build release --target testbuild --target browser-linux-x86_64 --target privacybrowser
+
+privacybrowser-testbuild-linux-x86_64-asan: submodule-update
+	$(rbm) build release --target testbuild --target browser-linux-x86_64-asan --target privacybrowser
+
+privacybrowser-testbuild-windows-x86_64: submodule-update
+	$(rbm) build release --target testbuild --target browser-windows-x86_64 --target privacybrowser
+
+privacybrowser-testbuild-macos: submodule-update
+	$(rbm) build release --target testbuild --target browser-macos --target privacybrowser
+
+privacybrowser-testbuild-macos-x86_64: submodule-update
+	$(rbm) build release --target testbuild --target browser-macos-x86_64 --target privacybrowser
+
+privacybrowser-testbuild-macos-aarch64: submodule-update
+	$(rbm) build release --target testbuild --target browser-macos-aarch64 --target privacybrowser
+
+privacybrowser-testbuild-src: submodule-update
+	$(rbm) build release --target testbuild --target browser-src-testbuild --target privacybrowser
+
+privacybrowser-incrementals-release: submodule-update
+	$(rbm) build release --step update_responses_config --target release --target create_unsigned_incrementals --target privacybrowser
+	tools/update-responses/download_missing_versions release
+	tools/update-responses/gen_incrementals release
+	$(rbm) build release --step hash_incrementals --target release --target privacybrowser
+
+privacybrowser-incrementals-alpha: submodule-update
+	$(rbm) build release --step update_responses_config --target alpha --target create_unsigned_incrementals --target privacybrowser
+	tools/update-responses/download_missing_versions alpha
+	tools/update-responses/gen_incrementals alpha
+	$(rbm) build release --step hash_incrementals --target alpha --target privacybrowser
+
+privacybrowser-incrementals-nightly: submodule-update
+	$(rbm) build release --step update_responses_config --target nightly --target privacybrowser
+	NO_CODESIGNATURE=1 tools/update-responses/gen_incrementals nightly
+	$(rbm) build release --step hash_incrementals --target nightly --target privacybrowser
+
+privacybrowser-update_responses-release: submodule-update
+	$(rbm) build release --step update_responses_config --target release --target signed --target privacybrowser
+	$(rbm) build release --step create_update_responses_tar --target release --target signed --target privacybrowser
+
+privacybrowser-update_responses-alpha: submodule-update
+	$(rbm) build release --step update_responses_config --target alpha --target signed --target privacybrowser
+	$(rbm) build release --step create_update_responses_tar --target alpha --target signed --target privacybrowser
+
+privacybrowser-dmg2mar-release: submodule-update
+	$(rbm) build release --step update_responses_config --target release --target signed --target privacybrowser
+	$(rbm) build release --step dmg2mar --target release --target signed --target privacybrowser
+	tools/update-responses/download_missing_versions release
+	CHECK_CODESIGNATURE_EXISTS=1 MAR_SKIP_EXISTING=1 tools/update-responses/gen_incrementals release
+
+privacybrowser-dmg2mar-alpha: submodule-update
+	$(rbm) build release --step update_responses_config --target alpha --target signed --target privacybrowser
+	$(rbm) build release --step dmg2mar --target alpha --target signed --target privacybrowser
+	tools/update-responses/download_missing_versions alpha
+	CHECK_CODESIGNATURE_EXISTS=1 MAR_SKIP_EXISTING=1 tools/update-responses/gen_incrementals alpha
+
+
+############################
+# Toolchain Update Targets #
+############################
+
+list_translation_updates-release:
+	$(rbm) showconf --target release --step list_updates translation list_updates
+
+list_translation_updates-alpha:
+	$(rbm) showconf --target alpha --step list_updates translation list_updates
+
+list_toolchain_updates-fenix: submodule-update
+	$(rbm) build fenix --step list_toolchain_updates --target nightly --target torbrowser-android-armv7
+
+list_toolchain_updates-firefox-linux: submodule-update
+	$(rbm) build firefox --step list_toolchain_updates --target nightly --target torbrowser-linux-x86_64
+
+list_toolchain_updates-firefox-windows: submodule-update
+	$(rbm) build firefox --step list_toolchain_updates --target nightly --target torbrowser-windows-x86_64
+
+list_toolchain_updates-firefox-macos: submodule-update
+	$(rbm) build firefox --step list_toolchain_updates --target nightly --target torbrowser-macos
+
+list_toolchain_updates-android-components: submodule-update
+	$(rbm) build android-components --step list_toolchain_updates --target nightly --target torbrowser-android-armv7
+
+list_toolchain_updates-application-services: submodule-update
+	$(rbm) build application-services --step list_toolchain_updates --target nightly --target torbrowser-android-armv7
+
+list_toolchain_updates-geckoview: submodule-update
+	$(rbm) build geckoview --step list_toolchain_updates --target nightly --target torbrowser-android-armv7
+
+create_glean_deps_tarball: submodule-update
+	 $(rbm) build glean --step create_glean_deps_tarball --target alpha --target torbrowser-android-armv7
+
+create_glean_deps_tarball-with_torsocks: submodule-update
+	$(rbm) build glean --step create_glean_deps_tarball --target alpha --target torbrowser-android-armv7 --target with_torsocks
+
+get_gradle_dependencies_list-fenix: submodule-update
+	$(rbm) build fenix --step get_gradle_dependencies_list --target nightly --target torbrowser-android-armv7
+
+get_gradle_dependencies_list-application-services: submodule-update
+	$(rbm) build application-services --step get_gradle_dependencies_list --target nightly --target torbrowser-android-armv7
+
+get_gradle_dependencies_list-android-components: submodule-update
+	$(rbm) build android-components --step get_gradle_dependencies_list --target nightly --target torbrowser-android-armv7
+
+cargo_vendor-application-services: submodule-update
+	$(rbm) build application-services --step cargo_vendor --target nightly --target torbrowser-android-armv7
+
+cargo_vendor-cbindgen-android: submodule-update
+	$(rbm) build cbindgen --step cargo_vendor --target nightly --target torbrowser-android-armv7
+
+cargo_vendor-cbindgen: submodule-update
+	$(rbm) build cbindgen --step cargo_vendor --target nightly --target torbrowser-linux-x86_64
+
+cargo_vendor-uniffi-rs: submodule-update
+	$(rbm) build uniffi-rs --step cargo_vendor --target nightly --target torbrowser-linux-x86_64
+
+
 ##################
 # Common Targets #
 ##################
 
 submodule-update:
 	git submodule update --init
+
+signtag-release: submodule-update
+	$(rbm) build release --step signtag --target release --target torbrowser
+
+signtag-alpha: submodule-update
+	$(rbm) build release --step signtag --target alpha --target torbrowser
 
 fetch: submodule-update
 	$(rbm) fetch

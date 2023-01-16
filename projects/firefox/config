@@ -15,7 +15,7 @@ var:
   firefox_version: '[% c("var/firefox_platform_version") %]esr'
   browser_branch: '12.5-1'
   browser_build: 1
-  branding_directory: 'browser/branding/tb-alpha'
+  branding_directory_prefix: 'tb'
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   nightly_updates_osname: '[% c("var/osname") %]'
   deps:
@@ -65,15 +65,15 @@ targets:
     # basebrowser tag always has a -build1 suffix
     git_hash: '[% c("var/project-name") %]-[% c("var/firefox_version") %]-[% c("var/browser_branch") %]-build1'
 
-  release:
-    var:
-      branding_directory: 'browser/branding/tb-release'
-
   nightly:
     git_hash: '[% c("var/project-name") %]-[% c("var/firefox_version") %]-[% c("var/browser_branch") %]'
     tag_gpg_id: 0
+
+  privacybrowser:
+    git_url: git@gitlab.torproject.org:tpo/applications/privacy-browser.git
     var:
-      branding_directory: 'browser/branding/tb-nightly'
+      branding_directory_prefix: 'pb'
+      browser_branch: '12.0-1'
 
   linux-x86_64:
     var:

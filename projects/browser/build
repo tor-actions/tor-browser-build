@@ -61,7 +61,7 @@ unzip -d $rootdir $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zi
 MARTOOLS=$rootdir/mar-tools
 
 mv [% c('input_files_by_name/noscript') %] "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi"
-[% IF !c("var/macos") -%]
+[% IF !c("var/macos") && c("var/tor-browser") -%]
   cp "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi" "$TBDIR/$PROFILEPATH/"
 [% END %]
 

@@ -53,10 +53,10 @@ targets:
       asan-build: '-asan'
   browser-linux-i686:
     var:
-      browser-linux-i686: 1
+      browser-linux-i686: '[% c("var/browser_type") != "privacybrowser" %]'
   browser-windows-i686:
     var:
-      browser-windows-i686: 1
+      browser-windows-i686: '[% c("var/browser_type") != "privacybrowser" %]'
   browser-windows-x86_64:
     var:
       browser-windows-x86_64: 1
@@ -93,6 +93,9 @@ targets:
   basebrowser:
     var:
       browser_type: basebrowser
+  privacybrowser:
+    var:
+      browser_type: privacybrowser
 
   release:
     var:

@@ -175,8 +175,8 @@ export LANG=C.UTF-8
   [% IF c("var/tor-browser") -%]
         --with-tor-browser-version=[% c("var/torbrowser_version") %] \
         --enable-update-channel=[% c("var/channel") %] \
-        --with-branding=[% c("var/branding_directory") %] \
   [% END %] \
+  [% IF !c("var/base-browser") -%]--with-branding=browser/branding/[% c("var/branding_directory_prefix") %]-[% c("var/channel") %][% END %] \
   [% IF !c("var/rlbox") -%]--without-wasm-sandboxed-libraries[% END %]
 
 ./mach build --verbose

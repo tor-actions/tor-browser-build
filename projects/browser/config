@@ -67,6 +67,9 @@ targets:
   basebrowser:
     var:
       prefs_file: 001-base-profile.js
+  privacybrowser:
+    var:
+      prefs_file: 001-base-profile.js
 
 input_files:
   - project: container-image
