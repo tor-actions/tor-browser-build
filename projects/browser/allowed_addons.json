@@ -1,7 +1,7 @@
 {
   "page_size": 25,
   "page_count": 1,
-  "count": 11,
+  "count": 10,
   "next": null,
   "previous": null,
   "results": [
@@ -17,7 +17,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/34/9734/13299734/13299734.png?modified=1565722641"
           }
         ],
-        "average_daily_users": 920784,
+        "average_daily_users": 941192,
         "categories": {
           "android": [
             "experimental",
@@ -31,7 +31,7 @@
         "contributions_url": "https://opencollective.com/darkreader?utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2017-09-19T07:03:00Z",
         "current_version": {
-          "id": 5477554,
+          "id": 5509244,
           "compatibility": {
             "firefox": {
               "min": "54.0",
@@ -42,7 +42,7 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/darkreader/versions/5477554",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/darkreader/versions/5509244",
           "is_strict_compatibility_enabled": false,
           "license": {
             "id": 22,
@@ -53,23 +53,22 @@
             "url": "http://www.opensource.org/licenses/mit-license.php"
           },
           "release_notes": {
-            "en-GB": "",
-            "en-US": "- Fixed broken hotkeys.\n- Improved IP v6 address support.\n- Users' fixes for websites."
+            "en-US": "- Fixed a edge case with extracting color numbers, it's now able to extract `rgb(0 0 0/0.04)`.\n- Improved IPv6 check.\n- Faster UI loading.\n- Users' fixes for websites."
           },
           "reviewed": null,
-          "version": "4.9.60",
+          "version": "4.9.62",
           "files": [
             {
-              "id": 4021899,
-              "created": "2022-10-27T07:07:27Z",
-              "hash": "sha256:202eccf8088bd2842158f5fe4f4b751217a05b2f0ada02057c16314c174df01b",
+              "id": 4053589,
+              "created": "2023-01-08T17:15:31Z",
+              "hash": "sha256:e537a2cee45ed7c26f79ecd3ed362620e3f00d24c158532a58e163a63a3d60cc",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 648411,
+              "size": 636487,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/4021899/darkreader-4.9.60.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/4053589/darkreader-4.9.62.xpi",
               "permissions": [
                 "alarms",
                 "contextMenus",
@@ -95,7 +94,7 @@
           "fr": "Cette extension de protection oculaire active le mode nuit en créant à la volée des thèmes sombres pour les sites Web. Dark Reader inverse les couleurs vives, ce qui les rend très contrastés et faciles à lire la nuit.\n\nVous pouvez régler la luminosité, le contraste, le filtre sépia, le mode sombre, les paramètres de police et la liste des sites ignorés.\n\nDark Reader n’affiche pas de publicités et n’envoie aucune donnée utilisateur. Il est entièrement open source <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/2a8020ee7fe5fea69148ed86ae4a26da4fc907d75110066fa5b5d0416670e666/https%3A//github.com/darkreader/darkreader\" rel=\"nofollow\">https://github.com/darkreader/darkreader</a>\n\nAvant de l’installer, désactivez vos extensions similaires. Profitez et regardez!",
           "he": "תוסף טיפוח לעיניים זה מאפשר למצב לילה ליצור ערכות נושא כהות לאתרי אינטרנט גלישה. קורא כהה ממיר צבעים בהירים מה שהופך אותם לניגודיות גבוהה וקל לקריאה בלילה.\n\nניתן להתאים את הבהירות, הניגודיות, מסנן חום-אדמדם, מצב כהה, הגדרות גופן ורשימת אתרים להתעלמות.\n\nReader Dark אינו מציג מודעות ואינו שולח את נתוני המשתמש לשום מקום. זהו קוד פתוח לחלוטין <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/2a8020ee7fe5fea69148ed86ae4a26da4fc907d75110066fa5b5d0416670e666/https%3A//github.com/darkreader/darkreader\" rel=\"nofollow\">https://github.com/darkreader/darkreader</a>\n\nלצורך פעולה תקינה, השבת תוספים דומים. צפייה נעימה!",
           "id": "Ekstensi ini mengaktifkan mode malam dengan membuat halaman situs web menjadi gelap. Dark Reader bekerja dengan membalik warna cerah dengan warna kontras sehingga nyaman di mata.\n\nAnda bisa mengatur kecerahan, kontras, filter sepia, mode malam, setelan fon dan pengecualian situs web.\n\nDark Reader tidak menampilkan iklan dan tidak mengirimkan data penggunan ke manapun. Sepenuhnya bersumber terbuka: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/2a8020ee7fe5fea69148ed86ae4a26da4fc907d75110066fa5b5d0416670e666/https%3A//github.com/darkreader/darkreader\" rel=\"nofollow\">https://github.com/darkreader/darkreader</a>\n\nSebelum memasang, silakan nonaktifkan ekstensi serupa. Selamat berselancar!",
-          "it": "Questa estensione si prende cura dei tuoi occhi e ti consente di creare al volo un tema scuro in modalità nottura per ogni sito. Dark Reader inverte i colori più luminosi rendendoli ad alto contrato e più semplici da leggere la notte.\n\nPuoi modificare luminosità, contrasto, filtro seppia, modalità notturna, caratteri e lista di siti da ignorare.\n\nDark Reader non mostra pubblicità e non invia i dati dell'utente da nessuna parte. È pienamente open-source <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/2a8020ee7fe5fea69148ed86ae4a26da4fc907d75110066fa5b5d0416670e666/https%3A//github.com/darkreader/darkreader\" rel=\"nofollow\">https://github.com/darkreader/darkreader</a>\n\nPrima di installare disabilita altre estensioni simili. Buona lettura!",
+          "it": "Questa estensione si prende cura dei tuoi occhi e ti consente di creare al volo un tema scuro in modalità notturna per ogni sito. Dark Reader inverte i colori più luminosi rendendoli ad alto contrasto e più semplici da leggere la notte.\n\nPuoi modificare luminosità, contrasto, filtro seppia, modalità notturna, caratteri e lista di siti da ignorare.\n\nDark Reader non mostra pubblicità e non invia i dati dell'utente da nessuna parte. È pienamente open-source <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/2a8020ee7fe5fea69148ed86ae4a26da4fc907d75110066fa5b5d0416670e666/https%3A//github.com/darkreader/darkreader\" rel=\"nofollow\">https://github.com/darkreader/darkreader</a>\n\nPrima di installare disabilita altre estensioni simili. Buona lettura!",
           "ja": "このアイ・ケアの拡張機能は、オンザフライでウェブサイトのためのダークテーマを作成し、ナイトモードを有効にします。 Dark Readerは鮮やかな色を反転させてコントラストを高め、夜間に読みやすくします。\n\n明るさ、コントラスト、セピアフィルター、ダークモード、フォント設定、無視リストを調整することができます。\n\nDark Readerは広告を表示せず、ユーザーのデータをどこにも送信しません。 それは完全にオープンソースです <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/2a8020ee7fe5fea69148ed86ae4a26da4fc907d75110066fa5b5d0416670e666/https%3A//github.com/darkreader/darkreader\" rel=\"nofollow\">https://github.com/darkreader/darkreader</a>\n\nインストールする前に、同様の拡張機能を無効にしてください。 ブラウジングをお楽しみください！",
           "ko": "이 눈 건강을 위한 확장 기능은 실시간으로 각 웹사이트에 어두운 테마를 적용해 야간 모드를 가능케 합니다. 다크 리더는 밝은 색상을 반전해 고대비로 만들어 밤에 읽기가 쉽도록 만듭니다.\n\n밝기, 대비, 세피아 필터, 어두운 모드, 폰트와 예외 목록을 설정할 수 있습니다.\n\n다크 리더는 광고를 보여주지 않으며 사용자의 데이터를 어디에도 보내지 않습니다. 완전히 오픈 소스입니다. <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/2a8020ee7fe5fea69148ed86ae4a26da4fc907d75110066fa5b5d0416670e666/https%3A//github.com/darkreader/darkreader\" rel=\"nofollow\">https://github.com/darkreader/darkreader</a>\n\n설치하기 전에 비슷한 기능을 가진 확장 기능을 사용 해제하시기 바랍니다. 편하게 읽으십시오!",
           "ms": "Ekstensi penjagaan mata ini mendayakan mod malam dengan mencipta tema gelap untuk laman web dengan cepat. Dark Reader menyongsangkan warna terang, menjadikannya kontras tinggi dan mudah dibaca pada waktu malam.\n\nAnda boleh melaraskan kecerahan, kontras, penapis sepia, mod gelap, tetapan fon dan senarai abaikan.\n\nDark Reader tidak memaparkan iklan dan tidak menghantar data pengguna ke mana-mana sahaja. Ia adalah sumber terbuka sepenuhnya: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/2a8020ee7fe5fea69148ed86ae4a26da4fc907d75110066fa5b5d0416670e666/https%3A//github.com/darkreader/darkreader\" rel=\"nofollow\">https://github.com/darkreader/darkreader</a>\n\nSebelum anda memasangnya, lumpuhkan sambungan yang serupa. Selamat menonton!",
@@ -146,7 +145,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2022-10-27T11:39:58Z",
+        "last_updated": "2023-01-09T12:25:16Z",
         "name": {
           "ar": "Dark Reader",
           "bn": "Dark Reader",
@@ -221,10 +220,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.5582,
-          "bayesian_average": 4.556981916903566,
-          "count": 4742,
-          "text_count": 1512
+          "average": 4.5565,
+          "bayesian_average": 4.555296389469589,
+          "count": 4800,
+          "text_count": 1532
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/reviews/",
         "requires_payment": false,
@@ -321,187 +320,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/versions/",
-        "weekly_downloads": 25636
-      },
-      "notes": null
-    },
-    {
-      "addon": {
-        "id": 229918,
-        "authors": [
-          {
-            "id": 5474073,
-            "name": "EFF Technologists",
-            "url": "https://addons.mozilla.org/en-US/firefox/user/5474073/",
-            "username": "eff-technologists",
-            "picture_url": "https://addons.mozilla.org/user-media/userpics/73/4073/5474073/5474073.png?modified=1469820907"
-          }
-        ],
-        "average_daily_users": 661005,
-        "categories": {
-          "android": [
-            "security-privacy"
-          ],
-          "firefox": [
-            "privacy-security"
-          ]
-        },
-        "contributions_url": "https://paypal.me/SupportEFF?utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
-        "created": "2010-09-16T15:09:10Z",
-        "current_version": {
-          "id": 5265391,
-          "compatibility": {
-            "firefox": {
-              "min": "52.0",
-              "max": "*"
-            },
-            "android": {
-              "min": "52.0",
-              "max": "*"
-            }
-          },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/https-everywhere/versions/5265391",
-          "is_strict_compatibility_enabled": false,
-          "license": {
-            "id": 5278,
-            "is_custom": true,
-            "name": {
-              "en-US": "Multiple"
-            },
-            "url": "https://addons.mozilla.org/en-US/firefox/addon/https-everywhere/license/"
-          },
-          "release_notes": {
-            "en-US": "2021.7.13\n* Amend Incognito Key for Chrome and Firefox #20092\n* Fix unexpected arithmetic operations on strings #20043\n* Remove Top Alexa Labeller #20083\n* Update deprecated log function #20101\n* Patch Chrome Test Failure #20102"
-          },
-          "reviewed": null,
-          "version": "2021.7.13",
-          "files": [
-            {
-              "id": 3809748,
-              "created": "2021-07-13T22:01:19Z",
-              "hash": "sha256:e261461b5d4d3621285fce70773558184d691c614b330744dab672f032db731c",
-              "is_restart_required": false,
-              "is_webextension": true,
-              "is_mozilla_signed_extension": false,
-              "platform": "all",
-              "size": 1752121,
-              "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/3809748/https_everywhere-2021.7.13.xpi",
-              "permissions": [
-                "webNavigation",
-                "webRequest",
-                "webRequestBlocking",
-                "tabs",
-                "cookies",
-                "storage",
-                "*://*/*",
-                "ftp://*/*"
-              ],
-              "optional_permissions": []
-            }
-          ]
-        },
-        "default_locale": "en-US",
-        "description": {
-          "de": "Viele Webseiten unterstützen zwar Verschlüsslung über HTTPS, machen es aber nicht einfach, diese auch zu nutzen. Manchmal bieten diese beispielsweise standardmäßig nur unverschlüsseltes HTTP an oder haben auf verschlüsselten Seiten Links gesetzt, die Sie zurück zu einer unverschlüsselten Version führen.\n\nDie HTTPS-Everywhere Erweiterung löst dieses Problem, indem sie alle Anfragen zu diesen Seiten automatisch zu HTTPS ändert.",
-          "en-US": "Note: Extension will sunset January 2023. Instructions on how to turn on HTTPS by default in Firefox here: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/a15697d75ed1f7eb05e9b06598c062eceecc8119070652184cca783966c7d025/https%3A//eff.org/https-everywhere/set-https-default-your-browser\" rel=\"nofollow\">https://eff.org/https-everywhere/set-https-default-your-browser</a>\n\nMany sites on the web offer some limited support for encryption over HTTPS, but make it difficult to use. For instance, they may default to unencrypted HTTP, or fill encrypted pages with links that go back to the unencrypted site.\n\nThe HTTPS Everywhere extension fixes these problems by rewriting all requests to these sites to HTTPS.\n\nThe DuckDuckGo Smarter Encryption list is publicly available under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0. International license. If you'd like to license the list for commercial use, please reach out to: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/afc2012d629a8b8f6c7fd0704db9ae59ddedc912bb5656ddb6f4aab441d0a6ab/https%3A//help.duckduckgo.com/duckduckgo-help-pages/company/contact-us/\" rel=\"nofollow\">https://help.duckduckgo.com/duckduckgo-help-pages/company/contact-us/</a>",
-          "es": "Muchos sitios en la web ofrecen soporte limitado para cifrado sobre HTTPS, pero hacen difícil su uso. Por ejemplo, puede que usen HTTP no cifrado por defecto o que llenen páginas cifradas con enlaces que vuelvan al sitio no cifrado.\n\nLa extensión HTTPS Everywhere corrige estos problemas reescribiendo todas las peticiones a estos sitios a HTTPS.",
-          "fr": "Beaucoup de sites web offrent une prise en charge limitée pour le chiffrement via HTTPS, mais la rendent difficile à utiliser. Par exemple, ils peuvent utiliser une adresse par défaut non chiffrée avec HTTPS, ou proposer sur des pages chiffrées uniquement des liens qui retournent sur le site non chiffré.\n\nL’extension HTTPS Everywhere résout le problème en redirigeant toutes les requêtes de ces sites vers HTTPS.",
-          "it": "Molti siti web offrono un limitato supporto per la crittografia HTTPS, ma lo rendono difficile da usare. Ad esempio, possono avere come impostazione predefinita HTTP non crittato, o inserire in pagine crittate collegamenti che indirizzano a siti non crittati.\n\nL'estensione HTTPS Everywhere consente di correggere questi problemi riscrivendo tutte le richieste a questi siti in HTTPS.",
-          "nl": "Veel websites bieden enigszins beperkte ondersteuning voor versleuteling via HTTPS, maar maken het moeilijk om dit te gebruiken. Ze kunnen bijvoorbeeld standaard niet-versleutelde HTTP hanteren, of versleutelde pagina’s vullen met koppelingen die naar de niet-versleutelde website terugkeren.\n\nDe HTTPS Everywhere-extensie lost deze problemen op door alle aanvragen naar deze websites naar HTTPS te herschrijven.",
-          "pt-BR": "Muitos sites na web oferecem algum suporte limitado a criptografia sobre HTTPS, mas tornam difícil seu uso. Por exemplo, podem encaminhar por padrão para HTTP não criptografado, ou colocar em páginas criptografadas links que voltam à versão não criptografada do site.\n\nA extensão HTTPS Everywhere corrige esses problemas, substituindo todas as solicitações a esses sites para HTTPS.",
-          "zh-CN": "许多网站通过 HTTPS 提供有限的网络加密，这样有时很难起作用。比如，网站还是默认使用 HTTP，或者在加密页面使用指向非加密页面的链接。\n\nHTTPS Everywhere 扩展通过把发向这些网站的请求都改写成 HTTPS 来解决这些问题。"
-        },
-        "developer_comments": null,
-        "edit_url": "https://addons.mozilla.org/en-US/developers/addon/https-everywhere/edit",
-        "guid": "https-everywhere@eff.org",
-        "has_eula": false,
-        "has_privacy_policy": true,
-        "homepage": {
-          "de": "https://www.eff.org/https-everywhere",
-          "en-US": "https://www.eff.org/https-everywhere",
-          "es": "https://www.eff.org/https-everywhere",
-          "fr": "https://www.eff.org/https-everywhere",
-          "it": "https://www.eff.org/https-everywhere",
-          "nl": "https://www.eff.org/https-everywhere",
-          "pt-BR": "https://www.eff.org/https-everywhere",
-          "zh-CN": "https://www.eff.org/https-everywhere"
-        },
-        "icon_url": "data:image/png;base64,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",
-        "icons": {
-          "32": "https://addons.mozilla.org/user-media/addon_icons/229/229918-32.png?modified=mcrushed",
-          "64": "https://addons.mozilla.org/user-media/addon_icons/229/229918-64.png?modified=mcrushed",
-          "128": "https://addons.mozilla.org/user-media/addon_icons/229/229918-128.png?modified=mcrushed"
-        },
-        "is_disabled": false,
-        "is_experimental": false,
-        "last_updated": "2021-07-14T06:03:40Z",
-        "name": {
-          "de": "HTTPS Everywhere",
-          "en-US": "HTTPS Everywhere",
-          "es": "HTTPS Everywhere",
-          "fr": "HTTPS Everywhere",
-          "it": "HTTPS Everywhere",
-          "nl": "HTTPS Everywhere",
-          "pt-BR": "HTTPS Everywhere",
-          "zh-CN": "HTTPS Everywhere - 加密网络"
-        },
-        "previews": [
-          {
-            "id": 214771,
-            "caption": null,
-            "image_size": [
-              1280,
-              800
-            ],
-            "image_url": "https://addons.mozilla.org/user-media/previews/full/214/214771.png?modified=1622132223",
-            "thumbnail_size": [
-              533,
-              333
-            ],
-            "thumbnail_url": "https://addons.mozilla.org/user-media/previews/thumbs/214/214771.jpg?modified=1622132223"
-          }
-        ],
-        "promoted": {
-          "apps": [
-            "firefox"
-          ],
-          "category": "spotlight"
-        },
-        "ratings": {
-          "average": 4.6599,
-          "bayesian_average": 4.657336257654981,
-          "count": 2311,
-          "text_count": 460
-        },
-        "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/https-everywhere/reviews/",
-        "requires_payment": false,
-        "review_url": "https://addons.mozilla.org/en-US/reviewers/review/229918",
-        "slug": "https-everywhere",
-        "status": "public",
-        "summary": {
-          "de": "Verschlüsseln Sie das Web! HTTPS-Everywhere schützt Ihre Kommunikation indem die Verbindung zu unterstützten Seiten automatisch auf eine HTTPS-Verschlüsselung umgestellt wird, auch wenn die URL oder ein besuchter Link das https://-Präfix weg lässt.",
-          "en-US": "Encrypt the web! HTTPS Everywhere is a Firefox extension to protect your communications by enabling HTTPS encryption automatically on sites that are known to support it, even when you type URLs or follow links that omit the https: prefix.",
-          "es": "¡Cifra la web! HTTPS Everywhere es una extensión para proteger tus comunicaciones al habilitar el cifrado HTTPS automáticamente en las web que lo soportan, incluso cuando escribes URLs o sigues vínculos que omiten el prefijo \"https:\".",
-          "fr": "Chiffrez le Web ! L’extension Firefox HTTPS Everywhere protège vos communications en activant automatiquement le chiffrement HTTPS sur les sites le prenant en charge, même lorsque vous saisissez une URL ou cliquez sur un lien sans préfixe « https: ».",
-          "it": "Il Web crittato! HTTPS Everywhere è un'estensione per Firefox che protegge le comunicazioni attivando la crittografia HTTPS automaticamente su tutti i siti che la supportano, anche se si digitano URL o si seguono link che omettono il prefisso https.",
-          "nl": "Versleutel het web! HTTPS Everywhere is een Firefox-extensie die uw communicatie beschermt door automatisch HTTPS-versleuteling in te schakelen op websites die dit ondersteunen, zelfs bij URL’s of koppelingen die het voorvoegsel https: weglaten.",
-          "pt-BR": "Criptografe a web! HTTPS Everywhere é uma extensão que protege sua comunicação habilitando criptografia HTTPS automaticamente em sites que são conhecidos por suportá-la, mesmo quando você digita URLs ou segue links que omitem o prefixo https:",
-          "zh-CN": "加密网络！HTTPS Everywhere 是一个保护通信的 Firefox 扩展。它对支持加密的网站自动开启 HTTPS 通信加密，即使你在输入网址时没有加上 https: 前缀也一样。"
-        },
-        "support_email": {
-          "en-US": "extension-devs@eff.org"
-        },
-        "support_url": {
-          "en-US": "https://www.eff.org/https-everywhere"
-        },
-        "tags": [
-          "security"
-        ],
-        "type": "extension",
-        "url": "https://addons.mozilla.org/en-US/firefox/addon/https-everywhere/",
-        "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/https-everywhere/versions/",
-        "weekly_downloads": 5713
+        "weekly_downloads": 26559
       },
       "notes": null
     },
@@ -517,7 +336,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/56/7656/6937656/6937656.png?modified=1550343990"
           }
         ],
-        "average_daily_users": 257005,
+        "average_daily_users": 260254,
         "categories": {
           "android": [
             "security-privacy"
@@ -732,10 +551,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.8208,
-          "bayesian_average": 4.816082492766398,
-          "count": 1306,
-          "text_count": 235
+          "average": 4.8226,
+          "bayesian_average": 4.81792153710705,
+          "count": 1319,
+          "text_count": 238
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/reviews/",
         "requires_payment": false,
@@ -820,7 +639,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/versions/",
-        "weekly_downloads": 4839
+        "weekly_downloads": 4978
       },
       "notes": null
     },
@@ -836,7 +655,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/73/4073/5474073/5474073.png?modified=1469820907"
           }
         ],
-        "average_daily_users": 1077418,
+        "average_daily_users": 1084519,
         "categories": {
           "android": [
             "security-privacy"
@@ -1358,10 +1177,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.7982,
-          "bayesian_average": 4.7953467483624355,
-          "count": 2151,
-          "text_count": 423
+          "average": 4.7952,
+          "bayesian_average": 4.7923692395774875,
+          "count": 2168,
+          "text_count": 427
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/reviews/",
         "requires_payment": false,
@@ -1385,7 +1204,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/versions/",
-        "weekly_downloads": 18282
+        "weekly_downloads": 18765
       },
       "notes": null
     },
@@ -1401,7 +1220,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 6143701,
+        "average_daily_users": 6238648,
         "categories": {
           "android": [
             "security-privacy"
@@ -1413,7 +1232,7 @@
         "contributions_url": "",
         "created": "2015-04-25T07:26:22Z",
         "current_version": {
-          "id": 5484631,
+          "id": 5503008,
           "compatibility": {
             "firefox": {
               "min": "68.0",
@@ -1424,7 +1243,7 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/ublock-origin/versions/5484631",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/ublock-origin/versions/5503008",
           "is_strict_compatibility_enabled": false,
           "license": {
             "id": 6,
@@ -1435,22 +1254,22 @@
             "url": "http://www.gnu.org/licenses/gpl-3.0.html"
           },
           "release_notes": {
-            "en-US": "See complete release notes for <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/95f0ebe3bae2fcefe329d597099e253e5788997d9e205855e3b7192c80f2af9f/https%3A//github.com/gorhill/uBlock/releases/tag/1.45.2\" rel=\"nofollow\">1.45.2</a>.\n\n<b>Fixes</b>\n\n<ul><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/dda3a5335ce241b61df3e520411dfca8476ad9f13ec8bf50297bd42e7892b24f/https%3A//github.com/gorhill/uBlock/commit/b1a14794bf3ef1b3272cbbe29451bc429b2b16ac\" rel=\"nofollow\">Test for unsupported pseudo operators after normalization</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/3d7500545eff2f1454e1b20ce3a510bcb13085936681647e515999cdf977d98b/https%3A//github.com/gorhill/uBlock/commit/4d4a5f380799b64c167e42331a37d7be2f917214\" rel=\"nofollow\">Mind implicit prelude <code>*</code> element in pseudo operators</a></li></ul>\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/5cabc51255c376ef5d9a0ea3f5f250a379aec980099d3f66eca4962ce3f1be61/https%3A//github.com/gorhill/uBlock/compare/1.45.0...1.45.2\" rel=\"nofollow\">Commits history since last version</a>."
+            "en-US": "See complete release notes for <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/389523b56d56000b5903f07819422d4704aa27d1929f5cb93fc2a4a30050dca8/https%3A//github.com/gorhill/uBlock/releases/tag/1.46.0\" rel=\"nofollow\">1.46.0</a>.\n\n<b>Fixes</b>\n<ul><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/9c26fe22ae94cdc2f29d6ca46fcc7c6ecf14cc05cef43bafb31fc28f9a1dbfee/https%3A//github.com/gorhill/uBlock/commit/f596559103ef\" rel=\"nofollow\">Add <code>options</code> stub to <code>nofab</code> scriptlet </a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/30cbc3175eb0b2e15466bfd4efbee6ef5ce128c9b06c8b6427bac1ccd97c11c4/https%3A//github.com/gorhill/uBlock/commit/a91781a4959c\" rel=\"nofollow\">Rewrite logger's \"exceptor\" feature</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/3ed97b9e246742ad411d56db9705b82a27e7b77022dbba33b60e6d0b1e28bc15/https%3A//github.com/gorhill/uBlock/commit/0971025b2115\" rel=\"nofollow\">Use Blob URLs to reliably inject scriptlets</a> -- as <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/438c3567eb7d6b3ff10d90715d3f508b2401886e8a757bfe48b70d8100e75a7c/https%3A//github.com/uBlockOrigin/uBlock-issues/issues/235%23issuecomment-1344313926\" rel=\"nofollow\">suggested</a> by @evilpie</li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8f40970eec0653bf03a1ca73c753681ab8540e58f3f61493ceb8c57769bf39e8/https%3A//github.com/gorhill/uBlock/commit/992255e9937f\" rel=\"nofollow\">Add :remove-attr() and :remove-class() pseudo selector operators</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/94fccb01a65453050684d299510de0bd095633200128476ec1ee4032b4efefa6/https%3A//github.com/gorhill/uBlock/commit/76d70102f069\" rel=\"nofollow\">Add pseudo-operator :matches-attr()</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/c08e49fc883ba5c9201cd81f514e0b4690acdd1eae97fc21b03899922e78ef11/https%3A//github.com/gorhill/uBlock/commit/62601639f678\" rel=\"nofollow\">Detect invalid usage of combinators in :not() pseudoclass</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/615d0729d168db8cb67c8bc165ff5fd0eb75944c72f6417d65eaec297e980bb8/https%3A//github.com/gorhill/uBlock/commit/92397baa3901\" rel=\"nofollow\">Give more time for viewport to be ready</a> (in popup panel) -- <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/20ff6c390e21534e4a52fd2ae4f96661a0f4a787ae3b90f8807d1a594e9de457/https%3A//github.com/uBlockOrigin/uBlock-issues/discussions/2385\" rel=\"nofollow\">related feedback</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/fac8d7f4335f97f8e60585013044fdd34d5cf16c42f9d82552909f0f68fe91f6/https%3A//github.com/gorhill/uBlock/commit/bdc7a4c5397c\" rel=\"nofollow\">Handle potentially invalid CSS selector</a> (in logger)</li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/2e3d7b79681191d69ae5192d6f66df0a2f5d8d59ac2552a3c829daeb0f28a173/https%3A//github.com/gorhill/uBlock/commit/eb709335f842\" rel=\"nofollow\">Ensure state of more/less in panel reflect locked/disabled sections</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/206078ace2c2f2cf401ad3c98b6986c9cac2205797738925b30a2922d848467d/https%3A//github.com/gorhill/uBlock/commit/9b3ad0702cbf\" rel=\"nofollow\">Isolate generic cosmetic filters from specific ones in generated stylesheet</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/4f9ea5893ffda77f028cf28ae59ec0fabc32a55043c909e41a3d221a4d5dcba0/https%3A//github.com/gorhill/uBlock/commit/161a175bb059\" rel=\"nofollow\">Do not cname-uncloak same-origin network requests</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/cc959a4d7f9d2e70d4122569cda27b90d030afa2d1020a8b49be6a0f974fd9d2/https%3A//github.com/gorhill/uBlock/commit/44753053c3fd\" rel=\"nofollow\">Prevent the creation of non-cosmetic extended filters in element picker</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/75f3ecbd1e6e79c9c62f22d86c0bde8d93b60c7771aeee82496f4178852d1abf/https%3A//github.com/gorhill/uBlock/commit/105c7f54466b\" rel=\"nofollow\">Fix visual of DOM inspector layer in dark theme mode</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/26929d8da566773a86e49a6ee795ba2476c9ea29022c3356b3ffc16a96e8f11a/https%3A//github.com/gorhill/uBlock/commit/d51b7e082b73\" rel=\"nofollow\">Improve extraction of tokens from regexes</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/53e1591ac127a6a1ee45be5d3077c11d155bc2d42a216ab4cf304b85242e33b1/https%3A//github.com/gorhill/uBlock/commit/2cc6835de0e4\" rel=\"nofollow\">Use placeholders to minimize vertical shifting at page load time</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/edead39b273cc8494559fdf09376cb9efada606153b22cbcc3b086b5c28454da/https%3A//github.com/uBlockOrigin/uBlock-issues/issues/2358\" rel=\"nofollow\">Bundled filter lists in releases are not timestamped</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/86a77d0302d1cfdc9a5c3120852d5239a1c725bcf258d86178769185c0a6214d/https%3A//github.com/gorhill/uBlock/commit/73c2decdf567\" rel=\"nofollow\">Ensure procedural filters are applied at least once</a></li></ul>\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/a57cff231cba9bed78994719ef3f6256d0f87f41c8c189983e326055cc2dfa46/https%3A//github.com/gorhill/uBlock/compare/1.45.2...1.46.0\" rel=\"nofollow\">Commits history since last version</a>."
           },
           "reviewed": null,
-          "version": "1.45.2",
+          "version": "1.46.0",
           "files": [
             {
-              "id": 4028976,
-              "created": "2022-11-11T14:15:28Z",
-              "hash": "sha256:fb173895c76c3b05f132caf87a716c75e3db21be861ead1b14ba6abc7e715e8b",
+              "id": 4047353,
+              "created": "2022-12-22T16:49:43Z",
+              "hash": "sha256:6bf8af5266353fab5eabdc7476de026e01edfb7901b0430c5e539f6791f1edc8",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 3234876,
+              "size": 3215576,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/4028976/ublock_origin-1.45.2.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/4047353/ublock_origin-1.46.0.xpi",
               "permissions": [
                 "dns",
                 "menus",
@@ -1565,7 +1384,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2022-12-15T18:40:20Z",
+        "last_updated": "2023-01-07T15:25:25Z",
         "name": {
           "ar": "uBlock Origin",
           "bg": "uBlock Origin",
@@ -1710,10 +1529,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.7784,
-          "bayesian_average": 4.777984735280378,
-          "count": 14716,
-          "text_count": 3857
+          "average": 4.7791,
+          "bayesian_average": 4.778687487250499,
+          "count": 14827,
+          "text_count": 3878
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/reviews/",
         "requires_payment": false,
@@ -1775,7 +1594,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/versions/",
-        "weekly_downloads": 144039
+        "weekly_downloads": 150528
       },
       "notes": null
     },
@@ -1791,7 +1610,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 139255,
+        "average_daily_users": 142502,
         "categories": {
           "android": [
             "photos-media"
@@ -1889,9 +1708,9 @@
         },
         "ratings": {
           "average": 4.5097,
-          "bayesian_average": 4.5044214841383585,
-          "count": 1077,
-          "text_count": 399
+          "bayesian_average": 4.504446391084406,
+          "count": 1085,
+          "text_count": 403
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/reviews/",
         "requires_payment": false,
@@ -1913,7 +1732,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/versions/",
-        "weekly_downloads": 309
+        "weekly_downloads": 354
       },
       "notes": null
     },
@@ -1929,7 +1748,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 92068,
+        "average_daily_users": 92136,
         "categories": {
           "android": [
             "experimental",
@@ -2066,7 +1885,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/versions/",
-        "weekly_downloads": 609
+        "weekly_downloads": 517
       },
       "notes": null
     },
@@ -2082,7 +1901,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/64/9064/12929064/12929064.png?modified=1651263207"
           }
         ],
-        "average_daily_users": 242609,
+        "average_daily_users": 245015,
         "categories": {
           "android": [
             "photos-media",
@@ -2300,10 +2119,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.646,
-          "bayesian_average": 4.641119725504792,
-          "count": 1209,
-          "text_count": 237
+          "average": 4.6498,
+          "bayesian_average": 4.644960886726223,
+          "count": 1222,
+          "text_count": 239
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/reviews/",
         "requires_payment": false,
@@ -2324,7 +2143,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/versions/",
-        "weekly_downloads": 3474
+        "weekly_downloads": 3563
       },
       "notes": null
     },
@@ -2347,7 +2166,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 99861,
+        "average_daily_users": 103493,
         "categories": {
           "android": [
             "other"
@@ -2629,10 +2448,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.4392,
-          "bayesian_average": 4.434480963861528,
-          "count": 1184,
-          "text_count": 316
+          "average": 4.442,
+          "bayesian_average": 4.437306737005405,
+          "count": 1190,
+          "text_count": 318
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/reviews/",
         "requires_payment": false,
@@ -2652,7 +2471,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/versions/",
-        "weekly_downloads": 45
+        "weekly_downloads": 50
       },
       "notes": null
     },
@@ -2668,7 +2487,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/43/0143/143/143.png?modified=1506804587"
           }
         ],
-        "average_daily_users": 328150,
+        "average_daily_users": 328001,
         "categories": {
           "android": [
             "performance",
@@ -2682,7 +2501,7 @@
         "contributions_url": "https://www.paypal.com/donate/?hosted_button_id=9ERKTU5MBH4EW&utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2005-05-13T10:51:32Z",
         "current_version": {
-          "id": 5489293,
+          "id": 5506390,
           "compatibility": {
             "firefox": {
               "min": "59.0",
@@ -2693,7 +2512,7 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/noscript/versions/5489293",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/noscript/versions/5506390",
           "is_strict_compatibility_enabled": false,
           "license": {
             "id": 13,
@@ -2704,22 +2523,22 @@
             "url": "http://www.gnu.org/licenses/gpl-2.0.html"
           },
           "release_notes": {
-            "en-US": "v 11.4.13\n============================================================\nx Ensure theme changes are synchronized across windows,\n  including private ones (thanks barbaz for reporting)\nx [UI] Ensure prompts are always centered relative to the\n  parent window in multi-monitors setups\nx Switch to \"Modern Red Evil\" icon contributed by fatboy\nx Work-around for Chromium unable to load the placeholder\n  icon\nx Themed placeholders\nx [nscl] Fixed placeholder fallback styles on Gecko\n  embedding documents\nx [L10n] New Romanian (ro) locale (thanks Simona Iacob and\n  Inpresentia I.)"
+            "en-US": "v 11.4.14\n============================================================\nx Updated HTML event attributes list\nx Uniformed indexed directory Firefox UI emulation to\n  prevent a script blocking bypass on file:// resources\n  (thanks RyotaK for reporting)\nx Fixed error being logged in the console on scriptless\n  pages when hitting [Delete] or [Backspace] (thanks barbaz\n  for reporting)\nx Work-around for background page misteriously being\n  unloaded sometimes by Firefox\nx [L10n] Updated Transifex configuration"
           },
           "reviewed": null,
-          "version": "11.4.13",
+          "version": "11.4.14",
           "files": [
             {
-              "id": 4033638,
-              "created": "2022-11-21T22:34:56Z",
-              "hash": "sha256:078026ae894fe516ce9e61a1084d1b6dc883cd72c51027de342132141ca7f00d",
+              "id": 4050735,
+              "created": "2023-01-01T22:33:07Z",
+              "hash": "sha256:14af6a3cbc269c045f2d950e1e4f7c29981b35a7abc61d2413f5bb8bd7311857",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 948790,
+              "size": 948881,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/4033638/noscript-11.4.13.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/4050735/noscript-11.4.14.xpi",
               "permissions": [
                 "contextMenus",
                 "storage",
@@ -2730,8 +2549,8 @@
                 "webRequestBlocking",
                 "dns",
                 "<all_urls>",
-                "ftp://*/*",
-                "file://*/*"
+                "file://*/*",
+                "ftp://*/*"
               ],
               "optional_permissions": []
             }
@@ -2785,7 +2604,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2022-12-04T09:05:24Z",
+        "last_updated": "2023-01-03T12:32:35Z",
         "name": {
           "de": "NoScript",
           "el": "NoScript",
@@ -2857,10 +2676,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.4106,
-          "bayesian_average": 4.4078510292178406,
-          "count": 2019,
-          "text_count": 790
+          "average": 4.412,
+          "bayesian_average": 4.40926402856513,
+          "count": 2029,
+          "text_count": 793
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/reviews/",
         "requires_payment": false,
@@ -2904,7 +2723,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/versions/",
-        "weekly_downloads": 7328
+        "weekly_downloads": 8435
       },
       "notes": null
     },
@@ -2920,7 +2739,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 140692,
+        "average_daily_users": 142622,
         "categories": {
           "android": [
             "performance",
@@ -3034,10 +2853,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 3.916,
-          "bayesian_average": 3.911620482957336,
-          "count": 1095,
-          "text_count": 393
+          "average": 3.9222,
+          "bayesian_average": 3.917847057751054,
+          "count": 1105,
+          "text_count": 395
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/reviews/",
         "requires_payment": false,
@@ -3056,7 +2875,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/versions/",
-        "weekly_downloads": 1318
+        "weekly_downloads": 1769
       },
       "notes": null
     }

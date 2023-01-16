@@ -11,7 +11,7 @@ container:
   use_container: 1
 
 var:
-  firefox_platform_version: 102.6.0
+  firefox_platform_version: 102.7.0
   firefox_version: '[% c("var/firefox_platform_version") %]esr'
   browser_branch: '12.5-1'
   browser_build: 1

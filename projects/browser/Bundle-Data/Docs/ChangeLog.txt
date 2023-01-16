@@ -1,3 +1,88 @@
+Tor Browser 12.5a2 - January 22 2023
+ * All Platforms
+   * Updated tor to 0.4.7.13
+   * Updated NoScript to 11.4.14
+   * Bug 40565: do something with security.tls.version.enable-deprecated [tor-browser]
+   * Bug 40727: Update list of Snowflake STUN servers in default bridge line [tor-browser-build]
+   * Bug 41066: Circuit Isolation should take containers into account [tor-browser]
+   * Bug 41428: Check if we can create our own directories for branding [tor-browser]
+   * Bug 41506: Remove TrustCor root certificates [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 102.7esr
+   * Bug 32274: Bad screen-reader UX for Security Level/Shield button [tor-browser]
+   * Bug 40733: Use the new branding directories [tor-browser-build]
+   * Bug 41393: about:tbupdate semantic and accessibility problems [tor-browser]
+   * Bug 41539: Crypto warning weaknesses [tor-browser]
+   * Bug 41549: tor freeze when receiving to many http proxy requests on socks port [tor-browser]
+   * Bug 41561: Maximize warning is broken (regression) [tor-browser]
+   * Bug 41562: API-triggered fullscreen after F11 causes letterboxing to crop the page [tor-browser]
+   * Bug 41563: Old placeholders used in TorStrings.jsm [tor-browser]
+   * Bug 41572: Check for userContextId also in the circuit display [tor-browser]
+   * Bug 41577: Disable profile migration [tor-browser]
+ * Windows + Linux
+   * Bug 40714: Ship NoScript in the distribution directory also for Windows and Linux [tor-browser-build]
+ * Windows
+   * Bug 40717: UX: hide SSO [tor-browser]
+   * Bug 41578: Disable and lock Windows SSO [tor-browser]
+ * macOS
+   * Bug 28124: Show Tor Browser icon as macOS volume (dmg) icon [tor-browser-build]
+   * Bug 40719: Allow non-universal macOS builds also on base-browser [tor-browser-build]
+   * Bug 41535: Remove the old, unused and undocumented "-invisible" macOS CLI flag [tor-browser]
+ * Android
+   * Updated GeckoView to 102.7esr
+   * Bug 40283: Can't upload files with Tor browser on Android [tor-browser]
+   * Bug 41571: Backport Android-specific Firefox 109 to ESR 102.7-based Tor Browser [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.19.5
+     * Bug 40720: Update fetch-changelogs.py scripts to support new Build System label [tor-browser-build]
+     * Bug 40735: Add command to list which translation components need to be updated [tor-browser-build]
+     * Bug 40739: tor-expert-bundle should include ClientTransportPlugin torrc lines for each pluggable transport [tor-browser-build]
+     * Bug 41567: Build outputs now going to obj-*/dist/torbrower rather than obj-*/dist/firefox [tor-browser]
+   * Windows + macOS + Linux
+     * Bug 40732: Review Bundle-Data and try not to ship the default profile in base browser [tor-browser-build]
+   * macOS
+     * Bug 40706: macos-signer-stapler should wait for user interaction before attempting stapling [tor-browser-build]
+     * Bug 40744: HFS DMG are not deterministic [tor-brower-build]
+   * Android
+     * Bug 40738: Update Android git hashes templates [tor-browser-build]
+
+Tor Browser 12.0.2 - January 16 2023
+ * All Platforms
+   * Updated tor to 0.4.7.13
+   * Updated NoScript to 11.4.14
+   * Bug 40565: do something with security.tls.version.enable-deprecated [tor-browser]
+   * Bug 40713: Use the new tor-browser l10n branch in Firefox [tor-browser-build]
+   * Bug 40727: Update list of Snowflake STUN servers in default bridge line [tor-browser-build]
+   * Bug 41506: Remove TrustCor root certificates [tor-browser]
+   * Bug 41525: Drop locales from torbutton, since we will inject them in tor-browser-build [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 102.7esr
+   * Bug 26504: Browser version in about:preferences showing the Firefox ESR version [tor-browser]
+   * Bug 32308: Stop inner letterbox jiggling as border is dragged [tor-browser]
+   * Bug 41375: Clean unused strings [tor-browser]
+   * Bug 41393: about:tbupdate semantic and accessibility problems [tor-browser]
+   * Bug 41522: Backport torbutton -> tor-browser migration to 12.0 series [tor-browser]
+   * Bug 41524: about:tbupdate needs UTF-8 [tor-browser]
+   * Bug 41539: Crypto warning weaknesses [tor-browser]
+   * Bug 41549: tor freeze when receiving to many http proxy requests on socks port [tor-browser]
+   * Bug 41561: Maximize warning is broken (regression) [tor-browser]
+   * Bug 41563: Old placeholders used in TorStrings.jsm [tor-browser]
+ * macOS
+   * Bug 40716: Unable to update to 12.0.1 on Apple Silicon-based Mac [tor-browser-build]
+ * Android
+   * Updated GeckoView to 102.7esr
+   * Bug 41571: Backport Android-specific Firefox 109 to ESR 102.7-based Tor Browser [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.19.5
+     * Bug 40735: Add command to list which translation components need to be updated [tor-browser-build]
+     * Bug 40739: tor-expert-bundle should include ClientTransportPlugin torrc lines for each pluggable transport [tor-browser-build]
+   * Windows + macOS + Linux
+     * Bug 40734: Backport the translation project [tor-browser-build]
+   * macOS
+     * Bug 40706: macos-signer-stapler should wait for user interaction before attempting stapling [tor-browser-build]
+
 Tor Browser 12.5a1 - December 21 2022
  * All Platforms
    * Updated tor to 0.4.7.12
