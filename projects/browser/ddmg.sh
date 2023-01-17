@@ -1,3 +1,6 @@
+#!/bin/bash
+set -e
+
 [% SET src = c('dmg_src', { error_if_undef => 1 }) -%]
 find [% src %] -executable -exec chmod 0755 {} \;
 find [% src %] ! -executable -exec chmod 0644 {} \;
@@ -18,7 +21,14 @@ newfs_hfs -v "[% c("var/Project_Name") %]" "\$hfsfile"
 
 pushd [% src %]
 
-hfsplus "\$hfsfile" addall .
+find -type d -mindepth 1 | sed -e 's/^\.\///' | sort | while read dirname; do
+  hfsplus "\$hfsfile" mkdir "/\$dirname"
+  hfsplus "\$hfsfile" chmod 0755 "/\$dirname"
+done
+find -type f | sed -e 's/^\.\///' | sort | while read filename; do
+  hfsplus "\$hfsfile" add "\$filename" "/\$filename"
+  hfsplus "\$hfsfile" chmod \$(stat --format '0%a' "\$filename") "/\$filename"
+done
 # hfsplus does not play well with dangling links
 hfsplus "\$hfsfile" symlink /Applications /Applications
 # Show the volume icon

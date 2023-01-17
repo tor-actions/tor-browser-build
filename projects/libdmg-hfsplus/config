@@ -16,3 +16,4 @@ input_files:
     project: cmake
   - name: ninja
     project: ninja
+  - filename: libdmg.patch
