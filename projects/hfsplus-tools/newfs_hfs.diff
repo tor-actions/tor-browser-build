@@ -1,0 +1,38 @@
+diff '--color=auto' -Naur diskdev_cmds-540.1.linux3_orig/Makefile diskdev_cmds-540.1.linux3/Makefile
+--- diskdev_cmds-540.1.linux3_orig/Makefile	2023-01-17 11:36:56.341279443 +0100
++++ diskdev_cmds-540.1.linux3/Makefile	2023-01-17 11:44:12.496479981 +0100
+@@ -3,7 +3,7 @@
+ CC := clang
+ CFLAGS := -g3 -Wall -fblocks -I$(PWD)/BlocksRunTime -I$(PWD)/include -DDEBUG_BUILD=0 -D_FILE_OFFSET_BITS=64 -D LINUX=1 -D BSD=1 -D VERSION=\"$(VERSION)\"
+ LDFLAGS := -Wl,--build-id -L$(PWD)/BlocksRunTime
+-SUBDIRS := BlocksRunTime newfs_hfs.tproj fsck_hfs.tproj
++SUBDIRS := newfs_hfs.tproj
+ 
+ all clean:
+ 	for d in $(SUBDIRS); do $(MAKE) -C $$d -f Makefile.lnx $@; done
+diff '--color=auto' -Naur diskdev_cmds-540.1.linux3_orig/newfs_hfs.tproj/makehfs.c diskdev_cmds-540.1.linux3/newfs_hfs.tproj/makehfs.c
+--- diskdev_cmds-540.1.linux3_orig/newfs_hfs.tproj/makehfs.c	2023-01-17 11:36:56.341279443 +0100
++++ diskdev_cmds-540.1.linux3/newfs_hfs.tproj/makehfs.c	2023-01-17 11:58:15.972059719 +0100
+@@ -38,8 +38,8 @@
+ #endif
+ #include <sys/errno.h>
+ #include <sys/stat.h>
+-#include <sys/sysctl.h>
+ #if !LINUX
++#include <sys/sysctl.h>
+ #include <sys/vmmeter.h>
+ #endif
+ 
+@@ -571,8 +571,10 @@
+ 	/* Adjust free blocks to reflect everything we have allocated. */
+ 	hp->freeBlocks -= blocksUsed;
+ 
+-	/* Generate and write UUID for the HFS+ disk */
+-	GenerateVolumeUUID(&newVolumeUUID);
++	/* Use a deterministic UUID for reproducibility */
++	memset(&newVolumeUUID, 0, sizeof(newVolumeUUID));
++	strncpy(&newVolumeUUID, defaults->volumeName, sizeof(newVolumeUUID));
++
+ 	finderInfoUUIDPtr = (VolumeUUID *)(&hp->finderInfo[24]);
+ 	finderInfoUUIDPtr->v.high = OSSwapHostToBigInt32(newVolumeUUID.v.high); 
+ 	finderInfoUUIDPtr->v.low = OSSwapHostToBigInt32(newVolumeUUID.v.low); 

@@ -42,7 +42,14 @@ cd $src_dir
 # add it back again with the special command to do so.
 rm -f Applications
 
-hfsplus "$hfsfile" addall .
+find -type d -mindepth 1 | sed -e 's/^\.\///' | sort | while read dirname; do
+  hfsplus "$hfsfile" mkdir "/$dirname"
+  hfsplus "$hfsfile" chmod 0755 "/$dirname"
+done
+find -type f | sed -e 's/^\.\///' | sort | while read filename; do
+  hfsplus "$hfsfile" add "$filename" "/$filename"
+  hfsplus "$hfsfile" chmod $(stat --format '0%a' "$filename") "/$filename"
+done
 hfsplus "$hfsfile" symlink /Applications /Applications
 # Show the volume icon
 hfsplus "$hfsfile" attr / C

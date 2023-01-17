@@ -16,6 +16,7 @@ input_files:
   # The project uses a flag that is not supported by GCC
   - name: clang
     project: clang
-  # Build only newfs (we do not care of fsck), and remove a header that does not
-  # exist on Linux (at that path) and is not required on Linux either.
-  - filename: only-newfs_include.diff
+  # Build only newfs (we do not care of fsck), remove a header that does not
+  # exist on Linux (at that path) and is not required on Linux either, and make
+  # the UUID deterministic.
+  - filename: newfs_hfs.diff

@@ -8,7 +8,7 @@ export PATH="/var/tmp/dist/clang/bin:$PATH"
 tar -xf diskdev_cmds-[% c("version") %].tar.gz
 cd diskdev_cmds-[% c("version") %]
 
-patch -p1 < $rootdir/only-newfs_include.diff
+patch -p1 < $rootdir/newfs_hfs.diff
 
 make -j[% c("num_procs") %]
 
