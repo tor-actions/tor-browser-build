@@ -210,6 +210,8 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
     - `ssh_host_macos_signer` : ssh hostname of macOS signing machine
   - [ ] `tor-browser-build/tools/signing/set-config.macos-notarization`
     - `macos_notarization_user` : the email login for a tor notariser Apple Developer account
+  - [ ] `set-config.update-responses`
+    - `update_responses_repository_dir` : directory where you cloned `git@gitlab.torproject.org:tpo/applications/tor-browser-update-responses.git`
   - [ ] `tor-browser-build/tools/signing/set-config.tbb-version`
     - `tbb_version` : tor browser version string, same as `var/torbrowser_version` in `rbm.conf` (examples: `11.5a12`, `11.0.13`)
     - `tbb_version_build` : the tor-browser-build build number (if `var/torbrowser_build` in `rbm.conf` is `buildN` then this value is `N`)
@@ -230,7 +232,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
     - [ ] `/srv/cdn-master.torproject.org/htdocs/aus1/torbrowser`
     - [ ] `/srv/dist-master.torproject.org/htdocs/torbrowser`
   - [ ] Static update components : `static-update-component cdn.torproject.org && static-update-component dist.torproject.org`
-  - [ ] Enable update responses : `./deploy_update_responses-alpha.sh`
+  - [ ] Enable update responses : `sudo -u tb-release ./deploy_update_responses-alpha.sh`
 - [ ] Publish APKs to Google Play:
   - Log into https://play.google.com/apps/publish
   - Select `Tor Browser (Alpha)` app
