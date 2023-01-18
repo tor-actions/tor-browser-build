@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
-git_url: https://github.com/pion/dtls
-git_hash: d2f797183a9f044ce976e6df6f362662ca722412 #v2.1.5
+git_url: https://github.com/xiaokangwang/dtls
+git_hash: 16e5cc8ce01c0262e4d945b7fe90eba4d7d58ce5 #v2.1.5+patch
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 container:
   use_container: 1
