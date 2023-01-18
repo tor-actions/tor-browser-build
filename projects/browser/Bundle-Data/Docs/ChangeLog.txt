@@ -1,4 +1,4 @@
-Tor Browser 12.0.2 - January 16 2023
+Tor Browser 12.0.2 - January 18 2023
  * All Platforms
    * Updated tor to 0.4.7.13
    * Updated NoScript to 11.4.14
@@ -31,6 +31,7 @@ Tor Browser 12.0.2 - January 16 2023
      * Bug 40739: tor-expert-bundle should include ClientTransportPlugin torrc lines for each pluggable transport [tor-browser-build]
    * Windows + macOS + Linux
      * Bug 40734: Backport the translation project [tor-browser-build]
+     * Bug 40746: Remove pt_config.json from pt dir [tor-browser-build]
    * macOS
      * Bug 40706: macos-signer-stapler should wait for user interaction before attempting stapling [tor-browser-build]
 
