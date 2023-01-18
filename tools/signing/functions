@@ -19,4 +19,16 @@ function check_torbrowser_version_var {
   return 0
 }
 
+function check_update_responses_repository_dir {
+  if test -z "$update_responses_repository_dir" || ! test -d "$update_responses_repository_dir"
+  then
+    cat << 'EOF' > /dev/stderr
+$aus1_repository_dir is not defined, or the directory does not exist
+You should clone git@gitlab.torproject.org:tpo/applications/tor-browser-update-responses.git
+and set $update_responses_repository_dir in set-config.update-responses
+EOF
+    exit 1
+  fi
+}
+
 . "$script_dir/set-config"

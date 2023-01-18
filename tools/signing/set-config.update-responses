@@ -1,0 +1,7 @@
+# You should clone git@gitlab.torproject.org:tpo/applications/tor-browser-update-responses.git
+# and uncomment the line setting update_responses_repository_dir.
+# Don't forget to set user.email and user.name in your git config
+
+#update_responses_repository_dir=/path/to/tor-browser-update-responses.git
+
+check_update_responses_repository_dir

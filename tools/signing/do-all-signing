@@ -2,6 +2,7 @@
 set -e
 script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "$script_dir/functions"
+source "$script_dir/set-config.update-responses"
 
 NON_INTERACTIVE=1
 steps_dir="$signed_version_dir.steps"

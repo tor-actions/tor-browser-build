@@ -2,6 +2,7 @@
 set -e
 script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "$script_dir/functions"
+source "$script_dir/set-config.update-responses"
 
 check_torbrowser_version_var
 
@@ -17,33 +18,40 @@ else
   popd > /dev/null
 fi
 
-update_dir=/srv/aus1-master.torproject.org/htdocs/torbrowser/update_3
+cd $update_responses_repository_dir
+git checkout main
+git pull --ff-only
+test -n "$(git status --porcelain=v1 | grep -v '^?')" \
+  && exit_error 'update_responses_repository_dir has modified files'
+cd update_3
+rm -Rf "$tbb_version_type"
+tar -xf "$update_responses_tar"
+git add "$tbb_version_type"
+git commit -m "$tbb_version_type: new version, $tbb_version"
+update_responses_commit=$(git log -1 --format=%H)
+
+update_dir=/srv/aus1-master.torproject.org/htdocs/torbrowser
 deploy_script=$(mktemp)
 trap "rm -Rf $deploy_script" EXIT
 cat << EOF > "$deploy_script"
 #!/bin/bash
 set -e
 
-tmpdir="\$(mktemp -d)"
+echo "Deploying version $tbb_version"
+echo "update_responses_commit: $update_responses_commit"
 
-trap "rm -Rf \$tmpdir" EXIT
-
-rm -Rf "$update_dir/$tbb_version_type.old"
-test -d "$update_dir/$tbb_version_type" && \\
-  mv -v "$update_dir/$tbb_version_type" "$update_dir/$tbb_version_type.old"
-
-tar -C "\$tmpdir" -xf ~/$update_responses_tar_filename
-chmod 775 "\$tmpdir"/$tbb_version_type
-chmod 664 "\$tmpdir"/$tbb_version_type/* "\$tmpdir"/$tbb_version_type/.htaccess
-chgrp -R torwww "\$tmpdir"/$tbb_version_type
-mv -v "\$tmpdir"/$tbb_version_type "$update_dir/$tbb_version_type"
+cd "$update_dir"
+git fetch
+git checkout "$update_responses_commit"
 
 static-update-component aus1.torproject.org
 EOF
 
 chmod +x $deploy_script
-scp -p "$update_responses_tar" "$ssh_host_staticiforme:"
 scp -p $deploy_script $ssh_host_staticiforme:deploy_update_responses-$tbb_version_type.sh
 
+git push
+
 echo 'To enable updates you can now run:'
-echo "  ssh $ssh_host_staticiforme ./deploy_update_responses-$tbb_version_type.sh"
+echo "  ssh $ssh_host_staticiforme"
+echo "  sudo -u tb-release ./deploy_update_responses-$tbb_version_type.sh"
