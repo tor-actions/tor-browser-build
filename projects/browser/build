@@ -83,9 +83,9 @@ mv [% c('input_files_by_name/noscript') %] "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b
   mv_tbdir data/{geoip,geoip6} "$TORCONFIGPATH"
 
   # Bridge lists will be consumed later in `bridges_conf`
-  mv tor/pluggable_transports/bridges_list.*.txt $rootdir
+  mv tor/pluggable_transports/bridges_list.*.txt tor/pluggable_transports/pt_config.json $rootdir
   [% IF c("var/macos_universal") %]
-    rm -f aarch64/tor/pluggable_transports/bridges_list.*.txt
+    rm -f aarch64/tor/pluggable_transports/bridges_list.*.txt aarch64/tor/pluggable_transports/pt_config.json
   [% END -%]
 
   # Snowflake's README is the only documentation shipped in tor-expert-bundle
