@@ -92,6 +92,7 @@ targets:
         - libasound2-dev
         # To support Wayland mode
         - libdrm-dev
+      libdir: lib64
 
   linux-i686:
     var:
@@ -111,6 +112,7 @@ targets:
         - libasound2-dev:i386
         # To support Wayland mode
         - libdrm-dev:i386
+      libdir: lib32
 
   macos:
     var:
@@ -174,8 +176,6 @@ input_files:
     target_prepend:
       - torbrowser-windows-x86_64
   - filename: abicheck.cc
-    enable: '[% c("var/linux") %]'
-  - filename: start-firefox
     enable: '[% c("var/linux") %]'
   - project: translation
     name: translation-base-browser

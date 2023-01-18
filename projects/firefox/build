@@ -190,12 +190,12 @@ export LANG=C.UTF-8
 [% END %]
 
 [% IF c("var/macos") %]
-  cp -a obj-*/dist/firefox/* $distdir
+  cp -a obj-*/dist/[% c('var/exe_name') %]/* $distdir
   [% IF c("var/base-browser") -%]
     mv "$distdir/Firefox.app" "$distdir/[% c('var/Project_Name') %].app"
   [% END -%]
   # Remove firefox-bin (we don't use it, see ticket #10126)
-  rm -f "$distdir/[% c('var/Project_Name') %].app/Contents/MacOS/firefox-bin"
+  rm -f "$distdir/[% c('var/Project_Name') %].app/Contents/MacOS/[% c('var/exe_name') %]-bin"
 
   # Adjust the Info.plist file
   INFO_PLIST="$distdir/[% c('var/Project_Name') %].app/Contents/Info.plist"
@@ -208,21 +208,23 @@ export LANG=C.UTF-8
   [% IF c("var/linux-x86_64") && !c("var/asan") %]
     cp obj-*/testing/geckodriver/x86_64-unknown-linux-gnu/release/geckodriver $distdir
   [% END %]
-  cp -a obj-*/dist/firefox/* $distdir/Browser/
+  cp -a obj-*/dist/[% c('var/exe_name') %]/* $distdir/Browser/
   # Remove firefox-bin (we don't use it, see ticket #10126)
-  rm -f $distdir/Browser/firefox-bin
+  rm -f "$distdir/Browser/[% c('var/exe_name') %]-bin"
   # TODO: There goes FIPS-140.. We could upload these somewhere unique and
   # subsequent builds could test to see if they've been uploaded before...
   # But let's find out if it actually matters first..
   rm -f $distdir/Browser/*.chk
-  # Replace firefox by a wrapper script (#25485)
-  mv $distdir/Browser/firefox $distdir/Browser/firefox.real
-  mv $rootdir/start-firefox $distdir/Browser/firefox
-  chmod 755 $distdir/Browser/firefox
+  # Replace $exe_name by a wrapper script (#25485)
+  mv "$distdir/Browser/[% c('var/exe_name') %]" "$distdir/Browser/[% c('var/exe_name') %].real"
+  cat > "$distdir/Browser/[% c('var/exe_name') %]" << 'RBM_TB_EOF'
+[% INCLUDE 'start-firefox' -%]
+RBM_TB_EOF
+  chmod 755 "$distdir/Browser/[% c('var/exe_name') %]"
 [% END %]
 
 [% IF c("var/windows") %]
-  cp -a obj-*/dist/firefox/* $distdir/Browser/
+  cp -a obj-*/dist/[% c('var/exe_name') %]/* $distdir/Browser/
   [% IF c("var/windows-i686") %]
     cp -a /var/tmp/dist/fxc2/bin/d3dcompiler_47_32.dll $distdir/Browser/d3dcompiler_47.dll
   [% ELSE %]
@@ -281,7 +283,7 @@ cd $distdir
   mkdir -p $distdir/Debug/Browser
   # Strip and generate debuginfo for the firefox binary that we keep, all *.so
   # files, the plugin-container, and the updater (see ticket #10126)
-  for LIB in Browser/*.so Browser/firefox.real Browser/plugin-container Browser/updater
+  for LIB in Browser/*.so "Browser/[% c('var/exe_name') %].real" Browser/plugin-container Browser/updater
   do
       objcopy --only-keep-debug $LIB Debug/$LIB
       strip $LIB
@@ -311,6 +313,16 @@ END;
 
 [% IF c("var/linux") %]
   /var/tmp/dist/gcc/bin/g++ $rootdir/abicheck.cc -o Browser/abicheck -std=c++17
+  [% IF !c("var/torbrowser") %]
+    libdest=Browser/libstdc++
+    mkdir -p "$libdest"
+    # FIXME: tor-browser-build#40749
+    cp /var/tmp/dist/gcc/[% c("var/libdir") %]/libstdc++.so.* "$libdest"
+    [% IF c("var/asan") -%]
+      cp /var/tmp/dist/gcc/[% c("var/libdir") %]/libasan.so.* "$libdest"
+      cp /var/tmp/dist/gcc/[% c("var/libdir") %]/libubsan.so.* "$libdest"
+    [% END -%]
+  [% END %]
 [% END %]
 
 [% c('tar', {
