@@ -95,6 +95,7 @@ sub get_dmg_files_from_sha256sums {
     my @files;
     foreach my $line (read_file('sha256sums-unsigned-build.txt')) {
         my (undef, $filename) = split '  ', $line;
+        next unless $filename;
         chomp $filename;
         next unless $filename =~ m/^$appname_dmg-(.+)-macos_(.+)\.dmg$/;
         push @files, { filename => $filename, version => $1, lang => $2 };
