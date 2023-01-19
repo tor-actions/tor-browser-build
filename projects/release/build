@@ -51,7 +51,7 @@ RewriteRule ^sha256sums.incrementals.txt.asc$ sha256sums-unsigned-build.incremen
 EOF
 
 # empty any existing sh256sums file
-echo > sha256sums-unsigned-build.txt
+echo -n > sha256sums-unsigned-build.txt
 # concat sha256sum entry for each file in set
 for i in $(ls -1 *.exe *.tar.xz *.dmg *.mar *.zip *.tar.gz *.apk *.json | grep -v '\.incremental\.mar$' | sort)
 do
