@@ -249,7 +249,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
     - [ ] `/srv/cdn-master.torproject.org/htdocs/aus1/torbrowser`
     - [ ] `/srv/dist-master.torproject.org/htdocs/torbrowser`
   - [ ] Static update components : `static-update-component cdn.torproject.org && static-update-component dist.torproject.org`
-  - [ ] Enable update responses : `./deploy_update_responses-alpha.sh`
+  - [ ] Enable update responses : `./deploy_update_responses-release.sh`
 - [ ] Publish APKs to Google Play:
   - Log into https://play.google.com/apps/publish
   - Select `Tor Browser` app
