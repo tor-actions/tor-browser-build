@@ -181,10 +181,10 @@ torbrowser-testbuild-src: submodule-update
 	$(rbm) build release --target testbuild --target browser-src-testbuild --target torbrowser
 
 signtag-release: submodule-update
-	$(rbm) build release --step signtag --target release
+	$(rbm) build release --step signtag --target release --target torbrowser
 
 signtag-alpha: submodule-update
-	$(rbm) build release --step signtag --target alpha
+	$(rbm) build release --step signtag --target alpha --target torbrowser
 
 incrementals-release: submodule-update
 	$(rbm) build release --step update_responses_config --target release --target create_unsigned_incrementals --target torbrowser
