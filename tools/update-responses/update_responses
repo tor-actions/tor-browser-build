@@ -170,7 +170,7 @@ sub get_perplatform_downloads {
           $os = 'windows-x86_64';
         } elsif ($file =~ m/^$config->{appname_bundle_win32}-${version}_(.+).exe$/) {
           $os = 'windows-i686';
-        } elsif ($file =~ m/^$config->{appname_bundle_android}-${version}-(android-armv7|android-x86|android-x86_64|android-aarch64)-multi.apk/) {
+        } elsif ($file =~ m/^$config->{appname_bundle_android}-${version}-(android-armv7|android-x86|android-x86_64|android-aarch64)-multi.apk$/) {
           $os = $1;
         } else {
             next;
