@@ -94,7 +94,7 @@ fi
 [% END -%]
 
 [% IF c("var/namecoin") %]
-  pushd toolkit/torproject/torbutton
+  pushd toolkit/torbutton
   patch -p1 < $rootdir/namecoin-torbutton.patch
   popd
 [% END %]
