@@ -5,4 +5,4 @@ source "$script_dir/functions"
 
 var_is_defined ssh_host_builder builder_tor_browser_build_dir
 
-rsync $rsync_options "$ssh_host_builder:$builder_tor_browser_build_dir/$tbb_version_type/unsigned/$tbb_version-build$tbb_version_build/" "$signed_version_dir/"
+rsync $rsync_options "$ssh_host_builder:$builder_tor_browser_build_dir/$SIGNING_PROJECTNAME/$tbb_version_type/unsigned/$tbb_version-build$tbb_version_build/" "$signed_version_dir/"

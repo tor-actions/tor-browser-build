@@ -4,7 +4,7 @@
 # file from a directory
 #
 # Usage:
-#   ddmg.sh <dmg-file> <src-directory>
+#   ddmg.sh <dmg-file> <src-directory> <Volume Label>
 
 set -e
 
@@ -13,6 +13,7 @@ source "$script_dir/functions"
 
 dest_file="$1"
 src_dir="$2"
+volume_label="$3"
 
 set +e
 find $src_dir -executable -exec chmod 0755 {} \; 2> /dev/null
@@ -20,8 +21,6 @@ find $src_dir ! -executable -exec chmod 0644 {} \; 2> /dev/null
 
 find $src_dir -exec touch -m -t 200001010101 {} \; 2> /dev/null
 set -e
-
-VOLUME_LABEL="${VOLUME_LABEL:-Tor Browser}"
 
 dmg_tmpdir=$(mktemp -d)
 hfsfile="$dmg_tmpdir/tbb-uncompressed.dmg"
@@ -34,7 +33,7 @@ echo "Starting: " $(basename $dest_file)
 # Use a similar strategy to Mozilla (they have 1.02, we have 1.1)
 size=$(du -ms "$src_dir" | awk '{ print int( $1 * 1.1 ) }')
 dd if=/dev/zero of="$hfsfile" bs=1M count=$size
-newfs_hfs -v "$VOLUME_LABEL" "$hfsfile"
+newfs_hfs -v "$volume_label" "$hfsfile"
 
 cd $src_dir
 

@@ -19,11 +19,12 @@ test "$version" = "$tbb_version" || \
 test -d "$macos_signed_dir" || \
   exit_error "$macos_signed_dir does not exist"
 
+ProjName=$(ProjectName)
 nb_locales=$(echo $bundle_locales | wc -w)
-nb_bundles=$(ls -1 "$macos_signed_dir"/TorBrowser-*.dmg | wc -l)
+nb_bundles=$(ls -1 "$macos_signed_dir/$ProjName"-*.dmg | wc -l)
 test "$nb_locales" -eq "$nb_bundles" || \
   exit_error "Wrong number of bundles: $nb_locales != $nb_bundles"
 
-mv -vf "$macos_signed_dir"/TorBrowser-*.dmg "$signed_version_dir"/
+mv -vf "$macos_signed_dir"/"$ProjName"-*.dmg "$signed_version_dir"/
 
 make dmg2mar-$tbb_version_type

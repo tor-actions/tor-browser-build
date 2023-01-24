@@ -62,13 +62,15 @@ tar -C "$tmpdir" -xf "$libdmg_file"
 tar -C "$tmpdir" -xf "$hfstools_file"
 export PATH="$PATH:$tmpdir/libdmg-hfsplus:$tmpdir/hfsplus-tools"
 
+ProjName=$(ProjectName)
+Proj_Name=$(Project_Name)
 for lang in $bundle_locales
 do
   cd $tmpdir/dmg
   unzip -q $macos_stapled_dir/tb-${tbb_version}_$lang-stapled.zip
   cd ..
-  $script_dir/ddmg.sh $macos_signed_dir/TorBrowser-${tbb_version}-macos_$lang.dmg $tmpdir/dmg/
-  rm -rf 'dmg/Tor Browser.app'
+  $script_dir/ddmg.sh $macos_signed_dir/$ProjName-${tbb_version}-macos_$lang.dmg $tmpdir/dmg/ "$Proj_Name"
+  rm -rf "dmg/$Proj_Name.app"
 done
 
 rm -Rf "$tmpdir"

@@ -4,7 +4,7 @@ set -e
 script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "$script_dir/functions"
 
-cd ~/"$tbb_version"
+cd ~/"$SIGNING_PROJECTNAME-$tbb_version"
 
 test -n "${YUBIPASS:-}" || read -s -p "Authenticode (yubihsm) password:" YUBIPASS
 echo

@@ -3,8 +3,10 @@ set -e
 
 script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "$script_dir/functions"
+source "$script_dir/set-config.generated-config"
 
 ENTITLEMENTS="$script_dir/$tbb_version_type.entitlements.xml"
+app_name=$(Project_Name)
 
 function check_signature() {
   LANG=$1
@@ -18,12 +20,12 @@ function check_signature() {
     pushd test_${LANG}
   fi
   echo "Checking $LANG..."
-  spctl -vvvv --assess --type open --context context:primary-signature 'Tor Browser.app/'
+  spctl -vvvv --assess --type open --context context:primary-signature "$app_name.app/"
   if [ $? -ne 3 ]; then
     echo tb-${tbb_version}_$LANG.zip not signed correctly. Failed open.
     failed_open=1
   fi
-  spctl -vvvv --assess --type exec --context context:primary-signature 'Tor Browser.app/'
+  spctl -vvvv --assess --type exec --context context:primary-signature "$app_name.app/"
   if [ $? -ne 0 ]; then
     echo tb-${tbb_version}_$LANG.zip not signed correctly. Failed exec.
     failed_exec=1
@@ -39,7 +41,7 @@ function check_signature() {
   fi
 }
 
-cd ~/${tbb_version}
+cd ~/$SIGNING_PROJECTNAME-${tbb_version}
 
 if test -n "$KEYCHAIN_PW"
 then
@@ -58,40 +60,40 @@ do
     echo "Deleting tb-${tbb_version}_${LANG}.zip"
     rm tb-${tbb_version}_${LANG}.zip
   fi
-  if [ -d "Tor Browser.app" ]
+  if [ -d "$app_name.app" ]
   then
-    echo "Deleting Tor Browser.app"
-    rm -r "Tor Browser.app"
+    echo "Deleting $app_name.app"
+    rm -r "$app_name.app"
   fi
-  if [ -d '/Volumes/Tor Browser' ]; then
+  if [ -d "/Volumes/$app_name" ]; then
     echo "DMG already mounted. Please correct."
     exit 1
   fi
-  hdiutil attach TorBrowser-${tbb_version}-macos_$LANG.dmg
-  cp -rf "/Volumes/Tor Browser/Tor Browser.app" "Tor Browser.app"
-  echo "Signing Tor Browser_$LANG.app"
-  codesign -vvv --deep -o runtime --entitlements="$ENTITLEMENTS" --timestamp -f -s "Developer ID Application: The Tor Project, Inc (MADPSAYN6T)" "Tor Browser.app/"
+  hdiutil attach $(ProjectName)-${tbb_version}-macos_$LANG.dmg
+  cp -rf "/Volumes/$app_name/$app_name.app" "$app_name.app"
+  echo "Signing ${app_name}_${LANG}.app"
+  codesign -vvv --deep -o runtime --entitlements="$ENTITLEMENTS" --timestamp -f -s "Developer ID Application: The Tor Project, Inc (MADPSAYN6T)" "$app_name.app/"
   echo "codesign exit code: $?"
   set +e
   check_signature $LANG 0
   if [ $? -eq 1 ]
   then
     echo Signature verification failed.
-    rm -r "Tor Browser.app"
-    hdiutil detach "/Volumes/Tor Browser"
+    rm -r "$app_name.app"
+    hdiutil detach "/Volumes/$app_name"
     exit 1
   fi
   set -e
   echo "Zipping up tb-${tbb_version}_${LANG}.zip"
-  zip -qr tb-${tbb_version}_${LANG}.zip "Tor Browser.app"
-  rm -rf "Tor Browser.app"
-  hdiutil detach "/Volumes/Tor Browser"
+  zip -qr tb-${tbb_version}_${LANG}.zip "$app_name.app"
+  rm -rf "$app_name.app"
+  hdiutil detach "/Volumes/$app_name"
   set +e
   check_signature $LANG 1
   if [ $? -eq 1 ]
   then
     echo "Signature verification failed (${LANG})".
-    rm -r "Tor Browser.app"
+    rm -r "$app_name.app"
     exit 1
   fi
   set -e

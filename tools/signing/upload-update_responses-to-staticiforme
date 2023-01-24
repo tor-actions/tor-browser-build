@@ -7,7 +7,7 @@ source "$script_dir/set-config.update-responses"
 check_torbrowser_version_var
 
 update_responses_tar_filename="update-responses-$tbb_version_type-$tbb_version.tar"
-update_responses_tar="$script_dir/../../$tbb_version_type/update-responses/$update_responses_tar_filename"
+update_responses_tar="$script_dir/../../$SIGNING_PROJECTNAME/$tbb_version_type/update-responses/$update_responses_tar_filename"
 if test -f "$update_responses_tar"
 then
   echo "$update_responses_tar_filename already exists: not running 'make update_responses-$tbb_version_type'"

@@ -5,4 +5,4 @@ source "$script_dir/functions"
 
 var_is_defined ssh_host_linux_signer
 
-rsync $rsync_options "$ssh_host_linux_signer:$tbb_version/" "$signed_version_dir/"
+rsync $rsync_options "$ssh_host_linux_signer:$SIGNING_PROJECTNAME-$tbb_version/" "$signed_version_dir/"

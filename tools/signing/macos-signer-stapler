@@ -5,16 +5,18 @@ read -n 1 -p "Press enter once notarization is complete..."
 
 script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "$script_dir/functions"
+source "$script_dir/set-config.generated-config"
 
 STAPLER=/Users/torbrowser/Xcode.app/Contents//Developer/usr/bin/stapler
+app_name=$(Project_Name)
 
-cd ~/${tbb_version}
+cd ~/$SIGNING_PROJECTNAME-${tbb_version}
 
 for LANG in $bundle_locales
 do
   echo "Stapling $LANG..."
   cd $LANG
-  $STAPLER staple Tor\ Browser.app
-  zip -qr ../tb-${tbb_version}_$LANG-stapled.zip Tor\ Browser.app
+  $STAPLER staple "$app_name.app"
+  zip -qr ../tb-${tbb_version}_$LANG-stapled.zip "$app_name.app"
   cd ..
 done

@@ -56,7 +56,7 @@ function macos-signer-gatekeeper-signing {
   "$script_dir/sync-macos-local-to-macos-signer"
   ssh "$ssh_host_macos_signer" 'bash -s' << EOF
   export KEYCHAIN_PW=$KEYCHAIN_PW
-  ~/signing-$tbb_version_type/macos-signer-gatekeeper-signing
+  ~/signing-$SIGNING_PROJECTNAME-$tbb_version_type/macos-signer-gatekeeper-signing.$SIGNING_PROJECTNAME
 EOF
   unset KEYCHAIN_PW
 }
@@ -64,13 +64,13 @@ EOF
 function macos-signer-notarization {
   ssh "$ssh_host_macos_signer" 'bash -s' << EOF
   export PW=$NOTARIZATION_PW
-  ~/signing-$tbb_version_type/macos-signer-notarization
+  ~/signing-$SIGNING_PROJECTNAME-$tbb_version_type/macos-signer-notarization.$SIGNING_PROJECTNAME
 EOF
   unset NOTARIZATION_PW
 }
 
 function macos-signer-stapler {
-  ssh "$ssh_host_macos_signer" "~/signing-$tbb_version_type/macos-signer-stapler"
+  ssh "$ssh_host_macos_signer" "~/signing-$SIGNING_PROJECTNAME-$tbb_version_type/macos-signer-stapler.$SIGNING_PROJECTNAME"
   "$script_dir/sync-macos-signer-stapled-to-macos-local-stapled"
 }
 
@@ -94,7 +94,7 @@ function linux-signer-signmars {
   "$script_dir/sync-local-to-linux-signer"
   ssh "$ssh_host_linux_signer" 'bash -s' << EOF
   export NSSPASS=$NSSPASS
-  ~/signing-$tbb_version_type/linux-signer-signmars
+  ~/signing-$SIGNING_PROJECTNAME-$tbb_version_type/linux-signer-signmars.$SIGNING_PROJECTNAME
 EOF
   unset NSSPASS
 }
@@ -110,7 +110,7 @@ function download-unsigned-sha256sums-gpg-signatures-from-people-tpo {
 function linux-signer-authenticode-signing {
   ssh "$ssh_host_linux_signer" 'bash -s' << EOF
   export YUBIPASS='$YUBIPASS'
-  ~/signing-$tbb_version_type/linux-signer-authenticode-signing
+  ~/signing-$SIGNING_PROJECTNAME-$tbb_version_type/linux-signer-authenticode-signing.$SIGNING_PROJECTNAME
 EOF
   unset YUBIPASS
 }
@@ -138,7 +138,7 @@ function sync-after-hash {
 function linux-signer-gpg-sign {
   ssh "$ssh_host_linux_signer" 'bash -s' << EOF
   export GPG_PASS=$GPG_PASS
-  ~/signing-$tbb_version_type/linux-signer-gpg-sign
+  ~/signing-$SIGNING_PROJECTNAME-$tbb_version_type/linux-signer-gpg-sign.$SIGNING_PROJECTNAME
 EOF
 }
 
@@ -155,7 +155,7 @@ function sync-scripts-to-staticiforme {
 }
 
 function staticiforme-prepare-cdn-dist-upload {
-  ssh "$ssh_host_staticiforme" "signing-$tbb_version_type/staticiforme-prepare-cdn-dist-upload"
+  ssh "$ssh_host_staticiforme" "signing-$SIGNING_PROJECTNAME-$tbb_version_type/staticiforme-prepare-cdn-dist-upload.$SIGNING_PROJECTNAME"
 }
 
 function upload-update_responses-to-staticiforme {
@@ -179,6 +179,8 @@ function do_step {
   echo "$(date -Iseconds) - Finished step: $1"
 }
 
+export SIGNING_PROJECTNAME
+
 do_step wait-for-finished-build
 do_step sync-builder-unsigned-to-local-signed
 do_step macos-signer-directory-not-present
@@ -189,10 +191,13 @@ do_step macos-signer-notarization
 do_step macos-signer-stapler
 do_step macos-signer-disable-network-proxy-settings
 do_step gatekeeper-bundling
-do_step dmg2mar
+is_project torbrowser && \
+  do_step dmg2mar
 do_step sync-scripts-to-linux-signer
-do_step linux-signer-signmars
-do_step sync-after-signmars
+is_project torbrowser && \
+  do_step linux-signer-signmars
+is_project torbrowser && \
+  do_step sync-after-signmars
 do_step linux-signer-authenticode-signing
 do_step sync-after-authenticode-signing
 do_step authenticode-timestamping
@@ -202,9 +207,13 @@ do_step sync-after-hash
 do_step linux-signer-gpg-sign
 do_step sync-after-gpg-sign
 do_step download-unsigned-sha256sums-gpg-signatures-from-people-tpo
-do_step sync-local-to-staticiforme
-do_step sync-scripts-to-staticiforme
-do_step staticiforme-prepare-cdn-dist-upload
-do_step upload-update_responses-to-staticiforme
+is_project torbrowser && \
+  do_step sync-local-to-staticiforme
+is_project torbrowser && \
+  do_step sync-scripts-to-staticiforme
+is_project torbrowser && \
+  do_step staticiforme-prepare-cdn-dist-upload
+is_project torbrowser && \
+  do_step upload-update_responses-to-staticiforme
 do_step finished-signing-clean-macos-signer
 do_step finished-signing-clean-linux-signer

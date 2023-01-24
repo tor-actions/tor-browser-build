@@ -232,7 +232,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
 - [ ] apk signing : copy signed `*multi.apk` files to the unsigned build outputs directory
 - [ ] run do-all-signing script:
     - `cd tor-browser-build/tools/signing/`
-    - `./do-all-signing.sh`
+    - `./do-all-signing.torbrowser`
 - **NOTE**: at this point the signed binaries should have been copied to `staticiforme`
 - [ ] Update `staticiforme.torproject.org`:
   - From `screen` session on `staticiforme.torproject.org`:

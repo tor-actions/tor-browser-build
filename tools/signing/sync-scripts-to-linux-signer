@@ -5,4 +5,6 @@ source "$script_dir/functions"
 
 var_is_defined ssh_host_linux_signer
 
-rsync $rsync_options "$script_dir/" "$ssh_host_linux_signer:signing-$tbb_version_type/"
+generate_config
+
+rsync $rsync_options "$script_dir/" "$ssh_host_linux_signer:signing-$SIGNING_PROJECTNAME-$tbb_version_type/"

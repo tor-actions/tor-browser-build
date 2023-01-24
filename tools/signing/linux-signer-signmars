@@ -46,7 +46,7 @@ test -n "${NSSPASS:-}" || read -s -p "NSS password:" NSSPASS
 echo ""
 
 COUNT=0
-cd ~/"$tbb_version"
+cd ~/"$SIGNING_PROJECTNAME-$tbb_version"
 for marfile in *.mar; do
   if [ ! -f "$marfile" ]; then
     continue;

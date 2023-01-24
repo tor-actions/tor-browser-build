@@ -7,7 +7,7 @@ source "$script_dir/set-config.macos-notarization"
 
 ALTOOL=~/Xcode.app/Contents/SharedFrameworks/ContentDeliveryServices.framework/Versions/A/Frameworks/AppStoreService.framework/Versions/A/Support/altool
 
-cd ~/${tbb_version}
+cd ~/$SIGNING_PROJECTNAME-${tbb_version}
 
 if [ -z "${PW}" ]; then
   echo "Please enter notarization password:"

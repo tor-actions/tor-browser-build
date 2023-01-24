@@ -10,5 +10,5 @@ source "$script_dir/functions"
 var_is_defined ssh_host_macos_signer tbb_version
 
 ssh "$ssh_host_macos_signer" 'bash -s' << EOF
-  test -n "$tbb_version" && rm -Rfv ~/"$tbb_version"
+  test -n "$tbb_version" && rm -Rfv ~/"$SIGNING_PROJECTNAME-$tbb_version"
 EOF
