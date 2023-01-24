@@ -63,6 +63,9 @@ done
 [% END -%]
 
 mv [% c('input_files_by_name/noscript') %] "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi"
+[% IF c("var/privacy-browser") -%]
+  mv [% c('input_files_by_name/ublock-origin') %] "$TBDIR/$EXTSPATH/uBlock0@raymondhill.net.xpi"
+[% END -%]
 [% IF !c("var/macos") && c("var/tor-browser") -%]
   cp "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi" "$TBDIR/$PROFILEPATH/"
 [% END %]
@@ -293,10 +296,11 @@ done
   # mozpack.mozjar.JarReaderError: Central directory and file header mismatch. Corrupted archive?
   #
   # See https://gitlab.torproject.org/tpo/applications/tor-browser-build/-/issues/40439#note_2838724
-  mv "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi" $rootdir/ns.xpi
+  mkdir $rootdir/extensions
+  mv "$TBDIR/$EXTSPATH/"* $rootdir/extensions
   MOZ_AUTOMATION=1 $firefox_src/mach python $firefox_src/toolkit/mozapps/installer/unify.py "$TBDIR" "$TBDIR_AARCH64"
   mkdir -p "$TBDIR/$EXTSPATH"
-  mv $rootdir/ns.xpi "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi"
+  mv $rootdir/extensions/* "$TBDIR/$EXTSPATH/"
   rm -Rf "$TBDIR_AARCH64"
 [% END -%]
 

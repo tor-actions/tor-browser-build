@@ -106,6 +106,10 @@ input_files:
   - URL: https://addons.mozilla.org/firefox/downloads/file/4050735/noscript-11.4.14.xpi
     name: noscript
     sha256sum: 14af6a3cbc269c045f2d950e1e4f7c29981b35a7abc61d2413f5bb8bd7311857
+  - URL: https://addons.mozilla.org/firefox/downloads/file/4047353/ublock_origin-1.46.0.xpi
+    name: ublock-origin
+    sha256sum: 6bf8af5266353fab5eabdc7476de026e01edfb7901b0430c5e539f6791f1edc8
+    enable: '[% c("var/privacy-browser") %]'
   - filename: 'gtk3-settings.ini'
     enable: '[% c("var/linux") %]'
   - project: hfsplus-tools
