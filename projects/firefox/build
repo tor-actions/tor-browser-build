@@ -232,46 +232,48 @@ RBM_TB_EOF
   [% END %]
 [% END %]
 
-# Make MAR-based update tools available for use during the bundle phase.
-# Note that mar and mbsdiff are standalone tools, compiled for the build
-# host's architecture.  We also include signmar, certutil, and the libraries
-# they require; these utilities and libraries are built for the target
-# architecture.
-MARTOOLS=$distdir/mar-tools
-mkdir -p $MARTOOLS
-cp -p config/createprecomplete.py $MARTOOLS/
-cp -p tools/update-packaging/*.sh $MARTOOLS/
-cp -p obj-*/dist/host/bin/mar $MARTOOLS/
-cp -p obj-*/dist/host/bin/mbsdiff $MARTOOLS/
-[% IF c("var/linux") || c("var/macos") %]
-  cp -p obj-*/dist/bin/signmar $MARTOOLS/
-  cp -p obj-*/dist/bin/certutil $MARTOOLS/
-  cp -p obj-*/dist/bin/modutil $MARTOOLS/
-  cp -p obj-*/dist/bin/pk12util $MARTOOLS/
-  cp -p obj-*/dist/bin/shlibsign $MARTOOLS/
-  [% IF c("var/linux") %]
-    NSS_LIBS="libfreeblpriv3.so libmozsqlite3.so libnss3.so libnssckbi.so libnssutil3.so libsmime3.so libsoftokn3.so libssl3.so"
-    NSPR_LIBS="libnspr4.so libplc4.so libplds4.so"
-  [% ELSE %]
-    NSS_LIBS="libfreebl3.dylib libmozglue.dylib libnss3.dylib libnssckbi.dylib libsoftokn3.dylib"
-    # No NSPR_LIBS for macOS
-    NSPR_LIBS=""
-  [% END %]
-  for LIB in $NSS_LIBS $NSPR_LIBS; do
-    cp -p obj-*/dist/bin/$LIB $MARTOOLS/
-  done
-[% END %]
-[% IF c("var/windows") %]
-  cp -p obj-*/dist/bin/signmar.exe $MARTOOLS/
-  cp -p obj-*/dist/bin/certutil.exe $MARTOOLS/
-  cp -p obj-*/dist/bin/modutil.exe $MARTOOLS/
-  cp -p obj-*/dist/bin/pk12util.exe $MARTOOLS/
-  cp -p obj-*/dist/bin/shlibsign.exe $MARTOOLS/
-  NSS_LIBS="freebl3.dll mozglue.dll nss3.dll nssckbi.dll softokn3.dll"
-  for LIB in $NSS_LIBS; do
+[% IF c("var/updater_enabled") -%]
+  # Make MAR-based update tools available for use during the bundle phase.
+  # Note that mar and mbsdiff are standalone tools, compiled for the build
+  # host's architecture.  We also include signmar, certutil, and the libraries
+  # they require; these utilities and libraries are built for the target
+  # architecture.
+  MARTOOLS=$distdir/mar-tools
+  mkdir -p $MARTOOLS
+  cp -p config/createprecomplete.py $MARTOOLS/
+  cp -p tools/update-packaging/*.sh $MARTOOLS/
+  cp -p obj-*/dist/host/bin/mar $MARTOOLS/
+  cp -p obj-*/dist/host/bin/mbsdiff $MARTOOLS/
+  [% IF c("var/linux") || c("var/macos") %]
+    cp -p obj-*/dist/bin/signmar $MARTOOLS/
+    cp -p obj-*/dist/bin/certutil $MARTOOLS/
+    cp -p obj-*/dist/bin/modutil $MARTOOLS/
+    cp -p obj-*/dist/bin/pk12util $MARTOOLS/
+    cp -p obj-*/dist/bin/shlibsign $MARTOOLS/
+    [% IF c("var/linux") %]
+      NSS_LIBS="libfreeblpriv3.so libmozsqlite3.so libnss3.so libnssckbi.so libnssutil3.so libsmime3.so libsoftokn3.so libssl3.so"
+      NSPR_LIBS="libnspr4.so libplc4.so libplds4.so"
+    [% ELSE %]
+      NSS_LIBS="libfreebl3.dylib libmozglue.dylib libnss3.dylib libnssckbi.dylib libsoftokn3.dylib"
+      # No NSPR_LIBS for macOS
+      NSPR_LIBS=""
+    [% END %]
+    for LIB in $NSS_LIBS $NSPR_LIBS; do
       cp -p obj-*/dist/bin/$LIB $MARTOOLS/
-  done
-[% END %]
+    done
+  [% END %]
+  [% IF c("var/windows") %]
+    cp -p obj-*/dist/bin/signmar.exe $MARTOOLS/
+    cp -p obj-*/dist/bin/certutil.exe $MARTOOLS/
+    cp -p obj-*/dist/bin/modutil.exe $MARTOOLS/
+    cp -p obj-*/dist/bin/pk12util.exe $MARTOOLS/
+    cp -p obj-*/dist/bin/shlibsign.exe $MARTOOLS/
+    NSS_LIBS="freebl3.dll mozglue.dll nss3.dll nssckbi.dll softokn3.dll"
+    for LIB in $NSS_LIBS; do
+        cp -p obj-*/dist/bin/$LIB $MARTOOLS/
+    done
+  [% END %]
+[% END -%]
 
 cd $distdir
 
@@ -283,7 +285,7 @@ cd $distdir
   mkdir -p $distdir/Debug/Browser
   # Strip and generate debuginfo for the firefox binary that we keep, all *.so
   # files, the plugin-container, and the updater (see ticket #10126)
-  for LIB in Browser/*.so "Browser/[% c('var/exe_name') %].real" Browser/plugin-container Browser/updater
+  for LIB in Browser/*.so "Browser/[% c('var/exe_name') %].real" Browser/plugin-container [% IF c("var/updater_enabled") -%]Browser/updater[% END %]
   do
       objcopy --only-keep-debug $LIB Debug/$LIB
       strip $LIB
@@ -343,10 +345,12 @@ END;
   [% END %]
 [% END %]
 
-[% c('zip', {
-        zip_src => [ 'mar-tools' ],
-        zip_args => dest_dir _ '/' _ c('filename') _ '/' _ c('var/martools_filename'),
-    }) %]
+[% IF c("var/updater_enabled") -%]
+  [% c('zip', {
+          zip_src => [ 'mar-tools' ],
+          zip_args => dest_dir _ '/' _ c('filename') _ '/' _ c('var/martools_filename'),
+      }) %]
+[% END -%]
 
 [% IF c("var/build_infos_json") -%]
   cat > "[% dest_dir _ '/' _ c('filename') _ '/build-infos.json' %]" << EOF_BUILDINFOS

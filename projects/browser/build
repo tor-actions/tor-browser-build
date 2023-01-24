@@ -56,9 +56,11 @@ do
   mkdir -p "$tbdir/$EXTSPATH"
 done
 
-# Extract the MAR tools.
-unzip -d $rootdir $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip
-MARTOOLS=$rootdir/mar-tools
+[% IF c("var/updater_enabled") -%]
+  # Extract the MAR tools.
+  unzip -d $rootdir $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip
+  MARTOOLS=$rootdir/mar-tools
+[% END -%]
 
 mv [% c('input_files_by_name/noscript') %] "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi"
 [% IF !c("var/macos") && c("var/tor-browser") -%]
@@ -311,14 +313,15 @@ cat > "$scripts_dir/create-$PKG_DIR" << SCRIPT_EOF
 set -e
 cp -a ${TB_STAGE_DIR} $distdir/$PKG_DIR
 
-pushd "$TBDIR[% IF c("var/macos") %]/Contents/Resources/[% END %]"
-rm -f precomplete
-python $MARTOOLS/createprecomplete.py
-popd
-
+[% IF c("var/updater_enabled") -%]
+  pushd "$TBDIR[% IF c("var/macos") %]/Contents/Resources/[% END %]"
+  rm -f precomplete
+  python $MARTOOLS/createprecomplete.py
+  popd
+[% END -%]
 cd $distdir
 
-[% IF c("var/build_mar") -%]
+[% IF c("var/build_mar") && c("var/updater_enabled") -%]
   # Create full MAR file and compressed package.
   [% SET mar_file = c("var/project-name") _ '-' _ c("var/mar_osname") _ '-' _ c("var/torbrowser_version") _ '_${PKG_LOCALE}.mar' %]
   MAR=$MARTOOLS/mar \
@@ -352,7 +355,9 @@ cd $distdir
 rm -rf $distdir/${PKG_DIR}
 SCRIPT_EOF
 
-cp $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip "$OUTDIR"/
+[% IF c("var/updater_enabled") -%]
+  cp $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip "$OUTDIR"/
+[% END -%]
 [% IF c("var/linux-x86_64") -%]
   [% IF c("var/tor-browser") -%]
     cp $rootdir/[% c('input_files_by_name/firefox') %]/browser-debug.tar.xz "$OUTDIR"/[% c("var/project-name") %]-[% c("var/mar_osname") %]-debug.tar.xz
