@@ -10,6 +10,12 @@ var:
     - build-essential
     - zlib1g-dev
     - libbz2-dev
+targets:
+  no_containers:
+    var:
+      cmake_opts: |
+        -DOPENSSL_USE_STATIC_LIBS=1 \
+        -DOPENSSL_ROOT_DIR=/var/tmp/dist/openssl
 input_files:
   - project: container-image
   - name: cmake
@@ -17,3 +23,6 @@ input_files:
   - name: ninja
     project: ninja
   - filename: libdmg.patch
+  - name: openssl-1.0.2
+    project: openssl-1.0.2
+    enable: '[% c("container/global_disable") %]'

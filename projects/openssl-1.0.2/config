@@ -1,0 +1,11 @@
+# vim: filetype=yaml sw=2
+#
+# We need openssl-1.0.2 for building libdmg-hfsplus:
+# https://github.com/planetbeing/libdmg-hfsplus/issues/14
+#
+version: 1.0.2u
+filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
+
+input_files:
+  - URL: 'https://www.openssl.org/source/openssl-[% c("version") %].tar.gz'
+    sha256sum: ecd0c6ffb493dd06707d38b14bb4d8c2288bb7033735606569d8f90f89669d16
