@@ -52,18 +52,19 @@ test -f "$hfstools_file" || \
              "  ./rbm/rbm build --target no_containers hfsplus-tools" \
              "You will need the clang and uuid-dev packages installed"
 
+ProjName=$(ProjectName)
+Proj_Name=$(Project_Name)
+
 test -d "$macos_signed_dir" || mkdir "$macos_signed_dir"
 tmpdir="$macos_stapled_dir/tmp"
 rm -Rf "$tmpdir"
 mkdir "$tmpdir"
-cp -rT "$script_dir/../../projects/browser/Bundle-Data/mac-applications.dmg" "$tmpdir/dmg"
+cp -rT "$script_dir/../../projects/browser/Bundle-Data/$ProjName.dmg" "$tmpdir/dmg"
 
 tar -C "$tmpdir" -xf "$libdmg_file"
 tar -C "$tmpdir" -xf "$hfstools_file"
 export PATH="$PATH:$tmpdir/libdmg-hfsplus:$tmpdir/hfsplus-tools"
 
-ProjName=$(ProjectName)
-Proj_Name=$(Project_Name)
 for lang in $bundle_locales
 do
   cd $tmpdir/dmg
