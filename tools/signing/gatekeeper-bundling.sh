@@ -45,12 +45,12 @@ test -f "$libdmg_file" || \
              "You can build it with:" \
              "  ./rbm/rbm build --target no_containers libdmg-hfsplus" \
              "See var/deps in projects/libdmg-hfsplus/config for the list of build dependencies"
-# hfsplus-tools needs to be compiled with Clang, so its build id might change
-hfstools_file="$script_dir/../../out/hfsplus-tools/hfsplus-tools-540.1.linux3-*.tar.gz"
+hfstools_file="$script_dir/../../out/hfsplus-tools/hfsplus-tools-540.1.linux3-66de66.tar.gz"
 test -f "$hfstools_file" || \
   exit_error "$hfstools_file is missing." \
              "You can build it with:" \
-             "  ./rbm/rbm build hfsplus-tools --target alpha --target torbrowser-macos-x86_64"
+             "  ./rbm/rbm build --target no_containers hfsplus-tools" \
+             "You will need the clang and uuid-dev packages installed"
 
 test -d "$macos_signed_dir" || mkdir "$macos_signed_dir"
 tmpdir="$macos_stapled_dir/tmp"
