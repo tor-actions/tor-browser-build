@@ -90,8 +90,11 @@ function sync-scripts-to-linux-signer {
   "$script_dir/sync-scripts-to-linux-signer"
 }
 
-function linux-signer-signmars {
+function sync-before-linux-signer-signmars {
   "$script_dir/sync-local-to-linux-signer"
+}
+
+function linux-signer-signmars {
   ssh "$ssh_host_linux_signer" 'bash -s' << EOF
   export NSSPASS=$NSSPASS
   ~/signing-$SIGNING_PROJECTNAME-$tbb_version_type/linux-signer-signmars.$SIGNING_PROJECTNAME
@@ -194,6 +197,7 @@ do_step gatekeeper-bundling
 is_project torbrowser && \
   do_step dmg2mar
 do_step sync-scripts-to-linux-signer
+do_step sync-before-linux-signer-signmars
 is_project torbrowser && \
   do_step linux-signer-signmars
 is_project torbrowser && \
