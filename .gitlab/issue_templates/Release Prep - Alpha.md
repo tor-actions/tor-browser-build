@@ -76,15 +76,13 @@
     - [ ] `$(ESR_TAG)` : `<INSERT_TAG_HERE>`
   - [ ] Identify the hg patch associated with above hg tag, and find the equivalent `gecko-dev` git commit (search by commit message)
     - [ ] `gecko-dev` commit : `<INSERT_COMMIT_HASH_HERE>`
-    - [ ] Sign/Tag commit :
+    - [ ] Sign/Tag `gecko-dev` commit :
       - Tag : `$(ESR_TAG)`
       - Message : `Hg tag $(ESR_TAG)`
-  - [ ] Create new branches with the discovered `gecko-dev` commit as `HEAD` named:
-    - [ ] `base-browser-$(ESR_VERSION)esr-$(TOR_BROWSER_MAJOR).$(TOR-BROWSER_MINOR)-1`
-    - [ ] `tor-browser-$(ESR_VERSION)esr-$(TOR_BROWSER_MAJOR).$(TOR-BROWSER_MINOR)-1`
+  - [ ] Create new `tor-browser` branch with the discovered `gecko-dev` commit as `HEAD` named:
+    - `tor-browser-$(ESR_VERSION)esr-$(TOR_BROWSER_MAJOR).$(TOR-BROWSER_MINOR)-1`
   - [ ] Push new branches and esr tag to origin
-  - [ ] Rebase previous `base-browser` patches onto the `gecko-dev` commit
-  - [ ] Rebase previous `tor-browser` patches onto the new `base-browser` branch
+  - [ ] Rebase previous `tor-browser` patches onto the new `gecko-dev` branch
   - [ ] Compare patch-sets (ensure nothing *weird* happened during rebase):
     - [ ] rangediff: `git range-diff $(ESR_TAG_PREV)..$(TOR_BROWSER_BRANCH_PREV) $(ESR_TAG)..$(TOR_BROWSER_BRANCH)`
     - [ ] diff of diffs:
@@ -93,14 +91,17 @@
         - [ ] `git diff $(ESR_TAG)..$(TOR_BROWSER_BRANCH) > rebased_patchset.diff`
         - [ ] `$(DIFF_TOOL) current_patchset.diff rebased_patchset.diff`
   - [ ] Open MR for the rebase
-- [ ] Sign/Tag `base-browser` commit:
-  - **NOTE** : Currently we are using the `Bug 40926: Implemented the New Identity feature` commit as the final commit of `base-browser` before `tor-browser`
-  - Tag : `base-browser-$(ESR_VERSION)esr-$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)-1-build1`
-  - Message: `Tagging build1 for $(ESR_VERSION)esr-based alpha`
+  - [ ] Merge
 - [ ] Sign/Tag `tor-browser` commit :
   - Tag : `tor-browser-$(ESR_VERSION)esr-$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)-1-$(FIREFOX_BUILD_N)`
   - Message : `Tagging $(FIREFOX_BUILD_N) for $(ESR_VERSION)esr-based alpha`
-- [ ] Push rebased branches and tags to `origin`
+- [ ] Create `base-browser` branch from rebased `tor-browser` branch named:
+  - `base-browser-$(ESR_VERSION)esr-$(TOR_BROWSER_MAJOR).$(TOR-BROWSER_MINOR)-1`
+  - **NOTE** : Currently we are using the `Bug 40926: Implemented the New Identity feature` commit as the final commit of `base-browser` before `tor-browser`
+- [ ] Sign/Tag `base-browser` commit :
+  - Tag : `base-browser-$(ESR_VERSION)esr-$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)-1-build1`
+  - Message: `Tagging build1 for $(ESR_VERSION)esr-based alpha`
+- [ ] Push tags to `origin`
 - [ ] Update Gitlab Default Branch to new Alpha branch:  https://gitlab.torproject.org/tpo/applications/tor-browser/-/settings/repository
 
 </details>
@@ -109,7 +110,7 @@
     <summary>Build</summary>
 
 ### tor-browser-build: https://gitlab.torproject.org/tpo/applications/tor-browser-build.git
-Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in the various `maint-$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)` (and possibly more specific) branches
+Tor Browser Alpha (and Nightly) are on the `main` branch
 
 - [ ] Update `rbm.conf`
   - [ ] `var/torbrowser_version` : update to next version
@@ -126,6 +127,10 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
     - [ ] `steps/base-browser-fluent/git_hash` : update with `HEAD` commit of project's `basebrowser-newidentityftl` branch
     - [ ] `steps/tor-browser/git_hash` : update with `HEAD` commit of project's `tor-browser` branch
     - [ ] `steps/fenix/git_hash` : update with `HEAD` commit of project's `fenix-torbrowserstringsxml` branch
+- [ ] ***(Optional)*** Update Android-specific build configs
+  - [ ] ***(Optional)*** Update `projects/geckoview/config`
+    - [ ] `git_hash` : update the `$(BUILD_N)` section to match `tor-browser` tag
+    - [ ] ***(Optional)*** `var/geckoview_version` : update to latest `$(ESR_VERSION)` if rebased
   - [ ] ***(Optional)*** Update `projects/tor-android-service/config`
     - [ ] `git_hash` : update with `HEAD` commit of project's `main` branch
   - [ ] ***(Optional)*** Update `projects/application-services/config`:
@@ -158,10 +163,8 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
     - [ ] ***(Optional)*** Update `projects/go/config`
       - [ ] `version` : update go version
       - [ ] `input_files/sha256sum` for `go` : update sha256sum of archive (sha256 sums are displayed on the go download page)
-  - [ ] ***(Optional)*** Update the manual
-    - [ ] Go to https://gitlab.torproject.org/tpo/web/manual/-/jobs/
-    - [ ] Open the latest build stage
-    - [ ] Download the artifacts (they come in a .zip file).
+  - [ ] ***(Optional)*** Update the manual : https://gitlab.torproject.org/tpo/web/manual/-/jobs/
+    - [ ] Download the `artifacts.zip` file from latest build stage row (download icon button on the right)
     - [ ] Rename it to `manual_$PIPELINEID.zip`
     - [ ] Upload it to people.tpo
     - [ ] Update `projects/manual/config`
@@ -179,8 +182,9 @@ Tor Browser Alpha (and Nightly) are on the `main` branch, while Stable lives in 
     - If you used the issue number, you will need to write the Tor Browser version manually
 - [ ] Open MR with above changes
 - [ ] Begin build on `$(BUILD_SERVER)` (fix any issues which come up and update MR)
+- [ ] Merge
 - [ ] Sign/Tag commit: `make signtag-alpha`
-- [ ] Push tag to origin
+- [ ] Push tag to `origin`
 </details>
 
 <details>
