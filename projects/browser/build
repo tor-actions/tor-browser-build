@@ -285,6 +285,9 @@ done
   export PATH="/var/tmp/dist/nsis/bin:$PATH"
 
   mv $rootdir/windows-installer $distdir/windows-installer
+  cat > $distdir/windows-installer/browser.nsi << 'BROWSER_NSI'
+[% INCLUDE 'windows-installer.nsi' %]
+BROWSER_NSI
   mv ${TB_STAGE_DIR} $distdir/windows-installer/"[% c('var/Project_Name') %]"
   mv $distdir/windows-installer ${TB_STAGE_DIR}
 [% END %]
@@ -354,7 +357,7 @@ cd $distdir
 [% ELSIF c("var/windows") %]
   find "$PKG_DIR" -exec [% c("touch") %] {} \;
   pushd "$PKG_DIR"
-  makensis [% c("var/projectname") %].nsi
+  makensis browser.nsi
   # Working around NSIS braindamage
   mv [% c("var/projectname") %]-install.exe browser-install-tmp.exe
   python3 $rootdir/pe_checksum_fix.py
