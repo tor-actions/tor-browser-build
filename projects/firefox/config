@@ -19,6 +19,8 @@ var:
   branding_directory: 'browser/branding/alpha'
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   nightly_updates_osname: '[% c("var/osname") %]'
+  gitlab_project: https://gitlab.torproject.org/tpo/applications/tor-browser
+  git_commit: '[% exec("git rev-parse HEAD") %]'
   deps:
     - build-essential
     - unzip
