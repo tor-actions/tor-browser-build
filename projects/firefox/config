@@ -18,6 +18,8 @@ var:
   branding_directory_prefix: 'tb'
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   nightly_updates_osname: '[% c("var/osname") %]'
+  gitlab_project: https://gitlab.torproject.org/tpo/applications/tor-browser
+  git_commit: '[% exec("git rev-parse HEAD") %]'
   deps:
     - build-essential
     - unzip
@@ -74,6 +76,7 @@ targets:
     var:
       branding_directory_prefix: 'pb'
       browser_branch: '12.0-1'
+      gitlab_project: https://gitlab.torproject.org/tpo/applications/privacy-browser
 
   linux-x86_64:
     var:
