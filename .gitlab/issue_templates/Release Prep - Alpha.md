@@ -200,6 +200,8 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
     - [ ] Tails dev mailing list: tails-dev@boum.org
     - [ ] Guardian Project: nathan@guardianproject.info
     - [ ] torbrowser-launcher: micah@micahflee.com
+    - [ ] FreeBSD port: freebsd@sysctl.cz <!-- Gitlab user maxfx -->
+    - [ ] OpenBSD port: caspar@schutijser.com <!-- Gitlab user cschutijser -->
   - [ ] Provide links to unsigned builds on `$(BUILD_SERVER)`
   - [ ] Note any changes which may affect packaging/downstream integration
 - [ ] Email upstream stakeholders:
