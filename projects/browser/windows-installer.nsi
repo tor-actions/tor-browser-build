@@ -28,6 +28,9 @@
   ;Request application privileges for Windows Vista
   RequestExecutionLevel user
 
+  ;Support HiDPI displays
+  ManifestDPIAware true
+
 ;--------------------------------
 ;Interface Configuration
 
