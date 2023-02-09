@@ -45,10 +45,15 @@ touch "$GENERATEDPREFSPATH"
   TORBINPATH=TorBrowser/Tor
   TORCONFIGPATH=TorBrowser/Data/Tor
 
-  PROFILEPATH=[% c('var/ProjectName') %]/Data/Browser/profile.default/extensions
-  mkdir -p "$TBDIR/$PROFILEPATH"
-
-  mkdir -p "$TBDIR/[% c('var/ProjectName') %]/Data/Browser/Caches"
+  [% IF c("var/tor-browser") -%]
+    PROFILEPATH=[% c('var/ProjectName') %]/Data/Browser/profile.default/extensions
+    mkdir -p "$TBDIR/$PROFILEPATH"
+  [% END -%]
+  [% IF !c("var/privacy-browser") -%]
+    # For Privacy Browser, we keep the data directory at the same level of
+    # Browser, instead of creating a Data directory with the program files.
+    mkdir -p "$TBDIR/[% c('var/ProjectName') %]/Data/Browser/Caches"
+  [% END -%]
 [% END %]
 
 for tbdir in "${TBDIRS[@]}"
@@ -102,7 +107,7 @@ mv [% c('input_files_by_name/noscript') %] "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b
 
   # Move READMEs from tor-expert-bundle to the doc dir
   mkdir -p "$TBDIR/$DOCSPATH/snowflake" [% IF c("var/macos_universal") %]"$TBDIR_AARCH64/$DOCSPATH/snowflake"[% END %]
-  
+
   mkdir -p "$TBDIR/$DOCSPATH/webtunnel" [% IF c("var/macos_universal") %]"$TBDIR_AARCH64/$DOCSPATH/webtunnel"[% END %]
   mkdir -p "$TBDIR/$DOCSPATH/conjure" [% IF c("var/macos_universal") %]"$TBDIR_AARCH64/$DOCSPATH/conjure"[% END %]
   mv_tbdir tor/pluggable_transports/README.SNOWFLAKE.md "$DOCSPATH/snowflake/README.md"
@@ -217,9 +222,12 @@ do
   mkdir -p "$tbdir/$DOCSPATH"
   cp -a Bundle-Data/Docs/* "$tbdir/$DOCSPATH"
   [% IF c("var/tor-browser") -%]
+    cp -a Bundle-Data/Docs-TBB/* "$tbdir/$DOCSPATH"
     tar -C Bundle-Data/[% bundledata_osname %] \
       [% IF ! c("var/namecoin") %]--exclude=*Electrum-NMC* --exclude=*ncprop279*[% END %] \
       -c . | tar -C "$tbdir[% IF ! c("var/macos") %]/[% c('var/ProjectName') %][% END %]" -x
+  [% ELSIF c("var/privacy-browser") -%]
+    cp -a Bundle-Data/Docs-PB/* "$tbdir/$DOCSPATH"
   [% END -%]
 done
 
@@ -244,11 +252,9 @@ done
   bridges_conf snowflake
 [% END -%]
 
-[% IF c("var/linux") %]
+[% IF c("var/linux") && c("var/tor-browser") %]
   chmod 700 ${TB_STAGE_DIR}/Browser/[% c('var/ProjectName') %]/Data/Browser
-  [% IF c("var/tor-browser") -%]
-    chmod 700 ${TB_STAGE_DIR}/Browser/TorBrowser/Data/Tor
-  [% END -%]
+  chmod 700 ${TB_STAGE_DIR}/Browser/TorBrowser/Data/Tor
 [% END %]
 
 # With multi-lingual builds, we use "ALL" in the package name as the locale for
