@@ -1,3 +1,89 @@
+Tor Browser 12.0.3 - February 13 2023
+ * All Platforms
+   * Updated Translations
+   * Updated OpenSSL to 1.1.1t
+   * Updated NoScript to 11.4.16
+   * Bug 40763: Stop using remote localized files in CFR [tor-browser]
+   * Bug 41424: Reduce disk activity by disabling some unnecessary tasks and telemetry [tor-browser]
+   * Bug 41565: Gate Telemetry Tasks behind AppConstants.MOZ_TELEMETRY_REPORTING [tor-browser]
+   * Bug 41601: Apply Snowflake Remove HelloVerify Countermeasure [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 102.8esr
+   * Bug 32274: Bad screen-reader UX for Security Level/Shield button [tor-browser]
+   * Bug 41066: Circuit Isolation should take containers into account [tor-browser]
+   * Bug 41561: Maximize warning is broken (regression) [tor-browser]
+   * Bug 41572: Check for userContextId also in the circuit display [tor-browser]
+   * Bug 41588: Use better words for the Tor Network description in the onboarding [tor-browser]
+ * Windows
+   * Bug 40717: UX: hide SSO [tor-browser]
+   * Bug 41578: Disable and lock Windows SSO [tor-browser]
+ * macOS
+   * Bug 28124: Show Tor Browser icon as macOS volume (dmg) icon [tor-browser-build]
+ * Android
+   * Updated GeckoView to 102.8esr
+   * Bug 40283: Can't upload files with Tor browser on Android [tor-browser]
+   * Bug 40536: Proxy Refused if link from other app opens Android TBB [tor-browser]
+   * Bug 41616: Backport Android-specific security fixes from Firefox 110 to ESR 102.8-based Tor Browser [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 40723: Update upload-update_responses-to-staticiforme step for new tor-browser-update-responses repository [tor-browser-build]
+     * Bug 40747: Remove empty line at the top of sha256sums-unsigned-build.txt [tor-browser-build]
+     * Bug 40748: When sha256sums-unsigned-build.txt contains an empty line, tools/dmg2mar prints a warning [tor-browser-build]
+   * macOS
+     * Bug 40744: HFS DMG are not deterministic [tor-browser-build]
+     * Bug 40755: libdmg-hfsplus fails to build on debian stable [tor-browser-build]
+   * Android
+     * Bug 40752: Wrong urls in download-android-*.json files [tor-browser-build]
+
+Tor Browser 12.5a2 - January 22 2023
+ * All Platforms
+   * Updated tor to 0.4.7.13
+   * Updated NoScript to 11.4.14
+   * Bug 40565: do something with security.tls.version.enable-deprecated [tor-browser]
+   * Bug 40727: Update list of Snowflake STUN servers in default bridge line [tor-browser-build]
+   * Bug 41066: Circuit Isolation should take containers into account [tor-browser]
+   * Bug 41428: Check if we can create our own directories for branding [tor-browser]
+   * Bug 41506: Remove TrustCor root certificates [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 102.7esr
+   * Bug 32274: Bad screen-reader UX for Security Level/Shield button [tor-browser]
+   * Bug 40733: Use the new branding directories [tor-browser-build]
+   * Bug 41393: about:tbupdate semantic and accessibility problems [tor-browser]
+   * Bug 41539: Crypto warning weaknesses [tor-browser]
+   * Bug 41549: tor freeze when receiving to many http proxy requests on socks port [tor-browser]
+   * Bug 41561: Maximize warning is broken (regression) [tor-browser]
+   * Bug 41562: API-triggered fullscreen after F11 causes letterboxing to crop the page [tor-browser]
+   * Bug 41563: Old placeholders used in TorStrings.jsm [tor-browser]
+   * Bug 41572: Check for userContextId also in the circuit display [tor-browser]
+   * Bug 41577: Disable profile migration [tor-browser]
+ * Windows + Linux
+   * Bug 40714: Ship NoScript in the distribution directory also for Windows and Linux [tor-browser-build]
+ * Windows
+   * Bug 40717: UX: hide SSO [tor-browser]
+   * Bug 41578: Disable and lock Windows SSO [tor-browser]
+ * macOS
+   * Bug 28124: Show Tor Browser icon as macOS volume (dmg) icon [tor-browser-build]
+   * Bug 40719: Allow non-universal macOS builds also on base-browser [tor-browser-build]
+   * Bug 41535: Remove the old, unused and undocumented "-invisible" macOS CLI flag [tor-browser]
+ * Android
+   * Updated GeckoView to 102.7esr
+   * Bug 40283: Can't upload files with Tor browser on Android [tor-browser]
+   * Bug 41571: Backport Android-specific Firefox 109 to ESR 102.7-based Tor Browser [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.19.5
+     * Bug 40720: Update fetch-changelogs.py scripts to support new Build System label [tor-browser-build]
+     * Bug 40735: Add command to list which translation components need to be updated [tor-browser-build]
+     * Bug 40739: tor-expert-bundle should include ClientTransportPlugin torrc lines for each pluggable transport [tor-browser-build]
+     * Bug 41567: Build outputs now going to obj-*/dist/torbrower rather than obj-*/dist/firefox [tor-browser]
+   * Windows + macOS + Linux
+     * Bug 40732: Review Bundle-Data and try not to ship the default profile in base browser [tor-browser-build]
+   * macOS
+     * Bug 40706: macos-signer-stapler should wait for user interaction before attempting stapling [tor-browser-build]
+     * Bug 40744: HFS DMG are not deterministic [tor-brower-build]
+   * Android
+     * Bug 40738: Update Android git hashes templates [tor-browser-build]
+
 Tor Browser 12.0.2 - January 18 2023
  * All Platforms
    * Updated tor to 0.4.7.13
