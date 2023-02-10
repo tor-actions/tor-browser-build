@@ -43,14 +43,20 @@ recalculates the PE-file checksum. Details of the discussion can be found in bug
 Thanks to a cypherpunk for this workaround idea.
 """
 
-import pefile;
+import pefile
+import sys
 
-f = open('browser-install-tmp.exe', 'rb')
-exe = f.read()
-f.close()
+
+if len(sys.argv) < 2:
+    print('Usage: {} exe-name'.format(sys.argv[0]))
+    sys.exit(1)
+
+exename = sys.argv[1]
+with open(exename, 'rb') as f:
+    exe = f.read()
 remainder = len(exe) % 8
 if remainder > 0:
-    exe += bytes('\0' * (8 - remainder), 'utf-8')
+    exe += b'\0' * (8 - remainder)
 pef = pefile.PE(data=exe, fast_load=True)
 pef.OPTIONAL_HEADER.CheckSum = pef.generate_checksum()
-pef.write(filename='browser-install-tmp2.exe')
+pef.write(filename=exename)

@@ -285,9 +285,14 @@ done
   export PATH="/var/tmp/dist/nsis/bin:$PATH"
 
   mv $rootdir/windows-installer $distdir/windows-installer
-  cat > $distdir/windows-installer/browser.nsi << 'BROWSER_NSI'
+  cat > $distdir/windows-installer/browser-portable.nsi << 'BROWSER_NSI'
 [% INCLUDE 'windows-installer.nsi' %]
 BROWSER_NSI
+  [% IF c('var/privacy-browser') -%]
+    cat > $distdir/windows-installer/browser-system.nsi << 'BROWSER_NSI'
+[% INCLUDE 'windows-installer.nsi' system_install_mode = 1 %]
+BROWSER_NSI
+  [% END -%]
   mv ${TB_STAGE_DIR} $distdir/windows-installer/"[% c('var/Project_Name') %]"
   mv $distdir/windows-installer ${TB_STAGE_DIR}
 [% END %]
@@ -357,13 +362,15 @@ cd $distdir
 [% ELSIF c("var/windows") %]
   find "$PKG_DIR" -exec [% c("touch") %] {} \;
   pushd "$PKG_DIR"
-  makensis browser.nsi
+  makensis browser-portable.nsi
   # Working around NSIS braindamage
-  mv [% c("var/projectname") %]-install.exe browser-install-tmp.exe
-  python3 $rootdir/pe_checksum_fix.py
-  mv browser-install-tmp2.exe [% c("var/projectname") %]-install.exe
-  rm browser-install-tmp.exe
-  mv [% c("var/projectname") %]-install.exe $OUTDIR/[% c("var/projectname") %]-install[% IF c("var/windows-x86_64") %]-win64[% END %]-[% c("var/torbrowser_version") %]_${PKG_LOCALE}.exe
+  python3 $rootdir/pe_checksum_fix.py browser-install.exe
+  mv browser-install.exe $OUTDIR/[% c("var/projectname") %]-install[% IF c("var/windows-x86_64") %]-win64[% END %]-[% c("var/torbrowser_version") %]_${PKG_LOCALE}.exe
+  [% IF c('var/privacy-browser') -%]
+    makensis browser-system.nsi
+    python3 $rootdir/pe_checksum_fix.py browser-install.exe
+    mv browser-install.exe $OUTDIR/[% c("var/projectname") %]-systeminstall[% IF c("var/windows-x86_64") %]-win64[% END %]-[% c("var/torbrowser_version") %]_${PKG_LOCALE}.exe
+  [% END -%]
   popd
 [% END %]
 rm -rf $distdir/${PKG_DIR}

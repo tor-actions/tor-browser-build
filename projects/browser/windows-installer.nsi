@@ -5,6 +5,7 @@
 ;--------------------------------
 ;Modern UI
 
+  !include "FileFunc.nsh"
   !include "MUI2.nsh"
   !include "LogicLib.nsh"
   !include "WinVer.nsh"
@@ -12,24 +13,37 @@
 ;--------------------------------
 ;General
 
-  ; location of Tor/Base/Privacy Browser to put into installer
+  ;Location of Tor/Base/Privacy Browser to put into installer
   !define PROGRAM_SOURCE ".\[% c('var/Project_Name') %]\"
 
   Name "[% c('var/Project_Name') %]"
-  OutFile "[% c('var/projectname') %]-install.exe"
+  OutFile "browser-install.exe"
 
   ;Default installation folder
+[% IF system_install_mode -%]
+  InstallDir "$PROGRAMFILES\[% c('var/Project_Name') %]"
+[% ELSE -%]
   InstallDir "$DESKTOP\[% c('var/Project_Name') %]"
+[% END -%]
 
   ;Best (but slowest) compression
   SetCompressor /SOLID lzma
   SetCompressorDictSize 32
 
   ;Request application privileges for Windows Vista
+[% IF system_install_mode -%]
+  RequestExecutionLevel admin
+[% ELSE -%]
   RequestExecutionLevel user
+[% END -%]
 
   ;Support HiDPI displays
   ManifestDPIAware true
+
+[% IF system_install_mode -%]
+  ;Registry keys to uninstall system-wide installs
+  !define UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\[% c('var/ProjectName') %]"
+[% END -%]
 
 ;--------------------------------
 ;Interface Configuration
@@ -133,16 +147,49 @@
 Section "[% c('var/Project_Name') %]" SecBrowser
 
   SetOutPath "$INSTDIR"
+[% IF !system_install_mode -%]
   File /r "${PROGRAM_SOURCE}\*.*"
-  SetOutPath "$INSTDIR\Browser"
   CreateShortCut "$INSTDIR\Start [% c('var/Project_Name') %].lnk" "$INSTDIR\Browser\[% c('var/exe_name') %].exe"
+[% ELSE -%]
+  File /r "${PROGRAM_SOURCE}\Browser\*.*"
+
+  ;Enable system-wide install in the browser
+  FileOpen $0 "$INSTDIR\system-install" w
+  FileClose $0
+
+  ;Write the uninstaller
+  WriteUninstaller $INSTDIR\uninstall.exe
+
+  ;Add the uninstaller to the control panel
+  WriteRegStr HKLM "${UNINST_KEY}" "DisplayName" "[% c('var/Project_Name') %]"
+  WriteRegStr HKLM "${UNINST_KEY}" "UninstallString" "$\"$INSTDIR\uninstall.exe$\""
+  WriteRegStr HKLM "${UNINST_KEY}" "QuietUninstallString" "$\"$INSTDIR\uninstall.exe$\" /S"
+  WriteRegStr HKLM "${UNINST_KEY}" "DisplayIcon" "$\"$INSTDIR\[% c('var/exe_name') %].exe$\""
+  WriteRegDWORD HKLM "${UNINST_KEY}" "NoModify" "1"
+  WriteRegDWORD HKLM "${UNINST_KEY}" "NoRepair" "1"
+  ${GetSize} "$INSTDIR" "/S=0K" $0 $1 $2
+  IntFmt $0 "0x%08X" $0
+  WriteRegDWORD HKLM "${UNINST_KEY}" "EstimatedSize" "$0"
+[% END -%]
 
 SectionEnd
 
-Function CreateShortcuts
+[% IF system_install_mode -%]
+Section "Uninstall"
+  RMDir /r "$INSTDIR"
+  DeleteRegKey HKLM "${UNINST_KEY}"
+  SetShellVarContext all
+  Delete "$SMPROGRAMS\[% c('var/Project_Name') %].lnk"
+  Delete "$DESKTOP\[% c('var/Project_Name') %].lnk"
+SectionEnd
+[% END -%]
 
-  CreateShortCut "$SMPROGRAMS\Start [% c('var/Project_Name') %].lnk" "$INSTDIR\Browser\[% c('var/exe_name') %].exe"
-  CreateShortCut "$DESKTOP\Start [% c('var/Project_Name') %].lnk" "$INSTDIR\Browser\[% c('var/exe_name') %].exe"
+Function CreateShortcuts
+[% IF system_install_mode -%]
+  SetShellVarContext all
+[% END -%]
+  CreateShortCut "$SMPROGRAMS\[% c('var/Project_Name') %].lnk" "$INSTDIR\[% IF !system_install_mode -%]Browser\[% END -%][% c('var/exe_name') %].exe"
+  CreateShortCut "$DESKTOP\[% c('var/Project_Name') %].lnk" "$INSTDIR\[% IF !system_install_mode -%]Browser\[% END -%][% c('var/exe_name') %].exe"
 
 FunctionEnd
 ;--------------------------------
@@ -180,7 +227,6 @@ ${If} ${FileExists} "$INSTDIR\*.*"
  NoAbort:
 ${EndIf}
 FunctionEnd
-
 
 Function StartBrowser
 ExecShell "open" "$INSTDIR/Start [% c('var/Project_Name') %].lnk"
