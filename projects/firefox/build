@@ -57,11 +57,13 @@ tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
 
 mkdir -p $distdir/[% IF ! c("var/macos") %]Browser[% END %]
 
-tar -xf $rootdir/[% c('input_files_by_name/translation-base-browser') %]
-transl_base_browser=$rootdir/translation-base-browser
-[% IF c("var/tor-browser") -%]
-  tar -xf $rootdir/[% c('input_files_by_name/translation-tor-browser') %]
-  transl_tor_browser=$rootdir/translation-tor-browser
+[% IF !c("var/testbuild") -%]
+  tar -xf $rootdir/[% c('input_files_by_name/translation-base-browser') %]
+  transl_base_browser=$rootdir/translation-base-browser
+  [% IF c("var/tor-browser") -%]
+    tar -xf $rootdir/[% c('input_files_by_name/translation-tor-browser') %]
+    transl_tor_browser=$rootdir/translation-tor-browser
+  [% END -%]
 [% END -%]
 
 cd /var/tmp/build/[% project %]-[% c("version") %]
@@ -116,7 +118,11 @@ add_translation () {
   echo "    locale/$lang/$filename (locale/$lang/$filename)" >> "browser/components/$component/jar.mn"
 }
 
-supported_locales="[% tmpl(c('var/locales').join(' ')) %]"
+[% IF c("var/testbuild") -%]
+  supported_locales=""
+[% ELSE -%]
+  supported_locales="[% tmpl(c('var/locales').join(' ')) %]"
+[% END -%]
 [% IF c("var/tor-browser") -%]
   torbutton_locales="toolkit/torbutton/chrome/locale/"
   torbutton_jar="toolkit/torbutton/jar.mn"

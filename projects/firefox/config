@@ -183,6 +183,7 @@ input_files:
   - project: translation
     name: translation-base-browser
     pkg_type: base-browser
+    enable: '[% !c("var/testbuild") %]'
   - project: translation
     name: translation-base-browser-fluent
     pkg_type: base-browser-fluent
@@ -190,7 +191,7 @@ input_files:
   - project: translation
     name: translation-tor-browser
     pkg_type: tor-browser
-    enable: '[% c("var/tor-browser") %]'
+    enable: '[% c("var/tor-browser") && !c("var/testbuild") %]'
   - filename: namecoin-torbutton.patch
     enable: '[% c("var/namecoin") %]'
     # TorButton patch authored by Arthur Edelstein, from https://github.com/arthuredelstein/torbutton/ branch 2.1.10-namecoin
