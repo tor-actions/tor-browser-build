@@ -9,10 +9,18 @@ do
   do
     tmpfile=$(mktemp)
     chmod 644 "$tmpfile"
-    wget -q -O "$tmpfile" "https://people.torproject.org/~$builder/builds/$tbb_version-build$tbb_version_build/$file" || \
-      wget -q -O "$tmpfile" "https://people.torproject.org/~$builder/builds/tor-browser/$tbb_version-build$tbb_version_build/$file" || \
-      wget -q -O "$tmpfile" "https://tb-build-03.torproject.org/~$builder/builds/tor-browser/$tbb_version_type/unsigned/$tbb_version-build$tbb_version_build/$file" && \
-      mv "$tmpfile" "$signed_version_dir/$file-$builder" && echo "Added $file-$builder"
+    for url in \
+      "https://people.torproject.org/~$builder/builds/$tbb_version-build$tbb_version_build/$file" \
+      "https://people.torproject.org/~$builder/builds/tor-browser/$tbb_version-build$tbb_version_build/$file" \
+      "https://tb-build-04.torproject.org/~$builder/builds/$tbb_version_type/unsigned/$tbb_version-build$tbb_version_build/$file" \
+      "https://tb-build-05.torproject.org/~$builder/builds/$tbb_version_type/unsigned/$tbb_version-build$tbb_version_build/$file"
+    do
+      if wget -q -O "$tmpfile" "$url"; then
+        mv "$tmpfile" "$signed_version_dir/$file-$builder"
+        echo "Added $file-$builder"
+        break
+      fi
+    done
   done
 done
 exit 0
