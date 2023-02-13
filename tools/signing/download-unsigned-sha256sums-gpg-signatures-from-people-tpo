@@ -11,9 +11,9 @@ do
     chmod 644 "$tmpfile"
     for url in \
       "https://people.torproject.org/~$builder/builds/$tbb_version-build$tbb_version_build/$file" \
-      "https://people.torproject.org/~$builder/builds/tor-browser/$tbb_version-build$tbb_version_build/$file" \
-      "https://tb-build-04.torproject.org/~$builder/builds/$tbb_version_type/unsigned/$tbb_version-build$tbb_version_build/$file" \
-      "https://tb-build-05.torproject.org/~$builder/builds/$tbb_version_type/unsigned/$tbb_version-build$tbb_version_build/$file"
+      "https://people.torproject.org/~$builder/builds/$SIGNING_PROJECTNAME/$tbb_version-build$tbb_version_build/$file" \
+      "https://tb-build-04.torproject.org/~$builder/builds/$SIGNING_PROJECTNAME/$tbb_version_type/unsigned/$tbb_version-build$tbb_version_build/$file" \
+      "https://tb-build-05.torproject.org/~$builder/builds/$SIGNING_PROJECTNAME/$tbb_version_type/unsigned/$tbb_version-build$tbb_version_build/$file"
     do
       if wget -q -O "$tmpfile" "$url"; then
         mv "$tmpfile" "$signed_version_dir/$file-$builder"
