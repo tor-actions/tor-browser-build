@@ -57,15 +57,6 @@ tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
 
 mkdir -p $distdir/[% IF ! c("var/macos") %]Browser[% END %]
 
-[% IF !c("var/testbuild") -%]
-  tar -xf $rootdir/[% c('input_files_by_name/translation-base-browser') %]
-  transl_base_browser=$rootdir/translation-base-browser
-  [% IF c("var/tor-browser") -%]
-    tar -xf $rootdir/[% c('input_files_by_name/translation-tor-browser') %]
-    transl_tor_browser=$rootdir/translation-tor-browser
-  [% END -%]
-[% END -%]
-
 cd /var/tmp/build/[% project %]-[% c("version") %]
 cat > .mozconfig << 'MOZCONFIG_EOF'
 [% INCLUDE mozconfig %]
@@ -106,43 +97,6 @@ fi
   sed -i 's|^URL=https://aus1\.torproject\.org/.*|URL=https://nightlies.tbb.torproject.org/nightly-updates/updates/nightly-[% c("var/nightly_updates_osname") %]/%CHANNEL%/%BUILD_TARGET%/%VERSION%/ALL|' build/application.ini.in
 [% END -%]
 
-add_translation () {
-  transl_dir=$1
-  component=$2
-  lang=$3
-  filename=$4
-
-  mkdir "browser/components/$component/locale/$lang"
-  cp "$transl_dir/$lang/$filename" "browser/components/$component/locale/$lang/"
-  echo "% locale $component $lang %locale/$lang/" >> "browser/components/$component/jar.mn"
-  echo "    locale/$lang/$filename (locale/$lang/$filename)" >> "browser/components/$component/jar.mn"
-}
-
-[% IF c("var/testbuild") -%]
-  supported_locales=""
-[% ELSE -%]
-  supported_locales="[% tmpl(c('var/locales').join(' ')) %]"
-[% END -%]
-[% IF c("var/tor-browser") -%]
-  torbutton_locales="toolkit/torbutton/chrome/locale/"
-  torbutton_jar="toolkit/torbutton/jar.mn"
-[% END -%]
-for lang in $supported_locales; do
-  [% IF c("var/macos") -%]
-    if [ "$lang" == "ja-JP-mac" ]; then
-      lang="ja"
-    fi
-  [% END-%]
-
-  add_translation $transl_base_browser newidentity $lang newIdentity.properties
-  add_translation $transl_base_browser securitylevel $lang securityLevel.properties
-
-  [% IF c("var/tor-browser") -%]
-    mv "$transl_tor_browser/$lang" "$torbutton_locales/"
-    echo "% locale torbutton $lang %locale/$lang/" >> "$torbutton_jar"
-    echo "    locale/$lang (chrome/locale/$lang/*)" >> "$torbutton_jar"
-  [% END -%]
-done
 
 rm -f configure
 rm -f js/src/configure
@@ -153,24 +107,60 @@ export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
 mkdir "$HOME/.mozbuild"
 
 [% IF !c("var/testbuild") -%]
+  supported_locales="[% tmpl(c('var/locales').join(' ')) %]"
+
   l10ncentral="$HOME/.mozbuild/l10n-central"
   mkdir "$l10ncentral"
   for tarball in $rootdir/[% c('input_files_by_name/firefox-l10n') %]/*; do
     tar -C "$l10ncentral" -xf "$tarball"
   done
 
-  tar -C $rootdir -xf $rootdir/[% c('input_files_by_name/translation-base-browser-fluent') %]
-  base_browser_fluent=$rootdir/translation-base-browser-fluent
+  tar -C "$rootdir" -xf "$rootdir/[% c('input_files_by_name/translation-base-browser') %]"
+  pushd "$rootdir/translation-base-browser"
+  ln -s ja ja-JP-mac
   for lang in $supported_locales; do
-    source_lang="$lang"
-    if [ $lang = "ja-JP-mac" ]; then
-      source_lang="ja"
-    elif [ $lang = "es-ES" ]; then
-      source_lang="es"
-    fi
-    cp "$base_browser_fluent/$source_lang/languageNotification.ftl" "$l10ncentral/$lang/browser/browser/"
+    # Please notice that Fluent and DTDs use different directories in
+    # l10n-central! This is something we have to keep in mind when we will join
+    # the two branches!
+    mv $lang/* "$l10ncentral/$lang/browser/chrome/browser/"
   done
-[% END %]
+  popd
+
+  tar -C "$rootdir" -xf "$rootdir/[% c('input_files_by_name/translation-base-browser-fluent') %]"
+  pushd "$rootdir/translation-base-browser-fluent"
+  ln -s ja ja-JP-mac
+  # TODO: These two sources will be unified eventually; at that point, this link
+  # will go away, too.
+  ln -s es es-ES
+  for lang in $supported_locales; do
+    mv $lang/languageNotification.ftl "$l10ncentral/$lang/browser/browser/"
+  done
+  popd
+
+  [% IF c("var/tor-browser") -%]
+    # We will have to keep the torbutton.jar until we stop using dtds, because
+    # if we move them to the browser locale directory, browser.xhtml is not
+    # loaded.
+    tar -C "$rootdir" -xf "$rootdir/[% c('input_files_by_name/translation-tor-browser') %]"
+    transl_tor_browser="$rootdir/translation-tor-browser"
+    torbutton_locales="toolkit/torbutton/chrome/locale/"
+    torbutton_jar="toolkit/torbutton/jar.mn"
+    for lang in $supported_locales; do
+      central_lang=$lang
+      [% IF c("var/macos") -%]
+        if [ "$lang" == "ja-JP-mac" ]; then
+          lang="ja"
+        fi
+      [% END -%]
+      mv "$transl_tor_browser/$lang/cryptoSafetyPrompt.properties" "$l10ncentral/$central_lang/browser/chrome/browser/"
+      mv "$transl_tor_browser/$lang" "$torbutton_locales/"
+      echo "% locale torbutton $lang %locale/$lang/" >> "$torbutton_jar"
+      echo "    locale/$lang (chrome/locale/$lang/*)" >> "$torbutton_jar"
+    done
+  [% END -%]
+[% ELSE -%]
+  supported_locales=""
+[% END -%]
 
 # PyYAML tries to read files as ASCII, otherwise
 export LC_ALL=C.UTF-8
