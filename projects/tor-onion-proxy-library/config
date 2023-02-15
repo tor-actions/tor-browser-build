@@ -41,3 +41,4 @@ input_files:
   - filename: 0001-Bug-33931-Filter-bridges-in-stream-by-type.patch
   - filename: 0001-Bug-30318-Add-snowflake-support.patch
   - filename: 0001-Bug-41361-Add-conjure-support.patch
+  - filename: 0001-Bug-40800-Add-WebTunnel-support.patch
