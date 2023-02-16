@@ -63,6 +63,13 @@ openssldir=/var/tmp/dist/openssl/openssl
 [% END %]
 
 cd /var/tmp/build/[% project %]-[% c('version') %]
+
+[% IF c("var/android") -%]
+# Remove reference to OpenSSL 1.1.1b. See https://gitlab.torproject.org/tpo/core/tor/-/issues/40759
+  sed -i 's/ A fix is expected to appear in OpenSSL //g' src/lib/tls/tortls_openssl.c
+  sed -i 's/1.1.1b.//g' src/lib/tls/tortls_openssl.c
+[% END -%]
+
 # add git hash to micro-revision.i for #24995
 echo '"[% c("abbrev", { abbrev_length => 16 }) %]"' > micro-revision.i
 ./autogen.sh
