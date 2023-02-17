@@ -128,9 +128,11 @@ sub convert_files {
         my $oldmar = getcwd . '/' . $output;
         exit_error "Error extracting $output"
                 unless system('mar', '-C', $tmpdir_oldmar, '-x', $oldmar) == 0;
+        my $appdir = "$tmpdir/$appname/$appname.app";
+        exit_error "Missing directory $appdir" unless -d $appdir;
         my $wanted = sub {
             my $file = $File::Find::name;
-            $file =~ s{^$tmpdir/$appname\.app/}{};
+            $file =~ s{^$appdir/}{};
             if (-f "$tmpdir_oldmar/$file") {
                 my (undef, undef, $mode) = stat("$tmpdir_oldmar/$file");
                 chmod $mode, $File::Find::name;
@@ -139,14 +141,14 @@ sub convert_files {
             chmod 0644, $File::Find::name if -f $File::Find::name;
             chmod 0755, $File::Find::name if -d $File::Find::name;
         };
-        find($wanted, "$tmpdir/$appname.app");
+        find($wanted, $appdir);
 
         unlink $output;
         local $ENV{MOZ_PRODUCT_VERSION} = $file->{version};
         local $ENV{MAR_CHANNEL_ID} = "torbrowser-torproject-$channel";
         local $ENV{TMPDIR} = $tmpdir;
         (undef, $err, $success) =  capture_exec('make_full_update.sh', '-q',
-                                        $output, "$tmpdir/$appname.app");
+                                        $output, $appdir);
         exit_error "Error updating $output: $err" unless $success;
         exit_error "make_full_update.sh failed. $output does not exist."
             unless -f $output;
