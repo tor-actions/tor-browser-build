@@ -106,7 +106,11 @@ sub get_dmg_files_from_sha256sums {
 sub convert_files {
     my ($channel) = @_;
     my $pm = Parallel::ForkManager->new(get_nbprocs);
-    $pm->run_on_finish(sub { print "Finished $_[2]\n" });
+    $pm->run_on_finish(
+      sub {
+        exit_error "Failed while running $_[2]" unless $_[1] == 0;
+        print "Finished $_[2]\n";
+      });
     foreach my $file (get_dmg_files_from_sha256sums) {
         # The 'ja' locale is a special case: it is called 'ja-JP-mac'
         # internally on OSX, but the dmg file still uses 'ja' to avoid
