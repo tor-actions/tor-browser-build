@@ -27,6 +27,7 @@ var:
     - autoconf2.13
     - yasm
     - pkg-config
+  has_l10n: '[% !c("var/testbuild") && c("var/locales").size %]'
 
   rezip: |
     rezip_tmpdir=$(mktemp -d)
@@ -159,7 +160,7 @@ input_files:
     name: cbindgen
   - project: firefox-l10n
     name: firefox-l10n
-    enable: '[% !c("var/testbuild") %]'
+    enable: '[% c("var/has_l10n") %]'
   - project: wasi-sysroot
     name: wasi-sysroot
     enable: '[% c("var/rlbox") %]'
@@ -183,15 +184,15 @@ input_files:
   - project: translation
     name: translation-base-browser
     pkg_type: base-browser
-    enable: '[% !c("var/testbuild") %]'
+    enable: '[% c("var/has_l10n") %]'
   - project: translation
     name: translation-base-browser-fluent
     pkg_type: base-browser-fluent
-    enable: '[% !c("var/testbuild") %]'
+    enable: '[% c("var/has_l10n") %]'
   - project: translation
     name: translation-tor-browser
     pkg_type: tor-browser
-    enable: '[% c("var/tor-browser") && !c("var/testbuild") %]'
+    enable: '[% c("var/tor-browser") && c("var/has_l10n") %]'
   - filename: namecoin-torbutton.patch
     enable: '[% c("var/namecoin") %]'
     # TorButton patch authored by Arthur Edelstein, from https://github.com/arthuredelstein/torbutton/ branch 2.1.10-namecoin
