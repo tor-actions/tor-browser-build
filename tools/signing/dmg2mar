@@ -27,4 +27,4 @@ test "$nb_locales" -eq "$nb_bundles" || \
 
 mv -vf "$macos_signed_dir"/"$ProjName"-*.dmg "$signed_version_dir"/
 
-make dmg2mar-$tbb_version_type
+make $SIGNING_PROJECTNAME-dmg2mar-$tbb_version_type

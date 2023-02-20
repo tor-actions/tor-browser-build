@@ -10,11 +10,11 @@ update_responses_tar_filename="update-responses-$tbb_version_type-$tbb_version.t
 update_responses_tar="$script_dir/../../$SIGNING_PROJECTNAME/$tbb_version_type/update-responses/$update_responses_tar_filename"
 if test -f "$update_responses_tar"
 then
-  echo "$update_responses_tar_filename already exists: not running 'make update_responses-$tbb_version_type'"
+  echo "$update_responses_tar_filename already exists: not running 'make $SIGNING_PROJECTNAME-update_responses-$tbb_version_type'"
 else
-  echo "Running 'make update_responses-$tbb_version_type'"
+  echo "Running 'make $SIGNING_PROJECTNAME-update_responses-$tbb_version_type'"
   pushd "$script_dir/../.." > /dev/null
-  make update_responses-$tbb_version_type
+  make $SIGNING_PROJECTNAME-update_responses-$tbb_version_type
   popd > /dev/null
 fi
 
