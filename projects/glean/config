@@ -29,7 +29,7 @@ var:
     4.0.0: https://people.torproject.org/~boklm/mirrors/sources/glean-wheels-4.0.0.tar.xz
     4.2.0: https://people.torproject.org/~pierov/tbb_files/glean-wheels-4.2.0.tar.xz
     4.4.0: https://people.torproject.org/~boklm/mirrors/sources/glean-wheels-4.4.0.tar.xz
-    5.0.1: https://people.torproject.org/~aguestuser/mirrors/sources/glean-wheels-5.0.1.tar.xz
+    5.0.1: https://people.torproject.org/~richard/mirrors/sources/glean-wheels-5.0.1.tar.xz
 
 steps:
   create_glean_deps_tarball:
