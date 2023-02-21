@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 version: '[% pc("firefox", "abbrev") %]'
-filename: '[% project %]-[% c("var/osname") %]-[% c("version") %]-1'
+filename: '[% project %]-[% c("var/osname") %]-[% c("version") %]-[% c("var/build_id") %]'
 link_input_files: 1
 
 steps:
