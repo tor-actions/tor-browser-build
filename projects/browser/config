@@ -110,6 +110,10 @@ input_files:
     name: ublock-origin
     sha256sum: 6bf8af5266353fab5eabdc7476de026e01edfb7901b0430c5e539f6791f1edc8
     enable: '[% c("var/privacy-browser") %]'
+  - URL: https://github.com/mullvad/browser-extension/releases/download/v0.7.0-firefox-beta/mullvad-browser-extension-0.7.1.xpi
+    name: mullvad-extension
+    sha256sum: 56677556ee5e4c61fb56274be9c2b79453b42582b0f8d1b5a182bc9aa5d58e77
+    enable: '[% c("var/privacy-browser") %]'
   - filename: 'gtk3-settings.ini'
     enable: '[% c("var/linux") %]'
   - project: hfsplus-tools

@@ -70,6 +70,7 @@ done
 mv [% c('input_files_by_name/noscript') %] "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi"
 [% IF c("var/privacy-browser") -%]
   mv [% c('input_files_by_name/ublock-origin') %] "$TBDIR/$EXTSPATH/uBlock0@raymondhill.net.xpi"
+  mv [% c('input_files_by_name/mullvad-extension') %] "$TBDIR/$EXTSPATH/{d19a89b9-76c1-4a61-bcd4-49e8de916403}.xpi"
 [% END -%]
 [% IF !c("var/macos") && c("var/tor-browser") -%]
   cp "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi" "$TBDIR/$PROFILEPATH/"
