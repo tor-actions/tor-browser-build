@@ -4,16 +4,16 @@
 - `$(BUILD_SERVER)` : the server the main builder is using to build a tor-browser release
 - `$(STAGING_SERVER)` : the server the signer is using to to run the signing process
 - `$(ESR_VERSION)` : the Mozilla defined ESR version, used in various places for building tor-browser tags, labels, etc
-    - example : `91.6.0`
-- `$(RR_VERSION)` : the Mozilla defined Rapid-Release version; Tor Browser for Android is based off of the `$(ESR_VERSION)`, but Mozilla's Firefox for Android is based off of the `$(RR_VERSION)` so we need to keep track of security vulnerabilities to backport from the monthly Rapid-Release train and our frozen ESR train.
-    - example: `103`
+  - example : `91.6.0`
 - `$(ESR_TAG)` : the Mozilla defined hg (Mercurial) tag associated with `$(ESR_VERSION)`
-    - exmaple : `FIREFOX_91_7_0esr_BUILD2`
+  - exmaple : `FIREFOX_91_7_0esr_BUILD2`
 - `$(ESR_TAG_PREV)` : the Mozilla defined hg (Mercurial) tag associated with the previous ESR version when rebasing (ie, the ESR version we are rebasing from)
 - `$(TOR_BROWSER_MAJOR)` : the Tor Browser major version
-    - example : `11`
+  - example : `11`
 - `$(TOR_BROWSER_MINOR)` : the Tor Browser minor version
-    - example : either `0` or `5`; Alpha's is always `(Stable + 5) % 10`
+  - example : either `0` or `5`; Alpha's is always `(Stable + 5) % 10`
+- `$(TOR_BROWSER_VERSION)` : the Tor Browser version in the format
+  - example: `12.5a3`, `12.0.3`
 - `$(BUILD_N)` : a project's build revision within a its branch; this is separate from the `$(TOR_BROWSER_BUILD_N)` value; many of the Firefox-related projects have a `$(BUILD_N)` suffix and may differ between projects even when they contribute to the same build.
     - example : `build1`
 - `$(TOR_BROWSER_BUILD_N)` : the tor-browser build revision for a given Tor Browser release; used in tagging git commits
@@ -23,89 +23,12 @@
         - if we have build failures unrelated to `tor-browser`, the `$(TOR_BROWSER_BUILD_N)` value will increase while the `$(BUILD_N)` will stay the same.
 - `$(TOR_BROWSER_VERSION)` : the published Tor Browser version
     - example : `11.5a6`, `11.0.7`
-- `$(TOR_BROWSER_BRANCH)` : the full name of tor-browser branch
-    - typically of the form: `tor-browser-$(ESR_VERSION)esr-$(TOR_BROWSER_MAJOR).$(TOR-BROWSER_MINOR)-1`
-- `$(TOR_BROWSER_BRANCH_PREV)` : the full name of the previous tor-browser branch (when rebasing)
 </details>
 
-<details>
-    <summary>Android</summary>
-
-### **Security Vulnerabilities Backport** : https://www.mozilla.org/en-US/security/advisories/
-- [ ] Create tor-browser issue `Backport Android-specific Firefox $(RR_VERSION) to ESR $(ESR_VERSION)-based Tor Browser`
-  - [ ] Link new backport issue to this release prep issue
-- [ ] Go through any `Security Vulnerabilities fixed in Firefox $(RR_VERSION)` (or similar) and create list of CVEs which affect Android that need to be a backported
-  - Potentially Affected Components:
-    - `firefox`/`geckoview`
-    - `application-services`
-    - `android-components`
-    - `fenix`
-
-### **application-services** ***(Optional)*** : *TODO: we need to setup a gitlab copy of this repo that we can apply security backports to*
-- [ ] Backport any Android-specific security fixes from Firefox rapid-release
-- [ ] Sign/Tag commit:
-  - Tag : `application-services-$(ESR_VERSION)-$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)-1-$(BUILD_N)`
-  - Message: `Tagging $(BUILD_N) for $(ESR_VERSION)-based stable`
-- [ ] Push tag to `origin`
-
-### **android-components** ***(Optional)*** : https://gitlab.torproject.org/tpo/applications/android-components.git
-- [ ] Backport any Android-specific security fixes from Firefox rapid-release
-- [ ] Sign/Tag commit:
-  - Tag : `android-components-$(ESR_VERSION)-$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)-1-$(BUILD_N)`
-  - Message: `Tagging $(BUILD_N) for $(ESR_VERSION)-based stable)`
-- [ ] Push tag to `origin`
-
-### **fenix** ***(Optional)*** : https://gitlab.torproject.org/tpo/applications/fenix.git
-- [ ] Backport any Android-specific security fixes from Firefox rapid-release
-- [ ] Sign/Tag commit:
-  - Tag : `tor-browser-$(ESR_VERSION)-$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)-1-$(BUILD_N)`
-  - Message: `Tagging $(BUILD_N) for $(ESR_VERSION)-based stable)`
-- [ ] Push tag to `origin`
-
-</details>
+**NOTE** It is assumed that the `tor-browser` rebase and security backport tasks have been completed
 
 <details>
-    <summary>Shared</summary>
-
-### tor-browser: https://gitlab.torproject.org/tpo/applications/tor-browser.git
-- [ ] ***(Optional)*** Backport any Android-specific security fixes from Firefox rapid-release
-- [ ] ***(Optional, Chemspill)*** Backport security-fixes to both `tor-browser` and `base-browser` branches
-- [ ] ***(Optional)*** Rebase to `$(ESR_VERSION)`
-  - [ ] Find the Firefox hg tag here : https://hg.mozilla.org/releases/mozilla-esr102/tags
-    - [ ] `$(ESR_TAG)` : `<INSERT_TAG_HERE>`
-  - [ ] Identify the hg patch associated with above hg tag, and find the equivalent `gecko-dev` git commit (search by commit message)
-    - [ ] `gecko-dev` commit : `<INSERT_COMMIT_HASH_HERE>`
-    - [ ] Sign/Tag `gecko-dev` commit :
-      - Tag : `$(ESR_TAG)`
-      - Message : `Hg tag $(ESR_TAG)`
-  - [ ] Create new `tor-browser` branch with the discovered `gecko-dev` commit as `HEAD` named:
-    - `tor-browser-$(ESR_VERSION)esr-$(TOR_BROWSER_MAJOR).$(TOR-BROWSER_MINOR)-1`
-  - [ ] Push new branches and esr tag to origin
-  - [ ] Rebase previous `tor-browser` patches onto the new `gecko-dev` branch
-  - [ ] Compare patch-sets (ensure nothing *weird* happened during rebase):
-    - [ ] rangediff: `git range-diff $(ESR_TAG_PREV)..$(TOR_BROWSER_BRANCH_PREV) $(ESR_TAG)..$(TOR_BROWSER_BRANCH)`
-    - [ ] diff of diffs:
-        -  Do the diff between `current_patchset.diff` and `rebased_patchset.diff` with your preferred `$(DIFF_TOOL)` and look at differences on lines that starts with + or -
-        - [ ] `git diff $(ESR_TAG_PREV)..$(TOR_BROWSER_BRANCH_PREV) > current_patchset.diff`
-        - [ ] `git diff $(ESR_TAG)..$(TOR_BROWSER_BRANCH) > rebased_patchset.diff`
-        - [ ] `$(DIFF_TOOL) current_patchset.diff rebased_patchset.diff`
-  - [ ] Open MR for the rebase
-  - [ ] Merge
-- [ ] Sign/Tag `tor-browser` commit :
-  - Tag : `tor-browser-$(ESR_VERSION)esr-$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)-1-$(FIREFOX_BUILD_N)`
-  - Message : `Tagging $(FIREFOX_BUILD_N) for $(ESR_VERSION)esr-based stable`
-- [ ] Create `base-browser` branch from rebased `tor-browser` branch named:
-  - `base-browser-$(ESR_VERSION)esr-$(TOR_BROWSER_MAJOR).$(TOR-BROWSER_MINOR)-1`
-  - **NOTE** : Currently we are using the `Bug 40926: Implemented the New Identity feature` commit as the final commit of `base-browser` before `tor-browser`
-- [ ] Sign/Tag `base-browser` commit:
-  - Tag : `base-browser-$(ESR_VERSION)esr-$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)-1-build1`
-  - Message: `Tagging build1 for $(ESR_VERSION)esr-based stable`
-- [ ] Push tags to `origin`
-
-</details>
-
-<details>
-    <summary>Build</summary>
+  <summary>Build Configs</summary>
 
 ### tor-browser-build: https://gitlab.torproject.org/tpo/applications/tor-browser-build.git
 Tor Browser Stable lives in the various `maint-$(TOR_BROWSER_MAJOR).$(TOR_BROWSER_MINOR)` (and possibly more specific) branches
@@ -113,9 +36,9 @@ Tor Browser Stable lives in the various `maint-$(TOR_BROWSER_MAJOR).$(TOR_BROWSE
 - [ ] Update `rbm.conf`
   - [ ] `var/torbrowser_version` : update to next version
   - [ ] `var/torbrowser_build` : update to `$(TOR_BROWSER_BUILD_N)`
-  - [ ] ***(Optional, Desktop)*** `var/torbrowser_incremental_from` : update to previous Desktop version
-    - [ ] **IMPORTANT**: Really *actually* make sure this is the previous Desktop version or else the `make incrementals-*` step will fail
-- [ ] ***(Optional)*** Update Desktop-specific build configs
+  - [ ] ***(Desktop Only)***`var/torbrowser_incremental_from` : update to previous Desktop version
+    - **IMPORTANT**: Really *actually* make sure this is the previous Desktop version or else the `make incrementals-*` step will fail
+- [ ] Update Desktop-specific build configs
   - [ ] Update `projects/firefox/config`
     - [ ] `git_hash` : update the `$(BUILD_N)` section to match `tor-browser` tag
     - [ ] ***(Optional)*** `var/firefox_platform_version` : update to latest `$(ESR_VERSION)` if rebased
@@ -125,7 +48,7 @@ Tor Browser Stable lives in the various `maint-$(TOR_BROWSER_MAJOR).$(TOR_BROWSE
     - [ ] `steps/base-browser-fluent/git_hash` : update with `HEAD` commit of project's `basebrowser-newidentityftl` branch
     - [ ] `steps/tor-browser/git_hash` : update with `HEAD` commit of project's `tor-browser` branch
     - [ ] `steps/fenix/git_hash` : update with `HEAD` commit of project's `fenix-torbrowserstringsxml` branch
-- [ ] ***(Optional)*** Update Android-specific build configs
+- [ ] Update Android-specific build configs
   - [ ] ***(Optional)*** Update `projects/geckoview/config`
     - [ ] `git_hash` : update the `$(BUILD_N)` section to match `tor-browser` tag
     - [ ] ***(Optional)*** `var/geckoview_version` : update to latest `$(ESR_VERSION)` if rebased
@@ -161,7 +84,7 @@ Tor Browser Stable lives in the various `maint-$(TOR_BROWSER_MAJOR).$(TOR_BROWSE
     - [ ] ***(Optional)*** Update `projects/go/config`
       - [ ] `version` : update go version
       - [ ] `input_files/sha256sum` for `go` : update sha256sum of archive (sha256 sums are displayed on the go download page)
-  - [ ] ***(Optional)*** Update the manual : https://gitlab.torproject.org/tpo/web/manual/-/jobs/
+  - [ ] Update the manual : https://gitlab.torproject.org/tpo/web/manual/-/jobs/
     - [ ] Download the `artifacts.zip` file from latest build stage row (download icon button on the right)
     - [ ] Rename it to `manual_$PIPELINEID.zip`
     - [ ] Upload it to people.tpo
@@ -176,40 +99,62 @@ Tor Browser Stable lives in the various `maint-$(TOR_BROWSER_MAJOR).$(TOR_BROWSE
     - Make sure you have `requests` installed (e.g., `apt install python3-requests`)
     - The first time you run this script you will need to generate an access token; the script will guide you
   - [ ] Copy the output of the script to the beginning of `ChangeLog.txt` and adjust its output
-    - At the moment, the script does not create a _Build System_ section
     - If you used the issue number, you will need to write the Tor Browser version manually
+  - [ ] Include any version updates for:
+    - [ ] translations
+    - [ ] OpenSSL
+    - [ ] NoScript
+    - [ ] Go
+    - [ ] zlib
+  - [ ] Include any ESR rebase for Firefox and GeckoView
 - [ ] Open MR with above changes
 - [ ] Begin build on `$(BUILD_SERVER)` (and fix any issues which come up and update MR)
 - [ ] Merge
 - [ ] Sign/Tag commit: `make signtag-release`
 - [ ] Push tag to `origin`
+
 </details>
 
 <details>
-	<summary>Communications</summary>
+  <summary>Communications</summary>
 
 ### notify stakeholders
+
+  <details>
+    <summary>email template</summary>
+
+      Hello All,
+
+      Unsigned Tor Browser $(TOR_BROWSER_VERSION) release candidate builds are now available for testing:
+
+      - https://tb-build-05.torproject.org/~$(BUILDER)/builds/release/unsigned/$(TOR_BROWSER_VERSION)/
+
+      The full changelog can be found here:
+
+      - https://gitlab.torproject.org/tpo/applications/tor-browser-build/-/raw/maint-12.0/projects/browser/Bundle-Data/Docs/ChangeLog.txt
+
+  </details>
+
 - [ ] Email tor-qa mailing list: tor-qa@lists.torproject.org
-  - [ ] Provide links to unsigned builds on `$(BUILD_SERVER)`
-  - [ ] Note any new functionality which needs testing
-  - [ ] Link to any known issues
+  - Additional information:
+    - [ ] Note any new functionality which needs testing
+    - [ ] Link to any known issues
 - [ ] Email downstream consumers:
   - Recipients:
-    - [ ] Tails dev mailing list: tails-dev@boum.org
-    - [ ] Guardian Project: nathan@guardianproject.info
-    - [ ] torbrowser-launcher: micah@micahflee.com
-    - [ ] FreeBSD port: freebsd@sysctl.cz <!-- Gitlab user maxfx -->
-    - [ ] OpenBSD port: caspar@schutijser.com <!-- Gitlab user cschutijser -->
-  - [ ] Provide links to unsigned builds on `$(BUILD_SERVER)`
+    - Tails dev mailing list: tails-dev@boum.org
+    - Guardian Project: nathan@guardianproject.info
+    - torbrowser-launcher: micah@micahflee.com
+    - FreeBSD port: freebsd@sysctl.cz <!-- Gitlab user maxfx -->
+    - OpenBSD port: caspar@schutijser.com <!-- Gitlab user cschutijser -->
   - [ ] Note any changes which may affect packaging/downstream integration
 - [ ] Email upstream stakeholders:
-  - [ ] ***(Optional, after ESR migration)*** Cloudflare: ask-research@cloudflare.com
+  - ***(Optional, after ESR migration)*** Cloudflare: ask-research@cloudflare.com
     - **NOTE** :  We need to provide them with updated user agent string so they can update their internal machinery to prevent Tor Browser users from getting so many CAPTCHAs
 
 </details>
 
 <details>
-  <summary>Signing/Publishing</summary>
+  <summary>Signing</summary>
 
 ### signing + publishing
 - [ ] Ensure builders have matching builds
@@ -240,25 +185,31 @@ Tor Browser Stable lives in the various `maint-$(TOR_BROWSER_MAJOR).$(TOR_BROWSE
 - **NOTE**: at this point the signed binaries should have been copied to `staticiforme`
 - [ ] Update `staticiforme.torproject.org`:
   - From `screen` session on `staticiforme.torproject.org`:
+  - [ ] Static update components : `static-update-component cdn.torproject.org && static-update-component dist.torproject.org`
+  - [ ] Enable update responses : `sudo -u tb-release ./deploy_update_responses-release.sh`
   - [ ] Remove old release data from following places:
     - **NOTE** : Skip this step if the current release is Android or Desktop *only*
     - [ ] `/srv/cdn-master.torproject.org/htdocs/aus1/torbrowser`
     - [ ] `/srv/dist-master.torproject.org/htdocs/torbrowser`
-  - [ ] Static update components : `static-update-component cdn.torproject.org && static-update-component dist.torproject.org`
-  - [ ] Enable update responses : `sudo -u tb-release ./deploy_update_responses-release.sh`
+- [ ] Static update components (again) : `static-update-component cdn.torproject.org && static-update-component
 - [ ] Publish APKs to Google Play:
   - Log into https://play.google.com/apps/publish
   - Select `Tor Browser` app
-  - Navigate to `Release > Production` and click `Create new release` button
-  - [ ] Upload the `*.multi.apk` APKs
-  - [ ] Update Release Name to Tor Browser version number
-  - [ ] Update Release Notes
+  - Navigate to `Release > Production` and click `Create new release` button:
+    - Upload the `*.multi.apk` APKs
+    - Update Release Name to Tor Browser version number
+    - Update Release Notes
     - Next to 'Release notes', click `Copy from a previous release`
-    - [ ] Edit blog post url to point to most recent blog post
+    - Edit blog post url to point to most recent blog post
   - Save, review, and configure rollout percentage
     - [ ] 25% rollout when publishing a scheduled update
     - [ ] 100% rollout when publishing a security-driven release
   - [ ] Update rollout percentage to 100% after confirmed no major issues
+
+</details>
+
+<details>
+  <summary>Publishing</summary>
 
 ### website: https://gitlab.torproject.org/tpo/web/tpo.git
 - [ ] `databags/versions.ini` : Update the downloads versions
@@ -296,4 +247,3 @@ Tor Browser Stable lives in the various `maint-$(TOR_BROWSER_MAJOR).$(TOR_BROWSE
 </details>
 
 /label ~"Release Prep"
-
