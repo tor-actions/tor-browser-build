@@ -195,9 +195,12 @@ export LANG=C.UTF-8
 
   # Adjust the Info.plist file
   INFO_PLIST="$distdir/[% c('var/Project_Name') %].app/Contents/Info.plist"
-  mv "$INFO_PLIST" tmp.plist
-  python3 $rootdir/fix-info-plist.py '[% c("var/torbrowser_version") %]' '[% c("var/copyright_year") %]' < tmp.plist > "$INFO_PLIST"
-  rm -f tmp.plist
+  python3 $rootdir/fix-info-plist.py \
+    "$INFO_PLIST" \
+    '[% c("var/Project_Name") %]' \
+    '[% c("var/torbrowser_version") %]' \
+    '[% c("var/copyright_year") %]' \
+    [% IF c("var/privacy-browser") -%]'Mullvad, Tor Browser and Mozilla Developers'[% ELSE -%]'The Tor Project'[% END %]
 [% END %]
 
 [% IF c("var/linux") %]

@@ -9,26 +9,34 @@ import getopt
 import plistlib
 import sys
 
+
 def usage():
-    print("usage: %s TORBROWSER_VERSION YEAR < Info.plist > FixedInfo.plist" % sys.argv[0], file=sys.stderr)
+    print(
+        f"Usage: {sys.argv[0]} plist-file product-name version year copyright-holder",
+        file=sys.stderr,
+    )
     sys.exit(2)
+
 
 _, args = getopt.gnu_getopt(sys.argv[1:], "")
 
-if len(args) != 2:
+if len(args) != 5:
     usage()
 
-TORBROWSER_VERSION = args[0]
-YEAR = args[1]
+fname = args[0]
+product = args[1]
+version = args[2]
+year = args[3]
+holder = args[4]
 
-COPYRIGHT = "Tor Browser %s Copyright %s The Tor Project" % (TORBROWSER_VERSION, YEAR)
+copyright = f"{product} {version} Copyright {year} {holder}"
 
-sys.stdin = open(sys.stdin.fileno(), 'rb')
-plist = plistlib.load(sys.stdin)
+with open(fname, "rb") as f:
+    plist = plistlib.load(f)
 
-plist["CFBundleGetInfoString"] = "Tor Browser %s" % TORBROWSER_VERSION
-plist["CFBundleShortVersionString"] = TORBROWSER_VERSION
-plist["NSHumanReadableCopyright"] = COPYRIGHT
+plist["CFBundleGetInfoString"] = f"{product} {version}"
+plist["CFBundleShortVersionString"] = version
+plist["NSHumanReadableCopyright"] = copyright
 
-sys.stdout = open(sys.stdout.fileno(), 'wb')
-plistlib.dump(plist, sys.stdout)
+with open(fname, "wb") as f:
+    plistlib.dump(plist, f)
