@@ -102,30 +102,44 @@ with token_file.open() as f:
     token = f.read().strip()
 headers = {"PRIVATE-TOKEN": token}
 
-if sys.argv[1][0] != "#":
-    version = sys.argv[1]
-    r = requests.get(
-        f"{API_URL}/projects/{PROJECT_ID}/issues?labels=Release Prep",
-        headers=headers,
-    )
-    issue = None
-    for i in r.json():
-        if i["title"].find(sys.argv[1]) != -1:
-            if issue is None:
-                issue = i
-            else:
-                print("More than one matching issue found!")
-                print("Please use the issue id.")
-                sys.exit(3)
-    if not issue:
-        print(
-            "Release preparation issue not found. Please make sure it has ~Release Prep."
+version = sys.argv[1]
+r = requests.get(
+    f"{API_URL}/projects/{PROJECT_ID}/issues?labels=Release Prep",
+    headers=headers,
+)
+if r.status_code == 401:
+    print("Unauthorized! Has your token expired?")
+    sys.exit(3)
+issue = None
+for i in r.json():
+    if i["title"].find(sys.argv[1]) != -1:
+        if issue is None:
+            issue = i
+        else:
+            print("More than one matching issue found!")
+            print("Please use the issue id.")
+            sys.exit(4)
+if not issue:
+    iid = version
+    version = None
+    if iid[0] == "#":
+        iid = iid[1:]
+    try:
+        int(iid)
+        r = requests.get(
+            f"{API_URL}/projects/{PROJECT_ID}/issues?iids={iid}",
+            headers=headers,
         )
-        sys.exit(4)
-    iid = issue["iid"]
-else:
-    version = "????"
-    iid = sys.argv[1][1:]
+        if r.ok and r.json():
+            issue = r.json()[0]
+    except ValueError:
+        pass
+if not issue:
+    print(
+        "Release preparation issue not found. Please make sure it has ~Release Prep."
+    )
+    sys.exit(5)
+iid = issue["iid"]
 
 linked = {}
 linked_build = {}
