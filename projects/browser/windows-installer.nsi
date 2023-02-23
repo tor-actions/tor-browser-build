@@ -46,6 +46,15 @@
 [% END -%]
 
 ;--------------------------------
+;Metadata
+
+  VIProductVersion "[% pc("firefox", "var/browser_series") %].0.0"
+  VIAddVersionKey "ProductName" "[% c('var/Project_Name') %]"
+  VIAddVersionKey "ProductVersion" "[% c('var/torbrowser_version') %]"
+  VIAddVersionKey "FileDescription" "[% c('var/Project_Name') %][% IF system_install_mode -%] System[% END -%] Installer"
+  VIAddVersionKey "LegalCopyright" "© [% pc("firefox", "var/copyright_year") %] The Tor Project"
+
+;--------------------------------
 ;Interface Configuration
 
   !define MUI_ICON   "[% c('var/projectname') %].ico"
@@ -164,7 +173,9 @@ Section "[% c('var/Project_Name') %]" SecBrowser
   WriteRegStr HKLM "${UNINST_KEY}" "DisplayName" "[% c('var/Project_Name') %]"
   WriteRegStr HKLM "${UNINST_KEY}" "UninstallString" "$\"$INSTDIR\uninstall.exe$\""
   WriteRegStr HKLM "${UNINST_KEY}" "QuietUninstallString" "$\"$INSTDIR\uninstall.exe$\" /S"
+  WriteRegStr HKLM "${UNINST_KEY}" "Publisher" "The Tor Project"
   WriteRegStr HKLM "${UNINST_KEY}" "DisplayIcon" "$\"$INSTDIR\[% c('var/exe_name') %].exe$\""
+  WriteRegStr HKLM "${UNINST_KEY}" "DisplayVersion" "[% c('var/torbrowser_version') %]"
   WriteRegDWORD HKLM "${UNINST_KEY}" "NoModify" "1"
   WriteRegDWORD HKLM "${UNINST_KEY}" "NoRepair" "1"
   ${GetSize} "$INSTDIR" "/S=0K" $0 $1 $2

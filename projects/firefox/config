@@ -13,7 +13,8 @@ container:
 var:
   firefox_platform_version: 102.8.0
   firefox_version: '[% c("var/firefox_platform_version") %]esr'
-  browser_branch: '12.5-1'
+  browser_series: '12.5'
+  browser_branch: '[% c("var/browser_series") %]-1'
   browser_build: 3
   branding_directory_prefix: 'tb'
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
