@@ -49,8 +49,8 @@ touch "$GENERATEDPREFSPATH"
     PROFILEPATH=[% c('var/ProjectName') %]/Data/Browser/profile.default/extensions
     mkdir -p "$TBDIR/$PROFILEPATH"
   [% END -%]
-  [% IF !c("var/privacy-browser") -%]
-    # For Privacy Browser, we keep the data directory at the same level of
+  [% IF !c("var/mullvad-browser") -%]
+    # For Mullvad Browser, we keep the data directory at the same level of
     # Browser, instead of creating a Data directory with the program files.
     mkdir -p "$TBDIR/[% c('var/ProjectName') %]/Data/Browser/Caches"
   [% END -%]
@@ -68,7 +68,7 @@ done
 [% END -%]
 
 mv [% c('input_files_by_name/noscript') %] "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi"
-[% IF c("var/privacy-browser") -%]
+[% IF c("var/mullvad-browser") -%]
   mv [% c('input_files_by_name/ublock-origin') %] "$TBDIR/$EXTSPATH/uBlock0@raymondhill.net.xpi"
   mv [% c('input_files_by_name/mullvad-extension') %] "$TBDIR/$EXTSPATH/{d19a89b9-76c1-4a61-bcd4-49e8de916403}.xpi"
 [% END -%]
@@ -231,7 +231,7 @@ do
     tar -C Bundle-Data/[% bundledata_osname %] \
       [% IF ! c("var/namecoin") %]--exclude=*Electrum-NMC* --exclude=*ncprop279*[% END %] \
       -c . | tar -C "$tbdir[% IF ! c("var/macos") %]/[% c('var/ProjectName') %][% END %]" -x
-  [% ELSIF c("var/privacy-browser") -%]
+  [% ELSIF c("var/mullvad-browser") -%]
     cp -a Bundle-Data/Docs-PB/* "$tbdir/$DOCSPATH"
   [% END -%]
 done
@@ -293,7 +293,7 @@ done
   cat > $distdir/windows-installer/browser-portable.nsi << 'BROWSER_NSI'
 [% INCLUDE 'windows-installer.nsi' %]
 BROWSER_NSI
-  [% IF c('var/privacy-browser') -%]
+  [% IF c('var/mullvad-browser') -%]
     cat > $distdir/windows-installer/browser-system.nsi << 'BROWSER_NSI'
 [% INCLUDE 'windows-installer.nsi' system_install_mode = 1 %]
 BROWSER_NSI
@@ -371,7 +371,7 @@ cd $distdir
   # Working around NSIS braindamage
   python3 $rootdir/pe_checksum_fix.py browser-install.exe
   mv browser-install.exe $OUTDIR/[% c("var/projectname") %]-install[% IF c("var/windows-x86_64") %]-win64[% END %]-[% c("var/torbrowser_version") %]_${PKG_LOCALE}.exe
-  [% IF c('var/privacy-browser') -%]
+  [% IF c('var/mullvad-browser') -%]
     makensis browser-system.nsi
     python3 $rootdir/pe_checksum_fix.py browser-install.exe
     mv browser-install.exe $OUTDIR/[% c("var/projectname") %]-systeminstall[% IF c("var/windows-x86_64") %]-win64[% END %]-[% c("var/torbrowser_version") %]_${PKG_LOCALE}.exe

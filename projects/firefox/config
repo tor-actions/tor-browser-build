@@ -75,10 +75,10 @@ targets:
     git_hash: '[% c("var/project-name") %]-[% c("var/firefox_version") %]-[% c("var/browser_branch") %]'
     tag_gpg_id: 0
 
-  privacybrowser:
+  mullvadbrowser:
     git_url: git@gitlab.torproject.org:tpo/applications/privacy-browser.git
     var:
-      branding_directory_prefix: 'pb'
+      branding_directory_prefix: 'mb'
       browser_branch: '12.0-1'
       gitlab_project: https://gitlab.torproject.org/tpo/applications/privacy-browser
 

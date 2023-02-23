@@ -53,10 +53,10 @@ targets:
       asan-build: '-asan'
   browser-linux-i686:
     var:
-      browser-linux-i686: '[% c("var/browser_type") != "privacybrowser" %]'
+      browser-linux-i686: '[% c("var/browser_type") != "mullvadbrowser" %]'
   browser-windows-i686:
     var:
-      browser-windows-i686: '[% c("var/browser_type") != "privacybrowser" %]'
+      browser-windows-i686: '[% c("var/browser_type") != "mullvadbrowser" %]'
   browser-windows-x86_64:
     var:
       browser-windows-x86_64: 1
@@ -93,9 +93,9 @@ targets:
   basebrowser:
     var:
       browser_type: basebrowser
-  privacybrowser:
+  mullvadbrowser:
     var:
-      browser_type: privacybrowser
+      browser_type: mullvadbrowser
 
   release:
     var:

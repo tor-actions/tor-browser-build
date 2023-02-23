@@ -1,4 +1,4 @@
-;NSIS Installer for Tor/Base/Privacy Browser
+;NSIS Installer for Tor/Base/Mullvad Browser
 ;Written by Moritz Bartl
 ;released under Public Domain
 
@@ -13,7 +13,7 @@
 ;--------------------------------
 ;General
 
-  ;Location of Tor/Base/Privacy Browser to put into installer
+  ;Location of Tor/Base/Mullvad Browser to put into installer
   !define PROGRAM_SOURCE ".\[% c('var/Project_Name') %]\"
 
   Name "[% c('var/Project_Name') %]"

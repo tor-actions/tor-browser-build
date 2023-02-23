@@ -15,7 +15,7 @@ test -n "${SIGNING_PROJECTNAME+x}" \
 
 test "$SIGNING_PROJECTNAME" = 'torbrowser' \
   || test "$SIGNING_PROJECTNAME" = 'basebrowser' \
-  || test "$SIGNING_PROJECTNAME" = 'privacybrowser' \
+  || test "$SIGNING_PROJECTNAME" = 'mullvadbrowser' \
   || exit_error "Unknown SIGNING_PROJECTNAME $SIGNING_PROJECTNAME"
 
 test -z "${rbm_not_available+x}" && rbm="$script_dir/../../rbm/rbm"
