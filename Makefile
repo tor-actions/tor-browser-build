@@ -403,133 +403,133 @@ basebrowser-incrementals-nightly: submodule-update
 
 
 ###########################
-# Privacy Browser Targets #
+# Mullvad Browser Targets #
 ###########################
 
-privacybrowser-release: submodule-update
-	$(rbm) build release --target release --target browser-all-desktop --target privacybrowser
+mullvadbrowser-release: submodule-update
+	$(rbm) build release --target release --target browser-all-desktop --target mullvadbrowser
 
-privacybrowser-release-desktop: submodule-update
-	$(rbm) build release --target release --target browser-all-desktop --target privacybrowser
+mullvadbrowser-release-desktop: submodule-update
+	$(rbm) build release --target release --target browser-all-desktop --target mullvadbrowser
 
-privacybrowser-release-linux-x86_64: submodule-update
-	$(rbm) build release --target release --target browser-linux-x86_64 --target privacybrowser
+mullvadbrowser-release-linux-x86_64: submodule-update
+	$(rbm) build release --target release --target browser-linux-x86_64 --target mullvadbrowser
 
-privacybrowser-release-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target release --target browser-linux-x86_64-asan --target privacybrowser
+mullvadbrowser-release-linux-x86_64-asan: submodule-update
+	$(rbm) build release --target release --target browser-linux-x86_64-asan --target mullvadbrowser
 
-privacybrowser-release-windows-x86_64: submodule-update
-	$(rbm) build release --target release --target browser-windows-x86_64 --target privacybrowser
+mullvadbrowser-release-windows-x86_64: submodule-update
+	$(rbm) build release --target release --target browser-windows-x86_64 --target mullvadbrowser
 
-privacybrowser-release-macos: submodule-update
-	$(rbm) build release --target release --target browser-macos --target privacybrowser
+mullvadbrowser-release-macos: submodule-update
+	$(rbm) build release --target release --target browser-macos --target mullvadbrowser
 
-privacybrowser-release-src: submodule-update
-	$(rbm) build release --target release --target browser-src --target privacybrowser
+mullvadbrowser-release-src: submodule-update
+	$(rbm) build release --target release --target browser-src --target mullvadbrowser
 
-privacybrowser-alpha: submodule-update
-	$(rbm) build release --target alpha --target browser-all-desktop --target privacybrowser
+mullvadbrowser-alpha: submodule-update
+	$(rbm) build release --target alpha --target browser-all-desktop --target mullvadbrowser
 
-privacybrowser-alpha-desktop: submodule-update
-	$(rbm) build release --target alpha --target browser-all-desktop --target privacybrowser
+mullvadbrowser-alpha-desktop: submodule-update
+	$(rbm) build release --target alpha --target browser-all-desktop --target mullvadbrowser
 
-privacybrowser-alpha-linux-x86_64: submodule-update
-	$(rbm) build release --target alpha --target browser-linux-x86_64 --target privacybrowser
+mullvadbrowser-alpha-linux-x86_64: submodule-update
+	$(rbm) build release --target alpha --target browser-linux-x86_64 --target mullvadbrowser
 
-privacybrowser-alpha-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target alpha --target browser-linux-x86_64-asan --target privacybrowser
+mullvadbrowser-alpha-linux-x86_64-asan: submodule-update
+	$(rbm) build release --target alpha --target browser-linux-x86_64-asan --target mullvadbrowser
 
-privacybrowser-alpha-windows-x86_64: submodule-update
-	$(rbm) build release --target alpha --target browser-windows-x86_64 --target privacybrowser
+mullvadbrowser-alpha-windows-x86_64: submodule-update
+	$(rbm) build release --target alpha --target browser-windows-x86_64 --target mullvadbrowser
 
-privacybrowser-alpha-macos: submodule-update
-	$(rbm) build release --target alpha --target browser-macos --target privacybrowser
+mullvadbrowser-alpha-macos: submodule-update
+	$(rbm) build release --target alpha --target browser-macos --target mullvadbrowser
 
-privacybrowser-alpha-src: submodule-update
-	$(rbm) build release --target alpha --target browser-src --target privacybrowser
+mullvadbrowser-alpha-src: submodule-update
+	$(rbm) build release --target alpha --target browser-src --target mullvadbrowser
 
-privacybrowser-nightly: submodule-update
-	$(rbm) build release --target nightly --target browser-all-desktop --target privacybrowser
+mullvadbrowser-nightly: submodule-update
+	$(rbm) build release --target nightly --target browser-all-desktop --target mullvadbrowser
 
-privacybrowser-nightly-desktop: submodule-update
-	$(rbm) build release --target nightly --target browser-all-desktop --target privacybrowser
+mullvadbrowser-nightly-desktop: submodule-update
+	$(rbm) build release --target nightly --target browser-all-desktop --target mullvadbrowser
 
-privacybrowser-nightly-linux-x86_64: submodule-update
-	$(rbm) build release --target nightly --target browser-linux-x86_64 --target privacybrowser
+mullvadbrowser-nightly-linux-x86_64: submodule-update
+	$(rbm) build release --target nightly --target browser-linux-x86_64 --target mullvadbrowser
 
-privacybrowser-nightly-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target nightly --target browser-linux-x86_64-asan --target privacybrowser
+mullvadbrowser-nightly-linux-x86_64-asan: submodule-update
+	$(rbm) build release --target nightly --target browser-linux-x86_64-asan --target mullvadbrowser
 
-privacybrowser-nightly-windows-x86_64: submodule-update
-	$(rbm) build release --target nightly --target browser-windows-x86_64 --target privacybrowser
+mullvadbrowser-nightly-windows-x86_64: submodule-update
+	$(rbm) build release --target nightly --target browser-windows-x86_64 --target mullvadbrowser
 
-privacybrowser-nightly-macos: submodule-update
-	$(rbm) build release --target nightly --target browser-macos --target privacybrowser
+mullvadbrowser-nightly-macos: submodule-update
+	$(rbm) build release --target nightly --target browser-macos --target mullvadbrowser
 
-privacybrowser-nightly-src: submodule-update
-	$(rbm) build release --target nightly --target browser-src --target privacybrowser
+mullvadbrowser-nightly-src: submodule-update
+	$(rbm) build release --target nightly --target browser-src --target mullvadbrowser
 
-privacybrowser-testbuild: submodule-update
-	$(rbm) build release --target testbuild --target browser-all-desktop --target privacybrowser
+mullvadbrowser-testbuild: submodule-update
+	$(rbm) build release --target testbuild --target browser-all-desktop --target mullvadbrowser
 
-privacybrowser-testbuild-desktop: submodule-update
-	$(rbm) build release --target testbuild --target browser-all-desktop --target privacybrowser
+mullvadbrowser-testbuild-desktop: submodule-update
+	$(rbm) build release --target testbuild --target browser-all-desktop --target mullvadbrowser
 
-privacybrowser-testbuild-linux-x86_64: submodule-update
-	$(rbm) build release --target testbuild --target browser-linux-x86_64 --target privacybrowser
+mullvadbrowser-testbuild-linux-x86_64: submodule-update
+	$(rbm) build release --target testbuild --target browser-linux-x86_64 --target mullvadbrowser
 
-privacybrowser-testbuild-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target testbuild --target browser-linux-x86_64-asan --target privacybrowser
+mullvadbrowser-testbuild-linux-x86_64-asan: submodule-update
+	$(rbm) build release --target testbuild --target browser-linux-x86_64-asan --target mullvadbrowser
 
-privacybrowser-testbuild-windows-x86_64: submodule-update
-	$(rbm) build release --target testbuild --target browser-windows-x86_64 --target privacybrowser
+mullvadbrowser-testbuild-windows-x86_64: submodule-update
+	$(rbm) build release --target testbuild --target browser-windows-x86_64 --target mullvadbrowser
 
-privacybrowser-testbuild-macos: submodule-update
-	$(rbm) build release --target testbuild --target browser-macos --target privacybrowser
+mullvadbrowser-testbuild-macos: submodule-update
+	$(rbm) build release --target testbuild --target browser-macos --target mullvadbrowser
 
-privacybrowser-testbuild-macos-x86_64: submodule-update
-	$(rbm) build release --target testbuild --target browser-macos-x86_64 --target privacybrowser
+mullvadbrowser-testbuild-macos-x86_64: submodule-update
+	$(rbm) build release --target testbuild --target browser-macos-x86_64 --target mullvadbrowser
 
-privacybrowser-testbuild-macos-aarch64: submodule-update
-	$(rbm) build release --target testbuild --target browser-macos-aarch64 --target privacybrowser
+mullvadbrowser-testbuild-macos-aarch64: submodule-update
+	$(rbm) build release --target testbuild --target browser-macos-aarch64 --target mullvadbrowser
 
-privacybrowser-testbuild-src: submodule-update
-	$(rbm) build release --target testbuild --target browser-src-testbuild --target privacybrowser
+mullvadbrowser-testbuild-src: submodule-update
+	$(rbm) build release --target testbuild --target browser-src-testbuild --target mullvadbrowser
 
-privacybrowser-incrementals-release: submodule-update
-	$(rbm) build release --step update_responses_config --target release --target create_unsigned_incrementals --target privacybrowser
+mullvadbrowser-incrementals-release: submodule-update
+	$(rbm) build release --step update_responses_config --target release --target create_unsigned_incrementals --target mullvadbrowser
 	tools/update-responses/download_missing_versions release
 	tools/update-responses/gen_incrementals release
-	$(rbm) build release --step hash_incrementals --target release --target privacybrowser
+	$(rbm) build release --step hash_incrementals --target release --target mullvadbrowser
 
-privacybrowser-incrementals-alpha: submodule-update
-	$(rbm) build release --step update_responses_config --target alpha --target create_unsigned_incrementals --target privacybrowser
+mullvadbrowser-incrementals-alpha: submodule-update
+	$(rbm) build release --step update_responses_config --target alpha --target create_unsigned_incrementals --target mullvadbrowser
 	tools/update-responses/download_missing_versions alpha
 	tools/update-responses/gen_incrementals alpha
-	$(rbm) build release --step hash_incrementals --target alpha --target privacybrowser
+	$(rbm) build release --step hash_incrementals --target alpha --target mullvadbrowser
 
-privacybrowser-incrementals-nightly: submodule-update
-	$(rbm) build release --step update_responses_config --target nightly --target privacybrowser
+mullvadbrowser-incrementals-nightly: submodule-update
+	$(rbm) build release --step update_responses_config --target nightly --target mullvadbrowser
 	NO_CODESIGNATURE=1 tools/update-responses/gen_incrementals nightly
-	$(rbm) build release --step hash_incrementals --target nightly --target privacybrowser
+	$(rbm) build release --step hash_incrementals --target nightly --target mullvadbrowser
 
-privacybrowser-update_responses-release: submodule-update
-	$(rbm) build release --step update_responses_config --target release --target signed --target privacybrowser
-	$(rbm) build release --step create_update_responses_tar --target release --target signed --target privacybrowser
+mullvadbrowser-update_responses-release: submodule-update
+	$(rbm) build release --step update_responses_config --target release --target signed --target mullvadbrowser
+	$(rbm) build release --step create_update_responses_tar --target release --target signed --target mullvadbrowser
 
-privacybrowser-update_responses-alpha: submodule-update
-	$(rbm) build release --step update_responses_config --target alpha --target signed --target privacybrowser
-	$(rbm) build release --step create_update_responses_tar --target alpha --target signed --target privacybrowser
+mullvadbrowser-update_responses-alpha: submodule-update
+	$(rbm) build release --step update_responses_config --target alpha --target signed --target mullvadbrowser
+	$(rbm) build release --step create_update_responses_tar --target alpha --target signed --target mullvadbrowser
 
-privacybrowser-dmg2mar-release: submodule-update
-	$(rbm) build release --step update_responses_config --target release --target signed --target privacybrowser
-	$(rbm) build release --step dmg2mar --target release --target signed --target privacybrowser
+mullvadbrowser-dmg2mar-release: submodule-update
+	$(rbm) build release --step update_responses_config --target release --target signed --target mullvadbrowser
+	$(rbm) build release --step dmg2mar --target release --target signed --target mullvadbrowser
 	tools/update-responses/download_missing_versions release
 	CHECK_CODESIGNATURE_EXISTS=1 MAR_SKIP_EXISTING=1 tools/update-responses/gen_incrementals release
 
-privacybrowser-dmg2mar-alpha: submodule-update
-	$(rbm) build release --step update_responses_config --target alpha --target signed --target privacybrowser
-	$(rbm) build release --step dmg2mar --target alpha --target signed --target privacybrowser
+mullvadbrowser-dmg2mar-alpha: submodule-update
+	$(rbm) build release --step update_responses_config --target alpha --target signed --target mullvadbrowser
+	$(rbm) build release --step dmg2mar --target alpha --target signed --target mullvadbrowser
 	tools/update-responses/download_missing_versions alpha
 	CHECK_CODESIGNATURE_EXISTS=1 MAR_SKIP_EXISTING=1 tools/update-responses/gen_incrementals alpha
 

@@ -200,7 +200,7 @@ export LANG=C.UTF-8
     '[% c("var/Project_Name") %]' \
     '[% c("var/torbrowser_version") %]' \
     '[% c("var/copyright_year") %]' \
-    [% IF c("var/privacy-browser") -%]'Mullvad, Tor Browser and Mozilla Developers'[% ELSE -%]'The Tor Project'[% END %]
+    [% IF c("var/mullvad-browser") -%]'Mullvad, Tor Browser and Mozilla Developers'[% ELSE -%]'The Tor Project'[% END %]
 [% END %]
 
 [% IF c("var/linux") %]
