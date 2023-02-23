@@ -1,23 +1,23 @@
 #!/bin/sh
 [% c("var/set_default_env") -%]
-[% IF c("var/linux") -%]
-  # Config options for hardening-wrapper
+mkdir -p /var/tmp/build
+[% IF c("var/linux") && ! c("var/linux-cross") -%]
+  # Config options for hardening
   export DEB_BUILD_HARDENING=1
-  export DEB_BUILD_HARDENING_STACKPROTECTOR=1
-  export DEB_BUILD_HARDENING_FORTIFY=1
   # Since r223796 landed on GCC master enforcing PIE breaks GCC compilation.
   # The compiler gets built with `-fno-PIE` and linked with `-no-pie` as not
   # doing so would make precompiled headers (PCH) fail.
   # It is okay for us to omit this right now as it does not change any hardening
   # flags in the resulting bundles.
-  export DEB_BUILD_HARDENING_PIE=0
+  #
   # We need to disable `-Werror=format-security` as GCC does not build with it
   # anymore. It seems it got audited for those problems already:
   # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=48817.
-  export DEB_BUILD_HARDENING_FORMAT=0
+  export DEB_BUILD_OPTIONS=hardening=+bindnow,+relro,-pie,+fortify,+stackprotector,+stackprotectorstrong,-format
+  eval $(cd /var/tmp/build; dpkg-buildflags --export=sh)
+  export OPT_LDFLAGS="$LDFLAGS"
 [% END -%]
 distdir=/var/tmp/dist/[% c("var/distdir") %]
-mkdir /var/tmp/build
 
 [% IF c("var/linux-cross") -%]
 

@@ -10,6 +10,9 @@
   HOST_CXX=$CXX
 
   export BINDGEN_CFLAGS='--gcc-toolchain=/var/tmp/dist/gcc'
+
+  # set LDFLAGS for Full RELRO
+  export LDFLAGS="-Wl,-z,relro -Wl,-z,now"
 [% END -%]
 
 [% IF c("var/windows") -%]

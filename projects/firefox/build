@@ -1,6 +1,9 @@
 #!/bin/bash
 [% c("var/set_default_env") -%]
-[% pc(c('var/compiler'), 'var/setup', { compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')) }) %]
+[% pc(c('var/compiler'), 'var/setup', {
+        compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')),
+        hardened_gcc => 0, # don't set hardened_gcc since firefox is setting the hardened flags
+      }) %]
 distdir=/var/tmp/dist/[% project %]
 mkdir -p /var/tmp/build
 mkdir -p [% dest_dir _ '/' _ c('filename') %]

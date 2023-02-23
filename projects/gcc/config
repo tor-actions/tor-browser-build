@@ -18,26 +18,7 @@ var:
     [% IF ! c("var/linux-cross") -%]
       export LD_LIBRARY_PATH=/var/tmp/dist/[% c("var/distdir") %]/lib64:/var/tmp/dist/[% c("var/distdir") %]/lib32
     [% END -%]
-
-    [% IF c("hardened_gcc") -%]
-      # Config options for hardening-wrapper
-      export DEB_BUILD_HARDENING=1
-      export DEB_BUILD_HARDENING_STACKPROTECTOR=1
-      export DEB_BUILD_HARDENING_FORTIFY=1
-      export DEB_BUILD_HARDENING_FORMAT=1
-      export DEB_BUILD_HARDENING_PIE=1
-
-      # Make sure we use the hardening wrapper
-      pushd /var/tmp/dist/[% c("var/distdir") %]/bin
-      cp /usr/bin/hardened-cc ./
-      mv [% c("var/target_prefix") %]gcc [% c("var/target_prefix") %]gcc.real
-      mv [% c("var/target_prefix") %]c++ [% c("var/target_prefix") %]c++.real
-      mv [% c("var/target_prefix") %]g++ [% c("var/target_prefix") %]g++.real
-      ln -sf hardened-cc [% c("var/target_prefix") %]gcc
-      ln -sf hardened-cc [% c("var/target_prefix") %]c++
-      ln -sf hardened-cc [% c("var/target_prefix") %]g++
-      popd
-    [% END -%]
+    [% IF c("hardened_gcc"); GET c("var/set_hardened_build_flags"); END %]
 
 targets:
   windows:
@@ -51,7 +32,6 @@ targets:
     var:
       configure_opt: --enable-multilib --enable-languages=c,c++ --with-arch_32=i686
       arch_deps:
-        - hardening-wrapper
         - libc6-dev-i386
   linux-cross:
     var:
@@ -64,7 +44,6 @@ targets:
       glibc_version: 2.26
       linux_version: 4.10.1
       arch_deps:
-        - hardening-wrapper
         - libc6-dev-i386
         - gawk
   linux-arm:

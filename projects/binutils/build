@@ -2,17 +2,7 @@
 [% c("var/set_default_env") -%]
 mkdir /var/tmp/dist
 distdir=/var/tmp/dist/binutils
-[% IF c("var/linux") %]
-  # Config options for hardening-wrapper
-  export DEB_BUILD_HARDENING=1
-  export DEB_BUILD_HARDENING_STACKPROTECTOR=1
-  export DEB_BUILD_HARDENING_FORTIFY=1
-  export DEB_BUILD_HARDENING_FORMAT=1
-  export DEB_BUILD_HARDENING_PIE=1
-
-  tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/bison') %]
-  export PATH=/var/tmp/dist/bison/bin:$PATH
-[% END %]
+[% IF c("var/linux"); GET c("var/set_hardened_build_flags"); END %]
 
 tar xf [% project %]-[% c("version") %].tar.xz
 cd [% project %]-[% c("version") %]
@@ -22,20 +12,6 @@ cd [% project %]-[% c("version") %]
 # Trick from https://stackoverflow.com/a/56159871
 make -j[% c("num_procs") %] MAKEINFO=true
 make install MAKEINFO=true
-
-# gold is disabled for linux-cross, because of
-# https://sourceware.org/bugzilla/show_bug.cgi?id=14995
-# Once we upgrade to glibc 2.26, we might be able to enable gold for
-# linux-cross.
-[% IF c("var/linux") && ! c("var/linux-cross") %]
-  # Make sure gold is used with the hardening wrapper for full RELRO, see #13031.
-  cd $distdir/bin
-  rm ld
-  cp /usr/bin/hardened-ld ./
-  mv ld.gold ld.gold.real
-  ln -sf hardened-ld ld.gold
-  ln -sf ld.gold ld
-[% END %]
 
 cd /var/tmp/dist
 [% c('tar', {

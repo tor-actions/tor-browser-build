@@ -22,7 +22,3 @@ input_files:
     file_gpg_id: 1
     gpg_keyring: binutils.gpg
   - project: container-image
-  - project: bison
-    name: bison
-    # We try to use system's bison, but Jessie's is too old
-    enable: '[% c("var/linux") %]'
