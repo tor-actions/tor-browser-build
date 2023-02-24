@@ -80,6 +80,7 @@ targets:
     var:
       branding_directory_prefix: 'mb'
       browser_branch: '12.0-1'
+      browser_build: 1
       gitlab_project: https://gitlab.torproject.org/tpo/applications/privacy-browser
 
   linux-x86_64:
