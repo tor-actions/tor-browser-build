@@ -52,7 +52,7 @@
   VIAddVersionKey "ProductName" "[% c('var/Project_Name') %]"
   VIAddVersionKey "ProductVersion" "[% c('var/torbrowser_version') %]"
   VIAddVersionKey "FileDescription" "[% c('var/Project_Name') %][% IF system_install_mode -%] System[% END -%] Installer"
-  VIAddVersionKey "LegalCopyright" "© [% pc("firefox", "var/copyright_year") %] The Tor Project"
+  VIAddVersionKey "LegalCopyright" "© [% pc("firefox", "var/copyright_year") %] [% IF c('var/mullvad-browser') -%]Mullvad, Tor Browser and Mozilla Developers[% ELSE -%]The Tor Project[% END -%]"
 
 ;--------------------------------
 ;Interface Configuration
@@ -173,7 +173,7 @@ Section "[% c('var/Project_Name') %]" SecBrowser
   WriteRegStr HKLM "${UNINST_KEY}" "DisplayName" "[% c('var/Project_Name') %]"
   WriteRegStr HKLM "${UNINST_KEY}" "UninstallString" "$\"$INSTDIR\uninstall.exe$\""
   WriteRegStr HKLM "${UNINST_KEY}" "QuietUninstallString" "$\"$INSTDIR\uninstall.exe$\" /S"
-  WriteRegStr HKLM "${UNINST_KEY}" "Publisher" "The Tor Project"
+  WriteRegStr HKLM "${UNINST_KEY}" "Publisher" "[% IF c('var/mullvad-browser') -%]Mullvad VPN[% ELSE -%]The Tor Project[% END -%]"
   WriteRegStr HKLM "${UNINST_KEY}" "DisplayIcon" "$\"$INSTDIR\[% c('var/exe_name') %].exe$\""
   WriteRegStr HKLM "${UNINST_KEY}" "DisplayVersion" "[% c('var/torbrowser_version') %]"
   WriteRegDWORD HKLM "${UNINST_KEY}" "NoModify" "1"
