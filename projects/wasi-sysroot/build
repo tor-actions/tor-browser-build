@@ -28,6 +28,9 @@ mv clang-source llvm-project
 export LLVM_HOME=$(pwd)/llvm-project
 tar -xf $rootdir/[% c('input_files_by_name/wasi-libc') %]
 mv wasi-libc-* wasi-libc
+pushd wasi-libc
+patch -p1 < "$rootdir/0001-Sort-the-object-list-passed-to-ar-in-the-Makefile.patch"
+popd
 popd
 
 # What follows has been copied from Firefox's
@@ -53,11 +56,14 @@ cat > 'version.sh' << EOF
 echo '[% c("abbrev") %]'
 EOF
 
-# Build wasi-libc, libc++ and libc++abi.
+# Build wasi-libc, and re-pack it, to make sure we get a deterministic output.
+make PREFIX=/wasi build/wasi-libc.BUILT
+
+# We need to compile compiler-rt before building libc++ and libc++abi, because
+# we need to inject it to Clang.
 make \
   LLVM_PROJ_DIR=$LLVM_HOME \
   PREFIX=/wasi \
-  build/wasi-libc.BUILT \
   build/compiler-rt.BUILT \
   NINJA_FLAGS='-j[% c("num_procs") %]'
 
@@ -66,6 +72,7 @@ rtdir="build/llvm/lib/clang/$(ls build/llvm/lib/clang)/lib/wasi"
 mkdir -p "$rtdir"
 cp build/compiler-rt/lib/wasi/libclang_rt.builtins-wasm32.a "$rtdir/"
 
+# Now we can finally build libc++ and libc++abi.
 make \
   LLVM_PROJ_DIR=$LLVM_HOME \
   PREFIX=/wasi \

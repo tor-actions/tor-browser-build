@@ -33,3 +33,4 @@ input_files:
     project: wasi-config
   - name: wasi-libc
     project: wasi-libc
+  - filename: '0001-Sort-the-object-list-passed-to-ar-in-the-Makefile.patch'
