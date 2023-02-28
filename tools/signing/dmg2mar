@@ -1,8 +1,7 @@
 #!/bin/bash
 
-# This script runs `make dmg2mar-release` or `make dmg2mar-alpha`, after
-# moving the signed dmg files from the $tbb_version-macos-signed directory
-# to the normal signed directory.
+# This script runs `make dmg2mar-release` or `make dmg2mar-alpha`, and assumes
+# that the final signed dmgs are deployed to the normal signed directory.
 # It should be run after `gatekeeper-bundling.sh`.
 
 set -e
@@ -12,19 +11,21 @@ source "$script_dir/functions"
 
 cd "$script_dir/../.."
 
+# some initial checks to make sure directories and file counts are as expected...
+
 version=$(./rbm/rbm showconf browser --target alpha --target torbrowser-linux-x86_64 var/torbrowser_version)
 test "$version" = "$tbb_version" || \
   exit_error "Incorrect tor browser version: $version != $tbb_version"
 
-test -d "$macos_signed_dir" || \
-  exit_error "$macos_signed_dir does not exist"
+test -d "$signed_version_dir" || \
+  exit_error "$signed_version_dir does not exist"
 
 ProjName=$(ProjectName)
 nb_locales=$(echo $bundle_locales | wc -w)
-nb_bundles=$(ls -1 "$macos_signed_dir/$ProjName"-*.dmg | wc -l)
+nb_bundles=$(ls -1 "$signed_version_dir/$ProjName"-*.dmg | wc -l)
 test "$nb_locales" -eq "$nb_bundles" || \
   exit_error "Wrong number of bundles: $nb_locales != $nb_bundles"
 
-mv -vf "$macos_signed_dir"/"$ProjName"-*.dmg "$signed_version_dir"/
+# before building converting the dmg to a mar
 
 make $SIGNING_PROJECTNAME-dmg2mar-$tbb_version_type

@@ -73,5 +73,7 @@ do
   $script_dir/ddmg.sh $macos_signed_dir/$ProjName-${tbb_version}-macos_$lang.dmg $tmpdir/dmg/ "$Proj_Name"
   rm -rf "dmg/$Proj_Name.app"
 done
-
 rm -Rf "$tmpdir"
+
+# move the signed+stapled dmgs to expected output directory for publishing and mar generation
+mv -vf "$macos_signed_dir"/"$ProjName"-*.dmg "$signed_version_dir"/
