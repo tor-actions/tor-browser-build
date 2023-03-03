@@ -240,6 +240,9 @@ ${EndIf}
 FunctionEnd
 
 Function StartBrowser
-ExecShell "open" "$INSTDIR/Start [% c('var/Project_Name') %].lnk"
+[% IF !system_install_mode -%]
+  ExecShell "open" "$INSTDIR/Start [% c('var/Project_Name') %].lnk"
+[% ELSE -%]
+  ExecShell "open" "$INSTDIR/[% c('var/exe_name') %].exe"
+[% END -%]
 FunctionEnd
-
