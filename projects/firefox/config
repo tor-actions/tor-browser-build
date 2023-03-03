@@ -80,6 +80,7 @@ targets:
     var:
       branding_directory_prefix: 'mb'
       browser_series: '12.0'
+      browser_branch: '[% c("var/browser_series") %]-2'
       browser_build: 1
       gitlab_project: https://gitlab.torproject.org/tpo/applications/privacy-browser
 
