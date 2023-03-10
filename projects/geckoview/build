@@ -68,7 +68,7 @@ export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
 # Create .mozbuild to avoid interactive prompt in configure
 mkdir "$HOME/.mozbuild"
 ./mach configure \
-    --with-tor-browser-version=[% c("var/torbrowser_version") %] \
+    --with-base-browser-version=[% c("var/torbrowser_version") %] \
     [% IF !c("var/rlbox") -%]--without-wasm-sandboxed-libraries[% END %]
 
 ./mach build --verbose
