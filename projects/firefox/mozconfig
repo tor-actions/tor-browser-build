@@ -66,11 +66,6 @@
   [% END -%]
 [% END -%]
 
-[% IF c("var/tor-browser") %]
-  ac_add_options --enable-tor-browser-update
-  ac_add_options --enable-verify-mar
-[% END -%]
-
 mk_add_options MOZ_PARALLEL_BUILD=[% c("num_procs") %]
 
 export MOZ_INCLUDE_SOURCE_INFO=1
