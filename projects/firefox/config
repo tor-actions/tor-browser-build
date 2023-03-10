@@ -79,9 +79,10 @@ targets:
     git_url: git@gitlab.torproject.org:tpo/applications/privacy-browser.git
     var:
       branding_directory_prefix: 'mb'
+      firefox_platform_version: 102.9.0
       browser_series: '12.0'
-      browser_branch: '[% c("var/browser_series") %]-2'
-      browser_build: 1
+      browser_branch: '[% c("var/browser_series") %]-1'
+      browser_build: 2
       gitlab_project: https://gitlab.torproject.org/tpo/applications/privacy-browser
 
   linux-x86_64:
