@@ -1,4 +1,4 @@
-. $topsrcdir/mozconfig-[% IF c("var/macos"); GET 'macos-x86_64'; ELSE; GET c("var/osname"); END; %][% IF c("var/asan") %]-asan[% END %]
+. $topsrcdir/mozconfig-[% IF c("var/macos"); GET 'macos'; ELSE; GET c("var/osname"); END; %][% IF c("var/asan") %]-asan[% END %]
 
 [% IF c("var/linux") -%]
   # We want to build with clang now and point to the GCC toolchain until #29041 is
