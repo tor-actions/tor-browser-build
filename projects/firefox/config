@@ -18,7 +18,7 @@ var:
   browser_build: 3
   branding_directory_prefix: 'tb'
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
-  nightly_updates_osname: '[% c("var/osname") %]'
+  nightly_updates_publish_dir: '[% c("var/nightly_updates_publish_dir_prefix") %][% c("var/osname") %]'
   gitlab_project: https://gitlab.torproject.org/tpo/applications/tor-browser
   git_commit: '[% exec("git rev-parse HEAD") %]'
   deps:
@@ -68,6 +68,8 @@ targets:
   basebrowser:
     # basebrowser tag always has a -build1 suffix
     git_hash: '[% c("var/project-name") %]-[% c("var/firefox_version") %]-[% c("var/browser_branch") %]-build1'
+    var:
+      nightly_updates_publish_dir_prefix: basebrowser-
 
   nightly:
     git_hash: '[% c("var/project-name") %]-[% c("var/firefox_version") %]-[% c("var/browser_branch") %]'
@@ -122,7 +124,7 @@ targets:
   macos:
     var:
       martools_filename: 'mar-tools-macos-[% c("var/macos_arch") %].zip'
-      nightly_updates_osname: macos
+      nightly_updates_publish_dir: '[% c("var/nightly_updates_publish_dir_prefix") %]macos'
       arch_deps:
         - python3
         - python3-distutils
