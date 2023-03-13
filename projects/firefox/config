@@ -33,7 +33,7 @@ var:
   rezip: |
     rezip_tmpdir=$(mktemp -d)
     mkdir -p "$rezip_tmpdir/z"
-    unzip -d "$rezip_tmpdir/z" -- [% c("rezip_file") %] || [ $? -lt 3 ]
+    unzip -q -d "$rezip_tmpdir/z" -- [% c("rezip_file") %] || [ $? -lt 3 ]
     pushd "$rezip_tmpdir/z"
     [% c("zip", {
       zip_src => [ '.' ],
