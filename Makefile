@@ -396,6 +396,11 @@ basebrowser-testbuild-macos-aarch64: submodule-update
 basebrowser-testbuild-src: submodule-update
 	$(rbm) build release --target testbuild --target browser-src-testbuild --target basebrowser
 
+basebrowser-incrementals-nightly: submodule-update
+	$(rbm) build release --step update_responses_config --target nightly --target basebrowser
+	NO_CODESIGNATURE=1 tools/update-responses/gen_incrementals nightly
+	$(rbm) build release --step hash_incrementals --target nightly --target basebrowser
+
 
 ###########################
 # Privacy Browser Targets #
