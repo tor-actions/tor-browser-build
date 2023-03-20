@@ -1,3 +1,92 @@
+Tor Browser 12.5a4 - March 20 2023
+ * All Platforms
+   * Updated Translations
+   * Updated NoScript to 11.4.20
+   * Bug 40353: Re-enable rlbox [tor-browser-build]
+   * Bug 40810: Enable Finnish (fi) in alpha builds [tor-browser-build]
+   * Bug 40817: Add basebrowser-incrementals-nightly makefile target [tor-browser-build]
+   * Bug 41599: about:networking#networkid should be normalized [tor-browser]
+   * Bug 41635: Disable the Normandy component at compile time [tor-browser]
+   * Bug 41636: Disable back webextension.storage.sync after ensuring NoScript settings won't be lost [tor-browser]
+   * Bug 41646: Regression in 12.5a3: the system font patch should also set a font-size [tor-browser]
+   * Bug 41647: Turn --enable-base-browser in --with-base-browser-version [tor-browser]
+   * Bug 41659: Add canonical color definitions to base-browser [tor-browser]
+   * Bug 41662: Disable about:sync-logs [tor-browser]
+   * Bug 41670: Rebase Tor Browser Alpha to 102.9.0esr [tor-browser]
+   * Bug 41671: Turn media.peerconnection.ice.relay_only to true as defense in depth against WebRTC ICE leaks [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 102.9esr
+   * Bug 40144: about:privatebrowsing Firefox branding [tor-browser]
+   * Bug 40788: Remove all languages but en-US for privacy-browser build target [tor-browser-build]
+   * Bug 40808: Set update URL for nightly base-browser [tor-browser-build]
+   * Bug 41085: Refactor the UI to remove all bridges [tor-browser]
+   * Bug 41093: Users don't understand the purpose of bridge-moji [tor-browser]
+   * Bug 41574: Use --warning-color variable for the "Custom" label in the security level popup. [tor-browser]
+   * Bug 41657: Remove --enable-tor-browser-data-outside-app-dir [tor-browser]
+ * Windows
+   * Bug 40793: Add some metadata also to the Windows installer [tor-browser-build]
+   * Bug 40801: Correct the ExecShell for system-wide installs in the NSIS script [tor-browser-build]
+ * Android
+   * Updated GeckoView to 102.9esr
+   * Bug 40800: WebTunnel Integration in Tor Browser mobile [tor-browser-build]
+   * Bug 41667: Enable media.peerconnection.ice.obfuscate_host_addresses on Android for defense-in-depth [tor-browser]
+   * Bug 41677: Remove the --disable-tor-browser-update flag on Android [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.19.7
+     * Bug 40750: Find why rlbox hurts reproducibility [tor-browser-build]
+     * Bug 40763: Add support for signing multiple browsers in tools/signing/nightly [tor-browser-build]
+     * Bug 40794: Include the build-id in firefox-l10n output name [tor-browser-build]
+     * Bug 40795: Trim down tor-browser-build release prep issue templates [tor-browser-build]
+     * Bug 40796: Bad UX for the changelogs script when using the issue number [tor-browser-build]
+     * Bug 40805: Define the version flag for all browsers [tor-browser-build]
+     * Bug 40807: Add config for signing base-browser nightly in tools/signing/nightly [tor-browser-build]
+     * Bug 40812: Make var/rezip in projects/firefox/config quiet [tor-browser-build]
+     * Bug 41649: Create rebase and security backport gitlab issue templates [tor-browser]
+     * Bug 41682: Add base-browser nightly mar signing key [tor-browser]
+   * Windows + macOS + Linux
+     * Bug 40809: Remove --enable-tor-browser-update and --enable-verify-mar from projects/firefox/mozconfig [tor-browser-build]
+     * Bug 40813: Enable var/updater_enabled for basebrowser nightly [tor-browser-build]
+   * macOS
+     * Bug 40790: Fix dmg2mar after dmg changes from #28124 [tor-browser-build]
+     * Bug 40791: tools/dmg2mar should exit with an error when there is an error creating the mar file [tor-browser-build]
+     * Bug 40792: signing scripts missing project name prefix to make rule [tor-browser-build]
+     * Bug 40798: dmg2mar step also takes care of copying the signed+stabled dmg to the signed directory [tor-browser-build]
+     * Bug 40806: Update the reference to the macOS mozconfig [tor-browser-build]
+     * Bug 41453: Rename mozconfig-macos-x86_64 to mozconfig-macos [tor-browser]
+   * Android
+     * Bug 40789: Broken mirror links for glean: link 404 for version 5.0.1 hosted at aguestuser's tor people storage [tor-browser-build]
+
+Tor Browser 12.0.4 - March 13 2023
+ * All Platforms
+   * Updated Translations
+   * Updated NoScript to 11.4.18
+   * Bug 41598: Prevent NoScript from being removed / disabled until core functionality has been migrated to Tor Browser [tor-browser]
+   * Bug 41603: Customize the creation of MOZ_SOURCE_URL [tor-browser]
+   * Bug 41627: Enable network.http.referer.hideOnionSource in base-browser [tor-browser]
+   * Bug 41637: cherry-pick Mozilla 1814416: Generalize the app name in about:buildconfig. r=ahochheiden [tor-browser]
+   * Bug 41659: Add canonical color definitions to base-browser [tor-browser]
+   * Bug 41669: Rebase Tor Browser stable to 102.9.0esr [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 102.9esr
+   * Bug 41542: Disable the creation of a default profile [tor-browser]
+   * Bug 41574: Use --warning-color variable for the "Custom" label in the security level popup. [tor-browser]
+   * Bug 41606: Move the changes to the hamburger menu out of the Torbutton commit [tor-browser]
+   * Bug 41626: Bridge-emojii tooltips not localized in ES locale [tor-browser]
+ * Android
+   * Updated GeckoView to 102.9esr
+   * Bug 41679: Backport Android-specific security fixes from Firefox 111 to ESR 102.9-based Tor Browser [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.19.7
+     * Bug 40764: Embed repo URL and git revision in Firefox [tor-browser-build]
+     * Bug 40782: Update tools/signing/download-unsigned-sha256sums-gpg-signatures-from-people-tpo to fetch from tb-build-04 and tb-build-05 [tor-browser-build]
+   * macOS
+     * Bug 40790: Fix dmg2mar after dmg changes from #28124 [tor-browser-build]
+     * Bug 40791: tools/dmg2mar should exit with an error when there is an error creating the mar file [tor-browser-build]
+   * Android
+     * Bug 40789: Broken mirror links for glean: link 404 for version 5.0.1 hosted at aguestuser's tor people storage [tor-browser-build]
+
 Tor Browser 12.5a3 - February 16 2023
  * All Platforms
    * Updated Translations
