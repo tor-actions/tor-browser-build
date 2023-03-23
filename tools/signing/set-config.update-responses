@@ -1,7 +1,12 @@
 # You should clone git@gitlab.torproject.org:tpo/applications/tor-browser-update-responses.git
-# and uncomment the line setting update_responses_repository_dir.
+# and git@gitlab.torproject.org:tpo/applications/mullvad-browser-update-responses.git
+# and uncomment the lines setting update_responses_repository_dir.
 # Don't forget to set user.email and user.name in your git config
 
-#update_responses_repository_dir=/path/to/tor-browser-update-responses.git
+#is_project torbrowser && \
+  #update_responses_repository_dir=/path/to/tor-browser-update-responses.git
+#is_project mullvadbrowser && \
+  #update_responses_repository_dir=/path/to/mullvad-browser-update-responses.git
+
 
 check_update_responses_repository_dir

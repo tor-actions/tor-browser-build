@@ -11,7 +11,12 @@ script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "$script_dir/functions"
 
 if [ -z "${NSS_DB_DIR+x}" ]; then
-  NSS_DB_DIR=/home/boklm/marsigning/nssdb7
+  if test "$SIGNING_PROJECTNAME" = 'torbrowser'; then
+    NSS_DB_DIR=/home/boklm/marsigning/nssdb7
+  fi
+  if test "$SIGNING_PROJECTNAME" = 'mullvadbrowser'; then
+    NSS_DB_DIR=/home/boklm/marsigning/mullvad-browser-nssdb-1
+  fi
 fi
 
 if [ -z "${NSS_CERTNAME+x}" ]; then

@@ -194,14 +194,11 @@ do_step macos-signer-notarization
 do_step macos-signer-stapler
 do_step macos-signer-disable-network-proxy-settings
 do_step gatekeeper-bundling
-is_project torbrowser && \
-  do_step dmg2mar
+do_step dmg2mar
 do_step sync-scripts-to-linux-signer
 do_step sync-before-linux-signer-signmars
-is_project torbrowser && \
-  do_step linux-signer-signmars
-is_project torbrowser && \
-  do_step sync-after-signmars
+do_step linux-signer-signmars
+do_step sync-after-signmars
 do_step linux-signer-authenticode-signing
 do_step sync-after-authenticode-signing
 do_step authenticode-timestamping
@@ -217,7 +214,6 @@ is_project torbrowser && \
   do_step sync-scripts-to-staticiforme
 is_project torbrowser && \
   do_step staticiforme-prepare-cdn-dist-upload
-is_project torbrowser && \
-  do_step upload-update_responses-to-staticiforme
+do_step upload-update_responses-to-staticiforme
 do_step finished-signing-clean-macos-signer
 do_step finished-signing-clean-linux-signer
