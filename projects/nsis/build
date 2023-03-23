@@ -13,6 +13,12 @@ cd /var/tmp/build/nsis-[% c('version') %]-src
 # only valid for the Windows linker. Therefore we add it using a patch
 # to the cross-compilation part only. Still needed as of 3.06.1, see: #40090.
 patch -p1 < $rootdir/no-insert-timestamp.patch
+# tor-browser-build#40822: NSIS adds a flag to tell it supports ASLR, but it
+# does so only to pass MS certifications. According to the NSIS forums, they
+# intended not to ship the .reloc to save space. But, according to the bug
+# tracker, binutils 2.36 started adding a .reloc section by default, and we need
+# to disable it with this patch.
+patch -p1 < $rootdir/no-reloc-section.diff
 
 [% IF c("var/windows-x86_64") %]
   # Seems like setting TARGET_ARCH is not enough so we need to patch build.cpp
