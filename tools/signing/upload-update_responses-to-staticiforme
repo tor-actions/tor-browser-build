@@ -23,11 +23,18 @@ git checkout main
 git pull --ff-only
 test -n "$(git status --porcelain=v1 | grep -v '^?')" \
   && exit_error 'update_responses_repository_dir has modified files'
-cd update_3
+is_project torbrowser && cd update_3
+is_project mullvadbrowser && cd update_1
+
 rm -Rf "$tbb_version_type"
 tar -xf "$update_responses_tar"
 git add "$tbb_version_type"
 git commit -m "$tbb_version_type: new version, $tbb_version"
+git push
+
+# we just need to push mullvadbrowser's update responses to git, not deploy to staticiforme
+is_project mullvadbrowser && exit 0
+
 update_responses_commit=$(git log -1 --format=%H)
 
 update_dir=/srv/aus1-master.torproject.org/htdocs/torbrowser
@@ -49,8 +56,6 @@ EOF
 
 chmod +x $deploy_script
 scp -p $deploy_script $ssh_host_staticiforme:deploy_update_responses-$tbb_version_type.sh
-
-git push
 
 echo 'To enable updates you can now run:'
 echo "  ssh $ssh_host_staticiforme"
