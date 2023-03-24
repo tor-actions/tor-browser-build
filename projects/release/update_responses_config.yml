@@ -1,18 +1,18 @@
 ---
 tmp_dir: '[% c("tmp_dir") %]'
 create_downloads_json: 1
-appname_marfile: tor-browser
-appname_bundle_android: tor-browser
-appname_bundle_macos: TorBrowser
-appname_bundle_linux: tor-browser
-appname_bundle_win32: torbrowser-install
-appname_bundle_win64: torbrowser-install-win64
+appname_marfile: '[% c("var/project-name") %]'
+appname_bundle_android: '[% c("var/project-name") %]'
+appname_bundle_macos: '[% c("var/ProjectName") %]'
+appname_bundle_linux: '[% c("var/project-name") %]'
+appname_bundle_win32: '[% c("var/projectname") %]-install'
+appname_bundle_win64: '[% c("var/projectname") %]-install-win64'
 releases_dir: [% path(c('output_dir')) %][% IF ! c("var/nightly") %]/signed[% END %]
 download:
-    archive_url: https://archive.torproject.org/tor-package-archive/torbrowser
+    archive_url: 'https://archive.torproject.org/tor-package-archive/[% c("var/projectname") %]'
     gpg_keyring: ../../keyring/torbrowser.gpg
-    bundles_url: https://dist.torproject.org/torbrowser
-    mars_url: https://cdn.torproject.org/aus1/torbrowser
+    bundles_url: 'https://dist.torproject.org/[% c("var/projectname") %]'
+    mars_url: 'https://cdn.torproject.org/aus1/[% c("var/projectname") %]'
 build_targets:
     linux32: Linux_x86-gcc3
     linux64: Linux_x86_64-gcc3
@@ -61,6 +61,8 @@ versions:
             minSupportedInstructionSet: SSE2
 mar_compression: xz
 tag: 'tbb-[% c("var/torbrowser_version") %]-[% c("var/torbrowser_build") %]'
+
+[% IF c("var/tor-browser") -%]
 htaccess_rewrite_rules:
     alpha: |
         # bug 26569: Redirect pre-8.0a9 alpha users to a separate update directory
@@ -75,3 +77,4 @@ htaccess_rewrite_rules:
         RewriteRule ^[^/]+/11\.0.*/.* https://aus1.torproject.org/torbrowser/update_pre12.0/release/$0 [last]
         RewriteRule ^[^/]+/11\.5/.* https://aus1.torproject.org/torbrowser/update_pre12.0/release/$0 [last]
         RewriteRule ^[^/]+/11\.5\.[01234567]/.* https://aus1.torproject.org/torbrowser/update_pre12.0/release/$0 [last]
+[% END -%]
