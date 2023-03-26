@@ -35,7 +35,7 @@
 # 2) Let LD_LIBRARY_PATH point to the mar-tools directory
 # 3) Let NSS_DB_DIR point to the directory containing the database with the
 #    signing certificate to check against.
-# 4) Let CHANNEL be the expected update channel
+# 4) Let MAR_CHANNEL_ID be the expected update channel (eg: torbrowser-torproject-alpha)
 #
 #    To create the database to use for signature checking import the
 #    release*.der certificate of your choice found in
@@ -45,9 +45,9 @@
 #    certutil -d nssdb -N --empty-password
 #    certutil -A -n "marsigner" -t,, -d nssdb -i /path/to/.der
 #
-# 4) Change into the directory containing the MAR files and the
+# 5) Change into the directory containing the MAR files and the
 #    sha256sums-unsigned-build.txt/sha256sums-unsigned-build.incrementals.txt.
-# 5) Run /path/to/marsigning_check.sh
+# 6) Run /path/to/marsigning_check.sh
 
 if [ -z "$SIGNMAR" ]
 then
@@ -67,9 +67,9 @@ then
   exit 1
 fi
 
-if [ -z "$CHANNEL" ]
+if [ -z "$MAR_CHANNEL_ID" ]
 then
-  echo "The update channel is missing! ([nightly|alpha|release])"
+  echo "The update channel is missing! (torbrowser-torproject-[nightly|alpha|release])"
   exit 1
 fi
 
@@ -106,7 +106,7 @@ for f in *.mar; do
   fi
 
   # Test 1.5: Is the MAR file correctly signed by the correct channel key?
-  if [ ! "$($SIGNMAR -T "$f" | grep "MAR channel name")" = "    - MAR channel name: torbrowser-torproject-${CHANNEL}" ]; then
+  if [ ! "$($SIGNMAR -T "$f" | grep "MAR channel name")" = "    - MAR channel name: ${MAR_CHANNEL_ID}" ]; then
       echo "$f contains wrong update channel!"
   fi
 

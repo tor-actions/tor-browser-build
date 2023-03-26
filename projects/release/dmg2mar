@@ -5,4 +5,4 @@ cd [% shell_quote(path(dest_dir)) %]/[% c("var/signed_status") %]/[%  c("version
 export TOR_APPNAME_BUNDLE_OSX='[% c("var/Project_Name") -%]'
 export TOR_APPNAME_DMGFILE='[% c("var/ProjectName") -%]'
 export TOR_APPNAME_MARFILE='[% c("var/project-name") -%]'
-[% shell_quote(c("basedir")) %]/tools/dmg2mar [% c("var/channel") %]
+[% shell_quote(c("basedir")) %]/tools/dmg2mar [% c("var/mar_channel_id") %]

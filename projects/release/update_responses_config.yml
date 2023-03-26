@@ -31,6 +31,7 @@ versions:
 [% IF c("var/create_unsigned_incrementals") -%]
         releases_dir: [% path(c('output_dir')) %]/unsigned
 [% END -%]
+        mar_channel_id: [% c('var/mar_channel_id') %]
         platformVersion: [% pc('firefox', 'var/firefox_platform_version') %]
         detailsURL: https://blog.torproject.org/new-release-tor-browser-[% c("var/torbrowser_version") FILTER remove('\.') %]
         incremental_from:

@@ -104,7 +104,7 @@ sub get_dmg_files_from_sha256sums {
 }
 
 sub convert_files {
-    my ($channel) = @_;
+    my ($mar_channel_id) = @_;
     my $pm = Parallel::ForkManager->new(get_nbprocs);
     $pm->run_on_finish(
       sub {
@@ -149,7 +149,7 @@ sub convert_files {
 
         unlink $output;
         local $ENV{MOZ_PRODUCT_VERSION} = $file->{version};
-        local $ENV{MAR_CHANNEL_ID} = "torbrowser-torproject-$channel";
+        local $ENV{MAR_CHANNEL_ID} = $mar_channel_id;
         local $ENV{TMPDIR} = $tmpdir;
         (undef, $err, $success) =  capture_exec('make_full_update.sh', '-q',
                                         $output, $appdir);
@@ -178,9 +178,9 @@ sub remove_incremental_mars {
 $ENV{LC_ALL} = 'C';
 
 
-exit_error "Please specify update channel" unless @ARGV == 1;
-my $channel = $ARGV[0];
+exit_error "Please specify the mar channel id" unless @ARGV == 1;
+my $mar_channel_id = $ARGV[0];
 
 extract_martools;
-convert_files $channel;
+convert_files $mar_channel_id;
 remove_incremental_mars;
