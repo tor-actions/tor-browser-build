@@ -11,6 +11,7 @@ torbrowser:
     - nightly-windows-i686
     - nightly-macos
   nss_db_dir: nssdb
+  appname_marfile: tor-browser
 basebrowser:
   publish_dirs:
     - basebrowser-nightly-linux-x86_64
@@ -19,6 +20,7 @@ basebrowser:
     - basebrowser-nightly-windows-i686
     - basebrowser-nightly-macos
   nss_db_dir: nssdb-basebrowser-1
+  appname_marfile: base-browser
 nss_certname: nightly-marsigner
 gpg_keyring: keyring/torbrowser-nightly.gpg
 rsync_dest: /srv/tbb-nightlies-master.torproject.org/htdocs/nightly-updates/

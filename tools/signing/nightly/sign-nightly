@@ -244,6 +244,7 @@ sub update_responses {
     my $ur_config = LoadFile("$FindBin::Bin/update-responses-base-config.yml");
     $ur_config->{download}{mars_url} .= "/$publish_dir";
     $ur_config->{releases_dir} = "$topdir/nightly/$publish_dir";
+    $ur_config->{appname_marfile} = get_config('appname_marfile');
     $ur_config->{channels}->{nightly} = $version;
     $ur_config->{versions}->{$version} = $ur_config->{versions}->{nightly_version};
     my $buildinfos = get_buildinfos("$topdir/nightly/$publish_dir/$version/build-infos.json");
