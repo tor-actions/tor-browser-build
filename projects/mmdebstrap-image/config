@@ -47,9 +47,8 @@ targets:
         suite: jessie
         arch: amd64
         debian_mirror: >
-          "deb [signed-by=/usr/share/keyrings/debian-archive-removed-keys.gpg] http://deb.debian.org/debian jessie main"
-          "deb [signed-by=/usr/share/keyrings/debian-archive-removed-keys.gpg] http://deb.debian.org/debian jessie-updates main"
-          "deb [signed-by=/usr/share/keyrings/debian-archive-removed-keys.gpg] http://security.debian.org/debian-security jessie/updates main"
+          "deb [signed-by=/usr/share/keyrings/debian-archive-removed-keys.gpg] http://archive.debian.org/debian-archive/debian/ jessie main"
+          "deb [signed-by=/usr/share/keyrings/debian-archive-removed-keys.gpg] http://archive.debian.org/debian-archive/debian-security/ jessie/updates main"
 
   bullseye-amd64:
     var:
