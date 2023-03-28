@@ -219,6 +219,10 @@ tar -C ${TB_STAGE_DIR} -xf [% c('input_files_by_name/firefox') %]/browser.tar.gz
 
 for tbdir in "${TBDIRS[@]}"
 do
+  [% IF c("var/linux") -%]
+    mv Bundle-Data/linux/Data/fontconfig "$tbdir/"
+  [% END -%]
+
   mkdir -p "$tbdir/$DOCSPATH"
   cp -a Bundle-Data/Docs/* "$tbdir/$DOCSPATH"
   [% IF c("var/tor-browser") -%]

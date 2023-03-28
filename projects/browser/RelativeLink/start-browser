@@ -338,7 +338,7 @@ setControlPortPasswd ${TOR_CONTROL_PASSWD:='"secret"'}
 [% END -%]
 
 # Set up custom bundled fonts. See fonts-conf(5).
-export FONTCONFIG_PATH="${HOME}/[% c('var/ProjectName') %]/Data/fontconfig"
+export FONTCONFIG_PATH="${HOME}/fontconfig"
 export FONTCONFIG_FILE="fonts.conf"
 
 # Avoid overwriting user's dconf values. Fixes #27903.
