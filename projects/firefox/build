@@ -169,7 +169,7 @@ export LANG=C.UTF-8
 ./mach configure \
   --with-distribution-id=org.torproject \
   --with-base-browser-version=[% c("var/torbrowser_version") %] \
-  [% IF c("var/tor-browser") -%]
+  [% IF c("var/updater_enabled") -%]
         --enable-update-channel=[% c("var/channel") %] \
   [% END %] \
   [% IF !c("var/base-browser") -%]--with-branding=browser/branding/[% c("var/branding_directory_prefix") %]-[% c("var/channel") %][% END %] \
