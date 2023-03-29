@@ -6,13 +6,13 @@ version: '[% c("abbrev") %]'
 steps:
   base-browser:
     base-browser: '[% INCLUDE build %]'
-    git_hash: 50ec65bc65e510156c1e9f5c835eb6ea034450d0
+    git_hash: 8c72bd0a7bb14626eaed4010f2eab481da02c806
     targets:
       nightly:
         git_hash: 'base-browser'
   base-browser-fluent:
     base-browser-fluent: '[% INCLUDE build %]'
-    git_hash: 667a6daeba46b7aeb0a8b664bd9ae006f8ac233d
+    git_hash: 9bdebc292322f4193899b229f547e183bfdd5bcb
     targets:
       nightly:
         git_hash: 'basebrowser-newidentityftl'

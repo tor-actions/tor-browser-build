@@ -106,13 +106,13 @@ input_files:
   - URL: https://addons.mozilla.org/firefox/downloads/file/4086528/noscript-11.4.20.xpi
     name: noscript
     sha256sum: 014aec3ce142222338372d227eaadfa2ae13c9e3861f6d43869615b932ce4b53
-  - URL: https://addons.mozilla.org/firefox/downloads/file/4079064/ublock_origin-1.47.4.xpi
+  - URL: https://addons.mozilla.org/firefox/downloads/file/4086892/ublock_origin-1.48.0.xpi
     name: ublock-origin
-    sha256sum: a35a6c8758ba74616afc09648c96d74ec2e7d27fe30f311d1db6e9a4966e7858
+    sha256sum: 787950ad4fdbf57ffab136c706918077ed15b0b4fb22b5429ddd0043de3c9720
     enable: '[% c("var/mullvad-browser") %]'
-  - URL: https://github.com/mullvad/browser-extension/releases/download/v0.7.7-firefox-beta/mullvad_privacy_companion-0.7.7.xpi
+  - URL: https://github.com/mullvad/browser-extension/releases/download/v0.7.9-firefox-beta/mullvad-browser-extension-0.7.9.xpi
     name: mullvad-extension
-    sha256sum: dee0e2c089b40fb1a2a8ab5d69eefd382961f695fa4dc76def400aae79b81ecf
+    sha256sum: 17ce31b32e8be0f0db86a5a5ed93607cc84d5e2092341aee0b8eaba1c0746390
     enable: '[% c("var/mullvad-browser") %]'
   - filename: 'gtk3-settings.ini'
     enable: '[% c("var/linux") %]'
