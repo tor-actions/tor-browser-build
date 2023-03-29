@@ -5,9 +5,6 @@
 - `$(STAGING_SERVER)` : the server the signer is using to to run the signing process
 - `$(ESR_VERSION)` : the Mozilla defined ESR version, used in various places for building tor-browser tags, labels, etc
     - example : `91.6.0`
-- `$(ESR_TAG)` : the Mozilla defined hg (Mercurial) tag associated with `$(ESR_VERSION)`
-    - exmaple : `FIREFOX_91_7_0esr_BUILD2`
-- `$(ESR_TAG_PREV)` : the Mozilla defined hg (Mercurial) tag associated with the previous ESR version when rebasing (ie, the ESR version we are rebasing from)
 - `$(TOR_BROWSER_MAJOR)` : the Tor Browser major version
     - example : `11`
 - `$(TOR_BROWSER_MINOR)` : the Tor Browser minor version
@@ -35,7 +32,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
   - [ ] `var/torbrowser_version` : update to next version
   - [ ] `var/torbrowser_build` : update to `$(TOR_BROWSER_BUILD_N)`
   - [ ] ***(Desktop Only)***`var/torbrowser_incremental_from` : update to previous Desktop version
-    - **IMPORTANT**: Really *actually* make sure this is the previous Desktop version or else the `make incrementals-*` step will fail
+    - **IMPORTANT**: Really *actually* make sure this is the previous Desktop version or else the `make torbrowser-incrementals-*` step will fail
 - [ ] Update Desktop-specific build configs
   - [ ] Update `projects/firefox/config`
     - [ ] `git_hash` : update the `$(BUILD_N)` section to match `tor-browser` tag
