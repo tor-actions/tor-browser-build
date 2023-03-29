@@ -18,7 +18,7 @@ var:
   browser_build: 2
   branding_directory_prefix: 'tb'
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
-  nightly_updates_publish_dir: '[% c("var/nightly_updates_publish_dir_prefix") %][% c("var/osname") %]'
+  nightly_updates_publish_dir: '[% c("var/nightly_updates_publish_dir_prefix") %]nightly-[% c("var/osname") %]'
   gitlab_project: https://gitlab.torproject.org/tpo/applications/tor-browser
   git_commit: '[% exec("git rev-parse HEAD") %]'
   deps:
@@ -133,7 +133,7 @@ targets:
   macos:
     var:
       martools_filename: 'mar-tools-macos-[% c("var/macos_arch") %].zip'
-      nightly_updates_publish_dir: '[% c("var/nightly_updates_publish_dir_prefix") %]macos'
+      nightly_updates_publish_dir: '[% c("var/nightly_updates_publish_dir_prefix") %]nightly-macos'
       arch_deps:
         - python3
         - python3-distutils
