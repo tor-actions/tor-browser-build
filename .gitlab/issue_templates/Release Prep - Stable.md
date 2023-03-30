@@ -110,7 +110,7 @@ Tor Browser Stable lives in the various `maint-$(TOR_BROWSER_MAJOR).$(TOR_BROWSE
 - [ ] Open MR with above changes
 - [ ] Begin build on `$(BUILD_SERVER)` (and fix any issues which come up and update MR)
 - [ ] Merge
-- [ ] Sign/Tag commit: `make signtag-release`
+- [ ] Sign/Tag commit: `make torbrowser-signtag-release`
 - [ ] Push tag to `origin`
 
 </details>
