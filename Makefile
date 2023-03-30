@@ -600,11 +600,17 @@ cargo_vendor-uniffi-rs: submodule-update
 submodule-update:
 	git submodule update --init
 
-signtag-release: submodule-update
+torbrowser-signtag-release: submodule-update
 	$(rbm) build release --step signtag --target release --target torbrowser
 
-signtag-alpha: submodule-update
+torbrowser-signtag-alpha: submodule-update
 	$(rbm) build release --step signtag --target alpha --target torbrowser
+
+mullvadbrowser-signtag-release: submodule-update
+	$(rbm) build release --step signtag --target release --target mullvadbrowser
+
+mullvadbrowser-signtag-alpha: submodule-update
+	$(rbm) build release --step signtag --target alpha --target mullvadbrowser
 
 fetch: submodule-update
 	$(rbm) fetch

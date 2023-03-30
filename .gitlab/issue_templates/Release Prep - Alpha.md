@@ -108,7 +108,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
 - [ ] Open MR with above changes
 - [ ] Begin build on `$(BUILD_SERVER)` (fix any issues which come up and update MR)
 - [ ] Merge
-- [ ] Sign/Tag commit: `make signtag-alpha`
+- [ ] Sign/Tag commit: `make torbrowser-signtag-alpha`
 - [ ] Push tag to `origin`
 
 </details>
