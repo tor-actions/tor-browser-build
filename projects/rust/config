@@ -7,7 +7,7 @@ container:
 targets:
   android:
     var:
-      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/clang --set rust.jemalloc --target=x86_64-unknown-linux-gnu,armv7-linux-androideabi,thumbv7neon-linux-androideabi,aarch64-linux-android,i686-linux-android,x86_64-linux-android --set=target.armv7-linux-androideabi.cc=armv7a-linux-androideabi16-clang --set=target.armv7-linux-androideabi.ar=armv7a-linux-androideabi-ar --set=target.thumbv7neon-linux-androideabi.cc=armv7a-linux-androideabi16-clang --set=target.thumbv7neon-linux-androideabi.ar=armv7a-linux-androideabi-ar --set=target.aarch64-linux-android.cc=aarch64-linux-android21-clang --set=target.aarch64-linux-android.ar=aarch64-linux-android-ar --set=target.i686-linux-android.cc=i686-linux-android16-clang --set=target.i686-linux-android.ar=i686-linux-android-ar --set=target.x86_64-linux-android.cc=x86_64-linux-android21-clang --set=target.x86_64-linux-android.ar=x86_64-linux-android-ar
+      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/clang --set rust.jemalloc --target=x86_64-unknown-linux-gnu,armv7-linux-androideabi,thumbv7neon-linux-androideabi,aarch64-linux-android,i686-linux-android,x86_64-linux-android,wasm32-unknown-unknown --set=target.armv7-linux-androideabi.cc=armv7a-linux-androideabi16-clang --set=target.armv7-linux-androideabi.ar=armv7a-linux-androideabi-ar --set=target.thumbv7neon-linux-androideabi.cc=armv7a-linux-androideabi16-clang --set=target.thumbv7neon-linux-androideabi.ar=armv7a-linux-androideabi-ar --set=target.aarch64-linux-android.cc=aarch64-linux-android21-clang --set=target.aarch64-linux-android.ar=aarch64-linux-android-ar --set=target.i686-linux-android.cc=i686-linux-android16-clang --set=target.i686-linux-android.ar=i686-linux-android-ar --set=target.x86_64-linux-android.cc=x86_64-linux-android21-clang --set=target.x86_64-linux-android.ar=x86_64-linux-android-ar --set target.wasm32-unknown-unknown.linker=clang --set target.wasm32-unknown-unknown.ar=llvm-ar --set target.wasm32-unknown-unknown.ranlib=llvm-ranlib --set rust.lld=true
 
   linux:
     var:
@@ -41,11 +41,11 @@ targets:
       #
       # Finally, we tell Rust to use some tools from LLVM, like the prebuilt
       # binaries do.
-      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/clang --set rust.jemalloc --target=x86_64-unknown-linux-gnu,i686-unknown-linux-gnu --set target.x86_64-unknown-linux-gnu.linker=clang --set target.x86_64-unknown-linux-gnu.ar=llvm-ar --set target.x86_64-unknown-linux-gnu.ranlib=llvm-ranlib --set target.i686-unknown-linux-gnu.linker=clang --set target.i686-unknown-linux-gnu.ar=llvm-ar --set target.i686-unknown-linux-gnu.ranlib=llvm-ranlib
+      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/clang --set rust.jemalloc --target=x86_64-unknown-linux-gnu,i686-unknown-linux-gnu,wasm32-unknown-unknown --set target.x86_64-unknown-linux-gnu.linker=clang --set target.x86_64-unknown-linux-gnu.ar=llvm-ar --set target.x86_64-unknown-linux-gnu.ranlib=llvm-ranlib --set target.i686-unknown-linux-gnu.linker=clang --set target.i686-unknown-linux-gnu.ar=llvm-ar --set target.i686-unknown-linux-gnu.ranlib=llvm-ranlib --set target.wasm32-unknown-unknown.linker=clang --set target.wasm32-unknown-unknown.ar=llvm-ar --set target.wasm32-unknown-unknown.ranlib=llvm-ranlib --set rust.lld=true
 
   macos:
     var:
-      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/macosx-toolchain/clang --set rust.jemalloc --target=x86_64-unknown-linux-gnu,[% c("var/build_target") %] --set=target.[% c("var/build_target") %].cc=[% c("var/build_target") %]-clang --set target.x86_64-unknown-linux-gnu.linker=clang --set target.x86_64-unknown-linux-gnu.ar=llvm-ar --set target.x86_64-unknown-linux-gnu.ranlib=llvm-ranlib
+      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/macosx-toolchain/clang --set rust.jemalloc --target=x86_64-unknown-linux-gnu,[% c("var/build_target") %],wasm32-unknown-unknown --set=target.[% c("var/build_target") %].cc=[% c("var/build_target") %]-clang --set target.x86_64-unknown-linux-gnu.linker=clang --set target.x86_64-unknown-linux-gnu.ar=llvm-ar --set target.x86_64-unknown-linux-gnu.ranlib=llvm-ranlib --set target.wasm32-unknown-unknown.linker=clang --set target.wasm32-unknown-unknown.ar=llvm-ar --set target.wasm32-unknown-unknown.ranlib=llvm-ranlib --set rust.lld=true
       arch_deps:
         - pkg-config
 
@@ -53,7 +53,7 @@ targets:
     var:
       # See tor-browser-build#29320
       compiler: mingw-w64
-      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/clang --target=x86_64-unknown-linux-gnu,[% c("arch") %]-pc-windows-gnu --set target.x86_64-unknown-linux-gnu.linker=clang --set target.x86_64-unknown-linux-gnu.ar=llvm-ar --set target.x86_64-unknown-linux-gnu.ranlib=llvm-ranlib
+      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/clang --target=x86_64-unknown-linux-gnu,[% c("arch") %]-pc-windows-gnu,wasm32-unknown-unknown --set target.x86_64-unknown-linux-gnu.linker=clang --set target.x86_64-unknown-linux-gnu.ar=llvm-ar --set target.x86_64-unknown-linux-gnu.ranlib=llvm-ranlib --set target.wasm32-unknown-unknown.linker=clang --set target.wasm32-unknown-unknown.ar=llvm-ar --set target.wasm32-unknown-unknown.ranlib=llvm-ranlib --set rust.lld=true
       arch_deps:
         - pkg-config
 
@@ -72,6 +72,8 @@ input_files:
     # libgcc, and the GNU/LLVM is a tier 3 platform supported only for x86_64).
     # macOS does not need Clang because it comes already with its compiler.
     enable: '[% c("var/linux") || c("var/android") || c("var/windows") %]'
+  - project: ninja
+    name: ninja
   - URL: 'https://static.rust-lang.org/dist/rustc-[% c("version") %]-src.tar.gz'
     name: rust
     sig_ext: asc
