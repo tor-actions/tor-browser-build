@@ -87,9 +87,9 @@ input_files:
   - project: mmdebstrap-image
     target:
       - '[% c("var/container/suite") %]-[% c("var/container/arch") %]'
-  - URL: http://deb.debian.org/debian/pool/main/f/faketime/faketime_0.9.6-3_amd64.deb
+  - URL: http://archive.debian.org/debian/pool/main/f/faketime/faketime_0.9.6-3_amd64.deb
     sha256sum: 19b2a01a2fae7e6d5a8b741fc0bc626451cb4c2cc884ee79f1136dd3c2c26213
     enable: '[% c("var/container/suite") == "jessie" %]'
-  - URL: http://deb.debian.org/debian/pool/main/f/faketime/libfaketime_0.9.6-3_amd64.deb
+  - URL: http://archive.debian.org/debian/pool/main/f/faketime/libfaketime_0.9.6-3_amd64.deb
     sha256sum: 82747d5815b226cfed7f6f9a751bf8c20d457f3ba786add6017d6904dea4fdb4
     enable: '[% c("var/container/suite") == "jessie" %]'
