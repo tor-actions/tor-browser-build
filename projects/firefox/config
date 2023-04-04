@@ -76,14 +76,14 @@ targets:
     tag_gpg_id: 0
 
   mullvadbrowser:
-    git_url: git@gitlab.torproject.org:tpo/applications/privacy-browser.git
+    git_url: https://gitlab.torproject.org/tpo/applications/mullvad-browser.git
     var:
       branding_directory_prefix: 'mb'
       firefox_platform_version: 102.9.0
       browser_series: '12.0'
       browser_branch: '[% c("var/browser_series") %]-1'
       browser_build: 5
-      gitlab_project: https://gitlab.torproject.org/tpo/applications/privacy-browser
+      gitlab_project: https://gitlab.torproject.org/tpo/applications/mullvad-browser
 
   linux-x86_64:
     var:
