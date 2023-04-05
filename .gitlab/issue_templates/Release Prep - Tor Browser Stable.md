@@ -40,7 +40,7 @@ Tor Browser Stable lives in the various `maint-$(TOR_BROWSER_MAJOR).$(TOR_BROWSE
     - **IMPORTANT**: Really *actually* make sure this is the previous Desktop version or else the `make incrementals-*` step will fail
 - [ ] Update Desktop-specific build configs
   - [ ] Update `projects/firefox/config`
-    - [ ] `git_hash` : update the `$(BUILD_N)` section to match `tor-browser` tag
+    - [ ] `browser_build` : update to match `tor-browser` tag
     - [ ] ***(Optional)*** `var/firefox_platform_version` : update to latest `$(ESR_VERSION)` if rebased
   - [ ] Update `projects/translation/config`:
     - [ ] run `make list_translation_updates-release` to get updated hashes
@@ -50,7 +50,7 @@ Tor Browser Stable lives in the various `maint-$(TOR_BROWSER_MAJOR).$(TOR_BROWSE
     - [ ] `steps/fenix/git_hash` : update with `HEAD` commit of project's `fenix-torbrowserstringsxml` branch
 - [ ] Update Android-specific build configs
   - [ ] ***(Optional)*** Update `projects/geckoview/config`
-    - [ ] `git_hash` : update the `$(BUILD_N)` section to match `tor-browser` tag
+    - [ ] `browser_build` : update to match `tor-browser` tag
     - [ ] ***(Optional)*** `var/geckoview_version` : update to latest `$(ESR_VERSION)` if rebased
   - [ ] ***(Optional)*** Update `projects/tor-android-service/config`
     - [ ] `git_hash` : update with `HEAD` commit of project's `main` branch
@@ -58,9 +58,9 @@ Tor Browser Stable lives in the various `maint-$(TOR_BROWSER_MAJOR).$(TOR_BROWSE
     **NOTE** we don't currently have any of our own patches for this project
     - [ ] `git_hash` : update to appropriate git commit associated with `$(ESR_VERSION)`
   - [ ] ***(Optional)*** Update `projects/android-components/config`:
-    - [ ] `git_hash` : update the `$(BUILD_N)` section to match `android-components` tag
+    - [ ] `android_components_build` : update to match android-components tag
   - [ ] ***(Optional)*** Update `projects/fenix/config`
-    - [ ] `git_hash` : update the `$(BUILD_N)` section to match `fenix` tag
+    - [ ] `fenix_build` : update to match fenix tag
     - [ ] ***(Optional)*** `var/fenix_version` : update to latest `$(ESR_VERSION)` if rebased
   - [ ] Update allowed_addons.json by running (from `tor-browser-build` root):
     - `./tools/fetch_allowed_addons.py > projects/browser/allowed_addons.json`

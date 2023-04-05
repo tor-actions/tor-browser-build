@@ -37,7 +37,7 @@ Mullvad Browser Stable lives in the various `maint-$(MULLVAD_BROWSER_MAJOR).$(MU
     - **IMPORTANT**: Really *actually* make sure this is the previous Desktop version or else the `make mullvadbrowser-incrementals-*` step will fail
 - [ ] Update build configs
   - [ ] Update `projects/firefox/config`
-    - [ ] `git_hash` : update the `$(BUILD_N)` section to match `mullvad-browser` tag
+    - [ ] `browser_build` : update to match `mullvad-browser` tag
     - [ ] ***(Optional)*** `var/firefox_platform_version` : update to latest `$(ESR_VERSION)` if rebased
   - [ ] Update `projects/translation/config`:
     - [ ] run `make list_translation_updates-release` to get updated hashes
