@@ -30,6 +30,12 @@ var:
     - pkg-config
   has_l10n: '[% !c("var/testbuild") && c("var/locales").size %]'
 
+  # Uncomment this if you want to test the updater. You will need to provide a
+  # marsigner.der in this directory, too. It will be used as a replacement for
+  # the nightly builds keys only. So, using this option for alphas and releases
+  # will not work (the browser will fail with a key/signature mismatch).
+  # override_updater_url: 'https://tb-build-05.torproject.org/~you/update_3/%CHANNEL%/%BUILD_TARGET%/%VERSION%/ALL'
+
   rezip: |
     rezip_tmpdir=$(mktemp -d)
     mkdir -p "$rezip_tmpdir/z"
@@ -199,6 +205,8 @@ input_files:
     name: translation-tor-browser
     pkg_type: tor-browser
     enable: '[% c("var/tor-browser") && c("var/has_l10n") %]'
+  - filename: marsigner.der
+    enable: '[% c("var/override_updater_url") %]'
   - filename: namecoin-torbutton.patch
     enable: '[% c("var/namecoin") %]'
     # TorButton patch authored by Arthur Edelstein, from https://github.com/arthuredelstein/torbutton/ branch 2.1.10-namecoin

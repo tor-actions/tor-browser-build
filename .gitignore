@@ -14,3 +14,7 @@
 /release
 /alpha
 /nightly
+
+# This file is used to test the updater, and whoever is interested in doing so,
+# should provide their file.
+/projects/firefox/marsigner.der
