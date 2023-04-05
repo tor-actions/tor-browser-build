@@ -100,9 +100,9 @@ input_files:
     enable: '[% ! c("var/android") %]'
   - filename: Bundle-Data
     enable: '[% ! c("var/android") %]'
-  - URL: https://addons.mozilla.org/firefox/downloads/file/4077959/noscript-11.4.18.xpi
+  - URL: https://addons.mozilla.org/firefox/downloads/file/4090970/noscript-11.4.21.xpi
     name: noscript
-    sha256sum: 229c8d463d1f5403adb5c940d0b6ecd6432e60dcf0b8075eabd27c253267f8ce
+    sha256sum: 0fd3b66a2780d03a5b3cd460216105f3df2b27c6d3a552c1769c5de48c9e2338
   - filename: 'gtk3-settings.ini'
     enable: '[% c("var/linux") %]'
   - project: hfsplus-tools
