@@ -1,0 +1,26 @@
+#!/bin/bash
+set -e
+
+if test $(whoami) != 'build-pkgs'; then
+  echo 'This script should be run as the build-pkgs user' >&2
+  exit 1
+fi
+
+destdir=/home/build-pkgs/packages/yubihsm-shell-pkgs
+if test -d "$destdir"; then
+  echo "$destdir already exists. Doing nothing."
+  exit 0
+fi
+
+cd /home/build-pkgs
+tar xf /signing/tor-browser-build.tar
+cd tor-browser-build
+tar xf /signing/rbm.tar
+yubihsm_src_filename=$(./rbm/rbm showconf yubihsm-shell var/src_filename)
+mkdir -p out/yubihsm-shell
+cp "/signing/$yubihsm_src_filename" out/yubihsm-shell
+./rbm/rbm build yubihsm-shell
+yubihsm_out_filename=$(./rbm/rbm showconf yubihsm-shell filename)
+rm -Rf "$destdir"
+mkdir -p $(dirname $destdir)
+mv -f "out/yubihsm-shell/$yubihsm_out_filename" "$destdir"

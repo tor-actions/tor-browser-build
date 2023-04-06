@@ -9,26 +9,14 @@ cd ~/"$tbb_version"
 test -n "${YUBIPASS:-}" || read -s -p "Authenticode (yubihsm) password:" YUBIPASS
 echo
 
-tmpdir=$(mktemp -d)
-chgrp yubihsm "$tmpdir"
-chmod g+rwx "$tmpdir"
-
 cwd=$(pwd)
 for i in `find . -name "*.exe" -print`
 do
   echo "Signing $i"
-  echo export 'YUBIHSM_PKCS11_CONF=~/yubihsm_pkcs11.conf' \; \
-       /home/yubihsm/osslsigncode/osslsigncode \
-                 -pkcs11engine /usr/lib/engines/engine_pkcs11.so \
-                 -pkcs11module /usr/local/lib/yubihsm_pkcs11.so \
-                 -pass "'$YUBIPASS'" \
-                 -h sha256 \
-                 -certs /home/yubihsm/tpo-cert.crt \
-                 -key 1c40 \
-                 "$cwd/$i" "$tmpdir/$i" \
-                 | sudo su - yubihsm
-  mv -vf "$tmpdir/$i" "$cwd/$i"
+  sudo -u signing-win -- "$wrappers_dir/sign-exe" \
+                 "$YUBIPASS" \
+                 "$cwd/$i"
+  cp /home/signing-win/last-signed-file.exe "$cwd/$i"
 done
 
 unset YUBIPASS
-rmdir "$tmpdir"

@@ -15,3 +15,4 @@ test -z "${NON_INTERACTIVE:-}" || rsync_progress="--progress"
 rsync_options="-avH ${rsync_progress:-} ${DRY_RUN:-}"
 
 tb_builders='boklm dan henry ma1 pierov richard'
+wrappers_dir=/signing/tor-browser-build/tools/signing/wrappers

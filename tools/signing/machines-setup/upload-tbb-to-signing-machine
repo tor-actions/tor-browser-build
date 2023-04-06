@@ -1,0 +1,59 @@
+#!/bin/bash
+# Upload tor-browser-build directory from current HEAD commit and other
+# dependencies to signing machine
+set -e
+
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+cd "$script_dir/../../.."
+tmpdir=$(mktemp -d)
+tbbtar=$tmpdir/tor-browser-build.tar
+git archive --prefix=tor-browser-build/ --output="$tbbtar" HEAD .
+
+echo "Created $tbbtar"
+
+make submodule-update
+osslsigncodefile=$(./rbm/rbm showconf osslsigncode --target no-git var/srcfile)
+if ! test -f "./out/osslsigncode/$osslsigncodefile"; then
+  ./rbm/rbm tar osslsigncode
+  echo "Created $osslsigncodefile"
+fi
+
+cd rbm
+git archive --prefix=rbm/ --output="$tmpdir/rbm.tar" HEAD .
+echo "Created rbm.tar"
+cd ..
+
+martools_filename=mar-tools-linux64.zip
+if ! test -f "./out/mar-tools/$martools_filename"; then
+  ./rbm/rbm build --step fetch_martools mar-tools
+  echo "Downloaded $martools_filename"
+fi
+
+yubihsm_filename=$(./rbm/rbm showconf yubihsm-shell var/src_filename)
+if ! test -f "./out/yubihsm-shell/$yubihsm_filename"; then
+  ./rbm/rbm build yubihsm-shell --step fetch_src
+  echo "Fetched $yubihsm_filename"
+fi
+
+signing_machine='linux-signer'
+setup_user='setup'
+signing_dir='/signing'
+
+echo "Uploading $osslsigncodefile to $signing_machine"
+chmod go+r "./out/osslsigncode/$osslsigncodefile"
+rsync -v "./out/osslsigncode/$osslsigncodefile" "$setup_user@$signing_machine:$signing_dir/$osslsigncodefile"
+echo "Uploading rbm.tar to $signing_machine"
+rsync -v "$tmpdir/rbm.tar" "$setup_user@$signing_machine:$signing_dir/rbm.tar"
+echo "Uploading $martools_filename"
+chmod go+r "./out/mar-tools/$martools_filename"
+rsync -v "./out/mar-tools/$martools_filename" "$setup_user@$signing_machine:$signing_dir/$martools_filename"
+echo "Uploading $yubihsm_filename"
+chmod go+r "./out/yubihsm-shell/$yubihsm_filename"
+rsync -v "./out/yubihsm-shell/$yubihsm_filename" "$setup_user@$signing_machine:$signing_dir/$yubihsm_filename"
+echo "Uploading tor-browser-build.tar to $signing_machine"
+scp -p "$tbbtar" "$setup_user@$signing_machine:$signing_dir/"
+echo "Extracting tor-browser-build.tar on $signing_machine"
+ssh "$setup_user@$signing_machine" tar -C $signing_dir -xf $signing_dir/tor-browser-build.tar
+echo "You can now run this command on $signing_machine to update signing machine setup:"
+echo " sudo -- $signing_dir/tor-browser-build/tools/signing/machines-setup/setup-signing-machine"

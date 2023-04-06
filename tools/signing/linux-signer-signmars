@@ -1,8 +1,4 @@
 #!/bin/bash
-#
-#
-# You may set NSS_DB_DIR and/or NSS_CERTNAME before invoking this script
-# (if you don't want to use the default values).
 
 set -e
 set -u
@@ -10,33 +6,15 @@ set -u
 script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "$script_dir/functions"
 
-if [ -z "${NSS_DB_DIR+x}" ]; then
-  NSS_DB_DIR=/home/boklm/marsigning/nssdb7
-fi
-
-if [ -z "${NSS_CERTNAME+x}" ]; then
-  NSS_CERTNAME=marsigner
-fi
-
 export LC_ALL=C
 
-# Check some prerequisites.
-if [ ! -r "$NSS_DB_DIR/cert9.db" ]; then
-  >&2 echo "Please create and populate the $NSS_DB_DIR directory"
-  exit 2
+martools_dir=/home/signing-mar/mar-tools
+if ! test -d "$martools_dir"; then
+  >&2 echo "Please create $martools_dir"
+  exit 3
 fi
-
-# Extract the MAR tools so we can use the signmar program.
-MARTOOLS_TMP_DIR=$(mktemp -d)
-trap "rm -rf $MARTOOLS_TMP_DIR" EXIT
-MARTOOLS_ZIP=~/gitian-builder/inputs/mar-tools-new-linux32.zip
-unzip -d "$MARTOOLS_TMP_DIR" -q "$MARTOOLS_ZIP"
-export PATH="$MARTOOLS_TMP_DIR/mar-tools:$PATH"
-if [ -z "${LD_LIBRARY_PATH+x}" ]; then
-  export LD_LIBRARY_PATH="$MARTOOLS_TMP_DIR/mar-tools"
-else
-  export LD_LIBRARY_PATH="$MARTOOLS_TMP_DIR/mar-tools:$LD_LIBRARY_PATH"
-fi
+export LD_LIBRARY_PATH="$martools_dir"
+export PATH="$martools_dir:$PATH"
 
 # Prompt for the NSS password.
 # TODO: Test that the entered NSS password is correct.  But how?  Unfortunately,
@@ -65,9 +43,8 @@ for marfile in *.mar; do
     continue;
   fi
 
-  echo "$NSSPASS" | signmar -d "$NSS_DB_DIR" -n "$NSS_CERTNAME" -s \
-    "$marfile" tmp.mar
-  mv -f tmp.mar "$marfile"
+  echo "$NSSPASS" | sudo -u signing-mar -- "$wrappers_dir/sign-mar" "$marfile"
+  cp /home/signing-mar/last-signed-mar.mar "$marfile"
   COUNT=$((COUNT + 1))
   echo "Signed MAR file $COUNT ($marfile)"
 done

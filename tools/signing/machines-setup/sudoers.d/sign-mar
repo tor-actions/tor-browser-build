@@ -1,0 +1,2 @@
+Defaults>signing-mar env_keep += SIGNING_PROJECTNAME
+%signing ALL = (signing-mar) NOPASSWD: /signing/tor-browser-build/tools/signing/wrappers/sign-mar
