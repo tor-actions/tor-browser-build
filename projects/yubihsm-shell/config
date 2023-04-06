@@ -1,0 +1,16 @@
+# vim: filetype=yaml sw=2
+version: 2.4.0
+filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %]'
+container:
+  use_container: 0
+var:
+  src_filename: 'yubihsm-shell-[% c("version") %].tar.gz'
+input_files:
+  - URL: 'https://developers.yubico.com/yubihsm-shell/Releases/[% c("var/src_filename") %]'
+    sha256sum: 319bb2ff2a7af5ecb949a170b181a6ee7c0b44270e31cf10d0840360b1b3b5e0
+
+steps:
+  fetch_src:
+    fetch_src: |
+      #!/bin/bash
+      echo ok

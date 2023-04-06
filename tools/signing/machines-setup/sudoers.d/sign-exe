@@ -1,0 +1,2 @@
+Defaults>signing-win env_keep += SIGNING_PROJECTNAME
+%signing ALL = (signing-win) NOPASSWD: /signing/tor-browser-build/tools/signing/wrappers/sign-exe

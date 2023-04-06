@@ -1,0 +1,11 @@
+#!/bin/bash
+[% c("var/set_default_env") -%]
+distdir=$(pwd)/dist
+tar xf [% project %]-[% c('version') %].tar.gz
+cd [% project %]-[% c('version') %]
+dpkg-buildpackage -us -uc
+mkdir -p "$distdir"
+mv ../*.deb "$distdir"
+dest=[% dest_dir _ '/' _ c('filename') %]
+rm -Rf "$dest"
+mv "$distdir" "$dest"

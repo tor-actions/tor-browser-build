@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+
+if test "$#" -ne 1; then
+  echo "Wrong number of arguments" >&2
+  exit 2
+fi
+
+if test $(whoami) != 'signing-gpg'; then
+  echo 'This script should be run as the signing-gpg user' >&2
+  exit 1
+fi
+
+exec gpg --homedir /home/signing-gpg/.gnupg -absu 0xe53d989a9e2d47bf! --batch --no-tty -o- --passphrase-fd 0 -- "$1"

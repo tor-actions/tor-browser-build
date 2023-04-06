@@ -1,0 +1,27 @@
+#!/bin/bash
+set -e
+
+if test $(whoami) != 'signing-win'; then
+  echo 'This script should be run as the signing-win user' >&2
+  exit 1
+fi
+
+destdir=/home/signing-win/osslsigncode
+if test -d "$destdir"; then
+  echo "$destdir already exists. Doing nothing."
+  exit 0
+fi
+
+cd /home/signing-win
+tar xf /signing/tor-browser-build.tar
+cd tor-browser-build
+tar xf /signing/rbm.tar
+osslsigncodefile=$(./rbm/rbm showconf osslsigncode --target no-git var/srcfile)
+mkdir -p out/osslsigncode
+cp "/signing/$osslsigncodefile" out/osslsigncode
+./rbm/rbm build osslsigncode --target no-git
+osslscbuild=$(./rbm/rbm showconf osslsigncode filename --target no-git)
+cd /home/signing-win
+tar xf "tor-browser-build/out/osslsigncode/$osslscbuild"
+chmod -R 755 /home/signing-win/osslsigncode
+echo "Extracted osslsigncode to /home/signing-win/osslsigncode"
