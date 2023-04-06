@@ -1,0 +1,134 @@
+#!/bin/bash
+set -e
+
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+function create_user {
+  user="$1"
+  groups="$2"
+  id "$user" > /dev/null 2>&1 && return 0
+  test -n "$groups" && groups="--groups $groups"
+  useradd -s /bin/bash -m "$user" $groups
+}
+
+function create_group {
+  group="$1"
+  getent group "$group" > /dev/null 2>&1 && return 0
+  groupadd "$group"
+}
+
+function authorized_keys {
+  user="$1"
+  shift
+  tmpfile=$(mktemp)
+  for file in "$@"; do
+    cat "$script_dir/ssh-keys/$file" >> "$tmpfile"
+  done
+  sshdir="/home/$user/.ssh"
+  authkeysfile="$sshdir/authorized_keys"
+  if diff "$tmpfile" "$authkeysfile" > /dev/null 2>&1; then
+    rm "$tmpfile"
+    return 0
+  fi
+  echo "Update authorized_keys for user $user"
+  if ! test -d "$sshdir"; then
+    mkdir "$sshdir"
+    chmod 700 "$sshdir"
+    chown $user:$user "$sshdir"
+  fi
+  mv "$tmpfile" "$authkeysfile"
+  chown $user:$user "$authkeysfile"
+  chmod 600 "$authkeysfile"
+}
+
+function sudoers_file {
+  sfile="$1"
+  cp "$script_dir/sudoers.d/$sfile" "/etc/sudoers.d/$sfile"
+  chown root:root "/etc/sudoers.d/$sfile"
+  chmod 0440 "/etc/sudoers.d/$sfile"
+}
+
+function udev_rule {
+  udevrule="$1"
+  rulepath="/etc/udev/rules.d/$udevrule"
+  if ! diff "$script_dir$rulepath" "$rulepath" > /dev/null 2>&1; then
+    cp "$script_dir$rulepath" "$rulepath"
+    udevadm control --reload-rules
+  fi
+}
+
+function install_packages {
+  for pkg in "$@"
+  do
+    dpkg-query -s "$pkg" 2> /dev/null | grep -q '^Status: .* installed' && continue
+    apt-get install -y "$pkg"
+  done
+}
+
+install_packages build-essential rsync unzip
+install_packages sudo vim tmux gnupg
+
+create_user setup
+authorized_keys setup boklm-yk1.pub
+mkdir -p /signing
+chmod 0755 /signing
+chown setup /signing
+
+create_user yubihsm
+create_group yubihsm
+udev_rule 70-yubikey.rules
+
+create_user signing
+create_group signing
+create_user signing-gpg
+create_user signing-mar
+create_user signing-win yubihsm
+
+
+sudoers_file sign-gpg
+sudoers_file sign-mar
+sudoers_file sign-exe
+
+authorized_keys boklm boklm-tb-release.pub boklm-yk1.pub
+create_user richard signing
+authorized_keys richard richard.pub
+
+# Install rbm deps
+install_packages libyaml-libyaml-perl libtemplate-perl libdatetime-perl \
+                 libio-handle-util-perl libio-all-perl \
+                 libio-captureoutput-perl libjson-perl libpath-tiny-perl \
+                 libstring-shellquote-perl libsort-versions-perl \
+                 libdigest-sha-perl libdata-uuid-perl libdata-dump-perl \
+                 libfile-copy-recursive-perl libfile-slurp-perl
+
+# Install deps for building osslsigncode
+install_packages autoconf libtool pkg-config libssl-dev libcurl4-openssl-dev
+sudo -u signing-win /signing/tor-browser-build/tools/signing/machines-setup/setup-osslsigncode
+
+# Packages needed for windows signing
+install_packages opensc libengine-pkcs11-openssl
+
+# Install deps for building yubihsm-shell
+install_packages cmake libusb-1.0-0-dev libedit-dev gengetopt libpcsclite-dev help2man chrpath dh-exec
+
+# Build and install yubihsm-pkcs11 package
+create_user build-pkgs
+if ! dpkg-query -s yubihsm-pkcs11 2> /dev/null | grep -q '^Status: .* installed'; then
+  yubishm_version=2.4.0
+  sudo -u build-pkgs /signing/tor-browser-build/tools/signing/machines-setup/build-yubihsm-shell-pkg
+  pushd /home/build-pkgs/packages/yubihsm-shell-pkgs
+  apt-get install -y ./yubihsm-pkcs11_${yubishm_version}_amd64.deb \
+    ./libyubihsm1_${yubishm_version}_amd64.deb \
+    ./libyubihsm-http1_${yubishm_version}_amd64.deb \
+    ./libyubihsm-usb1_${yubishm_version}_amd64.deb
+  popd
+fi
+
+# install mar-tools
+if ! test -d /home/signing-mar/mar-tools; then
+  tmpdir=$(mktemp -d)
+  unzip -d "$tmpdir" /signing/mar-tools-linux64.zip
+  chown -R signing-mar:signing-mar "$tmpdir/mar-tools"
+  chmod go+rX "$tmpdir/mar-tools"/*
+  mv "$tmpdir/mar-tools" /home/signing-mar/mar-tools
+fi

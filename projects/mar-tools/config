@@ -1,0 +1,20 @@
+# vim: filetype=yaml sw=2
+#
+# Used by tools/signing/machines-setup/upload-tbb-to-signing-machine
+# to fetch mar-tools for signing machine setup
+#
+version: 12.0.4
+filename: 'mar-tools-linux64.zip'
+container:
+  use_container: 0
+gpg_keyring: torbrowser.gpg
+tag_gpg_id: 1
+input_files:
+  - URL: 'https://archive.torproject.org/tor-package-archive/torbrowser/[% c("version") %]/mar-tools-linux64.zip'
+    sha256sum: 726ec4192de61a9342b3262c7ac722cbd59eaba07879be9589c65599d2d69584
+
+steps:
+  fetch_martools:
+    fetch_martools: |
+      #!/bin/bash
+      echo ok

@@ -1,0 +1,41 @@
+#!/bin/bash
+set -e
+
+if test "$#" -ne 1; then
+  echo "Wrong number of arguments" >&2
+  exit 1
+fi
+
+if test $(whoami) != 'signing-mar'; then
+  echo 'This script should be run as the signing-mar user' >&2
+  exit 2
+fi
+
+output_signed_mar=/home/signing-mar/last-signed-mar.mar
+rm -f "$output_signed_mar"
+
+if test "$SIGNING_PROJECTNAME" = 'torbrowser'; then
+  NSS_DB_DIR=/home/signing-mar/nssdb/torbrowser-nssdb7
+elif test "$SIGNING_PROJECTNAME" = 'mullvadbrowser'; then
+  NSS_DB_DIR=/home/signing-mar/nssdb/mullvadbrowser-nssdb-1
+else
+  echo "Unknown SIGNING_PROJECTNAME: $SIGNING_PROJECTNAME"
+  exit 3
+fi
+NSS_CERTNAME=marsigner
+
+if ! test -d "$NSS_DB_DIR"; then
+  echo "$NSS_DB_DIR is missing" >&2
+  exit 3
+fi
+
+martools_dir=/home/signing-mar/mar-tools
+if ! test -d "$martools_dir"; then
+  >&2 echo "Please create $martools_dir"
+  exit 4
+fi
+export LD_LIBRARY_PATH="$martools_dir"
+export PATH="$martools_dir:$PATH"
+
+"$martools_dir/signmar" -d "$NSS_DB_DIR" -n "$NSS_CERTNAME" -s "$1" "$output_signed_mar"
+chmod 644 "$output_signed_mar"

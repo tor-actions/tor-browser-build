@@ -1,0 +1,37 @@
+#!/bin/bash
+set -e
+
+if test "$#" -ne 2; then
+  echo "Wrong number of arguments" >&2
+  exit 1
+fi
+
+if test $(whoami) != 'signing-win'; then
+  echo 'This script should be run as the signing-win user' >&2
+  exit 2
+fi
+
+yubipass="$1"
+to_sign_exe="$2"
+
+tpo_cert=/home/signing-win/tpo-cert.crt
+
+if ! test -f "$tpo_cert"; then
+  echo "File $tpo_cert is missing" >&2
+  exit 2
+fi
+
+output_signed_exe=/home/signing-win/last-signed-file.exe
+rm -f "$output_signed_exe"
+
+export 'YUBIHSM_PKCS11_CONF=/signing/tor-browser-build/tools/signing/machines-setup/etc/yubihsm_pkcs11.conf'
+/home/signing-win/osslsigncode/bin/osslsigncode \
+  -pkcs11engine /usr/lib/x86_64-linux-gnu/engines-1.1/pkcs11.so \
+  -pkcs11module /usr/lib/x86_64-linux-gnu/pkcs11/yubihsm_pkcs11.so \
+  -pass "$yubipass" \
+  -h sha256 \
+  -certs "$tpo_cert" \
+  -key 1c40 \
+  "$to_sign_exe" "$output_signed_exe"
+
+chmod 644 "$output_signed_exe"
