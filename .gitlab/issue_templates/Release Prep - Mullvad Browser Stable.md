@@ -98,7 +98,7 @@ Mullvad Browser Stable lives in the various `maint-$(MULLVAD_BROWSER_MAJOR).$(MU
 </details>
 
 <details>
-  <summary>Communications</summary>
+  <summary>Downstream</summary>
 
 ### notify stakeholders
 
@@ -107,9 +107,15 @@ Mullvad Browser Stable lives in the various `maint-$(MULLVAD_BROWSER_MAJOR).$(MU
   - [ ] New `mullvad-browser` project branch and tags
   - [ ] mullvad-browser-update-responses git hash
   - [ ] changelog
+- [ ] Email downstream consumers:
+  - [ ] flathub package maintainer: proletarius101@protonmail.com
+  - [ ] arch package maintainer: bootctl@gmail.com
+
+### merge requests
+
+- [ ] homebrew: https://github.com/Homebrew/homebrew-cask/blob/master/Casks/mullvad-browser.rb
+  - **NOTE**: should just need to update the version to latest
 
 </details>
-
-
 
 /label ~"Release Prep"
