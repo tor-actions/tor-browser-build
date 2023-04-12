@@ -14,7 +14,7 @@ container:
 var:
   geckoview_version: 102.10.0esr
   torbrowser_branch: 12.0-1
-  browser_build: 1
+  browser_build: 2
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   deps:
     - build-essential

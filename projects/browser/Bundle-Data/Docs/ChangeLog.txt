@@ -1,4 +1,4 @@
-Tor Browser 12.0.5 - April 06 2023
+Tor Browser 12.0.5 - April 12 2023
  * All Platforms
    * Updated Translations
    * Updated NoScript to 11.4.21
@@ -9,6 +9,7 @@ Tor Browser 12.0.5 - April 06 2023
    * Bug 41526: "Cancel" button when establishing a connection should be grey [tor-browser]
  * Android
    * Updated GeckoView to 102.10esr
+   * Bug 41724: Backport Android-specific security fixes from Firefox 112 to ESR 102.10-based Tor Browser [tor-browser]
  * Build System
    * Windows
      * Bug 40822: The Tor Browser installer doesn't run with mandatory ASLR on (0xc000007b) [tor-browser-build]
