@@ -11,6 +11,7 @@ tar -xf diskdev_cmds-[% c("version") %].tar.gz
 cd diskdev_cmds-[% c("version") %]
 
 patch -p1 < $rootdir/newfs_hfs.diff
+patch -p1 < $rootdir/ignore-timezone.diff
 
 make -j[% c("num_procs") %]
 

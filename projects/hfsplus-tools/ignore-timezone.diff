@@ -1,0 +1,13 @@
+diff -ru diskdev_cmds-540.1.linux3/newfs_hfs.tproj/makehfs.c diskdev_cmds-540.1.linux3.n/newfs_hfs.tproj/makehfs.c
+--- diskdev_cmds-540.1.linux3/newfs_hfs.tproj/makehfs.c	2012-02-02 23:36:59.000000000 +0100
++++ diskdev_cmds-540.1.linux3.n/newfs_hfs.tproj/makehfs.c	2023-04-17 13:59:41.993000000 +0200
+@@ -463,8 +463,7 @@
+ 	}
+ 	hp->lastMountedVersion = kHFSPlusMountVersion;
+ 
+-	/* NOTE: create date is in local time, not GMT!  */
+-	hp->createDate = UTCToLocal(defaults->createDate);
++	hp->createDate = defaults->createDate;
+ 	hp->modifyDate = defaults->createDate;
+ 	hp->backupDate = 0;
+ 	hp->checkedDate = defaults->createDate;
