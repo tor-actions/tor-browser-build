@@ -21,3 +21,6 @@ input_files:
   # exist on Linux (at that path) and is not required on Linux either, and make
   # the UUID deterministic.
   - filename: newfs_hfs.diff
+  # Remove UTCToLocal conversion to avoid a different result when hwclock
+  # is set to local time or utc time (tor-browser-build#40844)
+  - filename: ignore-timezone.diff
