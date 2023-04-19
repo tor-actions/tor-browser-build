@@ -30,9 +30,12 @@ export FAKETIME="2000-01-01 01:01:01"
 
 echo "Starting: " $(basename $dest_file)
 
-# Use a similar strategy to Mozilla (they have 1.02, we have 1.1)
-size=$(du -ms "$src_dir" | awk '{ print int( $1 * 1.1 ) }')
-dd if=/dev/zero of="$hfsfile" bs=1M count=$size
+# 1 for ceiling and 1 for the inode
+fileblocks=$(find "$src_dir" -type f -printf '%s\n' | awk '{s += int($1 / 4096) + 2} END {print s}')
+directories=$(find "$src_dir" -type d | wc -l)
+# Give some room to breathe
+size=$(echo $(($fileblocks + $directories)) | awk '{print int($1 * 1.1)}')
+dd if=/dev/zero of="$hfsfile" bs=4096 count=$size
 newfs_hfs -v "$volume_label" "$hfsfile"
 
 cd $src_dir

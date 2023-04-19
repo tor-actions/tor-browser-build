@@ -14,9 +14,13 @@ hfsfile="\$dmg_tmpdir/tbb-uncompressed.dmg"
 export LD_PRELOAD=[% c("var/faketime_path") %]
 export FAKETIME="[% USE date; GET date.format(c('timestamp'), format = '%Y-%m-%d %H:%M:%S') %]"
 
-# Use a similar strategy to Mozilla (they have 1.02, we have 1.1)
-size=\$(du -ms [% src %] | awk '{ print int( \$1 * 1.1 ) }')
-dd if=/dev/zero of="\$hfsfile" bs=1M count=\$size
+src_dir=[% src %]
+# 1 for ceiling and 1 for the inode
+fileblocks=\$(find "\$src_dir" -type f -printf '%s\n' | awk '{s += int(\$1 / 4096) + 2} END {print s}')
+directories=\$(find "\$src_dir" -type d | wc -l)
+# Give some room to breathe
+size=\$(echo \$((\$fileblocks + \$directories)) | awk '{print int(\$1 * 1.1)}')
+dd if=/dev/zero of="\$hfsfile" bs=4096 count=\$size
 newfs_hfs -v "[% c("var/Project_Name") %]" "\$hfsfile"
 
 pushd [% src %]
