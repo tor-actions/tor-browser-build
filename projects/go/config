@@ -17,10 +17,6 @@ var:
       export GOOS=[% c("var/GOOS") %]
       export GOARCH=[% c("var/GOARCH") %]
     [% END -%]
-    # Run in GOPATH mode: https://golang.org/cmd/go/#hdr-Module_support. (see:
-    # #32027)
-    export GO111MODULE=off
-    export GOPATH=/var/tmp/dist/gopath
     export PATH=/var/tmp/dist/go/bin:/var/tmp/dist/gopath/bin:"$PATH"
     [% IF c("var/linux") -%]
       export CGO_LDFLAGS_ALLOW="-z|noexecstack"
@@ -40,6 +36,10 @@ var:
     #!/bin/bash
     [% c("var/set_default_env") -%]
     [% pc('go', 'var/setup', { go_tarfile => c('input_files_by_name/go') }) %]
+    # Run in GOPATH mode: https://golang.org/cmd/go/#hdr-Module_support. (see:
+    # #32027)
+    export GO111MODULE=off
+    export GOPATH=/var/tmp/dist/gopath
     distdir=/var/tmp/dist/[% project %]
     mkdir -p /var/tmp/build
     tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz

@@ -20,20 +20,20 @@ input_files:
     name: gradle
   - project: tor-expert-bundle
     name: tor-expert-bundle-armv7
-    target_prepend:
-      - android-armv7
+    target_replace:
+      '^torbrowser-.*': 'torbrowser-android-armv7'
   - project: tor-expert-bundle
     name: tor-expert-bundle-aarch64
-    target_prepend:
-      - android-aarch64
+    target_replace:
+      '^torbrowser-.*': 'torbrowser-android-aarch64'
   - project: tor-expert-bundle
     name: tor-expert-bundle-x86
-    target_prepend:
-      - android-x86
+    target_replace:
+      '^torbrowser-.*': 'torbrowser-android-x86'
   - project: tor-expert-bundle
     name: tor-expert-bundle-x86_64
-    target_prepend:
-      - android-x86_64
+    target_replace:
+      '^torbrowser-.*': 'torbrowser-android-x86_64'
   - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
     name: gradle-dependencies
     exec: '[% INCLUDE "fetch-gradle-dependencies" %]'

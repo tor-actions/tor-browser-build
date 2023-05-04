@@ -2,20 +2,23 @@
 version: '[% c("abbrev") %]'
 git_url: https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/conjure.git
 git_hash: b7d485734c3ab09ef3da818abb4b39ec27ef3a73
-filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 container:
   use_container: 1
 
-input_files:
-  - project: container-image
-  - name: go
-    project: go
-  - name: goptlib
-    project: goptlib
-  - name: gotapdance
-    project: gotapdance
-  - name: snowflake-lib
-    project: snowflake-lib
-  - name: '[% c("var/compiler") %]'
-    project: '[% c("var/compiler") %]'
-    enable: '[% c("var/android") %]'
+steps:
+  build:
+    filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+    input_files:
+      - project: container-image
+      - name: go
+        project: go
+      - name: '[% c("var/compiler") %]'
+        project: '[% c("var/compiler") %]'
+        enable: '[% c("var/android") %]'
+      - name: go_vendor
+        pkg_type: go_vendor
+        project: conjure
+        norec:
+          sha256sum: 2b403d6edf075777003bf2194a43fb178a28a4eaa7d23ec8f104563d9bbd7e53
+        target_replace:
+          '^torbrowser-.*': 'torbrowser-linux-x86_64'

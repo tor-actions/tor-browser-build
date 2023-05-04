@@ -96,8 +96,8 @@ input_files:
   - project: tor-expert-bundle
     name: tor-expert-bundle-aarch64
     enable: '[% c("var/macos_universal") && c("var/tor-browser") %]'
-    target_prepend:
-      - macos-aarch64
+    target_replace:
+      '^torbrowser-macos.*': torbrowser-macos-aarch64
   - project: fonts
     name: fonts
     enable: '[% ! c("var/android") %]'

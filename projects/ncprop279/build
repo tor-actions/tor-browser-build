@@ -1,6 +1,10 @@
 #!/bin/bash
 [% c("var/set_default_env") -%]
 [% pc('go', 'var/setup', { go_tarfile => c('input_files_by_name/go') }) %]
+# Run in GOPATH mode: https://golang.org/cmd/go/#hdr-Module_support. (see:
+# #32027)
+export GO111MODULE=off
+export GOPATH=/var/tmp/dist/gopath
 export CGO_ENABLED=0
 distdir=/var/tmp/dist/[% project %]
 mkdir -p $distdir

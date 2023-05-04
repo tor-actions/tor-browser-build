@@ -2,27 +2,24 @@
 version: '[% c("abbrev") %]'
 git_url: https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake.git
 git_hash: 7b77001eaa90e09d41172a2b170dabd3f1922b4a
-filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 
 container:
   use_container: 1
 
-input_files:
-  - project: container-image
-  - name: go
-    project: go
-  - name: goxtext
-    project: goxtext
-  - name: goptlib
-    project: goptlib
-  - name: pion-webrtc
-    project: pion-webrtc
-  - name: kcp-go
-    project: kcp-go
-  - name: smux
-    project: smux
-  - name: refraction-utls
-    project: refraction-utls
-  - name: '[% c("var/compiler") %]'
-    project: '[% c("var/compiler") %]'
-    enable: '[% c("var/android") %]'
+steps:
+  build:
+    filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+    input_files:
+      - project: container-image
+      - name: go
+        project: go
+      - name: '[% c("var/compiler") %]'
+        project: '[% c("var/compiler") %]'
+        enable: '[% c("var/android") %]'
+      - name: go_vendor
+        pkg_type: go_vendor
+        project: snowflake
+        norec:
+          sha256sum: a4bfd990bb3c0ce131ddd056c779d1c7be8f624aaff6fa1dbf865cc9f2950620
+        target_replace:
+          '^torbrowser-.*': 'torbrowser-linux-x86_64'

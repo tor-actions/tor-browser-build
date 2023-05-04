@@ -4,10 +4,12 @@ git_url: https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/
 git_hash: 'obfs4proxy-[% c("version") %]'
 tag_gpg_id: 1
 gpg_keyring: anti-censorship.gpg
-filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 
 container:
   use_container: 1
+
+var:
+  go_vendor_sha256sum: 5d2d82d00afc5fe044ee6df718ffe066b7d9e5446944c0ee0870e060e4e6bcc8
 
 # Stop using `main` on nightly, until tor-browser-build#40850 is fixed
 #targets:
@@ -15,27 +17,23 @@ container:
 #    git_hash: main
 #    version: '[% c("abbrev") %]'
 #    tag_gpg_id: 0
+#    var:
+#      go_vendor_sha256sum: ad5cbcb09580c74b02b230b4fad7d2362c3b2f4537cdefd4abdeb0c3c4e97adb
 
-input_files:
-  - project: container-image
-  - name: go
-    project: go
-  - name: goptlib
-    project: goptlib
-  - name: edwards25519
-    project: edwards25519
-  - name: edwards25519-extra
-    project: edwards25519-extra
-  - name: siphash
-    project: siphash
-  - name: goxcrypto
-    project: goxcrypto
-  - name: goxnet
-    project: goxnet
-  - name: refraction-utls
-    project: refraction-utls
-  - name: goxtext
-    project: goxtext
-  - name: '[% c("var/compiler") %]'
-    project: '[% c("var/compiler") %]'
-    enable: '[% c("var/android") %]'
+steps:
+  build:
+    filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+    input_files:
+      - project: container-image
+      - name: go
+        project: go
+      - name: '[% c("var/compiler") %]'
+        project: '[% c("var/compiler") %]'
+        enable: '[% c("var/android") %]'
+      - name: go_vendor
+        pkg_type: go_vendor
+        project: obfs4
+        norec:
+          sha256sum: '[% c("var/go_vendor_sha256sum") %]'
+        target_replace:
+          '^torbrowser-.*': 'torbrowser-linux-x86_64'

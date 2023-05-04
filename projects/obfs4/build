@@ -11,24 +11,14 @@ mkdir -p $distdir
   export CGO_ENABLED=1
 [% END -%]
 
-tar -C /var/tmp/dist -xf [% c('input_files_by_name/goptlib') %]
-tar -C /var/tmp/dist -xf [% c('input_files_by_name/edwards25519') %]
-tar -C /var/tmp/dist -xf [% c('input_files_by_name/edwards25519-extra') %]
-tar -C /var/tmp/dist -xf [% c('input_files_by_name/siphash') %]
-tar -C /var/tmp/dist -xf [% c('input_files_by_name/goxcrypto') %]
-tar -C /var/tmp/dist -xf [% c('input_files_by_name/goxnet') %]
-tar -C /var/tmp/dist -xf [% c('input_files_by_name/refraction-utls') %]
-tar -C /var/tmp/dist -xf [% c('input_files_by_name/goxtext') %]
-
 mkdir -p /var/tmp/build
 tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
 cd /var/tmp/build/[% project %]-[% c('version') %]
 
-mkdir -p "$GOPATH/src/gitlab.com/yawning"
-ln -sf "$PWD" "$GOPATH/src/gitlab.com/yawning/obfs4.git"
+tar -xf $rootdir/[% c('input_files_by_name/go_vendor') %]
 
 cd obfs4proxy
-go build -ldflags '-s'
+go build -mod=vendor -ldflags '-s'
 cp -a obfs4proxy[% IF c("var/windows") %].exe[% END %] $distdir
 
 cd $distdir

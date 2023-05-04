@@ -1,0 +1,10 @@
+When the dependencies of a go project ($project in the following lines)
+are changing:
+
+- the go.mod and go.sum files in $project.git are updated
+- in tor-browser-build, run `make go_vendor-$project-alpha` or
+  `make go_vendor-$project-nightly`
+- find the new file created in directory `out/$project/go_vendor` and
+  compute its sha256sum
+- in `projects/$project/config`, update `norec/sha256sum` for `go_vendor`
+  in `input_files`.

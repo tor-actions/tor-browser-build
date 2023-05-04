@@ -2,6 +2,10 @@
 [% c("var/set_default_env") -%]
 [% pc('go', 'var/setup', { go_tarfile => c('input_files_by_name/go') }) %]
 [% pc(c('var/compiler'), 'var/setup', { compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')) }) %]
+# Run in GOPATH mode: https://golang.org/cmd/go/#hdr-Module_support. (see:
+# #32027)
+export GO111MODULE=off
+export GOPATH=/var/tmp/dist/gopath
 
 tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/binutils') %]
 export PATH="/var/tmp/dist/binutils/bin:$PATH"

@@ -592,6 +592,21 @@ cargo_vendor-cbindgen: submodule-update
 cargo_vendor-uniffi-rs: submodule-update
 	$(rbm) build uniffi-rs --step cargo_vendor --target nightly --target torbrowser-linux-x86_64
 
+go_vendor-snowflake-alpha: submodule-update
+	$(rbm) build snowflake --step go_vendor --target alpha --target torbrowser-linux-x86_64
+
+go_vendor-conjure-alpha: submodule-update
+	$(rbm) build conjure --step go_vendor --target alpha --target torbrowser-linux-x86_64
+
+go_vendor-webtunnel-alpha: submodule-update
+	$(rbm) build webtunnel --step go_vendor --target alpha --target torbrowser-linux-x86_64
+
+go_vendor-obfs4-alpha: submodule-update
+	$(rbm) build obfs4 --step go_vendor --target alpha --target torbrowser-linux-x86_64
+
+go_vendor-obfs4-nightly: submodule-update
+	$(rbm) build obfs4 --step go_vendor --target nightly --target torbrowser-linux-x86_64
+
 
 ##################
 # Common Targets #
