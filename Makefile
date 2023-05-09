@@ -615,8 +615,11 @@ cargo_vendor-application-services: submodule-update
 cargo_vendor-cbindgen: submodule-update
 	$(rbm) build cbindgen --step cargo_vendor --target alpha --target torbrowser-linux-x86_64
 
+cargo_vendor-wasm-bindgen: submodule-update
+	$(rbm) build wasm-bindgen --step cargo_vendor --target alpha --target torbrowser-linux-x86_64
+
 cargo_vendor-lox: submodule-update
-	$(rbm) build lox-wasm --step cargo_vendor --target nightly --target torbrowser-linux-x86_64
+	$(rbm) build lox-wasm --step cargo_vendor --target alpha --target torbrowser-linux-x86_64
 
 go_vendor-snowflake-alpha: submodule-update
 	$(rbm) build snowflake --step go_vendor --target alpha --target torbrowser-linux-x86_64

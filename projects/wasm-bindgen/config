@@ -1,0 +1,19 @@
+# vim: filetype=yaml sw=2
+version: 0.2.86
+git_url: https://github.com/cohosh/wasm-bindgen
+git_hash: ecc5ca153cda278bfcebc99c157fb4732eb75e6e
+container:
+  use_container: 1
+
+steps:
+  build:
+    filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
+    input_files:
+      - project: container-image
+      - project: rust
+        name: rust
+      - name: cargo_vendor
+        project: wasm-bindgen
+        pkg_type: cargo_vendor
+        norec:
+          sha256sum: 926e938cc4eebf2f5c99f34170fddc5aa7b12445fb379d768eb51aaae3b305a3
