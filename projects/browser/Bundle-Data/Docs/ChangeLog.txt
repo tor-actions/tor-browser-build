@@ -1,3 +1,89 @@
+Tor Browser 12.0.6 - May 09 2023
+ * All Platforms
+   * Updated Translations
+   * Updated Go to 11.9.9
+   * Bug 41728: Pin bridges.torproject.org domains to Let's Encrypt's root cert public key [tor-browser]
+   * Bug 41756: Rebase Tor Browser Stable to 102.11.0esr [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 102.11esr
+   * Bug 40501: High CPU load after tor exits unexpectedly [tor-browser]
+ * Windows
+   * Bug 41683: Disable the network process on Windows [tor-browser]
+ * Android
+   * Updated GeckoView to 102.11esr
+ * Build System
+   * Windows + macOS + Linux
+     * Bug 41730: Bridge lines in tools/torbrowser/bridges.js out of date [tor-browser]
+   * macOS
+     * Bug 40844: Fix DMG reproducibility problem on 12.0.5 [tor-browser-build]
+
+Tor Browser 12.5a5 - April 18 2023
+ * All Platforms
+   * Updated Translations
+   * Updated NoScript to 11.4.21
+   * Updated Go to 11.9.8
+   * Bug 40833: base-browser nightly is using the default channel instead of nightly [tor-browser-build]
+   * Bug 41687: Rebase Tor Browser Alpha to 102.10.0esr [tor-browser]
+   * Bug 41689: Remove startup.homepage_override_url from Base Browser [tor-browser]
+   * Bug 41704: Immediately return on remoteSettings.pollChanges [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 102.10esr
+   * Bug 165: Fix maximization warning x button and preference [mullvad-browser]
+   * Bug 40501: High CPU load after tor exits unexpectedly [tor-browser]
+   * Bug 40701: Improve security warning when downloading a file [tor-browser]
+   * Bug 40788: Tor Browser 11.0.4-11.0.6 phoning home [tor-browser]
+   * Bug 40811: Make testing the updater easier [tor-browser-build]
+   * Bug 40831: Fix update URL for base-browser nightly [tor-browser-build]
+   * Bug 40958: The number of relays displayed for an onion site can be misleading [tor-browser]
+   * Bug 41038: Update "Click to Copy" button label in circuit display [tor-browser]
+   * Bug 41109: "New circuit..." button gets cut-off when onion name wraps [tor-browser]
+   * Bug 41350: Move the implementation of Bug 19273 out of Torbutton [tor-browser]
+   * Bug 41521: Improve localization notes [tor-browser]
+   * Bug 41533: Page Info window for view-source:http://...onion addresses says Connection Not Encrypted [tor-browser]
+   * Bug 41600: Some users have difficulty finding the circuit display [tor-browser]
+   * Bug 41617: Improve the UX of the built-in bridges dialog [tor-browser]
+   * Bug 41668: Move part of the updater patches to base browser [tor-browser]
+   * Bug 41686: Move the 'Bug 11641: Disable remoting by default' commit from base-browser to tor-browser [tor-browser]
+   * Bug 41695: Port warning on maximized windows without letterboxing from torbutton [tor-browser]
+   * Bug 41699: Tighten up the tor onion alias regular expression [tor-browser]
+   * Bug 41701: Reporting an extension does not work [tor-browser]
+   * Bug 41702: The connection pill needs to be centered vertically [tor-browser]
+   * Bug 41709: sendCommand should not try to send a command forever [tor-browser]
+   * Bug 41711: Race condition when opening a new window in New Identity [tor-browser]
+   * Bug 41713: “Remove All Bridges” button only appears after hitting “Show All Bridges" [tor-browser]
+   * Bug 41714: “Show Fewer Bridges” button missing from refactored remove all bridges UI [tor-browser]
+   * Bug 41719: Update title and button strings in the new circuit display to sentence case [tor-browser]
+   * Bug 41722: Regression: window maximization warning cannot be closed by the X button [tor-browser]
+   * Bug 41725: Stray connectionPane.xhtml patch [tor-browser]
+ * Windows
+   * Bug 41459: WebRTC fails to build under mingw [tor-browser]
+   * Bug 41678: WebRTC build fix patches incorrectly defining pid_t [tor-browser]
+   * Bug 41683: Disable the network process on Windows [tor-browser]
+ * Linux
+   * Bug 40830: The fontconfig directory is missing in Base Browser [tor-browser-build]
+   * Bug 41163: Many bundled fonts are blocked in Ubuntu/Fedora because of RFP [tor-browser]
+ * Android
+   * Updated GeckoView to 102.10esr
+   * Bug 41724: Backport Android-specific security fixes from Firefox 112 to ESR 102.10-based Tor Browser [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 40828: Use http://archive.debian.org/debian-archive/ for jessie [tor-browser-build]
+     * Bug 40837: Rebase mullvad-browser build changes onto main [tor-browser-build]
+   * Windows + macOS + Linux
+     * Bug 40823: Update appname_* variables in projects/release/update_responses_config.yml [tor-browser-build]
+     * Bug 40826: Correctly set appname_marfile for basebrowser in tools/signing/nightly/update-responses-base-config.yml [tor-browser-build]
+     * Bug 40827: MAR generation uses (mostly) hard-coded MAR update channel [tor-browser-build]
+     * Bug 41730: Bridge lines in tools/torbrowser/bridges.js out of date [tor-browser]
+   * Windows
+     * Bug 40822: The Tor Browser installer doesn't run with mandatory ASLR on (0xc000007b) [tor-browser-build]
+   * macOS
+     * Bug 40824: dmg2mar script using hardcoded project names for paths [tor-browser-build]
+     * Bug 40844: DMG reproducibility problem on 12.0.5 [tor-browser-build]
+   * Linux
+     * Bug 40835: Update faketime URLs in projects/container-image/config [tor-browser-build]
+   * Android
+     * Bug 41684: Android improvements for local dev builds [tor-browser]
+
 Tor Browser 12.0.5 - April 12 2023
  * All Platforms
    * Updated Translations
