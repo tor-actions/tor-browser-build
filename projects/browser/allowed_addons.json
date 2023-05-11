@@ -17,7 +17,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/34/9734/13299734/13299734.png?modified=1565722641"
           }
         ],
-        "average_daily_users": 970562,
+        "average_daily_users": 988302,
         "categories": {
           "android": [
             "experimental",
@@ -221,10 +221,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.5575,
-          "bayesian_average": 4.55632411125665,
-          "count": 4956,
-          "text_count": 1572
+          "average": 4.5608,
+          "bayesian_average": 4.559632030468385,
+          "count": 5005,
+          "text_count": 1581
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/reviews/",
         "requires_payment": false,
@@ -321,7 +321,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/versions/",
-        "weekly_downloads": 25917
+        "weekly_downloads": 24550
       },
       "notes": null
     },
@@ -337,7 +337,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/56/7656/6937656/6937656.png?modified=1550343990"
           }
         ],
-        "average_daily_users": 258016,
+        "average_daily_users": 258950,
         "categories": {
           "android": [
             "security-privacy"
@@ -553,10 +553,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.8168,
-          "bayesian_average": 4.81213034274172,
-          "count": 1332,
-          "text_count": 235
+          "average": 4.8136,
+          "bayesian_average": 4.808937485557134,
+          "count": 1336,
+          "text_count": 237
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/reviews/",
         "requires_payment": false,
@@ -641,7 +641,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/versions/",
-        "weekly_downloads": 3798
+        "weekly_downloads": 3514
       },
       "notes": null
     },
@@ -657,7 +657,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/73/4073/5474073/5474073.png?modified=1469820907"
           }
         ],
-        "average_daily_users": 1125722,
+        "average_daily_users": 1133122,
         "categories": {
           "android": [
             "security-privacy"
@@ -669,7 +669,7 @@
         "contributions_url": "https://paypal.me/SupportEFF?utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2014-05-01T18:23:16Z",
         "current_version": {
-          "id": 5520250,
+          "id": 5564707,
           "compatibility": {
             "firefox": {
               "min": "60.0",
@@ -680,7 +680,7 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/privacy-badger17/versions/5520250",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/privacy-badger17/versions/5564707",
           "is_strict_compatibility_enabled": false,
           "license": {
             "id": 6,
@@ -691,22 +691,22 @@
             "url": "http://www.gnu.org/licenses/gpl-3.0.html"
           },
           "release_notes": {
-            "en-US": "<ul><li>Added a note to the popup to explain that if you would like to log into websites with your Google account, you need to fully allow <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/361ac6552f690217a6c9f060dda6a93aa9cc3b3547983097f0c452ac1d4a1d53/http%3A//accounts.google.com\" rel=\"nofollow\">accounts.google.com</a></li><li>Added dark theme support to widget replacement placeholders</li><li>Fixed blocking service worker-initiated requests in Chrome</li><li>Fixed various site breakages</li><li>Added Hindi translations</li><li>Improved Traditional Chinese translations</li></ul>"
+            "en-US": "<ul><li>Expanded protection for \"cookieblocked\" (slider set to yellow) domains. These domains are allowed to load without access to cookies, as a compromise to avoid breaking websites. However, sometimes the same domain is used to serve both unobjectionable content as well as obnoxious fingerprinters that do not need cookies to track your browsing. Privacy Badger will now fully block these fingerprinters.</li><li>Disabled Google's Topics API by default. The Topics API replaces Federated Learning of Cohorts (FLoC).</li><li>You can now see where Privacy Badger observed tracking by a given domain by clicking on the domain name in the list of tracking domains on the options page</li><li>Fixed various site breakages</li><li>Added Vietnamese translations</li><li>Improved translations (Finnish, French, Hebrew, Persian, European Portuguese, Russian, Spanish)</li></ul>"
           },
-          "reviewed": "2023-02-02T18:47:37Z",
-          "version": "2023.1.31",
+          "reviewed": "2023-05-16T10:58:52Z",
+          "version": "2023.5.10",
           "files": [
             {
-              "id": 4064595,
-              "created": "2023-01-31T16:05:01Z",
-              "hash": "sha256:0082d8ffe7b25f370a313d9b899b0c1ba1669b21b3a11791fe5ecf031aeb6a6c",
+              "id": 4109050,
+              "created": "2023-05-10T19:28:15Z",
+              "hash": "sha256:8ff7650d1ce133894293d1a3e268bb24d300e77a1c25488ed17846e71d8b33e8",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 1834581,
+              "size": 1975567,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/4064595/privacy_badger17-2023.1.31.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/4109050/privacy_badger17-2023.5.10.xpi",
               "permissions": [
                 "tabs",
                 "http://*/*",
@@ -1134,7 +1134,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2023-02-02T18:47:37Z",
+        "last_updated": "2023-05-16T10:58:52Z",
         "name": {
           "en-US": "Privacy Badger"
         },
@@ -1180,10 +1180,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.8005,
-          "bayesian_average": 4.797701870245844,
-          "count": 2215,
-          "text_count": 428
+          "average": 4.802,
+          "bayesian_average": 4.79921587479466,
+          "count": 2232,
+          "text_count": 426
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/reviews/",
         "requires_payment": false,
@@ -1207,7 +1207,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/versions/",
-        "weekly_downloads": 22431
+        "weekly_downloads": 18346
       },
       "notes": null
     },
@@ -1223,7 +1223,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 6247825,
+        "average_daily_users": 6410036,
         "categories": {
           "android": [
             "security-privacy"
@@ -1235,7 +1235,7 @@
         "contributions_url": "",
         "created": "2015-04-25T07:26:22Z",
         "current_version": {
-          "id": 5547815,
+          "id": 5558705,
           "compatibility": {
             "firefox": {
               "min": "78.0",
@@ -1246,7 +1246,7 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/ublock-origin/versions/5547815",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/ublock-origin/versions/5558705",
           "is_strict_compatibility_enabled": false,
           "license": {
             "id": 6,
@@ -1257,22 +1257,22 @@
             "url": "http://www.gnu.org/licenses/gpl-3.0.html"
           },
           "release_notes": {
-            "en-US": "See complete release notes for <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/9ba5436deff955b8634d3a5c886aefd9a6d70c6972a66c33828e4756bb843a4e/https%3A//github.com/gorhill/uBlock/releases/tag/1.48.4\" rel=\"nofollow\">1.48.4</a>.\n\n<b>Fixes / changes</b>\n\n<ul><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/2881e29d212046e14a4f20b482d11c8dca34b2434cd96d19ee0acb5d2c454b4a/https%3A//github.com/gorhill/uBlock/commit/e2d837a2dbc1d18ce78ea40ce93ad6f8ecddcbb3\" rel=\"nofollow\">Fix presumed network filter not being a valid network filter</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/1d29de8f605dc6f4b7684f78c79a140e33e0420b4f2a45ff03d7a895bcb947fb/https%3A//github.com/gorhill/uBlock/commit/1835e90125702ac0098692a2f98c8276ace92346\" rel=\"nofollow\">Avoid using ! toolbar icon badge when inconsequential</a><ul><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/04728b2f874e135c8736ae07ce3df1552fb97f380453ad7fe10fe580856205f3/https%3A//github.com/gorhill/uBlock/commit/0b0915526817ce1b0dd2a32cfeaff3f1b647b737\" rel=\"nofollow\">Clear unprocessed requests status on webNavigation reload event</a></li></ul></li></ul>\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/e34f62492a00e2b8a221cac1eef2d1214374f31d9790f90ad9cc33b222a57a0e/https%3A//github.com/gorhill/uBlock/compare/1.48.2...1.48.4\" rel=\"nofollow\">Commits history since last version</a>."
+            "en-US": "See complete release notes for <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/24794abbbc5c8930eafab343afddc39bd9aa42f58522feddae09f56a2836e3d5/https%3A//github.com/gorhill/uBlock/releases/tag/1.49.2\" rel=\"nofollow\">1.49.2</a>.\n\n<b>Fixes</b>\n\n<ul><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/812da480d7e6e2fa7d6fd10655be4539b211ae42df39fd00d20dc610fc837343/https%3A//github.com/gorhill/uBlock/commit/348f75af7fdb8ede8ea09735e854b35a5162040a\" rel=\"nofollow\">Reverse usage of browser.alarms</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/53eab9764901466ecb7c1caee1f71c1132347b569dbad9e5e2863e6c7967ca36/https%3A//github.com/gorhill/uBlock/commit/98d4d24f9b784294bde0db4dd7a1dbed021f2c83\" rel=\"nofollow\">Mind rejected promises from vAPI.storage API</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/58bde6ecd0ff76608c145612b5f1ba1ad63b3731601fc38b819c22755a1c8d9a/https%3A//github.com/gorhill/uBlock/commit/54cb5e22329aec4883c61af3a27f5d3c7ae9d74d\" rel=\"nofollow\">Properly handle promise rejection from webext.storage.local API</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/3f0e0640ef4983e8fd23528ab8cec738685753393752bdf9b18d0253d98a7e3d/https%3A//github.com/gorhill/uBlock/commit/6294829e68b2f6eb2afe133205a36cbc8bb529ed\" rel=\"nofollow\">Add more checks against unexpected conditions re. assets.json</a></li></ul>\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/deebdaa7a15172babdad3eb8fa58f52ce94e3f9990986160bda4c443ee7ac0b5/https%3A//github.com/gorhill/uBlock/compare/1.49.0...1.49.2\" rel=\"nofollow\">Commits history since last version</a>."
           },
-          "reviewed": "2023-04-05T17:12:25Z",
-          "version": "1.48.4",
+          "reviewed": "2023-05-03T16:26:03Z",
+          "version": "1.49.2",
           "files": [
             {
-              "id": 4092158,
-              "created": "2023-04-01T21:20:42Z",
-              "hash": "sha256:d7666b963c2969b0014937aae55472eea5098ff21ed3bea8a2e1f595f62856c1",
+              "id": 4103048,
+              "created": "2023-04-26T14:37:33Z",
+              "hash": "sha256:39266486f720cd31d291d2fdad78625b079782a05517e1936eec7e780bc2a84d",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 3343703,
+              "size": 3383174,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/4092158/ublock_origin-1.48.4.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/4103048/ublock_origin-1.49.2.xpi",
               "permissions": [
                 "dns",
                 "menus",
@@ -1388,7 +1388,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2023-04-16T15:40:30Z",
+        "last_updated": "2023-05-21T19:05:37Z",
         "name": {
           "ar": "uBlock Origin",
           "bg": "uBlock Origin",
@@ -1533,10 +1533,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.7805,
-          "bayesian_average": 4.780095724686764,
-          "count": 15264,
-          "text_count": 3968
+          "average": 4.7807,
+          "bayesian_average": 4.780299334467883,
+          "count": 15437,
+          "text_count": 4014
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/reviews/",
         "requires_payment": false,
@@ -1598,7 +1598,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/versions/",
-        "weekly_downloads": 132315
+        "weekly_downloads": 131360
       },
       "notes": null
     },
@@ -1614,19 +1614,20 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 159848,
+        "average_daily_users": 168477,
         "categories": {
           "android": [
             "photos-media"
           ],
           "firefox": [
-            "games-entertainment"
+            "games-entertainment",
+            "photos-music-videos"
           ]
         },
         "contributions_url": "",
         "created": "2017-05-03T08:36:43Z",
         "current_version": {
-          "id": 5220332,
+          "id": 5560463,
           "compatibility": {
             "firefox": {
               "min": "42.0",
@@ -1637,7 +1638,7 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/video-background-play-fix/versions/5220332",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/video-background-play-fix/versions/5560463",
           "is_strict_compatibility_enabled": false,
           "license": {
             "id": 22,
@@ -1648,24 +1649,24 @@
             "url": "http://www.opensource.org/license/mit"
           },
           "release_notes": {
-            "de": "Experimentelle Verbesserungen der Handhabung von Youtube.",
-            "en-US": "Experimental improvement of Youtube handling.",
-            "ro": "Îmbunătățiri experimentale pentru Youtube."
+            "de": "Neue Übersetzungen ergänzt",
+            "en-US": "Added new translations",
+            "ro": "Adăugat traduceri noi"
           },
-          "reviewed": "2021-04-23T07:50:05Z",
-          "version": "1.6.0",
+          "reviewed": "2023-05-05T14:25:10Z",
+          "version": "1.7.0",
           "files": [
             {
-              "id": 3764692,
-              "created": "2021-04-22T21:46:53Z",
-              "hash": "sha256:73cfa682e0398ca1b51890340e4a6df3fcea945f54e9e677e9db942152aa614d",
+              "id": 4104806,
+              "created": "2023-05-01T11:53:35Z",
+              "hash": "sha256:e8713a1720ffba236c40ebabd5ac1db88702d75c21edc23d61216a5897b3792a",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 12088,
+              "size": 12968,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/3764692/video_background_play_fix-1.6.0.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/4104806/video_background_play_fix-1.7.0.xpi",
               "permissions": [
                 "*://*.youtube.com/*",
                 "*://*.youtube-nocookie.com/*",
@@ -1678,9 +1679,9 @@
         },
         "default_locale": "en-US",
         "description": {
-          "de": "ACHTUNG: Im neuen Firefox für Android (Version 79 und neuer) funktioniert Videowiedergabe im Hintergrund erst <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/05bb7b1ef7f63358eeabcdf19bcac1644202dcd83fc01f35c0e36862bd343b18/https%3A//github.com/mozilla-mobile/fenix/issues/9691\" rel=\"nofollow\">ab Firefox 82</a> korrekt.\n\nUnterstützt momentan folgende Seiten:\n<ul><li>Youtube</li><li>Vimeo (Wiedergabe nicht unterbrechen wenn Vollbildmodus beendet wird)</li></ul>",
-          "en-US": "ATTENTION: With the new Firefox on Android (Firefox 79 and newer), background playback only properly works starting <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/05bb7b1ef7f63358eeabcdf19bcac1644202dcd83fc01f35c0e36862bd343b18/https%3A//github.com/mozilla-mobile/fenix/issues/9691\" rel=\"nofollow\">from Firefox 82</a>.\n\nThe following pages are currently supported:\n<ul><li>Youtube</li><li>Vimeo (don't stop playback when existing fullscreen)</li></ul>",
-          "ro": "ATENȚIE: În noul Firefox pentru Android (versiunea 79+), redarea video în fundal funcționează corect abia de la <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/05bb7b1ef7f63358eeabcdf19bcac1644202dcd83fc01f35c0e36862bd343b18/https%3A//github.com/mozilla-mobile/fenix/issues/9691\" rel=\"nofollow\">Firefox 82</a>.\n\nÎn prezent este compatibil cu următoarele site-uri:\n<ul><li>Youtube</li><li>Vimeo (nu întrerupeți redarea atunci când ieșiți din modul fullscreen)</li></ul>"
+          "de": "Unterstützt momentan folgende Seiten:\n<ul><li>Youtube</li><li>Vimeo (Wiedergabe nicht unterbrechen wenn Vollbildmodus beendet wird)</li></ul>",
+          "en-US": "The following pages are currently supported:\n<ul><li>Youtube</li><li>Vimeo (don't stop playback when existing fullscreen)</li></ul>",
+          "ro": "În prezent este compatibil cu următoarele site-uri:\n<ul><li>Youtube</li><li>Vimeo (nu întrerupeți redarea atunci când ieșiți din modul fullscreen)</li></ul>"
         },
         "developer_comments": null,
         "edit_url": "https://addons.mozilla.org/en-US/developers/addon/video-background-play-fix/edit",
@@ -1698,7 +1699,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2021-04-23T07:50:05Z",
+        "last_updated": "2023-05-05T14:25:10Z",
         "name": {
           "de": "Videowiedergabe im Hintergrund",
           "en-US": "Video Background Play Fix",
@@ -1712,10 +1713,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.4964,
-          "bayesian_average": 4.4911928855659555,
-          "count": 1100,
-          "text_count": 407
+          "average": 4.4875,
+          "bayesian_average": 4.482377575890338,
+          "count": 1118,
+          "text_count": 418
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/reviews/",
         "requires_payment": false,
@@ -1737,7 +1738,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/versions/",
-        "weekly_downloads": 366
+        "weekly_downloads": 387
       },
       "notes": null
     },
@@ -1753,7 +1754,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 88484,
+        "average_daily_users": 88341,
         "categories": {
           "android": [
             "experimental",
@@ -1866,9 +1867,9 @@
         ],
         "promoted": null,
         "ratings": {
-          "average": 4.3668,
-          "bayesian_average": 4.352941163663537,
-          "count": 398,
+          "average": 4.37,
+          "bayesian_average": 4.356186612333998,
+          "count": 400,
           "text_count": 112
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/reviews/",
@@ -1891,7 +1892,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/versions/",
-        "weekly_downloads": 1034
+        "weekly_downloads": 1535
       },
       "notes": null
     },
@@ -1907,7 +1908,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/64/9064/12929064/12929064.png?modified=1651263207"
           }
         ],
-        "average_daily_users": 258622,
+        "average_daily_users": 262509,
         "categories": {
           "android": [
             "photos-media",
@@ -2126,10 +2127,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.6538,
-          "bayesian_average": 4.64901646767579,
-          "count": 1248,
-          "text_count": 241
+          "average": 4.6537,
+          "bayesian_average": 4.648959055095389,
+          "count": 1262,
+          "text_count": 242
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/reviews/",
         "requires_payment": false,
@@ -2150,7 +2151,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/versions/",
-        "weekly_downloads": 4497
+        "weekly_downloads": 3984
       },
       "notes": null
     },
@@ -2173,7 +2174,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 109747,
+        "average_daily_users": 111302,
         "categories": {
           "android": [
             "other"
@@ -2456,10 +2457,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.4449,
-          "bayesian_average": 4.440238588001734,
-          "count": 1207,
-          "text_count": 321
+          "average": 4.4439,
+          "bayesian_average": 4.439229613376027,
+          "count": 1212,
+          "text_count": 322
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/reviews/",
         "requires_payment": false,
@@ -2479,7 +2480,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/versions/",
-        "weekly_downloads": 31
+        "weekly_downloads": 32
       },
       "notes": null
     },
@@ -2495,7 +2496,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/43/0143/143/143.png?modified=1506804587"
           }
         ],
-        "average_daily_users": 312295,
+        "average_daily_users": 314158,
         "categories": {
           "android": [
             "performance",
@@ -2509,7 +2510,7 @@
         "contributions_url": "https://www.paypal.com/donate/?hosted_button_id=9ERKTU5MBH4EW&utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2005-05-13T10:51:32Z",
         "current_version": {
-          "id": 5546627,
+          "id": 5566736,
           "compatibility": {
             "firefox": {
               "min": "59.0",
@@ -2520,7 +2521,7 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/noscript/versions/5546627",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/noscript/versions/5566736",
           "is_strict_compatibility_enabled": false,
           "license": {
             "id": 13,
@@ -2531,22 +2532,22 @@
             "url": "http://www.gnu.org/licenses/gpl-2.0.html"
           },
           "release_notes": {
-            "en-US": "v 11.4.21\n============================================================\nx Fixed mislabeled Tor Browser settings override option\nx [L10n] Updated mk"
+            "en-US": "v 11.4.22\n============================================================\nx [L10n] Updated uk\nx Consistently apply DEFAULT policy to top-level data: URLs"
           },
-          "reviewed": "2023-04-04T12:01:03Z",
-          "version": "11.4.21",
+          "reviewed": "2023-05-18T09:07:59Z",
+          "version": "11.4.22",
           "files": [
             {
-              "id": 4090970,
-              "created": "2023-03-30T09:39:24Z",
-              "hash": "sha256:0fd3b66a2780d03a5b3cd460216105f3df2b27c6d3a552c1769c5de48c9e2338",
+              "id": 4111078,
+              "created": "2023-05-15T08:32:54Z",
+              "hash": "sha256:46a84c85df4c6be11905388ad2b66aeb5a010ed615484112c8c1710ad13bc36e",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 951542,
+              "size": 948900,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/4090970/noscript-11.4.21.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/4111078/noscript-11.4.22.xpi",
               "permissions": [
                 "contextMenus",
                 "storage",
@@ -2613,7 +2614,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2023-04-04T12:01:03Z",
+        "last_updated": "2023-05-21T21:36:00Z",
         "name": {
           "de": "NoScript",
           "el": "NoScript",
@@ -2685,10 +2686,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.4117,
-          "bayesian_average": 4.40897409082447,
-          "count": 2055,
-          "text_count": 798
+          "average": 4.4074,
+          "bayesian_average": 4.404687188031893,
+          "count": 2067,
+          "text_count": 803
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/reviews/",
         "requires_payment": false,
@@ -2732,7 +2733,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/versions/",
-        "weekly_downloads": 8021
+        "weekly_downloads": 7591
       },
       "notes": null
     },
@@ -2748,7 +2749,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 146192,
+        "average_daily_users": 151904,
         "categories": {
           "android": [
             "performance",
@@ -2863,10 +2864,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 3.9109,
-          "bayesian_average": 3.9065939897765096,
-          "count": 1122,
-          "text_count": 397
+          "average": 3.9026,
+          "bayesian_average": 3.898323122758472,
+          "count": 1129,
+          "text_count": 401
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/reviews/",
         "requires_payment": false,
@@ -2885,7 +2886,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/versions/",
-        "weekly_downloads": 1829
+        "weekly_downloads": 1860
       },
       "notes": null
     }

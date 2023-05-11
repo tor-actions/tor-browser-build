@@ -111,15 +111,19 @@ if r.status_code == 401:
     print("Unauthorized! Has your token expired?")
     sys.exit(3)
 issue = None
+issues = []
 for i in r.json():
     if i["title"].find(sys.argv[1]) != -1:
-        if issue is None:
-            issue = i
-        else:
-            print("More than one matching issue found!")
-            print("Please use the issue id.")
-            sys.exit(4)
-if not issue:
+        issues.append(i)
+if len(issues) == 1:
+    issue = issues[0]
+elif len(issues) > 1:
+    print("More than one matching issue found:")
+    for idx, i in enumerate(issues):
+        print(f"  {idx + 1}) #{i['iid']} - {i['title']}")
+    print("Please use the issue id.")
+    sys.exit(4)
+else:
     iid = version
     version = None
     if iid[0] == "#":
@@ -161,8 +165,9 @@ for issues in linked:
     print(f" * {issues[0].get_platforms()}")
     for i in issues:
         print(f"   * {i}")
-print(" * Build System")
-for issues in linked_build:
-    print(f"   * {issues[0].get_platforms()}")
-    for i in issues:
-        print(f"     * {i}")
+if linked_build:
+    print(" * Build System")
+    for issues in linked_build:
+        print(f"   * {issues[0].get_platforms()}")
+        for i in issues:
+            print(f"     * {i}")

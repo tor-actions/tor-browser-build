@@ -1,3 +1,57 @@
+Tor Browser 12.5a6 - May 22 2023
+ * All Platforms
+   * Updated Translations
+   * Updated Go to 11.9.9
+   * Bug 40860: Improve the transition from the old fontconfig file to the new one [tor-browser-build]
+   * Bug 41728: Pin bridges.torproject.org domains to Let's Encrypt's root cert public key [tor-browser]
+   * Bug 41738: Replace the patch to disable live reload with its preference [tor-browser]
+   * Bug 41757: Rebase Tor Browser Alpha to 102.11.0esr [tor-browser]
+   * Bug 41763: TTP-02-003 WP1: Data URI allows JS execution despite safest security level (Low) [tor-browser]
+   * Bug 41764: TTP-02-004 OOS: No user-activation required to download files (Low) [tor-browser]
+   * Bug 41775: Avoid re-defining some macros in nsUpdateDriver.cpp [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 102.11esr
+   * Bug 41607: Update "New Circuit" icon [tor-browser]
+   * Bug 41736: Customize the default CustomizableUI toolbar using CustomizableUI.jsm [tor-browser]
+   * Bug 41770: Keyboard navigation broken leaving the toolbar tor circuit button [tor-browser]
+   * Bug 41777: Internally shippped manual does not adapt to RTL languages (it always align to the left) [tor-browser]
+ * Windows + Linux
+   * Bug 41654: UpdateInfo jumped into Data [tor-browser]
+ * Linux
+   * Bug 41732: implement linux font whitelist as defense-in-depth [tor-browser]
+   * Bug 41776: System fonts are temporarily leaked on Linux after the browser is updated from 12.5a4 or earlier [tor-browser]
+ * Android
+   * Updated GeckoView to 102.11esr
+ * Build System
+   * All Platforms
+     * Bug 33953: Provide a way for easily updating Go dependencies of projects [tor-browser-build]
+     * Bug 40673: Avoid building each go module separately [tor-browser-build]
+     * Bug 40818: Enable wasm target for rust compiler [tor-browser-build]
+     * Bug 40841: Adapt signing scripts to new signing machines [tor-browser-build]
+     * Bug 40849: Move Go dependencies to the projects dependent on them, not as a standalone projects [tor-browser-build]
+     * Bug 40856: Unblock nightly builds [tor-browser-build]
+   * Windows
+     * Bug 40846: Temporarily disable Windows signing [tor-browser-build]
+
+Tor Browser 12.0.6 - May 09 2023
+ * All Platforms
+   * Updated Translations
+   * Updated Go to 11.9.9
+   * Bug 41728: Pin bridges.torproject.org domains to Let's Encrypt's root cert public key [tor-browser]
+   * Bug 41756: Rebase Tor Browser Stable to 102.11.0esr [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 102.11esr
+   * Bug 40501: High CPU load after tor exits unexpectedly [tor-browser]
+ * Windows
+   * Bug 41683: Disable the network process on Windows [tor-browser]
+ * Android
+   * Updated GeckoView to 102.11esr
+ * Build System
+   * Windows + macOS + Linux
+     * Bug 41730: Bridge lines in tools/torbrowser/bridges.js out of date [tor-browser]
+   * macOS
+     * Bug 40844: Fix DMG reproducibility problem on 12.0.5 [tor-browser-build]
+
 Tor Browser 12.5a5 - April 18 2023
  * All Platforms
    * Updated Translations
