@@ -9,11 +9,12 @@ filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/buil
 container:
   use_container: 1
 
-targets:
-  nightly:
-    git_hash: main
-    version: '[% c("abbrev") %]'
-    tag_gpg_id: 0
+# Stop using `main` on nightly, until tor-browser-build#40850 is fixed
+#targets:
+#  nightly:
+#    git_hash: main
+#    version: '[% c("abbrev") %]'
+#    tag_gpg_id: 0
 
 input_files:
   - project: container-image
