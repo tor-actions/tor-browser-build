@@ -1,13 +1,17 @@
 # vim: filetype=yaml sw=2
-filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
-version: '1.60.0'
+filename: '[% project %]-[% c("version") %]-[% c("var/rust_targets") %]-[% c("var/build_id") %].tar.gz'
+version: '1.69.0'
 container:
   use_container: 1
+
+var:
+  rust_targets: "[% c('var/osname') %]"
 
 targets:
   android:
     var:
-      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/clang --set rust.jemalloc --target=x86_64-unknown-linux-gnu,armv7-linux-androideabi,thumbv7neon-linux-androideabi,aarch64-linux-android,i686-linux-android,x86_64-linux-android,wasm32-unknown-unknown --set=target.armv7-linux-androideabi.cc=armv7a-linux-androideabi16-clang --set=target.armv7-linux-androideabi.ar=armv7a-linux-androideabi-ar --set=target.thumbv7neon-linux-androideabi.cc=armv7a-linux-androideabi16-clang --set=target.thumbv7neon-linux-androideabi.ar=armv7a-linux-androideabi-ar --set=target.aarch64-linux-android.cc=aarch64-linux-android21-clang --set=target.aarch64-linux-android.ar=aarch64-linux-android-ar --set=target.i686-linux-android.cc=i686-linux-android16-clang --set=target.i686-linux-android.ar=i686-linux-android-ar --set=target.x86_64-linux-android.cc=x86_64-linux-android21-clang --set=target.x86_64-linux-android.ar=x86_64-linux-android-ar --set target.wasm32-unknown-unknown.linker=clang --set target.wasm32-unknown-unknown.ar=llvm-ar --set target.wasm32-unknown-unknown.ranlib=llvm-ranlib --set rust.lld=true
+      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/clang --set rust.jemalloc --target=x86_64-unknown-linux-gnu,armv7-linux-androideabi,thumbv7neon-linux-androideabi,aarch64-linux-android,i686-linux-android,x86_64-linux-android,wasm32-unknown-unknown --set=target.armv7-linux-androideabi.cc=armv7a-linux-androideabi16-clang --set=target.armv7-linux-androideabi.ar=llvm-ar --set=target.thumbv7neon-linux-androideabi.cc=armv7a-linux-androideabi16-clang --set=target.thumbv7neon-linux-androideabi.ar=llvm-ar --set=target.aarch64-linux-android.cc=aarch64-linux-android21-clang --set=target.aarch64-linux-android.ar=llvm-ar --set=target.i686-linux-android.cc=i686-linux-android16-clang --set=target.i686-linux-android.ar=llvm-ar --set=target.x86_64-linux-android.cc=x86_64-linux-android21-clang --set=target.x86_64-linux-android.ar=llvm-ar --set target.wasm32-unknown-unknown.linker=clang --set target.wasm32-unknown-unknown.ar=llvm-ar --set target.wasm32-unknown-unknown.ranlib=llvm-ranlib --set rust.lld=true
+      rust_targets: android
 
   linux:
     var:
@@ -42,6 +46,7 @@ targets:
       # Finally, we tell Rust to use some tools from LLVM, like the prebuilt
       # binaries do.
       configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/clang --set rust.jemalloc --target=x86_64-unknown-linux-gnu,i686-unknown-linux-gnu,wasm32-unknown-unknown --set target.x86_64-unknown-linux-gnu.linker=clang --set target.x86_64-unknown-linux-gnu.ar=llvm-ar --set target.x86_64-unknown-linux-gnu.ranlib=llvm-ranlib --set target.i686-unknown-linux-gnu.linker=clang --set target.i686-unknown-linux-gnu.ar=llvm-ar --set target.i686-unknown-linux-gnu.ranlib=llvm-ranlib --set target.wasm32-unknown-unknown.linker=clang --set target.wasm32-unknown-unknown.ar=llvm-ar --set target.wasm32-unknown-unknown.ranlib=llvm-ranlib --set rust.lld=true
+      rust_targets: linux
 
   macos:
     var:
@@ -87,3 +92,6 @@ input_files:
   - project: python
     name: python
     enable: '[% c("var/linux") %]'
+  # Needed only for 1.69.0.
+  # See https://github.com/rust-lang/rust/issues/108948.
+  - filename: external-llvm.patch

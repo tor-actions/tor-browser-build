@@ -45,11 +45,11 @@ export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/nasm/bi
   # https://searchfox.org/mozilla-central/source/build/build-clang/build-clang.py#890,
   # include it directly in our clang
   [% IF c("var/macos") -%]
-    rtdir=/var/tmp/dist/macosx-toolchain/clang/lib/clang/[% pc("clang", "version") %]/lib/wasi
+    rtdir=/var/tmp/dist/macosx-toolchain/clang/lib/clang/[% pc("llvm-project", "var/llvm_major") %]/lib/wasi
   [% ELSIF c("var/windows") -%]
-    rtdir=/var/tmp/dist/mingw-w64-clang/lib/clang/[% pc("clang", "version") %]/lib/wasi
+    rtdir=/var/tmp/dist/mingw-w64-clang/lib/clang/[% pc("llvm-project", "var/llvm_major") %]/lib/wasi
   [% ELSE -%]
-    rtdir=/var/tmp/dist/clang/lib/clang/[% pc("clang", "version") %]/lib/wasi
+    rtdir=/var/tmp/dist/clang/lib/clang/[% pc("llvm-project", "var/llvm_major") %]/lib/wasi
   [% END -%]
   mkdir -p $rtdir
   cp /var/tmp/dist/wasi-sysroot/lib/clang/*/lib/wasi/libclang_rt.builtins-wasm32.a $rtdir
@@ -97,10 +97,6 @@ MOZCONFIG_EOF
   # Set update url for nightly (#33402 / #40033)
   sed -i 's|^URL=https://aus1\.torproject\.org/.*|URL=https://nightlies.tbb.torproject.org/nightly-updates/updates/[% c("var/nightly_updates_publish_dir") %]/%CHANNEL%/%BUILD_TARGET%/%VERSION%/ALL|' build/application.ini.in
 [% END -%]
-
-
-rm -f configure
-rm -f js/src/configure
 
 export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
 
@@ -206,7 +202,7 @@ export LANG=C.UTF-8
 
 [% IF c("var/linux") %]
   [% IF c("var/linux-x86_64") && !c("var/asan") %]
-    cp obj-*/testing/geckodriver/x86_64-unknown-linux-gnu/release/geckodriver $distdir
+    cp obj-*/x86_64-unknown-linux-gnu/release/geckodriver $distdir
   [% END %]
   cp -a obj-*/dist/[% c('var/exe_name') %]/* $distdir/Browser/
   # Remove firefox-bin (we don't use it, see ticket #10126)
@@ -247,9 +243,7 @@ RBM_TB_EOF
   [% IF c("var/linux") || c("var/macos") %]
     cp -p obj-*/dist/bin/signmar $MARTOOLS/
     cp -p obj-*/dist/bin/certutil $MARTOOLS/
-    cp -p obj-*/dist/bin/modutil $MARTOOLS/
     cp -p obj-*/dist/bin/pk12util $MARTOOLS/
-    cp -p obj-*/dist/bin/shlibsign $MARTOOLS/
     [% IF c("var/linux") %]
       NSS_LIBS="libfreeblpriv3.so libmozsqlite3.so libnss3.so libnssckbi.so libnssutil3.so libsmime3.so libsoftokn3.so libssl3.so"
       NSPR_LIBS="libnspr4.so libplc4.so libplds4.so"
@@ -265,9 +259,7 @@ RBM_TB_EOF
   [% IF c("var/windows") %]
     cp -p obj-*/dist/bin/signmar.exe $MARTOOLS/
     cp -p obj-*/dist/bin/certutil.exe $MARTOOLS/
-    cp -p obj-*/dist/bin/modutil.exe $MARTOOLS/
     cp -p obj-*/dist/bin/pk12util.exe $MARTOOLS/
-    cp -p obj-*/dist/bin/shlibsign.exe $MARTOOLS/
     NSS_LIBS="freebl3.dll mozglue.dll nss3.dll nssckbi.dll softokn3.dll"
     for LIB in $NSS_LIBS; do
         cp -p obj-*/dist/bin/$LIB $MARTOOLS/

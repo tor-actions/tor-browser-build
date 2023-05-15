@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
 git_url: https://github.com/ninja-build/ninja.git
-git_hash: b25c08bda4949192c69cea4cee057887341a2ffc #v1.9.0
+git_hash: a524bf3f6bacd1b4ad85d719eed2737d8562f27a #v1.11.1
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 container:
   use_container: 1
@@ -14,3 +14,4 @@ input_files:
   - name: python
     project: python
     enable: '[% c("var/linux") %]'
+  - filename: python3.patch

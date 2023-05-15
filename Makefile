@@ -583,11 +583,8 @@ get_gradle_dependencies_list-android-components: submodule-update
 cargo_vendor-application-services: submodule-update
 	$(rbm) build application-services --step cargo_vendor --target nightly --target torbrowser-android-armv7
 
-cargo_vendor-cbindgen-android: submodule-update
-	$(rbm) build cbindgen --step cargo_vendor --target nightly --target torbrowser-android-armv7
-
 cargo_vendor-cbindgen: submodule-update
-	$(rbm) build cbindgen --step cargo_vendor --target nightly --target torbrowser-linux-x86_64
+	$(rbm) build cbindgen --step cargo_vendor --target alpha --target torbrowser-linux-x86_64
 
 cargo_vendor-uniffi-rs: submodule-update
 	$(rbm) build uniffi-rs --step cargo_vendor --target nightly --target torbrowser-linux-x86_64

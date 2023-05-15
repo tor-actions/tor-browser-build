@@ -14,7 +14,7 @@ tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
 # Now prepare the offline build
 # Move the directory for hardcoding the path in .cargo/config
 mv /var/tmp/build/[% project %]-[% c('version') %] $builddir
-tar -C $builddir -xf $rootdir/[% c('input_files_by_name/cbindgen_vendor') %]
+tar -C $builddir -xf $rootdir/[% c('input_files_by_name/cargo_vendor') %]
 cd $builddir
 mkdir .cargo
 cat > .cargo/config << 'EOF'

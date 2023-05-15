@@ -4,10 +4,13 @@ filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 container:
   use_container: 1
 var:
-  node_version: 12.22.12
-  node_hash: bc42b7f8495b9bfc7f7850dd180bb02a5bdf139cc232b8c6f02a6967e20714f2
+  node_version: 16.19.0
+  node_sha256: 4f1fec1aea2392f6eb6d1d040b01e7ee3e51e762a9791dfea590920bc1156706
 
 input_files:
+  - URL: 'https://nodejs.org/dist/v[% c("var/node_version") %]/node-v[% c("var/node_version") %].tar.xz'
+    sha256sum: '[% c("var/node_sha256") %]'
+    name: node
   - project: container-image
   - project: binutils
     name: binutils
@@ -18,6 +21,3 @@ input_files:
   - name: python
     project: python
     enable: '[% c("var/linux") %]'
-  - URL: 'https://nodejs.org/dist/v[% c("var/node_version") %]/node-v[% c("var/node_version") %].tar.xz'
-    sha256sum: '[% c("var/node_hash") %]'
-    name: node

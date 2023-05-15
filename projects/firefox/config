@@ -11,11 +11,11 @@ container:
   use_container: 1
 
 var:
-  firefox_platform_version: 102.12.0
+  firefox_platform_version: 115.0.2
   firefox_version: '[% c("var/firefox_platform_version") %]esr'
-  browser_series: '12.5'
+  browser_series: '13.0'
   browser_branch: '[% c("var/browser_series") %]-1'
-  browser_build: 2
+  browser_build: 1
   branding_directory_prefix: 'tb'
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   nightly_updates_publish_dir: '[% c("var/nightly_updates_publish_dir_prefix") %]nightly-[% c("var/osname") %]'
@@ -25,7 +25,7 @@ var:
     - build-essential
     - unzip
     - zip
-    - autoconf2.13
+    - autoconf
     - yasm
     - pkg-config
   has_l10n: '[% !c("var/testbuild") && c("var/locales").size %]'
@@ -63,8 +63,7 @@ steps:
         version: '[% c("abbrev") %]'
 
   list_toolchain_updates:
-    git_url: https://github.com/mozilla/gecko-dev.git
-    git_hash: esr102
+    git_hash: tor-browser-115.0a1-13.0-1
     tag_gpg_id: 0
     input_files: []
     container:

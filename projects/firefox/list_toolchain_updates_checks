@@ -9,9 +9,13 @@
      SET toolchain_alias='linux64-rust-macos';
    END; %]
 read -d '' p << 'EOF' || true
+sub as_array {
+  ref $_[0] eq 'ARRAY' ? $_[0] : [ $_[0] ];
+}
 my $d = YAML::XS::LoadFile('taskcluster/ci/toolchain/rust.yml');
 foreach my $t (keys %$d) {
-  if ($d->{$t}{run}{'toolchain-alias'} eq '[% toolchain_alias %]') {
+  my $talias = as_array($d->{$t}{run}{'toolchain-alias'});
+  if (grep { $_ eq '[% toolchain_alias %]' } @$talias) {
     my $channel;
     foreach my $arg (@{$d->{$t}{run}{arguments}}) {
       if ($arg eq '--channel') {
@@ -62,27 +66,36 @@ check_update_needed nasm "$needed" "$current"
      SET toolchain_alias='macosx64-clang';
    END; %]
 read -d '' p << 'EOF' || true
+sub as_array {
+  ref $_[0] eq 'ARRAY' ? $_[0] : [ $_[0] ];
+}
 my $d = YAML::XS::LoadFile('taskcluster/ci/toolchain/clang.yml');
 my $clang_toolchain;
+my $clang_fetch;
 TOOLCHAIN: foreach my $t (keys %$d) {
-  foreach my $alias (@{$d->{$t}{run}{'toolchain-alias'}}) {
-    if ($alias eq 'linux64-clang') {
+  my $aliases = as_array($d->{$t}{run}{'toolchain-alias'}{'by-project'}{default});
+  foreach my $alias (@$aliases) {
+    if ($alias eq '[% toolchain_alias %]') {
       foreach my $fetch (@{$d->{$t}{fetches}{toolchain}}) {
         $clang_toolchain = $fetch if $fetch =~ m/^.*-clang-.*/;
+      }
+      foreach my $fetch (@{$d->{$t}{fetches}{fetch}}) {
+        $clang_fetch = $fetch if $fetch =~ m/^clang-.*/;
       }
       last TOOLCHAIN;
     }
   }
 }
 
-if (!$clang_toolchain) {
+if (!$clang_toolchain && !$clang_fetch) {
   print STDERR "Error: could not find clang toolchain\\n";
   exit 1;
 }
 
-my $clang_fetch;
-foreach my $fetch (@{$d->{$clang_toolchain}{fetches}{fetch}}) {
-  $clang_fetch = $fetch if $fetch =~ m/^clang-.*/;
+if (!$clang_fetch) {
+  foreach my $fetch (@{$d->{$clang_toolchain}{fetches}{fetch}}) {
+    $clang_fetch = $fetch if $fetch =~ m/^clang-.*/;
+  }
 }
 
 if (!$clang_fetch) {
@@ -138,20 +151,32 @@ if (m/^\\s*"Bootstrap currently only runs on Python ([^"]+)\\."/) {
 }
 EOF
 needed=$(cat python/mozboot/bin/bootstrap.py | perl -ne "$p")
-current="3.5+" # 3.6.0
+current="3.6+" # 3.6.0
 check_update_needed python "$needed" "$current"
 
 
 [% IF c("var/macos") %]
 # macosx-sdk
 read -d '' p << 'EOF' || true
-my $d = YAML::XS::LoadFile('taskcluster/ci/build/macosx.yml');
-foreach my $toolchain (@{$d->{'macosx64-add-on-devel/opt'}{fetches}{toolchain}}) {
-  if ($toolchain =~ m/^macosx64-sdk-(.+)$/) {
-    print $1;
-    exit;
+sub l {
+  ref $_[0] eq 'ARRAY' ? $_[0] : [ $_[0] ];
+}
+
+my $d = YAML::XS::LoadFile('taskcluster/ci/toolchain/macos-sdk.yml');
+
+my $sdk_version;
+foreach my $t (keys %$d) {
+  foreach my $alias (@{l($d->{$t}{run}{'toolchain-alias'})}) {
+    if ($alias eq 'macosx64-sdk') {
+      if ($t =~ m/^macosx64-sdk-(.*)/) {
+        print "$1";
+        exit 0;
+      }
+    }
   }
 }
+
+exit 1;
 EOF
 needed=$(perl -MYAML::XS -e "$p")
 current='[% pc("macosx-toolchain", "version") %]'
