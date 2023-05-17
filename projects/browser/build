@@ -222,6 +222,15 @@ for tbdir in "${TBDIRS[@]}"
 do
   [% IF c("var/linux") -%]
     mv Bundle-Data/linux/Data/fontconfig "$tbdir/"
+    [% IF c("var/tor-browser") -%]
+      # tor-browser#41776: We cannot remove the old fontconfig file with the
+      # updater. So, let's keep it for the mar generation, but remove it from
+      # new packages.
+      # Remove once we do a watershed release.
+      oldfontconfig="$tbdir/TorBrowser/Data/fontconfig"
+      mkdir -p $oldfontconfig
+      cp "$tbdir/fontconfig/fonts.conf" "$oldfontconfig/"
+    [% END -%]
   [% END -%]
 
   mkdir -p "$tbdir/$DOCSPATH"
@@ -357,6 +366,12 @@ cd $distdir
 [% END -%]
 
 [% IF c("var/linux") %]
+  [% IF c("var/tor-browser") %]
+    # We need the old fontconfig files only when updating from old installations
+    # that include it, but do not add it to new packages!
+    # Remove once we do a watershed release.
+    rm -rf "$TBDIR/TorBrowser/Data/fontconfig"
+  [% END -%]
   [% c('tar', {
         tar_src => [ '$PKG_DIR' ],
         tar_args => '-cJf $OUTDIR/' _ c("var/project-name") _ '-' _ c("var/mar_osname") _ '-' _ c("var/torbrowser_version") _ '_${PKG_LOCALE}.tar.xz',
