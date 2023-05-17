@@ -3,27 +3,8 @@
 distdir=/var/tmp/dist/[% project %]
 mkdir -p /var/tmp/dist
 
-[% IF c("var/linux") %]
-  # Config options for hardening-wrapper
-  export DEB_BUILD_HARDENING=1
-  export DEB_BUILD_HARDENING_STACKPROTECTOR=1
-  export DEB_BUILD_HARDENING_FORTIFY=1
-  export DEB_BUILD_HARDENING_FORMAT=1
-  export DEB_BUILD_HARDENING_PIE=1
-[% END %]
-
-mkdir -p /var/tmp/build
-
-# Building go 1.4.x
-# This is needed to bootstrap the go that we actually use
-# https://golang.org/doc/install/source#go14
-tar -C /var/tmp/build --transform='s,^go\>,go1.4,' -xf $rootdir/[% c('input_files_by_name/go14') %]
-cd /var/tmp/build/go1.4/src
-# Disable cgo to avoid conflicts with newer GCC. cgo is not needed for the bootstrap go.
-# https://github.com/golang/go/issues/13114#issuecomment-186922245
-# Disable CC etc. that are set up for cross builds.
-CGO_ENABLED=0 CC= CFLAGS= LDFLAGS= ./make.bash
-export GOROOT_BOOTSTRAP="/var/tmp/build/go1.4"
+tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/go-bootstrap') %]
+export GOROOT_BOOTSTRAP="/var/tmp/dist/go-bootstrap"
 
 cd $rootdir
 [% IF ! c("var/linux") %]

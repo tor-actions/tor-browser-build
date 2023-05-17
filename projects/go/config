@@ -1,12 +1,10 @@
 # vim: filetype=yaml sw=2
-version: 1.19.9
-filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
+version: 1.20.4
+filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 container:
   use_container: 1
 
 var:
-  go14_version: 1.4.3
-
   setup: |
     mkdir -p /var/tmp/dist
     tar -C /var/tmp/dist -xf $rootdir/[% c("go_tarfile") %]
@@ -121,9 +119,10 @@ input_files:
     enable: '[% ! c("var/linux") %]'
   - URL: 'https://golang.org/dl/go[% c("version") %].src.tar.gz'
     name: go
-    sha256sum: 131190a4697a70c5b1d232df5d3f55a3f9ec0e78e40516196ffb3f09ae6a5744
-  - URL: 'https://golang.org/dl/go[% c("var/go14_version") %].src.tar.gz'
-    name: go14
-    sha256sum: 9947fc705b0b841b5938c48b22dc33e9647ec0752bae66e50278df4f23f64959
+    sha256sum: 9f34ace128764b7a3a4b238b805856cc1b2184304df9e5690825b0710f4202d6
+  - project: go-bootstrap
+    name: go-bootstrap
+    target_replace:
+      '^.*browser-.*': 'basebrowser-linux-x86_64'
   - filename: 0001-Use-fixed-go-build-tmp-directory.patch
     enable: '[% c("var/android") %]'

@@ -1,0 +1,14 @@
+# vim: filetype=yaml sw=2
+version: 1.19.9
+filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
+container:
+  use_container: 1
+
+input_files:
+  - project: container-image
+  - URL: 'https://golang.org/dl/go[% c("version") %].src.tar.gz'
+    name: go
+    sha256sum: 131190a4697a70c5b1d232df5d3f55a3f9ec0e78e40516196ffb3f09ae6a5744
+  - URL: https://dl.google.com/go/go1.4-bootstrap-20171003.tar.gz
+    name: go14
+    sha256sum: f4ff5b5eb3a3cae1c993723f3eab519c5bae18866b5e5f96fe1102f0cb5c3e52
