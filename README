@@ -156,18 +156,9 @@ Automated builds using tbb-testsuite
 ------------------------------------
 
 The Tor Browser testsuite scripts can also be used to do nightly builds
-and publish the build logs. The recommended way to do that is to use
-the ansible roles from the tools/ansible directory. See next section
-for details.
-
-
-Using ansible to set up a nightly build machine
------------------------------------------------
-
-The directory tools/ansible contains some ansible roles to set up a
-nightly build machine. You can look at the playbook defined in
-boklm-tbb-nightly-build.yml and variables in group_vars/boklm-tbb-nightly/
-for an example of how it can be used.
+and publish the build logs. This page has some information about the
+setup we use for nightly builds:
+https://gitlab.torproject.org/tpo/applications/tor-browser/-/wikis/Nightly_Builds_Setup
 
 
 Signing builds
