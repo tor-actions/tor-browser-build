@@ -11,14 +11,13 @@ container:
 var:
   go_vendor_sha256sum: 5d2d82d00afc5fe044ee6df718ffe066b7d9e5446944c0ee0870e060e4e6bcc8
 
-# Stop using `main` on nightly, until tor-browser-build#40850 is fixed
-#targets:
-#  nightly:
-#    git_hash: main
-#    version: '[% c("abbrev") %]'
-#    tag_gpg_id: 0
-#    var:
-#      go_vendor_sha256sum: ad5cbcb09580c74b02b230b4fad7d2362c3b2f4537cdefd4abdeb0c3c4e97adb
+targets:
+  nightly:
+    git_hash: main
+    version: '[% c("abbrev") %]'
+    tag_gpg_id: 0
+    var:
+      go_vendor_sha256sum: 8b7e04a43bfbcdc829ea5093d8ee0a50eddefad543acd201b25424b33a7f882b
 
 steps:
   build:
