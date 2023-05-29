@@ -1,12 +1,12 @@
 #!/bin/bash
 [% c("var/set_default_env") -%]
 [% pc(c('var/compiler'), 'var/setup', {
-        compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')),
-        gradle_tarfile => c("input_files_by_name/gradle"),
-    }) %]
+    compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')),
+    gradle_tarfile => c("input_files_by_name/gradle"),
+  }) %]
 distdir=/var/tmp/dist
 mkdir -p /var/tmp/build
-mkdir -p $distdir/[% project %]
+mkdir -p $distdir
 
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/rust') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/cbindgen') %]
@@ -14,21 +14,21 @@ tar -C /var/tmp/dist -xf [% c('input_files_by_name/nasm') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/node') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/clang') %]
 export LLVM_CONFIG="/var/tmp/dist/clang/bin/llvm-config"
-tar -C /var/tmp/dist -xf [% c('input_files_by_name/compiler-rt') %]
-cp -r /var/tmp/dist/compiler-rt/* /var/tmp/dist/clang/
+tar -C /var/tmp/dist -xf [% c('input_files_by_name/llvm-runtimes') %]
+cp -r /var/tmp/dist/llvm-runtimes/* /var/tmp/dist/clang/
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/binutils') %]
 export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/nasm/bin:/var/tmp/dist/node/bin:/var/tmp/dist/clang/bin:/var/tmp/dist/binutils/bin:$PATH"
 
 [% IF c("var/rlbox") -%]
-    tar -C /var/tmp/dist -xf [% c('input_files_by_name/wasi-sysroot') %]
-    # XXX: We need the libclang_rt.builtins-wasm32.a in our clang lib directory.
-    # Copy it over.
-    # https://searchfox.org/mozilla-central/source/build/build-clang/build-clang.py#890,
-    # include it directly in our clang
-    rtdir=/var/tmp/dist/clang/lib/clang/[% pc("clang", "version") %]/lib/wasi
-    mkdir -p $rtdir
-    cp /var/tmp/dist/wasi-sysroot/lib/clang/*/lib/wasi/libclang_rt.builtins-wasm32.a $rtdir
-    export WASI_SYSROOT=/var/tmp/dist/wasi-sysroot/share/wasi-sysroot
+  tar -C /var/tmp/dist -xf [% c('input_files_by_name/wasi-sysroot') %]
+  # XXX: We need the libclang_rt.builtins-wasm32.a in our clang lib directory.
+  # Copy it over.
+  # https://searchfox.org/mozilla-central/source/build/build-clang/build-clang.py#890,
+  # include it directly in our clang
+  rtdir="/var/tmp/dist/clang/lib/clang/[% pc('llvm-project', 'var/llvm_major') %]/lib/wasi"
+  mkdir -p "$rtdir"
+  cp /var/tmp/dist/wasi-sysroot/lib/clang/*/lib/wasi/libclang_rt.builtins-wasm32.a "$rtdir/"
+  export WASI_SYSROOT=/var/tmp/dist/wasi-sysroot/share/wasi-sysroot
 [% END -%]
 
 tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
@@ -40,6 +40,8 @@ cat > .mozconfig << 'MOZCONFIG_EOF'
 export MOZ_INCLUDE_SOURCE_INFO=1
 export MOZ_SOURCE_REPO="[% c('var/gitlab_project') %]"
 export MOZ_SOURCE_CHANGESET=[% c("var/git_commit") %]
+
+ac_add_options --enable-update-channel=[% c("var/variant") %]
 MOZCONFIG_EOF
 
 [% c("var/set_MOZ_BUILD_DATE") %]
@@ -47,31 +49,49 @@ MOZCONFIG_EOF
 export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
 gradle_repo=/var/tmp/dist/gradle-dependencies
 export GRADLE_MAVEN_REPOSITORIES="file://$gradle_repo","file://$gradle_repo/maven2"
-export GRADLE_FLAGS="--no-daemon --offline"
+# Set the Maven local repository because Gradle ignores our overriding of $HOME.
+# It is only used for the local pubblication of single-arch AARs.
+export GRADLE_FLAGS="--no-daemon --offline -Dmaven.repo.local=$distdir/[% project %]"
 # Move the Gradle repo to a hard-coded location. The location is embedded in
 # the file chrome/toolkit/content/global/buildconfig.html so it needs to be
 # standardized for reproducibility.
 mv $rootdir/[% c('input_files_by_name/gradle-dependencies') %] $gradle_repo
-cp -r $gradle_repo/m2/* $gradle_repo
-
-rm -f configure
-rm -f js/src/configure
+cp -rl $gradle_repo/dl/android/maven2/* $gradle_repo || true
+cp -rl $gradle_repo/m2/* $gradle_repo || true
+cp -rl $gradle_repo/maven2/* $gradle_repo || true
 
 # We unbreak mach, see: https://bugzilla.mozilla.org/show_bug.cgi?id=1656993 and https://bugzilla.mozilla.org/show_bug.cgi?id=1755516
 export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
 # Create .mozbuild to avoid interactive prompt in configure
 mkdir "$HOME/.mozbuild"
 ./mach configure \
-    --with-base-browser-version=[% c("var/torbrowser_version") %] \
-    [% IF !c("var/rlbox") -%]--without-wasm-sandboxed-libraries[% END %]
+  --with-base-browser-version=[% c("var/torbrowser_version") %] \
+  [% IF !c("var/rlbox") -%]--without-wasm-sandboxed-libraries[% END %]
 
 ./mach build --verbose
 
-# We don't want the debug or "exoplayer" .aars, but the .aar that has `omni` in its name.
-find obj-* -type f -name geckoview*omni*.aar -exec cp {} $distdir/[% project %] \;
+[% IF !c("var/android_single_arch") -%]
+  mkdir "$distdir/[% project %]"
+  # We don't want the debug or "exoplayer" .aars, but the .aar that has `omni` in its name.
+  find obj-* -type f -name geckoview*omni*.aar -exec cp {} $distdir/[% project %] \;
+[% ELSE -%]
+  # For single-arch builds, we want to fake a fat aar anyway, to avoid having
+  # arch suffixes in filenames, or having to rename files.
+  cat >> mozconfig-android-all << 'MOZCONFIG_EOF'
+ac_add_options --enable-update-channel=[% c("var/channel") %]
+ac_add_options --with-base-browser-version=[% c("var/torbrowser_version") %]
+MOZCONFIG_EOF
+
+  pushd tools/torbrowser
+  make fat-aar ARCHS="[% c('arch') %]"
+  popd
+  MOZCONFIG=mozconfig-android-all ./mach gradle \
+    geckoview:publishWithGeckoBinariesDebugPublicationToMavenLocal \
+    exoplayer2:publishDebugPublicationToMavenLocal
+[% END -%]
 
 cd $distdir
 [% c('tar', {
-        tar_src => [ project ],
-        tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
-    }) %]
+    tar_src => [ project ],
+    tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
+  }) %]

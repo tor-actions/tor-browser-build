@@ -13,6 +13,18 @@ mkdir -p /var/tmp/build $output_dir
     compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')),
     gradle_tarfile => c("input_files_by_name/gradle"),
   }) %]
+# "Something" still uses this old binary name. Create a link as a workaround.
+# The correct fix would involve updating the source and/or using a newer
+# version of gradle.
+pushd $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin
+for arch in arm armv7a; do
+  ln -s llvm-strip "$arch-linux-androideabi-strip"
+done
+for arch in aarch64 i686 x86_64; do
+  ln -s llvm-strip "$arch-linux-android-strip"
+done
+popd
+
 tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
 unzip -d $rootdir $rootdir/[% c('input_files_by_name/jetifier') %]
 

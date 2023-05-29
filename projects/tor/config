@@ -32,7 +32,7 @@ targets:
         - zlib1g-dev
   android:
     var:
-      configure_opt_project: '--enable-android --enable-static-openssl --enable-static-libevent --enable-zstd --disable-tool-name-check --disable-system-torrc --disable-system-torrc'
+      configure_opt_project: '--enable-android --enable-static-openssl --enable-static-libevent --enable-zstd --disable-tool-name-check --disable-system-torrc'
 
 input_files:
   - project: container-image

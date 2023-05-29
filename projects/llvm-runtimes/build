@@ -1,0 +1,115 @@
+#!/bin/bash
+[% c("var/set_default_env") -%]
+distdir=/var/tmp/dist/[% project %]
+mkdir -p /var/tmp/dist
+tar -C /var/tmp/dist -xf [% c('input_files_by_name/clang') %]
+tar -C /var/tmp/dist -xf [% c('input_files_by_name/cmake') %]
+tar -C /var/tmp/dist -xf [% c('input_files_by_name/ninja') %]
+export PATH="/var/tmp/dist/clang/bin:/var/tmp/dist/ninja:/var/tmp/dist/cmake/bin:$PATH"
+
+[% pc(c('var/compiler'), 'var/setup', { compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')) }) %]
+
+tar -C /var/tmp/dist -xf [% c('input_files_by_name/binutils') %]
+export PATH="/var/tmp/dist/binutils/bin:$PATH"
+
+mkdir -p /var/tmp/build
+cd /var/tmp/build
+tar -xf $rootdir/[% c('input_files_by_name/clang-source') %]
+cd clang-source
+export LLVM_HOME=$(pwd)
+
+llvm_major="[% pc('llvm-project', 'var/llvm_major') %]"
+mkdir -p $distdir/lib/clang/$llvm_major/lib/linux/
+
+# Same trick as Mozilla: use an empty runtime because it is used only for tests
+mkdir /var/tmp/build/rt
+touch /var/tmp/build/rt/libgcc.a
+
+installdir=/var/tmp/build/install
+
+build_runtimes() {
+  mkdir -p "$installdir"
+  cd $LLVM_HOME
+  arch=$1
+  if [[ "$arch" == "armv7" ]]; then
+    arch="arm"
+  fi
+  target="$1-linux-android$2"
+  api_level=$2
+  libdir=$arch
+  if [[ "$arch" == "i686" ]]; then
+    libdir="i386"
+  fi
+  ## Common flags (from taskcluster/scripts/misc/build-llvm-common.sh)
+  COMMON_CMAKE_FLAGS="
+    -DCMAKE_INSTALL_PREFIX=$installdir
+    -DCMAKE_C_COMPILER_TARGET=$target
+    -DCMAKE_CXX_COMPILER_TARGET=$target
+    -DCMAKE_ASM_COMPILER_TARGET=$target
+    -DCMAKE_BUILD_TYPE=Release
+    -DLLVM_ENABLE_ASSERTIONS=OFF
+    -DLLVM_CONFIG_PATH=/var/tmp/dist/clang/bin/llvm-config
+    -DCMAKE_SYSROOT=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/sysroot
+    -DCMAKE_LINKER=/var/tmp/dist/clang/bin/ld.lld
+    -DCMAKE_SHARED_LINKER_FLAGS=-fuse-ld=lld
+    -DANDROID=1
+    -DANDROID_NATIVE_API_LEVEL=$api_level
+    -DSANITIZER_ALLOW_CXXABI=OFF
+    -DLLVM_DEFAULT_TARGET_TRIPLE=$arch-unknown-linux-android
+    -DCMAKE_C_COMPILER=/var/tmp/dist/clang/bin/clang
+    -DCMAKE_CXX_COMPILER=/var/tmp/dist/clang/bin/clang++
+    -DCMAKE_AR=/var/tmp/dist/clang/bin/llvm-ar
+    -DCMAKE_RANLIB=/var/tmp/dist/clang/bin/llvm-ranlib
+  "
+
+  ## compiler-rt
+
+  mkdir "build-compiler-rt-$arch"
+  cd "build-compiler-rt-$arch"
+
+  cmake ../compiler-rt/ -GNinja \
+    -DCMAKE_EXE_LINKER_FLAGS='-fuse-ld=lld --rtlib=libgcc -L /var/tmp/build/rt' \
+    -DCOMPILER_RT_BUILD_BUILTINS=ON \
+    -DCOMPILER_RT_BUILD_LIBFUZZER=OFF \
+    -DCOMPILER_RT_BUILD_MEMPROF=OFF \
+    -DCOMPILER_RT_BUILD_ORC=OFF \
+    -DCOMPILER_RT_BUILD_PROFILE=OFF \
+    -DCOMPILER_RT_BUILD_SANITIZERS=OFF \
+    -DCOMPILER_RT_BUILD_XRAY=OFF \
+    $COMMON_CMAKE_FLAGS
+
+  ninja -j[% c("num_procs") %] -v install
+
+  ## libunwind
+
+  cd /var/tmp/build/clang-source
+  mkdir "build-runtimes-$arch"
+  cmake -G Ninja -S runtimes -B "build-runtimes-$arch" \
+    -DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=ON \
+    -DCMAKE_C_COMPILER_WORKS=1 \
+    -DCMAKE_CXX_COMPILER_WORKS=1 \
+    -DLLVM_ENABLE_RUNTIMES=libunwind \
+    -DLIBUNWIND_ENABLE_SHARED=OFF \
+    $COMMON_CMAKE_FLAGS
+
+  cd "build-runtimes-$arch"
+  ninja -j[% c("num_procs") %] -v install
+
+  mv $installdir/lib/linux/* $distdir/lib/clang/$llvm_major/lib/linux/
+  # We are not copying libunwind's headers, but they should not be needed.
+  libunwind=$(find $installdir/lib -name libunwind.a)
+  mkdir $distdir/lib/clang/$llvm_major/lib/linux/$libdir/
+  mv $libunwind $distdir/lib/clang/$llvm_major/lib/linux/$libdir/
+  rm -rf "$installdir"
+}
+
+build_runtimes armv7 [% c('var/api_level_32') %]
+build_runtimes aarch64 [% c('var/api_level_64') %]
+build_runtimes i686 [% c('var/api_level_32') %]
+build_runtimes x86_64 [% c('var/api_level_64') %]
+
+cd /var/tmp/dist
+[% c('tar', {
+    tar_src => [ project ],
+    tar_args => '-czf ' _ dest_dir _ '/' _ c('filename'),
+  }) %]

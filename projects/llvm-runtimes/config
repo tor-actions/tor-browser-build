@@ -1,25 +1,14 @@
 # vim: filetype=yaml sw=2
-version: '[% c("var/llvm_version") %]'
+version: '[% pc("llvm-project", "version") %]'
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
 
 var:
-  llvm_version: '[% pc("llvm-project", "version") %]'
-
-targets:
-  android-armv7:
-    var:
-      libdir: 'arm-linux-androideabi/lib'
-  android-aarch64:
-    var:
-      libdir: 'aarch64-linux-android/lib64'
-  android-x86:
-    var:
-      libdir: 'i686-linux-android/lib'
-  android-x86_64:
-    var:
-      libdir: 'x86_64-linux-android/lib64'
+  # API level for armv7 and x86
+  api_level_32: 16
+  # API level for aarch64 and x86_64
+  api_level_64: 21
 
 input_files:
   - project: container-image
@@ -31,6 +20,8 @@ input_files:
     name: cmake
   - project: llvm-project
     name: clang-source
+  - project: clang
+    name: clang
   - project: ninja
     name: ninja
   - project: python

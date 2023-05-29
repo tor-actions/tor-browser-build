@@ -1,0 +1,156 @@
+#!/bin/bash
+
+# rust
+[% IF c("var/linux") || c("var/android");
+     SET toolchain_alias='linux64-rust';
+   ELSIF c("var/windows");
+     SET toolchain_alias='mingw32-rust';
+   ELSIF c("var/macos");
+     SET toolchain_alias='linux64-rust-macos';
+   END; %]
+read -d '' p << 'EOF' || true
+sub as_array {
+  ref $_[0] eq 'ARRAY' ? $_[0] : [ $_[0] ];
+}
+my $d = YAML::XS::LoadFile('taskcluster/ci/toolchain/rust.yml');
+foreach my $t (keys %$d) {
+  my $talias = as_array($d->{$t}{run}{'toolchain-alias'});
+  if (grep { $_ eq '[% toolchain_alias %]' } @$talias) {
+    my $channel;
+    foreach my $arg (@{$d->{$t}{run}{arguments}}) {
+      if ($arg eq '--channel') {
+        $channel = 1;
+        next;
+      }
+      if ($channel) {
+        print $arg;
+        exit;
+      }
+    }
+  }
+}
+EOF
+needed=$(perl -MYAML::XS -e "$p")
+current='[% pc("rust", "version") %]'
+check_update_needed rust "$needed" "$current"
+
+
+# clang
+[% IF c("var/linux") || c("var/android");
+     SET toolchain_alias='linux64-clang';
+   ELSIF c("var/windows");
+     SET toolchain_alias='linux64-clang-mingw-x64';
+   ELSIF c("var/macos");
+     SET toolchain_alias='macosx64-clang';
+   END; %]
+read -d '' p << 'EOF' || true
+sub as_array {
+  ref $_[0] eq 'ARRAY' ? $_[0] : [ $_[0] ];
+}
+my $d = YAML::XS::LoadFile('taskcluster/ci/toolchain/clang.yml');
+my $clang_toolchain;
+my $clang_fetch;
+TOOLCHAIN: foreach my $t (keys %$d) {
+  my $aliases = as_array($d->{$t}{run}{'toolchain-alias'}{'by-project'}{default});
+  foreach my $alias (@$aliases) {
+    if ($alias eq '[% toolchain_alias %]') {
+      foreach my $fetch (@{$d->{$t}{fetches}{toolchain}}) {
+        $clang_toolchain = $fetch if $fetch =~ m/^.*-clang-.*/;
+      }
+      foreach my $fetch (@{$d->{$t}{fetches}{fetch}}) {
+        $clang_fetch = $fetch if $fetch =~ m/^clang-.*/;
+      }
+      last TOOLCHAIN;
+    }
+  }
+}
+
+if (!$clang_toolchain && !$clang_fetch) {
+  print STDERR "Error: could not find clang toolchain\\n";
+  exit 1;
+}
+
+if (!$clang_fetch) {
+  foreach my $fetch (@{$d->{$clang_toolchain}{fetches}{fetch}}) {
+    $clang_fetch = $fetch if $fetch =~ m/^clang-.*/;
+  }
+}
+
+if (!$clang_fetch) {
+  print STDERR "Error: could not find clang fetch\\n";
+  exit 1;
+}
+
+my $fetch = YAML::XS::LoadFile('taskcluster/ci/fetch/toolchains.yml');
+print $fetch->{$clang_fetch}{fetch}{revision};
+EOF
+needed=$(perl -MYAML::XS -e "$p")
+current='[% pc("llvm-project", "git_hash") %]'
+check_update_needed clang "$needed" "$current"
+
+
+# cbindgen
+read -d '' p << 'EOF' || true
+if (m/^\\s*cbindgen_min_version\\s*=\\s*Version\\("([^"]+)"\\)/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat build/moz.configure/bindgen.configure | perl -ne "$p")
+current='[% pc("cbindgen", "version") %]'
+check_update_needed cbindgen "$needed" "$current"
+
+
+# nasm
+read -d '' p << 'EOF' || true
+my $nasm = YAML::XS::LoadFile('taskcluster/ci/toolchain/nasm.yml');
+my $linux64 = 'linux64-nasm';
+print substr $nasm->{$linux64}{'fetches'}{'fetch'}[0], 5;
+EOF
+needed=$(perl -MYAML::XS -e "$p")
+current='2.15.05'
+check_update_needed nasm "$needed" "$current"
+
+
+# node
+read -d '' p << 'EOF' || true
+sub l {
+  ref $_[0] eq 'ARRAY' ? $_[0] : [ $_[0] ];
+}
+
+my $d = YAML::XS::LoadFile('taskcluster/ci/toolchain/node.yml');
+my $node_toolchain;
+T: foreach my $t (keys %$d) {
+  foreach my $alias (@{l($d->{$t}{run}{'toolchain-alias'})}) {
+    if ($alias eq 'linux64-node') {
+      foreach my $fetch (@{$d->{$t}{fetches}{fetch}}) {
+        if ($fetch =~ m/^nodejs-.*/) {
+          $node_toolchain = $fetch;
+          last T;
+        }
+      }
+    }
+  }
+}
+
+exit 1 unless $node_toolchain;
+
+my $fetch = YAML::XS::LoadFile('taskcluster/ci/fetch/toolchains.yml');
+my ($version) = $fetch->{$node_toolchain}{fetch}{url} =~ m|^https://nodejs.org/dist/v([^/]+)/|;
+print "$version\\n";
+EOF
+needed=$(perl -MYAML::XS -e "$p")
+current='[% pc("node", "version") %]'
+check_update_needed node "$needed" "$current"
+
+
+# Python
+read -d '' p << 'EOF' || true
+if (m/^\\s*"Bootstrap currently only runs on Python ([^"]+)\\."/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat python/mozboot/bin/bootstrap.py | perl -ne "$p")
+current="3.6+" # 3.6.0
+check_update_needed python "$needed" "$current"

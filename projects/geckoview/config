@@ -14,15 +14,15 @@ container:
   use_container: 1
 
 var:
-  geckoview_version: 102.12.0esr
-  browser_branch: 12.5-1
+  geckoview_version: 115.1.0esr
+  browser_branch: 13.0-1
   browser_build: 2
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   gitlab_project: https://gitlab.torproject.org/tpo/applications/tor-browser
   git_commit: '[% exec("git rev-parse HEAD") %]'
   deps:
     - build-essential
-    - autoconf2.13
+    - autoconf
     - yasm
     - python3
     - python3-distutils
@@ -30,74 +30,25 @@ var:
     - openjdk-11-jdk-headless
   # this should be updated when the list of gradle dependencies is changed
   # see doc/how-to-create-gradle-dependencies-list.txt
-  gradle_dependencies_version: 11
-  gradle_version: 7.3
+  gradle_dependencies_version: 12
+  gradle_version: 7.5.1
+  variant: beta
+
+targets:
+  release:
+    var:
+      variant: release
+  nightly:
+    git_hash: 'tor-browser-[% c("var/geckoview_version") %]-[% c("var/browser_branch") %]'
+    tag_gpg_id: 0
+    var:
+      variant: nightly
 
 steps:
   merge_aars:
     filename: 'geckoview-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
     version: '[% c("abbrev") %]'
-    merge_aars: |
-      #!/bin/bash
-      [% c("var/set_default_env") -%]
-      [% pc(c('var/compiler'), 'var/setup', {
-          compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')),
-          gradle_tarfile => c("input_files_by_name/gradle"),
-        }) %]
-      distdir=/var/tmp/dist
-      builddir=/var/tmp/build
-      mkdir -p /var/tmp/build
-      mkdir -p $distdir/[% project %]
-
-      tar -C $distdir -xf [% c('input_files_by_name/node') %]
-      export PATH="/var/tmp/dist/node/bin:$PATH"
-
-      tar -C $builddir -xf [% c('input_files_by_name/geckoview_armv7') %]
-      tar -C $builddir -xf [% c('input_files_by_name/geckoview_aarch64') %]
-      tar -C $builddir -xf [% c('input_files_by_name/geckoview_x86') %]
-      tar -C $builddir -xf [% c('input_files_by_name/geckoview_x86_64') %]
-      tar -C $builddir -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
-
-      # Specify the architectures we want to merge
-      export MOZ_ANDROID_FAT_AAR_ARCHITECTURES=armeabi-v7a,arm64-v8a,x86,x86_64
-      export MOZ_ANDROID_FAT_AAR_ARMEABI_V7A=$builddir/geckoview/*armeabi-v7a*.aar
-      export MOZ_ANDROID_FAT_AAR_ARM64_V8A=$builddir/geckoview/*arm64-v8a*.aar
-      # Specifying just "x86" is not differentiating enough
-      export MOZ_ANDROID_FAT_AAR_X86=$builddir/geckoview/*x86-*.aar
-      export MOZ_ANDROID_FAT_AAR_X86_64=$builddir/geckoview/*x86_64*.aar
-
-      cd $builddir/[% project %]-[% c("version") %]
-      ln -s mozconfig-android-all .mozconfig
-      echo 'mk_add_options MOZ_PARALLEL_BUILD=[% c("num_procs") %]' >> .mozconfig
-
-      [% c("var/set_MOZ_BUILD_DATE") %]
-
-      export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
-      gradle_repo=/var/tmp/dist/gradle-dependencies
-      export GRADLE_MAVEN_REPOSITORIES="file://$gradle_repo","file://$gradle_repo/maven2"
-      export GRADLE_FLAGS="--no-daemon --offline"
-      mv $rootdir/[% c('input_files_by_name/gradle-dependencies') %] $gradle_repo
-      cp -r $gradle_repo/m2/* $gradle_repo
-
-      # We unbreak mach, see: https://bugzilla.mozilla.org/show_bug.cgi?id=1656993.
-      export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
-      # Create .mozbuild to avoid interactive prompt in configure
-      mkdir "$HOME/.mozbuild"
-      # We still need to specify --tor-browser-version due to bug 34005.
-      ./mach configure \
-        --with-base-browser-version=[% c("var/torbrowser_version") %] \
-        [% IF !c("var/rlbox") -%]--without-wasm-sandboxed-libraries[% END %]
-
-      ./mach build --verbose
-      find obj-* -regex '.*geckoview.*omni.*\(aar\|pom\)' -exec cp {} $distdir/[% project %] \;
-
-      cd $distdir/
-      [% c('tar', {
-              tar_src => [ project ],
-              tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
-         }) %]
-
-
+    merge_aars: '[% INCLUDE merge_aars %]'
     input_files:
       - project: container-image
         pkg_type: build
@@ -136,16 +87,11 @@ steps:
 
   list_toolchain_updates:
     git_url: https://github.com/mozilla/gecko-dev.git
-    git_hash: esr102
+    git_hash: esr115
     tag_gpg_id: 0
     input_files: []
     container:
       use_container: 0
-
-targets:
-  nightly:
-    git_hash: 'tor-browser-[% c("var/geckoview_version") %]-[% c("var/browser_branch") %]'
-    tag_gpg_id: 0
 
 input_files:
   - project: container-image
@@ -165,8 +111,8 @@ input_files:
     name: nasm
   - project: clang
     name: clang
-  - project: 'compiler-rt'
-    name: 'compiler-rt'
+  - project: llvm-runtimes
+    name: llvm-runtimes
   - project: wasi-sysroot
     name: wasi-sysroot
     enable: '[% c("var/rlbox") %]'
