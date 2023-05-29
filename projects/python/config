@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-version: 3.6.8
+version: 3.11.3
 filename: 'python-[% c("var/build_id") %].tar.gz'
 container:
   use_container: 1
@@ -8,9 +8,12 @@ var:
     - xz-utils
     - build-essential
     - python-all
-    - zlib1g-dev
-    - libssl-dev
+    - libbz2-dev
+    - libffi-dev
+    - libncurses-dev
     - libsqlite3-dev
+    - libssl-dev
+    - zlib1g-dev
 
   setup: |
     mkdir -p /var/tmp/dist
@@ -24,3 +27,6 @@ input_files:
     gpg_keyring: python.gpg
     sig_ext: asc
     file_gpg_id: 1
+  - name: '[% c("var/compiler") %]'
+    project: '[% c("var/compiler") %]'
+    enable: '[% c("var/linux") %]'
