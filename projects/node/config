@@ -7,20 +7,6 @@ var:
   node_version: 12.22.12
   node_hash: bc42b7f8495b9bfc7f7850dd180bb02a5bdf139cc232b8c6f02a6967e20714f2
 
-targets:
-  windows:
-    var:
-      arch_deps:
-        - python2
-  macos:
-    var:
-      arch_deps:
-        - python2
-  android:
-    var:
-      arch_deps:
-        - python2
-
 input_files:
   - project: container-image
   - project: binutils
@@ -28,6 +14,9 @@ input_files:
     enable: '[% c("var/linux") %]'
   - project: '[% c("var/compiler") %]'
     name: '[% c("var/compiler") %]'
+    enable: '[% c("var/linux") %]'
+  - name: python
+    project: python
     enable: '[% c("var/linux") %]'
   - URL: 'https://nodejs.org/dist/v[% c("var/node_version") %]/node-v[% c("var/node_version") %].tar.xz'
     sha256sum: '[% c("var/node_hash") %]'

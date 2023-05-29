@@ -7,7 +7,7 @@ container:
 var:
   ddmg: '[% INCLUDE ddmg.sh %]'
   deps:
-    - python
+    - python3
     - libparallel-forkmanager-perl
     - libfile-slurp-perl
     - zip

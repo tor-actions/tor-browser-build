@@ -5,6 +5,7 @@
                               hardened_gcc => 0 }) %]
   tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/binutils') %]
   export PATH="/var/tmp/dist/binutils/bin:$PATH"
+  [% pc('python', 'var/setup', { python_tarfile => c('input_files_by_name/python') }) %]
 [% END -%]
 distdir=/var/tmp/dist/[% project %]
 tar -xf [% c('input_files_by_name/node') %]

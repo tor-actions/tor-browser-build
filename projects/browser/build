@@ -329,7 +329,7 @@ BROWSER_NSI
   # See https://gitlab.torproject.org/tpo/applications/tor-browser-build/-/issues/40439#note_2838724
   mkdir $rootdir/extensions
   mv "$TBDIR/$EXTSPATH/"* $rootdir/extensions
-  MOZ_AUTOMATION=1 $firefox_src/mach python $firefox_src/toolkit/mozapps/installer/unify.py "$TBDIR" "$TBDIR_AARCH64"
+  MOZ_AUTOMATION=1 $firefox_src/mach python3 $firefox_src/toolkit/mozapps/installer/unify.py "$TBDIR" "$TBDIR_AARCH64"
   mkdir -p "$TBDIR/$EXTSPATH"
   mv $rootdir/extensions/* "$TBDIR/$EXTSPATH/"
   rm -Rf "$TBDIR_AARCH64"
@@ -351,7 +351,7 @@ cp -a ${TB_STAGE_DIR} $distdir/$PKG_DIR
 [% IF c("var/updater_enabled") -%]
   pushd "$TBDIR[% IF c("var/macos") %]/Contents/Resources/[% END %]"
   rm -f precomplete
-  python $MARTOOLS/createprecomplete.py
+  python3 $MARTOOLS/createprecomplete.py
   popd
 [% END -%]
 cd $distdir
