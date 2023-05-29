@@ -5,7 +5,7 @@ version: '[% c("abbrev") %]'
 # Mozilla and re-use the LLVM we already build.
 # So, be sure to update also wasi-libc and wasi-config when you update this
 # git hash!
-git_hash: 37ae6af88201884c8b98a65adcd6d8cd1284f95e
+git_hash: 935fe1acd2fcd7ea4aed2d5ee4527482862b6344
 git_url: https://github.com/WebAssembly/wasi-sdk.git
 git_submodule: 0
 
@@ -33,4 +33,3 @@ input_files:
     project: wasi-config
   - name: wasi-libc
     project: wasi-libc
-  - filename: '0001-Sort-the-object-list-passed-to-ar-in-the-Makefile.patch'
