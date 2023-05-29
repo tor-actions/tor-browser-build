@@ -24,3 +24,5 @@ input_files:
   - project: python
     name: python
     enable: '[% c("var/linux") %]'
+  - filename: use-fixed-chunk-size-for-uuid.patch
+    enable: '[% c("var/macos") %]'

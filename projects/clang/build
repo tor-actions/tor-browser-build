@@ -16,6 +16,12 @@ mkdir -p /var/tmp/build
 cd /var/tmp/build
 tar -xf $rootdir/[% c('input_files_by_name/clang-source') %]
 cd clang-source
+[% IF c("var/macos") -%]
+  # Remove once we update to a version that includes commit
+  # 359f170f5f712ee714193b46bad45a45656b2c59 (> 16.0.6)
+  # https://github.com/llvm/llvm-project/issues/63961
+  patch -p1 < $rootdir/use-fixed-chunk-size-for-uuid.patch
+[% END -%]
 export LLVM_HOME=$(pwd)
 mkdir build
 cd build
