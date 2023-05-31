@@ -13,7 +13,8 @@ var:
 
 targets:
   nightly:
-    git_hash: main
+    # Set fixed commit until tor-browser-build#40869 is done
+    git_hash: a34b4cad6d3c20f4abdec357e01101751a583f88
     version: '[% c("abbrev") %]'
     tag_gpg_id: 0
     var:
