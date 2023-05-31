@@ -14,8 +14,8 @@ input_files:
   - project: container-image
   - name: tor
     project: tor
-  - name: obfs4
-    project: obfs4
+  - name: lyrebird
+    project: lyrebird
   - name: snowflake
     project: snowflake
   - project: webtunnel

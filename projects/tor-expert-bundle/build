@@ -9,7 +9,7 @@ tar -xkf $rootdir/[% c('input_files_by_name/tor') %]
 cd tor
 mkdir pluggable_transports && cd pluggable_transports
 
-tar -xkf $rootdir/[% c('input_files_by_name/obfs4') %]
+tar -xkf $rootdir/[% c('input_files_by_name/lyrebird') %]
 tar -xkf $rootdir/[% c('input_files_by_name/snowflake') %]
 tar -xkf $rootdir/[% c('input_files_by_name/webtunnel') %]
 tar -xkf $rootdir/[% c('input_files_by_name/conjure') %]

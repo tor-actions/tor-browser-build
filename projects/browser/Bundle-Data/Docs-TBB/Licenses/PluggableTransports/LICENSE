@@ -145,10 +145,10 @@ warranty. See LICENSE.CC0.
 
 ===============================================================================
 
-obfs4
+lyrebird
 
-Copyright (c) 2014, Yawning Angel <yawning at torproject dot org>
-All rights reserved.
+Copyright (c) 2023, The Tor Project
+Copyright (c) 2014-2023, Yawning Angel <yawning at schwanenlied dot me>
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

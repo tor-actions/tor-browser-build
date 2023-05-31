@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
-version: 0.0.14-tor2
-git_url: https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/obfs4.git
-git_hash: 'obfs4proxy-[% c("version") %]'
+version: 0.1.0
+git_url: https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/lyrebird.git
+git_hash: 'lyrebird-[% c("version") %]'
 tag_gpg_id: 1
 gpg_keyring: anti-censorship.gpg
 
@@ -9,7 +9,7 @@ container:
   use_container: 1
 
 var:
-  go_vendor_sha256sum: 5d2d82d00afc5fe044ee6df718ffe066b7d9e5446944c0ee0870e060e4e6bcc8
+  go_vendor_sha256sum: d95d1fa8ce3904b76395b20ef169e8ef2b039fa485764b74739bb6290631537d
 
 targets:
   nightly:
@@ -17,7 +17,7 @@ targets:
     version: '[% c("abbrev") %]'
     tag_gpg_id: 0
     var:
-      go_vendor_sha256sum: 8b7e04a43bfbcdc829ea5093d8ee0a50eddefad543acd201b25424b33a7f882b
+      go_vendor_sha256sum: d95d1fa8ce3904b76395b20ef169e8ef2b039fa485764b74739bb6290631537d
 
 steps:
   build:
@@ -31,7 +31,7 @@ steps:
         enable: '[% c("var/android") %]'
       - name: go_vendor
         pkg_type: go_vendor
-        project: obfs4
+        project: lyrebird
         norec:
           sha256sum: '[% c("var/go_vendor_sha256sum") %]'
         target_replace:

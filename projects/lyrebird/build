@@ -17,9 +17,8 @@ cd /var/tmp/build/[% project %]-[% c('version') %]
 
 tar -xf $rootdir/[% c('input_files_by_name/go_vendor') %]
 
-cd obfs4proxy
-go build -mod=vendor -ldflags '-s'
-cp -a obfs4proxy[% IF c("var/windows") %].exe[% END %] $distdir
+go build -mod=vendor -ldflags '-s' ./cmd/lyrebird
+cp -a lyrebird[% IF c("var/windows") %].exe[% END %] $distdir
 
 cd $distdir
 [% c('tar', {

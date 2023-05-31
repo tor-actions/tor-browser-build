@@ -601,11 +601,11 @@ go_vendor-conjure-alpha: submodule-update
 go_vendor-webtunnel-alpha: submodule-update
 	$(rbm) build webtunnel --step go_vendor --target alpha --target torbrowser-linux-x86_64
 
-go_vendor-obfs4-alpha: submodule-update
-	$(rbm) build obfs4 --step go_vendor --target alpha --target torbrowser-linux-x86_64
+go_vendor-lyrebird-alpha: submodule-update
+	$(rbm) build lyrebird --step go_vendor --target alpha --target torbrowser-linux-x86_64
 
-go_vendor-obfs4-nightly: submodule-update
-	$(rbm) build obfs4 --step go_vendor --target nightly --target torbrowser-linux-x86_64
+go_vendor-lyrebird-nightly: submodule-update
+	$(rbm) build lyrebird --step go_vendor --target nightly --target torbrowser-linux-x86_64
 
 
 ##################
