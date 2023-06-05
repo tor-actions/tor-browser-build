@@ -95,9 +95,8 @@ steps:
       #!/bin/bash
       set -e
       mv -v [% c("input_files_by_name/build_tools") %] [% dest_dir _ '/' _ c('filename') %]
-    var:
-      container:
-        use_container: 0
+    container:
+      use_container: 0
     input_files:
       - URL: '[% c("var/google_repo") %]/[% c("var/build_tools_filename") %]'
         name: build_tools

@@ -17,6 +17,9 @@ echo
 test -f "$steps_dir/linux-signer-signmars.done" ||
   read -sp "Enter nssdb7 (mar signing) passphrase: " NSSPASS
 echo
+test -f "$steps_dir/linux-signer-sign-android-apks.done" ||
+  read -sp "Enter android apk signing password ($tbb_version_type): " KSPASS
+echo
 #test -f "$steps_dir/linux-signer-authenticode-signing.done" ||
 #  read -sp "Enter windows authenticode (yubihsm) passphrase: " YUBIPASS
 #echo
@@ -103,6 +106,18 @@ EOF
 }
 
 function sync-after-signmars {
+  "$script_dir/sync-linux-signer-to-local"
+}
+
+function linux-signer-sign-android-apks {
+  ssh "$ssh_host_linux_signer" 'bash -s' << EOF
+  export KSPASS=$KSPASS
+  ~/signing-$SIGNING_PROJECTNAME-$tbb_version_type/linux-signer-sign-android-apks.$SIGNING_PROJECTNAME
+EOF
+  unset KSPASS
+}
+
+function sync-after-sign-android-apks {
   "$script_dir/sync-linux-signer-to-local"
 }
 
@@ -199,6 +214,10 @@ do_step sync-scripts-to-linux-signer
 do_step sync-before-linux-signer-signmars
 do_step linux-signer-signmars
 do_step sync-after-signmars
+is_project torbrowser && \
+  do_step linux-signer-sign-android-apks
+is_project torbrowser && \
+  do_step sync-after-sign-android-apks
 #do_step linux-signer-authenticode-signing
 #do_step sync-after-authenticode-signing
 #do_step authenticode-timestamping

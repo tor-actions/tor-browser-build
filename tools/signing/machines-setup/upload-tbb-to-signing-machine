@@ -36,6 +36,12 @@ if ! test -f "./out/yubihsm-shell/$yubihsm_filename"; then
   echo "Fetched $yubihsm_filename"
 fi
 
+android_build_tools_filename=$(./rbm/rbm showconf --step get_build_tools android-toolchain filename)
+if ! test -f "./out/android-toolchain/$android_build_tools_filename"; then
+  ./rbm/rbm build --step get_build_tools android-toolchain
+  echo "Fetched $android_build_tools_filename"
+fi
+
 signing_machine='linux-signer'
 setup_user='setup'
 signing_dir='/signing'
@@ -43,14 +49,26 @@ signing_dir='/signing'
 echo "Uploading $osslsigncodefile to $signing_machine"
 chmod go+r "./out/osslsigncode/$osslsigncodefile"
 rsync -v "./out/osslsigncode/$osslsigncodefile" "$setup_user@$signing_machine:$signing_dir/$osslsigncodefile"
+
 echo "Uploading rbm.tar to $signing_machine"
 rsync -v "$tmpdir/rbm.tar" "$setup_user@$signing_machine:$signing_dir/rbm.tar"
+
 echo "Uploading $martools_filename"
 chmod go+r "./out/mar-tools/$martools_filename"
 rsync -v "./out/mar-tools/$martools_filename" "$setup_user@$signing_machine:$signing_dir/$martools_filename"
+
 echo "Uploading $yubihsm_filename"
 chmod go+r "./out/yubihsm-shell/$yubihsm_filename"
 rsync -v "./out/yubihsm-shell/$yubihsm_filename" "$setup_user@$signing_machine:$signing_dir/$yubihsm_filename"
+
+echo "Uploading $android_build_tools_filename"
+chmod go+r "./out/android-toolchain/$android_build_tools_filename"
+rsync -v "./out/android-toolchain/$android_build_tools_filename" "$setup_user@$signing_machine:$signing_dir/$android_build_tools_filename"
+echo "Extracting $android_build_tools_filename"
+ssh "$setup_user@$signing_machine" mkdir -p $signing_dir/android-build-tools
+ssh "$setup_user@$signing_machine" unzip -qo -d $signing_dir/android-build-tools "$signing_dir/$android_build_tools_filename"
+ssh "$setup_user@$signing_machine" chmod -R o+rX "$signing_dir/$android_build_tools_filename"
+
 echo "Uploading tor-browser-build.tar to $signing_machine"
 scp -p "$tbbtar" "$setup_user@$signing_machine:$signing_dir/"
 echo "Extracting tor-browser-build.tar on $signing_machine"

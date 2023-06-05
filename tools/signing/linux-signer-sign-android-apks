@@ -1,0 +1,83 @@
+#!/bin/bash
+
+set -e
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source "$script_dir/functions"
+source "$script_dir/set-config.generated-config"
+
+topdir="$script_dir/../.."
+ARCHS="armv7 aarch64 x86 x86_64"
+projname=$(project-name)
+# tbb_version_type is used in wrappers/sign-apk, so we export it
+export tbb_version_type
+
+check_installed_packages() {
+  local packages='unzip openjdk-11-jdk-headless openjdk-11-jre-headless'
+  for package in $packages
+  do
+    dpkg -s "$package" | grep -q '^Status: install ok installed$' || \
+      exit_error "package $package is missing"
+  done
+}
+
+setup_build_tools() {
+  build_tools_dir=/signing/android-build-tools
+  test -f "$build_tools_dir"/android-12/apksigner || \
+    exit_error "$build_tools_dir/android-12/apksigner is missing"
+  export PATH="$build_tools_dir/android-12:${PATH}"
+}
+
+sign_apk() {
+  sudo -u signing-apk -- /signing/tor-browser-build/tools/signing/wrappers/sign-apk "$(pwd)/$1" "$(pwd)/$2"
+}
+
+verify_apk() {
+  verified=$(apksigner verify --print-certs --verbose "$1")
+  scheme_v1="Verified using v1 scheme (JAR signing): true"
+  scheme_v2="Verified using v2 scheme (APK Signature Scheme v2): true"
+
+  # Verify the expected signing key was used, Alpha verses Release based on the filename.
+  if test "$tbb_version_type" = "alpha"; then
+    cert_digest="Signer #1 certificate SHA-256 digest: 15f760b41acbe4783e667102c9f67119be2af62fab07763f9d57f01e5e1074e1"
+    pubkey_digest="Signer #1 public key SHA-256 digest: 4e617e6516f81123ca58e718d617a704ac8365c575bd9e7a731ba5dd0476869d"
+  else
+    cert_digest="Signer #1 certificate SHA-256 digest: 20061f045e737c67375c17794cfedb436a03cec6bacb7cb9f96642205ca2cec8"
+    pubkey_digest="Signer #1 public key SHA-256 digest: 343ca8a2e5452670bdc335a181a4baed909f868937d68c4653e44ef84de8dfc6"
+  fi
+  for digest in "${scheme_v1}" "${scheme_v2}" "${cert_digest}" "${pubkey_digest}"; do
+    if ! echo "${verified}" | grep -q "${digest}"; then
+      echo "Expected digest not found:"
+      echo ${digest}
+      echo "in:"
+      echo ${verified}
+      exit 1
+    fi
+  done
+}
+
+check_installed_packages
+
+if [ -z "$KSPASS" ]; then
+    echo "Enter keystore passphrase"
+    stty -echo; read KSPASS; stty echo
+    export KSPASS
+fi
+
+setup_build_tools
+
+mkdir -p ~/"$SIGNING_PROJECTNAME-$tbb_version-apks"
+chgrp signing ~/"$SIGNING_PROJECTNAME-$tbb_version-apks"
+chmod g+w ~/"$SIGNING_PROJECTNAME-$tbb_version-apks"
+cp -af ~/"$SIGNING_PROJECTNAME-$tbb_version"/*.apk ~/"$SIGNING_PROJECTNAME-$tbb_version-apks"
+cd ~/"$SIGNING_PROJECTNAME-$tbb_version-apks"
+
+# Sign all packages
+for arch in ${ARCHS}; do
+  qa_apk=${projname}-${tbb_version}-android-${arch}-multi-qa.apk
+  signed_apk=${projname}-${tbb_version}-android-${arch}-multi.apk
+  sign_apk "$qa_apk" "$signed_apk"
+  verify_apk "$signed_apk"
+  cp -f "$signed_apk" ~/"$SIGNING_PROJECTNAME-$tbb_version"
+done
+
+rm -Rf ~/"$SIGNING_PROJECTNAME-$tbb_version-apks"
