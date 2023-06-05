@@ -2,20 +2,52 @@
 
 <!-- Bookkeeping information for release management -->
 
-- ### Related Issues
-  - tor-browser#xxxxx
-  - tor-browser-build#xxxxx
-  - etc
+### Related Issues
+- tor-browser#xxxxx
+- mullvad-browser#xxxxx
+- tor-browser-build#xxxxx
 
-- ### Backport Timeline
-  - [ ] **Immediate** - patchsets for critical bug fixes or other major blocker (e.g. fixes for a 0-day exploit) OR patchsets with trivial changes which do not need testing (e.g. fixes for typos or fixes easily verified in a local developer build)
-  - [ ] **Next Minor Stable Release** - patchset that needs to be verified in nightly before backport
-  - [ ] **Eventually** - patchset that needs to be verified in alpha before backport
-  - [ ] **No Backport** - patchset for the next major stable
+### Backporting
 
-- ### Issue Tracking
-  - [ ] Link resolved issues with appropriate [Release Prep issue](https://gitlab.torproject.org/groups/tpo/applications/-/issues/?sort=updated_desc&state=opened&label_name%5B%5D=Release%20Prep&first_page_size=20) for changelog generation
+#### Timeline
+- [ ] **Immediate**: patchset needed as soon as possible
+- [ ] **Next Minor Stable Release**: patchset that needs to be verified in nightly before backport
+- [ ] **Eventually**: patchset that needs to be verified in alpha before backport
+- [ ] **No Backport (preferred)**: patchset for the next major stable
 
-## Change Description
+#### (Optional) Justification
+- [ ] **Emergency security update**: patchset fixes CVEs, 0-days, etc
+- [ ] **Censorship event**: patchset enables censorship circumvention
+- [ ] **Critical bug-fix**: patchset fixes a bug in core-functionality
+- [ ] **Consistency**: patchset which would make development easier if it were in both the alpha and release branches; developer tools, build system changes, etc
+- [ ] **Sponsor required**: patchset required for sponsor
+- [ ] **Other**: please explain
 
-<!-- Whatever context the reviewer needs to effectively review the patchset -->
+### Issue Tracking
+- [ ] Link resolved issues with appropriate [Release Prep issue](https://gitlab.torproject.org/groups/tpo/applications/-/issues/?sort=updated_desc&state=opened&label_name%5B%5D=Release%20Prep&first_page_size=20) for changelog generation
+
+### Review
+
+#### Request Reviewer
+
+- [ ] Request review from an applications developer depending on modified system:
+  - **NOTE**: if the MR modifies multiple areas, please `/cc` all the relevant reviewers (since gitlab only allows 1 reviewer)
+  - **accessibility** : henry
+  - **android** : dan
+  - **build system** : boklm
+  - **extensions** : ma1
+  - **firefox internals (XUL/JS/XPCOM)** : ma1
+  - **fonts** : pierov
+  - **frontend (implementation)** : henry
+  - **frontend (review)** : donuts, richard
+  - **localization** : henry, pierov
+  - **nightly builds** : boklm
+  - **rebases/release-prep** : dan_b, ma1, pierov, richard
+  - **security** : ma1
+  - **signing** : boklm, richard
+  - **updater** : pierov
+  - **misc/other** : pierov, richard
+
+#### Change Description
+
+<!-- Whatever context the reviewer needs to effectively review the patchset; if the patch includes UX updates be sure to include screenshots/video of how any new behaviour -->
