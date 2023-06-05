@@ -1,0 +1,98 @@
+#!/bin/bash
+set -e
+
+function exit_error {
+  for msg in "$@"
+  do
+    echo "$msg" >&2
+  done
+  exit 1
+}
+
+if test "$tbb_version_type" != 'release' \
+  && test "$tbb_version_type" != 'alpha'; then
+  exit_error "Unexpected value for tbb_version_type: $tbb_version_type"
+fi
+
+android_signing_key_dir=/home/signing-apk/keys
+android_signing_key_path="$android_signing_key_dir/tba_$tbb_version_type.p12"
+test -f "$android_signing_key_path" || exit_error "$android_signing_key_path is missing"
+
+setup_build_tools() {
+  build_tools_dir=/signing/android-build-tools
+  test -f "$build_tools_dir"/android-12/apksigner || \
+    exit_error "$build_tools_dir/android-12/apksigner is missing"
+  export PATH="$build_tools_dir/android-12:${PATH}"
+}
+
+# Sign individual apk
+sign_apk() {
+    INPUTAPK="$1"
+    OUTPUTAPK="$2"
+
+    # https://developer.android.com/studio/publish/app-signing#sign-manually
+    # After running `gradlew assembleRelease`, creates an unsigned-unaligned apk
+
+    # Aligning ensures that all uncompressed data starts with a particular byte
+    # alignment relative to the start of the file, which may reduce the amount
+    # of RAM consumed by an app.
+    # zipalign -v -p 4 my-app-unsigned.apk my-app-unsigned-aligned.apk
+    echo Aligning and signing ${INPUTAPK}
+
+    # Append the different stages of signing
+    UNSIGNED_UNALIGNED_APK=`basename "${INPUTAPK}" | sed 's/\.apk/-unsigned-unaligned.apk/'`
+    UNSIGNED_APK=`echo "${UNSIGNED_UNALIGNED_APK}" | sed 's/-unaligned//'`
+    SIGNED_APK=`echo "${UNSIGNED_APK}" | sed 's/-unsigned//'`
+
+    # ${INPUTAPK} is full path. We copy to local tmp directory.
+    cp "${INPUTAPK}" "${UNSIGNED_UNALIGNED_APK}"
+
+    # Step 1: Align
+    zipalign -v -p 4 "${UNSIGNED_UNALIGNED_APK}" "${UNSIGNED_APK}"
+    if [ ! $? = 0 ]; then
+        echo "zipalign failed"
+        exit 1
+    fi
+    echo zipalign succeeded
+
+    # Step 2: Verify alignment
+    zipalign -vc 4 "${UNSIGNED_APK}"
+    if [ ! $? = 0 ]; then
+        echo "zipalign verify failed"
+        exit 1
+    fi
+    echo zipalign verify succeeded
+
+    # Step 3: Sign
+    # Use this command if reading key from file
+    apksigner sign --verbose -ks ${android_signing_key_path} --ks-type pkcs12 --ks-pass env:KSPASS --debuggable-apk-permitted=false --out "${SIGNED_APK}" "${UNSIGNED_APK}"
+
+    # Or, use below command if using a hardware token
+    # apksigner sign --verbose --provider-class sun.security.pkcs11.SunPKCS11 --provider-arg pkcs11_java.cfg --ks NONE --ks-type PKCS11 --debuggable-apk-permitted=false --out "${SIGNED_APK}" "${UNSIGNED_APK}"
+
+    if [ ! $? = 0 ]; then
+        echo "apksigner sign failed"
+        exit 1
+    fi
+    echo apksigner sign succeeded
+
+    # Step 4: Verify signature
+    apksigner verify --verbose "${SIGNED_APK}"
+    if [ ! $? = 0 ]; then
+        echo "apksigner verify failed"
+        exit 1
+    fi
+
+    mv -f "${SIGNED_APK}" "$OUTPUTAPK"
+    echo apksigner verify succeeded
+}
+
+setup_build_tools
+
+tmpdir=$(mktemp -d)
+cd "$tmpdir"
+
+sign_apk "$1" "$2"
+
+cd -
+rm -Rf "$tmpdir"

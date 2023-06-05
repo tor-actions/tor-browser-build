@@ -178,7 +178,6 @@ Tor Browser Stable lives in the various `maint-$(TOR_BROWSER_MAJOR).$(TOR_BROWSE
     - `cd tor-browser-build/tools/signing/`
     - `./macos-signer-proxy`
 - [ ] On `$(STAGING_SERVER)` in a separate `screen` session, ensure tor daemon is running with SOCKS5 proxy on the default port 9050
-- [ ] apk signing : copy signed `*multi.apk` files to the unsigned build outputs directory
 - [ ] run do-all-signing script:
     - `cd tor-browser-build/tools/signing/`
     - `./do-all-signing.sh`

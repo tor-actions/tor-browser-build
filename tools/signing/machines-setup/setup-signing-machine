@@ -83,11 +83,12 @@ create_group signing
 create_user signing-gpg
 create_user signing-mar
 create_user signing-win yubihsm
-
+create_user signing-apk signing
 
 sudoers_file sign-gpg
 sudoers_file sign-mar
 sudoers_file sign-exe
+sudoers_file sign-apk
 
 authorized_keys boklm boklm-tb-release.pub boklm-yk1.pub
 create_user richard signing
@@ -111,6 +112,9 @@ install_packages opensc libengine-pkcs11-openssl
 # Install deps for building yubihsm-shell
 install_packages cmake libusb-1.0-0-dev libedit-dev gengetopt libpcsclite-dev help2man chrpath dh-exec
 
+# Install deps for android/apk signing
+install_packages unzip openjdk-11-jdk-headless openjdk-11-jre-headless
+
 # Build and install yubihsm-pkcs11 package
 create_user build-pkgs
 if ! dpkg-query -s yubihsm-pkcs11 2> /dev/null | grep -q '^Status: .* installed'; then
@@ -132,3 +136,13 @@ if ! test -d /home/signing-mar/mar-tools; then
   chmod go+rX "$tmpdir/mar-tools"/*
   mv "$tmpdir/mar-tools" /home/signing-mar/mar-tools
 fi
+
+for rel in release alpha; do
+  keypath=/home/signing-apk/keys/tba_$rel.p12
+  if ! test -f "$keypath"; then
+    echo "$rel key for android should be put in $keypath"
+  else
+    chown signing-apk "$keypath"
+    chmod 700 "$keypath"
+  fi
+done
