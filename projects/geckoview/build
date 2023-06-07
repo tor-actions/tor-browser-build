@@ -41,7 +41,13 @@ export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/nasm/bi
 tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
 
 cd /var/tmp/build/[% project %]-[% c("version") %]
-ln -s mozconfig-[% c("var/osname") %] .mozconfig
+cat > .mozconfig << 'MOZCONFIG_EOF'
+. $topsrcdir/mozconfig-[% c("var/osname") %]
+
+export MOZ_INCLUDE_SOURCE_INFO=1
+export MOZ_SOURCE_REPO="[% c('var/gitlab_project') %]"
+export MOZ_SOURCE_CHANGESET=[% c("var/git_commit") %]
+MOZCONFIG_EOF
 
 eval $(perl $rootdir/get-moz-build-date [% c("var/copyright_year") %] [% c("var/torbrowser_version") %])
 if [ -z $MOZ_BUILD_DATE ]
