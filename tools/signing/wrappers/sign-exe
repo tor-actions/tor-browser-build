@@ -11,10 +11,12 @@ if test $(whoami) != 'signing-win'; then
   exit 2
 fi
 
-yubipass="$1"
+pass="$1"
 to_sign_exe="$2"
 
-tpo_cert=/home/signing-win/tpo-cert.crt
+key_dir=/home/signing-win/keys/key-1
+tpo_cert=$key_dir/the_tor_project_inc.crt
+tpo_key=$key_dir/private.pem
 
 if ! test -f "$tpo_cert"; then
   echo "File $tpo_cert is missing" >&2
@@ -26,12 +28,10 @@ rm -f "$output_signed_exe"
 
 export 'YUBIHSM_PKCS11_CONF=/signing/tor-browser-build/tools/signing/machines-setup/etc/yubihsm_pkcs11.conf'
 /home/signing-win/osslsigncode/bin/osslsigncode \
-  -pkcs11engine /usr/lib/x86_64-linux-gnu/engines-1.1/pkcs11.so \
-  -pkcs11module /usr/lib/x86_64-linux-gnu/pkcs11/yubihsm_pkcs11.so \
-  -pass "$yubipass" \
+  -pass "$pass" \
   -h sha256 \
   -certs "$tpo_cert" \
-  -key 1c40 \
+  -key "$tpo_key" \
   "$to_sign_exe" "$output_signed_exe"
 
 chmod 644 "$output_signed_exe"
