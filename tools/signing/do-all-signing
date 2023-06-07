@@ -20,9 +20,9 @@ echo
 test -f "$steps_dir/linux-signer-sign-android-apks.done" ||
   read -sp "Enter android apk signing password ($tbb_version_type): " KSPASS
 echo
-#test -f "$steps_dir/linux-signer-authenticode-signing.done" ||
-#  read -sp "Enter windows authenticode (yubihsm) passphrase: " YUBIPASS
-#echo
+test -f "$steps_dir/linux-signer-authenticode-signing.done" ||
+  read -sp "Enter windows authenticode passphrase: " YUBIPASS
+echo
 test -f "$steps_dir/linux-signer-gpg-sign.done" ||
   read -sp "Enter gpg passphrase: " GPG_PASS
 echo
@@ -218,10 +218,10 @@ is_project torbrowser && \
   do_step linux-signer-sign-android-apks
 is_project torbrowser && \
   do_step sync-after-sign-android-apks
-#do_step linux-signer-authenticode-signing
-#do_step sync-after-authenticode-signing
-#do_step authenticode-timestamping
-#do_step sync-after-authenticode-timestamping
+do_step linux-signer-authenticode-signing
+do_step sync-after-authenticode-signing
+do_step authenticode-timestamping
+do_step sync-after-authenticode-timestamping
 do_step hash_signed_bundles
 do_step sync-after-hash
 do_step linux-signer-gpg-sign
