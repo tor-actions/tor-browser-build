@@ -1,3 +1,62 @@
+Tor Browser 12.5a7 - June 08 2023
+ * All Platforms
+   * Updated Translations
+   * Updated NoScript to 11.4.22
+   * Updated OpenSSL to 1.1.1u
+   * Bug 41795: Rebase Tor Browser and Base Browser alpha to 102.12esr [tor-browser]
+   * Bug 41818: Remove YEC 2022 strings [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 102.12esr
+   * Bug 33298: HTTP onion sites do not give a popup warning when submitting form data to non-onion HTTP sites [tor-browser]
+   * Bug 40552: New texts for the add a bridge manually modal [tor-browser]
+   * Bug 41608: Improve the UX of the location bar's connection status [tor-browser]
+   * Bug 41618: Update the iconography used in the status strip in connection settings [tor-browser]
+   * Bug 41623: Update connection assist's iconography [tor-browser]
+   * Bug 41718: Add the external filetype warning to about:downloads [tor-browser]
+   * Bug 41726: Animate the torconnect icon to transition between connected states [tor-browser]
+   * Bug 41734: Add a `Connected` flag to indicate which built-in bridge option Tor Browser is currently using [tor-browser]
+   * Bug 41749: Replace the onion-glyph with dedicated icon for onion services [tor-browser]
+   * Bug 41785: Network monitor in developer tools shows HTTP onion resources as insecure [tor-browser]
+   * Bug 41792: Drag and Drop protection prevents dragging downloads [tor-browser]
+   * Bug 41800: Add the external filetype warning to Library / Manage Bookmarks [tor-browser]
+   * Bug 41801: Fix handleProcessReady in TorSettings.init [tor-browser]
+   * Bug 41802: Conjure bridge cards are mislabeled as vanilla bridges in alpha [tor-browser]
+   * Bug 41809: Wrong icon in the bridge QR code [tor-browser]
+   * Bug 41810: Add "Connect" buttons to Request Bridge and Provide Bridge modals [tor-browser]
+   * Bug 41815: wrong connect icons [tor-browser]
+   * Bug 41816: The top navigation in about:torconnect isn't updated correctly [tor-browser]
+ * Android
+   * Updated GeckoView to 102.12esr
+ * Build System
+   * All Platforms
+     * Bug 40777: Create a Go bootstrap project [tor-browser-build]
+     * Bug 40850: Tor Browser nightly fails to build obfs4 [tor-browser-build]
+     * Bug 40866: Remove `Using ansible to set up a nightly build machine` from README [tor-browser-build]
+     * Bug 40869: obfs4 is renamed to lyrebird [tor-browser-build]
+     * Bug 40870: Remove url without browser name from tools/signing/download-unsigned-sha256sums-gpg-signatures-from-people-tpo [tor-browser-build]
+     * Bug 40871: Update keyring/boklm.gpg for new subkeys [tor-browser-build]
+   * Windows + macOS + Linux
+     * Bug 40864: Make a script to update the manual artifact [tor-browser-build]
+   * macOS
+     * Bug 40847: Build filesystem influences the DMG creation [tor-browser-build]
+     * Bug 40858: Create script to assist testers self sign Mac builds to allow running on Arm processors [tor-browser-build]
+   * Android
+     * Bug 40874: Add commit information also to GV [tor-browser-build]
+
+Tor Browser 12.0.7 - May 31 2023
+ * All Platforms
+   * Updated Translations
+   * Updated NoScript to 11.4.22
+   * Updated OpenSSL to 1.1.1u
+   * Bug 41764: TTP-02-004 OOS: No user-activation required to download files (Low) [tor-browser]
+   * Bug 41794: Rebase Tor Browser and Base Browser stable to 102.12esr [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 102.12esr
+   * Bug 41777: Internally shippped manual does not adapt to RTL languages (it always align to the left) [tor-browser]
+ * Android
+   * Updated GeckoView to 102.12esr
+   * Bug 41805: Backport Android-specific security fixes from Firefox 114 to ESR 102.12-based Tor Browser [tor-browser]
+
 Tor Browser 12.5a6 - May 22 2023
  * All Platforms
    * Updated Translations
