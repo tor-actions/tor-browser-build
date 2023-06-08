@@ -1,20 +1,16 @@
 # vim: filetype=yaml sw=2
 version: '[% c("git_hash").substr(0, 12) %]'
 git_url: https://github.com/mtrojnar/osslsigncode
-git_hash: e72a1937d1a13e87074e4584f012f13e03fc1d64
+git_hash: d6f94d71f731868a3df86c6e0b8094da0c1412ed
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 container:
   use_container: 0
 var:
   deps:
-    - autoconf
-    - libtool
-    - pkg-config
+    - cmake
     - libssl-dev
     - libcurl4-openssl-dev
 input_files:
-  - filename: 0001-Make-code-work-with-OpenSSL-1.1.patch
-  - filename: timestamping.patch
   - filename: '[% c("var/srcfile") %]'
     enable: '[% c("var/no-git") %]'
 

@@ -4,11 +4,10 @@ distdir=$(pwd)/dist
 mkdir -p $distdir/[% project %]
 tar xf [% project %]-[% c('version') %].tar.gz
 cd [% project %]-[% c('version') %]
-patch -p1 < ../0001-Make-code-work-with-OpenSSL-1.1.patch
-patch -p1 < ../timestamping.patch
 
-./autogen.sh
-./configure --prefix=/[% project %]
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=/[% project %] -S ..
 make
 make DESTDIR=$distdir install
 
