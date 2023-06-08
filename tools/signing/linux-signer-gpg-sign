@@ -20,4 +20,5 @@ do
   tmpsig=$(mktemp)
   echo "$GPG_PASS" | sudo -u signing-gpg -- "$wrappers_dir/sign-gpg" "$i" > "$tmpsig"
   mv -f "$tmpsig" "${i}.asc"
+  chmod 644 "${i}.asc"
 done
