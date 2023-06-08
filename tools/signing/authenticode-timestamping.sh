@@ -35,7 +35,7 @@ set -e
 script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "$script_dir/functions"
 
-osslsigncode_file="$script_dir/../../out/osslsigncode/osslsigncode-e72a1937d1a1-25066d.tar.gz"
+osslsigncode_file="$script_dir/../../out/osslsigncode/osslsigncode-d6f94d71f731-3a61fb.tar.gz"
 
 test -f "$osslsigncode_file" ||
   exit_error "$osslsigncode_file is missing." \
