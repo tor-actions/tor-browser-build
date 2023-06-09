@@ -5,6 +5,8 @@ builddir=/var/tmp/build/[% project %]
 mkdir -p $distdir/[% project %]
 tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/rust') %]
 export PATH="/var/tmp/dist/rust/bin:$PATH"
+tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/wasm-bindgen') %]
+export PATH="/var/tmp/dist/wasm-bindgen:$PATH"
 [% IF c("var/linux") -%]
   export LD_LIBRARY_PATH="/var/tmp/dist/rust/lib:$LD_LIBRARY_PATH"
 [% END -%]
@@ -33,6 +35,8 @@ cargo build -p lox-wasm --release --frozen --target wasm32-unknown-unknown
 mv target/wasm32-unknown-unknown/release/lox_wasm.wasm $distdir/[% project %]
 
 cd $distdir
+wasm-bindgen --out-dir [% project %] --target web [% project %]/lox_wasm.wasm
+
 [% c('tar', {
         tar_src => [ project ],
         tar_args => '-czf ' _ dest_dir _ '/' _ c('filename'),
