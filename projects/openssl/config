@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-version: 1.1.1u
+version: 3.0.8
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
 container:
   use_container: 1
@@ -21,7 +21,6 @@ targets:
     var:
       flag_mwindows: ''
       configure_opts: '-shared --cross-compile-prefix=[% c("arch") %]-w64-mingw32- mingw[% IF c("var/windows-x86_64") %]64[% END %] "[% c("var/CFLAGS") %] [% c("var/LDFLAGS") %]"'
-      openssldir: 'Program Files[% IF c("var/windows-i686") %] (x86)[% END %]/OpenSSL'
   macos:
     var:
       configure_opts: '--cross-compile-prefix=[% c("var/build_target") %]- darwin64-[% c("var/macos_arch") %]-cc enable-ec_nistp_64_gcc_128'
@@ -34,4 +33,4 @@ input_files:
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
   - URL: 'https://www.openssl.org/source/openssl-[% c("version") %].tar.gz'
-    sha256sum: e2f8d84b523eecd06c7be7626830370300fbcc15386bf5142d72758f6963ebc6
+    sha256sum: 6c13d2bf38fdf31eac3ce2a347073673f5d63263398f1f69d0df4a41253e4b3e

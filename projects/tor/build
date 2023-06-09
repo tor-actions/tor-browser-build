@@ -29,14 +29,14 @@ tar -C /var/tmp/dist -xf [% c('input_files_by_name/openssl') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/libevent') %]
 tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
 libeventdir=/var/tmp/dist/libevent
-openssldir=/var/tmp/dist/openssl/openssl
+openssldir=/var/tmp/dist/openssl
 
 [% IF c("var/linux") %]
   TORDEBUGDIR="$distdir/debug"
   mkdir "$TORDEBUGDIR"
 
-  cp $openssldir/lib/libssl.so.1.1 "$TORBINDIR"
-  cp $openssldir/lib/libcrypto.so.1.1 "$TORBINDIR"
+  cp $openssldir/lib/libssl.so.3 "$TORBINDIR"
+  cp $openssldir/lib/libcrypto.so.3 "$TORBINDIR"
   cp $libeventdir/lib/libevent-2.1.so.7 "$TORBINDIR"
   # We need to copy the libstdc++.so.6 for Tor Browser on older Linux distros.
   # Copying it into /Browser, which feels more natural, and amending

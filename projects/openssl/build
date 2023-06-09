@@ -20,12 +20,13 @@ export CC='gcc -m32'
   export CC=cc
 [% END -%]
 export SOURCE_DATE_EPOCH='[% c("timestamp") %]'
-./Configure [% c('var/configure_opts') %]
+# OpenSSL 3 uses lib64 on 64-bit systems, but tor looks for lib
+./Configure --prefix="$distdir" --libdir=lib [% c('var/configure_opts') %]
 make -j[% c("num_procs") %]
 # https://github.com/openssl/openssl/issues/8170
-make -j[% c("num_procs") %] DESTDIR="$distdir" install
+make -j[% c("num_procs") %] install
 cd /var/tmp/dist
-ln -s '[% c("var/openssldir") %]' openssl/openssl
+
 [% c('tar', {
         tar_src => [ project ],
         tar_args => '-czf ' _ dest_dir _ '/' _ c('filename'),
