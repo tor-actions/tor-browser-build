@@ -16,21 +16,29 @@ chmod 775 "$dist_dir"
 chmod 664 "$dist_dir"/*
 chmod 664 "$dist_dir/.htaccess"
 
-cdn_dir="/srv/cdn-master.torproject.org/htdocs/aus1/torbrowser/$tbb_version"
-if test -d "$cdn_dir"
-then
-  echo "Error: $cdn_dir already exists" >&2
-  exit 1
-fi
-mkdir "$cdn_dir"
-chgrp tb-release "$cdn_dir"
-chmod 775 "$cdn_dir"
-cd "$cdn_dir"
-for marfile in "$dist_dir"/*.mar; do
-  ln -f "$marfile" .
-done
+if is_project torbrowser; then
+  cdn_dir="/srv/cdn-master.torproject.org/htdocs/aus1/torbrowser/$tbb_version"
+  if test -d "$cdn_dir"
+  then
+    echo "Error: $cdn_dir already exists" >&2
+    exit 1
+  fi
+  mkdir "$cdn_dir"
+  chgrp tb-release "$cdn_dir"
+  chmod 775 "$cdn_dir"
+  cd "$cdn_dir"
+  for marfile in "$dist_dir"/*.mar; do
+    ln -f "$marfile" .
+  done
 
-echo "$tbb_version is ready to upload to cdn.tpo and dist.tpo"
+  dest='cdn.tpo and dist.tpo'
+  staticupdatecmd='static-update-component cdn.torproject.org && static-update-component dist.torproject.org'
+else
+  dest='dist.tpo'
+  staticupdatecmd='static-update-component dist.torproject.org'
+fi
+
+echo "$tbb_version is ready to upload to $dest"
 echo "You should remove the old version(s) before starting the upload with:"
-echo '  static-update-component cdn.torproject.org && static-update-component dist.torproject.org'
+echo "  $staticupdatecmd"
 echo '(preferably using screen or tmux)'

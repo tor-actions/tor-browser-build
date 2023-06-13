@@ -88,12 +88,16 @@ Mullvad Browser Stable lives in the various `maint-$(MULLVAD_BROWSER_MAJOR).$(MU
 - [ ] On `$(STAGING_SERVER)` in a separate `screen` session, run the macOS proxy script:
     - `cd tor-browser-build/tools/signing/`
     - `./macos-signer-proxy`
-- [ ] On `$(STAGING_SERVER)` in a separate `screen` session, ensure mullvad daemon is running with SOCKS5 proxy on the default port 9050
-- [ ] apk signing : copy signed `*multi.apk` files to the unsigned build outputs direcmullvady
+- [ ] On `$(STAGING_SERVER)` in a separate `screen` session, ensure tor daemon is running with SOCKS5 proxy on the default port 9050
 - [ ] run do-all-signing script:
     - `cd tor-browser-build/tools/signing/`
     - `./do-all-signing.sh`
-- **NOTE**: at this point the signed binaries should be in `tor-browser-build/mullvadbrowser/release/signed/$(MULLVAD_BROWSER_VERSION)`
+- **NOTE**: at this point the signed binaries should have been copied to `staticiforme`
+- [ ] Update `staticiforme.torproject.org`:
+  - From `screen` session on `staticiforme.torproject.org`:
+  - [ ] Static update components : `static-update-component dist.torproject.org`
+  - [ ] Remove old release data from `/srv/dist-master.torproject.org/htdocs/mullvadbrowser`
+  - [ ] Static update components (again) : `static-update-component dist.torproject.org`
 
 </details>
 

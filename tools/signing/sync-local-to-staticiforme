@@ -3,4 +3,4 @@ set -e
 script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "$script_dir/functions"
 
-rsync $rsync_options "$signed_version_dir/" "$ssh_host_staticiforme:/srv/dist-master.torproject.org/htdocs/torbrowser/$tbb_version/"
+rsync $rsync_options "$signed_version_dir/" "$ssh_host_staticiforme:/srv/dist-master.torproject.org/htdocs/$SIGNING_PROJECTNAME/$tbb_version/"
