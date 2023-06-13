@@ -14,7 +14,7 @@ container:
 var:
   android_components_version: 102.0.14
   browser_branch: 12.5-1
-  android_components_build: 2
+  android_components_build: 3
   # This should be updated when the list of gradle dependencies is changed.
   gradle_dependencies_version: 37
   gradle_version: 7.0.2
