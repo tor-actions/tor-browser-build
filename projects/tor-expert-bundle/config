@@ -18,10 +18,6 @@ input_files:
     project: lyrebird
   - name: snowflake
     project: snowflake
-  - project: webtunnel
-    name: webtunnel
-  - name: conjure
-    project: conjure    
   - filename: pt_config.json
   - filename: bridges_list.obfs4.txt
   - filename: bridges_list.meek-azure.txt

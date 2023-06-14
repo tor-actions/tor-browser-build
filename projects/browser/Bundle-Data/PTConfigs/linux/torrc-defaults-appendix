@@ -3,9 +3,3 @@ ClientTransportPlugin meek_lite,obfs2,obfs3,obfs4,scramblesuit exec ./TorBrowser
 
 ## snowflake configuration
 ClientTransportPlugin snowflake exec ./TorBrowser/Tor/PluggableTransports/snowflake-client
-
-## webtunnel configuration
-ClientTransportPlugin webtunnel exec ./TorBrowser/Tor/PluggableTransports/webtunnel-client
-
-## conjure configuration
-ClientTransportPlugin conjure exec ./TorBrowser/Tor/PluggableTransports/conjure-client -registerURL https://registration.refraction.network/api

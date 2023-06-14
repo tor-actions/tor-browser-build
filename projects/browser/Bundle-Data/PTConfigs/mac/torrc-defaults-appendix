@@ -3,9 +3,3 @@ ClientTransportPlugin meek_lite,obfs2,obfs3,obfs4,scramblesuit exec PluggableTra
 
 ## snowflake configuration
 ClientTransportPlugin snowflake exec PluggableTransports/snowflake-client
-
-## webtunnel configuration
-ClientTransportPlugin webtunnel exec PluggableTransports/webtunnel-client
-
-## conjure configuration
-ClientTransportPlugin conjure exec PluggableTransports/conjure-client -registerURL https://registration.refraction.network/api
