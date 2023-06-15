@@ -26,13 +26,13 @@
     - **example** : `mb-12.0.7-build1`
 </details>
 
-**NOTE** It is assumed that the `tor-browser` stable rebase and security backport tasks have been completed
+**NOTE** It is assumed that the `tor-browser` alpha rebase and security backport tasks have been completed
 
 <details>
   <summary>Building</summary>
 
 ### tor-browser-build: https://gitlab.torproject.org/tpo/applications/tor-browser-build.git
-Mullvad Browser Stable lives in the various `maint-$(MULLVAD_BROWSER_MAJOR).$(MULLVAD_BROWSER_MINOR)` (and possibly more specific) branches
+Mullvad Browser Alpha (and Nightly) are on the `main` branch
 
 - [ ] Update `rbm.conf`
   - [ ] `var/torbrowser_version` : update to next version
@@ -44,7 +44,7 @@ Mullvad Browser Stable lives in the various `maint-$(MULLVAD_BROWSER_MAJOR).$(MU
     - [ ] `browser_build` : update to match `mullvad-browser` tag
     - [ ] ***(Optional)*** `var/firefox_platform_version` : update to latest `$(ESR_VERSION)` if rebased
   - [ ] Update `projects/translation/config`:
-    - [ ] run `make list_translation_updates-release` to get updated hashes
+    - [ ] run `make list_translation_updates-alpha` to get updated hashes
     - [ ] `steps/base-browser/git_hash` : update with `HEAD` commit of project's `base-browser` branch
     - [ ] `steps/base-browser-fluent/git_hash` : update with `HEAD` commit of project's `basebrowser-newidentityftl` branch
 - [ ] Update common build configs
@@ -62,7 +62,7 @@ Mullvad Browser Stable lives in the various `maint-$(MULLVAD_BROWSER_MAJOR).$(MU
       - [ ] `sha256sum`
 - [ ] Open MR with above changes
 - [ ] Merge
-- [ ] Sign/Tag commit: `make mullvadbrowser-signtag-release`
+- [ ] Sign/Tag commit: `make mullvadbrowser-signtag-alpha`
 - [ ] Push tag to `origin`
 - [ ] Begin build on `$(BUILD_SERVER)` (fix any issues in subsequent MRs)
 - [ ] **TODO** Submit build-tag to Mullvad build infra
@@ -163,9 +163,9 @@ Mullvad Browser Stable lives in the various `maint-$(MULLVAD_BROWSER_MAJOR).$(MU
     - **example** : `mullvad-browser-102.12.0esr-12.0-1-build1`
 - [ ] Sign+Tag additionally the `mullvad-browser.git` `firefox` commit used in build:
   - **Tag**: `$(MULLVAD_BROWSER_VERSION)`
-    - **example** : `12.0.7`
+    - **example** : `12.5a7`
   - **Message**: `$(ESR_VERSION)esr-based $(MULLVAD_BROWSER_VERSION)`
-    - **example** : `102.12.0esr-based 12.0.7`
+    - **example** : `102.12.0esr-based 12.5a7`
   - [ ] Push tag to github
 
 </details>
@@ -175,7 +175,7 @@ Mullvad Browser Stable lives in the various `maint-$(MULLVAD_BROWSER_MAJOR).$(MU
 
 ### notify packagers
 
-- [ ] **(Once Mullvad Updates their Github Releases Page)** Email downstream consumers:
+- [ ] **(Optional, Once Mullvad Updates their Github Releases Page)** Email downstream consumers:
   <details>
     <summary>email template</summary>
 
@@ -185,14 +185,10 @@ Mullvad Browser Stable lives in the various `maint-$(MULLVAD_BROWSER_MAJOR).$(MU
 
   </details>
 
+  - **NOTE**: This is an optional step and only necessary close a major release/transition from alpha to stable, or if there are major packing changes these developers need to be aware of
   - [ ] flathub package maintainer: proletarius101@protonmail.com
   - [ ] arch package maintainer: bootctl@gmail.com
   - [ ] nixOS package maintainer: dev@felschr.com
-
-### merge requests
-
-- [ ] homebrew: https://github.com/Homebrew/homebrew-cask/blob/master/Casks/mullvad-browser.rb
-  - **NOTE**: should just need to update the version to latest
 
 </details>
 
