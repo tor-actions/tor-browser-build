@@ -190,7 +190,7 @@ Tor Browser Stable lives in the various `maint-$(TOR_BROWSER_MAJOR).$(TOR_BROWSE
     - **NOTE** : Skip this step if the current release is Android or Desktop *only*
     - [ ] `/srv/cdn-master.torproject.org/htdocs/aus1/torbrowser`
     - [ ] `/srv/dist-master.torproject.org/htdocs/torbrowser`
-- [ ] Static update components (again) : `static-update-component cdn.torproject.org && static-update-component
+- [ ] Static update components (again) : `static-update-component cdn.torproject.org && static-update-component dist.torproject.org`
 - [ ] Publish APKs to Google Play:
   - Log into https://play.google.com/apps/publish
   - Select `Tor Browser` app
