@@ -17,9 +17,12 @@ echo
 test -f "$steps_dir/linux-signer-signmars.done" ||
   read -sp "Enter nssdb7 (mar signing) passphrase: " NSSPASS
 echo
-test -f "$steps_dir/linux-signer-sign-android-apks.done" ||
-  read -sp "Enter android apk signing password ($tbb_version_type): " KSPASS
-echo
+
+if is_project torbrowser; then
+  test -f "$steps_dir/linux-signer-sign-android-apks.done" ||
+    read -sp "Enter android apk signing password ($tbb_version_type): " KSPASS
+  echo
+fi
 test -f "$steps_dir/linux-signer-authenticode-signing.done" ||
   read -sp "Enter windows authenticode passphrase: " YUBIPASS
 echo
