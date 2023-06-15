@@ -14,8 +14,10 @@ echo
 test -f "$steps_dir/macos-signer-notarization.done" ||
   read -sp "Enter macos notarization passphrase: " NOTARIZATION_PW
 echo
+is_project torbrowser && nssdb=torbrowser-nssdb7
+is_project mullvadbrowser && nssdb=mullvadbrowser-nssdb-1
 test -f "$steps_dir/linux-signer-signmars.done" ||
-  read -sp "Enter nssdb7 (mar signing) passphrase: " NSSPASS
+  read -sp "Enter $nssdb (mar signing) passphrase: " NSSPASS
 echo
 
 if is_project torbrowser; then
