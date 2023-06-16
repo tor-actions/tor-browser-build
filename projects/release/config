@@ -258,3 +258,8 @@ steps:
     debug: 0
     input_files: []
     dmg2mar: '[% INCLUDE dmg2mar %]'
+  upload_sha256sums:
+    build_log: '-'
+    debug: 0
+    input_files: []
+    upload_sha256sums: '[% INCLUDE upload_sha256sums %]'

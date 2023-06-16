@@ -55,6 +55,11 @@ var:
   ### and sha256sums-unsigned-build.incrementals.txt files.
   #sign_build_gpg_opts: '--local-user XXXXXXXX'
 
+  ### The var/tpo_user option is used on the release upload_sha256sums step
+  ### and is the user on people.torproject.org that ssh/rsync will try to
+  ### upload the files to
+  #tpo_user: username
+
   ### The clean configuration is used by the cleaning script to find the
   ### branches and build targets you are using, to compute the list of
   ### files that should be kept.

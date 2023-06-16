@@ -650,11 +650,27 @@ cargo_vendor-rcodesign: submodule-update
 submodule-update:
 	git submodule update --init
 
+# requires tpo_user variable be set in rbm.local.conf
+torbrowser-upload-sha256sums-release: submodule-update
+	$(rbm) build release --step upload_sha256sums --target release --target torbrowser
+
+# requires tpo_user variable be set in rbm.local.conf
+torbrowser-upload-sha256sums-alpha: submodule-update
+	$(rbm) build release --step upload_sha256sums --target alpha --target torbrowser
+
 torbrowser-signtag-release: submodule-update
 	$(rbm) build release --step signtag --target release --target torbrowser
 
 torbrowser-signtag-alpha: submodule-update
 	$(rbm) build release --step signtag --target alpha --target torbrowser
+
+# requires tpo_user variable be set in rbm.local.conf
+mullvadbrowser-upload-sha256sums-release: submodule-update
+	$(rbm) build release --step upload_sha256sums --target release --target mullvadbrowser
+
+# requires tpo_user variable be set in rbm.local.conf
+mullvadbrowser-upload-sha256sums-alpha: submodule-update
+	$(rbm) build release --step upload_sha256sums --target alpha --target mullvadbrowser
 
 mullvadbrowser-signtag-release: submodule-update
 	$(rbm) build release --step signtag --target release --target mullvadbrowser

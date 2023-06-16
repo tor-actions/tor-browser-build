@@ -1,0 +1,34 @@
+#!/bin/sh
+# Tool to sign sha256sums of builds and upload them to where signing/download-unsigned-sha256sums-gpg-signatures-from-people-tpo expects them to be
+
+version=[% c("version") %]-[% c("var/torbrowser_build") %]
+signed=[% c("var/signed_status") %]
+channel=[% c("var/build_target") %]
+browser=[% c("var/browser_type") %]
+
+src_dir=[% shell_quote(path(dest_dir)) %]/$signed/$version
+
+target_dir=~/public_html/builds/$browser/$channel/$version/
+
+echo "browser:$browser channel:$channel signed:$signed version:$version"
+
+if [ ! -d $src_dir ]; then
+  echo "ERROR: $src_dir does not exist!"
+  exit
+fi
+
+cd $src_dir
+for i in sha256sums*.txt; do
+	if [ ! -f $i.asc ] ; then
+		gpg -abs [% c("var/sign_build_gpg_opts") %] $i;
+	fi
+done
+
+if [ -z '[% c("var/tpo_user") %]' ]; then
+  print "tpo_user variable unset, required to upload to people.torproject.org. Please set in rbm.local.conf"
+  exit
+fi
+
+ssh [% c("var/tpo_user") %]@people.torproject.org "mkdir -p $target_dir"
+rsync sha256sums*.* [% c("var/tpo_user") %]@people.torproject.org:$target_dir
+echo "Synced sha256sums to https://people.torproject.org/~[% c("var/tpo_user") %]/builds/$browser/$channel/$version/"
