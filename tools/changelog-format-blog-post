@@ -12,7 +12,7 @@ sub version_type {
 
 my ($changelog, $current_tbversion, $last_tbversion);
 
-if (!open(CHANGELOG, '<', "$FindBin::Bin/../ChangeLog.txt")) {
+if (!open(CHANGELOG, '<', "$FindBin::Bin/../ChangeLog-TBB.txt")) {
   print STDERR "Error opening changelog file\n";
   exit 1;
 }
@@ -49,6 +49,6 @@ if (! ( $current_tbversion =~ m/a/ ) ) {
   my @v = split(/\./, $current_tbversion);
   $changelog_branch = "maint-$v[0].$v[1]";
 }
-print "The full changelog since [Tor Browser $last_tbversion](https://gitlab.torproject.org/tpo/applications/tor-browser-build/-/raw/$changelog_branch/projects/browser/Bundle-Data/Docs/ChangeLog.txt) is:\n\n";
+print "The full changelog since [Tor Browser $last_tbversion](https://gitlab.torproject.org/tpo/applications/tor-browser-build/-/raw/$changelog_branch/projects/browser/Bundle-Data/Docs-TBB/ChangeLog.txt) is:\n\n";
 
 print $changelog;
