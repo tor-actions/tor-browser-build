@@ -42,6 +42,20 @@ If you are running Debian or Ubuntu, you can install them with:
                   libfile-copy-recursive-perl libfile-slurp-perl git \
                   mercurial uidmap
 
+If you are running an Arch based system, you should be able to install them with:
+
+# pacman -S perl-datetime perl-path-tiny perl-yaml perl-yaml-libyaml \
+            perl-yaml-tiny perl-template-toolkit perl-io-captureoutput \
+            perl-file-copy-recursive perl-string-shellquote \
+            perl-sort-versions perl-data-uuid perl-data-dump perl-json \
+            perl-digest-sha1 perl-io-all perl-file-slurp perl-sys-syscall \
+            perl-parallel-forkmanager perl-xml-libxml perl-lwp-protocol-https
+
+On Arch based systems you also need to generate some .ph files RBM expects:
+
+	# cd /usr/include/sys; h2ph syscall.h
+	# cd /usr/include/; h2ph asm/unistd.h asm/unistd_64.h bits/syscall.h
+
 The build system is based on rbm, which is included as a git submodule
 in the rbm/ directory. You can fetch the rbm git submodule by running
 'make submodule-update'.
