@@ -237,7 +237,7 @@ do
       [% IF ! c("var/namecoin") %]--exclude=*Electrum-NMC* --exclude=*ncprop279*[% END %] \
       -c . | tar -C "$tbdir[% IF ! c("var/macos") %]/[% c('var/ProjectName') %][% END %]" -x
   [% ELSIF c("var/mullvad-browser") -%]
-    cp -a Bundle-Data/Docs-PB/* "$tbdir/$DOCSPATH"
+    cp -a Bundle-Data/Docs-MB/* "$tbdir/$DOCSPATH"
   [% END -%]
 done
 
