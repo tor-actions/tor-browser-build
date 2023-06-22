@@ -1,0 +1,31 @@
+Mullvad Browser 12.5 - June 21 2023
+ * All Platforms
+   * Updated uBlock Origin to 1.50.0
+   * Updated mullvad-browser-extension to version 0.8.3
+ * Windows + macOS + Linux
+   * Bug 41577: Disable profile migration [tor-browser]
+   * Bug 41595: Disable pagethumbnails capturing [tor-browser]
+   * Bug 41609: Move the disabling of Firefox Home (Activity Stream) to base-browser [tor-browser]
+   * Bug 41668: Move part of the updater patches to base browser [tor-browser]
+   * Bug 41686: Move the 'Bug 11641: Disable remoting by default' commit from base-browser to tor-browser [tor-browser]
+   * Bug 41695: Port warning on maximized windows without letterboxing from torbutton [tor-browser]
+   * Bug 41701: Reporting an extension does not work [tor-browser]
+   * Bug 41711: Race condition when opening a new window in New Identity [tor-browser]
+   * Bug 41736: Customize the default CustomizableUI toolbar using CustomizableUI.jsm [tor-browser]
+   * Bug 41738: Replace the patch to disable live reload with its preference [tor-browser]
+   * Bug 41775: Avoid re-defining some macros in nsUpdateDriver.cpp [tor-browser]
+ * Windows + Linux
+   * Bug 41654: UpdateInfo jumped into Data [tor-browser]
+ * Linux
+   * Bug 40860: Improve the transition from the old fontconfig file to the new one [tor-browser-build]
+   * Bug 41163: Many bundled fonts are blocked in Ubuntu/Fedora because of RFP [tor-browser]
+   * Bug 41732: implement linux font whitelist as defense-in-depth [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 40837: Rebase mullvad-browser build changes onto main [tor-browser-build]
+     * Bug 40870: Remove url without browser name from tools/signing/download-unsigned-sha256sums-gpg-signatures-from-people-tpo [tor-browser-build]
+   * Windows + macOS + Linux
+     * Bug 40826: Correctly set appname_marfile for basebrowser in tools/signing/nightly/update-responses-base-config.yml [tor-browser-build]
+     * Bug 40866: Remove `Using ansible to set up a nightly build machine` from README [tor-browser-build]
+   * macOS
+     * Bug 40858: Create script to assist testers self sign Mac builds to allow running on Arm processors [tor-browser-build]
