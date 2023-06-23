@@ -19,6 +19,6 @@ steps:
         pkg_type: go_vendor
         project: webtunnel
         norec:
-          sha256sum: 4dafb6e138d00e7587eacc2e61d0e0b9a3467835059e4ae9eb85afbe3f38df0a
+          sha256sum: e3b5a9b3c3939aafa5389246f3a7a7e78d70fe623bed495f99c39cc37bbbe645
         target_replace:
           '^torbrowser-.*': 'torbrowser-linux-x86_64'
