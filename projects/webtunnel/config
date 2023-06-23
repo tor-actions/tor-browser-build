@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
 git_url: https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/webtunnel.git
-git_hash: 2ecf64381bad8a5db45c5871dcad7d12831dca69
+git_hash: 38eb55054a5c3c072acc1d8f9a9afa36e3a5c9b7
 container:
   use_container: 1
 
