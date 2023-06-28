@@ -176,8 +176,8 @@ sub get_perplatform_downloads {
             next;
         }
         $downloads->{$os} = {
-            version => $version,
-            git_tag => $gittag,
+            version => "$version",
+            git_tag => "$gittag",
             binary => "$download_url/$file",
             sig => "$download_url/$file.asc",
         };
@@ -459,8 +459,8 @@ sub write_downloads_json {
         my $version = $config->{channels}{$channel};
         my $tag = get_config($config, $version, 'any', 'tag');
         my $data = {
-            version => $version,
-            tag => $tag,
+            version => "$version",
+            tag => "$tag",
             downloads => get_version_downloads($config, $version),
         };
         write_htdocs($channel, 'downloads.json',
