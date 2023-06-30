@@ -6,19 +6,19 @@ version: '[% c("abbrev") %]'
 steps:
   base-browser:
     base-browser: '[% INCLUDE build %]'
-    git_hash: 481e743d406d38b7cb2504e19e0d5107b1dd8442
+    git_hash: f43ccce2bc26ec711d94ef3e0246000f16d012df
     targets:
       nightly:
         git_hash: 'base-browser'
   base-browser-fluent:
     base-browser-fluent: '[% INCLUDE build %]'
-    git_hash: 86657602203218195d7590040d059932175d0291
+    git_hash: 1d597e0a5b6f1402c1170e2f65642810bdd586e3
     targets:
       nightly:
         git_hash: 'basebrowser-newidentityftl'
   tor-browser:
     tor-browser: '[% INCLUDE build %]'
-    git_hash: 9eab586de15310d8384e1f3a2dc5adc8932247e4
+    git_hash: ac9790fa9367c36fc0e2771409b1f0f3661d168d
     targets:
       nightly:
         git_hash: 'tor-browser'
@@ -26,7 +26,7 @@ steps:
     fenix: '[% INCLUDE build %]'
     # We need to bump the commit before releasing but just pointing to a branch
     # might cause too much rebuidling of the Firefox part.
-    git_hash: 0d1e2c85507303006e692496f81e164335e3e385
+    git_hash: 399d0fcee55eacdc7e2d68cd84c824c4d924357f
     targets:
       nightly:
         git_hash: 'fenix-torbrowserstringsxml'
