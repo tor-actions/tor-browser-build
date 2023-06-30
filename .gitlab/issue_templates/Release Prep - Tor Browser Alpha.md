@@ -101,9 +101,9 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
     - **NOTE** : If you used the issue number, you will need to write the Tor Browser version manually
   - [ ] ***(Optional)*** Under `All Platforms` include any version updates for:
     - [ ] Translations
-    - [ ]OpenSSL
-    - [ ]NoScript
-    - [ ]zlib
+    - [ ] OpenSSL
+    - [ ] NoScript
+    - [ ] zlib
     - [ ] tor daemon
   - [ ] ***(Optional)*** Under `Windows + macOS + Linux` include updates for:
     - [ ] Firefox
