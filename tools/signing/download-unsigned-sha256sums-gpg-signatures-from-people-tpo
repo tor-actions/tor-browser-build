@@ -3,16 +3,24 @@ set -e
 script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "$script_dir/functions"
 
-for builder in $tb_builders
+for builder in $tb_builders jb
 do
-  for file in sha256sums-unsigned-build.txt.asc sha256sums-unsigned-build.incrementals.txt.asc
+  for file in sha256sums-unsigned-build.txt sha256sums-unsigned-build.incrementals.txt
   do
     tmpfile=$(mktemp)
     chmod 644 "$tmpfile"
-    for url in \
-      "https://people.torproject.org/~$builder/builds/$SIGNING_PROJECTNAME/$tbb_version-build$tbb_version_build/$file" \
-      "https://tb-build-04.torproject.org/~$builder/builds/$SIGNING_PROJECTNAME/$tbb_version_type/unsigned/$tbb_version-build$tbb_version_build/$file" \
-      "https://tb-build-05.torproject.org/~$builder/builds/$SIGNING_PROJECTNAME/$tbb_version_type/unsigned/$tbb_version-build$tbb_version_build/$file"
+    if test "$builder" = 'jb'; then
+      file="$file.gpg"
+      urls=("https://cdn.devmole.eu/hashes//$SIGNING_PROJECTNAME/$tbb_version-build$tbb_version_build/$file")
+    else
+      file="$file.asc"
+      urls=( \
+        "https://people.torproject.org/~$builder/builds/$SIGNING_PROJECTNAME/$tbb_version-build$tbb_version_build/$file" \
+        "https://tb-build-04.torproject.org/~$builder/builds/$SIGNING_PROJECTNAME/$tbb_version_type/unsigned/$tbb_version-build$tbb_version_build/$file" \
+        "https://tb-build-05.torproject.org/~$builder/builds/$SIGNING_PROJECTNAME/$tbb_version_type/unsigned/$tbb_version-build$tbb_version_build/$file" \
+      )
+    fi
+    for url in "${urls[@]}"
     do
       if wget -q -O "$tmpfile" "$url"; then
         mv "$tmpfile" "$signed_version_dir/$file-$builder"
