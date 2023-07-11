@@ -9,10 +9,6 @@ builddir=/var/tmp/build/[% project %]
 mkdir $distdir/[% project %]
 mkdir /var/tmp/build
 
-cat > get-moz-build-date << "EOF"
-[% INCLUDE "get-moz-build-date" %]
-EOF
-
 [% IF !c("var/fetch_gradle_dependencies") %]
   tar -C $distdir -xf [% c('input_files_by_name/geckoview') %]
   gradle_repo=$rootdir/[% c('input_files_by_name/gradle-dependencies') %]
@@ -60,12 +56,7 @@ sed -i 's/tag = getGitHash()/tag = \"[% c('abbrev') %]\"/' publish.gradle
   export LANG=C.UTF-8
   patch -p1 < $rootdir/mavenLocal.patch
 
-  eval $(perl $rootdir/get-moz-build-date [% pc("fenix", "var/copyright_year") %] [% pc("fenix", "var/torbrowser_version") %])
-  if [ -z $MOZ_BUILD_DATE ]
-  then
-    echo "MOZ_BUILD_DATE is not set"
-    exit 1
-  fi
+  [% c("var/set_MOZ_BUILD_DATE") %]
 
   # Increase the maximum memory usage, for when compiling with --disable-install-strip
   gradle_args="--offline --no-daemon -Dmaven.repo.local=$gradle_repo -Dorg.gradle.jvmargs=-Xmx8g"

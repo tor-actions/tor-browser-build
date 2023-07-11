@@ -153,7 +153,6 @@ input_files:
   - project: container-image
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
-  - filename: get-moz-build-date
   - project: binutils
     name: binutils
     enable: '[% c("var/linux") %]'
