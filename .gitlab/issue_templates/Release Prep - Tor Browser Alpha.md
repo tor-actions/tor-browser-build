@@ -169,6 +169,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
 ### signing
 - **NOTE** : In practice, it's most efficient to have the blog post and website updates ready to merge, since signing doesn't take very long
 - [ ] On `$(STAGING_SERVER)`, ensure updated:
+  - [ ] `tor-browser-build` is on the right commit: `git tag -v tbb-$(TOR_BROWSER_VERSION)-$(TOR_BROWSER_BUILD_N) && git checkout tbb-$(TOR_BROWSER_VERSION)-$(TOR_BROWSER_BUILD_N)`
   - [ ]  `tor-browser-build/tools/signing/set-config.hosts`
     - `ssh_host_builder` : ssh hostname of machine with unsigned builds
       - **NOTE** : `tor-browser-build` is expected to be in the `$HOME` directory)
@@ -216,6 +217,35 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
 </details>
 
 <details>
+  <summary>Signature verification</summary>
+
+  <details>
+    <summary>Check whether the .exe files got properly signed and timestamped</summary>
+    ```
+    # Point OSSLSIGNCODE to your osslsigncode binary
+    pushd tor-browser-build/${channel}/signed/$TORBROWSER_VERSION
+    OSSLSIGNCODE=/path/to/osslsigncode
+    ../../../tools/authenticode_check.sh
+    popd
+    ```
+  </details>
+  <details>
+    <summary>Check whether the MAR files got properly signed</summary>
+    ```
+    # Point NSSDB to your nssdb containing the mar signing certificate
+    # Point SIGNMAR to your signmar binary
+    # Point LD_LIBRARY_PATH to your mar-tools directory
+    pushd tor-browser-build/${channel}/signed/$TORBROWSER_VERSION
+    NSSDB=/path/to/nssdb
+    SIGNMAR=/path/to/mar-tools/signmar
+    LD_LIBRARY_PATH=/path/to/mar-tools/
+    ../../../tools/marsigning_check.sh
+    popd
+    ```
+  </details>
+</details>
+
+<details>
   <summary>Publishing</summary>
 
 ### website: https://gitlab.torproject.org/tpo/web/tpo.git
@@ -233,6 +263,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
 ### blog: https://gitlab.torproject.org/tpo/web/blog.git
 
 - [ ] Duplicate previous Stable or Alpha release blog post as appropriate to new directory under `content/blog/new-release-tor-browser-$(TOR_BROWSER_VERSION)` and update with info on release :
+    - [ ] Run `tools/signing/create-blog-post` which should create the new blog post from a template (edit set-config.blog to set you local blog directory)
     - [ ] Update Tor Browser version numbers
     - [ ] Note any ESR rebase
     - [ ] Link to any Firefox security updates from ESR upgrade
