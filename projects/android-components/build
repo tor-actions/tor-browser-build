@@ -31,7 +31,7 @@ mkdir /var/tmp/build
   # according to the Gradle dependencies list.
   cp -rf $distdir/application-services/maven/org $gradle_repo
 [% END %]
-tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
+tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
 
 cd $builddir-[% c('version') %]
 

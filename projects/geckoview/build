@@ -31,7 +31,7 @@ export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/nasm/bi
     export WASI_SYSROOT=/var/tmp/dist/wasi-sysroot/share/wasi-sysroot
 [% END -%]
 
-tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
+tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
 
 cd /var/tmp/build/[% project %]-[% c("version") %]
 cat > .mozconfig << 'MOZCONFIG_EOF'

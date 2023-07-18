@@ -2,4 +2,4 @@
 version: '[% c("abbrev") %]'
 git_url: https://github.com/WebAssembly/wasi-libc.git
 git_hash: 1dfe5c302d1c5ab621f7abf04620fae92700fd22
-filename: '[% c("project") %]-[% c("version") %].tar.gz'
+filename: '[% c("project") %]-[% c("version") %].tar.[% c("compress_tar") %]'

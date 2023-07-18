@@ -10,7 +10,7 @@ mv binutils $distdir
 export PATH="$distdir/bin:$PATH"
 
 cd /var/tmp/build
-tar xf $rootdir/[% project %]-[% c("version") %].tar.gz
+tar -xf $rootdir/[% project %]-[% c("version") %].tar.[% c('compress_tar') %]
 mkdir -p builddir/mingw-w64/mingw-w64-headers32
 cd builddir/mingw-w64/mingw-w64-headers32
 /var/tmp/build/[% project %]-[% c("version") %]/mingw-w64-headers/configure \

@@ -9,7 +9,7 @@ steps:
     version: '[% c("hg_hash") %]'
     fetch_locale: |
       [% c("var/set_default_env") -%]
-      tar xf '[% project %]-[% c("version") %].tar.gz'
+      tar xf '[% project %]-[% c("version") %].tar.[% c("compress_tar") %]'
       mv [% project %]-[% c("version") %] [% c("input_file_var/locale") %]
       tar caf '[% dest_dir %]/[% c("filename") %]' [% c("input_file_var/locale") %]
     input_files: []

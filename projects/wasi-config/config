@@ -2,4 +2,4 @@
 version: '[% c("abbrev") %]'
 git_url: https://git.savannah.gnu.org/git/config.git
 git_hash: f992bcc08219edb283d2ab31dd3871a4a0e8220e
-filename: '[% project %]-[% c("version") %].tar.gz'
+filename: '[% project %]-[% c("version") %].tar.[% c("compress_tar") %]'

@@ -53,7 +53,7 @@ steps:
       tar -C $builddir -xf [% c('input_files_by_name/geckoview_aarch64') %]
       tar -C $builddir -xf [% c('input_files_by_name/geckoview_x86') %]
       tar -C $builddir -xf [% c('input_files_by_name/geckoview_x86_64') %]
-      tar -C $builddir -xf [% project %]-[% c('version') %].tar.gz
+      tar -C $builddir -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
 
       # Specify the architectures we want to merge
       export MOZ_ANDROID_FAT_AAR_ARCHITECTURES=armeabi-v7a,arm64-v8a,x86,x86_64

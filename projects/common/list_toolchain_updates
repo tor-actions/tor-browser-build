@@ -6,7 +6,7 @@ rootdir="$(pwd)"
 no_updates="$rootdir/no_updates.txt"
 updates="$rootdir/updates.txt"
 
-tar -xf [% project %]-[% c('version') %].tar.gz
+tar -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
 cd [% project %]-[% c('version') %]
 
 function check_update_needed() {

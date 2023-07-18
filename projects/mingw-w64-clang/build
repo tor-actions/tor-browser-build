@@ -73,7 +73,7 @@ EOF
   # Restart from a clean state.
   cd $builddir
   rm -rf mingw-w64-clang
-  tar -xf $rootdir/mingw-w64-clang-[% c('version') %].tar.gz
+  tar -xf $rootdir/mingw-w64-clang-[% c('version') %].tar.[% c('compress_tar') %]
   mv mingw-w64-clang-[% c('version') %] mingw-w64-clang
 
   # Apply the same patches as Firefox

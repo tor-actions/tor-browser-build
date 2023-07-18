@@ -13,10 +13,10 @@ export PATH="/var/tmp/dist/ninja:/var/tmp/dist/cmake/bin:$PATH"
 [% END -%]
 
 mkdir -p /var/tmp/build
-tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
+tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
 
 cd /var/tmp/build
-tar -xf $rootdir/[% project %]-[% c('version') %].tar.gz
+tar -xf $rootdir/[% project %]-[% c('version') %].tar.[% c('compress_tar') %]
 cd $builddir
 
 pushd src

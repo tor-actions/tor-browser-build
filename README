@@ -12,6 +12,9 @@ newuidmap and newgidmap commands.
 The sources of most components are downloaded using git, which needs to
 be installed. The mercurial package is also needed.
 
+Zstandard (zstd) is used to compress some tarballs and needs to be
+installed. You'll also need tar >= 1.31, for zstd support.
+
 You also need a few perl modules installed:
 - YAML::XS
 - File::Basename
@@ -40,7 +43,7 @@ If you are running Debian or Ubuntu, you can install them with:
                   libstring-shellquote-perl libsort-versions-perl \
                   libdigest-sha-perl libdata-uuid-perl libdata-dump-perl \
                   libfile-copy-recursive-perl libfile-slurp-perl git \
-                  mercurial uidmap
+                  mercurial uidmap zstd
 
 If you are running an Arch based system, you should be able to install them with:
 
@@ -49,7 +52,8 @@ If you are running an Arch based system, you should be able to install them with
             perl-file-copy-recursive perl-string-shellquote \
             perl-sort-versions perl-data-uuid perl-data-dump perl-json \
             perl-digest-sha1 perl-io-all perl-file-slurp perl-sys-syscall \
-            perl-parallel-forkmanager perl-xml-libxml perl-lwp-protocol-https
+            perl-parallel-forkmanager perl-xml-libxml perl-lwp-protocol-https \
+            zstd
 
 On Arch based systems you also need to generate some .ph files RBM expects:
 

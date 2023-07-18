@@ -30,7 +30,7 @@ mkdir -p /var/tmp/build
   cp $distdir/application-services/nimbus-fml $nimbusdir/
   tar -C $distdir -xf $rootdir/[% c('input_files_by_name/translation-fenix') %]
 [% END %]
-tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
+tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
 
 cd $builddir-[% c("version") %]
 

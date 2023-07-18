@@ -18,7 +18,7 @@ mkdir -p $distdir
 [% END -%]
 
 mkdir -p $GOPATH/src/github.com/namecoin
-tar -C $GOPATH/src/github.com/namecoin -xf [% project %]-[% c('version') %].tar.gz
+tar -C $GOPATH/src/github.com/namecoin -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
 mv $GOPATH/src/github.com/namecoin/ncdns-[% c('version') %] $GOPATH/src/github.com/namecoin/ncdns
 
 TAGS="-tags no_namecoin_tls"

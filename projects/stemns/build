@@ -5,7 +5,7 @@ mkdir -p /var/tmp/build
 mkdir -p /var/tmp/dist
 
 # Extract StemNS
-tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
+tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
 
 cp -a /var/tmp/build/[% project %]-[% c('version') %] ${distdir}
 

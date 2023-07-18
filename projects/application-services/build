@@ -30,7 +30,7 @@ export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
   cp -r $gradle_repo/maven2/* $gradle_repo
 [% END %]
 
-tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
+tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
 
 # Prepare the offline build.
 # Move the directory for hardcoding the path in .cargo/config.

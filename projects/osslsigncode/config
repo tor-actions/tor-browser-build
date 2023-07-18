@@ -19,4 +19,4 @@ targets:
     git_url: ''
     var:
       no-git: 1
-      srcfile: '[% project %]-[% c("version") %].tar.gz'
+      srcfile: '[% project %]-[% c("version") %].tar.[% c("compress_tar") %]'

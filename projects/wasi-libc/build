@@ -1,4 +1,4 @@
 #!/bin/bash
 [% c("var/set_default_env") -%]
 mkdir -p /var/tmp/dist
-mv $rootdir/[% project %]-[% c('version') %].tar.gz [% dest_dir %]/[% c("filename") %]
+mv $rootdir/[% project %]-[% c('version') %].tar.[% c('compress_tar') %] [% dest_dir %]/[% c("filename") %]
