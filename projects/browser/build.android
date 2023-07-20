@@ -1,14 +1,13 @@
 #!/bin/bash
 [% c("var/set_default_env") -%]
 [% pc(c('var/compiler'), 'var/setup', { compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')) }) %]
+
+tar -xf $rootdir/[% c('input_files_by_name/firefox-android') %]
+
 assets_dir=assets
 ext_dir=$assets_dir/extensions
 qa_apk=[% dest_dir %]/[% c('filename') %]/[% c("var/project-name") %]-[% c("version") %]-[% c("var/osname") %]-multi-qa.apk
-apk=$rootdir/fenix/app-[% c("var/abi") %]-*.apk
-test_out_apk=[% dest_dir %]/[% c('filename') %]/[% c("var/project-name") %]-[% c("version") %]-[% c("var/osname") %]-androidTest.apk
-test_in_apk=$rootdir/fenix/app-*-androidTest.apk
-
-tar xavf $rootdir/[% c('input_files_by_name/fenix') %]
+apk=$rootdir/firefox-android/*-[% c("var/abi") %]-*.apk
 
 # Bundle our extensioni(s).
 # NoScript will be copied over to the profile folder
@@ -38,8 +37,6 @@ zipalign -vp 4 $apk $aligned_apk
 # Sign a QA build. This .apk is not a debug version and doesn't contain a debug
 # flag in the manifest.
 apksigner sign --verbose --min-sdk-version [% c("var/android_min_api") %] --ks $rootdir/android-qa.keystore --out $qa_apk --in $aligned_apk --ks-key-alias androidqakey --key-pass pass:android --ks-pass pass:android
-
-apksigner sign --verbose --min-sdk-version [% c("var/android_min_api") %] --ks $rootdir/android-qa.keystore --out $test_out_apk --in $test_in_apk  --ks-key-alias androidqakey --key-pass pass:android --ks-pass pass:android
 
 [%IF c("var/tor-browser") -%]
   tor_expert_bundle_src="[% c("input_files_by_name/tor-expert-bundle") %]"

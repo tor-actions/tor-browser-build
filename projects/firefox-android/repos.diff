@@ -1,0 +1,182 @@
+diff -rup firefox-android-orig/android-components/buildSrc/settings.gradle firefox-android-0aa48c23b715/android-components/buildSrc/settings.gradle
+--- firefox-android-orig/android-components/buildSrc/settings.gradle	2023-07-14 01:36:01.000000000 +0000
++++ firefox-android-0aa48c23b715/android-components/buildSrc/settings.gradle	2023-07-17 09:10:40.767368326 +0000
+@@ -2,9 +2,22 @@
+  * License, v. 2.0. If a copy of the MPL was not distributed with this
+  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+ 
++pluginManagement {
++    repositories {
++        maven {
++            url "file:///var/tmp/dist/gradle-dependencies"
++            metadataSources {
++                gradleMetadata()
++                mavenPom()
++            }
++        }
++    }
++}
++
++
+ buildCache {
+     local {
+         directory = new File(rootDir, '../.build-cache')
+         removeUnusedEntriesAfterDays = 30
+     }
+-}
+\ No newline at end of file
++}
+diff -rup firefox-android-orig/android-components/plugins/dependencies/settings.gradle firefox-android-0aa48c23b715/android-components/plugins/dependencies/settings.gradle
+--- firefox-android-orig/android-components/plugins/dependencies/settings.gradle	2023-07-14 01:36:01.000000000 +0000
++++ firefox-android-0aa48c23b715/android-components/plugins/dependencies/settings.gradle	2023-07-17 08:52:28.390014297 +0000
+@@ -3,3 +3,15 @@
+  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+ 
+ // Prevents gradle builds from looking for a root settings.gradle
++
++pluginManagement {
++    repositories {
++        maven {
++            url "file:///var/tmp/dist/gradle-dependencies"
++            metadataSources {
++                gradleMetadata()
++                mavenPom()
++            }
++        }
++    }
++}
+diff -rup firefox-android-orig/android-components/plugins/publicsuffixlist/settings.gradle firefox-android-0aa48c23b715/android-components/plugins/publicsuffixlist/settings.gradle
+--- firefox-android-orig/android-components/plugins/publicsuffixlist/settings.gradle	2023-07-14 01:36:01.000000000 +0000
++++ firefox-android-0aa48c23b715/android-components/plugins/publicsuffixlist/settings.gradle	2023-07-17 09:12:26.821491020 +0000
+@@ -3,3 +3,15 @@
+  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+ 
+ // Prevents gradle builds from looking for a root settings.gradle
++
++pluginManagement {
++    repositories {
++        maven {
++            url "file:///var/tmp/dist/gradle-dependencies"
++            metadataSources {
++                gradleMetadata()
++                mavenPom()
++            }
++        }
++    }
++}
+diff -rup firefox-android-orig/android-components/settings.gradle firefox-android-0aa48c23b715/android-components/settings.gradle
+--- firefox-android-orig/android-components/settings.gradle	2023-07-14 01:36:01.000000000 +0000
++++ firefox-android-0aa48c23b715/android-components/settings.gradle	2023-07-17 08:52:04.766877399 +0000
+@@ -3,6 +3,15 @@
+  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+ 
+ pluginManagement {
++    repositories {
++        maven {
++            url "file:///var/tmp/dist/gradle-dependencies"
++            metadataSources {
++                gradleMetadata()
++                mavenPom()
++            }
++        }
++    }
+     includeBuild("plugins/dependencies")
+     includeBuild("plugins/publicsuffixlist")
+ }
+diff -rup firefox-android-orig/fenix/app/build.gradle firefox-android-0aa48c23b715/fenix/app/build.gradle
+--- firefox-android-orig/fenix/app/build.gradle	2023-07-14 01:36:01.000000000 +0000
++++ firefox-android-0aa48c23b715/fenix/app/build.gradle	2023-07-17 11:04:32.924432356 +0000
+@@ -898,3 +898,4 @@ android.applicationVariants.all { varian
+ 
+ // Enable expiration by major version.
+ ext.gleanExpireByVersion = Config.majorVersion()
++ext.gleanBuildDate = "0"
+diff -rup firefox-android-orig/fenix/buildSrc/build.gradle firefox-android-0aa48c23b715/fenix/buildSrc/build.gradle
+--- firefox-android-orig/fenix/buildSrc/build.gradle	2023-07-14 01:36:01.000000000 +0000
++++ firefox-android-0aa48c23b715/fenix/buildSrc/build.gradle	2023-07-17 12:27:28.609768018 +0000
+@@ -7,6 +7,15 @@ plugins {
+ }
+ 
+ repositories {
++    repositories {
++        maven {
++            url "file:///var/tmp/dist/gradle-dependencies"
++            metadataSources {
++                gradleMetadata()
++                mavenPom()
++            }
++        }
++    }
+     if (project.hasProperty("centralRepo")) {
+         maven {
+             name "MavenCentral"
+diff -rup firefox-android-orig/fenix/settings.gradle firefox-android-0aa48c23b715/fenix/settings.gradle
+--- firefox-android-orig/fenix/settings.gradle	2023-07-14 01:36:01.000000000 +0000
++++ firefox-android-0aa48c23b715/fenix/settings.gradle	2023-07-17 12:26:10.479390296 +0000
+@@ -5,6 +5,15 @@
+ pluginManagement {
+     includeBuild("../android-components/plugins/publicsuffixlist")
+     includeBuild("../android-components/plugins/dependencies")
++    repositories {
++        maven {
++            url "file:///var/tmp/dist/gradle-dependencies"
++            metadataSources {
++                gradleMetadata()
++                mavenPom()
++            }
++        }
++    }
+ }
+ 
+ plugins {
+diff -rup firefox-android-orig/focus-android/settings.gradle firefox-android-0aa48c23b715/focus-android/settings.gradle
+--- firefox-android-orig/focus-android/settings.gradle	2023-07-14 01:36:01.000000000 +0000
++++ firefox-android-0aa48c23b715/focus-android/settings.gradle	2023-07-17 11:12:19.090555632 +0000
+@@ -3,6 +3,15 @@
+  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+ 
+ pluginManagement {
++    repositories {
++        maven {
++            url "file:///var/tmp/dist/gradle-dependencies"
++            metadataSources {
++                gradleMetadata()
++                mavenPom()
++            }
++        }
++    }
+     includeBuild("../android-components/plugins/publicsuffixlist")
+     includeBuild("../android-components/plugins/dependencies")
+ }
+diff -rup firefox-android-orig/shared-settings.gradle firefox-android-0aa48c23b715/shared-settings.gradle
+--- firefox-android-orig/shared-settings.gradle	2023-07-14 01:36:01.000000000 +0000
++++ firefox-android-0aa48c23b715/shared-settings.gradle	2023-07-17 09:09:39.331186584 +0000
+@@ -6,6 +6,13 @@ import org.yaml.snakeyaml.Yaml
+ 
+ buildscript {
+     repositories {
++        maven {
++            url "file:///var/tmp/dist/gradle-dependencies"
++            metadataSources {
++                gradleMetadata()
++                mavenPom()
++            }
++        }
+         mavenCentral()
+     }
+ 
+diff -upN firefox-android-orig/fenix/buildSrc/settings.gradle firefox-android-0aa48c23b715/fenix/buildSrc/settings.gradle 
+--- firefox-android-orig/fenix/buildSrc/settings.gradle 1970-01-01 00:00:00.000000000 +0000
++++ firefox-android-0aa48c23b715/fenix/buildSrc/settings.gradle 2023-07-17 12:27:39.371197488 +0000
+@@ -0,0 +1,11 @@
++pluginManagement {
++    repositories {
++        maven {
++            url "file:///var/tmp/dist/gradle-dependencies"
++            metadataSources {
++                gradleMetadata()
++                mavenPom()
++            }
++        }
++    }
++}

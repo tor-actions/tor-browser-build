@@ -1,0 +1,121 @@
+#!/bin/bash
+[% c("var/set_default_env") -%]
+[% pc(c('var/compiler'), 'var/setup', {
+    compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')),
+    gradle_tarfile => c("input_files_by_name/gradle"),
+  }) %]
+distdir=/var/tmp/dist
+builddir=/var/tmp/build/[% project %]
+mkdir $distdir/[% project %]
+mkdir /var/tmp/build
+
+[% c("var/set_MOZ_BUILD_DATE") %]
+
+# TODO: Something to fetch the gradle dependencies, automatically?
+
+gradle_repo=$distdir/gradle-dependencies
+mv $rootdir/[% c('input_files_by_name/gradle-dependencies') %] $gradle_repo
+cp -rl $gradle_repo/dl/android/maven2/* $gradle_repo || true
+cp -rl $gradle_repo/m2/* $gradle_repo || true
+cp -rl $gradle_repo/maven2/* $gradle_repo || true
+
+tar -C $distdir -xf [% c('input_files_by_name/geckoview') %]
+cp -r $distdir/geckoview/* $gradle_repo
+tar -C $distdir -xf [% c('input_files_by_name/application-services') %]
+cp -rf $distdir/application-services/maven/* $gradle_repo
+tar -C $distdir -xf $rootdir/[% c('input_files_by_name/translation-fenix') %]
+
+mkdir bin
+cat > bin/git << 'EOF'
+#!/bin/bash
+# Used to include the commit hash in the build
+if [ "$1" = "rev-parse" ]; then
+  echo "[% c('abbrev') %]"
+  exit 0
+fi
+
+# If there are uncommitted files (checked with `git status --porcelain=v2`), the
+# build system will append a `+` to the commit hash. So, report a clean tree.
+if [ "$1" = "status" ]; then
+  exit 0
+fi
+
+# Try to catch any other calls by making them fail
+echo "fake-git: not implemented command $1"
+exit 1
+EOF
+chmod +x bin/git
+export PATH=$rootdir/bin:$PATH
+
+tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
+cd $builddir-[% c('version') %]
+
+patch -p1 < $rootdir/repos.diff
+sed -i 's|^\(val VERSION = \).*|\1"[% c("var/as_version") %]"|' android-components/plugins/dependencies/src/main/java/ApplicationServices.kt
+sed -i 's|^\(val CHANNEL = \).*|\1ApplicationServicesChannel.RELEASE|' android-components/plugins/dependencies/src/main/java/ApplicationServices.kt
+gv_version="$(echo [% c('var/geckoview_version') %] | awk -F. '{print $1 "." $2}').[% c('var/geckoview_buildid') %]"
+sed -i "s|\(\s*const val version = \).*|\1\"$gv_version\"|" android-components/plugins/dependencies/src/main/java/Gecko.kt
+sed -i 's|\(\s*val channel = \).*|\1GeckoChannel.[% c("var/variant") FILTER upper %]|' android-components/plugins/dependencies/src/main/java/Gecko.kt
+
+export LC_ALL=C.UTF-8
+export LANG=C.UTF-8
+
+# Increase the maximum memory usage, for when compiling GeckoView with
+# --disable-install-strip
+gradle_args="--offline --no-daemon -Dorg.gradle.jvmargs=-Xmx8g -PcentralRepo=file://$gradle_repo"
+as_version="[% c('var/as_version') %]"
+
+# Build AC
+pushd android-components
+
+tar -xf $rootdir/[% c('input_files_by_name/glean') %]
+# Force the installation of the wheels now, otherwise the build could fail in
+# environments with a lot of cores.
+# See taskcluster/scripts/toolchain/external-gradle-dependencies.sh.
+gradle $gradle_args support-sync-telemetry:assemble
+
+mkdir -p "build/bin/nimbus/$as_version"
+cp $distdir/application-services/nimbus-fml "build/bin/nimbus/$as_version"
+
+gradle $gradle_args assembleGecko -x lint
+gradle $gradle_args publish
+popd
+
+# Build Fenix
+
+pushd fenix
+
+# Use the Android Components we have just built
+echo autoPublish.android-components.dir=../android-components > local.properties
+
+# Add our localized strings
+supported_locales="[% tmpl(c('var/locales_mobile').join(' ')) %]"
+for lang in $supported_locales; do
+  cp "/var/tmp/dist/translation-fenix/$lang/torbrowser_strings.xml" "app/src/main/res/values-$lang/"
+done
+
+# Move Tor Android libraries
+cp $rootdir/[% c('input_files_by_name/topl') %]/* app/
+cp $rootdir/[% c('input_files_by_name/tor-android-service') %]/* app/
+
+mkdir -p "build/bin/nimbus/$as_version"
+cp $distdir/application-services/nimbus-fml "build/bin/nimbus/$as_version"
+
+# Bug 40485: Inject deterministic build date into Glean.
+echo 'ext.gleanBuildDate = "0"' >> app/build.gradle
+
+variant='[% c("var/variant") %]'
+# We put the tor-browser version last to avoid int-parsing errors when consumers of project.versionName
+# assume it starts with a major version number, as it does for all Mozilla version names.
+version_name="[% c('var/fenix_version') %]-${variant,} ([% c('var/torbrowser_version') %])"
+
+gradle $gradle_args -PversionName="$version_name" "assemble$variant"
+cp app/build/outputs/apk/fenix/${variant,}/*.apk $distdir/[% project %]
+
+popd
+
+cd $distdir
+[% c('tar', {
+    tar_src => [ project ],
+    tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
+  }) %]

@@ -57,6 +57,8 @@ targets:
     build: '[% INCLUDE build.android %]'
     var:
       verify_allowed_addons: 1
+      arch_deps:
+        - openjdk-11-jdk-headless
   torbrowser:
     var:
       prefs_file: 000-tor-browser.js
@@ -83,8 +85,8 @@ input_files:
     name: src-firefox
     pkg_type: src-tarballs
     enable: '[% c("var/macos") %]'
-  - project: fenix
-    name: fenix
+  - project: firefox-android
+    name: firefox-android
     enable: '[% c("var/android") %]'
   - project: tor-expert-bundle
     name: tor-expert-bundle
@@ -99,9 +101,9 @@ input_files:
     enable: '[% ! c("var/android") %]'
   - filename: Bundle-Data
     enable: '[% ! c("var/android") %]'
-  - URL: https://addons.mozilla.org/firefox/downloads/file/4136347/noscript-11.4.25.xpi
+  - URL: https://addons.mozilla.org/firefox/downloads/file/4141345/noscript-11.4.26.xpi
     name: noscript
-    sha256sum: 36b44a4af8b57188db230c29284dd64626611ee6b46fbf8ef3e352317fbf55aa
+    sha256sum: 283db0eaebbd2888c1a852f5acabaa8e0225ff1eb1a97a25bceaedfd14d9f44c
   - URL: https://addons.mozilla.org/firefox/downloads/file/4121906/ublock_origin-1.50.0.xpi
     name: ublock-origin
     sha256sum: 10618003e70b528c3f17996e373146d39e6b15f777ac4ca1f214da2ffdb7a5b3
