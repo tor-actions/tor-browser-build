@@ -3,31 +3,37 @@
 [% pc(c('var/compiler'), 'var/setup', {
     compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')),
     gradle_tarfile => c("input_files_by_name/gradle"),
+    ndk_version => c("var/ndk_version"),
   }) %]
 distdir=/var/tmp/dist/[% project %]
 builddir=/var/tmp/build/[% project %]
 mkdir $distdir
 mkdir /var/tmp/build
 
-cd /var/tmp/dist
-[% FOREACH arch = ['armv7', 'aarch64', 'x86', 'x86_64', 'linux-x86_64'] -%]
-  tar -xf $rootdir/[% c('input_files_by_name/nss-' _ arch) %]
-  mv nss nss-[% arch %]
-  tar -xf $rootdir/[% c('input_files_by_name/sqlcipher-' _ arch) %]
-  mv sqlcipher sqlcipher-[% arch %]
+[% IF c("input_files_by_name/android_ndk") -%]
+  pushd $(dirname $ANDROID_NDK_HOME)
+  unzip -qq $rootdir/[% c("input_files_by_name/android_ndk") %]
+  # Without this link gradle will not find the NDK.
+  ln -s $(basename $ANDROID_NDK_HOME) [% c("var/ndk_version_build") %]
+  popd
 [% END -%]
+
+cd /var/tmp/dist
 tar -xf $rootdir/[% c('input_files_by_name/rust') %]
+tar -xf $rootdir/[% c('input_files_by_name/ninja') %]
 tar -xf $rootdir/[% c('input_files_by_name/uniffi-rs') %]
-export PATH=/var/tmp/dist/rust/bin:/var/tmp/dist/uniffi-rs:$PATH
+export PATH=/var/tmp/dist/rust/bin:/var/tmp/dist/ninja:/var/tmp/dist/uniffi-rs:$PATH
+export RUST_ANDROID_GRADLE_PYTHON_COMMAND=python3
 cd $rootdir
 
 export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
 
 [% IF !c('var/fetch_gradle_dependencies') %]
-  gradle_repo=$rootdir/[% c('input_files_by_name/gradle-dependencies') %]
-  cp -r $gradle_repo/dl/android/maven2/* $gradle_repo
-  cp -r $gradle_repo/m2/* $gradle_repo
-  cp -r $gradle_repo/maven2/* $gradle_repo
+  gradle_repo=/var/tmp/dist/gradle-dependencies
+  mv $rootdir/[% c('input_files_by_name/gradle-dependencies') %] $gradle_repo
+  cp -rl $gradle_repo/dl/android/maven2/* $gradle_repo || true
+  cp -rl $gradle_repo/m2/* $gradle_repo || true
+  cp -rl $gradle_repo/maven2/* $gradle_repo || true
 [% END %]
 
 tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
@@ -36,6 +42,15 @@ tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_ta
 # Move the directory for hardcoding the path in .cargo/config.
 mv /var/tmp/build/[% project %]-[% c('version') %] $builddir
 tar -C $builddir -xf $rootdir/[% c('input_files_by_name/cargo_vendor') %]
+
+cat > pip.conf << 'EOF'
+[global]
+find-links = /var/tmp/build/application-services/glean-wheels
+index-url =
+no-index = yes
+EOF
+export PIP_CONFIG_FILE=$rootdir/pip.conf
+
 cd $builddir
 # Make sure our vendored crates are used for offline builds.
 cat >> .cargo/config << 'EOF'
@@ -50,36 +65,19 @@ directory = "/var/tmp/build/application-services/vendor"
 offline=true
 EOF
 
-# Move NSS and SQLCipher to the right place
-# XXX: Maybe merge with the loop above.
-archs="armv7 aarch64 x86 x86_64 linux-x86_64"
-for a in $archs
-do
-  if [ "$a" == "armv7" ]
-  then
-    mkdir -p libs/android/armeabi-v7a
-    mv /var/tmp/dist/nss-$a libs/android/armeabi-v7a/nss
-    mv /var/tmp/dist/sqlcipher-$a libs/android/armeabi-v7a/sqlcipher
-  elif [ "$a" == "aarch64" ]
-  then
-    mkdir -p libs/android/arm64-v8a
-    mv /var/tmp/dist/nss-$a libs/android/arm64-v8a/nss
-    mv /var/tmp/dist/sqlcipher-$a libs/android/arm64-v8a/sqlcipher
-  elif [ "$a" == "linux-x86_64" ]
-  then
-    mkdir -p libs/desktop/linux-x86-64
-    mv /var/tmp/dist/nss-$a libs/desktop/linux-x86-64/nss
-    mv /var/tmp/dist/sqlcipher-$a libs/desktop/linux-x86-64/sqlcipher
-  else
-    mkdir -p libs/android/$a
-    mv /var/tmp/dist/nss-$a libs/android/$a/nss
-    mv /var/tmp/dist/sqlcipher-$a libs/android/$a/sqlcipher
-  fi
-done
-
 patch -p1 < $rootdir/no-git.patch
-patch -p1 < $rootdir/bug40485.patch
-export RUST_ANDROID_GRADLE_PYTHON_COMMAND=python3
+patch -p1 < $rootdir/bug40485.diff
+
+pushd libs
+mv $rootdir/[% c("input_files_by_name/nss") %] ./
+mv $rootdir/[% c("input_files_by_name/sqlcipher") %] ./
+mv $rootdir/bug_13028.patch ./
+patch -p2 < $rootdir/apply-bug-13028.diff
+sed -i 's/NDK_VERSION=.*/NDK_VERSION=[% c("var/ndk_version_build") %]/g' android_defaults.sh
+./build-all.sh desktop
+./build-all.sh android
+popd
+
 [% IF c('var/fetch_gradle_dependencies') %]
   # XXX: `assemble` is still not enough to see all fetched dependencies via
   # Gradle's --debug. See: tor-browser-build#40056.
@@ -93,19 +91,15 @@ export RUST_ANDROID_GRADLE_PYTHON_COMMAND=python3
   # otherwise `click` barfs. See: https://click.palletsprojects.com/python3/
   export LC_ALL=C.UTF-8
   export LANG=C.UTF-8
-  patch -p1 < $rootdir/mavenLocal.patch
-  gradle_flags="--offline --no-daemon -Dmaven.repo.local=$gradle_repo"
+  patch -p1 < $rootdir/local-repository.diff
+  gradle_flags="--offline --no-daemon"
   gradle $gradle_flags assembleRelease
   gradle $gradle_flags publish
+  mv build/maven $distdir
 
   pushd components/support/nimbus-fml
   cargo build --release
   popd
-
-  pushd build
-  find maven -regex '.*[0-9].\(aar\|pom\)' -exec cp --parents {} $distdir \;
-  popd
-
   cp target/release/nimbus-fml $distdir
 
   cd /var/tmp/dist

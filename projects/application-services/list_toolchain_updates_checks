@@ -8,7 +8,7 @@ if (m/^\\s*ndkVersion:\\s"([^"]*)",/) {
 }
 EOF
 needed=$(cat build.gradle | perl -ne "$p")
-current='[% pc("android-toolchain", "var/android_ndk_version_build") %]'
+current='[% c("var/ndk_version_build") %]'
 check_update_needed ndkVersion "$needed" "$current"
 
 
@@ -20,7 +20,7 @@ if (m/^\\s*compileSdkVersion:\\s([^"]*),/) {
 }
 EOF
 needed=$(cat build.gradle | perl -ne "$p")
-current=29
+current=33
 check_update_needed compileSdkVersion "$needed" "$current"
 
 
@@ -34,19 +34,6 @@ EOF
 needed=$(cat build.gradle | perl -ne "$p")
 current=21
 check_update_needed minSdkVersion "$needed" "$current"
-
-
-# glean_parser
-read -d '' p << 'EOF' || true
-if (m/^\\s*"glean_parser==([^"]+)",/) {
-  print $1;
-  exit;
-}
-EOF
-tar xf $rootdir/[% c('input_files_by_name/glean') %]
-needed=$(cat glean-[% c("var/glean_version") %]/glean-core/python/setup.py | perl -ne "$p")
-current='[% c("var/glean_parser") %]'
-check_update_needed glean_parser "$needed" "$current"
 
 
 # gradle
@@ -69,7 +56,7 @@ if (m/NSS_ARCHIVE="nss-(.*-with-nspr-.*)\\.tar\\.gz"/) {
 }
 EOF
 needed=$(cat libs/build-all.sh | perl -ne "$p")
-current='[% pc("nss", "version") %]-with-nspr-[% pc("nss", "nspr_version") %]'
+current='[% c("var/nss_version") %]-with-nspr-[% c("var/nspr_version") %]'
 check_update_needed nss-nspr "$needed" "$current"
 
 
@@ -81,18 +68,5 @@ if (m/SQLCIPHER_VERSION="([^"]+)"/) {
 }
 EOF
 needed=$(cat libs/build-all.sh | perl -ne "$p")
-current='[% pc("sqlcipher", "version") %]'
+current='[% c("var/sqlcipher_version") %]'
 check_update_needed sqlcipher "$needed" "$current"
-
-
-# android-gradle-plugin
-read -d '' p << 'EOF' || true
-if (m/^\\s*android_gradle_plugin_version\\s=\\s'([^']*)'/) {
-  print $1;
-  exit;
-}
-EOF
-needed=$(cat build.gradle | perl -ne "$p")
-current='4.2.2'
-check_update_needed android-gradle-plugin "$needed" "$current"
-

@@ -1,0 +1,59 @@
+diff --git a/components/support/nimbus-fml/src/parser.rs b/components/support/nimbus-fml/src/parser.rs
+index bb676f827..d00b1b6ef 100644
+--- a/components/support/nimbus-fml/src/parser.rs
++++ b/components/support/nimbus-fml/src/parser.rs
+@@ -26,7 +26,7 @@ pub(crate) struct EnumVariantBody {
+ #[serde(deny_unknown_fields)]
+ pub(crate) struct EnumBody {
+     description: String,
+-    variants: HashMap<String, EnumVariantBody>,
++    variants: BTreeMap<String, EnumVariantBody>,
+ }
+ 
+ #[derive(Debug, Deserialize, Serialize, Clone)]
+@@ -54,9 +54,9 @@ pub(crate) struct ObjectBody {
+ #[serde(deny_unknown_fields)]
+ pub(crate) struct Types {
+     #[serde(default)]
+-    enums: HashMap<String, EnumBody>,
++    enums: BTreeMap<String, EnumBody>,
+     #[serde(default)]
+-    objects: HashMap<String, ObjectBody>,
++    objects: BTreeMap<String, ObjectBody>,
+ }
+ 
+ #[derive(Debug, Deserialize, Serialize, Clone, Default, PartialEq, Eq)]
+@@ -105,7 +105,7 @@ pub(crate) struct ImportBlock {
+     pub(crate) path: String,
+     pub(crate) channel: String,
+     #[serde(default)]
+-    pub(crate) features: HashMap<String, Vec<DefaultBlock>>,
++    pub(crate) features: BTreeMap<String, Vec<DefaultBlock>>,
+ }
+ 
+ #[derive(Debug, Deserialize, Serialize, Clone)]
+@@ -134,7 +134,7 @@ pub(crate) struct ManifestFrontEnd {
+     #[serde(rename = "types")]
+     legacy_types: Option<Types>,
+     #[serde(default)]
+-    features: HashMap<String, FeatureBody>,
++    features: BTreeMap<String, FeatureBody>,
+ 
+     #[serde(default)]
+     #[serde(alias = "include")]
+@@ -1009,12 +1009,12 @@ impl Parser {
+ }
+ 
+ fn merge_map<T: Clone>(
+-    a: &HashMap<String, T>,
+-    b: &HashMap<String, T>,
++    a: &BTreeMap<String, T>,
++    b: &BTreeMap<String, T>,
+     display_key: &str,
+     key: &str,
+     child_path: &FilePath,
+-) -> Result<HashMap<String, T>> {
++) -> Result<BTreeMap<String, T>> {
+     let mut set = HashSet::new();
+ 
+     let (a, b) = if a.len() < b.len() { (a, b) } else { (b, a) };
