@@ -3,7 +3,7 @@ version: 1.3.0
 git_url: https://github.com/aio-libs/yarl.git
 git_hash: 619cc2203b8888fb9ad552c4a3da6f8b31d1fbac
 # TODO: This Git repo doesn't use GPG sigs.  We should pester them about that.
-filename: "[% project %]-[% c('version') %]-[% c('var/build_id') %].tar.gz"
+filename: "[% project %]-[% c('version') %]-[% c('var/build_id') %].tar.[% c('compress_tar') %]"
 container:
   use_container: 1
 input_files:

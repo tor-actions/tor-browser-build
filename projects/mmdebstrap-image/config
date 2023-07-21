@@ -1,7 +1,8 @@
 # vim: filetype=yaml sw=2
-filename: 'container-image_[% c("var/container/suite") %]-[% c("var/container/arch") %]-[% c("version") %].tar.gz'
+filename: 'container-image_[% c("var/container/suite") %]-[% c("var/container/arch") %]-[% c("version") %].tar.[% c("compress_tar") %]'
 version: 1
 pkg_type: build
+compress_tar: zst
 container:
   use_container: 1
 
@@ -14,21 +15,21 @@ pre: |
   rootdir=$(pwd)
   export DEBIAN_FRONTEND=noninteractive
   apt-get update -y -q
-  apt-get install -y -q debian-archive-keyring ubuntu-keyring mmdebstrap gnupg
+  apt-get install -y -q debian-archive-keyring ubuntu-keyring mmdebstrap gnupg zstd
 
   export SOURCE_DATE_EPOCH='[% c("timestamp") %]'
   tar -xf [% c('input_files_by_name/mmdebstrap') %]
-  ./mmdebstrap/mmdebstrap --mode=unshare [% c("var/container/mmdebstrap_opt") %] [% c("var/container/suite") %] output.tar.gz [% c("var/container/debian_mirror") %]
+  ./mmdebstrap/mmdebstrap --mode=unshare [% c("var/container/mmdebstrap_opt") %] [% c("var/container/suite") %] output.tar.[% c('compress_tar') %] [% c("var/container/debian_mirror") %]
 
   [% IF c("var/minimal_apt_version") -%]
     mkdir base-image
-    tar -C base-image -xf output.tar.gz ./var/lib/dpkg
+    tar -C base-image -xf output.tar.[% c('compress_tar') %] ./var/lib/dpkg
     apt_version=$(dpkg --admindir=$rootdir/base-image/var/lib/dpkg -s apt | grep '^Version: ' | cut -d ' ' -f 2)
     echo "apt version: $apt_version"
     dpkg --compare-versions "$apt_version" ge '[% c("var/minimal_apt_version") %]'
   [% END -%]
 
-  mv output.tar.gz [% dest_dir %]/[% c("filename") %]
+  mv output.tar.[% c('compress_tar') %] [% dest_dir %]/[% c("filename") %]
 
 targets:
   stretch-amd64:

@@ -111,6 +111,6 @@ export RUST_ANDROID_GRADLE_PYTHON_COMMAND=python3
   cd /var/tmp/dist
   [% c('tar', {
       tar_src => [ project ],
-      tar_args => '-czf ' _ dest_dir _ '/' _ c('filename'),
+      tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
   }) %]
 [% END %]

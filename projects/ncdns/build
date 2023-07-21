@@ -31,5 +31,5 @@ cd /var/tmp/dist
 
 [% c('tar', {
   tar_src => [ 'gopath' ],
-  tar_args => '-czf ' _ dest_dir _ '/' _ c('filename'),
+  tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
 }) %]

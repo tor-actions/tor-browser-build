@@ -54,5 +54,5 @@ rm -rf /var/tmp/dist/go/pkg/obj/go-build/
 cd /var/tmp/dist
 [% c('tar', {
         tar_src => [ project ],
-        tar_args => '-czf ' _ dest_dir _ '/' _ c('filename'),
+        tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
     }) %]

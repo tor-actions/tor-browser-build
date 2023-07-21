@@ -3,7 +3,7 @@ version: '[% c("abbrev") %]'
 git_url: https://github.com/golang/sys
 # HEAD as of 2022.10.20
 git_hash: 95e765b1cc43ac521bd4fd501e00774e34401449
-filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
 

@@ -2,7 +2,7 @@
 version: '[% c("abbrev") %]'
 git_url:  https://github.com/kr/pretty.git
 git_hash: 71e7e49937503c662b9b636fd6b2c14b1aa818a5
-filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
 

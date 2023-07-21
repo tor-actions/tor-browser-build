@@ -4,5 +4,5 @@ unzip -qq [% c("input_files_by_name/gradle") %]
 mv [% project %]-[% c("version") %] [% project %]
 [% c('tar', {
         tar_src => [ project ],
-        tar_args => '-czf ' _ dest_dir _ '/' _ c('filename'),
+        tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
     }) %]

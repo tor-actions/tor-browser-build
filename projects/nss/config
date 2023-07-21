@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-filename: '[% project %]-[% c("version") %]-with-nspr-[% c("nspr_version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+filename: '[% project %]-[% c("version") %]-with-nspr-[% c("nspr_version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 # The required versions for application-services can be found at the respective
 # commit in libs/build-all.sh
 version: 3.66

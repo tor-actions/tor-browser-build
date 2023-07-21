@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-filename: 'Electrum-NMC-[% c("version") %]-[% c("var/build_id") %].tar.gz'
+filename: 'Electrum-NMC-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 version: 3.3.11
 git_url: https://github.com/namecoin/electrum-nmc.git
 git_hash: dc366a9cfedac24c0fd12d493f25ed058cf38271

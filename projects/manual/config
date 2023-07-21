@@ -2,9 +2,14 @@
 # To update, see doc/how-to-update-the-manual.txt
 # Remember to update also the package's hash, with the version!
 version: 88998
-filename: 'manual-[% c("version") %]-[% c("var/build_id") %].tar.gz'
+filename: 'manual-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
+
+# Linux builds still use gz as compress_tar, while other platforms use
+# zst. To avoid duplicating manual tarballs which can be shared
+# between platforms, we set compress_tar.
+compress_tar: 'gz'
 
 var:
   container:

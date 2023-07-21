@@ -5,5 +5,5 @@ mv [% project %]-[% c("version") %] [% project %]-[% c("step") %]
 [% SET tar_source = project _ '-' _ c('step') -%]
 [% c('tar', {
         tar_src => [ tar_source ],
-        tar_args => '-czf ' _ dest_dir _ '/' _ c('filename'),
+        tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
     }) %]

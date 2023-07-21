@@ -4,7 +4,7 @@
 # https://github.com/planetbeing/libdmg-hfsplus/issues/14
 #
 version: 1.0.2u
-filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
+filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 
 input_files:
   - URL: 'https://www.openssl.org/source/openssl-[% c("version") %].tar.gz'

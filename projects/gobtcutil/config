@@ -2,7 +2,7 @@
 version: '[% c("abbrev") %]'
 git_url:  https://github.com/btcsuite/btcutil.git
 git_hash: 9e5f4b9a998d263e3ce9c56664a7816001ac8000
-filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
 

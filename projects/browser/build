@@ -170,13 +170,13 @@ RBM_TB_EOF
   cp $rootdir/gtk3-settings.ini $GTK_SETTINGS_DIR/settings.ini
 [% END %]
 
-tar -C ${TB_STAGE_DIR} -xf [% c('input_files_by_name/firefox') %]/browser.tar.gz
+tar -C ${TB_STAGE_DIR} -xf [% c('input_files_by_name/firefox') %]/browser.tar.[% c("compress_tar") %]
 
 [% IF c("var/macos_universal") -%]
   # Use symlink in tmp dir to extract "Tor Browser.app" to "Tor Browser-aarch64.app"
   ff_aarch64=$(mktemp -d)
   ln -s "$TBDIR_AARCH64" "$ff_aarch64/[% c("var/Project_Name") %].app"
-  tar -C $ff_aarch64 -xf [% c('input_files_by_name/firefox-aarch64') %]/browser.tar.gz
+  tar -C $ff_aarch64 -xf [% c('input_files_by_name/firefox-aarch64') %]/browser.tar.[% c("compress_tar") %]
 [% END %]
 
 [% IF c("var/tor-browser") -%]

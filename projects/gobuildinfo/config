@@ -2,7 +2,7 @@
 version: '[% c("abbrev") %]'
 git_url:  https://github.com/hlandau/buildinfo.git
 git_hash: 337a29b5499734e584d4630ce535af64c5fe7813
-filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
 

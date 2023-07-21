@@ -11,5 +11,5 @@ make -j[% c("num_procs") %] install
 cd /var/tmp/dist
 [% c('tar', {
         tar_src => [ 'openssl' ],
-        tar_args => '-czf ' _ dest_dir _ '/' _ c('filename'),
+        tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
     }) %]

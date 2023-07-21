@@ -2,7 +2,7 @@
 version: 1.0.17
 git_url:  https://github.com/hlandau/easyconfig.git
 git_hash: c31249162931b4963bbe6e501cccb60d23271a3f
-filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
 

@@ -2,7 +2,7 @@
 version: '[% c("abbrev") %]'
 git_url:  https://github.com/hlandau/configurable.git
 git_hash: 34642c4c8cbf56801d0e34f0e82187305983ac26
-filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
 

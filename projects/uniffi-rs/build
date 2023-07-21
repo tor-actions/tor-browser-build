@@ -38,5 +38,5 @@ mv target/x86_64-unknown-linux-gnu/release/uniffi-bindgen $distdir/[% project %]
 cd $distdir
 [% c('tar', {
         tar_src => [ project ],
-        tar_args => '-czf ' _ dest_dir _ '/' _ c('filename'),
+        tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
     }) %]

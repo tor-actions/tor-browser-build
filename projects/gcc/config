@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-filename: '[% project %]-[% c("version") %]-[% IF c("var/linux-cross") %][% c("var/osname") %][% ELSE %]x86[% END %]-[% c("var/build_id") %].tar.gz'
+filename: '[% project %]-[% c("version") %]-[% IF c("var/linux-cross") %][% c("var/osname") %][% ELSE %]x86[% END %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 # Note: When updating the gcc version, if this includes a libstdc++
 # ABI change we should also update projects/firefox/abicheck.cc to
 # require the new version.

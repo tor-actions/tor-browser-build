@@ -9,7 +9,7 @@ git_url: https://github.com/namecoin/ncdns.git
 # disable_namecoin_tlsa features.  Once they're in a tagged release, we'll go
 # back to using a hash that corresponds to a tag here.
 git_hash: 'ca0fe5552806a4275f38468c4d3fbcb2cba1cb79'
-filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
 

@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 version: 1.20.6
-filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
 
@@ -65,7 +65,7 @@ var:
     cd /var/tmp/dist
     [% c('tar', {
             tar_src => [ 'gopath' ],
-            tar_args => '-czf ' _ dest_dir _ '/' _ c('filename'),
+            tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
         }) %]
 
 targets:

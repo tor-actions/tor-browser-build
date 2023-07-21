@@ -2,7 +2,7 @@
 version: '[% c("abbrev") %]'
 git_url: https://github.com/namecoin/StemNS.git
 git_hash: '68d437491c0308545e149181768cd98e45c1ac82'
-filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
+filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
 var:

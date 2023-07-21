@@ -2,7 +2,7 @@
 version: '[% c("abbrev") %]'
 git_url:  https://github.com/alecthomas/template.git
 git_hash: fb15b899a75114aa79cc930e33c46b577cc664b1
-filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
 

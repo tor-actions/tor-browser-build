@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-filename: 'container-image_[% c("var/container/suite") %]-[% c("var/container/arch") %]-[% sha256(c("pre")).substr(0, 12) %].tar.gz'
+filename: 'container-image_[% c("var/container/suite") %]-[% c("var/container/arch") %]-[% sha256(c("pre")).substr(0, 12) %].tar.[% c("compress_tar") %]'
 pkg_type: build
 container:
   use_container: 1

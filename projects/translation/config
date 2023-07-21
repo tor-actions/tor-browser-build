@@ -1,7 +1,13 @@
 # vim: filetype=yaml sw=2
-filename: '[% project %]-[% c("step") %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
+filename: '[% project %]-[% c("step") %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 git_url: https://gitlab.torproject.org/tpo/translation.git
 version: '[% c("abbrev") %]'
+
+# Linux builds still use gz as compress_tar, while other platforms use
+# zst. To avoid duplicating translations tarballs which can be shared
+# between platforms, we set compress_tar, except for the fenix
+# translations (which are not used for Linux builds).
+compress_tar: 'gz'
 
 steps:
   base-browser:
@@ -27,6 +33,7 @@ steps:
     # We need to bump the commit before releasing but just pointing to a branch
     # might cause too much rebuidling of the Firefox part.
     git_hash: e037147c72348192ddd38c2a21712c65031b912c
+    compress_tar: 'zst'
     targets:
       nightly:
         git_hash: 'fenix-torbrowserstringsxml'

@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
-filename: 'geckoview-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+filename: 'geckoview-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 git_hash: 'tor-browser-[% c("var/geckoview_version") %]-[% c("var/browser_branch") %]-build[% c("var/browser_build") %]'
 tag_gpg_id: 1
 git_url: https://gitlab.torproject.org/tpo/applications/tor-browser.git
@@ -32,7 +32,7 @@ var:
 
 steps:
   merge_aars:
-    filename: 'geckoview-[% c("version") %]-[% c("var/build_id") %].tar.gz'
+    filename: 'geckoview-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
     version: '[% c("abbrev") %]'
     merge_aars: |
       #!/bin/bash
@@ -91,7 +91,7 @@ steps:
       cd $distdir/
       [% c('tar', {
               tar_src => [ project ],
-              tar_args => '-czf ' _ dest_dir _ '/' _ c('filename'),
+              tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
          }) %]
 
 

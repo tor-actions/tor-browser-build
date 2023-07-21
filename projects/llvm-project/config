@@ -2,7 +2,7 @@
 version: "[% c('var/llvm_major') %].0.4"
 git_hash: ae42196bc493ffe877a7e3dff8be32035dea4d07
 git_url: https://github.com/llvm/llvm-project
-filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
+filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 
 var:
   llvm_major: 16

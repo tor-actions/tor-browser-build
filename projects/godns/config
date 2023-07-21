@@ -2,7 +2,7 @@
 version: 1.1.22
 git_url:  https://github.com/miekg/dns.git
 git_hash: 1e224ff5dead8366ed6fcdcb832794be42e73f0e
-filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
 

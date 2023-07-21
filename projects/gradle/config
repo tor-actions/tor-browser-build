@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-filename: '[% project %]-[% c("version") %].tar.gz'
+filename: '[% project %]-[% c("version") %].tar.[% c("compress_tar") %]'
 version: '[% pc(c("origin_project"), "var/gradle_version", { error_if_undef => 1 }) %]'
 container:
   use_container: 1

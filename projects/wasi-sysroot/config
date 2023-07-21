@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
+filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 version: '[% c("abbrev") %]'
 # Notice: we are not enabling submodules because we use the same hacks as
 # Mozilla and re-use the LLVM we already build.

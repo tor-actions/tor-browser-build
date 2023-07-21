@@ -321,7 +321,7 @@ END;
 
 [% c('tar', {
         tar_src => [ browserdir ],
-        tar_args => '-czf ' _ dest_dir _ '/' _ c('filename') _ '/browser.tar.gz',
+        tar_args => '-caf ' _ dest_dir _ '/' _ c('filename') _ '/browser.tar.' _ c('compress_tar'),
     }) %]
 
 [% IF c("var/linux-x86_64") %]

@@ -4,5 +4,5 @@ tar -xf [% project %]-[% c("version") %].tar.[% c('compress_tar') %]
 mv [% project %]-[% c("version") %] clang-source
 [% c('tar', {
         tar_src => [ 'clang-source' ],
-        tar_args => '-czf ' _ dest_dir _ '/' _ c('filename'),
+        tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
     }) %]

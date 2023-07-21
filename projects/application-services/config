@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
+filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 # Remember to update the Cargo vendor archive, when updating
 version: 93.1.0
 git_hash: ae2bb5ae89f9818230bbc003819fc7b9775aae26

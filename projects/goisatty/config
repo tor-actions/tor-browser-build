@@ -2,7 +2,7 @@
 version: 0.0.10
 git_url:  https://github.com/mattn/go-isatty.git
 git_hash: 88ba11cfdc67c7588b30042edf244b2875f892b6
-filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.gz'
+filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
 
