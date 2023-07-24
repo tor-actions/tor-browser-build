@@ -8,7 +8,7 @@ distdir=/var/tmp/dist/[% project %]
 mkdir -p /var/tmp/build
 mkdir -p [% dest_dir _ '/' _ c('filename') %]
 
-[% IF c("var/windows") %]
+[% IF c("var/windows") -%]
   # Setting up fxc2
   tar -C /var/tmp/dist -xf [% c('input_files_by_name/fxc2') %]
   export PATH="/var/tmp/dist/fxc2/bin:$PATH"
@@ -20,7 +20,7 @@ tar -C /var/tmp/dist -xf [% c('input_files_by_name/nasm') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/node') %]
 export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/nasm/bin:/var/tmp/dist/node/bin:$PATH"
 
-[% IF c("var/linux") %]
+[% IF c("var/linux") -%]
   tar -C /var/tmp/dist -xf [% c('input_files_by_name/clang') %]
   tar -C /var/tmp/dist -xf [% c('input_files_by_name/python') %]
   export PATH="/var/tmp/dist/python/bin:$PATH"
@@ -30,7 +30,7 @@ export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/nasm/bi
   [% IF ! c("var/asan") -%]
     export PATH="/var/tmp/dist/clang/bin:$PATH"
   [% END -%]
-  [% IF c("var/linux-i686") %]
+  [% IF c("var/linux-i686") -%]
     # Exporting `PKG_CONFIG_PATH` in the mozconfig file is causing build
     # breakage in Rust code. It seems that environment variable is not passed
     # down properly in that case. Thus, we set it here in the build script.
@@ -72,7 +72,7 @@ MOZCONFIG_EOF
 
 [% c("var/set_MOZ_BUILD_DATE") %]
 
-[% IF c("var/windows") %]
+[% IF c("var/windows") -%]
   # Make sure widl is not inserting random timestamps, see #21837.
   export WIDL_TIME_OVERRIDE="0"
   patch -p1 < $rootdir/nsis-uninstall.patch
@@ -80,15 +80,15 @@ MOZCONFIG_EOF
   export LDFLAGS="[% c('var/flag_noSEH') %]"
 [% END -%]
 
-[% IF c("var/namecoin") %]
+[% IF c("var/namecoin") -%]
   patch -p1 < $rootdir/namecoin-etld.patch
 [% END -%]
 
-[% IF c("var/namecoin") %]
+[% IF c("var/namecoin") -%]
   pushd toolkit/torbutton
   patch -p1 < $rootdir/namecoin-torbutton.patch
   popd
-[% END %]
+[% END -%]
 
 [% IF c("var/override_updater_url") -%]
   sed -i 's|^URL=https://aus1\.torproject\.org/.*|URL=[% c("var/override_updater_url") %]|' build/application.ini.in
@@ -166,23 +166,21 @@ export LANG=C.UTF-8
 ./mach configure \
   --with-distribution-id=org.torproject \
   --with-base-browser-version=[% c("var/torbrowser_version") %] \
-  [% IF c("var/updater_enabled") -%]
-        --enable-update-channel=[% c("var/channel") %] \
-  [% END %] \
+  [% IF c("var/updater_enabled") -%]--enable-update-channel=[% c("var/channel") %][% END %] \
   [% IF !c("var/base-browser") -%]--with-branding=browser/branding/[% c("var/branding_directory_prefix") %]-[% c("var/channel") %][% END %] \
   [% IF !c("var/rlbox") -%]--without-wasm-sandboxed-libraries[% END %]
 
 ./mach build --verbose
-[% IF c("var/has_l10n") %]
+[% IF c("var/has_l10n") -%]
   export MOZ_CHROME_MULTILOCALE="$supported_locales"
   # No quotes on purpose, see https://firefox-source-docs.mozilla.org/build/buildsystem/locales.html#instructions-for-multi-locale-builds
   ./mach package-multi-locale --locales en-US $MOZ_CHROME_MULTILOCALE
   AB_CD=multi ./mach build stage-package
-[% ELSE %]
+[% ELSE -%]
   ./mach build stage-package
-[% END %]
+[% END -%]
 
-[% IF c("var/macos") %]
+[% IF c("var/macos") -%]
   cp -a obj-*/dist/[% c('var/exe_name') %]/* $distdir
   [% IF c("var/base-browser") -%]
     mv "$distdir/Firefox.app" "$distdir/[% c('var/Project_Name') %].app"
@@ -198,12 +196,12 @@ export LANG=C.UTF-8
     '[% c("var/torbrowser_version") %]' \
     '[% c("var/copyright_year") %]' \
     [% IF c("var/mullvad-browser") -%]'Mullvad, Tor Browser and Mozilla Developers'[% ELSE -%]'The Tor Project'[% END %]
-[% END %]
+[% END -%]
 
-[% IF c("var/linux") %]
-  [% IF c("var/linux-x86_64") && !c("var/asan") %]
+[% IF c("var/linux") -%]
+  [% IF c("var/linux-x86_64") && !c("var/asan") -%]
     cp obj-*/x86_64-unknown-linux-gnu/release/geckodriver $distdir
-  [% END %]
+  [% END -%]
   cp -a obj-*/dist/[% c('var/exe_name') %]/* $distdir/Browser/
   # Remove firefox-bin (we don't use it, see ticket #10126)
   rm -f "$distdir/Browser/[% c('var/exe_name') %]-bin"
@@ -217,16 +215,16 @@ export LANG=C.UTF-8
 [% INCLUDE 'start-firefox' -%]
 RBM_TB_EOF
   chmod 755 "$distdir/Browser/[% c('var/exe_name') %]"
-[% END %]
+[% END -%]
 
-[% IF c("var/windows") %]
+[% IF c("var/windows") -%]
   cp -a obj-*/dist/[% c('var/exe_name') %]/* $distdir/Browser/
-  [% IF c("var/windows-i686") %]
+  [% IF c("var/windows-i686") -%]
     cp -a /var/tmp/dist/fxc2/bin/d3dcompiler_47_32.dll $distdir/Browser/d3dcompiler_47.dll
-  [% ELSE %]
+  [% ELSE -%]
     cp -a /var/tmp/dist/fxc2/bin/d3dcompiler_47.dll $distdir/Browser
-  [% END %]
-[% END %]
+  [% END -%]
+[% END -%]
 
 [% IF c("var/updater_enabled") -%]
   # Make MAR-based update tools available for use during the bundle phase.
@@ -240,23 +238,23 @@ RBM_TB_EOF
   cp -p tools/update-packaging/*.sh $MARTOOLS/
   cp -p obj-*/dist/host/bin/mar $MARTOOLS/
   cp -p obj-*/dist/host/bin/mbsdiff $MARTOOLS/
-  [% IF c("var/linux") || c("var/macos") %]
+  [% IF c("var/linux") || c("var/macos") -%]
     cp -p obj-*/dist/bin/signmar $MARTOOLS/
     cp -p obj-*/dist/bin/certutil $MARTOOLS/
     cp -p obj-*/dist/bin/pk12util $MARTOOLS/
-    [% IF c("var/linux") %]
+    [% IF c("var/linux") -%]
       NSS_LIBS="libfreeblpriv3.so libmozsqlite3.so libnss3.so libnssckbi.so libnssutil3.so libsmime3.so libsoftokn3.so libssl3.so"
       NSPR_LIBS="libnspr4.so libplc4.so libplds4.so"
-    [% ELSE %]
+    [% ELSE -%]
       NSS_LIBS="libfreebl3.dylib libmozglue.dylib libnss3.dylib libnssckbi.dylib libsoftokn3.dylib"
       # No NSPR_LIBS for macOS
       NSPR_LIBS=""
-    [% END %]
+    [% END -%]
     for LIB in $NSS_LIBS $NSPR_LIBS; do
       cp -p obj-*/dist/bin/$LIB $MARTOOLS/
     done
-  [% END %]
-  [% IF c("var/windows") %]
+  [% END -%]
+  [% IF c("var/windows") -%]
     cp -p obj-*/dist/bin/signmar.exe $MARTOOLS/
     cp -p obj-*/dist/bin/certutil.exe $MARTOOLS/
     cp -p obj-*/dist/bin/pk12util.exe $MARTOOLS/
@@ -264,38 +262,38 @@ RBM_TB_EOF
     for LIB in $NSS_LIBS; do
         cp -p obj-*/dist/bin/$LIB $MARTOOLS/
     done
-  [% END %]
+  [% END -%]
 [% END -%]
 
 cd $distdir
 
-[% IF c("var/linux-x86_64") %]
-  [% IF !c("var/asan") %]
+[% IF c("var/linux-x86_64") -%]
+  [% IF !c("var/asan") -%]
     # No need for an unstripped geckodriver
     strip geckodriver
-  [% END %]
+  [% END -%]
   mkdir -p $distdir/Debug/Browser
   # Strip and generate debuginfo for the firefox binary that we keep, all *.so
   # files, the plugin-container, and the updater (see ticket #10126)
   for LIB in Browser/*.so "Browser/[% c('var/exe_name') %].real" Browser/plugin-container [% IF c("var/updater_enabled") -%]Browser/updater[% END %]
   do
-      objcopy --only-keep-debug $LIB Debug/$LIB
-      strip $LIB
-      objcopy --add-gnu-debuglink=./Debug/$LIB $LIB
+    objcopy --only-keep-debug $LIB Debug/$LIB
+    strip $LIB
+    objcopy --add-gnu-debuglink=./Debug/$LIB $LIB
   done
-[% END %]
+[% END -%]
 
 # Re-zipping the omni.ja files is not needed to make them reproductible,
 # however if we don't re-zip them, the files become corrupt when we
 # update them using 'zip' and firefox will silently fail to load some
 # parts.
-[% IF c("var/windows") || c("var/linux") %]
+[% IF c("var/windows") || c("var/linux") -%]
   [% c("var/rezip", { rezip_file => 'Browser/omni.ja' }) %]
   [% c("var/rezip", { rezip_file => 'Browser/browser/omni.ja' }) %]
-[% ELSIF c("var/macos") %]
+[% ELSIF c("var/macos") -%]
   [% c("var/rezip", { rezip_file => '"' _ c("var/Project_Name") _ '.app/Contents/Resources/omni.ja"' }) %]
   [% c("var/rezip", { rezip_file => '"' _ c("var/Project_Name") _ '.app/Contents/Resources/browser/omni.ja"' }) %]
-[% END %]
+[% END -%]
 
 [%
 IF c("var/macos");
@@ -305,9 +303,9 @@ ELSE;
 END;
 %]
 
-[% IF c("var/linux") %]
+[% IF c("var/linux") -%]
   /var/tmp/dist/gcc/bin/g++ $rootdir/abicheck.cc -o Browser/abicheck -std=c++17
-  [% IF !c("var/torbrowser") %]
+  [% IF !c("var/torbrowser") -%]
     libdest=Browser/libstdc++
     mkdir -p "$libdest"
     # FIXME: tor-browser-build#40749
@@ -316,32 +314,32 @@ END;
       cp /var/tmp/dist/gcc/[% c("var/libdir") %]/libasan.so.* "$libdest"
       cp /var/tmp/dist/gcc/[% c("var/libdir") %]/libubsan.so.* "$libdest"
     [% END -%]
-  [% END %]
-[% END %]
+  [% END -%]
+[% END -%]
 
 [% c('tar', {
         tar_src => [ browserdir ],
         tar_args => '-caf ' _ dest_dir _ '/' _ c('filename') _ '/browser.tar.' _ c('compress_tar'),
     }) %]
 
-[% IF c("var/linux-x86_64") %]
-[% c('tar', {
-        tar_src => [ 'Debug' ],
-        tar_args => '-cJf ' _ dest_dir _ '/' _ c('filename') _ '/browser-debug.tar.xz',
+[% IF c("var/linux-x86_64") -%]
+  [% c('tar', {
+      tar_src => [ 'Debug' ],
+      tar_args => '-cJf ' _ dest_dir _ '/' _ c('filename') _ '/browser-debug.tar.xz',
     }) %]
-  [% IF !c("var/asan") %]
+  [% IF !c("var/asan") -%]
     [% c('tar', {
-            tar_src => [ 'geckodriver' ],
-            tar_args => '-cJf ' _ dest_dir _ '/' _ c('filename') _ '/geckodriver-linux64.tar.xz',
-        }) %]
-  [% END %]
-[% END %]
+        tar_src => [ 'geckodriver' ],
+        tar_args => '-cJf ' _ dest_dir _ '/' _ c('filename') _ '/geckodriver-linux64.tar.xz',
+      }) %]
+  [% END -%]
+[% END -%]
 
 [% IF c("var/updater_enabled") -%]
   [% c('zip', {
-          zip_src => [ 'mar-tools' ],
-          zip_args => dest_dir _ '/' _ c('filename') _ '/' _ c('var/martools_filename'),
-      }) %]
+      zip_src => [ 'mar-tools' ],
+      zip_args => dest_dir _ '/' _ c('filename') _ '/' _ c('var/martools_filename'),
+    }) %]
 [% END -%]
 
 [% IF c("var/build_infos_json") -%]
