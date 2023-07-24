@@ -401,13 +401,13 @@ SCRIPT_EOF
 [% IF c("var/updater_enabled") -%]
   cp $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip "$OUTDIR"/
 [% END -%]
-[% IF c("var/linux-x86_64") -%]
-  [% IF c("var/tor-browser") -%]
-    cp $rootdir/[% c('input_files_by_name/firefox') %]/browser-debug.tar.xz "$OUTDIR"/[% c("var/project-name") %]-[% c("var/mar_osname") %]-debug.tar.xz
+[% IF c("var/linux") -%]
+  cp $rootdir/[% c('input_files_by_name/firefox') %]/browser-debug.tar.xz "$OUTDIR/[% c('var/project-name') %]-[% c('var/mar_osname') %]-debug.tar.xz"
+  [% IF c("var/linux-x86_64") && !c("var/asan") -%]
+    cp $rootdir/[% c('input_files_by_name/firefox') %]/geckodriver.tar.xz "$OUTDIR/geckodriver-[% c('var/mar_osname') %].tar.xz"
   [% END -%]
-  [% IF !c("var/asan") -%]
-    cp $rootdir/[% c('input_files_by_name/firefox') %]/geckodriver-linux64.tar.xz "$OUTDIR"/
-  [% END -%]
+[% ELSIF c("var/windows") -%]
+  cp $rootdir/[% c('input_files_by_name/firefox') %]/browser-debug.zip "$OUTDIR/[% c('var/project-name') %]-[% c('var/mar_osname') %]-debug.zip"
 [% END -%]
 [%IF c("var/tor-browser") -%]
   tor_expert_bundle_src="[% c("input_files_by_name/tor-expert-bundle") %]"
