@@ -44,6 +44,9 @@ pre: |
   apt-get upgrade -y -q
   [%
      deps = [];
+     IF pc(c('origin_project'), 'var/essential_deps', { step => c('origin_step') });
+       CALL deps.import(pc(c('origin_project'), 'var/essential_deps', { step => c('origin_step') }));
+     END;
      IF pc(c('origin_project'), 'var/deps', { step => c('origin_step') });
        CALL deps.import(pc(c('origin_project'), 'var/deps', { step => c('origin_step') }));
      END;

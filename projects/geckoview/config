@@ -19,8 +19,6 @@ var:
   git_commit: '[% exec("git rev-parse HEAD") %]'
   deps:
     - build-essential
-    - unzip
-    - zip
     - autoconf2.13
     - yasm
     - python3

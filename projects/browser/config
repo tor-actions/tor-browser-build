@@ -10,11 +10,7 @@ var:
     - python3
     - libparallel-forkmanager-perl
     - libfile-slurp-perl
-    - zip
-    - unzip
     - bzip2
-    - xz-utils
-    - patch
 
 targets:
   linux:

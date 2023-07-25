@@ -5,7 +5,6 @@ container:
   use_container: 1
 var:
   deps:
-    - xz-utils
     - build-essential
     - python-all
     - libbz2-dev

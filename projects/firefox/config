@@ -23,8 +23,6 @@ var:
   git_commit: '[% exec("git rev-parse HEAD") %]'
   deps:
     - build-essential
-    - unzip
-    - zip
     - autoconf
     - yasm
     - pkg-config

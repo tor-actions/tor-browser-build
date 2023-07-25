@@ -17,7 +17,6 @@ var:
     - python3
     - python3-pip
     - torsocks
-    - xz-utils
   glean_wheels_sha256sum:
     3.4.0: 6bbf3a9ffa939ca87e00b486f2020ab5cf9dea772f1d37b048f666fed38f98c1
     4.0.0: c974113bd8671364c592fea9b64bac660b59d4f03a7dcecd4dd4e0c355431db8
