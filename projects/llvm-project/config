@@ -6,3 +6,6 @@ filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("co
 
 var:
   llvm_major: 16
+
+input_files:
+  - filename: use-fixed-chunk-size-for-uuid.patch

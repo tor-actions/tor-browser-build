@@ -2,6 +2,14 @@
 [% c("var/set_default_env") -%]
 tar -xf [% project %]-[% c("version") %].tar.[% c('compress_tar') %]
 mv [% project %]-[% c("version") %] clang-source
+
+pushd clang-source
+# Remove once we update to a version that includes commit
+# 359f170f5f712ee714193b46bad45a45656b2c59 (> 16.0.6)
+# https://github.com/llvm/llvm-project/issues/63961
+patch -p1 < $rootdir/use-fixed-chunk-size-for-uuid.patch
+popd
+
 [% c('tar', {
         tar_src => [ 'clang-source' ],
         tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
