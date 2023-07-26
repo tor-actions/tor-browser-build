@@ -9,3 +9,4 @@ var:
 
 input_files:
   - filename: use-fixed-chunk-size-for-uuid.patch
+  - filename: partially-revert-llvm-less_second.patch

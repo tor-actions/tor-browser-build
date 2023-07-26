@@ -8,6 +8,10 @@ pushd clang-source
 # 359f170f5f712ee714193b46bad45a45656b2c59 (> 16.0.6)
 # https://github.com/llvm/llvm-project/issues/63961
 patch -p1 < $rootdir/use-fixed-chunk-size-for-uuid.patch
+# Remove once we update to a version that includes commit
+# 32ab0978dc3f7f7036df2038ee96a4ab89196255
+# https://github.com/llvm/llvm-project/issues/62546
+patch -p1 < $rootdir/partially-revert-llvm-less_second.patch
 popd
 
 [% c('tar', {
