@@ -123,6 +123,6 @@ input_files:
   - project: go-bootstrap
     name: go-bootstrap
     target_replace:
-      '^.*browser-.*': 'basebrowser-linux-x86_64'
+      '^.*browser-(?!testbuild).*': 'basebrowser-linux-x86_64'
   - filename: 0001-Use-fixed-go-build-tmp-directory.patch
     enable: '[% c("var/android") %]'

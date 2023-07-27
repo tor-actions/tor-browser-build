@@ -26,19 +26,19 @@ input_files:
   - project: tor-expert-bundle
     name: tor-expert-bundle-armv7
     target_replace:
-      '^torbrowser-.*': 'torbrowser-android-armv7'
+      '^torbrowser-(?!testbuild).*': 'torbrowser-android-armv7'
   - project: tor-expert-bundle
     name: tor-expert-bundle-aarch64
     target_replace:
-      '^torbrowser-.*': 'torbrowser-android-aarch64'
+      '^torbrowser-(?!testbuild).*': 'torbrowser-android-aarch64'
   - project: tor-expert-bundle
     name: tor-expert-bundle-x86
     target_replace:
-      '^torbrowser-.*': 'torbrowser-android-x86'
+      '^torbrowser-(?!testbuild).*': 'torbrowser-android-x86'
   - project: tor-expert-bundle
     name: tor-expert-bundle-x86_64
     target_replace:
-      '^torbrowser-.*': 'torbrowser-android-x86_64'
+      '^torbrowser-(?!testbuild).*': 'torbrowser-android-x86_64'
   - URL: 'https://dl.google.com/dl/android/studio/jetifier-zips/1.0.0-beta10/jetifier-standalone.zip'
     name: jetifier
     sha256sum: 38186db9c9d1b745890b3d35c0667da1cac146ceb3c26aae5bf0802119472c1b

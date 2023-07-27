@@ -21,4 +21,4 @@ steps:
         norec:
           sha256sum: 2b403d6edf075777003bf2194a43fb178a28a4eaa7d23ec8f104563d9bbd7e53
         target_replace:
-          '^torbrowser-.*': 'torbrowser-linux-x86_64'
+          '^torbrowser-(?!testbuild).*': 'torbrowser-linux-x86_64'
