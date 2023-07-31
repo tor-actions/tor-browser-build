@@ -1,3 +1,66 @@
+Tor Browser 12.5.2 - July 31 2023
+ * All Platforms
+   * Updated Translations
+   * Updated NoScript to 11.4.26
+   * Bug 41908: Rebase stable 12.5 to 102.14esr [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 102.14.0esr
+ * Windows
+   * Bug 41761: xul.dll win crash tor-browser 12.5.1 (based on Mozilla Firefox 102.13.0esr) (64-Bit) [tor-browser]
+ * Android
+   * Updated GeckoView to 102.14.0esr
+   * Bug 41928: Backport Android-specific security fixes from Firefox 116 to ESR 102.14 / 115.1 - based Tor Browser [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.20.6
+     * Bug 40889: Add mullvad sha256sums URL to tools/signing/download-unsigned-sha256sums-gpg-signatures-from-people-tpo [tor-browser-build]
+     * Bug 40894: Fix format of keyring/boklm.gpg [tor-browser-build]
+     * Bug 40909: Add dan_b and ma1 to list of taggers in relevant projects [tor-browser-build]
+   * Windows
+     * Bug 31546: Create and expose PDB files for Tor Browser debugging on Windows [tor-browser-build]
+
+Tor Browser 13.0a1 - July 20 2023
+ * All Platforms
+   * Updated Translations
+   * Updated NoScript to 11.4.25
+   * Updated OpenSSL to 3.0.9
+s   * Updated tor to 0.4.8.2-alpha
+   * Bug 40577: Add "suggest url" in DDG onion's manifest [tor-browser]
+   * Bug 40885: Bump version of snowflake to v2.6.0 [tor-browser-build]
+   * Bug 40887: Update Webtunnel version to 38eb5505 [tor-browser-build]
+   * Bug 41092: Enable tracking query parameters stripping [tor-browser]
+   * Bug 41399: Update Mozilla's patch for Bug 1675054 to enable brotli encoding for HTTP onions as well [tor-browser]
+   * Bug 41759: Rebase Base Browser to 115 nightly [tor-browser]
+   * Bug 41796: Rebase Tor Browser to Firefox 115 [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.0.2esr
+   * Bug 26277: When "Safest" setting is enabled searching using duckduckgo should always use the Non-Javascript site for searches [tor-browser]
+   * Bug 33955: Selecting "Copy image" from menu leaks the source URL to the clipboard. This data is often dereferenced by other applications. [tor-browser]
+   * Bug 41741: Refactor the domain isolator and new circuit [tor-browser]
+   * Bug 41834: Hide  "Can't Be Removed -  learn more" menu line for uninstallable add-ons [tor-browser]
+   * Bug 41842: Remove the old removal logics from Torbutton [tor-browser]
+   * Bug 41845: Stop forcing (bad) pref values for non-PBM users [tor-browser]
+   * Bug 41854: Download Spam Protection cannot be overridden to allow legitimate downloads [tor-browser]
+   * Bug 41874: Visual & A11 regressions in add-on badges [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.20.6
+     * Bug 40089: Clean up usage of get-moz-build-date script [tor-browser-build]
+     * Bug 40410: Get rid of python2 [tor-browser-build]
+     * Bug 40487: Bump Python version [tor-browser-build]
+     * Bug 40802: Drop the patch for making WASI reproducible [tor-browser-build]
+     * Bug 40854: Update to OpenSSL 3.0 [tor-browser-build]
+     * Bug 40855: Update toolchains for Mozilla 115 [tor-browser-build]
+     * Bug 40868: Bump Rust to 1.69.0 [tor-browser-build]
+     * Bug 40886: Update README with instructions for Arch linux [tor-browser-build]
+     * Bug 40889: Add mullvad sha256sums URL to tools/signing/download-unsigned-sha256sums-gpg-signatures-from-people-tpo [tor-browser-build]
+     * Bug 40894: Fix format of keyring/boklm.gpg [tor-browser-build]
+     * Bug 40898: Add doc from tor-browser-spec/processes/ReleaseProcess to gitlab issue templates [tor-browser-build]
+   * Windows
+     * Bug 40832: Unify mingw-w64-clang 32+64 bits [tor-browser-build]
+   * Linux
+     * Bug 40102: Move from Debian Jessie to Debian Stretch for our Linux builds [tor-browser-build]
+
 Tor Browser 12.5.1 - July 5 2023
  * All Platforms
    * Updated Translations
