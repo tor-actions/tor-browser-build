@@ -5,6 +5,8 @@ git_hash: 'tor-browser-[% c("var/geckoview_version") %]-[% c("var/browser_branch
 tag_gpg_id: 1
 git_url: https://gitlab.torproject.org/tpo/applications/tor-browser.git
 gpg_keyring:
+  - dan_b.gpg
+  - ma1.gpg
   - pierov.gpg
   - richard.gpg
 container:
