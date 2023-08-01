@@ -32,6 +32,7 @@ mv noto-fonts-* noto-fonts
 [% IF c("var/linux") %]
   cp {NotoSansJP-Regular.otf,NotoSansKR-Regular.otf,NotoSansSC-Regular.otf,NotoSansTC-Regular.otf} $distdir/
 [% END %]
+cp README.txt "$distdir/000_README.txt"
 cd /var/tmp/dist
 [% c('tar', {
         tar_src => [ 'fonts' ],

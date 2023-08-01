@@ -161,6 +161,7 @@ var:
 
 input_files:
   - project: container-image
+  - filename: README.txt
   - filename: 'noto-fonts-[% c("var/noto_git_hash") %]-[% c("version") %]'
     name: noto-fonts
     exec: '[% INCLUDE "fetch-noto-fonts" %]'
