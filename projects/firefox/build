@@ -351,7 +351,7 @@ END;
   [% IF c("var/linux-x86_64") && !c("var/asan") -%]
     [% c('tar', {
             tar_src => [ 'geckodriver' ],
-            tar_args => '-cJf ' _ dest_dir _ '/' _ c('filename') _ '/geckodriver-linux64.tar.xz',
+            tar_args => '-cJf ' _ dest_dir _ '/' _ c('filename') _ '/geckodriver.tar.xz',
         }) %]
   [% END %]
 [% ELSIF c("var/windows") -%]
