@@ -374,12 +374,12 @@ cd $distdir
   [% END -%]
   [% c('tar', {
         tar_src => [ '$PKG_DIR' ],
-        tar_args => '-cJf $OUTDIR/' _ c("var/project-name") _ '-' _ c("var/mar_osname") _ '-' _ c("var/torbrowser_version") _ '_${PKG_LOCALE}.tar.xz',
+        tar_args => '-cJf $OUTDIR/' _ c("var/project-name") _ '-' _ c("var/osname") _ '-' _ c("var/torbrowser_version") _ '.tar.xz',
     }) %]
 [% ELSIF c("var/macos") %]
   [% c('var/ddmg', {
         dmg_src => '"$PKG_DIR"',
-        dmg_out => '$OUTDIR/' _ c('var/ProjectName') _ '-' _ c("var/torbrowser_version") _ '-' _ c("var/mar_osname") _ '_${PKG_LOCALE}.dmg',
+        dmg_out => '$OUTDIR/' _ c('var/project-name') _ '-' _ c("var/mar_osname") _ '-' _ c("var/torbrowser_version") _ '.dmg',
     }) %]
 [% ELSIF c("var/windows") %]
   find "$PKG_DIR" -exec [% c("touch") %] {} \;
@@ -387,11 +387,11 @@ cd $distdir
   makensis browser-portable.nsi
   # Working around NSIS braindamage
   python3 $rootdir/pe_checksum_fix.py browser-install.exe
-  mv browser-install.exe $OUTDIR/[% c("var/projectname") %]-install[% IF c("var/windows-x86_64") %]-win64[% END %]-[% c("var/torbrowser_version") %]_${PKG_LOCALE}.exe
+  mv browser-install.exe $OUTDIR/[% c("var/project-name") %]-portable-[% c("var/osname") %]-[% c("var/torbrowser_version") %].exe
   [% IF c('var/mullvad-browser') -%]
     makensis browser-system.nsi
     python3 $rootdir/pe_checksum_fix.py browser-install.exe
-    mv browser-install.exe $OUTDIR/[% c("var/projectname") %]-systeminstall[% IF c("var/windows-x86_64") %]-win64[% END %]-[% c("var/torbrowser_version") %]_${PKG_LOCALE}.exe
+    mv browser-install.exe $OUTDIR/[% c("var/project-name") %]-install-[% c("var/osname") %]-[% c("var/torbrowser_version") %].exe
   [% END -%]
   popd
 [% END %]
@@ -402,12 +402,12 @@ SCRIPT_EOF
   cp $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip "$OUTDIR"/
 [% END -%]
 [% IF c("var/linux") -%]
-  cp $rootdir/[% c('input_files_by_name/firefox') %]/browser-debug.tar.xz "$OUTDIR/[% c('var/project-name') %]-[% c('var/mar_osname') %]-debug.tar.xz"
+  cp $rootdir/[% c('input_files_by_name/firefox') %]/browser-debug-symbols.tar.xz "$OUTDIR/[% c('var/project-name') %]-debug-symbols-[% c('var/mar_osname') %]-[% c('var/torbrowser_version') %].tar.xz"
   [% IF c("var/linux-x86_64") && !c("var/asan") -%]
-    cp $rootdir/[% c('input_files_by_name/firefox') %]/geckodriver.tar.xz "$OUTDIR/geckodriver-[% c('var/mar_osname') %].tar.xz"
+    cp $rootdir/[% c('input_files_by_name/firefox') %]/geckodriver.tar.xz "$OUTDIR/geckodriver-[% c('var/mar_osname') %]-[% c('var/torbrowser_version') %].tar.xz"
   [% END -%]
 [% ELSIF c("var/windows") -%]
-  cp $rootdir/[% c('input_files_by_name/firefox') %]/browser-debug.zip "$OUTDIR/[% c('var/project-name') %]-[% c('var/mar_osname') %]-debug.zip"
+  cp $rootdir/[% c('input_files_by_name/firefox') %]/browser-debug-symbols.zip "$OUTDIR/[% c('var/project-name') %]-debug-symbols-[% c('var/mar_osname') %]-[% c('var/torbrowser_version') %].zip"
 [% END -%]
 [%IF c("var/tor-browser") -%]
   tor_expert_bundle_src="[% c("input_files_by_name/tor-expert-bundle") %]"

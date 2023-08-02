@@ -2,6 +2,7 @@
 tmp_dir: '[% c("tmp_dir") %]'
 create_downloads_json: 1
 appname_marfile: '[% c("var/project-name") %]'
+appname_bundle: '[% c("var/project-name") %]'
 appname_bundle_android: '[% c("var/project-name") %]'
 appname_bundle_macos: '[% c("var/ProjectName") %]'
 appname_bundle_linux: '[% c("var/project-name") %]'
@@ -20,13 +21,13 @@ download:
     mars_url: 'https://cdn.mullvad.net/browser'
 [% END -%]
 build_targets:
-    linux32: Linux_x86-gcc3
-    linux64: Linux_x86_64-gcc3
-    win32:
+    linux-i686: Linux_x86-gcc3
+    linux-x86_64: Linux_x86_64-gcc3
+    windows-i686:
         - WINNT_x86-gcc3
         - WINNT_x86-gcc3-x86
         - WINNT_x86-gcc3-x64
-    win64: WINNT_x86_64-gcc3-x64
+    windows-x86_64: WINNT_x86_64-gcc3-x64
     macos:
       - Darwin_x86_64-gcc3
       - Darwin_aarch64-gcc3
@@ -59,17 +60,17 @@ versions:
             # macOS v10.12.0
             minSupportedOSVersion: 16.0.0
         # minSupportedOsVersion on Windows corresponds to the operating system version ( https://docs.microsoft.com/en-us/windows/win32/sysinfo/operating-system-version )
-        win32:
+        windows-i686:
             # Windows 7
             minSupportedOSVersion: 6.1
             minSupportedInstructionSet: SSE2
-        win64:
+        windows-x86_64:
             # Windows 7
             minSupportedOSVersion: 6.1
             minSupportedInstructionSet: SSE2
-        linux32:
+        linux-i686:
             minSupportedInstructionSet: SSE2
-        linux64:
+        linux-x86_64:
             minSupportedInstructionSet: SSE2
 mar_compression: xz
 tag: 'tbb-[% c("var/torbrowser_version") %]-[% c("var/torbrowser_build") %]'

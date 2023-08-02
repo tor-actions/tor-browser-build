@@ -192,11 +192,12 @@ sub fetch_version {
 }
 
 sub setup_martools {
-    my $martools_dir = "$FindBin::Bin/mar-tools-" . get_config('martools_version');
+    my $martools_version = get_config('martools_version');
+    my $martools_dir = "$FindBin::Bin/mar-tools-" . $martools_version;
     if (! -d $martools_dir) {
-        my $file = "mar-tools-linux64.zip";
-        my $url = join('/', get_config('martools_url'),
-                            get_config('martools_version'), $file);
+        my $martools_url = get_config('martools_url');
+        my $file = "mar-tools-linux-x86_64-$martools_version.zip";
+        my $url = "$martools_url/$martools_version/$file";
         my $tmpdir = get_tmpdir();
         exit_error "Error downloading $url"
                 unless getstore($url, "$tmpdir/$file") == 200;

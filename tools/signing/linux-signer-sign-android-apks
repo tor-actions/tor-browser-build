@@ -73,8 +73,8 @@ cd ~/"$SIGNING_PROJECTNAME-$tbb_version-apks"
 
 # Sign all packages
 for arch in ${ARCHS}; do
-  qa_apk=${projname}-${tbb_version}-android-${arch}-multi-qa.apk
-  signed_apk=${projname}-${tbb_version}-android-${arch}-multi.apk
+  qa_apk=${projname}-qa-android-${arch}-${tbb_version}.apk
+  signed_apk=${projname}-android-${arch}-${tbb_version}.apk
   sign_apk "$qa_apk" "$signed_apk"
   verify_apk "$signed_apk"
   cp -f "$signed_apk" ~/"$SIGNING_PROJECTNAME-$tbb_version"

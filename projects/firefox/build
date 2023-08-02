@@ -331,7 +331,7 @@ END;
 [% IF c("var/linux") -%]
   [% c('tar', {
       tar_src => [ 'Debug' ],
-      tar_args => '-cJf ' _ dest_dir _ '/' _ c('filename') _ '/browser-debug.tar.xz',
+      tar_args => '-cJf ' _ dest_dir _ '/' _ c('filename') _ '/browser-debug-symbols.tar.xz',
     }) %]
   [% IF c("var/linux-x86_64") && !c("var/asan") -%]
     [% c('tar', {
@@ -342,14 +342,14 @@ END;
 [% ELSIF c("var/windows") -%]
   [% c('zip', {
       zip_src => [ 'Debug' ],
-      zip_args => dest_dir _ '/' _ c('filename') _ '/browser-debug.zip',
+      zip_args => dest_dir _ '/' _ c('filename') _ '/browser-debug-symbols.zip',
     }) %]
 [% END -%]
 
 [% IF c("var/updater_enabled") -%]
   [% c('zip', {
       zip_src => [ 'mar-tools' ],
-      zip_args => dest_dir _ '/' _ c('filename') _ '/' _ c('var/martools_filename'),
+      zip_args => dest_dir _ '/' _ c('filename') _ '/' _ 'mar-tools-' _ c("var/osname") _ '-' _ c("var/torbrowser_version") _ '.zip',
     }) %]
 [% END -%]
 

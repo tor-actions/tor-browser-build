@@ -11,6 +11,7 @@ var:
     - libparallel-forkmanager-perl
     - libfile-slurp-perl
     - bzip2
+  mar_osname: '[% c("var/osname") %]'
 
 targets:
   linux:
@@ -20,12 +21,6 @@ targets:
         # builds (bug 29812). We don't need it in x86_64 builds, but we
         # share the container to reduce space used.
         - libc6-i386
-  linux-i686:
-    var:
-      mar_osname: linux32
-  linux-x86_64:
-    var:
-      mar_osname: linux64
   macos:
     var:
       arch_deps:
@@ -37,22 +32,10 @@ targets:
   macos-universal:
     var:
       mar_osname: macos
-  macos-aarch64:
-    var:
-      mar_osname: macos-aarch64
-  macos-x86_64:
-    var:
-      mar_osname: macos-x86_64
   windows:
     var:
       arch_deps:
         - python3-pefile
-  windows-i686:
-    var:
-      mar_osname: win32
-  windows-x86_64:
-    var:
-      mar_osname: win64
   android:
     build: '[% INCLUDE build.android %]'
     var:

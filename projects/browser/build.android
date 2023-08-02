@@ -6,7 +6,7 @@ tar -xf $rootdir/[% c('input_files_by_name/firefox-android') %]
 
 assets_dir=assets
 ext_dir=$assets_dir/extensions
-qa_apk=[% dest_dir %]/[% c('filename') %]/[% c("var/project-name") %]-[% c("version") %]-[% c("var/osname") %]-multi-qa.apk
+qa_apk=[% dest_dir %]/[% c('filename') %]/[% c("var/project-name") %]-qa-[% c("var/osname") %]-[% c("version") %].apk
 apk=$rootdir/firefox-android/*-[% c("var/abi") %]-*.apk
 
 # tor-browser-build#40920

@@ -39,7 +39,7 @@ use Cwd;
 # set the application name in the TOR_APPNAME_BUNDLE_OSX,
 # TOR_APPNAME_DMGFILE and TOR_APPNAME_MARFILE environment variables
 my $appname = $ENV{TOR_APPNAME_BUNDLE_OSX} // 'Tor Browser';
-my $appname_dmg = $ENV{TOR_APPNAME_DMGFILE} // 'TorBrowser';
+my $appname_dmg = $ENV{TOR_APPNAME_DMGFILE} // 'tor-browser';
 my $appname_mar = $ENV{TOR_APPNAME_MARFILE} // 'tor-browser';
 
 sub exit_error {
@@ -53,10 +53,10 @@ sub osname {
     my ($arch) = capture_exec('uname', '-m');
     chomp($osname, $arch);
     if ($osname eq 'Linux' && $arch eq 'x86_64') {
-        return 'linux64';
+        return 'linux-x86_64';
     }
     if ($osname eq 'Linux' && $arch =~ m/^i.86$/) {
-        return 'linux32';
+        return 'linux-i686';
     }
     exit_error 'Unknown OS';
 }
@@ -64,7 +64,8 @@ sub osname {
 my $martools_tmpdir;
 sub extract_martools {
     my $osname = osname;
-    my $marzip = getcwd . "/mar-tools-$osname.zip";
+    my $marzip = glob(getcwd . "/mar-tools-$osname-*.zip");
+    exit_error "Could not find mar-tools zip" unless $marzip;
     $martools_tmpdir = File::Temp->newdir();
     my $old_cwd = getcwd;
     chdir $martools_tmpdir;
@@ -97,7 +98,7 @@ sub get_dmg_files_from_sha256sums {
         my (undef, $filename) = split '  ', $line;
         next unless $filename;
         chomp $filename;
-        next unless $filename =~ m/^$appname_dmg-(.+)-macos_(.+)\.dmg$/;
+        next unless $filename =~ m/^$appname_dmg-(.+)-macos\.dmg$/;
         push @files, { filename => $filename, version => $1, lang => $2 };
     }
     return @files;

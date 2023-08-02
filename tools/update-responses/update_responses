@@ -132,19 +132,19 @@ sub get_version_downloads {
     opendir(my $d, $vdir) or exit_error "Error opening directory $vdir";
     foreach my $file (readdir $d) {
         next unless -f "$vdir/$file";
-        my ($os, $lang);
-        if ($file =~ m/^$config->{appname_bundle_macos}-$version-macos_(.+).dmg$/) {
-            ($os, $lang) = ('macos', $1);
-        } elsif ($file =~ m/^$config->{appname_bundle_linux}-(linux32|linux64)-${version}_(.+).tar.xz$/) {
-            ($os, $lang) = ($1, $2);
-        } elsif ($file =~ m/^$config->{appname_bundle_win64}-${version}_(.+).exe$/) {
-            ($os, $lang) = ('win64', $1);
-        } elsif ($file =~ m/^$config->{appname_bundle_win32}-${version}_(.+).exe$/) {
-            ($os, $lang) = ('win32', $1);
+        my $os;
+        if ($file =~ m/^$config->{appname_bundle}-macos-$version.dmg$/) {
+            $os = 'macos';
+        } elsif ($file =~ m/^$config->{appname_bundle}-(linux-i686|linux-x86_64)-${version}.tar.xz$/) {
+            $os = $1;
+        } elsif ($file =~ m/^$config->{appname_bundle}-windows-x86_64-${version}.exe$/) {
+            $os = 'win64';
+        } elsif ($file =~ m/^$config->{appname_bundle}-windows-i686-${version}.exe$/) {
+            $os = 'win32';
         } else {
             next;
         }
-        $downloads->{$os}{$lang} = {
+        $downloads->{$os}{ALL} = {
             binary => "$download_url/$file",
             sig => "$download_url/$file.asc",
         };
@@ -162,15 +162,13 @@ sub get_perplatform_downloads {
     foreach my $file (readdir $d) {
         next unless -f "$vdir/$file";
         my $os;
-        if ($file =~ m/^$config->{appname_bundle_macos}-$version-macos_(.+).dmg$/) {
+        if ($file =~ m/^$config->{appname_bundle}-macos-$version.dmg$/) {
           $os = 'macos';
-        } elsif ($file =~ m/^$config->{appname_bundle_linux}-(linux32|linux64)-${version}_(.+).tar.xz$/) {
-          $os = $1 eq 'linux64' ? 'linux-x86_64' : 'linux-i686';
-        } elsif ($file =~ m/^$config->{appname_bundle_win64}-${version}_(.+).exe$/) {
-          $os = 'windows-x86_64';
-        } elsif ($file =~ m/^$config->{appname_bundle_win32}-${version}_(.+).exe$/) {
-          $os = 'windows-i686';
-        } elsif ($file =~ m/^$config->{appname_bundle_android}-${version}-(android-armv7|android-x86|android-x86_64|android-aarch64)-multi.apk$/) {
+        } elsif ($file =~ m/^$config->{appname_bundle}-(linux-i686|linux-86_64)-${version}.tar.xz$/) {
+          $os = $1;
+        } elsif ($file =~ m/^$config->{appname_bundle}-(windows-i686|windows-86_64)-${version}.exe$/) {
+          $os = $1;
+        } elsif ($file =~ m/^$config->{appname_bundle}-(android-armv7|android-x86|android-x86_64|android-aarch64)-${version}.apk$/) {
           $os = $1;
         } else {
             next;
@@ -475,9 +473,11 @@ sub write_downloads_json {
 
 sub marzip_path {
     my ($config, $version) = @_;
-    for my $osname (qw/linux64 linux32 macos-x86_64 win64 win32/) {
-        my $marzip = version_dir($config, $version) . "/mar-tools-$osname.zip";
-        return $marzip if -f $marzip;
+    for my $osname (qw/linux-x86_64 linux-i686 macos-x86_64 windows-x86_64 windows-i686/) {
+        my $marzip = glob(version_dir($config, $version) . "/mar-tools-$osname-*.zip");
+        if ($marzip && -f $marzip) {
+          return $marzip;
+        }
     }
     exit_error 'Could not find mar-tools';
 }
