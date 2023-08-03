@@ -34,6 +34,8 @@ You also need a few perl modules installed:
 - Data::UUID
 - Data::Dump
 - DateTime
+- XML::Writer
+- Parallel::ForkManager
 
 If you are running Debian or Ubuntu, you can install them with:
 
@@ -43,7 +45,8 @@ If you are running Debian or Ubuntu, you can install them with:
                   libstring-shellquote-perl libsort-versions-perl \
                   libdigest-sha-perl libdata-uuid-perl libdata-dump-perl \
                   libfile-copy-recursive-perl libfile-slurp-perl git \
-                  mercurial uidmap zstd
+                  mercurial uidmap libxml-writer-perl \ 
+                  libparallel-forkmanager-perl libxml-libxml-perl 
 
 If you are running an Arch based system, you should be able to install them with:
 
