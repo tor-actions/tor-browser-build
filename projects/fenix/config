@@ -5,6 +5,7 @@ git_hash: 'tor-browser-[% c("var/fenix_version") %]-[% c("var/browser_branch") %
 git_url: https://gitlab.torproject.org/tpo/applications/fenix.git
 tag_gpg_id: 1
 gpg_keyring:
+  - boklm.gpg
   - dan_b.gpg
   - ma1.gpg
   - pierov.gpg

@@ -5,6 +5,7 @@ git_hash: '[% c("var/project-name") %]-[% c("var/firefox_version") %]-[% c("var/
 tag_gpg_id: 1
 git_url: https://gitlab.torproject.org/tpo/applications/tor-browser.git
 gpg_keyring:
+  - boklm.gpg
   - dan_b.gpg
   - ma1.gpg
   - pierov.gpg

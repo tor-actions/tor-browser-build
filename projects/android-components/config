@@ -5,6 +5,7 @@ git_hash: '[% project %]-[% c("var/android_components_version") %]-[% c("var/bro
 git_url: https://gitlab.torproject.org/tpo/applications/android-components.git
 tag_gpg_id: 1
 gpg_keyring:
+  - boklm.gpg
   - dan_b.gpg
   - ma1.gpg
   - pierov.gpg
