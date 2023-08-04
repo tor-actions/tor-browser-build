@@ -39,14 +39,14 @@ You also need a few perl modules installed:
 
 If you are running Debian or Ubuntu, you can install them with:
 
-# apt-get install libyaml-libyaml-perl libtemplate-perl libdatetime-perl \
-                  libio-handle-util-perl libio-all-perl \
-                  libio-captureoutput-perl libjson-perl libpath-tiny-perl \
-                  libstring-shellquote-perl libsort-versions-perl \
-                  libdigest-sha-perl libdata-uuid-perl libdata-dump-perl \
-                  libfile-copy-recursive-perl libfile-slurp-perl git \
-                  mercurial uidmap libxml-writer-perl \ 
-                  libparallel-forkmanager-perl libxml-libxml-perl 
+# apt-get install libdata-dump-perl libdata-uuid-perl libdatetime-perl \
+                  libdigest-sha-perl libfile-copy-recursive-perl \
+                  libfile-slurp-perl libio-all-perl libio-captureoutput-perl \
+                  libio-handle-util-perl libjson-perl \
+                  libparallel-forkmanager-perl libpath-tiny-perl \
+                  libsort-versions-perl libstring-shellquote-perl \
+                  libtemplate-perl libxml-libxml-perl libxml-writer-perl \
+                  libyaml-libyaml-perl git mercurial uidmap zstd
 
 If you are running an Arch based system, you should be able to install them with:
 
