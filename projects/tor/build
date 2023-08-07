@@ -73,7 +73,7 @@ find -type f -print0 | xargs -0 [% c("touch") %]
     [% IF c("var/windows") || c("var/android") %]--with-zlib-dir="$zlibdir"[% END %] \
     [% IF c("var/macos") %]--enable-static-openssl[% END %] \
     [% IF c("var/windows") %]--enable-static-libevent --enable-static-openssl --enable-static-zlib[% END %] \
-    --prefix="$distdir" [% c("var/configure_opt") %]
+    --enable-gpl --prefix="$distdir" [% c("var/configure_opt") %]
 [% IF c("var/macos") -%]
   export LD_PRELOAD=[% c("var/faketime_path") %]
   export FAKETIME="[% USE date; GET date.format(c('timestamp'), format = '%Y-%m-%d %H:%M:%S') %]"
