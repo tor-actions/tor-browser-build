@@ -1,3 +1,67 @@
+Tor Browser 13.0a2 - August 08 2023
+ * All Platforms
+   * Updated Translations
+   * Updated NoScript to 11.4.26
+   * Updated OpenSSL to 3.0.10
+   * Updated tor to 0.4.8.3-rc
+   * Bug 41909: Rebase 13.0 alpha to 115.1.0 esr [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.1.0esr
+   * Bug 30556: Re-evaluate letterboxing dimension choices [tor-browser]
+   * Bug 33282: Increase the max width of new windows [tor-browser]
+   * Bug 40982: Cleanup maps in tor-circuit-display [tor-browser]
+   * Bug 40983: Move not UI-related torbutton.js code to modules [tor-browser]
+   * Bug 41844: Stop using the control port directly [tor-browser]
+   * Bug 41907: The bootstrap is interrupted without any errors if the process becomes ready when already bootstrapping [tor-browser]
+   * Bug 41922: Unify the bridge line parsers [tor-browser]
+   * Bug 41923: The path normalization results in warnings [tor-browser]
+   * Bug 41924: Small refactors for TorProcess [tor-browser]
+   * Bug 41925: Remove the torbutton startup process [tor-browser]
+   * Bug 41926: Refactor the control port client implementation [tor-browser]
+   * Bug 41964: 'emojiAnnotations' not defined in time in connection preferences [tor-browser]
+ * Android
+   * Updated GeckoView to 115.1.0esr
+   * Bug 41928: Backport Android-specific security fixes from Firefox 116 to ESR 102.14 / 115.1 - based Tor Browser [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.20.7
+     * Bug 31588: Be smarter about vendoring for Rust projects [tor-browser-build]
+     * Bug 40855: Update toolchains for Mozilla 115 [tor-browser-build]
+     * Bug 40880: The README doesn't include some dependencies needed for building incrementals [tor-browser-build]
+     * Bug 40905: Go vendor archives ignore the nightly version override on testbuilds [tor-browser-build]
+     * Bug 40908: Enable the --enable-gpl config flag in tor to bring in PoW functionality [tor-browser-build]
+     * Bug 40909: Add dan_b and ma1 to list of taggers in relevant projects [tor-browser-build]
+     * Bug 40913: add boklm back to list of taggers in relevant projects [tor-browser-build]
+   * Windows + macOS + Linux
+     * Bug 40615: Consider adding a readme to the fonts directory [tor-browser-build]
+     * Bug 40907: Mar-tools aren't deterministic on 13.0a1 [tor-browser-build]
+   * Windows
+     * Bug 31546: Create and expose PDB files for Tor Browser debugging on Windows [tor-browser-build]
+   * Android
+     * Bug 40867: Create a RBM project for the unified Android repository [tor-browser-build]
+     * Bug 41899: Use LLD for Android [tor-browser]
+
+Tor Browser 12.5.2 - July 31 2023
+ * All Platforms
+   * Updated Translations
+   * Updated NoScript to 11.4.26
+   * Bug 41908: Rebase stable 12.5 to 102.14esr [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 102.14.0esr
+ * Windows
+   * Bug 41761: xul.dll win crash tor-browser 12.5.1 (based on Mozilla Firefox 102.13.0esr) (64-Bit) [tor-browser]
+ * Android
+   * Updated GeckoView to 102.14.0esr
+   * Bug 41928: Backport Android-specific security fixes from Firefox 116 to ESR 102.14 / 115.1 - based Tor Browser [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.20.6
+     * Bug 40889: Add mullvad sha256sums URL to tools/signing/download-unsigned-sha256sums-gpg-signatures-from-people-tpo [tor-browser-build]
+     * Bug 40894: Fix format of keyring/boklm.gpg [tor-browser-build]
+     * Bug 40909: Add dan_b and ma1 to list of taggers in relevant projects [tor-browser-build]
+   * Windows
+     * Bug 31546: Create and expose PDB files for Tor Browser debugging on Windows [tor-browser-build]
+
 Tor Browser 13.0a1 - July 20 2023
  * All Platforms
    * Updated Translations

@@ -1,3 +1,37 @@
+Mullvad Browser 13.0a2 - August 08 2023
+ * All Platforms
+   * Updated NoScript to 11.4.26
+   * Upated uBlock Origin to 1.51.0
+   * Updated Firefox to 115.1.0esr
+   * Bug 195: Choose which locales to translate Mullvad Browser to [mullvad-browser]
+   * Bug 216: Rebase Mullvad Browser onto 115.1.0esr [mullvad-browser]
+   * Bug 30556: Re-evaluate letterboxing dimension choices [tor-browser]
+   * Bug 33282: Increase the max width of new windows [tor-browser]
+   * Bug 40916: Update updated_responses_config.yml to pull Mullvad incrementals from archive.torproject.org [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Bug 198: Enable localization for Mullvad Browser builds [mullvad-browser]
+     * Bug 199: Mullvad Browser changes required to use Mullvad Browser-specific localization strings [mullvad-browser]
+     * Bug 40615: Consider adding a readme to the fonts directory [tor-browser-build]
+     * Bug 40880: The README doesn't include some dependencies needed for building incrementals [tor-browser-build]
+     * Bug 40907: Mar-tools aren't deterministic on 13.0a1 [tor-browser-build]
+     * Bug 40909: Add dan_b and ma1 to list of taggers in relevant projects [tor-browser-build]
+     * Bug 40913: add boklm back to list of taggers in relevant projects [tor-browser-build]
+
+Mullvad Browser 12.5.2 - July 31 2023
+ * All Platforms
+   * Updated NoScript to 11.4.26
+   * Upated uBlock Origin to 1.51.0
+   * Updated Firefox to 102.14.0esr
+   * Bug 217: Rebase Mullvad Browser 12.5 stable on top of 102.14esr [mullvad-browser]
+ * Build System
+   * All Platforms
+     * Bug 40889: Add mullvad sha256sums URL to tools/signing/download-unsigned-sha256sums-gpg-signatures-from-people-tpo [tor-browser-build]
+     * Bug 40894: Fix format of keyring/boklm.gpg [tor-browser-build]
+     * Bug 40909: Add dan_b and ma1 to list of taggers in relevant projects [tor-browser-build]
+   * Windows
+     * Bug 31546: Create and expose PDB files for Tor Browser debugging on Windows [tor-browser-build]
+
 Mullvad Browser 13.0a1 - July 20 2023
  * All Platforms
    * Updated NoScript to 11.4.25

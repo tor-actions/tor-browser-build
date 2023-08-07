@@ -16,7 +16,7 @@ container:
 var:
   fenix_version: 115.2.0
   browser_branch: 13.0-1
-  browser_build: 1
+  browser_build: 2
   platform_version: 115.0
   variant: Beta
   # This should be updated when the list of gradle dependencies is changed.
