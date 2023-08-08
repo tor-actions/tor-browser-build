@@ -10,13 +10,12 @@ appname_bundle_win64: '[% c("var/projectname") %]-install-win64'
 releases_dir: [% path(c('output_dir')) %][% IF ! c("var/nightly") %]/signed[% END %]
 download:
     gpg_keyring: ../../keyring/torbrowser.gpg
+    archive_url: 'https://archive.torproject.org/tor-package-archive/[% c("var/projectname") %]'
 [% IF c("var/tor-browser") -%]
-    archive_url: 'https://archive.torproject.org/tor-package-archive/torbrowser'
     bundles_url: 'https://dist.torproject.org/torbrowser'
     mars_url: 'https://cdn.torproject.org/aus1/torbrowser'
 [% END -%]
 [% IF c("var/mullvad-browser") -%]
-    archive_url: 'https://cdn.mullvad.net/browser'
     bundles_url: 'https://cdn.mullvad.net/browser'
     mars_url: 'https://cdn.mullvad.net/browser'
 [% END -%]
