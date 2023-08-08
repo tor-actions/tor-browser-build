@@ -47,6 +47,7 @@ Mullvad Browser Alpha (and Nightly) are on the `main` branch
     - [ ] run `make list_translation_updates-alpha` to get updated hashes
     - [ ] `steps/base-browser/git_hash` : update with `HEAD` commit of project's `base-browser` branch
     - [ ] `steps/base-browser-fluent/git_hash` : update with `HEAD` commit of project's `basebrowser-newidentityftl` branch
+    - [ ] `steps/mullvad-browser/git_hash` : update with `HEAD` commit of project's `mullvad-browser` branch
 - [ ] Update common build configs
   - [ ] Check for NoScript updates here : https://addons.mozilla.org/en-US/firefox/addon/noscript
     - [ ] ***(Optional)*** If new version available, update `noscript` section of `input_files` in `projects/browser/config`

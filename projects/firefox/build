@@ -154,6 +154,14 @@ mkdir "$HOME/.mozbuild"
       echo "% locale torbutton $lang %locale/$lang/" >> "$torbutton_jar"
       echo "    locale/$lang (chrome/locale/$lang/*)" >> "$torbutton_jar"
     done
+  [% ELSIF c("var/mullvad-browser") -%]
+    tar -C "$rootdir" -xf "$rootdir/[% c('input_files_by_name/translation-mullvad-browser') %]"
+    pushd "$rootdir/translation-mullvad-browser"
+    ln -s ja ja-JP-mac
+    for lang in $supported_locales; do
+      cp -r $lang "$l10ncentral/"
+    done
+    popd
   [% END -%]
 [% ELSE -%]
   supported_locales=""

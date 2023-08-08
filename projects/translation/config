@@ -28,6 +28,12 @@ steps:
     targets:
       nightly:
         git_hash: 'tor-browser'
+  mullvad-browser:
+    mullvad-browser: '[% INCLUDE build %]'
+    git_hash: 1f736c5ae157f27df975c18bf3f2fa5f4bb5e33a
+    targets:
+      nightly:
+        git_hash: 'mullvad-browser'
   fenix:
     fenix: '[% INCLUDE build %]'
     # We need to bump the commit before releasing but just pointing to a branch
@@ -40,7 +46,7 @@ steps:
   list_updates:
     list_updates: |
       [%
-        FOREACH component = [ 'base-browser', 'base-browser-fluent', 'tor-browser', 'fenix' ];
+        FOREACH component = [ 'base-browser', 'base-browser-fluent', 'tor-browser', 'mullvad-browser', 'fenix' ];
           branch = pc(project, 'git_hash', { step => component, target => [ 'nightly' ] });
           commit_hash = exec('git rev-parse ' _ branch, { git_hash => branch });
           IF commit_hash == pc(project, "git_hash", { step => component });

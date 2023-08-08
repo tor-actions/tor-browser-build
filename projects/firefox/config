@@ -199,6 +199,10 @@ input_files:
     name: translation-tor-browser
     pkg_type: tor-browser
     enable: '[% c("var/tor-browser") && c("var/has_l10n") %]'
+  - project: translation
+    name: translation-mullvad-browser
+    pkg_type: mullvad-browser
+    enable: '[% c("var/mullvad-browser") && c("var/has_l10n") %]'
   - filename: marsigner.der
     enable: '[% c("var/override_updater_url") %]'
   - filename: namecoin-torbutton.patch
