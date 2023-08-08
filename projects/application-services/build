@@ -21,8 +21,7 @@ mkdir /var/tmp/build
 cd /var/tmp/dist
 tar -xf $rootdir/[% c('input_files_by_name/rust') %]
 tar -xf $rootdir/[% c('input_files_by_name/ninja') %]
-tar -xf $rootdir/[% c('input_files_by_name/uniffi-rs') %]
-export PATH=/var/tmp/dist/rust/bin:/var/tmp/dist/ninja:/var/tmp/dist/uniffi-rs:$PATH
+export PATH=/var/tmp/dist/rust/bin:/var/tmp/dist/ninja:$PATH
 export RUST_ANDROID_GRADLE_PYTHON_COMMAND=python3
 cd $rootdir
 

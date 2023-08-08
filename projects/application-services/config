@@ -46,9 +46,6 @@ steps:
       - project: ninja
         name: ninja
         pkg_type: build
-      - project: uniffi-rs
-        name: uniffi-rs
-        pkg_type: build
       # See libs/build-all.sh to update these!
       # Also, build them with application-services, since they need the NDK and
       # we are using a different one from the other projects.
