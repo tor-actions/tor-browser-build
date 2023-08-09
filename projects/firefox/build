@@ -159,7 +159,7 @@ mkdir "$HOME/.mozbuild"
     pushd "$rootdir/translation-mullvad-browser"
     ln -s ja ja-JP-mac
     for lang in $supported_locales; do
-      cp -r $lang "$l10ncentral/"
+      cp -Lr $lang "$l10ncentral/"
     done
     popd
   [% END -%]
