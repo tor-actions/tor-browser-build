@@ -80,6 +80,9 @@ mkdir "$HOME/.mozbuild"
   cat >> mozconfig-android-all << 'MOZCONFIG_EOF'
 ac_add_options --enable-update-channel=[% c("var/channel") %]
 ac_add_options --with-base-browser-version=[% c("var/torbrowser_version") %]
+export MOZ_INCLUDE_SOURCE_INFO=1
+export MOZ_SOURCE_REPO="[% c('var/gitlab_project') %]"
+export MOZ_SOURCE_CHANGESET=[% c("var/git_commit") %]
 MOZCONFIG_EOF
 
   pushd tools/torbrowser
