@@ -1,5 +1,31 @@
+diff --git a/components/support/nimbus-fml/src/intermediate_representation.rs b/components/support/nimbus-fml/src/intermediate_representation.rs
+index e61f8a728..c1e396cab 100644
+--- a/components/support/nimbus-fml/src/intermediate_representation.rs
++++ b/components/support/nimbus-fml/src/intermediate_representation.rs
+@@ -8,7 +8,7 @@ use crate::util::loaders::FilePath;
+ use anyhow::{bail, Error, Result as AnyhowResult};
+ use serde::{Deserialize, Serialize};
+ use serde_json::{Map, Value};
+-use std::collections::{BTreeSet, HashMap, HashSet};
++use std::collections::{BTreeMap, BTreeSet, HashMap, HashSet};
+ use std::fmt::Display;
+ use std::slice::Iter;
+ 
+@@ -191,10 +191,10 @@ pub struct FeatureManifest {
+     pub(crate) about: AboutBlock,
+ 
+     #[serde(default)]
+-    pub(crate) imported_features: HashMap<ModuleId, BTreeSet<String>>,
++    pub(crate) imported_features: BTreeMap<ModuleId, BTreeSet<String>>,
+ 
+     #[serde(default)]
+-    pub(crate) all_imports: HashMap<ModuleId, FeatureManifest>,
++    pub(crate) all_imports: BTreeMap<ModuleId, FeatureManifest>,
+ }
+ 
+ impl TypeFinder for FeatureManifest {
 diff --git a/components/support/nimbus-fml/src/parser.rs b/components/support/nimbus-fml/src/parser.rs
-index bb676f827..d00b1b6ef 100644
+index bb676f827..0d7e78583 100644
 --- a/components/support/nimbus-fml/src/parser.rs
 +++ b/components/support/nimbus-fml/src/parser.rs
 @@ -26,7 +26,7 @@ pub(crate) struct EnumVariantBody {
@@ -41,6 +67,33 @@ index bb676f827..d00b1b6ef 100644
  
      #[serde(default)]
      #[serde(alias = "include")]
+@@ -785,7 +785,7 @@ impl Parser {
+         &self,
+         current: &FilePath,
+         channel: &str,
+-        imports: &mut HashMap<ModuleId, FeatureManifest>,
++        imports: &mut BTreeMap<ModuleId, FeatureManifest>,
+     ) -> Result<ModuleId> {
+         let id = current.try_into()?;
+         if imports.contains_key(&id) {
+@@ -814,7 +814,7 @@ impl Parser {
+         // This loop does the work of merging the default blocks back into the imported manifests.
+         // We'll then attach all the manifests to the root (i.e. the one we're generating code for today), in `imports`.
+         // We associate only the feature ids with the manifest we're loading in this method.
+-        let mut imported_feature_id_map = HashMap::new();
++        let mut imported_feature_id_map = BTreeMap::new();
+ 
+         for block in &frontend.imports {
+             // 1. Load the imported manifests in to the hash map.
+@@ -888,7 +888,7 @@ impl Parser {
+         &self,
+         channel: &str,
+     ) -> Result<FeatureManifest, FMLError> {
+-        let mut manifests = HashMap::new();
++        let mut manifests = BTreeMap::new();
+         let id = self.load_imports(&self.source, channel, &mut manifests)?;
+         let mut fm = manifests
+             .remove(&id)
 @@ -1009,12 +1009,12 @@ impl Parser {
  }
  
