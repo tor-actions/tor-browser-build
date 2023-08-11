@@ -43,6 +43,7 @@ Tor Browser 13.0a2 - August 08 2023
      * Bug 40867: Create a RBM project for the unified Android repository [tor-browser-build]
      * Bug 40917: Remove the uniffi-rs project [tor-browser-build]
      * Bug 41899: Use LLD for Android [tor-browser]
+     * Bug 40920: Non-deterministic generation of baseline.profm file in Android apks [tor-browser-build]
 
 Tor Browser 12.5.2 - July 31 2023
  * All Platforms
