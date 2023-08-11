@@ -3,7 +3,7 @@ set -e
 script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "$script_dir/functions"
 
-dist_dir="/srv/dist-master.torproject.org/htdocs/torbrowser/$tbb_version"
+dist_dir="/srv/dist-master.torproject.org/htdocs/$SIGNING_PROJECTNAME/$tbb_version"
 cat > "$dist_dir/.htaccess" << 'EOF'
 RewriteEngine On
 RewriteRule ^sha256sums.txt$ sha256sums-unsigned-build.txt
