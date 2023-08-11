@@ -801,8 +801,6 @@ f5759b7fcdfc83a525a036deedcbd32e5b536b625ebc282426f16ca137eb5902 | https://repo.
 770471090ca40a17b9e436ee2ec00819be42042da6f4085ece1d37916dc08ff9 | https://repo.maven.apache.org/maven2/backport-util-concurrent/backport-util-concurrent/3.1/backport-util-concurrent-3.1.pom
 2bf4e59f3acd106fea6145a9a88fe8956509f8b9c0fdd11eb96fee757269e3f3 | https://repo.maven.apache.org/maven2/classworlds/classworlds/1.1-alpha-2/classworlds-1.1-alpha-2.jar
 0cc647963b74ad1d7a37c9868e9e5a8f474e49297e1863582253a08a4c719cb1 | https://repo.maven.apache.org/maven2/classworlds/classworlds/1.1-alpha-2/classworlds-1.1-alpha-2.pom
-9e45ecc7775a250d953e980d9f2a2c38fc7729291cba3fe75140a99e316d3d89 | https://repo.maven.apache.org/maven2/com/adjust/sdk/adjust-android/4.33.0/adjust-android-4.33.0.aar
-aa17ade4ae7e8dd81fa495de04ef9481a139224fc6503dd6fa5fb2698ae8310d | https://repo.maven.apache.org/maven2/com/adjust/sdk/adjust-android/4.33.0/adjust-android-4.33.0.pom
 243a64470fda0e86a6fddeb0af4c7aa9426ce84e68cbfe18d75ee5da4b7e0b92 | https://repo.maven.apache.org/maven2/com/almworks/sqlite4java/sqlite4java/1.0.392/sqlite4java-1.0.392.jar
 139552c586a57bf6d98f87d6b7e23fef4db53cf74097be962f7868e3606c79d2 | https://repo.maven.apache.org/maven2/com/almworks/sqlite4java/sqlite4java/1.0.392/sqlite4java-1.0.392.pom
 3f59eca516374ccd4fd3551625bf50f8a4b191f700508f7ce4866460a6128af0 | https://repo.maven.apache.org/maven2/com/github/gundy/semver4j/0.16.4/semver4j-0.16.4-nodeps.jar

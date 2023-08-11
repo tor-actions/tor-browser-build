@@ -24,6 +24,7 @@ Tor Browser 13.0a2 - August 08 2023
    * Bug 40919: Fix nimbus-fml reproducibility of 13.0a2-build1 [tor-browser-build]
    * Bug 41928: Backport Android-specific security fixes from Firefox 116 to ESR 102.14 / 115.1 - based Tor Browser [tor-browser]
    * Bug 41972: Disable Firefox onboarding in 13.0 [tor-browser]
+   * Bug 41997: Remove all use and reference to com.adjust.sdk.Adjust which now uses AD_ID [tor-browser]
  * Build System
    * All Platforms
      * Updated Go to 1.20.7
