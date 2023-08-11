@@ -9,6 +9,11 @@ ext_dir=$assets_dir/extensions
 qa_apk=[% dest_dir %]/[% c('filename') %]/[% c("var/project-name") %]-[% c("version") %]-[% c("var/osname") %]-multi-qa.apk
 apk=$rootdir/firefox-android/*-[% c("var/abi") %]-*.apk
 
+# tor-browser-build#40920
+sorted_baseline_apk=$(basename $apk .apk)_sorted_baseline.apk
+$rootdir/sort-baseline.py --apk $apk $sorted_baseline_apk
+mv $sorted_baseline_apk $apk
+
 # Bundle our extensioni(s).
 # NoScript will be copied over to the profile folder
 # as a "regular" browser extension receiving regular AMO updates.

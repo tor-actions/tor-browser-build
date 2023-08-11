@@ -151,3 +151,6 @@ input_files:
   - project: manual
     name: manual
     enable: '[% ! c("var/android") && c("var/tor-browser") %]'
+    # tor-browser-build#40920
+  - filename: sort-baseline.py
+    enable: '[% c("var/android") %]'
