@@ -16,12 +16,6 @@ steps:
     targets:
       nightly:
         git_hash: 'base-browser'
-  base-browser-fluent:
-    base-browser-fluent: '[% INCLUDE build %]'
-    git_hash: 72c0d47f55994b6d68e0239d9edd02d7ae7708ab
-    targets:
-      nightly:
-        git_hash: 'basebrowser-newidentityftl'
   tor-browser:
     tor-browser: '[% INCLUDE build %]'
     git_hash: 2b885b2a6dfeaa046678133755639d6e26485754
@@ -46,7 +40,7 @@ steps:
   list_updates:
     list_updates: |
       [%
-        FOREACH component = [ 'base-browser', 'base-browser-fluent', 'tor-browser', 'mullvad-browser', 'fenix' ];
+        FOREACH component = [ 'base-browser', 'tor-browser', 'mullvad-browser', 'fenix' ];
           branch = pc(project, 'git_hash', { step => component, target => [ 'nightly' ] });
           commit_hash = exec('git rev-parse ' _ branch, { git_hash => branch });
           IF commit_hash == pc(project, "git_hash", { step => component });

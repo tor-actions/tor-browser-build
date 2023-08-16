@@ -46,7 +46,6 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
   - [ ] Update `projects/translation/config`:
     - [ ] run `make list_translation_updates-alpha` to get updated hashes
     - [ ] `steps/base-browser/git_hash` : update with `HEAD` commit of project's `base-browser` branch
-    - [ ] `steps/base-browser-fluent/git_hash` : update with `HEAD` commit of project's `basebrowser-newidentityftl` branch
     - [ ] `steps/tor-browser/git_hash` : update with `HEAD` commit of project's `tor-browser` branch
     - [ ] `steps/fenix/git_hash` : update with `HEAD` commit of project's `fenix-torbrowserstringsxml` branch
 - [ ] Update Android-specific build configs

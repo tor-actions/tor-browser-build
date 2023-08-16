@@ -192,10 +192,6 @@ input_files:
     pkg_type: base-browser
     enable: '[% c("var/has_l10n") %]'
   - project: translation
-    name: translation-base-browser-fluent
-    pkg_type: base-browser-fluent
-    enable: '[% c("var/has_l10n") %]'
-  - project: translation
     name: translation-tor-browser
     pkg_type: tor-browser
     enable: '[% c("var/tor-browser") && c("var/has_l10n") %]'

@@ -116,21 +116,10 @@ mkdir "$HOME/.mozbuild"
   pushd "$rootdir/translation-base-browser"
   ln -s ja ja-JP-mac
   for lang in $supported_locales; do
-    # Please notice that Fluent and DTDs use different directories in
-    # l10n-central! This is something we have to keep in mind when we will join
-    # the two branches!
+    # Fluent
+    mv $lang/base-browser.ftl "$l10ncentral/$lang/browser/browser/"
+    # Properties (they use a different directory)
     mv $lang/* "$l10ncentral/$lang/browser/chrome/browser/"
-  done
-  popd
-
-  tar -C "$rootdir" -xf "$rootdir/[% c('input_files_by_name/translation-base-browser-fluent') %]"
-  pushd "$rootdir/translation-base-browser-fluent"
-  ln -s ja ja-JP-mac
-  # TODO: These two sources will be unified eventually; at that point, this link
-  # will go away, too.
-  ln -s es es-ES
-  for lang in $supported_locales; do
-    mv $lang/languageNotification.ftl "$l10ncentral/$lang/browser/browser/"
   done
   popd
 
