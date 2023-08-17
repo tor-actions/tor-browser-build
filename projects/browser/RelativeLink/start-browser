@@ -365,23 +365,18 @@ cd "${HOME}"
 
 if [ "$show_usage" -eq 1 ]; then
     # Display Firefox help, then our help
-    [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] \
-        --class "[% c('var/Project_Name') %]" --name "[% c('var/Project_Name') %]" --help 2>/dev/null
+    [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] --help 2>/dev/null
     print_usage
 elif [ "$detach" -eq 1 ] ; then
-    [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] \
-        --class "[% c('var/Project_Name') %]" --name "[% c('var/Project_Name') %]" "${@}" > "$logfile" 2>&1 </dev/null &
-    disown "$!"
+    [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] "${@}" > "$logfile" 2>&1 </dev/null &
+        disown "$!"
 elif [ "$log_output" -eq 1 -a "$show_output" -eq 1 ]; then
-    [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] \
-        --class "[% c('var/Project_Name') %]" --name "[% c('var/Project_Name') %]" "${@}" 2>&1 </dev/null | \
+    [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] "${@}" 2>&1 </dev/null | \
         tee "$logfile"
 elif [ "$show_output" -eq 1 ]; then
-    [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] \
-        --class "[% c('var/Project_Name') %]" --name "[% c('var/Project_Name') %]" "${@}" < /dev/null
+    [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] "${@}" < /dev/null
 else
-    [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] \
-        --class "[% c('var/Project_Name') %]" --name "[% c('var/Project_Name') %]" "${@}" > "$logfile" 2>&1 </dev/null
+    [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] "${@}" > "$logfile" 2>&1 </dev/null
 fi
 
 exit $?

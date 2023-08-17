@@ -74,6 +74,8 @@ ac_add_options --[% IF c("var/updater_enabled") %]enable[% ELSE %]disable[% END 
 
 mk_add_options MOZ_PARALLEL_BUILD=[% c("num_procs") %]
 
+export MOZ_APP_REMOTINGNAME="[% c('var/Project_Name_Channel') %]"
+
 export MOZ_INCLUDE_SOURCE_INFO=1
 export MOZ_SOURCE_REPO="[% c('var/gitlab_project') %]"
 export MOZ_SOURCE_CHANGESET=[% c("var/git_commit") %]

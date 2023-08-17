@@ -31,4 +31,4 @@ Categories=Network;WebBrowser;Security;
 Exec=sh -c '"$(dirname "$*")"/Browser/start-[% c("var/project-name") %]  --detach || ([ ! -x "$(dirname "$*")"/Browser/start-[% c("var/project-name") %] ] && "$(dirname "$*")"/start-[% c("var/project-name") %] --detach)' dummy %k
 X-[% c("var/ProjectName") %]-ExecShell=./Browser/start-[% c("var/project-name") %] --detach
 Icon=web-browser
-StartupWMClass=[% c("var/Project_Name") %]
+StartupWMClass=[% c("var/Project_Name_Channel") %]
