@@ -57,10 +57,9 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
   - [ ] ***(Optional)*** Update `projects/application-services/config`:
     **NOTE** we don't currently have any of our own patches for this project
     - [ ] `git_hash` : update to appropriate git commit associated with `$(ESR_VERSION)`
-  - [ ] ***(Optional)*** Update `projects/android-components/config`:
-    - [ ] `android_components_build` : update to match alpha android-components tag
-  - [ ] ***(Optional)*** Update `projects/fenix/config`
-    - [ ] `fenix_build` : update to match fenix tag
+  - [ ] ***(Optional)*** Update `projects/firefox-android/config`:
+    - [ ] `fenix_version` : update to match alpha `firefox-android` build tag
+    - [ ] `browser_branch` : update to match alpha `firefox-android` build tag
   - [ ] Update allowed_addons.json by running (from `tor-browser-build` root):
     - `./tools/fetch_allowed_addons.py > projects/browser/allowed_addons.json`
 - [ ] Update common build configs
@@ -69,8 +68,8 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
       - [ ] `URL`
       - [ ] `sha256sum`
   - [ ] Check for OpenSSL updates here : https://www.openssl.org/source/
-    - [ ] ***(Optional)*** If new 1.X.Y version available, update `projects/openssl/config`
-      - [ ] `version` : update to next 1.X.Y version
+    - [ ] ***(Optional)*** If new 3.0.X version available, update `projects/openssl/config`
+      - [ ] `version` : update to next 3.0.X version
       - [ ] `input_files/sha256sum` : update to sha256 sum of source tarball
   - [ ] Check for zlib updates here: https://github.com/madler/zlib/releases
     - [ ] **(Optional)** If new tag available, update `projects/zlib/config`
