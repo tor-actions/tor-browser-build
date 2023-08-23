@@ -22,7 +22,7 @@ test -d "$signed_version_dir" || \
 
 ProjName=$(ProjectName)
 nb_locales=$(echo $bundle_locales | wc -w)
-nb_bundles=$(ls -1 "$signed_version_dir/$ProjName"-*.dmg | wc -l)
+nb_bundles=$(ls -1 "$signed_version_dir/$(project-name)"-*.dmg | wc -l)
 test "$nb_locales" -eq "$nb_bundles" || \
   exit_error "Wrong number of bundles: $nb_locales != $nb_bundles"
 

@@ -69,7 +69,7 @@ do
     echo "DMG already mounted. Please correct."
     exit 1
   fi
-  hdiutil attach $(ProjectName)-${tbb_version}-macos_$LANG.dmg
+  hdiutil attach $(project-name)-macos-${tbb_version}.dmg
   cp -rf "/Volumes/$app_name/$app_name.app" "$app_name.app"
   echo "Signing ${app_name}_${LANG}.app"
   codesign -vvv --deep -o runtime --entitlements="$ENTITLEMENTS" --timestamp -f -s "Developer ID Application: The Tor Project, Inc (MADPSAYN6T)" "$app_name.app/"

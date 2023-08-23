@@ -54,6 +54,7 @@ test -f "$hfstools_file" || \
 
 ProjName=$(ProjectName)
 Proj_Name=$(Project_Name)
+proj_name=$(project-name)
 
 test -d "$macos_signed_dir" || mkdir "$macos_signed_dir"
 tmpdir="$macos_stapled_dir/tmp"
@@ -70,10 +71,10 @@ do
   cd $tmpdir/dmg
   unzip -q $macos_stapled_dir/tb-${tbb_version}_$lang-stapled.zip
   cd ..
-  $script_dir/ddmg.sh $macos_signed_dir/$ProjName-${tbb_version}-macos_$lang.dmg $tmpdir/dmg/ "$Proj_Name"
+  $script_dir/ddmg.sh $macos_signed_dir/${proj_name}-macos-${tbb_version}.dmg $tmpdir/dmg/ "$Proj_Name"
   rm -rf "dmg/$Proj_Name.app"
 done
 rm -Rf "$tmpdir"
 
 # move the signed+stapled dmgs to expected output directory for publishing and mar generation
-mv -vf "$macos_signed_dir"/"$ProjName"-*.dmg "$signed_version_dir"/
+mv -vf "$macos_signed_dir"/"${proj_name}"-*.dmg "$signed_version_dir"/

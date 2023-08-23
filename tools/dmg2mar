@@ -98,8 +98,8 @@ sub get_dmg_files_from_sha256sums {
         my (undef, $filename) = split '  ', $line;
         next unless $filename;
         chomp $filename;
-        next unless $filename =~ m/^$appname_dmg-(.+)-macos\.dmg$/;
-        push @files, { filename => $filename, version => $1, lang => $2 };
+        next unless $filename =~ m/^$appname_dmg-macos-(.+)\.dmg$/;
+        push @files, { filename => $filename, version => $1, lang => 'ALL' };
     }
     return @files;
 }
