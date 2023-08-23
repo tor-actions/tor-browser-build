@@ -2,13 +2,13 @@
 download:
     mars_url: https://nightlies.tbb.torproject.org/nightly-updates
 build_targets:
-    linux32: Linux_x86-gcc3
-    linux64: Linux_x86_64-gcc3
-    win32:
+    linux-i686: Linux_x86-gcc3
+    linux-x86_64: Linux_x86_64-gcc3
+    windows-i686:
         - WINNT_x86-gcc3
         - WINNT_x86-gcc3-x86
         - WINNT_x86-gcc3-x64
-    win64: WINNT_x86_64-gcc3-x64
+    windows-x86_64: WINNT_x86_64-gcc3-x64
     macos:
       - Darwin_x86_64-gcc3
       - Darwin_aarch64-gcc3
@@ -16,20 +16,20 @@ channels:
     nightly: nightly_version
 versions:
     nightly_version:
-        platformVersion: 68.2.0
+        platformVersion: 115.1.0
         detailsURL: http://umj4zbqdfcyevlkgqgpq6foxk3z75zzxsbgt5jqmfxofrbrjh3crbnad.onion/
         migrate_langs:
             pt-PT: pt-BR
         macos:
             minSupportedOSVersion: 16.0.0
-        win32:
+        windows-i686:
             minSupportedOSVersion: 6.1
             minSupportedInstructionSet: SSE2
-        win64:
+        windows-x86_64:
             minSupportedOSVersion: 6.1
             minSupportedInstructionSet: SSE2
-        linux32:
+        linux-i686:
             minSupportedInstructionSet: SSE2
-        linux64:
+        linux-x86_64:
             minSupportedInstructionSet: SSE2
 mar_compression: xz

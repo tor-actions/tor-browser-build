@@ -98,7 +98,7 @@ sub get_version_files {
     opendir(my $d, $vdir) or exit_error "Error opening directory $vdir";
     foreach my $file (readdir $d) {
         next unless -f "$vdir/$file";
-        if ($file =~ m/^$appname-([^-]+)-${version}_(.+)\.mar$/) {
+        if ($file =~ m/^$appname-(.+)-${version}_(.+)\.mar$/) {
             my ($os, $lang) = ($1, $2);
             $files->{$os}{$lang}{complete} = {
                 type => 'complete',
@@ -109,7 +109,7 @@ sub get_version_files {
             };
             next;
         }
-        if ($file =~ m/^$appname-([^-]+)-(.+)-${version}_(.+)\.incremental\.mar$/) {
+        if ($file =~ m/^$appname-(.+)--(.+)-${version}_(.+)\.incremental\.mar$/) {
             my ($os, $from_version, $lang) = ($1, $2, $3);
             $files->{$os}{$lang}{partial}{$from_version} = {
                 type => 'partial',
@@ -223,7 +223,7 @@ sub mar_filename {
 sub create_incremental_mar {
     my ($config, $pm, $from_version, $new_version, $os, $lang, $channel) = @_;
     my $appname = $config->{appname_marfile};
-    my $mar_file = "$appname-$os-${from_version}-${new_version}_$lang.incremental.mar";
+    my $mar_file = "$appname-$os--${from_version}-${new_version}_$lang.incremental.mar";
     my $mar_file_path = version_dir($config, $new_version) . '/' . $mar_file;
     if ($ENV{MAR_SKIP_EXISTING} && -f $mar_file_path) {
         print "Skipping $mar_file\n";
