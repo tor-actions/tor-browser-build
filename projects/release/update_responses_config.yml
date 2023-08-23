@@ -3,11 +3,6 @@ tmp_dir: '[% c("tmp_dir") %]'
 create_downloads_json: 1
 appname_marfile: '[% c("var/project-name") %]'
 appname_bundle: '[% c("var/project-name") %]'
-appname_bundle_android: '[% c("var/project-name") %]'
-appname_bundle_macos: '[% c("var/ProjectName") %]'
-appname_bundle_linux: '[% c("var/project-name") %]'
-appname_bundle_win32: '[% c("var/projectname") %]-install'
-appname_bundle_win64: '[% c("var/projectname") %]-install-win64'
 releases_dir: [% path(c('output_dir')) %][% IF ! c("var/nightly") %]/signed[% END %]
 download:
     gpg_keyring: ../../keyring/torbrowser.gpg
