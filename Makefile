@@ -183,12 +183,14 @@ torbrowser-testbuild-src: submodule-update
 torbrowser-incrementals-release: submodule-update
 	$(rbm) build release --step update_responses_config --target release --target create_unsigned_incrementals --target torbrowser
 	tools/update-responses/download_missing_versions release
+	$(rbm) build release --step link_old_mar_filenames --target release --target torbrowser
 	tools/update-responses/gen_incrementals release
 	$(rbm) build release --step hash_incrementals --target release --target torbrowser
 
 torbrowser-incrementals-alpha: submodule-update
 	$(rbm) build release --step update_responses_config --target alpha --target create_unsigned_incrementals --target torbrowser
 	tools/update-responses/download_missing_versions alpha
+	$(rbm) build release --step link_old_mar_filenames --target alpha --target torbrowser
 	tools/update-responses/gen_incrementals alpha
 	$(rbm) build release --step hash_incrementals --target alpha --target torbrowser
 
@@ -209,12 +211,14 @@ torbrowser-dmg2mar-release: submodule-update
 	$(rbm) build release --step update_responses_config --target release --target signed --target torbrowser
 	$(rbm) build release --step dmg2mar --target release --target signed --target torbrowser
 	tools/update-responses/download_missing_versions release
+	$(rbm) build release --step link_old_mar_filenames --target release --target torbrowser
 	CHECK_CODESIGNATURE_EXISTS=1 MAR_SKIP_EXISTING=1 tools/update-responses/gen_incrementals release
 
 torbrowser-dmg2mar-alpha: submodule-update
 	$(rbm) build release --step update_responses_config --target alpha --target signed --target torbrowser
 	$(rbm) build release --step dmg2mar --target alpha --target signed --target torbrowser
 	tools/update-responses/download_missing_versions alpha
+	$(rbm) build release --step link_old_mar_filenames --target alpha --target torbrowser
 	CHECK_CODESIGNATURE_EXISTS=1 MAR_SKIP_EXISTING=1 tools/update-responses/gen_incrementals alpha
 
 
@@ -499,12 +503,14 @@ mullvadbrowser-testbuild-src: submodule-update
 mullvadbrowser-incrementals-release: submodule-update
 	$(rbm) build release --step update_responses_config --target release --target create_unsigned_incrementals --target mullvadbrowser
 	tools/update-responses/download_missing_versions release
+	$(rbm) build release --step link_old_mar_filenames --target release --target mullvadbrowser
 	tools/update-responses/gen_incrementals release
 	$(rbm) build release --step hash_incrementals --target release --target mullvadbrowser
 
 mullvadbrowser-incrementals-alpha: submodule-update
 	$(rbm) build release --step update_responses_config --target alpha --target create_unsigned_incrementals --target mullvadbrowser
 	tools/update-responses/download_missing_versions alpha
+	$(rbm) build release --step link_old_mar_filenames --target alpha --target mullvadbrowser
 	tools/update-responses/gen_incrementals alpha
 	$(rbm) build release --step hash_incrementals --target alpha --target mullvadbrowser
 
@@ -525,12 +531,14 @@ mullvadbrowser-dmg2mar-release: submodule-update
 	$(rbm) build release --step update_responses_config --target release --target signed --target mullvadbrowser
 	$(rbm) build release --step dmg2mar --target release --target signed --target mullvadbrowser
 	tools/update-responses/download_missing_versions release
+	$(rbm) build release --step link_old_mar_filenames --target release --target mullvadbrowser
 	CHECK_CODESIGNATURE_EXISTS=1 MAR_SKIP_EXISTING=1 tools/update-responses/gen_incrementals release
 
 mullvadbrowser-dmg2mar-alpha: submodule-update
 	$(rbm) build release --step update_responses_config --target alpha --target signed --target mullvadbrowser
 	$(rbm) build release --step dmg2mar --target alpha --target signed --target mullvadbrowser
 	tools/update-responses/download_missing_versions alpha
+	$(rbm) build release --step link_old_mar_filenames --target alpha --target mullvadbrowser
 	CHECK_CODESIGNATURE_EXISTS=1 MAR_SKIP_EXISTING=1 tools/update-responses/gen_incrementals alpha
 
 
