@@ -54,7 +54,7 @@ git checkout "$update_responses_commit"
 static-update-component aus1.torproject.org
 EOF
 
-chmod +x $deploy_script
+chmod +rx $deploy_script
 scp -p $deploy_script $ssh_host_staticiforme:deploy_update_responses-$tbb_version_type.sh
 
 echo 'To enable updates you can now run:'
