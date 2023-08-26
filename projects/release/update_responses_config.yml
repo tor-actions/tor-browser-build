@@ -73,7 +73,12 @@ versions:
         linux64:
             minSupportedInstructionSet: SSE2
 mar_compression: xz
+[% IF c("var/tor-browser") -%]
 tag: 'tbb-[% c("var/torbrowser_version") %]-[% c("var/torbrowser_build") %]'
+[% END -%]
+[% IF c("var/mullvad-browser") -%]
+tag: 'mb-[% c("var/torbrowser_version") %]-[% c("var/torbrowser_build") %]'
+[% END -%]
 
 [% IF c("var/tor-browser") -%]
 htaccess_rewrite_rules:
