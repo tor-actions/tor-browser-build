@@ -36,7 +36,7 @@ versions:
         mar_channel_id: [% c('var/mar_channel_id') %]
         platformVersion: [% pc('firefox', 'var/firefox_platform_version') %]
 [% IF c("var/tor-browser") -%]
-        detailsURL: https://blog.torproject.org/new-release-tor-browser-[% c("var/torbrowser_version") FILTER remove('\.') %]
+        detailsURL: https://blog.torproject.org/new[% IF c("var/alpha") %]-alpha[% END %]-release-tor-browser-[% c("var/torbrowser_version") FILTER remove('\.') %]
 [% END -%]
 [% IF c("var/mullvad-browser") -%]
         detailsURL: https://github.com/mullvad/mullvad-browser/releases/[% c("var/torbrowser_version") %]
