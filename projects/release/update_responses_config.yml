@@ -44,7 +44,7 @@ versions:
         detailsURL: https://blog.torproject.org/new-release-tor-browser-[% c("var/torbrowser_version") FILTER remove('\.') %]
 [% END -%]
 [% IF c("var/mullvad-browser") -%]
-        detailsURL: https://github.com/mullvad/mullvad-browser/releases/[% pc('firefox', 'git_hash') %]
+        detailsURL: https://github.com/mullvad/mullvad-browser/releases/[% c("var/torbrowser_version") %]
 [% END -%]
         incremental_from:
 [% SET incr_from = c("var/nightly") ? c("var_p/nightly_torbrowser_incremental_from") : c("var/torbrowser_incremental_from");
