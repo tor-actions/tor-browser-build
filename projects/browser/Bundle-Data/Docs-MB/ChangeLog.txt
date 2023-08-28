@@ -1,3 +1,59 @@
+Mullvad Browser 12.5.3 - August 28 2023
+ * All Platforms
+   * Updated Translations
+   * Updated Firefox to 102.15.0esr
+   * Bug 232: Rebase Mullvad Browser stable onto 102.15 [mullvad-browser]
+   * Bug 42053: Backport security fixes from Firefox 117 to ESR 102.15 - based Tor Browser [tor-browser]
+   * Bug 40937: First window after update should go to the user-friendly release page on GitHub [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Bug 40857: Mullvad Browser generated downloads.json references tbb-* build tag rather than mb-* [tor-browser-build]
+     * Bug 40913: add boklm back to list of taggers in relevant projects [tor-browser-build]
+     * Bug 40921: staticiforme-prepare-cdn-dist-upload uses hardcoded torbrowser path for .htacess file generation [tor-browser-build]
+
+Mullvad Browser 13.0a3 - August 21 2023
+ * All Platforms
+   * Updated Translations
+   * Updated Firefox to 115.2.0esr
+   * Bug 220: "Firefox Suggest" string appears when search matches a bookmark [mullvad-browser]
+   * Bug 223: Trademarks in the about popup are not translated [mullvad-browser]
+   * Bug 230: Rebase MB 13.0 alpha onto 115.2.0esr [mullvad-browser]
+   * Bug 40924: Customize MOZ_APP_REMOTINGNAME instead of passing --name and --class [tor-browser-build]
+   * Bug 41833: Reload extensions on new identiy [tor-browser]
+   * Bug 41943: Lock javascript.options.spectre.disable_for_isolated_content to false [tor-browser]
+   * Bug 41984: Rename languageNotification.ftl to base-browser.ftl [tor-browser]
+   * Bug 42019: Empty browser's clipboard on browser shutdown [tor-browser]
+   * Bug 42022: Prevent extension search engines from breaking the whole search system [tor-browser]
+   * Bug 42029: Defense-in-depth: disable non-proxied UDP WebRTC [tor-browser]
+ * Linux
+   * Bug 40576: Fontconfig warning: remove 'blank' configuration [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Bug 40829: Review and standardize naming scheme for browser installer/package artifacts [tor-browser-build]
+     * Bug 40921: staticiforme-prepare-cdn-dist-upload uses hardcoded torbrowser path for .htacess file generation [tor-browser-build]
+     * Bug 40922: Use base-browser.ftl instead of languageNotification.ftl [tor-browser-build]
+     * Bug 40923: Switch Mullvad Browser translations to the new repository [tor-browser-build]
+
+Mullvad Browser 13.0a2 - August 08 2023
+ * All Platforms
+   * Updated NoScript to 11.4.26
+   * Upated uBlock Origin to 1.51.0
+   * Updated Firefox to 115.1.0esr
+   * Bug 195: Choose which locales to translate Mullvad Browser to [mullvad-browser]
+   * Bug 216: Rebase Mullvad Browser onto 115.1.0esr [mullvad-browser]
+   * Bug 30556: Re-evaluate letterboxing dimension choices [tor-browser]
+   * Bug 33282: Increase the max width of new windows [tor-browser]
+   * Bug 40916: Update updated_responses_config.yml to pull Mullvad incrementals from archive.torproject.org [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Bug 198: Enable localization for Mullvad Browser builds [mullvad-browser]
+     * Bug 199: Mullvad Browser changes required to use Mullvad Browser-specific localization strings [mullvad-browser]
+     * Bug 40615: Consider adding a readme to the fonts directory [tor-browser-build]
+     * Bug 40880: The README doesn't include some dependencies needed for building incrementals [tor-browser-build]
+     * Bug 40907: Mar-tools aren't deterministic on 13.0a1 [tor-browser-build]
+     * Bug 40909: Add dan_b and ma1 to list of taggers in relevant projects [tor-browser-build]
+     * Bug 40913: add boklm back to list of taggers in relevant projects [tor-browser-build]
+
 Mullvad Browser 12.5.2 - July 31 2023
  * All Platforms
    * Updated NoScript to 11.4.26

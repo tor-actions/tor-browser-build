@@ -1,3 +1,99 @@
+Tor Browser 12.5.3 - August 28 2023
+ * All Platforms
+   * Updated Translations
+   * Updated OpenSSL to 1.1.1v
+   * Bug 42033: Rebase the releases onto 102.15.0esr [tor-browser]
+   * Bug 42053: Backport security fixes from Firefox 117 to ESR 102.15 - based Tor Browser [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 102.15.0esr
+ * Android
+   * Updated GeckoView to 102.15.0esr
+ * Build System
+   * All Platforms
+     * Updated Go to 1.20.7
+     * Bug 40740: Tor Browser for Android's snowflake ClientTransportPlugin seems to be out of date [tor-browser-build]
+     * Bug 40786: deploy_update_responses-*.sh requires +r permissions to run [tor-browser-build]
+     * Bug 40905: Go vendor archives ignore the nightly version override on testbuilds [tor-browser-build]
+     * Bug 40913: add boklm back to list of taggers in relevant projects [tor-browser-build]
+     * Bug 40921: staticiforme-prepare-cdn-dist-upload uses hardcoded torbrowser path for .htacess file generation [tor-browser-build]
+
+Tor Browser 13.0a3 - August 21 2023
+ * All Platforms
+   * Updated Translations
+   * Bug 41943: Lock javascript.options.spectre.disable_for_isolated_content to false [tor-browser]
+   * Bug 41984: Rename languageNotification.ftl to base-browser.ftl [tor-browser]
+   * Bug 42019: Empty browser's clipboard on browser shutdown [tor-browser]
+   * Bug 42030: Rebase the browsers to 115.2.0esr [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.2.0esr
+   * Bug 40175: Connections in reader mode are not FPI [tor-browser]
+   * Bug 40924: Customize MOZ_APP_REMOTINGNAME instead of passing --name and --class [tor-browser-build]
+   * Bug 41691: "Firefox Suggest" text appearing in UI [tor-browser]
+   * Bug 41833: Reload extensions on new identiy [tor-browser]
+   * Bug 42022: Prevent extension search engines from breaking the whole search system [tor-browser]
+   * Bug 42031: TBB 13.0a2: TypeError: channel.loadInfo.browsingContext.topChromeWindow.gBrowser is undefined [tor-browser]
+ * Linux
+   * Bug 40576: Fontconfig warning: remove 'blank' configuration [tor-browser-build]
+ * Android
+   * Updated GeckoView to 115.2.0esr
+   * Bug 42018: Rebase Firefox for Android to 115.2.1 [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 40829: Review and standardize naming scheme for browser installer/package artifacts [tor-browser-build]
+     * Bug 40921: staticiforme-prepare-cdn-dist-upload uses hardcoded torbrowser path for .htacess file generation [tor-browser-build]
+   * Windows + macOS + Linux
+     * Bug 40922: Use base-browser.ftl instead of languageNotification.ftl [tor-browser-build]
+   * Linux
+     * Bug 41967: Add a Makefile recipe to create multi-lingual dev builds [tor-browser]
+
+Tor Browser 13.0a2 - August 08 2023
+ * All Platforms
+   * Updated Translations
+   * Updated NoScript to 11.4.26
+   * Updated OpenSSL to 3.0.10
+   * Updated tor to 0.4.8.3-rc
+   * Bug 41909: Rebase 13.0 alpha to 115.1.0 esr [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.1.0esr
+   * Bug 30556: Re-evaluate letterboxing dimension choices [tor-browser]
+   * Bug 33282: Increase the max width of new windows [tor-browser]
+   * Bug 40982: Cleanup maps in tor-circuit-display [tor-browser]
+   * Bug 40983: Move not UI-related torbutton.js code to modules [tor-browser]
+   * Bug 41844: Stop using the control port directly [tor-browser]
+   * Bug 41907: The bootstrap is interrupted without any errors if the process becomes ready when already bootstrapping [tor-browser]
+   * Bug 41922: Unify the bridge line parsers [tor-browser]
+   * Bug 41923: The path normalization results in warnings [tor-browser]
+   * Bug 41924: Small refactors for TorProcess [tor-browser]
+   * Bug 41925: Remove the torbutton startup process [tor-browser]
+   * Bug 41926: Refactor the control port client implementation [tor-browser]
+   * Bug 41964: 'emojiAnnotations' not defined in time in connection preferences [tor-browser]
+ * Android
+   * Updated GeckoView to 115.1.0esr
+   * Bug 40919: Fix nimbus-fml reproducibility of 13.0a2-build1 [tor-browser-build]
+   * Bug 41928: Backport Android-specific security fixes from Firefox 116 to ESR 102.14 / 115.1 - based Tor Browser [tor-browser]
+   * Bug 41972: Disable Firefox onboarding in 13.0 [tor-browser]
+   * Bug 41997: Remove all use and reference to com.adjust.sdk.Adjust which now uses AD_ID [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.20.7
+     * Bug 31588: Be smarter about vendoring for Rust projects [tor-browser-build]
+     * Bug 40855: Update toolchains for Mozilla 115 [tor-browser-build]
+     * Bug 40880: The README doesn't include some dependencies needed for building incrementals [tor-browser-build]
+     * Bug 40905: Go vendor archives ignore the nightly version override on testbuilds [tor-browser-build]
+     * Bug 40908: Enable the --enable-gpl config flag in tor to bring in PoW functionality [tor-browser-build]
+     * Bug 40909: Add dan_b and ma1 to list of taggers in relevant projects [tor-browser-build]
+     * Bug 40913: add boklm back to list of taggers in relevant projects [tor-browser-build]
+   * Windows + macOS + Linux
+     * Bug 40615: Consider adding a readme to the fonts directory [tor-browser-build]
+     * Bug 40907: Mar-tools aren't deterministic on 13.0a1 [tor-browser-build]
+   * Windows
+     * Bug 31546: Create and expose PDB files for Tor Browser debugging on Windows [tor-browser-build]
+   * Android
+     * Bug 40867: Create a RBM project for the unified Android repository [tor-browser-build]
+     * Bug 40917: Remove the uniffi-rs project [tor-browser-build]
+     * Bug 41899: Use LLD for Android [tor-browser]
+     * Bug 40920: Non-deterministic generation of baseline.profm file in Android apks [tor-browser-build]
+
 Tor Browser 12.5.2 - July 31 2023
  * All Platforms
    * Updated Translations
