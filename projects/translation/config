@@ -18,7 +18,7 @@ steps:
         git_hash: 'base-browser'
   tor-browser:
     tor-browser: '[% INCLUDE build %]'
-    git_hash: 976a9c609d09666b67e5a7f530a5df7bad8b35ea
+    git_hash: 20f254a961574996496db5897aa06723bb79bce7
     targets:
       nightly:
         git_hash: 'tor-browser'
