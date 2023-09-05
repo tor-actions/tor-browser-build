@@ -72,8 +72,6 @@ steps:
 
 targets:
   basebrowser:
-    # basebrowser tag always has a -build1 suffix
-    git_hash: '[% c("var/project-name") %]-[% c("var/firefox_version") %]-[% c("var/browser_branch") %]-build1'
     var:
       nightly_updates_publish_dir_prefix: basebrowser-
 
