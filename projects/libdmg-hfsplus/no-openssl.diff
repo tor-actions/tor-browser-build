@@ -1,0 +1,34 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 79d4302..b54e81d 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 2.6)
+ 
+ project (libdmg-hfsplus)
+ 
++option(USE_OPENSSL "Enable or disable OpenSSL (1.0.x is currently required)" ON)
++
+ # We want win32 executables to build staticly by default, since it's more difficult to keep the shared libraries straight on Windows
+ IF(WIN32)
+ 	SET(BUILD_STATIC ON CACHE BOOL "Force compilation with static libraries")
+diff --git a/dmg/CMakeLists.txt b/dmg/CMakeLists.txt
+index 36f6bb6..ffdac77 100644
+--- a/dmg/CMakeLists.txt
++++ b/dmg/CMakeLists.txt
+@@ -18,14 +18,14 @@ link_directories(${PROJECT_BINARY_DIR}/common ${PROJECT_BINARY_DIR}/hfs)
+ 
+ add_library(dmg adc.c checksum.c dmgfile.c dmglib.c filevault.c io.c partition.c resources.c udif.c ../includes/dmg/adc.h ../includes/dmg/dmg.h ../includes/dmg/dmgfile.h ../includes/dmg/dmglib.h ../includes/dmg/filevault.h)
+ 
+-IF(OPENSSL_FOUND)
++IF(OPENSSL_FOUND AND USE_OPENSSL)
+ 	add_definitions(-DHAVE_CRYPT)
+ 	include_directories(${OPENSSL_INCLUDE_DIR})
+ 	target_link_libraries(dmg ${OPENSSL_CRYPTO_LIBRARY} $<$<BOOL:${OPENSSL_USE_STATIC_LIBS}>:${CMAKE_DL_LIBS}>)
+ 	IF(WIN32)
+ 		TARGET_LINK_LIBRARIES(dmg gdi32)
+ 	ENDIF(WIN32)
+-ENDIF(OPENSSL_FOUND)
++ENDIF(OPENSSL_FOUND AND USE_OPENSSL)
+ 
+ target_link_libraries(dmg common hfs z bz2)
+ 

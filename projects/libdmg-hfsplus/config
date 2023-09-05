@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
 git_url: https://github.com/mozilla/libdmg-hfsplus
-git_hash: 2ee327795680101d36f9700bd0fb618362237718
+git_hash: 2cb30de5b277bf2bc1fc129899bb9382bb56ccca
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
@@ -13,16 +13,12 @@ var:
 targets:
   no_containers:
     var:
-      cmake_opts: |
-        -DOPENSSL_USE_STATIC_LIBS=1 \
-        -DOPENSSL_ROOT_DIR=/var/tmp/dist/openssl
+      cmake_opts: '-DUSE_OPENSSL=OFF'
 input_files:
   - project: container-image
   - name: cmake
     project: cmake
   - name: ninja
     project: ninja
-  - filename: libdmg.patch
-  - name: openssl-1.0.2
-    project: openssl-1.0.2
+  - filename: no-openssl.diff
     enable: '[% c("container/global_disable") %]'
