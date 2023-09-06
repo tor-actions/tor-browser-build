@@ -50,7 +50,7 @@ sub get_tmpdir {
 }
 
 sub build_targets_by_os {
-    return ($_[0]) unless $config->{build_targets}{$_[0]};
+    exit_error "Unknown build target for OS $_[0]" unless $config->{build_targets}{$_[0]};
     my $r = $config->{build_targets}{$_[0]};
     return ref $r eq 'ARRAY' ? @$r : ($r);
 }
