@@ -17,7 +17,7 @@ targets:
     version: '[% c("abbrev") %]'
     tag_gpg_id: 0
     var:
-      go_vendor_sha256sum: 028c4536c10266331d680c0618b859d8f4ea8d630cd8588f13cfcc5b2d4272a1
+      go_vendor_sha256sum: ''
 
 steps:
   build:
