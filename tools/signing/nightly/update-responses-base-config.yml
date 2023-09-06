@@ -18,8 +18,6 @@ versions:
     nightly_version:
         platformVersion: 115.1.0
         detailsURL: http://umj4zbqdfcyevlkgqgpq6foxk3z75zzxsbgt5jqmfxofrbrjh3crbnad.onion/
-        migrate_langs:
-            pt-PT: pt-BR
         macos:
             minSupportedOSVersion: 16.0.0
         windows-i686:
