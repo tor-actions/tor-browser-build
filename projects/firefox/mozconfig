@@ -71,6 +71,11 @@
 
 ac_add_options --[% IF c("var/updater_enabled") %]enable[% ELSE %]disable[% END %]-updater
 ac_add_options --[% IF c("var/updater_enabled") %]enable[% ELSE %]disable[% END %]-base-browser-update
+[% IF c("var/override_updater_url") -%]
+  ac_add_options --with-updater-url=[% c("var/override_updater_url") %]
+[% ELSIF c("var/updater_url")  -%]
+  ac_add_options --with-updater-url=[% c("var/updater_url") %]
+[% END -%]
 
 mk_add_options MOZ_PARALLEL_BUILD=[% c("num_procs") %]
 

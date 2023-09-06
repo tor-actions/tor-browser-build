@@ -30,12 +30,15 @@ var:
     - yasm
     - pkg-config
   has_l10n: '[% !c("var/testbuild") && c("var/locales").size %]'
+  # For testing purposes use override_updater_url, as it will also override the
+  # certificate.
+  updater_url: 'https://aus1.torproject.org/torbrowser/update_3/'
 
   # Uncomment this if you want to test the updater. You will need to provide a
   # marsigner.der in this directory, too. It will be used as a replacement for
   # the nightly builds keys only. So, using this option for alphas and releases
   # will not work (the browser will fail with a key/signature mismatch).
-  # override_updater_url: 'https://tb-build-05.torproject.org/~you/update_3/%CHANNEL%/%BUILD_TARGET%/%VERSION%/ALL'
+  # override_updater_url: 'https://tb-build-05.torproject.org/~you/update_3/'
 
   rezip: |
     rezip_tmpdir=$(mktemp -d)
@@ -78,12 +81,15 @@ targets:
   nightly:
     git_hash: '[% c("var/project-name") %]-[% c("var/firefox_version") %]-[% c("var/browser_branch") %]'
     tag_gpg_id: 0
+    var:
+      updater_url: 'https://nightlies.tbb.torproject.org/nightly-updates/updates/[% c("var/nightly_updates_publish_dir") %]'
 
   mullvadbrowser:
     git_url: https://gitlab.torproject.org/tpo/applications/mullvad-browser.git
     var:
       branding_directory_prefix: 'mb'
       gitlab_project: https://gitlab.torproject.org/tpo/applications/mullvad-browser
+      updater_url: 'https://cdn.mullvad.net/browser/update_responses/update_1/'
 
   linux-x86_64:
     var:
