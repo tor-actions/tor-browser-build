@@ -134,7 +134,7 @@ mkdir "$HOME/.mozbuild"
           lang="ja"
         fi
       [% END -%]
-      mv "$transl_tor_browser/$lang/tor-browser.ftl" "$l10ncentral/$lang/browser/browser/"
+      mv "$transl_tor_browser/$lang/tor-browser.ftl" "$l10ncentral/$central_lang/browser/browser/"
       mv "$transl_tor_browser/$lang/cryptoSafetyPrompt.properties" "$l10ncentral/$central_lang/browser/chrome/browser/"
       mv "$transl_tor_browser/$lang" "$torbutton_locales/"
       echo "% locale torbutton $lang %locale/$lang/" >> "$torbutton_jar"
