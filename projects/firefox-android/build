@@ -53,7 +53,7 @@ cd $builddir-[% c('version') %]
 patch -p1 < $rootdir/repos.diff
 sed -i 's|^\(val VERSION = \).*|\1"[% c("var/as_version") %]"|' android-components/plugins/dependencies/src/main/java/ApplicationServices.kt
 sed -i 's|^\(val CHANNEL = \).*|\1ApplicationServicesChannel.RELEASE|' android-components/plugins/dependencies/src/main/java/ApplicationServices.kt
-gv_version="$(echo [% c('var/geckoview_version') %] | awk -F. '{print $1 "." $2}').[% c('var/geckoview_buildid') %]"
+gv_version=$(find "$distdir/geckoview/org/mozilla/geckoview/geckoview-[% c('var/variant') FILTER lower %]-omni" -mindepth 1 -maxdepth 1 -type d -printf '%f\n')
 sed -i "s|\(\s*const val version = \).*|\1\"$gv_version\"|" android-components/plugins/dependencies/src/main/java/Gecko.kt
 sed -i 's|\(\s*val channel = \).*|\1GeckoChannel.[% c("var/variant") FILTER upper %]|' android-components/plugins/dependencies/src/main/java/Gecko.kt
 
