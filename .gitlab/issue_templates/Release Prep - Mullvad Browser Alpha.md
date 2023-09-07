@@ -27,54 +27,79 @@
 </details>
 
 **NOTE** It is assumed that the `tor-browser` alpha rebase and security backport tasks have been completed
+**NOTE** This can/is often done in conjunction with the equivalent Tor Browser release prep issue
 
 <details>
   <summary>Building</summary>
 
-### tor-browser-build: https://gitlab.torproject.org/tpo/applications/tor-browser-build.git
-Mullvad Browser Alpha (and Nightly) are on the `main` branch
+  ### tor-browser-build: https://gitlab.torproject.org/tpo/applications/tor-browser-build.git
+  Mullvad Browser Alpha (and Nightly) are on the `main` branch
 
-- [ ] Update `rbm.conf`
-  - [ ] `var/torbrowser_version` : update to next version
-  - [ ] `var/torbrowser_build` : update to `$(MULLVAD_BROWSER_BUILD_N)`
-  - [ ] `var/torbrowser_incremental_from` : update to previous Desktop version
-    - **IMPORTANT**: Really *actually* make sure this is the previous Desktop version or else the `make mullvadbrowser-incrementals-*` step will fail
-- [ ] Update build configs
-  - [ ] Update `projects/firefox/config`
-    - [ ] `browser_build` : update to match `mullvad-browser` tag
-    - [ ] ***(Optional)*** `var/firefox_platform_version` : update to latest `$(ESR_VERSION)` if rebased
-  - [ ] Update `projects/translation/config`:
-    - [ ] run `make list_translation_updates-alpha` to get updated hashes
-    - [ ] `steps/base-browser/git_hash` : update with `HEAD` commit of project's `base-browser` branch
-    - [ ] `steps/mullvad-browser/git_hash` : update with `HEAD` commit of project's `mullvad-browser` branch
-- [ ] Update common build configs
-  - [ ] Check for NoScript updates here : https://addons.mozilla.org/en-US/firefox/addon/noscript
-    - [ ] ***(Optional)*** If new version available, update `noscript` section of `input_files` in `projects/browser/config`
-      - [ ] `URL`
-      - [ ] `sha256sum`
-  - [ ] Check for uBlock-origin updates here : https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/
-    - [ ] ***(Optional)*** If new version available, update `ublock-origin` section of `input_files` in `projects/browser/config`
-      - [ ] `URL`
-      - [ ] `sha256sum`
-  - [ ] Check for Mullvad Privacy Companion updates here : https://github.com/mullvad/browser-extension/releases
-    - [ ] ***(Optional)*** If new version available, update `mullvad-extension` section of `input_files` in `projects/browser/config`
-      - [ ] `URL`
-      - [ ] `sha256sum`
-- [ ] Open MR with above changes
-- [ ] Merge
-- [ ] Sign/Tag commit: `make mullvadbrowser-signtag-alpha`
-- [ ] Push tag to `origin`
-- [ ] Begin build on `$(BUILD_SERVER)` (fix any issues in subsequent MRs)
-- [ ] **TODO** Submit build-tag to Mullvad build infra
-- [ ] Ensure builders have matching builds
+  - [ ] Update `rbm.conf`
+    - [ ] `var/torbrowser_version` : update to next version
+    - [ ] `var/torbrowser_build` : update to `$(MULLVAD_BROWSER_BUILD_N)`
+    - [ ] `var/torbrowser_incremental_from` : update to previous Desktop version
+      - **NOTE**: We try to build incrementals for the previous 3 desktop versions except in the case of a watershed update
+      - **IMPORTANT**: Really *actually* make sure this is the previous Desktop version or else the `make mullvadbrowser-incrementals-*` step will fail
+  - [ ] Update build configs
+    - [ ] Update `projects/firefox/config`
+      - [ ] `browser_build` : update to match `mullvad-browser` tag
+      - [ ] ***(Optional)*** `var/firefox_platform_version` : update to latest `$(ESR_VERSION)` if rebased
+    - [ ] Update `projects/translation/config`:
+      - [ ] run `make list_translation_updates-alpha` to get updated hashes
+      - [ ] `steps/base-browser/git_hash` : update with `HEAD` commit of project's `base-browser` branch
+      - [ ] `steps/mullvad-browser/git_hash` : update with `HEAD` commit of project's `mullvad-browser` branch
+  - [ ] Update common build configs
+    - [ ] Check for NoScript updates here : https://addons.mozilla.org/en-US/firefox/addon/noscript
+      - [ ] ***(Optional)*** If new version available, update `noscript` section of `input_files` in `projects/browser/config`
+        - [ ] `URL`
+        - [ ] `sha256sum`
+    - [ ] Check for uBlock-origin updates here : https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/
+      - [ ] ***(Optional)*** If new version available, update `ublock-origin` section of `input_files` in `projects/browser/config`
+        - [ ] `URL`
+        - [ ] `sha256sum`
+    - [ ] Check for Mullvad Privacy Companion updates here : https://github.com/mullvad/browser-extension/releases
+      - [ ] ***(Optional)*** If new version available, update `mullvad-extension` section of `input_files` in `projects/browser/config`
+        - [ ] `URL`
+        - [ ] `sha256sum`
+  - [ ] Update `ChangeLog-MB.txt`
+    - [ ] Ensure ChangeLog-MB.txt is sync'd between alpha and stable branches
+    - [ ] Check the linked issues: ask people to check if any are missing, remove the not fixed ones
+    - [ ] Run `tools/fetch-changelogs.py $(TOR_BROWSER_VERSION)` or `tools/fetch-changelogs.py '#$(ISSUE_NUMBER)'`
+      - Make sure you have `requests` installed (e.g., `apt install python3-requests`)
+      - The first time you run this script you will need to generate an access token; the script will guide you
+    - [ ] Copy the output of the script to the beginning of `ChangeLog-MB.txt` and update its output
+      - [ ] Version
+      - [ ] Browser Name
+      - [ ] Release Date
+    - [ ] Under `All Platforms` include any version updates for:
+      - NoScript
+      - uBlock-origin
+      - Mullvad Browser Extension
+      - Firefox
+  - [ ] Open MR with above changes
+  - [ ] Build the MR after initial review on at least two of:
+    - [ ] Tor Project build machine
+    - [ ] Mullvad build machine
+    - [ ] Local developer machine
+  - [ ] Ensure builders have matching builds
+  - [ ] Merge
+  - [ ] Sign+Tag
+    - **NOTE** this must be done by one of:
+      - boklm
+      - dan
+      - ma1
+      - pierov
+      - richard
+    - [ ] Run: `make mullvadbrowser-signtag-alpha`
+    - [ ] Push tag to `origin`
 
 </details>
 
 <details>
   <summary>QA</summary>
 
-### send the build
-
+  ### send the build
   - [ ] Email Mullvad QA: support@mullvad.net, rui@mullvad.net
     <details>
       <summary>email template</summary>
@@ -83,7 +108,7 @@ Mullvad Browser Alpha (and Nightly) are on the `main` branch
         New build: Mullvad Browser $(MULLVAD_BROWSER_VERION) (unsigned)
 
         Body:
-        unsigned builds: https://tb-build-05.torproject.org/~$(BUILDER)/builds/mullvadbrowser/release/unsigned/$(MB_BUILD_TAG)
+        unsigned builds: https://tb-build-05.torproject.org/~$(BUILDER)/builds/mullvadbrowser/alpha/unsigned/$(MB_BUILD_TAG)
 
         changelog:
         ...
@@ -99,97 +124,106 @@ Mullvad Browser Alpha (and Nightly) are on the `main` branch
 <details>
   <summary>Signing</summary>
 
-### signing
-- [ ] On `$(STAGING_SERVER)`, ensure updated:
-  - [ ]  `tor-browser-build/tools/signing/set-config.hosts`
-    - `ssh_host_builder` : ssh hostname of machine with unsigned builds
-      - **NOTE** : `tor-browser-build` is expected to be in the `$HOME` directory)
-    - `ssh_host_linux_signer` : ssh hostname of linux signing machine
-    - `ssh_host_macos_signer` : ssh hostname of macOS signing machine
-  - [ ] `tor-browser-build/tools/signing/set-config.macos-notarization`
-    - `macos_notarization_user` : the email login for a mullvad notariser Apple Developer account
-  - [ ] `set-config.update-responses`
-    - `update_responses_repository_dir` : directory where you cloned `git@gitlab.torproject.org:tpo/applications/mullvad-browser-update-responses.git`
-  - [ ] `tor-browser-build/tools/signing/set-config.tbb-version`
-    - `tbb_version` : mullvad browser version string, same as `var/torbrowser_version` in `rbm.conf` (examples: `11.5a12`, `11.0.13`)
-    - `tbb_version_build` : the tor-browser-build build number (if `var/torbrowser_build` in `rbm.conf` is `buildN` then this value is `N`)
-    - `tbb_version_type` : either `alpha` for alpha releases or `release` for stable releases
-- [ ] On `$(STAGING_SERVER)` in a separate `screen` session, run the macOS proxy script:
-    - `cd tor-browser-build/tools/signing/`
-    - `./macos-signer-proxy`
-- [ ] On `$(STAGING_SERVER)` in a separate `screen` session, ensure tor daemon is running with SOCKS5 proxy on the default port 9050
-- [ ] run do-all-signing script:
-    - `cd tor-browser-build/tools/signing/`
-    - `./do-all-signing.mullvadbrowser`
-- **NOTE**: at this point the signed binaries should have been copied to `staticiforme`
-- [ ] Update `staticiforme.torproject.org`:
-  - From `screen` session on `staticiforme.torproject.org`:
-  - [ ] Static update components : `static-update-component dist.torproject.org`
-  - [ ] Remove old release data from `/srv/dist-master.torproject.org/htdocs/mullvadbrowser`
-  - [ ] Static update components (again) : `static-update-component dist.torproject.org`
+  ### signing
+  - [ ] Assign this issue to the signer, one of:
+    - boklm
+    - richard
+  - [ ] On `$(STAGING_SERVER)`, ensure updated:
+    - [ ]  `tor-browser-build/tools/signing/set-config.hosts`
+      - `ssh_host_builder` : ssh hostname of machine with unsigned builds
+        - **NOTE** : `tor-browser-build` is expected to be in the `$HOME` directory)
+      - `ssh_host_linux_signer` : ssh hostname of linux signing machine
+      - `ssh_host_macos_signer` : ssh hostname of macOS signing machine
+    - [ ] `tor-browser-build/tools/signing/set-config.macos-notarization`
+      - `macos_notarization_user` : the email login for a mullvad notariser Apple Developer account
+    - [ ] `set-config.update-responses`
+      - `update_responses_repository_dir` : directory where you cloned `git@gitlab.torproject.org:tpo/applications/mullvad-browser-update-responses.git`
+    - [ ] `tor-browser-build/tools/signing/set-config.tbb-version`
+      - `tbb_version` : mullvad browser version string, same as `var/torbrowser_version` in `rbm.conf` (examples: `11.5a12`, `11.0.13`)
+      - `tbb_version_build` : the tor-browser-build build number (if `var/torbrowser_build` in `rbm.conf` is `buildN` then this value is `N`)
+      - `tbb_version_type` : either `alpha` for alpha releases or `release` for stable releases
+  - [ ] On `$(STAGING_SERVER)` in a separate `screen` session, run the macOS proxy script:
+      - `cd tor-browser-build/tools/signing/`
+      - `./macos-signer-proxy`
+  - [ ] On `$(STAGING_SERVER)` in a separate `screen` session, ensure tor daemon is running with SOCKS5 proxy on the default port 9050
+  - [ ] run do-all-signing script:
+      - `cd tor-browser-build/tools/signing/`
+      - `./do-all-signing.mullvadbrowser`
+  - **NOTE**: at this point the signed binaries should have been copied to `staticiforme`
+  - [ ] Update `staticiforme.torproject.org`:
+    - From `screen` session on `staticiforme.torproject.org`:
+    - [ ] Static update components : `static-update-component dist.torproject.org`
+    - [ ] Remove old release data from `/srv/dist-master.torproject.org/htdocs/mullvadbrowser`
+    - [ ] Static update components (again) : `static-update-component dist.torproject.org`
 
 </details>
 
 <details>
   <summary>Publishing</summary>
 
-### email
+  ### mullvad-browser (github): https://github.com/mullvad/mullvad-browser/
+  - [ ] Assign this issue to someone with mullvad commit access, one of:
+    - richard
+  - [ ] Push this release's associated `mullvad-browser.git` branch to github
+  - [ ] Push this release's associated tags to github:
+    - [ ] Firefox ESR tag
+      - **example** : `FIREFOX_102_12_0esr_BUILD1,`
+    - [ ] `base-browser` tag
+      - **example** : `base-browser-102.12.0esr-12.0-1-build1`
+    - [ ] `mullvad-browser` tag
+      - **example** : `mullvad-browser-102.12.0esr-12.0-1-build1`
+  - [ ] Sign+Tag additionally the `mullvad-browser.git` `firefox` commit used in build:
+    - **Tag**: `$(MULLVAD_BROWSER_VERSION)`
+      - **example** : `12.5a7`
+    - **Message**: `$(ESR_VERSION)esr-based $(MULLVAD_BROWSER_VERSION)`
+      - **example** : `102.12.0esr-based 12.5a7`
+    - [ ] Push tag to github
 
-- [ ] Email Mullvad with release information: support@mullvad.net, rui@mullvad.net
-  <details>
-    <summary>email template</summary>
+  ### email
+  - [ ] Email Mullvad with release information: support@mullvad.net, rui@mullvad.net
+    <details>
+      <summary>email template</summary>
 
-      Subject:
-      New build: Mullvad Browser $(MULLVAD_BROWSER_VERION) (signed)
+        Subject:
+        New build: Mullvad Browser $(MULLVAD_BROWSER_VERION) (signed)
 
-      Body:
-      signed builds: https://dist.torproject.org/mullvadbrowser/$(MULLVAD_BROWSER_VERSION)
+        Body:
+        signed builds: https://dist.torproject.org/mullvadbrowser/$(MULLVAD_BROWSER_VERSION)
 
-      update_response hashes: $(MULLVAD_UPDATE_RESPONSES_HASH)
+        update_response hashes: $(MULLVAD_UPDATE_RESPONSES_HASH)
 
-      changelog:
-      ...
+        changelog:
+        ...
 
-  </details>
-
-### mullvad-browser (github): https://github.com/mullvad/mullvad-browser/
-- [ ] Push this release's associated `mullvad-browser.git` branch to github
-- [ ] Push this release's associated tags to github:
-  - [ ] Firefox ESR tag
-    - **example** : `FIREFOX_102_12_0esr_BUILD1,`
-  - [ ] `base-browser` tag
-    - **example** : `base-browser-102.12.0esr-12.0-1-build1`
-  - [ ] `mullvad-browser` tag
-    - **example** : `mullvad-browser-102.12.0esr-12.0-1-build1`
-- [ ] Sign+Tag additionally the `mullvad-browser.git` `firefox` commit used in build:
-  - **Tag**: `$(MULLVAD_BROWSER_VERSION)`
-    - **example** : `12.5a7`
-  - **Message**: `$(ESR_VERSION)esr-based $(MULLVAD_BROWSER_VERSION)`
-    - **example** : `102.12.0esr-based 12.5a7`
-  - [ ] Push tag to github
-
+    </details>
 </details>
 
 <details>
   <summary>Downstream</summary>
 
-### notify packagers
+  ### notify packagers
 
-- [ ] **(Optional, Once Mullvad Updates their Github Releases Page)** Email downstream consumers:
-  <details>
-    <summary>email template</summary>
+  - [ ] **(Optional, Once Mullvad Updates their Github Releases Page)** Email downstream consumers:
+    - **NOTE**: This is an optional step and only necessary close a major release/transition from alpha to stable, or if there are major packing changes these developers need to be aware of
+    <details>
+      <summary>email template</summary>
 
-    ...
+        Hello!
 
-    ...
+        Mullvad-Browser $(MULLVAD_BROWSER_VERSION) packages are available, so you should all update your respective downstream packages.
 
-  </details>
+        Release builds can be found here:
 
-  - **NOTE**: This is an optional step and only necessary close a major release/transition from alpha to stable, or if there are major packing changes these developers need to be aware of
-  - [ ] flathub package maintainer: proletarius101@protonmail.com
-  - [ ] arch package maintainer: bootctl@gmail.com
-  - [ ] nixOS package maintainer: dev@felschr.com
+        - https://github.com/mullvad/mullvad-browser/releases/tag/$(MULLVAD_BROWSER_VERSION)
+
+    </details>
+
+    - flathub package maintainer: proletarius101@protonmail.com
+    - arch package maintainer: bootctl@gmail.com
+    - nixOS package maintainer: dev@felschr.com
 
 </details>
 
 /label ~"Release Prep"
+/label ~"Sponsor 131"
+
