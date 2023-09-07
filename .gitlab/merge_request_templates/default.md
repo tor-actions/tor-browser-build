@@ -33,7 +33,7 @@
 - [ ] Request review from an applications developer depending on modified system:
   - **NOTE**: if the MR modifies multiple areas, please `/cc` all the relevant reviewers (since gitlab only allows 1 reviewer)
   - **accessibility** : henry
-  - **android** : dan
+  - **android** : clairehurst, dan
   - **build system** : boklm
   - **extensions** : ma1
   - **firefox internals (XUL/JS/XPCOM)** : ma1
@@ -41,13 +41,18 @@
   - **frontend (implementation)** : henry
   - **frontend (review)** : donuts, richard
   - **localization** : henry, pierov
+  - **macos** : clairehurst, dan
+  - **misc/other** : pierov, richard
   - **nightly builds** : boklm
-  - **rebases/release-prep** : dan_b, ma1, pierov, richard
+  - **rebases/release-prep** : dan, ma1, pierov, richard
   - **security** : ma1
   - **signing** : boklm, richard
   - **updater** : pierov
-  - **misc/other** : pierov, richard
 
 #### Change Description
 
 <!-- Whatever context the reviewer needs to effectively review the patchset; if the patch includes UX updates be sure to include screenshots/video of how any new behaviour -->
+
+#### How Tested
+
+<!-- Description of steps taken to verify the change -->
