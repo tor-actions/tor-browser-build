@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 # To update, see doc/how-to-update-the-manual.txt
 # Remember to update also the package's hash, with the version!
-version: 88998
+version: 102408
 filename: 'manual-[% c("version") %]-[% c("var/build_id") %].tar.gz'
 container:
   use_container: 1
@@ -17,8 +17,8 @@ var:
 
 input_files:
   - project: container-image
-  - URL: 'https://people.torproject.org/~richard/tbb_files/manual_[% c("version") %].zip'
+  - URL: 'https://build-sources.tbb.torproject.org/manual_[% c("version") %].zip'
     name: manual
-    sha256sum: 1be6cf35a3c9f243998b7611e9531d4a99591cc257cb55f3924f504b9ead71a7
+    sha256sum: f9c24f300f188276ee6ec7b8eb2f7e000ec49c9bb3651b4bd4468075885a9eef
   - filename: packagemanual.py
     name: package_script

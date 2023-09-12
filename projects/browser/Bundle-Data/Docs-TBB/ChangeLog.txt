@@ -1,3 +1,17 @@
+Tor Browser 12.5.4 - September 12 2023
+ * All Platforms
+   * Updated Translations
+   * Updated OpenSSL to 1.1.1w
+   * Bug 42084: Race condition with language preferences may make spoof_english ineffective [tor-browser]
+   * Bug 42090: Rebase release onto 102.15.1esr [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 102.15.1esr
+ * Android
+   * Updated GeckoView to 102.15.1esr
+ * Build System
+   * All Platforms
+     * Updated Go to 1.20.8
+
 Tor Browser 12.5.3 - August 28 2023
  * All Platforms
    * Updated Translations
