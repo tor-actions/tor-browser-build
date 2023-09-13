@@ -631,6 +631,20 @@ go_vendor-lyrebird-nightly: submodule-update
 	$(rbm) build lyrebird --step go_vendor --target nightly --target torbrowser-linux-x86_64
 
 
+#############
+# rcodesign #
+#############
+
+rcodesign: submodule-update
+	$(rbm) build --target release --target torbrowser-linux-x86_64 rcodesign
+
+rcodesign-filename: submodule-update
+	$(rbm) showconf --target release --target torbrowser-linux-x86_64 rcodesign filename
+
+cargo_vendor-rcodesign: submodule-update
+	$(rbm) build rcodesign --step cargo_vendor --target release --target torbrowser-linux-x86_64
+
+
 ##################
 # Common Targets #
 ##################
