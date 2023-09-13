@@ -1,0 +1,37 @@
+#!/bin/bash
+[% c("var/set_default_env") -%]
+distdir=/var/tmp/dist/[% project %]
+builddir=/var/tmp/build/[% project %]-[% c('version') %]
+mkdir -p $distdir $builddir
+
+tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/rust') %]
+export PATH=/var/tmp/dist/rust/bin:$PATH
+cd $rootdir
+
+tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
+tar -C $builddir -xf $rootdir/[% c('input_files_by_name/cargo_vendor') %]
+
+cd $builddir
+mkdir .cargo
+cat >> .cargo/config << 'EOF'
+
+[source.crates-io]
+replace-with = "vendored-sources"
+
+[source.vendored-sources]
+directory = "/var/tmp/build/[% project %]-[% c('version') %]/vendor"
+
+[net]
+offline=true
+EOF
+
+cd apple-codesign
+cargo build --release
+cd ..
+cp target/release/rcodesign $distdir
+
+cd /var/tmp/dist
+[% c('tar', {
+  tar_src => [ project ],
+  tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
+}) %]
