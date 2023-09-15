@@ -42,12 +42,12 @@
   - **frontend (review)** : donuts, richard
   - **localization** : henry, pierov
   - **macos** : clairehurst, dan
-  - **misc/other** : pierov, richard
   - **nightly builds** : boklm
   - **rebases/release-prep** : dan, ma1, pierov, richard
   - **security** : ma1
   - **signing** : boklm, richard
   - **updater** : pierov
+  - **misc/other** : pierov, richard
 
 #### Change Description
 
