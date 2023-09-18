@@ -1,170 +1,181 @@
 # vim: filetype=yaml sw=2
-version: '2'
-filename: "[% project %]-[% c('version') %]-[% c('var/build_id') %].tar.[% c('compress_tar') %]"
+version: '3'
+filename: "[% project %]-[% c('version') %]-[% c('var/platform') %]-[% c('var/build_id') %].tar.[% c('compress_tar') %]"
 container:
-  use_container: 1
+  # We just copy files around, no need to use a container.
+  use_container: 0
 var:
-  noto_git_hash: 20bc5918912503bc1537a407a694738c33c048aa
+  # noto-monthly-release-23.9.1
+  noto_git_hash: c890f6fec6fa37740f23fffdd2a28e156f3837a3
   # Use this way so that the script that downloads the fonts can access the
   # lists of all the targets.
   noto_fonts_common:
-    - NotoSansAdlam-Regular.ttf
-    - NotoSansBalinese-Regular.ttf
-    - NotoSansBamum-Regular.ttf
-    - NotoSansBassaVah-Regular.ttf
-    - NotoSansBatak-Regular.ttf
-    - NotoSansBengali-Regular.ttf
-    - NotoSansBuginese-Regular.ttf
-    - NotoSansBuhid-Regular.ttf
-    - NotoSansCanadianAboriginal-Regular.ttf
-    - NotoSansChakma-Regular.ttf
-    - NotoSansCham-Regular.ttf
-    - NotoSansCherokee-Regular.ttf
-    - NotoSansCoptic-Regular.ttf
-    - NotoSansDeseret-Regular.ttf
-    - NotoSansDevanagari-Regular.ttf
-    - NotoSansElbasan-Regular.ttf
-    - NotoSansEthiopic-Regular.ttf
-    - NotoSansGeorgian-Regular.ttf
-    - NotoSansGrantha-Regular.ttf
-    - NotoSansGujarati-Regular.ttf
-    - NotoSansGunjalaGondi-Regular.ttf
-    - NotoSansGurmukhi-Regular.ttf
-    - NotoSansHanifiRohingya-Regular.ttf
-    - NotoSansHanunoo-Regular.ttf
-    - NotoSansKannada-Regular.ttf
-    - NotoSansKhmer-Regular.ttf
-    - NotoSansJavanese-Regular.ttf
-    - NotoSansKayahLi-Regular.ttf
-    - NotoSansKhojki-Regular.ttf
-    - NotoSansKhudawadi-Regular.ttf
-    - NotoSansLao-Regular.ttf
-    - NotoSansLepcha-Regular.ttf
-    - NotoSansLimbu-Regular.ttf
-    - NotoSansLisu-Regular.ttf
-    - NotoSansMahajani-Regular.ttf
-    - NotoSansMalayalam-Regular.ttf
-    - NotoSansMandaic-Regular.ttf
-    - NotoSansMasaramGondi-Regular.ttf
-    - NotoSansMedefaidrin-Regular.ttf
-    - NotoSansMeeteiMayek-Regular.ttf
-    - NotoSansMendeKikakui-Regular.ttf
-    - NotoSansMiao-Regular.ttf
-    - NotoSansModi-Regular.ttf
-    - NotoSansMongolian-Regular.ttf
-    - NotoSansMro-Regular.ttf
-    - NotoSansMyanmar-Regular.ttf
-    - NotoSansMultani-Regular.ttf
-    - NotoSansNewa-Regular.ttf
-    - NotoSansNewTaiLue-Regular.ttf
-    - NotoSansNKo-Regular.ttf
-    - NotoSansOlChiki-Regular.ttf
-    - NotoSansOriya-Regular.ttf
-    - NotoSansOsage-Regular.ttf
-    - NotoSansOsmanya-Regular.ttf
-    - NotoSansPahawhHmong-Regular.ttf
-    - NotoSansPauCinHau-Regular.ttf
-    - NotoSansRejang-Regular.ttf
-    - NotoSansRunic-Regular.ttf
-    - NotoSansSamaritan-Regular.ttf
-    - NotoSansSaurashtra-Regular.ttf
-    - NotoSansSharada-Regular.ttf
-    - NotoSansShavian-Regular.ttf
-    - NotoSansSinhala-Regular.ttf
-    - NotoSansSoraSompeng-Regular.ttf
-    - NotoSansSoyombo-Regular.ttf
-    - NotoSansSundanese-Regular.ttf
-    - NotoSansSylotiNagri-Regular.ttf
-    - NotoSansSymbols2-Regular.ttf
-    - NotoSansSymbols-Regular.ttf
-    - NotoSansSyriac-Regular.ttf
-    - NotoSansTagalog-Regular.ttf
-    - NotoSansTagbanwa-Regular.ttf
-    - NotoSansTaiLe-Regular.ttf
-    - NotoSansTaiTham-Regular.ttf
-    - NotoSansTaiViet-Regular.ttf
-    - NotoSansTakri-Regular.ttf
-    - NotoSansTamil-Regular.ttf
-    - NotoSansTelugu-Regular.ttf
-    - NotoSansThaana-Regular.ttf
-    - NotoSansTifinaghAdrar-Regular.ttf
-    - NotoSansTifinaghAgrawImazighen-Regular.ttf
-    - NotoSansTifinaghAhaggar-Regular.ttf
-    - NotoSansTifinaghAir-Regular.ttf
-    - NotoSansTifinaghAPT-Regular.ttf
-    - NotoSansTifinaghAzawagh-Regular.ttf
-    - NotoSansTifinaghGhat-Regular.ttf
-    - NotoSansTifinaghHawad-Regular.ttf
-    - NotoSansTifinagh-Regular.ttf
-    - NotoSansTifinaghRhissaIxa-Regular.ttf
-    - NotoSansTifinaghSIL-Regular.ttf
-    - NotoSansTifinaghTawellemmet-Regular.ttf
-    - NotoSansTirhuta-Regular.ttf
-    - NotoSansVai-Regular.ttf
-    - NotoSansWancho-Regular.ttf
-    - NotoSansWarangCiti-Regular.ttf
-    - NotoSansYi-Regular.ttf
-    - NotoSansZanabazarSquare-Regular.ttf
-    - NotoSerifBalinese-Regular.ttf
-    - NotoSerifBengali-Regular.ttf
-    - NotoSerifDevanagari-Regular.ttf
-    - NotoSerifDogra-Regular.ttf
-    - NotoSerifEthiopic-Regular.ttf
-    - NotoSerifGeorgian-Regular.ttf
-    - NotoSerifGrantha-Regular.ttf
-    - NotoSerifGujarati-Regular.ttf
-    - NotoSerifGurmukhi-Regular.ttf
-    - NotoSerifKannada-Regular.ttf
-    - NotoSerifKhmer-Regular.ttf
-    - NotoSerifKhojki-Regular.ttf
-    - NotoSerifLao-Regular.ttf
-    - NotoSerifMalayalam-Regular.ttf
-    - NotoSerifMyanmar-Regular.ttf
-    - NotoSerifNyiakengPuachueHmong-Regular.ttf
-    - NotoSerifSinhala-Regular.ttf
-    - NotoSerifTamil-Regular.ttf
-    - NotoSerifTelugu-Regular.ttf
-    - NotoSerifTibetan-Regular.ttf
-    - NotoSerifYezidi-Regular.ttf
+    - NotoSansAdlam
+    - NotoSansBalinese
+    - NotoSansBamum
+    - NotoSansBassaVah
+    - NotoSansBatak
+    - NotoSansBengali
+    - NotoSansBuginese
+    - NotoSansBuhid
+    - NotoSansCanadianAboriginal
+    - NotoSansChakma
+    - NotoSansCham
+    - NotoSansCherokee
+    - NotoSansCoptic
+    - NotoSansDeseret
+    - NotoSansDevanagari
+    - NotoSansElbasan
+    - NotoSansEthiopic
+    - NotoSansGeorgian
+    - NotoSansGrantha
+    - NotoSansGujarati
+    - NotoSansGunjalaGondi
+    - NotoSansGurmukhi
+    - NotoSansHanifiRohingya
+    - NotoSansHanunoo
+    - NotoSansKannada
+    - NotoSansKhmer
+    - NotoSansJavanese
+    - NotoSansKayahLi
+    - NotoSansKhojki
+    - NotoSansKhudawadi
+    - NotoSansLao
+    - NotoSansLepcha
+    - NotoSansLimbu
+    - NotoSansLisu
+    - NotoSansMahajani
+    - NotoSansMalayalam
+    - NotoSansMandaic
+    - NotoSansMasaramGondi
+    - NotoSansMedefaidrin
+    - NotoSansMeeteiMayek
+    - NotoSansMendeKikakui
+    - NotoSansMiao
+    - NotoSansModi
+    - NotoSansMongolian
+    - NotoSansMro
+    - NotoSansMyanmar
+    - NotoSansMultani
+    - NotoSansNewa
+    - NotoSansNewTaiLue
+    - NotoSansNKo
+    - NotoSansOlChiki
+    - NotoSansOriya
+    - NotoSansOsage
+    - NotoSansOsmanya
+    - NotoSansPahawhHmong
+    - NotoSansPauCinHau
+    - NotoSansRejang
+    - NotoSansRunic
+    - NotoSansSamaritan
+    - NotoSansSaurashtra
+    - NotoSansSharada
+    - NotoSansShavian
+    - NotoSansSinhala
+    - NotoSansSoraSompeng
+    - NotoSansSoyombo
+    - NotoSansSundanese
+    - NotoSansSylotiNagri
+    - NotoSansSymbols2
+    - NotoSansSymbols
+    - NotoSansSyriac
+    - NotoSansTagalog
+    - NotoSansTagbanwa
+    - NotoSansTaiLe
+    - NotoSansTaiTham
+    - NotoSansTaiViet
+    - NotoSansTakri
+    - NotoSansTamil
+    - NotoSansTelugu
+    - NotoSansThaana
+    - NotoSansTifinagh
+    - NotoSansTirhuta
+    - NotoSansVai
+    - NotoSansWancho
+    - NotoSansWarangCiti
+    - NotoSansYi
+    - NotoSansZanabazarSquare
+    - NotoSerifBalinese
+    - NotoSerifBengali
+    - NotoSerifDevanagari
+    - NotoSerifDogra
+    - NotoSerifEthiopic
+    - NotoSerifGeorgian
+    - NotoSerifGrantha
+    - NotoSerifGujarati
+    - NotoSerifGurmukhi
+    - NotoSerifKannada
+    - NotoSerifKhmer
+    - NotoSerifKhojki
+    - NotoSerifLao
+    - NotoSerifMalayalam
+    - NotoSerifMyanmar
+    - NotoSerifNPHmong
+    - NotoSerifSinhala
+    - NotoSerifTamil
+    - NotoSerifTelugu
+    - NotoSerifTibetan
+    - NotoSerifYezidi
 
   noto_fonts_linux:
-    - Arimo-Regular.ttf
-    - Arimo-Bold.ttf
-    - Arimo-Italic.ttf
-    - Arimo-BoldItalic.ttf
-    - Cousine-Regular.ttf
-    - Tinos-Regular.ttf
-    - Tinos-Bold.ttf
-    - Tinos-Italic.ttf
-    - Tinos-BoldItalic.ttf
-    - NotoNaskhArabic-Regular.ttf
-    - NotoSansArmenian-Regular.ttf
-    - NotoSansHebrew-Regular.ttf
-    - NotoSansSymbols-Regular.ttf
-    - NotoSansSymbols2-Regular.ttf
-    - NotoSansThaana-Regular.ttf
-    - NotoSansThai-Regular.ttf
-    - NotoSerifArmenian-Regular.ttf
-    - NotoSerifHebrew-Regular.ttf
-    - NotoSerifThai-Regular.ttf
+    - NotoNaskhArabic
+    - NotoSansArmenian
+    - NotoSansHebrew
+    - NotoSansSymbols
+    - NotoSansSymbols2
+    - NotoSansThaana
+    - NotoSansThai
+    - NotoSerifArmenian
+    - NotoSerifHebrew
+    - NotoSerifThai
   noto_fonts_mac:
-    - NotoSansArmenian-Regular.ttf
-    - NotoSansHebrew-Regular.ttf
-    - NotoSansThaana-Regular.ttf
-    - NotoSerifArmenian-Regular.ttf
-    - NotoSerifHebrew-Regular.ttf
+    - NotoSansArmenian
+    - NotoSansHebrew
+    - NotoSansThaana
+    - NotoSerifArmenian
+    - NotoSerifHebrew
 
   noto_fonts_windows:
-    - NotoNaskhArabic-Regular.ttf
-    - NotoSans-Regular.ttf
-    - NotoSerif-Regular.ttf
+    - NotoNaskhArabic
+    - NotoSans
+    - NotoSerif
+
+  have_stix: '[% c("var/linux") || c("var/macos") %]'
 
 input_files:
-  - project: container-image
   - filename: README.txt
   - filename: 'noto-fonts-[% c("var/noto_git_hash") %]-[% c("version") %]'
     name: noto-fonts
     exec: '[% INCLUDE "fetch-noto-fonts" %]'
+  - URL: https://github.com/googlefonts/Arimo/archive/302dc85954f887248b4ad442b0966e4ead1c1cf9.zip
+    sha256sum: 1d06a61c69ab8a7edd6e2b79e38dcb3c5b572033f12de5cde5c3ea7caded2717
+    name: arimo
+    enable: '[% c("var/linux") %]'
+  - URL: https://github.com/notofonts/noto-fonts/raw/71d0a9e78ae4257499cabd4a8ad3e5e976c5c352/hinted/ttf/Cousine/Cousine-Bold.ttf
+    sha256sum: 1f224341677c5ceaa717417d1cb94efbdb276801b3ab1ccea697eb3a8057b6ac
+    enable: '[% c("var/linux") %]'
+  - URL: https://github.com/notofonts/noto-fonts/raw/71d0a9e78ae4257499cabd4a8ad3e5e976c5c352/hinted/ttf/Cousine/Cousine-BoldItalic.ttf
+    sha256sum: 82755a6d4b12067daabf89eb5bf48d52b9fea4073a59792d331651510a901728
+    enable: '[% c("var/linux") %]'
+  - URL: https://github.com/notofonts/noto-fonts/raw/71d0a9e78ae4257499cabd4a8ad3e5e976c5c352/hinted/ttf/Cousine/Cousine-Italic.ttf
+    sha256sum: 64e8ed603232b28eceebe0d18838a5e62297605203b33720d775ed628cdc222b
+    enable: '[% c("var/linux") %]'
+  - URL: https://github.com/notofonts/noto-fonts/raw/71d0a9e78ae4257499cabd4a8ad3e5e976c5c352/hinted/ttf/Cousine/Cousine-Regular.ttf
+    sha256sum: 829e776e4929eb6467838b92c7b700085fac2073801e6b54b224661affb34688
+    enable: '[% c("var/linux") %]'
+  - URL: https://github.com/notofonts/noto-fonts/raw/71d0a9e78ae4257499cabd4a8ad3e5e976c5c352/hinted/ttf/Tinos/Tinos-Bold.ttf
+    sha256sum: 971d6af5fcb3a0c05535a92a635fb63a86ea5eb935639c9b864be33f3bfaba80
+    enable: '[% c("var/linux") %]'
+  - URL: https://github.com/notofonts/noto-fonts/raw/71d0a9e78ae4257499cabd4a8ad3e5e976c5c352/hinted/ttf/Tinos/Tinos-BoldItalic.ttf
+    sha256sum: 0cd67b90617a03a69a815e758d0649d00f2be48a0cb570615e94e8e5a13aae2e
+    enable: '[% c("var/linux") %]'
+  - URL: https://github.com/notofonts/noto-fonts/raw/71d0a9e78ae4257499cabd4a8ad3e5e976c5c352/hinted/ttf/Tinos/Tinos-Italic.ttf
+    sha256sum: 0f949a3fa0e23cd0ca94a0c4784bd8f9efb99c20070b9f73b5fd592b49c092ad
+    enable: '[% c("var/linux") %]'
+  - URL: https://github.com/notofonts/noto-fonts/raw/71d0a9e78ae4257499cabd4a8ad3e5e976c5c352/hinted/ttf/Tinos/Tinos-Regular.ttf
+    sha256sum: cf264a22292950ca1679b2ade07e9e6ecb26c649ab70975d0e113f979efa827a
+    enable: '[% c("var/linux") %]'
   # Noto Sans CJK Version 2.004
   - URL: https://github.com/googlefonts/noto-cjk/raw/523d033d6cb47f4a80c58a35753646f5c3608a78/Sans/SubsetOTF/JP/NotoSansJP-Regular.otf
     sha256sum: dff723ba59d57d136764a04b9b2d03205544f7cd785a711442d6d2d085ac5073
@@ -178,6 +189,7 @@ input_files:
   - URL: https://github.com/googlefonts/noto-cjk/raw/523d033d6cb47f4a80c58a35753646f5c3608a78/Sans/SubsetOTF/TC/NotoSansTC-Regular.otf
     sha256sum: 5bab0cb3c1cf89dde07c4a95a4054b195afbcfe784d69d75c340780712237537
     enable: '[% c("var/linux") %]'
-  - URL: https://github.com/stipub/stixfonts/archive/2.0.0.zip
-    sha256sum: 4327a16797dabebedce28a9075671730e22c7f74831b24b1fb91e27faec5a235
-    enable: '[% c("var/linux") || c("var/macos") %]'
+  - URL: https://github.com/stipub/stixfonts/raw/v2.13b171/fonts/static_otf/STIXTwoMath-Regular.otf
+    sha256sum: 3a5f3f26f40d5698b3c62dd085d48d6663696a3f80825aab8b553d5097518e8c
+    name: stix
+    enable: '[% c("var/have_stix") %]'
