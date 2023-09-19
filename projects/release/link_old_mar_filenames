@@ -3,7 +3,7 @@
 # This script is for #40933:
 #   Fix generating incrementals between 12.5.x and 13.0
 [% FOREACH version = c("var/torbrowser_incremental_from") %]
-  cd [% shell_quote(path(dest_dir)) %]/signed/[% version %]
+  cd [% shell_quote(path(dest_dir)) %]/[% IF c("var/unsigned_releases_dir") %]un[% END %]signed/[% version %]
   test -e [% c("var/project-name") %]-linux-i686-[% version %]_ALL.mar || \
     ln -s [% c("var/project-name") %]-linux32-[% version %]_ALL.mar \
           [% c("var/project-name") %]-linux-i686-[% version %]_ALL.mar

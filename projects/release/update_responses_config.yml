@@ -3,7 +3,7 @@ tmp_dir: '[% c("tmp_dir") %]'
 create_downloads_json: 1
 appname_marfile: '[% c("var/project-name") %]'
 appname_bundle: '[% c("var/project-name") %]'
-releases_dir: [% path(c('output_dir')) %][% IF ! c("var/nightly") %]/signed[% END %]
+releases_dir: [% path(c('output_dir')) %][% IF ! c("var/nightly") %]/[% IF c("var/unsigned_releases_dir") -%]un[% END %]signed[% END %]
 download:
     gpg_keyring: ../../keyring/torbrowser.gpg
     archive_url: 'https://archive.torproject.org/tor-package-archive/[% c("var/projectname") %]'

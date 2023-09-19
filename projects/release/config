@@ -133,6 +133,10 @@ targets:
     var:
       create_unsigned_incrementals: 1
 
+  unsigned_releases_dir:
+    var:
+      unsigned_releases_dir: 1
+
 input_files:
 
 # Release

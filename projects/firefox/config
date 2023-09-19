@@ -35,9 +35,8 @@ var:
   updater_url: 'https://aus1.torproject.org/torbrowser/update_3/'
 
   # Uncomment this if you want to test the updater. You will need to provide a
-  # marsigner.der in this directory, too. It will be used as a replacement for
-  # the nightly builds keys only. So, using this option for alphas and releases
-  # will not work (the browser will fail with a key/signature mismatch).
+  # marsigner.der in this directory, too. It will replace either the release
+  # key, or the nightly key, depending on the channel you are building.
   # override_updater_url: 'https://tb-build-05.torproject.org/~you/update_3/'
 
   rezip: |
