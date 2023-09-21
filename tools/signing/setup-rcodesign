@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# usage: setup-rcodesign <localdir>
+#
+# Where <localdir> is an optional argument (default is directory `local`
+# in the tor-browser-build/tools directory), where we download the
+# rcodesign tarball and create an rcodesign directory.
+
+set -e
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source "$script_dir/set-config.rcodesign"
+
+localdir="$script_dir/../local"
+test $# -eq 1 && localdir="$1"
+rcodesign_path="$localdir/$rcodesign_filename"
+
+function download_rcodesign {
+  test -f "$rcodesign_path" && return 0
+  local tmpdir=$(mktemp -d)
+  mkdir -p "$localdir"
+  wget -O "$tmpdir/$rcodesign_filename" "$rcodesign_url"
+  if ! sha256sum "$tmpdir/$rcodesign_filename" | grep -q "^$rcodesign_sha256sum  $tmpdir/$rcodesign_filename\$"
+  then
+    echo "Error checking sha256sum of $tmpdir/$rcodesign_filename" >&2
+    exit 1
+  fi
+  mv -f "$tmpdir/$rcodesign_filename" "$rcodesign_path"
+  rmdir "$tmpdir"
+}
+
+function setup_rcodesign {
+  local rcodesign_dir="$localdir/rcodesign-$rcodesign_version"
+  test -d $rcodesign_dir && return 0
+  local tmpdir=$(mktemp -d)
+  tar -C "$tmpdir" -xf "$rcodesign_path"
+  mv "$tmpdir/rcodesign" "$rcodesign_dir"
+  chmod -R go+rX "$rcodesign_dir"
+  rm -f "$localdir/rcodesign"
+  ln -s "rcodesign-$rcodesign_version" "$localdir/rcodesign"
+}
+
+download_rcodesign
+setup_rcodesign

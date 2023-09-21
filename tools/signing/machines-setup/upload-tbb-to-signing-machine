@@ -4,6 +4,7 @@
 set -e
 
 script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source ../set-config.rcodesign
 
 cd "$script_dir/../../.."
 tmpdir=$(mktemp -d)
@@ -68,6 +69,10 @@ echo "Extracting $android_build_tools_filename"
 ssh "$setup_user@$signing_machine" mkdir -p $signing_dir/android-build-tools
 ssh "$setup_user@$signing_machine" unzip -qo -d $signing_dir/android-build-tools "$signing_dir/$android_build_tools_filename"
 ssh "$setup_user@$signing_machine" chmod -R o+rX "$signing_dir/$android_build_tools_filename"
+
+echo "Uploading $rcodesign_filename"
+tools/signing/setup-rcodesign
+rsync -v "tools/local/$rcodesign_filename" "$setup_user@$signing_machine:$signing_dir/$rcodesign_filename"
 
 echo "Uploading tor-browser-build.tar to $signing_machine"
 scp -p "$tbbtar" "$setup_user@$signing_machine:$signing_dir/"
