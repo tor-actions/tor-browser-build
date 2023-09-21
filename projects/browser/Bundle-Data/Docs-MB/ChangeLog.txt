@@ -1,3 +1,25 @@
+Mullvad Browser 13.0a5 - September 21 2023
+ * All Platforms
+   * Updated Translations
+   * Updated Firefox to 115.3.0esr
+   * Bug 228: Remove popup asking for preferred language on websites [mullvad-browser]
+   * Bug 238: Rebase Mullvad Browser to 115.3.0esr [mullvad-browser]
+   * Bug 40893: Update (Noto) fonts for 13.0 [tor-browser-build]
+   * Bug 41327: Disable UrlbarProviderInterventions [tor-browser]
+   * Bug 41581: ESR115: figure out extension pinning / unified Extensions [tor-browser]
+   * Bug 41903: The info icon on the language change prompt is not shown [tor-browser]
+   * Bug 42026: Disable cookie banner service and UI. [tor-browser]
+   * Bug 42037: Disable about:firefoxview [tor-browser]
+   * Bug 42083: RemoteSecuritySettings.init throws error in console [tor-browser]
+   * Bug 42094: Disable media.aboutwebrtc.hist.enabled as security in-depth [tor-browser]
+ * Windows
+   * Bug 41798: Stop building private_browsing.exe on Windows [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 40956: Allow testing the updater also with release and alpha channel [tor-browser-build]
+   * Windows
+     * Bug 41995: Generated headers on Windows aren't reproducible [tor-browser]
+
 Mullvad Browser 13.0a4 - September 12 2023
  * All Platforms
    * Updated Firefox to 115.2.1esr
