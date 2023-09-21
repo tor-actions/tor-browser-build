@@ -84,11 +84,13 @@ create_user signing-gpg
 create_user signing-mar
 create_user signing-win yubihsm
 create_user signing-apk signing
+create_user signing-macos signing
 
 sudoers_file sign-gpg
 sudoers_file sign-mar
 sudoers_file sign-exe
 sudoers_file sign-apk
+sudoers_file sign-rcodesign
 
 authorized_keys boklm boklm-tb-release.pub boklm-yk1.pub
 create_user richard signing
@@ -114,6 +116,9 @@ install_packages cmake libusb-1.0-0-dev libedit-dev gengetopt libpcsclite-dev he
 
 # Install deps for android/apk signing
 install_packages unzip openjdk-11-jdk-headless openjdk-11-jre-headless
+
+# Install deps for macos-rcodesign signing
+install_packages p7zip-full zstd
 
 # Build and install yubihsm-pkcs11 package
 create_user build-pkgs
@@ -146,3 +151,11 @@ for rel in release alpha; do
     chmod 700 "$keypath"
   fi
 done
+
+# Setup for macos signing with rcodesign
+/signing/tor-browser-build/tools/signing/setup-rcodesign /signing
+# `rcodesign sign` requires access to timestamp.apple.com. We do that
+# by redirecting a local port with `ssh -R`. See tor-browser-build#29815.
+if ! grep -q 'timestamp\.apple\.com' /etc/hosts; then
+  echo '127.0.0.1 timestamp.apple.com' >> /etc/hosts
+fi
