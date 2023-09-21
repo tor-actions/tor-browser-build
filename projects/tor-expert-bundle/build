@@ -14,11 +14,6 @@ tar -xkf $rootdir/[% c('input_files_by_name/snowflake') %]
 tar -xkf $rootdir/[% c('input_files_by_name/webtunnel') %]
 tar -xkf $rootdir/[% c('input_files_by_name/conjure') %]
 
-# copy in bridge lines for each pluggable transport
-mv $rootdir/bridges_list.obfs4.txt .
-mv $rootdir/bridges_list.meek-azure.txt .
-mv $rootdir/bridges_list.snowflake.txt .
-
 # add per-platform pt extension
 awk '{gsub(/\$\{pt_extension\}/, "[% c("var/pt_extension") %]"); print}' $rootdir/pt_config.json > pt_config.json
 

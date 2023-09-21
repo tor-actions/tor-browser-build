@@ -11,6 +11,8 @@ var:
   # this should be updated when the list of gradle dependencies is changed
   gradle_dependencies_version: 5
   gradle_version: 5.6.4
+  arch_deps:
+    - jq
 
 input_files:
   - project: container-image

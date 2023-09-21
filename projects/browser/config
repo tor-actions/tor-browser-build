@@ -11,6 +11,7 @@ var:
     - libparallel-forkmanager-perl
     - libfile-slurp-perl
     - bzip2
+    - jq
   mar_osname: '[% c("var/osname") %]'
 
 targets:
@@ -21,6 +22,7 @@ targets:
         # builds (bug 29812). We don't need it in x86_64 builds, but we
         # share the container to reduce space used.
         - libc6-i386
+      pt_path: ./TorBrowser/Tor/PluggableTransports/
   macos:
     var:
       arch_deps:
@@ -29,6 +31,7 @@ targets:
         - python3-pip
         - python3-distutils-extra
         - python3-psutil
+      pt_path: PluggableTransports/
   macos-universal:
     var:
       mar_osname: macos
@@ -36,6 +39,7 @@ targets:
     var:
       arch_deps:
         - python3-pefile
+      pt_path: TorBrowser\Tor\PluggableTransports\
   android:
     build: '[% INCLUDE build.android %]'
     var:

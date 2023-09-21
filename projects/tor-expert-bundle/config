@@ -23,6 +23,3 @@ input_files:
   - name: conjure
     project: conjure    
   - filename: pt_config.json
-  - filename: bridges_list.obfs4.txt
-  - filename: bridges_list.meek-azure.txt
-  - filename: bridges_list.snowflake.txt

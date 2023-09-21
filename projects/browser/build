@@ -15,7 +15,7 @@ mkdir -p $OUTDIR
 # directory named tor-browser (instead of tor-browser_en-US). Therefore we
 # stage everything under tor-browser-stage to avoid a conflict.
 TB_STAGE_DIR=$distdir/tor-browser-stage
-GENERATEDPREFSPATH=$rootdir/Bundle-Data/PTConfigs/generated-prefs.js
+GENERATEDPREFSPATH=$rootdir/Bundle-Data/generated-prefs.js
 # Create initially empty prefs file where we can dump our conditionally included/genetered prefs
 touch "$GENERATEDPREFSPATH"
 
@@ -100,10 +100,10 @@ mv [% c('input_files_by_name/noscript') %] "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b
   mkdir -p "$TBDIR/$TORCONFIGPATH" [% IF c("var/macos_universal") %]"$TBDIR_AARCH64/$TORCONFIGPATH"[% END %]
   mv_tbdir data/{geoip,geoip6} "$TORCONFIGPATH"
 
-  # Bridge lists will be consumed later in `bridges_conf`
-  mv tor/pluggable_transports/bridges_list.*.txt tor/pluggable_transports/pt_config.json $rootdir
+  # pt_config.json will be consumed later in `bridges_conf`
+  mv tor/pluggable_transports/pt_config.json $rootdir
   [% IF c("var/macos_universal") %]
-    rm -f aarch64/tor/pluggable_transports/bridges_list.*.txt aarch64/tor/pluggable_transports/pt_config.json
+    rm -f aarch64/tor/pluggable_transports/pt_config.json
   [% END -%]
 
   # Move READMEs from tor-expert-bundle to the doc dir
@@ -246,24 +246,37 @@ do
 done
 
 [% IF c("var/tor-browser") -%]
+  PT_CONFIG="$rootdir/pt_config.json"
+
+  # Write our ClientTransportPlugin lines to torrc-defults
   for tbdir in "${TBDIRS[@]}"
   do
-    cat Bundle-Data/PTConfigs/[% bundledata_osname %]/torrc-defaults-appendix >> "$tbdir/$TORCONFIGPATH/torrc-defaults"
+    PT_PATH='[% c("var/pt_path") %]'
+    TORRC_DEFAULTS="$tbdir/$TORCONFIGPATH/torrc-defaults"
+    jq --raw-output .pluggableTransports[] "${PT_CONFIG}" | while read -r line; do
+      echo "${line/\$\{pt_path\}/${PT_PATH}}" >> "$TORRC_DEFAULTS"
+    done
   done
-  cat Bundle-Data/PTConfigs/bridge_prefs.js >> "$GENERATEDPREFSPATH"
 
+  # Write Default Bridge Prefs
+  echo "# Tor Launcher preferences (default bridges):" >> "$GENERATEDPREFSPATH"
+  RECOMMMENDED_DEFAULT=$(jq -r .recommendedDefault "${PT_CONFIG}")
+  echo "pref(\"extensions.torlauncher.default_bridge_recommended_type\", \"${RECOMMMENDED_DEFAULT}\");" >> "$GENERATEDPREFSPATH"
+
+  # Writes bridge-line prefs for a given bridge type
   function bridges_conf {
-    local pt="$1"
+    local bridge_type="$1"
     local i=1
-    while read -r line
-    do
-      echo "pref(\"extensions.torlauncher.default_bridge.$pt.$i\", \"$line\");" >> "$GENERATEDPREFSPATH"
+    jq -r ".bridges.\"$bridge_type\" | .[]" "${PT_CONFIG}" | while read -r line; do
+      echo "pref(\"extensions.torlauncher.default_bridge.$bridge_type.$i\", \"$line\");" >> "$GENERATEDPREFSPATH"
       i=$((i + 1))
-    done < "$rootdir/bridges_list.$pt.txt"
+    done
   }
-  bridges_conf obfs4
-  bridges_conf meek-azure
-  bridges_conf snowflake
+
+  # Iterate over our bridge types and write default bridgelines for each
+  for bridge_type in $(jq -r ".bridges | keys[]" "${PT_CONFIG}"); do
+    bridges_conf $bridge_type
+  done
 [% END -%]
 
 [% IF c("var/linux") && c("var/tor-browser") %]

@@ -57,9 +57,22 @@ rm -fR service/src/main/jniLibs/*
     mv $tebdir/data/{geoip,geoip6} service/src/main/assets/common
 
     # Update bridges list
-    ptdir=$tebdir/tor/pluggable_transports
-    cat $ptdir/bridges_list.obfs4.txt $ptdir/bridges_list.meek-azure.txt \
-      $ptdir/bridges_list.snowflake.txt > service/src/main/assets/common/bridges.txt
+    PT_CONFIG="$tebdir/tor/pluggable_transports/pt_config.json"
+
+    # Writes bridge-line prefs for a given bridge type
+    BRIDGES_TXT="service/src/main/assets/common/bridges.txt"
+    echo -n "" > "${BRIDGES_TXT}"
+    function bridges_conf {
+      local bridge_type="$1"
+      jq -r ".bridges.\"$bridge_type\" | .[]" "${PT_CONFIG}" | while read -r line; do
+        echo $line >> "${BRIDGES_TXT}"
+      done
+    }
+
+    # Iterate over our bridge types and write default bridgelines for each
+    for bridge_type in $(jq -r ".bridges | keys[]" "${PT_CONFIG}"); do
+      bridges_conf $bridge_type
+    done
   [% END -%]
 [% END -%]
 
