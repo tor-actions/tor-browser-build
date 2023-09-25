@@ -57,7 +57,7 @@
 ;--------------------------------
 ;Interface Configuration
 
-  !define MUI_ICON   "[% c('var/projectname') %][% IF c('var/mullvad-browser') -%]-[% c('var/channel') %][% END -%].ico"
+  !define MUI_ICON   "[% c('var/projectname') %][% IF !c('var/base-browser') -%]-[% c('var/channel') %][% END -%].ico"
   !define MUI_ABORTWARNING
 
 ;--------------------------------
