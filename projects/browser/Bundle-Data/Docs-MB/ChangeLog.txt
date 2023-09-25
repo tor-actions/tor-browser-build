@@ -1,3 +1,70 @@
+Mullvad Browse 12.5.5 - September 25 2023
+ * All Platforms
+   * Updated NoScript to 11.4.27
+   * Upated uBlock Origin to 1.52.2
+   * Bug 42123: Backport security fixes from Firefox 118 to ESR 102.15 / 115.3 - based Tor Browser [tor-browser]
+
+Mullvad Browser 13.0a5 - September 21 2023
+ * All Platforms
+   * Updated Translations
+   * Updated Firefox to 115.3.0esr
+   * Bug 228: Remove popup asking for preferred language on websites [mullvad-browser]
+   * Bug 238: Rebase Mullvad Browser to 115.3.0esr [mullvad-browser]
+   * Bug 40893: Update (Noto) fonts for 13.0 [tor-browser-build]
+   * Bug 41327: Disable UrlbarProviderInterventions [tor-browser]
+   * Bug 41581: ESR115: figure out extension pinning / unified Extensions [tor-browser]
+   * Bug 41903: The info icon on the language change prompt is not shown [tor-browser]
+   * Bug 42026: Disable cookie banner service and UI. [tor-browser]
+   * Bug 42037: Disable about:firefoxview [tor-browser]
+   * Bug 42083: RemoteSecuritySettings.init throws error in console [tor-browser]
+   * Bug 42094: Disable media.aboutwebrtc.hist.enabled as security in-depth [tor-browser]
+ * Windows
+   * Bug 41798: Stop building private_browsing.exe on Windows [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 40956: Allow testing the updater also with release and alpha channel [tor-browser-build]
+   * Windows
+     * Bug 41995: Generated headers on Windows aren't reproducible [tor-browser]
+
+Mullvad Browser 13.0a4 - September 12 2023
+ * All Platforms
+   * Updated Firefox to 115.2.1esr
+   * Updated Translations
+   * Updated NoScript to 11.4.27
+   * Bug 211: Change "Mullvad Browser Home" to "New tab" [mullvad-browser]
+   * Bug 231: Fix the Security Level "read more" link in popup/settings panel [mullvad-browser]
+   * Bug 236: Rebase alpha onto 115.2.1 [mullvad-browser]
+   * Bug 40149: Remove patching of nightly update URL [tor-browser-build]
+   * Bug 40937: First window after update should go to the user-friendly release page on GitHub [tor-browser-build]
+   * Bug 41528: Hard-coded English "based on Mozilla Firefox" appears in version in "About" dialog [tor-browser]
+   * Bug 41675: ESR115: decide on large array buffers [tor-browser]
+   * Bug 41739: Remove "Website appearance" [tor-browser]
+   * Bug 41740: ESR115: change devicePixelRatio spoof to 2 in alpha for testing [tor-browser]
+   * Bug 41774: Hide the new "Switching to a new device" help menu item [tor-browser]
+   * Bug 41797: Lock RFP in release builds [tor-browser]
+   * Bug 41876: Remove firefox view from title bar [tor-browser]
+   * Bug 41881: Developer tools/Network/New Request remembers requests [tor-browser]
+   * Bug 42027: Create a Base Browser version of migrateUI [tor-browser]
+   * Bug 42043: Disable gUM: media.devices.enumerate.legacy.enabled [tor-browser]
+   * Bug 42046: Remove XUL layout hacks from base browser [tor-browser]
+   * Bug 42050: Bring back Save As... dialog as default [tor-browser]
+   * Bug 42061: Move the alpha update channel creation to a commit on its own [tor-browser]
+   * Bug 42084: Race condition with language preferences may make spoof_english ineffective [tor-browser]
+ * Windows
+   * Bug 40930: Update zlib to 1.3 after 13.0a3 [tor-browser-build]
+ * macOS
+   * Bug 42057: Disable Platform text-recognition functionality [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 40857: Mullvad Browser generated downloads.json references tbb-* build tag rather than mb-* [tor-browser-build]
+     * Bug 40932: Remove appname_bundle_android, appname_bundle_macos, appname_bundle_linux, appname_bundle_win32, appname_bundle_win64 from projects/release/update_responses_config.yml [tor-browser-build]
+     * Bug 40933: Fix generating incrementals between 12.5.x and 13.0 [tor-browser-build]
+     * Bug 40935: Fix fallout from build target rename in signing scripts [tor-browser-build]
+     * Bug 40942: Use the branch to build Base Browser [tor-browser-build]
+     * Bug 40946: override_updater_url does not work for Mullvad Browser [tor-browser-build]
+   * macOS
+     * Bug 40943: Update libdmg-hfsplus to include our uplifted patch [tor-browser-build]
+
 Mullvad Browser 12.5.4 - September 12 2023
  * All Platforms
    * Updated Firefox to 102.15.1esr

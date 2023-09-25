@@ -1,3 +1,139 @@
+Tor Browser 12.5.5 - September 25 2023
+ * All Platforms
+   * Updated tor to 0.4.7.15
+   * Updated NoScript to 11.4.27
+   * Updated Translations
+   * Bug 42120: Use foursquare as domain front for snowflake [tor-browser]
+   * Bug 42123: Backport security fixes from Firefox 118 to ESR 102.15 / 115.3 - based Tor Browser [tor-browser]
+ * Windows + macOS + Linux
+   * Bug 42126: moat and connect assist broken for people who can't reach domain front [tor-browser]
+
+Tor Browser 13.0a5 - September 21 2023
+ * All Platforms
+   * Updated Translations
+   * Updated OpenSSL to 3.0.11
+   * Updated tor to 0.4.8.6
+   * Bug 40938: Migrate remaining torbutton functionality to tor-browser [tor-browser]
+   * Bug 41327: Disable UrlbarProviderInterventions [tor-browser]
+   * Bug 42026: Disable cookie banner service and UI. [tor-browser]
+   * Bug 42094: Disable media.aboutwebrtc.hist.enabled as security in-depth [tor-browser]
+   * Bug 42112: Rebase alpha to 115.3.0esr [tor-browser]
+   * Bug 42120: Use foursquare as domain front for snowflake [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.3.0esr
+   * Bug 40893: Update (Noto) fonts for 13.0 [tor-browser-build]
+   * Bug 41639: Fix the wordmark (title and background) of the "About Tor Browser" window [tor-browser]
+   * Bug 41822: The default browser button came back on 115 [tor-browser]
+   * Bug 41864: TOR_CONTROL_HOST and TOR_SOCKS_HOST do not work as expected when the browser launches tor [tor-browser]
+   * Bug 41903: The info icon on the language change prompt is not shown [tor-browser]
+   * Bug 41957: Revert to Fx's default identity block style for internal pages [tor-browser]
+   * Bug 41958: Console error when closing tor browser with about:preferences open [tor-browser]
+   * Bug 41986: Fix the control port password handling [tor-browser]
+   * Bug 42037: Disable about:firefoxview [tor-browser]
+   * Bug 42073: Add simplified onion pattern to the new homepage [tor-browser]
+   * Bug 42079: TorConnect: handle switching from Bootstrapped to Configuring state [tor-browser]
+   * Bug 42083: RemoteSecuritySettings.init throws error in console [tor-browser]
+   * Bug 42091: Onion authorization prompt overflows [tor-browser]
+   * Bug 42092: Onion services key table display problems. [tor-browser]
+   * Bug 42102: TorProcess says the SOCKS port is not valid even though it is [tor-browser]
+   * Bug 42110: Add a utility module for shared UI methods needed for several tor browser components [tor-browser]
+ * Windows
+   * Bug 41798: Stop building private_browsing.exe on Windows [tor-browser]
+ * macOS
+   * Bug 42078: Implement MacOS application icons [tor-browser]
+ * Linux
+   * Bug 42088: Implement Linux application icons [tor-browser]
+ * Android
+   * Updated GeckoView to 115.3.0esr
+   * Bug 42089: Disable Mozilla 1805450 [tor-browser]
+   * Bug 42122: Fix crash due to bad android deprecation and APIs
+ * Build System
+   * Windows + macOS + Linux
+     * Bug 40956: Allow testing the updater also with release and alpha channel [tor-browser-build]
+   * Windows
+     * Bug 41995: Generated headers on Windows aren't reproducible [tor-browser]
+
+Tor Browser 13.0a4 - September 12 2023
+ * All Platforms
+   * Updated Translations
+   * Updated NoScript to 11.4.27
+   * Updated tor to 0.4.8.5
+   * Updated Snowflake to 2.6.1
+   * Bug 40951: Firefox fails to build for macos after #40938 [tor-browser-build]
+   * Bug 41675: ESR115: decide on large array buffers [tor-browser]
+   * Bug 41740: ESR115: change devicePixelRatio spoof to 2 in alpha for testing [tor-browser]
+   * Bug 41797: Lock RFP in release builds [tor-browser]
+   * Bug 41934: Websocket raises DOMException on http onions in 13.0a1 [tor-browser]
+   * Bug 42034: aboutTBUpdate.dtd is duplicated [tor-browser]
+   * Bug 42043: Disable gUM: media.devices.enumerate.legacy.enabled [tor-browser]
+   * Bug 42061: Move the alpha update channel creation to a commit on its own [tor-browser]
+   * Bug 42084: Race condition with language preferences may make spoof_english ineffective [tor-browser]
+   * Bug 42093: Rebase alpha onto 115.2.1esr [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.2.1esr
+   * Bug 40149: Remove patching of nightly update URL [tor-browser-build]
+   * Bug 40821: The update details URL is wrong in alphas [tor-browser-build]
+   * Bug 40938: Copy the new tor-browser.ftl file to the appropriate directory [tor-browser-build]
+   * Bug 41333: Modernize Tor Browser's new-tab page (about:tor) [tor-browser]
+   * Bug 41528: Hard-coded English "based on Mozilla Firefox" appears in version in "About" dialog [tor-browser]
+   * Bug 41651: Use moz-toggle in connection preferences [tor-browser]
+   * Bug 41739: Remove "Website appearance" [tor-browser]
+   * Bug 41774: Hide the new "Switching to a new device" help menu item [tor-browser]
+   * Bug 41821: Fix the proxy type in the proxy modal of about:preferences in 13.0 [tor-browser]
+   * Bug 41865: Use --text-color-deemphasized rather than --panel-description-color [tor-browser]
+   * Bug 41876: Remove firefox view from title bar [tor-browser]
+   * Bug 41881: Developer tools/Network/New Request remembers requests [tor-browser]
+   * Bug 41886: Downloads drop-down panel has new-line/line-break between every word in the 'Be careful opening downloads' warning [tor-browser]
+   * Bug 41904: The log textarea doesn't resize anymore [tor-browser]
+   * BUg 41906: hide about:preferences#privacy > DNS over HTTPS section [tor-browser]
+   * Bug 41971: Update Tails URL in downloads warning [tor-browser]
+   * Bug 41974: De-emphasized text in custom components is no longer gray in 13.0 alpha [tor-browser]
+   * Bug 41977: Hide the "Learn more" link in bridge cards [tor-browser]
+   * Bug 41980: Circuit display headline is misaligned in 13.0 alpha [tor-browser]
+   * Bug 42027: Create a Base Browser version of migrateUI [tor-browser]
+   * Bug 42045: Circuit panel overflows with long ipv6 addresses [tor-browser]
+   * Bug 42046: Remove XUL layout hacks from base browser [tor-browser]
+   * Bug 42047: Remove layout hacks from tor browser preferences [tor-browser]
+   * Bug 42050: Bring back Save As... dialog as default [tor-browser]
+   * Bug 42075: Fix link spacing and underline on new homepage [tor-browser]
+ * Windows + Android
+   * Updated zlib to 1.3
+   * Bug 40930: Update zlib to 1.3 after 13.0a3 [tor-browser-build]
+ * macOS
+   * Bug 42057: Disable Platform text-recognition functionality [tor-browser]
+ * Linux
+   * Bug 41509: After update, KDE Plasma identifies Tor Browser Nightly window group as "firefox-nightly" [tor-browser]
+ * Android
+   * Updated GeckoView to 115.2.1esr
+   * Bug 40941: Remove PT process options on Android [tor-browser-build]
+   * Bug 41878: firefox-mobile: refactor tor bootstrap off deleted onboarding path [tor-browser]
+   * Bug 41879: firefox-android: Add Tor integration and UI commit is too big, needs to be split up [tor-browser]
+   * Bug 41882: Update DuckDuckGo icons [tor-browser]
+   * Bug 41987: Tor Browser Android Onboarding Plan [tor-browser]
+   * Bug 42001: Hide 'Open links in external app' settings option and force defaults [tor-browser]
+   * Bug 42038: TBA Alpha - inscriptions Tor Browser Alpha and FireFox Browser simultaneously on the start screen [tor-browser]
+   * Bug 42076: Theme is visable in options, but shouldn't be [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.21.1
+     * Bug 40929: Update go to 1.21 series after 13.0a3 [tor-browser-build]
+     * Bug 40932: Remove appname_bundle_android, appname_bundle_macos, appname_bundle_linux, appname_bundle_win32, appname_bundle_win64 from projects/release/update_responses_config.yml [tor-browser-build]
+     * Bug 40935: Fix fallout from build target rename in signing scripts [tor-browser-build]
+     * Bug 40948: Remove lyrebird-vendor sha256sum in nightly [tor-browser-build]
+   * Windows + macOS + Linux
+     * Bug 40786: deploy_update_responses-*.sh requires +r permissions to run [tor-browser-build]
+     * Bug 40931: Fix incrementals after tor-browser-build#40829 [tor-browser-build]
+     * Bug 40933: Fix generating incrementals between 12.5.x and 13.0 [tor-browser-build]
+     * Bug 40942: Use the branch to build Base Browser [tor-browser-build]
+     * Bug 40944: After #40931, updates_responses is using incremental.mar files as if they were non-incremental mar files [tor-browser-build]
+     * Bug 40946: override_updater_url does not work for Mullvad Browser [tor-browser-build]
+     * Bug 40947: Remove migrate_langs from tools/signing/nightly/update-responses-base-config.yml [tor-browser-build]
+   * macOS
+     * Bug 40943: Update libdmg-hfsplus to include our uplifted patch [tor-browser-build]
+     * Bug 42035: Update tools/torbrowser/ scripts to support macOS dev environment [tor-browser]
+   * Linux
+     * Bug 42071: tor-browser deployed format changed breaking fetch.sh [tor-browser]
+
 Tor Browser 12.5.4 - September 12 2023
  * All Platforms
    * Updated Translations
