@@ -67,7 +67,13 @@ tar -C "$tmpdir" -xf "$hfstools_file"
 export PATH="$PATH:$tmpdir/libdmg-hfsplus:$tmpdir/hfsplus-tools"
 
 cd $tmpdir/dmg
-unzip -q $macos_stapled_dir/tb-${tbb_version}_ALL-stapled.zip
+
+if test -n "$use_rcodesign"; then
+  tar -xf $macos_stapled_dir/"${proj_name}-${tbb_version}-notarized+stapled.tar.zst"
+else
+  unzip -q $macos_stapled_dir/tb-${tbb_version}_ALL-stapled.zip
+fi
+
 cd ..
 $script_dir/ddmg.sh $macos_signed_dir/${proj_name}-macos-${tbb_version}.dmg $tmpdir/dmg/ "$Proj_Name"
 rm -rf "dmg/$Proj_Name.app"

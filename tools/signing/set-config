@@ -27,8 +27,9 @@ test -z "${rbm_not_available+x}" && rbm="$script_dir/../../rbm/rbm"
 
 signed_dir="$script_dir/../../$SIGNING_PROJECTNAME/$tbb_version_type/signed"
 signed_version_dir="$signed_dir/$tbb_version"
-macos_stapled_dir="$signed_dir/$tbb_version-macos-stapled"
-macos_signed_dir="$signed_dir/$tbb_version-macos-signed"
+macos_stapled_dir="$signed_dir/$tbb_version-macos-notarized+stapled-tar"
+macos_signed_dir="$signed_dir/$tbb_version-macos-signed-dmg"
+macos_rcodesign_signed_tar_dir="$signed_dir/$tbb_version-macos-rcodesign-signed-tar"
 
 faketime_path=/usr/lib/x86_64-linux-gnu/faketime/libfaketime.so.1
 
@@ -37,3 +38,5 @@ rsync_options="-avH ${rsync_progress:-} ${DRY_RUN:-}"
 
 tb_builders='boklm dan henry ma1 pierov richard'
 wrappers_dir=/signing/tor-browser-build/tools/signing/wrappers
+
+use_rcodesign=1
