@@ -8,12 +8,19 @@ NON_INTERACTIVE=1
 steps_dir="$signed_version_dir.steps"
 test -d "$steps_dir" || mkdir -p "$steps_dir"
 
-test -f "$steps_dir/macos-signer-gatekeeper-signing.done" ||
-  read -sp "Enter macos keychain passphrase: " KEYCHAIN_PW
-echo
-test -f "$steps_dir/macos-signer-notarization.done" ||
-  read -sp "Enter macos notarization passphrase: " NOTARIZATION_PW
-echo
+if test -n "$use_rcodesign"
+then
+  test -f "$steps_dir/linux-signer-rcodesign-sign.done" ||
+    read -sp "Enter rcodesign passphrase for key-1: " RCODESIGN_PW
+  echo
+else
+  test -f "$steps_dir/macos-signer-gatekeeper-signing.done" ||
+    read -sp "Enter macos keychain passphrase: " KEYCHAIN_PW
+  echo
+  test -f "$steps_dir/macos-signer-notarization.done" ||
+    read -sp "Enter macos notarization passphrase: " NOTARIZATION_PW
+  echo
+fi
 is_project torbrowser && nssdb=torbrowser-nssdb7
 is_project mullvadbrowser && nssdb=mullvadbrowser-nssdb-1
 test -f "$steps_dir/linux-signer-signmars.done" ||
@@ -38,6 +45,26 @@ function wait-for-finished-build {
 
 function sync-builder-unsigned-to-local-signed {
   "$script_dir/sync-builder-unsigned-to-local-signed"
+}
+
+function sync-before-linux-signer-rcodesign-sign {
+  "$script_dir/sync-local-to-linux-signer"
+}
+
+function linux-signer-rcodesign-sign {
+  ssh -R 8080:timestamp.apple.com:80 "$ssh_host_linux_signer" 'bash -s' << EOF
+  export RCODESIGN_PW=$RCODESIGN_PW
+  ~/signing-$SIGNING_PROJECTNAME-$tbb_version_type/linux-signer-rcodesign-sign.$SIGNING_PROJECTNAME
+EOF
+  unset RCODESIGN_PW
+}
+
+function sync-linux-signer-macos-signed-tar-to-local {
+  "$script_dir/sync-linux-signer-macos-signed-tar-to-local"
+}
+
+function rcodesign-notary-submit {
+  "$script_dir/rcodesign-notary-submit"
 }
 
 function macos-signer-directory-not-present {
@@ -206,13 +233,22 @@ export SIGNING_PROJECTNAME
 
 do_step wait-for-finished-build
 do_step sync-builder-unsigned-to-local-signed
-do_step macos-signer-directory-not-present
-do_step sync-scripts-to-macos-signer
-do_step macos-signer-enable-network-proxy-settings
-do_step macos-signer-gatekeeper-signing
-do_step macos-signer-notarization
-do_step macos-signer-stapler
-do_step macos-signer-disable-network-proxy-settings
+if test -n "$use_rcodesign";
+then
+  do_step sync-scripts-to-linux-signer
+  do_step sync-before-linux-signer-rcodesign-sign
+  do_step linux-signer-rcodesign-sign
+  do_step sync-linux-signer-macos-signed-tar-to-local
+  do_step rcodesign-notary-submit
+else
+  do_step macos-signer-directory-not-present
+  do_step sync-scripts-to-macos-signer
+  do_step macos-signer-enable-network-proxy-settings
+  do_step macos-signer-gatekeeper-signing
+  do_step macos-signer-notarization
+  do_step macos-signer-stapler
+  do_step macos-signer-disable-network-proxy-settings
+fi
 do_step gatekeeper-bundling
 do_step dmg2mar
 do_step sync-scripts-to-linux-signer

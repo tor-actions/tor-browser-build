@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -e
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source "$script_dir/functions"
+source "$script_dir/set-config.generated-config"
+# tbb_version_type is used in wrappers/sign-rcodesign, so we export it
+export tbb_version_type
+
+if [ -z "$RCODESIGN_PW" ]; then
+    echo "Enter passphrase"
+    stty -echo; read RCODESIGN_PW; stty echo
+    export RCODESIGN_PW
+fi
+
+Proj_Name=$(Project_Name)
+output_file=$(project-name)-macos-${tbb_version}-rcodesign-signed.tar.zst
+destdir=~/"$SIGNING_PROJECTNAME-$tbb_version-macos-signed"
+mkdir -p $destdir
+rm -f "$destdir/$output_file"
+
+sudo -u signing-macos -- /signing/tor-browser-build/tools/signing/wrappers/sign-rcodesign ~/"$SIGNING_PROJECTNAME-$tbb_version"/$(project-name)-macos-${tbb_version}.dmg "$Proj_Name"
+cp "/home/signing-macos/last-signed-$Proj_Name.tar.zst" "$destdir/$output_file"
