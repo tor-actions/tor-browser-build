@@ -1,3 +1,25 @@
+Mullvadd Browser 13.0a6 - September 29 2023
+ * All Platforms
+   * Updated uBlock Origin to 1.52.2
+   * Updated Translations
+   * Bug 42139: Backport security fixes from Firefox 115.3.1 to 115.3.0 [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 40957: Expired subkey warning on Tor Browser GPG verification [tor-browser-build]
+
+Mullvad Browser 12.5.6 - September 29 2023
+ * All Platforms
+   * Bug 42135: Backport security fixes from Firefox 115.3.1 to 102.15.1 [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 40957: Update subkey expiration date for Tor Browser gpg key [tor-browser-build]
+
+Mullvad Browser 12.5.5 - September 25 2023
+ * All Platforms
+   * Updated NoScript to 11.4.27
+   * Updated uBlock Origin to 1.52.2
+   * Bug 42123: Backport security fixes from Firefox 118 to ESR 102.15 / 115.3 - based Tor Browser [tor-browser]
+
 Mullvad Browser 13.0a5 - September 21 2023
  * All Platforms
    * Updated Translations

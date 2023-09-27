@@ -1,3 +1,50 @@
+Tor Browser 13.0a6 - September 29 2023
+ * All Platforms
+   * Updated tor to 0.4.8.7
+   * Updated Translations
+   * Bug 42139: Backport security fixes from Firefox 115.3.1 to 115.3.0 [tor-browser]
+ * Windows + macOS + Linux
+   * Bug 40899: Fix all of our usage of `app.support.baseURL` [tor-browser]
+   * Bug 41165: Crash with debug assertions enabled [tor-browser]
+   * Bug 41910: Support link regression in 115.1.0esr [tor-browser]
+   * Bug 42100: Connect Assist dropdown text not centered [tor-browser]
+   * Bug 42129: Disable the Tor restart prompt if shouldStartAndOwnTor is false [tor-browser]s
+   * Bug 42131: Tor Browser 13.0a5 does not track circuits created before Tor Browser started [tor-browser]
+   * Bug 42132: The new control port handling in Tor Browser 13 breaks a Tails security feature [tor-browser]
+ * Windows
+   * Bug 40954: Implement Windows installer icons [tor-browser-build]
+   * Bug 42087: Implement Windows application icons [tor-browser]
+ * Android
+   * Bug 42023: TB13.0a2 android: remove FF what's new [tor-browser]
+   * Bug 42114: Disable Allow sharing current tab URL from Android's Recents screen in private browsing mode [tor-browser]
+   * Bug 42115: Enhanced Tracking Protection can still be enabled [tor-browser]
+   * Bug 42133: Remove "Total Cookie Protection" popup [tor-browser]
+   * Bug 42134: Remove Android icon shortcuts [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 40741: Update browser and tor-android-service projects to pull data from pt_config.json [tor-browser-build]
+     * Bug 40957: Expired subkey warning on Tor Browser GPG verification [tor-browser-build]
+     * Bug 42130: Add support for specifying the branch in `tb-dev rebase-on-default` [tor-browser]
+   * Android
+     * Bug 40963: Tor Browesr 13.0 torbrowser-testbuild-android* targets fail to build [tor-browser-build]
+
+Tor Browser 12.5.6 - September 29 2023
+ * All Platforms
+   * Bug 42135: Backport security fixes from Firefox 115.3.1 to 102.15.1 [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 40957: Update subkey expiration date for Tor Browser gpg key [tor-browser-build]
+
+Tor Browser 12.5.5 - September 25 2023
+ * All Platforms
+   * Updated tor to 0.4.7.15
+   * Updated NoScript to 11.4.27
+   * Updated Translations
+   * Bug 42120: Use foursquare as domain front for snowflake [tor-browser]
+   * Bug 42123: Backport security fixes from Firefox 118 to ESR 102.15 / 115.3 - based Tor Browser [tor-browser]
+ * Windows + macOS + Linux
+   * Bug 42126: moat and connect assist broken for people who can't reach domain front [tor-browser]
+
 Tor Browser 13.0a5 - September 21 2023
  * All Platforms
    * Updated Translations
