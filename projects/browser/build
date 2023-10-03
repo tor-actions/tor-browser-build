@@ -414,9 +414,10 @@ SCRIPT_EOF
 [% IF c("var/updater_enabled") -%]
   cp $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip "$OUTDIR"/
 [% END -%]
-[% IF c("var/linux") -%]
+[% IF c("var/linux-x86_64") -%]
+  # TODO: See if we can make symbols also for Linux i686, see tor-browser#42146.
   cp $rootdir/[% c('input_files_by_name/firefox') %]/browser-debug-symbols.tar.xz "$OUTDIR/[% c('var/project-name') %]-debug-symbols-[% c('var/mar_osname') %]-[% c('var/torbrowser_version') %].tar.xz"
-  [% IF c("var/linux-x86_64") && !c("var/asan") -%]
+  [% IF !c("var/asan") -%]
     cp $rootdir/[% c('input_files_by_name/firefox') %]/geckodriver.tar.xz "$OUTDIR/geckodriver-[% c('var/mar_osname') %]-[% c('var/torbrowser_version') %].tar.xz"
   [% END -%]
 [% ELSIF c("var/windows") -%]
