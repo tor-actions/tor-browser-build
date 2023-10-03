@@ -12,7 +12,7 @@ app_name=$(Project_Name)
 
 cd ~/$SIGNING_PROJECTNAME-${tbb_version}
 
-for LANG in $bundle_locales
+for LANG in ALL
 do
   echo "Stapling $LANG..."
   cd $LANG
