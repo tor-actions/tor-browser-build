@@ -2,6 +2,7 @@
 from datetime import datetime
 import enum
 from pathlib import Path
+import re
 import sys
 
 import requests
@@ -10,6 +11,16 @@ import requests
 GITLAB = "https://gitlab.torproject.org"
 API_URL = f"{GITLAB}/api/v4"
 PROJECT_ID = 473
+
+is_mb = False
+project_order = {
+    "tor-browser-spec": 0,
+    # Leave 1 free, so we can redefine mullvad-browser when needed.
+    "tor-browser": 2,
+    "tor-browser-build": 3,
+    "mullvad-browser": 4,
+    "rbm": 5,
+}
 
 
 class Platform(enum.IntFlag):
@@ -27,6 +38,7 @@ class Issue:
         self.project, self.number = (
             j["references"]["full"].rsplit("/", 2)[-1].split("#")
         )
+        self.number = int(self.number)
         self.platform = 0
         self.num_platforms = 0
         if "Desktop" in j["labels"]:
@@ -43,9 +55,14 @@ class Issue:
                 self.platform |= Platform.LINUX
                 self.num_platforms += 1
         if "Android" in j["labels"]:
-            self.platform |= Platform.ANDROID
-            self.num_platforms += 1
-        if not self.platform:
+            if is_mb and self.num_platforms == 0:
+                raise Exception(
+                    f"Android-only issue on Mullvad Browser: {j['references']['full']}!"
+                )
+            elif not is_mb:
+                self.platform |= Platform.ANDROID
+                self.num_platforms += 1
+        if not self.platform or (is_mb and self.platform == Platform.DESKTOP):
             self.platform = Platform.ALL_PLATFORMS
             self.num_platforms = 4
         self.is_build = "Build System" in j["labels"]
@@ -68,7 +85,9 @@ class Issue:
         return f"Bug {self.number}: {self.title} [{self.project}]"
 
     def __lt__(self, other):
-        return self.number < other.number
+        if self.project == other.project:
+            return self.number < other.number
+        return project_order[self.project] < project_order[other.project]
 
 
 def sorted_issues(issues):
@@ -125,7 +144,7 @@ elif len(issues) > 1:
     sys.exit(4)
 else:
     iid = version
-    version = None
+    version = "CHANGEME!"
     if iid[0] == "#":
         iid = iid[1:]
     try:
@@ -136,6 +155,9 @@ else:
         )
         if r.ok and r.json():
             issue = r.json()[0]
+            version_match = re.search(r"\b[0-9]+\.[.0-9a]+\b", issue["title"])
+            if version_match:
+                version = version_match.group()
     except ValueError:
         pass
 if not issue:
@@ -143,6 +165,9 @@ if not issue:
         "Release preparation issue not found. Please make sure it has ~Release Prep."
     )
     sys.exit(5)
+if "Sponsor 131" in issue["labels"]:
+    is_mb = True
+    project_order["mullvad-browser"] = 1
 iid = issue["iid"]
 
 linked = {}
@@ -159,8 +184,9 @@ for i in r.json():
 linked = sorted_issues(linked)
 linked_build = sorted_issues(linked_build)
 
+name = "Mullvad" if is_mb else "Tor"
 date = datetime.now().strftime("%B %d %Y")
-print(f"Tor Browser {version} - {date}")
+print(f"{name} Browser {version} - {date}")
 for issues in linked:
     print(f" * {issues[0].get_platforms()}")
     for i in issues:
