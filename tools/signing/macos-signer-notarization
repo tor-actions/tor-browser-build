@@ -14,7 +14,7 @@ if [ -z "${PW}" ]; then
   stty -echo; read PW; stty echo; export PW
 fi
 
-for LANG in $bundle_locales
+for LANG in ALL
 do
   if test -f ${LANG}/tb-${tbb_version}_$LANG.zip.uuid
   then

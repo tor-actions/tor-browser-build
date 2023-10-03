@@ -53,7 +53,7 @@ security unlock $KPW /Users/torbrowser/Library/Keychains/tbb-signing-2021.keycha
 
 unset KPW KEYCHAIN_PW
 
-for LANG in $bundle_locales
+for LANG in ALL
 do
   if [ -f tb-${tbb_version}_${LANG}.zip ]
   then

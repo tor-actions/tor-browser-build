@@ -66,14 +66,11 @@ tar -C "$tmpdir" -xf "$libdmg_file"
 tar -C "$tmpdir" -xf "$hfstools_file"
 export PATH="$PATH:$tmpdir/libdmg-hfsplus:$tmpdir/hfsplus-tools"
 
-for lang in $bundle_locales
-do
-  cd $tmpdir/dmg
-  unzip -q $macos_stapled_dir/tb-${tbb_version}_$lang-stapled.zip
-  cd ..
-  $script_dir/ddmg.sh $macos_signed_dir/${proj_name}-macos-${tbb_version}.dmg $tmpdir/dmg/ "$Proj_Name"
-  rm -rf "dmg/$Proj_Name.app"
-done
+cd $tmpdir/dmg
+unzip -q $macos_stapled_dir/tb-${tbb_version}_ALL-stapled.zip
+cd ..
+$script_dir/ddmg.sh $macos_signed_dir/${proj_name}-macos-${tbb_version}.dmg $tmpdir/dmg/ "$Proj_Name"
+rm -rf "dmg/$Proj_Name.app"
 rm -Rf "$tmpdir"
 
 # move the signed+stapled dmgs to expected output directory for publishing and mar generation

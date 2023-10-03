@@ -20,12 +20,6 @@ test "$version" = "$tbb_version" || \
 test -d "$signed_version_dir" || \
   exit_error "$signed_version_dir does not exist"
 
-ProjName=$(ProjectName)
-nb_locales=$(echo $bundle_locales | wc -w)
-nb_bundles=$(ls -1 "$signed_version_dir/$(project-name)"-*.dmg | wc -l)
-test "$nb_locales" -eq "$nb_bundles" || \
-  exit_error "Wrong number of bundles: $nb_locales != $nb_bundles"
-
 # before building converting the dmg to a mar
 
 make $SIGNING_PROJECTNAME-dmg2mar-$tbb_version_type
