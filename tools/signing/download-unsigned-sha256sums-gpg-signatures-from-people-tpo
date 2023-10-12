@@ -16,6 +16,8 @@ do
       file="$file.asc"
       urls=( \
         "https://people.torproject.org/~$builder/builds/$SIGNING_PROJECTNAME/$tbb_version-build$tbb_version_build/$file" \
+        "https://tb-build-02.torproject.org/~$builder/builds/$SIGNING_PROJECTNAME/$tbb_version_type/unsigned/$tbb_version-build$tbb_version_build/$file" \
+        "https://tb-build-03.torproject.org/~$builder/builds/$SIGNING_PROJECTNAME/$tbb_version_type/unsigned/$tbb_version-build$tbb_version_build/$file" \
         "https://tb-build-04.torproject.org/~$builder/builds/$SIGNING_PROJECTNAME/$tbb_version_type/unsigned/$tbb_version-build$tbb_version_build/$file" \
         "https://tb-build-05.torproject.org/~$builder/builds/$SIGNING_PROJECTNAME/$tbb_version_type/unsigned/$tbb_version-build$tbb_version_build/$file" \
       )
