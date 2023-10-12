@@ -312,7 +312,7 @@ END;
 
 [% IF c("var/linux") -%]
   /var/tmp/dist/gcc/bin/g++ $rootdir/abicheck.cc -o Browser/abicheck -std=c++17
-  [% IF !c("var/torbrowser") -%]
+  [% IF !c("var/tor-browser") -%]
     libdest=Browser/libstdc++
     mkdir -p "$libdest"
     # FIXME: tor-browser-build#40749
