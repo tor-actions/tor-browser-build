@@ -42,12 +42,18 @@ mkdir -p "$destdir"
       "$destdir"/
 [% END -%]
 cd "$destdir"
-cat > .htaccess <<EOF
+cat > .htaccess <<'EOF'
 RewriteEngine On
 RewriteRule ^sha256sums.txt$ sha256sums-unsigned-build.txt
 RewriteRule ^sha256sums.txt.asc$ sha256sums-unsigned-build.txt.asc
 RewriteRule ^sha256sums.incrementals.txt$ sha256sums-unsigned-build.incrementals.txt
 RewriteRule ^sha256sums.incrementals.txt.asc$ sha256sums-unsigned-build.incrementals.txt.asc
+[% IF c("var/tor-browser") -%]
+RewriteRule ^tor-browser-linux64-(.*)_ALL.tar.xz.asc$ tor-browser-linux-x86_64-$1.tar.xz.asc
+RewriteRule ^tor-browser-linux64-(.*)_ALL.tar.xz$ tor-browser-linux-x86_64-$1.tar.xz
+RewriteRule ^tor-browser-linux32-(.*)_ALL.tar.xz.asc$ tor-browser-linux-i686-$1.tar.xz.asc
+RewriteRule ^tor-browser-linux32-(.*)_ALL.tar.xz$ tor-browser-linux-i686-$1.tar.xz
+[% END -%]
 EOF
 
 # empty any existing sh256sums file
