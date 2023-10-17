@@ -223,7 +223,7 @@ function finished-signing-clean-linux-signer {
 function do_step {
   test -f "$steps_dir/$1.done" && return 0
   echo "$(date -Iseconds) - Starting step: $1"
-  $1 | tee "$steps_dir/$1.log" 2>&1
+  $1 2>&1 | tee "$steps_dir/$1.log"
   test ${PIPESTATUS[0]} -eq 0
   touch "$steps_dir/$1.done"
   echo "$(date -Iseconds) - Finished step: $1"
