@@ -229,7 +229,7 @@ RBM_TB_EOF
   mkdir -p $distdir/Debug/Browser
   pushd obj-*
   cp -Lr dist/include $distdir/Debug/
-  find . \( -path ./dist -o -path ./_tests \) -prune -o -name '*.pdb' -exec cp -l {} $distdir/Debug/Browser/ \;
+  find . -path ./_tests -prune -o -name '*.pdb' -exec cp -l {} $distdir/Debug/Browser/ \;
   popd
 [% END -%]
 
