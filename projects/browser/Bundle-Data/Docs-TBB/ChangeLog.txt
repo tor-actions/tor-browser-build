@@ -1,3 +1,23 @@
+Tor Browser 13.0.1 - October 24 2023
+ * All Platforms
+   * Bug 42185: Rebase stable browsers on top of 115.4.0esr [tor-browser]
+   * Bug 42191: Backport security fixes (Android & wontfix) from Firefox 119 to 115.4 - based Tor Browser [tor-browser]
+   * Bug 40975: libstdc++.so.6 is included twice in tor-browser [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.4.0esr
+   * Bug 42182: Default Search Engine Does Not Persist Through Shift to New Identity [tor-browser]
+ * Android
+   * Updated GeckoView to 115.4.0esr
+ * Build System
+   * All Platforms
+     * Updated Go to 1.21.3
+     * Bug 40976: Update download-unsigned-sha256sums-gpg-signatures-from-people-tpo to fetch from tb-build-02 and tb-build-03 [tor-browser-build]
+     * Bug 40062: Copy input directories to containers recursively [rbm]
+   * Windows
+     * Bug 40984: The PDBs for .exe are not included [tor-browser-build]
+   * Linux
+     * Bug 40979: Add redirects from old Linux bundle filename to the new one [tor-browser-build]
+
 Tor Browser 13.0 - October 12 2023
  * All Platforms
    * Updated tor to 0.4.8.7
