@@ -190,18 +190,14 @@
       - `ssh_host_builder` : ssh hostname of machine with unsigned builds
         - **NOTE** : `tor-browser-build` is expected to be in the `$HOME` directory)
       - `ssh_host_linux_signer` : ssh hostname of linux signing machine
-      - `ssh_host_macos_signer` : ssh hostname of macOS signing machine
-    - [ ] `tor-browser-build/tools/signing/set-config.macos-notarization`
-      - `macos_notarization_user` : the email login for a tor notariser Apple Developer account
+    - [ ] `tor-browser-build/tools/signing/set-config.rcodesign-appstoreconnect`
+      - `appstoreconnect_api_key_path` : path to json file containing appstoreconnect api key infos
     - [ ] `set-config.update-responses`
       - `update_responses_repository_dir` : directory where you cloned `git@gitlab.torproject.org:tpo/applications/tor-browser-update-responses.git`
     - [ ] `tor-browser-build/tools/signing/set-config.tbb-version`
       - `tbb_version` : tor browser version string, same as `var/torbrowser_version` in `rbm.conf` (examples: `11.5a12`, `11.0.13`)
       - `tbb_version_build` : the tor-browser-build build number (if `var/torbrowser_build` in `rbm.conf` is `buildN` then this value is `N`)
       - `tbb_version_type` : either `alpha` for alpha releases or `release` for stable releases
-  - [ ] On `$(STAGING_SERVER)` in a separate `screen` session, run the macOS proxy script:
-      - `cd tor-browser-build/tools/signing/`
-      - `./macos-signer-proxy`
   - [ ] On `$(STAGING_SERVER)` in a separate `screen` session, ensure tor daemon is running with SOCKS5 proxy on the default port 9050
   - [ ] run do-all-signing script:
       - `cd tor-browser-build/tools/signing/`
