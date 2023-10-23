@@ -13,6 +13,8 @@ Tor Browser 13.0.1 - October 24 2023
      * Updated Go to 1.21.3
      * Bug 40976: Update download-unsigned-sha256sums-gpg-signatures-from-people-tpo to fetch from tb-build-02 and tb-build-03 [tor-browser-build]
      * Bug 40062: Copy input directories to containers recursively [rbm]
+   * Windows + Linux
+     * Bug 40991: Fix creation of downloads-windows-x86_64.json and downloads-linux-x86_64.json [tor-browser-build]
    * Windows
      * Bug 40984: The PDBs for .exe are not included [tor-browser-build]
    * Linux
