@@ -1,3 +1,7 @@
+Tor Browser 13.0.2 - October 26 2023
+ * Android
+   * Bump firefox-android commit to generate new version code to allow uploading to Google Play (see tor-browser-build#40992)
+
 Tor Browser 13.0.1 - October 24 2023
  * All Platforms
    * Bug 42185: Rebase stable browsers on top of 115.4.0esr [tor-browser]
