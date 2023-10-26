@@ -11,6 +11,17 @@ RewriteRule ^sha256sums.txt.asc$ sha256sums-unsigned-build.txt.asc
 RewriteRule ^sha256sums.incrementals.txt$ sha256sums-unsigned-build.incrementals.txt
 RewriteRule ^sha256sums.incrementals.txt.asc$ sha256sums-unsigned-build.incrementals.txt.asc
 EOF
+
+# Adding redirects for tor-browser-build#40979
+if is_project torbrowser; then
+  cat >> "$dist_dir/.htaccess" << 'EOF'
+RewriteRule ^tor-browser-linux64-(.*)_ALL.tar.xz.asc$ tor-browser-linux-x86_64-$1.tar.xz.asc
+RewriteRule ^tor-browser-linux64-(.*)_ALL.tar.xz$ tor-browser-linux-x86_64-$1.tar.xz
+RewriteRule ^tor-browser-linux32-(.*)_ALL.tar.xz.asc$ tor-browser-linux-i686-$1.tar.xz.asc
+RewriteRule ^tor-browser-linux32-(.*)_ALL.tar.xz$ tor-browser-linux-i686-$1.tar.xz
+EOF
+fi
+
 chgrp -R tb-release "$dist_dir"
 chmod 775 "$dist_dir"
 chmod 664 "$dist_dir"/*
