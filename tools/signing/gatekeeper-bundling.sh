@@ -45,7 +45,7 @@ test -f "$libdmg_file" || \
              "You can build it with:" \
              "  ./rbm/rbm build --target no_containers libdmg-hfsplus" \
              "See var/deps in projects/libdmg-hfsplus/config for the list of build dependencies"
-hfstools_file="$script_dir/../../out/hfsplus-tools/hfsplus-tools-540.1.linux3-81ff5b.tar.gz"
+hfstools_file="$script_dir/../../out/hfsplus-tools/hfsplus-tools-540.1.linux3-2acaa4.tar.zst"
 test -f "$hfstools_file" || \
   exit_error "$hfstools_file is missing." \
              "You can build it with:" \
