@@ -14,7 +14,7 @@ test -f "$appstoreconnect_api_key_path" || \
 
 "$script_dir/setup-rcodesign"
 
-tmpdir=$(mktemp -d)
+tmpdir=$(mktemp -d -p /var/tmp)
 trap "rm -Rf $tmpdir" EXIT
 
 Proj_Name=$(Project_Name)
