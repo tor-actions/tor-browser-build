@@ -1,3 +1,43 @@
+Tor Browser 13.0.3 - November 06 2023
+ * Android
+   * Bug 42222: Fix TorDomainIsolator initialization on Android [tor-browser]
+
+Tor Browser 13.5a1 - November 01 2023
+ * All Platforms
+   * Updated OpenSSL to 3.0.12
+   * Updated NoScript to 11.4.28
+   * Bug 42191: Backport security fixes (Android & wontfix) from Firefox 119 to 115.4 - based Tor Browser [tor-browser]
+   * Bug 42204: Drop unused aboutTor.dtd [tor-browser]
+   * Bug 40975: libstdc++.so.6 is included twice in tor-browser [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.4.0esr
+   * Bug 41341: Fix style and position of "Always Prioritize Onions" wingpanel [tor-browser]
+   * Bug 42108: Tor Circuit button not shown if TLS handshake fails [tor-browser]
+   * Bug 42182: Default Search Engine Does Not Persist Through Shift to New Identity [tor-browser]
+   * Bug 42184: Setting "Homepage and new windows" ignores "Blank Page" value [tor-browser]
+ * Windows + macOS
+   * Bug 42154: Empty the clipboard on browser shutdown only if content comes from private browsing windows [tor-browser]
+ * Android
+   * Updated GeckoView to 115.4.0esr
+   * Bug 42201: Make the script sign all the channels for local builds [tor-browser]
+   * Bug 42222: Fix TorDomainIsolator initialization on Android [tor-browser]
+ * Build System
+   * All Platforms
+     * Update Go to 1.21.3
+     * Bug 40852: Reproducible build of the the lox client library to wasm [tor-browser-build]
+     * Bug 40934: Remove $bundle_locales from signing scripts now that we're on ALL for everything [tor-browser-build]
+     * Bug 40976: Update download-unsigned-sha256sums-gpg-signatures-from-people-tpo to fetch from tb-build-02 and tb-build-03 [tor-browser-build]
+     * Bug 40982: Fix logging in tools/signing/do-all-signing [tor-browser-build]
+     * Bug 40983: Bump the various branches to 13.5 on main [tor-browser-build]
+     * Bug 40989: Add .nobackup files to reproducible and disposable directores [tor-browser-build]
+     * Bug 40062: Copy input directories to containers recursively [rbm]
+   * Windows
+     * Bug 40984: The PDBs for .exe are not included [tor-browser-build]
+   * macOS
+     * Bug 29815: Sign our macOS bundles on Linux [tor-browser-build]
+   * Linux
+     * Bug 40979: Add redirects from old Linux bundle filename to the new one [tor-browser-build]
+
 Tor Browser 13.0.2 - October 26 2023
  * Android
    * Bump firefox-android commit to generate new version code to allow uploading to Google Play (see tor-browser-build#40992)

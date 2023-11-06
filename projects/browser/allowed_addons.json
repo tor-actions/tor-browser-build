@@ -17,7 +17,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/34/9734/13299734/13299734.png?modified=1565722641"
           }
         ],
-        "average_daily_users": 1045779,
+        "average_daily_users": 1047950,
         "categories": {
           "android": [
             "experimental",
@@ -221,10 +221,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.556,
-          "bayesian_average": 4.554850109055476,
-          "count": 5200,
-          "text_count": 1632
+          "average": 4.5563,
+          "bayesian_average": 4.555166332139257,
+          "count": 5222,
+          "text_count": 1636
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/reviews/",
         "requires_payment": false,
@@ -321,7 +321,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/versions/",
-        "weekly_downloads": 30788
+        "weekly_downloads": 32054
       },
       "notes": null
     },
@@ -337,7 +337,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/56/7656/6937656/6937656.png?modified=1550343990"
           }
         ],
-        "average_daily_users": 260965,
+        "average_daily_users": 258996,
         "categories": {
           "android": [
             "security-privacy"
@@ -553,10 +553,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.8133,
-          "bayesian_average": 4.80862905917694,
-          "count": 1366,
-          "text_count": 241
+          "average": 4.8121,
+          "bayesian_average": 4.80748856406892,
+          "count": 1368,
+          "text_count": 242
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/reviews/",
         "requires_payment": false,
@@ -641,7 +641,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/versions/",
-        "weekly_downloads": 4245
+        "weekly_downloads": 3695
       },
       "notes": null
     },
@@ -657,7 +657,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/73/4073/5474073/5474073.png?modified=1469820907"
           }
         ],
-        "average_daily_users": 1155791,
+        "average_daily_users": 1161828,
         "categories": {
           "android": [
             "security-privacy"
@@ -669,18 +669,18 @@
         "contributions_url": "https://paypal.me/SupportEFF?utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2014-05-01T18:23:16Z",
         "current_version": {
-          "id": 5622730,
+          "id": 5644330,
           "compatibility": {
             "firefox": {
-              "min": "60.0",
+              "min": "78.0",
               "max": "*"
             },
             "android": {
-              "min": "60.0",
+              "min": "113.0",
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/privacy-badger17/versions/5622730",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/privacy-badger17/versions/5644330",
           "is_strict_compatibility_enabled": false,
           "license": {
             "id": 6,
@@ -691,22 +691,22 @@
             "url": "http://www.gnu.org/licenses/gpl-3.0.html"
           },
           "release_notes": {
-            "en-US": "<ul><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/07ac27a67ad814cdf74ed5f221177f69a522a26b6d4c9cc363f20b5ac87e00e7/https%3A//www.eff.org/deeplinks/2023/09/new-privacy-badger-prevents-google-mangling-more-your-links-and-invading-your\" rel=\"nofollow\">Improved link tracking protection</a> (\"link unwrapping\") on Google sites. With this update Privacy Badger removes tracking from links in Google Docs, Gmail, Google Maps, and Google Images results. Privacy Badger now also removes tracking from links added after scrolling through Google Search results.</li><li>Fixed various site breakages</li><li>Added Malay and restored Serbian translations</li><li>Improved Traditional Chinese translations</li></ul>"
+            "en-US": "<ul><li>Added widget replacement for embedded Tweets. Privacy Badger replaces potentially useful widgets with placeholders. These replacements protect privacy while letting you restore the original widget whenever you want it or need it for the page to function.</li><li>Fixed various site breakages</li><li>Improved Brazilian Portuguese and Swedish translations</li></ul>"
           },
-          "reviewed": "2023-09-15T11:48:09Z",
-          "version": "2023.9.12",
+          "reviewed": "2023-11-02T08:16:06Z",
+          "version": "2023.10.31",
           "files": [
             {
-              "id": 4167070,
-              "created": "2023-09-12T19:42:38Z",
-              "hash": "sha256:eae97d9d3df3350476901ca412505cb4a43d0e7fa79bd9516584935158f82095",
+              "id": 4188670,
+              "created": "2023-10-31T21:43:07Z",
+              "hash": "sha256:37e96cbd257b73d7350605ed20494a82b578f25a2cefc3de2dab019e5ff6ced1",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 1986265,
+              "size": 1882955,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/4167070/privacy_badger17-2023.9.12.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/4188670/privacy_badger17-2023.10.31.xpi",
               "permissions": [
                 "alarms",
                 "tabs",
@@ -1135,7 +1135,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2023-09-15T11:48:09Z",
+        "last_updated": "2023-11-02T08:16:06Z",
         "name": {
           "en-US": "Privacy Badger"
         },
@@ -1181,10 +1181,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.7969,
-          "bayesian_average": 4.794146592865077,
-          "count": 2309,
-          "text_count": 440
+          "average": 4.794,
+          "bayesian_average": 4.791288988997076,
+          "count": 2320,
+          "text_count": 441
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/reviews/",
         "requires_payment": false,
@@ -1208,7 +1208,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/versions/",
-        "weekly_downloads": 27720
+        "weekly_downloads": 24811
       },
       "notes": null
     },
@@ -1224,7 +1224,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 6840315,
+        "average_daily_users": 6892995,
         "categories": {
           "android": [
             "security-privacy"
@@ -1236,18 +1236,18 @@
         "contributions_url": "",
         "created": "2015-04-25T07:26:22Z",
         "current_version": {
-          "id": 5626680,
+          "id": 5644148,
           "compatibility": {
             "firefox": {
               "min": "78.0",
               "max": "*"
             },
             "android": {
-              "min": "79.0",
+              "min": "113.0",
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/ublock-origin/versions/5626680",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/ublock-origin/versions/5644148",
           "is_strict_compatibility_enabled": false,
           "license": {
             "id": 6,
@@ -1258,22 +1258,22 @@
             "url": "http://www.gnu.org/licenses/gpl-3.0.html"
           },
           "release_notes": {
-            "en-US": "See complete release notes for <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/e38b38b24e46f55b7c57f83b5227e089e4f5c3f58cde96ba66b0146bd51d0c6c/https%3A//github.com/gorhill/uBlock/releases/tag/1.52.2\" rel=\"nofollow\">1.52.2</a>.\n\n<b>Fixes / changes</b>\n\n<ul><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/c8600567c8c689e1622572c00fd6ebd61a08dbdc4531b29e6826bd06301493ef/https%3A//github.com/gorhill/uBlock/commit/ce959164bb\" rel=\"nofollow\">Fix XHR hook partial response handling</a> (fix by @ephemeralViolette)</li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/086a07ab99860699ff92c95db622107237042b20e0572139492ae8edf271b49c/https%3A//github.com/gorhill/uBlock/commit/7ef3408712\" rel=\"nofollow\">Fix regression in <code>:is()</code> operator</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/70ff1de4e99376d9ec6147065836d44e449b03b24b39703d1f34d6d5766e6162/https%3A//github.com/gorhill/uBlock/commit/313a3121c9\" rel=\"nofollow\">Do not assume set viewport for popup panel when using portrait mode in descktop</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/bbe0786f040f57b52d6ee71a598b3a3917cfce1929ead27cda95ab65ef302ed8/https%3A//github.com/gorhill/uBlock/commit/2571660161\" rel=\"nofollow\">Fix removal of <code>:scope</code> prefix in <code>:has()</code> operator</a></li></ul>\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/3851922ac2114338a1a10a77f1df7185ae001e84099468aad207e003c942f728/https%3A//github.com/gorhill/uBlock/compare/1.52.0...1.52.2\" rel=\"nofollow\">Commits history since last version</a>."
+            "en-US": "See complete release notes for <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8e97e4fad4a9080cacd692facb78b65ab79a35653a4f79faf3fb61991994a985/https%3A//github.com/gorhill/uBlock/releases/tag/1.53.0\" rel=\"nofollow\">1.53.0</a>.\n\n<b>Fixes / changes</b>\n\n<ul><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/04dc7add7ba2b97b2c9b89a9da5ed0f59b5b9cd812c950144fa78768dbb38567/https%3A//github.com/gorhill/uBlock/commit/b445f4f4cd\" rel=\"nofollow\">Improve google-ima shim script</a> (by @kzar)</li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/b4a71c78d84ca82dd6abd18eab8a1747a2cc8a05e0fce7dc06489d8a60f88251/https%3A//github.com/gorhill/uBlock/commit/d32204f984\" rel=\"nofollow\">Match <code>type</code> exactly in <code>prevent-addEventListener</code> scriptlet</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/ff70ef00dfe5f67a6928e76c88b17fb873d05b4bc58e9e5305880abfcbde8a95/https%3A//github.com/gorhill/uBlock/commit/a9ff41ae55\" rel=\"nofollow\">Add filtering expressions for logger output</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/02bf9ee4e085caa28d989f11b2082d4ef646c9098aecc9f3b72db516892476ef/https%3A//github.com/gorhill/uBlock/commit/f1ce3b2191\" rel=\"nofollow\">Add warning against adding custom filters from untrusted sources</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/6c4da5a1939b3db01c9ee39cccd901278f2bb6d4d1dad1a1a637a9342403170b/https%3A//github.com/gorhill/uBlock/commit/64c1f8767c\" rel=\"nofollow\">Consider <em>My filters</em> an untrusted source by default</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/ca1700dc2ee0250b8cf6d8bebf4ebe582a8448965e5693303bd4cd3e2d191a2b/https%3A//github.com/gorhill/uBlock/commit/1c9da227d7\" rel=\"nofollow\">Add <code>trusted-prune-inbound-object</code> scriptlet</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/ba6f6721dda39f05a31f174fa4c0971e46a0fe66bc0e1deeff8eaede7a6ca30d/https%3A//github.com/gorhill/uBlock/commit/607bba6eaf\" rel=\"nofollow\">Add <code>dontOverwrite</code> vararg to <code>(trusted-)set-cookie</code> scriptlets</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/35c49cd46c6ee8f6de39a9424f4cbe637207125d8afa237037bed8a17f03e623/https%3A//github.com/gorhill/uBlock/commit/eb66129fbf\" rel=\"nofollow\">Add \"on\" and \"off\" values to set-cookie</a> (by @peace2000)</li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/4927397ea80a4a61cc940c1f6f976042b772a9e34c72b0ece77cc3e7bb24f4dc/https%3A//github.com/gorhill/uBlock/commit/41d91ed080\" rel=\"nofollow\">Fine tune <code>set-local-storage-item</code> as per feedback</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/7fa8961d810dcba3ee585c84b2d03e339cbbc1a7beb84a13eb076045c9f4fb1b/https%3A//github.com/gorhill/uBlock/commit/9d3acd91b8\" rel=\"nofollow\">Support AdGuard's <code>[trusted-]set-cookie-reload</code> scriptlets</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/349cef9dc278896ca7daa78edcc468fa2f1236723fe35eed57c3e5925692f047/https%3A//github.com/gorhill/uBlock/commit/7daf31336a\" rel=\"nofollow\">Ignore assets older than cached version when fetching from CDNs</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/b0dea07b330af0f97e32e2a4b0b3e8d6d5a36b4f85dda07c15cbeccb7f7898a7/https%3A//github.com/gorhill/uBlock/commit/027c7a4fb5\" rel=\"nofollow\">Support quoting scriptlet parameters with backticks</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/5d764bfef4a34dddcc078fab3f7b0e4c352828fbffe44f37870d6b29277636e6/https%3A//github.com/gorhill/uBlock/commit/2e4525fe3c\" rel=\"nofollow\">Add new static network filter option: <code>urltransform</code></a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/5169835229aef5279e13d79f6f618b8d65db2480b6d68addbe06b06d4d17c959/https%3A//github.com/gorhill/uBlock/commit/bee64ebd90\" rel=\"nofollow\">Support pane: mark lists as obsolete only when update button is clicked</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/3f93ea80841656313527524268fcfde9475bc4220103619d323dc9f009b117aa/https%3A//github.com/gorhill/uBlock/commit/c96a673338\" rel=\"nofollow\">Bring <code>header=</code> filter option out of experimental status</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/6f0c547fbe7e39c23f4e0de4a751f26323094c4fdfbb145fe5180be70876739f/https%3A//github.com/gorhill/uBlock/commit/7af88b025d\" rel=\"nofollow\">Add <code>trusted-click-element</code> scriptlet</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/396bbf79d31a089d9396f0f706527384c056be0fefe506e22a4eb37262c289c4/https%3A//github.com/gorhill/uBlock/commit/0325dcdcb4\" rel=\"nofollow\">Add ability to update lists through links with specifically crafted URLs</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/da3831d0dd386383b7c063e6c9eeb1de648d57f8e5576c4140de95ef77ad884b/https%3A//github.com/gorhill/uBlock/commit/e5c1b63315\" rel=\"nofollow\">Fix overzealous matching in <code>(remove|replace)-node-text</code> scriptlets</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/106e2566988d1f7f89ef4ac63f5e6c441004dda7a5ae68023236889f3ffcce6c/https%3A//github.com/gorhill/uBlock/commit/6f74df942d\" rel=\"nofollow\">Fix <code>no-xhr-if</code> scriptlet for Firefox</a></li><li>[More ...]\n\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/d8295679b79e096909c47f38e679894d0eadd34815804bfec532098a66e598bc/https%3A//github.com/gorhill/uBlock/compare/1.52.2...1.53.0\" rel=\"nofollow\">Commits history since last version</a>.</li></ul>"
           },
-          "reviewed": "2023-09-25T15:47:17Z",
-          "version": "1.52.2",
+          "reviewed": "2023-11-02T12:31:33Z",
+          "version": "1.53.0",
           "files": [
             {
-              "id": 4171020,
-              "created": "2023-09-21T17:09:35Z",
-              "hash": "sha256:e8ee3f9d597a6d42db9d73fe87c1d521de340755fd8bfdd69e41623edfe096d6",
+              "id": 4188488,
+              "created": "2023-10-31T12:35:52Z",
+              "hash": "sha256:5403474101f753b5d38c09135e40d82a115afcd01310d78133a4af363462194b",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 3578876,
+              "size": 3593021,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/4171020/ublock_origin-1.52.2.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/4188488/ublock_origin-1.53.0.xpi",
               "permissions": [
                 "dns",
                 "menus",
@@ -1294,7 +1294,10 @@
                 "https://forums.lanik.us/*",
                 "https://github.com/*",
                 "https://*.github.io/*",
-                "https://*.letsblock.it/*"
+                "https://*.letsblock.it/*",
+                "https://github.com/uBlockOrigin/*",
+                "https://ublockorigin.github.io/*",
+                "https://*.reddit.com/r/uBlockOrigin/*"
               ],
               "optional_permissions": [],
               "host_permissions": []
@@ -1309,7 +1312,7 @@
           "ca": "Un bloquejador eficient: el consum de memòria i de processador és baix però, no obstant això, pot carregar i aplicar milers de filtres més que altres bloquejadors coneguts.\n\nGràfic de l'eficiència: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/407a22e7e017297705e927653caa7e67ad67aabb741f33b91851c56c0544a0d9/https%3A//github.com/gorhill/uBlock/wiki/uBlock-vs.-ABP%3A-efficiency-compared\" rel=\"nofollow\">https://github.com/gorhill/uBlock/wiki/uBlock-vs.-ABP:-efficiency-compared</a>\n\nÚs: El gran botó d'engegada de la finestra emergent serveix per a desactivar/activar permanentment el uBlock per al lloc web actual. No és un botó d'engegada general de l'extensió.\n\n***\n\nFlexible, és més que un \"bloquejador d'anuncis\": també pot llegir i crear filtres a partir de fitxers hosts.\n\nPer defecte, es carreguen i s'apliquen aquestes llistes de filtres:\n\n- EasyList\n- Peter Lowe’s Ad server list\n- EasyPrivacy\n- Dominis de malware\n\nSi voleu, podeu seleccionar altres llistes disponibles:\n\n- Fanboy’s Enhanced Tracking List\n- Dan Pollock’s hosts file\n- hpHosts’s Ad and tracking servers\n- MVPS HOSTS\n- Spam404\n- I altres\n\nÒbviament, com més filtres activeu, més gran serà el consum de memòria. Però fins i tot després d'afegir dues llistes extra de Fanboy, hpHosts’s Ad and tracking servers, el uBlock₀ encara té un consum de memòria inferior al d'altres bloquejadors coneguts.\n\nTambé heu de ser conscient que seleccionant algunes d'aquestes llistes extra és més probable trobar-se amb llocs webs inservibles -- especialment aquelles llistes que s'utilitzen normalment com a fitxer de hosts.\n\n***\n\nSense les llistes predefinides de filtres, aquesta extensió no és res. Així que, si en cap moment voleu fer una aportació, penseu en les persones que treballen durament per a mantenir les llistes de filtres que utilitzeu, a disposició de tothom de manera gratuïta.\n\n***\n\nLliure.\nCodi obert amb llicència pública (GPLv3)\nPer usuaris per a usuaris.\n\nCol·laboradors a Github: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/9bfaba4f3fe3310ae0a3189187f5fbab185097d85398752765e086889775079e/https%3A//github.com/gorhill/uBlock/graphs/contributors\" rel=\"nofollow\">https://github.com/gorhill/uBlock/graphs/contributors</a>\nCol·laboradors a Crowdin: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/6a44868e1580018df8d4d87adf8e97cc74b71b962a73dd5a64604f99db767287/https%3A//crowdin.net/project/ublock\" rel=\"nofollow\">https://crowdin.net/project/ublock</a>\n\n***\n\nAquesta és, en certa manera, una versió primitiva. Tingueu-ho en compte quan en doneu la vostra opinió.\n\nRegistre de canvis del projecte:\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/de148deb19b52874eb4c5726859834f3294a6057ed44e873c958acee4c920062/https%3A//github.com/gorhill/uBlock/releases\" rel=\"nofollow\">https://github.com/gorhill/uBlock/releases</a>",
           "cs": "Efektivní blokovač: nezanechává velké stopy, nezatěžuje paměť a CPU, a přesto může načítat a využívat o několik tisíc filtrů více, než jiné populární blockery.\n\nGrafický přehled jeho účinnosti: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/407a22e7e017297705e927653caa7e67ad67aabb741f33b91851c56c0544a0d9/https%3A//github.com/gorhill/uBlock/wiki/uBlock-vs.-ABP%3A-efficiency-compared\" rel=\"nofollow\">https://github.com/gorhill/uBlock/wiki/uBlock-vs.-ABP:-efficiency-compared</a>\n\nPoužití: Velký vypínač ve vyskakovacím okně trvale povolí/zakáže uBlock pro otevřenou stránku. Funguje pouze pro aktivní webovou stránku, není to obecný vypínač.\n\n***\n\nFlexibilní, více než jen \"blokovač reklam\": umí také číst a vytvářet filtry z hosts souborů.\n\nPo instalaci jsou načteny a použity tyto filtry:\n\n- EasyList\n- Peter Lowe’s Ad server list\n- EasyPrivacy\n- Malware domains\n\nPokud chcete, můžete si vybrat tyto další filtry:\n\n- Fanboy’s Enhanced Tracking List\n- Dan Pollock’s hosts file\n- hpHosts’s Ad and tracking servers\n- MVPS HOSTS\n- Spam404\n- A mnoho dalších\n\nČím více filtrů je povoleno, tím je samozřejmě větší stopa v paměti. I přesto má ale uBlock₀ i po přidání dvou dalších seznamů od Fanboye a \"hpHosts’s Ad and tracking servers\" menší vliv na paměť než mnohé další velmi populární blockery.\n\nDále mějte na paměti, že vybírání více filtrů zvyšuje šanci chybného zobrazení webů -- především u seznamů, které se normálně používají jako hosts soubory.\n\n***\n\nBez předvolených seznamů filtrů by toto rozšíření bylo k ničemu. Pokud tedy opravdu budete chtít něčím přispět, myslete na lidi, kteří spravují Vámi používané seznamy filtrů a uvolňují je pro všechny zdarma.\n\n***\n\nSvobodný software.\nOpen source s veřejnou licencí (GPLv3)\nOd uživatelů pro uživatele.\n\nPřispěvatelé na Githubu: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/9bfaba4f3fe3310ae0a3189187f5fbab185097d85398752765e086889775079e/https%3A//github.com/gorhill/uBlock/graphs/contributors\" rel=\"nofollow\">https://github.com/gorhill/uBlock/graphs/contributors</a>\nPřispěvatelé na Crowdinu: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/6a44868e1580018df8d4d87adf8e97cc74b71b962a73dd5a64604f99db767287/https%3A//crowdin.net/project/ublock\" rel=\"nofollow\">https://crowdin.net/project/ublock</a>\n\n***\n\nJde o poměrně ranou verzi, mějte to na paměti při recenzování.\n\nChange log projektu:\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/de148deb19b52874eb4c5726859834f3294a6057ed44e873c958acee4c920062/https%3A//github.com/gorhill/uBlock/releases\" rel=\"nofollow\">https://github.com/gorhill/uBlock/releases</a>",
           "da": "En effektiv blocker: let på hukommelse og CPU forbrug,. Kan indlæse og anvende tusindvis af flere filtre end andre populære blockere derude.\n\nIllustreret oversigt over effektiviteten: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/54af2c2b64bc518ff8c7fb93e22ea308d599fca1bc03ab6aa8e08b0ec6566a80/https%3A//github.com/gorhill/uBlock/wiki/uBlock-vs.-ABP\" rel=\"nofollow\">https://github.com/gorhill/uBlock/wiki/uBlock-vs.-ABP</a> :-Efficiency-compared\n\nAnvendelse: Den Store power knap i pop-up-vinduet kan permanent deaktivere/aktivere uBlock på det aktuelle websted. Dette gælder kun for det aktuelle websted, det er ikke en global afbryderknap.\n\n***\n\nFleksibel, det er mere end en \"ad blocker\": den kan også læse og oprette filtre fra hosts-filer.\n\nFra starten af er disse lister over filtre indlæst og anvendt:\n\n- EasyList\n- Peter Lowe’s Ad server list\n- EasyPrivacy\n- Malware domains\n\nFlere lister er tilgængelige hvis du ønsker det:\n\n- Fanboy’s Enhanced Tracking List\n- Dan Pollock’s hosts file\n- hpHosts’s Ad and tracking servers\n- MVPS HOSTS\n- Spam404\n- Osv.\n\nSelvfølgelig vil flere aktive filtre betyde højere hukommelsesforbrug. Selv efter tilføjelse af Fanboys to ekstra lister, og hpHosts’s Ad and tracking server, har uBlock₀ stadig et lavere hukommelsesforbrug end andre blockere derude.\n\nVær desuden opmærksom på, at hvis du vælger nogle af disse ekstra lister kan det føre til højere sandsynlighed for, at webstedet bliver vist forkert - især de lister der normalt anvendes som hosts-fil.\n\n***\n\nUden de forudindstillede lister med filtre er denne udvidelse intet. Hvis du nogensinde  virkelig ønsker at bidrage med noget, så tænk på de mennesker der arbejder hårdt for at vedligeholde de filterlister du bruger, som alle blev stillet gratis til rådighed for alle.\n\n***\n\nGratis.\nOpen source med offentlig licens (GPLv3)\nFor brugere, af brugere.\n\nBidragydere @ Github: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/9bfaba4f3fe3310ae0a3189187f5fbab185097d85398752765e086889775079e/https%3A//github.com/gorhill/uBlock/graphs/contributors\" rel=\"nofollow\">https://github.com/gorhill/uBlock/graphs/contributors</a>\nBidragydere @ Crowdin: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/6a44868e1580018df8d4d87adf8e97cc74b71b962a73dd5a64604f99db767287/https%3A//crowdin.net/project/ublock\" rel=\"nofollow\">https://crowdin.net/project/ublock</a>\n\n***\n\nDette er en tidlig version. Hav dette i tankerne når du skriver en anmeldelse.\n\nProjekt changelog:\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/de148deb19b52874eb4c5726859834f3294a6057ed44e873c958acee4c920062/https%3A//github.com/gorhill/uBlock/releases\" rel=\"nofollow\">https://github.com/gorhill/uBlock/releases</a>",
-          "de": "Ein effizienter Blocker: Geringer Speicherbedarf und niedrige CPU-Belastung - und dennoch werden Tausende an Filtern mehr angewendet als bei anderen populären Blockern.\n\nEin illustrierter Überblick über seine Effizienz: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/407a22e7e017297705e927653caa7e67ad67aabb741f33b91851c56c0544a0d9/https%3A//github.com/gorhill/uBlock/wiki/uBlock-vs.-ABP%3A-efficiency-compared\" rel=\"nofollow\">https://github.com/gorhill/uBlock/wiki/uBlock-vs.-ABP:-efficiency-compared</a>\n\nBenutzung: Der An-/Ausschaltknopf beim Klicken des Erweiterungssymbols dient zum An-/Ausschalten von uBlock auf der aktuellen Webseite. Dies wirkt sich also nur auf die aktuelle Webseite aus und nicht global.\n\n***\n\nuBlock ist flexibel, denn es ist mehr als ein \"Werbeblocker\": Es verarbeitet auch Filter aus mehreren hosts-Dateien.\n\nStandardmäßig werden folgende Filterlisten geladen und angewandt:\n\n- EasyList\n- Peter Lowe’s Ad server list\n- EasyPrivacy\n- Malware domains\n\nAuf Wunsch können zusätzliche Listen ausgewählt werden:\n\n- Fanboy’s Enhanced Tracking List\n- Dan Pollock’s hosts file\n- hpHosts’s Ad and tracking servers\n- MVPS HOSTS\n- Spam404\n- etc.\n\nNatürlich ist der Speicherbedarf umso höher, desto mehr Filter angewandt werden. Aber selbst mit den zwei zusätzlichen Listen von Fanboy und hpHosts’s Ad and tracking servers ist der Speicherbedarf von uBlock₀ geringer als bei anderen sehr populären Blockern.\n\nBedenke allerdings, dass durch die Wahl zusätzlicher Listen die Wahrscheinlichkeit größer wird, dass bestimmte Webseiten nicht richtig geladen werden - vor allem bei Listen, die normalerweise als hosts-Dateien verwendet werden.\n\n***\n\nOhne die vorgegebenen Filterlisten ist diese Erweiterung nichts. Wenn du also etwas beitragen möchtest, dann denke an die Menschen, die hart dafür arbeiten, die von dir benutzten Filterlisten zu pflegen, und diese für uns alle frei verfügbar gemacht haben.\n\n***\n\nKostenlos.\nOpen source mit Public License (GPLv3)\nFür Benutzer von Benutzern.\n\nMitwirkende @ Github: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/9bfaba4f3fe3310ae0a3189187f5fbab185097d85398752765e086889775079e/https%3A//github.com/gorhill/uBlock/graphs/contributors\" rel=\"nofollow\">https://github.com/gorhill/uBlock/graphs/contributors</a>\nMitwirkende @ Crowdin: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/6a44868e1580018df8d4d87adf8e97cc74b71b962a73dd5a64604f99db767287/https%3A//crowdin.net/project/ublock\" rel=\"nofollow\">https://crowdin.net/project/ublock</a>\n\n***\n\nDies ist eine ziemlich frühe Version - bitte denke daran, wenn du sie bewertest.\n\nChange log des Projekts:\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/de148deb19b52874eb4c5726859834f3294a6057ed44e873c958acee4c920062/https%3A//github.com/gorhill/uBlock/releases\" rel=\"nofollow\">https://github.com/gorhill/uBlock/releases</a>",
+          "de": "Ein effizienter Blocker: Geringer Speicherbedarf und niedrige CPU-Belastung - und dennoch werden Tausende an Filtern mehr angewendet als bei anderen populären Blockern.\n\nBenutzung: Der An-/Ausschaltknopf beim Klicken des Erweiterungssymbols dient zum An-/Ausschalten von uBlock auf der aktuellen Webseite. Dies wirkt sich also nur auf die aktuelle Webseite aus und nicht global.\n\n***\n\nuBlock ist flexibel, denn es ist mehr als ein \"Werbeblocker\": Es verarbeitet auch Filter aus mehreren hosts-Dateien.\n\nStandardmäßig werden folgende Filterlisten geladen und angewandt:\n\n- EasyList (Werbung)\n- EasyPrivacy (Tracking)\n- Peter Lowe’s Ad server list (Werbung und Tracking)\n- Online Malicious URL Blocklist\n- uBO's eigene Filterlisten\n\nAuf Wunsch können zusätzliche Listen ausgewählt werden:\n\n- EasyList Cookie\n- Fanboy Annoyances\n- AdGuard Annoyances\n- Dan Pollock’s hosts file\n- Und viele weitere\n\n***\n\nOhne die vorgegebenen Filterlisten ist diese Erweiterung nichts. Wenn du also etwas beitragen möchtest, dann denke an die Menschen, die hart dafür arbeiten, die von dir benutzten Filterlisten zu pflegen, und diese für uns alle frei verfügbar gemacht haben.\n\n***\n\nKostenlos.\nOpen source mit Public License (GPLv3)\nFür Benutzer von Benutzern.\n\nMitwirkende @ Github: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/9bfaba4f3fe3310ae0a3189187f5fbab185097d85398752765e086889775079e/https%3A//github.com/gorhill/uBlock/graphs/contributors\" rel=\"nofollow\">https://github.com/gorhill/uBlock/graphs/contributors</a>\nMitwirkende @ Crowdin: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/6a44868e1580018df8d4d87adf8e97cc74b71b962a73dd5a64604f99db767287/https%3A//crowdin.net/project/ublock\" rel=\"nofollow\">https://crowdin.net/project/ublock</a>\n\n***\n\nChange log des Projekts:\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/de148deb19b52874eb4c5726859834f3294a6057ed44e873c958acee4c920062/https%3A//github.com/gorhill/uBlock/releases\" rel=\"nofollow\">https://github.com/gorhill/uBlock/releases</a>",
           "el": "Ένας αποτελεσματικός αναστολέας διαφημίσεων: παρόλο το ελαφρύ του αποτύπωμα στη μνήμη και τον επεξεργαστή μπορεί να εφαρμόσει χιλιάδες περισσότερα φίλτρα σε σχέση με άλλους δημοφιλείς blockers.\n\nΑπεικονιζόμενη επισκόπηση της αποτελεσματικότητάς του: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/407a22e7e017297705e927653caa7e67ad67aabb741f33b91851c56c0544a0d9/https%3A//github.com/gorhill/uBlock/wiki/uBlock-vs.-ABP%3A-efficiency-compared\" rel=\"nofollow\">https://github.com/gorhill/uBlock/wiki/uBlock-vs.-ABP:-efficiency-compared</a>\n\nΧρήση: Το μεγάλο πλήκτρο απενεργοποίησης/ενεργοποίησης στο αναδυόμενο παράθυρο, χρησιμεύει στην εναλλαγή κατάστασης του uBlock για τον τρέχοντα ιστότοπο. Η εφαρμογή της ρύθμισης αυτής γίνεται μόνο για τον τρέχοντα ιστότοπο και δεν επιβάλλεται καθολικά.\n\n***\n\nΕυέλικτος, είναι πολλά περισσότερα από ένας απλός \"ad blocker\": μπορεί επιπλέον να διαβάζει και να δημιουργεί φίλτρα από αρχεία hosts.\n\nΚατά προεπιλογή, οι λίστες φίλτρων που φορτώνονται και επιβάλλονται είναι οι εξής:\n\n- EasyList\n- Λίστα διακομιστών διαφημίσεων του Peter Lowe\n- EasyPrivacy\n- Κακόβουλοι τομείς\n\nΕπιπλέον λίστες είναι διαθέσιμες για να επιλέξετε εάν το επιθυμείτε:\n\n- Ενισχυμένη Ιχνωσική Λίστα του Fanboy\n- Αρχείο hosts του Dan Pollock\n- Διαφημίσεις και διακομιστές ίχνωσης hpHosts\n- MVPS HOSTS\n- Spam404\n- και πολλές άλλες\n\nΦυσικά, όσο περισσότερα φίλτρα ενεργοποιούνται, τόσο αυξάνεται το αποτύπωμα της μνήμης. Ωστόσο, ακόμη και μετά από την προσθήκη δυο επιπλέον λιστών, του Fanboy και της λίστας διαφημίσεων και διακομιστών ίχνωσης hpHosts, το uBlock₀ συνεχίζει να έχει χαμηλότερο αποτύπωμα μνήμης από άλλους δημοφιλείς αναστολείς.\n\nΕπίσης, έχετε υπ'όψην ότι διαλέγοντας μερικές από τις έξτρα λίστες μπορεί να οδηγήσει σε πιθανό σφάλμα στην ιστοσελίδα -- ειδικά εκείνες που κανονικά χρησιμοποιούνται σαν host αρχεία.\n\n***\n\nΧωρίς τις υπάρχουσες λίστες φίλτρων, αυτή η επέκταση δεν έχει καμία αξία. Εάν ποτέ λοιπόν θελήσετε πραγματικά να συνεισφέρετε κάτι, αναλογιστείτε τους ανθρώπους που εργάζονται σκληρά για να διατηρήσουν τις λίστες φίλτρων που χρησιμοποιείτε, οι οποίες διατέθηκαν προς χρήση σε όλους, δωρεάν.\n\n***\n\nΔωρεάν.\nΑνοιχτού κώδικα με άδεια δημόσιας χρήσης (GPLv3)\nΑπό τους χρήστες για τους χρήστες.\n\nΣυνεισφέροντες @ Github: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/9bfaba4f3fe3310ae0a3189187f5fbab185097d85398752765e086889775079e/https%3A//github.com/gorhill/uBlock/graphs/contributors\" rel=\"nofollow\">https://github.com/gorhill/uBlock/graphs/contributors</a>\nΣυνεισφέροντες @ Crowdin: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/6a44868e1580018df8d4d87adf8e97cc74b71b962a73dd5a64604f99db767287/https%3A//crowdin.net/project/ublock\" rel=\"nofollow\">https://crowdin.net/project/ublock</a>\n\n***\n\nΕίναι μια αρκετά πρόωρη έκδοση, κρατήστε το υπόψη κατά την αξιολόγηση.\n\nΑρχείο αλλαγών του έργου:\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/de148deb19b52874eb4c5726859834f3294a6057ed44e873c958acee4c920062/https%3A//github.com/gorhill/uBlock/releases\" rel=\"nofollow\">https://github.com/gorhill/uBlock/releases</a>",
           "en-US": "uBlock Origin is <b>not</b> an \"ad blocker\", it's a wide-spectrum content blocker with CPU and memory efficiency as a primary feature.\n\n***\n\nOut of the box, uBO blocks ads, trackers, coin miners, popups, etc. through the following lists of filters, enabled by default:\n\n- EasyList (ads)\n- EasyPrivacy (tracking)\n- Peter Lowe’s Ad server list (ads and tracking)\n- Online Malicious URL Blocklist\n- uBO's own lists\n\nMore lists are available for you to select if you wish:\n\n- EasyList Cookie\n- Fanboy Annoyances\n- AdGuard Annoyances\n- Dan Pollock’s hosts file\n- And many others\n\nAdditionally, you can point-and-click to block JavaScript locally or globally, create your own global or local rules to override entries from filter lists, and many more advanced features.\n\n***\n\nFree.\nOpen source with public license (GPLv3)\nFor users by users.\n\nIf ever you really do want to contribute something, think about the people working hard to maintain the filter lists you are using, which were made available to use by all for free.\n\n***\n\n<ul><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/788d66e7299bdfb1da05832994551640d0ad441e148a3e29afe8dd0a5a90800c/https%3A//github.com/gorhill/uBlock%23ublock-origin\" rel=\"nofollow\">Documentation</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/de148deb19b52874eb4c5726859834f3294a6057ed44e873c958acee4c920062/https%3A//github.com/gorhill/uBlock/releases\" rel=\"nofollow\">Release notes</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/32c3d6819f5263e56c265042e8d34e2da4d974e73a7ad55a81786d8995cf65a9/https%3A//www.reddit.com/r/uBlockOrigin/\" rel=\"nofollow\">Community support @ Reddit</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/9bfaba4f3fe3310ae0a3189187f5fbab185097d85398752765e086889775079e/https%3A//github.com/gorhill/uBlock/graphs/contributors\" rel=\"nofollow\">Contributors @ GitHub</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/6a44868e1580018df8d4d87adf8e97cc74b71b962a73dd5a64604f99db767287/https%3A//crowdin.net/project/ublock\" rel=\"nofollow\">Contributors @ Crowdin</a></li></ul>",
           "es": "Un bloqueador eficiente: capaz de cargar y aplicar miles más de filtros en comparación con otros populares bloqueadores, manteniendo un mínimo consumo de memoria y CPU.\n\nEjemplo con imágenes ilustrando su eficiencia (en inglés): <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/407a22e7e017297705e927653caa7e67ad67aabb741f33b91851c56c0544a0d9/https%3A//github.com/gorhill/uBlock/wiki/uBlock-vs.-ABP%3A-efficiency-compared\" rel=\"nofollow\">https://github.com/gorhill/uBlock/wiki/uBlock-vs.-ABP:-efficiency-compared</a>\n\nUso: El botón grande de apagado/encendido en la ventana emergente de la extensión, es para deshabilitar/habilitar uBlock₀ permanentemente en el sitio web actual. Aplica solo al sitio web actual, no activa o desactiva la extensión de forma general.\n\n***\n\nFlexible, es más que un \"bloqueador de anuncios\": también puede leer y crear filtros desde archivos hosts.\n\nPor defecto ya trae configuradas las siguientes listas de filtros:\n\n- EasyList\n- Peter Lowe’s Ad server list\n- EasyPrivacy\n- Malware domains\n\nOtras listas disponibles pueden ser seleccionadas, si se desea:\n\n- Fanboy’s Enhanced Tracking List\n- Dan Pollock’s hosts file\n- hpHosts’s Ad and tracking servers\n- MVPS HOSTS\n- Spam404\n- Y muchas más\n\nPor supuesto, mientras más filtros se activen, mayor será el consumo de memoria. No obstante, incluso después de agregar las dos listas adicionales de \"Fanboy's\" y la \"hpHosts’s Ad and tracking servers\", uBlock₀ consume menos memoria que otros bloqueadores similares.\n\nTambién tenga en cuenta que seleccionar algunas de estas listas adicionales puede conducir a una mayor probabilidad de aparición de problemas al mostrar un sitio web -- especialmente las listas utilizadas normalmente como archivo hosts.\n\n***\n\nSin las listas preestablecidas de filtros, esta extensión no sería nada. Así que si alguna vez realmente quieres aportar algo, piensa en las personas que trabajan duro para mantener estas listas de filtros,  disponibles de forma gratuita para todos.\n\n***\n\nLibre.\nCódigo abierto con licencia pública (GPLv3)\nHecho para usuarios por los usuarios.\n\nColaboradores @ Github: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/9bfaba4f3fe3310ae0a3189187f5fbab185097d85398752765e086889775079e/https%3A//github.com/gorhill/uBlock/graphs/contributors\" rel=\"nofollow\">https://github.com/gorhill/uBlock/graphs/contributors</a>\nColaboradores @ Crowdin: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/7bae4395c4e5926bb237c1ef9b0f391cb005dbdbf58f4c9e47298db9bb6d1f57/https%3A//crowdin.com/project/ublock\" rel=\"nofollow\">https://crowdin.com/project/ublock</a>\n\n***\n\nRegistro de cambios del proyecto:\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/de148deb19b52874eb4c5726859834f3294a6057ed44e873c958acee4c920062/https%3A//github.com/gorhill/uBlock/releases\" rel=\"nofollow\">https://github.com/gorhill/uBlock/releases</a>",
@@ -1389,7 +1392,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2023-10-22T22:40:35Z",
+        "last_updated": "2023-11-06T01:50:32Z",
         "name": {
           "ar": "uBlock Origin",
           "bg": "uBlock Origin",
@@ -1534,10 +1537,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.7828,
-          "bayesian_average": 4.7824108134916,
-          "count": 16288,
-          "text_count": 4231
+          "average": 4.784,
+          "bayesian_average": 4.783619011833919,
+          "count": 16477,
+          "text_count": 4290
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/reviews/",
         "requires_payment": false,
@@ -1584,6 +1587,7 @@
         },
         "support_email": null,
         "support_url": {
+          "de": "https://old.reddit.com/r/uBlockOrigin/",
           "en-US": "https://old.reddit.com/r/uBlockOrigin/",
           "ka": "https://old.reddit.com/r/uBlockOrigin/",
           "ur": "https://old.reddit.com/r/uBlockOrigin/"
@@ -1599,7 +1603,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/versions/",
-        "weekly_downloads": 284546
+        "weekly_downloads": 259499
       },
       "notes": null
     },
@@ -1615,7 +1619,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 171634,
+        "average_daily_users": 172615,
         "categories": {
           "android": [
             "photos-media"
@@ -1714,10 +1718,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.4908,
-          "bayesian_average": 4.485671359198481,
-          "count": 1143,
-          "text_count": 427
+          "average": 4.49,
+          "bayesian_average": 4.484869455864706,
+          "count": 1145,
+          "text_count": 428
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/reviews/",
         "requires_payment": false,
@@ -1739,7 +1743,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/versions/",
-        "weekly_downloads": 393
+        "weekly_downloads": 433
       },
       "notes": null
     },
@@ -1755,7 +1759,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 88504,
+        "average_daily_users": 87057,
         "categories": {
           "android": [
             "experimental",
@@ -1893,7 +1897,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/versions/",
-        "weekly_downloads": 2256
+        "weekly_downloads": 2013
       },
       "notes": null
     },
@@ -1909,7 +1913,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/64/9064/12929064/12929064.png?modified=1651263207"
           }
         ],
-        "average_daily_users": 276219,
+        "average_daily_users": 277163,
         "categories": {
           "android": [
             "photos-media",
@@ -2128,10 +2132,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.6509,
-          "bayesian_average": 4.646312748713676,
-          "count": 1335,
-          "text_count": 256
+          "average": 4.6543,
+          "bayesian_average": 4.649791403978484,
+          "count": 1345,
+          "text_count": 257
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/reviews/",
         "requires_payment": false,
@@ -2152,7 +2156,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/versions/",
-        "weekly_downloads": 5690
+        "weekly_downloads": 5764
       },
       "notes": null
     },
@@ -2175,7 +2179,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 113785,
+        "average_daily_users": 115047,
         "categories": {
           "android": [
             "other"
@@ -2458,9 +2462,9 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.3672,
-          "bayesian_average": 4.3627273427174105,
-          "count": 1269,
+          "average": 4.3666,
+          "bayesian_average": 4.362179866443754,
+          "count": 1271,
           "text_count": 356
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/reviews/",
@@ -2481,7 +2485,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/versions/",
-        "weekly_downloads": 36
+        "weekly_downloads": 35
       },
       "notes": null
     },
@@ -2497,7 +2501,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/43/0143/143/143.png?modified=1506804587"
           }
         ],
-        "average_daily_users": 311914,
+        "average_daily_users": 310140,
         "categories": {
           "android": [
             "performance",
@@ -2687,10 +2691,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.3995,
-          "bayesian_average": 4.3968053215576,
-          "count": 2125,
-          "text_count": 821
+          "average": 4.3994,
+          "bayesian_average": 4.396743494333709,
+          "count": 2133,
+          "text_count": 825
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/reviews/",
         "requires_payment": false,
@@ -2734,7 +2738,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/versions/",
-        "weekly_downloads": 9346
+        "weekly_downloads": 9017
       },
       "notes": null
     },
@@ -2750,7 +2754,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 154597,
+        "average_daily_users": 155003,
         "categories": {
           "android": [
             "performance",
@@ -2862,10 +2866,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 3.8689,
-          "bayesian_average": 3.8647664217835884,
-          "count": 1182,
-          "text_count": 428
+          "average": 3.866,
+          "bayesian_average": 3.861926627269856,
+          "count": 1187,
+          "text_count": 430
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/reviews/",
         "requires_payment": false,
@@ -2884,7 +2888,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/versions/",
-        "weekly_downloads": 2037
+        "weekly_downloads": 2510
       },
       "notes": null
     }
