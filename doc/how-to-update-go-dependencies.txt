@@ -1,3 +1,5 @@
+# Updating dependencies
+
 When the dependencies of a go project ($project in the following lines)
 are changing:
 
@@ -7,3 +9,14 @@ are changing:
   compute its sha256sum
 - in `projects/$project/config`, update `norec/sha256sum` for `go_vendor`
   in `input_files`.
+
+# Adding a new Go project
+
+Pluggable transports are generally written in Go, you can take them as an
+example.
+In particular, Lyrebird shows how to skip the hash check if you use a branch
+for nightly builds, instead of a particular tag/commit.
+
+In general, you just need to add a dependency on the go_vendor step in the
+build step. But you will not need to implement that step by yourself, because
+it is defined in a generic way in rbm.conf.
