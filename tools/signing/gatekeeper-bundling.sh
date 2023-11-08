@@ -39,7 +39,7 @@ test -f $faketime_path || \
   exit_error "$faketime_path is missing"
 test -d $macos_stapled_dir || \
   exit_error "The stapled macos zip files should be placed in directory $macos_stapled_dir"
-libdmg_file="$script_dir/../../out/libdmg-hfsplus/libdmg-hfsplus-2cb30de5b277-68b0fc.tar.zst"
+libdmg_file="$script_dir/../../out/libdmg-hfsplus/libdmg-hfsplus-a0a959bd2537-f2819c.tar.zst"
 test -f "$libdmg_file" || \
   exit_error "$libdmg_file is missing." \
              "You can build it with:" \
