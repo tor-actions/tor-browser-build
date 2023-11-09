@@ -257,6 +257,20 @@ fi
 HOME="${PWD}"
 export HOME
 
+# Prevent disk leaks in $HOME/.local/share (tor-browser#17560)
+local_dir="$HOME/.local/"
+share_dir="$local_dir/share"
+if [ -d "$share_dir" ]; then
+    ( srm -r "$share_dir" ||
+      wipe -r "$share_dir" ||
+      find "$share_dir" -type f -exec shred -u {} \; ;
+      rm -rf "$share_dir"
+    ) > /dev/null 2>&1
+else
+    mkdir -p "$local_dir"
+fi
+ln -fs /dev/null "$share_dir"
+
 [% IF c("var/tor-browser") -%]
 SYSARCHITECTURE=$(getconf LONG_BIT)
 TORARCHITECTURE=$(expr "$(file TorBrowser/Tor/tor)" : '.*ELF \([[:digit:]]*\)')
