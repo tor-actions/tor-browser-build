@@ -7,7 +7,7 @@ container:
   use_container: 1
 
 var:
-  ubuntu_version: 22.04.2
+  ubuntu_version: 22.04.3
 
 pre: |
   #!/bin/sh
@@ -50,9 +50,16 @@ targets:
         suite: bullseye
         arch: amd64
 
+  bookworm-amd64:
+    var:
+      minimal_apt_version: 2.6.1
+      container:
+        suite: bookworm
+        arch: amd64
+
 input_files:
   - project: mmdebstrap
     name: mmdebstrap
   - URL: 'https://cdimage.ubuntu.com/ubuntu-base/releases/[% c("var/ubuntu_version") %]/release/ubuntu-base-[% c("var/ubuntu_version") %]-base-amd64.tar.gz'
     filename: 'container-image_ubuntu-base-[% c("var/ubuntu_version") %]-base-amd64.tar.gz'
-    sha256sum: 373f064df30519adc3344a08d774f437caabd1479d846fa2ca6fed727ea7a53d
+    sha256sum: ad33b7ae47b75c92c2e2fe21fd4612e15357e67679d8751d6ce892a475be24fe
