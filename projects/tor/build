@@ -97,8 +97,9 @@ cp $distdir/share/tor/geoip6 "$TORDATADIR"
 
 cd $distdir
 [% IF c("var/windows") %]
-  install -s $distdir/bin/tor.exe "$TORBINDIR"
-  install -s $distdir/bin/tor-gencert.exe "$TORBINDIR"
+  # With Debian bookworm strip changes the date time, llvm-strip doesn't do it.
+  install -s --strip-program=llvm-strip $distdir/bin/tor.exe "$TORBINDIR"
+  install -s --strip-program=llvm-strip $distdir/bin/tor-gencert.exe "$TORBINDIR"
 [% END %]
 
 [% IF c("var/linux") %]

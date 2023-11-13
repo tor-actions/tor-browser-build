@@ -13,7 +13,7 @@ compress_tar: 'gz'
 
 var:
   container:
-    suite: bullseye
+    suite: bookworm
     arch: amd64
   deps:
     - python3
