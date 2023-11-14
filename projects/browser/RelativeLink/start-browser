@@ -367,6 +367,10 @@ rm -Rf "${HOME}/TorBrowser/Data/fontconfig"
 # Avoid overwriting user's dconf values. Fixes #27903.
 export GSETTINGS_BACKEND=memory
 
+# tor-browser-build#41017: Nvidia drivers create a shader cache by default in
+# $HOME/.cache/nvidia. We we can easily disable it.
+export __GL_SHADER_DISK_CACHE=0
+
 cd "${HOME}"
 
 # We pass all additional command-line arguments we get to Firefox.
