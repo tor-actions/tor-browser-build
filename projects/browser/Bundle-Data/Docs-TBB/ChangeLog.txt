@@ -1,3 +1,36 @@
+Tor Browser 13.0.4 - November 16 2023
+ * All Platforms
+   * Updated OpenSSL to 3.0.12
+   * Updated tor to 0.4.8.9
+   * Bug 42275: Rebase Tor Browser Stable to 115.5.0esr [tor-browser]
+   * Bug 42277: Enable storage.sync to fix broken webextensions [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.5.0esr
+   * Bug 41341: Fix style and position of "Always Prioritize Onions" wingpanel [tor-browser]
+   * Bug 42108: Tor Circuit button not shown if TLS handshake fails [tor-browser]
+   * Bug 42184: Setting "Homepage and new windows" ignores "Blank Page" value [tor-browser]
+   * Bug 42188: Donations are asked repeatedly when I click New identity button [tor-browser]
+   * Bug 42194: Blank Net Error page on name resolution failure [tor-browser]
+ * Windows + macOS
+   * Bug 42154: Empty the clipboard on browser shutdown only if content comes from private browsing windows [tor-browser]
+ * Android
+   * Updated GeckoView to 115.5.0esr
+   * Bug 42074: YEC 2023 Takeover for Android Stable [tor-browser]
+   * Bug 42287: Backport security fixes (Android & wontfix) from Firefox 120 to 115.5 - based Tor Browser [tor-browser]
+ * Build System
+   * All Platforms
+     * Update Go to 1.21.4
+     * Bug 40934: Remove $bundle_locales from signing scripts now that we're on ALL for everything [tor-browser-build]
+     * Bug 40982: Fix logging in tools/signing/do-all-signing [tor-browser-build]
+     * Bug 40989: Add .nobackup files to reproducible and disposable directores [tor-browser-build]
+     * Bug 41006: Fix typo in finished-signing-clean-linux signer [tor-browser-build]
+   * macOS
+     * Bug 29815: Sign our macOS bundles on Linux [tor-browser-build]
+     * Bug 41005: Unpack macOS bundle to /var/tmp instead of /tmp in rcodesign-notary-submit step [tor-browser-build]
+     * Bug 41007: gatekeeper-bundling.sh refers to old .tar.gz archive [tor-browser-build]
+     * Bug 41014: Update libdmg-hfsplus to drop the OpenSSL patch [tor-browser-build]
+     * Bug 41020: Opening MacOS dmg file is causing a warning, since 13.0 [tor-browser-build]
+
 Tor Browser 13.0.3 - November 06 2023
  * Android
    * Bug 42222: Fix TorDomainIsolator initialization on Android [tor-browser]
