@@ -55,6 +55,12 @@ Tor Browser $tbb_version is now available from the [Tor Browser download page]($
 
 This version includes important [security updates](https://www.mozilla.org/en-US/security/advisories/) to Firefox.
 
+## Send us your feedback
+
+If you find a bug or have a suggestion for how we could improve this release, [please let us know](https://support.torproject.org/misc/bug-or-feedback/).
+
+## Full changelog
+
 EOF
 
 $script_dir/../changelog-format-blog-post >> "$contents_lr"
