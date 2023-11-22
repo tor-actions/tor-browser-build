@@ -216,7 +216,7 @@
     - Log into https://play.google.com/apps/publish
     - Select `Tor Browser (Alpha)` app
     - Navigate to `Release > Production` and click `Create new release` button:
-      - Upload the `*.multi.apk` APKs
+      - Upload the `tor-browser-android-*.apk` APKs
       - Update Release Name to Tor Browser version number
       - Update Release Notes
       - Next to 'Release notes', click `Copy from a previous release`
