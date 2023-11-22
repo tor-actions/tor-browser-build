@@ -1,3 +1,12 @@
+Tor Browser 13.0.5 - November 22 2023
+ * Windows + macOS + Linux
+   * Bug 42072: YEC 2023 Takeover for Desktop Stable [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 40970: Missing symlink create-blog-post.torbrowser -> create-blog-post symlink [tor-browser-build]
+     * Bug 41023: Update lead.png symlink and blog post template in tools/signing/create-blog-post [tor-browser-build]
+     * Bug 40063: RBM's chroot fails in Fedora [rbm]
+
 Tor Browser 13.0.4 - November 16 2023
  * All Platforms
    * Updated OpenSSL to 3.0.12
