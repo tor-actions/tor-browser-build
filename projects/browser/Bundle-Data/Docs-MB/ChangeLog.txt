@@ -20,6 +20,26 @@ Mullvad Browser 13.0.4 - November 16 2023
      * Bug 41014: Update libdmg-hfsplus to drop the OpenSSL patch [tor-browser-build]
      * Bug 41020: Opening MacOS dmg file is causing a warning, since 13.0 [tor-browser-build]
 
+Mullvad Browser 13.5a1 - November 01 2023
+ * All Platforms
+   * Updated Firefox to 115.4.0esr
+   * Updated NoScript to 11.4.28
+   * Bug 246: Add the last Mullvad Browser Extension (0.8.4) to 13.0 [mullvad-browser]
+   * Bug 42182: Default Search Engine Does Not Persist Through Shift to New Identity [tor-browser]
+   * Bug 42191: Backport security fixes (Android & wontfix) from Firefox 119 to 115.4 - based Tor Browser [tor-browser]
+ * Windows + macOS
+   * Bug 42154: Empty the clipboard on browser shutdown only if content comes from private browsing windows [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 40934: Remove $bundle_locales from signing scripts now that we're on ALL for everything [tor-browser-build]
+     * Bug 40982: Fix logging in tools/signing/do-all-signing [tor-browser-build]
+     * Bug 40983: Bump the various branches to 13.5 on main [tor-browser-build]
+     * Bug 40989: Add .nobackup files to reproducible and disposable directores [tor-browser-build]
+   * Windows
+     * Bug 40984: The PDBs for .exe are not included [tor-browser-build]
+   * macOS
+     * Bug 29815: Sign our macOS bundles on Linux [tor-browser-build]
+
 Mullvad Browser 13.0.1 - October 24 2023
  * All Platforms
    * Updated Firefox to 115.4.0esr
