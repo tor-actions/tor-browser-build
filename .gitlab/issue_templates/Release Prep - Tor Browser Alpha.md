@@ -86,11 +86,12 @@
         - [ ] `input_files/sha256sum` for `go` : update sha256sum of archive (sha256 sums are displayed on the go download page)
     - [ ] Check for manual updates by running (from `tor-browser-build` root): `./tools/fetch-manual.py`
       - [ ] ***(Optional)*** If new version is available:
-        - [ ] Upload the downloaded `manual_$PIPELINEID.zip` file to people.tpo
+        - [ ] Upload the downloaded `manual_$PIPELINEID.zip` file to `tb-build-02.torproject.org`
+        - [ ] Deploy to `tb-builder`'s `public_html` directory:
+          - `sudo -u tb-builder cp manual_$PIPELINEID.zip ~/../tb-builder/public_html/.`
         - [ ] Update `projects/manual/config`:
           - [ ] Change the `version` to `$PIPELINEID`
           - [ ] Update `sha256sum` in the `input_files` section
-          - [ ] ***(Optional)*** Update the URL if you have uploaded to a different people.tpo home
   - [ ] Update `ChangeLog-TBB.txt`
     - [ ] Ensure ChangeLog-TBB.txt is sync'd between alpha and stable branches
     - [ ] Check the linked issues: ask people to check if any are missing, remove the not fixed ones
