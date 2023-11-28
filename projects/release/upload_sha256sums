@@ -8,7 +8,7 @@ browser=[% c("var/browser_type") %]
 
 src_dir=[% shell_quote(path(dest_dir)) %]/$signed/$version
 
-target_dir=~/public_html/builds/$browser/$channel/$version/
+target_dir=public_html/builds/$browser/$channel/$version/
 
 echo "browser:$browser channel:$channel signed:$signed version:$version"
 
