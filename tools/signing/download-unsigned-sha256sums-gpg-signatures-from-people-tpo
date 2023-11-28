@@ -11,7 +11,7 @@ do
     chmod 644 "$tmpfile"
     if test "$builder" = 'jb'; then
       file="$file.gpg"
-      urls=("https://cdn.devmole.eu/hashes//$SIGNING_PROJECTNAME/$tbb_version-build$tbb_version_build/$file")
+      urls=("https://cdn.stagemole.eu/hashes/$SIGNING_PROJECTNAME/$tbb_version-build$tbb_version_build/$file")
     else
       file="$file.asc"
       urls=( \
