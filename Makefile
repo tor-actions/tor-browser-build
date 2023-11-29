@@ -233,6 +233,12 @@ torbrowser-dmg2mar-alpha: submodule-update
 	$(rbm) build release --step link_old_mar_filenames --target alpha --target torbrowser
 	CHECK_CODESIGNATURE_EXISTS=1 MAR_SKIP_EXISTING=1 tools/update-responses/gen_incrementals alpha
 
+torbrowser-compare-windows-signed-unsigned-release: submodule-update
+	$(rbm) build release --step compare_windows_signed_unsigned_exe --target release --target signed --target torbrowser
+
+torbrowser-compare-windows-signed-unsigned-alpha: submodule-update
+	$(rbm) build release --step compare_windows_signed_unsigned_exe --target alpha --target signed --target torbrowser
+
 
 ########################
 # Base Browser Targets #
@@ -564,6 +570,12 @@ mullvadbrowser-dmg2mar-alpha: submodule-update
 	tools/update-responses/download_missing_versions alpha
 	$(rbm) build release --step link_old_mar_filenames --target alpha --target mullvadbrowser
 	CHECK_CODESIGNATURE_EXISTS=1 MAR_SKIP_EXISTING=1 tools/update-responses/gen_incrementals alpha
+
+mullvadbrowser-compare-windows-signed-unsigned-release: submodule-update
+	$(rbm) build release --step compare_windows_signed_unsigned_exe --target release --target signed --target mullvadbrowser
+
+mullvadbrowser-compare-windows-signed-unsigned-alpha: submodule-update
+	$(rbm) build release --step compare_windows_signed_unsigned_exe --target alpha --target signed --target mullvadbrowser
 
 
 ############################

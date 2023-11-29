@@ -1,0 +1,30 @@
+#!/bin/bash
+[% c("var/set_default_env") -%]
+[% IF c("var/nightly") -%]
+  build_dir=[% shell_quote(path(dest_dir)) %]/[%  c("version") %]
+[% ELSE -%]
+  build_dir=[% shell_quote(path(dest_dir)) %]/[% c("var/signed_status") %]/[% c("version") %]
+[% END -%]
+
+if ! test -d "$build_dir"
+then
+  echo "Error: Directory $build_dir does not exist" 1>&2
+  echo "You can download it with this command:" 1>&2
+  echo " ./tools/download-[% c("var/projectname") %] [% c("var/torbrowser_version") %]" 1>&2
+  exit 1
+fi
+
+cp -a "$build_dir"/*.exe "$build_dir"/sha256sums-unsigned-build.txt .
+
+tar -xf $rootdir/[% c('input_files_by_name/osslsigncode') %]
+
+for file in *.exe
+do
+  ./osslsigncode/bin/osslsigncode remove-signature -in "$file" -out "unsigned-$file" > /dev/null
+  mv -f "unsigned-$file" "$file"
+  echo "Unsigned $file"
+done
+
+grep '\.exe$' sha256sums-unsigned-build.txt | sha256sum -c
+
+echo "Unsigned exe files are matching with sha256sums-unsigned-build.txt"
