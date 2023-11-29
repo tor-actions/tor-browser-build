@@ -263,3 +263,11 @@ steps:
     debug: 0
     input_files: []
     upload_sha256sums: '[% INCLUDE upload_sha256sums %]'
+  compare_windows_signed_unsigned_exe:
+    build_log: '-'
+    debug: 0
+    input_files:
+      - project: osslsigncode
+        name: osslsigncode
+        pkg_type: build
+    compare_windows_signed_unsigned_exe: '[% INCLUDE compare_windows_signed_unsigned_exe %]'

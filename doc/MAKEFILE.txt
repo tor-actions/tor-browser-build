@@ -136,3 +136,8 @@ Create update responses xml files for a signed build in the release or
 alpha channel. The files can be found in a tar in the directory
 torbrowser/{release,alpha}/update-responses.
 
+torbrowser-compare-windows-signed-unsigned-{release,alpha}
+----------------------------------------------------------
+Unsign exe files from directory torbrowser/{release,alpha}/signed/$version
+and compare them with the checksum from sha256sums-unsigned-build.txt.
+
