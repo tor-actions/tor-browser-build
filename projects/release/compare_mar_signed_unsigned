@@ -1,0 +1,44 @@
+#!/bin/bash
+[% c("var/set_default_env") -%]
+[% IF c("var/nightly") -%]
+  build_dir=[% shell_quote(path(dest_dir)) %]/[%  c("version") %]
+[% ELSE -%]
+  build_dir=[% shell_quote(path(dest_dir)) %]/[% c("var/signed_status") %]/[% c("version") %]
+[% END -%]
+
+if ! test -d "$build_dir"
+then
+  echo "Error: Directory $build_dir does not exist" 1>&2
+  echo "You can download it with this command:" 1>&2
+  echo " ./tools/download-[% c("var/projectname") %] [% c("var/torbrowser_version") %]" 1>&2
+  exit 1
+fi
+
+sha256sums_files=sha256sums-unsigned-build.txt
+cd "$build_dir"
+test -f sha256sums-unsigned-build.incrementals.txt \
+  && sha256sums_files="$sha256sums_files sha256sums-unsigned-build.incrementals.txt"
+cp -a -- $(ls -1 *.mar | grep -v -- -macos-) $sha256sums_files "$rootdir/"
+cd "$rootdir"
+
+unzip -q "$rootdir/[% c('input_files_by_name/mar-tools') %]"
+export PATH="$rootdir/mar-tools:$PATH"
+export LD_LIBRARY_PATH="$rootdir/mar-tools"
+
+for file in *.mar
+do
+  signmar -r "$file" "unsigned-$file"
+  mv -f "unsigned-$file" "$file"
+  echo "Unsigned $file"
+done
+
+grep -h -- '\.mar$' $sha256sums_files | grep -v -- -macos- | sha256sum -c
+
+cat << 'EOF'
+macOS mar files have been skipped as we don't yet have a good solution
+to remove code signing from those files.
+See https://gitlab.torproject.org/tpo/applications/tor-browser-build/-/issues/40988
+
+Windows and Linux unsigned mar files are matching with
+sha256sums-unsigned-build.txt.
+EOF
