@@ -243,11 +243,6 @@ steps:
     debug: 0
     input_files: []
     update_responses_config: '[% INCLUDE update_responses_config %]'
-  link_old_mar_filenames:
-    build_log: '-'
-    debug: 0
-    input_files: []
-    link_old_mar_filenames: '[% INCLUDE link_old_mar_filenames %]'
   create_update_responses_tar:
     build_log: '-'
     debug: 0
