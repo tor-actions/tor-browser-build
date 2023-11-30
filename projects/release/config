@@ -271,3 +271,11 @@ steps:
         name: osslsigncode
         pkg_type: build
     compare_windows_signed_unsigned_exe: '[% INCLUDE compare_windows_signed_unsigned_exe %]'
+  compare_mar_signed_unsigned:
+    build_log: '-'
+    debug: 0
+    input_files:
+      - project: mar-tools
+        name: mar-tools
+        pkg_type: fetch_martools
+    compare_mar_signed_unsigned: '[% INCLUDE compare_mar_signed_unsigned %]'

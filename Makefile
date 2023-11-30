@@ -239,6 +239,12 @@ torbrowser-compare-windows-signed-unsigned-release: submodule-update
 torbrowser-compare-windows-signed-unsigned-alpha: submodule-update
 	$(rbm) build release --step compare_windows_signed_unsigned_exe --target alpha --target signed --target torbrowser
 
+torbrowser-compare-mar-signed-unsigned-release: submodule-update
+	$(rbm) build release --step compare_mar_signed_unsigned --target release --target signed --target torbrowser
+
+torbrowser-compare-mar-signed-unsigned-alpha: submodule-update
+	$(rbm) build release --step compare_mar_signed_unsigned --target alpha --target signed --target torbrowser
+
 
 ########################
 # Base Browser Targets #
@@ -576,6 +582,12 @@ mullvadbrowser-compare-windows-signed-unsigned-release: submodule-update
 
 mullvadbrowser-compare-windows-signed-unsigned-alpha: submodule-update
 	$(rbm) build release --step compare_windows_signed_unsigned_exe --target alpha --target signed --target mullvadbrowser
+
+mullvadbrowser-compare-mar-signed-unsigned-release: submodule-update
+	$(rbm) build release --step compare_mar_signed_unsigned --target release --target signed --target mullvadbrowser
+
+mullvadbrowser-compare-mar-signed-unsigned-alpha: submodule-update
+	$(rbm) build release --step compare_mar_signed_unsigned --target alpha --target signed --target mullvadbrowser
 
 
 ############################

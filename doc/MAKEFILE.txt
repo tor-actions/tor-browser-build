@@ -141,3 +141,8 @@ torbrowser-compare-windows-signed-unsigned-{release,alpha}
 Unsign exe files from directory torbrowser/{release,alpha}/signed/$version
 and compare them with the checksum from sha256sums-unsigned-build.txt.
 
+torbrowser-compare-mar-signed-unsigned-{release,alpha}
+----------------------------------------------------------
+Unsign mar files from directory torbrowser/{release,alpha}/signed/$version
+and compare them with the checksum from sha256sums-unsigned-build.txt.
+
