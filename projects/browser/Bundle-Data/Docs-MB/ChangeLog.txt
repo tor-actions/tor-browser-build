@@ -1,3 +1,50 @@
+Mullvad Browser 13.0.6 - December 04 2023
+ * All Platforms
+   * Bug 42288: Allow language spoofing in status messages [tor-browser]
+   * Updated uBlock Origin to 1.54.0
+ * Linux
+   * Bug 17560: Downloaded URLs disk leak on Linux [tor-browser]
+   * Bug 42306: Tor Browser crashes when extensions popups are opened with Wayland enabled [tor-browser]
+   * Bug 41017: Disable Nvidia shader cache [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Bug 41027: Remove tb-build-04 and tb-build-05 from tools/signing/download-unsigned-sha256sums-gpg-signatures-from-people-tpo [tor-browser-build]
+     * Bug 40936: Revert tor-browser-build#40933 [tor-browser-build]
+     * Bug 40970: Missing symlink create-blog-post.torbrowser -> create-blog-post symlink [tor-browser-build]
+     * Bug 40995: Use cdn.stagemole.eu instead of cdn.devmole.eu in download-unsigned-sha256sums-gpg-signatures-from-people-tpo [tor-browser-build]
+     * Bug 40063: RBM's chroot fails in Fedora [rbm]
+     * Bug 40064: Using exec on project with no git_url/hg_url is causing warning [rbm]
+   * Windows + macOS + Linux
+     * Bug 41031: Add command to unsign .mar files and compare with sha256sums-unsigned-build.txt [tor-browser-build]
+   * Windows
+     * Bug 41030: Add command to unsign .exe files and compare with sha256sums-unsigned-build.txt [tor-browser-build]
+
+Mullvad Browser 13.5a2 - November 27 2023
+ * All Platforms
+   * Updated Firefox to 115.5.0esr
+   * Updated uBlock Origin to 1.54.0
+   * Bug 250: Enable storage.sync to fix broken webextensions [mullvad-browser]
+   * Bug 254: Rebase Mullvad Browser Alpha to 115.5.0esr [mullvad-browser]
+   * Bug 42153: Drop dom.enable_resource_timing = false preference [tor-browser]
+   * Bug 42194: Blank Net Error page on name resolution failure [tor-browser]
+   * Bug 42276: Rebase Browsers Alpha to 115.5.0esr [tor-browser]
+   * Bug 42288: Allow language spoofing in status messages [tor-browser]
+ * Linux
+   * Bug 17560: Downloaded URLs disk leak on Linux [tor-browser]
+   * Bug 41017: Disable Nvidia shader cache [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Bug 40884: Script to automate uploading sha256s and signatures to location signing/download-unsigned-sha256sums-gpg-signatures-from-people-tpo expects them to be [tor-browser-build]
+     * Bug 40970: Missing symlink create-blog-post.torbrowser -> create-blog-post symlink [tor-browser-build]
+     * Bug 41006: Fix typo in finished-signing-clean-linux signer [tor-browser-build]
+     * Bug 40063: RBM's chroot fails in Fedora [rbm]
+     * Bug 40064: Using exec on project with no git_url/hg_url is causing warning [rbm]
+   * macOS
+     * Bug 41005: Unpack macOS bundle to /var/tmp instead of /tmp in rcodesign-notary-submit step [tor-browser-build]
+     * Bug 41007: gatekeeper-bundling.sh refers to old .tar.gz archive [tor-browser-build]
+     * Bug 41014: Update libdmg-hfsplus to drop the OpenSSL patch [tor-browser-build]
+     * Bug 41020: Opening MacOS dmg file is causing a warning, since 13.0 [tor-browser-build]
+
 Mullvad Browser 13.0.4 - November 16 2023
  * All Platforms
    * Updated Firefox to 115.5.0esr
