@@ -1,6 +1,0 @@
-#!/bin/bash
-set -e
-script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-source "$script_dir/functions"
-
-ssh -R :1080 "$ssh_host_macos_signer" 'python ~/proxy.py --port 8443'
