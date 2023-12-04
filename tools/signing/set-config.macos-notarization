@@ -1,5 +1,0 @@
-# The following line should be uncommented and updated:
-
-#macos_notarization_user='user@email'
-
-var_is_defined macos_notarization_user

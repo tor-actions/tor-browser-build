@@ -8,19 +8,9 @@ NON_INTERACTIVE=1
 steps_dir="$signed_version_dir.steps"
 test -d "$steps_dir" || mkdir -p "$steps_dir"
 
-if test -n "$use_rcodesign"
-then
-  test -f "$steps_dir/linux-signer-rcodesign-sign.done" ||
-    read -sp "Enter rcodesign passphrase for key-1: " RCODESIGN_PW
-  echo
-else
-  test -f "$steps_dir/macos-signer-gatekeeper-signing.done" ||
-    read -sp "Enter macos keychain passphrase: " KEYCHAIN_PW
-  echo
-  test -f "$steps_dir/macos-signer-notarization.done" ||
-    read -sp "Enter macos notarization passphrase: " NOTARIZATION_PW
-  echo
-fi
+test -f "$steps_dir/linux-signer-rcodesign-sign.done" ||
+  read -sp "Enter rcodesign passphrase for key-1: " RCODESIGN_PW
+echo
 is_project torbrowser && nssdb=torbrowser-nssdb7
 is_project mullvadbrowser && nssdb=mullvadbrowser-nssdb-1
 test -f "$steps_dir/linux-signer-signmars.done" ||
@@ -65,52 +55,6 @@ function sync-linux-signer-macos-signed-tar-to-local {
 
 function rcodesign-notary-submit {
   "$script_dir/rcodesign-notary-submit"
-}
-
-function macos-signer-directory-not-present {
-  # To avoid doing two signings at the same time, or to avoid unknowingly
-  # using parts from a previous signing attempt, we check that the
-  # directory does not exist yet (see tor-browser-build#40497)
-  if ssh "$ssh_host_macos_signer" "test -d $tbb_version"
-  then
-    echo "The directory $tbb_version already exists on $ssh_host_macos_signer"
-    return 1
-  fi
-  return 0
-}
-
-function sync-scripts-to-macos-signer {
-  "$script_dir/sync-scripts-to-macos-signer"
-}
-
-function macos-signer-enable-network-proxy-settings {
-  ssh "$ssh_host_macos_signer" 'networksetup -setsecurewebproxystate Ethernet on'
-}
-
-function macos-signer-gatekeeper-signing {
-  "$script_dir/sync-macos-local-to-macos-signer"
-  ssh "$ssh_host_macos_signer" 'bash -s' << EOF
-  export KEYCHAIN_PW=$KEYCHAIN_PW
-  ~/signing-$SIGNING_PROJECTNAME-$tbb_version_type/macos-signer-gatekeeper-signing.$SIGNING_PROJECTNAME
-EOF
-  unset KEYCHAIN_PW
-}
-
-function macos-signer-notarization {
-  ssh "$ssh_host_macos_signer" 'bash -s' << EOF
-  export PW=$NOTARIZATION_PW
-  ~/signing-$SIGNING_PROJECTNAME-$tbb_version_type/macos-signer-notarization.$SIGNING_PROJECTNAME
-EOF
-  unset NOTARIZATION_PW
-}
-
-function macos-signer-stapler {
-  ssh "$ssh_host_macos_signer" "~/signing-$SIGNING_PROJECTNAME-$tbb_version_type/macos-signer-stapler.$SIGNING_PROJECTNAME"
-  "$script_dir/sync-macos-signer-stapled-to-macos-local-stapled"
-}
-
-function macos-signer-disable-network-proxy-settings {
-  ssh "$ssh_host_macos_signer" 'networksetup -setsecurewebproxystate Ethernet off'
 }
 
 function gatekeeper-bundling {
@@ -212,10 +156,6 @@ function upload-update_responses-to-staticiforme {
   "$script_dir/upload-update_responses-to-staticiforme"
 }
 
-function finished-signing-clean-macos-signer {
-  "$script_dir/finished-signing-clean-macos-signer"
-}
-
 function finished-signing-clean-linux-signer {
   "$script_dir/finished-signing-clean-linux-signer"
 }
@@ -233,22 +173,11 @@ export SIGNING_PROJECTNAME
 
 do_step wait-for-finished-build
 do_step sync-builder-unsigned-to-local-signed
-if test -n "$use_rcodesign";
-then
-  do_step sync-scripts-to-linux-signer
-  do_step sync-before-linux-signer-rcodesign-sign
-  do_step linux-signer-rcodesign-sign
-  do_step sync-linux-signer-macos-signed-tar-to-local
-  do_step rcodesign-notary-submit
-else
-  do_step macos-signer-directory-not-present
-  do_step sync-scripts-to-macos-signer
-  do_step macos-signer-enable-network-proxy-settings
-  do_step macos-signer-gatekeeper-signing
-  do_step macos-signer-notarization
-  do_step macos-signer-stapler
-  do_step macos-signer-disable-network-proxy-settings
-fi
+do_step sync-scripts-to-linux-signer
+do_step sync-before-linux-signer-rcodesign-sign
+do_step linux-signer-rcodesign-sign
+do_step sync-linux-signer-macos-signed-tar-to-local
+do_step rcodesign-notary-submit
 do_step gatekeeper-bundling
 do_step dmg2mar
 do_step sync-scripts-to-linux-signer
@@ -272,5 +201,4 @@ do_step sync-local-to-staticiforme
 do_step sync-scripts-to-staticiforme
 do_step staticiforme-prepare-cdn-dist-upload
 do_step upload-update_responses-to-staticiforme
-do_step finished-signing-clean-macos-signer
 do_step finished-signing-clean-linux-signer
