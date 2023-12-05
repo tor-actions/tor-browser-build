@@ -643,9 +643,6 @@ go_vendor-webtunnel-alpha: submodule-update
 go_vendor-lyrebird-alpha: submodule-update
 	$(rbm) build lyrebird --step go_vendor --target alpha --target torbrowser-linux-x86_64
 
-go_vendor-lyrebird-nightly: submodule-update
-	$(rbm) build lyrebird --step go_vendor --target nightly --target torbrowser-linux-x86_64
-
 
 #############
 # rcodesign #
