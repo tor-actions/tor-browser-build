@@ -631,16 +631,16 @@ cargo_vendor-application-services: submodule-update
 cargo_vendor-cbindgen: submodule-update
 	$(rbm) build cbindgen --step cargo_vendor --target alpha --target torbrowser-linux-x86_64
 
-go_vendor-snowflake-alpha: submodule-update
+go_vendor-snowflake: submodule-update
 	$(rbm) build snowflake --step go_vendor --target alpha --target torbrowser-linux-x86_64
 
-go_vendor-conjure-alpha: submodule-update
+go_vendor-conjure: submodule-update
 	$(rbm) build conjure --step go_vendor --target alpha --target torbrowser-linux-x86_64
 
-go_vendor-webtunnel-alpha: submodule-update
+go_vendor-webtunnel: submodule-update
 	$(rbm) build webtunnel --step go_vendor --target alpha --target torbrowser-linux-x86_64
 
-go_vendor-lyrebird-alpha: submodule-update
+go_vendor-lyrebird: submodule-update
 	$(rbm) build lyrebird --step go_vendor --target alpha --target torbrowser-linux-x86_64
 
 
