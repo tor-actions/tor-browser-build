@@ -48,6 +48,17 @@ If you are running Debian or Ubuntu, you can install them with:
                   libtemplate-perl libxml-libxml-perl libxml-writer-perl \
                   libyaml-libyaml-perl git mercurial uidmap zstd
 
+If you are running Fedora, CentOS or RHEL, you can install them with:
+
+# dnf install "perl(YAML::XS)" "perl(File::Basename)" "perl(Getopt::Long)" \
+              "perl(Template)" "perl(IO::Handle)" "perl(IO::CaptureOutput)" \
+              "perl(JSON)" "perl(File::Temp)" "perl(Path::Tiny)" \
+              "perl(File::Path)" "perl(File::Slurp)" \
+              "perl(File::Copy::Recursive)" "perl(String::ShellQuote)"
+              "perl(Sort::Versions)" "perl(Digest::SHA)" "perl(Data::UUID)" \
+              "perl(Data::Dump)" "perl(DateTime)" "perl(XML::Writer)" \
+              "perl(Parallel::ForkManager)" perl-ph mercurial git zstd
+
 If you are running an Arch based system, you should be able to install them with:
 
 # pacman -S perl-datetime perl-path-tiny perl-yaml perl-yaml-libyaml \
