@@ -26,8 +26,22 @@ test -n "$(git status --porcelain=v1 | grep -v '^?')" \
 is_project torbrowser && cd update_3
 is_project mullvadbrowser && cd update_1
 
-rm -Rf "$tbb_version_type"
+old_ur=$(mktemp -d)
+trap "rm -Rf $old_ur" EXIT
+mv "$tbb_version_type" "$old_ur/$tbb_version_type"
 tar -xf "$update_responses_tar"
+
+# Keep download-*.json files from previous release if they are not in
+# the new release. This happens when a release does not include some
+# platforms. See tor-browser-build#41039.
+IFS=$'\n'
+for file in $(ls -1 "$old_ur/$tbb_version_type"/download-*.json)
+do
+  fname=$(basename "$file")
+  test -f "$tbb_version_type/$fname" && continue
+  mv "$file" "$tbb_version_type/$fname"
+done
+
 git add "$tbb_version_type"
 git commit -m "$tbb_version_type: new version, $tbb_version"
 git push
