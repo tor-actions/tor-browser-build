@@ -45,10 +45,11 @@ Tor Browser Stable lives in the various `maint-$(TOR_BROWSER_MAJOR).$(TOR_BROWSE
     - [ ] ***(Optional)*** `var/firefox_platform_version` : update to latest `$(ESR_VERSION)` if rebased
   - [ ] Update `projects/translation/config`:
     - [ ] run `make list_translation_updates-release` to get updated hashes
-    - [ ] `steps/base-browser/git_hash` : update with `HEAD` commit of project's `base-browser` branch
-    - [ ] `steps/base-browser-fluent/git_hash` : update with `HEAD` commit of project's `basebrowser-newidentityftl` branch
-    - [ ] `steps/tor-browser/git_hash` : update with `HEAD` commit of project's `tor-browser` branch
-    - [ ] `steps/fenix/git_hash` : update with `HEAD` commit of project's `fenix-torbrowserstringsxml` branch
+    - [ ] Update `projects/translation/config`:
+      - [ ] run `make list_translation_updates-alpha` to get updated hashes
+      - [ ] `steps/base-browser/git_hash` : update with `HEAD` commit of project's `base-browser` branch
+      - [ ] `steps/tor-browser/git_hash` : update with `HEAD` commit of project's `tor-browser` branch
+      - [ ] `steps/fenix/git_hash` : update with `HEAD` commit of project's `fenix-torbrowserstringsxml` branch
 - [ ] Update Android-specific build configs
   - [ ] Update `projects/geckoview/config`
     - [ ] `browser_build` : update to match `tor-browser` tag
@@ -58,10 +59,9 @@ Tor Browser Stable lives in the various `maint-$(TOR_BROWSER_MAJOR).$(TOR_BROWSE
   - [ ] ***(Optional)*** Update `projects/application-services/config`:
     **NOTE** we don't currently have any of our own patches for this project
     - [ ] `git_hash` : update to appropriate git commit associated with `$(ESR_VERSION)`
-  - [ ] ***(Optional)*** Update `projects/android-components/config`:
-    - [ ] `android_components_build` : update to match stable android-components tag
-  - [ ] ***(Optional)*** Update `projects/fenix/config`
-    - [ ] `fenix_build` : update to match fenix tag
+  - [ ] ***(Optional)*** Update `projects/firefox-android/config`:
+      - [ ] `fenix_version` : update to match alpha `firefox-android` build tag
+      - [ ] `browser_branch` : update to match alpha `firefox-android` build tag
   - [ ] Update allowed_addons.json by running (from `tor-browser-build` root):
     - `./tools/fetch_allowed_addons.py > projects/browser/allowed_addons.json`
 - [ ] Update common build configs
@@ -79,43 +79,39 @@ Tor Browser Stable lives in the various `maint-$(TOR_BROWSER_MAJOR).$(TOR_BROWSE
   - [ ] Check for tor updates here : https://gitlab.torproject.org/tpo/core/tor/-/tags
     - [ ] ***(Optional)*** Update `projects/tor/config` 
       - [ ] `version` : update to latest non `-alpha` tag (ping dgoulet or ahf if unsure)
-  - [ ] Check for go updates here : https://golang.org/dl
+  - [ ] Check for go updates here : https://go.dev/dl
     - **NOTE** : Tor Browser Stable uses the latest of the *previous* Stable major series go version (apart from the transition phase from Tor Browser Alpha to Stable, in which case Tor Browser Stable may use the latest major series go version)
     - [ ] ***(Optional)*** Update `projects/go/config`
       - [ ] `version` : update go version
       - [ ] `input_files/sha256sum` for `go` : update sha256sum of archive (sha256 sums are displayed on the go download page)
-    - [ ] Check for manual updates by running (from `tor-browser-build` root): `./tools/fetch-manual.py`
-      - [ ] ***(Optional)*** If new version is available:
-        - [ ] Upload the downloaded `manual_$PIPELINEID.zip` file to `tb-build-02.torproject.org`
-        - [ ] Deploy to `tb-builder`'s `public_html` directory:
-          - `sudo -u tb-builder cp manual_$PIPELINEID.zip ~/../tb-builder/public_html/.`
-        - [ ] Update `projects/manual/config`:
-          - [ ] Change the `version` to `$PIPELINEID`
-          - [ ] Update `sha256sum` in the `input_files` section
-- [ ] Update `ChangeLog.txt`
-  - [ ] Ensure ChangeLog.txt is sync'd between alpha and stable branches
+  - [ ] Check for manual updates by running (from `tor-browser-build` root): `./tools/fetch-manual.py`
+    - [ ] ***(Optional)*** If new version is available:
+      - [ ] Upload the downloaded `manual_$PIPELINEID.zip` file to `tb-build-02.torproject.org`
+      - [ ] Deploy to `tb-builder`'s `public_html` directory:
+        - `sudo -u tb-builder cp manual_$PIPELINEID.zip ~/../tb-builder/public_html/.`
+      - [ ] Update `projects/manual/config`:
+        - [ ] Change the `version` to `$PIPELINEID`
+        - [ ] Update `sha256sum` in the `input_files` section
+- [ ] Update `ChangeLog-TBB.txt`
+  - [ ] Ensure `ChangeLog-TBB.txt` is sync'd between alpha and stable branches
   - [ ] Check the linked issues: ask people to check if any are missing, remove the not fixed ones
-  - [ ] Run `tools/fetch-changelogs.py $(TOR_BROWSER_VERSION)` or `tools/fetch-changelogs.py '#$(ISSUE_NUMBER)'`
+  - [ ] Run `tools/fetch-changelogs.py $(ISSUE_NUMBER) --date $date $updateArgs`
     - Make sure you have `requests` installed (e.g., `apt install python3-requests`)
     - The first time you run this script you will need to generate an access token; the script will guide you
-  - [ ] Copy the output of the script to the beginning of `ChangeLog.txt` and adjust its output
-    - **NOTE** : If you used the issue number, you will need to write the Tor Browser version manually
-  - [ ] ***(Optional)*** Under `All Platforms` include any version updates for:
-    - [ ] Translations
-    - [ ] OpenSSL
-    - [ ] NoScript
-    - [ ] zlib
-    - [ ] tor daemon
-  - [ ] ***(Optional)*** Under `Windows + macOS + Linux` include updates for:
-    - [ ] Firefox
-  - [ ] ***(Optional)*** Under `Android`, include updates for:
-    - [ ] Geckoview
-  - [ ] ***(Optional)*** Under `Build System/All Platforms` include updates for:
-    - [ ] Go
-- [ ] Open MR with above changes
+    - `$updateArgs` should be these arguments, depending on what you actually updated:
+      - [ ] `--firefox` (be sure to include esr at the end if needed, which is usually the case)
+      - [ ] `--tor`
+      - [ ] `--no-script`
+      - [ ] `--openssl`
+      - [ ] `--zlib`
+      - [ ] `--go`
+      - E.g., `tools/fetch-changelogs.py 41028 --date 'December 19 2023' --firefox 115.6.0esr --tor 0.4.8.10 --no-script 11.4.29 --zlib 1.3 --go 1.21.5 --openssl 3.0.12`
+    - `--date $date` is optional, if omitted it will be the date on which you run the command
+  - [ ] Copy the output of the script to the beginning of `ChangeLog-TBB.txt` and adjust its output
+- [ ] Open MR with above changes, using the template for release preparations
 - [ ] Merge
 - [ ] Sign/Tag commit: `make torbrowser-signtag-release`
-- [ ] Push tag to `origin`
+- [ ] Push tag to `upstream`
 - [ ] Begin build on `$(BUILD_SERVER)` (fix any issues in subsequent MRs)
 - [ ] **TODO** Submit build-tag to Mullvad build infra
 - [ ] Ensure builders have matching builds

@@ -62,26 +62,20 @@
       - [ ] ***(Optional)*** If new version available, update `mullvad-extension` section of `input_files` in `projects/browser/config`
         - [ ] `URL`
         - [ ] `sha256sum`
-  - [ ] Update `ChangeLog-MB.txt`
-    - [ ] Ensure ChangeLog-MB.txt is sync'd between alpha and stable branches
-    - [ ] Check the linked issues: ask people to check if any are missing, remove the not fixed ones
-    - [ ] Run `tools/fetch-changelogs.py $(TOR_BROWSER_VERSION)` or `tools/fetch-changelogs.py '#$(ISSUE_NUMBER)'`
-      - Make sure you have `requests` installed (e.g., `apt install python3-requests`)
-      - The first time you run this script you will need to generate an access token; the script will guide you
-    - [ ] Copy the output of the script to the beginning of `ChangeLog-MB.txt` and update its output
-      - [ ] Version
-      - [ ] Browser Name
-      - [ ] Release Date
-    - [ ] Under `All Platforms` include any version updates for:
-      - NoScript
-      - uBlock-origin
-      - Mullvad Browser Extension
-      - Firefox
-  - [ ] Open MR with above changes
-  - [ ] Build the MR after initial review on at least two of:
-    - [ ] Tor Project build machine
-    - [ ] Mullvad build machine
-    - [ ] Local developer machine
+    - [ ] Update `ChangeLog-MB.txt`
+      - [ ] Ensure `ChangeLog-MB.txt` is sync'd between alpha and stable branches
+      - [ ] Check the linked issues: ask people to check if any are missing, remove the not fixed ones
+      - [ ] Run `tools/fetch-changelogs.py $(ISSUE_NUMBER) --date $date $updateArgs`
+        - Make sure you have `requests` installed (e.g., `apt install python3-requests`)
+        - The first time you run this script you will need to generate an access token; the script will guide you
+        - `$updateArgs` should be these arguments, depending on what you actually updated:
+          - [ ] `--firefox`
+          - [ ] `--no-script`
+          - [ ] `--ublock`
+          - E.g., `tools/fetch-changelogs.py 41029 --date 'December 19 2023' --firefox 115.6.0esr --no-script 11.4.29 --ublock 1.54.0`
+        - `--date $date` is optional, if omitted it will be the date on which you run the command
+      - [ ] Copy the output of the script to the beginning of `ChangeLog-MB.txt` and adjust its output
+  - [ ] Open MR with above changes, using the template for release preparations
   - [ ] Ensure builders have matching builds
   - [ ] Merge
   - [ ] Sign+Tag
@@ -92,32 +86,11 @@
       - pierov
       - richard
     - [ ] Run: `make mullvadbrowser-signtag-alpha`
-    - [ ] Push tag to `origin`
-
-</details>
-
-<details>
-  <summary>QA</summary>
-
-  ### send the build
-  - [ ] Email Mullvad QA: support@mullvad.net, rui@mullvad.net
-    <details>
-      <summary>email template</summary>
-
-        Subject:
-        New build: Mullvad Browser $(MULLVAD_BROWSER_VERION) (unsigned)
-
-        Body:
-        unsigned builds: https://tb-build-05.torproject.org/~$(BUILDER)/builds/mullvadbrowser/alpha/unsigned/$(MB_BUILD_TAG)
-
-        changelog:
-        ...
-
-    </details>
-
-    - ***(Optional)*** Add additional information:
-      - [ ] Note any new functionality which needs testing
-      - [ ] Link to any known issues
+  - [ ] Push tag to `upstream`
+  - [ ] Build the tag on at least two of:
+    - [ ] Tor Project build machine
+    - [ ] Mullvad build machine
+    - [ ] Local developer machine
 
 </details>
 

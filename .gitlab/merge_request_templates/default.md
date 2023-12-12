@@ -43,13 +43,13 @@
   - **localization** : henry, pierov
   - **macos** : clairehurst, dan
   - **nightly builds** : boklm
-  - **rebases/release-prep** : dan, ma1, pierov, richard
+  - **rebases/release-prep** : boklm, dan, ma1, pierov, richard
   - **security** : ma1
   - **signing** : boklm, richard
   - **updater** : pierov
   - **misc/other** : pierov, richard
 
-#### Change Description
+### Change Description
 
 <!-- Whatever context the reviewer needs to effectively review the patchset; if the patch includes UX updates be sure to include screenshots/video of how any new behaviour -->
 

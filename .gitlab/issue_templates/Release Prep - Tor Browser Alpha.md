@@ -93,30 +93,22 @@
           - [ ] Change the `version` to `$PIPELINEID`
           - [ ] Update `sha256sum` in the `input_files` section
   - [ ] Update `ChangeLog-TBB.txt`
-    - [ ] Ensure ChangeLog-TBB.txt is sync'd between alpha and stable branches
+    - [ ] Ensure `ChangeLog-TBB.txt` is sync'd between alpha and stable branches
     - [ ] Check the linked issues: ask people to check if any are missing, remove the not fixed ones
-    - [ ] Run `tools/fetch-changelogs.py $(TOR_BROWSER_VERSION)` or `tools/fetch-changelogs.py '#$(ISSUE_NUMBER)'`
+    - [ ] Run `tools/fetch-changelogs.py $(ISSUE_NUMBER) --date $date $updateArgs`
       - Make sure you have `requests` installed (e.g., `apt install python3-requests`)
       - The first time you run this script you will need to generate an access token; the script will guide you
-    - [ ] Copy the output of the script to the beginning of `ChangeLog-TBB.txt` and update its output
-      - [ ] Version
-      - [ ] Browser Name
-      - [ ] Release Date
-    - [ ] Under `All Platforms` include any version updates for:
-      - NoScript
-      - tor
-      - OpenSSL
-      - lyrebird
-      - Snowflake
-    - [ ] Under `Windows + macOS + Linux` include any version updates for:
-      - Firefox
-    - [ ] Under `Android` include any version updates for:
-      - Geckoview
-    - [ ] Under `Windows + Android` include any version updates for:
-      - zlib
-    - [ ] Under `Build System/All Platforms` include any version updates for:
-      - Go
-  - [ ] Open MR with above changes
+      - `$updateArgs` should be these arguments, depending on what you actually updated:
+          - [ ] `--firefox` (be sure to include esr at the end if needed, which is usually the case)
+          - [ ] `--tor`
+          - [ ] `--no-script`
+          - [ ] `--openssl`
+          - [ ] `--zlib`
+          - [ ] `--go`
+          - E.g., `tools/fetch-changelogs.py 41028 --date 'December 19 2023' --firefox 115.6.0esr --tor 0.4.8.10 --no-script 11.4.29 --zlib 1.3 --go 1.21.5 --openssl 3.0.12`
+        - `--date $date` is optional, if omitted it will be the date on which you run the command
+      - [ ] Copy the output of the script to the beginning of `ChangeLog-TBB.txt` and adjust its output
+  - [ ] Open MR with above changes, using the template for release preparations
   - [ ] Build the MR after initial review on at least two of:
     - [ ] Tor Project build machine
     - [ ] Mullvad build machine

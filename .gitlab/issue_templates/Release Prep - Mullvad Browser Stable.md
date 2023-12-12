@@ -60,39 +60,26 @@ Mullvad Browser Stable lives in the various `maint-$(MULLVAD_BROWSER_MAJOR).$(MU
     - [ ] ***(Optional)*** If new version available, update `mullvad-extension` section of `input_files` in `projects/browser/config`
       - [ ] `URL`
       - [ ] `sha256sum`
-- [ ] Open MR with above changes
+- [ ] Update `ChangeLog-MB.txt`
+  - [ ] Ensure `ChangeLog-MB.txt` is sync'd between alpha and stable branches
+  - [ ] Check the linked issues: ask people to check if any are missing, remove the not fixed ones
+  - [ ] Run `tools/fetch-changelogs.py $(ISSUE_NUMBER) --date $date $updateArgs`
+    - Make sure you have `requests` installed (e.g., `apt install python3-requests`)
+    - The first time you run this script you will need to generate an access token; the script will guide you
+    - `$updateArgs` should be these arguments, depending on what you actually updated:
+      - [ ] `--firefox`
+      - [ ] `--no-script`
+      - [ ] `--ublock`
+      - E.g., `tools/fetch-changelogs.py 41029 --date 'December 19 2023' --firefox 115.6.0esr --no-script 11.4.29 --ublock 1.54.0`
+    - `--date $date` is optional, if omitted it will be the date on which you run the command
+  - [ ] Copy the output of the script to the beginning of `ChangeLog-MB.txt` and adjust its output
+- [ ] Open MR with above changes, using the template for release preparations
 - [ ] Merge
 - [ ] Sign/Tag commit: `make mullvadbrowser-signtag-release`
 - [ ] Push tag to `origin`
 - [ ] Begin build on `$(BUILD_SERVER)` (fix any issues in subsequent MRs)
 - [ ] **TODO** Submit build-tag to Mullvad build infra
 - [ ] Ensure builders have matching builds
-
-</details>
-
-<details>
-  <summary>QA</summary>
-
-### send the build
-
-  - [ ] Email Mullvad QA: support@mullvad.net, rui@mullvad.net
-    <details>
-      <summary>email template</summary>
-
-        Subject:
-        New build: Mullvad Browser $(MULLVAD_BROWSER_VERION) (unsigned)
-
-        Body:
-        unsigned builds: https://tb-build-05.torproject.org/~$(BUILDER)/builds/mullvadbrowser/release/unsigned/$(MB_BUILD_TAG)
-
-        changelog:
-        ...
-
-    </details>
-
-    - ***(Optional)*** Add additional information:
-      - [ ] Note any new functionality which needs testing
-      - [ ] Link to any known issues
 
 </details>
 
@@ -192,4 +179,4 @@ Mullvad Browser Stable lives in the various `maint-$(MULLVAD_BROWSER_MAJOR).$(MU
 
 </details>
 
-/label ~"Release Prep"
+/label ~"Release Prep" ~"Sponsor 131"
