@@ -1,3 +1,26 @@
+Tor Browser 13.0.7 - December 19 2023
+ * All Platforms
+   * Updated tor to 0.4.8.10
+   * Updated NoScript to 11.4.29
+   * Bug 42042: view-source:http://ip-address does not work because of HTTPS Only [tor-browser]
+   * Bug 42261: Update the icon of Startpage search engine [tor-browser]
+   * Bug 42330: Rebase stable browsers to 115.6.0esr [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.6.0esr
+   * Bug 42283: Tor Browser shouldn't ship blockchair by default [tor-browser]
+ * Android
+   * Updated GekcoView to 115.6.0esr
+   * Bug 42285: Update the gitignore to use the correct paths for tor stuff [tor-browser]
+ * Build System
+   * All Platforms
+     * Update Go to 1.21.5
+     * Bug 40884: Script to automate uploading sha256s and signatures to location signing/download-unsigned-sha256sums-gpg-signatures-from-people-tpo expects them to be [tor-browser-build]
+     * Bug 41026: Do not use ~ when uploading the signed hashes [tor-browser-build]
+     * Bug 41036: Remove go_vendor-lyrebird-nightly makefile target, and rename go_vendor-$project-alpha makefile targets to go_vendor-$project [tor-browser-build]
+     * Bug 41039: Update tools/signing/upload-update_responses-to-staticiforme to keep download-*json files from previous release when new release does not include them [tor-browser-build]
+   * macOS
+     * Bug 40990: Remove old macos signing scripts [tor-browser-build]
+
 Tor Browser 13.0.6 - December 04 2023
  * All Platforms
    * Bug 42288: Allow language spoofing in status messages [tor-browser]
