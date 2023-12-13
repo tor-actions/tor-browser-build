@@ -42,6 +42,11 @@ buildconf:
   ### signing the tag.
   #git_signtag_opt: '-u keyid'
 
+  ### The buildconf/devmole_auth_token option is used for starting remote builds on
+  ### Mullvad's devmole server using the kick_devmole_build step in the release
+  ### project. Such a token can be acquired from the Mullvad sysadmins.
+  #devmole_auth_token: abcdefghijklmnopqrstuvwxyz012345
+
 var:
   local_conf: 1
 

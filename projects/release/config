@@ -279,3 +279,8 @@ steps:
         name: mar-tools
         pkg_type: fetch_martools
     compare_mar_signed_unsigned: '[% INCLUDE compare_mar_signed_unsigned %]'
+  kick_devmole_build:
+    build_log: '-'
+    debug: 0
+    input_files: []
+    kick_devmole_build: '[% INCLUDE kick_devmole_build %]'

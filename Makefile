@@ -679,6 +679,10 @@ torbrowser-signtag-release: submodule-update
 torbrowser-signtag-alpha: submodule-update
 	$(rbm) build release --step signtag --target alpha --target torbrowser
 
+# requires var/devmole_auth_token to be set in rbm.local.conf
+torbrowser-kick-devmole-build: submodule-update
+	$(rbm) build release --step kick_devmole_build --target torbrowser
+
 # requires tpo_user variable be set in rbm.local.conf
 mullvadbrowser-upload-sha256sums-release: submodule-update
 	$(rbm) build release --step upload_sha256sums --target release --target mullvadbrowser
@@ -692,6 +696,10 @@ mullvadbrowser-signtag-release: submodule-update
 
 mullvadbrowser-signtag-alpha: submodule-update
 	$(rbm) build release --step signtag --target alpha --target mullvadbrowser
+
+# requires var/devmole_auth_token to be set in rbm.local.conf
+mullvadbrowser-kick-devmole-build: submodule-update
+	$(rbm) build release --step kick_devmole_build --target mullvadbrowser
 
 fetch: submodule-update
 	$(rbm) fetch
