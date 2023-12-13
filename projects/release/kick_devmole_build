@@ -1,0 +1,42 @@
+#!/usr/bin/bash
+
+# This script triggers a build of Tor or Mullvad Browser on Mullvad Infrastructure
+# Hashes are saved here: https://cdn.stagemole.eu/hashes/
+# A Mullvad build server auth token (var/devmole_auth_token) is required to build
+# For now you have to be connecting from Sweden (ie via Malmö or Gothenburg exits using MullvadVPN) for your request to succeed
+
+set -e
+
+# get our build tag
+TAG=[% c("var/git_tag_prefix") %]-[% c("var/torbrowser_version") %]-[% c("var/torbrowser_build") %]
+
+# check for tag existence
+if ! git rev-parse ${TAG} > /dev/null 2>&1; then
+    echo "Error: build tag '${TAG}' does not exist"
+    exit 1
+fi
+
+# determine whether alpha or release based on the build tag
+RELEASE=
+if [[ "${TAG}" =~ ^(mb|tbb)-[1-9][0-9]\.[05]a[1-9][0-9]*-build[1-9]$ ]]; then
+    RELEASE="alpha"
+elif [[ "${TAG}" =~ ^(mb|tbb)-[1-9][0-9]\.[05](\.[1-9][0-9]*)?-build[1-9]$ ]]; then
+    RELEASE="release"
+else
+    echo "Error: malformed build tag '${TAG}'"
+    exit 1
+fi
+
+# get auth token for submission to devmole build server
+AUTH_TOKEN=[% c("buildconf/devmole_auth_token") %]
+if [[ "${AUTH_TOKEN}" = "" ]]; then
+    echo "AUTH_TOKEN: ${AUTH_TOKEN}"
+    echo "Error: buildconf/devmole_auth_token missing from rbm.local.conf"
+    exit 1
+fi
+
+# make request
+curl -X POST "https://drone-server.devmole.eu/api/repos/mullvad/browser-build/builds?branch=main&tag=${TAG}&release=${RELEASE}" -H "Authorization: Bearer ${AUTH_TOKEN}" -H "Accept: application/json"
+
+echo
+echo Hashes will appear here: https://cdn.stagemole.eu/hashes/[% c("var/projectname") %]/[% c("var/torbrowser_version") %]-[% c("var/torbrowser_build") %]
