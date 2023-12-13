@@ -13,16 +13,14 @@ torbrowser:
   nss_db_dir: nssdb
   appname_marfile: tor-browser
   appname_bundle: tor-browser
-basebrowser:
+mullvadbrowser:
   publish_dirs:
-    - basebrowser-nightly-linux-x86_64
-    - basebrowser-nightly-linux-i686
-    - basebrowser-nightly-windows-x86_64
-    - basebrowser-nightly-windows-i686
-    - basebrowser-nightly-macos
-  nss_db_dir: nssdb-basebrowser-1
-  appname_marfile: base-browser
-  appname_bundle: base-browser
+    - mullvadbrowser-nightly-linux-x86_64
+    - mullvadbrowser-nightly-windows-x86_64
+    - mullvadbrowser-nightly-macos
+  nss_db_dir: nssdb-mullvadbrowser-1
+  appname_marfile: mullvad-browser
+  appname_bundle: mullvad-browser
 nss_certname: nightly-marsigner
 gpg_keyring: keyring/torbrowser-nightly.gpg
 rsync_dest: /srv/tbb-nightlies-master.torproject.org/htdocs/nightly-updates/
