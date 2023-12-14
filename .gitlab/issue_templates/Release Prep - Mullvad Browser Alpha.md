@@ -76,7 +76,6 @@
         - `--date $date` is optional, if omitted it will be the date on which you run the command
       - [ ] Copy the output of the script to the beginning of `ChangeLog-MB.txt` and adjust its output
   - [ ] Open MR with above changes, using the template for release preparations
-  - [ ] Ensure builders have matching builds
   - [ ] Merge
   - [ ] Sign+Tag
     - **NOTE** this must be done by one of:
@@ -86,11 +85,15 @@
       - pierov
       - richard
     - [ ] Run: `make mullvadbrowser-signtag-alpha`
-  - [ ] Push tag to `upstream`
-  - [ ] Build the tag on at least two of:
+    - [ ] Push tag to `upstream`
+  - [ ] Build the tag on at least one of:
+    - Run `make mullvadbrowser-alpha && make mullvadbrowser-incrementals-alpha`
     - [ ] Tor Project build machine
-    - [ ] Mullvad build machine
     - [ ] Local developer machine
+  - [ ] Submit build request to Mullvad infrastructure:
+    - **NOTE** this requires a devmole authentication token
+    - Run `make mullvadbrowser-kick-devmole-build`
+  - [ ] Ensure builders have matching builds
 
 </details>
 

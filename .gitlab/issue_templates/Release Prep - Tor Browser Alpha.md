@@ -109,13 +109,8 @@
         - `--date $date` is optional, if omitted it will be the date on which you run the command
       - [ ] Copy the output of the script to the beginning of `ChangeLog-TBB.txt` and adjust its output
   - [ ] Open MR with above changes, using the template for release preparations
-  - [ ] Build the MR after initial review on at least two of:
-    - [ ] Tor Project build machine
-    - [ ] Mullvad build machine
-    - [ ] Local developer machine
-  - [ ] Ensure builders have matching builds
   - [ ] Merge
-  - [ ] Sign_Tag
+  - [ ] Sign+Tag
     - **NOTE** this must be done by one of:
       - boklm
       - dan
@@ -123,7 +118,15 @@
       - pierov
       - richard
     - [ ] Run: `make torbrowser-signtag-alpha`
-    - [ ] Push tag to `origin`
+    - [ ] Push tag to `upstream`
+  - [ ] Build on at least one of:
+    - Run `make torbrowser-alpha && make torbrowser-incrementals-alpha`
+    - [ ] Tor Project build machine
+    - [ ] Local developer machine
+  - [ ] Submit build request to Mullvad infrastructure:
+    - **NOTE** this requires a devmole authentication token
+    - Run `make torbrowser-kick-devmole-build`
+  - [ ] Ensure builders have matching builds
 
 </details>
 

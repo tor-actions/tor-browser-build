@@ -108,13 +108,25 @@ Tor Browser Stable lives in the various `maint-$(TOR_BROWSER_MAJOR).$(TOR_BROWSE
       - E.g., `tools/fetch-changelogs.py 41028 --date 'December 19 2023' --firefox 115.6.0esr --tor 0.4.8.10 --no-script 11.4.29 --zlib 1.3 --go 1.21.5 --openssl 3.0.12`
     - `--date $date` is optional, if omitted it will be the date on which you run the command
   - [ ] Copy the output of the script to the beginning of `ChangeLog-TBB.txt` and adjust its output
-- [ ] Open MR with above changes, using the template for release preparations
-- [ ] Merge
-- [ ] Sign/Tag commit: `make torbrowser-signtag-release`
-- [ ] Push tag to `upstream`
-- [ ] Begin build on `$(BUILD_SERVER)` (fix any issues in subsequent MRs)
-- [ ] **TODO** Submit build-tag to Mullvad build infra
-- [ ] Ensure builders have matching builds
+  - [ ] Open MR with above changes, using the template for release preparations
+  - [ ] Merge
+  - [ ] Sign+Tag
+    - **NOTE** this must be done by one of:
+      - boklm
+      - dan
+      - ma1
+      - pierov
+      - richard
+    - [ ] Run: `make torbrowser-signtag-release`
+    - [ ] Push tag to `upstream`
+  - [ ] Build on at least one of:
+    - Run `make torbrowser-release && make torbrowser-incrementals-release`
+    - [ ] Tor Project build machine
+    - [ ] Local developer machine
+  - [ ] Submit build request to Mullvad infrastructure:
+    - **NOTE** this requires a devmole authentication token
+    - Run `make torbrowser-kick-devmole-build`
+  - [ ] Ensure builders have matching builds
 
 </details>
 

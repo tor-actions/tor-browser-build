@@ -73,13 +73,25 @@ Mullvad Browser Stable lives in the various `maint-$(MULLVAD_BROWSER_MAJOR).$(MU
       - E.g., `tools/fetch-changelogs.py 41029 --date 'December 19 2023' --firefox 115.6.0esr --no-script 11.4.29 --ublock 1.54.0`
     - `--date $date` is optional, if omitted it will be the date on which you run the command
   - [ ] Copy the output of the script to the beginning of `ChangeLog-MB.txt` and adjust its output
-- [ ] Open MR with above changes, using the template for release preparations
-- [ ] Merge
-- [ ] Sign/Tag commit: `make mullvadbrowser-signtag-release`
-- [ ] Push tag to `origin`
-- [ ] Begin build on `$(BUILD_SERVER)` (fix any issues in subsequent MRs)
-- [ ] **TODO** Submit build-tag to Mullvad build infra
-- [ ] Ensure builders have matching builds
+  - [ ] Open MR with above changes, using the template for release preparations
+  - [ ] Merge
+  - [ ] Sign+Tag
+    - **NOTE** this must be done by one of:
+      - boklm
+      - dan
+      - ma1
+      - pierov
+      - richard
+    - [ ] Run: `make mullvadbrowser-signtag-release`
+    - [ ] Push tag to `upstream`
+  - [ ] Build on at least one of:
+    - Run `make mullvadbrowser-release && make mullvadbrowser-incrementals-release`
+    - [ ] Tor Project build machine
+    - [ ] Local developer machine
+  - [ ] Submit build request to Mullvad infrastructure:
+    - **NOTE** this requires a devmole authentication token
+    - Run `make mullvadbrowser-kick-devmole-build`
+  - [ ] Ensure builders have matching builds
 
 </details>
 
