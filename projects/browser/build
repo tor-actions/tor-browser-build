@@ -413,15 +413,34 @@ SCRIPT_EOF
 [% IF c("var/updater_enabled") -%]
   cp $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip "$OUTDIR"/
 [% END -%]
-[% IF c("var/linux-x86_64") -%]
-  # TODO: See if we can make symbols also for Linux i686, see tor-browser#42146.
-  cp $rootdir/[% c('input_files_by_name/firefox') %]/browser-debug-symbols.tar.xz "$OUTDIR/[% c('var/project-name') %]-debug-symbols-[% c('var/mar_osname') %]-[% c('var/torbrowser_version') %].tar.xz"
-  [% IF !c("var/asan") -%]
-    cp $rootdir/[% c('input_files_by_name/firefox') %]/geckodriver.tar.xz "$OUTDIR/geckodriver-[% c('var/mar_osname') %]-[% c('var/torbrowser_version') %].tar.xz"
-  [% END -%]
-[% ELSIF c("var/windows") -%]
-  cp $rootdir/[% c('input_files_by_name/firefox') %]/browser-debug-symbols.zip "$OUTDIR/[% c('var/project-name') %]-debug-symbols-[% c('var/mar_osname') %]-[% c('var/torbrowser_version') %].zip"
+
+[% IF c("var/windows") -%]
+  archive_ext=zip
+[% ELSE -%]
+  archive_ext=tar.xz
 [% END -%]
+
+debug_symbols="$rootdir/[% c('input_files_by_name/firefox') %]/browser-debug-symbols.$archive_ext"
+if [[ -f "$debug_symbols" ]]; then
+  cp "$debug_symbols"  "$OUTDIR/[% c('var/project-name') %]-debug-symbols-[% c('var/mar_osname') %]-[% c('var/torbrowser_version') %].$archive_ext"
+fi
+
+[% IF c("var/macos_universal") -%]
+  geckodriver="$rootdir/[% c('input_files_by_name/firefox') %]/geckodriver.$archive_ext"
+  if [[ -f "$geckodriver" ]]; then
+    cp "$geckodriver" "$OUTDIR/geckodriver-[% c('var/osname') %]-[% c('var/torbrowser_version') %].$archive_ext"
+  fi
+  geckodriver="$rootdir/[% c('input_files_by_name/firefox-aarch64') %]/geckodriver.$archive_ext"
+  if [[ -f "$geckodriver" ]]; then
+    cp "$geckodriver" "$OUTDIR/geckodriver-macos-aarch64-[% c('var/torbrowser_version') %].$archive_ext"
+  fi
+[% ELSE -%]
+  geckodriver="$rootdir/[% c('input_files_by_name/firefox') %]/geckodriver.$archive_ext"
+  if [[ -f "$geckodriver" ]]; then
+    cp "$geckodriver" "$OUTDIR/geckodriver-[% c('var/osname') %]-[% c('var/torbrowser_version') %].$archive_ext"
+  fi
+[% END -%]
+
 [%IF c("var/tor-browser") -%]
   tor_expert_bundle_src="[% c("input_files_by_name/tor-expert-bundle") %]"
   # strip off trailing "$buildid.tar.gz"

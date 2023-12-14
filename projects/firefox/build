@@ -201,9 +201,6 @@ echo "Starting ./mach build $(date)"
 [% END -%]
 
 [% IF c("var/linux") -%]
-  [% IF c("var/linux-x86_64") && !c("var/asan") -%]
-    cp obj-*/x86_64-unknown-linux-gnu/release/geckodriver $distdir
-  [% END -%]
   cp -a obj-*/dist/[% c('var/exe_name') %]/* $distdir/Browser/
   mkdir -p $distdir/Debug
   # Some include files are symlinks, so use -Lr, or the tarball will fail
@@ -236,6 +233,8 @@ RBM_TB_EOF
   find . -path ./_tests -prune -o -name '*.pdb' -exec cp -l {} $distdir/Debug/Browser/ \;
   popd
 [% END -%]
+
+cp -L obj-*/dist/bin/geckodriver* $distdir
 
 [% IF c("var/updater_enabled") -%]
   # Make MAR-based update tools available for use during the bundle phase.
@@ -279,10 +278,6 @@ RBM_TB_EOF
 cd $distdir
 
 [% IF c("var/linux") -%]
-  [% IF c("var/linux-x86_64") && !c("var/asan") -%]
-    # No need for an unstripped geckodriver
-    strip geckodriver
-  [% END -%]
   mkdir -p $distdir/Debug/Browser
   # Strip and generate debuginfo for the firefox binary that we keep, all *.so
   # files, the plugin-container, and the updater (see ticket #10126)
@@ -335,17 +330,12 @@ echo "Starting to package artifacts $(date)"
         tar_args => '-caf ' _ dest_dir _ '/' _ c('filename') _ '/browser.tar.' _ c('compress_tar'),
     }) %]
 
+# Debug symbols
 [% IF c("var/linux") -%]
   [% c('tar', {
       tar_src => [ 'Debug' ],
       tar_args => '-cJf ' _ dest_dir _ '/' _ c('filename') _ '/browser-debug-symbols.tar.xz',
     }) %]
-  [% IF c("var/linux-x86_64") && !c("var/asan") -%]
-    [% c('tar', {
-        tar_src => [ 'geckodriver' ],
-        tar_args => '-cJf ' _ dest_dir _ '/' _ c('filename') _ '/geckodriver.tar.xz',
-      }) %]
-  [% END -%]
 [% ELSIF c("var/windows") -%]
   [% c('zip', {
       zip_src => [ 'Debug' ],
@@ -353,6 +343,21 @@ echo "Starting to package artifacts $(date)"
     }) %]
 [% END -%]
 
+# Geckodriver
+llvm-strip geckodriver*
+[% IF c("var/windows") -%]
+  [% c('zip', {
+      zip_src => [ 'geckodriver.exe' ],
+      zip_args => dest_dir _ '/' _ c('filename') _ '/geckodriver.zip',
+    }) %]
+[% ELSE -%]
+  [% c('tar', {
+      tar_src => [ 'geckodriver' ],
+      tar_args => '-cJf ' _ dest_dir _ '/' _ c('filename') _ '/geckodriver.tar.xz',
+    }) %]
+[% END -%]
+
+# MAR tools
 [% IF c("var/updater_enabled") -%]
   [% c('zip', {
       zip_src => [ 'mar-tools' ],
