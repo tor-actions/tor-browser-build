@@ -13,6 +13,7 @@ var:
     - bzip2
     - jq
   mar_osname: '[% c("var/osname") %]'
+  version_json: version.json
 
 targets:
   linux:
@@ -49,6 +50,7 @@ targets:
   torbrowser:
     var:
       prefs_file: 000-tor-browser.js
+      version_json: tbb_version.json
   basebrowser:
     var:
       prefs_file: 001-base-profile.js
