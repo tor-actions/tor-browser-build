@@ -64,10 +64,13 @@ cp -rl $gradle_repo/maven2/* $gradle_repo || true
 export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
 # Create .mozbuild to avoid interactive prompt in configure
 mkdir "$HOME/.mozbuild"
+
+echo "Starting ./mach configure $(date)"
 ./mach configure \
   --with-base-browser-version=[% c("var/torbrowser_version") %] \
   [% IF !c("var/rlbox") -%]--without-wasm-sandboxed-libraries[% END %]
 
+echo "Starting ./mach build $(date)"
 ./mach build --verbose
 
 [% IF !c("var/android_single_arch") -%]
@@ -85,6 +88,7 @@ export MOZ_SOURCE_REPO="[% c('var/gitlab_project') %]"
 export MOZ_SOURCE_CHANGESET=[% c("var/git_commit") %]
 MOZCONFIG_EOF
 
+  echo "Starting the creation of the fake fat AAR $(date)"
   pushd tools/torbrowser
   make fat-aar ARCHS="[% c('arch') %]"
   popd
@@ -93,6 +97,7 @@ MOZCONFIG_EOF
     exoplayer2:publishDebugPublicationToMavenLocal
 [% END -%]
 
+echo "Starting to package artifacts $(date)"
 cd $distdir
 [% c('tar', {
     tar_src => [ project ],

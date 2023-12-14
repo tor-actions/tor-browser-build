@@ -161,6 +161,7 @@ mkdir "$HOME/.mozbuild"
 export LC_ALL=C.UTF-8
 export LANG=C.UTF-8
 
+echo "Starting ./mach configure $(date)"
 ./mach configure \
   --with-distribution-id=org.torproject \
   --with-base-browser-version=[% c("var/torbrowser_version") %] \
@@ -168,12 +169,15 @@ export LANG=C.UTF-8
   [% IF !c("var/base-browser") -%]--with-branding=browser/branding/[% c("var/branding_directory_prefix") %]-[% c("var/channel") %][% END %] \
   [% IF !c("var/rlbox") -%]--without-wasm-sandboxed-libraries[% END %]
 
+echo "Starting ./mach build $(date)"
 ./mach build --verbose
 [% IF c("var/has_l10n") -%]
+  echo "Starting to merge locales $(date)"
   export MOZ_CHROME_MULTILOCALE="$supported_locales"
   # No quotes on purpose, see https://firefox-source-docs.mozilla.org/build/buildsystem/locales.html#instructions-for-multi-locale-builds
   ./mach package-multi-locale --locales en-US $MOZ_CHROME_MULTILOCALE
   AB_CD=multi ./mach build stage-package
+  echo "Locales merged $(date)"
 [% ELSE -%]
   ./mach build stage-package
 [% END -%]
@@ -323,6 +327,8 @@ END;
     [% END -%]
   [% END -%]
 [% END -%]
+
+echo "Starting to package artifacts $(date)"
 
 [% c('tar', {
         tar_src => [ browserdir ],
