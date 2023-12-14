@@ -332,10 +332,15 @@ echo "Starting to package artifacts $(date)"
 
 # Debug symbols
 [% IF c("var/linux") -%]
+  pushd Debug
+  mkdir -p [% c('var/project-name') %]/Browser
+  mv Browser [% c('var/project-name') %]/Browser/.debug
+  mv include [% c('var/project-name') %]/
   [% c('tar', {
-      tar_src => [ 'Debug' ],
+      tar_src => [ c('var/project-name') ],
       tar_args => '-cJf ' _ dest_dir _ '/' _ c('filename') _ '/browser-debug-symbols.tar.xz',
     }) %]
+  popd
 [% ELSIF c("var/windows") -%]
   [% c('zip', {
       zip_src => [ 'Debug' ],
