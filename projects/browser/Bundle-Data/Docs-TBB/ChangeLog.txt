@@ -5,12 +5,14 @@ Tor Browser 13.0.7 - December 19 2023
    * Bug 42042: view-source:http://ip-address does not work because of HTTPS Only [tor-browser]
    * Bug 42261: Update the icon of Startpage search engine [tor-browser]
    * Bug 42330: Rebase stable browsers to 115.6.0esr [tor-browser]
+   * Bug 42334: Keep returning ERROR_ONION_WITH_SELF_SIGNED_CERT only for .onion sites whose cert throws ERROR_UNKNOWN_ISSUER [tor-browser]
  * Windows + macOS + Linux
    * Updated Firefox to 115.6.0esr
    * Bug 42283: Tor Browser shouldn't ship blockchair by default [tor-browser]
  * Android
    * Updated GekcoView to 115.6.0esr
    * Bug 42285: Update the gitignore to use the correct paths for tor stuff [tor-browser]
+   * Bug 42339: Backport Android security fixes from Firefox 121 to 115.6 - based Tor Browser [tor-browser]
  * Build System
    * All Platforms
      * Update Go to 1.21.5
