@@ -1,3 +1,104 @@
+Tor Browser 13.5a3 - December 22 2023
+ * All Platforms
+   * Updated Tor to 0.4.8.10
+   * Updated NoScript to 11.4.29
+   * Bug 42042: view-source:http://ip-address does not work because of HTTPS Only [tor-browser]
+   * Bug 42308: Update README for tor browser [tor-browser]
+   * Bug 42332: Rebase Tor Browser alpha onto 115.6.0esr [tor-browser]
+   * Bug 42334: Keep returning ERROR_ONION_WITH_SELF_SIGNED_CERT only for .onion sites whose cert throws ERROR_UNKNOWN_ISSUER [tor-browser]
+   * Bug 42335: Do not localize the order of locales for app lang [tor-browser]
+   * Bug 42340: TorBridgeChanged notification sends out "[object Object]" as its data. [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.6.0esr
+   * Bug 40856: Add a default for preferences in TorSettings [tor-browser]
+   * Bug 42189: Assertion failure: the value of mPrivateBrowsingId in the loadContext and in the loadInfo are not the same! [tor-browser]
+   * Bug 42283: Tor Browser shouldn't ship blockchair by default [tor-browser]
+   * Bug 42299: After adding incorrect bridge addres on user cannot go back to the Connection page [tor-browser]
+   * Bug 42303: Remove unused "help" button logic in tor dialogs [tor-browser]
+   * Bug 42319: Make all the wordmark of the same size [tor-browser]
+ * Android
+   * Updated GeckoView to 115.6.0esr
+   * Bug 42248: Allow GeckoView to launch tor [tor-browser]
+   * Bug 42249: Allow GeckoView to launch lyrebird [tor-browser]
+   * Bug 42250: Allow Moat.sys.mjs to invoke lyrebird on Android [tor-browser]
+   * Bug 42313: Enable One UI Sans KR as a possible font for Korean (MozBug 1865238) [tor-browser]
+   * Bug 42339: Backport Android security fixes from Firefox 121 to 115.6 - based Tor Browser [tor-browser]
+ * Windows
+   * Bug 42163: Make the 3rd party DLL blocklist obey portable mode [tor-browser]
+ * Linux
+   * Bug 41050: Improve disk leak sanitization on startup [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.21.5
+     * Bug 42331: tb-dev fetch command is missing repository argument [tor-browser]
+     * Bug 40995: Use cdn.stagemole.eu instead of cdn.devmole.eu in download-unsigned-sha256sums-gpg-signatures-from-people-tpo [tor-browser-build]
+     * Bug 41026: Do not use ~ when uploading the signed hashes [tor-browser-build]
+     * Bug 41027: Remove tb-build-04 and tb-build-05 from tools/signing/download-unsigned-sha256sums-gpg-signatures-from-people-tpo [tor-browser-build]
+     * Bug 41036: Remove go_vendor-lyrebird-nightly makefile target, and rename go_vendor-$project-alpha makefile targets to go_vendor-$project [tor-browser-build]
+     * Bug 41039: Update tools/signing/upload-update_responses-to-staticiforme to keep download-*json files from previous release when new release does not include them [tor-browser-build]
+     * Bug 41042: Add options to include updates in the changelog scripts [tor-browser-build]
+     * Bug 41043: Create script to push build requests to Mullvad build servers [tor-browser-build]
+     * Bug 41045: Dump more information about build times on Firefox [tor-browser-build]
+     * Bug 41048: Drop the  kcp-go project [tor-browser-build]
+   * Windows + macOS + Linux
+     * Bug 41031: Add command to unsign .mar files and compare with sha256sums-unsigned-build.txt [tor-browser-build]
+   * Windows + macOS
+     * Bug 41016: Switch from bullseye to bookworm for desktop platforms [tor-browser-build]
+   * Windows
+     * Bug 41015: Enable std::filesystem on libc++ on Windows [tor-browser-build]
+     * Bug 41030: Add command to unsign .exe files and compare with sha256sums-unsigned-build.txt [tor-browser-build]
+   * macOS
+     * Bug 40990: Remove old macos signing scripts [tor-browser-build]
+
+Tor Browser 13.0.7 - December 19 2023
+ * All Platforms
+   * Updated tor to 0.4.8.10
+   * Updated NoScript to 11.4.29
+   * Bug 42042: view-source:http://ip-address does not work because of HTTPS Only [tor-browser]
+   * Bug 42261: Update the icon of Startpage search engine [tor-browser]
+   * Bug 42330: Rebase stable browsers to 115.6.0esr [tor-browser]
+   * Bug 42334: Keep returning ERROR_ONION_WITH_SELF_SIGNED_CERT only for .onion sites whose cert throws ERROR_UNKNOWN_ISSUER [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.6.0esr
+   * Bug 42283: Tor Browser shouldn't ship blockchair by default [tor-browser]
+ * Android
+   * Updated GekcoView to 115.6.0esr
+   * Bug 42285: Update the gitignore to use the correct paths for tor stuff [tor-browser]
+   * Bug 42339: Backport Android security fixes from Firefox 121 to 115.6 - based Tor Browser [tor-browser]
+ * Build System
+   * All Platforms
+     * Update Go to 1.21.5
+     * Bug 40884: Script to automate uploading sha256s and signatures to location signing/download-unsigned-sha256sums-gpg-signatures-from-people-tpo expects them to be [tor-browser-build]
+     * Bug 41026: Do not use ~ when uploading the signed hashes [tor-browser-build]
+     * Bug 41036: Remove go_vendor-lyrebird-nightly makefile target, and rename go_vendor-$project-alpha makefile targets to go_vendor-$project [tor-browser-build]
+     * Bug 41039: Update tools/signing/upload-update_responses-to-staticiforme to keep download-*json files from previous release when new release does not include them [tor-browser-build]
+   * macOS
+     * Bug 40990: Remove old macos signing scripts [tor-browser-build]
+
+Tor Browser 13.0.6 - December 04 2023
+ * All Platforms
+   * Bug 42288: Allow language spoofing in status messages [tor-browser]
+ * Windows + macOS + Linux
+   * Bug 42302: The allowed ports string contains a typo [tor-browser]
+   * Bug 42231: Improve the network monitor patch for http onion resources [tor-browser]
+   * Bug 42299: After adding incorrect bridge addres on user cannot go back to the Connection page [tor-browser]
+ * Linux
+   * Bug 17560: Downloaded URLs disk leak on Linux [tor-browser]
+   * Bug 42306: Tor Browser crashes when extensions popups are opened with Wayland enabled [tor-browser]
+   * Bug 41017: Disable Nvidia shader cache [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Bug 41027: Remove tb-build-04 and tb-build-05 from tools/signing/download-unsigned-sha256sums-gpg-signatures-from-people-tpo [tor-browser-build]
+     * Bug 40936: Revert tor-browser-build#40933 [tor-browser-build]
+     * Bug 40995: Use cdn.stagemole.eu instead of cdn.devmole.eu in download-unsigned-sha256sums-gpg-signatures-from-people-tpo [tor-browser-build]
+     * Bug 40064: Using exec on project with no git_url/hg_url is causing warning [rbm]
+   * Windows + macOS + Linux
+     * Bug 41031: Add command to unsign .mar files and compare with sha256sums-unsigned-build.txt [tor-browser-build]
+   * Windows
+     * Bug 41030: Add command to unsign .exe files and compare with sha256sums-unsigned-build.txt [tor-browser-build]
+   * Android
+     * Bug 41024: Fix android filenames in Release Prep issue templates [tor-browser-build]
+
 Tor Browser 13.5a2 - November 27 2023
  * All Platforms
    * Updated tor to 0.4.8.9
