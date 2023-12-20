@@ -43,9 +43,12 @@ versions:
 [% END -%]
         incremental_from:
 [% SET incr_from = c("var/nightly") ? c("var_p/nightly_torbrowser_incremental_from") : c("var/torbrowser_incremental_from");
-   FOREACH v IN incr_from -%]
-          - [% v %]
-[% END -%]
+   FOREACH v IN incr_from;
+     SET ver = tmpl(v);
+     IF ver -%]
+          - [% ver %]
+[%   END;
+   END -%]
         # for example, osx32: osx64
         migrate_archs:
         # for example, pt-PT: pt-BR
