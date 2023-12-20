@@ -1,3 +1,14 @@
+Tor Browser 13.0.8 - December 20 2023
+ * Windows
+   * Bug 41053: All PT's crash instantly in 13.0.7  [tor-browser-build]
+   * Bug 42179: PTs on Tor Browser 13 do not work with Windows 7 [tor-browser]
+ * Linux
+   * Bug 41050: Improve the disk leak sanitization on start-$browser [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Bug 41042: Add options to include updates in the changelog scripts [tor-browser-build]
+     * Bug 41043: Create script to push build requests to Mullvad build servers [tor-browser-build]
+
 Tor Browser 13.0.7 - December 19 2023
  * All Platforms
    * Updated tor to 0.4.8.10
