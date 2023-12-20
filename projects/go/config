@@ -1,10 +1,11 @@
 # vim: filetype=yaml sw=2
-version: 1.21.5
+version: '[% IF c("var/use_go_1_20") %]1.20.12[% ELSE %]1.21.5[% END %]'
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
 
 var:
+  use_go_1_20: 0
   setup: |
     mkdir -p /var/tmp/dist
     tar -C /var/tmp/dist -xf $rootdir/[% c("go_tarfile") %]
@@ -72,6 +73,7 @@ targets:
   windows:
     var:
       GOOS: windows
+      use_go_1_20: '[% c("origin_project") != "snowflake" %]'
   windows-i686:
     var:
       GOARCH: 386
@@ -117,9 +119,14 @@ input_files:
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
     enable: '[% ! c("var/linux") %]'
-  - URL: 'https://golang.org/dl/go[% c("version") %].src.tar.gz'
+  - URL: 'https://go.dev/dl/go[% c("version") %].src.tar.gz'
     name: go
     sha256sum: 285cbbdf4b6e6e62ed58f370f3f6d8c30825d6e56c5853c66d3c23bcdb09db19
+    enable: '[% !c("var/use_go_1_20") %]'
+  - URL: 'https://go.dev/dl/go[% c("version") %].src.tar.gz'
+    name: go
+    sha256sum: c5bf934751d31c315c1d0bb5fb02296545fa6d08923566f7a5afec81f2ed27d6
+    enable: '[% c("var/use_go_1_20") %]'
   - project: go-bootstrap
     name: go-bootstrap
     target_replace:
