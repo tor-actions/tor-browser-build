@@ -14,7 +14,7 @@ sorted_baseline_apk=$(basename $apk .apk)_sorted_baseline.apk
 $rootdir/sort-baseline.py --apk $apk $sorted_baseline_apk
 mv $sorted_baseline_apk $apk
 
-# Bundle our extensioni(s).
+# Bundle our extension(s).
 # NoScript will be copied over to the profile folder
 # as a "regular" browser extension receiving regular AMO updates.
 noscript_path="$ext_dir/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi"
@@ -22,6 +22,21 @@ noscript_path="$ext_dir/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi"
 mkdir -p /var/tmp/build/$ext_dir [% dest_dir _ '/' _ c('filename') %]
 cd /var/tmp/build
 mv $rootdir/[% c('input_files_by_name/noscript') %] "$noscript_path"
+
+[%IF c("var/tor-browser") -%]
+  unzip -j "$apk" assets/omni.ja
+  tar -xaf "$rootdir/[% c("input_files_by_name/tor-expert-bundle") %]" tor/pluggable_transports/pt_config.json
+  mkdir omni
+  pushd omni
+  unzip ../omni.ja
+  cp ../tor/pluggable_transports/pt_config.json chrome/toolkit/content/global/pt_config.json
+  [% c('zip', {
+      zip_src => [ '.' ],
+      zip_args => '../assets/omni.ja',
+    }) %]
+  popd
+[% END -%]
+
 
 [% IF c("var/verify_allowed_addons") %]
   # Check that allowed_addons.json contains the right versions of our bundled extension(s).
@@ -32,9 +47,9 @@ mv $rootdir/[% c('input_files_by_name/noscript') %] "$noscript_path"
 mv $rootdir/allowed_addons.json $assets_dir/allowed_addons.json
 
 [% c('zip', {
-        zip_src => [ '$assets_dir' ],
-        zip_args => '$apk',
-    }) %]
+    zip_src => [ '$assets_dir' ],
+    zip_args => '$apk',
+  }) %]
 
 aligned_apk=$(basename $apk .apk)_aligned.apk
 zipalign -vp 4 $apk $aligned_apk

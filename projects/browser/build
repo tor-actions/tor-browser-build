@@ -257,26 +257,6 @@ done
       echo "${line/\$\{pt_path\}/${PT_PATH}}" >> "$TORRC_DEFAULTS"
     done
   done
-
-  # Write Default Bridge Prefs
-  echo "# Tor Launcher preferences (default bridges):" >> "$GENERATEDPREFSPATH"
-  RECOMMMENDED_DEFAULT=$(jq -r .recommendedDefault "${PT_CONFIG}")
-  echo "pref(\"extensions.torlauncher.default_bridge_recommended_type\", \"${RECOMMMENDED_DEFAULT}\");" >> "$GENERATEDPREFSPATH"
-
-  # Writes bridge-line prefs for a given bridge type
-  function bridges_conf {
-    local bridge_type="$1"
-    local i=1
-    jq -r ".bridges.\"$bridge_type\" | .[]" "${PT_CONFIG}" | while read -r line; do
-      echo "pref(\"extensions.torlauncher.default_bridge.$bridge_type.$i\", \"$line\");" >> "$GENERATEDPREFSPATH"
-      i=$((i + 1))
-    done
-  }
-
-  # Iterate over our bridge types and write default bridgelines for each
-  for bridge_type in $(jq -r ".bridges | keys[]" "${PT_CONFIG}"); do
-    bridges_conf $bridge_type
-  done
 [% END -%]
 
 [% IF c("var/linux") && c("var/tor-browser") %]
@@ -293,8 +273,17 @@ PKG_DIR='[% c("var/project-name") %]'
 
 for tbdir in "${TBDIRS[@]}"
 do
-  tbdir="$tbdir[% IF c('var/macos') %]/Contents/Resources[% END %]/browser/"
-  pushd "$tbdir"
+  tbdir="$tbdir[% IF c('var/macos') %]/Contents/Resources[% END %]/"
+  [% IF c("var/tor-browser") -%]
+    pushd "$rootdir"
+    pt_config_dir=chrome/toolkit/content/global
+    mkdir -p "$pt_config_dir"
+    cp "pt_config.json" "$pt_config_dir/"
+    zip -Xm "$tbdir/omni.ja" "$pt_config_dir/pt_config.json"
+    rm -rf chrome
+    popd
+  [% END -%]
+  pushd "$tbdir/browser"
   unzip omni.ja defaults/preferences/[% c("var/prefs_file") %] || [ $? -lt 3 ]
   # Append our built extension-overrides.js to the preferences file
   cat "$GENERATEDPREFSPATH" >> defaults/preferences/[% c("var/prefs_file") %]
