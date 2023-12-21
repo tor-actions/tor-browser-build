@@ -709,6 +709,7 @@ mullvadbrowser-kick-devmole-build: submodule-update
 
 fetch: submodule-update
 	$(rbm) fetch
+	$(rbm) fetch firefox --target mullvadbrowser
 
 clean: submodule-update
 	./tools/clean-old
