@@ -11,22 +11,27 @@ Tor Browser 13.5a3 - December 22 2023
  * Windows + macOS + Linux
    * Updated Firefox to 115.6.0esr
    * Bug 40856: Add a default for preferences in TorSettings [tor-browser]
+   * Bug 42099: Blind cross-origin requests to .tor.onion domains [tor-browser]
    * Bug 42189: Assertion failure: the value of mPrivateBrowsingId in the loadContext and in the loadInfo are not the same! [tor-browser]
    * Bug 42283: Tor Browser shouldn't ship blockchair by default [tor-browser]
    * Bug 42299: After adding incorrect bridge addres on user cannot go back to the Connection page [tor-browser]
    * Bug 42303: Remove unused "help" button logic in tor dialogs [tor-browser]
    * Bug 42319: Make all the wordmark of the same size [tor-browser]
+ * Windows
+   * Bug 42163: Make the 3rd party DLL blocklist obey portable mode [tor-browser]
+   * Bug 42179: PTs on Tor Browser 13 do not work with Windows 7 [tor-browser]
+ * Linux
+   * Bug 41050: Improve the disk leak sanitization on start-$browser [tor-browser-build]
  * Android
    * Updated GeckoView to 115.6.0esr
    * Bug 42248: Allow GeckoView to launch tor [tor-browser]
    * Bug 42249: Allow GeckoView to launch lyrebird [tor-browser]
    * Bug 42250: Allow Moat.sys.mjs to invoke lyrebird on Android [tor-browser]
+   * Bug 42301: Make TorSettings interact with the old Android Settings [tor-browser]
    * Bug 42313: Enable One UI Sans KR as a possible font for Korean (MozBug 1865238) [tor-browser]
+   * Bug 42323: Add a checkbox to enable the connect assist experiments on alpha [tor-browser]
+   * Bug 42324: Onion Location on Android is ignored [tor-browser]
    * Bug 42339: Backport Android security fixes from Firefox 121 to 115.6 - based Tor Browser [tor-browser]
- * Windows
-   * Bug 42163: Make the 3rd party DLL blocklist obey portable mode [tor-browser]
- * Linux
-   * Bug 41050: Improve disk leak sanitization on startup [tor-browser]
  * Build System
    * All Platforms
      * Updated Go to 1.21.5
@@ -42,6 +47,8 @@ Tor Browser 13.5a3 - December 22 2023
      * Bug 41048: Drop the  kcp-go project [tor-browser-build]
    * Windows + macOS + Linux
      * Bug 41031: Add command to unsign .mar files and compare with sha256sums-unsigned-build.txt [tor-browser-build]
+     * Bug 41056: Make it possible to use templates in var/torbrowser_incremental_from [tor-browser-build]
+     * Bug 41057: make fetch is not fetching mullvad repo [tor-browser-build]
    * Windows + macOS
      * Bug 41016: Switch from bullseye to bookworm for desktop platforms [tor-browser-build]
    * Windows
@@ -49,6 +56,19 @@ Tor Browser 13.5a3 - December 22 2023
      * Bug 41030: Add command to unsign .exe files and compare with sha256sums-unsigned-build.txt [tor-browser-build]
    * macOS
      * Bug 40990: Remove old macos signing scripts [tor-browser-build]
+   * Linux
+     * Bug 41046: Use the final path for Linux debug symbols [tor-browser-build]
+
+Tor Browser 13.0.8 - December 20 2023
+ * Windows
+   * Bug 41053: All PT's crash instantly in 13.0.7  [tor-browser-build]
+   * Bug 42179: PTs on Tor Browser 13 do not work with Windows 7 [tor-browser]
+ * Linux
+   * Bug 41050: Improve the disk leak sanitization on start-$browser [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Bug 41042: Add options to include updates in the changelog scripts [tor-browser-build]
+     * Bug 41043: Create script to push build requests to Mullvad build servers [tor-browser-build]
 
 Tor Browser 13.0.7 - December 19 2023
  * All Platforms
