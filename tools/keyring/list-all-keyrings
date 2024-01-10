@@ -6,5 +6,6 @@ set -e
 cd $(dirname "$0")/../..
 for keyring in ./keyring/*.gpg
 do
+    file "$keyring"
     gpg --no-auto-check-trustdb --list-options show-unusable-subkeys,show-keyring --no-default-keyring --list-keys --keyring "$keyring"
 done
