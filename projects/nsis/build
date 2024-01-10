@@ -36,17 +36,9 @@ cd /var/tmp/build/nsis-[% c('version') %]-src
 sed -i 's/-Wl,--exclude-libs,msvcrt.a/-Wl,-Xlink=-fixed/' SCons/Config/gnu
 sed -i '2i extern "C"' SCons/Config/{memcpy,memset}.c
 
-# Adding --no-insert-timestamp to APPEND_LINKFLAGS is not working as it
-# is used for both the host and cross-compiled parts, but this option is
-# only valid for the Windows linker. Therefore we add it using a patch
-# to the cross-compilation part only. Still needed as of 3.06.1, see: #40090.
-patch -p1 < $rootdir/no-insert-timestamp.patch
-# tor-browser-build#40822: NSIS adds a flag to tell it supports ASLR, but it
-# does so only to pass MS certifications. According to the NSIS forums, they
-# intended not to ship the .reloc to save space. But, according to the bug
-# tracker, binutils 2.36 started adding a .reloc section by default, and we need
-# to disable it with this patch.
-patch -p1 < $rootdir/no-reloc-section.diff
+export SOURCE_DATE_EPOCH=$(stat -c '%Y' Source)
+# Resource.dll does not obey the source date epoch...
+patch -p1 < "$rootdir/resource-reproducible.diff"
 
 [% IF c("var/windows-x86_64") %]
   # Seems like setting TARGET_ARCH is not enough so we need to patch build.cpp

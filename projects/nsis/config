@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-version: 3.08
+version: 3.09
 filename: 'nsis-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
@@ -16,12 +16,11 @@ input_files:
   - project: container-image
   - filename: 'nsis-[% c("version") %].tar.bz2'
     URL: 'https://downloads.sourceforge.net/nsis/nsis-[% c("version") %]-src.tar.bz2'
-    sha256sum: a85270ad5386182abecb2470e3d7e9bec9fe4efd95210b13551cb386830d1e87
-  - filename: no-insert-timestamp.patch
-  - filename: no-reloc-section.diff
+    sha256sum: 0cd846c6e9c59068020a87bfca556d4c630f2c5d554c1098024425242ddc56e2
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
   - name: binutils
     project: binutils
   - name: zlib
     project: zlib
+  - filename: resource-reproducible.diff
