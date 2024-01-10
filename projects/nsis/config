@@ -11,12 +11,6 @@ var:
     - zlib1g-dev
     - libcppunit-dev
     - xsltproc
-  # NSIS has an assembly part that cannot be compiled with Clang.
-  # Mozilla uses -fno-integrated-as (see
-  # taskcluster/scripts/misc/build-mingw32-nsis.sh) but for some reason this
-  # does not seem to work for us, so just keep GCC for the moment, since we are
-  # already using it for Rust anyway.
-  compiler: mingw-w64
 
 input_files:
   - project: container-image
@@ -27,5 +21,7 @@ input_files:
   - filename: no-reloc-section.diff
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
+  - name: binutils
+    project: binutils
   - name: zlib
     project: zlib
