@@ -305,11 +305,6 @@ done
   cat > $distdir/windows-installer/browser-portable.nsi << 'BROWSER_NSI'
 [% INCLUDE 'windows-installer.nsi' %]
 BROWSER_NSI
-  [% IF c('var/mullvad-browser') -%]
-    cat > $distdir/windows-installer/browser-system.nsi << 'BROWSER_NSI'
-[% INCLUDE 'windows-installer.nsi' system_install_mode = 1 %]
-BROWSER_NSI
-  [% END -%]
   mv ${TB_STAGE_DIR} $distdir/windows-installer/"[% c('var/Project_Name') %]"
   mv $distdir/windows-installer ${TB_STAGE_DIR}
 [% END %]
@@ -389,11 +384,6 @@ cd $distdir
   # Working around NSIS braindamage
   python3 $rootdir/pe_checksum_fix.py browser-install.exe
   mv browser-install.exe $OUTDIR/[% c("var/project-name") %]-[% c("var/osname") %]-portable-[% c("var/torbrowser_version") %].exe
-  [% IF c('var/mullvad-browser') -%]
-    makensis browser-system.nsi
-    python3 $rootdir/pe_checksum_fix.py browser-install.exe
-    mv browser-install.exe $OUTDIR/[% c("var/project-name") %]-[% c("var/osname") %]-install-[% c("var/torbrowser_version") %].exe
-  [% END -%]
   popd
 [% END %]
 rm -rf $distdir/${PKG_DIR}
