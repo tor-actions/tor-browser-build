@@ -14,11 +14,11 @@ container:
   use_container: 1
 
 var:
-  firefox_platform_version: 115.6.0
+  firefox_platform_version: 115.7.0
   firefox_version: '[% c("var/firefox_platform_version") %]esr'
   browser_series: '13.0'
   browser_branch: '[% c("var/browser_series") %]-1'
-  browser_build: 2
+  browser_build: 1
   branding_directory_prefix: 'tb'
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   nightly_updates_publish_dir: '[% c("var/nightly_updates_publish_dir_prefix") %]nightly-[% c("var/osname") %]'
