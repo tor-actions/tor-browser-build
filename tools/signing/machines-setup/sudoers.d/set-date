@@ -1,0 +1,1 @@
+%signing ALL = NOPASSWD: /usr/bin/date -s *
