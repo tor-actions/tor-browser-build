@@ -29,6 +29,11 @@ test -f "$steps_dir/linux-signer-gpg-sign.done" ||
   read -sp "Enter gpg passphrase: " GPG_PASS
 echo
 
+function set-time-on-signing-machine {
+  local current_time=$(date -u)
+  ssh "$ssh_host_linux_signer" sudo /usr/bin/date -s "'$current_time'"
+}
+
 function wait-for-finished-build {
   "$script_dir/wait-for-finished-build"
 }
@@ -171,6 +176,7 @@ function do_step {
 
 export SIGNING_PROJECTNAME
 
+do_step set-time-on-signing-machine
 do_step wait-for-finished-build
 do_step sync-builder-unsigned-to-local-signed
 do_step sync-scripts-to-linux-signer
