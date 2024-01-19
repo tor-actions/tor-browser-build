@@ -3,7 +3,8 @@ Tor Browser 13.0.9 - January 23 2024
    * Updated Snowflake to 2.8.1
    * Bug 42363: Tab thumbnails enhancements [tor-browser]
    * Bug 42365: Rebase Tor Browser Stable onto Firefox 115.7.0esr [tor-browser]
-   * Bug 42367: Backport Android seucirty fixes from Firefox 122 [tor-browser]
+   * Bug 42367: Backport Android security fixes from Firefox 122 [tor-browser]
+   * Bug 42369: Revert YEC 2023 changes [tor-browser]
    * Bug 41058: Update Snowflake to 2.8.1 [tor-browser-build]
  * Windows + macOS + Linux
    * Updated Firefox to 115.7.0esr
