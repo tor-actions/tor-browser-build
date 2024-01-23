@@ -46,7 +46,13 @@ targets:
     var:
       verify_allowed_addons: 1
       arch_deps:
-        - openjdk-11-jdk-headless
+        - 7zip
+        - openjdk-17-jdk-headless
+      container:
+        # 7zip is in backports in bullseye, and we can already use Java 17 for
+        # apksigner.
+        suite: bookworm
+        arch: amd64
   torbrowser:
     var:
       prefs_file: 000-tor-browser.js
