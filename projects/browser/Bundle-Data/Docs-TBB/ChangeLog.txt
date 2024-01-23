@@ -28,6 +28,8 @@ Tor Browser 13.0.9 - January 23 2024
      * Bug 41016: Switch from bullseye to bookworm for desktop platforms [tor-browser-build]
    * Windows
      * Bug 41015: Enable std::filesystem on libc++ on Windows [tor-browser-build]
+   * Android
+     * Bug 41066: The Android x86 APK for 13.0.9 is too big [tor-browser-build]
 
 Tor Browser 13.5a3 - December 22 2023
  * All Platforms
