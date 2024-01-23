@@ -46,13 +46,19 @@ mv $rootdir/[% c('input_files_by_name/noscript') %] "$noscript_path"
 
 mv $rootdir/allowed_addons.json $assets_dir/allowed_addons.json
 
-[% c('zip', {
-    zip_src => [ '$assets_dir' ],
-    zip_args => '$apk',
-  }) %]
+mkdir apk
+pushd apk
+7zz x "$apk"
+cp -R ../assets ./
+find -type f -exec touch -m -t '[% USE date; date.format(pc("firefox-android", "timestamp"), format = "%Y%m%d%H%M") %]' {} \;
+find -type f ! -name resources.arsc -printf '%P\n' | sort > ../files.txt
+7zz a -tzip -mx9 -mtc- -spf ../repacked.apk @../files.txt
+# resources.arsc must not be compressed as per the APK specifications
+7zz a -tzip -mm=Copy -mtc- ../repacked.apk resources.arsc
+popd
 
 aligned_apk=$(basename $apk .apk)_aligned.apk
-zipalign -vp 4 $apk $aligned_apk
+zipalign -vp 4 repacked.apk $aligned_apk
 
 # Sign a QA build. This .apk is not a debug version and doesn't contain a debug
 # flag in the manifest.
