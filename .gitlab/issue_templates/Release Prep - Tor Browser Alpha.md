@@ -169,6 +169,8 @@
   - [ ] Email external partners:
     - ***(Optional, after ESR migration)*** Cloudflare: ask-research@cloudflare.com
       - **NOTE** :  We need to provide them with updated user agent string so they can update their internal machinery to prevent Tor Browser users from getting so many CAPTCHAs
+    - ***(Optional, after ESR migration)*** Startpage: admin@startpage.com
+      - **NOTE** : Startpage also needs the updated user-agent string for better experience on their onion service sites.
 
 </details>
 
