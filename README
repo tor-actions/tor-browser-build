@@ -21,7 +21,7 @@ You also need a few perl modules installed:
 - Getopt::Long
 - Template
 - IO::Handle
-- IO::CaptureOutput
+- Capture::Tiny
 - JSON
 - File::Temp
 - Path::Tiny
@@ -41,7 +41,7 @@ If you are running Debian or Ubuntu, you can install them with:
 
 # apt-get install libdata-dump-perl libdata-uuid-perl libdatetime-perl \
                   libdigest-sha-perl libfile-copy-recursive-perl \
-                  libfile-slurp-perl libio-all-perl libio-captureoutput-perl \
+                  libfile-slurp-perl libio-all-perl libcapture-tiny-perl \
                   libio-handle-util-perl libjson-perl \
                   libparallel-forkmanager-perl libpath-tiny-perl \
                   libsort-versions-perl libstring-shellquote-perl \
@@ -51,7 +51,7 @@ If you are running Debian or Ubuntu, you can install them with:
 If you are running an Arch based system, you should be able to install them with:
 
 # pacman -S perl-datetime perl-path-tiny perl-yaml perl-yaml-libyaml \
-            perl-yaml-tiny perl-template-toolkit perl-io-captureoutput \
+            perl-yaml-tiny perl-template-toolkit perl-capture-tiny \
             perl-file-copy-recursive perl-string-shellquote \
             perl-sort-versions perl-data-uuid perl-data-dump perl-json \
             perl-digest-sha1 perl-io-all perl-file-slurp perl-sys-syscall \

@@ -100,7 +100,7 @@ authorized_keys richard richard.pub
 # Install rbm deps
 install_packages libyaml-libyaml-perl libtemplate-perl libdatetime-perl \
                  libio-handle-util-perl libio-all-perl \
-                 libio-captureoutput-perl libjson-perl libpath-tiny-perl \
+                 libcapture-tiny-perl libjson-perl libpath-tiny-perl \
                  libstring-shellquote-perl libsort-versions-perl \
                  libdigest-sha-perl libdata-uuid-perl libdata-dump-perl \
                  libfile-copy-recursive-perl libfile-slurp-perl

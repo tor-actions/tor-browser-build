@@ -29,7 +29,7 @@
 #  $ export "PATH=$p7zipdir/bin:$PATH"
 
 use strict;
-use IO::CaptureOutput qw(capture_exec);
+use Capture::Tiny qw(capture);
 use File::Slurp;
 use File::Find;
 use Parallel::ForkManager;
@@ -46,6 +46,15 @@ sub exit_error {
     print STDERR "Error: ", $_[0], "\n";
     chdir '/';
     exit (exists $_[1] ? $_[1] : 1);
+}
+
+sub capture_exec {
+  my @cmd = @_;
+  my ($stdout, $stderr, $exit) = capture {
+    system(@cmd);
+  };
+  return ($stdout, $stderr, $exit == 0, $exit) if wantarray();
+  return $stdout;
 }
 
 sub osname {
