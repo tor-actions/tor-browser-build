@@ -6,7 +6,6 @@
 use strict;
 use English;
 use LWP::Simple;
-use IO::CaptureOutput qw(capture_exec);
 use File::Temp;
 use File::Basename qw(fileparse);
 use FindBin;

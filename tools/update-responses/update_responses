@@ -14,7 +14,7 @@ use File::Copy;
 use File::Temp;
 use File::Find;
 use POSIX qw(setlocale LC_ALL);
-use IO::CaptureOutput qw(capture_exec);
+use Capture::Tiny qw(capture);
 use Parallel::ForkManager;
 use File::Basename;
 use XML::LibXML '1.70';
@@ -265,9 +265,11 @@ sub create_incremental_mar {
     local $ENV{MOZ_PRODUCT_VERSION} = $new_version;
     local $ENV{MAR_CHANNEL_ID} = get_config($config, $new_version, $os, 'mar_channel_id');
     local $ENV{TMPDIR} = $tmpdir;
-    my ($out, $err, $success) = capture_exec('make_incremental_update.sh',
-                                   $mar_file_path, "$tmpdir/A", "$tmpdir/B");
-    if (!$success) {
+    my ($out, $err, $exit) = capture {
+      system('make_incremental_update.sh',
+        $mar_file_path, "$tmpdir/A", "$tmpdir/B");
+    };
+    if ($exit) {
         unlink $mar_file_path if -f $mar_file_path;
         exit_error "making incremental mar:\n" . $err;
     }
@@ -490,9 +492,11 @@ sub extract_martools {
     $martools_tmpdir = get_tmpdir($config);
     my $old_cwd = getcwd;
     chdir $martools_tmpdir;
-    my (undef, undef, $success) = capture_exec('unzip', $marzip);
+    my (undef, undef, $exit) = capture {
+      system('unzip', $marzip);
+    };
     chdir $old_cwd;
-    exit_error "Error extracting $marzip" unless $success;
+    exit_error "Error extracting $marzip" if $exit;
     $ENV{PATH} = "$martools_tmpdir/mar-tools:$initPATH";
     if ($initLD_LIBRARY_PATH) {
         $ENV{LD_LIBRARY_PATH} = "$initLD_LIBRARY_PATH:$martools_tmpdir/mar-tools";
