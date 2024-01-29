@@ -1,3 +1,77 @@
+Tor Browser 13.5a4 - January 29 2024
+ * All Platforms
+   * Updated zlib to 1.3.1
+   * Updated Snowflake to 2.8.1
+   * Bug 42343: Consume pt_config.json in the browser [tor-browser]
+   * Bug 42348: TorSettings.defaultSettings() removed but still referenced by Moat.sys.mjs [tor-browser]
+   * Bug 42354: Refactor exclusions in ShouldSanitizePreference() to the pref list. [tor-browser]
+   * Bug 42358: Separate the domain fronted requests from Moat [tor-browser]
+   * Bug 42359: Handle firewall and proxy in TorSettings.setSettings [tor-browser]
+   * Bug 42363: Tab thumbnails enhancements [tor-browser]
+   * Bug 42366: Rebase Tor Browser Alpha onto Firefox 115.7.0esr [tor-browser]
+   * Bug 42369: Revert YEC 2023 changes [tor-browser]
+   * Bug 42374: spoof english leaks via numberingSystem: numbers (non-latn) or decimal separator (latn) [tor-browser]
+   * Bug 42384: Regression: quickstart doesn't work anymore [tor-browser]
+   * Bug 41058: Update Snowflake to 2.8.1 [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.7.0esr
+   * Bug 41917: Make the appearance of letterboxing look more intentional [tor-browser]
+   * Bug 42338: Changing circuit programmatically in Tor Browser not working anymore! [tor-browser]
+ * Android
+   * Updated GeckoView to 115.7.0esr
+   * Bug 42252: Plumb down TorConnect commands from firefox-android to GeckoView [tor-browser]
+   * Bug 42346: Crash in firefox-android originating in backported FullScreenNotificationDialog patch [tor-browser]
+   * Bug 42353: Fix Android NoScript automatic updates [tor-browser]
+   * Bug 42355: Fullscreen on Android doesn't hide system bars [tor-browser]
+   * Bug 42367: Backport Android security fixes from Firefox 122 [tor-browser]
+   * Bug 42368: Tor Browser 13.5a3 crashes during start-up because of API26+ methods [tor-browser]
+ * Linux
+   * Bug 42293: Updater is disabled when tor-browser is run by torbrowser-launcher flatpak [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.20.13 and 1.21.6
+     * Bug 41037: Set time on signing machine before starting signing [tor-browser-build]
+     * Bug 41059: Update keyring/torbrowser.gpg with updated key [tor-browser-build]
+     * Bug 41063: Run "file $keyring" in tools/keyring/list-all-keyrings [tor-browser-build]
+     * Bug 40067: Use --no-verbose wget option when not running in a terminal [rbm]
+   * Windows
+     * Bug 40606: Use Clang to compile NSIS [tor-browser-build]
+     * Bug 40900: Update NSIS to 3.09 [tor-browser-build]
+     * Bug 41065: Do a cleanup of the NSIS script [tor-browser-build]
+
+Tor Browser 13.0.9 - January 23 2024
+ * All Platforms
+   * Updated Snowflake to 2.8.1
+   * Bug 42363: Tab thumbnails enhancements [tor-browser]
+   * Bug 42365: Rebase Tor Browser Stable onto Firefox 115.7.0esr [tor-browser]
+   * Bug 42367: Backport Android security fixes from Firefox 122 [tor-browser]
+   * Bug 42369: Revert YEC 2023 changes [tor-browser]
+   * Bug 41058: Update Snowflake to 2.8.1 [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.7.0esr
+   * Bug 42099: Blind cross-origin requests to .tor.onion domains [tor-browser]
+   * Bug 42189: Assertion failure: the value of mPrivateBrowsingId in the loadContext and in the loadInfo are not the same! [tor-browser]
+ * Android
+   * Updated GeckoView to 115.7.0esr
+   * Bug 42313: Enable One UI Sans KR as a possible font for Korean (MozBug 1865238) [tor-browser]
+   * Bug 42324: Onion Location on Android is ignored [tor-browser]
+   * Bug 42346: Crash in firefox-android originating in backported FullScreenNotificationDialog patch [tor-browser]
+   * Bug 42353: Fix Android NoScript automatic updates [tor-browser]
+   * Bug 42355: Fullscreen on Android doesn't hide system bars [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.20.13 and 1.21.6
+     * Bug 41059: Update keyring/torbrowser.gpg with updated key [tor-browser-build]
+     * Bug 41063: Run "file $keyring" in tools/keyring/list-all-keyrings [tor-browser-build]
+   * Windows + macOS + Linux
+     * Bug 41056: Make it possible to use templates in var/torbrowser_incremental_from [tor-browser-build]
+   * Windows + macOS
+     * Bug 41016: Switch from bullseye to bookworm for desktop platforms [tor-browser-build]
+   * Windows
+     * Bug 41015: Enable std::filesystem on libc++ on Windows [tor-browser-build]
+   * Android
+     * Bug 41066: The Android x86 APK for 13.0.9 is too big [tor-browser-build]
+
 Tor Browser 13.5a3 - December 22 2023
  * All Platforms
    * Updated Tor to 0.4.8.10
