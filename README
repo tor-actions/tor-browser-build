@@ -222,15 +222,19 @@ of containers: the container-image project is still called, but it will
 just create an empty file instead of a real container image.
 
 The build without containers is currently only supported for the Android
-builds, and will require that you run Debian Buster and install build
-dependencies for all the components that are built. This can be done
-with the following command:
+builds, and will require that you run Debian Bullseye or Bookworm and
+install build dependencies for all the components that are built. This can
+be done with the following command:
 
-  # apt-get install build-essential python automake libtool zip unzip \
-            autoconf2.13 openjdk-8-jdk gettext-base autotools-dev \
+  # apt-get install build-essential python3 automake libtool zip unzip \
+            autoconf2.13 openjdk-11-jdk gettext-base autotools-dev \
             automake autoconf libtool autopoint libssl-dev \
             pkg-config zlib1g-dev libparallel-forkmanager-perl \
-            libfile-slurp-perl bzip2 xz-utils apksigner yasm
+            libfile-slurp-perl bzip2 xz-utils apksigner yasm wget \
+	    bison gyp tcl python3-venv 7zip jq
+
+Note that Debian Bullseye requires the bullseye-backports repository to
+get the 7zip package.
 
 
 Common Build Errors
