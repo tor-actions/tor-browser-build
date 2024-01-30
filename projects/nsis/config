@@ -24,3 +24,4 @@ input_files:
   - name: zlib
     project: zlib
   - filename: resource-reproducible.diff
+  - filename: ShellLink.cpp

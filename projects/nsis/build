@@ -30,7 +30,8 @@ EOF
 chmod +x "$compiler_prefix-gcc"
 ln -s "$compiler_prefix-clang++" "$compiler_prefix-g++"
 
-cd /var/tmp/build/nsis-[% c('version') %]-src
+builddir=/var/tmp/build/nsis-[% c('version') %]-src
+cd "$builddir"
 
 # These two sed commands also come from build-mingw32-nsis.sh
 sed -i 's/-Wl,--exclude-libs,msvcrt.a/-Wl,-Xlink=-fixed/' SCons/Config/gnu
@@ -60,6 +61,22 @@ patch -p1 < "$rootdir/resource-reproducible.diff"
 scons [% scons_args %] -j[% c("num_procs") %] || true
 scons [% scons_args %]
 scons [% scons_args %] install
+
+# Plugins
+target="[% target %]-unicode"
+plugins="/var/tmp/dist/nsis/share/nsis/Plugins/$target"
+plugin_lib="$builddir/build/urelease/api/nsis/libpluginapi-$target.a"
+
+# This is not needed to build installers, but it makes easier to adapt plugins
+# outside our build system.
+mkdir /var/tmp/dist/nsis/share/nsis/Lib
+cp $plugin_lib /var/tmp/dist/nsis/share/nsis/Lib/
+
+$compiler_prefix-clang++ -I "$builddir/build/urelease/api" -O2 $plugin_lib \
+  -DUNICODE "$rootdir/ShellLink.cpp" \
+  -Wl,--no-insert-timestamp -lole32 -luuid -shared -o "$plugins/ShellLink.dll"
+llvm-strip "$plugins/ShellLink.dll"
+
 cd /var/tmp/dist
 [% c('tar', {
         tar_src => [ project ],
