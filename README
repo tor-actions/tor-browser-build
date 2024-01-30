@@ -228,10 +228,9 @@ be done with the following command:
 
   # apt-get install build-essential python3 automake libtool zip unzip \
             autoconf2.13 openjdk-11-jdk gettext-base autotools-dev \
-            automake autoconf libtool autopoint libssl-dev \
-            pkg-config zlib1g-dev libparallel-forkmanager-perl \
-            libfile-slurp-perl bzip2 xz-utils apksigner yasm wget \
-	    bison gyp tcl python3-venv 7zip jq
+            automake autoconf libtool autopoint libssl-dev pkg-config \
+            zlib1g-dev libparallel-forkmanager-perl libfile-slurp-perl bzip2 \
+            xz-utils apksigner yasm wget bison gyp tcl python3-venv 7zip jq
 
 Note that Debian Bullseye requires the bullseye-backports repository to
 get the 7zip package.
