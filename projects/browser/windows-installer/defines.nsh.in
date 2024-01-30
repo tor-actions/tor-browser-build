@@ -1,0 +1,52 @@
+;--------------------------------
+; Defines
+  ; Location of Tor/Base/Mullvad Browser to put into installer
+  !define PROGRAM_SOURCE ".\[% c('var/Project_Name') %]\"
+
+  ; Project and display name
+  !define PROJECT_NAME "[% c('var/Project_Name') %]"
+[% IF c("var/channel") == "release" -%]
+  !define DISPLAY_NAME "[% c('var/Project_Name') %]"
+[% ELSIF c("var/testbuild") -%]
+  !define DISPLAY_NAME "[% c('var/Project_Name') %] Testbuild"
+[% ELSE -%]
+  !define DISPLAY_NAME "[% c('var/Project_Name_Channel') %]"
+[% END -%]
+  !define NAME_NO_SPACES "[% c('var/ProjectName') %]"
+  !define UPDATE_CHANNEL "[% c('var/channel') FILTER ucfirst %]"
+
+  ; Version
+  !define VERSION "[% c('var/torbrowser_version') %]"
+  ; String for use with Windows's Product Version.
+  ; It must be 4 integers separated by a dot.
+  !define VERSION_WINDOWS "[% pc('firefox', 'var/browser_series') %].0.0"
+
+  !define DEFAULT_PORTABLE_DIR "$DESKTOP\${DISPLAY_NAME}"
+  !define EXE_NAME "[% c('var/exe_name') %].exe"
+[% IF !c("var/base-browser") -%]
+  !define ICON_NAME "[% c('var/projectname') %]-[% c('var/channel') %].ico"
+[% ELSE -%]
+  !define ICON_NAME "[% c('var/projectname') %].ico"
+[% END -%]
+
+[% IF c('var/mullvad-browser') -%]
+  ; Firefox's --with-user-appdir
+  !define APP_DIR "Mullvad"
+
+  !define PUBLISHER "Mullvad VPN"
+  !define COPYRIGHT_STRING "© [% pc('firefox', 'var/copyright_year') %] Mullvad, Tor Browser and Mozilla Developers"
+
+  !define URL_ABOUT "https://mullvad.net/en/browser"
+  !define URL_UPDATE "https://github.com/mullvad/mullvad-browser/releases/[% c('var/torbrowser_version') %]"
+  !define URL_HELP "https://mullvad.net/help/tag/browser/"
+[% ELSE -%]
+  ; Not defined for Tor Browser
+  !define APP_DIR "TorProject"
+
+  !define PUBLISHER "The Tor Project"
+  !define COPYRIGHT_STRING "© [% pc('firefox', 'var/copyright_year') %] The Tor Project"
+
+  !define URL_ABOUT "https://www.torproject.org/"
+  !define URL_UPDATE "https://blog.torproject.org/new[% IF c('var/alpha') %]-alpha[% END %]-release-tor-browser-[% c('var/torbrowser_version') FILTER remove('\.') %]"
+  !define URL_HELP "https://tb-manual.torproject.org/"
+[% END -%]

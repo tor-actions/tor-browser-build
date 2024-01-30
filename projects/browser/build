@@ -303,9 +303,27 @@ done
   export PATH="/var/tmp/dist/nsis/bin:$PATH"
 
   mv $rootdir/windows-installer $distdir/windows-installer
-  cat > $distdir/windows-installer/browser-portable.nsi << 'BROWSER_NSI'
-[% INCLUDE 'windows-installer.nsi' %]
-BROWSER_NSI
+  mv $rootdir/defines.nsh $distdir/windows-installer/
+  [% IF !c('var/testbuild') -%]
+    source $distdir/windows-installer/language-map.sh
+    supported_locales="[% tmpl(c('var/locales').join(' ')) %]"
+    for code in $supported_locales; do
+      if [[ -n ${nsis_languages[$code]} ]]; then
+        echo '!insertmacro MUI_LANGUAGE "'${nsis_languages[$code]}'"' >> $distdir/windows-installer/languages.nsh
+      fi
+    done
+  [% END -%]
+
+  [% IF c('var/mullvad-browser') -%]
+    pushd $distdir/windows-installer
+    # While Firefox re-uses the uninstaller for this, we cannot do it, because
+    # we write the uninstaller from the installer.
+    # Instead, we need to write an updated postupdate.exe also when updating.
+    makensis postupdate.nsi
+    mv postupdate.exe ${TB_STAGE_DIR}/Browser/
+    popd
+  [% END -%]
+
   mv ${TB_STAGE_DIR} $distdir/windows-installer/"[% c('var/Project_Name') %]"
   mv $distdir/windows-installer ${TB_STAGE_DIR}
 [% END %]
@@ -383,8 +401,13 @@ cd $distdir
   pushd "$PKG_DIR"
   makensis browser-portable.nsi
   # Working around NSIS braindamage
-  python3 $rootdir/pe_checksum_fix.py browser-install.exe
-  mv browser-install.exe $OUTDIR/[% c("var/project-name") %]-[% c("var/osname") %]-portable-[% c("var/torbrowser_version") %].exe
+  python3 $rootdir/pe_checksum_fix.py browser-portable.exe
+  mv browser-portable.exe $OUTDIR/[% c("var/project-name") %]-[% c("var/osname") %]-portable-[% c("var/torbrowser_version") %].exe
+  [% IF c('var/mullvad-browser') -%]
+    makensis browser-install.nsi
+    python3 $rootdir/pe_checksum_fix.py browser-install.exe
+    mv browser-install.exe $OUTDIR/[% c("var/project-name") %]-[% c("var/osname") %]-install-[% c("var/torbrowser_version") %].exe
+  [% END -%]
   popd
 [% END %]
 rm -rf $distdir/${PKG_DIR}
