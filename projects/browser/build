@@ -279,6 +279,7 @@ do
     pt_config_dir=chrome/toolkit/content/global
     mkdir -p "$pt_config_dir"
     cp "pt_config.json" "$pt_config_dir/"
+    [% c("touch") %] "$pt_config_dir/pt_config.json"
     zip -Xm "$tbdir/omni.ja" "$pt_config_dir/pt_config.json"
     rm -rf chrome
     popd
