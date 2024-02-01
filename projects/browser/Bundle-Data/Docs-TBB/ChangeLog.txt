@@ -40,6 +40,8 @@ Tor Browser 13.5a4 - January 31 2024
      * Bug 41067: Use Capture::Tiny instead of IO::CaptureOutput [tor-browser-build]
      * Bug 41073: Update documention about required packages for container-less build [tor-browser-build]
      * Bug 40067: Use --no-verbose wget option when not running in a terminal [rbm]
+   * Windows + macOS + Linux
+     * Bug 41078: pt_config.json not touch'd before adding to omni.ja, resulting in build non-determinism [tor-browser-build]
    * Windows
      * Bug 40606: Use Clang to compile NSIS [tor-browser-build]
      * Bug 40900: Update NSIS to 3.09 [tor-browser-build]
