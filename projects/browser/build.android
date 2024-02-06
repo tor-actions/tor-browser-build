@@ -24,18 +24,23 @@ cd /var/tmp/build
 mv $rootdir/[% c('input_files_by_name/noscript') %] "$noscript_path"
 
 [%IF c("var/tor-browser") -%]
-  unzip -j "$apk" assets/omni.ja
   tar -xaf "$rootdir/[% c("input_files_by_name/tor-expert-bundle") %]" tor/pluggable_transports/pt_config.json
-  mkdir omni
-  pushd omni
-  unzip ../omni.ja
-  cp ../tor/pluggable_transports/pt_config.json chrome/toolkit/content/global/pt_config.json
-  [% c('zip', {
-      zip_src => [ '.' ],
-      zip_args => '../assets/omni.ja',
-    }) %]
-  popd
 [% END -%]
+unzip -j "$apk" assets/omni.ja
+mkdir omni
+pushd omni
+unzip ../omni.ja
+[%IF c("var/tor-browser") -%]
+  cp -a ../tor/pluggable_transports/pt_config.json chrome/toolkit/content/global/pt_config.json
+[% END -%]
+[% c('zip', {
+        zip_src   => [ '.' ],
+        zip_args  => '../assets/omni.ja',
+        use_7z    => 1,
+        '7z_bin'  => '7zz',
+        '7z_opts' => '-mx9',
+      }) %]
+popd
 
 
 [% IF c("var/verify_allowed_addons") %]
