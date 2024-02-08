@@ -185,13 +185,14 @@ echo "Starting ./mach build $(date)"
 [% IF c("var/macos") -%]
   cp -a obj-*/dist/[% c('var/exe_name') %]/* $distdir
   [% IF c("var/base-browser") -%]
-    mv "$distdir/Firefox.app" "$distdir/[% c('var/Project_Name') %].app"
+    mv "$distdir/Firefox.app" "$distdir/[% c('var/display_name') %].app"
   [% END -%]
+  app_bundle="[% c('var/display_name') %]"
   # Remove firefox-bin (we don't use it, see ticket #10126)
-  rm -f "$distdir/[% c('var/Project_Name') %].app/Contents/MacOS/[% c('var/exe_name') %]-bin"
+  rm -f "$distdir/$app_bundle/Contents/MacOS/[% c('var/exe_name') %]-bin"
 
   # Adjust the Info.plist file
-  INFO_PLIST="$distdir/[% c('var/Project_Name') %].app/Contents/Info.plist"
+  INFO_PLIST="$distdir/$app_bundle/Contents/Info.plist"
   python3 $rootdir/fix-info-plist.py \
     "$INFO_PLIST" \
     '[% c("var/Project_Name") %]' \
@@ -297,13 +298,13 @@ cd $distdir
   [% c("var/rezip", { rezip_file => 'Browser/omni.ja' }) %]
   [% c("var/rezip", { rezip_file => 'Browser/browser/omni.ja' }) %]
 [% ELSIF c("var/macos") -%]
-  [% c("var/rezip", { rezip_file => '"' _ c("var/Project_Name") _ '.app/Contents/Resources/omni.ja"' }) %]
-  [% c("var/rezip", { rezip_file => '"' _ c("var/Project_Name") _ '.app/Contents/Resources/browser/omni.ja"' }) %]
+  [% c("var/rezip", { rezip_file => '"$app_bundle/Contents/Resources/omni.ja"' }) %]
+  [% c("var/rezip", { rezip_file => '"$app_bundle/Contents/Resources/browser/omni.ja"' }) %]
 [% END -%]
 
 [%
 IF c("var/macos");
-  SET browserdir='"' _ c("var/Project_Name") _ '.app/Contents"';
+  SET browserdir='"$app_bundle/Contents"';
 ELSE;
   SET browserdir='Browser';
 END;

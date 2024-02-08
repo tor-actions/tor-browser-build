@@ -20,9 +20,9 @@ GENERATEDPREFSPATH=$rootdir/Bundle-Data/generated-prefs.js
 touch "$GENERATEDPREFSPATH"
 
 [% IF c("var/macos") %]
-  TBDIR="$TB_STAGE_DIR/[% c("var/Project_Name") %].app"
+  TBDIR="$TB_STAGE_DIR/[% c('var/display_name') %].app"
   [% IF c("var/macos_universal") %]
-    TBDIR_AARCH64="$TB_STAGE_DIR/[% c("var/Project_Name") %]-aarch64.app"
+    TBDIR_AARCH64="$TB_STAGE_DIR/[% c('var/display_name') %]-aarch64.app"
     TBDIRS=("$TBDIR" "$TBDIR_AARCH64")
   [% ELSE -%]
     TBDIRS=("$TBDIR")
@@ -175,7 +175,7 @@ tar -C ${TB_STAGE_DIR} -xf [% c('input_files_by_name/firefox') %]/browser.tar.[%
 [% IF c("var/macos_universal") -%]
   # Use symlink in tmp dir to extract "Tor Browser.app" to "Tor Browser-aarch64.app"
   ff_aarch64=$(mktemp -d)
-  ln -s "$TBDIR_AARCH64" "$ff_aarch64/[% c("var/Project_Name") %].app"
+  ln -s "$TBDIR_AARCH64" "$ff_aarch64/[% c('var/display_name') %].app"
   tar -C $ff_aarch64 -xf [% c('input_files_by_name/firefox-aarch64') %]/browser.tar.[% c("compress_tar") %]
 [% END %]
 
@@ -216,6 +216,10 @@ tar -C ${TB_STAGE_DIR} -xf [% c('input_files_by_name/firefox') %]/browser.tar.[%
 
 [% IF c("var/macos") %]
   tar -C "Bundle-Data/[% c('var/ProjectName') %].dmg" -c . | tar -C $TB_STAGE_DIR -x
+  pushd $TB_STAGE_DIR
+  cp [% c('var/channel') %].DS_Store .DS_Store
+  rm *.DS_Store
+  popd
 [% END %]
 
 for tbdir in "${TBDIRS[@]}"
@@ -353,7 +357,7 @@ done
 [% IF c("var/windows") %]
   TBDIR="$distdir/$PKG_DIR/[% c("var/Project_Name") %]/Browser"
 [% ELSIF c("var/macos") %]
-  TBDIR="$distdir/$PKG_DIR/[% c("var/Project_Name") %].app"
+  TBDIR="$distdir/$PKG_DIR/[% c('var/display_name') %].app"
 [% ELSE %]
   TBDIR="$distdir/$PKG_DIR/Browser"
 [% END %]
