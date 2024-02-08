@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
 git_url: https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake.git
-git_hash: v2.8.1
+git_hash: v2.9.0
 gpg_keyring: anti-censorship.gpg
 tag_gpg_id: 1
 
@@ -22,6 +22,6 @@ steps:
         pkg_type: go_vendor
         project: snowflake
         norec:
-          sha256sum: 6e41846a6d3e94891847d74ac08c6888c1540e0b0680ed3900ca54d7c35e1752
+          sha256sum: a081c55db822f9f26121e9f986d1a74c212b01303daf43eef1ea3f808b1b8c0b
         target_replace:
           '^torbrowser-(?!testbuild).*': 'torbrowser-linux-x86_64'
