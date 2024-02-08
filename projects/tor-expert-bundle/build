@@ -2,6 +2,10 @@
 [% c("var/set_default_env") -%]
 distdir=/var/tmp/dist/[% project %]
 mkdir -p $distdir
+
+output_dir=[% dest_dir %]/[% c('filename') %]
+mkdir -p $output_dir
+
 cd $distdir
 
 tar -xkf $rootdir/[% c('input_files_by_name/tor') %]
@@ -18,6 +22,32 @@ tar -xkf $rootdir/[% c('input_files_by_name/conjure') %]
 awk '{gsub(/\$\{pt_extension\}/, "[% c("var/pt_extension") %]"); print}' $rootdir/pt_config.json > pt_config.json
 
 cd $distdir
+
+# package a .aar on android
+[% IF c("var/android") -%]
+  aar_file=torExpertBundle-[% c('arch') %].aar
+
+  mkdir aar
+  mkdir -p aar/jni/[% c('arch') %]
+  mkdir -p aar/assets/common
+
+  cp -a tor/libTor.so aar/jni/[% c('arch') %]/
+  cp -a tor/pluggable_transports/conjure-client aar/jni/[% c('arch') %]/libConjure.so
+  cp -a tor/pluggable_transports/lyrebird aar/jni/[% c('arch') %]/Lyrebird.so
+  cp -a tor/pluggable_transports/snowflake-client aar/jni/[% c('arch') %]/libSnowflake.so
+  cp -a tor/pluggable_transports/webtunnel-client aar/jni/[% c('arch') %]/libWebtunnel.so
+
+  cp -a data/* aar/assets/common/
+
+  cp -a tor/pluggable_transports/pt_config.json aar/assets/common/
+
+  cp -a $rootdir/AndroidManifest.xml aar/
+
+  cd aar
+  jar -cvf $output_dir/tor-expert-bundle-[% c('arch') %].aar *
+  cd ..
+[% END %]
+
 [%
   SET tar_src = [ "tor", "data" ];
   IF c("var/linux");
@@ -25,6 +55,6 @@ cd $distdir
   END;
   c('tar', {
     tar_src => tar_src,
-    tar_args => '-czvf' _ dest_dir _ '/' _ c('filename'),
+    tar_args => '-czvf' _ dest_dir _ '/' _ c('filename') _ '/tor-expert-bundle.tar.gz',
   });
 %]

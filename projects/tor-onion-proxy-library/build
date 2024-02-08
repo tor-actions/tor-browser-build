@@ -43,7 +43,7 @@ patch -p1 < $rootdir/0001-Bug-40800-Add-WebTunnel-support.patch
   # Extract tor-expert-bundle
   tebdir=$rootdir/tor-expert-bundle-[% arch %]
   mkdir $tebdir
-  tar -C $tebdir -xf $rootdir/[% c('input_files_by_name/tor-expert-bundle-' _ arch) %]
+  tar -C $tebdir -xf $rootdir/[% c('input_files_by_name/tor-expert-bundle-' _ arch) %]/tor-expert-bundle.tar.gz
   ptdir=$tebdir/tor/pluggable_transports
 
   # Overwrite the obfs4proxy binary provided by Pluto and add Snowflake

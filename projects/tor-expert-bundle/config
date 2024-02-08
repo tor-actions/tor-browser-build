@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-filename: '[% project %]-[% c("var/osname") %]-[% c("version") %]-[% c("var/build_id") %].tar.gz'
+filename: '[% project %]-[% c("var/osname") %]-[% c("version") %]-[% c("var/build_id") %]'
 version: '[% c("var/torbrowser_version") %]'
 
 container:
@@ -23,3 +23,4 @@ input_files:
   - name: conjure
     project: conjure    
   - filename: pt_config.json
+  - filename: AndroidManifest.xml

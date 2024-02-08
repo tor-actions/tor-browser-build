@@ -90,10 +90,10 @@ mv [% c('input_files_by_name/noscript') %] "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b
     [% END -%]
   }
 
-  tar -xvf [% c('input_files_by_name/tor-expert-bundle') %]
+  tar -xvf [% c('input_files_by_name/tor-expert-bundle') %]/tor-expert-bundle.tar.gz
   [% IF c("var/macos_universal") -%]
     mkdir aarch64
-    tar -C aarch64 -xf [% c('input_files_by_name/tor-expert-bundle-aarch64') %]
+    tar -C aarch64 -xf [% c('input_files_by_name/tor-expert-bundle-aarch64') %]/tor-expert-bundle.tar.gz
   [% END -%]
 
   # geoip(6) and anything else that belongs in the data dir from the expert bundle
@@ -451,13 +451,13 @@ fi
 [%IF c("var/tor-browser") -%]
   tor_expert_bundle_src="[% c("input_files_by_name/tor-expert-bundle") %]"
   # strip off trailing "$buildid.tar.gz"
-  tor_expert_bundle_dest=${tor_expert_bundle_src:0:-14}.tar.gz
-  cp $rootdir/[% c("input_files_by_name/tor-expert-bundle") %] "$OUTDIR"/$tor_expert_bundle_dest
+  tor_expert_bundle_dest=${tor_expert_bundle_src:0:-7}.tar.gz
+  cp $rootdir/[% c("input_files_by_name/tor-expert-bundle") %]/tor-expert-bundle.tar.gz "$OUTDIR"/$tor_expert_bundle_dest
   [% IF c("var/macos_universal") %]
     tor_expert_bundle_src="[% c('input_files_by_name/tor-expert-bundle-aarch64') %]"
     # strip off trailing "$buildid.tar.gz"
-    tor_expert_bundle_dest=${tor_expert_bundle_src:0:-14}.tar.gz
-    cp $rootdir/[% c('input_files_by_name/tor-expert-bundle-aarch64') %] "$OUTDIR"/$tor_expert_bundle_dest
+    tor_expert_bundle_dest=${tor_expert_bundle_src:0:-7}.tar.gz
+    cp $rootdir/[% c('input_files_by_name/tor-expert-bundle-aarch64') %]/tor-expert-bundle.tar.gz "$OUTDIR"/$tor_expert_bundle_dest
   [% END -%]
 [% END -%]
 [% IF c("var/build_infos_json") -%]

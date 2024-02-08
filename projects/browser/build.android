@@ -24,7 +24,7 @@ cd /var/tmp/build
 mv $rootdir/[% c('input_files_by_name/noscript') %] "$noscript_path"
 
 [%IF c("var/tor-browser") -%]
-  tar -xaf "$rootdir/[% c("input_files_by_name/tor-expert-bundle") %]" tor/pluggable_transports/pt_config.json
+  tar -xaf "$rootdir/[% c("input_files_by_name/tor-expert-bundle") %]/tor-expert-bundle.tar.gz" tor/pluggable_transports/pt_config.json
 [% END -%]
 unzip -j "$apk" assets/omni.ja
 mkdir omni
@@ -70,8 +70,8 @@ unsign_patch="[% dest_dir %]/[% c('filename') %]/[% c('var/project-name') %]-qa-
 bsdiff $qa_apk $aligned_apk $unsign_patch
 
 [%IF c("var/tor-browser") -%]
-  tor_expert_bundle_src="[% c("input_files_by_name/tor-expert-bundle") %]"
+  tor_expert_bundle_src="[% c('input_files_by_name/tor-expert-bundle') %]"
   # strip off trailing "$buildid.tar.gz"
-  tor_expert_bundle_dest=${tor_expert_bundle_src:0:-14}.tar.gz
-  cp $rootdir/$tor_expert_bundle_src [% dest_dir %]/[% c('filename') %]/$tor_expert_bundle_dest
+  tor_expert_bundle_dest=${tor_expert_bundle_src:0:-7}.tar.gz
+  cp "$rootdir/[% c("input_files_by_name/tor-expert-bundle") %]/tor-expert-bundle.tar.gz" [% dest_dir %]/[% c('filename') %]/$tor_expert_bundle_dest
 [% END -%]

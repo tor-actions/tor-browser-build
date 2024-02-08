@@ -35,7 +35,7 @@ rm -fR service/src/main/jniLibs/*
   # Extract tor-expert-bundle
   tebdir=$rootdir/tor-expert-bundle-[% arch %]
   mkdir $tebdir
-  tar -C $tebdir -xf $rootdir/[% c('input_files_by_name/tor-expert-bundle-' _ arch) %]
+  tar -C $tebdir -xf $rootdir/[% c('input_files_by_name/tor-expert-bundle-' _ arch) %]/tor-expert-bundle.tar.gz
 
   # Figure out our android abi from our arch
   [% IF arch == "armv7" -%]
