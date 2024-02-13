@@ -1,3 +1,74 @@
+Tor Browser 13.0.10 - February 20 2024
+ * All Platforms
+   * Updated OpenSSL to 3.0.13
+   * Updated zlib to 1.3.1
+   * Bug 42374: spoof english leaks via numberingSystem: numbers (non-latn) or decimal separator (latn) [tor-browser]
+   * Bug 42411: Rebase Tor Browser stable onto 115.8.0esr [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.8.0esr
+   * Bug 42338: Changing circuit programmatically in Tor Browser not working anymore! [tor-browser]
+ * Android
+   * Updated GeckoView to 115.8.0esr
+   * Bug 42402: Remove Android YEC strings [tor-browser]
+ * Linux
+   * Bug 42293: Updater is disabled when tor-browser is run by torbrowser-launcher flatpak [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.20.14 and 1.21.7
+     * Bug 41067: Use Capture::Tiny instead of IO::CaptureOutput [tor-browser-build]
+     * Bug 40067: Use --no-verbose wget option when not running in a terminal [rbm]
+     * Bug 40068: Switch from IO::CaptureOutput to Capture::Tiny [rbm]
+     * Bug 40069: Make stdout and stderr utf8 [rbm]
+
+Tor Browser 13.5a4 - January 31 2024
+ * All Platforms
+   * Updated zlib to 1.3.1
+   * Updated Snowflake to 2.8.1
+   * Bug 42343: Consume pt_config.json in the browser [tor-browser]
+   * Bug 42348: TorSettings.defaultSettings() removed but still referenced by Moat.sys.mjs [tor-browser]
+   * Bug 42354: Refactor exclusions in ShouldSanitizePreference() to the pref list. [tor-browser]
+   * Bug 42358: Separate the domain fronted requests from Moat [tor-browser]
+   * Bug 42359: Handle firewall and proxy in TorSettings.setSettings [tor-browser]
+   * Bug 42363: Tab thumbnails enhancements [tor-browser]
+   * Bug 42366: Rebase Tor Browser Alpha onto Firefox 115.7.0esr [tor-browser]
+   * Bug 42369: Revert YEC 2023 changes [tor-browser]
+   * Bug 42374: spoof english leaks via numberingSystem: numbers (non-latn) or decimal separator (latn) [tor-browser]
+   * Bug 42384: Regression: quickstart doesn't work anymore [tor-browser]
+   * Bug 41058: Update Snowflake to 2.8.1 [tor-browser-build]
+   * Bug 262: Mouse-over long links causes the browser element to re-center relative to width of status tooltip [mullvad-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.7.0esr
+   * Bug 41917: Make the appearance of letterboxing look more intentional [tor-browser]
+   * Bug 42036: Design and build a user interface for Lox [tor-browser]
+   * Bug 42338: Changing circuit programmatically in Tor Browser not working anymore! [tor-browser]
+   * Bug 42387: Visual noise in 13.5a4 letterboxing [tor-browser]
+ * Linux
+   * Bug 42293: Updater is disabled when tor-browser is run by torbrowser-launcher flatpak [tor-browser]
+ * Android
+   * Updated GeckoView to 115.7.0esr
+   * Bug 42252: Plumb down TorConnect commands from firefox-android to GeckoView [tor-browser]
+   * Bug 42346: Crash in firefox-android originating in backported FullScreenNotificationDialog patch [tor-browser]
+   * Bug 42353: Fix Android NoScript automatic updates [tor-browser]
+   * Bug 42355: Fullscreen on Android doesn't hide system bars [tor-browser]
+   * Bug 42367: Backport Android security fixes from Firefox 122 [tor-browser]
+   * Bug 42368: Tor Browser 13.5a3 crashes during start-up because of API26+ methods [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.20.13 and 1.21.6
+     * Bug 41037: Set time on signing machine before starting signing [tor-browser-build]
+     * Bug 41038: Add RPM dependencies to README [tor-browser-build]
+     * Bug 41059: Update keyring/torbrowser.gpg with updated key [tor-browser-build]
+     * Bug 41063: Run "file $keyring" in tools/keyring/list-all-keyrings [tor-browser-build]
+     * Bug 41067: Use Capture::Tiny instead of IO::CaptureOutput [tor-browser-build]
+     * Bug 41073: Update documention about required packages for container-less build [tor-browser-build]
+     * Bug 40067: Use --no-verbose wget option when not running in a terminal [rbm]
+   * Windows + macOS + Linux
+     * Bug 41078: pt_config.json not touch'd before adding to omni.ja, resulting in build non-determinism [tor-browser-build]
+   * Windows
+     * Bug 40606: Use Clang to compile NSIS [tor-browser-build]
+     * Bug 40900: Update NSIS to 3.09 [tor-browser-build]
+     * Bug 41065: Do a cleanup of the NSIS script [tor-browser-build]
+
 Tor Browser 13.0.9 - January 23 2024
  * All Platforms
    * Updated Snowflake to 2.8.1
