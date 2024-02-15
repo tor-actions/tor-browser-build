@@ -17,7 +17,7 @@ channels:
 versions:
     nightly_version:
         platformVersion: 115.1.0
-        detailsURL: http://umj4zbqdfcyevlkgqgpq6foxk3z75zzxsbgt5jqmfxofrbrjh3crbnad.onion/
+        detailsURL: https://nightlies.tbb.torproject.org/
         macos:
             minSupportedOSVersion: 16.0.0
         windows-i686:
