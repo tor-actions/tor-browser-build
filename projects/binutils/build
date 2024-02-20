@@ -1,7 +1,7 @@
 #!/bin/bash
 [% c("var/set_default_env") -%]
 mkdir /var/tmp/dist
-distdir=/var/tmp/dist/binutils
+distdir=/var/tmp/dist/[% c("var/distdir") %]
 [% IF c("var/linux"); GET c("var/set_hardened_build_flags"); END %]
 
 tar xf [% project %]-[% c("version") %].tar.xz
@@ -15,6 +15,6 @@ make install MAKEINFO=true
 
 cd /var/tmp/dist
 [% c('tar', {
-        tar_src => [ project ],
+        tar_src => [ c('var/distdir') ],
         tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
         }) %]

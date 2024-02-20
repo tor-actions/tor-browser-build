@@ -1,9 +1,10 @@
 # vim: filetype=yaml sw=2
 version: 2.39
-filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
+filename: '[% project %]-[% c("version") %]-[% IF c("var/linux-cross") %]cross-[% c("arch") %]-[% END %][% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
 var:
+  distdir: binutils
   configure_opt: '--disable-multilib --enable-gold --enable-deterministic-archives --enable-plugins'
 
 targets:
@@ -12,6 +13,7 @@ targets:
       configure_opt: '--target=[% c("arch") %]-w64-mingw32 --disable-multilib --enable-deterministic-archives'
   linux-cross:
     var:
+      distdir: 'binutils-cross-[% c("arch") %]'
       # gold is disabled on cross-compiles until we upgrade to glibc 2.26 and
       # binutils 2.28
       configure_opt: '--target=[% c("var/crosstarget") %] --disable-multilib --enable-deterministic-archives --enable-plugins'
