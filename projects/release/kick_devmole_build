@@ -39,4 +39,4 @@ fi
 curl -X POST "https://drone-server.devmole.eu/api/repos/mullvad/browser-build/builds?branch=main&tag=${TAG}&release=${RELEASE}" -H "Authorization: Bearer ${AUTH_TOKEN}" -H "Accept: application/json"
 
 echo
-echo Hashes will appear here: https://cdn.stagemole.eu/hashes/[% c("var/projectname") %]/[% c("var/torbrowser_version") %]-[% c("var/torbrowser_build") %]
+echo Hashes will appear here: https://cdn.stagemole.eu/browser/hashes/[% c("var/projectname") %]/[% c("var/torbrowser_version") %]-[% c("var/torbrowser_build") %]/
