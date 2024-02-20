@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-filename: '[% project %]-[% c("version") %]-[% IF c("var/linux-cross") %][% c("var/osname") %][% ELSE %]x86[% END %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
+filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 # Note: When updating the gcc version, if this includes a libstdc++
 # ABI change we should also update projects/firefox/abicheck.cc to
 # require the new version.
@@ -7,6 +7,7 @@ version: '[% pc("gcc-source", "version") %]'
 container:
   use_container: 1
 var:
+  no_crosscompile: 1
   distdir: gcc
   deps:
     - build-essential
@@ -15,9 +16,7 @@ var:
     mkdir -p /var/tmp/dist
     tar -C /var/tmp/dist -xf $rootdir/[% c("compiler_tarfile") %]
     export PATH="/var/tmp/dist/[% c("var/distdir") %]/bin:$PATH"
-    [% IF ! c("var/linux-cross") -%]
-      export LD_LIBRARY_PATH=/var/tmp/dist/[% c("var/distdir") %]/lib64:/var/tmp/dist/[% c("var/distdir") %]/lib32
-    [% END -%]
+    export LD_LIBRARY_PATH=/var/tmp/dist/[% c("var/distdir") %]/lib64:/var/tmp/dist/[% c("var/distdir") %]/lib32
     [% IF c("hardened_gcc"); GET c("var/set_hardened_build_flags"); END %]
 
 targets:
@@ -33,33 +32,8 @@ targets:
       configure_opt: --enable-multilib --enable-languages=c,c++ --with-arch_32=i686
       arch_deps:
         - libc6-dev-i386
-  linux-cross:
-    var:
-      target_prefix: '[% c("var/crosstarget") %]-'
-      distdir: gcc-cross
-      # TODO: Consider upgrading to a glibc that works out of the box with the
-      # GCC version we use. However, removing our glibc version workarounds may
-      # not be desirable since we want to be able to easily bump the GCC
-      # version without worrying about linux-cross breakage.
-      glibc_version: 2.26
-      linux_version: 4.10.1
-      arch_deps:
-        - libc6-dev-i386
-        - gawk
-  linux-arm:
-    var:
-      configure_opt: --disable-multilib --enable-languages=c,c++ --target=arm-linux-gnueabihf --with-arch=armv7-a --with-fpu=vfpv3-d16 --with-float=hard --with-mode=thumb
 
 input_files:
   - project: container-image
   - project: gcc-source
     name: gcc
-  - name: binutils
-    project: binutils
-    enable: '[% c("var/linux-cross") -%]'
-  - URL: 'https://ftp.gnu.org/gnu/glibc/glibc-[% c("var/glibc_version") %].tar.xz'
-    sha256sum: e54e0a934cd2bc94429be79da5e9385898d2306b9eaf3c92d5a77af96190f6bd
-    enable: '[% c("var/linux-cross") -%]'
-  - URL: 'https://www.kernel.org/pub/linux/kernel/v4.x/linux-[% c("var/linux_version") %].tar.xz'
-    sha256sum: 6ca06bb5faf5f83600d7388bb623dae41df2a257de85ad5d1792e03302bc3543
-    enable: '[% c("var/linux-cross") -%]'

@@ -1,0 +1,96 @@
+#!/bin/sh
+[% c("var/set_default_env") -%]
+mkdir -p /var/tmp/build
+distdir=/var/tmp/dist/[% c("var/distdir") %]
+
+# Install native gcc
+mkdir /var/tmp/dist
+cd /var/tmp/dist
+tar xf $rootdir/[% c('input_files_by_name/gcc-native') %]
+export PATH="$distdir/bin:$PATH"
+
+# Install cross binutils (needed for cross-compiling)
+cd /var/tmp/dist
+tar xf $rootdir/[% c('input_files_by_name/binutils') %]
+rsync -a binutils-cross-[% c("arch") %]/* $distdir
+rm -rf binutils-cross-[% c("arch") %]
+
+# Install Linux headers, see Step 2 of
+# https://preshing.com/20141119/how-to-build-a-gcc-cross-compiler/
+# Doing this before gcc configure is intended to solve a limits.h issue
+cd /var/tmp/build
+mkdir linux
+cd linux
+tar -xJf $rootdir/linux-[% c("var/linux_version") %].tar.xz
+cd linux-[% c("var/linux_version") %]
+make ARCH=[% IF c("arch") == "aarch64" %]arm64[% ELSE %][% c("arch") %][% END %] INSTALL_HDR_PATH=$distdir/[% c("var/crosstarget") %] headers_install
+
+cd /var/tmp/build
+mkdir gcc-cross
+cd gcc-cross
+tar -xJf $rootdir/[% c('input_files_by_name/gcc') %]
+cd gcc-[% c("version") %]
+patch -p1 <$rootdir/gcc-cross.patch
+
+cd /var/tmp/build/gcc-cross
+gcc-[% c("version") %]/configure --prefix=$distdir --includedir=$distdir/[% c("var/crosstarget") %]/include [% c("var/configure_opt") %]
+
+# For cross-compiling to work, we need to partially build GCC, then build
+# glibc, then come back to finish GCC.
+
+# Build only the components of GCC that don't need glibc, see Step 3 of
+# https://preshing.com/20141119/how-to-build-a-gcc-cross-compiler/
+cd /var/tmp/build/gcc-cross
+make -j[% c("num_procs") %] all-gcc
+make install-gcc
+
+# Build glibc headers and startup files, see Step 4 of
+# https://preshing.com/20141119/how-to-build-a-gcc-cross-compiler/
+cd /var/tmp/build
+mkdir glibc
+cd glibc
+tar -xJf $rootdir/glibc-[% c("var/glibc_version") %].tar.xz
+[% IF c("var/linux-aarch64") -%]
+  # Avoid linking issues by backporting glibc patches
+  cd glibc-[% c("var/glibc_version") %]
+  patch -p1 <$rootdir/glibc-cross-linux-aarch64.patch
+  patch -p1 <$rootdir/glibc-cross-linux-aarch64-2.patch
+  cd /var/tmp/build/glibc
+[% END -%]
+
+# TODO: Remove --disable-werror once glibc is upgraded to a version that's
+# designed to work with the GCC version we're using.
+glibc-[% c("var/glibc_version") %]/configure --prefix=$distdir/[% c("var/crosstarget") %] --build=$MACHTYPE --host=[% c("var/crosstarget") %] --target=[% c("var/crosstarget") %] --with-headers=$distdir/[% c("var/crosstarget") %]/include --disable-multilib --disable-werror libc_cv_forced_unwind=yes
+make install-bootstrap-headers=yes install-headers
+make -j[% c("num_procs") %] csu/subdir_lib
+install csu/crt1.o csu/crti.o csu/crtn.o $distdir/[% c("var/crosstarget") %]/lib
+[% c("var/crosstarget") %]-gcc -nostdlib -nostartfiles -shared -x c /dev/null -o $distdir/[% c("var/crosstarget") %]/lib/libc.so
+# stdio_lim.h is intended to solve a limits.h issue
+touch $distdir/[% c("var/crosstarget") %]/include/gnu/stubs.h $distdir/[% c("var/crosstarget") %]/include/bits/stdio_lim.h
+
+# Build compiler support library, see Step 5 of
+# https://preshing.com/20141119/how-to-build-a-gcc-cross-compiler/
+cd /var/tmp/build/gcc-cross
+make -j[% c("num_procs") %] all-target-libgcc
+make install-target-libgcc
+
+# finish building glibc, see Step 6 of
+# https://preshing.com/20141119/how-to-build-a-gcc-cross-compiler/
+cd /var/tmp/build/glibc
+make -j[% c("num_procs") %]
+make install
+
+# We're done with glibc, we can now finish building gcc...
+cd /var/tmp/build/gcc-cross
+make -j[% c("num_procs") %]
+make install
+
+# Include a working version of limits.h
+cd gcc-[% c("version") %]
+cat gcc/limitx.h gcc/glimits.h gcc/limity.h >$distdir/lib/gcc/[% c("var/crosstarget") %]/[% c("version") %]/include/limits.h
+
+cd /var/tmp/dist
+[% c('tar', {
+        tar_src => [ c('var/distdir') ],
+        tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
+        }) %]

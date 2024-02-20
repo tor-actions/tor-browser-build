@@ -1,0 +1,53 @@
+# vim: filetype=yaml sw=2
+filename: '[% project %]-[% c("version") %]-[% c("arch") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
+# Note: When updating the gcc version, if this includes a libstdc++
+# ABI change we should also update projects/firefox/abicheck.cc to
+# require the new version.
+version: '[% pc("gcc-source", "version") %]'
+container:
+  use_container: 1
+hardened_gcc: 1
+var:
+  distdir: gcc
+  deps:
+    - build-essential
+    - libmpc-dev
+  setup: |
+    mkdir -p /var/tmp/dist
+    tar -C /var/tmp/dist -xf $rootdir/[% c("compiler_tarfile") %]
+    export PATH="/var/tmp/dist/[% c("var/distdir") %]/bin:$PATH"
+    export LD_LIBRARY_PATH=/var/tmp/dist/[% c("var/distdir") %]/lib64:/var/tmp/dist/[% c("var/distdir") %]/lib32
+    [% IF c("hardened_gcc"); GET c("var/set_hardened_build_flags"); END %]
+  configure_opt: '--target=[% c("var/crosstarget") %] --disable-multilib --enable-languages=c,c++ --with-glibc-version=[% c("var/glibc_version") %]'
+  # Use stretch's glibc and stretch-security's linux
+  glibc_version: 2.24
+  linux_version: 4.19.232
+  arch_deps:
+    - libc6-dev-i386
+    - gawk
+    - rsync
+
+targets:
+  linux-arm:
+    var:
+      configure_opt: '--target=[% c("var/crosstarget") %] --disable-multilib --enable-languages=c,c++ --with-glibc-version=[% c("var/glibc_version") %] --with-arch=armv7-a --with-fpu=vfpv3-d16 --with-float=hard --with-mode=thumb'
+
+input_files:
+  - project: container-image
+  - project: gcc-source
+    name: gcc
+  - name: binutils
+    project: binutils
+    target_prepend:
+      - linux-cross
+  - name: gcc-native
+    project: gcc
+  - URL: 'https://ftp.gnu.org/gnu/glibc/glibc-[% c("var/glibc_version") %].tar.xz'
+    sha256sum: 99d4a3e8efd144d71488e478f62587578c0f4e1fa0b4eed47ee3d4975ebeb5d3
+  - URL: 'https://www.kernel.org/pub/linux/kernel/v4.x/linux-[% c("var/linux_version") %].tar.xz'
+    sha256sum: 4fcfe814780d63dc56e907bf41596ff162e9601978bdc1a60eab64cc3903a22c
+  - filename: 'gcc-cross.patch'
+  - filename: 'glibc-cross-linux-aarch64.patch'
+    enable: '[% c("var/linux-aarch64") -%]'
+  - filename: 'glibc-cross-linux-aarch64-2.patch'
+    enable: '[% c("var/linux-aarch64") -%]'
