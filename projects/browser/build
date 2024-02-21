@@ -363,9 +363,53 @@ done
   TBDIR="$distdir/$PKG_DIR/Browser"
 [% END %]
 
-cat > "$scripts_dir/create-$PKG_DIR" << SCRIPT_EOF
-#!/bin/bash
-set -e
+[% IF c("var/updater_enabled") -%]
+  cp $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip "$OUTDIR"/
+[% END -%]
+
+[% IF c("var/windows") -%]
+  archive_ext=zip
+[% ELSE -%]
+  archive_ext=tar.xz
+[% END -%]
+
+debug_symbols="$rootdir/[% c('input_files_by_name/firefox') %]/browser-debug-symbols.$archive_ext"
+if [[ -f "$debug_symbols" ]]; then
+  cp "$debug_symbols"  "$OUTDIR/[% c('var/project-name') %]-debug-symbols-[% c('var/mar_osname') %]-[% c('var/torbrowser_version') %].$archive_ext"
+fi
+
+[% IF c("var/macos_universal") -%]
+  geckodriver="$rootdir/[% c('input_files_by_name/firefox') %]/geckodriver.$archive_ext"
+  if [[ -f "$geckodriver" ]]; then
+    cp "$geckodriver" "$OUTDIR/geckodriver-[% c('var/osname') %]-[% c('var/torbrowser_version') %].$archive_ext"
+  fi
+  geckodriver="$rootdir/[% c('input_files_by_name/firefox-aarch64') %]/geckodriver.$archive_ext"
+  if [[ -f "$geckodriver" ]]; then
+    cp "$geckodriver" "$OUTDIR/geckodriver-macos-aarch64-[% c('var/torbrowser_version') %].$archive_ext"
+  fi
+[% ELSE -%]
+  geckodriver="$rootdir/[% c('input_files_by_name/firefox') %]/geckodriver.$archive_ext"
+  if [[ -f "$geckodriver" ]]; then
+    cp "$geckodriver" "$OUTDIR/geckodriver-[% c('var/osname') %]-[% c('var/torbrowser_version') %].$archive_ext"
+  fi
+[% END -%]
+
+[%IF c("var/tor-browser") -%]
+  tor_expert_bundle_src="[% c("input_files_by_name/tor-expert-bundle") %]"
+  # strip off trailing "$buildid.tar.gz"
+  tor_expert_bundle_dest=${tor_expert_bundle_src:0:-7}.tar.gz
+  cp $rootdir/[% c("input_files_by_name/tor-expert-bundle") %]/tor-expert-bundle.tar.gz "$OUTDIR"/$tor_expert_bundle_dest
+  [% IF c("var/macos_universal") %]
+    tor_expert_bundle_src="[% c('input_files_by_name/tor-expert-bundle-aarch64') %]"
+    # strip off trailing "$buildid.tar.gz"
+    tor_expert_bundle_dest=${tor_expert_bundle_src:0:-7}.tar.gz
+    cp $rootdir/[% c('input_files_by_name/tor-expert-bundle-aarch64') %]/tor-expert-bundle.tar.gz "$OUTDIR"/$tor_expert_bundle_dest
+  [% END -%]
+[% END -%]
+[% IF c("var/build_infos_json") -%]
+  cp $rootdir/[% c('input_files_by_name/firefox') %]/build-infos.json "$OUTDIR"/build-infos-[% c("var/mar_osname") %].json
+[% END -%]
+
 cp -a ${TB_STAGE_DIR} $distdir/$PKG_DIR
 
 [% IF c("var/updater_enabled") -%]
@@ -415,55 +459,3 @@ cd $distdir
   [% END -%]
   popd
 [% END %]
-rm -rf $distdir/${PKG_DIR}
-SCRIPT_EOF
-
-[% IF c("var/updater_enabled") -%]
-  cp $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip "$OUTDIR"/
-[% END -%]
-
-[% IF c("var/windows") -%]
-  archive_ext=zip
-[% ELSE -%]
-  archive_ext=tar.xz
-[% END -%]
-
-debug_symbols="$rootdir/[% c('input_files_by_name/firefox') %]/browser-debug-symbols.$archive_ext"
-if [[ -f "$debug_symbols" ]]; then
-  cp "$debug_symbols"  "$OUTDIR/[% c('var/project-name') %]-debug-symbols-[% c('var/mar_osname') %]-[% c('var/torbrowser_version') %].$archive_ext"
-fi
-
-[% IF c("var/macos_universal") -%]
-  geckodriver="$rootdir/[% c('input_files_by_name/firefox') %]/geckodriver.$archive_ext"
-  if [[ -f "$geckodriver" ]]; then
-    cp "$geckodriver" "$OUTDIR/geckodriver-[% c('var/osname') %]-[% c('var/torbrowser_version') %].$archive_ext"
-  fi
-  geckodriver="$rootdir/[% c('input_files_by_name/firefox-aarch64') %]/geckodriver.$archive_ext"
-  if [[ -f "$geckodriver" ]]; then
-    cp "$geckodriver" "$OUTDIR/geckodriver-macos-aarch64-[% c('var/torbrowser_version') %].$archive_ext"
-  fi
-[% ELSE -%]
-  geckodriver="$rootdir/[% c('input_files_by_name/firefox') %]/geckodriver.$archive_ext"
-  if [[ -f "$geckodriver" ]]; then
-    cp "$geckodriver" "$OUTDIR/geckodriver-[% c('var/osname') %]-[% c('var/torbrowser_version') %].$archive_ext"
-  fi
-[% END -%]
-
-[%IF c("var/tor-browser") -%]
-  tor_expert_bundle_src="[% c("input_files_by_name/tor-expert-bundle") %]"
-  # strip off trailing "$buildid.tar.gz"
-  tor_expert_bundle_dest=${tor_expert_bundle_src:0:-7}.tar.gz
-  cp $rootdir/[% c("input_files_by_name/tor-expert-bundle") %]/tor-expert-bundle.tar.gz "$OUTDIR"/$tor_expert_bundle_dest
-  [% IF c("var/macos_universal") %]
-    tor_expert_bundle_src="[% c('input_files_by_name/tor-expert-bundle-aarch64') %]"
-    # strip off trailing "$buildid.tar.gz"
-    tor_expert_bundle_dest=${tor_expert_bundle_src:0:-7}.tar.gz
-    cp $rootdir/[% c('input_files_by_name/tor-expert-bundle-aarch64') %]/tor-expert-bundle.tar.gz "$OUTDIR"/$tor_expert_bundle_dest
-  [% END -%]
-[% END -%]
-[% IF c("var/build_infos_json") -%]
-  cp $rootdir/[% c('input_files_by_name/firefox') %]/build-infos.json "$OUTDIR"/build-infos-[% c("var/mar_osname") %].json
-[% END -%]
-
-chmod 775 $rootdir/run_scripts "$scripts_dir"/*
-$rootdir/run_scripts [% c("num_procs") %] "$scripts_dir"
