@@ -14,7 +14,8 @@ mkdir -p $OUTDIR
 # When we build with MULTI_LINGUAL=1, the browser will be packaged inside a
 # directory named tor-browser (instead of tor-browser_en-US). Therefore we
 # stage everything under tor-browser-stage to avoid a conflict.
-TB_STAGE_DIR=$distdir/tor-browser-stage
+PKG_DIR='[% c("var/project-name") %]'
+TB_STAGE_DIR="$distdir/$PKG_DIR[% IF c('var/windows') %]/[% c('var/Project_Name') %][% END %]"
 GENERATEDPREFSPATH=$rootdir/Bundle-Data/generated-prefs.js
 # Create initially empty prefs file where we can dump our conditionally included/genetered prefs
 touch "$GENERATEDPREFSPATH"
@@ -37,7 +38,7 @@ touch "$GENERATEDPREFSPATH"
   tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/libdmg') %]
   export PATH=/var/tmp/dist/hfsplus-tools:/var/tmp/dist/libdmg-hfsplus:$PATH
 [% ELSE %]
-  TBDIR=$TB_STAGE_DIR/Browser
+  TBDIR="$TB_STAGE_DIR/Browser"
   TBDIRS=("$TBDIR")
 
   DOCSPATH=[% c('var/ProjectName') %]/Docs
@@ -124,7 +125,6 @@ mv [% c('input_files_by_name/noscript') %] "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b
 
   # on linux, libstdc++ lives in it's own directory
   [% IF c("var/linux") %]
-    find $TBDIR/$TORBINPATH
     mkdir -p "$TBDIR/$TORBINPATH/libstdc++"
     mv "$TBDIR/$TORBINPATH"/libstdc++.so.* "$TBDIR/$TORBINPATH/libstdc++"
   [% END %]
@@ -145,32 +145,32 @@ do
 done
 
 [% IF c("var/linux") %]
-  cat > ${TB_STAGE_DIR}/start-[% c("var/project-name") %].desktop << 'RBM_TB_EOF'
+  cat > "${TB_STAGE_DIR}/start-[% c('var/project-name') %].desktop" << 'RBM_TB_EOF'
 [% INCLUDE 'RelativeLink/start-browser.desktop' -%]
 RBM_TB_EOF
-  cat > ${TB_STAGE_DIR}/Browser/start-[% c("var/project-name") %] << 'RBM_TB_EOF'
+  cat > "${TB_STAGE_DIR}/Browser/start-[% c('var/project-name') %]" << 'RBM_TB_EOF'
 [% INCLUDE 'RelativeLink/start-browser' -%]
 RBM_TB_EOF
-  cat > ${TB_STAGE_DIR}/Browser/execdesktop << 'RBM_TB_EOF'
+  cat > "${TB_STAGE_DIR}/Browser/execdesktop" << 'RBM_TB_EOF'
 [% INCLUDE 'RelativeLink/execdesktop' -%]
 RBM_TB_EOF
-  chmod +x ${TB_STAGE_DIR}/start-[% c("var/project-name") %].desktop \
-           ${TB_STAGE_DIR}/Browser/start-[% c("var/project-name") %] \
-           ${TB_STAGE_DIR}/Browser/execdesktop
-  cp ${TB_STAGE_DIR}/start-[% c("var/project-name") %].desktop \
-     ${TB_STAGE_DIR}/Browser
+  chmod +x "${TB_STAGE_DIR}/start-[% c('var/project-name') %].desktop" \
+           "${TB_STAGE_DIR}/Browser/start-[% c('var/project-name') %]" \
+           "${TB_STAGE_DIR}/Browser/execdesktop"
+  cp "${TB_STAGE_DIR}/start-[% c('var/project-name') %].desktop" \
+     "${TB_STAGE_DIR}/Browser"
   [% IF c("var/namecoin") %]
-    pushd ${TB_STAGE_DIR}/Browser/
+    pushd "${TB_STAGE_DIR}/Browser/"
     patch -p1 < $rootdir/namecoin.patch
     popd
   [% END %]
   # Make sure we get the desired scrollbar behavior with Gtk3, see bug 27546.
-  GTK_SETTINGS_DIR=${TB_STAGE_DIR}/Browser/.config/gtk-3.0
+  GTK_SETTINGS_DIR="${TB_STAGE_DIR}/Browser/.config/gtk-3.0"
   mkdir -p $GTK_SETTINGS_DIR
   cp $rootdir/gtk3-settings.ini $GTK_SETTINGS_DIR/settings.ini
 [% END %]
 
-tar -C ${TB_STAGE_DIR} -xf [% c('input_files_by_name/firefox') %]/browser.tar.[% c("compress_tar") %]
+tar -C "${TB_STAGE_DIR}" -xf [% c('input_files_by_name/firefox') %]/browser.tar.[% c("compress_tar") %]
 
 [% IF c("var/macos_universal") -%]
   # Use symlink in tmp dir to extract "Tor Browser.app" to "Tor Browser-aarch64.app"
@@ -215,8 +215,8 @@ tar -C ${TB_STAGE_DIR} -xf [% c('input_files_by_name/firefox') %]/browser.tar.[%
    END; %]
 
 [% IF c("var/macos") %]
-  tar -C "Bundle-Data/[% c('var/ProjectName') %].dmg" -c . | tar -C $TB_STAGE_DIR -x
-  pushd $TB_STAGE_DIR
+  tar -C "Bundle-Data/[% c('var/ProjectName') %].dmg" -c . | tar -C "$TB_STAGE_DIR" -x
+  pushd "$TB_STAGE_DIR"
   cp [% c('var/channel') %].DS_Store .DS_Store
   rm *.DS_Store
   popd
@@ -264,16 +264,9 @@ done
 [% END -%]
 
 [% IF c("var/linux") && c("var/tor-browser") %]
-  chmod 700 ${TB_STAGE_DIR}/Browser/[% c('var/ProjectName') %]/Data/Browser
-  chmod 700 ${TB_STAGE_DIR}/Browser/TorBrowser/Data/Tor
+  chmod 700 "${TB_STAGE_DIR}/Browser/[% c('var/ProjectName') %]/Data/Browser"
+  chmod 700 "${TB_STAGE_DIR}/Browser/TorBrowser/Data/Tor"
 [% END %]
-
-# With multi-lingual builds, we use "ALL" in the package name as the locale for
-# update purposes. But we do not include "ALL" in the name of the directory that
-# is inside the package (in other words, users will not see tor-browser_ALL
-# after they install Tor Browser).
-PKG_LOCALE="ALL"
-PKG_DIR='[% c("var/project-name") %]'
 
 for tbdir in "${TBDIRS[@]}"
 do
@@ -325,12 +318,13 @@ done
     # we write the uninstaller from the installer.
     # Instead, we need to write an updated postupdate.exe also when updating.
     makensis postupdate.nsi
-    mv postupdate.exe ${TB_STAGE_DIR}/Browser/
+    mv postupdate.exe "${TB_STAGE_DIR}/Browser/"
     popd
   [% END -%]
 
-  mv ${TB_STAGE_DIR} $distdir/windows-installer/"[% c('var/Project_Name') %]"
-  mv $distdir/windows-installer ${TB_STAGE_DIR}
+  mv "${TB_STAGE_DIR}" "$distdir/windows-installer/[% c('var/Project_Name') %]"
+  rmdir "$distdir/$PKG_DIR"
+  mv $distdir/windows-installer "$distdir/$PKG_DIR"
 [% END %]
 
 [% IF c("var/macos_universal") -%]
@@ -355,14 +349,6 @@ done
   rm -Rf "$TBDIR_AARCH64"
 [% END -%]
 
-[% IF c("var/windows") %]
-  TBDIR="$distdir/$PKG_DIR/[% c("var/Project_Name") %]/Browser"
-[% ELSIF c("var/macos") %]
-  TBDIR="$distdir/$PKG_DIR/[% c('var/display_name') %].app"
-[% ELSE %]
-  TBDIR="$distdir/$PKG_DIR/Browser"
-[% END %]
-
 [% IF c("var/updater_enabled") -%]
   cp $rootdir/[% c('input_files_by_name/firefox') %]/mar-tools-*.zip "$OUTDIR"/
 [% END -%]
@@ -378,19 +364,14 @@ if [[ -f "$debug_symbols" ]]; then
   cp "$debug_symbols"  "$OUTDIR/[% c('var/project-name') %]-debug-symbols-[% c('var/mar_osname') %]-[% c('var/torbrowser_version') %].$archive_ext"
 fi
 
+geckodriver="$rootdir/[% c('input_files_by_name/firefox') %]/geckodriver.$archive_ext"
+if [[ -f "$geckodriver" ]]; then
+  cp "$geckodriver" "$OUTDIR/geckodriver-[% c('var/osname') %]-[% c('var/torbrowser_version') %].$archive_ext"
+fi
 [% IF c("var/macos_universal") -%]
-  geckodriver="$rootdir/[% c('input_files_by_name/firefox') %]/geckodriver.$archive_ext"
-  if [[ -f "$geckodriver" ]]; then
-    cp "$geckodriver" "$OUTDIR/geckodriver-[% c('var/osname') %]-[% c('var/torbrowser_version') %].$archive_ext"
-  fi
   geckodriver="$rootdir/[% c('input_files_by_name/firefox-aarch64') %]/geckodriver.$archive_ext"
   if [[ -f "$geckodriver" ]]; then
     cp "$geckodriver" "$OUTDIR/geckodriver-macos-aarch64-[% c('var/torbrowser_version') %].$archive_ext"
-  fi
-[% ELSE -%]
-  geckodriver="$rootdir/[% c('input_files_by_name/firefox') %]/geckodriver.$archive_ext"
-  if [[ -f "$geckodriver" ]]; then
-    cp "$geckodriver" "$OUTDIR/geckodriver-[% c('var/osname') %]-[% c('var/torbrowser_version') %].$archive_ext"
   fi
 [% END -%]
 
@@ -410,8 +391,6 @@ fi
   cp $rootdir/[% c('input_files_by_name/firefox') %]/build-infos.json "$OUTDIR"/build-infos-[% c("var/mar_osname") %].json
 [% END -%]
 
-cp -a ${TB_STAGE_DIR} $distdir/$PKG_DIR
-
 [% IF c("var/updater_enabled") -%]
   pushd "$TBDIR[% IF c("var/macos") %]/Contents/Resources/[% END %]"
   rm -f precomplete
@@ -422,7 +401,7 @@ cd $distdir
 
 [% IF c("var/build_mar") && c("var/updater_enabled") -%]
   # Create full MAR file and compressed package.
-  [% SET mar_file = c("var/project-name") _ '-' _ c("var/mar_osname") _ '-' _ c("var/torbrowser_version") _ '_${PKG_LOCALE}.mar' %]
+  [% SET mar_file = c("var/project-name") _ '-' _ c("var/mar_osname") _ '-' _ c("var/torbrowser_version") _ '_ALL.mar' %]
   MAR=$MARTOOLS/mar \
   MOZ_PRODUCT_VERSION=[% c("var/torbrowser_version") %] \
   MAR_CHANNEL_ID=[% c("var/mar_channel_id") %] \
