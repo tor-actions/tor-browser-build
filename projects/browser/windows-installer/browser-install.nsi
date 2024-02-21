@@ -1,5 +1,7 @@
+  !addplugindir nsis-plugins
   !include "common.nsh"
   !include "registry.nsh"
+  !include "Win\COM.nsh"
 
 ;--------------------------------
   OutFile "browser-install.exe"
@@ -219,7 +221,7 @@ Section "Browser" SecBrowser
     ; Write the uninstaller
     WriteUninstaller $INSTDIR\uninstall.exe
 
-    !insertmacro UPDATE_REGISTRY
+    Call UpdateRegistry
 
     CreateShortCut "$SMPROGRAMS\${DISPLAY_NAME}.lnk" "$INSTDIR\${EXE_NAME}"
     ${If} $createDesktopShortcut == "true"
@@ -238,23 +240,56 @@ FunctionEnd
 
 ;--------------------------------
 ; Uninstaller
+
+Function un.GetPathFromString
+  !insertmacro GetPathFromStringImp
+FunctionEnd
+
 Section "Uninstall"
+  ; Currently, the uninstaller is written by the installer, only in install
+  ; mode, and we do not have any way to update it.
+  ; However, we keep postupdate.exe updated, so we can use that instead.
+  ExecWait '"$INSTDIR\postupdate.exe" /Uninstall' $0
+
   RMDir /r "$INSTDIR"
   DeleteRegKey HKCU "${UNINST_KEY}"
 
-  StrCpy $0 ""
-  ShellLink::GetShortCutTarget "$SMPROGRAMS\${DISPLAY_NAME}.lnk"
-  Pop $0
-  ${If} $0 == "$INSTDIR\${EXE_NAME}"
-    Delete "$SMPROGRAMS\${DISPLAY_NAME}.lnk"
+  StrCpy $2 "$SMPROGRAMS\${DISPLAY_NAME}.lnk"
+  StrCpy $3 ""
+  ShellLink::GetShortCutTarget "$2"
+  Pop $3
+  ${If} $3 == "$INSTDIR\${EXE_NAME}"
+    ; https://stackoverflow.com/questions/42816091/nsis-remove-pinned-icon-from-taskbar-on-uninstall
+    !insertmacro ComHlpr_CreateInProcInstance ${CLSID_StartMenuPin} ${IID_IStartMenuPinnedList} r0 ""
+    ${If} $0 P<> 0
+      System::Call 'SHELL32::SHCreateItemFromParsingName(ws, p0, g "${IID_IShellItem}", *p0r1)' "$2"
+      ${If} $1 P<> 0
+        ${IStartMenuPinnedList::RemoveFromList} $0 '(r1)'
+        ${IUnknown::Release} $1 ""
+      ${EndIf}
+      ${IUnknown::Release} $0 ""
+    ${EndIf}
+
+    Delete "$2"
   ${EndIf}
 
-  StrCpy $0 ""
-  ShellLink::GetShortCutTarget "$DESKTOP\${DISPLAY_NAME}.lnk"
-  Pop $0
-  ${If} $0 == "$INSTDIR\${EXE_NAME}"
-    Delete "$DESKTOP\${DISPLAY_NAME}.lnk"
-  ${EndIf}
+  FindFirst $1 $2 "$DESKTOP\*.lnk"
+  loop:
+    IfErrors end
+    StrCpy $0 ""
+    ShellLink::GetShortCutTarget "$DESKTOP\$2"
+    ; Do not pop, and pass the value over
+    Call un.GetPathFromString
+    Pop $0
+    ${If} $0 == "$INSTDIR\${EXE_NAME}"
+      Delete "$DESKTOP\$2"
+    ${EndIf}
+    FindNext $1 $2
+    goto loop
+  end:
+  FindClose $1
+
+  ${RefreshShellIcons}
 
   ; TODO: Optionally remove profiles.
   ; This operation is not trivial, because it involes finding our installation

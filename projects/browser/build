@@ -320,6 +320,7 @@ done
 
   [% IF c('var/mullvad-browser') -%]
     pushd $distdir/windows-installer
+    tar -xf $rootdir/[% c('input_files_by_name/firefox') %]/nsis-plugins.tar.[% c("compress_tar") %]
     # While Firefox re-uses the uninstaller for this, we cannot do it, because
     # we write the uninstaller from the installer.
     # Instead, we need to write an updated postupdate.exe also when updating.

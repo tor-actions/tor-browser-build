@@ -124,6 +124,7 @@ input_files:
   - filename: 'defines.nsh'
     content: '[% INCLUDE "windows-installer/defines.nsh.in" %]'
     refresh_input: 1
+    enable: '[% c("var/windows") %]'
   - filename: pe_checksum_fix.py
     enable: '[% c("var/windows") %]'
   # To generate a new keystore, see how-to-generate-keystore.txt

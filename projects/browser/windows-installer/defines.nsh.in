@@ -5,13 +5,7 @@
 
   ; Project and display name
   !define PROJECT_NAME "[% c('var/Project_Name') %]"
-[% IF c("var/channel") == "release" -%]
-  !define DISPLAY_NAME "[% c('var/Project_Name') %]"
-[% ELSIF c("var/testbuild") -%]
-  !define DISPLAY_NAME "[% c('var/Project_Name') %] Testbuild"
-[% ELSE -%]
-  !define DISPLAY_NAME "[% c('var/Project_Name_Channel') %]"
-[% END -%]
+  !define DISPLAY_NAME "[% c('var/display_name') %]"
   !define NAME_NO_SPACES "[% c('var/ProjectName') %]"
   !define UPDATE_CHANNEL "[% c('var/channel') FILTER ucfirst %]"
 

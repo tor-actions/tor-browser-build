@@ -6,7 +6,8 @@
       }) %]
 distdir=/var/tmp/dist/[% project %]
 mkdir -p /var/tmp/build
-mkdir -p [% dest_dir _ '/' _ c('filename') %]
+[% SET out_dir = dest_dir _ '/' _ c('filename') -%]
+mkdir -p [% out_dir %]
 
 [% IF c("var/windows") -%]
   # Setting up fxc2
@@ -276,6 +277,20 @@ cp -L obj-*/dist/bin/geckodriver* $distdir
   [% END -%]
 [% END -%]
 
+[% IF c("var/mullvad-browser") && c("var/windows") -%]
+  function make_nsis_plugin {
+    pushd "other-licenses/nsis/Contrib/$1"
+    make CXX=[% c("arch") %]-w64-mingw32-clang++
+    cp "$1.dll" $distdir/nsis-plugins/
+    [% c("touch") %] "$distdir/nsis-plugins/$1.dll"
+    popd
+  }
+
+  mkdir -p $distdir/nsis-plugins
+  make_nsis_plugin ApplicationID
+  make_nsis_plugin CityHash
+[% END -%]
+
 cd $distdir
 
 [% IF c("var/linux") -%]
@@ -328,7 +343,7 @@ echo "Starting to package artifacts $(date)"
 
 [% c('tar', {
         tar_src => [ browserdir ],
-        tar_args => '-caf ' _ dest_dir _ '/' _ c('filename') _ '/browser.tar.' _ c('compress_tar'),
+        tar_args => '-caf ' _ out_dir _ '/browser.tar.' _ c('compress_tar'),
     }) %]
 
 # Debug symbols
@@ -339,13 +354,13 @@ echo "Starting to package artifacts $(date)"
   mv include [% c('var/project-name') %]/
   [% c('tar', {
       tar_src => [ c('var/project-name') ],
-      tar_args => '-cJf ' _ dest_dir _ '/' _ c('filename') _ '/browser-debug-symbols.tar.xz',
+      tar_args => '-cJf ' _ out_dir _ '/browser-debug-symbols.tar.xz',
     }) %]
   popd
 [% ELSIF c("var/windows") -%]
   [% c('zip', {
       zip_src => [ 'Debug' ],
-      zip_args => dest_dir _ '/' _ c('filename') _ '/browser-debug-symbols.zip',
+      zip_args => out_dir _ '/browser-debug-symbols.zip',
     }) %]
 [% END -%]
 
@@ -354,12 +369,12 @@ llvm-strip geckodriver*
 [% IF c("var/windows") -%]
   [% c('zip', {
       zip_src => [ 'geckodriver.exe' ],
-      zip_args => dest_dir _ '/' _ c('filename') _ '/geckodriver.zip',
+      zip_args => out_dir _ '/geckodriver.zip',
     }) %]
 [% ELSE -%]
   [% c('tar', {
       tar_src => [ 'geckodriver' ],
-      tar_args => '-cJf ' _ dest_dir _ '/' _ c('filename') _ '/geckodriver.tar.xz',
+      tar_args => '-cJf ' _ out_dir _ '/geckodriver.tar.xz',
     }) %]
 [% END -%]
 
@@ -367,12 +382,19 @@ llvm-strip geckodriver*
 [% IF c("var/updater_enabled") -%]
   [% c('zip', {
       zip_src => [ 'mar-tools' ],
-      zip_args => dest_dir _ '/' _ c('filename') _ '/' _ 'mar-tools-' _ c("var/osname") _ '-' _ c("var/torbrowser_version") _ '.zip',
+      zip_args => out_dir _ '/' _ 'mar-tools-' _ c("var/osname") _ '-' _ c("var/torbrowser_version") _ '.zip',
+    }) %]
+[% END -%]
+
+[% IF c("var/mullvad-browser") && c("var/windows") -%]
+  [% c('tar', {
+      tar_src => [ 'nsis-plugins' ],
+      tar_args => '-caf ' _ out_dir _ '/nsis-plugins.tar.' _ c('compress_tar'),
     }) %]
 [% END -%]
 
 [% IF c("var/build_infos_json") -%]
-  cat > "[% dest_dir _ '/' _ c('filename') _ '/build-infos.json' %]" << EOF_BUILDINFOS
+  cat > "[% out_dir _ '/build-infos.json' %]" << EOF_BUILDINFOS
   {
       "firefox_platform_version" : "[% c("var/firefox_platform_version") %]",
       "firefox_buildid" : "$MOZ_BUILD_DATE"
