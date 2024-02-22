@@ -1,3 +1,75 @@
+Tor Browser 13.5a5 - February 27 2024
+ * All Platforms
+   * Updated OpenSSL to 3.0.13
+   * Updated Snowflake to 2.9.0
+   * Bug 42376: The placeholder of datetime inputs keeps being localized when spoof English is on [tor-browser]
+   * Bug 42378: spoof english + htmlform <details> can leak app language [tor-browser]
+   * Bug 42390: Betterboxing: make the decorator border disappear when the corners are flat [tor-browser]
+   * Bug 42397: Change RFP-spoofed Timezone from UTC to a real-world, less discriminable one [tor-browser]
+   * Bug 42412: Rebase Tor Browser Alpha onto 115.8.0esr [tor-browser]
+   * Bug 41079: Bump version of Snowflake to v2.9.0 [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.8.0esr
+   * Bug 41814: Change "vanilla bridge:" to "Tor bridge:" in bridge cards [tor-browser]
+   * Bug 42270: Implement design changes to QR code dialog [tor-browser]
+   * Bug 42389: Betterboxing: gradient is never shown [tor-browser]
+   * Bug 42398: Include Alpha and Nightly in MOZ_APP_DISPLAYNAME (and possibly in other places) [tor-browser]
+   * Bug 42414: Show ellipsis when the tor bridge address overflows [tor-browser]
+   * Bug 42415: Improve focus styling for forced focus in bridge settings [tor-browser]
+   * Bug 42421: Remove bridge option should be hidden for Lox bridges [tor-browser]
+   * Bug 42423: Move temporary Lox Fluent strings to new file [tor-browser]
+   * Bug 42425: Improve accessibility of the bridge emoji cells [tor-browser]
+ * Android
+   * Updated GeckoView to 115.8.0esr
+   * Bug 42253: Remove "New private tab" action and widget [tor-browser]
+   * Bug 42402: Remove Android YEC strings [tor-browser]
+   * Bug 42407: TTP-03-010 WP3: Potential phishing [tor-browser]
+   * Bug 42416: Backport Android security fixes from Firefox 123 [tor-browser]
+ * macOS
+   * Bug 40569: Create build-specific installer for macOS [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.20.14 and 1.21.7
+     * Bug 41081: Update detailsURL in tools/signing/nightly/update-responses-base-config.yml [tor-browser-build]
+     * Bug 41085: kick_devmole_build script prints wrong URL for Mullvad's build hashes [tor-browser-build]
+     * Bug 40068: Switch from IO::CaptureOutput to Capture::Tiny [rbm]
+     * Bug 40069: Make stdout and stderr utf8 [rbm]
+     * Bug 40071: Add an option to create zip files using 7z [rbm]
+     * Bug 40072: Move capture_exec to a separate module [rbm]
+   * Windows
+     * Bug 41076: Include the ShellLink plugin in NSIS [tor-browser-build]
+   * macOS
+     * Bug 41084: $app_bundle is missing the final .app in projects/firefox/build [tor-browser-build]
+   * Android
+     * Bug 42399: Re-enable minimization of JS for Android [tor-browser]
+     * Bug 41080: Re-pack omni.ja with 7-zip on Android [tor-browser-build]
+
+Tor Browser 13.0.10 - February 20 2024
+ * All Platforms
+   * Updated OpenSSL to 3.0.13
+   * Updated zlib to 1.3.1
+   * Updated Snowflake to 2.9.0
+   * Bug 42374: spoof english leaks via numberingSystem: numbers (non-latn) or decimal separator (latn) [tor-browser]
+   * Bug 42411: Rebase Tor Browser stable onto 115.8.0esr [tor-browser]
+   * Bug 41079: Bump version of Snowflake to v2.9.0 [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.8.0esr
+   * Bug 42338: Changing circuit programmatically in Tor Browser not working anymore! [tor-browser]
+ * Android
+   * Updated GeckoView to 115.8.0esr
+   * Bug 42402: Remove Android YEC strings [tor-browser]
+   * Bug 42416: Backport Android security fixes from Firefox 123 [tor-browser]
+ * Linux
+   * Bug 42293: Updater is disabled when tor-browser is run by torbrowser-launcher flatpak [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.20.14 and 1.21.7
+     * Bug 41067: Use Capture::Tiny instead of IO::CaptureOutput [tor-browser-build]
+     * Bug 40067: Use --no-verbose wget option when not running in a terminal [rbm]
+     * Bug 40068: Switch from IO::CaptureOutput to Capture::Tiny [rbm]
+     * Bug 40069: Make stdout and stderr utf8 [rbm]
+     * Bug 40072: Move capture_exec to a separate module [rbm]
+
 Tor Browser 13.5a4 - January 31 2024
  * All Platforms
    * Updated zlib to 1.3.1
