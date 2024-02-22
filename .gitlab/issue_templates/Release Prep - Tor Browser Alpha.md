@@ -57,6 +57,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
   - [ ] ***(Optional)*** Update `projects/firefox-android/config`:
     - [ ] `fenix_version` : update to match alpha `firefox-android` build tag
     - [ ] `browser_branch` : update to match alpha `firefox-android` build tag
+    - [ ] `browser_build` : update to match alpha `firefox-android` build tag
   - [ ] Update allowed_addons.json by running (from `tor-browser-build` root):
     - `./tools/fetch_allowed_addons.py > projects/browser/allowed_addons.json`
 - [ ] Update `projects/translation/config`:
@@ -95,7 +96,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
 - [ ] Update `ChangeLog-TBB.txt`
   - [ ] Ensure `ChangeLog-TBB.txt` is sync'd between alpha and stable branches
   - [ ] Check the linked issues: ask people to check if any are missing, remove the not fixed ones
-  - [ ] Run `tools/fetch-changelogs.py $(ISSUE_NUMBER) --date $date $updateArgs`
+  - [ ] Run `./tools/fetch-changelogs.py $(ISSUE_NUMBER) --date $date $updateArgs`
     - Make sure you have `requests` installed (e.g., `apt install python3-requests`)
     - The first time you run this script you will need to generate an access token; the script will guide you
     - `$updateArgs` should be these arguments, depending on what you actually updated:
@@ -105,7 +106,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
       - [ ] `--openssl`
       - [ ] `--zlib`
       - [ ] `--go`
-      - E.g., `tools/fetch-changelogs.py 41028 --date 'December 19 2023' --firefox 115.6.0esr --tor 0.4.8.10 --no-script 11.4.29 --zlib 1.3 --go 1.21.5 --openssl 3.0.12`
+      - E.g., `./tools/fetch-changelogs.py 41028 --date 'December 19 2023' --firefox 115.6.0esr --tor 0.4.8.10 --no-script 11.4.29 --zlib 1.3 --go 1.21.5 --openssl 3.0.12`
     - `--date $date` is optional, if omitted it will be the date on which you run the command
   - [ ] Copy the output of the script to the beginning of `ChangeLog-TBB.txt` and adjust its output
 - [ ] Open MR with above changes, using the template for release preparations
