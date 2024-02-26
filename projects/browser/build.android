@@ -35,10 +35,7 @@ unzip ../omni.ja
 [% END -%]
 [% c('zip', {
         zip_src   => [ '.' ],
-        zip_args  => '../assets/omni.ja',
-        use_7z    => 1,
-        '7z_bin'  => '7zz',
-        '7z_opts' => '-mx9',
+        zip_args  => '-0 ../assets/omni.ja',
       }) %]
 popd
 
