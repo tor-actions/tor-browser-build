@@ -23,6 +23,12 @@ export SIGNING_PROJECTNAME
 test -z "${rbm_not_available+x}" && rbm="$script_dir/../../rbm/rbm"
 
 . "$script_dir/set-config.tbb-version"
+
+test "$tbb_version_type" = 'release' \
+  || test "$tbb_version_type" = 'alpha' \
+  || test "$tbb_version_type" = 'nightly' \
+  || exit_error "Unknown tbb_version_type $tbb_version_type"
+
 . "$script_dir/set-config.hosts"
 
 signed_dir="$script_dir/../../$SIGNING_PROJECTNAME/$tbb_version_type/signed"

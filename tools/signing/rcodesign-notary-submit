@@ -17,14 +17,14 @@ test -f "$appstoreconnect_api_key_path" || \
 tmpdir=$(mktemp -d -p /var/tmp)
 trap "rm -Rf $tmpdir" EXIT
 
-Proj_Name=$(Project_Name)
+display_name=$(display_name)
 
 tar -C "$tmpdir" -xf "$macos_rcodesign_signed_tar_dir/$(project-name)-macos-${tbb_version}-rcodesign-signed.tar.zst"
 
-"$script_dir/../local/rcodesign/rcodesign" notary-submit --api-key-path "$appstoreconnect_api_key_path" --staple "$tmpdir/$Proj_Name.app"
+"$script_dir/../local/rcodesign/rcodesign" notary-submit --api-key-path "$appstoreconnect_api_key_path" --staple "$tmpdir/$display_name.app"
 
 output_file="$(project-name)-${tbb_version}-notarized+stapled.tar.zst"
-tar -C "$tmpdir" -caf "$tmpdir/$output_file" "$Proj_Name.app"
+tar -C "$tmpdir" -caf "$tmpdir/$output_file" "$display_name.app"
 mkdir -p "$macos_stapled_dir"
 mv "$tmpdir/$output_file" "$macos_stapled_dir/$output_file"
 

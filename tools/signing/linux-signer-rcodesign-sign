@@ -13,11 +13,11 @@ if [ -z "$RCODESIGN_PW" ]; then
     export RCODESIGN_PW
 fi
 
-Proj_Name=$(Project_Name)
+display_name=$(display_name)
 output_file=$(project-name)-macos-${tbb_version}-rcodesign-signed.tar.zst
 destdir=~/"$SIGNING_PROJECTNAME-$tbb_version-macos-signed"
 mkdir -p $destdir
 rm -f "$destdir/$output_file"
 
-sudo -u signing-macos -- /signing/tor-browser-build/tools/signing/wrappers/sign-rcodesign ~/"$SIGNING_PROJECTNAME-$tbb_version"/$(project-name)-macos-${tbb_version}.dmg "$Proj_Name"
-cp "/home/signing-macos/last-signed-$Proj_Name.tar.zst" "$destdir/$output_file"
+sudo -u signing-macos -- /signing/tor-browser-build/tools/signing/wrappers/sign-rcodesign ~/"$SIGNING_PROJECTNAME-$tbb_version"/$(project-name)-macos-${tbb_version}.dmg "$display_name"
+cp "/home/signing-macos/last-signed-$display_name.tar.zst" "$destdir/$output_file"

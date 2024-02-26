@@ -39,7 +39,7 @@ function generate_config {
   p1=$("$rbm" showconf browser var/project-name --target "$SIGNING_PROJECTNAME")
   p2=$("$rbm" showconf browser var/Project_Name --target "$SIGNING_PROJECTNAME")
   p3=$("$rbm" showconf browser var/ProjectName --target "$SIGNING_PROJECTNAME")
-  p4=$("$rbm" showconf browser var/display_name --target "$SIGNING_PROJECTNAME")
+  p4=$("$rbm" showconf browser var/display_name --target "$SIGNING_PROJECTNAME" --target "$tbb_version_type")
   echo 'rbm_not_available=1' > "$script_dir/set-config.generated-config"
   echo "SIGNING_PROJECTNAMES=(\"$p1\" \"$p2\" \"$p3\" \"$p4\")" >> "$script_dir/set-config.generated-config"
 }
@@ -72,7 +72,7 @@ function display_name {
    if test -n "${rbm_not_available+x}"; then
      echo "${SIGNING_PROJECTNAMES[3]}"
    else
-     "$rbm" showconf browser var/display_name --target "$SIGNING_PROJECTNAME"
+     "$rbm" showconf browser var/display_name --target "$SIGNING_PROJECTNAME" --target "$tbb_version_type"
    fi
 }
 

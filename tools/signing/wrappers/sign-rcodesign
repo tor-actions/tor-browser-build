@@ -11,9 +11,9 @@ function exit_error {
 
 test $# -eq 2 || exit_error "Wrong number of arguments"
 dmg_file="$1"
-Proj_Name="$2"
+display_name="$2"
 
-output_file="/home/signing-macos/last-signed-$Proj_Name.tar.zst"
+output_file="/home/signing-macos/last-signed-$display_name.tar.zst"
 rm -f "$output_file"
 
 rcodesign_signing_p12_file=/home/signing-macos/keys/key-1.p12
@@ -28,11 +28,11 @@ cd "$tmpdir"
 # https://gitlab.torproject.org/tpo/applications/tor-browser-build/-/issues/29815#note_2957050
 # FIXME: Maybe we should extract the .mar file instead of the .dmg to
 # preserve permissions
-chmod ugo+x "$Proj_Name/$Proj_Name.app/Contents/MacOS"/* \
-            "$Proj_Name/$Proj_Name.app/Contents/MacOS/updater.app/Contents/MacOS"/* \
-            "$Proj_Name/$Proj_Name.app/Contents/MacOS/plugin-container.app/Contents/MacOS"/*
-test -d "$Proj_Name/$Proj_Name.app/Contents/MacOS/Tor" && \
-  chmod -R ugo+x "$Proj_Name/$Proj_Name.app/Contents/MacOS/Tor"
+chmod ugo+x "$display_name/$display_name.app/Contents/MacOS"/* \
+            "$display_name/$display_name.app/Contents/MacOS/updater.app/Contents/MacOS"/* \
+            "$display_name/$display_name.app/Contents/MacOS/plugin-container.app/Contents/MacOS"/*
+test -d "$display_name/$display_name.app/Contents/MacOS/Tor" && \
+  chmod -R ugo+x "$display_name/$display_name.app/Contents/MacOS/Tor"
 
 pwdir=/run/lock/rcodesign-pw
 trap "rm -Rf $pwdir" EXIT
@@ -56,19 +56,19 @@ rcodesign_opts="
 echo '**** Signing updater.app ****'
 /signing/rcodesign/rcodesign sign \
   $rcodesign_opts \
-  --info-plist-path "$Proj_Name/$Proj_Name.app/Contents/MacOS/updater.app/Contents/Info.plist" \
+  --info-plist-path "$display_name/$display_name.app/Contents/MacOS/updater.app/Contents/Info.plist" \
   -- \
-  "$Proj_Name/$Proj_Name.app/Contents/MacOS/updater.app"
+  "$display_name/$display_name.app/Contents/MacOS/updater.app"
 echo '**** Signing plugin-container.app ****'
 /signing/rcodesign/rcodesign sign \
   $rcodesign_opts \
   --entitlements-xml-path /signing/tor-browser-build/tools/signing/${tbb_version_type}.entitlements.xml \
   -- \
-  "$Proj_Name/$Proj_Name.app/Contents/MacOS/plugin-container.app"
+  "$display_name/$display_name.app/Contents/MacOS/plugin-container.app"
 
 # Setting binary-identifier on some files, to avoid signature errors. See:
 # https://gitlab.torproject.org/tpo/applications/tor-browser-build/-/issues/29815#note_2956149
-pushd "$Proj_Name/$Proj_Name.app/Contents/MacOS/"
+pushd "$display_name/$display_name.app/Contents/MacOS/"
 for lib in *.dylib
 do
   binident=$(echo $lib | sed 's/\.dylib$//')
@@ -78,9 +78,9 @@ do
 done
 popd
 
-if test -d "$Proj_Name/$Proj_Name.app/Contents/MacOS/Tor/PluggableTransports/"
+if test -d "$display_name/$display_name.app/Contents/MacOS/Tor/PluggableTransports/"
 then
-  pushd "$Proj_Name/$Proj_Name.app/Contents/MacOS/Tor/PluggableTransports/"
+  pushd "$display_name/$display_name.app/Contents/MacOS/Tor/PluggableTransports/"
   for file in echo *
   do
     binident="--binary-identifier Contents/MacOS/Tor/PluggableTransports/$file:$file"
@@ -90,17 +90,17 @@ then
   popd
 fi
 
-echo "**** Signing main bundle ($Proj_Name.app) ****"
+echo "**** Signing main bundle ($display_name.app) ****"
 # We use `--exclude '**'` to avoid re-signing nested bundles
 /signing/rcodesign/rcodesign sign \
   $rcodesign_opts \
   --entitlements-xml-path /signing/tor-browser-build/tools/signing/${tbb_version_type}.entitlements.xml \
   --exclude '**' \
   -- \
-  "$Proj_Name/$Proj_Name.app"
+  "$display_name/$display_name.app"
 
 rm -f "$pwdir/rcodesign-pw"
 rmdir "$pwdir"
-tar -C "$Proj_Name" -caf "$output_file" "$Proj_Name.app"
+tar -C "$display_name" -caf "$output_file" "$display_name.app"
 cd -
 rm -Rf "$tmpdir"
