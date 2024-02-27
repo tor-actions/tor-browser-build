@@ -59,7 +59,7 @@ EOF
 # empty any existing sh256sums file
 echo -n > sha256sums-unsigned-build.txt
 # concat sha256sum entry for each file in set
-for i in $(ls -1 *.exe *.tar.xz *.dmg *.mar *.zip *.tar.gz *.apk *.json | grep -v '\.incremental\.mar$' | sort)
+for i in $(ls -1 *.exe *.tar.xz *.dmg *.mar *.zip *.tar.gz *.apk *.bspatch *.json | grep -v '\.incremental\.mar$' | sort)
 do
   sha256sum $i >> sha256sums-unsigned-build.txt
 done

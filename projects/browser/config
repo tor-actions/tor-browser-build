@@ -48,6 +48,7 @@ targets:
       arch_deps:
         - 7zip
         - openjdk-17-jdk-headless
+        - bsdiff
       container:
         # 7zip is in backports in bullseye, and we can already use Java 17 for
         # apksigner.

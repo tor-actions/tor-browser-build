@@ -54,7 +54,7 @@ If you are running Fedora, CentOS or RHEL, you can install them with:
               "perl(Template)" "perl(IO::Handle)" "perl(Capture::Tiny)" \
               "perl(JSON)" "perl(File::Temp)" "perl(Path::Tiny)" \
               "perl(File::Path)" "perl(File::Slurp)" \
-              "perl(File::Copy::Recursive)" "perl(String::ShellQuote)"
+              "perl(File::Copy::Recursive)" "perl(String::ShellQuote)" \
               "perl(Sort::Versions)" "perl(Digest::SHA)" "perl(Data::UUID)" \
               "perl(Data::Dump)" "perl(DateTime)" "perl(XML::Writer)" \
               "perl(Parallel::ForkManager)" perl-ph mercurial git zstd
@@ -237,11 +237,12 @@ builds, and will require that you run Debian Bullseye or Bookworm and
 install build dependencies for all the components that are built. This can
 be done with the following command:
 
-  # apt-get install build-essential python3 automake libtool zip unzip \
-            autoconf2.13 openjdk-11-jdk gettext-base autotools-dev \
-            automake autoconf libtool autopoint libssl-dev pkg-config \
-            zlib1g-dev libparallel-forkmanager-perl libfile-slurp-perl bzip2 \
-            xz-utils apksigner yasm wget bison gyp tcl python3-venv 7zip jq
+  # apt-get install 7zip apksigner autoconf autoconf2.13 automake autopoint \
+                    autotools-dev bison bsdiff build-essential bzip2 \
+                    gettext-base gyp jq libfile-slurp-perl \
+                    libparallel-forkmanager-perl libssl-dev libtool libtool \
+                    openjdk-11-jdk pkg-config python3 python3-venv tcl unzip \
+                    wget xz-utils yasm zip zlib1g-dev
 
 Note that Debian Bullseye requires the bullseye-backports repository to
 get the 7zip package.

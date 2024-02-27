@@ -66,6 +66,9 @@ zipalign -vp 4 repacked.apk $aligned_apk
 # flag in the manifest.
 apksigner sign --verbose --min-sdk-version [% c("var/android_min_api") %] --ks $rootdir/android-qa.keystore --out $qa_apk --in $aligned_apk --ks-key-alias androidqakey --key-pass pass:android --ks-pass pass:android
 
+unsign_patch="[% dest_dir %]/[% c('filename') %]/[% c('var/project-name') %]-qa-unsign-[% c('var/osname') %]-[% c('version') %].bspatch"
+bsdiff $qa_apk $aligned_apk $unsign_patch
+
 [%IF c("var/tor-browser") -%]
   tor_expert_bundle_src="[% c("input_files_by_name/tor-expert-bundle") %]"
   # strip off trailing "$buildid.tar.gz"
