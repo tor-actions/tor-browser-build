@@ -1,4 +1,4 @@
-Tor Browser 13.5a5 - February 27 2024
+Tor Browser 13.5a5 - February 28 2024
  * All Platforms
    * Updated OpenSSL to 3.0.13
    * Updated Snowflake to 2.9.0
@@ -43,6 +43,8 @@ Tor Browser 13.5a5 - February 27 2024
    * Android
      * Bug 42399: Re-enable minimization of JS for Android [tor-browser]
      * Bug 41080: Re-pack omni.ja with 7-zip on Android [tor-browser-build]
+     * Bug 41092: Use an uncompressed omni.ja to improve final apk compression. [tor-browser-build]
+     * Bug 41093: Sign unsigned APKs instead of the QA-signed ones [tor-browser-build]
 
 Tor Browser 13.0.10 - February 20 2024
  * All Platforms
