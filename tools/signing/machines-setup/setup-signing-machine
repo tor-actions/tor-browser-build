@@ -116,7 +116,7 @@ install_packages opensc libengine-pkcs11-openssl
 install_packages cmake libusb-1.0-0-dev libedit-dev gengetopt libpcsclite-dev help2man chrpath dh-exec
 
 # Install deps for android/apk signing
-install_packages unzip openjdk-11-jdk-headless openjdk-11-jre-headless
+install_packages unzip openjdk-11-jdk-headless openjdk-11-jre-headless bsdiff
 
 # Install deps for macos-rcodesign signing
 install_packages p7zip-full zstd

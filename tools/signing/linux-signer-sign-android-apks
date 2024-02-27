@@ -68,14 +68,19 @@ setup_build_tools
 mkdir -p ~/"$SIGNING_PROJECTNAME-$tbb_version-apks"
 chgrp signing ~/"$SIGNING_PROJECTNAME-$tbb_version-apks"
 chmod g+w ~/"$SIGNING_PROJECTNAME-$tbb_version-apks"
-cp -af ~/"$SIGNING_PROJECTNAME-$tbb_version"/*.apk ~/"$SIGNING_PROJECTNAME-$tbb_version-apks"
+cp -af ~/"$SIGNING_PROJECTNAME-$tbb_version"/*.apk \
+  ~/"$SIGNING_PROJECTNAME-$tbb_version"/*.bspatch \
+  ~/"$SIGNING_PROJECTNAME-$tbb_version-apks"
 cd ~/"$SIGNING_PROJECTNAME-$tbb_version-apks"
 
 # Sign all packages
 for arch in ${ARCHS}; do
   qa_apk=${projname}-qa-android-${arch}-${tbb_version}.apk
+  unsigned_apk=${projname}-qa-unsigned-android-${arch}-${tbb_version}.apk
+  unsigned_apk_bspatch=${projname}-qa-unsign-android-${arch}-${tbb_version}.bspatch
   signed_apk=${projname}-android-${arch}-${tbb_version}.apk
-  sign_apk "$qa_apk" "$signed_apk"
+  bspatch "$qa_apk" "$unsigned_apk" "$unsigned_apk_bspatch"
+  sign_apk "$unsigned_apk" "$signed_apk"
   verify_apk "$signed_apk"
   cp -f "$signed_apk" ~/"$SIGNING_PROJECTNAME-$tbb_version"
 done
