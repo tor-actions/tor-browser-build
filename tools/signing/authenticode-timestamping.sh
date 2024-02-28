@@ -46,8 +46,8 @@ test -f "$osslsigncode_file" ||
 which rename > /dev/null 2>&1 ||
   exit_error '`rename` is missing.'
 
-tmp_dir="$signed_dir/$tbb_version/tmp-timestamp"
-mkdir "$tmp_dir"
+tmp_dir=$(mktemp -d)
+trap "rm -Rf $tmp_dir" EXIT
 tar -C "$tmp_dir" -xf "$osslsigncode_file"
 export PATH="$PATH:$tmp_dir/osslsigncode/bin"
 
@@ -64,5 +64,3 @@ do
 done
 echo "Timestamped $COUNT .exe files, now renaming"
 rename -f 's/-timestamped//' *-timestamped
-
-rm -Rf "$tmp_dir"
