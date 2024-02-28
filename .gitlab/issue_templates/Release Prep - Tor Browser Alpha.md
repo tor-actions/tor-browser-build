@@ -147,7 +147,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
 
     Unsigned Tor Browser $(TOR_BROWSER_VERSION) alpha candidate builds are now available for testing:
 
-    - https://tb-build-02.torproject.org/~$(BUILDER)/builds/alpha/unsigned/$(TOR_BROWSER_VERSION)/
+    - https://tb-build-02.torproject.org/~$(BUILDER)/builds/torbrowser/alpha/unsigned/$(TOR_BROWSER_VERSION)/
 
     The full changelog can be found here:
 

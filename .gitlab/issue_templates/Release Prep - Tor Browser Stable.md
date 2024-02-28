@@ -148,7 +148,7 @@ Tor Browser Stable lives in the various `maint-$(TOR_BROWSER_MAJOR).$(TOR_BROWSE
 
     Unsigned Tor Browser $(TOR_BROWSER_VERSION) release candidate builds are now available for testing:
 
-    - https://tb-build-02.torproject.org/~$(BUILDER)/builds/release/unsigned/$(TOR_BROWSER_VERSION)/
+    - https://tb-build-02.torproject.org/~$(BUILDER)/builds/torbrowser/release/unsigned/$(TOR_BROWSER_VERSION)/
 
     The full changelog can be found here:
 
