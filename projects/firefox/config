@@ -58,9 +58,25 @@ steps:
   src-tarballs:
     filename: 'src-[% project %]-[% c("version") %].tar.xz'
     version: '[% c("git_hash") %]'
-    input_files: []
+    input_files:
+      - project: container-image
+        pkg_type: build
+    compress_tar: ''
     container:
-      use_container: 0
+      use_container: 1
+    var:
+      # single-thread and multi-thread xz will generate a different result,
+      # se we use at least 2 threads
+      xz_threads: '[% c("num_procs") == "1" ? "2" : c("num_procs") %]'
+    src-tarballs: |
+      #!/bin/bash
+      set -e
+      mkdir -p '[% dest_dir %]'
+      # Files copied to the container are owned by group root (rbm#40074),
+      # and it seems xz doesn't like that and exits with an error
+      chgrp rbm '[% project %]-[% c("version") %].tar'
+      xz --threads=[% c("var/xz_threads") %] -f '[% project %]-[% c("version") %].tar'
+      mv -vf '[% project %]-[% c("version") %].tar.xz' '[% dest_dir %]/[% c("filename") %]'
     targets:
       nightly:
         version: '[% c("abbrev") %]'
