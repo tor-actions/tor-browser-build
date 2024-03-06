@@ -229,8 +229,7 @@ input_files:
    pkg_type: src-tarballs
    target:
      - '[% c("var/build_target") %]'
-     - browser-src
-     - '[% c("var/browser_type") %]'
+     - '[% c("var/browser_type") %]-macos'
 
 steps:
   signtag:
