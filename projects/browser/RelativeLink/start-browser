@@ -254,6 +254,7 @@ if [ "$register_desktop_app" -eq -1 ]; then
 	exit 0
 fi
 
+export BB_ORIGINAL_HOME="$HOME"
 HOME="${PWD}"
 export HOME
 
