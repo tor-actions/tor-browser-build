@@ -14,7 +14,9 @@ var:
   mar_osname: '[% c("var/osname") %]'
   version_json: version.json
 
+
 targets:
+
   linux:
     var:
       arch_deps:
@@ -23,6 +25,7 @@ targets:
         # share the container to reduce space used.
         - libc6-i386
       pt_path: ./TorBrowser/Tor/PluggableTransports/
+
   macos:
     var:
       arch_deps:
@@ -32,14 +35,17 @@ targets:
         - python3-distutils-extra
         - python3-psutil
       pt_path: PluggableTransports/
+
   macos-universal:
     var:
       mar_osname: macos
+
   windows:
     var:
       arch_deps:
         - python3-pefile
       pt_path: TorBrowser\Tor\PluggableTransports\
+
   android:
     build: '[% INCLUDE build.android %]'
     var:
@@ -53,16 +59,20 @@ targets:
         # apksigner.
         suite: bookworm
         arch: amd64
+
   torbrowser:
     var:
       prefs_file: 000-tor-browser.js
       version_json: tbb_version.json
+
   basebrowser:
     var:
       prefs_file: 001-base-profile.js
+
   mullvadbrowser:
     var:
       prefs_file: 001-base-profile.js
+
 
 input_files:
   - project: container-image
