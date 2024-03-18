@@ -1,0 +1,10 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Source:: https://gitlab.torproject.org/tpo/applications/tor-browser-build/
+Upstream-Name: [% c("var/Project_Name") %]
+Comment:
+ License for the build recipes and tools used for building [% c("var/Project_Name") %]
+ can be found at this URL:
+  https://gitlab.torproject.org/tpo/applications/tor-browser-build/-/blob/main/LICENSE
+ For the license of specific components included in [% c("var/Project_Name") %], see
+ this directory:
+  /usr/share/doc/[% c("var/system_pkg/pkg_name") %]/Licenses

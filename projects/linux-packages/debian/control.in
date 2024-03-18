@@ -1,0 +1,11 @@
+Source: [% c("var/system_pkg/pkg_name") %]
+Maintainer: [% c("var/Project_Name") %] Developers <torbrowser@torproject.org>
+Priority: optional
+Section: web
+Build-Depends: debhelper (>= 9)
+
+Package: [% c("var/system_pkg/pkg_name") %]
+Architecture: [% c("var_p/system_pkg/deb_archs").join(" ") %]
+Depends: ${shlibs:Depends},
+Description: [% c('var/display_name') %]
+ [% c("var/system_pkg/pkg_description") %]

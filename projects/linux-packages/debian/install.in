@@ -1,0 +1,3 @@
+#! /usr/bin/dh-exec
+${DEB_HOST_ARCH}/Browser/* [% c("var/system_pkg/install_path") %]
+debian/[% c("var/system_pkg/pkg_name") %].desktop usr/share/applications

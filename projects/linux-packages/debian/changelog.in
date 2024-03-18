@@ -1,0 +1,5 @@
+[% c("var/system_pkg/pkg_name") %] ([% c("var/system_pkg/pkg_version") %]-[% c("var/system_pkg/pkg_revision") %]) UNRELEASED; urgency=medium
+
+  * [% c("var/Project_Name") %] [% c("var/torbrowser_version") %]
+
+ -- [% c("var/Project_Name") %] Developers <torbrowser@torproject.org>  [% c("var/system_pkg/deb_release_date") %]

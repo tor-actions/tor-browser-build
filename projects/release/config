@@ -47,6 +47,7 @@ targets:
   browser-linux-x86_64:
     var:
       browser-linux-x86_64: 1
+      linux-packages: '[% c("var/mullvad-browser") %]'
   browser-linux-x86_64-asan:
     var:
       browser-linux-x86_64: 1
@@ -54,6 +55,7 @@ targets:
   browser-linux-i686:
     var:
       browser-linux-i686: '[% c("var/browser_type") != "mullvadbrowser" %]'
+      linux-packages: '[% c("var/mullvad-browser") %]'
   browser-windows-i686:
     var:
       browser-windows-i686: '[% c("var/browser_type") != "mullvadbrowser" %]'
@@ -185,6 +187,14 @@ input_files:
     target:
       - '[% c("var/build_target") %]'
       - '[% c("var/browser_type") %]-linux-i686'
+
+  - name: linux-packages
+    project: linux-packages
+    enable: '[% c("var/linux-packages") %]'
+    # Add linux-x86_64 targets for container config
+    target_prepend:
+      - linux-x86_64
+      - linux
 
   - name: windows-i686
     project: browser

@@ -1,0 +1,7 @@
+build:
+	rm -f "${DEB_TARGET_ARCH}/Browser/start-[% c('var/project-name') %].desktop"
+	echo 'This is a packaged app.' > "${DEB_TARGET_ARCH}/Browser/is-packaged-app"
+	[% c("touch") %] "${DEB_TARGET_ARCH}/Browser/is-packaged-app"
+
+clean:
+	rm -f "${DEB_TARGET_ARCH}/Browser/is-packaged-app"

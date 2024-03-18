@@ -97,8 +97,10 @@ print_usage () {
   printf "  --verbose         Display [% IF c("var/tor-browser") -%]Tor and [% END -%]the browser output in the terminal\n"
   printf "  --log [file]      Record [% IF c("var/tor-browser") -%]Tor and [% END -%]the browser output in file (default: [% c('var/project-name') %].log)\n"
   printf "  --detach          Detach from terminal and run [% c('var/Project_Name') %] in the background.\n"
-  printf "  --register-app    Register [% c('var/Project_Name') %] as a desktop app for this user\n"
-  printf "  --unregister-app  Unregister [% c('var/Project_Name') %] as a desktop app for this user\n"
+  if test -z "$system_install"; then
+    printf "  --register-app    Register [% c('var/Project_Name') %] as a desktop app for this user\n"
+    printf "  --unregister-app  Unregister [% c('var/Project_Name') %] as a desktop app for this user\n"
+  fi
 }
 log_output=0
 show_output=0
@@ -208,10 +210,16 @@ if [ -L "$myname" ]; then
   fi
 fi
 
-# Try to be agnostic to where we're being started from, chdir to where
-# the script is.
-mydir="`dirname "$myname"`"
-test -d "$mydir" && cd "$mydir"
+cd "$(dirname "$myname")"
+browser_dir="$(pwd)"
+if test -f "$browser_dir/is-packaged-app"; then
+  system_install=1
+  browser_home="$HOME/.[% pc('linux-packages', 'var/system_pkg/pkg_name') %]"
+  mkdir -p "$browser_home"
+  cd "$browser_home"
+else
+  browser_home="$browser_dir"
+fi
 
 # If ${PWD} results in a zero length string, we can try something else...
 if [ ! "${PWD}" ]; then
@@ -227,35 +235,37 @@ if [ ! -d ".config/ibus" ]; then
   ln -nsf ~/.config/ibus/bus .config/ibus
 fi
 
-# Fix up .desktop Icon and Exec Paths, and update the .desktop file from the
-# canonical version if it was changed by the updater.
-cp start-[% c('var/project-name') %].desktop ../
-sed -i -e "s,^Name=.*,Name=[% c('var/Project_Name') %],g" ../start-[% c('var/project-name') %].desktop
-sed -i -e "s,^Icon=.*,Icon=$PWD/browser/chrome/icons/default/default128.png,g" ../start-[% c('var/project-name') %].desktop
-sed -i -e "s,^Icon=.*,Icon=$PWD/browser/chrome/icons/default/default128.png,g" start-[% c('var/project-name') %].desktop
-sed -i -e "s,^Exec=.*,Exec=sh -c '\"$PWD/start-[% c('var/project-name') %]\" --detach || ([ !  -x \"$PWD/start-[% c('var/project-name') %]\" ] \&\& \"\$(dirname \"\$*\")\"/Browser/start-[% c('var/project-name') %] --detach)' dummy %k,g" ../start-[% c('var/project-name') %].desktop
+if test -z "$system_install"; then
+  # Fix up .desktop Icon and Exec Paths, and update the .desktop file from the
+  # canonical version if it was changed by the updater.
+  cp start-[% c('var/project-name') %].desktop ../
+  sed -i -e "s,^Name=.*,Name=[% c('var/Project_Name') %],g" ../start-[% c('var/project-name') %].desktop
+  sed -i -e "s,^Icon=.*,Icon=$PWD/browser/chrome/icons/default/default128.png,g" ../start-[% c('var/project-name') %].desktop
+  sed -i -e "s,^Icon=.*,Icon=$PWD/browser/chrome/icons/default/default128.png,g" start-[% c('var/project-name') %].desktop
+  sed -i -e "s,^Exec=.*,Exec=sh -c '\"$PWD/start-[% c('var/project-name') %]\" --detach || ([ !  -x \"$PWD/start-[% c('var/project-name') %]\" ] \&\& \"\$(dirname \"\$*\")\"/Browser/start-[% c('var/project-name') %] --detach)' dummy %k,g" ../start-[% c('var/project-name') %].desktop
 
-if [ "$register_desktop_app" -eq 1 ]; then
-  mkdir -p "$HOME/.local/share/applications/"
-  cp ../start-[% c('var/project-name') %].desktop "$HOME/.local/share/applications/"
-  update-desktop-database "$HOME/.local/share/applications/"
-  printf "[% c('var/Project_Name') %] has been registered as a desktop app for this user in ~/.local/share/applications/\n"
-  exit 0
-fi
-
-if [ "$register_desktop_app" -eq -1 ]; then
-  if [ -e "$HOME/.local/share/applications/start-[% c('var/project-name') %].desktop" ]; then
-    rm -f "$HOME/.local/share/applications/start-[% c('var/project-name') %].desktop"
+  if [ "$register_desktop_app" -eq 1 ]; then
+    mkdir -p "$HOME/.local/share/applications/"
+    cp ../start-[% c('var/project-name') %].desktop "$HOME/.local/share/applications/"
     update-desktop-database "$HOME/.local/share/applications/"
-    printf "[% c('var/Project_Name') %] has been removed as a user desktop app (from ~/.local/share/applications/)\n"
-  else
-    printf "[% c('var/Project_Name') %] does not appear to be a desktop app (not present in ~/.local/share/applications/)\n"
+    printf "[% c('var/Project_Name') %] has been registered as a desktop app for this user in ~/.local/share/applications/\n"
+    exit 0
   fi
-  exit 0
+
+  if [ "$register_desktop_app" -eq -1 ]; then
+    if [ -e "$HOME/.local/share/applications/start-[% c('var/project-name') %].desktop" ]; then
+      rm -f "$HOME/.local/share/applications/start-[% c('var/project-name') %].desktop"
+      update-desktop-database "$HOME/.local/share/applications/"
+      printf "[% c('var/Project_Name') %] has been removed as a user desktop app (from ~/.local/share/applications/)\n"
+    else
+      printf "[% c('var/Project_Name') %] does not appear to be a desktop app (not present in ~/.local/share/applications/)\n"
+    fi
+    exit 0
+  fi
 fi
 
 export BB_ORIGINAL_HOME="$HOME"
-HOME="${PWD}"
+HOME="$browser_home"
 export HOME
 
 # Prevent disk leaks in $HOME/.local/share (tor-browser#17560)
@@ -367,7 +377,7 @@ setControlPortPasswd ${TOR_CONTROL_PASSWD:='"secret"'}
 [% END -%]
 
 # Set up custom bundled fonts. See fonts-conf(5).
-export FONTCONFIG_PATH="${HOME}/fontconfig"
+export FONTCONFIG_PATH="$browser_dir/fontconfig"
 export FONTCONFIG_FILE="fonts.conf"
 [% # tor-browser#41776: We cannot make the updater remove this file.
    # So, let's remove it on this script, since we know that at this point the
@@ -398,18 +408,18 @@ cd "${HOME}"
 
 if [ "$show_usage" -eq 1 ]; then
   # Display Firefox help, then our help
-  [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] --help 2>/dev/null
+  [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] "$browser_dir"/[% c('var/exe_name') %] --help 2>/dev/null
   print_usage
 elif [ "$detach" -eq 1 ] ; then
-  [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] "${@}" > "$logfile" 2>&1 </dev/null &
+  [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] "$browser_dir"/[% c('var/exe_name') %] "${@}" > "$logfile" 2>&1 </dev/null &
   disown "$!"
 elif [ "$log_output" -eq 1 -a "$show_output" -eq 1 ]; then
-  [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] "${@}" 2>&1 </dev/null | \
+  [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] "$browser_dir"/[% c('var/exe_name') %] "${@}" 2>&1 </dev/null | \
     tee "$logfile"
 elif [ "$show_output" -eq 1 ]; then
-  [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] "${@}" < /dev/null
+  [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] "$browser_dir"/[% c('var/exe_name') %] "${@}" < /dev/null
 else
-  [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] "${@}" > "$logfile" 2>&1 </dev/null
+  [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] "$browser_dir"/[% c('var/exe_name') %] "${@}" > "$logfile" 2>&1 </dev/null
 fi
 
 exit $?

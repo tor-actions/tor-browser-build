@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=[% c("var/Project_Name") %]
+GenericName=Web Browser
+Comment=[% c("var/system_pkg/pkg_description") %]
+Categories=Network;WebBrowser;Security;
+Exec=/[% c("var/system_pkg/install_path") %]/start-[% c("var/project-name") %]  --detach
+X-[% c("var/ProjectName") %]-ExecShell=/[% c("var/system_pkg/install_path") %]/start-[% c("var/project-name") %]  --detach
+Icon=[% c("var/system_pkg/pkg_name") %]
+StartupWMClass=[% c("var/display_name") %]

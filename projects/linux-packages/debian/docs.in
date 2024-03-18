@@ -1,0 +1,3 @@
+#! /usr/bin/dh-exec
+${DEB_HOST_ARCH}/Browser/[% c("var/ProjectName") %]/Docs/ChangeLog.txt
+${DEB_HOST_ARCH}/Browser/[% c("var/ProjectName") %]/Docs/Licenses/

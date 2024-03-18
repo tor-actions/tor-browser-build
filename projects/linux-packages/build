@@ -1,0 +1,55 @@
+#!/bin/bash
+[% c("var/set_default_env") -%]
+distdir=/var/tmp/dist/[% project %]
+
+OUTDIR='[% dest_dir _ "/" _ c("filename") %]'
+mkdir -p $OUTDIR
+mkdir -p "$distdir"
+
+export SOURCE_DATE_EPOCH='[% c("timestamp") %]'
+
+[% IF c("var/build_deb_pkg") -%]
+  cd $distdir
+  project_dir=[% c("var/system_pkg/pkg_name") %]-[% c("var/system_pkg/pkg_version") %]
+  mkdir "$project_dir"
+  mv $rootdir/Makefile "$project_dir"
+  [% c('tar', {
+        tar_src => [ '$project_dir' ],
+        tar_args => '-cJf ' _ c("var/system_pkg/pkg_name") _ '_' _ c("var/system_pkg/pkg_version") _ '.orig.tar.xz',
+       }) %]
+
+  cd "$project_dir"
+  mv $rootdir/debian .
+  chmod +x debian/install debian/docs debian/rules
+  mkdir debian/source
+  echo -n '3.0 (quilt)' > debian/source/format
+
+
+  function extract_src_tar {
+    src_tar="$1"
+    deb_arch="$2"
+    mkdir $deb_arch
+    tar -C $deb_arch --strip-components=1 -xf "$src_tar"
+    mv "$src_tar" \
+      ../[% c("var/system_pkg/pkg_name") %]_[% c("var/system_pkg/pkg_version") %].orig-$deb_arch.tar.xz
+  }
+  [% IF c("var/browser-linux-x86_64") -%]
+    extract_src_tar \
+      $rootdir/[% c('input_files_by_name/linux-x86_64') %]/[% c("var/project-name") %]-linux-x86_64-[% c("version") %].tar.xz \
+      amd64
+  [% END -%]
+  [% IF c("var/browser-linux-i686") -%]
+    extract_src_tar \
+      $rootdir/[% c('input_files_by_name/linux-x86_64') %]/[% c("var/project-name") %]-linux-i686-[% c("version") %].tar.xz \
+      i386
+  [% END -%]
+
+  [% FOREACH deb_arch = c("var_p/system_pkg/deb_archs") -%]
+    dpkg-buildpackage --unsigned-source --unsigned-changes --build=full --host-arch=[% deb_arch %]
+    deb_file_name='[% c("var/system_pkg/pkg_name") %]_[% c("var/system_pkg/pkg_version") %]-[% c("var/system_pkg/pkg_revision") %]_[% deb_arch %].deb'
+    dpkg-deb --info "../$deb_file_name"
+    pushd ..
+    mv -f "$deb_file_name" *.dsc *.orig.tar.xz *.debian.tar.xz "$OUTDIR/"
+    popd
+  [% END -%]
+[% END %]
