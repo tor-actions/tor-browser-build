@@ -16,8 +16,12 @@ var:
 
 steps:
   build:
-    filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
+    filename: '[% project %]-[% c("version") %]-[% c("var/rebuild_date") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
     var:
+      # Due to some issue in application-service causing non matching
+      # builds when build time differ a lot, we need to do periodic rebuilds:
+      # https://gitlab.torproject.org/tpo/applications/tor-browser-build/-/merge_requests/937#note_3009480
+      rebuild_date: '2024-09-12'
       arch_deps:
         # Needed to build NSS
         - gyp
