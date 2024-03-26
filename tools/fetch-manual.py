@@ -75,7 +75,7 @@ else:
             sha256.update(chunk)
     print(f"File downloaded as {manual_file}.")
     print(
-        "Please upload it to people.torproject.org and then update projects/manual/config:"
+        "Please upload it to tb-build-02.torproject.org:~tb-builder/public_html/. and then update projects/manual/config:"
     )
 sha256 = sha256.hexdigest()
 
