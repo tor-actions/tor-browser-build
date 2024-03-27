@@ -9,9 +9,9 @@ complain_dialog_title="[% c('var/Project_Name') %]"
 
 # Make sure this script wasn't started as 'sh start-[% c('var/project-name') %]' or similar.
 if [ "x$BASH" = "x" ]; then
-    echo "$complain_dialog_title should be started as './start-[% c('var/project-name') %]'"
-    echo "Exiting." >&2
-    exit 1;
+  echo "$complain_dialog_title should be started as './start-[% c('var/project-name') %]'"
+  echo "Exiting." >&2
+  exit 1;
 fi
 
 # Do not (try to) connect to the session manager
@@ -21,84 +21,84 @@ unset SESSION_MANAGER
 # Usage: complain message
 # message must not begin with a dash.
 complain () {
-	# Trim leading newlines, to avoid breaking formatting in some dialogs.
-	complain_message="`echo "$1" | sed '/./,$!d'`"
+  # Trim leading newlines, to avoid breaking formatting in some dialogs.
+  complain_message="`echo "$1" | sed '/./,$!d'`"
 
-	# If we're being run in debug/verbose mode, complain to stderr.
-	if [ "$show_output" -eq 1 ]; then
-		echo "$complain_message" >&2
-		return
-	fi
+  # If we're being run in debug/verbose mode, complain to stderr.
+  if [ "$show_output" -eq 1 ]; then
+    echo "$complain_message" >&2
+    return
+  fi
 
-	# Otherwise, we're being run by a GUI program of some sort;
-	# try to pop up a message in the GUI in the nicest way
-	# possible.
-	#
-	# In mksh, non-existent commands return 127; I'll assume all
-	# other shells set the same exit code if they can't run a
-	# command.  (xmessage returns 1 if the user clicks the WM
-	# close button, so we do need to look at the exact exit code,
-	# not just assume the command failed to display a message if
-	# it returns non-zero.)
+  # Otherwise, we're being run by a GUI program of some sort;
+  # try to pop up a message in the GUI in the nicest way
+  # possible.
+  #
+  # In mksh, non-existent commands return 127; I'll assume all
+  # other shells set the same exit code if they can't run a
+  # command.  (xmessage returns 1 if the user clicks the WM
+  # close button, so we do need to look at the exact exit code,
+  # not just assume the command failed to display a message if
+  # it returns non-zero.)
 
-	# First, try zenity.
-	zenity --error \
-		--title="$complain_dialog_title" \
-		--text="$complain_message"
-	if [ "$?" -ne 127 ]; then
-		return
-	fi
+  # First, try zenity.
+  zenity --error \
+         --title="$complain_dialog_title" \
+         --text="$complain_message"
+  if [ "$?" -ne 127 ]; then
+    return
+  fi
 
-	# Try kdialog.
-	kdialog --title "$complain_dialog_title" \
-		--error "$complain_message"
-	if [ "$?" -ne 127 ]; then
-		return
-	fi
+  # Try kdialog.
+  kdialog --title "$complain_dialog_title" \
+          --error "$complain_message"
+  if [ "$?" -ne 127 ]; then
+    return
+  fi
 
-	# Try xmessage.
-	xmessage -title "$complain_dialog_title" \
-		-center \
-		-buttons OK \
-		-default OK \
-		-xrm '*message.scrollVertical: Never' \
-		"$complain_message"
-	if [ "$?" -ne 127 ]; then
-		return
-	fi
+  # Try xmessage.
+  xmessage -title "$complain_dialog_title" \
+           -center \
+           -buttons OK \
+           -default OK \
+           -xrm '*message.scrollVertical: Never' \
+           "$complain_message"
+  if [ "$?" -ne 127 ]; then
+    return
+  fi
 
-	# Try gxmessage.  This one isn't installed by default on
-	# Debian with the default GNOME installation, so it seems to
-	# be the least likely program to have available, but it might
-	# be used by one of the 'lightweight' Gtk-based desktop
-	# environments.
-	gxmessage -title "$complain_dialog_title" \
-		-center \
-		-buttons GTK_STOCK_OK \
-		-default OK \
-		"$complain_message"
-	if [ "$?" -ne 127 ]; then
-		return
-	fi
+  # Try gxmessage.  This one isn't installed by default on
+  # Debian with the default GNOME installation, so it seems to
+  # be the least likely program to have available, but it might
+  # be used by one of the 'lightweight' Gtk-based desktop
+  # environments.
+  gxmessage -title "$complain_dialog_title" \
+            -center \
+            -buttons GTK_STOCK_OK \
+            -default OK \
+            "$complain_message"
+  if [ "$?" -ne 127 ]; then
+    return
+  fi
 }
 
 if [ "`id -u`" -eq 0 ]; then
-	complain "The [% c('var/Project_Name') %] should not be run as root.  Exiting."
-	exit 1
+  complain "The [% c('var/Project_Name') %] should not be run as root.  Exiting."
+  exit 1
 fi
 
 if test -r /proc/cpuinfo && ! grep -q '^flags\s*:.* sse2' /proc/cpuinfo; then
-        complain "[% c('var/Project_Name') %] requires a CPU with SSE2 support.  Exiting."
-        exit 1
+  complain "[% c('var/Project_Name') %] requires a CPU with SSE2 support.  Exiting."
+  exit 1
 fi
 
 print_usage () {
-    printf "\n[% c('var/Project_Name') %] Script Options\n"
-    printf "  --verbose         Display [% IF c("var/tor-browser") -%]Tor and [% END -%]the browser output in the terminal\n"
-    printf "  --log [file]      Record [% IF c("var/tor-browser") -%]Tor and [% END -%]the browser output in file (default: [% c('var/project-name') %].log)\n"
-    printf "  --detach          Detach from terminal and run [% c('var/Project_Name') %] in the background.\n"
-    printf "  --register-app    Register [% c('var/Project_Name') %] as a desktop app for this user\n"
-    printf "  --unregister-app  Unregister [% c('var/Project_Name') %] as a desktop app for this user\n"
+  printf "\n[% c('var/Project_Name') %] Script Options\n"
+  printf "  --verbose         Display [% IF c("var/tor-browser") -%]Tor and [% END -%]the browser output in the terminal\n"
+  printf "  --log [file]      Record [% IF c("var/tor-browser") -%]Tor and [% END -%]the browser output in file (default: [% c('var/project-name') %].log)\n"
+  printf "  --detach          Detach from terminal and run [% c('var/Project_Name') %] in the background.\n"
+  printf "  --register-app    Register [% c('var/Project_Name') %] as a desktop app for this user\n"
+  printf "  --unregister-app  Unregister [% c('var/Project_Name') %] as a desktop app for this user\n"
 }
 log_output=0
 show_output=0
@@ -108,104 +108,104 @@ register_desktop_app=0
 logfile=/dev/null
 while :
 do
-    case "$1" in
-      --detach)
-          detach=1
-          shift
-          ;;
-      -v | --verbose | -d | --debug)
-          show_output=1
-          verbose_arg="$2"
-          shift
-          ;;
-      -h | "-?" | --help | -help)
-          show_usage=1
-          show_output=1
-          shift
-          ;;
-      -l | --log)
-          if [ -z "$2" -o "${2:0:1}" == "-" ]; then
-             printf "Logging [% c('var/Project_Name') %] debug information to [% c('var/project-name') %].log\n"
-             logfile="../[% c('var/project-name') %].log"
-          elif [ "${2:0:1}" == "/" -o "${2:0:1}" == "~" ]; then
-             printf "Logging [% c('var/Project_Name') %] debug information to %s\n" "$2"
-             logfile="$2"
-             shift
-          else
-             printf "Logging [% c('var/Project_Name') %] debug information to %s\n" "$2"
-             logfile="../$2"
-             shift
-          fi
-          log_output=1
-          shift
-          ;;
-      --register-app)
-          register_desktop_app=1
-          show_output=1
-          shift
-          ;;
-      --unregister-app)
-          register_desktop_app=-1
-          show_output=1
-          shift
-          ;;
-      *) # No more options
-          break
-          ;;
-    esac
+  case "$1" in
+    --detach)
+      detach=1
+      shift
+      ;;
+    -v | --verbose | -d | --debug)
+      show_output=1
+      verbose_arg="$2"
+      shift
+      ;;
+    -h | "-?" | --help | -help)
+      show_usage=1
+      show_output=1
+      shift
+      ;;
+    -l | --log)
+      if [ -z "$2" -o "${2:0:1}" == "-" ]; then
+        printf "Logging [% c('var/Project_Name') %] debug information to [% c('var/project-name') %].log\n"
+        logfile="../[% c('var/project-name') %].log"
+      elif [ "${2:0:1}" == "/" -o "${2:0:1}" == "~" ]; then
+        printf "Logging [% c('var/Project_Name') %] debug information to %s\n" "$2"
+        logfile="$2"
+        shift
+      else
+        printf "Logging [% c('var/Project_Name') %] debug information to %s\n" "$2"
+        logfile="../$2"
+        shift
+      fi
+      log_output=1
+      shift
+      ;;
+    --register-app)
+      register_desktop_app=1
+      show_output=1
+      shift
+      ;;
+    --unregister-app)
+      register_desktop_app=-1
+      show_output=1
+      shift
+      ;;
+    *) # No more options
+      break
+      ;;
+  esac
 done
 
 # We can't detach and show output at the same time..
 if [ "$show_output" -eq 1 -a "$detach" -eq 1 ]; then
-    detach=0
+  detach=0
 fi
 
 if [ "$show_output" -eq 0 ]; then
-    # If the user hasn't requested 'debug mode' or --help, close stdout and stderr,
-    # to keep Firefox and the stuff loaded by/for it (including the
-    # system's shared-library loader) from printing messages to
-    # $HOME/.xsession-errors or other files. (Users wouldn't have seen
-    # messages there anyway.)
-    exec > "$logfile"
-    exec 2> "$logfile"
+  # If the user hasn't requested 'debug mode' or --help, close stdout and stderr,
+  # to keep Firefox and the stuff loaded by/for it (including the
+  # system's shared-library loader) from printing messages to
+  # $HOME/.xsession-errors or other files. (Users wouldn't have seen
+  # messages there anyway.)
+  exec > "$logfile"
+  exec 2> "$logfile"
 fi
 
 # If XAUTHORITY is unset, set it to its default value of $HOME/.Xauthority
 # before we change HOME below.  (See xauth(1) and #1945.)  XDM and KDM rely
 # on applications using this default value.
 if [ -z "$XAUTHORITY" ]; then
-	XAUTHORITY=~/.Xauthority
-	export XAUTHORITY
+  XAUTHORITY=~/.Xauthority
+  export XAUTHORITY
 fi
 
 # If this script is being run through a symlink, we need to know where
 # in the filesystem the script itself is, not where the symlink is.
 myname="$0"
 if [ -L "$myname" ]; then
-	# XXX readlink is not POSIX, but is present in GNU coreutils
-	# and on FreeBSD.  Unfortunately, the -f option (which follows
-	# a whole chain of symlinks until it reaches a non-symlink
-	# path name) is a GNUism, so we have to have a fallback for
-	# FreeBSD.  Fortunately, FreeBSD has realpath instead;
-	# unfortunately, that's also non-POSIX and is not present in
-	# GNU coreutils.
-	#
-	# If this launcher were a C program, we could just use the
-	# realpath function, which *is* POSIX.  Too bad POSIX didn't
-	# make that function accessible to shell scripts.
+  # XXX readlink is not POSIX, but is present in GNU coreutils
+  # and on FreeBSD.  Unfortunately, the -f option (which follows
+  # a whole chain of symlinks until it reaches a non-symlink
+  # path name) is a GNUism, so we have to have a fallback for
+  # FreeBSD.  Fortunately, FreeBSD has realpath instead;
+  # unfortunately, that's also non-POSIX and is not present in
+  # GNU coreutils.
+  #
+  # If this launcher were a C program, we could just use the
+  # realpath function, which *is* POSIX.  Too bad POSIX didn't
+  # make that function accessible to shell scripts.
 
-	# If realpath is available, use it; it Does The Right Thing.
-	possibly_my_real_name="`realpath "$myname" 2>/dev/null`"
-	if [ "$?" -eq 0 ]; then
-		myname="$possibly_my_real_name"
-	else
-		# realpath is not available; hopefully readlink -f works.
-		myname="`readlink -f "$myname" 2>/dev/null`"
-		if [ "$?" -ne 0 ]; then
-			# Ugh.
-			complain "start-[% c('var/project-name') %] cannot be run using a symlink on this operating system."
-		fi
-	fi
+  # If realpath is available, use it; it Does The Right Thing.
+  possibly_my_real_name="`realpath "$myname" 2>/dev/null`"
+  if [ "$?" -eq 0 ]; then
+    myname="$possibly_my_real_name"
+  else
+    # realpath is not available; hopefully readlink -f works.
+    myname="`readlink -f "$myname" 2>/dev/null`"
+    if [ "$?" -ne 0 ]; then
+      # Ugh.
+      complain "start-[% c('var/project-name') %] cannot be run using a symlink on this operating system."
+    fi
+  fi
 fi
 
 # Try to be agnostic to where we're being started from, chdir to where
@@ -215,9 +215,9 @@ test -d "$mydir" && cd "$mydir"
 
 # If ${PWD} results in a zero length string, we can try something else...
 if [ ! "${PWD}" ]; then
-	# "hacking around some braindamage"
-	PWD="`pwd`"
-	surveysays="This system has a messed up shell.\n"
+  # "hacking around some braindamage"
+  PWD="`pwd`"
+  surveysays="This system has a messed up shell.\n"
 fi
 
 # This is a fix for an ibus issue on some Linux systems. See #9353 for more
@@ -236,22 +236,22 @@ sed -i -e "s,^Icon=.*,Icon=$PWD/browser/chrome/icons/default/default128.png,g" s
 sed -i -e "s,^Exec=.*,Exec=sh -c '\"$PWD/start-[% c('var/project-name') %]\" --detach || ([ !  -x \"$PWD/start-[% c('var/project-name') %]\" ] \&\& \"\$(dirname \"\$*\")\"/Browser/start-[% c('var/project-name') %] --detach)' dummy %k,g" ../start-[% c('var/project-name') %].desktop
 
 if [ "$register_desktop_app" -eq 1 ]; then
-	mkdir -p "$HOME/.local/share/applications/"
-	cp ../start-[% c('var/project-name') %].desktop "$HOME/.local/share/applications/"
-	update-desktop-database "$HOME/.local/share/applications/"
-	printf "[% c('var/Project_Name') %] has been registered as a desktop app for this user in ~/.local/share/applications/\n"
-	exit 0
+  mkdir -p "$HOME/.local/share/applications/"
+  cp ../start-[% c('var/project-name') %].desktop "$HOME/.local/share/applications/"
+  update-desktop-database "$HOME/.local/share/applications/"
+  printf "[% c('var/Project_Name') %] has been registered as a desktop app for this user in ~/.local/share/applications/\n"
+  exit 0
 fi
 
 if [ "$register_desktop_app" -eq -1 ]; then
-	if [ -e "$HOME/.local/share/applications/start-[% c('var/project-name') %].desktop" ]; then
-		rm -f "$HOME/.local/share/applications/start-[% c('var/project-name') %].desktop"
-		update-desktop-database "$HOME/.local/share/applications/"
-		printf "[% c('var/Project_Name') %] has been removed as a user desktop app (from ~/.local/share/applications/)\n"
-	else
-		printf "[% c('var/Project_Name') %] does not appear to be a desktop app (not present in ~/.local/share/applications/)\n"
-	fi
-	exit 0
+  if [ -e "$HOME/.local/share/applications/start-[% c('var/project-name') %].desktop" ]; then
+    rm -f "$HOME/.local/share/applications/start-[% c('var/project-name') %].desktop"
+    update-desktop-database "$HOME/.local/share/applications/"
+    printf "[% c('var/Project_Name') %] has been removed as a user desktop app (from ~/.local/share/applications/)\n"
+  else
+    printf "[% c('var/Project_Name') %] does not appear to be a desktop app (not present in ~/.local/share/applications/)\n"
+  fi
+  exit 0
 fi
 
 export BB_ORIGINAL_HOME="$HOME"
@@ -260,13 +260,13 @@ export HOME
 
 # Prevent disk leaks in $HOME/.local/share (tor-browser#17560)
 function erase_leaky() {
-	local leaky="$1"
-	[ -e "$leaky" ] &&
-	( srm -r "$leaky" ||
-	  wipe -r "$leaky" ||
-	  find "$leaky" -type f -exec shred -u {} \; ;
-	  rm -rf "$leaky"
-	) > /dev/null 2>&1
+  local leaky="$1"
+  [ -e "$leaky" ] &&
+    ( srm -r "$leaky" ||
+      wipe -r "$leaky" ||
+      find "$leaky" -type f -exec shred -u {} \; ;
+      rm -rf "$leaky"
+    ) > /dev/null 2>&1
 }
 local_dir="$HOME/.local/"
 share_dir="$local_dir/share"
@@ -275,14 +275,14 @@ share_dir="$local_dir/share"
 # We're not using realpath/readlink for consistency with the (possibly
 # outdated) availability assumptions made elsewhere in this script.
 if ! [ -L "$local_dir" -o -L "$share_dir" ]; then
-	if [ -d "$share_dir" ]; then
-		for leaky_path in "gvfs-metadata" "recently-used.xbel"; do
-			erase_leaky "$share_dir/$leaky_path"
-		done
-	else
-		mkdir -p "$local_dir"
-	fi
-	ln -fs /dev/null "$share_dir"
+  if [ -d "$share_dir" ]; then
+    for leaky_path in "gvfs-metadata" "recently-used.xbel"; do
+      erase_leaky "$share_dir/$leaky_path"
+    done
+  else
+    mkdir -p "$local_dir"
+  fi
+  ln -fs /dev/null "$share_dir"
 fi
 [ -L "$HOME/.cache" ] || erase_leaky "$HOME/.cache/nvidia"
 
@@ -291,8 +291,8 @@ SYSARCHITECTURE=$(getconf LONG_BIT)
 TORARCHITECTURE=$(expr "$(file TorBrowser/Tor/tor)" : '.*ELF \([[:digit:]]*\)')
 
 if [ $SYSARCHITECTURE -ne $TORARCHITECTURE ]; then
-   complain "Wrong architecture? 32-bit vs. 64-bit."
-   exit 1
+  complain "Wrong architecture? 32-bit vs. 64-bit."
+  exit 1
 fi
 [% END -%]
 
@@ -305,27 +305,27 @@ export ASAN_OPTIONS
 
 [% IF c("var/tor-browser") -%]
 function setControlPortPasswd() {
-    local ctrlPasswd=$1
+  local ctrlPasswd=$1
 
-    if test -z "$ctrlPasswd" -o "$ctrlPasswd" = $'\"secret\"' ; then
-        unset TOR_CONTROL_PASSWD
-        return
-    fi
+  if test -z "$ctrlPasswd" -o "$ctrlPasswd" = $'\"secret\"' ; then
+    unset TOR_CONTROL_PASSWD
+    return
+  fi
 
-    if test "${ctrlPasswd:0:1}" = $'\"'; then  # First 2 chars were '"
-        printf "Using system Tor process.\n"
-        export TOR_CONTROL_PASSWD
-    else
-        complain "There seems to have been a quoting problem with your \
+  if test "${ctrlPasswd:0:1}" = $'\"'; then  # First 2 chars were '"
+    printf "Using system Tor process.\n"
+    export TOR_CONTROL_PASSWD
+  else
+    complain "There seems to have been a quoting problem with your \
 TOR_CONTROL_PASSWD environment variable."
-	echo "The Tor ControlPort password should be given inside double"
-	echo "quotes, inside single quotes. That is, if the ControlPort"
-	echo 'password is “secret” (without curly quotes) then we must'
-	echo "start this script after setting the environment variable"
-	echo "exactly like this:"
-	echo
-	echo "  \$ TOR_CONTROL_PASSWD='\"secret\"' $myname"
-    fi
+    echo "The Tor ControlPort password should be given inside double"
+    echo "quotes, inside single quotes. That is, if the ControlPort"
+    echo 'password is “secret” (without curly quotes) then we must'
+    echo "start this script after setting the environment variable"
+    echo "exactly like this:"
+    echo
+    echo "  \$ TOR_CONTROL_PASSWD='\"secret\"' $myname"
+  fi
 }
 
 # Using a system-installed Tor process with Tor Browser:
@@ -397,19 +397,19 @@ cd "${HOME}"
 # prevent from mixing up with them).
 
 if [ "$show_usage" -eq 1 ]; then
-    # Display Firefox help, then our help
-    [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] --help 2>/dev/null
-    print_usage
+  # Display Firefox help, then our help
+  [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] --help 2>/dev/null
+  print_usage
 elif [ "$detach" -eq 1 ] ; then
-    [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] "${@}" > "$logfile" 2>&1 </dev/null &
-        disown "$!"
+  [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] "${@}" > "$logfile" 2>&1 </dev/null &
+  disown "$!"
 elif [ "$log_output" -eq 1 -a "$show_output" -eq 1 ]; then
-    [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] "${@}" 2>&1 </dev/null | \
-        tee "$logfile"
+  [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] "${@}" 2>&1 </dev/null | \
+    tee "$logfile"
 elif [ "$show_output" -eq 1 ]; then
-    [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] "${@}" < /dev/null
+  [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] "${@}" < /dev/null
 else
-    [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] "${@}" > "$logfile" 2>&1 </dev/null
+  [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] "${@}" > "$logfile" 2>&1 </dev/null
 fi
 
 exit $?
