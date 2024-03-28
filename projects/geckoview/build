@@ -89,8 +89,9 @@ export MOZ_SOURCE_CHANGESET=[% c("var/git_commit") %]
 MOZCONFIG_EOF
 
   echo "Starting the creation of the fake fat AAR $(date)"
-  pushd tools/torbrowser
-  make fat-aar ARCHS="[% c('arch') %]"
+  pushd tools/geckoview
+  touch android-env.sh
+  make fataar ARCHS="[% c('arch') %]"
   popd
   MOZCONFIG=mozconfig-android-all ./mach gradle \
     geckoview:publishWithGeckoBinariesDebugPublicationToMavenLocal \
