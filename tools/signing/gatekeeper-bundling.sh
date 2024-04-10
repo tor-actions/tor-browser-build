@@ -69,6 +69,9 @@ export PATH="$PATH:$tmpdir/libdmg-hfsplus:$tmpdir/hfsplus-tools"
 
 cd $tmpdir/dmg
 
+cp ${tbb_version_type}.DS_Store .DS_Store
+rm *.DS_Store
+
 tar -xf $macos_stapled_dir/"${proj_name}-${tbb_version}-notarized+stapled.tar.zst"
 
 cd ..
