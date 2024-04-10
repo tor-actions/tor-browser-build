@@ -38,6 +38,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
 - [ ] Update `rbm.conf`
   - [ ] `var/torbrowser_version` : update to next version
   - [ ] `var/torbrowser_build` : update to `$(TOR_BROWSER_BUILD_N)`
+  - [ ] `var/browser_release_date` : update to build date
   - [ ] ***(Desktop Only)***`var/torbrowser_incremental_from` : update to previous Desktop version
     - **NOTE**: We try to build incrementals for the previous 3 desktop versions except in the case of a watershed update
     - **IMPORTANT**: Really *actually* make sure this is the previous Desktop version or else the `make torbrowser-incrementals-*` step will fail
