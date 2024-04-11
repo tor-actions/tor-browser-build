@@ -17,18 +17,19 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/34/9734/13299734/13299734.png?modified=1709053095"
           }
         ],
-        "average_daily_users": 1159924,
+        "average_daily_users": 1147622,
         "categories": {
           "firefox": [
             "web-development",
             "appearance",
-            "other"
+            "other",
+            "accessibility"
           ]
         },
         "contributions_url": "https://opencollective.com/darkreader?utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2017-09-19T07:03:00Z",
         "current_version": {
-          "id": 5698881,
+          "id": 5716486,
           "compatibility": {
             "firefox": {
               "min": "78.0",
@@ -39,7 +40,7 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/darkreader/versions/5698881",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/darkreader/versions/5716486",
           "is_strict_compatibility_enabled": false,
           "license": {
             "id": 22,
@@ -50,22 +51,22 @@
             "url": "http://www.opensource.org/license/mit"
           },
           "release_notes": {
-            "en-US": "- Optimized Adopted Style Sheets changes handling.\n- Fixed watching for style/link element position changes.\n- Fixed processing large style elements loaded by chunks.\n- Fixed enabling the extension with a hotkey after it was disabled automatically.\n- Fixed sliders in mobile UI.\n- Users' fixes for websites."
+            "en-US": "- Fixed performance issue when detecting @layer and @supports rules.\n- Improved border colors with CSS variables.\n- Leave iframes unchanged when dark theme is detected on a web page.\n- Users' fixes for websites."
           },
-          "reviewed": "2024-03-05T08:23:41Z",
-          "version": "4.9.78",
+          "reviewed": "2024-04-09T08:44:59Z",
+          "version": "4.9.82",
           "files": [
             {
-              "id": 4243182,
-              "created": "2024-02-29T10:00:39Z",
-              "hash": "sha256:21e08b3f26e9b54257d30f6b2fb2d966d41ace54d2d79ccec55e55517084c7ce",
+              "id": 4260787,
+              "created": "2024-04-05T20:41:43Z",
+              "hash": "sha256:df2e0c5498c08caa8452cd21f627d6dce0b2251047602ab2417c2e1dd7350697",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 727208,
+              "size": 735921,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/4243182/darkreader-4.9.78.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/4260787/darkreader-4.9.82.xpi",
               "permissions": [
                 "alarms",
                 "contextMenus",
@@ -143,7 +144,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2024-03-05T08:23:41Z",
+        "last_updated": "2024-04-09T08:44:59Z",
         "name": {
           "ar": "Dark Reader",
           "bn": "Dark Reader",
@@ -218,10 +219,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.5365,
-          "bayesian_average": 4.535401175675945,
-          "count": 5491,
-          "text_count": 1733
+          "average": 4.5317,
+          "bayesian_average": 4.530596215637371,
+          "count": 5563,
+          "text_count": 1752
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/reviews/",
         "requires_payment": false,
@@ -318,7 +319,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/versions/",
-        "weekly_downloads": 23726
+        "weekly_downloads": 24103
       },
       "notes": null
     },
@@ -334,7 +335,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/56/7656/6937656/6937656.png?modified=1550343990"
           }
         ],
-        "average_daily_users": 267400,
+        "average_daily_users": 262844,
         "categories": {
           "firefox": [
             "privacy-security"
@@ -343,18 +344,18 @@
         "contributions_url": "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=decentraleyes%40protonmail.com&item_name=Decentraleyes&utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2014-06-10T05:46:02Z",
         "current_version": {
-          "id": 5613891,
+          "id": 5711487,
           "compatibility": {
             "firefox": {
-              "min": "56.0a1",
+              "min": "78.0",
               "max": "*"
             },
             "android": {
-              "min": "56.0a1",
+              "min": "113.0",
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/decentraleyes/versions/5613891",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/decentraleyes/versions/5711487",
           "is_strict_compatibility_enabled": false,
           "license": {
             "id": 3338,
@@ -365,22 +366,22 @@
             "url": "http://www.mozilla.org/MPL/2.0/"
           },
           "release_notes": {
-            "en-US": "<i>Enhancements:</i>\n\n- Improved object property evaluation logic.\n\n<i>Other changes:</i>\n\n- Applied various performance optimizations and stability improvements.\n- Updated resource audit tool dependencies."
+            "en-US": "<i>Enhancements:</i>\n\n- Added additional resources to the staging environment.\n\n<i>Other changes:</i>\n\n- Implemented mobile extension signing-related changes.\n- Improved and extended the resource audit tool."
           },
-          "reviewed": "2023-08-30T12:55:12Z",
-          "version": "2.0.18",
+          "reviewed": "2024-03-28T20:50:08Z",
+          "version": "2.0.19",
           "files": [
             {
-              "id": 4158232,
-              "created": "2023-08-24T20:38:03Z",
-              "hash": "sha256:f8f031ef91c02a1cb1a6552acd02b8f488693400656b4047d68f03ba0a1078d9",
+              "id": 4255788,
+              "created": "2024-03-26T20:59:58Z",
+              "hash": "sha256:105d65bf8189d527251647d0452715c5725af6065fba67cd08187190aae4a98f",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 6951879,
+              "size": 7180376,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/4158232/decentraleyes-2.0.18.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/4255788/decentraleyes-2.0.19.xpi",
               "permissions": [
                 "*://*/*",
                 "privacy",
@@ -470,7 +471,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2023-08-30T12:55:12Z",
+        "last_updated": "2024-03-28T20:50:08Z",
         "name": {
           "ar": "Decentraleyes",
           "bg": "Decentraleyes",
@@ -547,10 +548,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.7982,
-          "bayesian_average": 4.793635080149146,
-          "count": 1412,
-          "text_count": 254
+          "average": 4.7961,
+          "bayesian_average": 4.7914809918911105,
+          "count": 1422,
+          "text_count": 258
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/reviews/",
         "requires_payment": false,
@@ -635,7 +636,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/versions/",
-        "weekly_downloads": 3038
+        "weekly_downloads": 3094
       },
       "notes": null
     },
@@ -651,7 +652,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/73/4073/5474073/5474073.png?modified=1469820907"
           }
         ],
-        "average_daily_users": 1235058,
+        "average_daily_users": 1210586,
         "categories": {
           "firefox": [
             "privacy-security"
@@ -1170,9 +1171,9 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.7979,
-          "bayesian_average": 4.795218830409015,
-          "count": 2405,
+          "average": 4.7997,
+          "bayesian_average": 4.796985292621238,
+          "count": 2421,
           "text_count": 457
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/reviews/",
@@ -1197,7 +1198,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/versions/",
-        "weekly_downloads": 19773
+        "weekly_downloads": 19565
       },
       "notes": null
     },
@@ -1213,7 +1214,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 7806685,
+        "average_daily_users": 7698492,
         "categories": {
           "firefox": [
             "privacy-security"
@@ -1222,7 +1223,7 @@
         "contributions_url": "",
         "created": "2015-04-25T07:26:22Z",
         "current_version": {
-          "id": 5693353,
+          "id": 5717409,
           "compatibility": {
             "firefox": {
               "min": "78.0",
@@ -1233,7 +1234,7 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/ublock-origin/versions/5693353",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/ublock-origin/versions/5717409",
           "is_strict_compatibility_enabled": false,
           "license": {
             "id": 6,
@@ -1244,22 +1245,22 @@
             "url": "http://www.gnu.org/licenses/gpl-3.0.html"
           },
           "release_notes": {
-            "en-US": "See complete release notes for <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/d2b406aad3a1689d93242d841355ff70cc8bad0caa470153d0020e98b5547472/https%3A//github.com/gorhill/uBlock/releases/tag/1.56.0\" rel=\"nofollow\">1.56.0</a>.\n\n<b>Fixes / changes</b>\n\n<ul><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/39dfcbf564824557b9576b8ab90f8b3bf9b6a00796694276f49ffccd1f883691/https%3A//github.com/gorhill/uBlock/commit/2a5a444482\" rel=\"nofollow\">Mind that multiple <code>uritransform</code> may apply to a single request</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/a81992f7ab9a23a438d94b1936b9612cabf9e665d9db49a1a6fed0835bee73fa/https%3A//github.com/gorhill/uBlock/commit/9bff0c2f94\" rel=\"nofollow\">Fix incorrect built-in filtering expression in logger</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/e88d43f67c0962312b76d6d06af26de5de0006954c70568e488f1567269b9288/https%3A//github.com/gorhill/uBlock/commit/21ec5a277c\" rel=\"nofollow\">Fix improper invalidation of valid <code>uritransform</code> exception filters</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/0f3549a7d85e6616619d00126a8ff97508acb67c4d6a8be80bc128c304889a7b/https%3A//github.com/gorhill/uBlock/commit/b22b3d729b\" rel=\"nofollow\">Improve <code>prevent-addEventListener</code> scriptlet</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/378d2611f7de534428615ac9418e10ec3f21533992611f8067c17be97fea704f/https%3A//github.com/gorhill/uBlock/commit/397d6d47b9\" rel=\"nofollow\">Fix Chartbeat flicker control <code>div</code>'s</a> (by @ryanbr)</li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/bbf6c43dcdb62ea74fd182f6c14e982561410421c4ece87fe2287a9be7122b8d/https%3A//github.com/gorhill/uBlock/commit/7b138b58c6\" rel=\"nofollow\">Fix potential exfiltration of browsing history by a rogue list author through <code>permissions=</code></a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/93a9a64cf8ec890f9a478cf32179abeb3392c2b0e00eaabdaae18767df4c6fd8/https%3A//github.com/gorhill/uBlock/commit/3037ae5f04\" rel=\"nofollow\">Ignore event handler-related attributes in <code>set-attr</code> scriptlet</a> (suggested by @distinctmondaylilac)</li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/4ed2b2948421552ce1c1706bddc2e1d7e140ea318c342ac62425de7247245b93/https%3A//github.com/gorhill/uBlock/commit/db5656f607\" rel=\"nofollow\">Fix potential exfiltration of browsing history by a rogue list author through <code>csp=</code></a> (reported by @distinctmondaylilac)</li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/0fc7f9c779a1eb0dde44e6a9cce8c1d1eb82d03b869d06379c98ac2385c5f57a/https%3A//github.com/gorhill/uBlock/commit/869a653fdf\" rel=\"nofollow\">Output scriptlet logging information to the logger</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/0dc5f09464b305050627d6fe2d78c2542b033c5e4bea6c5b753395f8c4a2ef9c/https%3A//github.com/gorhill/uBlock/commit/49dd68ef3d\" rel=\"nofollow\">Fix decompiling of scriptlet parameters</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/5a4d736ff47d1505619f0b2875e2844a6517ae724da6087c4358a1c27723aba2/https%3A//github.com/gorhill/uBlock/commit/45e62c939f\" rel=\"nofollow\">Add support for <code>extraMatch</code> in <code>trusted-click-element</code> scriptlet</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/439735e662e837889e0dbe7125bdfaa00456c0b435fe56c67d76a29021c82464/https%3A//github.com/gorhill/uBlock/commit/f624c835c2\" rel=\"nofollow\">Remove minimum height constraint from \"My filters\" pane</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/ef423b580af2dea4a9a044064326e60a7b1837990f0f4ceb83c319d13816449b/https%3A//github.com/gorhill/uBlock/commit/13dcd844a7\" rel=\"nofollow\">Unregister all scriptlets when disabling uBO on a specific site</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/e06c923bfb016c184026f7d1e9b2341d3d547d2afe5b8f1f4309ba5a2d70384d/https%3A//github.com/gorhill/uBlock/commit/b19094339f\" rel=\"nofollow\">Allow <code>uritransform</code> to process the hash part of a URL</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/3e0f743a60bf78bced858027f356d13fcb916fcc1cff9149d5fd1b738753f1ac/https%3A//github.com/gorhill/uBlock/commit/3d1b100646\" rel=\"nofollow\">Remember presentation state of \"My rules\" pane</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/819053ea32148fd9ad7c6ce5e1e67a5d2e98fb589d58d66d5cef20f53c6740b3/https%3A//github.com/gorhill/uBlock/commit/0e00010b91\" rel=\"nofollow\">Fix improperly assembled <code>!#include</code> sublists</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/9506d56abc46f95d7412b99505eb28ad87762987a4892e8c2b63d164a3032844/https%3A//github.com/gorhill/uBlock/commit/757b8be9cd\" rel=\"nofollow\">Mark procedural filters with pseudo-elements selector as invalid</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/9b18234e17c6871170acd1d510f4746b9b055de1ed04a73c26982e71e6a3ff48/https%3A//github.com/gorhill/uBlock/commit/bc641fc024\" rel=\"nofollow\">Prevent access to picker when \"My filters\" is not enabled</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/f990e686b6eacbbd0bd43a18048c60e6771a538fd2ca663db22bb9096ff37134/https%3A//github.com/gorhill/uBlock/commit/c4bb8a0f64\" rel=\"nofollow\">Provide visual feedback when applying changes in \"Filter lists\" pane</a></li><li>[...]</li></ul>\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/738859f7b07778caaaa18298773a617906b1e10d8d43c5f34902c5d63aef885b/https%3A//github.com/gorhill/uBlock/compare/1.55.0...1.56.0\" rel=\"nofollow\">Commits history since last version</a>"
+            "en-US": "See complete release notes for <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/65a30f1a59ac2ef295f46995786578633d74b56c32119609a791998b2181d0f0/https%3A//github.com/gorhill/uBlock/releases/tag/1.57.2\" rel=\"nofollow\">1.57.2</a>.\n\nThis is an emergency release to fix an issue causing differential updates to fail. The issue primarily affected Firefox because of uBO's use of indexedDB prior to 1.57.0. The issue did not affect full update of filter lists even though the asset viewer would show old versions of those lists (internally uBO compiles lists and would still correctly compile from lists fetched by full updater).\n\n<b>Fixes / changes</b>\n\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/92c6c66077821bbbc4fd825dcb521bf7489bd68180388cf53434bc138b664e09/https%3A//github.com/gorhill/uBlock/commit/defd68ef7d\" rel=\"nofollow\">Fix stray lists in redesigned cache storage</a>\n\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/ad79f1669e12cf4cb05689281e841ad02b344fd831ca42985329020d6cb94faf/https%3A//github.com/gorhill/uBlock/compare/1.57.0...1.57.2\" rel=\"nofollow\">Commits history since last version</a>"
           },
-          "reviewed": "2024-02-20T18:51:52Z",
-          "version": "1.56.0",
+          "reviewed": "2024-04-10T09:01:57Z",
+          "version": "1.57.2",
           "files": [
             {
-              "id": 4237670,
-              "created": "2024-02-17T14:54:31Z",
-              "hash": "sha256:f5fbeeac511ca4e10a74723413727fda8e6f9236c726d16eb54ade1fbe7be5be",
+              "id": 4261710,
+              "created": "2024-04-08T13:51:42Z",
+              "hash": "sha256:9928e79a52cecf7cfa231fdb0699c7d7a427660d94eb10d711ed5a2f10d2eb89",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 3819727,
+              "size": 3861786,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/4237670/ublock_origin-1.56.0.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/4261710/ublock_origin-1.57.2.xpi",
               "permissions": [
                 "alarms",
                 "dns",
@@ -1379,7 +1380,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2024-03-11T17:35:25Z",
+        "last_updated": "2024-04-10T15:40:26Z",
         "name": {
           "ar": "uBlock Origin",
           "bg": "uBlock Origin",
@@ -1524,10 +1525,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.7893,
-          "bayesian_average": 4.78892933338675,
-          "count": 17378,
-          "text_count": 4532
+          "average": 4.7889,
+          "bayesian_average": 4.788525377738124,
+          "count": 17520,
+          "text_count": 4569
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/reviews/",
         "requires_payment": false,
@@ -1590,7 +1591,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/versions/",
-        "weekly_downloads": 159165
+        "weekly_downloads": 153133
       },
       "notes": null
     },
@@ -1606,7 +1607,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 178990,
+        "average_daily_users": 180160,
         "categories": {
           "firefox": [
             "photos-music-videos",
@@ -1702,10 +1703,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.4476,
-          "bayesian_average": 4.442740710153104,
-          "count": 1211,
-          "text_count": 466
+          "average": 4.4484,
+          "bayesian_average": 4.443495738230568,
+          "count": 1222,
+          "text_count": 475
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/reviews/",
         "requires_payment": false,
@@ -1727,7 +1728,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/versions/",
-        "weekly_downloads": 350
+        "weekly_downloads": 348
       },
       "notes": null
     },
@@ -1743,7 +1744,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 78537,
+        "average_daily_users": 75277,
         "categories": {
           "firefox": [
             "privacy-security",
@@ -1853,10 +1854,10 @@
         ],
         "promoted": null,
         "ratings": {
-          "average": 4.3753,
-          "bayesian_average": 4.3611016639271964,
-          "count": 405,
-          "text_count": 114
+          "average": 4.3768,
+          "bayesian_average": 4.3623663717329295,
+          "count": 406,
+          "text_count": 115
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/reviews/",
         "requires_payment": false,
@@ -1878,7 +1879,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/versions/",
-        "weekly_downloads": 1672
+        "weekly_downloads": 1271
       },
       "notes": null
     },
@@ -1894,7 +1895,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/64/9064/12929064/12929064.png?modified=1651263207"
           }
         ],
-        "average_daily_users": 308991,
+        "average_daily_users": 309538,
         "categories": {
           "firefox": [
             "search-tools",
@@ -2111,10 +2112,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.6435,
-          "bayesian_average": 4.639139586780839,
-          "count": 1422,
-          "text_count": 276
+          "average": 4.6324,
+          "bayesian_average": 4.628055038190222,
+          "count": 1450,
+          "text_count": 284
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/reviews/",
         "requires_payment": false,
@@ -2137,7 +2138,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/versions/",
-        "weekly_downloads": 5686
+        "weekly_downloads": 5610
       },
       "notes": null
     },
@@ -2160,7 +2161,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 125273,
+        "average_daily_users": 125835,
         "categories": {
           "firefox": [
             "search-tools",
@@ -2441,10 +2442,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.3752,
-          "bayesian_average": 4.37089257689689,
-          "count": 1338,
-          "text_count": 378
+          "average": 4.378,
+          "bayesian_average": 4.373626111950373,
+          "count": 1344,
+          "text_count": 381
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/reviews/",
         "requires_payment": false,
@@ -2464,7 +2465,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/versions/",
-        "weekly_downloads": 22
+        "weekly_downloads": 29
       },
       "notes": null
     },
@@ -2480,12 +2481,11 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/43/0143/143/143.png?modified=1506804587"
           }
         ],
-        "average_daily_users": 309704,
+        "average_daily_users": 300871,
         "categories": {
           "firefox": [
-            "web-development",
             "privacy-security",
-            "other"
+            "alerts-updates"
           ]
         },
         "contributions_url": "https://www.paypal.com/donate/?hosted_button_id=9ERKTU5MBH4EW&utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
@@ -2550,20 +2550,20 @@
         "default_locale": "en-US",
         "description": {
           "da": "Dette værktøj, vinder af \"2006 PC World World Class Award\", giver ekstra beskyttelse til din Firefox.\nDen lader kun JavaScript, Java og andet kørbart indhold køre fra betroede domæner du har valgt, fx din home-banking hjemmeside, og forsvarer \"tillids-grænserne\" mod cross-site scripting angreb (XXS).\nEn sådan forebyggende metode forhindrer udnyttelse af sikkerhedshuller (kendte som ukendte!) uden tab af funktionalitet...\nEksperterne er enige: Firefox er faktisk mere sikker med NoScript ;-)",
-          "de": "<b>WICHTIG</b>\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/e19d2306e457c98e6c3e03f52480e7206685d42d1b075ee88b77e44b1f1d3813/https%3A//forums.informaction.com/viewtopic.php%3Ff=7&amp;t=23974&amp;p=94778\" rel=\"nofollow\">Eine Anleitung in die Grundlagen von <b>NoScript 10</b></a>\n\nIst die neue Oberfläche von NoScript 10 immer noch ungewohnt?\nSehen Sie sich diese <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/f5ad7f79289d1b2c198593e25708cba9ab4104a300b4ab49f98975c26ad4bc69/https%3A//blog.jeaye.com/2017/11/30/noscript/\" rel=\"nofollow\">von Nutzern erstellte NoScript 10 Einführung</a> und diesen <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/4e700d4e76086494b5553ff9e42d881037d3adcf6d64fefa11545d184fe3d8b5/https%3A//hackademix.net/2017/12/04/noscript-quantum-vs-legacy-in-a-nutshell-2/\" rel=\"nofollow\">Vergleich zwischen NoScript 10 \"Quantum\" und NoScript 5 \"Classic\"</a> an.\n\nAls Gewinner des \"PC World World Class Award\" und ausgeliefert als Teil des Tor Browsers bietet Ihnen NoScript den besten verfügbaren Schutz im Internet.\n\nMit NoScript können Sie JavaScript, Flash, Java und andere ausführbare Inhalte bloß auf vertrauenswürdigen Domains Ihrer Wahl zulassen, z.B. beim Online-Banking. Somit verhindern Sie aus der Ferne ausnutzbare Schwachstellen inklusive Spectre und Meltdown.\n\nIhre vertrauenswürdigen Bereiche werden dank der einmaligen ClearClick Technologie gegen seitenübergreifende Scripting-Attacken (XSS), Cross-Zone DNS Rebinding / CSRF Attacken (Router Hacking), und Clickjacking-Versuche geschützt.\n\nDieser präventive Ansatz verhindert das Ausnutzen von (bekannten und unbekannten!) Sicherheitslücken ohne Verlust an Funktionalität, wo Sie diese benötigen.\nExperten sind sich einig: Firefox wird wirklich noch sicherer mithilfe von NoScript ;-)\n\n\nFAQ: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a4a623eb90a9becd02eed9474b3d82f9e6a93cd27281b3c5a9346d4da3543e7/https%3A//noscript.net/faq\" rel=\"nofollow\">https://noscript.net/faq</a>\nForum: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a6b9e607349db8d83719e8645277b4597538997d7a8946bb1515a4ff3f79287/https%3A//noscript.net/forum\" rel=\"nofollow\">https://noscript.net/forum</a>",
+          "de": "<b>WICHTIG</b>\n<a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/e19d2306e457c98e6c3e03f52480e7206685d42d1b075ee88b77e44b1f1d3813/https%3A//forums.informaction.com/viewtopic.php%3Ff=7&amp;t=23974&amp;p=94778\">Eine Anleitung in die Grundlagen von <b>NoScript 10</b></a>\n\nIst die neue Oberfläche von NoScript 10 immer noch ungewohnt?\nSehen Sie sich diese <a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/f5ad7f79289d1b2c198593e25708cba9ab4104a300b4ab49f98975c26ad4bc69/https%3A//blog.jeaye.com/2017/11/30/noscript/\">von Nutzern erstellte NoScript 10 Einführung</a> und diesen <a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/4e700d4e76086494b5553ff9e42d881037d3adcf6d64fefa11545d184fe3d8b5/https%3A//hackademix.net/2017/12/04/noscript-quantum-vs-legacy-in-a-nutshell-2/\">Vergleich zwischen NoScript 10 \"Quantum\" und NoScript 5 \"Classic\"</a> an.\n\nAls Gewinner des \"PC World World Class Award\" und ausgeliefert als Teil des Tor Browsers bietet Ihnen NoScript den besten verfügbaren Schutz im Internet.\n\nMit NoScript können Sie JavaScript, Flash, Java und andere ausführbare Inhalte bloß auf vertrauenswürdigen Domains Ihrer Wahl zulassen, z.B. beim Online-Banking. Somit verhindern Sie aus der Ferne ausnutzbare Schwachstellen inklusive Spectre und Meltdown.\n\nIhre vertrauenswürdigen Bereiche werden dank der einmaligen ClearClick Technologie gegen seitenübergreifende Scripting-Attacken (XSS), Cross-Zone DNS Rebinding / CSRF Attacken (Router Hacking), und Clickjacking-Versuche geschützt.\n\nDieser präventive Ansatz verhindert das Ausnutzen von (bekannten und unbekannten!) Sicherheitslücken ohne Verlust an Funktionalität, wo Sie diese benötigen.\nExperten sind sich einig: Firefox wird wirklich noch sicherer mithilfe von NoScript ;-)\n\n\nFAQ: <a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a4a623eb90a9becd02eed9474b3d82f9e6a93cd27281b3c5a9346d4da3543e7/https%3A//noscript.net/faq\">https://noscript.net/faq</a>\nForum: <a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a6b9e607349db8d83719e8645277b4597538997d7a8946bb1515a4ff3f79287/https%3A//noscript.net/forum\">https://noscript.net/forum</a>",
           "el": "Αυτό το πρόσθετο που κέρδισε το βραβείο «2006  World Class Award» του περιοδικού PC World, παρέχει πρόσθετη προστασία στον Firefox.\nΕπιτρέπει την εκτέλεση JavaScript, Java και άλλου εκτελέσιμου περιεχομένου, μόνο για έμπιστους τομείς δικτύου της επιλογής σας (π.χ. την δικτυακή υπηρεσία τραπεζικών συναλλαγών σας) και τους προστατεύει από τον κίνδυνο επιθέσεων cross-site scripting (XSS) .\nΑυτή η προσέγγιση προκαταβολικού μπλοκαρίσματος δεν επιτρέπει την εκμετάλλευση κενών ασφαλείας (ήδη γνωστών αλλά και άγνωστων ακόμα!) χωρίς να επηρεάζει την λειτουργικότητα...\nΟι ειδικοί συμφωνούν: Ο Firefox είναι πραγματικά ασφαλέστερος με το NoScript! ;-)",
-          "en-US": "Winner of the \"PC World - World Class Award\" and bundled with the Tor Browser, NoScript gives you the best available protection on the web. It allows JavaScript, Flash, and other executable content to run only from trusted domains of your choice (e.g. your banking site), thus mitigating remotely exploitable vulnerabilities, such as Spectre and Meltdown.\n\nIt protects your \"trust boundaries\" against cross-site scripting attacks (XSS), cross-zone DNS rebinding / CSRF attacks (router hacking), and Clickjacking attempts, thanks to its unique ClearClick technology.\n\nSuch a preemptive approach prevents exploitation of security vulnerabilities (known and unknown!) with no loss of functionality where you need it. Experts do agree: Firefox is really safer with NoScript ;-)\n\nFAQ: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a4a623eb90a9becd02eed9474b3d82f9e6a93cd27281b3c5a9346d4da3543e7/https%3A//noscript.net/faq\" rel=\"nofollow\">https://noscript.net/faq</a>\nForum: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a6b9e607349db8d83719e8645277b4597538997d7a8946bb1515a4ff3f79287/https%3A//noscript.net/forum\" rel=\"nofollow\">https://noscript.net/forum</a>\n\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/e19d2306e457c98e6c3e03f52480e7206685d42d1b075ee88b77e44b1f1d3813/https%3A//forums.informaction.com/viewtopic.php%3Ff=7&amp;t=23974&amp;p=94778\" rel=\"nofollow\">A Basic <b>NoScript 10 Guide</b></a>\n\nStill confused by NoScript 10's new UI?\nCheck this <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/f5ad7f79289d1b2c198593e25708cba9ab4104a300b4ab49f98975c26ad4bc69/https%3A//blog.jeaye.com/2017/11/30/noscript/\" rel=\"nofollow\">user-contributed NoScript 10 primer</a>.\nand this <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/4e700d4e76086494b5553ff9e42d881037d3adcf6d64fefa11545d184fe3d8b5/https%3A//hackademix.net/2017/12/04/noscript-quantum-vs-legacy-in-a-nutshell-2/\" rel=\"nofollow\">NoScript 10 \"Quantum\" vs NoScript 5 \"Classic\" (or \"Legacy\") comparison</a>.",
+          "en-US": "Winner of the \"PC World - World Class Award\" and bundled with the Tor Browser, NoScript gives you the best available protection on the web. It allows JavaScript, Flash, and other executable content to run only from trusted domains of your choice (e.g. your banking site), thus mitigating remotely exploitable vulnerabilities, such as Spectre and Meltdown.\n\nIt protects your \"trust boundaries\" against cross-site scripting attacks (XSS), cross-zone DNS rebinding / CSRF attacks (router hacking), and Clickjacking attempts, thanks to its unique ClearClick technology.\n\nSuch a preemptive approach prevents exploitation of security vulnerabilities (known and unknown!) with no loss of functionality where you need it. \nExperts do agree: Firefox is really safer with NoScript!\n\nFAQ: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a4a623eb90a9becd02eed9474b3d82f9e6a93cd27281b3c5a9346d4da3543e7/https%3A//noscript.net/faq\" rel=\"nofollow\">https://noscript.net/faq</a>\nForum: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a6b9e607349db8d83719e8645277b4597538997d7a8946bb1515a4ff3f79287/https%3A//noscript.net/forum\" rel=\"nofollow\">https://noscript.net/forum</a>\n\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/e19d2306e457c98e6c3e03f52480e7206685d42d1b075ee88b77e44b1f1d3813/https%3A//forums.informaction.com/viewtopic.php%3Ff=7&amp;t=23974&amp;p=94778\" rel=\"nofollow\">A Basic <b>NoScript 10 Guide</b></a>\n\nStill confused by NoScript 10's new UI?\nCheck this <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/f5ad7f79289d1b2c198593e25708cba9ab4104a300b4ab49f98975c26ad4bc69/https%3A//blog.jeaye.com/2017/11/30/noscript/\" rel=\"nofollow\">user-contributed NoScript 10 primer</a>.\nand this <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/4e700d4e76086494b5553ff9e42d881037d3adcf6d64fefa11545d184fe3d8b5/https%3A//hackademix.net/2017/12/04/noscript-quantum-vs-legacy-in-a-nutshell-2/\" rel=\"nofollow\">NoScript 10 \"Quantum\" vs NoScript 5 \"Classic\" (or \"Legacy\") comparison</a>.",
           "es": "Protección extra para su Firefox: NoScript sólo permite JavaScript, Java y otros plugins en los sitios web de confianza que Ud. elija (como la web de su banco). Este planteamiento preventivo basado en una lista blanca evita que se puedan explotar vulnerabilidades (conocidas o incluso desconocidas) sin pérdida de funcionalidad... Los expertos lo confirmarán: Firefox es realmente más seguro con NoScript :-)",
-          "fr": "<b>IMPORTANT</b>\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/e19d2306e457c98e6c3e03f52480e7206685d42d1b075ee88b77e44b1f1d3813/https%3A//forums.informaction.com/viewtopic.php%3Ff=7&amp;t=23974&amp;p=94778\" rel=\"nofollow\">Un Guide élémentaire pour <b>NoScript 10</b> (en anglais)</a>\n\nConfus avec la nouvelle interface graphique de NoScript 10 ?\nConsultez cette <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/f5ad7f79289d1b2c198593e25708cba9ab4104a300b4ab49f98975c26ad4bc69/https%3A//blog.jeaye.com/2017/11/30/noscript/\" rel=\"nofollow\">introduction à NoScript 10, contribution d’un utilisateur</a> (en anglais)\net cette <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/4e700d4e76086494b5553ff9e42d881037d3adcf6d64fefa11545d184fe3d8b5/https%3A//hackademix.net/2017/12/04/noscript-quantum-vs-legacy-in-a-nutshell-2/\" rel=\"nofollow\">comparaison entre NoScript 10 « Quantum » et NoScript 5 « Classic » (ou « Legacy »)</a> (en anglais).\n\nLauréat du « World Class Award » décerné par PC World et fourni avec le navigateur Tor, NoScript vous offre la meilleure protection disponible pour le Web.\n\nIl autorise le contenu actif JavaScript, Flash, Java et autres à ne s’exécuter que sur les domaines de confiance de votre choix, par exemple le site de votre banque, réduisant le risque d’exploitation à distance de vulnérabilités comme Spectre et Meltdown.\n\nIl protège vos zones de confiance contre les attaques par cross-site scripting (XSS), DNS rebinding / attaque CSRF (Cross Site Request Forgery) (piratage de routeur) et les tentatives de détournement de clic (Clickjacking) grâce à sa propre technologie ClearClick.\n\nCette approche préventive empêche l’exploitation des failles de sécurité (connues mais aussi inconnues) sans perte de fonctionnalités là où vous en avez besoin. Les experts en conviendront : Firefox est réellement plus sûr avec NoScript ;-)\n\nFAQ : <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a4a623eb90a9becd02eed9474b3d82f9e6a93cd27281b3c5a9346d4da3543e7/https%3A//noscript.net/faq\" rel=\"nofollow\">https://noscript.net/faq</a> (en anglais)\nForum : <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a6b9e607349db8d83719e8645277b4597538997d7a8946bb1515a4ff3f79287/https%3A//noscript.net/forum\" rel=\"nofollow\">https://noscript.net/forum</a> (en anglais)",
-          "it": "<b>IMPORTANTE</b>\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/e19d2306e457c98e6c3e03f52480e7206685d42d1b075ee88b77e44b1f1d3813/https%3A//forums.informaction.com/viewtopic.php%3Ff=7&amp;t=23974&amp;p=94778\" rel=\"nofollow\">Guida di base a <b>NoScript 10</b></a>\n\nAncora confuso dalla nuova interfaccia di NoScript 10?\nLeggi qui <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/f5ad7f79289d1b2c198593e25708cba9ab4104a300b4ab49f98975c26ad4bc69/https%3A//blog.jeaye.com/2017/11/30/noscript/\" rel=\"nofollow\">i contributi degli utenti di NoScript 10</a>.\ne <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/4e700d4e76086494b5553ff9e42d881037d3adcf6d64fefa11545d184fe3d8b5/https%3A//hackademix.net/2017/12/04/noscript-quantum-vs-legacy-in-a-nutshell-2/\" rel=\"nofollow\"> una comparazione tra NoScript 10 \"Quantum\" vs NoScript 5 \"Classic\" (o \"Legacy\")</a>.\n\nVincitore del premio \"PC World World Class Award\" ed incorporato nel browser Tor, NoScript ti offre la migliore protezione possibile per il web.\n\nAttiva JavaScript, Flash, Java e altri eseguibili solo sui domini fidati scelti da te, ad esempio il sito della tua banca, riducendo le possibili conseguenze di vulnerabilità, inclusi Spectre e Meltdown.\n\nProtegge la tua rete dagli attacchi cross-site scripting (XSS), cross-zone DNS rebinding / attacchi CSRF (intrusione nel router) e tentativi di Clickjacking, grazie alla sua tecnologia unica ClearClick. \n\nCon un approccio proattivo previene lo sfruttamento di vulnerabilità di sicurezza (conosciute e ancora sconosciute!) senza perdere le funzionalità necessarie.\nGli esperti sono d'accordo: Firefox è veramente più sicuro con NoScript ;-)\n\nFAQ: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a4a623eb90a9becd02eed9474b3d82f9e6a93cd27281b3c5a9346d4da3543e7/https%3A//noscript.net/faq\" rel=\"nofollow\">https://noscript.net/faq</a>\nForum: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a6b9e607349db8d83719e8645277b4597538997d7a8946bb1515a4ff3f79287/https%3A//noscript.net/forum\" rel=\"nofollow\">https://noscript.net/forum</a>",
-          "nl": "<b>BELANGRIJK</b>\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/e19d2306e457c98e6c3e03f52480e7206685d42d1b075ee88b77e44b1f1d3813/https%3A//forums.informaction.com/viewtopic.php%3Ff=7&amp;t=23974&amp;p=94778\" rel=\"nofollow\">Een basale <b>Handleiding voor NoScript 10</b></a>\n\nNog steeds in verwarring door de nieuwe UI van NoScript 10?\nBekijk deze <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/f5ad7f79289d1b2c198593e25708cba9ab4104a300b4ab49f98975c26ad4bc69/https%3A//blog.jeaye.com/2017/11/30/noscript/\" rel=\"nofollow\">door gebruikers aangeleverde beknopte handleiding voor NoScript 10</a>\nen deze <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/4e700d4e76086494b5553ff9e42d881037d3adcf6d64fefa11545d184fe3d8b5/https%3A//hackademix.net/2017/12/04/noscript-quantum-vs-legacy-in-a-nutshell-2/\" rel=\"nofollow\">vergelijking tussen NoScript 10 ‘Quantum’ en NoScript 5 ‘Classic’ (of ‘Verouderd’)</a>.\n\nAls winnaar van de ‘PC World World Class Award’ en gebundeld met de Tor-browser biedt NoScript de best beschikbare bescherming op het web.\n\nHet zorgt ervoor dat JavaScript, Flash, Java en andere uitvoerbare inhoud alleen wordt uitgevoerd vanaf vertrouwde domeinen van uw keuze, zoals uw website voor thuisbankieren, zodat op afstand te misbruiken kwetsbaarheden, waaronder Spectre en Meltdown, worden verminderd.\n\nHet beschermt uw ‘vertrouwensgrenzen’ tegen cross-site-scripting-aanvallen (XSS), cross-zone-DNS-rebinding / CSRF-aanvallen (routerhacking) en Clickjacking-pogingen, dankzij de unieke ClearClick-technologie ervan. \n\nEen dergelijke preventieve benadering voorkomt exploitatie van beveiligingskwetsbaarheden (bekende en zelfs onbekende!) zonder verlies van functionaliteit waar dat nodig is.\nExperts zijn het ermee eens: Firefox is echt veiliger met NoScript ;-)\n\nFAQ: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a4a623eb90a9becd02eed9474b3d82f9e6a93cd27281b3c5a9346d4da3543e7/https%3A//noscript.net/faq\" rel=\"nofollow\">https://noscript.net/faq</a>\nForum: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a6b9e607349db8d83719e8645277b4597538997d7a8946bb1515a4ff3f79287/https%3A//noscript.net/forum\" rel=\"nofollow\">https://noscript.net/forum</a>",
+          "fr": "<b>IMPORTANT</b>\n<a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/e19d2306e457c98e6c3e03f52480e7206685d42d1b075ee88b77e44b1f1d3813/https%3A//forums.informaction.com/viewtopic.php%3Ff=7&amp;t=23974&amp;p=94778\">Un Guide élémentaire pour <b>NoScript 10</b> (en anglais)</a>\n\nConfus avec la nouvelle interface graphique de NoScript 10 ?\nConsultez cette <a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/f5ad7f79289d1b2c198593e25708cba9ab4104a300b4ab49f98975c26ad4bc69/https%3A//blog.jeaye.com/2017/11/30/noscript/\">introduction à NoScript 10, contribution d’un utilisateur</a> (en anglais)\net cette <a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/4e700d4e76086494b5553ff9e42d881037d3adcf6d64fefa11545d184fe3d8b5/https%3A//hackademix.net/2017/12/04/noscript-quantum-vs-legacy-in-a-nutshell-2/\">comparaison entre NoScript 10 « Quantum » et NoScript 5 « Classic » (ou « Legacy »)</a> (en anglais).\n\nLauréat du « World Class Award » décerné par PC World et fourni avec le navigateur Tor, NoScript vous offre la meilleure protection disponible pour le Web.\n\nIl autorise le contenu actif JavaScript, Flash, Java et autres à ne s’exécuter que sur les domaines de confiance de votre choix, par exemple le site de votre banque, réduisant le risque d’exploitation à distance de vulnérabilités comme Spectre et Meltdown.\n\nIl protège vos zones de confiance contre les attaques par cross-site scripting (XSS), DNS rebinding / attaque CSRF (Cross Site Request Forgery) (piratage de routeur) et les tentatives de détournement de clic (Clickjacking) grâce à sa propre technologie ClearClick.\n\nCette approche préventive empêche l’exploitation des failles de sécurité (connues mais aussi inconnues) sans perte de fonctionnalités là où vous en avez besoin. Les experts en conviendront : Firefox est réellement plus sûr avec NoScript ;-)\n\nFAQ : <a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a4a623eb90a9becd02eed9474b3d82f9e6a93cd27281b3c5a9346d4da3543e7/https%3A//noscript.net/faq\">https://noscript.net/faq</a> (en anglais)\nForum : <a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a6b9e607349db8d83719e8645277b4597538997d7a8946bb1515a4ff3f79287/https%3A//noscript.net/forum\">https://noscript.net/forum</a> (en anglais)",
+          "it": "<b>IMPORTANTE</b>\n<a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/e19d2306e457c98e6c3e03f52480e7206685d42d1b075ee88b77e44b1f1d3813/https%3A//forums.informaction.com/viewtopic.php%3Ff=7&amp;t=23974&amp;p=94778\">Guida di base a <b>NoScript 10</b></a>\n\nAncora confuso dalla nuova interfaccia di NoScript 10?\nLeggi qui <a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/f5ad7f79289d1b2c198593e25708cba9ab4104a300b4ab49f98975c26ad4bc69/https%3A//blog.jeaye.com/2017/11/30/noscript/\">i contributi degli utenti di NoScript 10</a>.\ne <a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/4e700d4e76086494b5553ff9e42d881037d3adcf6d64fefa11545d184fe3d8b5/https%3A//hackademix.net/2017/12/04/noscript-quantum-vs-legacy-in-a-nutshell-2/\"> una comparazione tra NoScript 10 \"Quantum\" vs NoScript 5 \"Classic\" (o \"Legacy\")</a>.\n\nVincitore del premio \"PC World World Class Award\" ed incorporato nel browser Tor, NoScript ti offre la migliore protezione possibile per il web.\n\nAttiva JavaScript, Flash, Java e altri eseguibili solo sui domini fidati scelti da te, ad esempio il sito della tua banca, riducendo le possibili conseguenze di vulnerabilità, inclusi Spectre e Meltdown.\n\nProtegge la tua rete dagli attacchi cross-site scripting (XSS), cross-zone DNS rebinding / attacchi CSRF (intrusione nel router) e tentativi di Clickjacking, grazie alla sua tecnologia unica ClearClick. \n\nCon un approccio proattivo previene lo sfruttamento di vulnerabilità di sicurezza (conosciute e ancora sconosciute!) senza perdere le funzionalità necessarie.\nGli esperti sono d'accordo: Firefox è veramente più sicuro con NoScript ;-)\n\nFAQ: <a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a4a623eb90a9becd02eed9474b3d82f9e6a93cd27281b3c5a9346d4da3543e7/https%3A//noscript.net/faq\">https://noscript.net/faq</a>\nForum: <a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a6b9e607349db8d83719e8645277b4597538997d7a8946bb1515a4ff3f79287/https%3A//noscript.net/forum\">https://noscript.net/forum</a>",
+          "nl": "<b>BELANGRIJK</b>\n<a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/e19d2306e457c98e6c3e03f52480e7206685d42d1b075ee88b77e44b1f1d3813/https%3A//forums.informaction.com/viewtopic.php%3Ff=7&amp;t=23974&amp;p=94778\">Een basale <b>Handleiding voor NoScript 10</b></a>\n\nNog steeds in verwarring door de nieuwe UI van NoScript 10?\nBekijk deze <a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/f5ad7f79289d1b2c198593e25708cba9ab4104a300b4ab49f98975c26ad4bc69/https%3A//blog.jeaye.com/2017/11/30/noscript/\">door gebruikers aangeleverde beknopte handleiding voor NoScript 10</a>\nen deze <a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/4e700d4e76086494b5553ff9e42d881037d3adcf6d64fefa11545d184fe3d8b5/https%3A//hackademix.net/2017/12/04/noscript-quantum-vs-legacy-in-a-nutshell-2/\">vergelijking tussen NoScript 10 ‘Quantum’ en NoScript 5 ‘Classic’ (of ‘Verouderd’)</a>.\n\nAls winnaar van de ‘PC World World Class Award’ en gebundeld met de Tor-browser biedt NoScript de best beschikbare bescherming op het web.\n\nHet zorgt ervoor dat JavaScript, Flash, Java en andere uitvoerbare inhoud alleen wordt uitgevoerd vanaf vertrouwde domeinen van uw keuze, zoals uw website voor thuisbankieren, zodat op afstand te misbruiken kwetsbaarheden, waaronder Spectre en Meltdown, worden verminderd.\n\nHet beschermt uw ‘vertrouwensgrenzen’ tegen cross-site-scripting-aanvallen (XSS), cross-zone-DNS-rebinding / CSRF-aanvallen (routerhacking) en Clickjacking-pogingen, dankzij de unieke ClearClick-technologie ervan. \n\nEen dergelijke preventieve benadering voorkomt exploitatie van beveiligingskwetsbaarheden (bekende en zelfs onbekende!) zonder verlies van functionaliteit waar dat nodig is.\nExperts zijn het ermee eens: Firefox is echt veiliger met NoScript ;-)\n\nFAQ: <a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a4a623eb90a9becd02eed9474b3d82f9e6a93cd27281b3c5a9346d4da3543e7/https%3A//noscript.net/faq\">https://noscript.net/faq</a>\nForum: <a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a6b9e607349db8d83719e8645277b4597538997d7a8946bb1515a4ff3f79287/https%3A//noscript.net/forum\">https://noscript.net/forum</a>",
           "pl": "Zwycięzca \"2006 PC World World Class Award\". Narzędzie to stanowi dodatkowe\nzabezpieczenie dla wszystkich przeglądarek Mozilli. NoScript pozwala\nwykonywać skrypty JavaScript i aplety Java tylko przez zaufane domeny\nwybrane przez użytkownika np. witryny banków internetowych oraz zabezpiecza\nprzed atakami typu \"cross-site scripting\" (XSS). Takie prewencyjne podejście\nzabezpiecza przed wykorzystaniem luk bezpieczeństwa - znanych i nieznanych -\nbez utraty funkcjonalności.\n\nEksperci są zgodni: Firefox z NoScript jest naprawdę bezpieczniejszy!",
-          "pt-BR": "IMPORTANTE\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/e19d2306e457c98e6c3e03f52480e7206685d42d1b075ee88b77e44b1f1d3813/https%3A//forums.informaction.com/viewtopic.php%3Ff=7&amp;t=23974&amp;p=94778\" rel=\"nofollow\">Um <b>guia básico do NoScript 10</b></a>\n\nAinda confuso com a nova interface gráfica do NoScript 10?\nConsulte esta <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/f5ad7f79289d1b2c198593e25708cba9ab4104a300b4ab49f98975c26ad4bc69/https%3A//blog.jeaye.com/2017/11/30/noscript/\" rel=\"nofollow\">cartilha do NoScript 10 de contribuições de usuários</a>.\ne esta <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/4e700d4e76086494b5553ff9e42d881037d3adcf6d64fefa11545d184fe3d8b5/https%3A//hackademix.net/2017/12/04/noscript-quantum-vs-legacy-in-a-nutshell-2/\" rel=\"nofollow\">comparação entre NoScript 10 \"Quantum\" e NoScript 5 \"Classic\" (ou \"Legado\")</a>.\n\nVencedor do \"PC World World Class Award\" e incorporado ao Navegador Tor, o NoScript lhe oferece a melhor proteção disponível na web.\n\nEle permite que JavaScript, Flash, Java e outros conteúdos executáveis funcionem apenas em domínios de sua confiança, por exemplo no site do seu banco, mitigando vulnerabilidades de exploração remota, incluindo Spectre e Meltdown.\n\nProtege suas \"fronteiras seguras\" contra ataques 'cross-site scripting' (XSS), ataques 'cross-zone DNS rebinding / CSRF' (invasão de roteador) e tentativas de Clickjacking, graças à sua inigualável tecnologia ClearClick. \n\nTal abordagem preemptiva previne exploração de vulnerabilidades de segurança (conhecidas e até mesmo desconhecidas!) sem perda de funcionalidade onde você precisa.\nEspecialistas concordam: o Firefox é realmente mais seguro com o NoScript ;-)\n\nFAQ: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a4a623eb90a9becd02eed9474b3d82f9e6a93cd27281b3c5a9346d4da3543e7/https%3A//noscript.net/faq\" rel=\"nofollow\">https://noscript.net/faq</a>\nFórum: <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a6b9e607349db8d83719e8645277b4597538997d7a8946bb1515a4ff3f79287/https%3A//noscript.net/forum\" rel=\"nofollow\">https://noscript.net/forum</a>",
+          "pt-BR": "IMPORTANTE\n<a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/e19d2306e457c98e6c3e03f52480e7206685d42d1b075ee88b77e44b1f1d3813/https%3A//forums.informaction.com/viewtopic.php%3Ff=7&amp;t=23974&amp;p=94778\">Um <b>guia básico do NoScript 10</b></a>\n\nAinda confuso com a nova interface gráfica do NoScript 10?\nConsulte esta <a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/f5ad7f79289d1b2c198593e25708cba9ab4104a300b4ab49f98975c26ad4bc69/https%3A//blog.jeaye.com/2017/11/30/noscript/\">cartilha do NoScript 10 de contribuições de usuários</a>.\ne esta <a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/4e700d4e76086494b5553ff9e42d881037d3adcf6d64fefa11545d184fe3d8b5/https%3A//hackademix.net/2017/12/04/noscript-quantum-vs-legacy-in-a-nutshell-2/\">comparação entre NoScript 10 \"Quantum\" e NoScript 5 \"Classic\" (ou \"Legado\")</a>.\n\nVencedor do \"PC World World Class Award\" e incorporado ao Navegador Tor, o NoScript lhe oferece a melhor proteção disponível na web.\n\nEle permite que JavaScript, Flash, Java e outros conteúdos executáveis funcionem apenas em domínios de sua confiança, por exemplo no site do seu banco, mitigando vulnerabilidades de exploração remota, incluindo Spectre e Meltdown.\n\nProtege suas \"fronteiras seguras\" contra ataques 'cross-site scripting' (XSS), ataques 'cross-zone DNS rebinding / CSRF' (invasão de roteador) e tentativas de Clickjacking, graças à sua inigualável tecnologia ClearClick. \n\nTal abordagem preemptiva previne exploração de vulnerabilidades de segurança (conhecidas e até mesmo desconhecidas!) sem perda de funcionalidade onde você precisa.\nEspecialistas concordam: o Firefox é realmente mais seguro com o NoScript ;-)\n\nFAQ: <a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a4a623eb90a9becd02eed9474b3d82f9e6a93cd27281b3c5a9346d4da3543e7/https%3A//noscript.net/faq\">https://noscript.net/faq</a>\nFórum: <a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a6b9e607349db8d83719e8645277b4597538997d7a8946bb1515a4ff3f79287/https%3A//noscript.net/forum\">https://noscript.net/forum</a>",
           "ru": "Победитель \"2006 PC World World Class Award», этот инструмент обеспечивает дополнительную защиту для Вашего Firefox.\nОно позволяет запуск JavaScript, Java и другого активного содержимого только для доверенных доменов по Вашему выбору, например, Ваш личный банковский веб-сайт. Обеспечивает безопасность Вашей работы в \"зоне доверия\", защищает от атак с использованием межузловых сценариев (XSS), кросс-зоны DNS подменой / CSRF-атак (хакерских маршрутизаторов), и атаки ClickJacking, благодаря своей уникальной технологии ClearClick. Он также реализует DoNotTrack защиту по умолчанию, см. <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/bd4266094d321e473190ea27c5ce1eeb6f3ae9aaa99ce33f14cdf3ec1d7dd070/http%3A//snipurl.com/nsdntrack\" rel=\"nofollow\">http://snipurl.com/nsdntrack</a>.\nТакой упреждающий подход предотвращает использование уязвимостей (известных и даже неизвестных!) Без потери функциональности.\nЭксперты едины во мнении: Firefox действительно безопаснее с NoScript ;-)",
           "sk": "Víťaz ceny \"2006 PC World World Class Award\". Tento nástroj poskytuje špeciálnu ochranu Firefoxu.\nPovoľuje spúšťanie JavaScriptu, Javy a ďalšieho spustiteľného obsahu len na dôveryhodných doménach podľa vášho výberu, napr. na webovej stránke bankingu.\nTakýto preventívny prístup chráni pred zneužitím bezpečnostných dier (známych aj neznámych) bez straty funkčnosti.\nOdborníci by súhlasili: Firefox je s rozšírením NoScript naozaj bezpečnejší ;-)",
           "vi": "Đã chiến thắng trong \"Giải thưởng Cấp độ Thế giới PC World 2006\", công cụ này cung cấp lớp phòng vệ phụ thêm cho Firefox của bạn.\nNoScript chỉ cho phép JavaScript, Java (và các phần bổ trợ khác) trên những tên miền tin cậy mà bạn chọn (vd., trang web ngân hàng của bạn), canh gác \"vùng biên giới tin cậy\" của bạn chống lại các âm mưu tấn công cross-site scripting (XSS) và Clickjacking, nhờ công nghệ ClearClick của nó.\nPhương thức ngăn chặn trước dựa trên sổ trắng này ngăn chặn việc khai thác các lỗ hổng bảo mật (đã biết hay thậm chí chưa biết!) mà không làm mất đi chức năng...\nCác chuyên gia đều đồng ý rằng: Firefox thật sự an toàn hơn với NoScript :-)",
           "zh-TW": "這個工具是 2006 PC World 世界級大獎贏家，讓你的 Firefox 更加安全！\n\n使用此套件後，僅有你信任的網站（例如你的銀行）才能執行腳本、Java 與其他動態內容。建立「信任範圍」以抵擋跨網站腳本攻擊（XSS）。\n\n未雨綢繆、使用此套件避開安全漏洞（連未知的漏洞也照擋不誤），而不損失正常功能…\n\n連專家都同意、Firefox 有了 NoScript 後更加安全了 ;-)",
-          "zh-CN": "重要\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/e19d2306e457c98e6c3e03f52480e7206685d42d1b075ee88b77e44b1f1d3813/https%3A//forums.informaction.com/viewtopic.php%3Ff=7&amp;t=23974&amp;p=94778\" rel=\"nofollow\">一篇基础的<b>NoScript 10 指南</b></a>\n\n仍被 NoScript 10 的新 UI 所困惑？\n看看这篇<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/f5ad7f79289d1b2c198593e25708cba9ab4104a300b4ab49f98975c26ad4bc69/https%3A//blog.jeaye.com/2017/11/30/noscript/\" rel=\"nofollow\">用户贡献的 NoScript 10 入门</a>。\n还有这篇<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/4e700d4e76086494b5553ff9e42d881037d3adcf6d64fefa11545d184fe3d8b5/https%3A//hackademix.net/2017/12/04/noscript-quantum-vs-legacy-in-a-nutshell-2/\" rel=\"nofollow\"> NoScript 10 \"Quantum\" vs NoScript 5 \"Classic\" (or \"Legacy\") comparison</a>。\n\n作为“PC World World Class Award”大奖的获得者并内置于 Tor 浏览器，NoScript 将为您提供最佳的网络保护。\n\n它只允许在您选择的信任域上执行 JavaScript、Flash、Java 和其他可执行内容，例如您的家庭银行网站，能够缓解包括 Spectre 和 Meltdown 等远程可利用漏洞。\n\n多亏了其独特的 ClearClick 技术，它可以保护您的“信任边界”不受跨站点脚本攻击（XSS），跨区 DNS 重新绑定/ CSRF 攻击（路由器黑客）和点击劫持（Clickjacking）尝试。\n\n这种先发制人的机制在不损失任何功能的前提下，防止利用安全漏洞（已知甚至未知的！）进行攻击。\n专家们一致同意：拥有 NoScript 的 Firefox 更安全 :-)\n\n常见问题解答：<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a4a623eb90a9becd02eed9474b3d82f9e6a93cd27281b3c5a9346d4da3543e7/https%3A//noscript.net/faq\" rel=\"nofollow\">https://noscript.net/faq</a>\n论坛：<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a6b9e607349db8d83719e8645277b4597538997d7a8946bb1515a4ff3f79287/https%3A//noscript.net/forum\" rel=\"nofollow\">https://noscript.net/forum</a>"
+          "zh-CN": "重要\n<a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/e19d2306e457c98e6c3e03f52480e7206685d42d1b075ee88b77e44b1f1d3813/https%3A//forums.informaction.com/viewtopic.php%3Ff=7&amp;t=23974&amp;p=94778\">一篇基础的<b>NoScript 10 指南</b></a>\n\n仍被 NoScript 10 的新 UI 所困惑？\n看看这篇<a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/f5ad7f79289d1b2c198593e25708cba9ab4104a300b4ab49f98975c26ad4bc69/https%3A//blog.jeaye.com/2017/11/30/noscript/\">用户贡献的 NoScript 10 入门</a>。\n还有这篇<a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/4e700d4e76086494b5553ff9e42d881037d3adcf6d64fefa11545d184fe3d8b5/https%3A//hackademix.net/2017/12/04/noscript-quantum-vs-legacy-in-a-nutshell-2/\"> NoScript 10 \"Quantum\" vs NoScript 5 \"Classic\" (or \"Legacy\") comparison</a>。\n\n作为“PC World World Class Award”大奖的获得者并内置于 Tor 浏览器，NoScript 将为您提供最佳的网络保护。\n\n它只允许在您选择的信任域上执行 JavaScript、Flash、Java 和其他可执行内容，例如您的家庭银行网站，能够缓解包括 Spectre 和 Meltdown 等远程可利用漏洞。\n\n多亏了其独特的 ClearClick 技术，它可以保护您的“信任边界”不受跨站点脚本攻击（XSS），跨区 DNS 重新绑定/ CSRF 攻击（路由器黑客）和点击劫持（Clickjacking）尝试。\n\n这种先发制人的机制在不损失任何功能的前提下，防止利用安全漏洞（已知甚至未知的！）进行攻击。\n专家们一致同意：拥有 NoScript 的 Firefox 更安全 :-)\n\n常见问题解答：<a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a4a623eb90a9becd02eed9474b3d82f9e6a93cd27281b3c5a9346d4da3543e7/https%3A//noscript.net/faq\">https://noscript.net/faq</a>\n论坛：<a rel=\"nofollow\" href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8a6b9e607349db8d83719e8645277b4597538997d7a8946bb1515a4ff3f79287/https%3A//noscript.net/forum\">https://noscript.net/forum</a>"
         },
         "developer_comments": {
           "en-US": "Security issues affecting Firefox or the Tor Browser which can be fixed by a NoScript update are guaranteed to be addressed within 24 hours. This sometimes requires many updates to be issued in a short timespan, and when this happens you may notice NoScript UI's asking to \"<em>reload this page in order to operate properly</em>\". This is normal on \"live\" updates, and it just means the UI is out of sync with the page content, but there's no need to worry as <strong>all the restrictions to scripts and active content are still in place</strong>.",
@@ -2619,12 +2619,12 @@
               960,
               727
             ],
-            "image_url": "https://addons.mozilla.org/user-media/previews/full/267/267408.png?modified=1668722455",
+            "image_url": "https://addons.mozilla.org/user-media/previews/full/267/267408.png?modified=1710779945",
             "thumbnail_size": [
               528,
               400
             ],
-            "thumbnail_url": "https://addons.mozilla.org/user-media/previews/thumbs/267/267408.jpg?modified=1668722455"
+            "thumbnail_url": "https://addons.mozilla.org/user-media/previews/thumbs/267/267408.jpg?modified=1710779945"
           },
           {
             "id": 267511,
@@ -2635,12 +2635,12 @@
               717,
               542
             ],
-            "image_url": "https://addons.mozilla.org/user-media/previews/full/267/267511.png?modified=1668722455",
+            "image_url": "https://addons.mozilla.org/user-media/previews/full/267/267511.png?modified=1710779945",
             "thumbnail_size": [
               529,
               400
             ],
-            "thumbnail_url": "https://addons.mozilla.org/user-media/previews/thumbs/267/267511.jpg?modified=1668722455"
+            "thumbnail_url": "https://addons.mozilla.org/user-media/previews/thumbs/267/267511.jpg?modified=1710779945"
           },
           {
             "id": 267512,
@@ -2651,12 +2651,12 @@
               717,
               542
             ],
-            "image_url": "https://addons.mozilla.org/user-media/previews/full/267/267512.png?modified=1668722455",
+            "image_url": "https://addons.mozilla.org/user-media/previews/full/267/267512.png?modified=1710779945",
             "thumbnail_size": [
               529,
               400
             ],
-            "thumbnail_url": "https://addons.mozilla.org/user-media/previews/thumbs/267/267512.jpg?modified=1668722455"
+            "thumbnail_url": "https://addons.mozilla.org/user-media/previews/thumbs/267/267512.jpg?modified=1710779945"
           }
         ],
         "promoted": {
@@ -2667,10 +2667,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.3973,
-          "bayesian_average": 4.394644655920732,
-          "count": 2187,
-          "text_count": 841
+          "average": 4.3989,
+          "bayesian_average": 4.3962123489941085,
+          "count": 2201,
+          "text_count": 842
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/reviews/",
         "requires_payment": false,
@@ -2714,7 +2714,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/versions/",
-        "weekly_downloads": 7679
+        "weekly_downloads": 7056
       },
       "notes": null
     },
@@ -2730,7 +2730,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 163565,
+        "average_daily_users": 162447,
         "categories": {
           "firefox": [
             "photos-music-videos",
@@ -2839,10 +2839,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 3.8716,
-          "bayesian_average": 3.867573249528433,
-          "count": 1231,
-          "text_count": 446
+          "average": 3.8642,
+          "bayesian_average": 3.8601313266049937,
+          "count": 1237,
+          "text_count": 448
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/reviews/",
         "requires_payment": false,
@@ -2861,7 +2861,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/versions/",
-        "weekly_downloads": 2672
+        "weekly_downloads": 2040
       },
       "notes": null
     }
