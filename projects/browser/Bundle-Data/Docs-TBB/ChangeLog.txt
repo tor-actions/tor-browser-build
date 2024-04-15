@@ -4,20 +4,25 @@ Tor Browser 13.0.14 - April 16 2024
    * Bug 41676: Set privacy.resistFingerprinting.testing.setTZtoUTC as a defense-in-depth [tor-browser]
    * Bug 42335: Do not localize the order of locales for app lang [tor-browser]
    * Bug 42428: Timezone offset leak via document.lastModified [tor-browser]
-   * Bug 42472: Timezone May leak from XSLT Date function [tor-browser]
+   * Bug 42472: Timezone may leak from XSLT Date function [tor-browser]
    * Bug 42508: Rebase Tor Browser stable onto 115.10.0esr [tor-browser]
  * Windows + macOS + Linux
    * Updated Firefox to 115.10.0esr
+   * Bug 42172: browser.startup.homepage and TOR_DEFAULT_HOMEPAGE are ignored for the new window opened by New Identity [tor-browser]
    * Bug 42236: Let users decide whether to load their home page on new identity. [tor-browser]
    * Bug 42468: App languages not sorted correctly in stable [tor-browser]
- * Android
-   * Updated GeckoView to 115.10.0esr
  * Linux
    * Bug 41110: Avoid Fontconfig warning about "ambiguous path" [tor-browser-build]
+ * Android
+   * Updated GeckoView to 115.10.0esr
+   * Bug 42509: Backport Android security fixes from Firefox 125 [tor-browser]
  * Build System
    * All Platforms
      * Updated Go to 1.21.8
      * Bug 41107: Update download-unsigned-sha256sums-gpg-signatures-from-people-tpo for new type of URL [tor-browser-build]
+     * Bug 41122: Add release date to rbm.conf [tor-browser-build]
+   * Android
+     * Bug 40992: Updated torbrowser_version number is not enough to change firefox-android versionCode number [tor-browser-build]
 
 Tor Browser 13.5a6 - March 28 2024
  * All Platforms
