@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 version: 1.0.10
-git_url:  https://github.com/hlandau/svcutils.git
+git_url: https://github.com/hlandau/svcutils.git
 git_hash: c25dac49e50cbbcbef8c81b089f56156f4067729
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:

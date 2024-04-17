@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
-git_url:  https://github.com/golang/groupcache.git
+git_url: https://github.com/golang/groupcache.git
 git_hash: 611e8accdfc92c4187d399e95ce826046d4c8d73
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:

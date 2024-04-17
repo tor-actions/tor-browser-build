@@ -21,6 +21,6 @@ input_files:
   - project: webtunnel
     name: webtunnel
   - name: conjure
-    project: conjure    
+    project: conjure
   - filename: pt_config.json
   - filename: AndroidManifest.xml
