@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 git_hash: 'v[% c("version") %]'
-git_url:  https://github.com/mozilla/glean.git
+git_url: https://github.com/mozilla/glean.git
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 version: '[% pc(c("origin_project"), "var/glean_version", { step => "list_toolchain_updates" }) %]'
 
@@ -55,4 +55,4 @@ steps:
 
 targets:
   with_torsocks:
-      use_torsocks: 1
+    use_torsocks: 1

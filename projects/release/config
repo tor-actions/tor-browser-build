@@ -140,96 +140,96 @@ targets:
 input_files:
 
 # Release
- - name: android-armv7
-   project: browser
-   enable: '[% c("var/browser-android-armv7") %]'
-   target:
-     - '[% c("var/containers_target") %]'
-     - '[% c("var/build_target") %]'
-     - '[% c("var/browser_type") %]-android-armv7'
+  - name: android-armv7
+    project: browser
+    enable: '[% c("var/browser-android-armv7") %]'
+    target:
+      - '[% c("var/containers_target") %]'
+      - '[% c("var/build_target") %]'
+      - '[% c("var/browser_type") %]-android-armv7'
 
- - name: android-x86
-   project: browser
-   enable: '[% c("var/browser-android-x86") %]'
-   target:
-     - '[% c("var/containers_target") %]'
-     - '[% c("var/build_target") %]'
-     - '[% c("var/browser_type") %]-android-x86'
+  - name: android-x86
+    project: browser
+    enable: '[% c("var/browser-android-x86") %]'
+    target:
+      - '[% c("var/containers_target") %]'
+      - '[% c("var/build_target") %]'
+      - '[% c("var/browser_type") %]-android-x86'
 
- - name: android-x86_64
-   project: browser
-   enable: '[% c("var/browser-android-x86_64") %]'
-   target:
-     - '[% c("var/containers_target") %]'
-     - '[% c("var/build_target") %]'
-     - '[% c("var/browser_type") %]-android-x86_64'
+  - name: android-x86_64
+    project: browser
+    enable: '[% c("var/browser-android-x86_64") %]'
+    target:
+      - '[% c("var/containers_target") %]'
+      - '[% c("var/build_target") %]'
+      - '[% c("var/browser_type") %]-android-x86_64'
 
- - name: android-aarch64
-   project: browser
-   enable: '[% c("var/browser-android-aarch64") %]'
-   target:
-     - '[% c("var/containers_target") %]'
-     - '[% c("var/build_target") %]'
-     - '[% c("var/browser_type") %]-android-aarch64'
+  - name: android-aarch64
+    project: browser
+    enable: '[% c("var/browser-android-aarch64") %]'
+    target:
+      - '[% c("var/containers_target") %]'
+      - '[% c("var/build_target") %]'
+      - '[% c("var/browser_type") %]-android-aarch64'
 
- - name: linux-x86_64
-   project: browser
-   enable: '[% c("var/browser-linux-x86_64") %]'
-   target:
-     - '[% c("var/build_target") %]'
-     - '[% c("var/browser_type") %]-linux-x86_64[% c("var/asan-build") %]'
+  - name: linux-x86_64
+    project: browser
+    enable: '[% c("var/browser-linux-x86_64") %]'
+    target:
+      - '[% c("var/build_target") %]'
+      - '[% c("var/browser_type") %]-linux-x86_64[% c("var/asan-build") %]'
 
- - name: linux-i686
-   project: browser
-   enable: '[% c("var/browser-linux-i686") %]'
-   target:
-     - '[% c("var/build_target") %]'
-     - '[% c("var/browser_type") %]-linux-i686'
+  - name: linux-i686
+    project: browser
+    enable: '[% c("var/browser-linux-i686") %]'
+    target:
+      - '[% c("var/build_target") %]'
+      - '[% c("var/browser_type") %]-linux-i686'
 
- - name: windows-i686
-   project: browser
-   enable: '[% c("var/browser-windows-i686") %]'
-   target:
-     - '[% c("var/build_target") %]'
-     - '[% c("var/browser_type") %]-windows-i686'
+  - name: windows-i686
+    project: browser
+    enable: '[% c("var/browser-windows-i686") %]'
+    target:
+      - '[% c("var/build_target") %]'
+      - '[% c("var/browser_type") %]-windows-i686'
 
- - name: windows-x86_64
-   project: browser
-   enable: '[% c("var/browser-windows-x86_64") %]'
-   target:
-     - '[% c("var/build_target") %]'
-     - '[% c("var/browser_type") %]-windows-x86_64'
+  - name: windows-x86_64
+    project: browser
+    enable: '[% c("var/browser-windows-x86_64") %]'
+    target:
+      - '[% c("var/build_target") %]'
+      - '[% c("var/browser_type") %]-windows-x86_64'
 
- - name: macos
-   project: browser
-   enable: '[% c("var/browser-macos") %]'
-   target:
-     - '[% c("var/build_target") %]'
-     - '[% c("var/browser_type") %]-macos'
-
- # non-universal macos build
- - name: macos-x86_64
-   project: browser
-   enable: '[% c("var/browser-macos-x86_64") %]'
-   target:
-     - '[% c("var/build_target") %]'
-     - '[% c("var/browser_type") %]-macos-x86_64'
+  - name: macos
+    project: browser
+    enable: '[% c("var/browser-macos") %]'
+    target:
+      - '[% c("var/build_target") %]'
+      - '[% c("var/browser_type") %]-macos'
 
  # non-universal macos build
- - name: macos-aarch64
-   project: browser
-   enable: '[% c("var/browser-macos-aarch64") %]'
-   target:
-     - '[% c("var/build_target") %]'
-     - '[% c("var/browser_type") %]-macos-aarch64'
+  - name: macos-x86_64
+    project: browser
+    enable: '[% c("var/browser-macos-x86_64") %]'
+    target:
+      - '[% c("var/build_target") %]'
+      - '[% c("var/browser_type") %]-macos-x86_64'
 
- - name: src-firefox
-   project: firefox
-   enable: '[% c("var/browser-src") %]'
-   pkg_type: src-tarballs
-   target:
-     - '[% c("var/build_target") %]'
-     - '[% c("var/browser_type") %]-macos'
+ # non-universal macos build
+  - name: macos-aarch64
+    project: browser
+    enable: '[% c("var/browser-macos-aarch64") %]'
+    target:
+      - '[% c("var/build_target") %]'
+      - '[% c("var/browser_type") %]-macos-aarch64'
+
+  - name: src-firefox
+    project: firefox
+    enable: '[% c("var/browser-src") %]'
+    pkg_type: src-tarballs
+    target:
+      - '[% c("var/build_target") %]'
+      - '[% c("var/browser_type") %]-macos'
 
 steps:
   signtag:

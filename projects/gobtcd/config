@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
-git_url:  https://github.com/namecoin/btcd.git
+git_url: https://github.com/namecoin/btcd.git
 git_hash: 6cfad711d4ee7367b3ab9dc572097438dbca56eb
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:

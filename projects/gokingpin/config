@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 version: 2.2.6
-git_url:  https://github.com/alecthomas/kingpin.git
+git_url: https://github.com/alecthomas/kingpin.git
 git_hash: 947dcec5ba9c011838740e680966fd7087a71d0d
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:

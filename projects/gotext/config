@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 version: 0.1.0
-git_url:  https://github.com/kr/text.git
+git_url: https://github.com/kr/text.git
 git_hash: e2ffdb16a802fe2bb95e2e35ff34f0e53aeef34f
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
