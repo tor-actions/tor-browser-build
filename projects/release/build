@@ -38,7 +38,8 @@ mkdir -p "$destdir"
   mv [% c('input_files_by_name/linux-x86_64') %]/* "$destdir"/
 [% END -%]
 [% IF c("var/linux-packages") -%]
-  mv [% c('input_files_by_name/linux-packages') %]/* "$destdir"/
+  mv [% c('input_files_by_name/deb-packages') %]/* "$destdir"/
+  mv [% c('input_files_by_name/rpm-packages') %]/* "$destdir"/
 [% END -%]
 [% IF c("var/browser-src") -%]
   mv  [% c('input_files_by_name/src-firefox') %]      \
@@ -62,7 +63,7 @@ EOF
 # empty any existing sh256sums file
 echo -n > sha256sums-unsigned-build.txt
 # concat sha256sum entry for each file in set
-for i in $(ls -1 *.exe *.tar.xz *.dmg *.mar *.zip *.tar.gz *.apk *.bspatch *.json *.deb | grep -v '\.incremental\.mar$' | sort)
+for i in $(ls -1 *.exe *.tar.xz *.dmg *.mar *.zip *.tar.gz *.apk *.bspatch *.json *.deb *.rpm | grep -v '\.incremental\.mar$' | sort)
 do
   sha256sum $i >> sha256sums-unsigned-build.txt
 done

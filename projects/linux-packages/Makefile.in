@@ -3,5 +3,25 @@ build:
 	echo 'This is a packaged app.' > "${DEB_TARGET_ARCH}/Browser/is-packaged-app"
 	[% c("touch") %] "${DEB_TARGET_ARCH}/Browser/is-packaged-app"
 
+install:
+	mkdir -p "${DESTDIR}/[% c('var/system_pkg/install_path') %]"
+	cp -a "${DEB_TARGET_ARCH}/Browser"/* "${DESTDIR}/[% c('var/system_pkg/install_path') %]"
+	chmod -R go+rX "${DESTDIR}/[% c('var/system_pkg/install_path') %]"
+	mkdir -p "${DESTDIR}/usr/share/applications"
+	cp -a [% c("var/system_pkg/pkg_name") %].desktop "${DESTDIR}/usr/share/applications"
+	mkdir -p "${DESTDIR}/usr/bin"
+	ln -s "/[% c('var/system_pkg/install_path') %]/start-[% c('var/project-name') %]" \
+		"${DESTDIR}/usr/bin/[% c('var/system_pkg/pkg_name') %]"
+	for res in 16 32 48 64 128 ;\
+	do \
+	  resdir="${DESTDIR}/usr/share/icons/hicolor/$${res}x$${res}/apps"; \
+	  mkdir -p "$$resdir"; \
+	  ln -s "/[% c('var/system_pkg/install_path') %]/browser/chrome/icons/default/default$${res}.png" \
+		  "$${resdir}/[% c('var/system_pkg/pkg_name') %].png"; \
+	done
+	mkdir -p "${DESTDIR}/usr/share/icons/hicolor/scalable/apps"
+	ln -s "/[% c('var/system_pkg/install_path') %]/browser/chrome/icons/default/about-logo.svg" \
+		"${DESTDIR}/usr/share/icons/hicolor/scalable/apps/[% c('var/system_pkg/pkg_name') %].svg"
+
 clean:
 	rm -f "${DEB_TARGET_ARCH}/Browser/is-packaged-app"

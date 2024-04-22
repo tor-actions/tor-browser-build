@@ -188,11 +188,21 @@ input_files:
       - '[% c("var/build_target") %]'
       - '[% c("var/browser_type") %]-linux-i686'
 
-  - name: linux-packages
+  - name: deb-packages
     project: linux-packages
     enable: '[% c("var/linux-packages") %]'
     # Add linux-x86_64 targets for container config
     target_prepend:
+      - deb
+      - linux-x86_64
+      - linux
+
+  - name: rpm-packages
+    project: linux-packages
+    enable: '[% c("var/linux-packages") %]'
+    # Add linux-x86_64 targets for container config
+    target_prepend:
+      - rpm
       - linux-x86_64
       - linux
 

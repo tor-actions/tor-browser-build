@@ -6,11 +6,10 @@ container:
   use_container: 1
 
 var:
-  build_deb_pkg: '[% c("var/mullvad-browser") %]'
   system_pkg:
     install_path: 'usr/lib/[% c("var/system_pkg/pkg_name") %]'
     pkg_name: '[% c("var/project-name") %]-[% c("var/channel") %]'
-    pkg_version: '[% c("var/torbrowser_version") %]-[% c("var/torbrowser_build") %]'
+    pkg_version: '[% c("var/torbrowser_version") %]'
     pkg_revision: '1'
     pkg_description: '[% c("var/display_name") %]'
     deb_release_date: '[% USE date; date.format(c("timestamp"), format = "%a, %d %b %Y 01:02:03 +0000", locale = "en_US") %]'
@@ -19,24 +18,41 @@ var:
       - '[% IF c("var/browser-linux-x86_64") %]amd64[% END %]'
       - '[% IF c("var/browser-linux-i686") %]i386[% END %]'
 
-  arch_deps:
-    # Packages needed to build the deb package
-    - dpkg-dev
-    - debhelper
-    - dh-exec
-    # Packages needed to generate dependencies for the deb package
-    - linux-libc-dev
-    - libasound2-dev
-    - libfontconfig1-dev
-    - libfreetype6-dev
-    - libgconf2-dev
-    - libgtk-3-dev
-    - libpango1.0-dev
-    - libpulse-dev
-    - libx11-xcb-dev
-    - libxt-dev
 
 targets:
+
+  deb:
+    var:
+      build_deb_pkg: '[% c("var/mullvad-browser") %]'
+      arch_deps:
+        # Packages needed to build the deb package
+        - dpkg-dev
+        - debhelper
+        - dh-exec
+        # Packages needed to generate dependencies for the deb package
+        - linux-libc-dev
+        - libasound2-dev
+        - libfontconfig1-dev
+        - libfreetype6-dev
+        - libgconf2-dev
+        - libgtk-3-dev
+        - libpango1.0-dev
+        - libpulse-dev
+        - libx11-xcb-dev
+        - libxt-dev
+
+  rpm:
+    var:
+      build_rpm_pkg: '[% c("var/mullvad-browser") %]'
+
+      arch_deps:
+        # Packages needed to build the rpm package
+        - rpm
+
+      # Use bookworm since rpm version from stretch does not produce
+      # reproducible rpm files
+      container:
+        suite: bookworm
 
   browser-all:
     - browser-linux-x86_64
@@ -54,6 +70,8 @@ targets:
   torbrowser:
     var:
       browser_type: torbrowser
+      system_pkg:
+        pkg_url: 'https://torproject.org/'
   basebrowser:
     var:
       browser_type: basebrowser
@@ -62,6 +80,7 @@ targets:
       browser_type: mullvadbrowser
       system_pkg:
         pkg_description: 'Mullvad Browser is a privacy-focused web browser designed to minimize tracking and fingerprinting.'
+        pkg_url: 'https://mullvad.net/browser'
 
   release:
     var:
@@ -105,6 +124,11 @@ input_files:
     content: "[% INCLUDE 'Makefile.in' %]"
     refresh_input: 1
 
+  - filename: '[% c("var/system_pkg/pkg_name") %].desktop'
+    content: "[% INCLUDE 'browser.desktop.in' %]"
+    refresh_input: 1
+    enable: '[% c("var/build_deb_pkg") || c("var/build_rpm_pkg") %]'
+
   # Debian Package
   - filename: debian/changelog
     content: "[% INCLUDE 'debian/changelog.in' %]"
@@ -120,24 +144,18 @@ input_files:
     content: "[% INCLUDE 'debian/copyright.in' %]"
     refresh_input: 1
     enable: '[% c("var/build_deb_pkg") %]'
-  - filename: debian/install
-    content: "[% INCLUDE 'debian/install.in' %]"
-    refresh_input: 1
-    enable: '[% c("var/build_deb_pkg") %]'
   - filename: debian/docs
     content: "[% INCLUDE 'debian/docs.in' %]"
     refresh_input: 1
     enable: '[% c("var/build_deb_pkg") %]'
-  - filename: 'debian/[% c("var/system_pkg/pkg_name") %].desktop'
-    content: "[% INCLUDE 'debian/browser.desktop.in' %]"
-    refresh_input: 1
-    enable: '[% c("var/build_deb_pkg") %]'
-  - filename: debian/links
-    content: "[% INCLUDE 'debian/links.in' %]"
-    refresh_input: 1
-    enable: '[% c("var/build_deb_pkg") %]'
   - filename: debian/rules
     enable: '[% c("var/build_deb_pkg") %]'
+
+  # rpm package
+  - filename: '[% c("var/system_pkg/pkg_name") %].spec'
+    content: "[% INCLUDE 'rpm-package.spec' %]"
+    refresh_input: 1
+    enable: '[% c("var/build_rpm_pkg") %]'
 
 --- |
   # This part of the file contains options written in perl

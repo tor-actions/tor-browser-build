@@ -1,7 +1,0 @@
-[% c("var/system_pkg/install_path") %]/start-[% c("var/project-name") %] usr/bin/[% c("var/system_pkg/pkg_name") %]
-[% c("var/system_pkg/install_path") %]/browser/chrome/icons/default/default16.png usr/share/icons/hicolor/16x16/apps/[% c("var/system_pkg/pkg_name") %].png
-[% c("var/system_pkg/install_path") %]/browser/chrome/icons/default/default32.png usr/share/icons/hicolor/32x32/apps/[% c("var/system_pkg/pkg_name") %].png
-[% c("var/system_pkg/install_path") %]/browser/chrome/icons/default/default48.png usr/share/icons/hicolor/48x48/apps/[% c("var/system_pkg/pkg_name") %].png
-[% c("var/system_pkg/install_path") %]/browser/chrome/icons/default/default64.png usr/share/icons/hicolor/64x64/apps/[% c("var/system_pkg/pkg_name") %].png
-[% c("var/system_pkg/install_path") %]/browser/chrome/icons/default/default128.png usr/share/icons/hicolor/128x128/apps/[% c("var/system_pkg/pkg_name") %].png
-[% c("var/system_pkg/install_path") %]/browser/chrome/icons/default/about-logo.svg usr/share/icons/hicolor/scalable/apps/[% c("var/system_pkg/pkg_name") %].svg
