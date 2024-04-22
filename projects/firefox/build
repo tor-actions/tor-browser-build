@@ -118,7 +118,7 @@ mkdir "$HOME/.mozbuild"
   ln -s ja ja-JP-mac
   for lang in $supported_locales; do
     # Fluent
-    mv $lang/base-browser.ftl "$l10ncentral/$lang/browser/browser/"
+    mv $lang/base-browser.ftl "$l10ncentral/$lang/toolkit/toolkit/global/"
     # Properties (they use a different directory)
     mv $lang/* "$l10ncentral/$lang/browser/chrome/browser/"
   done
@@ -139,7 +139,7 @@ mkdir "$HOME/.mozbuild"
           source_lang="ja"
         fi
       [% END -%]
-      mv "$transl_tor_browser/$source_lang/tor-browser.ftl" "$l10ncentral/$lang/browser/browser/"
+      mv "$transl_tor_browser/$source_lang/tor-browser.ftl" "$l10ncentral/$lang/toolkit/toolkit/global/"
       mv "$transl_tor_browser/$source_lang/cryptoSafetyPrompt.properties" "$l10ncentral/$lang/browser/chrome/browser/"
       mv "$transl_tor_browser/$source_lang" "$torbutton_locales/$lang"
       echo "% locale torbutton $lang %locale/$lang/" >> "$torbutton_jar"
