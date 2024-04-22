@@ -15,7 +15,6 @@ mkdir pluggable_transports && cd pluggable_transports
 
 tar -xkf $rootdir/[% c('input_files_by_name/lyrebird') %]
 tar -xkf $rootdir/[% c('input_files_by_name/snowflake') %]
-tar -xkf $rootdir/[% c('input_files_by_name/webtunnel') %]
 tar -xkf $rootdir/[% c('input_files_by_name/conjure') %]
 
 # add per-platform pt extension
@@ -35,7 +34,6 @@ cd $distdir
   cp -a tor/pluggable_transports/conjure-client aar/jni/[% c('arch') %]/libConjure.so
   cp -a tor/pluggable_transports/lyrebird aar/jni/[% c('arch') %]/Lyrebird.so
   cp -a tor/pluggable_transports/snowflake-client aar/jni/[% c('arch') %]/libSnowflake.so
-  cp -a tor/pluggable_transports/webtunnel-client aar/jni/[% c('arch') %]/libWebtunnel.so
 
   cp -a data/* aar/assets/common/
 

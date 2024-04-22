@@ -643,9 +643,6 @@ go_vendor-snowflake: submodule-update
 go_vendor-conjure: submodule-update
 	$(rbm) build conjure --step go_vendor --target alpha --target torbrowser-linux-x86_64
 
-go_vendor-webtunnel: submodule-update
-	$(rbm) build webtunnel --step go_vendor --target alpha --target torbrowser-linux-x86_64
-
 go_vendor-lyrebird: submodule-update
 	$(rbm) build lyrebird --step go_vendor --target alpha --target torbrowser-linux-x86_64
 

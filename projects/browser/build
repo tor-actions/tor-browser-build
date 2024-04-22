@@ -109,11 +109,8 @@ mv [% c('input_files_by_name/noscript') %] "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b
 
   # Move READMEs from tor-expert-bundle to the doc dir
   mkdir -p "$TBDIR/$DOCSPATH/snowflake" [% IF c("var/macos_universal") %]"$TBDIR_AARCH64/$DOCSPATH/snowflake"[% END %]
-
-  mkdir -p "$TBDIR/$DOCSPATH/webtunnel" [% IF c("var/macos_universal") %]"$TBDIR_AARCH64/$DOCSPATH/webtunnel"[% END %]
   mkdir -p "$TBDIR/$DOCSPATH/conjure" [% IF c("var/macos_universal") %]"$TBDIR_AARCH64/$DOCSPATH/conjure"[% END %]
   mv_tbdir tor/pluggable_transports/README.SNOWFLAKE.md "$DOCSPATH/snowflake/README.md"
-  mv_tbdir tor/pluggable_transports/README.WEBTUNNEL.md "$DOCSPATH/webtunnel/README.md"
   mv_tbdir tor/pluggable_transports/README.CONJURE.md "$DOCSPATH/conjure/README.md"
 
   # Move the PTs to where TB expects them
