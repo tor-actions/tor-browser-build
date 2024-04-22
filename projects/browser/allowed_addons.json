@@ -17,18 +17,19 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/34/9734/13299734/13299734.png?modified=1709053095"
           }
         ],
-        "average_daily_users": 1157805,
+        "average_daily_users": 1162909,
         "categories": {
           "firefox": [
             "web-development",
             "appearance",
-            "other"
+            "other",
+            "accessibility"
           ]
         },
         "contributions_url": "https://opencollective.com/darkreader?utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2017-09-19T07:03:00Z",
         "current_version": {
-          "id": 5705306,
+          "id": 5718683,
           "compatibility": {
             "firefox": {
               "min": "78.0",
@@ -39,7 +40,7 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/darkreader/versions/5705306",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/darkreader/versions/5718683",
           "is_strict_compatibility_enabled": false,
           "license": {
             "id": 22,
@@ -50,22 +51,22 @@
             "url": "http://www.opensource.org/license/mit"
           },
           "release_notes": {
-            "en-US": "- Analyze inline background images for root elements.\n- Support for \"background\" attribute.\n- Fixed performance for asynchronously resolved inline styles.\n- Fixed freezes and incorrect work on several websites.\n- Dev Tools: Formatting of CSS fixes.\n- Users' fixes for websites."
+            "en-US": "- Reduced memory consumption.\n- Fixed iframes' background colors.\n- Optimized CSS @import loading.\n- Users' fixes for websites."
           },
-          "reviewed": "2024-03-18T08:14:15Z",
-          "version": "4.9.80",
+          "reviewed": "2024-04-15T06:53:51Z",
+          "version": "4.9.83",
           "files": [
             {
-              "id": 4249607,
-              "created": "2024-03-13T17:13:44Z",
-              "hash": "sha256:a93f1250b72cc27fe4a9b02be062c68fb079e45a1233d562852b48e1e9b99307",
+              "id": 4262984,
+              "created": "2024-04-10T20:40:08Z",
+              "hash": "sha256:a43cca2449de202d17040b0d91b2fb3ed4dd58ac81ec5d3fde4c9940d326c822",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 731722,
+              "size": 736649,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/4249607/darkreader-4.9.80.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/4262984/darkreader-4.9.83.xpi",
               "permissions": [
                 "alarms",
                 "contextMenus",
@@ -143,7 +144,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2024-03-18T08:14:15Z",
+        "last_updated": "2024-04-15T06:53:51Z",
         "name": {
           "ar": "Dark Reader",
           "bn": "Dark Reader",
@@ -218,10 +219,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.5332,
-          "bayesian_average": 4.532093960246261,
-          "count": 5531,
-          "text_count": 1747
+          "average": 4.5327,
+          "bayesian_average": 4.531595695870713,
+          "count": 5574,
+          "text_count": 1752
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/reviews/",
         "requires_payment": false,
@@ -318,7 +319,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/versions/",
-        "weekly_downloads": 23454
+        "weekly_downloads": 22901
       },
       "notes": null
     },
@@ -334,7 +335,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/56/7656/6937656/6937656.png?modified=1550343990"
           }
         ],
-        "average_daily_users": 266335,
+        "average_daily_users": 265075,
         "categories": {
           "firefox": [
             "privacy-security"
@@ -343,18 +344,18 @@
         "contributions_url": "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=decentraleyes%40protonmail.com&item_name=Decentraleyes&utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2014-06-10T05:46:02Z",
         "current_version": {
-          "id": 5613891,
+          "id": 5711487,
           "compatibility": {
             "firefox": {
-              "min": "56.0a1",
+              "min": "78.0",
               "max": "*"
             },
             "android": {
-              "min": "56.0a1",
+              "min": "113.0",
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/decentraleyes/versions/5613891",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/decentraleyes/versions/5711487",
           "is_strict_compatibility_enabled": false,
           "license": {
             "id": 3338,
@@ -365,22 +366,22 @@
             "url": "http://www.mozilla.org/MPL/2.0/"
           },
           "release_notes": {
-            "en-US": "<i>Enhancements:</i>\n\n- Improved object property evaluation logic.\n\n<i>Other changes:</i>\n\n- Applied various performance optimizations and stability improvements.\n- Updated resource audit tool dependencies."
+            "en-US": "<i>Enhancements:</i>\n\n- Added additional resources to the staging environment.\n\n<i>Other changes:</i>\n\n- Implemented mobile extension signing-related changes.\n- Improved and extended the resource audit tool."
           },
-          "reviewed": "2023-08-30T12:55:12Z",
-          "version": "2.0.18",
+          "reviewed": "2024-03-28T20:50:08Z",
+          "version": "2.0.19",
           "files": [
             {
-              "id": 4158232,
-              "created": "2023-08-24T20:38:03Z",
-              "hash": "sha256:f8f031ef91c02a1cb1a6552acd02b8f488693400656b4047d68f03ba0a1078d9",
+              "id": 4255788,
+              "created": "2024-03-26T20:59:58Z",
+              "hash": "sha256:105d65bf8189d527251647d0452715c5725af6065fba67cd08187190aae4a98f",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 6951879,
+              "size": 7180376,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/4158232/decentraleyes-2.0.18.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/4255788/decentraleyes-2.0.19.xpi",
               "permissions": [
                 "*://*/*",
                 "privacy",
@@ -470,7 +471,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2023-08-30T12:55:12Z",
+        "last_updated": "2024-03-28T20:50:08Z",
         "name": {
           "ar": "Decentraleyes",
           "bg": "Decentraleyes",
@@ -547,10 +548,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.7986,
-          "bayesian_average": 4.793974484524402,
-          "count": 1415,
-          "text_count": 255
+          "average": 4.7963,
+          "bayesian_average": 4.791679941683995,
+          "count": 1424,
+          "text_count": 258
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/reviews/",
         "requires_payment": false,
@@ -635,7 +636,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/versions/",
-        "weekly_downloads": 3292
+        "weekly_downloads": 3048
       },
       "notes": null
     },
@@ -651,7 +652,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/73/4073/5474073/5474073.png?modified=1469820907"
           }
         ],
-        "average_daily_users": 1231658,
+        "average_daily_users": 1227790,
         "categories": {
           "firefox": [
             "privacy-security"
@@ -1170,10 +1171,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.7988,
-          "bayesian_average": 4.796088382620796,
-          "count": 2415,
-          "text_count": 458
+          "average": 4.798,
+          "bayesian_average": 4.795280100065183,
+          "count": 2421,
+          "text_count": 457
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/reviews/",
         "requires_payment": false,
@@ -1197,7 +1198,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/versions/",
-        "weekly_downloads": 22533
+        "weekly_downloads": 19870
       },
       "notes": null
     },
@@ -1213,7 +1214,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 7819848,
+        "average_daily_users": 7852360,
         "categories": {
           "firefox": [
             "privacy-security"
@@ -1222,7 +1223,7 @@
         "contributions_url": "",
         "created": "2015-04-25T07:26:22Z",
         "current_version": {
-          "id": 5693353,
+          "id": 5717409,
           "compatibility": {
             "firefox": {
               "min": "78.0",
@@ -1233,7 +1234,7 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/ublock-origin/versions/5693353",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/ublock-origin/versions/5717409",
           "is_strict_compatibility_enabled": false,
           "license": {
             "id": 6,
@@ -1244,22 +1245,22 @@
             "url": "http://www.gnu.org/licenses/gpl-3.0.html"
           },
           "release_notes": {
-            "en-US": "See complete release notes for <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/d2b406aad3a1689d93242d841355ff70cc8bad0caa470153d0020e98b5547472/https%3A//github.com/gorhill/uBlock/releases/tag/1.56.0\" rel=\"nofollow\">1.56.0</a>.\n\n<b>Fixes / changes</b>\n\n<ul><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/39dfcbf564824557b9576b8ab90f8b3bf9b6a00796694276f49ffccd1f883691/https%3A//github.com/gorhill/uBlock/commit/2a5a444482\" rel=\"nofollow\">Mind that multiple <code>uritransform</code> may apply to a single request</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/a81992f7ab9a23a438d94b1936b9612cabf9e665d9db49a1a6fed0835bee73fa/https%3A//github.com/gorhill/uBlock/commit/9bff0c2f94\" rel=\"nofollow\">Fix incorrect built-in filtering expression in logger</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/e88d43f67c0962312b76d6d06af26de5de0006954c70568e488f1567269b9288/https%3A//github.com/gorhill/uBlock/commit/21ec5a277c\" rel=\"nofollow\">Fix improper invalidation of valid <code>uritransform</code> exception filters</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/0f3549a7d85e6616619d00126a8ff97508acb67c4d6a8be80bc128c304889a7b/https%3A//github.com/gorhill/uBlock/commit/b22b3d729b\" rel=\"nofollow\">Improve <code>prevent-addEventListener</code> scriptlet</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/378d2611f7de534428615ac9418e10ec3f21533992611f8067c17be97fea704f/https%3A//github.com/gorhill/uBlock/commit/397d6d47b9\" rel=\"nofollow\">Fix Chartbeat flicker control <code>div</code>'s</a> (by @ryanbr)</li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/bbf6c43dcdb62ea74fd182f6c14e982561410421c4ece87fe2287a9be7122b8d/https%3A//github.com/gorhill/uBlock/commit/7b138b58c6\" rel=\"nofollow\">Fix potential exfiltration of browsing history by a rogue list author through <code>permissions=</code></a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/93a9a64cf8ec890f9a478cf32179abeb3392c2b0e00eaabdaae18767df4c6fd8/https%3A//github.com/gorhill/uBlock/commit/3037ae5f04\" rel=\"nofollow\">Ignore event handler-related attributes in <code>set-attr</code> scriptlet</a> (suggested by @distinctmondaylilac)</li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/4ed2b2948421552ce1c1706bddc2e1d7e140ea318c342ac62425de7247245b93/https%3A//github.com/gorhill/uBlock/commit/db5656f607\" rel=\"nofollow\">Fix potential exfiltration of browsing history by a rogue list author through <code>csp=</code></a> (reported by @distinctmondaylilac)</li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/0fc7f9c779a1eb0dde44e6a9cce8c1d1eb82d03b869d06379c98ac2385c5f57a/https%3A//github.com/gorhill/uBlock/commit/869a653fdf\" rel=\"nofollow\">Output scriptlet logging information to the logger</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/0dc5f09464b305050627d6fe2d78c2542b033c5e4bea6c5b753395f8c4a2ef9c/https%3A//github.com/gorhill/uBlock/commit/49dd68ef3d\" rel=\"nofollow\">Fix decompiling of scriptlet parameters</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/5a4d736ff47d1505619f0b2875e2844a6517ae724da6087c4358a1c27723aba2/https%3A//github.com/gorhill/uBlock/commit/45e62c939f\" rel=\"nofollow\">Add support for <code>extraMatch</code> in <code>trusted-click-element</code> scriptlet</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/439735e662e837889e0dbe7125bdfaa00456c0b435fe56c67d76a29021c82464/https%3A//github.com/gorhill/uBlock/commit/f624c835c2\" rel=\"nofollow\">Remove minimum height constraint from \"My filters\" pane</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/ef423b580af2dea4a9a044064326e60a7b1837990f0f4ceb83c319d13816449b/https%3A//github.com/gorhill/uBlock/commit/13dcd844a7\" rel=\"nofollow\">Unregister all scriptlets when disabling uBO on a specific site</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/e06c923bfb016c184026f7d1e9b2341d3d547d2afe5b8f1f4309ba5a2d70384d/https%3A//github.com/gorhill/uBlock/commit/b19094339f\" rel=\"nofollow\">Allow <code>uritransform</code> to process the hash part of a URL</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/3e0f743a60bf78bced858027f356d13fcb916fcc1cff9149d5fd1b738753f1ac/https%3A//github.com/gorhill/uBlock/commit/3d1b100646\" rel=\"nofollow\">Remember presentation state of \"My rules\" pane</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/819053ea32148fd9ad7c6ce5e1e67a5d2e98fb589d58d66d5cef20f53c6740b3/https%3A//github.com/gorhill/uBlock/commit/0e00010b91\" rel=\"nofollow\">Fix improperly assembled <code>!#include</code> sublists</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/9506d56abc46f95d7412b99505eb28ad87762987a4892e8c2b63d164a3032844/https%3A//github.com/gorhill/uBlock/commit/757b8be9cd\" rel=\"nofollow\">Mark procedural filters with pseudo-elements selector as invalid</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/9b18234e17c6871170acd1d510f4746b9b055de1ed04a73c26982e71e6a3ff48/https%3A//github.com/gorhill/uBlock/commit/bc641fc024\" rel=\"nofollow\">Prevent access to picker when \"My filters\" is not enabled</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/f990e686b6eacbbd0bd43a18048c60e6771a538fd2ca663db22bb9096ff37134/https%3A//github.com/gorhill/uBlock/commit/c4bb8a0f64\" rel=\"nofollow\">Provide visual feedback when applying changes in \"Filter lists\" pane</a></li><li>[...]</li></ul>\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/738859f7b07778caaaa18298773a617906b1e10d8d43c5f34902c5d63aef885b/https%3A//github.com/gorhill/uBlock/compare/1.55.0...1.56.0\" rel=\"nofollow\">Commits history since last version</a>"
+            "en-US": "See complete release notes for <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/65a30f1a59ac2ef295f46995786578633d74b56c32119609a791998b2181d0f0/https%3A//github.com/gorhill/uBlock/releases/tag/1.57.2\" rel=\"nofollow\">1.57.2</a>.\n\nThis is an emergency release to fix an issue causing differential updates to fail. The issue primarily affected Firefox because of uBO's use of indexedDB prior to 1.57.0. The issue did not affect full update of filter lists even though the asset viewer would show old versions of those lists (internally uBO compiles lists and would still correctly compile from lists fetched by full updater).\n\n<b>Fixes / changes</b>\n\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/92c6c66077821bbbc4fd825dcb521bf7489bd68180388cf53434bc138b664e09/https%3A//github.com/gorhill/uBlock/commit/defd68ef7d\" rel=\"nofollow\">Fix stray lists in redesigned cache storage</a>\n\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/ad79f1669e12cf4cb05689281e841ad02b344fd831ca42985329020d6cb94faf/https%3A//github.com/gorhill/uBlock/compare/1.57.0...1.57.2\" rel=\"nofollow\">Commits history since last version</a>"
           },
-          "reviewed": "2024-02-20T18:51:52Z",
-          "version": "1.56.0",
+          "reviewed": "2024-04-10T09:01:57Z",
+          "version": "1.57.2",
           "files": [
             {
-              "id": 4237670,
-              "created": "2024-02-17T14:54:31Z",
-              "hash": "sha256:f5fbeeac511ca4e10a74723413727fda8e6f9236c726d16eb54ade1fbe7be5be",
+              "id": 4261710,
+              "created": "2024-04-08T13:51:42Z",
+              "hash": "sha256:9928e79a52cecf7cfa231fdb0699c7d7a427660d94eb10d711ed5a2f10d2eb89",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 3819727,
+              "size": 3861786,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/4237670/ublock_origin-1.56.0.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/4261710/ublock_origin-1.57.2.xpi",
               "permissions": [
                 "alarms",
                 "dns",
@@ -1379,7 +1380,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2024-03-26T17:25:30Z",
+        "last_updated": "2024-04-22T10:35:19Z",
         "name": {
           "ar": "uBlock Origin",
           "bg": "uBlock Origin",
@@ -1524,10 +1525,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.7892,
-          "bayesian_average": 4.788825346990968,
-          "count": 17455,
-          "text_count": 4552
+          "average": 4.7888,
+          "bayesian_average": 4.788425633486962,
+          "count": 17570,
+          "text_count": 4578
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/reviews/",
         "requires_payment": false,
@@ -1590,7 +1591,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/versions/",
-        "weekly_downloads": 158166
+        "weekly_downloads": 157043
       },
       "notes": null
     },
@@ -1606,7 +1607,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 178562,
+        "average_daily_users": 180840,
         "categories": {
           "firefox": [
             "photos-music-videos",
@@ -1702,10 +1703,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.4481,
-          "bayesian_average": 4.443180454772495,
-          "count": 1214,
-          "text_count": 467
+          "average": 4.446,
+          "bayesian_average": 4.441120511767687,
+          "count": 1231,
+          "text_count": 478
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/reviews/",
         "requires_payment": false,
@@ -1727,7 +1728,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/versions/",
-        "weekly_downloads": 386
+        "weekly_downloads": 367
       },
       "notes": null
     },
@@ -1743,7 +1744,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 77166,
+        "average_daily_users": 74977,
         "categories": {
           "firefox": [
             "privacy-security",
@@ -1853,10 +1854,10 @@
         ],
         "promoted": null,
         "ratings": {
-          "average": 4.3753,
-          "bayesian_average": 4.3611016639271964,
-          "count": 405,
-          "text_count": 114
+          "average": 4.3768,
+          "bayesian_average": 4.3623663717329295,
+          "count": 406,
+          "text_count": 115
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/reviews/",
         "requires_payment": false,
@@ -1878,7 +1879,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/versions/",
-        "weekly_downloads": 1963
+        "weekly_downloads": 622
       },
       "notes": null
     },
@@ -1894,7 +1895,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/64/9064/12929064/12929064.png?modified=1651263207"
           }
         ],
-        "average_daily_users": 309800,
+        "average_daily_users": 313979,
         "categories": {
           "firefox": [
             "search-tools",
@@ -2111,10 +2112,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.6336,
-          "bayesian_average": 4.629244598584173,
-          "count": 1441,
-          "text_count": 284
+          "average": 4.6337,
+          "bayesian_average": 4.629361656130135,
+          "count": 1455,
+          "text_count": 286
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/reviews/",
         "requires_payment": false,
@@ -2137,7 +2138,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/versions/",
-        "weekly_downloads": 5510
+        "weekly_downloads": 5338
       },
       "notes": null
     },
@@ -2160,7 +2161,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 124783,
+        "average_daily_users": 126198,
         "categories": {
           "firefox": [
             "search-tools",
@@ -2441,10 +2442,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.3766,
-          "bayesian_average": 4.372232748328777,
-          "count": 1341,
-          "text_count": 379
+          "average": 4.3816,
+          "bayesian_average": 4.377221344459828,
+          "count": 1347,
+          "text_count": 380
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/reviews/",
         "requires_payment": false,
@@ -2464,7 +2465,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/versions/",
-        "weekly_downloads": 26
+        "weekly_downloads": 37
       },
       "notes": null
     },
@@ -2480,7 +2481,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/43/0143/143/143.png?modified=1506804587"
           }
         ],
-        "average_daily_users": 307654,
+        "average_daily_users": 305131,
         "categories": {
           "firefox": [
             "privacy-security",
@@ -2666,10 +2667,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.399,
-          "bayesian_average": 4.396311536554253,
-          "count": 2193,
-          "text_count": 842
+          "average": 4.4,
+          "bayesian_average": 4.3973085609220925,
+          "count": 2205,
+          "text_count": 843
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/reviews/",
         "requires_payment": false,
@@ -2713,7 +2714,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/versions/",
-        "weekly_downloads": 7405
+        "weekly_downloads": 7026
       },
       "notes": null
     },
@@ -2729,7 +2730,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 162666,
+        "average_daily_users": 162878,
         "categories": {
           "firefox": [
             "photos-music-videos",
@@ -2838,10 +2839,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 3.8694,
-          "bayesian_average": 3.8653261105375534,
-          "count": 1233,
-          "text_count": 447
+          "average": 3.866,
+          "bayesian_average": 3.861922949733725,
+          "count": 1239,
+          "text_count": 448
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/reviews/",
         "requires_payment": false,
@@ -2860,7 +2861,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/versions/",
-        "weekly_downloads": 1444
+        "weekly_downloads": 1345
       },
       "notes": null
     }
