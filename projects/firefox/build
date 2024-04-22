@@ -132,15 +132,15 @@ mkdir "$HOME/.mozbuild"
     torbutton_locales="toolkit/torbutton/chrome/locale/"
     torbutton_jar="toolkit/torbutton/jar.mn"
     for lang in $supported_locales; do
-      central_lang=$lang
+      source_lang=$lang
       [% IF c("var/macos") -%]
         if [ "$lang" == "ja-JP-mac" ]; then
-          lang="ja"
+          source_lang="ja"
         fi
       [% END -%]
-      mv "$transl_tor_browser/$lang/tor-browser.ftl" "$l10ncentral/$central_lang/browser/browser/"
-      mv "$transl_tor_browser/$lang/cryptoSafetyPrompt.properties" "$l10ncentral/$central_lang/browser/chrome/browser/"
-      mv "$transl_tor_browser/$lang" "$torbutton_locales/"
+      mv "$transl_tor_browser/$source_lang/tor-browser.ftl" "$l10ncentral/$lang/browser/browser/"
+      mv "$transl_tor_browser/$source_lang/cryptoSafetyPrompt.properties" "$l10ncentral/$lang/browser/chrome/browser/"
+      mv "$transl_tor_browser/$source_lang" "$torbutton_locales/$lang"
       echo "% locale torbutton $lang %locale/$lang/" >> "$torbutton_jar"
       echo "    locale/$lang (chrome/locale/$lang/*)" >> "$torbutton_jar"
     done
