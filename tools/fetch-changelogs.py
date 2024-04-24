@@ -12,16 +12,7 @@ import requests
 GITLAB = "https://gitlab.torproject.org"
 API_URL = f"{GITLAB}/api/v4"
 PROJECT_ID = 473
-
-is_mb = False
-project_order = {
-    "tor-browser-spec": 0,
-    # Leave 1 free, so we can redefine mullvad-browser when needed.
-    "tor-browser": 2,
-    "tor-browser-build": 3,
-    "mullvad-browser": 4,
-    "rbm": 5,
-}
+AUTH_HEADER = "PRIVATE-TOKEN"
 
 
 class EntryType(enum.IntFlag):
@@ -39,11 +30,19 @@ class Platform(enum.IntFlag):
 
 
 class ChangelogEntry:
-    def __init__(self, type_, platform, num_platforms, is_build):
+    def __init__(self, type_, platform, num_platforms, is_build, is_mb):
         self.type = type_
         self.platform = platform
         self.num_platforms = num_platforms
         self.is_build = is_build
+        self.project_order = {
+            "tor-browser-spec": 0,
+            # Leave 1 free, so we can redefine mullvad-browser when needed.
+            "tor-browser": 2,
+            "tor-browser-build": 3,
+            "mullvad-browser": 1 if is_mb else 4,
+            "rbm": 5,
+        }
 
     def get_platforms(self):
         if self.platform == Platform.ALL_PLATFORMS:
@@ -60,6 +59,10 @@ class ChangelogEntry:
         return " + ".join(platforms)
 
     def __lt__(self, other):
+        if self.num_platforms != other.num_platforms:
+            return self.num_platforms > other.num_platforms
+        if self.platform != other.platform:
+            return self.platform > other.platform
         if self.type != other.type:
             return self.type < other.type
         if self.type == EntryType.UPDATE:
@@ -67,22 +70,25 @@ class ChangelogEntry:
             return False
         if self.project == other.project:
             return self.number < other.number
-        return project_order[self.project] < project_order[other.project]
+        return (
+            self.project_order[self.project]
+            < self.project_order[other.project]
+        )
 
 
 class UpdateEntry(ChangelogEntry):
-    def __init__(self, name, version):
+    def __init__(self, name, version, is_mb):
         if name == "Firefox" and not is_mb:
             platform = Platform.DESKTOP
             num_platforms = 3
-        elif name == "GeckoView":
+        elif name == "GeckoView" or name == "Zstandard":
             platform = Platform.ANDROID
-            num_platforms = 3
+            num_platforms = 1
         else:
             platform = Platform.ALL_PLATFORMS
             num_platforms = 4
         super().__init__(
-            EntryType.UPDATE, platform, num_platforms, name == "Go"
+            EntryType.UPDATE, platform, num_platforms, name == "Go", is_mb
         )
         self.name = name
         self.version = version
@@ -92,7 +98,7 @@ class UpdateEntry(ChangelogEntry):
 
 
 class Issue(ChangelogEntry):
-    def __init__(self, j):
+    def __init__(self, j, is_mb):
         self.title = j["title"]
         self.project, self.number = (
             j["references"]["full"].rsplit("/", 2)[-1].split("#")
@@ -125,152 +131,236 @@ class Issue(ChangelogEntry):
             platform = Platform.ALL_PLATFORMS
             num_platforms = 4
         is_build = "Build System" in j["labels"]
-        super().__init__(EntryType.ISSUE, platform, num_platforms, is_build)
+        super().__init__(
+            EntryType.ISSUE, platform, num_platforms, is_build, is_mb
+        )
 
     def __str__(self):
         return f"Bug {self.number}: {self.title} [{self.project}]"
 
 
-def sorted_issues(issues):
-    issues = [sorted(v) for v in issues.values()]
-    return sorted(
-        issues,
-        key=lambda group: (group[0].num_platforms << 8) | group[0].platform,
-        reverse=True,
-    )
+class ChangelogBuilder:
 
+    def __init__(self, auth_token, issue_or_version, is_mullvad=None):
+        self.headers = {AUTH_HEADER: auth_token}
+        self._find_issue(issue_or_version, is_mullvad)
 
-parser = argparse.ArgumentParser()
-parser.add_argument("issue_version")
-parser.add_argument("--date", help="The date of the release")
-parser.add_argument("--firefox", help="New Firefox version (if we rebased)")
-parser.add_argument("--tor", help="New Tor version (if updated)")
-parser.add_argument("--no-script", help="New NoScript version (if updated)")
-parser.add_argument("--openssl", help="New OpenSSL version (if updated)")
-parser.add_argument("--ublock", help="New uBlock version (if updated)")
-parser.add_argument("--zlib", help="New zlib version (if updated)")
-parser.add_argument("--go", help="New Go version (if updated)")
-args = parser.parse_args()
-
-if not args.issue_version:
-    parser.print_help()
-    sys.exit(1)
-
-token_file = Path(__file__).parent / ".changelogs_token"
-if not token_file.exists():
-    print(
-        f"Please add your personal GitLab token (with 'read_api' scope) to {token_file}"
-    )
-    print(
-        f"Please go to {GITLAB}/-/profile/personal_access_tokens and generate it."
-    )
-    token = input("Please enter the new token: ").strip()
-    if not token:
-        print("Invalid token!")
-        sys.exit(2)
-    with token_file.open("w") as f:
-        f.write(token)
-with token_file.open() as f:
-    token = f.read().strip()
-headers = {"PRIVATE-TOKEN": token}
-
-version = args.issue_version
-r = requests.get(
-    f"{API_URL}/projects/{PROJECT_ID}/issues?labels=Release Prep",
-    headers=headers,
-)
-if r.status_code == 401:
-    print("Unauthorized! Has your token expired?")
-    sys.exit(3)
-issue = None
-issues = []
-for i in r.json():
-    if i["title"].find(version) != -1:
-        issues.append(i)
-if len(issues) == 1:
-    issue = issues[0]
-elif len(issues) > 1:
-    print("More than one matching issue found:")
-    for idx, i in enumerate(issues):
-        print(f"  {idx + 1}) #{i['iid']} - {i['title']}")
-    print("Please use the issue id.")
-    sys.exit(4)
-else:
-    iid = version
-    version = "CHANGEME!"
-    if iid[0] == "#":
-        iid = iid[1:]
-    try:
-        int(iid)
+    def _find_issue(self, issue_or_version, is_mullvad):
+        self.version = None
+        if issue_or_version[0] == "#":
+            self._fetch_issue(issue_or_version[1:], is_mullvad)
+            return
+        labels = "Release Prep"
+        if is_mullvad:
+            labels += ",Sponsor 131"
+        elif not is_mullvad and is_mullvad is not None:
+            labels += "&not[labels]=Sponsor 131"
         r = requests.get(
-            f"{API_URL}/projects/{PROJECT_ID}/issues?iids={iid}",
-            headers=headers,
+            f"{API_URL}/projects/{PROJECT_ID}/issues?labels={labels}&search={issue_or_version}&in=title",
+            headers=self.headers,
         )
-        if r.ok and r.json():
-            issue = r.json()[0]
+        r.raise_for_status()
+        issues = r.json()
+        if len(issues) == 1:
+            self.version = issue_or_version
+            self._set_issue(issues[0], is_mullvad)
+        elif len(issues) > 1:
+            raise ValueError(
+                "Multiple issues found, try to specify the browser."
+            )
+        else:
+            self._fetch_issue(issue_or_version, is_mullvad)
+
+    def _fetch_issue(self, number, is_mullvad):
+        try:
+            # Validate the string to be an integer
+            number = int(number)
+        except ValueError:
+            # This is called either as a last chance, or because we
+            # were given "#", so this error should be good.
+            raise ValueError("Issue not found")
+        r = requests.get(
+            f"{API_URL}/projects/{PROJECT_ID}/issues?iids[]={number}",
+            headers=self.headers,
+        )
+        r.raise_for_status()
+        issues = r.json()
+        if len(issues) != 1:
+            # It should be only 0, since we used the number...
+            raise ValueError("Issue not found")
+        self._set_issue(issues[0], is_mullvad)
+
+    def _set_issue(self, issue, is_mullvad):
+        has_s131 = "Sponsor 131" in issue["labels"]
+        if is_mullvad is not None and is_mullvad != has_s131:
+            raise ValueError(
+                "Inconsistency detected: a browser was explicitly specified, but the issue does not have the correct labels."
+            )
+        self.issue_id = issue["iid"]
+        self.is_mullvad = has_s131
+
+        if self.version is None:
             version_match = re.search(r"\b[0-9]+\.[.0-9a]+\b", issue["title"])
             if version_match:
-                version = version_match.group()
-    except ValueError:
-        pass
-if not issue:
-    print(
-        "Release preparation issue not found. Please make sure it has ~Release Prep."
+                self.version = version_match.group()
+
+    def create(self, **kwargs):
+        self._find_linked()
+        self._add_updates(kwargs)
+        self._sort_issues()
+        name = "Mullvad" if self.is_mullvad else "Tor"
+        date = (
+            kwargs["date"]
+            if kwargs.get("date")
+            else datetime.now().strftime("%B %d %Y")
+        )
+        text = f"{name} Browser {self.version} - {date}\n"
+        prev_platform = ""
+        for issue in self.issues:
+            platform = issue.get_platforms()
+            if platform != prev_platform:
+                text += f" * {platform}\n"
+                prev_platform = platform
+            text += f"   * {issue}\n"
+        if self.issues_build:
+            text += " * Build System\n"
+            prev_platform = ""
+            for issue in self.issues_build:
+                platform = issue.get_platforms()
+                if platform != prev_platform:
+                    text += f"   * {platform}\n"
+                    prev_platform = platform
+                text += f"     * {issue}\n"
+        return text
+
+    def _find_linked(self):
+        self.issues = []
+        self.issues_build = []
+
+        r = requests.get(
+            f"{API_URL}/projects/{PROJECT_ID}/issues/{self.issue_id}/links",
+            headers=self.headers,
+        )
+        for i in r.json():
+            self._add_issue(i)
+
+    def _add_issue(self, gitlab_data):
+        self._add_entry(Issue(gitlab_data, self.is_mullvad))
+
+    def _add_entry(self, entry):
+        target = self.issues_build if entry.is_build else self.issues
+        target.append(entry)
+
+    def _add_updates(self, updates):
+        names = {
+            "Firefox": "firefox",
+        }
+        if not self.is_mullvad:
+            names.update(
+                {
+                    "GeckoView": "firefox",
+                    "Tor": "tor",
+                    "NoScript": "noscript",
+                    "OpenSSL": "openssl",
+                    "zlib": "zlib",
+                    "Zstandard": "zstd",
+                    "Go": "go",
+                }
+            )
+        else:
+            names.update(
+                {
+                    "Mullvad Browser Extension": "mb_extension",
+                    "uBlock Origin": "ublock",
+                }
+            )
+        for name, key in names.items():
+            self._maybe_add_update(name, updates, key)
+
+    def _maybe_add_update(self, name, updates, key):
+        if updates.get(key):
+            self._add_entry(UpdateEntry(name, updates[key], self.is_mullvad))
+
+    def _sort_issues(self):
+        self.issues.sort()
+        self.issues_build.sort()
+
+
+def load_token(test=True, interactive=True):
+    token_path = Path(__file__).parent / ".changelogs_token"
+
+    if token_path.exists():
+        with token_path.open() as f:
+            token = f.read().strip()
+    elif interactive:
+        print(
+            f"Please add your personal GitLab token (with 'read_api' scope) to {token_path}"
+        )
+        print(
+            f"Please go to {GITLAB}/-/profile/personal_access_tokens and generate it."
+        )
+        token = input("Please enter the new token: ").strip()
+        if not token:
+            raise ValueError("Invalid token!")
+        with token_path.open("w") as f:
+            f.write(token)
+    if test:
+        r = requests.get(f"{API_URL}/version", headers={AUTH_HEADER: token})
+        if r.status_code == 401:
+            raise ValueError("The loaded or provided token does not work.")
+    return token
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("issue_version")
+    parser.add_argument("-d", "--date", help="The date of the release")
+    parser.add_argument(
+        "-b", "--browser", choices=["tor-browser", "mullvad-browser"]
     )
-    sys.exit(5)
-if "Sponsor 131" in issue["labels"]:
-    is_mb = True
-    project_order["mullvad-browser"] = 1
-iid = issue["iid"]
+    parser.add_argument(
+        "--firefox", help="New Firefox version (if we rebased)"
+    )
+    parser.add_argument("--tor", help="New Tor version (if updated)")
+    parser.add_argument(
+        "--noscript", "--no-script", help="New NoScript version (if updated)"
+    )
+    parser.add_argument("--openssl", help="New OpenSSL version (if updated)")
+    parser.add_argument("--zlib", help="New zlib version (if updated)")
+    parser.add_argument("--zstd", help="New zstd version (if updated)")
+    parser.add_argument("--go", help="New Go version (if updated)")
+    parser.add_argument(
+        "--mb-extension",
+        help="New Mullvad Browser Extension version (if updated)",
+    )
+    parser.add_argument("--ublock", help="New uBlock version (if updated)")
+    args = parser.parse_args()
 
-linked = {}
-linked_build = {}
+    if not args.issue_version:
+        parser.print_help()
+        sys.exit(1)
 
-
-def add_entry(entry):
-    target = linked_build if entry.is_build else linked
-    if entry.platform not in target:
-        target[entry.platform] = []
-    target[entry.platform].append(entry)
-
-
-if args.firefox:
-    add_entry(UpdateEntry("Firefox", args.firefox))
-    if not is_mb:
-        add_entry(UpdateEntry("GeckoView", args.firefox))
-if args.tor and not is_mb:
-    add_entry(UpdateEntry("Tor", args.tor))
-if args.no_script:
-    add_entry(UpdateEntry("NoScript", args.no_script))
-if not is_mb:
-    if args.openssl:
-        add_entry(UpdateEntry("OpenSSL", args.openssl))
-    if args.zlib:
-        add_entry(UpdateEntry("zlib", args.zlib))
-    if args.go:
-        add_entry(UpdateEntry("Go", args.go))
-elif args.ublock:
-    add_entry(UpdateEntry("uBlock Origin", args.ublock))
-
-r = requests.get(
-    f"{API_URL}/projects/{PROJECT_ID}/issues/{iid}/links", headers=headers
-)
-for i in r.json():
-    add_entry(Issue(i))
-
-linked = sorted_issues(linked)
-linked_build = sorted_issues(linked_build)
-
-name = "Mullvad" if is_mb else "Tor"
-date = args.date if args.date else datetime.now().strftime("%B %d %Y")
-print(f"{name} Browser {version} - {date}")
-for issues in linked:
-    print(f" * {issues[0].get_platforms()}")
-    for i in issues:
-        print(f"   * {i}")
-if linked_build:
-    print(" * Build System")
-    for issues in linked_build:
-        print(f"   * {issues[0].get_platforms()}")
-        for i in issues:
-            print(f"     * {i}")
+    try:
+        token = load_token()
+    except ValueError:
+        print(
+            "Invalid authentication token. Maybe has it expired?",
+            file=sys.stderr,
+        )
+        sys.exit(2)
+    is_mullvad = args.browser == "mullvad-browser" if args.browser else None
+    cb = ChangelogBuilder(token, args.issue_version, is_mullvad)
+    print(
+        cb.create(
+            date=args.date,
+            firefox=args.firefox,
+            tor=args.tor,
+            noscript=args.noscript,
+            openssl=args.openssl,
+            zlib=args.zlib,
+            zstd=args.zstd,
+            go=args.go,
+            mb_extension=args.mb_extension,
+            ublock=args.ublock,
+        )
+    )
