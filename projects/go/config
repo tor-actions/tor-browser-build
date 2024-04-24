@@ -1,11 +1,14 @@
 # vim: filetype=yaml sw=2
-version: '[% IF c("var/use_go_1_20") %]1.20.14[% ELSE %]1.21.9[% END %]'
+# When Windows 7 goes EOL, just update this field
+version: '[% IF c("var/use_go_1_20") %][% c("var/go_1_20") %][% ELSE %][% c("var/go_1_21") %][% END %]'
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
 
 var:
   use_go_1_20: 0
+  go_1_21: 1.21.9
+  go_1_20: 1.20.14
   setup: |
     mkdir -p /var/tmp/dist
     tar -C /var/tmp/dist -xf $rootdir/[% c("go_tarfile") %]
@@ -119,13 +122,11 @@ input_files:
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
     enable: '[% ! c("var/linux") %]'
-  - URL: 'https://go.dev/dl/go[% c("version") %].src.tar.gz'
-    # 1.21 series
+  - URL: 'https://go.dev/dl/go[% c("var/go_1_21") %].src.tar.gz'
     name: go
     sha256sum: 58f0c5ced45a0012bce2ff7a9df03e128abcc8818ebabe5027bb92bafe20e421
     enable: '[% !c("var/use_go_1_20") %]'
-  - URL: 'https://go.dev/dl/go[% c("version") %].src.tar.gz'
-    # 1.20 series
+  - URL: 'https://go.dev/dl/go[% c("var/go_1_20") %].src.tar.gz'
     name: go
     sha256sum: 1aef321a0e3e38b7e91d2d7eb64040666cabdcc77d383de3c9522d0d69b67f4e
     enable: '[% c("var/use_go_1_20") %]'

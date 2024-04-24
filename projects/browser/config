@@ -111,7 +111,7 @@ input_files:
     name: ublock-origin
     sha256sum: 9928e79a52cecf7cfa231fdb0699c7d7a427660d94eb10d711ed5a2f10d2eb89
     enable: '[% c("var/mullvad-browser") %]'
-  - URL: https://github.com/mullvad/browser-extension/releases/download/v0.9.0-firefox-beta/mullvad-browser-extension-0.9.0.xpi
+  - URL: https://cdn.mullvad.net/browser-extension/0.9.0/mullvad-browser-extension-0.9.0.xpi
     name: mullvad-extension
     sha256sum: 65bf235aa1015054ae0a54a40c5a663e67fe1d0f0799e7b4726f98cccc7f3eab
     enable: '[% c("var/mullvad-browser") %]'
