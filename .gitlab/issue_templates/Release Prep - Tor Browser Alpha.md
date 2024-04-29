@@ -78,6 +78,10 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
   - [ ] Check for zlib updates here: https://github.com/madler/zlib/releases
     - [ ] **(Optional)** If new tag available, update `projects/zlib/config`
       - [ ] `version` : update to next release tag
+  - [ ] Check for Zstandard updates here: https://github.com/facebook/zstd/releases
+    - [ ] **(Optional)** If new tag available, update `projects/zstd/config`
+      - [ ] `version` : update to next release tag
+      - [ ] `git_hash`: update to the commit corresponding to the tag (we don't check signatures for Zstandard)
   - [ ] Check for tor updates here : https://gitlab.torproject.org/tpo/core/tor/-/tags
     - [ ] ***(Optional)*** Update `projects/tor/config`
       - [ ] `version` : update to latest `-alpha` tag or release tag if newer (ping dgoulet or ahf if unsure)
@@ -97,7 +101,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
 - [ ] Update `ChangeLog-TBB.txt`
   - [ ] Ensure `ChangeLog-TBB.txt` is sync'd between alpha and stable branches
   - [ ] Check the linked issues: ask people to check if any are missing, remove the not fixed ones
-  - [ ] Run `./tools/fetch-changelogs.py $(ISSUE_NUMBER) --date $date $updateArgs`
+  - [ ] Run `./tools/fetch_changelogs.py $(ISSUE_NUMBER) --date $date $updateArgs`
     - Make sure you have `requests` installed (e.g., `apt install python3-requests`)
     - The first time you run this script you will need to generate an access token; the script will guide you
     - `$updateArgs` should be these arguments, depending on what you actually updated:
@@ -106,8 +110,9 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
       - [ ] `--no-script`
       - [ ] `--openssl`
       - [ ] `--zlib`
+      - [ ] `--zstd`
       - [ ] `--go`
-      - E.g., `./tools/fetch-changelogs.py 41028 --date 'December 19 2023' --firefox 115.6.0esr --tor 0.4.8.10 --no-script 11.4.29 --zlib 1.3 --go 1.21.5 --openssl 3.0.12`
+      - E.g., `./tools/fetch_changelogs.py 41028 --date 'December 19 2023' --firefox 115.6.0esr --tor 0.4.8.10 --no-script 11.4.29 --zlib 1.3 --go 1.21.5 --openssl 3.0.12`
     - `--date $date` is optional, if omitted it will be the date on which you run the command
   - [ ] Copy the output of the script to the beginning of `ChangeLog-TBB.txt` and adjust its output
 - [ ] Open MR with above changes, using the template for release preparations

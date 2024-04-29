@@ -67,14 +67,14 @@ Mullvad Browser Alpha (and Nightly) are on the `main` branch
 - [ ] Update `ChangeLog-MB.txt`
   - [ ] Ensure `ChangeLog-MB.txt` is sync'd between alpha and stable branches
   - [ ] Check the linked issues: ask people to check if any are missing, remove the not fixed ones
-  - [ ] Run `./tools/fetch-changelogs.py $(ISSUE_NUMBER) --date $date $updateArgs`
+  - [ ] Run `./tools/fetch_changelogs.py $(ISSUE_NUMBER) --date $date $updateArgs`
     - Make sure you have `requests` installed (e.g., `apt install python3-requests`)
     - The first time you run this script you will need to generate an access token; the script will guide you
     - `$updateArgs` should be these arguments, depending on what you actually updated:
       - [ ] `--firefox` (be sure to include esr at the end if needed, which is usually the case)
       - [ ] `--no-script`
       - [ ] `--ublock`
-      - E.g., `./tools/fetch-changelogs.py 41029 --date 'December 19 2023' --firefox 115.6.0esr --no-script 11.4.29 --ublock 1.54.0`
+      - E.g., `./tools/fetch_changelogs.py 41029 --date 'December 19 2023' --firefox 115.6.0esr --no-script 11.4.29 --ublock 1.54.0`
     - `--date $date` is optional, if omitted it will be the date on which you run the command
   - [ ] Copy the output of the script to the beginning of `ChangeLog-MB.txt` and adjust its output
 - [ ] Open MR with above changes, using the template for release preparations
