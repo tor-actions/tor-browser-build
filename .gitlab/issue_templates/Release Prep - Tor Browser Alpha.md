@@ -90,14 +90,13 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
     - [ ] ***(Optional)*** Update `projects/go/config`
       - [ ] `version` : update go version
       - [ ] `input_files/sha256sum` for `go` : update sha256sum of archive (sha256 sums are displayed on the go download page)
-  - [ ] Check for manual updates by running (from `tor-browser-build` root): `./tools/fetch-manual.py`
+  - [ ] Check for manual updates by running (from `tor-browser-build` root): `./tools/update_manual.py`
     - [ ] ***(Optional)*** If new version is available:
       - [ ] Upload the downloaded `manual_$PIPELINEID.zip` file to `tb-build-02.torproject.org`
+        - The script will tell if it's necessary to
       - [ ] Deploy to `tb-builder`'s `public_html` directory:
         - `sudo -u tb-builder cp manual_$PIPELINEID.zip ~tb-builder/public_html/.`
-      - [ ] Update `projects/manual/config`:
-        - [ ] Change the `version` to `$PIPELINEID`
-        - [ ] Update `sha256sum` in the `input_files` section
+      - [ ] Add `projects/manual/config` to the stage area if the script updated it.
 - [ ] Update `ChangeLog-TBB.txt`
   - [ ] Ensure `ChangeLog-TBB.txt` is sync'd between alpha and stable branches
   - [ ] Check the linked issues: ask people to check if any are missing, remove the not fixed ones
