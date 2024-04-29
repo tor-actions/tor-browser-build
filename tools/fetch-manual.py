@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 import hashlib
 from pathlib import Path
-import sys
 
 import requests
-import yaml
+import ruamel.yaml
+
+from fetch_changelogs import load_token, AUTH_HEADER
 
 
 GITLAB = "https://gitlab.torproject.org"
@@ -13,71 +14,87 @@ PROJECT_ID = 23
 REF_NAME = "main"
 
 
-token_file = Path(__file__).parent / ".changelogs_token"
-if not token_file.exists():
-    print("This scripts uses the same access token as fetch-changelog.py.")
-    print("However, the file has not been found.")
-    print(
-        "Please run fetch-changelog.py to get the instructions on how to "
-        "generate it."
+def find_job(auth_token):
+    r = requests.get(
+        f"{API_URL}/projects/{PROJECT_ID}/jobs",
+        headers={AUTH_HEADER: auth_token},
     )
-    sys.exit(1)
-with token_file.open() as f:
-    headers = {"PRIVATE-TOKEN": f.read().strip()}
+    r.raise_for_status()
+    for job in r.json():
+        if job["ref"] != REF_NAME:
+            continue
+        for artifact in job["artifacts"]:
+            if artifact["filename"] == "artifacts.zip":
+                return job
 
-r = requests.get(f"{API_URL}/projects/{PROJECT_ID}/jobs", headers=headers)
-if r.status_code == 401:
-    print("Unauthorized! Maybe the token has expired.")
-    sys.exit(2)
-found = False
-for job in r.json():
-    if job["ref"] != REF_NAME:
-        continue
-    for art in job["artifacts"]:
-        if art["filename"] == "artifacts.zip":
-            found = True
+
+def update_config(base_path, pipeline_id, sha256):
+    yaml = ruamel.yaml.YAML()
+    yaml.indent(mapping=2, sequence=4, offset=2)
+    yaml.width = 150
+    yaml.preserve_quotes = True
+
+    config_path = base_path / "projects/manual/config"
+    config = yaml.load(config_path)
+    if int(config["version"]) == pipeline_id:
+        return False
+
+    config["version"] = pipeline_id
+    for input_file in config["input_files"]:
+        if input_file.get("name") == "manual":
+            input_file["sha256sum"] = sha256
             break
-    if found:
-        break
-if not found:
-    print("Cannot find a usable job.")
-    sys.exit(3)
+    with config_path.open("w") as f:
+        yaml.dump(config, f)
+    return True
 
-pipeline_id = job["pipeline"]["id"]
-conf_file = Path(__file__).parent.parent / "projects/manual/config"
-with conf_file.open() as f:
-    config = yaml.load(f, yaml.SafeLoader)
-if int(config["version"]) == int(pipeline_id):
-    print(
-        "projects/manual/config is already using the latest pipeline. Nothing to do."
-    )
-    sys.exit(0)
-
-manual_dir = Path(__file__).parent.parent / "out/manual"
-manual_dir.mkdir(0o755, parents=True, exist_ok=True)
-manual_file = manual_dir / f"manual_{pipeline_id}.zip"
-sha256 = hashlib.sha256()
-if manual_file.exists():
-    with manual_file.open("rb") as f:
-        while chunk := f.read(8192):
-            sha256.update(chunk)
-    print("You already have the latest manual version in your out directory.")
-    print("Please update projects/manual/config to:")
-else:
-    print("Downloading the new version of the manual...")
-    url = f"{API_URL}/projects/{PROJECT_ID}/jobs/artifacts/{REF_NAME}/download?job={job['name']}"
-    r = requests.get(url, headers=headers, stream=True)
+def download_manual(url, dest):
+    r = requests.get(url, stream=True)
     # https://stackoverflow.com/a/16696317
     r.raise_for_status()
-    with manual_file.open("wb") as f:
+    sha256 = hashlib.sha256()
+    with dest.open("wb") as f:
         for chunk in r.iter_content(chunk_size=8192):
             f.write(chunk)
             sha256.update(chunk)
-    print(f"File downloaded as {manual_file}.")
-    print(
-        "Please upload it to tb-build-02.torproject.org:~tb-builder/public_html/. and then update projects/manual/config:"
-    )
-sha256 = sha256.hexdigest()
+    return sha256.hexdigest()
 
-print(f"\tversion: {pipeline_id}")
-print(f"\tSHA256: {sha256}")
+
+def update_manual(auth_token, base_path):
+    job = find_job(auth_token)
+    if job is None:
+        raise RuntimeError("No usable job found")
+    pipeline_id = int(job["pipeline"]["id"])
+
+    manual_fname = f"manual_{pipeline_id}.zip"
+    url = f"https://build-sources.tbb.torproject.org/{manual_fname}"
+    r = requests.head(url)
+    needs_upload = r.status_code != 200
+
+    manual_dir = base_path / "out/manual"
+    manual_dir.mkdir(0o755, parents=True, exist_ok=True)
+    manual_file = manual_dir / manual_fname
+    if manual_file.exists():
+        sha256 = hashlib.sha256()
+        with manual_file.open("rb") as f:
+            while chunk := f.read(8192):
+                sha256.update(chunk)
+        sha256 = sha256.hexdigest()
+    elif not needs_upload:
+        sha256 = download_manual(url, manual_file)
+    else:
+        url = f"{API_URL}/projects/{PROJECT_ID}/jobs/artifacts/{REF_NAME}/download?job={job['name']}"
+        sha256 = download_manual(url, manual_file)
+
+    if needs_upload:
+        print(f"New manual version: {manual_file}.")
+        print(
+            "Please upload it to tb-build-02.torproject.org:~tb-builder/public_html/."
+        )
+
+    return update_config(base_path, pipeline_id, sha256)
+
+
+if __name__ == "__main__":
+    if update_manual(load_token(), Path(__file__).parent.parent):
+        print("Manual config updated, remember to stage it!")
