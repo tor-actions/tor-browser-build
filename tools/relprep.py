@@ -4,9 +4,9 @@ from collections import namedtuple
 import configparser
 from datetime import datetime, timezone
 from hashlib import sha256
-import io
 import json
 import locale
+import logging
 from pathlib import Path
 import re
 import sys
@@ -21,7 +21,39 @@ import fetch_changelogs
 from update_manual import update_manual
 
 
-ReleaseTag = namedtuple("ReleaseTag", ["tag", "version", "minor"])
+logger = logging.getLogger(__name__)
+
+
+ReleaseTag = namedtuple("ReleaseTag", ["tag", "version"])
+
+
+class Version:
+    def __init__(self, v):
+        self.v = v
+        m = re.match(r"(\d+\.\d+)([a\.])?(\d*)", v)
+        self.major = m.group(1)
+        self.minor = int(m.group(3)) if m.group(3) else 0
+        self.is_alpha = m.group(2) == "a"
+        self.channel = "alpha" if self.is_alpha else "release"
+
+    def __str__(self):
+        return self.v
+
+    def __lt__(self, other):
+        if self.major != other.major:
+            # String comparison, but it should be fine until
+            # version 100 :)
+            return self.major < other.major
+        if self.is_alpha != other.is_alpha:
+            return self.is_alpha
+        # Same major, both alphas/releases
+        return self.minor < other.minor
+
+    def __eq__(self, other):
+        return self.v == other.v
+
+    def __hash__(self):
+        return hash(self.v)
 
 
 def get_sorted_tags(repo):
@@ -52,6 +84,12 @@ def get_github_release(project, regex=""):
 
 class ReleasePreparation:
     def __init__(self, repo_path, version, **kwargs):
+        logger.debug(
+            "Initializing. Version=%s, repo=%s, additional args=%s",
+            repo_path,
+            version,
+            kwargs,
+        )
         self.base_path = Path(repo_path)
         self.repo = Repo(self.base_path)
 
@@ -63,19 +101,19 @@ class ReleasePreparation:
         if not self.tor_browser and self.android:
             raise ValueError("Only Tor Browser supports Android")
 
+        logger.debug(
+            "Tor Browser: %s; Mullvad Browser: %s; Android: %s",
+            self.tor_browser,
+            self.mullvad_browser,
+            self.android,
+        )
+
         self.yaml = ruamel.yaml.YAML()
         self.yaml.indent(mapping=2, sequence=4, offset=2)
         self.yaml.width = 4096
         self.yaml.preserve_quotes = True
 
-        self.version = version
-        self.is_alpha = "a" in version
-        self.channel = "alpha" if self.is_alpha else "release"
-        self.major = (
-            version.split("a")[0]
-            if self.is_alpha
-            else ".".join(version.split(".")[:2])
-        )
+        self.version = Version(version)
 
         self.build_date = kwargs.get("build_date", datetime.now(timezone.utc))
         self.changelog_date = kwargs.get("changelog_date", self.build_date)
@@ -83,6 +121,7 @@ class ReleasePreparation:
 
         self.get_last_releases()
 
+        logger.info("Checking you have a working GitLab token.")
         self.gitlab_token = fetch_changelogs.load_token()
 
     def run(self):
@@ -101,54 +140,75 @@ class ReleasePreparation:
             if self.android:
                 self.update_zstd()
             self.update_go()
-            update_manual(self.gitlab_token, self.base_path)
+            self.update_manual()
 
         self.update_changelogs()
         self.update_rbm_conf()
 
+        logger.info("Release preparation complete!")
+
     def branch_sanity_check(self):
+        logger.info("Checking you are on an updated branch.")
+
         remote = None
         for rem in self.repo.remotes:
             if "tpo/applications/tor-browser-build" in rem.url:
                 remote = rem
                 break
         if remote is None:
-            print("Cannot find the tpo/applications remote.", file=sys.stderr)
-            sys.exit(1)
+            raise RuntimeError("Cannot find the tpo/applications remote.")
         remote.fetch()
 
-        branch = remote.refs[
-            "main" if self.is_alpha else f"maint-{self.major}"
-        ]
+        branch_name = (
+            "main" if self.version.is_alpha else f"maint-{self.version.major}"
+        )
+        branch = remote.refs[branch_name]
         base = self.repo.merge_base(self.repo.head, branch)[0]
         if base != branch.commit:
-            print(
-                "Sanity check with the remote branch failed!", file=sys.stderr
+            raise RuntimeError(
+                "You are not working on a branch descending from "
+                f"f{branch_name}. "
+                "Please checkout the correct branch, or pull/rebase."
             )
-            print(
-                "Please checkout the correct branch, or pull/rebase.",
-                file=sys.stderr,
-            )
-            sys.exit(2)
+        logger.debug("Sanity check succeeded.")
 
     def update_firefox(self):
+        logger.info("Updating Firefox (and GeckoView if needed)")
         config = self.load_config("firefox")
 
         tag_tb = None
         tag_mb = None
         if self.tor_browser:
             tag_tb = self._get_firefox_tag(config, "tor-browser")
+            logger.debug(
+                "Tor Browser tag: ff=%s, rebase=%s, build=%s",
+                tag_tb[0],
+                tag_tb[1],
+                tag_tb[2],
+            )
         if self.mullvad_browser:
             tag_mb = self._get_firefox_tag(config, "mullvad-browser")
+            logger.debug(
+                "Mullvad Browser tag: ff=%s, rebase=%s, build=%s",
+                tag_mb[0],
+                tag_mb[1],
+                tag_mb[2],
+            )
         if (
             tag_mb
             and (not tag_tb or tag_tb[2] == tag_mb[2])
             and "browser_build" in config["targets"]["mullvadbrowser"]["var"]
         ):
+            logger.debug(
+                "Tor Browser and Mullvad Browser are on the same build number, deleting unnecessary targets/mullvadbrowser/var/browser_build."
+            )
             del config["targets"]["mullvadbrowser"]["var"]["browser_build"]
         elif tag_mb and tag_tb and tag_mb[2] != tag_tb[2]:
             config["targets"]["mullvadbrowser"]["var"]["browser_build"] = (
                 tag_mb[2]
+            )
+            logger.debug(
+                "Mismatching builds for TBB and MB, will add targets/mullvadbrowser/var/browser_build."
             )
         # We assume firefox version and rebase to be in sync
         if tag_tb:
@@ -164,14 +224,18 @@ class ReleasePreparation:
         config["var"]["browser_rebase"] = rebase
         config["var"]["browser_build"] = build
         self.save_config("firefox", config)
+        logger.debug("Firefox configuration saved")
 
         if self.android:
             assert tag_tb
             config = self.load_config("geckoview")
             config["var"]["geckoview_version"] = tag_tb[0]
-            config["var"]["browser_branch"] = f"{self.major}-{tag_tb[1]}"
+            config["var"][
+                "browser_branch"
+            ] = f"{self.version.major}-{tag_tb[1]}"
             config["var"]["browser_build"] = tag_tb[2]
             self.save_config("geckoview", config)
+            logger.debug("GeckoView configuration saved")
 
     def _get_firefox_tag(self, config, browser):
         if browser == "mullvad-browser":
@@ -180,17 +244,23 @@ class ReleasePreparation:
             remote = config["git_url"]
         repo = Repo(self.base_path / "git_clones/firefox")
         repo.remotes["origin"].set_url(remote)
+        logger.debug("About to fetch Firefox from %s.", remote)
         repo.remotes["origin"].fetch()
         tags = get_sorted_tags(repo)
         for t in tags:
             m = re.match(
                 r"(\w+-browser)-([^-]+)-([\d\.]+)-(\d+)-build(\d+)", t.tag
             )
-            if m and m.group(1) == browser and m.group(3) == self.major:
+            if (
+                m
+                and m.group(1) == browser
+                and m.group(3) == self.version.major
+            ):
                 # firefox-version, rebase, build
                 return (m.group(2), int(m.group(4)), int(m.group(5)))
 
     def update_firefox_android(self):
+        logger.info("Updating firefox-android")
         config = self.load_config("firefox-android")
         repo = Repo(self.base_path / "git_clones/firefox-android")
         repo.remotes["origin"].fetch()
@@ -199,8 +269,10 @@ class ReleasePreparation:
             m = re.match(
                 r"firefox-android-([^-]+)-([\d\.]+)-(\d+)-build(\d+)", t.tag
             )
-            if not m or m.group(2) != self.major:
+            if not m or m.group(2) != self.version.major:
+                logger.debug("Discarding firefox-android tag: %s", t.tag)
                 continue
+            logger.debug("Using firefox-android tag: %s", t.tag)
             config["var"]["fenix_version"] = m.group(1)
             config["var"]["browser_branch"] = m.group(2) + "-" + m.group(3)
             config["var"]["browser_build"] = int(m.group(4))
@@ -208,6 +280,7 @@ class ReleasePreparation:
         self.save_config("firefox-android", config)
 
     def update_translations(self):
+        logger.info("Updating translations")
         repo = Repo(self.base_path / "git_clones/translation")
         repo.remotes["origin"].fetch()
         config = self.load_config("translation")
@@ -223,11 +296,14 @@ class ReleasePreparation:
                 repo.rev_parse(f"origin/{branch}")
             )
         self.save_config("translation", config)
+        logger.debug("Translations updated")
 
     def update_addons(self):
+        logger.info("Updating addons")
         config = self.load_config("browser")
 
         amo_data = fetch_allowed_addons()
+        logger.debug("Fetched AMO data")
         if self.android:
             with (
                 self.base_path / "projects/browser/allowed_addons.json"
@@ -235,10 +311,13 @@ class ReleasePreparation:
                 json.dump(amo_data, f, indent=2)
 
         noscript = find_addon(amo_data, NOSCRIPT)
+        logger.debug("Updating NoScript")
         self.update_addon_amo(config, "noscript", noscript)
         if self.mullvad_browser:
+            logger.debug("Updating uBlock Origin")
             ublock = find_addon(amo_data, "uBlock0@raymondhill.net")
             self.update_addon_amo(config, "ublock-origin", ublock)
+            logger.debug("Updating the Mullvad Browser extension")
             self.update_mullvad_addon(config)
 
         self.save_config("browser", config)
@@ -263,6 +342,7 @@ class ReleasePreparation:
         ]
         url = updates[-1]["update_link"]
         if input_["URL"] == url:
+            logger.debug("No need to update the Mullvad extension.")
             return
         input_["URL"] = url
 
@@ -275,8 +355,10 @@ class ReleasePreparation:
                 f.write(r.bytes)
         with path.open("rb") as f:
             input_["sha256sum"] = sha256(f.read()).hexdigest()
+        logger.debug("Mullvad extension downloaded and updated")
 
     def update_tor(self):
+        logger.info("Updating Tor")
         databag = configparser.ConfigParser()
         r = requests.get(
             "https://gitlab.torproject.org/tpo/web/tpo/-/raw/main/databags/versions.ini"
@@ -285,7 +367,12 @@ class ReleasePreparation:
         databag.read_string(r.text)
         tor_stable = databag["tor-stable"]["version"]
         tor_alpha = databag["tor-alpha"]["version"]
-        if self.is_alpha and tor_alpha:
+        logger.debug(
+            "Found tor stable: %s, alpha: %s",
+            tor_stable,
+            tor_alpha if tor_alpha else "(empty)",
+        )
+        if self.version.is_alpha and tor_alpha:
             version = tor_alpha
         else:
             version = tor_stable
@@ -294,36 +381,50 @@ class ReleasePreparation:
         if version != config["version"]:
             config["version"] = version
             self.save_config("tor", config)
+            logger.debug("Tor updated to %s and config saved", version)
+        else:
+            logger.debug(
+                "No need to update Tor (current version: %s).", version
+            )
 
     def update_openssl(self):
+        logger.info("Updating OpenSSL")
         config = self.load_config("openssl")
         version = get_github_release("openssl/openssl", r"openssl-(3.0.\d+)")
         if version == config["version"]:
+            logger.debug("No need to update OpenSSL, keeping %s.", version)
             return
 
         config["version"] = version
+
         source = self.find_input(config, "openssl")
-        source["URL"] = (
-            f"https://www.openssl.org/source/openssl-{version}.tar.gz"
+        # No need to update URL, as it uses a variable.
+        hash_url = (
+            f"https://www.openssl.org/source/openssl-{version}.tar.gz.sha256"
         )
-        hash_url = source["URL"] + ".sha256"
         r = requests.get(hash_url)
         r.raise_for_status()
         source["sha256sum"] = r.text.strip()
         self.save_config("openssl", config)
+        logger.debug("Updated OpenSSL to %s and config saved.", version)
 
     def update_zlib(self):
+        logger.info("Updating zlib")
         config = self.load_config("zlib")
         version = get_github_release("madler/zlib", r"v([0-9\.]+)")
         if version == config["version"]:
+            logger.debug("No need to update zlib, keeping %s.", version)
             return
         config["version"] = version
         self.save_config("zlib", config)
+        logger.debug("Updated zlib to %s and config saved.", version)
 
     def update_zstd(self):
+        logger.info("Updating Zstandard")
         config = self.load_config("zstd")
         version = get_github_release("facebook/zstd", r"v([0-9\.]+)")
         if version == config["version"]:
+            logger.debug("No need to update Zstandard, keeping %s.", version)
             return
 
         repo = Repo(self.base_path / "git_clones/zstd")
@@ -333,6 +434,11 @@ class ReleasePreparation:
         config["version"] = version
         config["git_hash"] = tag.object.hexsha
         self.save_config("zstd", config)
+        logger.debug(
+            "Updated Zstandard to %s (commit %s) and config saved.",
+            version,
+            config["git_hash"],
+        )
 
     def update_go(self):
         def get_major(v):
@@ -376,26 +482,33 @@ class ReleasePreparation:
 
         self.save_config("go", config)
 
+    def update_manual(self):
+        logger.info("Updating the manual")
+        update_manual(self.gitlab_token, self.base_path)
+
     def get_last_releases(self):
+        logger.info("Finding the previous releases.")
         sorted_tags = get_sorted_tags(self.repo)
         self.last_releases = {}
         self.build_number = 1
-        regex = re.compile(r"(\w+)-(\d+\.\d+)([a.]\d+)?-build(\d+)")
+        regex = re.compile(r"(\w+)-([\d\.a]+)-build(\d+)")
         num_releases = 0
         for t in sorted_tags:
             m = regex.match(t.tag)
             project = m.group(1)
-            major = m.group(2)
-            version = major + m.group(3)
-            minor = int(m.group(3)[1:]) if m.group(3) else 0
-            build = int(m.group(4))
+            version = Version(m.group(2))
+            build = int(m.group(3))
             if version == self.version:
                 # A previous tag, we can use it to bump our build.
                 if self.build_number == 1:
                     self.build_number = build + 1
+                    logger.debug(
+                        "Found previous tag for the version we are preparing: %s. Bumping build number to %d.",
+                        t.tag,
+                        self.build_number,
+                    )
                 continue
-            ch = "alpha" if m.group(3)[0] == "a" else "release"
-            key = (project, ch)
+            key = (project, version.channel)
             if key not in self.last_releases:
                 self.last_releases[key] = []
             skip = False
@@ -404,25 +517,37 @@ class ReleasePreparation:
                 # first.
                 if rel.version == version:
                     skip = True
+                    logger.debug(
+                        "Additional build for a version we already found, skipping: %s",
+                        t.tag,
+                    )
                     break
             if skip:
                 continue
             if len(self.last_releases[key]) != self.num_incrementals:
-                self.last_releases[key].append(ReleaseTag(t, version, minor))
+                logger.debug(
+                    "Found tag to potentially build incrementals from: %s.",
+                    t.tag,
+                )
+                self.last_releases[key].append(ReleaseTag(t, version))
                 num_releases += 1
             if num_releases == self.num_incrementals * 4:
                 break
 
     def update_changelogs(self):
         if self.tor_browser:
+            logger.info("Updating changelogs for Tor Browser")
             self.make_changelogs("tbb")
         if self.mullvad_browser:
+            logger.info("Updating changelogs for Mullvad Browser")
             self.make_changelogs("mb")
 
     def make_changelogs(self, tag_prefix):
         locale.setlocale(locale.LC_TIME, "C")
         kwargs = {"date": self.changelog_date.strftime("%B %d %Y")}
-        prev_tag = self.last_releases[(tag_prefix, self.channel)][0].tag
+        prev_tag = self.last_releases[(tag_prefix, self.version.channel)][
+            0
+        ].tag
         self.check_update(
             kwargs, prev_tag, "firefox", ["var", "firefox_platform_version"]
         )
@@ -436,11 +561,16 @@ class ReleasePreparation:
         self.check_update_simple(kwargs, prev_tag, "zstd")
         try:
             self.check_update(kwargs, prev_tag, "go", ["var", "go_1_21"])
-        except KeyError:
+        except KeyError as e:
+            logger.warning(
+                "Go: var/go_1_21 not found, marking Go as not updated.",
+                exc_info=e,
+            )
             pass
         self.check_update_extensions(kwargs, prev_tag)
+        logger.debug("Changelog arguments for %s: %s", tag_prefix, kwargs)
         cb = fetch_changelogs.ChangelogBuilder(
-            self.gitlab_token, self.version, is_mullvad=tag_prefix == "mb"
+            self.gitlab_token, str(self.version), is_mullvad=tag_prefix == "mb"
         )
         changelogs = cb.create(**kwargs)
 
@@ -451,6 +581,7 @@ class ReleasePreparation:
             last_tag = stable_tag
         else:
             last_tag = alpha_tag
+        logger.debug("Using %s to add the new changelogs to.", last_tag.tag)
         last_changelogs = self.repo.git.show(f"{last_tag.tag}:{path}")
         with (self.base_path / path).open("w") as f:
             f.write(changelogs + "\n" + last_changelogs + "\n")
@@ -485,6 +616,7 @@ class ReleasePreparation:
                 updates[update_key] = new_version
 
     def update_rbm_conf(self):
+        logger.info("Updating rbm.conf.")
         releases = {}
         browsers = {
             "tbb": '[% IF c("var/tor-browser") %]{}[% END %]',
@@ -492,17 +624,25 @@ class ReleasePreparation:
         }
         incremental_from = []
         for b in ["tbb", "mb"]:
-            for rel in self.last_releases[(b, self.channel)]:
-                if rel.minor not in releases:
-                    releases[rel.minor] = {}
-                releases[rel.minor][b] = rel.version
-        for minor in sorted(releases, reverse=True):
-            if len(releases[minor]) == 2:
-                incremental_from.append(releases[minor]["tbb"])
+            for rel in self.last_releases[(b, self.version.channel)]:
+                if rel.version not in releases:
+                    releases[rel.version] = {}
+                releases[rel.version][b] = str(rel.version)
+        for version in sorted(releases.keys(), reverse=True):
+            if len(releases[version]) == 2:
+                incremental_from.append(releases[version]["tbb"])
+                logger.debug(
+                    "Building incremental from %s for both browsers.", version
+                )
             else:
                 for b, template in browsers.items():
-                    maybe_rel = releases[minor].get(b)
+                    maybe_rel = releases[version].get(b)
                     if maybe_rel:
+                        logger.debug(
+                            "Building incremental from %s only for %s.",
+                            version,
+                            b,
+                        )
                         incremental_from.append(template.format(maybe_rel))
 
         separator = "\n--- |\n"
@@ -510,7 +650,7 @@ class ReleasePreparation:
         with path.open() as f:
             docs = f.read().split(separator, 2)
         config = self.yaml.load(docs[0])
-        config["var"]["torbrowser_version"] = self.version
+        config["var"]["torbrowser_version"] = str(self.version)
         config["var"]["torbrowser_build"] = f"build{self.build_number}"
         config["var"]["torbrowser_incremental_from"] = incremental_from
         config["var"]["browser_release_date"] = self.build_date.strftime(
@@ -569,9 +709,29 @@ if __name__ == "__main__":
         action="store_true",
         help="Only update the changelogs",
     )
+    parser.add_argument(
+        "--log-level",
+        choices=["debug", "info", "warning", "error"],
+        default="info",
+        help="Set the log level",
+    )
     parser.add_argument("version")
 
     args = parser.parse_args()
+
+    # Logger adapted from https://stackoverflow.com/a/56944256.
+    log_level = getattr(logging, args.log_level.upper())
+    logger.setLevel(log_level)
+    ch = logging.StreamHandler()
+    ch.setLevel(log_level)
+    ch.setFormatter(
+        logging.Formatter(
+            "%(asctime)s - %(name)s - %(levelname)s - %(message)s (%(filename)s:%(lineno)d)",
+            datefmt="%Y-%m-%d %H:%M:%S",
+        )
+    )
+    logger.addHandler(ch)
+
     tbb = bool(args.tor_browser)
     mb = bool(args.mullvad_browser)
     kwargs = {}
@@ -594,6 +754,8 @@ if __name__ == "__main__":
         kwargs["incrementals"] = args.incrementals
     rp = ReleasePreparation(args.repository, args.version, **kwargs)
     if args.only_changelogs:
+        logger.info("Updating only the changelogs")
         rp.update_changelogs()
     else:
+        logger.debug("Running a complete release preparation.")
         rp.run()
