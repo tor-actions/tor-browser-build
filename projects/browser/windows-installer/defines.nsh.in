@@ -22,6 +22,7 @@
 [% ELSE -%]
   !define ICON_NAME "[% c('var/projectname') %].ico"
 [% END -%]
+  !define WELCOME_IMAGE "[% c('var/projectname') %].bmp"
 
 [% IF c('var/mullvad-browser') -%]
   ; Firefox's --with-user-appdir
@@ -33,6 +34,9 @@
   !define URL_ABOUT "https://mullvad.net/en/browser"
   !define URL_UPDATE "https://github.com/mullvad/mullvad-browser/releases/[% c('var/torbrowser_version') %]"
   !define URL_HELP "https://mullvad.net/help/tag/browser/"
+
+  ; TODO: This will likely be localized in the future.
+  !define INTRO_TEXT "Mullvad Browser is a privacy-focused web browser designed to minimize tracking and fingerprinting."
 [% ELSE -%]
   ; Not defined for Tor Browser
   !define APP_DIR "TorProject"
@@ -43,4 +47,6 @@
   !define URL_ABOUT "https://www.torproject.org/"
   !define URL_UPDATE "https://blog.torproject.org/new[% IF c('var/alpha') %]-alpha[% END %]-release-tor-browser-[% c('var/torbrowser_version') FILTER remove('\.') %]"
   !define URL_HELP "https://tb-manual.torproject.org/"
+
+  !define INTRO_TEXT "Tor Browser. Protect yourself against tracking, surveillance, and censorship."
 [% END -%]

@@ -10,20 +10,27 @@
   !define DEFAULT_INSTALL_DIR "$LocalAppdata\${APP_DIR}\${NAME_NO_SPACES}\${UPDATE_CHANNEL}"
   InstallDir "${DEFAULT_INSTALL_DIR}"
 
+  AutoCloseWindow true
+
 ;--------------------------------
 ; Pages
   Page custom SetupType SetupTypeLeave
   Page custom CustomSetup CustomSetupLeave
   ; Disable the directory selection when updating
-  !define MUI_PAGE_CUSTOMFUNCTION_PRE CustomPageDirectory
+  !define MUI_PAGE_CUSTOMFUNCTION_PRE PageDirectoryPre
+  !define MUI_PAGE_CUSTOMFUNCTION_SHOW PageDirectoryShow
   !define MUI_PAGE_CUSTOMFUNCTION_LEAVE CheckIfTargetDirectoryExists
+  !define MUI_PAGE_HEADER_SUBTEXT ""
   !insertmacro MUI_PAGE_DIRECTORY
+  !define MUI_PAGE_CUSTOMFUNCTION_LEAVE StartBrowser
   !insertmacro MUI_PAGE_INSTFILES
-  !insertmacro MUI_PAGE_FINISH
 
   !insertmacro MUI_UNPAGE_CONFIRM
   !insertmacro MUI_UNPAGE_INSTFILES
-  !insertmacro MUI_UNPAGE_FINISH
+  ; If we want to restore the finish page in the uninstaller, we have to enable
+  ; it also for the installer (but we can still skip it by adding Quit in
+  ; StartBrowser).
+  ; !insertmacro MUI_UNPAGE_FINISH
 
   ; Languages must be defined after pages
   !include "languages.nsh"
@@ -49,36 +56,67 @@ var typeNextButton
 var customCheckboxPortable
 var customCheckboxDesktop
 
+ReserveFile ${WELCOME_IMAGE}
+
 Function .onInit
   Call CheckRequirements
 
-  !insertmacro MUI_LANGDLL_DISPLAY
+  ; Skip NSIS's language selection prompt and try to use the OS language without
+  ; further confirmations.
+
+  File /oname=$PLUGINSDIR\${WELCOME_IMAGE} "${WELCOME_IMAGE}"
 
   ReadRegStr $existingInstall HKCU "${UNINST_KEY}" "InstallLocation"
   StrCpy $createDesktopShortcut "true"
 FunctionEnd
 
 Function SetupType
-  !insertmacro MUI_HEADER_TEXT "Setup Type" "Choose setup options"
-  nsDialogs::Create 1018
+  ; Freely inspired by the built-in page implemented in
+  ; Contrib/Modern UI 2/Pages/Welcome.nsh.
+  ; The problem with the built-in page is that the description label fills all
+  ; the vertical space, preventing the addition of other widgets (they will be
+  ; hidden, will become visible when using Tab, but it will not be possible to
+  ; interact with them with the mouse.
+  nsDialogs::Create 1044
   Pop $0
   ${If} $0 == error
     Abort
   ${EndIf}
+  SetCtlColors $0 "" "${MUI_BGCOLOR}"
 
-  ${NSD_CreateLabel} 0 0 100% 18% "Choose the type of setup you prefer."
+  ${NSD_CreateBitmap} 0 0 100% 100% ""
+  Pop $0
+  ${NSD_SetBitmap} $0 $PLUGINSDIR\${WELCOME_IMAGE} $1
+
+  ${NSD_CreateLabel} 120u 10u 195u 28u "Welcome to the ${DISPLAY_NAME} Installer"
+  Pop $0
+  SetCtlColors $0 "${MUI_TEXTCOLOR}" "${MUI_BGCOLOR}"
+  CreateFont $2 "$(^Font)" "12" "700"
+  SendMessage $0 ${WM_SETFONT} $2 0
+
+  ${NSD_CreateLabel} 120u 45u 195u 60u "${INTRO_TEXT}"
+  Pop $0
+  SetCtlColors $0 "${MUI_TEXTCOLOR}" "${MUI_BGCOLOR}"
+
+  ${NSD_CreateLabel} 120u 105u 195u 12u "Installation Type"
+  Pop $0
+  SetCtlColors $0 "" ${MUI_BGCOLOR}
+
   ${If} $existingInstall == ""
-    ${NSD_CreateRadioButton} 0 18% 100% 6% "Standard"
+    ${NSD_CreateRadioButton} 120u 117u 160u 12u "Standard"
     Pop $typeRadioStandard
-    ${NSD_CreateRadioButton} 0 30% 100% 6% "Custom"
+    ${NSD_CreateRadioButton} 120u 129u 160u 12u "Custom"
     Pop $typeRadioCustom
   ${Else}
-    ${NSD_CreateRadioButton} 0 18% 100% 6% "Update your existing installation"
+    ${NSD_CreateRadioButton} 120u 117u 160u 12u "Update"
     Pop $typeRadioStandard
-    ${NSD_CreateRadioButton} 0 30% 100% 6% "Portable installation"
+    ${NSD_CreateRadioButton} 120u 129u 160u 12u "Self-contained install"
     Pop $typeRadioCustom
   ${EndIf}
+
+  SetCtlColors $typeRadioStandard "" ${MUI_BGCOLOR}
   ${NSD_OnClick} $typeRadioStandard SetupTypeRadioClick
+  SetCtlColors $typeRadioCustom "" ${MUI_BGCOLOR}
   ${NSD_OnClick} $typeRadioCustom SetupTypeRadioClick
 
   GetDlgItem $typeNextButton $HWNDPARENT 1
@@ -93,6 +131,8 @@ Function SetupType
   Call SetupTypeUpdate
 
   nsDialogs::Show
+
+  ${NSD_FreeBitmap} $1
 FunctionEnd
 
 Function SetupTypeRadioClick
@@ -185,7 +225,7 @@ Function CustomSetupLeave
   Call CustomSetupUpdate
 FunctionEnd
 
-Function CustomPageDirectory
+Function PageDirectoryPre
   ${If} $isPortableMode == "true"
     StrCpy $INSTDIR "${DEFAULT_PORTABLE_DIR}"
     ; Always go through this page in portable mode.
@@ -202,6 +242,12 @@ Function CustomPageDirectory
     ; Standard install, use the default directory and skip the page.
     Abort
   ${EndIf}
+FunctionEnd
+
+Function PageDirectoryShow
+  ShowWindow $mui.DirectoryPage.Text ${SW_HIDE}
+  ShowWindow $mui.DirectoryPage.SpaceRequired ${SW_HIDE}
+  ShowWindow $mui.DirectoryPage.SpaceAvailable ${SW_HIDE}
 FunctionEnd
 
 Section "Browser" SecBrowser

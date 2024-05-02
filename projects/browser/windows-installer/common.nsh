@@ -28,6 +28,9 @@
   ; Support HiDPI displays
   ManifestDPIAware true
 
+  ; Do not show "Nullsoft Install System vX.XX"
+  BrandingText " "
+
 ;--------------------------------
 ; Version information
   VIProductVersion "${VERSION_WINDOWS}"
