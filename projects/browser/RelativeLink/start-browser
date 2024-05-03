@@ -396,7 +396,7 @@ export GSETTINGS_BACKEND=memory
 # $HOME/.cache/nvidia. We we can easily disable it.
 export __GL_SHADER_DISK_CACHE=0
 
-cd "${HOME}"
+cd "$browser_dir"
 
 # We pass all additional command-line arguments we get to Firefox.
 #
