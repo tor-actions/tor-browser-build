@@ -21,6 +21,20 @@ mkdir $TORBINDIR
 [% IF c("var/windows") || c("var/android") %]
   tar -C /var/tmp/dist -xf [% c('input_files_by_name/zlib') %]
   zlibdir=/var/tmp/dist/zlib
+[% ELSIF c("var/linux-cross") %]
+  # Since 1. we are using Debian's zlib1g-dev:$arch_debian, 2. our
+  # cross-toolchain's default paths (i.e. -I and -L) are not the same
+  # as those of Debian's cross-toolchain, and 3. tor's configure does
+  # not support separate header and library directories for zlib, we
+  # need to make the headers and $arch_debian library available to
+  # configure manually.
+  # DO NOT use CPPFLAGS="-I/usr/include" to include the headers, the
+  # build will fail (probably because some of our cross-$arch_debian
+  # headers get masked by the native ones).
+  CROSS_INCLUDEDIR=/var/tmp/dist/gcc/[% c("var/crosstarget") %]/include
+  ln -s /usr/include/zconf.h $CROSS_INCLUDEDIR
+  ln -s /usr/include/zlib.h $CROSS_INCLUDEDIR
+  export LDFLAGS="-L/usr/lib/[% c("var/crosstarget") %] $LDFLAGS"
 [% END %]
 [% IF c("var/android") %]
   tar -C /var/tmp/dist -xf [% c('input_files_by_name/zstd') %]
@@ -44,10 +58,14 @@ openssldir=/var/tmp/dist/openssl
   # LD_LIBRARY_PATH value to the Tor Browser with the newer one. Thus, we copy
   # the libstdc++ into the directory with the libs tor depends on, too. See bug
   # 13359 for further details.
-  cp /var/tmp/dist/gcc/[% c("var/libdir") %]/libstdc++.so.6 "$TORBINDIR"
+  libdir=[% c("var/libdir") %]
+  [% IF c("var/linux-cross") -%]
+    libdir="[% c("var/crosstarget") %]/$libdir"
+  [% END -%]
+  cp "/var/tmp/dist/gcc/$libdir/libstdc++.so.6" "$TORBINDIR"
   [% IF c("var/asan") -%]
-    cp /var/tmp/dist/gcc/[% c("var/libdir") %]/libasan.so.6 "$TORBINDIR"
-    cp /var/tmp/dist/gcc/[% c("var/libdir") %]/libubsan.so.1 "$TORBINDIR"
+    cp "/var/tmp/dist/gcc/$libdir/libasan.so.6" "$TORBINDIR"
+    cp "/var/tmp/dist/gcc/$libdir/libubsan.so.1" "$TORBINDIR"
   [% END -%]
   chmod 700 "$TORBINDIR"/*.so*
   # This is needed to make RPATH unavailable. See bug 9150.
@@ -73,6 +91,7 @@ find -type f -print0 | xargs -0 [% c("touch") %]
     [% IF c("var/windows") || c("var/android") %]--with-zlib-dir="$zlibdir"[% END %] \
     [% IF c("var/macos") %]--enable-static-openssl[% END %] \
     [% IF c("var/windows") %]--enable-static-libevent --enable-static-openssl --enable-static-zlib[% END %] \
+    [% IF c("var/linux-cross") %]--build=x86_64-linux-gnu[% END %] \
     --enable-gpl --prefix="$distdir" [% c("var/configure_opt") %]
 [% IF c("var/macos") -%]
   export LD_PRELOAD=[% c("var/faketime_path") %]
@@ -103,10 +122,17 @@ cd $distdir
 [% END %]
 
 [% IF c("var/linux") %]
+  [% IF c("var/linux-cross") -%]
+    CROSS_PREFIX=[% c("var/crosstarget") %]-
+  [% END -%]
+
+  OBJCOPY="${CROSS_PREFIX}objcopy"
+  STRIP="${CROSS_PREFIX}strip"
+
   # Strip and generate debuginfo for libs
-  objcopy --only-keep-debug $distdir/bin/tor "$TORDEBUGDIR/tor"
-  install -s $distdir/bin/tor "$TORBINDIR"
-  objcopy --add-gnu-debuglink="$TORDEBUGDIR/tor" "$TORBINDIR/tor"
+  "$OBJCOPY" --only-keep-debug $distdir/bin/tor "$TORDEBUGDIR/tor"
+  install -s --strip-program="$STRIP" $distdir/bin/tor "$TORBINDIR"
+  "$OBJCOPY" --add-gnu-debuglink="$TORDEBUGDIR/tor" "$TORBINDIR/tor"
   for i in "$TORBINDIR"/*so*
   do
       LIB=`basename $i`
@@ -116,11 +142,11 @@ cd $distdir
         # treat this the same as the rest (though it seems libstdc++ doesn't come with
         # any useful debug symbols since we don't build it, so maybe we should figure
         # out how to package them
-        strip "$TORBINDIR/$LIB"
+        "$STRIP" "$TORBINDIR/$LIB"
       else
-        objcopy --only-keep-debug "$TORBINDIR/$LIB" "$TORDEBUGDIR/$LIB"
-        strip "$TORBINDIR/$LIB"
-        objcopy --add-gnu-debuglink="$TORDEBUGDIR/$LIB" "$TORBINDIR/$LIB"
+        "$OBJCOPY" --only-keep-debug "$TORBINDIR/$LIB" "$TORDEBUGDIR/$LIB"
+        "$STRIP" "$TORBINDIR/$LIB"
+        "$OBJCOPY" --add-gnu-debuglink="$TORDEBUGDIR/$LIB" "$TORBINDIR/$LIB"
       fi
   done
 [% END %]
