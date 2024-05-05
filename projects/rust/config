@@ -19,6 +19,11 @@ targets:
       target: i686-unknown-linux-gnu
       target_flags: --set target.i686-unknown-linux-gnu.linker=clang --set target.i686-unknown-linux-gnu.ar=llvm-ar --set target.i686-unknown-linux-gnu.ranlib=llvm-ranlib
 
+  linux-aarch64:
+    var:
+      target: aarch64-unknown-linux-gnu
+      target_flags: --set target.aarch64-unknown-linux-gnu.linker=aarch64-linux-gnu-gcc --set target.aarch64-unknown-linux-gnu.ar=llvm-ar --set target.aarch64-unknown-linux-gnu.ranlib=llvm-ranlib
+
   macos:
     var:
       target: '[% c("var/build_target") %]'
