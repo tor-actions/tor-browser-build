@@ -9,6 +9,7 @@ var:
   use_go_1_20: 0
   go_1_21: 1.21.9
   go_1_20: 1.20.14
+  no_crosscompile: 1
   setup: |
     mkdir -p /var/tmp/dist
     tar -C /var/tmp/dist -xf $rootdir/[% c("go_tarfile") %]
@@ -101,6 +102,12 @@ targets:
   linux-i686:
     var:
       GOARCH: 386
+  linux-aarch64:
+    var:
+      GOARCH: arm64
+  linux-arm:
+    var:
+      GOARCH: arm
   android:
     var:
       GOOS: android
