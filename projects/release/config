@@ -56,6 +56,10 @@ targets:
     var:
       browser-linux-i686: '[% c("var/browser_type") != "mullvadbrowser" %]'
       linux-packages: '[% c("var/mullvad-browser") || c("var/tor-browser-linux-packages") %]'
+  browser-linux-aarch64:
+    var:
+      browser-linux-aarch64: 1
+      linux-packages: 0
   browser-windows-i686:
     var:
       browser-windows-i686: '[% c("var/browser_type") != "mullvadbrowser" %]'
@@ -188,6 +192,13 @@ input_files:
     target:
       - '[% c("var/build_target") %]'
       - '[% c("var/browser_type") %]-linux-i686'
+
+  - name: linux-aarch64
+    project: browser
+    enable: '[% c("var/browser-linux-aarch64") %]'
+    target:
+      - '[% c("var/build_target") %]'
+      - '[% c("var/browser_type") %]-linux-aarch64'
 
   - name: deb-packages
     project: linux-packages

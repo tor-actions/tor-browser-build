@@ -36,6 +36,9 @@ torbrowser-release-linux-x86_64-asan: submodule-update
 torbrowser-release-linux-i686: submodule-update
 	$(rbm) build release --target release --target browser-linux-i686 --target torbrowser
 
+torbrowser-release-linux-aarch64: submodule-update
+	$(rbm) build release --target release --target browser-linux-aarch64 --target torbrowser
+
 torbrowser-release-windows-i686: submodule-update
 	$(rbm) build release --target release --target browser-windows-i686 --target torbrowser
 
@@ -74,6 +77,9 @@ torbrowser-alpha-linux-x86_64: submodule-update
 
 torbrowser-alpha-linux-x86_64-asan: submodule-update
 	$(rbm) build release --target alpha --target browser-linux-x86_64-asan --target torbrowser
+
+torbrowser-alpha-linux-aarch64: submodule-update
+	$(rbm) build release --target alpha --target browser-linux-aarch64 --target torbrowser
 
 torbrowser-alpha-linux-i686: submodule-update
 	$(rbm) build release --target alpha --target browser-linux-i686 --target torbrowser
@@ -116,6 +122,9 @@ torbrowser-nightly-linux-x86_64: submodule-update
 
 torbrowser-nightly-linux-x86_64-asan: submodule-update
 	$(rbm) build release --target nightly --target browser-linux-x86_64-asan --target torbrowser
+
+torbrowser-nightly-linux-aarch64: submodule-update
+	$(rbm) build release --target nightly --target browser-linux-aarch64 --target torbrowser
 
 torbrowser-nightly-linux-i686: submodule-update
 	$(rbm) build release --target nightly --target browser-linux-i686 --target torbrowser
@@ -161,6 +170,9 @@ torbrowser-testbuild-linux-x86_64-asan: submodule-update
 
 torbrowser-testbuild-linux-i686: submodule-update
 	$(rbm) build release --target testbuild --target browser-linux-i686 --target torbrowser
+
+torbrowser-testbuild-linux-aarch64: submodule-update
+	$(rbm) build release --target testbuild --target browser-linux-aarch64 --target torbrowser
 
 torbrowser-testbuild-windows-x86_64: submodule-update
 	$(rbm) build release --target testbuild --target browser-windows-x86_64 --target torbrowser
@@ -274,6 +286,9 @@ basebrowser-release-linux-x86_64-asan: submodule-update
 basebrowser-release-linux-i686: submodule-update
 	$(rbm) build release --target release --target browser-linux-i686 --target basebrowser
 
+basebrowser-release-linux-aarch64: submodule-update
+	$(rbm) build release --target release --target browser-linux-aarch64 --target basebrowser
+
 basebrowser-release-windows-i686: submodule-update
 	$(rbm) build release --target release --target browser-windows-i686 --target basebrowser
 
@@ -315,6 +330,9 @@ basebrowser-alpha-linux-x86_64-asan: submodule-update
 
 basebrowser-alpha-linux-i686: submodule-update
 	$(rbm) build release --target alpha --target browser-linux-i686 --target basebrowser
+
+basebrowser-alpha-linux-aarch64: submodule-update
+	$(rbm) build release --target alpha --target browser-linux-aarch64 --target basebrowser
 
 basebrowser-alpha-windows-i686: submodule-update
 	$(rbm) build release --target alpha --target browser-windows-i686 --target basebrowser
@@ -358,6 +376,9 @@ basebrowser-nightly-linux-x86_64-asan: submodule-update
 basebrowser-nightly-linux-i686: submodule-update
 	$(rbm) build release --target nightly --target browser-linux-i686 --target basebrowser
 
+basebrowser-nightly-linux-aarch64: submodule-update
+	$(rbm) build release --target nightly --target browser-linux-aarch64 --target basebrowser
+
 basebrowser-nightly-windows-i686: submodule-update
 	$(rbm) build release --target nightly --target browser-windows-i686 --target basebrowser
 
@@ -400,6 +421,9 @@ basebrowser-testbuild-linux-x86_64-asan: submodule-update
 basebrowser-testbuild-linux-i686: submodule-update
 	$(rbm) build release --target testbuild --target browser-linux-i686 --target basebrowser
 
+basebrowser-testbuild-linux-aarch64: submodule-update
+	$(rbm) build release --target testbuild --target browser-linux-aarch64 --target basebrowser
+
 basebrowser-testbuild-windows-x86_64: submodule-update
 	$(rbm) build release --target testbuild --target browser-windows-x86_64 --target basebrowser
 
@@ -440,6 +464,9 @@ mullvadbrowser-release-linux-x86_64: submodule-update
 mullvadbrowser-release-linux-x86_64-asan: submodule-update
 	$(rbm) build release --target release --target browser-linux-x86_64-asan --target mullvadbrowser
 
+mullvadbrowser-release-linux-aarch64: submodule-update
+	$(rbm) build release --target release --target browser-linux-aarch64 --target mullvadbrowser
+
 mullvadbrowser-release-windows-x86_64: submodule-update
 	$(rbm) build release --target release --target browser-windows-x86_64 --target mullvadbrowser
 
@@ -460,6 +487,9 @@ mullvadbrowser-alpha-linux-x86_64: submodule-update
 
 mullvadbrowser-alpha-linux-x86_64-asan: submodule-update
 	$(rbm) build release --target alpha --target browser-linux-x86_64-asan --target mullvadbrowser
+
+mullvadbrowser-alpha-linux-aarch64: submodule-update
+	$(rbm) build release --target alpha --target browser-linux-aarch64 --target mullvadbrowser
 
 mullvadbrowser-alpha-windows-x86_64: submodule-update
 	$(rbm) build release --target alpha --target browser-windows-x86_64 --target mullvadbrowser
@@ -482,6 +512,9 @@ mullvadbrowser-nightly-linux-x86_64: submodule-update
 mullvadbrowser-nightly-linux-x86_64-asan: submodule-update
 	$(rbm) build release --target nightly --target browser-linux-x86_64-asan --target mullvadbrowser
 
+mullvadbrowser-nightly-linux-aarch64: submodule-update
+	$(rbm) build release --target nightly --target browser-linux-aarch64 --target mullvadbrowser
+
 mullvadbrowser-nightly-windows-x86_64: submodule-update
 	$(rbm) build release --target nightly --target browser-windows-x86_64 --target mullvadbrowser
 
@@ -502,6 +535,9 @@ mullvadbrowser-testbuild-linux-x86_64: submodule-update
 
 mullvadbrowser-testbuild-linux-x86_64-asan: submodule-update
 	$(rbm) build release --target testbuild --target browser-linux-x86_64-asan --target mullvadbrowser
+
+mullvadbrowser-testbuild-linux-aarch64: submodule-update
+	$(rbm) build release --target testbuild --target browser-linux-aarch64 --target mullvadbrowser
 
 mullvadbrowser-testbuild-windows-x86_64: submodule-update
 	$(rbm) build release --target testbuild --target browser-windows-x86_64 --target mullvadbrowser
