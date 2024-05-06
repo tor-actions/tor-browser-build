@@ -13,6 +13,10 @@
 
   # set LDFLAGS for Full RELRO
   export LDFLAGS="-Wl,-z,relro -Wl,-z,now"
+
+  [% IF c("var/linux-cross") -%]
+    export LDFLAGS="-L/var/tmp/dist/gcc/[% c("var/crosstarget") %]/lib $LDFLAGS"
+  [% END -%]
 [% END -%]
 
 [% IF c("var/windows") -%]

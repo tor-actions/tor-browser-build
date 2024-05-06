@@ -20,16 +20,21 @@ mkdir -p [% out_dir %]
 
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/rust') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/cbindgen') %]
-tar -C /var/tmp/dist -xf [% c('input_files_by_name/nasm') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/node') %]
-export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/nasm/bin:/var/tmp/dist/node/bin:$PATH"
+[% IF ! c("var/linux-aarch64") -%]
+  tar -C /var/tmp/dist -xf [% c('input_files_by_name/nasm') %]
+  export PATH="/var/tmp/dist/nasm/bin:$PATH"
+[% END -%]
+export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/node/bin:$PATH"
 
 [% IF c("var/linux") -%]
   tar -C /var/tmp/dist -xf [% c('input_files_by_name/clang') %]
   tar -C /var/tmp/dist -xf [% c('input_files_by_name/python') %]
   export PATH="/var/tmp/dist/python/bin:$PATH"
-  tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/binutils') %]
-  export PATH="/var/tmp/dist/binutils/bin:$PATH"
+  [% IF ! c("var/linux-cross") -%]
+    tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/binutils') %]
+    export PATH="/var/tmp/dist/binutils/bin:$PATH"
+  [% END -%]
   # Use clang for everything on Linux now if we don't build with ASan.
   [% IF ! c("var/asan") -%]
     export PATH="/var/tmp/dist/clang/bin:$PATH"
@@ -39,6 +44,8 @@ export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/nasm/bi
     # breakage in Rust code. It seems that environment variable is not passed
     # down properly in that case. Thus, we set it here in the build script.
     export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:/usr/lib/i386-linux-gnu/pkgconfig"
+  [% ELSIF c("var/linux-cross") -%]
+    export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:/usr/lib/[% c("var/crosstarget") %]/pkgconfig"
   [% END -%]
 [% END -%]
 
@@ -296,14 +303,21 @@ cp -L obj-*/dist/bin/geckodriver* $distdir
 cd $distdir
 
 [% IF c("var/linux") -%]
+  [% IF c("var/linux-cross") -%]
+    CROSS_PREFIX=[% c("var/crosstarget") %]-
+  [% END -%]
+
+  OBJCOPY="${CROSS_PREFIX}objcopy"
+  STRIP="${CROSS_PREFIX}strip"
+
   mkdir -p $distdir/Debug/Browser
   # Strip and generate debuginfo for the firefox binary that we keep, all *.so
   # files, and the updater (see ticket #10126)
   for LIB in Browser/*.so "Browser/[% c('var/exe_name') %].real" [% IF c("var/updater_enabled") -%]Browser/updater[% END %]
   do
-    objcopy --only-keep-debug $LIB Debug/$LIB
-    strip $LIB
-    objcopy --add-gnu-debuglink=./Debug/$LIB $LIB
+    "$OBJCOPY" --only-keep-debug $LIB Debug/$LIB
+    "$STRIP" $LIB
+    "$OBJCOPY" --add-gnu-debuglink=./Debug/$LIB $LIB
   done
 [% END -%]
 
@@ -328,15 +342,19 @@ END;
 %]
 
 [% IF c("var/linux") -%]
-  /var/tmp/dist/gcc/bin/g++ $rootdir/abicheck.cc -o Browser/abicheck -std=c++17
+  /var/tmp/dist/gcc/bin/"${CROSS_PREFIX}g++" $rootdir/abicheck.cc -o Browser/abicheck -std=c++17
   [% IF !c("var/tor-browser") -%]
     libdest=Browser/libstdc++
     mkdir -p "$libdest"
+    libdir=[% c("var/libdir") %]
+    [% IF c("var/linux-cross") -%]
+      libdir="[% c("var/crosstarget") %]/$libdir"
+    [% END -%]
     # FIXME: tor-browser-build#40749
-    cp /var/tmp/dist/gcc/[% c("var/libdir") %]/libstdc++.so.* "$libdest"
+    cp "/var/tmp/dist/gcc/$libdir/libstdc++.so."* "$libdest"
     [% IF c("var/asan") -%]
-      cp /var/tmp/dist/gcc/[% c("var/libdir") %]/libasan.so.* "$libdest"
-      cp /var/tmp/dist/gcc/[% c("var/libdir") %]/libubsan.so.* "$libdest"
+      cp "/var/tmp/dist/gcc/$libdir/libasan.so."* "$libdest"
+      cp "/var/tmp/dist/gcc/$libdir/libubsan.so."* "$libdest"
     [% END -%]
   [% END -%]
 [% END -%]

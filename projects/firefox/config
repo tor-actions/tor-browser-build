@@ -143,6 +143,23 @@ targets:
         - libdrm-dev:i386
       libdir: lib32
 
+  linux-aarch64:
+    var:
+      arch_deps:
+        - libgtk2.0-dev:arm64
+        - libgtk-3-dev:arm64
+        - libdbus-glib-1-dev:arm64
+        - libxt-dev:arm64
+        # To pass configure since ESR 31
+        - libpulse-dev:arm64
+        # To pass configure since ESR 52
+        - libx11-xcb-dev:arm64
+        # To pass configure since ESR 102
+        - libasound2-dev:arm64
+        # To support Wayland mode
+        - libdrm-dev:arm64
+      libdir: lib64
+
   macos:
     var:
       nightly_updates_publish_dir: '[% c("var/nightly_updates_publish_dir_prefix") %]nightly-macos'
@@ -162,9 +179,10 @@ input_files:
   - project: container-image
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
+    # Cross-binutils are already included in the cross-compiler
   - project: binutils
     name: binutils
-    enable: '[% c("var/linux") %]'
+    enable: '[% c("var/linux") && ! c("var/linux-cross") %]'
   - filename: fix-info-plist.py
     enable: '[% c("var/macos") %]'
   - filename: nsis-uninstall.patch
@@ -183,6 +201,7 @@ input_files:
     name: node
   - project: nasm
     name: nasm
+    enable: '[% ! c("var/linux-aarch64") %]'
   - project: python
     name: python
     enable: '[% c("var/linux") %]'
