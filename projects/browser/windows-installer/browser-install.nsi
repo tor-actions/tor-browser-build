@@ -15,7 +15,7 @@
 ;--------------------------------
 ; Pages
   Page custom SetupType SetupTypeLeave
-  Page custom CustomSetup CustomSetupLeave
+  Page custom AdvancedSetup AdvancedSetupLeave
   ; Disable the directory selection when updating
   !define MUI_PAGE_CUSTOMFUNCTION_PRE PageDirectoryPre
   !define MUI_PAGE_CUSTOMFUNCTION_SHOW PageDirectoryShow
@@ -42,19 +42,19 @@
 var existingInstall
 
 ; Installation settings
-var isCustomMode
-var isPortableMode
+var isAdvancedMode
+var isStandaloneMode
 var createDesktopShortcut
 
 ; Variable used by the setup type page
 var typeRadioStandard
-var typeRadioCustom
+var typeRadioAdvanced
 var typeRadioClicked
 var typeNextButton
 
-; Variables used in the custom setup page
-var customCheckboxPortable
-var customCheckboxDesktop
+; Variables used in the advanced setup page
+var advancedCheckboxDesktop
+var advancedCheckboxStandalone
 
 ReserveFile ${WELCOME_IMAGE}
 
@@ -105,25 +105,23 @@ Function SetupType
   ${If} $existingInstall == ""
     ${NSD_CreateRadioButton} 120u 117u 160u 12u "Standard"
     Pop $typeRadioStandard
-    ${NSD_CreateRadioButton} 120u 129u 160u 12u "Custom"
-    Pop $typeRadioCustom
   ${Else}
-    ${NSD_CreateRadioButton} 120u 117u 160u 12u "Update"
+    ${NSD_CreateRadioButton} 120u 117u 160u 12u "Update current installation"
     Pop $typeRadioStandard
-    ${NSD_CreateRadioButton} 120u 129u 160u 12u "Self-contained install"
-    Pop $typeRadioCustom
   ${EndIf}
+  ${NSD_CreateRadioButton} 120u 129u 160u 12u "Advanced"
+  Pop $typeRadioAdvanced
 
   SetCtlColors $typeRadioStandard "" ${MUI_BGCOLOR}
   ${NSD_OnClick} $typeRadioStandard SetupTypeRadioClick
-  SetCtlColors $typeRadioCustom "" ${MUI_BGCOLOR}
-  ${NSD_OnClick} $typeRadioCustom SetupTypeRadioClick
+  SetCtlColors $typeRadioAdvanced "" ${MUI_BGCOLOR}
+  ${NSD_OnClick} $typeRadioAdvanced SetupTypeRadioClick
 
   GetDlgItem $typeNextButton $HWNDPARENT 1
 
   ; Re-check radios if the user presses back
-  ${If} $isCustomMode == "true"
-    StrCpy $typeRadioClicked $typeRadioCustom
+  ${If} $isAdvancedMode == "true"
+    StrCpy $typeRadioClicked $typeRadioAdvanced
   ${Else}
     StrCpy $typeRadioClicked $typeRadioStandard
   ${EndIf}
@@ -141,12 +139,12 @@ Function SetupTypeRadioClick
 FunctionEnd
 
 Function SetupTypeUpdate
-  ${If} $typeRadioClicked == $typeRadioCustom
-    StrCpy $isCustomMode "true"
+  ${If} $typeRadioClicked == $typeRadioAdvanced
+    StrCpy $isAdvancedMode "true"
     SendMessage $typeNextButton ${WM_SETTEXT} 0 "STR:$(^NextBtn)"
   ${ElseIf} $typeRadioClicked == $typeRadioStandard
-    StrCpy $isCustomMode "false"
-    StrCpy $isPortableMode "false"
+    StrCpy $isAdvancedMode "false"
+    StrCpy $isStandaloneMode "false"
     ${If} $existingInstall == ""
       SendMessage $typeNextButton ${WM_SETTEXT} 0 "STR:$(^InstallBtn)"
     ${Else}
@@ -156,79 +154,81 @@ Function SetupTypeUpdate
 FunctionEnd
 
 Function SetupTypeLeave
-  ${If} $typeRadioClicked == $typeRadioCustom
-    StrCpy $isCustomMode "true"
+  ${If} $typeRadioClicked == $typeRadioAdvanced
+    StrCpy $isAdvancedMode "true"
   ${ElseIf} $typeRadioClicked == $typeRadioStandard
-    StrCpy $isCustomMode "false"
-    StrCpy $isPortableMode "false"
+    StrCpy $isAdvancedMode "false"
+    StrCpy $isStandaloneMode "false"
   ${Else}
     Abort
   ${EndIf}
 FunctionEnd
 
-Function CustomSetup
-  ${If} $isCustomMode != "true"
+Function AdvancedSetup
+  ${If} $isAdvancedMode != "true"
     Return
   ${EndIf}
 
-  !insertmacro MUI_HEADER_TEXT "Custom Setup" "Customize your setup options"
+  !insertmacro MUI_HEADER_TEXT "Advanced setup" ""
   nsDialogs::Create 1018
   Pop $0
   ${If} $0 == error
     Abort
   ${EndIf}
 
-  ${NSD_CreateCheckbox} 0 18% 100% 6% "Portable installation"
-  Pop $customCheckboxPortable
-  ${NSD_CreateCheckbox} 0 30% 100% 6% "Create a desktop shortcut"
-  Pop $customCheckboxDesktop
-  ${NSD_OnClick} $customCheckboxPortable CustomSetupCheckboxClick
-  ${NSD_OnClick} $customCheckboxDesktop CustomSetupCheckboxClick
+  ${NSD_CreateCheckbox} 0 18% 100% 6% "Create a desktop shortcut"
+  Pop $advancedCheckboxDesktop
+  ${NSD_CreateCheckbox} 0 30% 100% 6% "Standalone installation"
+  Pop $advancedCheckboxStandalone
+  ${NSD_CreateLabel} 4% 37% 95% 50% "Choose the standalone installation if you want to install Mullvad Browser in its own dedicated folder, without adding it to the Start menu and to the list of applications."
+  Pop $0
+  ${NSD_OnClick} $advancedCheckboxStandalone AdvancedSetupCheckboxClick
+  ${NSD_OnClick} $advancedCheckboxDesktop AdvancedSetupCheckboxClick
 
-  ${If} $existingInstall != ""
-    ; If we already have an installation, this is already portable mode.
-    StrCpy $isPortableMode "true"
-    ${NSD_Check} $customCheckboxPortable
-    EnableWindow $customCheckboxPortable 0
-  ${ElseIf} $isPortableMode == "true"
-    ${NSD_Check} $customCheckboxPortable
-  ${EndIf}
   ${If} $createDesktopShortcut == "true"
-    ${NSD_Check} $customCheckboxDesktop
+    ${NSD_Check} $advancedCheckboxDesktop
+  ${EndIf}
+  ${If} $existingInstall != ""
+    ; If we already have an installation, this is already standalone mode.
+    StrCpy $isStandaloneMode "true"
+    ${NSD_Check} $advancedCheckboxStandalone
+    EnableWindow $advancedCheckboxStandalone 0
+  ${ElseIf} $isStandaloneMode == "true"
+    ${NSD_Check} $advancedCheckboxStandalone
   ${EndIf}
 
   nsDialogs::Show
 FunctionEnd
 
-Function CustomSetupUpdate
-  ${NSD_GetState} $customCheckboxPortable $0
-  ${If} $0 == "${BST_CHECKED}"
-    StrCpy $isPortableMode "true"
-  ${Else}
-    StrCpy $isPortableMode "false"
-  ${EndIf}
-
-  ${NSD_GetState} $customCheckboxDesktop $0
+Function AdvancedSetupUpdate
+  ${NSD_GetState} $advancedCheckboxDesktop $0
   ${If} $0 == "${BST_CHECKED}"
     StrCpy $createDesktopShortcut "true"
   ${Else}
     StrCpy $createDesktopShortcut "false"
   ${EndIf}
+
+  ${NSD_GetState} $advancedCheckboxStandalone $0
+  ${If} $0 == "${BST_CHECKED}"
+    StrCpy $isStandaloneMode "true"
+  ${Else}
+    StrCpy $isStandaloneMode "false"
+  ${EndIf}
 FunctionEnd
 
-Function CustomSetupCheckboxClick
+Function AdvancedSetupCheckboxClick
   Pop $0
-  Call CustomSetupUpdate
+  Call AdvancedSetupUpdate
 FunctionEnd
 
-Function CustomSetupLeave
-  Call CustomSetupUpdate
+Function AdvancedSetupLeave
+  Call AdvancedSetupUpdate
 FunctionEnd
 
 Function PageDirectoryPre
-  ${If} $isPortableMode == "true"
+  ${If} $isStandaloneMode == "true"
     StrCpy $INSTDIR "${DEFAULT_PORTABLE_DIR}"
-    ; Always go through this page in portable mode.
+    ; Always go through this page in standalone mode.
     Return
   ${ElseIf} $existingInstall != ""
     ; When updating, force the old directory and skip the page.
@@ -238,7 +238,7 @@ Function PageDirectoryPre
     StrCpy $INSTDIR "${DEFAULT_INSTALL_DIR}"
   ${EndIf}
 
-  ${If} $isCustomMode != "true"
+  ${If} $isAdvancedMode != "true"
     ; Standard install, use the default directory and skip the page.
     Abort
   ${EndIf}
@@ -253,14 +253,14 @@ FunctionEnd
 Section "Browser" SecBrowser
   SetOutPath "$INSTDIR"
 
-  ${If} $isPortableMode == "true"
+  ${If} $isStandaloneMode == "true"
     File /r "${PROGRAM_SOURCE}\*.*"
     CreateShortCut "$INSTDIR\${DISPLAY_NAME}.lnk" "$INSTDIR\Browser\${EXE_NAME}"
   ${Else}
     ; Do not use a Browser directory for installs.
     File /r "${PROGRAM_SOURCE}\Browser\*.*"
 
-    ; Tell the browser we are not in portable mode anymore.
+    ; Tell the browser we are not in standalone mode anymore.
     FileOpen $0 "$INSTDIR\system-install" w
     FileClose $0
 
@@ -277,7 +277,7 @@ Section "Browser" SecBrowser
 SectionEnd
 
 Function StartBrowser
-  ${If} $isPortableMode == "true"
+  ${If} $isStandaloneMode == "true"
     ExecShell "open" "$INSTDIR\${DISPLAY_NAME}.lnk"
   ${Else}
     ExecShell "open" "$INSTDIR\${EXE_NAME}"
