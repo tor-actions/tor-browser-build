@@ -8,7 +8,9 @@ cd ~/"$SIGNING_PROJECTNAME-$tbb_version"
 
 test -n "$GPG_PASS" || read -sp "Enter gpg passphrase: " GPG_PASS
 currentdir=$(pwd)
-for i in `find . -name "*.dmg" -o -name "*.exe" -o -name "*.tar.xz" -o -name "*.txt" -o -name "*.zip" -o -name "*.tar.gz" -o -name "*.apk" | sort`
+for i in `find . -name "*.dmg" -o -name "*.exe" -o -name "*.tar.xz" \
+  -o -name "*.txt" -o -name "*.zip" -o -name "*.tar.gz" -o -name "*.apk" \
+  -o -name "*.deb" | sort`
 do
   if test -f "$i.asc"
   then
