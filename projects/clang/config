@@ -6,15 +6,20 @@ container:
 
 var:
   llvm_version: '[% pc("llvm-project", "version") %]'
+  no_crosscompile: 1
 
 input_files:
   - project: container-image
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
     enable: '[% c("var/linux") %]'
+    # Override the target to make sure we don't have linux-cross
   - name: binutils
     project: binutils
     enable: '[% c("var/linux") %]'
+    target:
+      - '[% c("var/channel") %]'
+      - '[% c("var/projectname") %]-linux-x86_64'
   - project: cmake
     name: cmake
   - project: llvm-project

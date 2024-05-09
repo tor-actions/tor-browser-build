@@ -6,15 +6,20 @@ container:
 var:
   node_version: 18.19.0
   node_sha256: f52b41af20596a9abd8ed75241837ec43945468221448bbf841361e2091819b6
+  no_crosscompile: 1
 
 input_files:
   - URL: 'https://nodejs.org/dist/v[% c("var/node_version") %]/node-v[% c("var/node_version") %].tar.xz'
     sha256sum: '[% c("var/node_sha256") %]'
     name: node
   - project: container-image
+    # Override the target to make sure we don't have linux-cross
   - project: binutils
     name: binutils
     enable: '[% c("var/linux") %]'
+    target:
+      - '[% c("var/channel") %]'
+      - '[% c("var/projectname") %]-linux-x86_64'
   - project: '[% c("var/compiler") %]'
     name: '[% c("var/compiler") %]'
     enable: '[% c("var/linux") %]'

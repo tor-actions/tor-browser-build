@@ -4,6 +4,7 @@ filename: 'python-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
 var:
+  no_crosscompile: 1
   deps:
     - build-essential
     - python-all

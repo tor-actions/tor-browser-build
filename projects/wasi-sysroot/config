@@ -12,6 +12,9 @@ git_submodule: 0
 container:
   use_container: 1
 
+var:
+  no_crosscompile: 1
+
 input_files:
   - project: container-image
   # We do not use GCC, but we need its libsdc++ to run Clang
