@@ -33,6 +33,8 @@ var:
   gradle_dependencies_version: 12
   gradle_version: 7.5.1
   variant: beta
+  has_l10n: '[% !c("var/testbuild") && !c("var/locales").empty %]'
+  l10n-changesets: '[% exec("cat browser/locales/l10n-changesets.json") %]'
 
 targets:
   release:
@@ -84,6 +86,12 @@ steps:
         pkg_type: build
         target_prepend:
           - torbrowser-android-x86_64
+      - project: firefox-l10n
+        name: firefox-l10n
+        enable: '[% c("var/has_l10n") %]'
+        pkg_type: build
+        target_prepend:
+          - torbrowser-android-armv7
 
   list_toolchain_updates:
     git_url: https://github.com/mozilla/gecko-dev.git

@@ -49,6 +49,19 @@ cp -rl $gradle_repo/maven2/* $gradle_repo || true
 export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
 # Create .mozbuild to avoid interactive prompt in configure
 mkdir "$HOME/.mozbuild"
+
+[% IF c("var/has_l10n") -%]
+  supported_locales="[% tmpl(c('var/locales_mobile').join(' ')).replace('-r', '-').replace('in', 'id').replace('iw', 'he') %]"
+  l10ncentral="$HOME/.mozbuild/l10n-central"
+  mkdir "$l10ncentral"
+  for tarball in $rootdir/[% c('input_files_by_name/firefox-l10n') %]/*; do
+    tar -C "$l10ncentral" -xf "$tarball"
+  done
+
+  # Do not setup our localization files, as we do not provide any frontend
+  # through GeckoView.
+[% END -%]
+
 # We still need to specify --tor-browser-version due to bug 34005.
 ./mach configure \
   --with-base-browser-version=[% c("var/torbrowser_version") %] \
@@ -56,6 +69,12 @@ mkdir "$HOME/.mozbuild"
   [% IF !c("var/rlbox") -%]--without-wasm-sandboxed-libraries[% END %]
 
 ./mach build --verbose
+
+[% IF c('var/has_l10n') -%]
+  # No quotes on purpose, to pass each locale as an additional argument.
+  ./mach package-multi-locale --locales en-US $supported_locales
+[% END -%]
+
 # We prepare an archive to then extract it as we were using a local Maven
 # repository.
 # See also https://github.com/mozilla-mobile/firefox-android/blob/main/fenix/docs/substituting-local-gv.md

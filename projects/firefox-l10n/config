@@ -21,11 +21,17 @@ steps:
     input_files => sub {
       my ($project, $options) = @_;
       my @input_files;
-      my $changesets_json = project_config('firefox', 'var/l10n-changesets', { %$options, origin_project => $project });
+      my $is_android = project_config($project, 'var/android', $options);
+      my $source_project = $is_android ? 'geckoview' : 'firefox';
+      my $locales_key = $is_android ? 'var/locales_mobile' : 'var/locales';
+      my $changesets_json = project_config($source_project, 'var/l10n-changesets', { %$options, origin_project => $project });
       my $d = decode_json $changesets_json;
-      my $locales = project_config($project, 'var/locales', $options);
+      my $locales = project_config($project, $locales_key, $options);
       foreach my $loc (@$locales) {
         my $locale = process_template($project, $loc, '.');
+        $locale =~ s/-r/-/;
+        $locale = "id" if ($is_android && $locale eq "in");
+        $locale = "he" if ($is_android && $locale eq "iw");
         next unless my $revision = $d->{$locale}{revision};
         my $input_file = {
           name => $locale,
