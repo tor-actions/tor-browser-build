@@ -22,7 +22,7 @@
 [% ELSE -%]
   !define ICON_NAME "[% c('var/projectname') %].ico"
 [% END -%]
-  !define WELCOME_IMAGE "[% c('var/projectname') %].bmp"
+  !define WELCOME_IMAGE "[% c('var/projectname') %]-[% c('var/channel') %].bmp"
 
 [% IF c('var/mullvad-browser') -%]
   ; Firefox's --with-user-appdir

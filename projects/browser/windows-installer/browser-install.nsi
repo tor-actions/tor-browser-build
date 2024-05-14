@@ -84,9 +84,9 @@ Function SetupType
   ${EndIf}
   SetCtlColors $0 "" "${MUI_BGCOLOR}"
 
-  ${NSD_CreateBitmap} 0 0 100% 100% ""
+  ${NSD_CreateBitmap} 0u 0u 109u 193u ""
   Pop $0
-  ${NSD_SetBitmap} $0 $PLUGINSDIR\${WELCOME_IMAGE} $1
+  !insertmacro MUI_INTERNAL_FULLWINDOW_LOADWIZARDIMAGE "" $0 $PLUGINSDIR\${WELCOME_IMAGE} $1
 
   ${NSD_CreateLabel} 120u 10u 195u 28u "Welcome to the ${DISPLAY_NAME} Installer"
   Pop $0
