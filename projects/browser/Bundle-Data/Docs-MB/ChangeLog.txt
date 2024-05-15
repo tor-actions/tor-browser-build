@@ -1,3 +1,48 @@
+Mullvad Browser 13.5a8 - May 16 2024
+ * All Platforms
+   * Updated Firefox to 115.11.0esr
+   * Bug 222: Hide "List all tabs" when the tabs don't overflow [mullvad-browser]
+   * Bug 241: Move network.proxy.failover_direct=false pref to base-browser [mullvad-browser]
+   * Bug 284: Should we reflect the actual channel in about:debugging? [mullvad-browser]
+   * Bug 290: Add default bookmarks in the alpha channels for testing [mullvad-browser]
+   * Bug 297: Rebase Mullvad Browser alpha onto 115.11.0esr [mullvad-browser]
+   * Bug 41930: intl.accept_languages gets into a stuck modifed state [tor-browser]
+   * Bug 42391: IndexDB's private directory not removed on browser shutdown in global private browsing mode [tor-browser]
+   * Bug 42405: Fix betterboxing + findbar horizontal bounce if the scrollbar is not an overlay [tor-browser]
+   * Bug 42565: Backport Android and desktop security fixes from Firefox 126 [tor-browser]
+   * Bug 42574: Exempt pdf.js from letterboxing [tor-browser]
+   * Bug 42583: Modify moz-support-link [tor-browser]
+ * Windows + macOS
+   * Bug 41405: Win ≤8.1 and macOS ≤10.14 not supported in ESR 128 [tor-browser]
+   * Bug 42347: Add a banner warning users about the upcoming EOL for Win ≤8.1 and macOS ≤10.14 [tor-browser]
+ * Windows
+   * Bug 278: Create asset(s) for the Mullvad Browser installer [mullvad-browser]
+ * Linux
+   * Bug 28: deb installation package for Linux [mullvad-browser]
+   * Bug 295: Filepicker string chars are tofu for the .deb package in Ubuntu 22.04 / Debian 11 [mullvad-browser]
+   * Bug 41135: 13.5a7's start-tor-browser seems to break KeePassXC-Browser? [tor-browser-build]
+   * Bug 41136: Include *.deb in the list of files to gpg sign [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Bug 41001: Create Release Prep MR generating script [tor-browser-build]
+     * Bug 41148: Update projects/browser/Bundle-Data/Docs/Licenses/NoScript.txt [tor-browser-build]
+     * Bug 40076: Correctly refresh file when computing input_files_id and a file is set as refresh_input [rbm]
+   * Windows
+     * Bug 200: Build system installer for Mullvad Browser on Windows [mullvad-browser]
+
+Mullvad Browser 13.0.15 - May 15 2024
+ * All Platforms
+   * Updated Firefox to 115.11.0esr
+   * Bug 296: Rebase Mullvad Browser stable onto 115.10.0esr [mullvad-browser]
+   * Bug 42391: IndexDB's private directory not removed on browser shutdown in global private browsing mode [tor-browser]
+   * Bug 42532: Use the HomePage module for new identity checks [tor-browser]
+   * Bug 42565: Backport Android and desktop security fixes from Firefox 126 [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41122: Add release date to rbm.conf [tor-browser-build]
+   * macOS
+     * Bug 42535: mac: app change to ja doesn't apply ja translations to most (all?) chrome [tor-browser]
+
 Mullvad Browser 13.5a7 - April 25 2024
  * All Platforms
    * Updated Firefox to 115.10.0esr

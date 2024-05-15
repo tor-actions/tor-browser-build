@@ -16,7 +16,7 @@ container:
 var:
   geckoview_version: 115.11.0esr
   browser_branch: 13.5-1
-  browser_build: 1
+  browser_build: 2
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   gitlab_project: https://gitlab.torproject.org/tpo/applications/tor-browser
   git_commit: '[% exec("git rev-parse HEAD") %]'
