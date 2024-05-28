@@ -24,3 +24,6 @@
   LangString standalone_installation ${LANG_ENGLISH} "Standalone installation"
   ; Use %s instead of ${PROJECT_NAME} for localization
   LangString standalone_description ${LANG_ENGLISH} "Choose the standalone installation if you want to install ${PROJECT_NAME} in its own dedicated folder, without adding it to the Start menu and to the list of applications."
+
+  ; The rest of the languages and translated strings will be added here by
+  ; add-strings.py.
