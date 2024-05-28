@@ -1,4 +1,9 @@
 #!/bin/bash
+
+# Usually NSIS uses English name with capital first letter.
+# You can check the exact language names on NSIS's archive or here:
+# https://sourceforge.net/p/nsis/code/HEAD/tree/NSIS/trunk/Contrib/Language%20files/
+
 declare -A nsis_languages
 nsis_languages[ar]="Arabic"
 nsis_languages[ca]="Catalan"
@@ -13,7 +18,7 @@ nsis_languages[fr]="French"
 nsis_languages[ga-IE]="ScotsGaelic"
 nsis_languages[he]="Hebrew"
 nsis_languages[hu]="Hungarian"
-nsis_languages[d]="Indonesian"
+nsis_languages[id]="Indonesian"
 nsis_languages[is]="Icelandic"
 nsis_languages[it]="Italian"
 nsis_languages[ja]="Japanese"
@@ -37,3 +42,8 @@ nsis_languages[uk]="Ukrainian"
 nsis_languages[vi]="Vietnamese"
 nsis_languages[zh-CN]="SimpChinese"
 nsis_languages[zh-TW]="TradChinese"
+
+# Currently nightly only
+nsis_languages[be]="Belarusian"
+nsis_languages[bg]="Bulgarian"
+nsis_languages[pt-PT]="Portuguese"

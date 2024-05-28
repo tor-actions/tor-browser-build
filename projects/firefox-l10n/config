@@ -29,6 +29,7 @@ steps:
       my $locales = project_config($project, $locales_key, $options);
       foreach my $loc (@$locales) {
         my $locale = process_template($project, $loc, '.');
+        next unless $locale;
         $locale =~ s/-r/-/;
         $locale = "id" if ($is_android && $locale eq "in");
         $locale = "he" if ($is_android && $locale eq "iw");
