@@ -66,15 +66,6 @@ Function CheckRequirements
     SetErrorLevel 1
     Quit
   ${EndIf}
-
-  ; Don't install on systems that don't support SSE2. The parameter value of
-  ; 10 is for PF_XMMI64_INSTRUCTIONS_AVAILABLE which will check whether the
-  ; SSE2 instruction set is available.
-  System::Call "kernel32::IsProcessorFeaturePresent(i 10)i .R7"
-  ${If} "$R7" == "0"
-    MessageBox MB_OK|MB_ICONSTOP "${PROJECT_NAME} requires a processor with SSE2 support."
-    Quit
-  ${EndIf}
 FunctionEnd
 
 Function CheckIfTargetDirectoryExists
