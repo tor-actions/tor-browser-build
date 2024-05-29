@@ -47,7 +47,7 @@ targets:
   browser-linux-x86_64:
     var:
       browser-linux-x86_64: 1
-      linux-packages: '[% c("var/mullvad-browser") %]'
+      linux-packages: '[% c("var/mullvad-browser") || c("var/tor-browser-linux-packages") %]'
   browser-linux-x86_64-asan:
     var:
       browser-linux-x86_64: 1
@@ -55,7 +55,7 @@ targets:
   browser-linux-i686:
     var:
       browser-linux-i686: '[% c("var/browser_type") != "mullvadbrowser" %]'
-      linux-packages: '[% c("var/mullvad-browser") %]'
+      linux-packages: '[% c("var/mullvad-browser") || c("var/tor-browser-linux-packages") %]'
   browser-windows-i686:
     var:
       browser-windows-i686: '[% c("var/browser_type") != "mullvadbrowser" %]'
@@ -93,6 +93,7 @@ targets:
     var:
       browser_type: torbrowser
       git_tag_prefix: tbb
+      tor-browser-linux-packages: '[% ! c("var/release") %]'
   basebrowser:
     var:
       browser_type: basebrowser

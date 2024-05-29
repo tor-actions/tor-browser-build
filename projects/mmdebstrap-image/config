@@ -42,6 +42,12 @@ targets:
           "deb [signed-by=/usr/share/keyrings/debian-archive-keyring.gpg] http://archive.debian.org/debian-archive/debian/ stretch main"
           "deb [signed-by=/usr/share/keyrings/debian-archive-keyring.gpg] http://archive.debian.org/debian-archive/debian-security/ stretch/updates main"
 
+  buster-amd64:
+    var:
+      minimal_apt_version: 1.8.2
+      container:
+        suite: buster
+        arch: amd64
 
   bullseye-amd64:
     var:

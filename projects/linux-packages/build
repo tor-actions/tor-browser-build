@@ -10,6 +10,16 @@ export SOURCE_DATE_EPOCH='[% c("timestamp") %]'
 umask 0022
 
 [% IF c("var/build_deb_pkg") -%]
+  [% IF c("var/browser-linux-i686") -%]
+    # When building an i386 deb package, dh_strip requires i686-linux-gnu-*
+    # commands not provided by the binutils x86_64 package on debian stretch.
+    # We can use the binutils-i686-gnu package when we switch to buster.
+    mkdir -p /var/tmp/dist/binutils
+    for bin in strip objcopy objdump; do
+      ln -s /usr/bin/$bin /var/tmp/dist/binutils/i686-linux-gnu-$bin
+    done
+    export PATH="/var/tmp/dist/binutils:$PATH"
+  [% END -%]
   cd $distdir
   project_dir=[% c("var/system_pkg/pkg_name") %]-[% c("var/system_pkg/pkg_version") %]
   mkdir "$project_dir"
@@ -41,20 +51,20 @@ umask 0022
   [% END -%]
   [% IF c("var/browser-linux-i686") -%]
     extract_src_tar \
-      $rootdir/[% c('input_files_by_name/linux-x86_64') %]/[% c("var/project-name") %]-linux-i686-[% c("version") %].tar.xz \
+      $rootdir/[% c('input_files_by_name/linux-i686') %]/[% c("var/project-name") %]-linux-i686-[% c("version") %].tar.xz \
       i386
   [% END -%]
 
+  dpkg-buildpackage --unsigned-source --unsigned-changes --build=source
   [% FOREACH deb_arch = c("var_p/system_pkg/deb_archs") -%]
-    dpkg-buildpackage --unsigned-source --unsigned-changes --build=full --host-arch=[% deb_arch %]
+    dpkg-buildpackage --unsigned-source --unsigned-changes --build=binary --host-arch=[% deb_arch %]
     deb_file_name='[% c("var/system_pkg/pkg_name") %]_[% c("var/system_pkg/pkg_version") %]-[% c("var/system_pkg/pkg_revision") %]_[% deb_arch %].deb'
     dpkg-deb --info "../$deb_file_name"
-    pushd ..
-    mv -f "$deb_file_name" *.dsc *.orig.tar.xz *.debian.tar.xz "$OUTDIR/"
-    popd
+    mv -f ../"$deb_file_name" "$OUTDIR/"
   [% END -%]
 
   cd ..
+  mv -f *.dsc *.orig.tar.xz *.debian.tar.xz "$OUTDIR/"
 [% END %]
 
 [% IF c("var/build_rpm_pkg") -%]
@@ -77,10 +87,15 @@ EOF
   [% END -%]
   [% IF c("var/browser-linux-i686") -%]
     cp -a $rootdir/[% c('input_files_by_name/linux-i686') %]/[% c("var/project-name") %]-linux-i686-[% c("version") %].tar.xz \
-      SOURCES/[% c("var/system_pkg/pkg_name") %]-linux-i686-[% c("var/system_pkg/pkg_version") %].tar.xz
+      SOURCES/[% c("var/system_pkg/pkg_name") %]-linux-i386-[% c("var/system_pkg/pkg_version") %].tar.xz
   [% END -%]
   rpmdir=$(pwd)
-  rpmbuild --define "_topdir $rpmdir" -v -bb SPECS/[% c("var/system_pkg/pkg_name") %].spec
+  [% IF c("var/browser-linux-x86_64") -%]
+    rpmbuild --define "_topdir $rpmdir" -v -bb SPECS/[% c("var/system_pkg/pkg_name") %].spec
+  [% END -%]
+  [% IF c("var/browser-linux-i686") -%]
+    rpmbuild --define "_topdir $rpmdir" --target i686-redhat-linux -v -bb SPECS/[% c("var/system_pkg/pkg_name") %].spec
+  [% END -%]
   mv RPMS/*/*.rpm "$OUTDIR/"
 
 [% END %]

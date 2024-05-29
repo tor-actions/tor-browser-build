@@ -34,7 +34,7 @@ Source1: [% c("var/system_pkg/pkg_name") %].desktop
 Source2: %{name}-linux-x86_64-%{version}.tar.xz
 [% END -%]
 [% IF c("var/browser-linux-i686") -%]
-Source3: %{name}-linux-i686-%{version}.tar.xz
+Source3: %{name}-linux-i386-%{version}.tar.xz
 [% END -%]
 
 %description
