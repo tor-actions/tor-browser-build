@@ -64,6 +64,7 @@ Function .onInit
   ; Skip NSIS's language selection prompt and try to use the OS language without
   ; further confirmations.
 
+  InitPluginsDir
   File /oname=$PLUGINSDIR\${WELCOME_IMAGE} "${WELCOME_IMAGE}"
 
   ReadRegStr $existingInstall HKCU "${UNINST_KEY}" "InstallLocation"
