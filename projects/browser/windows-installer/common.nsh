@@ -62,7 +62,7 @@
 ; Helper functions
 Function CheckRequirements
   ${IfNot} ${AtLeastWin7}
-    MessageBox MB_USERICON|MB_OK "${PROJECT_NAME} requires at least Windows 7"
+    MessageBox MB_USERICON|MB_OK "$(min_windows_version)"
     SetErrorLevel 1
     Quit
   ${EndIf}
@@ -70,7 +70,7 @@ FunctionEnd
 
 Function CheckIfTargetDirectoryExists
   ${If} ${FileExists} "$INSTDIR\*.*"
-    MessageBox MB_YESNO "The destination directory already exists. Do you want to continue anyway?" IDYES +2
+    MessageBox MB_YESNO "$(destination_exists)" IDYES +2
     Abort
   ${EndIf}
 FunctionEnd

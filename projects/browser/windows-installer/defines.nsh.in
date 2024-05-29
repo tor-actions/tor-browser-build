@@ -35,8 +35,7 @@
   !define URL_UPDATE "https://github.com/mullvad/mullvad-browser/releases/[% c('var/torbrowser_version') %]"
   !define URL_HELP "https://mullvad.net/help/tag/browser/"
 
-  ; TODO: This will likely be localized in the future.
-  !define INTRO_TEXT "Mullvad Browser is a privacy-focused web browser designed to minimize tracking and fingerprinting."
+  !define INTRO_TEXT "$(mb_intro)"
 [% ELSE -%]
   ; Not defined for Tor Browser
   !define APP_DIR "TorProject"
@@ -48,5 +47,6 @@
   !define URL_UPDATE "https://blog.torproject.org/new[% IF c('var/alpha') %]-alpha[% END %]-release-tor-browser-[% c('var/torbrowser_version') FILTER remove('\.') %]"
   !define URL_HELP "https://tb-manual.torproject.org/"
 
+  ; TODO: Localize if we actually start using it.
   !define INTRO_TEXT "Tor Browser. Protect yourself against tracking, surveillance, and censorship."
 [% END -%]

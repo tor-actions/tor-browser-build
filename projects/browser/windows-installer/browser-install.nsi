@@ -89,7 +89,7 @@ Function SetupType
   Pop $0
   !insertmacro MUI_INTERNAL_FULLWINDOW_LOADWIZARDIMAGE "" $0 $PLUGINSDIR\${WELCOME_IMAGE} $1
 
-  ${NSD_CreateLabel} 120u 10u 195u 28u "Welcome to the ${DISPLAY_NAME} Installer"
+  ${NSD_CreateLabel} 120u 10u 195u 28u "$(welcome_title)"
   Pop $0
   SetCtlColors $0 "${MUI_TEXTCOLOR}" "${MUI_BGCOLOR}"
   CreateFont $2 "$(^Font)" "12" "700"
@@ -99,18 +99,18 @@ Function SetupType
   Pop $0
   SetCtlColors $0 "${MUI_TEXTCOLOR}" "${MUI_BGCOLOR}"
 
-  ${NSD_CreateLabel} 120u 105u 195u 12u "Installation Type"
+  ${NSD_CreateLabel} 120u 105u 195u 12u "$(installation_type)"
   Pop $0
   SetCtlColors $0 "" ${MUI_BGCOLOR}
 
   ${If} $existingInstall == ""
-    ${NSD_CreateRadioButton} 120u 117u 160u 12u "Standard"
+    ${NSD_CreateRadioButton} 120u 117u 160u 12u "$(standard)"
     Pop $typeRadioStandard
   ${Else}
-    ${NSD_CreateRadioButton} 120u 117u 160u 12u "Update current installation"
+    ${NSD_CreateRadioButton} 120u 117u 160u 12u "$(update_current)"
     Pop $typeRadioStandard
   ${EndIf}
-  ${NSD_CreateRadioButton} 120u 129u 160u 12u "Advanced"
+  ${NSD_CreateRadioButton} 120u 129u 160u 12u "$(advanced)"
   Pop $typeRadioAdvanced
 
   SetCtlColors $typeRadioStandard "" ${MUI_BGCOLOR}
@@ -149,7 +149,7 @@ Function SetupTypeUpdate
     ${If} $existingInstall == ""
       SendMessage $typeNextButton ${WM_SETTEXT} 0 "STR:$(^InstallBtn)"
     ${Else}
-      SendMessage $typeNextButton ${WM_SETTEXT} 0 "STR:&Update"
+      SendMessage $typeNextButton ${WM_SETTEXT} 0 "STR:$(update_button)"
     ${EndIf}
   ${EndIf}
 FunctionEnd
@@ -170,18 +170,18 @@ Function AdvancedSetup
     Return
   ${EndIf}
 
-  !insertmacro MUI_HEADER_TEXT "Advanced setup" ""
+  !insertmacro MUI_HEADER_TEXT "$(advanced_setup)" ""
   nsDialogs::Create 1018
   Pop $0
   ${If} $0 == error
     Abort
   ${EndIf}
 
-  ${NSD_CreateCheckbox} 0 18% 100% 6% "Create a desktop shortcut"
+  ${NSD_CreateCheckbox} 0 18% 100% 6% "$(desktop_shortcut)"
   Pop $advancedCheckboxDesktop
-  ${NSD_CreateCheckbox} 0 30% 100% 6% "Standalone installation"
+  ${NSD_CreateCheckbox} 0 30% 100% 6% "$(standalone_installation)"
   Pop $advancedCheckboxStandalone
-  ${NSD_CreateLabel} 4% 37% 95% 50% "Choose the standalone installation if you want to install Mullvad Browser in its own dedicated folder, without adding it to the Start menu and to the list of applications."
+  ${NSD_CreateLabel} 4% 37% 95% 50% "$(standalone_description)"
   Pop $0
   ${NSD_OnClick} $advancedCheckboxStandalone AdvancedSetupCheckboxClick
   ${NSD_OnClick} $advancedCheckboxDesktop AdvancedSetupCheckboxClick

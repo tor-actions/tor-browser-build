@@ -10,7 +10,7 @@
   ; Misuse the option to show the readme to create the shortcuts.
   ; Less ugly than MUI_PAGE_COMPONENTS.
   !define MUI_FINISHPAGE_SHOWREADME
-  !define MUI_FINISHPAGE_SHOWREADME_TEXT "&Add Start Menu && Desktop shortcuts"
+  !define MUI_FINISHPAGE_SHOWREADME_TEXT "$(add_shortcuts)"
   !define MUI_FINISHPAGE_SHOWREADME_FUNCTION "CreateShortcuts"
 
   !define MUI_PAGE_CUSTOMFUNCTION_LEAVE CheckIfTargetDirectoryExists
