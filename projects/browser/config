@@ -134,6 +134,14 @@ input_files:
     enable: '[% c("var/windows") %]'
   - filename: pe_checksum_fix.py
     enable: '[% c("var/windows") %]'
+  - project: translation
+    name: translation-base-browser
+    pkg_type: base-browser
+    enable: '[% c("var/windows") && !c("var/testbuild") %]'
+  - project: translation
+    name: translation-mullvad-browser
+    pkg_type: mullvad-browser
+    enable: '[% c("var/mullvad-browser") && c("var/windows") && !c("var/testbuild") %]'
   # To generate a new keystore, see how-to-generate-keystore.txt
   - filename: android-qa.keystore
     enable: '[% c("var/android") %]'

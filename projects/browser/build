@@ -296,17 +296,17 @@ done
   tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/nsis') %]
   export PATH="/var/tmp/dist/nsis/bin:$PATH"
 
-  mv $rootdir/windows-installer $distdir/windows-installer
-  mv $rootdir/defines.nsh $distdir/windows-installer/
+  mv defines.nsh windows-installer/
   [% IF !c('var/testbuild') -%]
-    source $distdir/windows-installer/language-map.sh
     supported_locales="[% tmpl(c('var/locales').join(' ')) %]"
-    for code in $supported_locales; do
-      if [[ -n ${nsis_languages[$code]} ]]; then
-        echo '!insertmacro MUI_LANGUAGE "'${nsis_languages[$code]}'"' >> $distdir/windows-installer/languages.nsh
-      fi
-    done
+    tar -xf "[% c('input_files_by_name/translation-base-browser') %]"
+    python3 windows-installer/add-strings.py --enable-languages translation-base-browser $supported_locales >> windows-installer/languages.nsh
+    [% IF c("var/mullvad-browser") -%]
+      tar -xf "[% c('input_files_by_name/translation-mullvad-browser') %]"
+      python3 windows-installer/add-strings.py translation-mullvad-browser $supported_locales >> windows-installer/languages.nsh
+    [% END -%]
   [% END -%]
+  mv windows-installer $distdir/windows-installer
 
   [% IF c('var/mullvad-browser') -%]
     pushd $distdir/windows-installer
