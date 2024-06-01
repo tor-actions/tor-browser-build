@@ -78,12 +78,18 @@ The build system is based on rbm, which is included as a git submodule
 in the rbm/ directory. You can fetch the rbm git submodule by running
 'make submodule-update'.
 
-The build uses user_namespaces(7), which are disabled by default on Debian.
-To enable them you can use the following command as root:
+The build uses user_namespaces(7), which are disabled by default on Debian
+and on Ubuntu v24.04 and later. To enable them on Debian you can use the
+following command as root:
 
   # sysctl -w kernel.unprivileged_userns_clone=1
 
-You can enable them permanently by adding the setting to /etc/sysctl.d/
+To enable them on Ubuntu v24.04 and later, you can use the following command
+as root:
+
+  # sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+
+You can enable them permanently by adding the settings to /etc/sysctl.d/
 
 The user you use to build needs to have a range of subordinate uids and
 gids in /etc/subuid and /etc/subgid. Most of the time they are added by
