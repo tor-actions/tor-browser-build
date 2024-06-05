@@ -34,6 +34,8 @@ popd
 # taskcluster/scripts/misc/build-sysroot-wasi.sh and adapted to
 # tor-browser-build.
 
+patch -p1 < $rootdir/wasi-sdk.patch
+
 mkdir -p build/install/wasi
 # The wasi-sdk build system wants to build clang itself. We trick it into
 # thinking it did, and put our own clang where it would have built its own.

@@ -59,7 +59,11 @@ EOF
   ln -s llvm-ranlib "$arch-w64-mingw32-ranlib"
   ln -s llvm-readobj "$arch-w64-mingw32-readobj"
   ln -s llvm-objcopy "$arch-w64-mingw32-objcopy"
-  ln -s llvm-windres "$arch-w64-mingw32-windres"
+
+  # While the current HEAD of llvm-mingw does not include a wrapper for windres
+  # anymore, Firefox still uses it, and as a result it does not escape the
+  # defines passed with -D as it should to use LLVM's tool without wrappers.
+  ./clang -DDEFAULT_TARGET=\"$arch-w64-mingw32\" $rootdir/windres-wrapper.c -o "$arch-w64-mingw32-windres"
 
   # Building mingw-w64
   export PATH="$distdir/bin:/var/tmp/dist/cmake/bin:$PATH"

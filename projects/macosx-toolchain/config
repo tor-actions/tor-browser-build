@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("arch") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
-version: 13.3
+version: 14.4
 container:
   use_container: 1
 var:
@@ -26,12 +26,10 @@ input_files:
     project: cmake
   - name: ninja
     project: ninja
-  # Instructions on how to create the SDK tarball can be found at:
-  # build/macosx/cross-mozconfig.common
   - name: SDK
-    # Original URL: https://swcdn.apple.com/content/downloads/15/62/032-84673-A_7A1TG1RF8Z/xpc8q44ggn2pkn82iwr0fi1zeb9cxi8ath/CLTools_macOSNMOS_SDK.pkg
-    URL: https://build-sources.tbb.torproject.org/CLTools_macOSNMOS_SDK-13.3.pkg
-    sha256sum: c33545d543a38911aee2a65d4bf7ff4932c12de1e6a042ae38e6415f65a10710
+    # Original URL: https://swcdn.apple.com/content/downloads/14/48/052-59890-A_I0F5YGAY0Y/p9n40hio7892gou31o1v031ng6fnm9sb3c/CLTools_macOSNMOS_SDK.pkg
+    URL: https://build-sources.tbb.torproject.org/CLTools_macOSNMOS_SDK-14.4.pkg
+    sha512sum: a4e05d2a051027620c86f72694da126a2ceed59b8740270426c4ca3adb38e16fe981b536a373a7f0cdcc84bbe9d9149608ccd03967dbd94262548ccadbfa0f5d
   - name: llvm-project
     project: llvm-project
   - filename: macpkg.py

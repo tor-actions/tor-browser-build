@@ -33,3 +33,6 @@ input_files:
     project: wasi-config
   - name: wasi-libc
     project: wasi-libc
+  # taskcluster/scripts/misc/wasi-sdk.patch from Firefox's source code.
+  # Taken from gecko-dev@823106ac4295f822717f5a953047dc89074d632b
+  - filename: wasi-sdk.patch

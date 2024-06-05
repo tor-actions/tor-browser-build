@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/filename_targets") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
-version: '1.69.0'
+version: '1.78.0'
 container:
   use_container: 1
 
@@ -68,6 +68,3 @@ input_files:
   - project: python
     name: python
     enable: '[% c("var/linux") %]'
-  # Needed only for 1.69.0.
-  # See https://github.com/rust-lang/rust/issues/108948.
-  - filename: external-llvm.patch

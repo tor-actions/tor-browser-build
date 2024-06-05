@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
-version: 0.24.3
+version: 0.26.0
 git_url: https://github.com/eqrion/cbindgen
-git_hash: f43ccfc047a1a160267f32355c5e5e7154a2665a
+git_hash: 703b53c06f9fe2dbc0193d67626558cfa84a0f62
 container:
   use_container: 1
 
@@ -16,4 +16,4 @@ steps:
         project: cbindgen
         pkg_type: cargo_vendor
         norec:
-          sha256sum: 96057adf58cd75b968d2209a86de3ff8bf52a5024bac2f677673b388cb26475e
+          sha256sum: 50cf77f33397639e401e7139997ec088d3106c4d37b86ea2e89e4a9af2a99fce

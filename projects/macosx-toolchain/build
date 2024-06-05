@@ -45,18 +45,24 @@ target=[% c("var/build_target") %]
   arch=x86_64
 [% END -%]
 
+# These flags come from:
+# - taskcluster/scripts/misc/build-llvm-common.sh
+# - taskcluster/scripts/misc/build-compiler-rt.sh.
 COMMON_CMAKE_FLAGS="
+  -GNinja
+  -DCMAKE_C_COMPILER_TARGET=$target
+  -DCMAKE_CXX_COMPILER_TARGET=$target
+  -DCMAKE_ASM_COMPILER_TARGET=$target
   -DCMAKE_BUILD_TYPE=Release
   -DCMAKE_INSTALL_PREFIX=$distdir/clang/lib/clang/[% pc("llvm-project", "var/llvm_major") %]/
+  -DLLVM_ENABLE_ASSERTIONS=OFF
+  -DLLVM_CONFIG_PATH=$clangdir/llvm-config
   -DCMAKE_C_COMPILER=$clang
   -DCMAKE_CXX_COMPILER=$clang++
   -DCMAKE_AR=$clangdir/llvm-ar
   -DCMAKE_RANLIB=$clangdir/llvm-ranlib
   -DCMAKE_LINKER=$clangdir/ld64.lld
   -DCMAKE_LIPO=$clangdir/llvm-lipo
-  -DCMAKE_C_COMPILER_TARGET=$target
-  -DCMAKE_CXX_COMPILER_TARGET=$target
-  -DCMAKE_ASM_COMPILER_TARGET=$target
   -DCMAKE_SYSTEM_NAME=Darwin
   -DCMAKE_SYSTEM_VERSION=$MACOSX_DEPLOYMENT_TARGET
   -DCMAKE_OSX_SYSROOT=$sysrootdir
@@ -67,8 +73,11 @@ COMMON_CMAKE_FLAGS="
   -DDARWIN_macosx_OVERRIDE_SDK_VERSION=11.0
   -DDARWIN_osx_BUILTIN_ARCHS=$arch
   -DLLVM_DEFAULT_TARGET_TRIPLE=$target
-  -DLLVM_ENABLE_ASSERTIONS=OFF
-  -DLLVM_CONFIG_PATH=$clangdir/llvm-config
+  -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON
+  -DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=OFF
+  -DCOMPILER_RT_ENABLE_IOS=OFF
+  -DCOMPILER_RT_ENABLE_WATCHOS=OFF
+  -DCOMPILER_RT_ENABLE_TVOS=OFF
   "
 
 mkdir $builddir/faketools
@@ -92,8 +101,7 @@ cd $builddir
 mkdir build_compiler_rt
 cd build_compiler_rt
 
-# And we build compiler-rt by following taskcluster/scripts/misc/build-compiler-rt.sh.
-cmake $builddir/clang-source/compiler-rt -GNinja \
+cmake $builddir/clang-source/compiler-rt \
   $COMMON_CMAKE_FLAGS
 
 ninja -j[% c("num_procs") %] -v install

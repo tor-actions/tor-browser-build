@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("arch") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 git_url: https://git.code.sf.net/p/mingw-w64/mingw-w64
-git_hash: f9500e2d85b9400c0982518663660a127e1dc61a
+git_hash: cd4cf9b279f8fb0815f8b9665d3cea60a30290bc
 version: '[% pc("gcc-source", "version") %]'
 container:
   use_container: 1

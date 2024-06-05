@@ -4,8 +4,8 @@ filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("co
 container:
   use_container: 1
 var:
-  node_version: 16.19.0
-  node_sha256: 4f1fec1aea2392f6eb6d1d040b01e7ee3e51e762a9791dfea590920bc1156706
+  node_version: 18.19.0
+  node_sha256: f52b41af20596a9abd8ed75241837ec43945468221448bbf841361e2091819b6
 
 input_files:
   - URL: 'https://nodejs.org/dist/v[% c("var/node_version") %]/node-v[% c("var/node_version") %].tar.xz'
