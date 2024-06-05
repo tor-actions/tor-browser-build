@@ -13,6 +13,8 @@ var:
     pkg_revision: '1'
     pkg_description: '[% c("var/display_name") %]'
     deb_release_date: '[% USE date; date.format(c("timestamp"), format = "%a, %d %b %Y 01:02:03 +0000", locale = "en_US") %]'
+    # https://spdx.github.io/spdx-spec/v2.3/SPDX-license-expressions/
+    spdx_license: 'MPL-2.0 AND GPL-3.0-or-later AND OFL-1.1 AND Apache-2.0[% IF c("var/tor-browser") %] AND BSD-3-Clause AND CC0-1.0 AND MIT[% END %]'
     # Use var_p/system_pkg/deb_archs for the processed list
     deb_archs_list:
       - '[% IF c("var/browser-linux-x86_64") %]amd64[% END %]'

@@ -27,7 +27,7 @@ Name:    [% c("var/system_pkg/pkg_name") %]
 Version: [% c("var/system_pkg/pkg_version") %]
 Release: [% c("var/system_pkg/pkg_revision") %]
 URL:     [% c("var/system_pkg/pkg_url") %]
-License: MPL-2.0 AND GPL-3.0-or-later AND OFL-1.1 AND Apache-2.0[% IF c("var/tor-browser") %] AND BSD-3-Clause AND CC0-1.0 AND MIT[% END %]
+License: [% c("var/system_pkg/spdx_license") %]
 Source0: Makefile
 Source1: [% c("var/system_pkg/pkg_name") %].desktop
 [% IF c("var/browser-linux-x86_64") -%]

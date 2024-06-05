@@ -1,6 +1,7 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Source:: https://gitlab.torproject.org/tpo/applications/tor-browser-build/
 Upstream-Name: [% c("var/Project_Name") %]
+License: [% c("var/system_pkg/spdx_license") %]
 Comment:
  License for the build recipes and tools used for building [% c("var/Project_Name") %]
  can be found at this URL:
