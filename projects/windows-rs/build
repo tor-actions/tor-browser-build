@@ -1,0 +1,19 @@
+#!/bin/bash
+[% c("var/set_default_env") -%]
+mkdir -p /var/tmp/build /var/tmp/dist
+distdir=/var/tmp/dist
+builddir=/var/tmp/build/[% project %]-[% c('version') %]
+tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/rust') %]
+export PATH="/var/tmp/dist/rust/bin:$PATH"
+tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
+
+cd "$builddir/crates/libs/windows"
+cargo package
+
+cd $distdir
+tar -xf $builddir/target/package/windows-*.crate
+mv windows-* windows-rs
+[% c('tar', {
+        tar_src => [ project ],
+        tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
+    }) %]

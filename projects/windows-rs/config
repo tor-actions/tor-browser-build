@@ -1,0 +1,16 @@
+version: 0.52.0
+filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
+git_url: https://github.com/microsoft/windows-rs.git
+git_hash: 3a605cba064b26f2a198ac58085f8c8836f47c38
+container:
+  use_container: 1
+  disable_network:
+    # It seems Cargo really does not want to use the projects in the same path.
+    # So, build this package with network enabled, and check the hash of the
+    # output in the consumers (currently only Firefox).
+    build: 0
+
+input_files:
+  - project: container-image
+  - name: rust
+    project: rust
