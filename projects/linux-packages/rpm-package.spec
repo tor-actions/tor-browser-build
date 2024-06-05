@@ -21,6 +21,7 @@
 %global privlibs %{privlibs}|libxul
 %global __provides_exclude ^(%{privlibs})\\.so
 %global __requires_exclude ^(%{privlibs})\\.so
+%global __strip true
 
 Summary: [% c("var/display_name") %]
 Name:    [% c("var/system_pkg/pkg_name") %]
@@ -35,6 +36,9 @@ Source2: %{name}-linux-x86_64-%{version}.tar.xz
 [% END -%]
 [% IF c("var/browser-linux-i686") -%]
 Source3: %{name}-linux-i386-%{version}.tar.xz
+[% END -%]
+[% IF c("var/browser-linux-aarch64") -%]
+Source4: %{name}-linux-aarch64-%{version}.tar.xz
 [% END -%]
 
 %description

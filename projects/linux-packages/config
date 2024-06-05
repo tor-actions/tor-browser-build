@@ -19,6 +19,7 @@ var:
     deb_archs_list:
       - '[% IF c("var/browser-linux-x86_64") %]amd64[% END %]'
       - '[% IF c("var/browser-linux-i686") %]i386[% END %]'
+      - '[% IF c("var/browser-linux-aarch64") %]arm64[% END %]'
 
 
 targets:
@@ -28,7 +29,7 @@ targets:
       build_deb_pkg: 1
       pre_pkginst: |
         dpkg --add-architecture i386
-        # some :i386 packages fail to install when /var/lib/dpkg/available
+        # some foreign-arch packages fail to install when /var/lib/dpkg/available
         # does not exist, so create it as an empty file
         echo > /var/lib/dpkg/available
       arch_deps:
@@ -58,6 +59,31 @@ targets:
         - libpulse-dev:i386
         - libx11-xcb-dev:i386
         - libxt-dev:i386
+  deb-arm64:
+    var:
+      build_deb_pkg: 1
+      pre_pkginst: |
+        dpkg --add-architecture arm64
+        # some foreign-arch packages fail to install when /var/lib/dpkg/available
+        # does not exist, so create it as an empty file
+        echo > /var/lib/dpkg/available
+      arch_deps:
+        # Packages needed to build the deb package
+        - dpkg-dev
+        - debhelper
+        - dh-exec
+        - dh-apparmor
+        # Packages needed to generate dependencies for the deb package
+        - linux-libc-dev:arm64
+        - libasound2-dev:arm64
+        - libfontconfig1-dev:arm64
+        - libfreetype6-dev:arm64
+        - libgconf2-dev:arm64
+        - libgtk-3-dev:arm64
+        - libpango1.0-dev:arm64
+        - libpulse-dev:arm64
+        - libx11-xcb-dev:arm64
+        - libxt-dev:arm64
 
   rpm:
     var:
@@ -72,18 +98,15 @@ targets:
       container:
         suite: bookworm
 
-  browser-all:
-    - browser-linux-x86_64
-    - browser-linux-i686
-
-  browser-all-desktop: browser-all
-
   browser-linux-x86_64:
     var:
       browser-linux-x86_64: 1
   browser-linux-i686:
     var:
       browser-linux-i686: '[% c("var/browser_type") != "mullvadbrowser" %]'
+  browser-linux-aarch64:
+    var:
+      browser-linux-aarch64: 1
 
   torbrowser:
     var:
@@ -138,6 +161,13 @@ input_files:
     target:
       - '[% c("var/build_target") %]'
       - '[% c("var/browser_type") %]-linux-i686'
+
+  - name: linux-aarch64
+    project: browser
+    enable: '[% c("var/browser-linux-aarch64") %]'
+    target:
+      - '[% c("var/build_target") %]'
+      - '[% c("var/browser_type") %]-linux-aarch64'
 
   - filename: Makefile
     content: "[% INCLUDE 'Makefile.in' %]"

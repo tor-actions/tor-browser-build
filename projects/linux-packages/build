@@ -57,6 +57,11 @@ umask 0022
       $rootdir/[% c('input_files_by_name/linux-i686') %]/[% c("var/project-name") %]-linux-i686-[% c("version") %].tar.xz \
       i386
   [% END -%]
+  [% IF c("var/browser-linux-aarch64") -%]
+    extract_src_tar \
+      $rootdir/[% c('input_files_by_name/linux-aarch64') %]/[% c("var/project-name") %]-linux-aarch64-[% c("version") %].tar.xz \
+      arm64
+  [% END -%]
 
   dpkg-buildpackage --unsigned-source --unsigned-changes --build=source
   [% FOREACH deb_arch = c("var_p/system_pkg/deb_archs") -%]
@@ -92,12 +97,19 @@ EOF
     cp -a $rootdir/[% c('input_files_by_name/linux-i686') %]/[% c("var/project-name") %]-linux-i686-[% c("version") %].tar.xz \
       SOURCES/[% c("var/system_pkg/pkg_name") %]-linux-i386-[% c("var/system_pkg/pkg_version") %].tar.xz
   [% END -%]
+  [% IF c("var/browser-linux-aarch64") -%]
+    cp -a $rootdir/[% c('input_files_by_name/linux-aarch64') %]/[% c("var/project-name") %]-linux-aarch64-[% c("version") %].tar.xz \
+      SOURCES/[% c("var/system_pkg/pkg_name") %]-linux-aarch64-[% c("var/system_pkg/pkg_version") %].tar.xz
+  [% END -%]
   rpmdir=$(pwd)
   [% IF c("var/browser-linux-x86_64") -%]
     rpmbuild --define "_topdir $rpmdir" -v -bb SPECS/[% c("var/system_pkg/pkg_name") %].spec
   [% END -%]
   [% IF c("var/browser-linux-i686") -%]
     rpmbuild --define "_topdir $rpmdir" --target i686-redhat-linux -v -bb SPECS/[% c("var/system_pkg/pkg_name") %].spec
+  [% END -%]
+  [% IF c("var/browser-linux-aarch64") -%]
+    rpmbuild --define "_topdir $rpmdir" --target aarch64-redhat-linux -v -bb SPECS/[% c("var/system_pkg/pkg_name") %].spec
   [% END -%]
   mv RPMS/*/*.rpm "$OUTDIR/"
 

@@ -40,8 +40,13 @@ mkdir -p "$destdir"
 [% IF c("var/browser-linux-aarch64") -%]
   mv [% c('input_files_by_name/linux-aarch64') %]/* "$destdir"/
 [% END -%]
-[% IF c("var/linux-packages") -%]
-  mv [% c('input_files_by_name/deb-packages') %]/* "$destdir"/
+[% IF c("var/linux-packages") || c("var/linux-packages-aarch64") -%]
+  [% IF c("var/linux-packages") -%]
+    mv [% c('input_files_by_name/deb-packages') %]/* "$destdir"/
+  [% END -%]
+  [% IF c("var/linux-packages-aarch64") -%]
+    mv [% c('input_files_by_name/deb-packages-aarch64') %]/* "$destdir"/
+  [% END -%]
   mv [% c('input_files_by_name/rpm-packages') %]/* "$destdir"/
 [% END -%]
 [% IF c("var/browser-src") -%]

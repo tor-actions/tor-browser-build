@@ -5,7 +5,7 @@ Section: web
 Build-Depends: debhelper (>= 9), dh-apparmor
 
 Package: [% c("var/system_pkg/pkg_name") %]
-Architecture: [% c("var_p/system_pkg/deb_archs").join(" ") %]
+Architecture: amd64 i386 arm64
 Depends: ${shlibs:Depends},
 Description: [% c('var/display_name') %]
  [% c("var/system_pkg/pkg_description") %]
