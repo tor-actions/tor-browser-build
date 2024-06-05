@@ -36,5 +36,4 @@ input_files:
     project: llvm-project
   - filename: macpkg.py
   - filename: unpack-sdk.py
-  - filename: mozbuild_util.py
   - filename: tools.diff

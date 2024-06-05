@@ -10,7 +10,7 @@ tar -C $distdir -xf [% c('input_files_by_name/clang') %]
 tar -C $distdir -xf [% c('input_files_by_name/cctools') %]
 tar -C $builddir -xf [% c('input_files_by_name/llvm-project') %]
 
-patch -p1 < $rootdir/tools.diff
+patch -p4 < $rootdir/tools.diff
 
 sysrootdir=$distdir/MacOSX[% c("version") %].sdk/
 mkdir -p $sysrootdir
@@ -88,6 +88,7 @@ chmod +x $builddir/faketools/sw_vers
 export PATH=$PATH:"$builddir/faketools"
 # End of Moz's tricks
 
+cd $builddir
 mkdir build_compiler_rt
 cd build_compiler_rt
 
