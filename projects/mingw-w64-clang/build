@@ -137,11 +137,11 @@ EOF
   cp lib/windows/libclang_rt.builtins-$compiler_rt_machine.a $rtdir/
 
   # libc++, libc++abi and libunwind now are compiled together
-  # See https://libcxx.llvm.org/BuildingLibcxx.html
+  # See https://libcxx.llvm.org/BuildingLibcxx.html.
+  # The flags are from taskcluster/scripts/misc/build-clang-mingw.sh.
   cd $builddir/clang-source
   mkdir "build-$arch"
   cmake -G "Unix Makefiles" -S runtimes -B "build-$arch" \
-        -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind" \
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_INSTALL_PREFIX=$distdir/$arch-w64-mingw32 \
         -DCMAKE_C_COMPILER=$CC \
@@ -154,21 +154,6 @@ EOF
         -DLLVM_COMPILER_CHECKED=True \
         -DCMAKE_AR=$distdir/bin/llvm-ar \
         -DCMAKE_RANLIB=$distdir/bin/llvm-ranlib \
-        -DLLVM_NO_OLD_LIBSTDCXX=TRUE \
-        -DCXX_SUPPORTS_CXX11=TRUE \
-        -DCXX_SUPPORTS_CXX_STD=True \
-        -DCMAKE_CXX_FLAGS="-Wno-dll-attribute-on-redeclaration -DPSAPI_VERSION=2 -D_LIBCPP_DISABLE_VISIBILITY_ANNOTATIONS -D_LIBCPP_HAS_THREAD_API_WIN32 -D_LIBCXXABI_DISABLE_VISIBILITY_ANNOTATIONS" \
-        -DCMAKE_C_FLAGS="-Wno-dll-attribute-on-redeclaration" \
-        -DLIBUNWIND_USE_COMPILER_RT=TRUE \
-        -DLIBUNWIND_ENABLE_THREADS=TRUE \
-        -DLIBUNWIND_ENABLE_SHARED=FALSE \
-        -DLIBUNWIND_ENABLE_CROSS_UNWINDING=FALSE \
-        -DLIBCXXABI_USE_COMPILER_RT=ON \
-        -DLIBCXXABI_ENABLE_EXCEPTIONS=ON \
-        -DLIBCXXABI_ENABLE_THREADS=ON \
-        -DLIBCXXABI_TARGET_TRIPLE=$arch-w64-mingw32 \
-        -DLIBCXXABI_ENABLE_SHARED=OFF \
-        -DLIBCXXABI_LIBCXX_INCLUDES=$builddir/clang-source/libcxx/include \
         -DLIBCXX_USE_COMPILER_RT=ON \
         -DLIBCXX_INSTALL_HEADERS=ON \
         -DLIBCXX_ENABLE_EXCEPTIONS=ON \
@@ -182,8 +167,23 @@ EOF
         -DLIBCXX_ENABLE_FILESYSTEM=ON \
         -DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=TRUE \
         -DLIBCXX_CXX_ABI=libcxxabi \
-        -DLIBCXX_CXX_ABI_INCLUDE_PATHS=$builddir/clang-source/libcxxabi/include \
-        -DLIBCXX_CXX_ABI_LIBRARY_PATH=$builddir/clang-source/libcxxabi/build/lib \
+        -DLIBCXXABI_USE_LLVM_UNWINDER=TRUE \
+        -DLIBCXXABI_ENABLE_STATIC_UNWINDER=TRUE \
+        -DLLVM_NO_OLD_LIBSTDCXX=TRUE \
+        -DLIBUNWIND_USE_COMPILER_RT=TRUE \
+        -DLIBUNWIND_ENABLE_THREADS=TRUE \
+        -DLIBUNWIND_ENABLE_SHARED=FALSE \
+        -DLIBUNWIND_ENABLE_CROSS_UNWINDING=FALSE \
+        -DLIBUNWIND_CXX_FLAGS="-Wno-dll-attribute-on-redeclaration -nostdinc++ -DPSAPI_VERSION=2" \
+        -DLIBUNWIND_C_FLAGS="-Wno-dll-attribute-on-redeclaration" \
+        -DLIBUNWIND_ENABLE_FRAME_APIS=ON \
+        -DLIBCXXABI_USE_COMPILER_RT=ON \
+        -DLIBCXXABI_ENABLE_EXCEPTIONS=ON \
+        -DLIBCXXABI_ENABLE_THREADS=ON \
+        -DLIBCXXABI_TARGET_TRIPLE=$arch-w64-mingw32 \
+        -DLIBCXXABI_ENABLE_SHARED=OFF \
+        -DLIBCXXABI_CXX_FLAGS="-D_LIBCPP_HAS_THREAD_API_WIN32" \
+        -DLLVM_ENABLE_RUNTIMES="libcxxabi;libcxx;libunwind" \
 
   cd "build-$arch"
   make -j[% c("num_procs") %] VERBOSE=1

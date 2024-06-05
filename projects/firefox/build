@@ -13,6 +13,9 @@ mkdir -p [% out_dir %]
   # Setting up fxc2
   tar -C /var/tmp/dist -xf [% c('input_files_by_name/fxc2') %]
   export PATH="/var/tmp/dist/fxc2/bin:$PATH"
+
+  tar -C /var/tmp/dist -xf [% c('input_files_by_name/windows-rs') %]
+  export MOZ_WINDOWS_RS_DIR=/var/tmp/dist/windows-rs/
 [% END -%]
 
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/rust') %]
@@ -296,8 +299,8 @@ cd $distdir
 [% IF c("var/linux") -%]
   mkdir -p $distdir/Debug/Browser
   # Strip and generate debuginfo for the firefox binary that we keep, all *.so
-  # files, the plugin-container, and the updater (see ticket #10126)
-  for LIB in Browser/*.so "Browser/[% c('var/exe_name') %].real" Browser/plugin-container [% IF c("var/updater_enabled") -%]Browser/updater[% END %]
+  # files, and the updater (see ticket #10126)
+  for LIB in Browser/*.so "Browser/[% c('var/exe_name') %].real" [% IF c("var/updater_enabled") -%]Browser/updater[% END %]
   do
     objcopy --only-keep-debug $LIB Debug/$LIB
     strip $LIB
