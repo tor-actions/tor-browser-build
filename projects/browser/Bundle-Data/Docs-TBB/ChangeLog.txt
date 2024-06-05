@@ -1,3 +1,40 @@
+Tor Browser 13.5a9 - June 07 2024
+ * All Platforms
+   * Updated OpenSSL to 3.0.14
+   * Bug 41467: compat: beacon: re-enable the API but transform it to a no-op [tor-browser]
+   * Bug 42604: Add some debug logs about circuits [tor-browser]
+   * Bug 42614: Rebase Tor Browser Stable onto 115.12.0esr [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.12.0esr
+   * Bug 41149: Add be, bg and pt-PT translations to nightlies [tor-browser-build]
+ * Windows + macOS
+   * Bug 42586: Add support link to OS deprecation message [tor-browser]
+ * Windows
+   * Bug 41859: Font used for IPs in circuit display is illegible [tor-browser]
+ * Android
+   * Updated GeckoView to 115.12.0esr
+   * Bug 42593: Unable to disable bridges after they have been configured and successfully bootstrapped [tor-browser]
+   * Bug 42621: Backport security fixes from Firefox 127 [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.21.11
+     * Bug 42594: Update mach to work with python 3.12 [tor-browser]
+     * Bug 41153: Update README for Ubuntu 24.04 unprivileged user namespace changes [tor-browser-build]
+     * Bug 41154: Update keyring/boklm.gpg for new subkeys [tor-browser-build]
+   * Windows
+     * Bug 41150: Do not check for SSE2 on the Windows installer [tor-browser-build]
+   * Linux
+     * Bug 41126: Make deb and rpm packages for Tor Browser [tor-browser-build]
+     * Bug 41160: Enable build of Tor Browser rpm/deb packages for nightly only [tor-browser-build]
+   * Android
+     * Bug 42568: Remove legacy tor dependencies from firefox-android [tor-browser]
+     * Bug 42569: Remove tor-onion-proxy-library and and tor-android-service deployment/ingestion steps from firefox-android dev tools/scripts [tor-browser]
+     * Bug 42570: Add tor-expert-bundle aar depoyment/ingestion step to firefox-android dev tools/scripts [tor-browser]
+     * Bug 42581: Check if a file exists before trying to sign it in tools/tba-sign-devbuild.sh [tor-browser]
+     * Bug 41139: Remove tor-android-service and tor-onion-proxy-library dependencies and ingestion steps from firefox-android config and build script [tor-browser-build]
+     * Bug 41140: Remove tor-onion-proxy-library and tor-android-service projects from tor-browser-build [tor-browser-build]
+     * Bug 41141: Add tor-expert-bundle aar dependency to firefox-android [tor-browser-build]
+
 Tor Browser 13.5a8 - May 16 2024
  * All Platforms
    * Bug 42290: "DuckDuckGoOnion" is a weird naming format for onion search engines [tor-browser]

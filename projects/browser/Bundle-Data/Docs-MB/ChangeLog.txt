@@ -1,3 +1,25 @@
+Mullvad Browser 13.5a9 - June 07 2024
+ * All Platforms
+   * Updated Firefox to 115.12.0esr
+   * Updated uBlock Origin to 1.58.0
+   * Bug 290: Add default bookmarks in the alpha channels for testing [mullvad-browser]
+   * Bug 308: Rebase Mullvad Browser stable onto 115.12.0esr [mullvad-browser]
+   * Bug 41467: compat: beacon: re-enable the API but transform it to a no-op [tor-browser]
+ * Windows + macOS
+   * Bug 42586: Add support link to OS deprecation message [tor-browser]
+ * Linux
+   * Bug 29: rpm installation package for Linux [mullvad-browser]
+ * Build System
+   * All Platforms
+     * Bug 301: Deb package in the debian software installer is showing the License as "Proprietary" [mullvad-browser]
+     * Bug 42594: Update mach to work with python 3.12 [tor-browser]
+     * Bug 41153: Update README for Ubuntu 24.04 unprivileged user namespace changes [tor-browser-build]
+     * Bug 41154: Update keyring/boklm.gpg for new subkeys [tor-browser-build]
+   * Windows
+     * Bug 41151: Explicitly initialize the plugin directory on the Windows installer [tor-browser-build]
+   * Linux
+     * Bug 41129: Make rpm package for Mullvad Browser [tor-browser-build]
+
 Mullvad Browser 13.5a8 - May 16 2024
  * All Platforms
    * Updated Firefox to 115.11.0esr

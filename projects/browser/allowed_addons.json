@@ -17,19 +17,18 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/34/9734/13299734/13299734.png?modified=1709053095"
           }
         ],
-        "average_daily_users": 1155869,
+        "average_daily_users": 1156098,
         "categories": {
           "firefox": [
             "web-development",
             "appearance",
-            "other",
-            "accessibility"
+            "other"
           ]
         },
         "contributions_url": "https://opencollective.com/darkreader?utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2017-09-19T07:03:00Z",
         "current_version": {
-          "id": 5734039,
+          "id": 5751259,
           "compatibility": {
             "firefox": {
               "min": "78.0",
@@ -40,7 +39,7 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/darkreader/versions/5734039",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/darkreader/versions/5751259",
           "is_strict_compatibility_enabled": false,
           "license": {
             "id": 22,
@@ -51,22 +50,22 @@
             "url": "http://www.opensource.org/license/mit"
           },
           "release_notes": {
-            "en-US": "- Improved Dev Tools (per site editor).\n- Improved SVG logos analysis.\n- Improved large background image analysis.\n- Fixed IPv6 URL support.\n- Fixed Mark elements' colors (Wikipedia issue).\n- Check for CSS @layer support.\n- Users' fixes for websites."
+            "en-US": "- CSS variables performance optimizations.\n- Fixed loosing control over tabs after update.\n- Users' fixes for websites."
           },
-          "reviewed": "2024-05-02T10:55:24Z",
-          "version": "4.9.84",
+          "reviewed": "2024-06-03T17:37:38Z",
+          "version": "4.9.86",
           "files": [
             {
-              "id": 4278339,
-              "created": "2024-04-26T14:48:37Z",
-              "hash": "sha256:d418b40fc2cb69cfffabf6cc291f2cc5ca4c9d6a99e46562b44f4e2c0148374c",
+              "id": 4295557,
+              "created": "2024-05-30T10:50:27Z",
+              "hash": "sha256:dde9896751858d0179f3d724a59f2bd4a0d61e599cb8822dc8ed2de320510714",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 742672,
+              "size": 748912,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/4278339/darkreader-4.9.84.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/4295557/darkreader-4.9.86.xpi",
               "permissions": [
                 "alarms",
                 "contextMenus",
@@ -144,7 +143,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2024-05-02T10:55:24Z",
+        "last_updated": "2024-06-03T17:37:38Z",
         "name": {
           "ar": "Dark Reader",
           "bn": "Dark Reader",
@@ -219,10 +218,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.5328,
-          "bayesian_average": 4.531700579588363,
-          "count": 5616,
-          "text_count": 1763
+          "average": 4.5325,
+          "bayesian_average": 4.531403445528627,
+          "count": 5654,
+          "text_count": 1775
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/reviews/",
         "requires_payment": false,
@@ -319,7 +318,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/versions/",
-        "weekly_downloads": 22009
+        "weekly_downloads": 23401
       },
       "notes": null
     },
@@ -335,7 +334,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/56/7656/6937656/6937656.png?modified=1550343990"
           }
         ],
-        "average_daily_users": 262071,
+        "average_daily_users": 261889,
         "categories": {
           "firefox": [
             "privacy-security"
@@ -548,10 +547,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.7971,
-          "bayesian_average": 4.792462065343955,
-          "count": 1424,
-          "text_count": 257
+          "average": 4.7948,
+          "bayesian_average": 4.790160494031685,
+          "count": 1428,
+          "text_count": 258
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/reviews/",
         "requires_payment": false,
@@ -636,7 +635,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/versions/",
-        "weekly_downloads": 3004
+        "weekly_downloads": 3230
       },
       "notes": null
     },
@@ -652,7 +651,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/73/4073/5474073/5474073.png?modified=1469820907"
           }
         ],
-        "average_daily_users": 1211771,
+        "average_daily_users": 1221169,
         "categories": {
           "firefox": [
             "privacy-security"
@@ -661,7 +660,7 @@
         "contributions_url": "https://paypal.me/SupportEFF?utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
         "created": "2014-05-01T18:23:16Z",
         "current_version": {
-          "id": 5688386,
+          "id": 5752164,
           "compatibility": {
             "firefox": {
               "min": "78.0",
@@ -672,7 +671,7 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/privacy-badger17/versions/5688386",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/privacy-badger17/versions/5752164",
           "is_strict_compatibility_enabled": false,
           "license": {
             "id": 6,
@@ -683,22 +682,22 @@
             "url": "http://www.gnu.org/licenses/gpl-3.0.html"
           },
           "release_notes": {
-            "en-US": "<ul><li>Fixed timing issue that could lead to incomplete or empty tracker data on installation in Firefox</li><li>Fixed various UI display issues</li><li>Fixed various site breakages</li><li>Improved translations (Hebrew, Brazilian Portuguese, Swedish, Ukrainian)</li></ul>"
+            "en-US": "This is a bug fix update to work around Privacy Badger failing to read from extension storage for whatever reason."
           },
-          "reviewed": "2024-02-08T18:59:58Z",
-          "version": "2024.2.6",
+          "reviewed": "2024-06-04T09:41:20Z",
+          "version": "2024.5.31",
           "files": [
             {
-              "id": 4232703,
-              "created": "2024-02-06T15:04:35Z",
-              "hash": "sha256:81d80bff29b6209aa444713bc548a3d06fd5bde208c9c3c596dba81cc97add02",
+              "id": 4296462,
+              "created": "2024-05-31T21:41:13Z",
+              "hash": "sha256:d26010ff08cde19d9eb05286daf8f392c521199f45c87c13943e3cecc8d6d4a5",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 1892384,
+              "size": 1893938,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/4232703/privacy_badger17-2024.2.6.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/4296462/privacy_badger17-2024.5.31.xpi",
               "permissions": [
                 "<all_urls>",
                 "alarms",
@@ -1125,7 +1124,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2024-02-08T18:59:58Z",
+        "last_updated": "2024-06-04T09:41:20Z",
         "name": {
           "en-US": "Privacy Badger"
         },
@@ -1171,10 +1170,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.7987,
-          "bayesian_average": 4.795984211985758,
-          "count": 2434,
-          "text_count": 461
+          "average": 4.7975,
+          "bayesian_average": 4.794784650041368,
+          "count": 2444,
+          "text_count": 462
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/reviews/",
         "requires_payment": false,
@@ -1198,7 +1197,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/versions/",
-        "weekly_downloads": 19752
+        "weekly_downloads": 26256
       },
       "notes": null
     },
@@ -1214,7 +1213,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 7762168,
+        "average_daily_users": 7879659,
         "categories": {
           "firefox": [
             "privacy-security"
@@ -1223,7 +1222,7 @@
         "contributions_url": "",
         "created": "2015-04-25T07:26:22Z",
         "current_version": {
-          "id": 5717409,
+          "id": 5746167,
           "compatibility": {
             "firefox": {
               "min": "78.0",
@@ -1234,7 +1233,7 @@
               "max": "*"
             }
           },
-          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/ublock-origin/versions/5717409",
+          "edit_url": "https://addons.mozilla.org/en-US/developers/addon/ublock-origin/versions/5746167",
           "is_strict_compatibility_enabled": false,
           "license": {
             "id": 6,
@@ -1245,22 +1244,22 @@
             "url": "http://www.gnu.org/licenses/gpl-3.0.html"
           },
           "release_notes": {
-            "en-US": "See complete release notes for <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/65a30f1a59ac2ef295f46995786578633d74b56c32119609a791998b2181d0f0/https%3A//github.com/gorhill/uBlock/releases/tag/1.57.2\" rel=\"nofollow\">1.57.2</a>.\n\nThis is an emergency release to fix an issue causing differential updates to fail. The issue primarily affected Firefox because of uBO's use of indexedDB prior to 1.57.0. The issue did not affect full update of filter lists even though the asset viewer would show old versions of those lists (internally uBO compiles lists and would still correctly compile from lists fetched by full updater).\n\n<b>Fixes / changes</b>\n\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/92c6c66077821bbbc4fd825dcb521bf7489bd68180388cf53434bc138b664e09/https%3A//github.com/gorhill/uBlock/commit/defd68ef7d\" rel=\"nofollow\">Fix stray lists in redesigned cache storage</a>\n\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/ad79f1669e12cf4cb05689281e841ad02b344fd831ca42985329020d6cb94faf/https%3A//github.com/gorhill/uBlock/compare/1.57.0...1.57.2\" rel=\"nofollow\">Commits history since last version</a>"
+            "en-US": "See complete release notes for <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/fc9c36f18102ea4ded4bcacad7f136ee67bb0e4e6ad8e408150e55d07eae9797/https%3A//github.com/gorhill/uBlock/releases/tag/1.58.0\" rel=\"nofollow\">1.58.0</a>.\n\n<b>Fixes / changes</b>\n\n<ul><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/0ceba5b398c66affa556c85ab35e3fa650753c515c74f4ba8f3580bdfc3b98ef/https%3A//github.com/gorhill/uBlock/commit/59ffc96e89\" rel=\"nofollow\">Fallback to <code>requestAnimationFrame</code> when <code>requestIdleCallback</code> is not available</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/dfc19cb77cf548b6c698228b41dd33e99ea73cd21f88026ff32743580597bae2/https%3A//github.com/gorhill/uBlock/commit/ee67cd6284\" rel=\"nofollow\">Improve <code>trusted-click-element</code> scriptlet</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/53aab049c05ac90b7081a7a52d5dcb11c6d0b2435507fdc7968f42679aa2e2f6/https%3A//github.com/gorhill/uBlock/commit/ca7d2ad61d\" rel=\"nofollow\">Replace EasyDutch with AdGuard Dutch</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/3e24b5ff4776262424fc01206b6012c51a814b15125e234b30297015e700e073/https%3A//github.com/gorhill/uBlock/commit/0e6d607484\" rel=\"nofollow\">Add checksum validation when loading trie buffers in selfie</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/f01b43177275954a8e94d5e2f6d76e8e35b7af20a78b6c2d3271deaea43e9661/https%3A//github.com/gorhill/uBlock/commit/bb479b0a66\" rel=\"nofollow\">Catch exceptions in API calls for the sake of old Chromium versions</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/cda2db15403a985081c839f6a78a620b3ec50375339703e50a88611a64b39b71/https%3A//github.com/gorhill/uBlock/commit/363ad6795c\" rel=\"nofollow\">Add <code>accept</code>/<code>reject</code> to <code>set-local-storage-item</code></a> (by @ryanbr)</li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/8c1c4689ecbe42bcad2c0532c61edf92655a66a76ee291360bc51ac281675692/https%3A//github.com/gorhill/uBlock/commit/923452b788\" rel=\"nofollow\">Use raw string for regex patterns in python scripts</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/46d71082be3bfdfd2d307ce3ee8481d69538ad8796bf563f9568ce074375e705/https%3A//github.com/gorhill/uBlock/commit/4d8ee35ef7\" rel=\"nofollow\">Improve <code>noeval-if</code> scriptlet</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/99fecf82daa8a26001eaf1395ccd3f71258ca8e8c4877e65d844717e5a1e1e22/https%3A//github.com/gorhill/uBlock/commit/2ccc3135c1\" rel=\"nofollow\">Improve <code>trusted-set-local-storage-item</code> scriptlet</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/bce21a4229b5324fd554cec8862cb35c53eb9dc15d1c672196b8641ad3492f87/https%3A//github.com/gorhill/uBlock/commit/c098eb8625\" rel=\"nofollow\">Fix potential corruption when reading serialized data</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/c9aae1db1f24a4acdfe9cf32a36e3a21bddcb95b423be572cb168f3a60a0af3b/https%3A//github.com/gorhill/uBlock/commit/91dfcbef2a\" rel=\"nofollow\">Improve <code>remove-[attr|class]</code> scriptlets</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/10dd9b96392c90e151be30d372aa7e9be40b102f837e5c574c353445c2902627/https%3A//github.com/gorhill/uBlock/commit/6152f5269e\" rel=\"nofollow\">Improve dashboard layout at high zoom factor</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/a940c446ca823b9c65e9faf70dd38097e6f06056714d973dba8ecb380a9a98b4/https%3A//github.com/gorhill/uBlock/commit/3b4f02db21\" rel=\"nofollow\">Add a console pane to the logger</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/9a5a38c655f10c3c00929323116a362089a763064857dc8190bf8d52534f8034/https%3A//github.com/gorhill/uBlock/commit/277e90a4a7\" rel=\"nofollow\">Improve <code>spoof-css</code> scriptlet</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/9fd94ee7163797f024cc08090fb9e6eed7d0094bfcd95d175294c91e662370a3/https%3A//github.com/gorhill/uBlock/commit/a5f6c35bb0\" rel=\"nofollow\">Fix bad date computation in auto-comment feature</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/3dfedb4d0253010212ffab171bac973155bf5c5d8dd4db3919c65b199af0b63c/https%3A//github.com/gorhill/uBlock/commit/c223a8cd39\" rel=\"nofollow\">Fix regression breaking import of <code>file://</code> lists</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/b32094a94721ee7b6b2a87033ae4dcba992a937a824829eec69701b1ae0d5509/https%3A//github.com/gorhill/uBlock/commit/21e1ee30ee\" rel=\"nofollow\">Add <code>trusted-replace-outbound-text</code> scriptlet</a></li><li><a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/e6f32d49fbe58d23695dfba58394454aa834d9bba3f1fe8adc4e8ed2c789ef0f/https%3A//github.com/gorhill/uBlock/commit/49ff7cffb1\" rel=\"nofollow\">Improve <code>[trusted-]set-cookie</code> scriptlets</a></li></ul>\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/ca5f86b769d3b3edc3cfe683735794914c6984db643288346de6d391397f692d/https%3A//github.com/gorhill/uBlock/compare/1.57.2...1.58.0\" rel=\"nofollow\">Commits history since last version</a>"
           },
-          "reviewed": "2024-04-10T09:01:57Z",
-          "version": "1.57.2",
+          "reviewed": "2024-05-23T16:49:52Z",
+          "version": "1.58.0",
           "files": [
             {
-              "id": 4261710,
-              "created": "2024-04-08T13:51:42Z",
-              "hash": "sha256:9928e79a52cecf7cfa231fdb0699c7d7a427660d94eb10d711ed5a2f10d2eb89",
+              "id": 4290466,
+              "created": "2024-05-21T13:25:43Z",
+              "hash": "sha256:470c56994a7174db21578adce598b158a5dc0970c87c5cfe889ac632bd3085ea",
               "is_restart_required": false,
               "is_webextension": true,
               "is_mozilla_signed_extension": false,
               "platform": "all",
-              "size": 3861786,
+              "size": 3902133,
               "status": "public",
-              "url": "https://addons.mozilla.org/firefox/downloads/file/4261710/ublock_origin-1.57.2.xpi",
+              "url": "https://addons.mozilla.org/firefox/downloads/file/4290466/ublock_origin-1.58.0.xpi",
               "permissions": [
                 "alarms",
                 "dns",
@@ -1282,7 +1281,6 @@
                 "https://forums.lanik.us/*",
                 "https://github.com/*",
                 "https://*.github.io/*",
-                "https://*.letsblock.it/*",
                 "https://github.com/uBlockOrigin/*",
                 "https://ublockorigin.github.io/*",
                 "https://*.reddit.com/r/uBlockOrigin/*"
@@ -1380,7 +1378,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2024-05-14T16:20:20Z",
+        "last_updated": "2024-06-05T12:50:33Z",
         "name": {
           "ar": "uBlock Origin",
           "bg": "uBlock Origin",
@@ -1525,10 +1523,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.7896,
-          "bayesian_average": 4.789226313750859,
-          "count": 17664,
-          "text_count": 4598
+          "average": 4.791,
+          "bayesian_average": 4.790627643925216,
+          "count": 17804,
+          "text_count": 4638
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/reviews/",
         "requires_payment": false,
@@ -1591,7 +1589,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/versions/",
-        "weekly_downloads": 155653
+        "weekly_downloads": 182607
       },
       "notes": null
     },
@@ -1607,7 +1605,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 181302,
+        "average_daily_users": 181829,
         "categories": {
           "firefox": [
             "photos-music-videos",
@@ -1703,10 +1701,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.4446,
-          "bayesian_average": 4.439729996055061,
-          "count": 1237,
-          "text_count": 480
+          "average": 4.4468,
+          "bayesian_average": 4.441957225995825,
+          "count": 1249,
+          "text_count": 485
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/reviews/",
         "requires_payment": false,
@@ -1728,7 +1726,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/video-background-play-fix/versions/",
-        "weekly_downloads": 360
+        "weekly_downloads": 449
       },
       "notes": null
     },
@@ -1744,7 +1742,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 72620,
+        "average_daily_users": 71125,
         "categories": {
           "firefox": [
             "privacy-security",
@@ -1879,7 +1877,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-possum/versions/",
-        "weekly_downloads": 817
+        "weekly_downloads": 888
       },
       "notes": null
     },
@@ -1895,7 +1893,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/64/9064/12929064/12929064.png?modified=1651263207"
           }
         ],
-        "average_daily_users": 316235,
+        "average_daily_users": 342270,
         "categories": {
           "firefox": [
             "search-tools",
@@ -1968,7 +1966,7 @@
         },
         "default_locale": "en-US",
         "description": {
-          "en-US": "Search by Image is a browser extension for Firefox that makes effortless reverse image searches possible, and comes with support for more than 30 search engines.\n\nSearch by Image is an open source project made possible thanks to a community of awesome supporters. If you'd like to support the continued development of the extension, please consider contributing with <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/41c106361a7c39f9d2001c93119b0d734fe2515f827c52b675c98ec9293c7912/https%3A//armin.dev/go/patreon%3Fpr=search-by-image&amp;src=amo\" rel=\"nofollow\">Patreon</a>, <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/d401358dba8a5fc523e092e5f0a30df2e47898c9461dfe8530e3d765d03ec34c/https%3A//armin.dev/go/paypal%3Fpr=search-by-image&amp;src=amo\" rel=\"nofollow\">PayPal</a> or <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/0dc030db8e27048be301cc63fcc0b39a33473a79428a9f66353fc90cb933541f/https%3A//armin.dev/go/bitcoin%3Fpr=search-by-image&amp;src=amo\" rel=\"nofollow\">Bitcoin</a>.\n\nThe extension helps journalists and researchers verify the authenticity of images, and assists in the identification of false information on social media. Search by Image is also popular among photographers, helping artists explore how their work is shared on the web, while shoppers find it valuable for discovering similar products at discounted prices.\n\nThe extension enables you to search for images from the context menu and the browser toolbar with the help of a diverse set of reverse image search engines, which can be toggled and reordered from the extension's options. Visit the wiki for the full list of supported search engines.\n\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/a1f33afb4059aef86430eb9249e5a6024756138e53dc9117ae49eaf455990b69/https%3A//github.com/dessant/search-by-image/wiki/Search-engines\" rel=\"nofollow\">https://github.com/dessant/search-by-image/wiki/Search-engines</a>\n\nImages positioned at the selected area are detected regardless of how they were embedded in the page. The extension also supports searching with images from your device, images from private sites, and captured areas of the page.\n\nA handful of search modes are offered that serve different use cases. The search mode can be set independently for the context menu and the browser toolbar from the extension's options.\n\n<b>Search modes:</b>\n<ul>  <li><b>Select URL</b>: select an image on the page and search with the image URL. This is the default search mode.</li>  <li><b>Select image</b>: select an image on the page and search with the image file. This search mode is preferred for sites which do not allow the direct linking of images, such as private sites.</li>  <li><b>Capture</b>: search with a captured area of the page.</li>  <li><b>Browse</b>: search with an image from your device. Pasting images from the clipboard is also supported on desktop platforms.</li>  <li><b>URL</b>: search with an image URL.</li></ul>\nThe image you select during a search is sent to the requested service, such as Google Images. Visit the extension's <a href=\"https://addons.mozilla.org/en-US/firefox/addon/search_by_image/privacy/\" rel=\"nofollow\">privacy policy</a> for more information.\n\nThe extension is also available for <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/7ed09b9ef47c6ca28528b04a7fc4f9d47d06cbe14963b3b2078b69c752144ac6/https%3A//chrome.google.com/webstore/detail/search-by-image/cnojnbdhbhnkbcieeekonklommdnndci\" rel=\"nofollow\">Chrome</a> and <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/32275a8494767c60b0f8570f5f7abcf126ad0a6351f4a5deccac0f396007ac46/https%3A//apps.apple.com/us/app/search-by-image-for-safari/id1544552106\" rel=\"nofollow\">Safari</a>.\n\n<b>Reviews are not monitored for bug reports, please use GitHub for issues and feature requests.</b>\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/409bf55345207cc65f09ea6142e4b4cd069323e76f635076bfc139da6d46de4d/https%3A//github.com/dessant/search-by-image\" rel=\"nofollow\">https://github.com/dessant/search-by-image</a>"
+          "en-US": "Search by Image is a browser extension for Firefox that makes effortless reverse image searches possible, and comes with support for more than 30 search engines.\n\nSearch by Image is an open source project made possible thanks to a community of awesome supporters. If you'd like to support the continued development of the extension, please consider contributing with <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/41c106361a7c39f9d2001c93119b0d734fe2515f827c52b675c98ec9293c7912/https%3A//armin.dev/go/patreon%3Fpr=search-by-image&amp;src=amo\" rel=\"nofollow\">Patreon</a>, <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/d401358dba8a5fc523e092e5f0a30df2e47898c9461dfe8530e3d765d03ec34c/https%3A//armin.dev/go/paypal%3Fpr=search-by-image&amp;src=amo\" rel=\"nofollow\">PayPal</a> or <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/0dc030db8e27048be301cc63fcc0b39a33473a79428a9f66353fc90cb933541f/https%3A//armin.dev/go/bitcoin%3Fpr=search-by-image&amp;src=amo\" rel=\"nofollow\">Bitcoin</a>.\n\nThe extension helps journalists and researchers verify the authenticity of images, and assists in the identification of false information on social media. Search by Image is also popular among photographers, helping artists explore how their work is shared on the web, while shoppers find it valuable for discovering similar products at discounted prices.\n\nThe extension enables you to search for images from the context menu and the browser toolbar with the help of a diverse set of reverse image search engines, which can be toggled and reordered from the extension's options. Visit the wiki for the full list of supported search engines.\n\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/a1f33afb4059aef86430eb9249e5a6024756138e53dc9117ae49eaf455990b69/https%3A//github.com/dessant/search-by-image/wiki/Search-engines\" rel=\"nofollow\">https://github.com/dessant/search-by-image/wiki/Search-engines</a>\n\nImages positioned at the selected area are detected regardless of how they were embedded in the page. The extension also supports searching with images from your device, images from private sites, and captured areas of the page.\n\nA handful of search modes are offered that serve different use cases. The search mode can be set independently for the context menu and the browser toolbar from the extension's options.\n\n<b>Search modes:</b>\n<ul>  <li><b>Select URL</b>: select an image on the page and search with the image URL. This is the default search mode.</li>  <li><b>Select image</b>: select an image on the page and search with the image file. This search mode is preferred for sites which do not allow the direct linking of images, such as private sites.</li>  <li><b>Capture</b>: search with a captured area of the page.</li>  <li><b>Browse</b>: search with an image from your device. Pasting images from the clipboard is also supported on desktop platforms.</li>  <li><b>URL</b>: search with an image URL.</li></ul>\nThe extension is also available for <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/7ed09b9ef47c6ca28528b04a7fc4f9d47d06cbe14963b3b2078b69c752144ac6/https%3A//chrome.google.com/webstore/detail/search-by-image/cnojnbdhbhnkbcieeekonklommdnndci\" rel=\"nofollow\">Chrome</a> and <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/32275a8494767c60b0f8570f5f7abcf126ad0a6351f4a5deccac0f396007ac46/https%3A//apps.apple.com/us/app/search-by-image-for-safari/id1544552106\" rel=\"nofollow\">Safari</a>.\n\nThe image you select during a search is sent to the requested service, visit the extension's <a href=\"https://addons.mozilla.org/firefox/addon/search_by_image/privacy/\" rel=\"nofollow\">privacy policy</a> for more information.\n\n<b>Reviews are not monitored for bug reports, please use GitHub for issues and feature requests.</b>\n<a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/409bf55345207cc65f09ea6142e4b4cd069323e76f635076bfc139da6d46de4d/https%3A//github.com/dessant/search-by-image\" rel=\"nofollow\">https://github.com/dessant/search-by-image</a>"
         },
         "developer_comments": null,
         "edit_url": "https://addons.mozilla.org/en-US/developers/addon/search_by_image/edit",
@@ -2112,10 +2110,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.6299,
-          "bayesian_average": 4.6255944189516915,
-          "count": 1470,
-          "text_count": 291
+          "average": 4.6243,
+          "bayesian_average": 4.620034696169136,
+          "count": 1488,
+          "text_count": 296
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/reviews/",
         "requires_payment": false,
@@ -2138,7 +2136,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/search_by_image/versions/",
-        "weekly_downloads": 16371
+        "weekly_downloads": 20452
       },
       "notes": null
     },
@@ -2161,7 +2159,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 126585,
+        "average_daily_users": 124957,
         "categories": {
           "firefox": [
             "search-tools",
@@ -2442,10 +2440,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.3834,
-          "bayesian_average": 4.379041968223674,
-          "count": 1359,
-          "text_count": 382
+          "average": 4.3855,
+          "bayesian_average": 4.381132961943928,
+          "count": 1362,
+          "text_count": 383
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/reviews/",
         "requires_payment": false,
@@ -2465,7 +2463,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/google-search-fixer/versions/",
-        "weekly_downloads": 21
+        "weekly_downloads": 15
       },
       "notes": null
     },
@@ -2481,7 +2479,7 @@
             "picture_url": "https://addons.mozilla.org/user-media/userpics/43/0143/143/143.png?modified=1506804587"
           }
         ],
-        "average_daily_users": 299825,
+        "average_daily_users": 298924,
         "categories": {
           "firefox": [
             "privacy-security",
@@ -2595,7 +2593,7 @@
         },
         "is_disabled": false,
         "is_experimental": false,
-        "last_updated": "2023-12-12T09:47:41Z",
+        "last_updated": "2024-06-02T06:45:17Z",
         "name": {
           "de": "NoScript",
           "el": "NoScript",
@@ -2667,10 +2665,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 4.4014,
-          "bayesian_average": 4.398711509634907,
-          "count": 2215,
-          "text_count": 847
+          "average": 4.4034,
+          "bayesian_average": 4.400712050131131,
+          "count": 2226,
+          "text_count": 853
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/reviews/",
         "requires_payment": false,
@@ -2714,7 +2712,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/versions/",
-        "weekly_downloads": 6433
+        "weekly_downloads": 7169
       },
       "notes": null
     },
@@ -2730,7 +2728,7 @@
             "picture_url": null
           }
         ],
-        "average_daily_users": 162253,
+        "average_daily_users": 162310,
         "categories": {
           "firefox": [
             "photos-music-videos",
@@ -2839,10 +2837,10 @@
           "category": "recommended"
         },
         "ratings": {
-          "average": 3.8621,
-          "bayesian_average": 3.858039634294564,
-          "count": 1247,
-          "text_count": 452
+          "average": 3.8595,
+          "bayesian_average": 3.8554457903094925,
+          "count": 1253,
+          "text_count": 455
         },
         "ratings_url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/reviews/",
         "requires_payment": false,
@@ -2861,7 +2859,7 @@
         "type": "extension",
         "url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/",
         "versions_url": "https://addons.mozilla.org/en-US/firefox/addon/youtube-high-definition/versions/",
-        "weekly_downloads": 1389
+        "weekly_downloads": 1628
       },
       "notes": null
     }

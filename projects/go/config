@@ -7,7 +7,7 @@ container:
 
 var:
   use_go_1_20: 0
-  go_1_21: 1.21.10
+  go_1_21: 1.21.11
   go_1_20: 1.20.14
   no_crosscompile: 1
   setup: |
@@ -131,7 +131,7 @@ input_files:
     enable: '[% ! c("var/linux") %]'
   - URL: 'https://go.dev/dl/go[% c("var/go_1_21") %].src.tar.gz'
     name: go
-    sha256sum: 900e0afe8900c1ee65a8a8c4f0c5a3ca02dcf85c1d1cb13a652be22c21399394
+    sha256sum: 42aee9bf2b6956c75a7ad6aa3f0a51b5821ffeac57f5a2e733a2d6eae1e6d9d2
     enable: '[% !c("var/use_go_1_20") %]'
   - URL: 'https://go.dev/dl/go[% c("var/go_1_20") %].src.tar.gz'
     name: go
