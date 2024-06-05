@@ -9,7 +9,7 @@ sub l {
   ref $_[0] eq 'ARRAY' ? $_[0] : [ $_[0] ];
 }
 
-my $d = YAML::XS::LoadFile('taskcluster/ci/toolchain/macos-sdk.yml');
+my $d = YAML::XS::LoadFile('taskcluster/kinds/toolchain/macos-sdk.yml');
 
 my $sdk_version;
 foreach my $t (keys %$d) {
@@ -31,7 +31,7 @@ check_update_needed macos-sdk "$needed" "$current"
 
 # cctools
 read -d '' p << 'EOF' || true
-my $d = YAML::XS::LoadFile('taskcluster/ci/fetch/toolchains.yml');
+my $d = YAML::XS::LoadFile('taskcluster/kinds/fetch/toolchains.yml');
 print $d->{'cctools-port'}{fetch}{revision};
 EOF
 needed=$(perl -MYAML::XS -e "$p")
@@ -40,7 +40,7 @@ check_update_needed cctools "$needed" "$current"
 
 # libtapi
 read -d '' p << 'EOF' || true
-my $d = YAML::XS::LoadFile('taskcluster/ci/fetch/toolchains.yml');
+my $d = YAML::XS::LoadFile('taskcluster/kinds/fetch/toolchains.yml');
 print $d->{'libtapi'}{fetch}{revision};
 EOF
 needed=$(perl -MYAML::XS -e "$p")
@@ -54,7 +54,7 @@ check_update_needed libtapi "$needed" "$current"
 [% IF c("var/windows") %]
 # mingw-w64
 read -d '' p << 'EOF' || true
-my $d = YAML::XS::LoadFile('taskcluster/ci/fetch/toolchains.yml');
+my $d = YAML::XS::LoadFile('taskcluster/kinds/fetch/toolchains.yml');
 print $d->{'mingw-w64'}{fetch}{revision};
 EOF
 needed=$(perl -MYAML::XS -e "$p")
@@ -64,7 +64,7 @@ check_update_needed mingw-w64 "$needed" "$current"
 
 # fxc2
 read -d '' p << 'EOF' || true
-my $d = YAML::XS::LoadFile('taskcluster/ci/fetch/toolchains.yml');
+my $d = YAML::XS::LoadFile('taskcluster/kinds/fetch/toolchains.yml');
 print $d->{fxc2}{fetch}{revision};
 EOF
 needed=$(perl -MYAML::XS -e "$p")
@@ -78,7 +78,7 @@ check_update_needed fxc2 "$needed" "$current"
 [% IF c("var/rlbox") %]
 # wasi-sdk
 read -d '' p << 'EOF' || true
-my $d = YAML::XS::LoadFile('taskcluster/ci/fetch/toolchains.yml');
+my $d = YAML::XS::LoadFile('taskcluster/kinds/fetch/toolchains.yml');
 print $d->{'wasi-sdk'}{fetch}{revision};
 EOF
 needed=$(perl -MYAML::XS -e "$p")

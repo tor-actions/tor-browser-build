@@ -83,7 +83,7 @@ steps:
         version: '[% c("abbrev") %]'
 
   list_toolchain_updates:
-    git_hash: tor-browser-115.0a1-13.0-1
+    git_hash: tor-browser-128.0b1-14.0-1
     tag_gpg_id: 0
     input_files: []
     container:
