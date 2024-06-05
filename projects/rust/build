@@ -27,9 +27,7 @@ export PATH="$distdir-rust-prebuilt/bin:$PATH"
   export CFLAGS='--gcc-toolchain=/var/tmp/dist/gcc'
   export CXXFLAGS='--gcc-toolchain=/var/tmp/dist/gcc'
   export RUSTFLAGS="-L/var/tmp/dist/gcc/lib64"
-[% END -%]
-
-[% IF c("var/macos") %]
+[% ELSIF c("var/macos") -%]
   # We need to clear `CC` and `LDFLAGS` as they are used for the host platform
   # (i.e. Linux).
   unset CC
@@ -47,7 +45,7 @@ EOF
 
   chmod +x $distdir/helper/[% c("var/build_target") %]-clang
   export PATH=$distdir/helper:$PATH
-[% END %]
+[% END -%]
 
 cd $rootdir
 mkdir -p /var/tmp/build
@@ -64,7 +62,57 @@ ln -s "/var/tmp/build/rustc-[% c('version') %]-src/src/llvm-project" "/var/tmp/b
 
 mkdir build
 cd build
-../configure --prefix=$distdir --disable-docs --disable-compiler-docs [% c("var/configure_opt") %]
+
+# We use
+# `--enable-local-rust` to avoid downloading the required compiler during build
+# time
+# `--enable-vendor` to avoid downloading crates during build time and just use
+# the ones which are shipped with the source
+#
+# `--enable-extended` to build not only rustc but cargo as well
+#
+# `--release-channel=stable` to just include stable features in the compiler
+#
+# `--sysconfdir=etc` to avoid install failures as |make install| wants to write
+# to /etc otherwise
+#
+# `--llvm-root=$llvm_root` to avoid building LLVM again while building Rust
+#
+# `--target`: x86-64 Linux and WASM are always enabled. Additional targets are
+# enabled on the configuration file.
+#
+# --set rust.jemalloc to use jemalloc. This option is used also in the prebuilt
+# binaries, and we added it because when we were using Debian Jessie, the build
+# never ended without this option (see tor-browser-build#40591)
+#
+# the `target` triple to explicitly specify the architecture and platform
+# for the compiler/std lib. Ideally, it should not be needed unless one is
+# cross-compiling, but compiling `alloc_jemalloc` fails without that in a
+# 32bit container. "--host=x86_64-unknown-linux-gnu" is used in its
+# configure script in this case.
+#
+# Finally, we tell Rust to use some tools from LLVM, like the prebuilt
+# binaries do.
+
+../configure \
+  --prefix=$distdir \
+  --disable-docs --disable-compiler-docs \
+  --enable-local-rust \
+  --enable-vendor \
+  --enable-extended \
+  --release-channel=stable \
+  --sysconfdir=etc \
+  --llvm-root=[% c('var/llvm_root') %] \
+  --set rust.jemalloc \
+  --target=x86_64-unknown-linux-gnu,wasm32-unknown-unknown,[% c("var/target") %] \
+  --set target.x86_64-unknown-linux-gnu.linker=clang \
+  --set target.x86_64-unknown-linux-gnu.ar=llvm-ar \
+  --set target.x86_64-unknown-linux-gnu.ranlib=llvm-ranlib \
+  --set target.wasm32-unknown-unknown.linker=clang \
+  --set target.wasm32-unknown-unknown.ar=llvm-ar \
+  --set target.wasm32-unknown-unknown.ranlib=llvm-ranlib \
+  --set rust.lld=true \
+  [% c("var/target_flags") %]
 
 make -j[% c("num_procs") %]
 make install

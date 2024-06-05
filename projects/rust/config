@@ -1,56 +1,31 @@
 # vim: filetype=yaml sw=2
-filename: '[% project %]-[% c("version") %]-[% c("var/rust_targets") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
+filename: '[% project %]-[% c("version") %]-[% c("var/filename_targets") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 version: '1.69.0'
 container:
   use_container: 1
 
 var:
-  rust_targets: "[% c('var/osname') %]"
+  filename_targets: "[% c('var/osname') %]"
+  llvm_root: "/var/tmp/dist/clang"
 
 targets:
   android:
     var:
-      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/clang --set rust.jemalloc --target=x86_64-unknown-linux-gnu,armv7-linux-androideabi,thumbv7neon-linux-androideabi,aarch64-linux-android,i686-linux-android,x86_64-linux-android,wasm32-unknown-unknown --set=target.armv7-linux-androideabi.cc=armv7a-linux-androideabi16-clang --set=target.armv7-linux-androideabi.ar=llvm-ar --set=target.thumbv7neon-linux-androideabi.cc=armv7a-linux-androideabi16-clang --set=target.thumbv7neon-linux-androideabi.ar=llvm-ar --set=target.aarch64-linux-android.cc=aarch64-linux-android21-clang --set=target.aarch64-linux-android.ar=llvm-ar --set=target.i686-linux-android.cc=i686-linux-android16-clang --set=target.i686-linux-android.ar=llvm-ar --set=target.x86_64-linux-android.cc=x86_64-linux-android21-clang --set=target.x86_64-linux-android.ar=llvm-ar --set target.wasm32-unknown-unknown.linker=clang --set target.wasm32-unknown-unknown.ar=llvm-ar --set target.wasm32-unknown-unknown.ranlib=llvm-ranlib --set rust.lld=true
-      rust_targets: android
+      target: armv7-linux-androideabi,thumbv7neon-linux-androideabi,aarch64-linux-android,i686-linux-android,x86_64-linux-android
+      target_flags: --set=target.armv7-linux-androideabi.cc=armv7a-linux-androideabi16-clang --set=target.armv7-linux-androideabi.ar=llvm-ar --set=target.thumbv7neon-linux-androideabi.cc=armv7a-linux-androideabi16-clang --set=target.thumbv7neon-linux-androideabi.ar=llvm-ar --set=target.aarch64-linux-android.cc=aarch64-linux-android21-clang --set=target.aarch64-linux-android.ar=llvm-ar --set=target.i686-linux-android.cc=i686-linux-android16-clang --set=target.i686-linux-android.ar=llvm-ar --set=target.x86_64-linux-android.cc=x86_64-linux-android21-clang --set=target.x86_64-linux-android.ar=llvm-ar
+      filename_targets: android
 
   linux:
     var:
-      # We use
-      # `--enable-local-rust` to avoid downloading the required compiler during
-      # build time
-      #
-      # `--enable-vendor` to avoid downloading crates during build time and just
-      # use the ones which are shipped with the source
-      #
-      # `--enable-extended` to build not only rustc but cargo as well
-      #
-      # `--release-channel=stable` to just include stable features in the
-      # compiler
-      #
-      # `--sysconfdir=etc` to avoid install failures as |make install| wants to
-      # write to /etc otherwise
-      #
-      # `--llvm-root=/var/tmp/dist/clang` to avoid building LLVM again while
-      # building Rust
-      #
-      # --set rust.jemalloc to use jemalloc. This option is used also in the
-      # prebuilt binaries, and without it the build never ends on Debian Jessie
-      # (see tor-browser-build#40591)
-      #
-      # the `target` triple to explicitly specify the architecture and platform
-      # for the compiler/std lib. Ideally, it should not be needed unless one is
-      # cross-compiling, but compiling `alloc_jemalloc` fails without that in a
-      # 32bit container. "--host=x86_64-unknown-linux-gnu" is used in its
-      # configure script in this case.
-      #
-      # Finally, we tell Rust to use some tools from LLVM, like the prebuilt
-      # binaries do.
-      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/clang --set rust.jemalloc --target=x86_64-unknown-linux-gnu,i686-unknown-linux-gnu,wasm32-unknown-unknown --set target.x86_64-unknown-linux-gnu.linker=clang --set target.x86_64-unknown-linux-gnu.ar=llvm-ar --set target.x86_64-unknown-linux-gnu.ranlib=llvm-ranlib --set target.i686-unknown-linux-gnu.linker=clang --set target.i686-unknown-linux-gnu.ar=llvm-ar --set target.i686-unknown-linux-gnu.ranlib=llvm-ranlib --set target.wasm32-unknown-unknown.linker=clang --set target.wasm32-unknown-unknown.ar=llvm-ar --set target.wasm32-unknown-unknown.ranlib=llvm-ranlib --set rust.lld=true
-      rust_targets: linux
+      target: i686-unknown-linux-gnu
+      target_flags: --set target.i686-unknown-linux-gnu.linker=clang --set target.i686-unknown-linux-gnu.ar=llvm-ar --set target.i686-unknown-linux-gnu.ranlib=llvm-ranlib
+      filename_targets: linux
 
   macos:
     var:
-      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/macosx-toolchain/clang --set rust.jemalloc --target=x86_64-unknown-linux-gnu,[% c("var/build_target") %],wasm32-unknown-unknown --set=target.[% c("var/build_target") %].cc=[% c("var/build_target") %]-clang --set target.x86_64-unknown-linux-gnu.linker=clang --set target.x86_64-unknown-linux-gnu.ar=llvm-ar --set target.x86_64-unknown-linux-gnu.ranlib=llvm-ranlib --set target.wasm32-unknown-unknown.linker=clang --set target.wasm32-unknown-unknown.ar=llvm-ar --set target.wasm32-unknown-unknown.ranlib=llvm-ranlib --set rust.lld=true
+      target: '[% c("var/build_target") %]'
+      target_flags: --set=target.[% c("var/build_target") %].cc=[% c("var/build_target") %]-clang
+      llvm_root: "/var/tmp/dist/macosx-toolchain/clang"
       arch_deps:
         - pkg-config
 
@@ -58,7 +33,8 @@ targets:
     var:
       # See tor-browser-build#29320
       compiler: mingw-w64
-      configure_opt: --enable-local-rust --enable-vendor --enable-extended --release-channel=stable --sysconfdir=etc --llvm-root=/var/tmp/dist/clang --target=x86_64-unknown-linux-gnu,[% c("arch") %]-pc-windows-gnu,wasm32-unknown-unknown --set target.x86_64-unknown-linux-gnu.linker=clang --set target.x86_64-unknown-linux-gnu.ar=llvm-ar --set target.x86_64-unknown-linux-gnu.ranlib=llvm-ranlib --set target.wasm32-unknown-unknown.linker=clang --set target.wasm32-unknown-unknown.ar=llvm-ar --set target.wasm32-unknown-unknown.ranlib=llvm-ranlib --set rust.lld=true
+      target: '[% c("arch") %]-pc-windows-gnu'
+      target_flags:
       arch_deps:
         - pkg-config
 
