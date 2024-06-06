@@ -1,0 +1,28 @@
+# vim: filetype=yaml sw=2
+version: '[% c("var/torbrowser_version") %]'
+filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %]'
+container:
+  use_container: 1
+
+var:
+
+input_files:
+  - project: container-image
+  - name: '[% c("var/compiler") %]'
+    project: '[% c("var/compiler") %]'
+  - project: tor-expert-bundle
+    name: tor-expert-bundle-armv7
+    target_replace:
+      '^torbrowser-(?!testbuild).*': 'torbrowser-android-armv7'
+  - project: tor-expert-bundle
+    name: tor-expert-bundle-aarch64
+    target_replace:
+      '^torbrowser-(?!testbuild).*': 'torbrowser-android-aarch64'
+  - project: tor-expert-bundle
+    name: tor-expert-bundle-x86
+    target_replace:
+      '^torbrowser-(?!testbuild).*': 'torbrowser-android-x86'
+  - project: tor-expert-bundle
+    name: tor-expert-bundle-x86_64
+    target_replace:
+      '^torbrowser-(?!testbuild).*': 'torbrowser-android-x86_64'

@@ -100,8 +100,7 @@ for lang in $supported_locales; do
 done
 
 # Move Tor Android libraries
-cp $rootdir/[% c('input_files_by_name/topl') %]/* app/
-cp $rootdir/[% c('input_files_by_name/tor-android-service') %]/* app/
+cp $rootdir/[% c('input_files_by_name/teb') %]/tor-expert-bundle.aar app/
 
 mkdir -p "build/bin/nimbus/$as_version"
 cp $distdir/application-services/nimbus-fml "build/bin/nimbus/$as_version"

@@ -65,10 +65,8 @@ input_files:
   - name: translation-fenix
     project: translation
     pkg_type: fenix
-  - project: tor-android-service
-    name: tor-android-service
-  - project: tor-onion-proxy-library
-    name: topl
+  - project: tor-expert-bundle-aar
+    name: teb
   - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
     name: gradle-dependencies
     exec: '[% INCLUDE "fetch-gradle-dependencies" %]'

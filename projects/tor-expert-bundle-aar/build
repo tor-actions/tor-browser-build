@@ -1,0 +1,14 @@
+#!/bin/bash
+[% c("var/set_default_env") -%]
+distdir=[% dest_dir %]/[% c('filename') %]
+
+mkdir -p /var/tmp/build $distdir
+
+mkdir tor-expert-bundle-aar
+cd tor-expert-bundle-aar
+
+[% FOREACH arch = ['armv7', 'aarch64', 'x86', 'x86_64'] -%]
+  unzip -o $rootdir/[% c('input_files_by_name/tor-expert-bundle-' _ arch) %]/tor-expert-bundle-[% arch %].aar
+[% END -%]
+
+jar -cvf $distdir/tor-expert-bundle.aar *

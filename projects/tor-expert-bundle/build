@@ -26,14 +26,16 @@ cd $distdir
 [% IF c("var/android") -%]
   aar_file=torExpertBundle-[% c('arch') %].aar
 
+  abi=[% c('var/abi') %]
+
   mkdir aar
-  mkdir -p aar/jni/[% c('arch') %]
+  mkdir -p aar/jni/$abi
   mkdir -p aar/assets/common
 
-  cp -a tor/libTor.so aar/jni/[% c('arch') %]/
-  cp -a tor/pluggable_transports/conjure-client aar/jni/[% c('arch') %]/libConjure.so
-  cp -a tor/pluggable_transports/lyrebird aar/jni/[% c('arch') %]/Lyrebird.so
-  cp -a tor/pluggable_transports/snowflake-client aar/jni/[% c('arch') %]/libSnowflake.so
+  cp -a tor/libTor.so aar/jni/$abi/
+  cp -a tor/pluggable_transports/conjure-client aar/jni/$abi/libConjure.so
+  cp -a tor/pluggable_transports/lyrebird aar/jni/$abi/libObfs4proxy.so
+  cp -a tor/pluggable_transports/snowflake-client aar/jni/$abi/libSnowflake.so
 
   cp -a data/* aar/assets/common/
 
