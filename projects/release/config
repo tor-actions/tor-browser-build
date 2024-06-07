@@ -93,7 +93,7 @@ targets:
     var:
       browser_type: torbrowser
       git_tag_prefix: tbb
-      tor-browser-linux-packages: '[% ! c("var/release") %]'
+      tor-browser-linux-packages: '[% c("var/nightly") %]'
   basebrowser:
     var:
       browser_type: basebrowser
