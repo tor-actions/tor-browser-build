@@ -158,6 +158,7 @@ class ReleasePreparation:
         if remote is None:
             raise RuntimeError("Cannot find the tpo/applications remote.")
         remote.fetch()
+        remote.fetch(tags=True)
 
         branch_name = (
             "main" if self.version.is_alpha else f"maint-{self.version.major}"
