@@ -1,5 +1,6 @@
-Tor Browser 13.5a9 - June 07 2024
+Tor Browser 13.5a9 - June 10 2024
  * All Platforms
+   * Updated Tor to 0.4.8.12
    * Updated OpenSSL to 3.0.14
    * Bug 41467: compat: beacon: re-enable the API but transform it to a no-op [tor-browser]
    * Bug 42604: Add some debug logs about circuits [tor-browser]

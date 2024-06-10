@@ -1,4 +1,4 @@
-Mullvad Browser 13.5a9 - June 07 2024
+Mullvad Browser 13.5a9 - June 10 2024
  * All Platforms
    * Updated Firefox to 115.12.0esr
    * Updated uBlock Origin to 1.58.0
