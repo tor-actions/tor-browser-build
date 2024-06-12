@@ -14,7 +14,7 @@ cd /var/tmp/dist/rust-[% c('version') %]-x86_64-unknown-linux-gnu
 export PATH="$distdir-rust-prebuilt/bin:$PATH"
 
 [% pc(c('var/compiler'), 'var/setup', { compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')) }) %]
-[% IF c("var/linux") || c("var/android") || c("var/windows") -%]
+[% IF c("var/linux") || c("var/android") -%]
   # See the config file for more details on why we do that also on Windows
   tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/clang') %]
   export PATH=/var/tmp/dist/clang/bin:$PATH
@@ -45,12 +45,22 @@ EOF
 
   chmod +x $distdir/helper/[% c("var/build_target") %]-clang
   export PATH=$distdir/helper:$PATH
+[% ELSIF c("var/windows") -%]
+  pushd /var/tmp/dist/mingw-w64-clang/bin
+  ln -s clang cc
+  ln -s clang++ c++
+  popd
 [% END -%]
 
 cd $rootdir
 mkdir -p /var/tmp/build
 tar -C /var/tmp/build -xf  [% c('input_files_by_name/rust') %]
 cd /var/tmp/build/rustc-[% c('version') %]-src
+
+[% IF c("var/windows") -%]
+  patch -p1 < $rootdir/chkstk.patch
+  sed -i 's/117b50d6725ee0af0a7b3d197ea580655561f66a870ebc450d96af22bf7f39f6/1eebe6e65b11cae356e3c19a886d7585d3cfed41899b5387209516d957613032/g' vendor/compiler_builtins/.cargo-checksum.json
+[% END -%]
 
 # This is a workaround to get access to the libunwind header files. Our LLVM_CONFIG
 # thinks that the llvm source root is at /var/tmp/dist/clang-source because that's

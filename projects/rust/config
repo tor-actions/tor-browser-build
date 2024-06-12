@@ -5,7 +5,7 @@ container:
   use_container: 1
 
 var:
-  filename_targets: "[% c('var/osname') %]"
+  filename_targets: "[% c('var/platform') %]"
   llvm_root: "/var/tmp/dist/clang"
 
 targets:
@@ -13,28 +13,26 @@ targets:
     var:
       target: armv7-linux-androideabi,thumbv7neon-linux-androideabi,aarch64-linux-android,i686-linux-android,x86_64-linux-android
       target_flags: --set=target.armv7-linux-androideabi.cc=armv7a-linux-androideabi16-clang --set=target.armv7-linux-androideabi.ar=llvm-ar --set=target.thumbv7neon-linux-androideabi.cc=armv7a-linux-androideabi16-clang --set=target.thumbv7neon-linux-androideabi.ar=llvm-ar --set=target.aarch64-linux-android.cc=aarch64-linux-android21-clang --set=target.aarch64-linux-android.ar=llvm-ar --set=target.i686-linux-android.cc=i686-linux-android16-clang --set=target.i686-linux-android.ar=llvm-ar --set=target.x86_64-linux-android.cc=x86_64-linux-android21-clang --set=target.x86_64-linux-android.ar=llvm-ar
-      filename_targets: android
 
   linux:
     var:
       target: i686-unknown-linux-gnu
       target_flags: --set target.i686-unknown-linux-gnu.linker=clang --set target.i686-unknown-linux-gnu.ar=llvm-ar --set target.i686-unknown-linux-gnu.ranlib=llvm-ranlib
-      filename_targets: linux
 
   macos:
     var:
       target: '[% c("var/build_target") %]'
       target_flags: --set=target.[% c("var/build_target") %].cc=[% c("var/build_target") %]-clang
       llvm_root: "/var/tmp/dist/macosx-toolchain/clang"
+      filename_targets: "[% c('var/osname') %]"
       arch_deps:
         - pkg-config
 
   windows:
     var:
-      # See tor-browser-build#29320
-      compiler: mingw-w64
-      target: '[% c("arch") %]-pc-windows-gnu'
-      target_flags:
+      target: x86_64-pc-windows-gnullvm,i686-pc-windows-gnullvm
+      target_flags: --set target.x86_64-pc-windows-gnullvm.linker=x86_64-w64-mingw32-clang --set target.i686-pc-windows-gnullvm.linker=i686-w64-mingw32-clang
+      llvm_root: "/var/tmp/dist/mingw-w64-clang"
       arch_deps:
         - pkg-config
 
@@ -48,11 +46,7 @@ input_files:
     name: '[% c("var/compiler") %]'
   - project: clang
     name: clang
-    # On Windows we the basic Clang without additional Windows stuff because we
-    # want to be sure GCC is used to compile Rust (Rust has a hard depedency on
-    # libgcc, and the GNU/LLVM is a tier 3 platform supported only for x86_64).
-    # macOS does not need Clang because it comes already with its compiler.
-    enable: '[% c("var/linux") || c("var/android") || c("var/windows") %]'
+    enable: '[% c("var/linux") || c("var/android") ]'
   - project: ninja
     name: ninja
   - URL: 'https://static.rust-lang.org/dist/rustc-[% c("version") %]-src.tar.gz'
@@ -68,3 +62,5 @@ input_files:
   - project: python
     name: python
     enable: '[% c("var/linux") %]'
+  - filename: chkstk.patch
+    enable: '[% c("var/windows") %]'
