@@ -424,14 +424,15 @@ cd $distdir
 [% ELSIF c("var/windows") %]
   find "$PKG_DIR" -exec [% c("touch") %] {} \;
   pushd "$PKG_DIR"
-  makensis browser-portable.nsi
-  # Working around NSIS braindamage
-  python3 $rootdir/pe_checksum_fix.py browser-portable.exe
-  mv browser-portable.exe $OUTDIR/[% c("var/project-name") %]-[% c("var/osname") %]-portable-[% c("var/torbrowser_version") %].exe
   [% IF c('var/mullvad-browser') -%]
     makensis browser-install.nsi
     python3 $rootdir/pe_checksum_fix.py browser-install.exe
-    mv browser-install.exe $OUTDIR/[% c("var/project-name") %]-[% c("var/osname") %]-install-[% c("var/torbrowser_version") %].exe
+    mv browser-install.exe $OUTDIR/[% c("var/project-name") %]-[% c("var/osname") %]-[% c("var/torbrowser_version") %].exe
+  [% ELSE -%]
+    makensis browser-portable.nsi
+    # Working around NSIS braindamage
+    python3 $rootdir/pe_checksum_fix.py browser-portable.exe
+    mv browser-portable.exe $OUTDIR/[% c("var/project-name") %]-[% c("var/osname") %]-portable-[% c("var/torbrowser_version") %].exe
   [% END -%]
   popd
 [% END %]
