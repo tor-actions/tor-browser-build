@@ -17,8 +17,6 @@ cd /var/tmp/build/[% project %]-[% c('version') %]
   ./configure --prefix=$distdir
   make -j[% c("num_procs") %]
   make -j[% c("num_procs") %] install
-  # Only need static libraries
-  rm -r $distdir/lib/{*.so*,pkgconfig}
 [% END -%]
 
 cd /var/tmp/dist

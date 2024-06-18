@@ -30,8 +30,8 @@ var:
     - openjdk-17-jdk-headless
   # this should be updated when the list of gradle dependencies is changed
   # see doc/how-to-create-gradle-dependencies-list.txt
-  gradle_dependencies_version: 12
-  gradle_version: 7.5.1
+  gradle_dependencies_version: 13
+  gradle_version: 8.8
   variant: beta
   has_l10n: '[% !c("var/testbuild") && !c("var/locales").empty %]'
   l10n-changesets: '[% exec("cat browser/locales/l10n-changesets.json") %]'
@@ -94,8 +94,7 @@ steps:
           - torbrowser-android-armv7
 
   list_toolchain_updates:
-    git_url: https://github.com/mozilla/gecko-dev.git
-    git_hash: esr115
+    git_hash: tor-browser-128.0b1-14.0-1
     tag_gpg_id: 0
     input_files: []
     container:

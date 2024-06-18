@@ -22,7 +22,7 @@ if (m/build_tools_version\\s*=\\s*"([^"]+)"/) {
 }
 EOF
 needed=$(cat build/moz.configure/android-sdk.configure | perl -ne "$p")
-current='[% pc("android-toolchain", "var/version_33") %]'
+current='[% pc("android-toolchain", "version") %]'
 check_update_needed build_tools "$needed" "$current"
 
 
@@ -34,7 +34,7 @@ if (m/target_sdk_version\\s*=\\s*"(.+)"/) {
 }
 EOF
 needed=$(cat build/moz.configure/android-sdk.configure | perl -ne "$p")
-current='[% pc("android-toolchain", "var/android_api_level_33") %]'
+current='[% pc("android-toolchain", "var/android_api_level") %]'
 check_update_needed target_sdk "$needed" "$current"
 
 
@@ -62,43 +62,34 @@ check_update_needed cmdline-tools "$needed" "$current"
 # min-android
 read -d '' p << 'EOF' || true
 use Path::Tiny;
-use Digest::SHA qw(sha256_hex);
 my $f;
-my $min_indent;
 foreach (path('build/moz.configure/android-ndk.configure')->lines_utf8) {
-  if ($_ eq "def min_android_version(target):\\n") {
+  if ($_ eq "def min_android_version():\\n") {
     $f = $_;
     next;
   } else {
     next unless $f;
   }
-  m/^(\\s*)/;
-  my $indent = length $1;
-  $min_indent = $indent unless $min_indent;
-  last if $indent < $min_indent;
-  $f .= $_;
+  m/return "([0-9]+)"/;
+  if ($1) {
+    print $1;
+    exit;
+  }
 }
-print substr(sha256_hex($f), 0, 10);
 EOF
 needed=$(perl -e "$p")
-# We can't easily parse the min_android_version function.
-# Instead we get a checksum of the function, and manually check it when
-# it was updated.
-# Current value of min_android_version is:
-#  21 on aarch64, x86_64
-#  16 on other archs
-current=303de6de36
+current='[% c("var/android_min_api") %]'
 check_update_needed min-android "$needed" "$current"
 
 
 # min_sdk
 read -d '' p << 'EOF' || true
-if (m/^\\s*min_sdk_version="[^"]+" if geckoview_lite else "([^"]+)"/) {
+if (m/^\\s*min_sdk_version="([^"]+)"/) {
   print $1;
   exit;
 }
 EOF
-needed=$(cat build/moz.configure/android-sdk.configure | perl -ne "$p")
+needed=$(perl -ne "$p" < build/moz.configure/android-sdk.configure)
 current=21
 check_update_needed min_sdk "$needed" "$current"
 
