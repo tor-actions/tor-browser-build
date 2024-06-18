@@ -46,7 +46,7 @@ MOZCONFIG_EOF
 
 [% c("var/set_MOZ_BUILD_DATE") %]
 
-export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
+export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64
 gradle_repo=/var/tmp/dist/gradle-dependencies
 export GRADLE_MAVEN_REPOSITORIES="file://$gradle_repo","file://$gradle_repo/maven2"
 # Set the Maven local repository because Gradle ignores our overriding of $HOME.

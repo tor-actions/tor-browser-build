@@ -25,7 +25,7 @@ export PATH=/var/tmp/dist/rust/bin:/var/tmp/dist/ninja:$PATH
 export RUST_ANDROID_GRADLE_PYTHON_COMMAND=python3
 cd $rootdir
 
-export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
+export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64
 
 [% IF !c('var/fetch_gradle_dependencies') %]
   gradle_repo=/var/tmp/dist/gradle-dependencies

@@ -27,7 +27,7 @@ var:
     - python3
     - python3-distutils
     - pkg-config
-    - openjdk-11-jdk-headless
+    - openjdk-17-jdk-headless
   # this should be updated when the list of gradle dependencies is changed
   # see doc/how-to-create-gradle-dependencies-list.txt
   gradle_dependencies_version: 12
