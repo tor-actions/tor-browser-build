@@ -26,12 +26,14 @@ var:
     - yasm
     - python3
     - python3-distutils
+    - python3-venv
     - pkg-config
     - openjdk-17-jdk-headless
   # this should be updated when the list of gradle dependencies is changed
   # see doc/how-to-create-gradle-dependencies-list.txt
   gradle_dependencies_version: 13
   gradle_version: 8.8
+  glean_parser: 14.0.1
   variant: beta
   has_l10n: '[% !c("var/testbuild") && !c("var/locales").empty %]'
   l10n-changesets: '[% exec("cat browser/locales/l10n-changesets.json") %]'
@@ -63,6 +65,9 @@ steps:
       - project: node
         name: node
         pkg_type: build
+      - project: application-services
+        name: application-services
+        pkg_type: build
       - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
         name: gradle-dependencies
         exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
@@ -92,6 +97,12 @@ steps:
         pkg_type: build
         target_prepend:
           - torbrowser-android-armv7
+      - name: translation-fenix
+        project: translation
+        pkg_type: fenix
+      - URL: '[% pc("glean", "var/glean_wheels_url/" _ c("var/glean_parser"), { error_if_undef => 1 }) %]'
+        name: glean-wheels
+        sha256sum: '[% pc("glean", "var/glean_wheels_sha256sum/" _ c("var/glean_parser"), { error_if_undef => 1 }) %]'
 
   list_toolchain_updates:
     git_hash: tor-browser-128.0b1-14.0-1

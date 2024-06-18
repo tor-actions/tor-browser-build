@@ -34,6 +34,8 @@ export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/nasm/bi
 tar -xf [% c('input_files_by_name/application-services') %]
 export NIMBUS_FML=$rootdir/application-services/nimbus-fml
 
+[% INCLUDE 'fake-git' %]
+
 tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
 
 cd /var/tmp/build/[% project %]-[% c("version") %]

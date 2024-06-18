@@ -11,6 +11,16 @@ mkdir -p $builddir $distdir
 tar -C $distdir -xf [% c('input_files_by_name/node') %]
 export PATH="/var/tmp/dist/node/bin:$PATH"
 
+tar -C $distdir -xf $rootdir/[% c('input_files_by_name/translation-fenix') %]
+
+tar -xf [% c('input_files_by_name/glean-wheels') %]
+export GLEAN_PYTHON_WHEELS_DIR=$rootdir/glean-wheels
+
+tar -xf [% c('input_files_by_name/application-services') %]
+export NIMBUS_FML=$rootdir/application-services/nimbus-fml
+
+[% INCLUDE 'fake-git' %]
+
 tar -C $builddir -xf [% c('input_files_by_name/geckoview_armv7') %]
 tar -C $builddir -xf [% c('input_files_by_name/geckoview_aarch64') %]
 tar -C $builddir -xf [% c('input_files_by_name/geckoview_x86') %]
@@ -41,6 +51,7 @@ gradle_repo=/var/tmp/dist/gradle-dependencies
 export GRADLE_MAVEN_REPOSITORIES="file://$gradle_repo","file://$gradle_repo/maven2"
 export GRADLE_FLAGS="--no-daemon --offline -Dmaven.repo.local=$distdir/[% project %]"
 mv $rootdir/[% c('input_files_by_name/gradle-dependencies') %] $gradle_repo
+cp -rl $rootdir/application-services/maven/* $gradle_repo
 cp -rl $gradle_repo/dl/android/maven2/* $gradle_repo || true
 cp -rl $gradle_repo/m2/* $gradle_repo || true
 cp -rl $gradle_repo/maven2/* $gradle_repo || true
@@ -62,6 +73,9 @@ mkdir "$HOME/.mozbuild"
   # through GeckoView.
 [% END -%]
 
+export LC_ALL=C.UTF-8
+export LANG=C.UTF-8
+
 # We still need to specify --tor-browser-version due to bug 34005.
 ./mach configure \
   --with-base-browser-version=[% c("var/torbrowser_version") %] \
@@ -75,12 +89,38 @@ mkdir "$HOME/.mozbuild"
   ./mach package-multi-locale --locales en-US $supported_locales
 [% END -%]
 
-# We prepare an archive to then extract it as we were using a local Maven
-# repository.
-# See also https://github.com/mozilla-mobile/firefox-android/blob/main/fenix/docs/substituting-local-gv.md
-./mach gradle \
-  geckoview:publishWithGeckoBinariesDebugPublicationToMavenLocal \
-  exoplayer2:publishDebugPublicationToMavenLocal
+pushd mobile/android/android-components
+gradle $GRADLE_FLAGS assembleGecko -x lint
+popd
+
+# The build might fail with "file exists" otherwise.
+rm -rf /var/tmp/dist/android-toolchain/gradle/glean/pythonenv
+
+pushd mobile/android/fenix
+
+# Use the Android Components we have just built
+echo autoPublish.android-components.dir=../android-components > local.properties
+
+# Add our localized strings
+supported_locales="[% tmpl(c('var/locales_mobile').join(' ')) %]"
+for lang in $supported_locales; do
+  cp "/var/tmp/dist/translation-fenix/$lang/torbrowser_strings.xml" "app/src/main/res/values-$lang/"
+done
+
+# Bug 40485: Inject deterministic build date into Glean.
+echo 'ext.gleanBuildDate = "0"' >> app/build.gradle
+
+variant='[% c("var/variant") %]'
+# We put the tor-browser version last to avoid int-parsing errors when consumers of project.versionName
+# assume it starts with a major version number, as it does for all Mozilla version names.
+version_name="[% c('var/fenix_version') %]-$variant ([% c('var/torbrowser_version') %])"
+
+gradle $GRADLE_FLAGS -PversionName="$version_name" "assemble$variant"
+
+mkdir $distdir/[% project %]
+cp app/build/outputs/apk/fenix/$variant/*.apk $distdir/[% project %]
+
+popd
 
 cd $distdir/
 [% c('tar', {
