@@ -1,20 +1,13 @@
 # vim: filetype=yaml sw=2
 # FIXME: Rework this whole mess
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
-version: '[% c("var/version_28") %]+[% c("var/version_29") %]+[% c("var/version_30") %]+[% c("var/version_31") %]+[% c("var/version_33") %]'
-container:
-  use_container: 1
+version: '34.0.0'
 var:
-  version_33: 33.0.1
-  version_31: 31.0.0
-  version_30: 30.0.3
-  version_29: 29.0.2
-  version_28: 28.0.3
   setup: |
     mkdir -p /var/tmp/dist
     tar -C /var/tmp/dist -xf $rootdir/[% c("compiler_tarfile") %]
     export ANDROID_HOME=/var/tmp/dist/[% project %]/android-sdk-linux
-    export PATH=$PATH:$ANDROID_HOME/build-tools/[% c("var/version_33") %]
+    export PATH=$PATH:$ANDROID_HOME/build-tools/[% c("version") %]
     # By default we use the old NDK which is the one GeckoView is using.
     # However, we can overwrite that per project if needed (e.g.
     # application-services is currently on a newer NDK).
@@ -36,83 +29,43 @@ var:
       export PATH=$PATH:$GRADLE_HOME/bin
     [% END -%]
   google_repo: https://dl.google.com/android/repository
-  android_api_level_33: 33
-  android_platform_revision_33: 02
-  android_release_dir_33: android-13
-  android_api_level_31: 31
-  android_platform_revision_31: 01
-  android_release_dir_31: android-12
-  android_api_level_30: 30
-  android_platform_revision_30: 03
-  android_release_dir_30: android-11
-  android_api_level_29: 29
-  android_platform_revision_29: 04
-  android_release_dir_29: android-10
-  android_release_dir_28: android-9
-  android_ndk_version: 23
+  android_api_level: 34
+  android_release_dir: android-14
+  android_platform_revision: '03'
+  android_ndk_version: 26
   android_ndk_revision: c
-  android_ndk_version_build: 23.2.8568313
+  android_ndk_version_build: 26.2.11394342
   # We need the following two variables for get_build_tools, used by signing
   # scripts.
-  build_tools_33_filename: 'build-tools_r[% c("var/version_33") %]-linux.zip'
-  build_tools_33_sha256sum: 0fdf2746200ee21d50a837451350e14cb11a544cbb40be5e539a89164cf3b8e5
-  # XXX: In commit 83fffa1198c3cbeffec45028971896876e2133a5 mozilla
-  # replaced sdk-tools with commandlinetools. We try to do the same here,
-  # but it seems sdk-tools is still being used in the build, so we can't
-  # remove sdk-tools yet.
-  sdk_tools_version: 4333796
-  commandlinetools_version: 9477386
-  commandlinetools_version_string: 9.0
+  build_tools_version: 34
+  build_tools_filename: 'build-tools_r[% c("var/build_tools_version") %]-linux.zip'
+  build_tools_sha512sum: c28dd52f8eca82996726905617f3cb4b0f0aee1334417b450d296991d7112cab1288f5fd42c48a079ba6788218079f81caa3e3e9108e4a6f27163a1eb7f32bd7
+  commandlinetools_version: 11076708
+  commandlinetools_version_string: 12.0
 input_files:
-  - project: container-image
-  - URL: '[% c("var/google_repo") %]/[% c("var/build_tools_33_filename") %]'
-    name: build_tools_33
-    sha256sum: '[% c("var/build_tools_33_sha256sum") %]'
-  # Special: Google wasn't consistent with 31.0.0 and 31 between build tools and
-  # platform.
-  - URL: '[% c("var/google_repo") %]/build-tools_r31-linux.zip'
-    name: build_tools_31
-    sha256sum: f90c22f5562638a2e00762e1711eebd55e7f0a05232b65200d387307d057bfe8
-  - URL: '[% c("var/google_repo") %]/build-tools_r[% c("var/version_30") %]-linux.zip'
-    name: build_tools_30
-    sha256sum: 24593500aa95d2f99fb4f10658aae7e65cb519be6cd33fa164f15f27f3c4a2d6
-  - URL: '[% c("var/google_repo") %]/build-tools_r[% c("var/version_29") %]-linux.zip'
-    name: build_tools_29
-    sha256sum: 1e9393cbfd4a4b82e30e7f55ab38db4a5a3259db93d5821c63597bc74522fa08
-  - URL: '[% c("var/google_repo") %]/build-tools_r[% c("var/version_28") %]-linux.zip'
-    name: build_tools_28
-    sha256sum: 7954956a40633c88f693d638cbc23f68e9e2499dc7a4b7dfdaf6a3e91387749a
-  - URL: '[% c("var/google_repo") %]/platform-[% c("var/android_api_level_29") %]_r[% c("var/android_platform_revision_29") %].zip'
-    name: platform_29
-    sha256sum: c9eaf2ce4e8fa6f5a8036bd3c95363d003733bf0a1bd349718cadf802db44c69
-  - URL: '[% c("var/google_repo") %]/platform-[% c("var/android_api_level_30") %]_r[% c("var/android_platform_revision_30") %].zip'
-    name: platform_30
-    sha256sum: f3f5b75744dbf6ee6ed3e8174a71e513bfee502d0bc3463ea97e517bff68d84e
-  - URL: '[% c("var/google_repo") %]/platform-[% c("var/android_api_level_31") %]_r[% c("var/android_platform_revision_31") %].zip'
-    name: platform_31
-    sha256sum: 1d69fe1d7f9788d82ff3a374faf4f6ccc9d1d372aa84a86b5bcfb517523b0b3f
-  - URL: '[% c("var/google_repo") %]/platform-[% c("var/android_api_level_33") %]_r[% c("var/android_platform_revision_33") %].zip'
-    name: platform_33
-    sha256sum: f851b13fe89f8510a1250df5e8593e86176b2428f4f3cbe0e304a85818c07bc8
+  # Hashes can be compared with https://gitlab.com/fdroid/android-sdk-transparency-log/-/blob/master/checksums.json
+  - URL: '[% c("var/google_repo") %]/commandlinetools-linux-[% c("var/commandlinetools_version") %]_latest.zip'
+    name: android_commandlinetools
+    sha256sum: 2d2d50857e4eb553af5a6dc3ad507a17adf43d115264b1afc116f95c92e5e258
+  - URL: '[% c("var/google_repo") %]/android-ndk-r[% c("var/android_ndk_version") %][% c("var/android_ndk_revision") %]-linux.zip'
+    name: android_ndk_compiler
+    sha256sum: 6d6e659834d28bb24ba7ae66148ad05115ebbad7dabed1af9b3265674774fcf6
+  - URL: '[% c("var/google_repo") %]/[% c("var/build_tools_filename") %]'
+    name: build_tools
+    sha512sum: '[% c("var/build_tools_sha512sum") %]'
+  - URL: '[% c("var/google_repo") %]/platform-[% c("var/android_api_level") %]-ext7_r[% c("var/android_platform_revision") %].zip'
+    name: platform
+    sha256sum: 16fdb74c55e59ae3ef52def135aec713508467bd56d7dabcd8c9be31fa8b20f3
   # ./mach bootstrap is fetching the latest version, so it does not seem to
   # matter which particular version we are using. Pin to the one fitting best to
   # SDK version/build-tools version.
-  - URL: '[% c("var/google_repo") %]/platform-tools_r[% c("var/version_33") %]-linux.zip'
+  - URL: '[% c("var/google_repo") %]/platform-tools_r[% c("version") %]-linux.zip'
     name: platform_tools
-    sha256sum: a339548918c3ab31c4d88416c21cee753bd942040540216c06e640f4b6db3ae2
-  - URL: '[% c("var/google_repo") %]/sdk-tools-linux-[% c("var/sdk_tools_version") %].zip'
-    name: android_sdk_tools
-    sha256sum: 92ffee5a1d98d856634e8b71132e8a95d96c83a63fde1099be3d86df3106def9
-  - URL: '[% c("var/google_repo") %]/commandlinetools-linux-[% c("var/commandlinetools_version") %]_latest.zip'
-    name: android_commandlinetools
-    sha256sum: bd1aa17c7ef10066949c88dc6c9c8d536be27f992a1f3b5a584f9bd2ba5646a0
-  - URL: '[% c("var/google_repo") %]/android-ndk-r[% c("var/android_ndk_version") %][% c("var/android_ndk_revision") %]-linux.zip'
-    name: android_ndk_compiler
-    sha256sum: 6ce94604b77d28113ecd588d425363624a5228d9662450c48d2e4053f8039242
+    sha256sum: 8137c2834dea05cb64c1a8bc041ea00fcd43e3a8a29429ad4f25b8ee51efebf6
 steps:
   # The get_build_tools step is used by tools/signing/android-signing
   get_build_tools:
-    filename: 'android-[% c("var/build_tools_33_filename") %]'
+    filename: 'android-[% c("var/build_tools_filename") %]'
     get_build_tools: |
       #!/bin/bash
       set -e
@@ -120,6 +73,6 @@ steps:
     container:
       use_container: 0
     input_files:
-      - URL: '[% c("var/google_repo") %]/[% c("var/build_tools_33_filename") %]'
+      - URL: '[% c("var/google_repo") %]/[% c("var/build_tools_filename") %]'
         name: build_tools
-        sha256sum: '[% c("var/build_tools_33_sha256sum") %]'
+        sha512sum: '[% c("var/build_tools_sha512sum") %]'

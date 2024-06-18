@@ -1,83 +1,42 @@
 #!/bin/bash
 [% c("var/set_default_env") -%]
-distdir=/var/tmp/dist/[% project %]
-export ANDROID_HOME=$distdir/android-sdk-linux
-export NDK_HOME=$ANDROID_HOME/ndk
 
-# Make directories
-mkdir -p $NDK_HOME $ANDROID_HOME
+distdir=$rootdir/[% project %]
+mkdir -p $distdir
 
-# Compiler Archives
-unzip -qq [% c("input_files_by_name/android_sdk_tools") %] -d $ANDROID_HOME
-mkdir -p $ANDROID_HOME/cmdline-tools
-unzip -qq [% c("input_files_by_name/android_commandlinetools") %] -d $ANDROID_HOME/cmdline-tools
-mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/[% c("var/commandlinetools_version_string") %]
-unzip -qq [% c("input_files_by_name/android_ndk_compiler")%] -d $NDK_HOME
-ln -s $NDK_HOME/android-ndk-r[% c("var/android_ndk_version") %][% c("var/android_ndk_revision") %] $NDK_HOME/[% c("var/android_ndk_version_build") %]
+mkdir $distdir/android-sdk-linux
+cd $distdir/android-sdk-linux
 
-# NDK Archive
-# Adjust cross compilation prefix for armv7a. Unfortunately, the compiler cross
-# compilation prefix and the one for all the other tools differ. Let's fix that
-# so we only have to take care of one. See: #33557 (comment 2674649).
-cd $NDK_HOME/android-ndk-r[% c("var/android_ndk_version") %][% c("var/android_ndk_revision") %]/toolchains/llvm/prebuilt/linux-x86_64/bin
-for f in `ls arm-linux-androideabi-*`; do
-  ln -s $f ${f//arm-linux-androideabi/armv7a-linux-androideabi}
-done
+# Command line tools
+mkdir -p cmdline-tools
+unzip -qq $rootdir/[% c("input_files_by_name/android_commandlinetools") %] -d cmdline-tools
+mv cmdline-tools/cmdline-tools cmdline-tools/[% c("var/commandlinetools_version_string") %]
 
-# Tool Archives
-cd $ANDROID_HOME
+# NDK
+mkdir ndk
+unzip -qq $rootdir/[% c("input_files_by_name/android_ndk_compiler")%] -d ndk
+ln -s android-ndk-r[% c("var/android_ndk_version") %][% c("var/android_ndk_revision") %] ndk/[% c("var/android_ndk_version_build") %]
 
-unzip -qq $rootdir/[% c("input_files_by_name/build_tools_33") %] -d $ANDROID_HOME
-mkdir -p build-tools/[% c("var/version_33") %]
-mv [% c("var/android_release_dir_33") %]/* build-tools/[% c("var/version_33") %]
+# Build tools
+mkdir build-tools
+unzip -qq $rootdir/[% c("input_files_by_name/build_tools") %] -d build-tools
+mv build-tools/[% c("var/android_release_dir") %] build-tools/[% c("version") %]
 
-unzip -qq $rootdir/[% c("input_files_by_name/build_tools_31") %] -d $ANDROID_HOME
-mkdir -p build-tools/[% c("var/version_31") %]
-mv [% c("var/android_release_dir_31") %]/* build-tools/[% c("var/version_31") %]
+# Platform
+mkdir platforms
+unzip -qq $rootdir/[% c("input_files_by_name/platform") %] -d platforms
 
-# Application Services needed build tools 30.0.2 for 99.
-# TODO: verify for 115.
-unzip -qq $rootdir/[% c("input_files_by_name/build_tools_30") %] -d $ANDROID_HOME
-mkdir -p build-tools/[% c("var/version_30") %]
-mv [% c("var/android_release_dir_30") %]/* build-tools/[% c("var/version_30") %]
-
-unzip -qq $rootdir/[% c("input_files_by_name/build_tools_29") %] -d $ANDROID_HOME
-mkdir -p build-tools/[% c("var/version_29") %]
-mv [% c("var/android_release_dir_29") %]/* build-tools/[% c("var/version_29") %]
-
-# Apart from GeckoView all other projects do still need build-tools 28.0.3 as
-# they are using the Gradle plugin 3.2.1 - 3.6.0 without specifying
-# `buildToolsVersion`.
-unzip -qq $rootdir/[% c("input_files_by_name/build_tools_28") %] -d $ANDROID_HOME
-mkdir -p build-tools/[% c("var/version_28") %]
-mv [% c("var/android_release_dir_28") %]/* build-tools/[% c("var/version_28") %]
-
-unzip -qq $rootdir/[% c("input_files_by_name/platform_33") %] -d $ANDROID_HOME
-mkdir -p platforms/android-[% c("var/android_api_level_33") %]
-mv [% c("var/android_release_dir_33") %]/* platforms/android-[% c("var/android_api_level_33") %]
-
-unzip -qq $rootdir/[% c("input_files_by_name/platform_31") %] -d $ANDROID_HOME
-mkdir -p platforms/android-[% c("var/android_api_level_31") %]
-mv [% c("var/android_release_dir_31") %]/* platforms/android-[% c("var/android_api_level_31") %]
-
-unzip -qq $rootdir/[% c("input_files_by_name/platform_30") %] -d $ANDROID_HOME
-mkdir -p platforms/android-[% c("var/android_api_level_30") %]
-mv [% c("var/android_release_dir_30") %]/* platforms/android-[% c("var/android_api_level_30") %]
-
-unzip -qq $rootdir/[% c("input_files_by_name/platform_29") %] -d $ANDROID_HOME
-mkdir -p platforms/android-[% c("var/android_api_level_29") %]
-mv [% c("var/android_release_dir_29") %]/* platforms/android-[% c("var/android_api_level_29") %]
-
-unzip -qq $rootdir/[% c("input_files_by_name/platform_tools") %] -d $ANDROID_HOME
+# Platform tools
+unzip -qq $rootdir/[% c("input_files_by_name/platform_tools") %]
 
 # That's a quirk required by GeckoView but let's have it here instead of in the
 # project's build script
 mkdir emulator
-cp tools/emulator emulator/
+touch emulator/emulator
+chmod +x emulator/emulator
 
-# Archive dist directory
-cd /var/tmp/dist
+cd $rootdir
 [% c('tar', {
-        tar_src => [ project ],
-        tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
-        }) %]
+    tar_src => [ project ],
+    tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
+  }) %]
