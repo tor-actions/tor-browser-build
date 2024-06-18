@@ -4,12 +4,6 @@ filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("co
 container:
   use_container: 1
 
-var:
-  # API level for armv7 and x86
-  api_level_32: 16
-  # API level for aarch64 and x86_64
-  api_level_64: 21
-
 input_files:
   - project: container-image
   - name: '[% c("var/compiler") %]'

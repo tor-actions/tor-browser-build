@@ -34,8 +34,8 @@ build_runtimes() {
   if [[ "$arch" == "armv7" ]]; then
     arch="arm"
   fi
-  target="$1-linux-android$2"
-  api_level=$2
+  api_level=21
+  target="$1-linux-android$api_level"
   libdir=$arch
   if [[ "$arch" == "i686" ]]; then
     libdir="i386"
@@ -103,10 +103,10 @@ build_runtimes() {
   rm -rf "$installdir"
 }
 
-build_runtimes armv7 [% c('var/api_level_32') %]
-build_runtimes aarch64 [% c('var/api_level_64') %]
-build_runtimes i686 [% c('var/api_level_32') %]
-build_runtimes x86_64 [% c('var/api_level_64') %]
+build_runtimes armv7
+build_runtimes aarch64
+build_runtimes i686
+build_runtimes x86_64
 
 cd /var/tmp/dist
 [% c('tar', {

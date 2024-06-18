@@ -12,7 +12,7 @@ targets:
   android:
     var:
       target: armv7-linux-androideabi,thumbv7neon-linux-androideabi,aarch64-linux-android,i686-linux-android,x86_64-linux-android
-      target_flags: --set=target.armv7-linux-androideabi.cc=armv7a-linux-androideabi16-clang --set=target.armv7-linux-androideabi.ar=llvm-ar --set=target.thumbv7neon-linux-androideabi.cc=armv7a-linux-androideabi16-clang --set=target.thumbv7neon-linux-androideabi.ar=llvm-ar --set=target.aarch64-linux-android.cc=aarch64-linux-android21-clang --set=target.aarch64-linux-android.ar=llvm-ar --set=target.i686-linux-android.cc=i686-linux-android16-clang --set=target.i686-linux-android.ar=llvm-ar --set=target.x86_64-linux-android.cc=x86_64-linux-android21-clang --set=target.x86_64-linux-android.ar=llvm-ar
+      target_flags: --set=target.armv7-linux-androideabi.cc=armv7a-linux-androideabi21-clang --set=target.armv7-linux-androideabi.ar=llvm-ar --set=target.thumbv7neon-linux-androideabi.cc=armv7a-linux-androideabi21-clang --set=target.thumbv7neon-linux-androideabi.ar=llvm-ar --set=target.aarch64-linux-android.cc=aarch64-linux-android21-clang --set=target.aarch64-linux-android.ar=llvm-ar --set=target.i686-linux-android.cc=i686-linux-android21-clang --set=target.i686-linux-android.ar=llvm-ar --set=target.x86_64-linux-android.cc=x86_64-linux-android21-clang --set=target.x86_64-linux-android.ar=llvm-ar
 
   linux:
     var:
