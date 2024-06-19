@@ -34,6 +34,10 @@ umask 0022
   chmod +x debian/docs debian/rules
   mkdir debian/source
   echo -n '3.0 (quilt)' > debian/source/format
+  # Fix permissions to avoid mismatching debian.tar.xz file depending
+  # on umask outside the container (tor-browser-build#41173)
+  find debian -executable -exec chmod 700 {} \;
+  find debian ! -executable -exec chmod 600 {} \;
 
 
   function extract_src_tar {
