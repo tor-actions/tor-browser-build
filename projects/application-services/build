@@ -1,31 +1,28 @@
 #!/bin/bash
 [% c("var/set_default_env") -%]
+
 [% pc(c('var/compiler'), 'var/setup', {
     compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')),
     gradle_tarfile => c("input_files_by_name/gradle"),
-    ndk_version => c("var/ndk_version"),
   }) %]
+pushd /var/tmp/dist/android-toolchain/android-sdk-linux/build-tools/
+unzip $rootdir/'[% c("input_files_by_name/build_tools_30") %]'
+mv android-11 30.0.3
+popd
+
 distdir=/var/tmp/dist/[% project %]
 builddir=/var/tmp/build/[% project %]
 mkdir $distdir
 mkdir /var/tmp/build
 
-[% IF c("input_files_by_name/android_ndk") -%]
-  pushd $(dirname $ANDROID_NDK_HOME)
-  unzip -qq $rootdir/[% c("input_files_by_name/android_ndk") %]
-  # Without this link gradle will not find the NDK.
-  ln -s $(basename $ANDROID_NDK_HOME) [% c("var/ndk_version_build") %]
-  popd
-[% END -%]
-
-cd /var/tmp/dist
-tar -xf $rootdir/[% c('input_files_by_name/rust') %]
-tar -xf $rootdir/[% c('input_files_by_name/ninja') %]
+tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/rust') %]
+tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/ninja') %]
 export PATH=/var/tmp/dist/rust/bin:/var/tmp/dist/ninja:$PATH
 export RUST_ANDROID_GRADLE_PYTHON_COMMAND=python3
-cd $rootdir
 
 export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64
+
+[% INCLUDE 'fake-git' %]
 
 [% IF !c('var/fetch_gradle_dependencies') %]
   gradle_repo=/var/tmp/dist/gradle-dependencies
@@ -37,22 +34,27 @@ export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64
 
 tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
 
-# Prepare the offline build.
-# Move the directory for hardcoding the path in .cargo/config.
 mv /var/tmp/build/[% project %]-[% c('version') %] $builddir
-tar -C $builddir -xf $rootdir/[% c('input_files_by_name/cargo_vendor') %]
 
-cat > pip.conf << 'EOF'
+cd $builddir
+
+# Prepare the offline build.
+
+tar -xf $rootdir/[% c('input_files_by_name/glean-wheels') %]
+export GLEAN_PYTHON_WHEELS_DIR=$builddir/glean-wheels
+# Setting GLEAN_PYTHON_WHEELS_DIR is not enough: a Rust build script will still
+# try to install Glean with pip.
+cat > $rootdir/pip.conf << 'EOF'
 [global]
 find-links = /var/tmp/build/application-services/glean-wheels
 index-url =
 no-index = yes
 EOF
 export PIP_CONFIG_FILE=$rootdir/pip.conf
-
-cd $builddir
+# Move the directory for hardcoding the path in .cargo/config.
+tar -C $builddir -xf $rootdir/[% c('input_files_by_name/cargo_vendor') %]
 # Make sure our vendored crates are used for offline builds.
-cat >> .cargo/config << 'EOF'
+cat >> .cargo/config.toml << 'EOF'
 
 [source.crates-io]
 replace-with = "vendored-sources"
@@ -64,15 +66,11 @@ directory = "/var/tmp/build/application-services/vendor"
 offline=true
 EOF
 
-patch -p1 < $rootdir/no-git.patch
-patch -p1 < $rootdir/bug40485.diff
-
 pushd libs
-mv $rootdir/[% c("input_files_by_name/nss") %] ./
-mv $rootdir/[% c("input_files_by_name/sqlcipher") %] ./
-mv $rootdir/bug_13028.patch ./
+ln -s $rootdir/[% c("input_files_by_name/nss") %] ./
+ln -s $rootdir/bug_13028.patch
 patch -p2 < $rootdir/apply-bug-13028.diff
-sed -i 's/NDK_VERSION=.*/NDK_VERSION=[% c("var/ndk_version_build") %]/g' android_defaults.sh
+patch -p2 < $rootdir/no-ndk-lookup.diff
 ./build-all.sh desktop
 ./build-all.sh android
 popd
@@ -84,13 +82,14 @@ popd
   $rootdir/gen_gradle_deps_file.sh gradle.log
   mv gradle-dependencies-list.txt '[% dest_dir _ "/" _ c("filename") %]'
 [% ELSE %]
-  # Prepare Glean dependencies for offline build
-  tar -xf $rootdir/[% c('input_files_by_name/glean-wheels') %]
   # We need to set `LC_ALL` and `LANG` to something that is not ASCII as encoding
   # otherwise `click` barfs. See: https://click.palletsprojects.com/python3/
   export LC_ALL=C.UTF-8
   export LANG=C.UTF-8
   patch -p1 < $rootdir/local-repository.diff
+  patch -p1 < $rootdir/ohttp-no-git.diff
+  patch -p1 < $rootdir/bug40485.diff
+  patch -p1 < $rootdir/offline-nimbus-fml.diff
   gradle_flags="--offline --no-daemon"
   gradle $gradle_flags assembleRelease
   gradle $gradle_flags publish

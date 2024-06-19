@@ -18,16 +18,14 @@ var:
     - python3-pip
     - torsocks
   glean_wheels_sha256sum:
-    5.0.1: 289b843af3d0f4bd5fbdc77c94c7e1b2830bcbbf7e43786d30b2bd02f85b4a1a
-    7.1.0: ff216b274f7f251e5c241bbb4b1ed82e7c6554b518ca17d282da417441bbd30a
+    14.0.1: 95f01d0e158ae7968680029b7d9c2908895e1d1ec1ba4e6a044648a05af4ee0c
   glean_wheels_url:
-    5.0.1: https://people.torproject.org/~richard/mirrors/sources/glean-wheels-5.0.1.tar.xz
-    7.1.0: https://build-sources.tbb.torproject.org/glean-wheels-7.1.0.tar.xz
+    14.0.1: https://build-sources.tbb.torproject.org/glean-wheels-14.0.1.tar.xz
 
 steps:
   create_glean_deps_tarball:
     git_url: ''
-    version: 5.0.1
+    version: 14.0.1
     filename: 'glean-wheels-[% c("version") %].tar.xz'
     build_log: '-'
     container:
@@ -47,8 +45,7 @@ steps:
           }) %]
       cd '[% dest_dir %]'
       sha256sum [% c('filename') %]
-      echo 'The file is ready to be uploaded:'
-      echo '  scp -p out/glean/[% c("filename") %] people.torproject.org:public_html/mirrors/sources/'
+      echo 'The file is ready to be uploaded: out/glean/[% c("filename") %]'
     input_files:
       - project: container-image
         pkg_type: build

@@ -1,0 +1,15 @@
+diff --git a/components/as-ohttp-client/Cargo.toml b/components/as-ohttp-client/Cargo.toml
+index fd45a058b..b7070fc15 100644
+--- a/components/as-ohttp-client/Cargo.toml
++++ b/components/as-ohttp-client/Cargo.toml
+@@ -19,8 +19,8 @@ rusqlite = { workspace = true, features = ["bundled"] }
+ [dependencies.ohttp]
+ version = "0.4"
+ default-features = false
+-git = "https://github.com/martinthomson/ohttp.git"
+-rev = "fc3f4c787d1f6a6a87bf5194f7152cc906b02973"
++# git = "https://github.com/martinthomson/ohttp.git"
++# rev = "fc3f4c787d1f6a6a87bf5194f7152cc906b02973"
+ features = ["client", "server", "app-svc", "external-sqlite"]
+ 
+ [build-dependencies]

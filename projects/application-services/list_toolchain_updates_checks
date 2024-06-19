@@ -1,17 +1,5 @@
 #!/bin/bash
 
-# ndkVersion
-read -d '' p << 'EOF' || true
-if (m/^\\s*ndkVersion:\\s"([^"]*)",/) {
-  print $1;
-  exit;
-}
-EOF
-needed=$(cat build.gradle | perl -ne "$p")
-current='[% c("var/ndk_version_build") %]'
-check_update_needed ndkVersion "$needed" "$current"
-
-
 # compileSdkVersion
 read -d '' p << 'EOF' || true
 if (m/^\\s*compileSdkVersion:\\s([^"]*),/) {
@@ -20,7 +8,7 @@ if (m/^\\s*compileSdkVersion:\\s([^"]*),/) {
 }
 EOF
 needed=$(cat build.gradle | perl -ne "$p")
-current=33
+current=34
 check_update_needed compileSdkVersion "$needed" "$current"
 
 
@@ -58,15 +46,3 @@ EOF
 needed=$(cat libs/build-all.sh | perl -ne "$p")
 current='[% c("var/nss_version") %]-with-nspr-[% c("var/nspr_version") %]'
 check_update_needed nss-nspr "$needed" "$current"
-
-
-# sqlcipher
-read -d '' p << 'EOF' || true
-if (m/SQLCIPHER_VERSION="([^"]+)"/) {
-  print $1;
-  exit;
-}
-EOF
-needed=$(cat libs/build-all.sh | perl -ne "$p")
-current='[% c("var/sqlcipher_version") %]'
-check_update_needed sqlcipher "$needed" "$current"

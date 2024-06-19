@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
-version: 115.0
-git_hash: 78ab4ce85120f45a4b67b055936e401193eabd68
+version: 128.0.1
+git_hash: 0e4777f4133a98f44bca164fcf0406e8f706dbe4
 git_url: https://github.com/mozilla/application-services
 git_submodule: 1
 container:
@@ -8,35 +8,25 @@ container:
 
 var:
   # This should be updated when the list of gradle dependencies is changed.
-  gradle_dependencies_version: 10
-  gradle_version: 7.6.1
-  glean_parser: 7.1.0
-  ndk_version: 25c
-  ndk_version_build: 25.2.9519653
-  nss_version: 3.88.1
+  gradle_dependencies_version: 11
+  gradle_version: 8.8
+  glean_parser: 14.0.1
+  nss_version: '3.101'
   nspr_version: '4.35'
-  sqlcipher_version: 4.5.4
 
 steps:
   build:
     filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
     var:
       arch_deps:
-        # Needed to build nss and sqlcipher
+        # Needed to build NSS
         - gyp
-        - tcl
     input_files:
       - project: container-image
         pkg_type: build
       - project: '[% c("var/compiler") %]'
         name: '[% c("var/compiler") %]'
         pkg_type: build
-      # application-services is the only project for which we use a more recent
-      # NDK than GeckoView. So, download it here, rather than adding 1.5-2GB to
-      # each other Android project.
-      - URL: 'https://dl.google.com/android/repository/android-ndk-r[% c("var/ndk_version") %]-linux.zip'
-        name: android_ndk
-        sha256sum: 769ee342ea75f80619d985c2da990c48b3d8eaf45f48783a2d48870d04b46108
       - project: gradle
         name: gradle
         pkg_type: build
@@ -46,15 +36,16 @@ steps:
       - project: ninja
         name: ninja
         pkg_type: build
-      # See libs/build-all.sh to update these!
-      # Also, build them with application-services, since they need the NDK and
-      # we are using a different one from the other projects.
+      # Only Application Services currently requires build tools 30.0.3.
+      # So, download them only here, rather than adding them to the shared
+      # toolchain.
+      - URL: 'https://dl.google.com/android/repository/build-tools_r30.0.3-linux.zip'
+        name: build_tools_30
+        sha256sum: 24593500aa95d2f99fb4f10658aae7e65cb519be6cd33fa164f15f27f3c4a2d6
+      # NSS version ans sha256 are in libs/build-all.sh.
       - URL: 'https://ftp.mozilla.org/pub/security/nss/releases/NSS_[% c("var/nss_version") | replace("\\.", "_") %]_RTM/src/nss-[% c("var/nss_version") %]-with-nspr-[% c("var/nspr_version") %].tar.gz'
         name: nss
-        sha256sum: fcfa26d2738ec5b0cf72ab4be784eac832a75132cda2e295799c04d62a93607a
-      - URL: 'https://www.zetetic.net/sqlcipher/verify/[% c("var/sqlcipher_version") %]/sqlcipher-[% c("var/sqlcipher_version") %].zip'
-        name: sqlcipher
-        sha256sum: bb333b1dfa58d66634f263328a81d07d96395ca17f4e147ede4b723ea83ce5f8
+        sha256sum: 566faa9283ff3d9a7d6c44272df6e4330e3e06ca4e841a68840d31b27c9161c4
       - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
         name: gradle-dependencies
         exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
@@ -67,8 +58,7 @@ steps:
         project: application-services
         pkg_type: cargo_vendor
         norec:
-          sha256sum: 391e5ca72bfd0a66b0e821fe7c264567602853d4293cd3db39932184002419f2
-      - filename: no-git.patch
+          sha256sum: 92ce1131b35bf78d86362670ba7e4930ecdd1117694996d7cce850e4860f90b6
       - filename: local-repository.diff
         enable: '[% !c("var/fetch_gradle_dependencies") %]'
       - filename: gen_gradle_deps_file.sh
@@ -77,6 +67,11 @@ steps:
       - filename: apply-bug-13028.diff
       # Delete when this patch is included upstream
       - filename: bug40485.diff
+      - filename: no-ndk-lookup.diff
+      # as-ohttp-client lists both the version for ohttp and a git repo + rev,
+      # but this breaks the vendoring for offline builds.
+      - filename: ohttp-no-git.diff
+      - filename: offline-nimbus-fml.diff
 
   list_toolchain_updates:
     git_hash: 'v[% c("version") %]'

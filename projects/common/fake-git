@@ -1,0 +1,25 @@
+mkdir -p $rootdir/bin
+cat > $rootdir/bin/git << 'EOF'
+#!/bin/bash
+# Used to include the commit hash in the build
+if [ "$1" = "rev-parse" ]; then
+  if [[ "$*" == *"--short"* ]]; then
+    echo "[% c('abbrev') %]"
+  else
+    echo "[% IF c('var/git_commit') %][% c('var/git_commit') %][% ELSE %][% c('abbrev') %][% END %]"
+  fi
+  exit 0
+fi
+
+# If there are uncommitted files (checked with `git status --porcelain=v2`), the
+# build system will append a `+` to the commit hash. So, report a clean tree.
+if [ "$1" = "status" ]; then
+  exit 0
+fi
+
+# Try to catch any other calls by making them fail
+echo "fake-git: not implemented command $1"
+exit 1
+EOF
+chmod +x $rootdir/bin/git
+export PATH=$rootdir/bin:$PATH
