@@ -137,7 +137,10 @@ Mullvad Browser Stable lives in the various `maint-$(MULLVAD_BROWSER_MAJOR).$(MU
 
 ### mullvad-browser (GitHub): https://github.com/mullvad/mullvad-browser/
 - [ ] Assign this issue to someone with mullvad commit access, one of:
+    - boklm
+    - ma1
     - richard
+    - pierov
 - [ ] Push this release's associated `mullvad-browser.git` branch to github
 - [ ] Push this release's associated tags to github:
   - [ ] Firefox ESR tag
