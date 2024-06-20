@@ -6,8 +6,13 @@ import re
 import shutil
 import sys
 from urllib.parse import urlparse
-from urllib.request import urlretrieve
 
+import requests
+
+
+# maven.mozilla.org does not work over IPv6 from our build servers.
+# See https://gitlab.torproject.org/tpo/tpa/team/-/issues/41654.
+requests.packages.urllib3.util.connection.HAS_IPV6 = False
 
 if len(sys.argv) < 3:
     print(
@@ -57,7 +62,10 @@ for u, h in pairs:
             shutil.copyfile(existing[p], p)
         else:
             print(f"Downloading {u}")
-            urlretrieve(u, p)
+            r = requests.get(u)
+            r.raise_for_status()
+            with p.open("wb") as f:
+                f.write(r.content)
 
     if p.suffix != ".pom":
         m = hashlib.sha256()
