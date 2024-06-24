@@ -12,6 +12,8 @@ gpg_keyring:
   - richard.gpg
 container:
   use_container: 1
+  disable_network:
+    build_apk: 1
 
 var:
   geckoview_version: 115.12.0esr
@@ -49,10 +51,10 @@ targets:
       variant: nightly
 
 steps:
-  merge_aars:
-    filename: 'geckoview-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
+  build_apk:
+    filename: 'geckoview-[% c("version") %]-apks-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
     version: '[% c("abbrev") %]'
-    merge_aars: '[% INCLUDE merge_aars %]'
+    build_apk: '[% INCLUDE build_apk %]'
     input_files:
       - project: container-image
         pkg_type: build
