@@ -88,8 +88,9 @@ input_files:
     name: src-firefox
     pkg_type: src-tarballs
     enable: '[% c("var/macos") %]'
-  - project: firefox-android
-    name: firefox-android
+  - project: geckoview
+    name: fenix
+    pkg_type: build_apk
     enable: '[% c("var/android") %]'
   - project: tor-expert-bundle
     name: tor-expert-bundle
