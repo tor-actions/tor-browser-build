@@ -6,5 +6,9 @@
 override_dh_strip_nondeterminism:
 	dh_strip_nondeterminism -Xxpi
 
+# Our binaries are already stripped, and the binutils version we are currently
+# using cannot parse some ELF sections, so skip the strip phase.
+override_dh_strip:
+
 override_dh_shlibdeps:
 	dh_shlibdeps -Xabicheck[% IF c("var/tor-browser") %] -l$(CURDIR)/debian/[% c("var/system_pkg/pkg_name") %]/[% c('var/system_pkg/install_path') %]/TorBrowser/Tor[% END %]
