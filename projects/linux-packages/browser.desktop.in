@@ -1,10 +1,14 @@
 [Desktop Entry]
+Version=1.0
 Type=Application
 Name=[% c("var/Project_Name") %]
 GenericName=Web Browser
 Comment=[% c("var/system_pkg/pkg_description") %]
-Categories=Network;WebBrowser;Security;
+Categories=Network;WebBrowser;
 Exec=/[% c("var/system_pkg/install_path") %]/start-[% c("var/project-name") %]  --detach
-X-[% c("var/ProjectName") %]-ExecShell=/[% c("var/system_pkg/install_path") %]/start-[% c("var/project-name") %]  --detach
 Icon=[% c("var/system_pkg/pkg_name") %]
 StartupWMClass=[% c("var/display_name") %]
+[% IF ! c("var/tor-browser") -%]
+MimeType=text/html;text/xml;application/xhtml_xml;x-scheme-handler/http;x-scheme-handler/https;
+[% END -%]
+Terminal=false
