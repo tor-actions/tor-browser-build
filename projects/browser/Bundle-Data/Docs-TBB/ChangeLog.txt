@@ -1,3 +1,18 @@
+Tor Browser 13.5.1 - July 09 2024
+ * All Platforms
+   * Bug 42689: Rebase Tor Browser onto 115.13.0esr [tor-browser]
+   * Bug 42693: Backports security fixes from Firefox 128 [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.13.0esr
+ * Android
+   * Updated GeckoView to 115.13.0esr
+ * Build System
+   * All Platforms
+     * Updated Go to 1.21.12
+     * Bug 41166: Use the GitHub repository for firefox-l10n [tor-browser-build]
+   * Windows
+     * Bug 41177: Include Windows installer without -portable- in download json files [tor-browser-build]
+
 Tor Browser 13.5 - June 17 2024
  * All Platforms
    * Bug 40856: Add a default for preferences in TorSettings [tor-browser]
