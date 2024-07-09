@@ -2,15 +2,22 @@
 version: '[% pc("firefox", "abbrev") %]'
 filename: '[% project %]-[% c("var/osname") %]-[% c("version") %]-[% c("var/build_id") %]'
 link_input_files: 1
+# We need to specify git_url in the root to make this project recognized as a
+# git project, we canoot specify the git_url only in the step.
+# However, once we specify a git_url, we need to specify a valid git_hash for
+# the final stage, even though we are not going to use it.
+# Any hash will work, as long as we can run git archive on it.
+git_url: https://github.com/mozilla-l10n/firefox-l10n.git
+git_hash: c1523924f0e10259e1a80b8268556f6f7a0b29bf
 
 steps:
   fetch_locale:
-    filename: 'l10n-[% c("input_file_var/locale") %]-[% c("hg_hash") %]-[% c("var/build_id") %].tar.xz'
-    version: '[% c("hg_hash") %]'
+    filename: 'l10n-[% c("input_file_var/locale") %]-[% c("abbrev") %]-[% c("var/build_id") %].tar.xz'
+    version: '[% c("git_hash") %]'
     fetch_locale: |
       [% c("var/set_default_env") -%]
       tar xf '[% project %]-[% c("version") %].tar.[% c("compress_tar") %]'
-      mv [% project %]-[% c("version") %] [% c("input_file_var/locale") %]
+      cd [% project %]-[% c("version") %]
       tar caf '[% dest_dir %]/[% c("filename") %]' [% c("input_file_var/locale") %]
     input_files: []
 --- |
@@ -38,9 +45,7 @@ steps:
           name => $locale,
           project => 'firefox-l10n',
           pkg_type => 'fetch_locale',
-          hg_hash => $revision,
-          hg_url => "https://hg.mozilla.org/l10n-central/$locale",
-          hg_clone_subdir => $locale,
+          git_hash => $revision,
           input_file_var => {
             locale => $locale,
           },
