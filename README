@@ -10,7 +10,7 @@ etc ...). You will need to install the uidmap package, providing the
 newuidmap and newgidmap commands.
 
 The sources of most components are downloaded using git, which needs to
-be installed. The mercurial package is also needed.
+be installed.
 
 Zstandard (zstd) is used to compress some tarballs and needs to be
 installed. You'll also need tar >= 1.31, for zstd support.
@@ -46,7 +46,7 @@ If you are running Debian or Ubuntu, you can install them with:
                   libparallel-forkmanager-perl libpath-tiny-perl \
                   libsort-versions-perl libstring-shellquote-perl \
                   libtemplate-perl libxml-libxml-perl libxml-writer-perl \
-                  libyaml-libyaml-perl git mercurial uidmap zstd
+                  libyaml-libyaml-perl git uidmap zstd
 
 If you are running Fedora, CentOS or RHEL, you can install them with:
 
@@ -57,7 +57,7 @@ If you are running Fedora, CentOS or RHEL, you can install them with:
               "perl(File::Copy::Recursive)" "perl(String::ShellQuote)" \
               "perl(Sort::Versions)" "perl(Digest::SHA)" "perl(Data::UUID)" \
               "perl(Data::Dump)" "perl(DateTime)" "perl(XML::Writer)" \
-              "perl(Parallel::ForkManager)" perl-ph mercurial git zstd
+              "perl(Parallel::ForkManager)" perl-ph git zstd
 
 If you are running an Arch based system, you should be able to install them with:
 
