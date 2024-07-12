@@ -18,9 +18,9 @@ echo "Created directory $blog_dir"
 
 if test "$tbb_version_type" = "release"
 then
-  lead=../../../assets/static/images/blog/tor-browser-13.png
+  lead=../../../assets/static/images/blog/tor-browser-stable.png
 else
-  lead=../../../assets/static/images/blog/tor-browser_0_0.png
+  lead=../../../assets/static/images/blog/tor-browser-alpha.png
 fi
 ln -s "$lead" "$blog_dir/lead.png"
 echo "Created $blog_dir/lead.png -> $lead"
