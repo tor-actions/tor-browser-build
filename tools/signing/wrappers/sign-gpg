@@ -11,4 +11,6 @@ if test $(whoami) != 'signing-gpg'; then
   exit 1
 fi
 
-exec gpg --homedir /home/signing-gpg/.gnupg -absu 0xe53d989a9e2d47bf! --batch --no-tty -o- --passphrase-fd 0 -- "$1"
+gpg_subkey='0xe53d989a9e2d47bf!'
+test -n "$GPG_NEWSUBKEY" && gpg_subkey='0x157432CF78A65729!'
+exec gpg --homedir /home/signing-gpg/.gnupg -absu "$gpg_subkey" --batch --no-tty -o- --passphrase-fd 0 -- "$1"

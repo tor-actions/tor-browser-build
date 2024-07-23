@@ -4,6 +4,8 @@ set -e
 script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "$script_dir/functions"
 
+test "$tbb_version_type" = "alpha" && export GPG_NEWSUBKEY=1
+
 cd ~/"$SIGNING_PROJECTNAME-$tbb_version"
 
 test -n "$GPG_PASS" || read -sp "Enter gpg passphrase: " GPG_PASS
