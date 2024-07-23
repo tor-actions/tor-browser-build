@@ -164,6 +164,8 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
   - [ ] FreeBSD port: freebsd@sysctl.cz <!-- Gitlab user maxfx -->
   - [ ] OpenBSD port: caspar@schutijser.com <!-- Gitlab user cschutijser -->
   - [ ] Note any changes which may affect packaging/downstream integration
+- [ ] ***(Optional, only after internal API-breaking changes)*** Email downstream project maintainers:
+  - [ ] selenium-tor: matzfan@tempr.email <!-- Forum user Noino -->
 - [ ] ***(Optional, after ESR migration)*** Email external partners:
   - [ ] Cloudflare: ask-research@cloudflare.com
     - **NOTE** :  We need to provide them with updated user agent string so they can update their internal machinery to prevent Tor Browser users from getting so many CAPTCHAs
