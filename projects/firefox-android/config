@@ -10,7 +10,6 @@ gpg_keyring:
   - ma1.gpg
   - pierov.gpg
   - morgan.gpg
-  - richard.gpg
 container:
   use_container: 1
 
