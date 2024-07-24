@@ -42,5 +42,5 @@ faketime_path=/usr/lib/x86_64-linux-gnu/faketime/libfaketime.so.1
 test -z "${NON_INTERACTIVE:-}" || rsync_progress="--progress"
 rsync_options="-avH ${rsync_progress:-} ${DRY_RUN:-}"
 
-tb_builders='boklm dan henry ma1 pierov richard'
+tb_builders='boklm dan henry ma1 morgan pierov'
 wrappers_dir=/signing/tor-browser-build/tools/signing/wrappers
