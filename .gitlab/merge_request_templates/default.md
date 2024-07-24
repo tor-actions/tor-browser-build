@@ -39,16 +39,16 @@
   - **firefox internals (XUL/JS/XPCOM)** : jwilde, ma1
   - **fonts** : pierov
   - **frontend (implementation)** : henry
-  - **frontend (review)** : donuts, richard
+  - **frontend (review)** : donuts, morgan
   - **localization** : henry, pierov
   - **macOS** : clairehurst, dan
   - **nightly builds** : boklm
-  - **rebases/release-prep** : boklm, dan, ma1, pierov, richard
+  - **rebases/release-prep** : boklm, dan, ma1, morgan, pierov
   - **security** : jwilde, ma1
-  - **signing** : boklm, richard
+  - **signing** : boklm, morgan
   - **updater** : pierov
-  - **windows** : jwilde, richard
-  - **misc/other** : pierov, richard
+  - **windows** : jwilde, morgan
+  - **misc/other** : morgan, pierov
 
 ### Change Description
 

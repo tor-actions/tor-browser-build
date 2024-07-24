@@ -42,7 +42,7 @@
 
 ### Request Reviewer
 
-- [ ] Request review from a release engineer: boklm, dan, ma1, pierov, richard
+- [ ] Request review from a release engineer: boklm, dan, ma1, morgan, pierov
 
 ### Change Description
 

@@ -118,8 +118,8 @@ Tor Browser Stable lives in the various `maint-$(TOR_BROWSER_MAJOR).$(TOR_BROWSE
     - boklm
     - dan
     - ma1
+    - morgan
     - pierov
-    - richard
   - [ ] Run: `make torbrowser-signtag-release`
   - [ ] Push tag to `upstream`
 - [ ] Build the tag:
@@ -171,7 +171,7 @@ Tor Browser Stable lives in the various `maint-$(TOR_BROWSER_MAJOR).$(TOR_BROWSE
 - **NOTE** : In practice, it's most efficient to have the blog post and website updates ready to merge, since signing doesn't take very long
 - [ ] Assign this issue to the signer, one of:
   - boklm
-  - richard
+  - morgan
 - [ ] On `$(STAGING_SERVER)`, ensure updated:
   - [ ] `tor-browser-build` is on the right commit: `git tag -v tbb-$(TOR_BROWSER_VERSION)-$(TOR_BROWSER_BUILD_N) && git checkout tbb-$(TOR_BROWSER_VERSION)-$(TOR_BROWSER_BUILD_N)`
   - [ ] `tor-browser-build/tools/signing/set-config.hosts`

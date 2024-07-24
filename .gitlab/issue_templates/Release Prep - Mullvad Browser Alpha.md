@@ -84,8 +84,8 @@ Mullvad Browser Alpha (and Nightly) are on the `main` branch
     - boklm
     - dan
     - ma1
+    - morgan
     - pierov
-    - richard
   - [ ] Run: `make mullvadbrowser-signtag-alpha`
   - [ ] Push tag to `upstream`
 - [ ] Build the tag:
@@ -105,7 +105,7 @@ Mullvad Browser Alpha (and Nightly) are on the `main` branch
 ### release signing
 - [ ] Assign this issue to the signer, one of:
   - boklm
-  - richard
+  - morgan
 - [ ] On `$(STAGING_SERVER)`, ensure updated:
   - [ ] `tor-browser-build` is on the right commit: `git tag -v tbb-$(MULLVAD_BROWSER_VERSION)-$(MULLVAD_BROWSER_BUILD_N) && git checkout tbb-$(MULLVAD_BROWSER_VERSION)-$(MULLVAD_BROWSER_BUILD_N)`
   - [ ] `tor-browser-build/tools/signing/set-config.hosts`
@@ -139,7 +139,7 @@ Mullvad Browser Alpha (and Nightly) are on the `main` branch
 - [ ] Assign this issue to someone with mullvad commit access, one of:
     - boklm
     - ma1
-    - richard
+    - morgan
     - pierov
 - [ ] Push this release's associated `mullvad-browser.git` branch to github
 - [ ] Push this release's associated tags to github:
