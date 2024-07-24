@@ -8,6 +8,7 @@ gpg_keyring:
   - boklm.gpg
   - dan_b.gpg
   - ma1.gpg
+  - morgan.gpg
   - pierov.gpg
   - richard.gpg
 container:

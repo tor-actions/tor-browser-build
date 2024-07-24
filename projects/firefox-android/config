@@ -9,6 +9,7 @@ gpg_keyring:
   - dan_b.gpg
   - ma1.gpg
   - pierov.gpg
+  - morgan.gpg
   - richard.gpg
 container:
   use_container: 1
