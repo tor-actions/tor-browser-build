@@ -1,3 +1,260 @@
+Tor Browser 14.0a1 - July 24 2024
+ * All Platforms
+   * Updated NoScript to 11.4.31
+   * Bug 41328: Follow firefox ESMify for Bug 1308512 [tor-browser]
+   * Bug 42441: Evaluate RR version-by-RR version rebases instead of ESR-to-ESR [tor-browser]
+   * Bug 42683: Create script to generate issue triage csv's from bugzilla query and git scraping [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 128.0esr
+   * Bug 42687: Disable Privacy-Preserving Attribution [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.22.5
+     * Bug 42470: Add merge request CI for linting [tor-browser]
+     * Bug 42722: clang-format and localization linters are not running [tor-browser]
+     * Bug 40964: Create new Tor Browser gpg subkey [tor-browser-build]
+     * Bug 41155: Update toolchains for ESR128 [tor-browser-build]
+     * Bug 41156: Split the Rust configuration options [tor-browser-build]
+     * Bug 41166: Use the GitHub repository for firefox-l10n [tor-browser-build]
+     * Bug 41168: deploy_update_responses-$channel.sh should check that it is not reverting an update in an other channel [tor-browser-build]
+     * Bug 41184: Update generate blog post script to use new blog header images [tor-browser-build]
+     * Bug 41189: Add matzfan to list of downstream projects in alpha release-prep template [tor-browser-build]
+     * Bug 41190: Add morgan.gpg to keyrings and list of valid keyrings in firefox+geckoview [tor-browser-build]
+     * Bug 41191: Remove richard.gpg from keyrings and list of valid keyrings in firefox+geckoview [tor-browser-build]
+     * Bug 41195: Update Go to 1.22 [tor-browser-build]
+     * Bug 40078: Update tools/tb-build-06-start-nightly-build after tor-browser-build#40829 [tor-browser-bundle-testsuite]
+   * Windows
+     * Bug 29318: Drop mingw-w64/gcc toolchain [tor-browser-build]
+     * Bug 29320: Use mingw-w64/clang toolchain to build Rust [tor-browser-build]
+     * Bug 41177: Include Windows installer without -portable- in download json files [tor-browser-build]
+   * Windows + macOS
+     * Bug 41197: Modify update-responses to prevent upgrades on unsupported Windows and macOS versions [tor-browser-build]
+
+Tor Browser 13.5.1 - July 09 2024
+ * All Platforms
+   * Bug 42689: Rebase Tor Browser onto 115.13.0esr [tor-browser]
+   * Bug 42693: Backports security fixes from Firefox 128 [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.13.0esr
+ * Android
+   * Updated GeckoView to 115.13.0esr
+ * Build System
+   * All Platforms
+     * Updated Go to 1.21.12
+     * Bug 41166: Use the GitHub repository for firefox-l10n [tor-browser-build]
+   * Windows
+     * Bug 41177: Include Windows installer without -portable- in download json files [tor-browser-build]
+
+Tor Browser 13.5 - June 17 2024
+ * All Platforms
+   * Bug 40856: Add a default for preferences in TorSettings [tor-browser]
+   * Bug 40919: Consider dropping protection against line-height introduced in #23104 [tor-browser]
+   * Bug 41114: Fix no-async-promise-executor on TorConnect [tor-browser]
+   * Bug 41467: compat: beacon: re-enable the API but transform it to a no-op [tor-browser]
+   * Bug 42153: Drop dom.enable_resource_timing = false preference [tor-browser]
+   * Bug 42246: Migrate tor connection stuff from browser to toolkit [tor-browser]
+   * Bug 42290: "DuckDuckGoOnion" is a weird naming format for onion search engines [tor-browser]
+   * Bug 42302: The allowed ports string contains a typo [tor-browser]
+   * Bug 42308: Update README for tor browser [tor-browser]
+   * Bug 42315: compat: why is eventCounts undefined? [tor-browser]
+   * Bug 42336: Review the relationship between TorSettings and the TorProvider [tor-browser]
+   * Bug 42340: TorBridgeChanged notification sends out "[object Object]" as its data. [tor-browser]
+   * Bug 42343: Consume pt_config.json in the browser [tor-browser]
+   * Bug 42354: Refactor exclusions in ShouldSanitizePreference() to the pref list. [tor-browser]
+   * Bug 42358: Separate the domain fronted requests from Moat [tor-browser]
+   * Bug 42359: Handle firewall and proxy in TorSettings.setSettings [tor-browser]
+   * Bug 42390: Betterboxing: make the decorator border disappear when the corners are flat [tor-browser]
+   * Bug 42397: Change RFP-spoofed Timezone from UTC to a real-world, less discriminable one [tor-browser]
+   * Bug 42437: Drop "torbrowser.version" preference [tor-browser]
+   * Bug 42466: Drop the "Onion Logo" from trademark statement [tor-browser]
+   * Bug 42479: Switch from localized strings to error codes in TorConnect errors [tor-browser]
+   * Bug 42481: Modularize SecurityLevel [tor-browser]
+   * Bug 42521: Remove unused onboarding strings [tor-browser]
+   * Bug 42529: Try not to spoof system-ui in contexts exempt from RFP [tor-browser]
+   * Bug 42537: Move Fluent files from "browser" to "toolkit" [tor-browser]
+   * Bug 42538: Move onion icons to toolkit [tor-browser]
+   * Bug 42549: Remove brand.dtd [tor-browser]
+   * Bug 42604: Add some debug logs about circuits [tor-browser]
+   * Bug 241: Move network.proxy.failover_direct=false pref to base-browser [mullvad-browser]
+   * Bug 41111: Use Lyrebird to provide WebTunnel PT Client [tor-browser-build]
+ * Windows + macOS + Linux
+   * Bug 40843: Add a working state to the Internet test button in connection settings [tor-browser]
+   * Bug 41621: Tweak about:torconnect styling [tor-browser]
+   * Bug 41622: Convert onion site errors to the new neterror template [tor-browser]
+   * Bug 41814: Change "vanilla bridge:" to "Tor bridge:" in bridge cards [tor-browser]
+   * Bug 41916: Letterboxing preferences UI [tor-browser]
+   * Bug 41917: Make the appearance of letterboxing look more intentional [tor-browser]
+   * Bug 41918: Add option to reuse last window size when letterboxing is enabled [tor-browser]
+   * Bug 41930: intl.accept_languages gets into a stuck modifed state [tor-browser]
+   * Bug 41966: Cannot remove locales from the locale alternatives list [tor-browser]
+   * Bug 42036: Design and build a user interface for Lox [tor-browser]
+   * Bug 42192: Correctly round new windows when bookmarks toolbar is set to "Only Show on New Tab" [tor-browser]
+   * Bug 42202: Fluent migration: crypto safety [tor-browser]
+   * Bug 42203: Fluent migration: about dialog [tor-browser]
+   * Bug 42204: Drop unused aboutTor.dtd [tor-browser]
+   * Bug 42206: Fluent migration: about:rulesets [tor-browser]
+   * Bug 42207: Fluent migration: preferences [tor-browser]
+   * Bug 42209: Fluent migration: tor circuit [tor-browser]
+   * Bug 42210: Fluent migration: download warning [tor-browser]
+   * Bug 42211: Fluent migration: new identity [tor-browser]
+   * Bug 42214: Fluent migration: security level [tor-browser]
+   * Bug 42270: Implement design changes to QR code dialog [tor-browser]
+   * Bug 42303: Remove unused "help" button logic in tor dialogs [tor-browser]
+   * Bug 42319: Make all the wordmark of the same size [tor-browser]
+   * Bug 42387: Visual noise in 13.5a4 letterboxing [tor-browser]
+   * Bug 42389: Betterboxing: gradient is never shown [tor-browser]
+   * Bug 42398: Include Alpha and Nightly in MOZ_APP_DISPLAYNAME (and possibly in other places) [tor-browser]
+   * Bug 42405: Fix betterboxing + findbar horizontal bounce if the scrollbar is not an overlay [tor-browser]
+   * Bug 42414: Show ellipsis when the tor bridge address overflows [tor-browser]
+   * Bug 42415: Improve focus styling for forced focus in bridge settings [tor-browser]
+   * Bug 42421: Remove bridge option should be hidden for Lox bridges [tor-browser]
+   * Bug 42423: Move temporary Lox Fluent strings to new file [tor-browser]
+   * Bug 42425: Improve accessibility of the bridge emoji cells [tor-browser]
+   * Bug 42443: Shrink the window to match letterboxing size when the emtpy area is doble-clicked [tor-browser]
+   * Bug 42446: Improve accessible descriptions in built-in dialog [tor-browser]
+   * Bug 42457: Loading icon for bridge pass (Lox) invites [tor-browser]
+   * Bug 42458: Update the "Submit Feedback" link in "About Tor Browser" [tor-browser]
+   * Bug 42476: Only allow Lox (invites) in alpha and nightly builds [tor-browser]
+   * Bug 42489: Lox module notifications [tor-browser]
+   * Bug 42490: Install svg from branding theme to browser/chrome/icons/default [tor-browser]
+   * Bug 42496: Moat refresh bug [tor-browser]
+   * Bug 42500: When startup window is maximized per letterboxing.rememberSize on startup, the restore button shrinks it to its minimum size [tor-browser]
+   * Bug 42504: TB Bookmarks: Add the Tor forum .onion to the bookmarks [tor-browser]
+   * Bug 42510: SETCONF Tor control protocol command should not be used when system Tor is configured / TOR_SKIP_LAUNCH=1 is not honored [tor-browser]
+   * Bug 42511: false positive message: browser tab bar shows "Not connected" even though connected in a system Tor etc. context [tor-browser]
+   * Bug 42520: Correctly record new initial window size after auto-shrinking [tor-browser]
+   * Bug 42533: Add Lox notification for activeLoxId [tor-browser]
+   * Bug 42540: Fix gNetworkStatus.deinint typo [tor-browser]
+   * Bug 42541: Circuit Display does not work when using Conjure pluggable transport [tor-browser]
+   * Bug 42542: Quirks when onion authentication prompt is shared between two tabs [tor-browser]
+   * Bug 42573: Tweak language notification to avoid formatValue [tor-browser]
+   * Bug 42574: Exempt pdf.js from letterboxing [tor-browser]
+   * Bug 42583: Modify moz-support-link [tor-browser]
+   * Bug 262: Mouse-over long links causes the browser element to re-center relative to width of status tooltip [mullvad-browser]
+   * Bug 289: The Letterboxing>Content Alignment heading doesn't follow the Firefox design document capitalization [mullvad-browser]
+   * Bug 41149: Add be, bg and pt-PT translations to nightlies [tor-browser-build]
+ * Windows + macOS
+   * Bug 41405: Win ≤8.1 and macOS ≤10.14 not supported in ESR 128 [tor-browser]
+   * Bug 42347: Add a banner warning users about the upcoming EOL for Win ≤8.1 and macOS ≤10.14 [tor-browser]
+   * Bug 42586: Add support link to OS deprecation message [tor-browser]
+ * Windows
+   * Bug 41859: Font used for IPs in circuit display is illegible [tor-browser]
+   * Bug 41901: windows: FontSubstitutes can leak system locale [tor-browser]
+   * Bug 42163: Make the 3rd party DLL blocklist obey portable mode [tor-browser]
+ * macOS
+   * Bug 40569: Create build-specific installer for macOS [tor-browser-build]
+ * Linux
+   * Bug 42438: Adapt the data import wizard to use the original $HOME on Linux [tor-browser]
+   * Bug 41112: Fix indentation of projects/browser/RelativeLink/start-browser [tor-browser-build]
+   * Bug 41136: Include *.deb in the list of files to gpg sign [tor-browser-build]
+ * Android
+   * Bug 41187: Improve Android's bridge settings UI [tor-browser]
+   * Bug 41846: Disable new nimbus use in firefox-android 115 [tor-browser]
+   * Bug 42017: TBA13: system/widget font tests: font-family not returned in getComputedStyle [tor-browser]
+   * Bug 42248: Allow GeckoView to launch tor [tor-browser]
+   * Bug 42249: Allow GeckoView to launch lyrebird [tor-browser]
+   * Bug 42250: Allow Moat.sys.mjs to invoke lyrebird on Android [tor-browser]
+   * Bug 42252: Plumb down TorConnect commands from firefox-android to GeckoView [tor-browser]
+   * Bug 42253: Remove "New private tab" action and widget [tor-browser]
+   * Bug 42259: Remove unused firefox branding from Tor Browser for Android [tor-browser]
+   * Bug 42260: Add TBB artifacts to .gitignore [tor-browser]
+   * Bug 42301: Make TorSettings interact with the old Android Settings [tor-browser]
+   * Bug 42317: Update "Security Settings" menu item [tor-browser]
+   * Bug 42323: Add a checkbox to enable the connect assist experiments on alpha [tor-browser]
+   * Bug 42409: TTP-03-011 WP3: Potential DoS due to Deep Link abuse [tor-browser]
+   * Bug 42427: Do not ship bridges as prefences anymore [tor-browser]
+   * Bug 42486: firefox-android bridge settings sometimes dont save [tor-browser]
+   * Bug 42522: The quick connect switch on Android seems too much on the right side [tor-browser]
+   * Bug 42552: TBA: formatting APIs are en-US only [tor-browser]
+   * Bug 42566: Remove 'Enable beta connection features' menu item in stable release channel [tor-browser]
+   * Bug 42567: Remove 'Enable beta connection features' toggle [tor-browser]
+   * Bug 42571: The new bootstrap on Android breaks if the browser goes in background [tor-browser]
+   * Bug 42576: Backport Bug 1885171: use the private keyboard for prompts on Android [tor-browser]
+   * Bug 42578: Reject Android "open in Tor Browser" intent [tor-browser]
+   * Bug 42582: Accepted languages should use id and he on Android [tor-browser]
+   * Bug 42593: Unable to disable bridges after they have been configured and successfully bootstrapped [tor-browser]
+   * Bug 42618: Addons on Android have a stale cache [tor-browser]
+   * Bug 42619: Cannot install Android addons from AMO [tor-browser]
+   * Bug 42632: Don't display builtin bridges in provide bridge popup [tor-browser]
+   * Bug 42636: A bad bridge line might get TBA stuck [tor-browser]
+   * Bug 42648: Don't cancel tor bootstrap when opening settings from bootstrap [tor-browser]
+   * Bug 41143: Enable multi-locales also on GeckoView [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Bug 42331: tb-dev fetch command is missing repository argument [tor-browser]
+     * Bug 42516: Make tb-dev worktree-compatible [tor-browser]
+     * Bug 42594: Update mach to work with Python 3.12 [tor-browser]
+     * Bug 40852: Reproducible build of the the lox client library to wasm [tor-browser-build]
+     * Bug 40983: Bump the various branches to 13.5 on main [tor-browser-build]
+     * Bug 41001: Create Release Prep MR generating script [tor-browser-build]
+     * Bug 41037: Set time on signing machine before starting signing [tor-browser-build]
+     * Bug 41038: Add RPM dependencies to README [tor-browser-build]
+     * Bug 41045: Dump more information about build times on Firefox [tor-browser-build]
+     * Bug 41048: Drop the kcp-go project [tor-browser-build]
+     * Bug 41073: Update documention about required packages for container-less build [tor-browser-build]
+     * Bug 41081: Update detailsURL in tools/signing/nightly/update-responses-base-config.yml [tor-browser-build]
+     * Bug 41148: Update projects/browser/Bundle-Data/Docs/Licenses/NoScript.txt [tor-browser-build]
+     * Bug 41153: Update README for Ubuntu 24.04 unprivileged user namespace changes [tor-browser-build]
+     * Bug 41154: Update keyring/boklm.gpg for new subkeys [tor-browser-build]
+     * Bug 41161: Explicitly fetch tags in the release preparation script [tor-browser-build]
+     * Bug 40071: Add an option to create zip files using 7z [rbm]
+     * Bug 40073: We should remove ./ when using 7-zip for zip files [rbm]
+     * Bug 40076: Correctly refresh file when computing input_files_id and a file is set as refresh_input [rbm]
+   * Windows + macOS + Linux
+     * Bug 42305: (Semi-)Automatically merge translation resources across tor browser releases (desktop) [tor-browser]
+     * Bug 42501: Move `--disable-eme` to OS- and architecture-specific mozconfigs [tor-browser]
+     * Bug 42519: Update the profile directory patch to check both for `system-install` and for `is-packaged-app` file [tor-browser]
+     * Bug 41057: make fetch is not fetching mullvad repo [tor-browser-build]
+     * Bug 41078: pt_config.json not touch'd before adding to omni.ja, resulting in build non-determinism [tor-browser-build]
+     * Bug 41088: Remove use of projects/browser/run_scripts [tor-browser-build]
+   * Windows
+     * Bug 40606: Use Clang to compile NSIS [tor-browser-build]
+     * Bug 40900: Update NSIS to 3.09 [tor-browser-build]
+     * Bug 41065: Do a cleanup of the NSIS script [tor-browser-build]
+     * Bug 41076: Include the ShellLink plugin in NSIS [tor-browser-build]
+     * Bug 41097: authenticode-timestamping.sh fails to run again because tmp-timestamp already exists [tor-browser-build]
+     * Bug 41150: Do not check for SSE2 on the Windows installer [tor-browser-build]
+   * macOS
+     * Bug 41084: $app_bundle is missing the final .app in projects/firefox/build [tor-browser-build]
+     * Bug 41124: Since TB/MB 13.5a5 macos signed installers contain all .DS_Store [tor-browser-build]
+   * Linux
+     * Bug 42491: Add mozconfig-linux-aarch64 [tor-browser]
+     * Bug 41046: Use the final path for Linux debug symbols [tor-browser-build]
+     * Bug 41126: Make deb and rpm packages for Tor Browser [tor-browser-build]
+     * Bug 41137: Build gcc-cross and tor-expert-bundle for linux-aarch64 [tor-browser-build]
+     * Bug 41160: Enable build of Tor Browser rpm/deb packages for nightly only [tor-browser-build]
+   * Android
+     * Bug 40502: Do not recommend addons on Tor Browser [tor-browser]
+     * Bug 42399: Re-enable minimization of JS for Android [tor-browser]
+     * Bug 42568: Remove legacy tor dependencies from firefox-android [tor-browser]
+     * Bug 42569: Remove tor-onion-proxy-library and and tor-android-service deployment/ingestion steps from firefox-android dev tools/scripts [tor-browser]
+     * Bug 42570: Add tor-expert-bundle aar depoyment/ingestion step to firefox-android dev tools/scripts [tor-browser]
+     * Bug 42581: Check if a file exists before trying to sign it in tools/tba-sign-devbuild.sh [tor-browser]
+     * Bug 41080: Re-pack omni.ja with 7-zip on Android [tor-browser-build]
+     * Bug 41082: Package tor expert bundle on android as .aar that firefox-android can use in lieu of tor-android-service with geckoview bootstrap [tor-browser-build]
+     * Bug 41092: Use an uncompressed omni.ja to improve final apk compression. [tor-browser-build]
+     * Bug 41093: Sign unsigned APKs instead of the QA-signed ones [tor-browser-build]
+     * Bug 41127: Android testbuilds fail because of the too early MOZ_BUILD_DATE [tor-browser-build]
+     * Bug 41139: Remove tor-android-service and tor-onion-proxy-library dependencies and ingestion steps from firefox-android config and build script [tor-browser-build]
+     * Bug 41140: Remove tor-onion-proxy-library and tor-android-service projects from tor-browser-build [tor-browser-build]
+     * Bug 41141: Add tor-expert-bundle aar dependency to firefox-android [tor-browser-build]
+     * Bug 42201: Make the script sign all the channels for local builds [tor-browser]
+     * Bug 42258: Replace the current boring "fiery android" icon we use for dev with the cool nightly icon [tor-browser]
+
+Tor Browser 13.0.16 - June 11th 2024
+ * All Platforms
+   * Updated Tor to 0.4.8.12
+   * Updated OpenSSL to 3.0.14
+   * Bug 42625: Rebase Tor Browser Stable 13.0 onto 115.12.0esr [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.12.0esr
+ * Android
+   * Updated GeckoView to 115.12.0esr
+   * Bug 42621: Backport security fixes from Firefox 127 [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.21.11
+
 Tor Browser 13.5a9 - June 10 2024
  * All Platforms
    * Updated Tor to 0.4.8.12

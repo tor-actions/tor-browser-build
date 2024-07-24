@@ -17,8 +17,10 @@ var:
   firefox_platform_version: 128.0
   firefox_version: '[% c("var/firefox_platform_version") %]esr'
   browser_series: '14.0'
-  browser_rebase: 1
+  # Note: In 14.0a1, mullvad-browser is on browser_rebase: 1!
+  browser_rebase: 2
   browser_branch: '[% c("var/browser_series") %]-[% c("var/browser_rebase") %]'
+  # Note: In 14.0a1, mullvad-browser is on browser_build: 2!
   browser_build: 1
   branding_directory_prefix: 'tb'
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
@@ -107,6 +109,10 @@ targets:
       gitlab_project: https://gitlab.torproject.org/tpo/applications/mullvad-browser
       updater_url: 'https://cdn.mullvad.net/browser/update_responses/update_1/'
       nightly_updates_publish_dir_prefix: mullvadbrowser-
+      # TODO: Remove/update me for 14.0a2 when/if in-sync with tor-browser
+      browser_rebase: 1
+      # TODO: Remove/update me for 14.0a2 when/if in-sync with tor-browser
+      browser_build: 2
 
   linux-x86_64:
     var:
