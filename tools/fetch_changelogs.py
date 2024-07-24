@@ -41,7 +41,8 @@ class ChangelogEntry:
             "tor-browser": 2,
             "tor-browser-build": 3,
             "mullvad-browser": 1 if is_mb else 4,
-            "rbm": 5,
+            "tor-browser-bundle-testsuite": 5,
+            "rbm": 6,
         }
 
     def get_platforms(self):
