@@ -96,6 +96,8 @@ sudoers_file set-date
 authorized_keys boklm boklm-tb-release.pub boklm-yk1.pub
 create_user richard signing
 authorized_keys richard richard.pub
+create_user morgan signing
+authorized_keys morgan morgan.pub
 
 # Install rbm deps
 install_packages libyaml-libyaml-perl libtemplate-perl libdatetime-perl \
