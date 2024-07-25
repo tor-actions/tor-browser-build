@@ -1,14 +1,10 @@
 # vim: filetype=yaml sw=2
-# When Windows 7 goes EOL, just update this field
-version: '[% IF c("var/use_go_1_20") %][% c("var/go_1_20") %][% ELSE %][% c("var/go_1_21") %][% END %]'
+version: '1.22.5'
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
 
 var:
-  use_go_1_20: 0
-  go_1_21: 1.21.11
-  go_1_20: 1.20.14
   no_crosscompile: 1
   setup: |
     mkdir -p /var/tmp/dist
@@ -77,7 +73,6 @@ targets:
   windows:
     var:
       GOOS: windows
-      use_go_1_20: '[% c("origin_project") != "snowflake" %]'
   windows-i686:
     var:
       GOARCH: 386
@@ -129,14 +124,9 @@ input_files:
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
     enable: '[% ! c("var/linux") %]'
-  - URL: 'https://go.dev/dl/go[% c("var/go_1_21") %].src.tar.gz'
+  - URL: 'https://go.dev/dl/go[% c("version") %].src.tar.gz'
     name: go
-    sha256sum: 42aee9bf2b6956c75a7ad6aa3f0a51b5821ffeac57f5a2e733a2d6eae1e6d9d2
-    enable: '[% !c("var/use_go_1_20") %]'
-  - URL: 'https://go.dev/dl/go[% c("var/go_1_20") %].src.tar.gz'
-    name: go
-    sha256sum: 1aef321a0e3e38b7e91d2d7eb64040666cabdcc77d383de3c9522d0d69b67f4e
-    enable: '[% c("var/use_go_1_20") %]'
+    sha256sum: ac9c723f224969aee624bc34fd34c9e13f2a212d75c71c807de644bb46e112f6
   - project: go-bootstrap
     name: go-bootstrap
     target_replace:
