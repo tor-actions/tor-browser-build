@@ -62,7 +62,7 @@ echo '**** Signing updater.app ****'
 echo '**** Signing plugin-container.app ****'
 /signing/rcodesign/rcodesign sign \
   $rcodesign_opts \
-  --entitlements-xml-path /signing/tor-browser-build/tools/signing/${tbb_version_type}.entitlements.xml \
+  --entitlements-xml-path /signing/tor-browser-build/tools/signing/macos-entitlements/plugin-container.xml \
   -- \
   "$display_name/$display_name.app/Contents/MacOS/plugin-container.app"
 
@@ -94,7 +94,7 @@ echo "**** Signing main bundle ($display_name.app) ****"
 # We use `--exclude '**'` to avoid re-signing nested bundles
 /signing/rcodesign/rcodesign sign \
   $rcodesign_opts \
-  --entitlements-xml-path /signing/tor-browser-build/tools/signing/${tbb_version_type}.entitlements.xml \
+  --entitlements-xml-path /signing/tor-browser-build/tools/signing/macos-entitlements/firefox.browser.xml \
   --exclude '**' \
   -- \
   "$display_name/$display_name.app"
