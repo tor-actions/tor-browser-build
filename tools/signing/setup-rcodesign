@@ -35,8 +35,8 @@ function setup_rcodesign {
   tar -C "$tmpdir" -xf "$rcodesign_path"
   mv "$tmpdir/rcodesign" "$rcodesign_dir"
   chmod -R go+rX "$rcodesign_dir"
-  rm -f "$localdir/rcodesign"
-  ln -s "rcodesign-$rcodesign_version" "$localdir/rcodesign"
+  rm -f "$localdir/rcodesign-128"
+  ln -s "rcodesign-$rcodesign_version" "$localdir/rcodesign-128"
 }
 
 download_rcodesign

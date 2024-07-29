@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
-version: 0.22.0
-git_hash: cb406b5feb1439131f36ec60375f607a7f82439d
+version: 0.27.0
+git_hash: 703362f818272d43b3844105863739bcb6f1a11a
 git_url: https://github.com/indygreg/apple-platform-rs.git
 container:
   use_container: 1
@@ -16,4 +16,4 @@ steps:
         project: rcodesign
         pkg_type: cargo_vendor
         norec:
-          sha256sum: 04c21203d2948ebfa59f1039d4481e419e656ec636293b4846fdb7868cfd98f0
+          sha256sum: c778deb784f68b48a51c6c54095c6cd45e37847d65e9db36ce39b4326874ae9c

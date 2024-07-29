@@ -12,7 +12,7 @@ tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_ta
 tar -C $builddir -xf $rootdir/[% c('input_files_by_name/cargo_vendor') %]
 
 cd $builddir
-mkdir .cargo
+mkdir -p .cargo
 cat >> .cargo/config << 'EOF'
 
 [source.crates-io]

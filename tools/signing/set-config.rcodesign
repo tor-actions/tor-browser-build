@@ -1,4 +1,4 @@
-rcodesign_version=0.22.0-bc8cc7
+rcodesign_version=0.27.0-e252fa
 rcodesign_filename=rcodesign-${rcodesign_version}.tar.gz
-rcodesign_sha256sum=2a9eda016fff116c59f52b358e7a740f6fb5c039974f0acc8266c3605d24092a
+rcodesign_sha256sum=c228c5fb06a088bc6c50a212d8d5a15425c2bcdf448bfa7f94ea5cc41321c533
 rcodesign_url="https://build-sources.tbb.torproject.org/${rcodesign_filename}"
