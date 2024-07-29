@@ -16,6 +16,7 @@ display_name="$2"
 output_file="/home/signing-macos/last-signed-$display_name.tar.zst"
 rm -f "$output_file"
 
+rcodesign=/signing/rcodesign-128/rcodesign
 rcodesign_signing_p12_file=/home/signing-macos/keys/key-1.p12
 test -f "$rcodesign_signing_p12_file" || exit_error "$rcodesign_signing_p12_file is missing"
 
@@ -30,7 +31,10 @@ cd "$tmpdir"
 # preserve permissions
 chmod ugo+x "$display_name/$display_name.app/Contents/MacOS"/* \
             "$display_name/$display_name.app/Contents/MacOS/updater.app/Contents/MacOS"/* \
-            "$display_name/$display_name.app/Contents/MacOS/plugin-container.app/Contents/MacOS"/*
+            "$display_name/$display_name.app/Contents/MacOS/plugin-container.app/Contents/MacOS"/* \
+            "$display_name/$display_name.app/Contents/MacOS/media-plugin-helper.app/Contents/MacOS"/* \
+            "$display_name/$display_name.app/Contents/Frameworks/ChannelPrefs.framework/ChannelPrefs" \
+            "$display_name/$display_name.app/Contents/MacOS/updater.app/Contents/Frameworks/UpdateSettings.framework/UpdateSettings"
 test -d "$display_name/$display_name.app/Contents/MacOS/Tor" && \
   chmod -R ugo+x "$display_name/$display_name.app/Contents/MacOS/Tor"
 
@@ -45,6 +49,8 @@ EOF
 tr -d '\n' < "$pwdir/rcodesign-pw-2" > "$pwdir/rcodesign-pw"
 rm "$pwdir/rcodesign-pw-2"
 
+# unset RCODESIGN_PW since it conflicts with rcodesign config
+unset RCODESIGN_PW
 rcodesign_opts="
   --code-signature-flags runtime
   --timestamp-url http://timestamp.apple.com:8080/ts01
@@ -52,50 +58,33 @@ rcodesign_opts="
   --p12-password-file $pwdir/rcodesign-pw
   "
 
-# sign updater.app and plugin-container.app separately
-echo '**** Signing updater.app ****'
-/signing/rcodesign/rcodesign sign \
-  $rcodesign_opts \
-  --info-plist-path "$display_name/$display_name.app/Contents/MacOS/updater.app/Contents/Info.plist" \
-  -- \
-  "$display_name/$display_name.app/Contents/MacOS/updater.app"
-echo '**** Signing plugin-container.app ****'
-/signing/rcodesign/rcodesign sign \
-  $rcodesign_opts \
-  --entitlements-xml-path /signing/tor-browser-build/tools/signing/macos-entitlements/plugin-container.xml \
-  -- \
-  "$display_name/$display_name.app/Contents/MacOS/plugin-container.app"
-
-# Setting binary-identifier on some files, to avoid signature errors. See:
-# https://gitlab.torproject.org/tpo/applications/tor-browser-build/-/issues/29815#note_2956149
-pushd "$display_name/$display_name.app/Contents/MacOS/"
-for lib in *.dylib
+flags=()
+for dir in Contents/MacOS Contents/MacOS/Tor Contents/MacOS/Tor/PluggableTransports
 do
-  binident=$(echo $lib | sed 's/\.dylib$//')
-  binident="--binary-identifier Contents/MacOS/$lib:$binident"
-  echo "Adding option $binident"
-  rcodesign_opts="$rcodesign_opts $binident"
-done
-popd
-
-if test -d "$display_name/$display_name.app/Contents/MacOS/Tor/PluggableTransports/"
-then
-  pushd "$display_name/$display_name.app/Contents/MacOS/Tor/PluggableTransports/"
-  for file in echo *
+  d="$display_name/$display_name.app/$dir"
+  test -d "$d" || continue
+  pushd "$d"
+  for file in *
   do
-    binident="--binary-identifier Contents/MacOS/Tor/PluggableTransports/$file:$file"
-    echo "Adding option $binident"
-    rcodesign_opts="$rcodesign_opts $binident"
+    test -f "$file" || continue
+    flags+=('--code-signature-flags' "$dir/$file:runtime")
   done
   popd
-fi
+done
+echo "code-signature-flags: ${flags[@]}"
 
 echo "**** Signing main bundle ($display_name.app) ****"
-# We use `--exclude '**'` to avoid re-signing nested bundles
-/signing/rcodesign/rcodesign sign \
+$rcodesign sign \
   $rcodesign_opts \
+  "${flags[@]}" \
+  --code-signature-flags Contents/MacOS/updater.app/Contents/Frameworks/UpdateSettings.framework:runtime \
+  --code-signature-flags Contents/MacOS/updater.app:runtime \
+  --code-signature-flags Contents/Frameworks/ChannelPrefs.framework:runtime \
+  --code-signature-flags Contents/MacOS/plugin-container.app:runtime \
+  --code-signature-flags Contents/MacOS/media-plugin-helper.app:runtime \
+  --entitlements-xml-path Contents/MacOS/plugin-container.app:/signing/tor-browser-build/tools/signing/macos-entitlements/plugin-container.xml \
+  --entitlements-xml-path Contents/MacOS/media-plugin-helper.app:/signing/tor-browser-build/tools/signing/macos-entitlements/media-plugin-helper.xml \
   --entitlements-xml-path /signing/tor-browser-build/tools/signing/macos-entitlements/firefox.browser.xml \
-  --exclude '**' \
   -- \
   "$display_name/$display_name.app"
 
