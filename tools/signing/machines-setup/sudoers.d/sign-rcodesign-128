@@ -1,0 +1,2 @@
+Defaults>signing-macos env_keep += "SIGNING_PROJECTNAME tbb_version_type RCODESIGN_PW"
+%signing ALL = (signing-macos) NOPASSWD: /signing/tor-browser-build/tools/signing/wrappers/sign-rcodesign-128
