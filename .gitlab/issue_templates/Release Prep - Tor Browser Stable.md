@@ -60,8 +60,6 @@ Tor Browser Stable lives in the various `maint-$(TOR_BROWSER_MAJOR).$(TOR_BROWSE
     - [ ] `browser_branch` : update to match stable `firefox-android` build tag
     - [ ] `browser_build` : update to match stable `firefox-android` build tag
   variant: Beta
-  - [ ] Update allowed_addons.json by running (from `tor-browser-build` root):
-    - `./tools/fetch_allowed_addons.py > projects/browser/allowed_addons.json`
 - [ ] Update `projects/translation/config`:
   - [ ] run `make list_translation_updates-release` to get updated hashes
   - [ ] `steps/base-browser/git_hash` : update with `HEAD` commit of project's `base-browser` branch

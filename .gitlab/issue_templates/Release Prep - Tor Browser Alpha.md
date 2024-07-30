@@ -59,8 +59,6 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
     - [ ] `fenix_version` : update to match alpha `firefox-android` build tag
     - [ ] `browser_branch` : update to match alpha `firefox-android` build tag
     - [ ] `browser_build` : update to match alpha `firefox-android` build tag
-  - [ ] Update allowed_addons.json by running (from `tor-browser-build` root):
-    - `./tools/fetch_allowed_addons.py > projects/browser/allowed_addons.json`
 - [ ] Update `projects/translation/config`:
   - [ ] run `make list_translation_updates-alpha` to get updated hashes
   - [ ] `steps/base-browser/git_hash` : update with `HEAD` commit of project's `base-browser` branch

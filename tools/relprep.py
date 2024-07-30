@@ -4,7 +4,6 @@ from collections import namedtuple
 import configparser
 from datetime import datetime, timezone
 from hashlib import sha256
-import json
 import locale
 import logging
 from pathlib import Path
@@ -16,7 +15,6 @@ from git import Repo
 import requests
 import ruamel.yaml
 
-from fetch_allowed_addons import NOSCRIPT, fetch_allowed_addons, find_addon
 import fetch_changelogs
 from update_manual import update_manual
 
@@ -319,28 +317,27 @@ class ReleasePreparation:
         logger.info("Updating addons")
         config = self.load_config("browser")
 
-        amo_data = fetch_allowed_addons()
-        logger.debug("Fetched AMO data")
-        if self.android:
-            with (
-                self.base_path / "projects/browser/allowed_addons.json"
-            ).open("w") as f:
-                json.dump(amo_data, f, indent=2)
-
-        noscript = find_addon(amo_data, NOSCRIPT)
         logger.debug("Updating NoScript")
-        self.update_addon_amo(config, "noscript", noscript)
+        self.update_addon_amo(
+            config, "noscript", "{73a6fe31-595d-460b-a920-fcc0f8843232}"
+        )
         if self.mullvad_browser:
             logger.debug("Updating uBlock Origin")
-            ublock = find_addon(amo_data, "uBlock0@raymondhill.net")
-            self.update_addon_amo(config, "ublock-origin", ublock)
+            self.update_addon_amo(
+                config, "ublock-origin", "uBlock0@raymondhill.net"
+            )
             logger.debug("Updating the Mullvad Browser extension")
             self.update_mullvad_addon(config)
 
         self.save_config("browser", config)
 
-    def update_addon_amo(self, config, name, addon):
-        addon = addon["current_version"]["files"][0]
+    def update_addon_amo(self, config, name, addon_id):
+        r = requests.get(
+            f"https://services.addons.mozilla.org/api/v4/addons/addon/{addon_id}"
+        )
+        r.raise_for_status()
+        amo_data = r.json()
+        addon = amo_data["current_version"]["files"][0]
         assert addon["hash"].startswith("sha256:")
         addon_input = self.find_input(config, name)
         addon_input["URL"] = addon["url"]
