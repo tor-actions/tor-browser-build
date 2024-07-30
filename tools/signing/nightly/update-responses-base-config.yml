@@ -18,14 +18,17 @@ versions:
     nightly_version:
         platformVersion: 115.1.0
         detailsURL: https://nightlies.tbb.torproject.org/
+        # minSupportedOsVersion on macOS corresponds to the Darwin version ( https://en.wikipedia.org/wiki/Darwin_(operating_system) )
         macos:
-            minSupportedOSVersion: 16.0.0
+            # macOS v10.15.0
+            minSupportedOSVersion: 19.0.0
+        # minSupportedOsVersion on Windows corresponds to the operating system version ( https://docs.microsoft.com/en-us/windows/win32/sysinfo/operating-system-version )
         windows-i686:
-            minSupportedOSVersion: 6.1
-            minSupportedInstructionSet: SSE2
+            # Windows 10
+            minSupportedOSVersion: 10.0
         windows-x86_64:
-            minSupportedOSVersion: 6.1
-            minSupportedInstructionSet: SSE2
+            # Windows v10
+            minSupportedOSVersion: 10.0
         linux-i686:
             minSupportedInstructionSet: SSE2
         linux-x86_64:
