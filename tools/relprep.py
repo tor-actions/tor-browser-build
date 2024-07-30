@@ -448,9 +448,9 @@ class ReleasePreparation:
                 major = major[2:]
             return major
 
+        logger.info("Updating Go")
         config = self.load_config("go")
-        # TODO: When Windows 7 goes EOL use config["version"]
-        major = get_major(config["var"]["go_1_21"])
+        major = get_major(config["version"])
 
         r = requests.get("https://go.dev/dl/?mode=json")
         r.raise_for_status()
@@ -463,7 +463,7 @@ class ReleasePreparation:
         if not data:
             raise KeyError("Could not find information for our Go series.")
         # Skip the "go" prefix in the version.
-        config["var"]["go_1_21"] = data["version"][2:]
+        config["version"] = data["version"][2:]
 
         sha256sum = ""
         for f in data["files"]:
@@ -472,15 +472,7 @@ class ReleasePreparation:
                 break
         if not sha256sum:
             raise KeyError("Go source package not found.")
-        updated_hash = False
-        for input_ in config["input_files"]:
-            if "URL" in input_ and "var/go_1_21" in input_["URL"]:
-                input_["sha256sum"] = sha256sum
-                updated_hash = True
-                break
-        if not updated_hash:
-            raise KeyError("Could not find a matching entry in input_files.")
-
+        self.find_input(config, "go")["sha256sum"] = sha256sum
         self.save_config("go", config)
 
     def update_manual(self):
@@ -556,18 +548,11 @@ class ReleasePreparation:
             # Sometimes this might be incorrect for alphas, but let's
             # keep it for now.
             kwargs["firefox"] += "esr"
-        self.check_update_simple(kwargs, prev_tag, "tor")
-        self.check_update_simple(kwargs, prev_tag, "openssl")
-        self.check_update_simple(kwargs, prev_tag, "zlib")
-        self.check_update_simple(kwargs, prev_tag, "zstd")
-        try:
-            self.check_update(kwargs, prev_tag, "go", ["var", "go_1_21"])
-        except KeyError as e:
-            logger.warning(
-                "Go: var/go_1_21 not found, marking Go as not updated.",
-                exc_info=e,
-            )
-            pass
+        self.check_update(kwargs, prev_tag, "tor")
+        self.check_update(kwargs, prev_tag, "openssl")
+        self.check_update(kwargs, prev_tag, "zlib")
+        self.check_update(kwargs, prev_tag, "zstd")
+        self.check_update(kwargs, prev_tag, "go")
         self.check_update_extensions(kwargs, prev_tag)
         logger.debug("Changelog arguments for %s: %s", tag_prefix, kwargs)
         cb = fetch_changelogs.ChangelogBuilder(
@@ -587,7 +572,7 @@ class ReleasePreparation:
         with (self.base_path / path).open("w") as f:
             f.write(changelogs + "\n" + last_changelogs + "\n")
 
-    def check_update(self, updates, prev_tag, project, key):
+    def check_update(self, updates, prev_tag, project, key=["version"]):
         old_val = self.load_old_config(prev_tag.tag, project)
         new_val = self.load_config(project)
         for k in key:
@@ -595,9 +580,6 @@ class ReleasePreparation:
             new_val = new_val[k]
         if old_val != new_val:
             updates[project] = new_val
-
-    def check_update_simple(self, updates, prev_tag, project):
-        self.check_update(updates, prev_tag, project, ["version"])
 
     def check_update_extensions(self, updates, prev_tag):
         old_config = self.load_old_config(prev_tag, "browser")
