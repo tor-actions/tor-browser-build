@@ -49,7 +49,6 @@ targets:
   android:
     build: '[% INCLUDE build.android %]'
     var:
-      verify_allowed_addons: 1
       arch_deps:
         - 7zip
         - openjdk-17-jdk-headless
@@ -160,10 +159,6 @@ input_files:
     enable: '[% c("var/namecoin") %]'
   - filename: namecoin.patch
     enable: '[% c("var/namecoin") %]'
-  - filename: allowed_addons.json
-    enable: '[% c("var/android") %]'
-  - filename: verify_allowed_addons.py
-    enable: '[% c("var/android") && c("var/verify_allowed_addons") %]'
   - project: manual
     name: manual
     enable: '[% ! c("var/android") && c("var/tor-browser") %]'

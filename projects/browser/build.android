@@ -39,15 +39,6 @@ unzip ../omni.ja
       }) %]
 popd
 
-
-[% IF c("var/verify_allowed_addons") %]
-  # Check that allowed_addons.json contains the right versions of our bundled extension(s).
-  # If so, replace the default allowed_addons.json by ours in the apk assets folder.
-  $rootdir/verify_allowed_addons.py "$rootdir/allowed_addons.json" "$noscript_path"
-[% END %]
-
-mv $rootdir/allowed_addons.json $assets_dir/allowed_addons.json
-
 mkdir apk
 pushd apk
 7zz x "$apk"
