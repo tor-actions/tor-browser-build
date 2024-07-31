@@ -61,7 +61,7 @@
 ;--------------------------------
 ; Helper functions
 Function CheckRequirements
-  ${IfNot} ${AtLeastWin7}
+  ${IfNot} ${AtLeastWin10}
     MessageBox MB_USERICON|MB_OK "$(min_windows_version)"
     SetErrorLevel 1
     Quit

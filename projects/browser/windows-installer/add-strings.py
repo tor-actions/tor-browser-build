@@ -73,7 +73,7 @@ languages = {
 replacements = {
     "min_windows_version": {
         "program": "${PROJECT_NAME}",
-        "version": "7",
+        "version": "10",
     },
     "welcome_title": ("${DISPLAY_NAME}",),
     "mb_intro": ("${PROJECT_NAME}",),

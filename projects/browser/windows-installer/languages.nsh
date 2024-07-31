@@ -6,7 +6,8 @@
   LangString add_shortcuts ${LANG_ENGLISH} "&Add Start menu and desktop icons"
   ; Use %(program)s instead of ${PROJECT_NAME}  and %(version)s instead of 7
   ; when sending the string from localization.
-  LangString min_windows_version ${LANG_ENGLISH} "${PROJECT_NAME} requires Windows 7 or later."
+  ; Remember to update also add-strings.py when bumping the Windows version.
+  LangString min_windows_version ${LANG_ENGLISH} "${PROJECT_NAME} requires Windows 10 or later."
   LangString destination_exists ${LANG_ENGLISH} "The destination folder already exists. Do you want to continue anyway?"
 
   ; Mullvad Browser strings
