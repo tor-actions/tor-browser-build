@@ -14,10 +14,10 @@ container:
   use_container: 1
 
 var:
-  firefox_platform_version: 128.0
+  firefox_platform_version: '128.1.0'
   firefox_version: '[% c("var/firefox_platform_version") %]esr'
   browser_series: '14.0'
-  browser_rebase: 2
+  browser_rebase: 1
   browser_branch: '[% c("var/browser_series") %]-[% c("var/browser_rebase") %]'
   browser_build: 1
   branding_directory_prefix: 'tb'
