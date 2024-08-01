@@ -9,31 +9,27 @@ var_is_defined blog_publish_user blog_directory
 content_dir="$blog_directory/content/blog"
 test -d "$content_dir" || exit_error "$content_dir is not a direcotry"
 
-blog_dir="$content_dir/new-release-tor-browser-"$(echo $tbb_version | sed 's/\.//g')
+if test "$tbb_version_type" = "release"
+then
+  blog_dir_base="new-release-tor-browser"
+  lead=../../../assets/static/images/blog/tor-browser-stable.png
+  title="New Release: Tor Browser $tbb_version"
+  download_page='https://www.torproject.org/download/'
+else
+  blog_dir_base="new-alpha-release-tor-browser"
+  lead=../../../assets/static/images/blog/tor-browser-alpha.png
+  title="New Alpha Release: Tor Browser $tbb_version"
+  download_page='https://www.torproject.org/download/alpha/'
+fi
+blog_dir="$content_dir/$blog_dir_base-"$(echo $tbb_version | sed 's/\.//g')
 
 test -d "$blog_dir" && exit_error "$blog_dir already exists"
 
 mkdir "$blog_dir"
 echo "Created directory $blog_dir"
 
-if test "$tbb_version_type" = "release"
-then
-  lead=../../../assets/static/images/blog/tor-browser-stable.png
-else
-  lead=../../../assets/static/images/blog/tor-browser-alpha.png
-fi
 ln -s "$lead" "$blog_dir/lead.png"
 echo "Created $blog_dir/lead.png -> $lead"
-
-
-if test "$tbb_version_type" = "release"
-then
-  title="New Release: Tor Browser $tbb_version"
-  download_page='https://www.torproject.org/download/'
-else
-  title="New Alpha Release: Tor Browser $tbb_version"
-  download_page='https://www.torproject.org/download/alpha/'
-fi
 
 contents_lr="$blog_dir/contents.lr"
 cat > "$contents_lr" << EOF
