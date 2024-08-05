@@ -254,13 +254,13 @@ class ChangelogBuilder:
     def _add_updates(self, updates):
         names = {
             "Firefox": "firefox",
+            "NoScript": "noscript",
         }
         if not self.is_mullvad:
             names.update(
                 {
                     "GeckoView": "firefox",
                     "Tor": "tor",
-                    "NoScript": "noscript",
                     "OpenSSL": "openssl",
                     "zlib": "zlib",
                     "Zstandard": "zstd",
