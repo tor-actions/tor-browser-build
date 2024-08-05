@@ -14,7 +14,7 @@ container:
   use_container: 1
 
 var:
-  geckoview_version: 115.13.0esr
+  geckoview_version: 115.14.0esr
   browser_branch: 13.5-1
   browser_build: 2
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'

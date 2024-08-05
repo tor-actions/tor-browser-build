@@ -1,3 +1,55 @@
+Tor Browser 13.5.2 - August 06 2024
+ * All Platforms
+   * Updated NoScript to 11.4.31
+   * Bug 42835: Filter data transfers containing files [tor-browser]
+   * Bug 42998: Rebase Tor Browser stable onto 115.14.0esr [tor-browser]
+   * Bug 43005: Backport security fixes from Firefox 129 [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.14.0esr
+ * Android
+   * Updated GeckoView to 115.14.0esr
+ * Build System
+   * All Platforms
+     * Bug 42470: Add merge request CI for linting [tor-browser]
+     * Bug 40964: Create new Tor Browser gpg subkey [tor-browser-build]
+     * Bug 41168: deploy_update_responses-$channel.sh should check that it is not reverting an update in an other channel [tor-browser-build]
+     * Bug 41184: Update generate blog post script to use new blog header images [tor-browser-build]
+     * Bug 41190: Add morgan.gpg to keyrings and list of valid keyrings in firefox+geckoview [tor-browser-build]
+     * Bug 41191: Remove richard.gpg from keyrings and list of valid keyrings in firefox+geckoview [tor-browser-build]
+     * Bug 41204: NoScript isn't added automatically to Mullvad Browser changelogs [tor-browser-build]
+
+Tor Browser 14.0a1 - July 24 2024
+ * All Platforms
+   * Updated NoScript to 11.4.31
+   * Bug 41328: Follow firefox ESMify for Bug 1308512 [tor-browser]
+   * Bug 42441: Evaluate RR version-by-RR version rebases instead of ESR-to-ESR [tor-browser]
+   * Bug 42683: Create script to generate issue triage csv's from bugzilla query and git scraping [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 128.0esr
+   * Bug 42687: Disable Privacy-Preserving Attribution [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.22.5
+     * Bug 42470: Add merge request CI for linting [tor-browser]
+     * Bug 42722: clang-format and localization linters are not running [tor-browser]
+     * Bug 40964: Create new Tor Browser gpg subkey [tor-browser-build]
+     * Bug 41155: Update toolchains for ESR128 [tor-browser-build]
+     * Bug 41156: Split the Rust configuration options [tor-browser-build]
+     * Bug 41166: Use the GitHub repository for firefox-l10n [tor-browser-build]
+     * Bug 41168: deploy_update_responses-$channel.sh should check that it is not reverting an update in an other channel [tor-browser-build]
+     * Bug 41184: Update generate blog post script to use new blog header images [tor-browser-build]
+     * Bug 41189: Add matzfan to list of downstream projects in alpha release-prep template [tor-browser-build]
+     * Bug 41190: Add morgan.gpg to keyrings and list of valid keyrings in firefox+geckoview [tor-browser-build]
+     * Bug 41191: Remove richard.gpg from keyrings and list of valid keyrings in firefox+geckoview [tor-browser-build]
+     * Bug 41195: Update Go to 1.22 [tor-browser-build]
+     * Bug 40078: Update tools/tb-build-06-start-nightly-build after tor-browser-build#40829 [tor-browser-bundle-testsuite]
+   * Windows
+     * Bug 29318: Drop mingw-w64/gcc toolchain [tor-browser-build]
+     * Bug 29320: Use mingw-w64/clang toolchain to build Rust [tor-browser-build]
+     * Bug 41177: Include Windows installer without -portable- in download json files [tor-browser-build]
+   * Windows + macOS
+     * Bug 41197: Modify update-responses to prevent upgrades on unsupported Windows and macOS versions [tor-browser-build]
+
 Tor Browser 13.5.1 - July 09 2024
  * All Platforms
    * Bug 42689: Rebase Tor Browser onto 115.13.0esr [tor-browser]
@@ -359,6 +411,7 @@ Tor Browser 13.5a7 - April 25 2024
    * Bug 42520: Correctly record new initial window size after auto-shrinking [tor-browser]
    * Bug 42532: Use the HomePage module for new identity checks [tor-browser]
    * Bug 42533: Add Lox notification for activeLoxId [tor-browser]
+   * Bug 42540: Fix gNetworkStatus.deinint typo [tor-browser]
    * Bug 289: The Letterboxing>Content Alignment heading doesn't follow the Firefox design document capitalization [mullvad-browser]
  * Windows
    * Bug 41901: windows: FontSubstitutes can leak system locale [tor-browser]
