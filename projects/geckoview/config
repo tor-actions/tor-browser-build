@@ -105,6 +105,9 @@ steps:
       - URL: '[% pc("glean", "var/glean_wheels_url/" _ c("var/glean_parser"), { error_if_undef => 1 }) %]'
         name: glean-wheels
         sha256sum: '[% pc("glean", "var/glean_wheels_sha256sum/" _ c("var/glean_parser"), { error_if_undef => 1 }) %]'
+      - name: tor-expert-bundle-aar
+        project: tor-expert-bundle-aar
+        pkg_type: build
 
   list_toolchain_updates:
     git_hash: tor-browser-128.0b1-14.0-1
