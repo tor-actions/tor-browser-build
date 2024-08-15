@@ -126,8 +126,6 @@ class ReleasePreparation:
         self.branch_sanity_check()
 
         self.update_firefox()
-        if self.android:
-            self.update_firefox_android()
         self.update_translations()
         self.update_addons()
 
@@ -228,11 +226,9 @@ class ReleasePreparation:
         if self.android:
             assert tag_tb
             config = self.load_config("geckoview")
-            config["var"]["geckoview_version"] = tag_tb[0]
-            config["var"][
-                "browser_branch"
-            ] = f"{self.version.major}-{tag_tb[1]}"
-            config["var"]["browser_build"] = tag_tb[2]
+            config["var"]["firefox_platform_version"] = platform
+            config["var"]["browser_rebase"] = rebase
+            config["var"]["browser_build"] = build
             self.save_config("geckoview", config)
             logger.debug("GeckoView configuration saved")
 
@@ -257,26 +253,6 @@ class ReleasePreparation:
             ):
                 # firefox-version, rebase, build
                 return (m.group(2), int(m.group(4)), int(m.group(5)))
-
-    def update_firefox_android(self):
-        logger.info("Updating firefox-android")
-        config = self.load_config("firefox-android")
-        repo = Repo(self.base_path / "git_clones/firefox-android")
-        repo.remotes["origin"].fetch()
-        tags = get_sorted_tags(repo)
-        for t in tags:
-            m = re.match(
-                r"firefox-android-([^-]+)-([\d\.]+)-(\d+)-build(\d+)", t.tag
-            )
-            if not m or m.group(2) != self.version.major:
-                logger.debug("Discarding firefox-android tag: %s", t.tag)
-                continue
-            logger.debug("Using firefox-android tag: %s", t.tag)
-            config["var"]["fenix_version"] = m.group(1)
-            config["var"]["browser_branch"] = m.group(2) + "-" + m.group(3)
-            config["var"]["browser_build"] = int(m.group(4))
-            break
-        self.save_config("firefox-android", config)
 
     def update_translations(self):
         logger.info("Updating translations")
