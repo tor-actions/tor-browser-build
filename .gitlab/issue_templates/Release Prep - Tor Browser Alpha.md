@@ -39,7 +39,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
   - [ ] `var/torbrowser_version` : update to next version
   - [ ] `var/torbrowser_build` : update to `$(TOR_BROWSER_BUILD_N)`
   - [ ] `var/browser_release_date` : update to build date. For the build to be reproducible, the date should be in the past when building.
-  - [ ] ***(Desktop Only)***`var/torbrowser_incremental_from` : update to previous Desktop version
+  - [ ] ***(Desktop Only)*** `var/torbrowser_incremental_from` : update to previous Desktop version
     - **NOTE**: We try to build incrementals for the previous 3 desktop versions except in the case of a watershed update
     - **IMPORTANT**: Really *actually* make sure this is the previous Desktop version or else the `make torbrowser-incrementals-*` step will fail
 - [ ] Update Desktop-specific build configs
@@ -49,16 +49,10 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
 - [ ] Update Android-specific build configs
   - [ ] Update `projects/geckoview/config`
     - [ ] `browser_build` : update to match `tor-browser` tag
-    - [ ] ***(Optional)*** `var/geckoview_version` : update to latest `$(ESR_VERSION)` if rebased
-  - [ ] ***(Optional)*** Update `projects/tor-android-service/config`
-    - [ ] `git_hash` : update with `HEAD` commit of project's `main` branch
+    - [ ] ***(Optional)*** `var/firefox_platform_version` : update to latest `$(ESR_VERSION)` if rebased
   - [ ] ***(Optional)*** Update `projects/application-services/config`:
     **NOTE** we don't currently have any of our own patches for this project
     - [ ] `git_hash` : update to appropriate git commit associated with `$(ESR_VERSION)`
-  - [ ] ***(Optional)*** Update `projects/firefox-android/config`:
-    - [ ] `fenix_version` : update to match alpha `firefox-android` build tag
-    - [ ] `browser_branch` : update to match alpha `firefox-android` build tag
-    - [ ] `browser_build` : update to match alpha `firefox-android` build tag
 - [ ] Update `projects/translation/config`:
   - [ ] run `make list_translation_updates-alpha` to get updated hashes
   - [ ] `steps/base-browser/git_hash` : update with `HEAD` commit of project's `base-browser` branch
