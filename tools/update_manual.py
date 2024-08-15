@@ -94,7 +94,8 @@ def update_manual(auth_token, base_path):
 
     return update_config(base_path, pipeline_id, sha256)
 
-
 if __name__ == "__main__":
     if update_manual(load_token(), Path(__file__).parent.parent):
         print("Manual config updated, remember to stage it!")
+    else:
+        print("Manual already latest")
