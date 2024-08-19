@@ -1,25 +1,10 @@
 #!/bin/bash
-[% c("var/set_default_env") -%]
-[% pc(c('var/compiler'), 'var/setup', {
-  compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')),
-  gradle_tarfile => c("input_files_by_name/gradle"),
-}) %]
-distdir=/var/tmp/dist
-builddir=/var/tmp/build
-mkdir -p $builddir $distdir
-
-tar -C $distdir -xf [% c('input_files_by_name/node') %]
-export PATH="/var/tmp/dist/node/bin:$PATH"
+[% INCLUDE 'build_common' %]
 
 tar -C $distdir -xf $rootdir/[% c('input_files_by_name/translation-fenix') %]
 
 tar -xf [% c('input_files_by_name/glean-wheels') %]
 export GLEAN_PYTHON_WHEELS_DIR=$rootdir/glean-wheels
-
-tar -xf [% c('input_files_by_name/application-services') %]
-export NIMBUS_FML=$rootdir/application-services/nimbus-fml
-
-[% INCLUDE 'fake-git' %]
 
 tar -C $builddir -xf [% c('input_files_by_name/geckoview_armv7') %]
 tar -C $builddir -xf [% c('input_files_by_name/geckoview_aarch64') %]
@@ -44,23 +29,6 @@ export MOZ_SOURCE_REPO="[% c('var/gitlab_project') %]"
 export MOZ_SOURCE_CHANGESET=[% c("var/git_commit") %]
 MOZCONFIG_EOF
 
-[% c("var/set_MOZ_BUILD_DATE") %]
-
-export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64
-gradle_repo=/var/tmp/dist/gradle-dependencies
-export GRADLE_MAVEN_REPOSITORIES="file://$gradle_repo","file://$gradle_repo/maven2"
-export GRADLE_FLAGS="--no-daemon --offline -Dmaven.repo.local=$distdir/[% project %]"
-mv $rootdir/[% c('input_files_by_name/gradle-dependencies') %] $gradle_repo
-cp -rl $rootdir/application-services/maven/* $gradle_repo
-cp -rl $gradle_repo/dl/android/maven2/* $gradle_repo || true
-cp -rl $gradle_repo/m2/* $gradle_repo || true
-cp -rl $gradle_repo/maven2/* $gradle_repo || true
-
-# We unbreak mach, see: https://bugzilla.mozilla.org/show_bug.cgi?id=1656993.
-export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
-# Create .mozbuild to avoid interactive prompt in configure
-mkdir "$HOME/.mozbuild"
-
 [% IF c("var/has_l10n") -%]
   supported_locales="[% tmpl(c('var/locales_mobile').join(' ')).replace('-r', '-').replace('in', 'id').replace('iw', 'he') %]"
   l10ncentral="$HOME/.mozbuild/l10n-central"
@@ -72,9 +40,6 @@ mkdir "$HOME/.mozbuild"
   # Do not setup our localization files, as we do not provide any frontend
   # through GeckoView.
 [% END -%]
-
-export LC_ALL=C.UTF-8
-export LANG=C.UTF-8
 
 # We still need to specify --tor-browser-version due to bug 34005.
 ./mach configure \
