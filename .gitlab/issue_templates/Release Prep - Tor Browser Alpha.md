@@ -155,6 +155,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
   - [ ] Guardian Project: nathan@guardianproject.info
   - [ ] FreeBSD port: freebsd@sysctl.cz <!-- Gitlab user maxfx -->
   - [ ] OpenBSD port: caspar@schutijser.com <!-- Gitlab user cschutijser -->
+  - [ ] Anti-Censorship: meskio@torproject.org
   - [ ] Note any changes which may affect packaging/downstream integration
 - [ ] ***(Optional, only after internal API-breaking changes)*** Email downstream project maintainers:
   - [ ] selenium-tor: matzfan@tempr.email <!-- Forum user Noino -->
