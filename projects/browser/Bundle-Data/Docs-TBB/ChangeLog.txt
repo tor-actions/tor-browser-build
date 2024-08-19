@@ -1,4 +1,4 @@
-Tor Browser 14.0a2 - August 16 2024
+Tor Browser 14.0a2 - August 19 2024
  * All Platforms
    * Updated NoScript to 11.4.34
    * Bug 42759: CI: remove localization file names that are in neither 14.0 nor 13.5 branches [tor-browser]
@@ -80,7 +80,9 @@ Tor Browser 14.0a2 - August 16 2024
      * Bug 41172: Refactor the android-toolchain project [tor-browser-build]
      * Bug 41178: Force IPv4 when downloading in fix_gradle_deps.py [tor-browser-build]
      * Bug 41200: Remove allowed_addons.json and the related tools [tor-browser-build]
+     * Bug 41206: GeckoView ignores the number of processors [tor-browser-build]
      * Bug 41210: Use tor-expert-bundle-aar in geckoview/build_apk [tor-browser-build]
+     * Bug 41211: The Android license file is not deterministic anymore [tor-browser-build]
      * Bug 41214: Update geckoview/config to be more like firefox/config [tor-browser-build]
      * Bug 41217: Update realprep.py script to handle Firefox 128-based Tor Browser Android [tor-browser-build]
 
