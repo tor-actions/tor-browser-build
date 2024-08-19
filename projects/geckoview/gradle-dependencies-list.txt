@@ -961,8 +961,6 @@ bc787098a208e6bdc8d93720a162bbea01df1b26394d1c1ef5ec523b1d604e8b | https://maven
 d6ff762251fb35594afe5efe860b5871064e18c0bd1bdb77084e3573f90e4e8f | https://maven.google.com/com/google/android/datatransport/transport-runtime/3.1.8/transport-runtime-3.1.8.pom
 41745c5b8f427d24439015b84f651ad420718991867d2afc262c264009b802c1 | https://maven.google.com/com/google/android/datatransport/transport-runtime/3.1.9/transport-runtime-3.1.9.aar
 86f452b74551062623fad0b0bb6bc4dc2a6ba9f44a99834d0e50fb047051357b | https://maven.google.com/com/google/android/datatransport/transport-runtime/3.1.9/transport-runtime-3.1.9.pom
-a2625e5f849e9d03a564cd85a08caa4266cd89c25af4298aad86c276f9efbc42 | https://maven.google.com/com/google/android/gms/oss-licenses-plugin/0.10.4/oss-licenses-plugin-0.10.4.jar
-7e782a6e268910e89a0549f4a559385042d17dcf42f70c1031c02b3db5ba5bd0 | https://maven.google.com/com/google/android/gms/oss-licenses-plugin/0.10.4/oss-licenses-plugin-0.10.4.pom
 380b09bfc5389fff93b5719c04e57c99678c9c3af0402a91e26d89734babcc49 | https://maven.google.com/com/google/android/gms/play-services-ads-identifier/16.0.0/play-services-ads-identifier-16.0.0.aar
 d851ae0d9232951d36b1060eb8a3dc07ac5fcf668cb741b0a5a165c60519c898 | https://maven.google.com/com/google/android/gms/play-services-ads-identifier/16.0.0/play-services-ads-identifier-16.0.0.pom
 eb1a063e5f2bccfc0568957d6699b6efbe741eb7ca785d8dcc9fac4de5d092bc | https://maven.google.com/com/google/android/gms/play-services-base/18.4.0/play-services-base-18.4.0.aar

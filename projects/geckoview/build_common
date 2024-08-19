@@ -37,6 +37,9 @@ cp -rl $gradle_repo/dl/android/maven2/* $gradle_repo || true
 cp -rl $gradle_repo/m2/* $gradle_repo || true
 cp -rl $gradle_repo/maven2/* $gradle_repo || true
 
+tar -xf [% c('input_files_by_name/oss-licenses-plugin') %]
+cp -rl oss-licenses-plugin/. $gradle_repo
+
 # We unbreak mach, see: https://bugzilla.mozilla.org/show_bug.cgi?id=1656993.
 export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
 # Create .mozbuild to avoid interactive prompt in configure

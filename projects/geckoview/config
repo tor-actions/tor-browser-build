@@ -36,7 +36,7 @@ var:
     - openjdk-17-jdk-headless
   # this should be updated when the list of gradle dependencies is changed
   # see doc/how-to-create-gradle-dependencies-list.txt
-  gradle_dependencies_version: 13
+  gradle_dependencies_version: 14
   gradle_version: 8.8
   glean_parser: 14.0.1
   variant: beta
@@ -111,6 +111,9 @@ steps:
       - name: tor-expert-bundle-aar
         project: tor-expert-bundle-aar
         pkg_type: build
+      - project: oss-licenses-plugin
+        name: oss-licenses-plugin
+        pkg_type: build
 
   list_toolchain_updates:
     git_hash: tor-browser-128.0b1-14.0-1
@@ -147,3 +150,5 @@ input_files:
   - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
     name: gradle-dependencies
     exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
+  - project: oss-licenses-plugin
+    name: oss-licenses-plugin
