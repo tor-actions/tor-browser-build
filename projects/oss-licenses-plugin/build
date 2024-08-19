@@ -1,0 +1,28 @@
+#!/bin/bash
+[% c("var/set_default_env") -%]
+
+distdir=/var/tmp/dist/[% project %]
+builddir=/var/tmp/build/[% project %]-[% c('version') %]/[% project %]
+mkdir -p $distdir $builddir
+tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
+
+tar -C /var/tmp/dist -xf [% c('input_files_by_name/gradle') %] 
+export PATH=/var/tmp/dist/gradle/bin:$PATH
+
+gradle_repo=/var/tmp/dist/gradle-dependencies
+mv $rootdir/[% c('input_files_by_name/gradle-dependencies') %] $gradle_repo
+cp -rl $gradle_repo/m2/* $gradle_repo || true
+
+cd $builddir
+patch -p2 < $rootdir/sort-dependencies.diff
+patch -p2 < $rootdir/build-customization.diff
+gradle --no-daemon --offline -Dmaven.repo.local=$gradle_repo assemble publish
+cd build/repo
+cp -a . $distdir/
+
+cd /var/tmp/dist
+
+[% c('tar', {
+    tar_src => [ project ],
+    tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
+  }) %]

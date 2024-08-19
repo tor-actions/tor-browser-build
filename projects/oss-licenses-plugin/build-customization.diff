@@ -1,0 +1,51 @@
+diff --git a/oss-licenses-plugin/build.gradle b/oss-licenses-plugin/build.gradle
+index 2a7dd74..f9368e1 100644
+--- a/oss-licenses-plugin/build.gradle
++++ b/oss-licenses-plugin/build.gradle
+@@ -15,34 +15,25 @@ dependencies {
+ group = 'com.google.android.gms'
+ version = '0.10.4'
+ 
+-apply plugin: 'maven'
++apply plugin: 'maven-publish'
+ 
+ repositories {
+     google()
+     jcenter()
++    mavenLocal()
+ }
+ 
+-// upload and build in local
+-uploadArchives {
+-    repositories {
+-        mavenDeployer {
+-            repository(url: uri('../repo'))
+-            pom.project {
+-                licenses {
+-                    license {
+-                        name 'The Apache Software License, Version 2.0'
+-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+-                        distribution 'repo'
+-                    }
+-                }
+-
+-            }
++publishing {
++    publications {
++        customLibrary(MavenPublication) {
++            from components.java
+         }
+     }
+-}
+ 
+-// generate zip file for android maven release tool
+-task packageFiles(type: Zip, dependsOn: 'uploadArchives') {
+-    def groupDir = rootProject.group.replaceAll('\\.', '/')
+-    from("../repo/$groupDir/$rootProject.name/$rootProject.version/")
++    repositories {
++        maven {
++            name = 'sampleRepo'
++            url = layout.buildDirectory.dir("repo")
++        }
++    }
+ }
