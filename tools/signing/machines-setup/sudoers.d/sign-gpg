@@ -1,2 +1,2 @@
-Defaults>signing-gpg env_keep += "SIGNING_PROJECTNAME GPG_NEWSUBKEY"
+Defaults>signing-gpg env_keep += SIGNING_PROJECTNAME
 %signing ALL = (signing-gpg) NOPASSWD: /signing/tor-browser-build/tools/signing/wrappers/sign-gpg
