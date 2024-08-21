@@ -18,7 +18,7 @@ cd /var/tmp/build/[% project %]-[% c('version') %]
 tar -xf $rootdir/[% c('input_files_by_name/go_vendor') %]
 
 cd client
-go build -ldflags '-s'
+go build -ldflags '-s' -tags 'protoreflect,nacl'
 cp -a client[% IF c("var/windows") %].exe[% END %] $distdir/conjure-client[% IF c("var/windows") %].exe[% END %]
 
 cd ..
