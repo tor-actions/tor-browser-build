@@ -64,7 +64,7 @@ echo "update_responses_commit: $update_responses_commit"
 cd "$update_dir"
 git fetch
 changed_files="\$(git diff --name-only HEAD $update_responses_commit)"
-if ! echo "\$changed_files" | grep -qv "$tbb_version_type"
+if echo "\$changed_files" | grep -qv "$tbb_version_type"
 then
   echo >&2 "Error: checking out new update_response_commit will changes"
   echo >&2 "some files outside of the $tbb_version_type directory:"
