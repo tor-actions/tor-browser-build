@@ -188,7 +188,6 @@ torbrowser-incrementals-release: submodule-update
 
 torbrowser-incrementals-release-unsigned: submodule-update
 	$(rbm) build release --step update_responses_config --target release --target unsigned_releases_dir --target torbrowser
-	$(rbm) build release --step link_old_mar_filenames --target release --target unsigned_releases_dir --target torbrowser
 	NO_CODESIGNATURE=1 tools/update-responses/gen_incrementals release
 	$(rbm) build release --step hash_incrementals --target release --target torbrowser
 
@@ -200,7 +199,6 @@ torbrowser-incrementals-alpha: submodule-update
 
 torbrowser-incrementals-alpha-unsigned: submodule-update
 	$(rbm) build release --step update_responses_config --target alpha --target unsigned_releases_dir --target torbrowser
-	$(rbm) build release --step link_old_mar_filenames --target alpha --target unsigned_releases_dir --target torbrowser
 	NO_CODESIGNATURE=1 tools/update-responses/gen_incrementals alpha
 	$(rbm) build release --step hash_incrementals --target alpha --target torbrowser
 
@@ -528,7 +526,6 @@ mullvadbrowser-incrementals-release: submodule-update
 
 mullvadbrowser-incrementals-release-unsigned: submodule-update
 	$(rbm) build release --step update_responses_config --target release --target unsigned_releases_dir --target mullvadbrowser
-	$(rbm) build release --step link_old_mar_filenames --target release --target unsigned_releases_dir --target mullvadbrowser
 	NO_CODESIGNATURE=1 tools/update-responses/gen_incrementals release
 	$(rbm) build release --step hash_incrementals --target release --target mullvadbrowser
 
@@ -540,7 +537,6 @@ mullvadbrowser-incrementals-alpha: submodule-update
 
 mullvadbrowser-incrementals-alpha-unsigned: submodule-update
 	$(rbm) build release --step update_responses_config --target alpha --target unsigned_releases_dir --target mullvadbrowser
-	$(rbm) build release --step link_old_mar_filenames --target alpha --target unsigned_releases_dir --target mullvadbrowser
 	NO_CODESIGNATURE=1 tools/update-responses/gen_incrementals alpha
 	$(rbm) build release --step hash_incrementals --target alpha --target torbrowser
 
