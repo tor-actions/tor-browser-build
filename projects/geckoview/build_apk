@@ -78,9 +78,7 @@ done
 echo 'ext.gleanBuildDate = "0"' >> app/build.gradle
 
 variant='[% c("var/variant") %]'
-# We put the tor-browser version last to avoid int-parsing errors when consumers of project.versionName
-# assume it starts with a major version number, as it does for all Mozilla version names.
-version_name="[% c('var/fenix_version') %]-$variant ([% c('var/torbrowser_version') %])"
+version_name="[% c('var/torbrowser_version') %] ([% c('var/geckoview_version') %])"
 
 gradle $GRADLE_FLAGS -PversionName="$version_name" "assemble$variant"
 
