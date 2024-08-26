@@ -1,3 +1,42 @@
+Tor Browser 14.0a3 - August 26 2024
+ * All Platforms
+   * Bug 40056: Ensure that the lazy loading attribute is ignored on script-disabled documents [tor-browser]
+   * Bug 42611: Set clipboard.imageAsFile.enabled to false [tor-browser]
+   * Bug 42646: Drop patch for tor-browser#40166 [tor-browser]
+   * Bug 42830: Enable WebAudio APIs [tor-browser]
+   * Bug 43012: Mixed content: browser requests HTTPS images from onion domain accessed via HTTP [tor-browser]
+   * Bug 43013: security.mixed_content.upgrade_display_content.image is true by default [tor-browser]
+   * Bug 43074: Pass the browser to TorDomainIsolator.newCircuitForBrowser [tor-browser]
+   * Bug 43085: Rebase Tor Browser Alpha onto 128.2.0esr [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 128.2.0esr
+   * Bug 41811: Primary buttons that result in a connection attempt should be purple [tor-browser]
+   * Bug 41817: Add more color aliases that take dark mode into account [tor-browser]
+   * Bug 41820: Downloads warning styling improvements (use moz-message-bar) [tor-browser]
+   * Bug 42212: Fluent migration: onion services [tor-browser]
+   * Bug 42603: Remove safebrowsing URLs [tor-browser]
+   * Bug 42665: Drop "Learn More" spacing [tor-browser]
+   * Bug 43059: Drag and Drop issue in new update 13.5.2 [tor-browser]
+   * Bug 43066: about:torconnect no longer changes the title icon on errors [tor-browser]
+   * Bug 43067: Use html:link rather than xml-stylesheet in our dialogs [tor-browser]
+   * Bug 43071: Make sure "tor-button" elements that are also "primary" still use the tor colors [tor-browser]
+   * Bug 43081: Remove hard-coded CSS `line-height` [tor-browser]
+ * Linux
+   * Bug 43064: Make copy/paste and drag/drop file filtering more specific [tor-browser]
+ * Android
+   * Updated GeckoView to 128.2.0esr
+   * Bug 42386: Remove unused assets to reduce APK size [tor-browser]
+   * Bug 42590: “Tor browser” text in top left of home fragment/new tab view gets cut off with larger text sizes [tor-browser]
+   * Bug 43078: Disable Sharing Links to TBA [tor-browser]
+   * Bug 41223: Tor Browser Alpha version not displayed correctly [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Bug 41013: Add a README to each project [tor-browser-build]
+     * Bug 41198: Update release-prep issue  template to include notifiying anti-censorship team of package name changes for GetTor distributor [tor-browser-build]
+     * Bug 41222: link_old_mar_filenames still referenced in torbrowser-incrementals-{release,alpha}-unsigned [tor-browser-build]
+   * Android
+     * Bug 42480: Use translation CI in android [tor-browser]
+
 Tor Browser 14.0a2 - August 19 2024
  * All Platforms
    * Updated NoScript to 11.4.34

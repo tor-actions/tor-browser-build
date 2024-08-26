@@ -1,3 +1,20 @@
+Mullvad Browser 14.0a3 - August 26 2024
+ * All Platforms
+   * Updated Firefox to 128.2.0esr
+   * Bug 333: Rebase Mullvad Browser Alpha onto 128.2.0esr [mullvad-browser]
+   * Bug 40056: Ensure that the lazy loading attribute is ignored on script-disabled documents [tor-browser]
+   * Bug 41817: Add more color aliases that take dark mode into account [tor-browser]
+   * Bug 42603: Remove safebrowsing URLs [tor-browser]
+   * Bug 42611: Set clipboard.imageAsFile.enabled to false [tor-browser]
+   * Bug 42646: Drop patch for tor-browser#40166 [tor-browser]
+   * Bug 42665: Drop "Learn More" spacing [tor-browser]
+ * Linux
+   * Bug 43064: Make copy/paste and drag/drop file filtering more specific [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41013: Add a README to each project [tor-browser-build]
+     * Bug 41222: link_old_mar_filenames still referenced in torbrowser-incrementals-{release,alpha}-unsigned [tor-browser-build]
+
 Mullvad Browser 14.0a2 - August 16 2024
  * All Platforms
    * Updated Firefox to 128.1.0esr
