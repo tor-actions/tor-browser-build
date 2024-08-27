@@ -20,6 +20,7 @@ input_files:
     project: snowflake
   - name: conjure
     project: conjure
+    enable: '[% !c("var/android-x86") && !c("var/android-x86_64") %]'
   - filename: pt_config.json
   - filename: AndroidManifest.xml
     enable: '[% c("var/android") %]'
