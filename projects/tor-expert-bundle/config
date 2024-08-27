@@ -22,3 +22,4 @@ input_files:
     project: conjure
   - filename: pt_config.json
   - filename: AndroidManifest.xml
+    enable: '[% c("var/android") %]'
