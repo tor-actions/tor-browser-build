@@ -44,19 +44,3 @@ References:
   in which they mention the `IMAGE_DLLCHARACTERISTICS_DYNAMIC_BASE` flag for
   compatibility.
 - [tor-browser-build#40900](https://gitlab.torproject.org/tpo/applications/tor-browser-build/-/issues/40900)
-
-## Reproducibility issues
-
-We have a patch to add `--no-insert-timestamp` to make the binaries
-reproducible.
-
-We could drop our patch and switch to the official way to do it
-(`SOURCE_DATE_EPOCH`).
-
-References:
-
-- [nsis#294](https://sourceforge.net/p/nsis/patches/294/): the patch for
-  `SOURCE_DATE_EPOCH` 
-- [nsis#309](https://sourceforge.net/p/nsis/patches/309/): the attempt to uplift
-  our patch
-- [tor-browser-build#40090](https://gitlab.torproject.org/tpo/applications/tor-browser-build/-/issues/40090)

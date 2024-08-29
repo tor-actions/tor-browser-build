@@ -19,7 +19,6 @@ export CC='gcc -m32'
   # from GCC to Clang and vice versa.
   export CC=cc
 [% END -%]
-export SOURCE_DATE_EPOCH='[% c("timestamp") %]'
 # OpenSSL 3 uses lib64 on 64-bit systems, but tor looks for lib
 ./Configure --prefix="$distdir" --libdir=lib [% c('var/configure_opts') %]
 make -j[% c("num_procs") %]

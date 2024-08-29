@@ -6,7 +6,6 @@ OUTDIR='[% dest_dir _ "/" _ c("filename") %]'
 mkdir -p $OUTDIR
 mkdir -p "$distdir"
 
-export SOURCE_DATE_EPOCH='[% c("timestamp") %]'
 umask 0022
 
 [% IF c("var/build_deb_pkg") -%]
