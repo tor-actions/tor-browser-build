@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-version: 2.39
+version: 2.41
 filename: '[% project %]-[% c("version") %]-[% IF c("var/linux-cross") %]cross-[% c("arch") %]-[% END %][% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
