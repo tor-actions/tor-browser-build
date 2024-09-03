@@ -139,7 +139,9 @@ class ReleasePreparation:
             self.update_zlib()
             if self.android:
                 self.update_zstd()
-            self.update_go()
+            # Do not update Go anymore: 1.21.x is not listed anymore in
+            # the download page as it is EOL as of August 13, 2024.
+            # self.update_go()
             self.update_manual()
 
         self.update_changelogs()

@@ -1,3 +1,163 @@
+Tor Browser 13.5.3 - September 03 2024
+ * All Platforms
+   * Updated NoScript to 11.4.35
+   * Bug 40056: Ensure that the lazy loading attribute is ignored on script-disabled documents [tor-browser]
+   * Bug 42686: Backport Mozilla 1885101 [tor-browser]
+   * Bug 42829: Prevent CSS-based scriptless interaction tracking [tor-browser]
+   * Bug 43084: Rebase Tor Browser Stable onto 115.15.0esr [tor-browser]
+   * Bug 43100: Backport security fixes from Firefox 130 [tor-browser]
+   * Bug 41207: Upgrade lyrebird to 0.3.0 [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.15.0esr
+   * Bug 42596: Several console errors: Console.maxLogLevelPref used with a non-existing pref: [tor-browser]
+   * Bug 42622: Offline state is unreachable in about:torconnect (first bootstrap attempt) [tor-browser]
+   * Bug 42642: Downloads button warning no longer announced on Orca [tor-browser]
+   * Bug 42661: Re-run update_emojis.py and update locales [tor-browser]
+   * Bug 42691: Simplified bridge cards prevent censored users from modifying built-in bridges [tor-browser]
+   * Bug 42696: Update `mail` icon used in "Find more bridges" [tor-browser]
+   * Bug 42697: Remove padding to left of `tor-bridges-provider-list` under "Find more bridges" [tor-browser]
+   * Bug 43059: Drag and Drop issue in new update 13.5.2 [tor-browser]
+   * Bug 43066: about:torconnect no longer changes the title icon on errors [tor-browser]
+ * Linux
+   * Bug 43064: Make copy/paste and drag/drop file filtering more specific [tor-browser]
+ * Android
+   * Updated GeckoView to 115.15.0esr
+ * Build System
+   * All Platforms
+     * Updated Go to 1.21.13
+     * Bug 41213: Update the update_manual.py script to notify when no changes needed [tor-browser-build]
+     * Bug 41218: Use new Tor Browser gpg subkey for signing stable releases [tor-browser-build]
+     * Bug 41222: link_old_mar_filenames still referenced in torbrowser-incrementals-{release,alpha}-unsigned [tor-browser-build]
+   * Android
+     * Bug 41206: GeckoView ignores the number of processors [tor-browser-build]
+
+Tor Browser 14.0a3 - August 26 2024
+ * All Platforms
+   * Bug 40056: Ensure that the lazy loading attribute is ignored on script-disabled documents [tor-browser]
+   * Bug 42611: Set clipboard.imageAsFile.enabled to false [tor-browser]
+   * Bug 42646: Drop patch for tor-browser#40166 [tor-browser]
+   * Bug 42830: Enable WebAudio APIs [tor-browser]
+   * Bug 43012: Mixed content: browser requests HTTPS images from onion domain accessed via HTTP [tor-browser]
+   * Bug 43013: security.mixed_content.upgrade_display_content.image is true by default [tor-browser]
+   * Bug 43074: Pass the browser to TorDomainIsolator.newCircuitForBrowser [tor-browser]
+   * Bug 43085: Rebase Tor Browser Alpha onto 128.2.0esr [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 128.2.0esr
+   * Bug 41811: Primary buttons that result in a connection attempt should be purple [tor-browser]
+   * Bug 41817: Add more color aliases that take dark mode into account [tor-browser]
+   * Bug 41820: Downloads warning styling improvements (use moz-message-bar) [tor-browser]
+   * Bug 42212: Fluent migration: onion services [tor-browser]
+   * Bug 42603: Remove safebrowsing URLs [tor-browser]
+   * Bug 42665: Drop "Learn More" spacing [tor-browser]
+   * Bug 43059: Drag and Drop issue in new update 13.5.2 [tor-browser]
+   * Bug 43066: about:torconnect no longer changes the title icon on errors [tor-browser]
+   * Bug 43067: Use html:link rather than xml-stylesheet in our dialogs [tor-browser]
+   * Bug 43071: Make sure "tor-button" elements that are also "primary" still use the tor colors [tor-browser]
+   * Bug 43081: Remove hard-coded CSS `line-height` [tor-browser]
+ * Linux
+   * Bug 43064: Make copy/paste and drag/drop file filtering more specific [tor-browser]
+ * Android
+   * Updated GeckoView to 128.2.0esr
+   * Bug 42386: Remove unused assets to reduce APK size [tor-browser]
+   * Bug 42590: “Tor browser” text in top left of home fragment/new tab view gets cut off with larger text sizes [tor-browser]
+   * Bug 43078: Disable Sharing Links to TBA [tor-browser]
+   * Bug 41223: Tor Browser Alpha version not displayed correctly [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Bug 41013: Add a README to each project [tor-browser-build]
+     * Bug 41198: Update release-prep issue  template to include notifiying anti-censorship team of package name changes for GetTor distributor [tor-browser-build]
+     * Bug 41222: link_old_mar_filenames still referenced in torbrowser-incrementals-{release,alpha}-unsigned [tor-browser-build]
+   * Android
+     * Bug 42480: Use translation CI in android [tor-browser]
+
+Tor Browser 14.0a2 - August 19 2024
+ * All Platforms
+   * Updated NoScript to 11.4.34
+   * Bug 42759: CI: remove localization file names that are in neither 14.0 nor 13.5 branches [tor-browser]
+   * Bug 42762: Review Mozilla 1498512: Enable by default setSinkId pref [tor-browser]
+   * Bug 42788: Review Mozilla 1828606: Add Recently Closed tabs to its own page [tor-browser]
+   * Bug 42789: Review Mozilla 1830157: Add new telemetry probe to determine how often an extension process had to be... [tor-browser]
+   * Bug 42792: Review Mozilla 1837097: Implement "Show less frequently" behavior for Pocket suggestions [tor-browser]
+   * Bug 42810: Review Mozilla 1840584: Support autofilling `first name` and `last name` field in a credit card form [tor-browser]
+   * Bug 42814: Opt out from Firefox relay by default. [tor-browser]
+   * Bug 42818: Review Mozilla 1841295: Update PocketSuggestions for the final suggestions schema [tor-browser]
+   * Bug 42835: Filter data transfers containing files [tor-browser]
+   * Bug 42846: Review Mozilla 1841995: Enable Credit Card Autofill in ES and IT in nightly [tor-browser]
+   * Bug 42847: Review Mozilla 1841996: Enable Credit Card Autofill in AT, BE, and PL in nightly [tor-browser]
+   * Bug 42848: Review Mozilla 1841998: Enable Credit Card Autofill for ES,IT,AT,BE and PL locales in release. r=dimi... [tor-browser]
+   * Bug 42886: Review Mozilla 1848048: Add a result menu to disable trending results. r=dao,fluent-reviewers,setting... [tor-browser]
+   * Bug 42996: Review Mozilla 1517786: Implement and ship CanvasRenderingContext2D.getContextAttributes() [tor-browser]
+   * Bug 42999: Rebase Tor Browser Alpha onto 128.1.0esr [tor-browser]
+   * Bug 43011: Ship only one copy of the MIT license, like upstream. [tor-browser]
+   * Bug 41207: Upgrade lyrebird to 0.3.0 [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 128.1.0esr
+   * Bug 42488: ESR 128: Remove role="code" from tor circuit panel [tor-browser]
+   * Bug 42596: Several console errors: Console.maxLogLevelPref used with a non-existing pref: [tor-browser]
+   * Bug 42612: Re-implement moz-toggle customizations for ESR 128 [tor-browser]
+   * Bug 42622: Offline state is unreachable in about:torconnect (first bootstrap attempt) [tor-browser]
+   * Bug 42629: Tweak `isOnNewTabPage` patch [tor-browser]
+   * Bug 42641: Move from panel-footer class to moz-button-group [tor-browser]
+   * Bug 42642: Downloads button warning no longer announced on Orca [tor-browser]
+   * Bug 42643: downloads panel separator has mismatched margin [tor-browser]
+   * Bug 42644: toolbar rules in panelUI-shared.css are unneccessary [tor-browser]
+   * Bug 42661: Re-run update_emojis.py and update locales [tor-browser]
+   * Bug 42662: Use data-hidden-from-search for hiding the firefox connection settings [tor-browser]
+   * Bug 42663: Tor Browser "Connection" settings missing a tooltip [tor-browser]
+   * Bug 42667: Add description-deemphasized class to our additions to about:preferences [tor-browser]
+   * Bug 42679: Use a more robust approach to hide the "tracking protection" urlbar button [tor-browser]
+   * Bug 42691: Simplified bridge cards prevent censored users from modifying built-in bridges [tor-browser]
+   * Bug 42695: Use `--arrowpanel-` variables for tor circuit panel spacing [tor-browser]
+   * Bug 42696: Update `mail` icon used in "Find more bridges" [tor-browser]
+   * Bug 42697: Remove padding to left of `tor-bridges-provider-list` under "Find more bridges" [tor-browser]
+   * Bug 42699: Drop level="top" attribute from panels [tor-browser]
+   * Bug 42700: Remove !nodes condition from gTorCircuitPanel._updateCurrentBrowser [tor-browser]
+   * Bug 42704: Drop the badged="true" attribute from security level button [tor-browser]
+   * Bug 42705: Update our preferences to account for new line height [tor-browser]
+   * Bug 42713: Some --in-content CSS variables were renamed/removed [tor-browser]
+   * Bug 42806: Use the `lh` CSS unit [tor-browser]
+   * Bug 42855: Review Mozilla 1843130: Pocket newtab use new recs api for locale list config if new api pref is set [tor-browser]
+   * Bug 42862: Review Mozilla 1845428: Instrument Translations Panel With Telemetry [tor-browser]
+   * Bug 42863: Review Mozilla 1847150: Add more TranslationsTelemetry event keys for panel open r=gregtatum, a=dsmith [tor-browser]
+   * Bug 42864: Review Mozilla 1848845: Pocket newtab migrate existing markets to new API. r=gvn a=RyanVM [tor-browser]
+   * Bug 42872: Disable translations until audited and solved the UX problems [tor-browser]
+ * Windows + macOS
+   * Bug 42774: Review Mozilla 1848815: Add a user-facing setting to enable enterprise roots import, and enable it by default [tor-browser]
+   * Bug 43021: Revert the OS deprecation notification introduced in #42347 [tor-browser]
+ * Windows
+   * Bug 43051: windows: remove UI for "open Tor Browser automatically when computer starts" [tor-browser]
+ * Android
+   * Updated GeckoView to 128.1.0esr
+   * Bug 43048: Firefox logo on splash [tor-browser]
+   * Bug 43050: Center text in connect buttons [tor-browser]
+   * Bug 43057: fenix/.../search/list.json failing linting [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.23.0
+     * Bug 42799: Do not run lint pipelines on new tag [tor-browser]
+     * Bug 43014: Add purgecaches to the dev build [tor-browser]
+     * Bug 41203: Tor Blog generation script uses the wrong url scheme for alpha releases [tor-browser-build]
+     * Bug 41213: Update the update_manual.py script to notify when no changes needed [tor-browser-build]
+   * Windows + macOS + Linux
+     * Bug 42668: Drop torconnect rule in eslint-plugin-mozilla [tor-browser]
+   * Windows
+     * Bug 41185: Drop Windows 7 support for 14.0 from build tools [tor-browser-build]
+     * Bug 41201: Bump the Windows version checked by the installer [tor-browser-build]
+   * macOS
+     * Bug 41202: 14.0a1 fails to run on macOS because of invalid signature [tor-browser-build]
+   * Android
+     * Bug 40544: Bump Java 8 version to something more recent [tor-browser-build]
+     * Bug 41123: Drop the firefox-android project [tor-browser-build]
+     * Bug 41171: Switch Android containers to Debian bookworm [tor-browser-build]
+     * Bug 41172: Refactor the android-toolchain project [tor-browser-build]
+     * Bug 41178: Force IPv4 when downloading in fix_gradle_deps.py [tor-browser-build]
+     * Bug 41200: Remove allowed_addons.json and the related tools [tor-browser-build]
+     * Bug 41206: GeckoView ignores the number of processors [tor-browser-build]
+     * Bug 41210: Use tor-expert-bundle-aar in geckoview/build_apk [tor-browser-build]
+     * Bug 41211: The Android license file is not deterministic anymore [tor-browser-build]
+     * Bug 41214: Update geckoview/config to be more like firefox/config [tor-browser-build]
+     * Bug 41217: Update realprep.py script to handle Firefox 128-based Tor Browser Android [tor-browser-build]
+
 Tor Browser 13.5.2 - August 06 2024
  * All Platforms
    * Updated NoScript to 11.4.31
