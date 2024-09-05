@@ -1,3 +1,50 @@
+Mullvad Browser 14.0a4 - September 06 2024
+ * All Platforms
+   * Updated NoScript to 11.4.35
+   * Bug 329: Remove the Security Levels icon from the toolbar [mullvad-browser]
+   * Bug 30862: 10ms time precision via EXSLT date-time function [tor-browser]
+   * Bug 40147: Re-enable Picture-in-Picture mode [tor-browser]
+   * Bug 41309: Re-enable screenshots component [tor-browser]
+   * Bug 42601: Check Bug 1894779: Allow font-face urls to be resource:// urls and relax CORS for resource:// URLs [tor-browser]
+   * Bug 42617: Restore the HTML form on DDG when using safest in 128 [tor-browser]
+   * Bug 42630: Review LaterRun in 128 [tor-browser]
+   * Bug 42640: Disable Firefox Flame button due to unknown interactions with New Identity [tor-browser]
+   * Bug 42684: Disable network prefetch [tor-browser]
+   * Bug 42685: compat: ESR128: enable textmetrics [tor-browser]
+   * Bug 42686: Backport Mozilla 1885101 [tor-browser]
+   * Bug 42730: Make RemoteSettings use only local dumps [tor-browser]
+   * Bug 42735: Disable recent search suggestions [tor-browser]
+   * Bug 42745: Remove some residuals from update scripts [tor-browser]
+   * Bug 42764: Unconditionally disable find-bar transition animation [tor-browser]
+   * Bug 42867: Disable contentRelevancy component [tor-browser]
+   * Bug 43100: Backport security fixes from Firefox 130 [tor-browser]
+   * Bug 43103: Verify whether an update is unsupported before choosing one [tor-browser]
+ * macOS
+   * Bug 42494: mac: add Arial Black and Arial Narrow to allowlist [tor-browser]
+ * Linux
+   * Bug 42773: Replace ~ with the original HOME [tor-browser]
+   * Bug 43092: Disable Wayland by default in 14.0 [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41096: Set SOURCE_DATE_EPOCH in the default env variables [tor-browser-build]
+     * Bug 41188: Upgrade binutils to 2.41 [tor-browser-build]
+
+Mullvad Browser 13.5.3 - September 03 2024
+ * All Platforms
+   * Updated Firefox to 115.15.0esr
+   * Updated NoScript to 11.4.35
+   * Bug 332: Rebase Mullvad Browser Stable onto 115.15.0esr [mullvad-browser]
+   * Bug 40056: Ensure that the lazy loading attribute is ignored on script-disabled documents [tor-browser]
+   * Bug 42686: Backport Mozilla 1885101 [tor-browser]
+   * Bug 42829: Prevent CSS-based scriptless interaction tracking [tor-browser]
+   * Bug 43100: Backport security fixes from Firefox 130 [tor-browser]
+ * Linux
+   * Bug 43064: Make copy/paste and drag/drop file filtering more specific [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41218: Use new Tor Browser gpg subkey for signing stable releases [tor-browser-build]
+     * Bug 41222: link_old_mar_filenames still referenced in torbrowser-incrementals-{release,alpha}-unsigned [tor-browser-build]
+
 Mullvad Browser 14.0a3 - August 26 2024
  * All Platforms
    * Updated Firefox to 128.2.0esr

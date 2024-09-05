@@ -1,3 +1,94 @@
+Tor Browser 14.0a4 - September 06 2024
+ * All Platforms
+   * Updated NoScript to 11.4.35
+   * Updated OpenSSL to 3.0.15
+   * Bug 30862: 10ms time precision via EXSLT date-time function [tor-browser]
+   * Bug 42601: Check Bug 1894779: Allow font-face urls to be resource:// urls and relax CORS for resource:// URLs [tor-browser]
+   * Bug 42684: Disable network prefetch [tor-browser]
+   * Bug 42685: compat: ESR128: enable textmetrics [tor-browser]
+   * Bug 42686: Backport Mozilla 1885101 [tor-browser]
+   * Bug 42730: Make RemoteSettings use only local dumps [tor-browser]
+   * Bug 42867: Disable contentRelevancy component [tor-browser]
+   * Bug 43100: Backport security fixes from Firefox 130 [tor-browser]
+ * Windows + macOS + Linux
+   * Bug 40147: Re-enable Picture-in-Picture mode [tor-browser]
+   * Bug 41309: Re-enable screenshots component [tor-browser]
+   * Bug 41835: Review default search engine options [tor-browser]
+   * Bug 42617: Restore the HTML form on DDG when using safest in 128 [tor-browser]
+   * Bug 42630: Review LaterRun in 128 [tor-browser]
+   * Bug 42640: Disable Firefox Flame button due to unknown interactions with New Identity [tor-browser]
+   * Bug 42735: Disable recent search suggestions [tor-browser]
+   * Bug 42737: Drop the hash check on updates [tor-browser]
+   * Bug 42743: Invalid onion sites are shown as secure in the page info window [tor-browser]
+   * Bug 42744: Light theme override for "about:tor" is inherited by chrome error pages. [tor-browser]
+   * Bug 42745: Remove some residuals from update scripts [tor-browser]
+   * Bug 42764: Unconditionally disable find-bar transition animation [tor-browser]
+   * Bug 42803: Lost focus styling for built-in bridges radio options [tor-browser]
+   * Bug 42891: Review Mozilla 1854965: Define new search engine configuration schema [tor-browser]
+   * Bug 43015: Missing region-name-skr fluent entry when fetching TorConnect country names [tor-browser]
+   * Bug 43075: Should we drop link spacing in about:tor [tor-browser]
+   * Bug 43082: Search engine icon is not shown while typing in the address bar [tor-browser]
+   * Bug 43103: Verify whether an update is unsupported before choosing one [tor-browser]
+   * Bug 43105: Migrating Disconnect is not needed anymore [tor-browser]
+ * macOS + Linux
+   * Bug 42467: Make OS HTTP User-Agent OS spoofing configurable by pref [tor-browser]
+ * macOS
+   * Bug 42494: mac: add Arial Black and Arial Narrow to allowlist [tor-browser]
+ * Linux
+   * Bug 42773: Replace ~ with the original HOME [tor-browser]
+   * Bug 43092: Disable Wayland by default in 14.0 [tor-browser]
+ * Android
+   * Bug 42655: Implement "New circuit for this site" on Android [tor-browser]
+   * Bug 42731: Verify `privacy.spoof_english` still works once we have Android builds [tor-browser]
+   * Bug 43016: Re-disable Nimbus [tor-browser]
+   * Bug 43023: Review Mozilla 1872510: Use SamsungColorEmoji by default for Samsung devices [tor-browser]
+   * Bug 43043: Remove credit card autofill UI elements from menu [tor-browser]
+   * Bug 43088: Query stripping is disabled on Android [tor-browser]
+   * Bug 43094: Remove "Open in regular tab" button [tor-browser]
+   * Bug 43114: Reader view uses the catch-all circuit on Android [tor-browser]
+   * Bug 43116: The lack of GeoIP databases produces a lot of spam in the console on Android [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41096: Set SOURCE_DATE_EPOCH in the default env variables [tor-browser-build]
+     * Bug 41180: Some files do not need to be copied when building tor-expert-bundle [tor-browser-build]
+     * Bug 41188: Upgrade binutils to 2.41 [tor-browser-build]
+     * Bug 41229: Migrate OpenSSL download location to github releases [tor-browser-build]
+   * Android
+     * Bug 41224: Do not ship Conjure and GeoIP databases on Android x86, x86-64 to save some space [tor-browser-build]
+
+Tor Browser 13.5.3 - September 03 2024
+ * All Platforms
+   * Updated NoScript to 11.4.35
+   * Bug 40056: Ensure that the lazy loading attribute is ignored on script-disabled documents [tor-browser]
+   * Bug 42686: Backport Mozilla 1885101 [tor-browser]
+   * Bug 42829: Prevent CSS-based scriptless interaction tracking [tor-browser]
+   * Bug 43084: Rebase Tor Browser Stable onto 115.15.0esr [tor-browser]
+   * Bug 43100: Backport security fixes from Firefox 130 [tor-browser]
+   * Bug 41207: Upgrade lyrebird to 0.3.0 [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.15.0esr
+   * Bug 42596: Several console errors: Console.maxLogLevelPref used with a non-existing pref: [tor-browser]
+   * Bug 42622: Offline state is unreachable in about:torconnect (first bootstrap attempt) [tor-browser]
+   * Bug 42642: Downloads button warning no longer announced on Orca [tor-browser]
+   * Bug 42661: Re-run update_emojis.py and update locales [tor-browser]
+   * Bug 42691: Simplified bridge cards prevent censored users from modifying built-in bridges [tor-browser]
+   * Bug 42696: Update `mail` icon used in "Find more bridges" [tor-browser]
+   * Bug 42697: Remove padding to left of `tor-bridges-provider-list` under "Find more bridges" [tor-browser]
+   * Bug 43059: Drag and Drop issue in new update 13.5.2 [tor-browser]
+   * Bug 43066: about:torconnect no longer changes the title icon on errors [tor-browser]
+ * Linux
+   * Bug 43064: Make copy/paste and drag/drop file filtering more specific [tor-browser]
+ * Android
+   * Updated GeckoView to 115.15.0esr
+ * Build System
+   * All Platforms
+     * Updated Go to 1.21.13
+     * Bug 41213: Update the update_manual.py script to notify when no changes needed [tor-browser-build]
+     * Bug 41218: Use new Tor Browser gpg subkey for signing stable releases [tor-browser-build]
+     * Bug 41222: link_old_mar_filenames still referenced in torbrowser-incrementals-{release,alpha}-unsigned [tor-browser-build]
+   * Android
+     * Bug 41206: GeckoView ignores the number of processors [tor-browser-build]
+
 Tor Browser 14.0a3 - August 26 2024
  * All Platforms
    * Bug 40056: Ensure that the lazy loading attribute is ignored on script-disabled documents [tor-browser]

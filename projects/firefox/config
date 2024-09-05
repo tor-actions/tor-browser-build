@@ -19,7 +19,7 @@ var:
   browser_series: '14.0'
   browser_rebase: 1
   browser_branch: '[% c("var/browser_series") %]-[% c("var/browser_rebase") %]'
-  browser_build: 2
+  browser_build: 3
   branding_directory_prefix: 'tb'
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   nightly_updates_publish_dir: '[% c("var/nightly_updates_publish_dir_prefix") %]nightly-[% c("var/osname") %]'
@@ -107,7 +107,7 @@ targets:
       gitlab_project: https://gitlab.torproject.org/tpo/applications/mullvad-browser
       updater_url: 'https://cdn.mullvad.net/browser/update_responses/update_1/'
       nightly_updates_publish_dir_prefix: mullvadbrowser-
-      browser_build: 1
+      browser_build: 2
 
   linux-x86_64:
     var:
