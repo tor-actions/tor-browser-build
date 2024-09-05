@@ -403,7 +403,7 @@ class ReleasePreparation:
         source = self.find_input(config, "openssl")
         # No need to update URL, as it uses a variable.
         hash_url = (
-            f"https://www.openssl.org/source/openssl-{version}.tar.gz.sha256"
+            f"https://github.com/openssl/openssl/releases/download/openssl-{version}/openssl-{version}.tar.gz.sha256"
         )
         r = requests.get(hash_url)
         r.raise_for_status()
