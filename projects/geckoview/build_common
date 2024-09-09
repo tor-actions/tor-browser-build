@@ -37,6 +37,9 @@ cp -rl $gradle_repo/dl/android/maven2/* $gradle_repo || true
 cp -rl $gradle_repo/m2/* $gradle_repo || true
 cp -rl $gradle_repo/maven2/* $gradle_repo || true
 
+tar -xf [% c('input_files_by_name/glean-wheels') %]
+export GLEAN_PYTHON_WHEELS_DIR=$rootdir/glean-wheels
+
 tar -xf [% c('input_files_by_name/oss-licenses-plugin') %]
 cp -rl oss-licenses-plugin/. $gradle_repo
 

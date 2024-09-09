@@ -12,15 +12,22 @@ input_files:
     name: tor-expert-bundle-armv7
     target_replace:
       '^torbrowser-(?!testbuild).*': 'torbrowser-android-armv7'
+    enable: '[% !c("var/android_single_arch") %]'
   - project: tor-expert-bundle
     name: tor-expert-bundle-aarch64
     target_replace:
       '^torbrowser-(?!testbuild).*': 'torbrowser-android-aarch64'
+    enable: '[% !c("var/android_single_arch") %]'
   - project: tor-expert-bundle
     name: tor-expert-bundle-x86
     target_replace:
       '^torbrowser-(?!testbuild).*': 'torbrowser-android-x86'
+    enable: '[% !c("var/android_single_arch") %]'
   - project: tor-expert-bundle
     name: tor-expert-bundle-x86_64
     target_replace:
       '^torbrowser-(?!testbuild).*': 'torbrowser-android-x86_64'
+    enable: '[% !c("var/android_single_arch") %]'
+  - project: tor-expert-bundle
+    name: tor-expert-bundle
+    enable: '[% c("var/android_single_arch") %]'

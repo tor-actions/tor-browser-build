@@ -105,6 +105,7 @@ steps:
       - name: translation-fenix
         project: translation
         pkg_type: fenix
+        enable: '[% c("var/has_l10n") %]'
       - URL: '[% pc("glean", "var/glean_wheels_url/" _ c("var/glean_parser"), { error_if_undef => 1 }) %]'
         name: glean-wheels
         sha256sum: '[% pc("glean", "var/glean_wheels_sha256sum/" _ c("var/glean_parser"), { error_if_undef => 1 }) %]'
@@ -150,5 +151,18 @@ input_files:
   - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
     name: gradle-dependencies
     exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
+  - URL: '[% pc("glean", "var/glean_wheels_url/" _ c("var/glean_parser"), { error_if_undef => 1 }) %]'
+    name: glean-wheels
+    sha256sum: '[% pc("glean", "var/glean_wheels_sha256sum/" _ c("var/glean_parser"), { error_if_undef => 1 }) %]'
   - project: oss-licenses-plugin
     name: oss-licenses-plugin
+  - name: tor-expert-bundle-aar
+    project: tor-expert-bundle-aar
+    enable: '[% c("var/android_single_arch") %]'
+  - project: firefox-l10n
+    name: firefox-l10n
+    enable: '[% c("var/android_single_arch") && c("var/has_l10n") %]'
+  - name: translation-fenix
+    project: translation
+    pkg_type: fenix
+    enable: '[% c("var/android_single_arch") && c("var/has_l10n") %]'

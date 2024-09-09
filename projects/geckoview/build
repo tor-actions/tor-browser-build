@@ -43,29 +43,14 @@ echo "Starting ./mach configure $(date)"
 echo "Starting ./mach build $(date)"
 ./mach build --verbose
 
+echo "Build finished, copying the AAR to the to the destination directory $(date)"
+
 [% IF !c("var/android_single_arch") -%]
   mkdir "$distdir/[% project %]"
   # We don't want the debug or "exoplayer" .aars, but the .aar that has `omni` in its name.
   find obj-* -type f -name geckoview*omni*.aar -exec cp {} $distdir/[% project %] \;
 [% ELSE -%]
-  # For single-arch builds, we want to fake a fat aar anyway, to avoid having
-  # arch suffixes in filenames, or having to rename files.
-  cat >> mozconfig-android-all << 'MOZCONFIG_EOF'
-ac_add_options --enable-update-channel=[% c("var/variant") %]
-ac_add_options --with-base-browser-version=[% c("var/torbrowser_version") %]
-export MOZ_INCLUDE_SOURCE_INFO=1
-export MOZ_SOURCE_REPO="[% c('var/gitlab_project') %]"
-export MOZ_SOURCE_CHANGESET=[% c("var/git_commit") %]
-MOZCONFIG_EOF
-
-  echo "Starting the creation of the fake fat AAR $(date)"
-  pushd tools/geckoview
-  touch android-env.sh
-  make fataar ARCHS="[% c('arch') %]"
-  popd
-  MOZCONFIG=mozconfig-android-all ./mach gradle \
-    geckoview:publishWithGeckoBinariesDebugPublicationToMavenLocal \
-    exoplayer2:publishDebugPublicationToMavenLocal
+[% INCLUDE 'build_ac_fenix' %]
 [% END -%]
 
 echo "Starting to package artifacts $(date)"

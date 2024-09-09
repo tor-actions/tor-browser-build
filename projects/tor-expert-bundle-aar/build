@@ -7,8 +7,12 @@ mkdir -p /var/tmp/build $distdir
 mkdir tor-expert-bundle-aar
 cd tor-expert-bundle-aar
 
-[% FOREACH arch = ['armv7', 'aarch64', 'x86', 'x86_64'] -%]
-  unzip -o $rootdir/[% c('input_files_by_name/tor-expert-bundle-' _ arch) %]/tor-expert-bundle-[% arch %].aar
+[% IF c("var/android_single_arch") -%]
+  unzip -o $rootdir/[% c('input_files_by_name/tor-expert-bundle') %]/tor-expert-bundle-[% c("arch") %].aar
+[% ELSE -%]
+  [% FOREACH arch = ['armv7', 'aarch64', 'x86', 'x86_64'] -%]
+    unzip -o $rootdir/[% c('input_files_by_name/tor-expert-bundle-' _ arch) %]/tor-expert-bundle-[% arch %].aar
+  [% END -%]
 [% END -%]
 
 jar -cvf $distdir/tor-expert-bundle.aar *

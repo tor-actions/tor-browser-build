@@ -1,0 +1,56 @@
+[% IF c('var/has_l10n') -%]
+  echo "Injecting the Firefox's localization to GV $(date)"
+  supported_locales="[% tmpl(c('var/locales_mobile').join(' ')).replace('-r', '-').replace('in', 'id').replace('iw', 'he') %]"
+  l10ncentral="$HOME/.mozbuild/l10n-central"
+  mkdir "$l10ncentral"
+  for tarball in $rootdir/[% c('input_files_by_name/firefox-l10n') %]/*; do
+    tar -C "$l10ncentral" -xf "$tarball"
+  done
+
+  # Do not setup our localization files, as we do not provide any frontend
+  # through GeckoView.
+
+  # No quotes on purpose, to pass each locale as an additional argument.
+  ./mach package-multi-locale --locales en-US $supported_locales
+[% END -%]
+
+echo "Building Android Components $(date)"
+pushd mobile/android/android-components
+gradle $GRADLE_FLAGS assembleGecko -x lint
+popd
+
+# The build might fail with "file exists" otherwise.
+rm -rf /var/tmp/dist/android-toolchain/gradle/glean/pythonenv
+
+echo "Building Fenix $(date)"
+pushd mobile/android/fenix
+
+cp -a $rootdir/[% c('input_files_by_name/tor-expert-bundle-aar') %]/tor-expert-bundle.aar app/
+
+# Use the Android Components we have just built
+echo autoPublish.android-components.dir=../android-components > local.properties
+
+[% IF c('var/has_l10n') -%]
+  tar -C $distdir -xf $rootdir/[% c('input_files_by_name/translation-fenix') %]
+  # Add our localized strings
+  supported_locales="[% tmpl(c('var/locales_mobile').join(' ')) %]"
+  for lang in $supported_locales; do
+    cp "/var/tmp/dist/translation-fenix/$lang/torbrowser_strings.xml" "app/src/main/res/values-$lang/"
+  done
+[% END -%]
+
+# Bug 40485: Inject deterministic build date into Glean.
+echo 'ext.gleanBuildDate = "0"' >> app/build.gradle
+
+variant='[% c("var/variant") %]'
+version_name="[% c('var/torbrowser_version') %] ([% c('var/geckoview_version') %])"
+
+gradle $GRADLE_FLAGS -PversionName="$version_name" "assemble$variant"
+
+echo "Build finished, copying the APK(s) to the destination directory $(date)"
+
+mkdir $distdir/[% project %]
+cp app/build/outputs/apk/fenix/$variant/*.apk $distdir/[% project %]
+
+popd
+

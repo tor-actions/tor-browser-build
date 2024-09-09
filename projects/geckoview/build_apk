@@ -1,10 +1,7 @@
 #!/bin/bash
 [% INCLUDE 'build_common' %]
 
-tar -C $distdir -xf $rootdir/[% c('input_files_by_name/translation-fenix') %]
-
-tar -xf [% c('input_files_by_name/glean-wheels') %]
-export GLEAN_PYTHON_WHEELS_DIR=$rootdir/glean-wheels
+echo "Starting the creation of the fat AAR $(date)"
 
 tar -C $builddir -xf [% c('input_files_by_name/geckoview_armv7') %]
 tar -C $builddir -xf [% c('input_files_by_name/geckoview_aarch64') %]
@@ -29,18 +26,6 @@ export MOZ_SOURCE_REPO="[% c('var/gitlab_project') %]"
 export MOZ_SOURCE_CHANGESET=[% c("var/git_commit") %]
 MOZCONFIG_EOF
 
-[% IF c("var/has_l10n") -%]
-  supported_locales="[% tmpl(c('var/locales_mobile').join(' ')).replace('-r', '-').replace('in', 'id').replace('iw', 'he') %]"
-  l10ncentral="$HOME/.mozbuild/l10n-central"
-  mkdir "$l10ncentral"
-  for tarball in $rootdir/[% c('input_files_by_name/firefox-l10n') %]/*; do
-    tar -C "$l10ncentral" -xf "$tarball"
-  done
-
-  # Do not setup our localization files, as we do not provide any frontend
-  # through GeckoView.
-[% END -%]
-
 # We still need to specify --tor-browser-version due to bug 34005.
 ./mach configure \
   --with-base-browser-version=[% c("var/torbrowser_version") %] \
@@ -49,43 +34,7 @@ MOZCONFIG_EOF
 
 ./mach build --verbose
 
-[% IF c('var/has_l10n') -%]
-  # No quotes on purpose, to pass each locale as an additional argument.
-  ./mach package-multi-locale --locales en-US $supported_locales
-[% END -%]
-
-pushd mobile/android/android-components
-gradle $GRADLE_FLAGS assembleGecko -x lint
-popd
-
-# The build might fail with "file exists" otherwise.
-rm -rf /var/tmp/dist/android-toolchain/gradle/glean/pythonenv
-
-pushd mobile/android/fenix
-
-cp -a $rootdir/[% c('input_files_by_name/tor-expert-bundle-aar') %]/tor-expert-bundle.aar app/
-
-# Use the Android Components we have just built
-echo autoPublish.android-components.dir=../android-components > local.properties
-
-# Add our localized strings
-supported_locales="[% tmpl(c('var/locales_mobile').join(' ')) %]"
-for lang in $supported_locales; do
-  cp "/var/tmp/dist/translation-fenix/$lang/torbrowser_strings.xml" "app/src/main/res/values-$lang/"
-done
-
-# Bug 40485: Inject deterministic build date into Glean.
-echo 'ext.gleanBuildDate = "0"' >> app/build.gradle
-
-variant='[% c("var/variant") %]'
-version_name="[% c('var/torbrowser_version') %] ([% c('var/geckoview_version') %])"
-
-gradle $GRADLE_FLAGS -PversionName="$version_name" "assemble$variant"
-
-mkdir $distdir/[% project %]
-cp app/build/outputs/apk/fenix/$variant/*.apk $distdir/[% project %]
-
-popd
+[% INCLUDE 'build_ac_fenix' %]
 
 cd $distdir/
 [% c('tar', {

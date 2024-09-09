@@ -90,7 +90,11 @@ input_files:
   - project: geckoview
     name: fenix
     pkg_type: build_apk
-    enable: '[% c("var/android") %]'
+    enable: '[% c("var/android") && !c("var/android_single_arch") %]'
+  - project: geckoview
+    name: fenix
+    pkg_type: build
+    enable: '[% c("var/android") && c("var/android_single_arch") %]'
   - project: tor-expert-bundle
     name: tor-expert-bundle
     enable: '[% c("var/tor-browser") %]'
