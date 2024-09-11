@@ -11,8 +11,7 @@ dmg_tmpdir=$(mktemp -d)
 hfsfile="$dmg_tmpdir/tbb-uncompressed.dmg"
 
 # hfsplus sets all the times to time(NULL)
-export LD_PRELOAD=[% c("var/faketime_path") %]
-export FAKETIME="[% USE date; GET date.format(c('timestamp'), format = '%Y-%m-%d %H:%M:%S') %]"
+[% c("var/faketime_setup") %]
 
 src_dir=[% src %]
 # 1 for ceiling and 1 for the inode
