@@ -56,6 +56,9 @@ ProjName=$(ProjectName)
 Proj_Name=$(Project_Name)
 proj_name=$(project-name)
 disp_name=$(display_name)
+pushd "$script_dir/../.."
+browser_release_date=$($rbm showconf --target "$tbb_version_type" --target "$SIGNING_PROJECTNAME-linux-x86_64" browser var/faketime_date)
+popd
 
 test -d "$macos_signed_dir" || mkdir "$macos_signed_dir"
 tmpdir="$macos_stapled_dir/tmp"
@@ -75,7 +78,7 @@ rm *.DS_Store
 tar -xf $macos_stapled_dir/"${proj_name}-${tbb_version}-notarized+stapled.tar.zst"
 
 cd ..
-$script_dir/ddmg.sh $macos_signed_dir/${proj_name}-macos-${tbb_version}.dmg $tmpdir/dmg/ "$disp_name"
+$script_dir/ddmg.sh $macos_signed_dir/${proj_name}-macos-${tbb_version}.dmg $tmpdir/dmg/ "$disp_name" "$browser_release_date"
 rm -rf "dmg/$disp_name.app"
 rm -Rf "$tmpdir"
 

@@ -4,7 +4,7 @@
 # file from a directory
 #
 # Usage:
-#   ddmg.sh <dmg-file> <src-directory> <Volume Label>
+#   ddmg.sh <dmg-file> <src-directory> <Volume Label> <release date>
 
 set -e
 
@@ -14,6 +14,7 @@ source "$script_dir/functions"
 dest_file="$1"
 src_dir="$2"
 volume_label="$3"
+browser_release_date="$4"
 
 set +e
 find $src_dir -executable -exec chmod 0755 {} \; 2> /dev/null
@@ -26,7 +27,7 @@ dmg_tmpdir=$(mktemp -d)
 hfsfile="$dmg_tmpdir/tbb-uncompressed.dmg"
 
 export LD_PRELOAD=$faketime_path
-export FAKETIME="2000-01-01 01:01:01"
+export FAKETIME="$browser_release_date"
 
 echo "Starting: " $(basename $dest_file)
 
