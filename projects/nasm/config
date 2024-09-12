@@ -6,9 +6,6 @@ container:
 
 input_files:
   - project: container-image
-  - project: binutils
-    name: binutils
-    enable: '[% c("var/linux") %]'
   - project: '[% c("var/compiler") %]'
     name: '[% c("var/compiler") %]'
     enable: '[% c("var/linux") %]'

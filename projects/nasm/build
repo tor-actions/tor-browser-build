@@ -3,8 +3,6 @@
 [% IF c("var/linux") %]
   [% pc('gcc', 'var/setup', { compiler_tarfile => c('input_files_by_name/gcc'),
                               hardened_gcc => 0 }) %]
-  tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/binutils') %]
-  export PATH="/var/tmp/dist/binutils/bin:$PATH"
 [% END -%]
 distdir=/var/tmp/dist/[% project %]
 tar -xf [% project %]-[% c('version') %].tar.xz

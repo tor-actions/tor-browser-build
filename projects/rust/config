@@ -38,8 +38,6 @@ targets:
 
 input_files:
   - project: container-image
-  - name: binutils
-    project: binutils
   - project: cmake
     name: cmake
   - project: '[% c("var/compiler") %]'

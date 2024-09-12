@@ -129,8 +129,6 @@ input_files:
     project: '[% c("var/compiler") %]'
   - project: gradle
     name: gradle
-  - project: binutils
-    name: binutils
   - project: rust
     name: rust
   - project: cbindgen

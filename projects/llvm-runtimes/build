@@ -9,9 +9,6 @@ export PATH="/var/tmp/dist/clang/bin:/var/tmp/dist/ninja:/var/tmp/dist/cmake/bin
 
 [% pc(c('var/compiler'), 'var/setup', { compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')) }) %]
 
-tar -C /var/tmp/dist -xf [% c('input_files_by_name/binutils') %]
-export PATH="/var/tmp/dist/binutils/bin:$PATH"
-
 mkdir -p /var/tmp/build
 cd /var/tmp/build
 tar -xf $rootdir/[% c('input_files_by_name/clang-source') %]

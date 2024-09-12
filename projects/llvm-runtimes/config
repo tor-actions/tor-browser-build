@@ -8,8 +8,6 @@ input_files:
   - project: container-image
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
-  - name: binutils
-    project: binutils
   - project: cmake
     name: cmake
   - project: llvm-project
