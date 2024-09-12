@@ -1,3 +1,38 @@
+Tor Browser 14.0a5 - September 12 2024
+ * All Platforms
+   * Updated NoScript to 11.4.37
+   * Bug 42255: pdfjs.disabled used to be part of RFP until Bug 1838415; lock pref to false in stable [tor-browser]
+   * Bug 42746: Extend prefers-contrast rules to include forced-colors [tor-browser]
+   * Bug 43046: Review Mozilla 1866927: Adds ability to enable email tracker blocking protection in private mode [tor-browser]
+   * Bug 43054: check bounceTrackingProtection in PB mode does not persist to disk [tor-browser]
+ * Windows + macOS + Linux
+   * Bug 42647: "Switching to a new device" regressed on 128 [tor-browser]
+   * Bug 42653: The Neterror page has a checkbox to report iframe origin errors to TPO [tor-browser]
+   * Bug 42777: Remove 'Website Privacy Preferences' and ensure sensible default prefs [tor-browser]
+   * Bug 43087: Onion pattern on about:torconnect needs a dark theme asset [tor-browser]
+   * Bug 43109: Remove mention of Firefox Relay from settings [tor-browser]
+   * Bug 43115: Height of search bar has collapsed on about:tor [tor-browser]
+   * Bug 43117: Hide 'Always underline links' option [tor-browser]
+   * Bug 43118: hide CFR [tor-browser]
+   * Bug 43131: Reduce layout jank when loading about:tor [tor-browser]
+ * Linux
+   * Bug 42702: Cannot access the clipboard for the crypto address check (wayland) [tor-browser]
+   * Bug 334: When set as default browser on Linux in standard mode, links don't open correctly [mullvad-browser]
+ * Android
+   * Bug 42954: Remove product recommendation API integration (Review Mozilla 1857215) [tor-browser]
+   * Bug 43097: NoScript fails to install on Android [tor-browser]
+   * Bug 43108: Backport Android fullscreen notifications refactoring on ESR128 [tor-browser]
+   * Bug 43128: Use DuckDuckGo HTML on the Safest security level for Android [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.23.1
+   * macOS
+     * Bug 41231: Use var/browser_release_date in tools/signing/gatekeeper-bundling.sh [tor-browser-build]
+   * Android
+     * Bug 41106: Non matching builds after application-services not being rebuilt in a long time [tor-browser-build]
+     * Bug 41232: Re-implement single-arch builds after the monorepo migration [tor-browser-build]
+     * Bug 41234: More dependencies are needed when building Android as a release [tor-browser-build]
+
 Tor Browser 14.0a4 - September 06 2024
  * All Platforms
    * Updated NoScript to 11.4.35

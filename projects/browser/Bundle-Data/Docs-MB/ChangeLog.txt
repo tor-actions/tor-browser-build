@@ -1,3 +1,21 @@
+Mullvad Browser 14.0a5 - September 12 2024
+ * All Platforms
+   * Updated NoScript to 11.4.37
+   * Bug 328: Provide search engine icons [mullvad-browser]
+   * Bug 42255: pdfjs.disabled used to be part of RFP until Bug 1838415; lock pref to false in stable [tor-browser]
+   * Bug 42647: "Switching to a new device" regressed on 128 [tor-browser]
+   * Bug 42653: The Neterror page has a checkbox to report iframe origin errors to TPO [tor-browser]
+   * Bug 42777: Remove 'Website Privacy Preferences' and ensure sensible default prefs [tor-browser]
+   * Bug 43046: Review Mozilla 1866927: Adds ability to enable email tracker blocking protection in private mode [tor-browser]
+   * Bug 43054: check bounceTrackingProtection in PB mode does not persist to disk [tor-browser]
+   * Bug 43109: Remove mention of Firefox Relay from settings [tor-browser]
+   * Bug 43117: Hide 'Always underline links' option [tor-browser]
+ * Linux
+   * Bug 334: When set as default browser on Linux in standard mode, links don't open correctly [mullvad-browser]
+ * Build System
+   * macOS
+     * Bug 41231: Use var/browser_release_date in tools/signing/gatekeeper-bundling.sh [tor-browser-build]
+
 Mullvad Browser 14.0a4 - September 06 2024
  * All Platforms
    * Updated NoScript to 11.4.35
