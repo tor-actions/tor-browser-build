@@ -21,7 +21,7 @@ var:
   browser_series: '14.0'
   browser_rebase: 1
   browser_branch: '[% c("var/browser_series") %]-[% c("var/browser_rebase") %]'
-  browser_build: 5
+  browser_build: 6
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   gitlab_project: https://gitlab.torproject.org/tpo/applications/tor-browser
   git_commit: '[% exec("git rev-parse HEAD") %]'

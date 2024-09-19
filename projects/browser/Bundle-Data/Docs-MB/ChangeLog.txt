@@ -1,3 +1,16 @@
+Mullvad Browser 14.0a6 - September 19 2024
+ * All Platforms
+   * Bug 344: set media.navigator.enabled = true [mullvad-browser]
+   * Bug 42718: Remove the firefox-view button from UI, even when always-on private-browsing mode is disabled [tor-browser]
+   * Bug 42740: Stop trying to hide "Restore previous session" [tor-browser]
+   * Bug 42831: Remove the shopping components [tor-browser]
+   * Bug 43072: moz-message-bar does not get announced on Orca screen-reader [tor-browser]
+   * Bug 43083: Backport fix for Mozilla 1436462 [tor-browser]
+   * Bug 43144: Ensure non-privacy browsing also sets the GPC header [tor-browser]
+ * Linux
+   * Bug 43141: Hardcode Arimo as a system-ui font [tor-browser]
+   * Bug 41237: Add some aliases to our Linux font config for compatibility [tor-browser-build]
+
 Mullvad Browser 14.0a5 - September 12 2024
  * All Platforms
    * Updated NoScript to 11.4.37
