@@ -94,7 +94,7 @@ class ReleasePreparation:
         self.repo = Repo(self.base_path)
 
         self.tor_browser = bool(kwargs.get("tor_browser", True))
-        self.mullvad_browser = bool(kwargs.get("tor_browser", True))
+        self.mullvad_browser = bool(kwargs.get("mullvad_browser", True))
         if not self.tor_browser and not self.mullvad_browser:
             raise ValueError("Nothing to do")
         self.android = kwargs.get("android", self.tor_browser)
