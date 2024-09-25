@@ -1,3 +1,30 @@
+Tor Browser 13.5.5 - September 25 2024
+ * Windows + macOS
+   * Bug 43125: Update message for legacy OS (windows ≤8.1, macOS ≤10.14) users [tor-browser]
+ * Linux
+   * Bug 334: When set as default browser on Linux in standard mode, links don't open correctly [mullvad-browser]
+
+Tor Browser 14.0a6 - September 19 2024
+ * All Platforms
+   * Bug 42831: Remove the shopping components [tor-browser]
+   * Bug 43144: Ensure non-privacy browsing also sets the GPC header [tor-browser]
+ * Windows + macOS + Linux
+   * Bug 42698: Bridge card background contrast is low for bridge-moji [tor-browser]
+   * Bug 42718: Remove the firefox-view button from UI, even when always-on private-browsing mode is disabled [tor-browser]
+   * Bug 42740: Stop trying to hide "Restore previous session" [tor-browser]
+   * Bug 43072: moz-message-bar does not get announced on Orca screen-reader [tor-browser]
+   * Bug 43083: Backport fix for Mozilla 1436462 [tor-browser]
+ * Linux
+   * Bug 43141: Hardcode Arimo as a system-ui font [tor-browser]
+   * Bug 41237: Add some aliases to our Linux font config for compatibility [tor-browser-build]
+ * Android
+   * Bug 41550: Remove unused extensions from Tor Browser for Android [tor-browser]
+   * Bug 43052: Remove non private tabs icon and "other device tabs" from tab view [tor-browser]
+   * Bug 43129: about:neterror cannot display SVG on Android with Security Level Safest [tor-browser]
+   * Bug 43145: Backport Android security fix from 130.0.1 [tor-browser]
+   * Bug 43146: Update the icon of DuckDuckGo onion search engine on Android [tor-browser]
+   * Bug 43147: Remove unused search plugins from the apk files [tor-browser]
+
 Tor Browser 13.5.4 - September 16 2024
  * All Platforms
    * Updated NoScript to 11.4.37
