@@ -5,8 +5,8 @@ container:
   # We just copy files around, no need to use a container.
   use_container: 0
 var:
-  # noto-monthly-release-23.9.1
-  noto_git_hash: c890f6fec6fa37740f23fffdd2a28e156f3837a3
+  # noto-monthly-release-24.9.1
+  noto_git_hash: eeb71fdda20300eb0891badeed5e64850e2cbc64
   # Use this way so that the script that downloads the fonts can access the
   # lists of all the targets.
   noto_fonts_common:
