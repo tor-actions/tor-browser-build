@@ -23,7 +23,7 @@ git checkout main
 git pull --ff-only
 test -n "$(git status --porcelain=v1 | grep -v '^?')" \
   && exit_error 'update_responses_repository_dir has modified files'
-is_project torbrowser && cd update_3
+is_project torbrowser && mkdir -p update_pre13.5a10 && cd update_pre13.5a10
 is_project mullvadbrowser && cd update_1
 
 old_ur=$(mktemp -d)
