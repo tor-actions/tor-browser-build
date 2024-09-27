@@ -1,3 +1,18 @@
+Mullvad Browser 14.0a7 - September 27 2024
+ * All Platforms
+   * Updated Firefox to 128.3.0esr
+   * Updated NoScript to 11.4.40
+   * Bug 355: Rebase Mullvad Browser Alpha onto Firefox 128.3.0esr [mullvad-browser]
+   * Bug 42070: Backport Bugzilla 1834307 and hide smooth-scroll UX [tor-browser]
+   * Bug 42362: "New window" missing from File menu [tor-browser]
+   * Bug 42742: Inconsistent use of "New private window" vs "New window" [tor-browser]
+   * Bug 42832: Download spam prevention should not affect browser extensions [tor-browser]
+   * Bug 43163: Disable offscreen canvas until verified it is not fingerprintable [tor-browser]
+   * Bug 41248: Check and update bundled font versions [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Bug 41236: Remove binutils when not needed [tor-browser-build]
+
 Mullvad Browser 14.0a6 - September 19 2024
  * All Platforms
    * Bug 344: set media.navigator.enabled = true [mullvad-browser]

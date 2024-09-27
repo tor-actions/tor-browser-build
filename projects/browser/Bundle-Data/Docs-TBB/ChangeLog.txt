@@ -1,3 +1,36 @@
+Tor Browser 14.0a7 - September 27 2024
+ * All Platforms
+   * Updated NoScript to 11.4.40
+   * Bug 42832: Download spam prevention should not affect browser extensions [tor-browser]
+   * Bug 43163: Disable offscreen canvas until verified it is not fingerprintable [tor-browser]
+   * Bug 43166: Rebase Tor Browser alpha onto Firefox 128.3.0esr [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 128.3.0esr
+   * Bug 42070: Backport Bugzilla 1834307 and hide smooth-scroll UX [tor-browser]
+   * Bug 42362: "New window" missing from File menu [tor-browser]
+   * Bug 42742: Inconsistent use of "New private window" vs "New window" [tor-browser]
+   * Bug 41248: Check and update bundled font versions [tor-browser-build]
+ * Android
+   * Updated GeckoView to 128.3.0esr
+   * Bug 43172: remove remote settings and SERPTelemetry [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.23.1
+     * Bug 41236: Remove binutils when not needed [tor-browser-build]
+   * Windows + macOS + Linux
+     * Bug 41246: Add updater rewriterules to make 13.5a10 a watershed [tor-browser-build]
+
+Tor Browser 13.5a10 - September 25 2024
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.15.0esr
+   * Updated NoScript to 11.4.37
+   * Updated OpenSSL to 3.0.15
+ * Windows + macOS
+   * Bug 42747: Windows 7/8 and macOS 10.12-10.14 Legacy/Maintenance [tor-browser]
+ * Build System
+   * Windows + macOS + Linux
+     * Updated Go to 1.21.12
+
 Tor Browser 14.0a6 - September 19 2024
  * All Platforms
    * Bug 42831: Remove the shopping components [tor-browser]
