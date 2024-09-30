@@ -1,8 +1,51 @@
-Tor Browser 13.5.5 - September 25 2024
+Tor Browser 13.5.6 - September 30 2024
+ * All Platforms
+   * Updated NoScript to 11.4.40
+   * Bug 42832: Download spam prevention should not affect browser extensions [tor-browser]
+   * Bug 43167: Rebase Tor Browser Stable onto 115.16.0esr [tor-browser]
+   * Bug 43173: Backport security fixes from Firefox 131 [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.16.0esr
+   * Bug 42737: Drop the hash check on updates [tor-browser]
+   * Bug 43098: YEC 2024 Takeover for Desktop Stable [tor-browser]
  * Windows + macOS
-   * Bug 43125: Update message for legacy OS (windows ≤8.1, macOS ≤10.14) users [tor-browser]
- * Linux
-   * Bug 334: When set as default browser on Linux in standard mode, links don't open correctly [mullvad-browser]
+   * Bug 42747: Windows 7/8 and macOS 10.12-10.14 Legacy/Maintenance [tor-browser]
+ * Android
+   * Updated GeckoView to 115.16.0esr
+   * Bug 43099: YEC 2024 Takeover for Android Stable [tor-browser]
+
+Tor Browser 14.0a7 - September 27 2024
+ * All Platforms
+   * Updated NoScript to 11.4.40
+   * Bug 42832: Download spam prevention should not affect browser extensions [tor-browser]
+   * Bug 43163: Disable offscreen canvas until verified it is not fingerprintable [tor-browser]
+   * Bug 43166: Rebase Tor Browser alpha onto Firefox 128.3.0esr [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 128.3.0esr
+   * Bug 42070: Backport Bugzilla 1834307 and hide smooth-scroll UX [tor-browser]
+   * Bug 42362: "New window" missing from File menu [tor-browser]
+   * Bug 42742: Inconsistent use of "New private window" vs "New window" [tor-browser]
+   * Bug 41248: Check and update bundled font versions [tor-browser-build]
+ * Android
+   * Updated GeckoView to 128.3.0esr
+   * Bug 43172: remove remote settings and SERPTelemetry [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.23.1
+     * Bug 41236: Remove binutils when not needed [tor-browser-build]
+   * Windows + macOS + Linux
+     * Bug 41246: Add updater rewriterules to make 13.5a10 a watershed [tor-browser-build]
+
+Tor Browser 13.5a10 - September 25 2024
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.15.0esr
+   * Updated NoScript to 11.4.37
+   * Updated OpenSSL to 3.0.15
+ * Windows + macOS
+   * Bug 42747: Windows 7/8 and macOS 10.12-10.14 Legacy/Maintenance [tor-browser]
+ * Build System
+   * Windows + macOS + Linux
+     * Updated Go to 1.21.12
 
 Tor Browser 14.0a6 - September 19 2024
  * All Platforms
