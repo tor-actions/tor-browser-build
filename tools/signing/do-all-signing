@@ -206,5 +206,4 @@ do_step download-unsigned-sha256sums-gpg-signatures-from-people-tpo
 do_step sync-local-to-staticiforme
 do_step sync-scripts-to-staticiforme
 do_step staticiforme-prepare-cdn-dist-upload
-do_step upload-update_responses-to-staticiforme
 do_step finished-signing-clean-linux-signer
