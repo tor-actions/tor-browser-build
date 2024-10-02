@@ -140,7 +140,6 @@ mkdir "$HOME/.mozbuild"
         fi
       [% END -%]
       mv "$transl_tor_browser/$source_lang/tor-browser.ftl" "$l10ncentral/$lang/toolkit/toolkit/global/"
-      mv "$transl_tor_browser/$source_lang/cryptoSafetyPrompt.properties" "$l10ncentral/$lang/browser/chrome/browser/"
       mv "$transl_tor_browser/$source_lang" "$torbutton_locales/$lang"
       echo "% locale torbutton $lang %locale/$lang/" >> "$torbutton_jar"
       echo "    locale/$lang (chrome/locale/$lang/*)" >> "$torbutton_jar"
