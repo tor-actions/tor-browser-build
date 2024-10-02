@@ -42,6 +42,10 @@ sub exit_error {
     exit (exists $_[1] ? $_[1] : 1);
 }
 
+sub as_array {
+    ref $_[0] eq 'ARRAY' ? $_[0] : [ $_[0] ];
+}
+
 sub get_tmpdir {
     my ($config) = @_;
     return File::Temp->newdir($config->{tmp_dir} ?
@@ -335,39 +339,48 @@ sub get_buildinfos {
 }
 
 sub get_response {
-    my ($config, $version, $os, @patches) = @_;
+    my ($config, $versions, $os, $lang, $from_version) = @_;
     my $res;
     my $writer = XML::Writer->new(OUTPUT => \$res, ENCODING => 'UTF-8');
     $writer->xmlDecl;
     $writer->startTag('updates');
-    if (get_config($config, $version, $os, 'unsupported')) {
+    foreach my $version (@$versions) {
+        if (get_config($config, $version, $os, 'unsupported')) {
+            $writer->startTag('update',
+                unsupported => 'true',
+                detailsURL => get_config($config, $version, $os, 'detailsURL'),
+            );
+            goto CLOSETAGS;
+        }
+        my $minversion = get_config($config, $version, $os, 'minSupportedOSVersion');
+        my $mininstruc = get_config($config, $version, $os, 'minSupportedInstructionSet');
         $writer->startTag('update',
-            unsupported => 'true',
+            type => 'minor',
+            displayVersion => $version,
+            appVersion => $version,
+            platformVersion => get_config($config, $version, $os, 'platformVersion'),
+            buildID => get_config($config, $version, $os, 'buildID'),
             detailsURL => get_config($config, $version, $os, 'detailsURL'),
+            actions => 'showURL',
+            openURL => get_config($config, $version, $os, 'detailsURL'),
+            defined $minversion ? ( minSupportedOSVersion => $minversion ) : (),
+            defined $mininstruc ? ( minSupportedInstructionSet => $mininstruc ) : (),
         );
-        goto CLOSETAGS;
+        if (my $patch = $config->{versions}{$version}{files}{$os}{$lang}{complete}) {
+            my @sorted_patch = map { $_ => $patch->{$_} } sort keys %$patch;
+            $writer->startTag('patch', @sorted_patch);
+            $writer->endTag('patch');
+        }
+        if ($from_version) {
+            if (my $patch = $config->{versions}{$version}{files}{$os}{$lang}{partial}{$from_version}) {
+                my @sorted_patch = map { $_ => $patch->{$_} } sort keys %$patch;
+                $writer->startTag('patch', @sorted_patch);
+                $writer->endTag('patch');
+            }
+        }
+        CLOSETAGS:
+        $writer->endTag('update');
     }
-    my $minversion = get_config($config, $version, $os, 'minSupportedOSVersion');
-    my $mininstruc = get_config($config, $version, $os, 'minSupportedInstructionSet');
-    $writer->startTag('update',
-        type => 'minor',
-        displayVersion => $version,
-        appVersion => $version,
-        platformVersion => get_config($config, $version, $os, 'platformVersion'),
-        buildID => get_config($config, $version, $os, 'buildID'),
-        detailsURL => get_config($config, $version, $os, 'detailsURL'),
-        actions => 'showURL',
-        openURL => get_config($config, $version, $os, 'detailsURL'),
-        defined $minversion ? ( minSupportedOSVersion => $minversion ) : (),
-        defined $mininstruc ? ( minSupportedInstructionSet => $mininstruc ) : (),
-    );
-    foreach my $patch (@patches) {
-        my @sorted_patch = map { $_ => $patch->{$_} } sort keys %$patch;
-        $writer->startTag('patch', @sorted_patch);
-        $writer->endTag('patch');
-    }
-    CLOSETAGS:
-    $writer->endTag('update');
     $writer->endTag('updates');
     $writer->end;
     return $res;
@@ -375,28 +388,38 @@ sub get_response {
 
 sub write_responses {
     my ($config, $channel) = @_;
-    my $version = $config->{channels}{$channel};
-    get_version_files($config, $version);
-    get_buildinfos($config, $version);
-    my $files = $config->{versions}{$version}{files};
-    my $migrate_archs = $config->{versions}{$version}{migrate_archs} // {};
-    foreach my $old_os (keys %$migrate_archs) {
-        my $new_os = $migrate_archs->{$old_os};
-        foreach my $lang (keys %{$files->{$new_os}}) {
-            $files->{$old_os}{$lang}{complete} =
-                $files->{$new_os}{$lang}{complete};
+    my $versions = as_array($config->{channels}{$channel});
+    my (%oses, %langs, %from_versions);
+    foreach my $version (@$versions) {
+        get_version_files($config, $version);
+        get_buildinfos($config, $version);
+        my $files = $config->{versions}{$version}{files};
+        my $migrate_archs = $config->{versions}{$version}{migrate_archs} // {};
+        foreach my $old_os (keys %$migrate_archs) {
+            my $new_os = $migrate_archs->{$old_os};
+            foreach my $lang (keys %{$files->{$new_os}}) {
+                $files->{$old_os}{$lang}{complete} =
+                    $files->{$new_os}{$lang}{complete};
+            }
+        }
+        foreach my $os (keys %$files) {
+            $oses{$os} = 1;
+            foreach my $lang (keys %{$files->{$os}}) {
+                $langs{$lang} = 1;
+                foreach my $from_version (keys %{$files->{$os}{$lang}{partial}}) {
+                    $from_versions{$from_version} = 1;
+                }
+            }
         }
     }
-    foreach my $os (keys %$files) {
-        foreach my $lang (keys %{$files->{$os}}) {
-            my $resp = get_response($config, $version, $os,
-                                $files->{$os}{$lang}{complete});
-            write_htdocs($channel, "$version-$os-$lang.xml", $resp);
-            foreach my $from_version (keys %{$files->{$os}{$lang}{partial}}) {
-                $resp = get_response($config, $version, $os,
-                                $files->{$os}{$lang}{complete},
-                                $files->{$os}{$lang}{partial}{$from_version});
-                write_htdocs($channel, "$from_version-$version-$os-$lang.xml", $resp);
+    my $versions_str = join('+', @$versions);
+    foreach my $os (keys %oses) {
+        foreach my $lang (keys %langs) {
+            my $resp = get_response($config, $versions, $os, $lang);
+            write_htdocs($channel, "$versions_str-$os-$lang.xml", $resp);
+            foreach my $from_version (keys %from_versions) {
+                $resp = get_response($config, $versions, $os, $lang, $from_version);
+                write_htdocs($channel, "$from_version-$versions_str-$os-$lang.xml", $resp);
             }
         }
     }
@@ -410,25 +433,40 @@ sub write_htaccess {
     my $flags = "[last]";
     my $htaccess = "RewriteEngine On\n";
     $htaccess .= $config->{htaccess_rewrite_rules}{$channel} // '';
-    my $version = $config->{channels}{$channel};
-    my $migrate_langs = $config->{versions}{$version}{migrate_langs} // {};
-    my $files = $config->{versions}{$version}{files};
-    $htaccess .= "RewriteRule ^[^\/]+/$version/ no-update.xml $flags\n";
-    foreach my $os (sort keys %$files) {
+    my $versions = as_array($config->{channels}{$channel});
+    my $versions_str = join('+', @$versions);
+    my (%oses, %langs, %from_versions);
+    my $migrate_langs;
+    foreach my $version (@$versions) {
+        $migrate_langs = $config->{versions}{$version}{migrate_langs}
+                                if $config->{versions}{$version}{migrate_langs};
+        my $files = $config->{versions}{$version}{files};
+        foreach my $os (keys %$files) {
+            $oses{$os} = 1;
+            foreach my $lang (keys %{$files->{$os}}) {
+                $langs{$lang} = 1;
+                foreach my $from_version (keys %{$files->{$os}{$lang}{partial}}) {
+                    $from_versions{$from_version} = 1;
+                }
+            }
+        }
+        $htaccess .= "RewriteRule ^[^\/]+/$version/ no-update.xml $flags\n";
+    }
+    foreach my $os (sort keys %oses) {
         foreach my $bt (build_targets_by_os($os)) {
-            foreach my $lang (sort keys %{$files->{$os}}) {
-                foreach my $from_version (sort keys %{$files->{$os}{$lang}{partial}}) {
+            foreach my $lang (sort keys %langs) {
+                foreach my $from_version (sort keys %from_versions) {
                     $htaccess .= "RewriteRule ^$bt/$from_version/$lang "
-                              .  "$from_version-$version-$os-$lang.xml $flags\n";
+                              .  "$from_version-$versions_str-$os-$lang.xml $flags\n";
                 }
                 $htaccess .= "RewriteRule ^$bt/[^\/]+/$lang "
-                          .  "$version-$os-$lang.xml $flags\n";
+                          .  "$versions_str-$os-$lang.xml $flags\n";
             }
             foreach my $lang (sort keys %$migrate_langs) {
                 $htaccess .= "RewriteRule ^$bt/[^\/]+/$lang "
-                          .  "$version-$os-$migrate_langs->{$lang}.xml $flags\n";
+                          .  "$versions_str-$os-$migrate_langs->{$lang}.xml $flags\n";
             }
-            $htaccess .= "RewriteRule ^$bt/ $version-$os-ALL.xml $flags\n";
+            $htaccess .= "RewriteRule ^$bt/ $versions_str-$os-ALL.xml $flags\n";
         }
     }
     write_htdocs($channel, '.htaccess', $htaccess);
@@ -437,7 +475,8 @@ sub write_htaccess {
 sub write_downloads_json {
     my ($config, $channel) = @_;
     return unless $config->{create_downloads_json};
-    my $version = $config->{channels}{$channel};
+    my $versions = as_array($config->{channels}{$channel});
+    my ($version) = @$versions;
     my $tag = get_config($config, $version, 'any', 'tag');
     my $data = {
         version => "$version",
@@ -465,8 +504,10 @@ sub marzip_path {
 }
 
 my $martools_tmpdir;
+my $extracted_martools;
 sub extract_martools {
     my ($config, $version) = @_;
+    return if $extracted_martools;
     my $marzip = marzip_path($config, $version);
     $martools_tmpdir = get_tmpdir($config);
     my $old_cwd = getcwd;
@@ -482,6 +523,7 @@ sub extract_martools {
     } else {
         $ENV{LD_LIBRARY_PATH} = "$martools_tmpdir/mar-tools";
     }
+    $extracted_martools = 1;
 }
 
 sub log_step {
@@ -538,7 +580,8 @@ sub build_targets_list {
 
 sub check_update_responses_channel {
     my ($config, $base_url, $channel) = @_;
-    my $channel_version = $config->{channels}{$channel};
+    my $channel_versions = as_array($config->{channels}{$channel});
+    my ($channel_version) = @$channel_versions;
     foreach my $build_target (build_targets_list()) {
         foreach my $lang (qw(en-US de)) {
             my $url = "$base_url/$channel/$build_target/1.0/$lang";
@@ -603,11 +646,13 @@ sub download_missing_versions {
     my ($config, $channel) = @_;
     exit_error "Unknown channel $channel"
         unless $config->{channels}{$channel};
-    my $cversion = $config->{channels}{$channel};
-    next unless $config->{versions}{$cversion}{incremental_from};
-    foreach my $version (@{$config->{versions}{$cversion}{incremental_from}}) {
-        next if -d version_dir($config, $version);
-        download_version($config, $version);
+    my $cversions = as_array($config->{channels}{$channel});
+    foreach my $cversion (@$cversions) {
+        next unless $config->{versions}{$cversion}{incremental_from};
+        foreach my $version (@{$config->{versions}{$cversion}{incremental_from}}) {
+            next if -d version_dir($config, $version);
+            download_version($config, $version);
+        }
     }
 }
 
@@ -649,10 +694,12 @@ my %actions = (
         exit_error "Wrong arguments" unless @ARGV == 1;
         my $channel = $ARGV[0];
         exit_error "Unknown channel" unless $config->{channels}{$channel};
-        my $version = $config->{channels}{$channel};
-        extract_martools($config, $version);
-        get_version_files($config, $version);
-        create_incremental_mars_for_version($config, $version, $channel);
+        my $versions = as_array($config->{channels}{$channel});
+        foreach my $version (@$versions) {
+            extract_martools($config, $version);
+            get_version_files($config, $version);
+            create_incremental_mars_for_version($config, $version, $channel);
+        }
     },
     download_missing_versions => sub {
         my ($config) = @_;
