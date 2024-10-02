@@ -256,7 +256,7 @@ sub update_responses {
     my $htdocsdir = "$topdir/tools/update-responses/htdocs/nightly";
     path($htdocsdir)->remove_tree({ safe => 0 });
     exit_error "Error running update_responses for $publish_dir" unless
-       system("$topdir/tools/update-responses/update_responses") == 0;
+       system("$topdir/tools/update-responses/update_responses", 'nightly') == 0;
     path("$topdir/nightly/updates/$publish_dir/nightly")->remove_tree({ safe => 0 });
     make_path("$topdir/nightly/updates/$publish_dir");
     dirmove($htdocsdir, "$topdir/nightly/updates/$publish_dir/nightly")
