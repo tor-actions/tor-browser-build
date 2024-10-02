@@ -39,6 +39,8 @@ Tor Browser Stable lives in the various `maint-$(TOR_BROWSER_MAJOR).$(TOR_BROWSE
   - [ ] `var/torbrowser_version` : update to next version
   - [ ] `var/torbrowser_build` : update to `$(TOR_BROWSER_BUILD_N)`
   - [ ] `var/browser_release_date` : update to build date. For the build to be reproducible, the date should be in the past when building.
+  - [ ] `var/torbrowser_legacy_version` : update to next version in the legacy-13.5 branch
+  - [ ] `var/torbrowser_legacy_platform_version` : update to firefox platform version in the legacy-13.5 branch
   - [ ] ***(Desktop Only)***`var/torbrowser_incremental_from` : update to previous Desktop version
     - **NOTE**: We try to build incrementals for the previous 3 desktop versions except in the case of a watershed update
     - **IMPORTANT**: Really *actually* make sure this is the previous Desktop version or else the `make torbrowser-incrementals-*` step will fail
