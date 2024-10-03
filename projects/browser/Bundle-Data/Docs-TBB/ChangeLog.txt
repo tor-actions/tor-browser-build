@@ -1,3 +1,54 @@
+Tor Browser 14.0a8 - October 03 2024
+ * All Platforms
+   * Bug 30543: compat: make spoofed orientation reflect spoofed screen dimensions [1607032 + 1918202] [tor-browser]
+   * Bug 42054: ESR128: investigate - thorin's list [tor-browser]
+   * Bug 42716: Disable unwanted about:* pages [tor-browser]
+   * Bug 43170: Disable user-agent spoofing in HTTP header [tor-browser]
+   * Bug 43173: Backport security fixes from Firefox 131 [tor-browser]
+   * Bug 43178: Audit fingerprinting overrides (MozBug 1834274) [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 128.3.0esr
+   * Bug 43098: YEC 2024 Takeover for Desktop Stable [tor-browser]
+   * Bug 43149: Update donate URL in YEC 2024 desktop [tor-browser]
+   * Bug 43164: Prevent search-bar from being auto-hidden when not used for awhile [tor-browser]
+   * Bug 43169: compat: align userAgent in navigator + HTTP Header [tor-browser]
+ * Android
+   * Updated GeckoView to 128.3.0esr
+   * Bug 42660: Review the patch on Android's ProxySelector [tor-browser]
+   * Bug 43102: Android notifications tell to make Firefox your default browser
+   * Bug 43151: MOZ_DATA_REPORTING, MOZ_TELEMETRY_REPORTING, MOZ_CRASHREPORTER, and MOZ_BACKGROUNDTASKS enabled on Android [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.23.2
+     * Bug 43156: Update translation CI to account for the extended 13.5 release [tor-browser]
+     * Bug 43157: Move tb-dev to base-browser [tor-browser]
+     * Bug 43181: Run translation CI if there is a change in a string.xml file [tor-browser]
+   * Windows + macOS + Linux
+     * Bug 41247: Adapt tools/update-responses/update_responses to support multiple versions in the same xml files [tor-browser-build]
+     * Bug 41256: tools/signing/upload-update_responses-to-staticiforme should regenerate update-responses when it already exists [tor-browser-build]
+
+Tor Browser 13.5a11 - October 01 2024
+ * All Platforms
+   * Bug 41252: Disable updating update_responses in 13.5-legacy branch [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.16.0esr
+
+Tor Browser 13.5.6 - September 30 2024
+ * All Platforms
+   * Updated NoScript to 11.4.40
+   * Bug 42832: Download spam prevention should not affect browser extensions [tor-browser]
+   * Bug 43167: Rebase Tor Browser Stable onto 115.16.0esr [tor-browser]
+   * Bug 43173: Backport security fixes from Firefox 131 [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 115.16.0esr
+   * Bug 42737: Drop the hash check on updates [tor-browser]
+   * Bug 43098: YEC 2024 Takeover for Desktop Stable [tor-browser]
+ * Windows + macOS
+   * Bug 42747: Windows 7/8 and macOS 10.12-10.14 Legacy/Maintenance [tor-browser]
+ * Android
+   * Updated GeckoView to 115.16.0esr
+   * Bug 43099: YEC 2024 Takeover for Android Stable [tor-browser]
+
 Tor Browser 14.0a7 - September 27 2024
  * All Platforms
    * Updated NoScript to 11.4.40
@@ -30,6 +81,12 @@ Tor Browser 13.5a10 - September 25 2024
  * Build System
    * Windows + macOS + Linux
      * Updated Go to 1.21.12
+
+Tor Browser 13.5.5 - September 25 2024
+ * Windows + macOS
+   * Bug 43125: Update message for legacy OS (windows ≤8.1, macOS ≤10.14) users [tor-browser]
+ * Linux
+   * Bug 334: When set as default browser on Linux in standard mode, links don't open correctly [mullvad-browser]
 
 Tor Browser 14.0a6 - September 19 2024
  * All Platforms
