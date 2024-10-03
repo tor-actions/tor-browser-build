@@ -8,15 +8,12 @@ check_torbrowser_version_var
 
 update_responses_tar_filename="update-responses-$tbb_version_type-$tbb_version.tar"
 update_responses_tar="$script_dir/../../$SIGNING_PROJECTNAME/$tbb_version_type/update-responses/$update_responses_tar_filename"
-if test -f "$update_responses_tar"
-then
-  echo "$update_responses_tar_filename already exists: not running 'make $SIGNING_PROJECTNAME-update_responses-$tbb_version_type'"
-else
-  echo "Running 'make $SIGNING_PROJECTNAME-update_responses-$tbb_version_type'"
-  pushd "$script_dir/../.." > /dev/null
-  make $SIGNING_PROJECTNAME-update_responses-$tbb_version_type
-  popd > /dev/null
-fi
+test -f "$update_responses_tar" && \
+  echo "warning: $update_responses_tar_filename already exists. It will be re-generated."
+echo "Running 'make $SIGNING_PROJECTNAME-update_responses-$tbb_version_type'"
+pushd "$script_dir/../.." > /dev/null
+make $SIGNING_PROJECTNAME-update_responses-$tbb_version_type
+popd > /dev/null
 
 cd $update_responses_repository_dir
 git checkout main
