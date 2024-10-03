@@ -107,8 +107,10 @@ sub get_version_files {
                 type => 'complete',
                 URL => "$download_url/$file",
                 size => -s "$vdir/$file",
-                hashFunction => 'SHA512',
-                hashValue => get_sha512_hex_of_file("$vdir/$file"),
+                $config->{hashes_in_responses} ? (
+                    hashFunction => 'SHA512',
+                    hashValue => get_sha512_hex_of_file("$vdir/$file"),
+                ) : (),
             };
             next;
         }
@@ -118,9 +120,11 @@ sub get_version_files {
                 type => 'partial',
                 URL => "$download_url/$file",
                 size => -s "$vdir/$file",
-                hashFunction => 'SHA512',
-                hashValue => get_sha512_hex_of_file("$vdir/$file"),
-            }
+                $config->{hashes_in_responses} ? (
+                    hashFunction => 'SHA512',
+                    hashValue => get_sha512_hex_of_file("$vdir/$file"),
+                ) : (),
+            };
         }
     }
     closedir $d;
@@ -241,8 +245,10 @@ sub create_incremental_mar {
             type => 'partial',
             URL => "$download_url/$mar_file",
             size => -s $mar_file_path,
-            hashFunction => 'SHA512',
-            hashValue => get_sha512_hex_of_file($mar_file_path),
+            $config->{hashes_in_responses} ? (
+                hashFunction => 'SHA512',
+                hashValue => get_sha512_hex_of_file($mar_file_path),
+            ) : (),
         };
     };
     return if $pm->start($finished_file);
