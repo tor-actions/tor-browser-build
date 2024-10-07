@@ -77,7 +77,6 @@ versions:
         mar_channel_id: [% c('var/mar_channel_id') %]
         platformVersion: [% c('var/torbrowser_legacy_platform_version') %]
         detailsURL: https://blog.torproject.org/new[% IF c("var/alpha") %]-alpha[% END %]-release-tor-browser-[% c("var/torbrowser_legacy_version") FILTER remove('\.') %]
-        incremental_from: []
         # minSupportedOsVersion on macOS corresponds to the Darwin version ( https://en.wikipedia.org/wiki/Darwin_(operating_system) )
         macos:
             # macOS v10.12.0

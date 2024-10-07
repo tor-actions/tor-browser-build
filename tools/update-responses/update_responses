@@ -702,6 +702,7 @@ my %actions = (
         exit_error "Unknown channel" unless $config->{channels}{$channel};
         my $versions = as_array($config->{channels}{$channel});
         foreach my $version (@$versions) {
+            next unless $config->{versions}{$version}{incremental_from};
             extract_martools($config, $version);
             get_version_files($config, $version);
             create_incremental_mars_for_version($config, $version, $channel);
