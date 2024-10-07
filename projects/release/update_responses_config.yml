@@ -72,7 +72,7 @@ versions:
             minSupportedInstructionSet: SSE2
         linux-x86_64:
             minSupportedInstructionSet: SSE2
-[% IF c("var/torbrowser_legacy_version") -%]
+[% IF c("var/tor-browser") && c("var/torbrowser_legacy_version") -%]
     [% c("var/torbrowser_legacy_version") %]:
         mar_channel_id: [% c('var/mar_channel_id') %]
         platformVersion: [% c('var/torbrowser_legacy_platform_version') %]
