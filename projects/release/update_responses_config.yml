@@ -29,7 +29,7 @@ build_targets:
 channels:
     [% c('var/channel') %]:
       - [% c("var/torbrowser_version") %]
-[% IF c("var/torbrowser_legacy_version") -%]
+[% IF c("var/tor-browser") && c("var/torbrowser_legacy_version") -%]
       - [% c("var/torbrowser_legacy_version") %]
 [% END -%]
 versions:
