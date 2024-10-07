@@ -1,4 +1,4 @@
-Tor Browser 14.0a8 - October 03 2024
+Tor Browser 14.0a8 - October 07 2024
  * All Platforms
    * Bug 30543: compat: make spoofed orientation reflect spoofed screen dimensions [1607032 + 1918202] [tor-browser]
    * Bug 42054: ESR128: investigate - thorin's list [tor-browser]
@@ -26,6 +26,7 @@ Tor Browser 14.0a8 - October 03 2024
    * Windows + macOS + Linux
      * Bug 41247: Adapt tools/update-responses/update_responses to support multiple versions in the same xml files [tor-browser-build]
      * Bug 41256: tools/signing/upload-update_responses-to-staticiforme should regenerate update-responses when it already exists [tor-browser-build]
+     * Bug 41259: Skip versions which don't set incremental_from when generating incrementals [tor-browser-build]
 
 Tor Browser 13.5a11 - October 01 2024
  * All Platforms
