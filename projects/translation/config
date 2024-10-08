@@ -12,19 +12,19 @@ compress_tar: 'gz'
 steps:
   base-browser:
     base-browser: '[% INCLUDE build %]'
-    git_hash: a142f78af87f994913faa15fb4b0f34f0ce1a22b
+    git_hash: ceb66dd0937da14962cb535699242b2526e11f02
     targets:
       nightly:
         git_hash: 'base-browser'
   tor-browser:
     tor-browser: '[% INCLUDE build %]'
-    git_hash: 04f824bce1b6fb4b989bb9303949af17eab11406
+    git_hash: dbf1454fdbd3256d65985cc1c46391ce0ec159e7
     targets:
       nightly:
         git_hash: 'tor-browser'
   mullvad-browser:
     mullvad-browser: '[% INCLUDE build %]'
-    git_hash: 78212a3da2439e436ac5f73d8e3eb908145c3ece
+    git_hash: 2f7d98b46ce480cdb4d7e9ddab912650c8673d6c
     targets:
       nightly:
         git_hash: 'mullvad-browser'
@@ -32,7 +32,7 @@ steps:
     fenix: '[% INCLUDE build %]'
     # We need to bump the commit before releasing but just pointing to a branch
     # might cause too much rebuidling of the Firefox part.
-    git_hash: 559ac499551ba78889c61b5dc0669ba10a256674
+    git_hash: 669ea989fa07933df7ab03ec0077e166e0dcc961
     compress_tar: 'zst'
     targets:
       nightly:
