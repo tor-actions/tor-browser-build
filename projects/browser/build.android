@@ -21,7 +21,15 @@ noscript_path="$ext_dir/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi"
 
 mkdir -p /var/tmp/build/$ext_dir [% dest_dir _ '/' _ c('filename') %]
 cd /var/tmp/build
-mv $rootdir/[% c('input_files_by_name/noscript') %] "$noscript_path"
+
+mkdir noscript
+pushd noscript
+unzip $rootdir/[% c('input_files_by_name/noscript') %]
+[% c('zip', {
+    zip_src  => [ '.' ],
+    zip_args => '-0 ../$noscript_path',
+  }) %]
+popd
 
 [%IF c("var/tor-browser") -%]
   tar -xaf "$rootdir/[% c("input_files_by_name/tor-expert-bundle") %]/tor-expert-bundle.tar.gz" tor/pluggable_transports/pt_config.json
