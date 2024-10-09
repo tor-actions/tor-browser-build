@@ -19,7 +19,7 @@ var:
   browser_build: 15
   variant: Beta
   # This should be updated when the list of gradle dependencies is changed.
-  gradle_dependencies_version: 2
+  gradle_dependencies_version: 3
   gradle_version: 7.6.1
   glean_parser: 7.1.0
   as_version: '[% pc("application-services", "version") %]'

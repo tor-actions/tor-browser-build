@@ -1,6 +1,6 @@
 sha256sum | url
-ec3a75bebddbf19ff56a281cf5d1ad146169dcaa0e69d7b14f4aaba2e7775f34 | https://build-sources.tbb.torproject.org/jtorctl/jtorctl-0.2.jar
-3369726ca2b0e3736c741ff3c22e06f707a1007ff20ccc5b5ba5d0d9a01ead30 | https://build-sources.tbb.torproject.org/jtorctl/jtorctl-0.2.pom
+ec3a75bebddbf19ff56a281cf5d1ad146169dcaa0e69d7b14f4aaba2e7775f34 | https://build-sources.tbb.torproject.org/maven2/net/freehaven/tor/control/jtorctl/0.2/jtorctl-0.2.jar
+3369726ca2b0e3736c741ff3c22e06f707a1007ff20ccc5b5ba5d0d9a01ead30 | https://build-sources.tbb.torproject.org/maven2/net/freehaven/tor/control/jtorctl/0.2/jtorctl-0.2.pom
 caa72885d1ce7979c1d6c59a8b255c6097b770780d4d4da95d56979a348646cd | https://maven.google.com/androidx/activity/activity-compose/1.7.0/activity-compose-1.7.0.aar
 f7a29bcba338575dcf89a553cff9cfad3f140340eaf2b56fd0193244da602c0a | https://maven.google.com/androidx/activity/activity-compose/1.7.0/activity-compose-1.7.0.module
 90f32e60dcb83add1aff051ee8709023123d524cc3f6390fff6a4a31c20d9798 | https://maven.google.com/androidx/activity/activity-compose/1.7.0/activity-compose-1.7.0.pom
