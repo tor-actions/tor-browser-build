@@ -5,6 +5,10 @@ version: '[% c("var/torbrowser_version") %]'
 container:
   use_container: 1
 
+var:
+  deps:
+  - jq
+
 targets:
   windows:
     var:
@@ -18,6 +22,7 @@ input_files:
     project: lyrebird
   - name: snowflake
     project: snowflake
+    enable: '[% !c("var/windows") %]'
   - name: conjure
     project: conjure
   - filename: pt_config.json

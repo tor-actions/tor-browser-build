@@ -14,11 +14,20 @@ cd tor
 mkdir pluggable_transports && cd pluggable_transports
 
 tar -xkf $rootdir/[% c('input_files_by_name/lyrebird') %]
+# do not include snowflake-client on Windows targets
+[% IF !c("var/windows") -%]
 tar -xkf $rootdir/[% c('input_files_by_name/snowflake') %]
+[% END %]
 tar -xkf $rootdir/[% c('input_files_by_name/conjure') %]
 
 # add per-platform pt extension
 awk '{gsub(/\$\{pt_extension\}/, "[% c("var/pt_extension") %]"); print}' $rootdir/pt_config.json > pt_config.json
+
+# remove snowflake entires on Windows targets
+[% IF c("var/windows") -%]
+# remove snowflake pt and bridge entries
+jq 'del(.pluggableTransports.snowflake, .bridges.snowflake)' pt_config.json > tmp.pt_config.json && mv tmp.pt_config.json pt_config.json
+[% END %]
 
 cd $distdir
 
