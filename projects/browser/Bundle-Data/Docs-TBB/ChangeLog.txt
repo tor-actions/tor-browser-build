@@ -1,3 +1,16 @@
+Tor Browser 13.5.8 - October 14 2024
+  * Android
+   * Updated NoScript to 11.4.42
+   * Bug 43099: YEC 2024 Takeover for Android Stable [tor-browser]
+   * Bug 43173: Backport security fixes from Firefox 131 [tor-browser]
+
+Tor Browser 14.0a9 - October 08 2024
+ * All Platforms
+   * Bug 43197: Disable automatic exception for HTTPS-First [tor-browser]
+   * Bug 43201: Security fixes from Firefox 131.0.2 [tor-browser]
+ * Android
+   * Bug 43132: Enable extensions installation on Tor Browser 14 for Android. [tor-browser]
+
 Tor Browser 13.5.7 - October 08 2024
  * All Platforms
    * Bug 43201: Security fixes from Firefox 131.0.2 [tor-browser]
