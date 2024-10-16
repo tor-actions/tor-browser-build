@@ -108,9 +108,9 @@ input_files:
     enable: '[% ! c("var/android") %]'
   - filename: Bundle-Data
     enable: '[% ! c("var/android") %]'
-  - URL: https://addons.mozilla.org/firefox/downloads/file/4357325/noscript-11.4.40.xpi
+  - URL: https://addons.mozilla.org/firefox/downloads/file/4363712/noscript-11.4.42.xpi
     name: noscript
-    sha256sum: 242ead426159d871480a13062cbee08abc97da746cdc5c643aee2692e9adbbb2
+    sha256sum: fd2d420afd93829bb6fe30ec6f8ba926d3d54d7583b8bbd822053b8cd13c0472
   - URL: https://addons.mozilla.org/firefox/downloads/file/4359936/ublock_origin-1.60.0.xpi
     name: ublock-origin
     sha256sum: e2cda9b2a1b0a7f6e5ef0da9f87f28df52f8560587ba2e51a3003121cfb81600

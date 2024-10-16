@@ -19,7 +19,7 @@ var:
   browser_series: '14.0'
   browser_rebase: 1
   browser_branch: '[% c("var/browser_series") %]-[% c("var/browser_rebase") %]'
-  browser_build: 4
+  browser_build: 6
   branding_directory_prefix: 'tb'
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
   nightly_updates_publish_dir: '[% c("var/nightly_updates_publish_dir_prefix") %]nightly-[% c("var/osname") %]'
