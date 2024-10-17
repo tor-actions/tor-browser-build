@@ -242,6 +242,7 @@ class ReleasePreparation:
         logger.debug("About to fetch Firefox from %s.", remote)
         repo.remotes["origin"].fetch()
         tags = get_sorted_tags(repo)
+        tag_info = None
         for t in tags:
             m = re.match(
                 r"(\w+-browser)-([^-]+)-([\d\.]+)-(\d+)-build(\d+)", t.tag
@@ -251,8 +252,21 @@ class ReleasePreparation:
                 and m.group(1) == browser
                 and m.group(3) == self.version.major
             ):
+                logger.debug("Matched tag %s.", t.tag)
                 # firefox-version, rebase, build
-                return (m.group(2), int(m.group(4)), int(m.group(5)))
+                tag_info = [m.group(2), int(m.group(4)), int(m.group(5))]
+                break
+        if tag_info is None:
+            raise RuntimeError("No compatible tag found.")
+        branch = t.tag[: m.end(4)]
+        logger.debug("Checking if tag %s is head of %s.", t.tag, branch)
+        if t.object != repo.remotes["origin"].refs[branch].commit:
+            logger.info(
+                "Found new commits after tag %s, bumping the build number preemptively.",
+                t.tag,
+            )
+            tag_info[2] += 1
+        return tag_info
 
     def update_translations(self):
         logger.info("Updating translations")
@@ -373,9 +387,7 @@ class ReleasePreparation:
 
         source = self.find_input(config, "openssl")
         # No need to update URL, as it uses a variable.
-        hash_url = (
-            f"https://github.com/openssl/openssl/releases/download/openssl-{version}/openssl-{version}.tar.gz.sha256"
-        )
+        hash_url = f"https://github.com/openssl/openssl/releases/download/openssl-{version}/openssl-{version}.tar.gz.sha256"
         r = requests.get(hash_url)
         r.raise_for_status()
         source["sha256sum"] = r.text.strip()
