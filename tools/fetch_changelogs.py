@@ -156,7 +156,7 @@ class ChangelogBuilder:
         elif not is_mullvad and is_mullvad is not None:
             labels += "&not[labels]=Sponsor 131"
         r = requests.get(
-            f"{API_URL}/projects/{PROJECT_ID}/issues?labels={labels}&search={issue_or_version}&in=title",
+            f"{API_URL}/projects/{PROJECT_ID}/issues?labels={labels}&search={issue_or_version}&in=title&state=opened",
             headers=self.headers,
         )
         r.raise_for_status()
@@ -196,7 +196,7 @@ class ChangelogBuilder:
             raise ValueError(
                 "Inconsistency detected: a browser was explicitly specified, but the issue does not have the correct labels."
             )
-        self.issue_id = issue["iid"]
+        self.relprep_issue = issue["iid"]
         self.is_mullvad = has_s131
 
         if self.version is None:
@@ -205,7 +205,9 @@ class ChangelogBuilder:
                 self.version = version_match.group()
 
     def create(self, **kwargs):
-        self._find_linked()
+        self._find_linked(
+            kwargs.get("include_from"), kwargs.get("exclude_from")
+        )
         self._add_updates(kwargs)
         self._sort_issues()
         name = "Mullvad" if self.is_mullvad else "Tor"
@@ -233,16 +235,46 @@ class ChangelogBuilder:
                 text += f"     * {issue}\n"
         return text
 
-    def _find_linked(self):
+    def _find_linked(self, include_relpreps=[], exclude_relpreps=[]):
         self.issues = []
         self.issues_build = []
 
+        if include_relpreps is None:
+            include_relpreps = [self.relprep_issue]
+        elif self.relprep_issue not in include_relpreps:
+            include_relpreps.append(self.relprep_issue)
+        if exclude_relpreps is None:
+            exclude_relpreps = []
+
+        included = {}
+        excluded = set()
+        for relprep in include_relpreps:
+            included.update(
+                {
+                    issue["references"]["full"]: issue
+                    for issue in self._get_linked_issues(relprep)
+                }
+            )
+        for relprep in exclude_relpreps:
+            excluded.update(
+                [
+                    issue["references"]["full"]
+                    for issue in self._get_linked_issues(relprep)
+                ]
+            )
+        for ex in excluded:
+            if ex in included:
+                included.pop(ex)
+        for data in included.values():
+            self._add_issue(data)
+
+    def _get_linked_issues(self, issue_id):
         r = requests.get(
-            f"{API_URL}/projects/{PROJECT_ID}/issues/{self.issue_id}/links",
+            f"{API_URL}/projects/{PROJECT_ID}/issues/{issue_id}/links",
             headers=self.headers,
         )
-        for i in r.json():
-            self._add_issue(i)
+        r.raise_for_status()
+        return r.json()
 
     def _add_issue(self, gitlab_data):
         self._add_entry(Issue(gitlab_data, self.is_mullvad))
@@ -334,6 +366,16 @@ if __name__ == "__main__":
         help="New Mullvad Browser Extension version (if updated)",
     )
     parser.add_argument("--ublock", help="New uBlock version (if updated)")
+    parser.add_argument(
+        "--exclude-from",
+        help="Relprep issues to remove entries from, useful when doing a major release",
+        nargs="*",
+    )
+    parser.add_argument(
+        "--include-from",
+        help="Relprep issues to add entries from, useful when doing a major release",
+        nargs="*",
+    )
     args = parser.parse_args()
 
     if not args.issue_version:
@@ -350,17 +392,4 @@ if __name__ == "__main__":
         sys.exit(2)
     is_mullvad = args.browser == "mullvad-browser" if args.browser else None
     cb = ChangelogBuilder(token, args.issue_version, is_mullvad)
-    print(
-        cb.create(
-            date=args.date,
-            firefox=args.firefox,
-            tor=args.tor,
-            noscript=args.noscript,
-            openssl=args.openssl,
-            zlib=args.zlib,
-            zstd=args.zstd,
-            go=args.go,
-            mb_extension=args.mb_extension,
-            ublock=args.ublock,
-        )
-    )
+    print(cb.create(**vars(args)))
