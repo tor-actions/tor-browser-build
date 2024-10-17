@@ -36,6 +36,7 @@ targets:
         - dpkg-dev
         - debhelper
         - dh-exec
+        - dh-apparmor
         # Packages needed to generate dependencies for the deb package
         - linux-libc-dev
         - libasound2-dev
@@ -148,6 +149,10 @@ input_files:
     enable: '[% c("var/build_deb_pkg") || c("var/build_rpm_pkg") %]'
 
   # Debian Package
+  - filename: debian/apparmor
+    content: "[% INCLUDE 'debian/apparmor.in' %]"
+    refresh_input: 1
+    enable: '[% c("var/build_deb_pkg") %]'
   - filename: debian/changelog
     content: "[% INCLUDE 'debian/changelog.in' %]"
     refresh_input: 1
