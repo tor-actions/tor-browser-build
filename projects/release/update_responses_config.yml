@@ -118,4 +118,9 @@ htaccess_rewrite_rules:
         RewriteRule ^[^/]+/11\.0.*/.* https://aus1.torproject.org/torbrowser/update_pre12.0/release/$0 [last]
         RewriteRule ^[^/]+/11\.5/.* https://aus1.torproject.org/torbrowser/update_pre12.0/release/$0 [last]
         RewriteRule ^[^/]+/11\.5\.[01234567]/.* https://aus1.torproject.org/torbrowser/update_pre12.0/release/$0 [last]
+        # tor-browser-build#41270: make 13.5.7 a watershed update
+        RewriteRule ^[^/]+/1[12]\.[05].*/.* https://aus1.torproject.org/torbrowser/update_pre14.0/release/$0 [last]
+        RewriteRule ^[^/]+/13\.0.*/.* https://aus1.torproject.org/torbrowser/update_pre14.0/release/$0 [last]
+        RewriteRule ^[^/]+/13\.5/.* https://aus1.torproject.org/torbrowser/update_pre14.0/release/$0 [last]
+        RewriteRule ^[^/]+/13\.5\.[0123456]/.* https://aus1.torproject.org/torbrowser/update_pre14.0/release/$0 [last]
 [% END -%]
