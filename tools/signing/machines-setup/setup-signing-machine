@@ -99,6 +99,10 @@ create_user richard signing
 authorized_keys richard richard.pub
 create_user morgan signing
 authorized_keys morgan morgan.pub
+create_user ma1 signing
+authorized_keys ma1 ma1.pub
+create_user pierov signing
+authorized_keys pierov pierov.pub
 
 # Install rbm deps
 install_packages libyaml-libyaml-perl libtemplate-perl libdatetime-perl \
