@@ -41,6 +41,8 @@ title: $title
 ---
 pub_date: $(date +%Y-%m-%d)
 ---
+_discoverable: no
+---
 author: $blog_publish_user
 ---
 categories:
