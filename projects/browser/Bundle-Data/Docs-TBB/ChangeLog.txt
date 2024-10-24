@@ -1,3 +1,26 @@
+Tor Browser 13.5.9 - October 28 2024
+  * Windows + macOS + Linux
+   * Updated Tor to 0.4.8.13
+   * Bug 43240: Backport security fixes from Firefox 132 [tor-browser]
+   * Bug 41273: relprep.py: bump Firefox and GV to a (yet) non-existing tag when the last one does not match HEAD [tor-browser-build]
+   * Updated Firefox to 115.17.0esr
+   * Bug 42280: Weird connection attempt to multicast IPv6 ff00:::443 on "New identity" [tor-browser]
+   * Bug 43104: Local files and extensions can't be loaded in new windows before bootstrap [tor-browser]
+   * Bug 43169: compat: align userAgent in navigator + HTTP Header [tor-browser]
+   * Bug 43174: Issue with custom home page on local filesystem [tor-browser]
+   * Bug 43207: Backport Mozbug 1886222 [tor-browser]
+ * Windows + macOS
+   * Bug 41252: Disable updating update_responses in 13.5-legacy branch [tor-browser-build]
+ * Windows
+   * Bug 43206: Hide Snowflake UX in legacy Tor Browser on Windows [tor-browser]
+ * Android
+   * Updated GeckoView to 115.17.0esr
+ * Build System
+   * All Platforms
+     * Bug 41278: Hide legacy 13.5 Tor Browser blog posts after 13.5.7 [tor-browser-build]
+   * Windows + macOS
+     * Bug 41269: Simplify projects/go/config and friends once maint-13.5 is legacy Windows and macOS only [tor-browser-build]
+
 Tor Browser 13.5.8 - October 14 2024
   * Android
    * Updated NoScript to 11.4.42
