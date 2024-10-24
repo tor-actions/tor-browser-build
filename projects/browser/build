@@ -221,19 +221,6 @@ tar -C "${TB_STAGE_DIR}" -xf [% c('input_files_by_name/firefox') %]/browser.tar.
 
 for tbdir in "${TBDIRS[@]}"
 do
-  [% IF c("var/linux") -%]
-    mv Bundle-Data/linux/Data/fontconfig "$tbdir/"
-    [% IF c("var/tor-browser") -%]
-      # tor-browser#41776: We cannot remove the old fontconfig file with the
-      # updater. So, let's keep it for the mar generation, but remove it from
-      # new packages.
-      # Remove once we do a watershed release.
-      oldfontconfig="$tbdir/TorBrowser/Data/fontconfig"
-      mkdir -p $oldfontconfig
-      cp "$tbdir/fontconfig/fonts.conf" "$oldfontconfig/"
-    [% END -%]
-  [% END -%]
-
   mkdir -p "$tbdir/$DOCSPATH"
   cp -a Bundle-Data/Docs/* "$tbdir/$DOCSPATH"
   [% IF c("var/tor-browser") -%]

@@ -376,19 +376,6 @@ TOR_CONTROL_PASSWD environment variable."
 setControlPortPasswd ${TOR_CONTROL_PASSWD:='"secret"'}
 [% END -%]
 
-# Set up custom bundled fonts. See fonts-conf(5).
-export FONTCONFIG_PATH="$browser_dir/fontconfig"
-export FONTCONFIG_FILE="fonts.conf"
-[% # tor-browser#41776: We cannot make the updater remove this file.
-   # So, let's remove it on this script, since we know that at this point the
-   # browser will not need it anymore.
-   # Remove once we do a watershed release.
- -%]
-[% IF c("var/tor-browser") -%]
-# Old fontconfig directory, not needed anymore
-rm -Rf "${HOME}/TorBrowser/Data/fontconfig"
-[% END -%]
-
 # Avoid overwriting user's dconf values. Fixes #27903.
 export GSETTINGS_BACKEND=memory
 
