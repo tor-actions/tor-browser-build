@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-version: 3.11.3
+version: 3.9.20
 filename: 'python-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
@@ -24,9 +24,7 @@ input_files:
   - project: container-image
   - name: python
     URL: 'https://www.python.org/ftp/python/[% c("version") %]/Python-[% c("version") %].tar.xz'
-    gpg_keyring: python.gpg
-    sig_ext: asc
-    file_gpg_id: 1
+    sha256sum: 6b281279efd85294d2d6993e173983a57464c0133956fbbb5536ec9646beaf0c
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
     enable: '[% c("var/linux") %]'
