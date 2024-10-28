@@ -17,11 +17,6 @@ test -f "$steps_dir/linux-signer-signmars.done" ||
   read -sp "Enter $nssdb (mar signing) passphrase: " NSSPASS
 echo
 
-if is_project torbrowser; then
-  test -f "$steps_dir/linux-signer-sign-android-apks.done" ||
-    read -sp "Enter android apk signing password ($tbb_version_type): " KSPASS
-  echo
-fi
 test -f "$steps_dir/linux-signer-authenticode-signing.done" ||
   read -sp "Enter windows authenticode passphrase: " YUBIPASS
 echo
@@ -190,10 +185,6 @@ do_step sync-scripts-to-linux-signer
 do_step sync-before-linux-signer-signmars
 do_step linux-signer-signmars
 do_step sync-after-signmars
-is_project torbrowser && \
-  do_step linux-signer-sign-android-apks
-is_project torbrowser && \
-  do_step sync-after-sign-android-apks
 do_step linux-signer-authenticode-signing
 do_step sync-after-authenticode-signing
 do_step authenticode-timestamping
