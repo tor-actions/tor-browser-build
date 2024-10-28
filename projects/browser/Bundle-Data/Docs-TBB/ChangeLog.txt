@@ -1,3 +1,18 @@
+Tor Browser 14.0.1 - October 29 2024
+ * All Platforms
+   * Updated Tor to 0.4.8.13
+   * Bug 43231: Rebase Tor Browser 128-based stable and alpha onto 128.4.0esr [tor-browser]
+   * Bug 43240: Backport security fixes from Firefox 132 [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 128.4.0esr
+ * Android
+   * Updated GeckoView to 128.4.0esr
+ * Build System
+   * All Platforms
+     * Bug 41289: Fix single-browser in relprep.py [tor-browser-build]
+   * Linux
+     * Bug 41282: Add SSL to our custom Python for MozBug 1924022 [tor-browser-build]
+
 Tor Browser 14.0 - October 17 2024
  * All Platforms
    * Bug 30543: compat: make spoofed orientation reflect spoofed screen dimensions [1607032 + 1918202] [tor-browser]
