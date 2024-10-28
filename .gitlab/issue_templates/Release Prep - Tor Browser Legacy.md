@@ -251,6 +251,22 @@ popd
         ```bash
         make torbrowser-update_responses-release
         ```
+    - [ ] Commit new update responses to tor-browser-update-responses.git:
+      - [ ] Run:
+        ```bash
+        updaterespdir=/path/to/tor-browser-update-responses.git
+        cp torbrowser/release/update-responses/update-responses-release-${TOR_BROWSER_VERSION}.tar "$updaterespdir"
+        cd "$updaterespdir"
+        git pull
+        rm -Rf update_3/release
+        tar -C update_3 update-responses-release-${TOR_BROWSER_VERSION}.tar
+        rm update-responses-release-${TOR_BROWSER_VERSION}.tar
+        git add update_3/release
+        git commit -m "release: new version, ${TOR_BROWSER_VERSION}"
+        git push
+        # print the commit hash and copy past it for the next step
+        git show -s --format=%H
+        ```
   - On `staticiforme.torproject.org`, deploy new update responses:
     - **NOTE**: for now this is a bit janky, we should somehow update the workflow to be a bit less hacky
     - [ ] Edit an existing `deploy_update_responses-release.sh` script in your `HOME` directory with the newly pushed commit hash
