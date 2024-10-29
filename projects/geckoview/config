@@ -22,9 +22,9 @@ var:
   browser_rebase: 1
   browser_branch: '[% c("var/browser_series") %]-[% c("var/browser_rebase") %]'
   browser_build: 1
-  copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
+  copyright_year: '[% exec("git show -s --format=%ci" _ c("git_hash") _ "^{commit}", { exec_noco => 1 }).remove("-.*") %]'
   gitlab_project: https://gitlab.torproject.org/tpo/applications/tor-browser
-  git_commit: '[% exec("git rev-parse HEAD") %]'
+  git_commit: '[% exec("git rev-parse " _ c("git_hash") _ "^{commit}", { exec_noco => 1 }) %]'
   deps:
     - build-essential
     - autoconf
@@ -41,7 +41,7 @@ var:
   glean_parser: 14.0.1
   variant: beta
   has_l10n: '[% !c("var/testbuild") && !c("var/locales").empty %]'
-  l10n-changesets: '[% exec("cat browser/locales/l10n-changesets.json") %]'
+  l10n-changesets: '[% exec("git --no-pager show " _ c("git_hash") _ ":browser/locales/l10n-changesets.json", { exec_noco => 1 }) %]'
 
 targets:
   release:

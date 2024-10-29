@@ -21,10 +21,10 @@ var:
   browser_branch: '[% c("var/browser_series") %]-[% c("var/browser_rebase") %]'
   browser_build: 1
   branding_directory_prefix: 'tb'
-  copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
+  copyright_year: '[% exec("git show -s --format=%ci" _ c("git_hash") _ "^{commit}", { exec_noco => 1 }).remove("-.*") %]'
   nightly_updates_publish_dir: '[% c("var/nightly_updates_publish_dir_prefix") %]nightly-[% c("var/osname") %]'
   gitlab_project: https://gitlab.torproject.org/tpo/applications/tor-browser
-  git_commit: '[% exec("git rev-parse HEAD") %]'
+  git_commit: '[% exec("git rev-parse " _ c("git_hash") _ "^{commit}", { exec_noco => 1 }) %]'
   deps:
     - build-essential
     - autoconf
@@ -53,7 +53,7 @@ var:
     mv -f -- "$rezip_tmpdir/new.zip" [% c("rezip_file") %]
     rm -Rf "$rezip_tmpdir"
 
-  l10n-changesets: '[% exec("cat browser/locales/l10n-changesets.json") %]'
+  l10n-changesets: '[% exec("git --no-pager show " _ c("git_hash") _ ":browser/locales/l10n-changesets.json", { exec_noco => 1 }) %]'
 
 steps:
   src-tarballs:
