@@ -141,16 +141,12 @@ Tor Browser Legacy is on the `maint-13.5` branch
 <details>
   <summary>Website</summary>
 
-  ### downloads: https://gitlab.torproject.org/tpo/web/tpo.git
-  - [ ] `databags/versions.ini`: Update the downloads versions
-      - `torbrowser-stable/version`: catch-all for latest stable version
-      - `torbrowser-alpha/version`: catch-all for latest alpha version
-      - `torbrowser-legacy/version`: catch-all for latest ESR-115 version
-      - `torbrowser-*-stable/version`: platform-specific stable versions
-      - `torbrowser-*-alpha/version`: platform-specific alpha versions
-      - `torbrowser-*-legacy/version`: platform-specific legacy versions
-      - `tor-stable`,`tor-alpha`: set by tor devs, do not touch
-  - [ ] Push to origin as new branch and create MR
+  ### blog: https://gitlab.torproject.org/tpo/web/blog.git
+  - [ ] Run `tools/signing/create-blog-post` which should create the new blog post from a template (edit set-config.blog to set you local blog directory)
+    - [ ] Note any ESR update
+    - [ ] Thank any users which have contributed patches
+    - [ ] **(Optional)** Draft any additional sections for new features which need testing, known issues, etc
+  - [ ] Push to origin as new branch and open MR
   - [ ] Review
   - [ ] Merge
     - **⚠️ WARNING**: Do not deploy yet!
@@ -232,7 +228,7 @@ popd
     ```bash
     static-update-component cdn.torproject.org && static-update-component dist.torproject.org
     ```
-- [ ] Deploy `tor-website` MR
+- [ ] Deploy `tor-blog` MR
 - [ ] On `staticiforme.torproject.org`, remove old release:
   - **NOTE**: Skip this step if we need to hold on to older versions for some reason (for example, this is an Andoid or Desktop-only release, or if we need to hold back installers in favor of build-to-build updates if there are signing issues, etc)
   - [ ] `/srv/cdn-master.torproject.org/htdocs/aus1/torbrowser`
