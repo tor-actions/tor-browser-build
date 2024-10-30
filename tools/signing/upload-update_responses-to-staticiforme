@@ -58,12 +58,20 @@ cat << EOF > "$deploy_script"
 #!/bin/bash
 set -e
 
-echo "Deploying version $tbb_version"
-echo "update_responses_commit: $update_responses_commit"
+if test "\$#" -gt 1; then
+  echo >&2 "Wrong number of arguments"
+  exit 2
+fi
+
+commit=$update_responses_commit
+test "\$#" -eq 1 && commit="\$1"
+
+test "\$#" -eq 0 && echo "Deploying version $tbb_version"
+echo "update_responses_commit: \$commit"
 
 cd "$update_dir"
 git fetch
-changed_files="\$(git diff --name-only HEAD $update_responses_commit)"
+changed_files="\$(git diff --name-only HEAD \$commit)"
 if echo "\$changed_files" | grep -qv "$tbb_version_type"
 then
   echo >&2 "Error: checking out new update_response_commit will changes"
@@ -75,7 +83,7 @@ then
   echo >&2 "See tor-browser-build#41168 for more details."
   exit 1
 fi
-git checkout "$update_responses_commit"
+git checkout "\$commit"
 
 static-update-component aus1.torproject.org
 EOF
