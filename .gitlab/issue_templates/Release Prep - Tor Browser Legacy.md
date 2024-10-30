@@ -268,37 +268,9 @@ popd
         git show -s --format=%H
         ```
   - On `staticiforme.torproject.org`, deploy new update responses:
-    - **NOTE**: for now this is a bit janky, we should somehow update the workflow to be a bit less hacky
-    - [ ] Edit an existing `deploy_update_responses-release.sh` script in your `HOME` directory with the newly pushed commit hash
-      - **example**: (hash: `d938943`)
-        ```bash
-        #!/bin/bash
-        set -e
-
-        echo "Deploying version 14.0"
-        echo "update_responses_commit: d938943"
-
-        cd "/srv/aus1-master.torproject.org/htdocs/torbrowser"
-        git fetch
-        changed_files="$(git diff --name-only HEAD d938943)"
-        if echo "$changed_files" | grep -qv "release"
-        then
-          echo >&2 "Error: checking out new update_response_commit will changes"
-          echo >&2 "some files outside of the release directory:"
-          echo "$changed_files" | grep -v "release" >&2
-          echo >&2 "--"
-          echo >&2 "If this is really what you want to do, edit this script to"
-          echo >&2 "remove the line 'exit 1' and run it again."
-          echo >&2 "See tor-browser-build#41168 for more details."
-          exit 1
-        fi
-        git checkout "d938943"
-
-        static-update-component aus1.torproject.org
-        ```
-    - [ ] Enable update responses:
+    - [ ] Enable update responses, passing the commit hash as argument (replace $commit):
       ```bash
-      sudo -u tb-release ./deploy_update_responses-release.sh
+      sudo -u tb-release ./deploy_update_responses-release.sh $commit
       ```
 
 </details>
