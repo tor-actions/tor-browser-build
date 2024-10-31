@@ -89,7 +89,9 @@ EOF
   patch -p1 < "$rootdir/mingw-dispatchqueue.patch"
   patch -p1 < "$rootdir/mingw-ts_sd.patch"
   patch -p1 < "$rootdir/mingw-composition.patch"
-  patch -p1 < "$rootdir/mingw-webrtc.patch"
+  [% IF !c("var/release") %]
+    patch -p1 < "$rootdir/mingw-webrtc.patch"
+  [% END %]
 
   cd $builddir/mingw-w64-clang/mingw-w64-headers
   mkdir build && cd build
