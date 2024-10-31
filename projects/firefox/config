@@ -107,7 +107,6 @@ targets:
       gitlab_project: https://gitlab.torproject.org/tpo/applications/mullvad-browser
       updater_url: 'https://cdn.mullvad.net/browser/update_responses/update_1/'
       nightly_updates_publish_dir_prefix: mullvadbrowser-
-      browser_build: 1
 
   linux-x86_64:
     var:

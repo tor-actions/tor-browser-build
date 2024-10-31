@@ -1,3 +1,40 @@
+Mullvad Browser 14.0a10 - November 01 2024
+ * All Platforms
+   * Updated Firefox to 128.4.0esr
+   * Updated NoScript to 11.5.0
+   * Bug 42356: Review 000-tor-browser.js and 001-base-profile.js for 128 [tor-browser]
+   * Bug 43134: Backport Bugzilla 1436226 Hardcode VP8/VP9 [tor-browser]
+   * Bug 43174: Issue with custom home page on local filesystem [tor-browser]
+   * Bug 43184: Backport Bugzilla 1922294: RFP: fixup square spoofed orientation [tor-browser]
+   * Bug 43209: UI freezes when clipboard is empty after screen lock [tor-browser]
+   * Bug 43217: Fullscreen videos have rounded letterboxing corners [tor-browser]
+   * Bug 43240: Backport security fixes from Firefox 132 [tor-browser]
+ * Windows
+   * Bug 373: Re-enable WebRTC for Windows builds [mullvad-browser]
+ * Linux
+   * Bug 43101: Security features warning links to Firefox installation support page with incomplete info [tor-browser]
+   * Bug 43196: Remove the vendor name from the "is playing media" notification on Linux [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41273: relprep.py: bump Firefox and GV to a (yet) non-existing tag when the last one does not match HEAD [tor-browser-build]
+     * Bug 41274: Improve fetch_changelogs.py for major releases [tor-browser-build]
+     * Bug 41279: Add @pierov and @ma1 as new signers [tor-browser-build]
+     * Bug 41289: Fix single-browser in relprep.py [tor-browser-build]
+   * Windows
+     * Bug 41296: Implement missing Windows headers required for building cross-compiling WebRTC with mingw [tor-browser-build]
+   * Linux
+     * Bug 41243: Add own apparmor profile to deb package [tor-browser-build]
+     * Bug 41282: Add SSL to our custom Python for MozBug 1924022 [tor-browser-build]
+
+Mullvad Browser 13.5.9 - October 28 2024
+ * All Platforms
+   * Updated Firefox to 115.17.0esr
+   * Updated NoScript to 11.4.42
+   * Bug 43174: Issue with custom home page on local filesystem [tor-browser]
+   * Bug 43207: Backport Mozbug 1886222 [tor-browser]
+   * Bug 43240: Backport security fixes from Firefox 132 [tor-browser]
+   * Bug 41273: relprep.py: bump Firefox and GV to a (yet) non-existing tag when the last one does not match HEAD [tor-browser-build]
+
 Mullvad Browser 14.0a9 - October 08 2024
  * All Platforms
    * Bug 43197: Disable automatic exception for HTTPS-First [tor-browser]
