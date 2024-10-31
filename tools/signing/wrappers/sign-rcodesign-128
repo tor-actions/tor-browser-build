@@ -82,6 +82,7 @@ $rcodesign sign \
   --code-signature-flags Contents/Frameworks/ChannelPrefs.framework:runtime \
   --code-signature-flags Contents/MacOS/plugin-container.app:runtime \
   --code-signature-flags Contents/MacOS/media-plugin-helper.app:runtime \
+  --entitlements-xml-path Contents/MacOS/Tor/tor:/signing/tor-browser-build/tools/signing/macos-entitlements/tor.xml \
   --entitlements-xml-path Contents/MacOS/plugin-container.app:/signing/tor-browser-build/tools/signing/macos-entitlements/plugin-container.xml \
   --entitlements-xml-path Contents/MacOS/media-plugin-helper.app:/signing/tor-browser-build/tools/signing/macos-entitlements/media-plugin-helper.xml \
   --entitlements-xml-path /signing/tor-browser-build/tools/signing/macos-entitlements/firefox.browser.xml \
