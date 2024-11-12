@@ -5,7 +5,7 @@ Name=[% c("var/Project_Name") %]
 GenericName=Web Browser
 Comment=[% c("var/system_pkg/pkg_description") %]
 Categories=Network;WebBrowser;
-Exec=/[% c("var/system_pkg/install_path") %]/start-[% c("var/project-name") %] --detach %u
+Exec=/[% c("var/system_pkg/install_path") %]/start-[% c("var/project-name") %] %u
 Icon=[% c("var/system_pkg/pkg_name") %]
 StartupWMClass=[% c("var/display_name") %]
 [% IF ! c("var/tor-browser") -%]
