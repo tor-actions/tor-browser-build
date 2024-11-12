@@ -115,9 +115,9 @@ input_files:
     name: ublock-origin
     sha256sum: e2cda9b2a1b0a7f6e5ef0da9f87f28df52f8560587ba2e51a3003121cfb81600
     enable: '[% c("var/mullvad-browser") %]'
-  - URL: https://cdn.mullvad.net/browser-extension/0.9.0/mullvad-browser-extension-0.9.0.xpi
+  - URL: https://cdn.mullvad.net/browser-extension/0.9.3/mullvad-browser-extension-0.9.3.xpi
     name: mullvad-extension
-    sha256sum: 65bf235aa1015054ae0a54a40c5a663e67fe1d0f0799e7b4726f98cccc7f3eab
+    sha256sum: fc6bc7c850adf8845fec15b7ea06324f65f843155e2cc5dbd8719e34436512af
     enable: '[% c("var/mullvad-browser") %]'
   - filename: 'gtk3-settings.ini'
     enable: '[% c("var/linux") %]'
