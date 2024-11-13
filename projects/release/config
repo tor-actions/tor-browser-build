@@ -10,19 +10,11 @@ var:
 
 targets:
   browser-all:
-    - browser-linux-x86_64
-    - browser-linux-i686
     - browser-windows-i686
     - browser-windows-x86_64
     - browser-macos
-    - browser-android-armv7
-    - browser-android-x86
-    - browser-android-x86_64
-    - browser-android-aarch64
     - browser-src
   browser-all-desktop:
-    - browser-linux-x86_64
-    - browser-linux-i686
     - browser-windows-i686
     - browser-windows-x86_64
     - browser-macos
