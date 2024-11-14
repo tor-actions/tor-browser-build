@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% pc("llvm-project", "version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 git_url: https://git.code.sf.net/p/mingw-w64/mingw-w64
-git_hash: '[% IF c("var/release") %]cd4cf9b279f8fb0815f8b9665d3cea60a30290bc[% ELSE %]4ef04b0a7f7a20735de2f58b5c0496fcb4c7d191[% END -%]'
+git_hash: '4ef04b0a7f7a20735de2f58b5c0496fcb4c7d191'
 version: '[% c("abbrev") %]'
 container:
   use_container: 1
@@ -36,4 +36,3 @@ input_files:
   - filename: mingw-ts_sd.patch
   - filename: mingw-composition.patch
   - filename: mingw-webrtc.patch
-    enable: '[% !c("var/release") %]'
