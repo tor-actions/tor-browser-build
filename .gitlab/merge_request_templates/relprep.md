@@ -1,9 +1,19 @@
-## Related Issues
+## Release Prep
+
+### Issues
+
+#### Resolves
 
 - tor-browser-build#xxxxx
 - tor-browser-build#xxxxx
 
-## Self-review + reviewer's template
+#### Related
+
+- tor-browser-build#xxxxx
+- tor-browser#xxxxx
+- mullvad-browser#xxxxx
+
+### Self-review + reviewer's template
 
 - [ ] `rbm.conf` updates:
   - [ ] `var/torbrowser_version`
@@ -15,12 +25,12 @@
 - [ ] Tag updates:
   - [ ] [Firefox](https://gitlab.torproject.org/tpo/applications/tor-browser/-/tags)
   - [ ] Geckoview - should match Firefox
-  - Tags might be speculative in the release preparation: i.e., they might not exist yet.
+  - **NOTE**: Tags might be speculative in the release preparation: i.e., they might not exist yet.
 - [ ] Addon updates:
   - [ ] [NoScript](https://addons.mozilla.org/en-US/firefox/addon/noscript/)
   - [ ] [uBlock Origin](https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/) (Mullvad Browser only)
   - [ ] [Mullvad Browser Extension](https://github.com/mullvad/browser-extension/releases) (Mullvad Browser only)
-  - For AMO extension (NoScript and uBlock), updating the version in the URL is not enough, check that also a numeric ID from the URL has changed
+  - ⚠️ **IMPORTANT**: For AMO extension (NoScript and uBlock), updating the version in the URL is not enough, check that also a numeric ID from the URL has changed
 - [ ] Tor and dependencies updates (Tor Browser only)
   - [ ] [Tor](https://gitlab.torproject.org/tpo/core/tor/-/tags)
   - [ ] [OpenSSL](https://www.openssl.org/source/): we stay on the latest LTS channel (currently 3.0.x)
@@ -39,11 +49,11 @@
     - If you find errors such as platform or category (build system) please adjust the issue label accordingly
     - You can run `tools/relprep.py --only-changelogs --date $date $version` to update only the changelogs
 
-## Review
+### Review
 
-### Request Reviewer
+#### Request Reviewer
 
 - [ ] Request review from a release engineer: boklm, dan, ma1, morgan, pierov
 
-### Change Description
+#### Change Description
 

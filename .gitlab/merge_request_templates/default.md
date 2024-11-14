@@ -2,18 +2,34 @@
 
 <!-- Bookkeeping information for release management -->
 
-### Related Issues
+### Issues
+
+#### Resolves
+- tor-browser-build#xxxxx
 - tor-browser#xxxxx
 - mullvad-browser#xxxxx
+
+#### Related
 - tor-browser-build#xxxxx
+- tor-browser#xxxxx
+- mullvad-browser#xxxxx
+
+### Merging
+
+<!-- This block tells the merger where commits need to be merged and future code archaeologists where commits were *supposed* to be merged -->
+
+#### Target Branches
+  - [ ] **`main`**: esr128-14.5
+  - [ ] **`maint-14.0`**: esr128-14.0
+  - [ ] **`maint-13.5`**: esr115-13.5
 
 ### Backporting
 
 #### Timeline
+- [ ] **No Backport (preferred)**: patchset for the next major stable
 - [ ] **Immediate**: patchset needed as soon as possible
 - [ ] **Next Minor Stable Release**: patchset that needs to be verified in nightly before backport
 - [ ] **Eventually**: patchset that needs to be verified in alpha before backport
-- [ ] **No Backport (preferred)**: patchset for the next major stable
 
 #### (Optional) Justification
 - [ ] **Emergency security update**: patchset fixes CVEs, 0-days, etc
@@ -50,7 +66,7 @@
   - **windows** : jwilde, morgan
   - **misc/other** : morgan, pierov
 
-### Change Description
+#### Change Description
 
 <!-- Whatever context the reviewer needs to effectively review the patchset; if the patch includes UX updates be sure to include screenshots/video of how any new behaviour -->
 
