@@ -41,13 +41,17 @@
 
 - [ ] Tag `tor-browser` in tor-browser.git
   - **example**: `tor-browser-128.4.0esr-14.0-1-build1`
+  - Run:
+    ```bash
+    ./tools/browser/sign-tag.torbrowser stable ${BUILD_N}
+    ```
 
 ### tor-browser-build: https://gitlab.torproject.org/tpo/applications/tor-browser-build.git
 Tor Browser Stable is on the `maint-${TOR_BROWSER_MAJOR}.${TOR_BROWSER_MINOR}` branch
 
 - [ ] Changelog bookkeeping:
-  - [ ] Ensure all commits to `tor-browser` and `tor-browser-build` for this release have an associated issue linked to this release preparation issue
-  - [ ] Ensure each issue has a platform (~Windows, ~MacOS, ~Linux, ~Android, ~Desktop, ~"All Platforms") and potentially ~"Build System" labels
+  - Ensure all commits to `tor-browser` and `tor-browser-build` for this release have an associated issue linked to this release preparation issue
+  - Ensure each issue has a platform (~Windows, ~MacOS, ~Linux, ~Android, ~Desktop, ~"All Platforms") and potentially ~"Build System" labels
 - [ ] Create a release preparation branch from the current `maint-XX.Y` branch
 - [ ] Run release preparation script:
   - **NOTE**: You can omit the `--tor-browser` argument if this is for a joint Tor and Mullvad Browser release
@@ -64,9 +68,9 @@ Tor Browser Stable is on the `maint-${TOR_BROWSER_MAJOR}.${TOR_BROWSER_MINOR}` b
     - [ ] ***(Desktop Only)*** `var/torbrowser_incremental_from`: updated to previous Desktop version
       - **NOTE**: We try to build incrementals for the previous 3 desktop versions
       - **⚠️ WARNING**: Really *actually* make sure this is the previous Desktop version or else the `make torbrowser-incrementals-*` step will fail
-- [ ] `projects/firefox/config`
-    - [ ] `browser_build`: updated to match `tor-browser` tag
-    - [ ] ***(Optional)*** `var/firefox_platform_version`: updated to latest `${ESR_VERSION}` if rebased
+  - [ ] `projects/firefox/config`
+      - [ ] `browser_build`: updated to match `tor-browser` tag
+      - [ ] ***(Optional)*** `var/firefox_platform_version`: updated to latest `${ESR_VERSION}` if rebased
   - [ ] `projects/geckoview/config`
     - [ ] `browser_build`: updated to match `tor-browser` tag
     - [ ] ***(Optional)*** `var/firefox_platform_version`: updated to latest `${ESR_VERSION}` if rebased
@@ -75,7 +79,7 @@ Tor Browser Stable is on the `maint-${TOR_BROWSER_MAJOR}.${TOR_BROWSER_MINOR}` b
     - [ ] `steps/tor-browser/git_hash`: updated with `HEAD` commit of project's `tor-browser` branch
     - [ ] `steps/fenix/git_hash`: updated with `HEAD` commit of project's `fenix-torbrowserstringsxml` branch
   - [ ] ***(Optional)*** `projects/browser/config`:
-    - [ ] NoScript: https://addons.mozilla.org/en-US/firefox/addon/noscript
+    - [ ] ***(Optional)*** NoScript: https://addons.mozilla.org/en-US/firefox/addon/noscript
       - [ ] `URL` updated
         - **⚠️ WARNING**: If preparing the release manually, updating the version number in the url is not sufficient, as each version has a random unique id in the download url
       - [ ] `sha256sum` updated
@@ -101,18 +105,18 @@ Tor Browser Stable is on the `maint-${TOR_BROWSER_MAJOR}.${TOR_BROWSER_MINOR}` b
     - [ ] `input_files/shasum` for `manual`: updated to manual hash
     - [ ] Upload the downloaded `manual_${PIPELINEID}.zip` file to `tb-build-02.torproject.org`
     - [ ] Deploy to `tb-builder`'s `public_html` directory:
-      - [ ] Run:
+      - Run:
         ```bash
         sudo -u tb-builder cp manual_${PIPELINEID}.zip ~tb-builder/public_html/.
         ```
       - `sudo` documentation for TPO machines: https://gitlab.torproject.org/tpo/tpa/team/-/wikis/doc/accounts#changingresetting-your-passwords
   - [ ] `ChangeLog-TBB.txt`: ensure correctness
-    - [ ] Browser name correct
-    - [ ] Release date correct
-    - [ ] No Android updates on a desktop-only release and vice-versa
-    - [ ] All issues added under correct platform
-    - [ ] ESR updates correct
-    - [ ] Component updates correct
+    - Browser name correct
+    - Release date correct
+    - No Android updates on a desktop-only release and vice-versa
+    - All issues added under correct platform
+    - ESR updates correct
+    - Component updates correct
 - [ ] Open MR with above changes, using the template for release preparations
   - **NOTE**: target the `maint-14.0` branch
 - [ ] Merge
@@ -123,22 +127,22 @@ Tor Browser Stable is on the `maint-${TOR_BROWSER_MAJOR}.${TOR_BROWSER_MINOR}` b
     - ma1
     - morgan
     - pierov
-  - [ ] Run:
+  - Run:
     ```bash
     make torbrowser-signtag-release
     ```
-  - [ ] Push tag to `upstream`
+- [ ] Push tag to `upstream`
 - [ ] Build the tag:
-  - [ ] Run:
+  - Run:
     ```bash
     make torbrowser-release && make torbrowser-incrementals-release
     ```
-    - [ ] Tor Project build machine
-    - [ ] Local developer machine
+    - Tor Project build machine
+    - Local developer machine
   - [ ] Submit build request to Mullvad infrastructure:
     - **NOTE** this requires a devmole authentication token
-    - **NOTE** this also requires you be connected to a Swedish Mulvad VPN exit
-    - [ ] Run:
+    - **NOTE** this also requires you be connected to Gothenburg Mulvad VPN exit `se-got-wg-101`
+    - Run:
       ```bash
       make torbrowser-kick-devmole-build
       ```
@@ -160,9 +164,14 @@ Tor Browser Stable is on the `maint-${TOR_BROWSER_MAJOR}.${TOR_BROWSER_MINOR}` b
     - **⚠️ WARNING**: Do not deploy yet!
 
   ### blog: https://gitlab.torproject.org/tpo/web/blog.git
-  - [ ] Run `tools/signing/create-blog-post` which should create the new blog post from a template (edit set-config.blog to set you local blog directory)
-    - [ ] Note any ESR update
-    - [ ] Thank any users which have contributed patches
+  - [ ] Generate release blog post
+    - Run:
+    ```bash
+    ./tools/signing/create-blog-post.torbrowser
+    ```
+    - **NOTE** this script creates the new blog post from a template (edit `./tools/signing/set-config.blog` to set you local blog directory)
+    - [ ] **(Optional)** Note any ESR update
+    - [ ] **(Optional)** Thank any users which have contributed patches
     - [ ] **(Optional)** Draft any additional sections for new features which need testing, known issues, etc
   - [ ] Push to origin as new branch and open MR
   - [ ] Review
@@ -201,7 +210,7 @@ Tor Browser Stable is on the `maint-${TOR_BROWSER_MAJOR}.${TOR_BROWSER_MINOR}` b
     - `tbb_version_type`: either `alpha` for alpha releases or `release` for stable releases
 - [ ] On `${STAGING_SERVER}` in a separate `screen` session, ensure tor daemon is running with SOCKS5 proxy on the default port 9050
 - [ ] On `${STAGING_SERVER}` in a separate `screen` session, run do-all-signing script:
-  - [ ] Run:
+  - Run:
     ```bash
     cd tor-browser-build/tools/signing/ && ./do-all-signing.torbrowser
     ```
@@ -247,14 +256,14 @@ popd
 
 ### website
 - [ ] On `staticiforme.torproject.org`, static update components:
-  - [ ] Run:
+  - Run:
     ```bash
     static-update-component cdn.torproject.org && static-update-component dist.torproject.org
     ```
 - [ ] Deploy `tor-website` MR
 - [ ] Deploy `tor-blog` MR
 - [ ] On `staticiforme.torproject.org`, enable update responses:
-  - [ ] Run:
+  - Run:
     ```bash
     sudo -u tb-release ./deploy_update_responses-release.sh
     ```
@@ -262,7 +271,7 @@ popd
   - **NOTE**: Skip this step if we need to hold on to older versions for some reason (for example, this is an Andoid or Desktop-only release, or if we need to hold back installers in favor of build-to-build updates if there are signing issues, etc)
   - [ ] `/srv/cdn-master.torproject.org/htdocs/aus1/torbrowser`
   - [ ] `/srv/dist-master.torproject.org/htdocs/torbrowser`
-  - [ ] Run:
+  - Run:
     ```bash
     static-update-component cdn.torproject.org && static-update-component dist.torproject.org
     ```
@@ -317,7 +326,7 @@ popd
     - torbrowser-launcher: mail@asciiwolf.com <!-- Gitlab user asciiwolf -->
     - Anti-Censorship: meskio@torproject.org <!-- Gitlab user meskio -->
     ```
-    tails-dev@boum.org nathan@guardianproject.info freebsd@sysctl.cz caspar@schutijser.com mail@asciiwolf.com meskio@torproject.org
+    tails-dev@boum.org, nathan@guardianproject.info, freebsd@sysctl.cz, caspar@schutijser.com, mail@asciiwolf.com, meskio@torproject.org,
     ```
   - **Subject**
     ```

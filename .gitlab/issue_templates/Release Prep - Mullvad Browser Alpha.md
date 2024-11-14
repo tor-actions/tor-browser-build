@@ -41,13 +41,17 @@
 
 - [ ] Tag `mullvad-browser` commit:
   - **example**: `mullvad-browser-128.4.0esr-14.5-1-build1`
+  - Run:
+    ```bash
+    ./tools/browser/sign-tag.mullvadbrowser alpha ${BUILD_N}
+    ```
 
 ### tor-browser-build: https://gitlab.torproject.org/tpo/applications/tor-browser-build.git
 Mullvad Browser Alpha (and Nightly) are on the `main` branch
 
 - [ ] Changelog bookkeeping:
-  - [ ] Ensure all commits to `mullvad-browser` and `tor-browser-build` for this release have an associated issue linked to this release preparation issue
-  - [ ] Ensure each issue has a platform (~Windows, ~MacOS, ~Linux, ~Desktop, ~"All Platforms") and potentially ~"Build System" labels
+  - Ensure all commits to `mullvad-browser` and `tor-browser-build` for this release have an associated issue linked to this release preparation issue
+  - Ensure each issue has a platform (~Windows, ~MacOS, ~Linux, ~Desktop, ~"All Platforms") and potentially ~"Build System" labels
 - [ ] Create a release preparation branch from the `main` branch
 - [ ] Run release preparation script:
   - **NOTE**: You can omit the `--mullvad-browser` argument if this is for a joint Tor and Mullvad Browser release
@@ -71,24 +75,24 @@ Mullvad Browser Alpha (and Nightly) are on the `main` branch
     - [ ] `steps/base-browser/git_hash`: updated with `HEAD` commit of project's `base-browser` branch
     - [ ] `steps/mullvad-browser/git_hash`: updated with `HEAD` commit of project's `mullvad-browser` branch
   - [ ] ***(Optional)*** `projects/browser/config`:
-    - [ ] NoScript: https://addons.mozilla.org/en-US/firefox/addon/noscript
+    - [ ] ***(Optional)***  NoScript: https://addons.mozilla.org/en-US/firefox/addon/noscript
       - [ ] `URL` updated
         - **⚠️ WARNING**: If preparing the release manually, updating the version number in the url is not sufficient, as each version has a random unique id in the download url
       - [ ] `sha256sum` updated
-    - [ ] uBlock-origin: https://addons.mozilla.org/en-US/firefox/addon/ublock-origin
+    - [ ] ***(Optional)*** uBlock-origin: https://addons.mozilla.org/en-US/firefox/addon/ublock-origin
       - [ ] `URL` updated
         - **⚠️ WARNING**: If preparing the release manually, updating the version number in the url is not sufficient, as each version has a random unique id in the download url
       - [ ] `sha256sum` updated
-    - [ ] Mullvad Browser extension: https://github.com/mullvad/browser-extension/releases
+    - [ ] ***(Optional)*** Mullvad Browser extension: https://github.com/mullvad/browser-extension/releases
       - [ ] `URL` updated
       - [ ] `sha256sum` updated
   - [ ] `ChangeLog-MB.txt`: ensure correctness
-    - [ ] Browser name correct
-    - [ ] Release date correct
-    - [ ] No Android updates
-    - [ ] All issues added under correct platform
-    - [ ] ESR updates correct
-    - [ ] Component updates correct
+    - Browser name correct
+    - Release date correct
+    - No Android updates
+    - All issues added under correct platform
+    - ESR updates correct
+    - Component updates correct
 - [ ] Open MR with above changes, using the template for release preparations
   - **NOTE**: target the `main` branch
 - [ ] Merge
@@ -99,13 +103,13 @@ Mullvad Browser Alpha (and Nightly) are on the `main` branch
     - ma1
     - morgan
     - pierov
-  - [ ] Run:
+  - Run:
     ```bash
     make mullvadbrowser-signtag-alpha
     ```
-  - [ ] Push tag to `upstream`
+- [ ] Push tag to `upstream`
 - [ ] Build the tag:
-  - [ ] Run:
+  - Run:
     ```bash
     make mullvadbrowser-alpha && make mullvadbrowser-incrementals-alpha
     ```
@@ -113,8 +117,8 @@ Mullvad Browser Alpha (and Nightly) are on the `main` branch
     - [ ] Local developer machine
   - [ ] Submit build request to Mullvad infrastructure:
     - **NOTE** this requires a devmole authentication token
-    - **NOTE** this also requires you be connected to a Swedish Mulvad VPN exit
-    - [ ] Run:
+    - **NOTE** this also requires you be connected to Gothenburg Mulvad VPN exit `se-got-wg-101`
+    - Run:
       ```bash
       make mullvadbrowser-kick-devmole-build
       ```
@@ -148,7 +152,7 @@ Mullvad Browser Alpha (and Nightly) are on the `main` branch
     - `tbb_version_type`: either `alpha` for alpha releases or `release` for stable releases
 - [ ] On `${STAGING_SERVER}` in a separate `screen` session, ensure tor daemon is running with SOCKS5 proxy on the default port 9050
 - [ ] On `${STAGING_SERVER}` in a separate `screen` session, run do-all-signing script:
-  - [ ] Run:
+  - Run:
     ```bash
     cd tor-browser-build/tools/signing/ && ./do-all-signing.mullvadbrowser
     ```
@@ -162,7 +166,7 @@ Mullvad Browser Alpha (and Nightly) are on the `main` branch
 ### website
 - [ ] On `staticiforme.torproject.org`, remove old release and publish new:
   - [ ] `/srv/dist-master.torproject.org/htdocs/mullvadbrowser`
-  - [ ] Run:
+  - Run:
     ```bash
     static-update-component dist.torproject.org
     ```
@@ -200,7 +204,7 @@ Mullvad Browser Alpha (and Nightly) are on the `main` branch
     - Mullvad support alias: support@mullvadvpn.net
     - Rui Hildt: rui@mullvad.net
     ```
-    support@mullvadvpn.net rui@mullvad.net
+    support@mullvadvpn.net, rui@mullvad.net,
     ```
   - **Subject**
     ```
@@ -228,7 +232,7 @@ Mullvad Browser Alpha (and Nightly) are on the `main` branch
     - arch package maintainer: bootctl@gmail.com
     - nixOS package maintainer: dev@felschr.com
     ```
-    proletarius101@protonmail.com bootctl@gmail.com dev@felschr.com
+    proletarius101@protonmail.com, bootctl@gmail.com, dev@felschr.com,
     ```
   - **Subject**
     ```
