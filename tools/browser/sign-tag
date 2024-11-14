@@ -1,0 +1,115 @@
+#!/usr/bin/env bash
+
+# See README.md for usage instructions.
+
+# terminate on error
+set -e
+
+# Check if at least two arguments are provided
+if [ "$#" -lt 2 ]; then
+    echo "Usage: $0 channel build-number [commit]"
+    exit 1
+fi
+
+script_name=$(basename "${BASH_ARGV0:-$0}")
+script_dir=$(dirname "${BASH_ARGV0:-$0}")
+browser=$(echo "$script_name" | perl -pe 's/^[^\.]+\.//')
+
+case "${browser}" in
+    basebrowser | torbrowser | mullvadbrowser)
+        # go down to browser directory
+        pushd ${script_dir}/${browser} > /dev/null
+        # and exit on script termination
+        trap "popd > /dev/null" EXIT
+        ;;
+    *)
+        echo -n "unrecognized browser: '${browser}'"
+        exit 1
+        ;;
+esac
+
+#
+# Branch name validation and extract components from branch name needed for tag
+# and message
+#
+
+branch_name=$(git rev-parse --abbrev-ref HEAD)
+if [[ $branch_name =~ ^([a-z]+-browser)-([1-9][0-9]+\.[0-9]+\.[0-9]+esr)-([1-9][0-9]*\.[05])-([1-9]).*$ ]]; then
+    project="${BASH_REMATCH[1]}"
+    esr="${BASH_REMATCH[2]}"
+    version="${BASH_REMATCH[3]}"
+    branch_number="${BASH_REMATCH[4]}"
+else
+    echo "This script must be run from an official browser branch. For example 'base-browser-128.4.0esr-14.0-1'"
+    exit 1
+fi
+
+#
+# Verify the detected browser matches the name of the current branch
+#
+case "${browser}" in
+    basebrowser)
+        valid_project="base-browser"
+        ;;
+    torbrowser)
+        valid_project="tor-browser"
+        ;;
+    mullvadbrowser)
+        valid_project="mullvad-browser"
+        ;;
+esac
+
+if ! [[ "${project}" == "${valid_project}" ]]; then
+    echo "Invalid branch \"${branch_name}\". Must be a \"${valid_project}\" branch"
+    exit 1
+fi
+
+#
+# Assign arguments to variables
+#
+channel=$1
+build_number=$2
+commit=$(git rev-parse --short ${3:-HEAD})
+
+#
+# Validate arguments
+#
+
+# channel validation
+if [[ "${project}" == "mullvad-browser" ]]; then
+    valid_channels=("alpha" "stable")
+else
+    valid_channels=("alpha" "stable" "legacy")
+fi
+channel_valid=false
+for value in "${valid_channels[@]}"; do
+    if [[ "${channel}" == "${value}" ]]; then
+        channel_valid=true
+        break
+    fi
+done
+
+if ! $channel_valid; then
+    echo "Invalid channel name \"${channel}\". Must be one of: ${valid_channels[*]}"
+    exit 1
+fi
+
+# build number validation
+if ! [[ "${build_number}" =~ ^build[1-9][0-9]*$ ]]; then
+    echo "Invalid build number \"${build_number}\". Must be in the format \"build[1-9][0-9]*\""
+    exit 1
+fi
+
+#
+# Sign and tag the specified git commit
+#
+
+tag="${project}-${esr}-${version}-${branch_number}-${build_number}"
+message="Tagging ${build_number} for ${esr}-based ${channel}"
+
+
+echo "Tag commit ${commit} in ${branch_name}"
+echo " tag:     ${tag}"
+echo " message: ${message}"
+
+git tag -s "${tag}" "${commit}" -m "${message}"
