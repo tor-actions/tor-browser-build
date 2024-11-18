@@ -12,6 +12,7 @@ targets:
   browser-all:
     - browser-linux-x86_64
     - browser-linux-i686
+    - browser-linux-aarch64
     - browser-windows-i686
     - browser-windows-x86_64
     - browser-macos
@@ -20,13 +21,16 @@ targets:
     - browser-android-x86_64
     - browser-android-aarch64
     - browser-src
+    - browser-all-target
   browser-all-desktop:
     - browser-linux-x86_64
     - browser-linux-i686
+    - browser-linux-aarch64
     - browser-windows-i686
     - browser-windows-x86_64
     - browser-macos
     - browser-src
+    - browser-all-target
   browser-all-android:
     - browser-android-armv7
     - browser-android-x86
@@ -58,7 +62,7 @@ targets:
       linux-packages: '[% c("var/mullvad-browser") || c("var/tor-browser-linux-packages") %]'
   browser-linux-aarch64:
     var:
-      browser-linux-aarch64: 1
+      browser-linux-aarch64: '[% ! c("var/browser-all-target") || c("var/testbuild") || c("var/nightly") %]'
       linux-packages: 0
   browser-windows-i686:
     var:
@@ -81,6 +85,9 @@ targets:
   browser-src-testbuild:
     var:
       browser-src: 1
+  browser-all-target:
+    var:
+      browser-all-target: 1
 
   notarget:
     - torbrowser
