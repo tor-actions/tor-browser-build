@@ -1,5 +1,36 @@
 # Tools
 
+### generate-bugzilla-triage-csv
+
+This script generates a csv file (to be hosted on Google Sheets) which enumerates all of the Bugzilla issues resolved for a particular Firefox release as defined by Mozilla's bug-tracker AND the set of patches in a provided commit range. Each entry will include the Bugzilla issue title and a link which creates an issue in [tpo/applications/tor-browser](https://gitlab.torproject.org/tpo/applications/tor-browser) for further review.
+
+This script should be invoked, the output written to a .csv file, and uploaded to a shared Google Sheets spreadsheet for team triage + review.
+
+#### Prerequisites
+
+- The user must create the following soft-links:
+    - `/tools/browser/torbrowser` -> `/path/to/local/tor-browser.git`
+
+#### Usage
+
+```
+Usage: ./tools/browser/generate-bugzilla-triage-csv <ff-version> <begin-commit> <end-commit> <gitlab-audit-issue> <reviewers...>
+
+ff-version             rapid-release Firefox version to audit
+begin-commit           starting gecko-dev commit of this Firefox version
+end-commit             ending gecko-dev commit of this Firefox version
+gitlab-audit-issue     tor-browser GitLab issue number for this audit
+reviewers...           space-separated list of reviewers responsible for this audit
+```
+
+#### Examples
+
+Generates a spreadsheet derived from the Firefox 129 resolved issues and all commits between `FIREFOX_NIGHTLY_128_END` and `FIREFOX_NIGHTLY_129_END`. New issues will automatically link themslves to [tor-browser#43303](https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/43303). The requested reviewers will be morgan, pierov, and henry.
+
+```bash
+./tools/browser/generate-bugzilla-triage-csv 129 FIREFOX_NIGHTLY_128_END FIREFOX_NIGHTLY_129_END 43303 morgan pierov henry
+```
+
 ### sign-tag
 
 This script gpg signs a git tag associated with a particular browser commit in the user's tor-browser.git or mullvad-browser.git repo.
