@@ -387,14 +387,6 @@ export __GL_SHADER_DISK_CACHE=0
 
 cd "$browser_dir"
 
-# We pass all additional command-line arguments we get to Firefox.
-#
-# The --class parameter was added to fix bug trac#11102 (X11).
-# The --name parameter was added to fix bug tor-browser-build#40517 (Wayland).
-# --class and --name parameters are used to make sure WM_CLASS is set
-# up correctly, to identify itself from plain Firefox windows (and
-# prevent from mixing up with them).
-
 if [ "$show_usage" -eq 1 ]; then
   # Display Firefox help, then our help
   [% IF c("var/tor-browser") %]TOR_CONTROL_PASSWD=${TOR_CONTROL_PASSWD}[% END %] ./[% c('var/exe_name') %] --help 2>/dev/null
