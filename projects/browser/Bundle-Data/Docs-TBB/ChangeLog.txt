@@ -1,3 +1,19 @@
+Tor Browser 13.5.10 - November 18 2024
+ * All Platforms
+   * Updated Firefox to 115.18.0esr
+   * Updated NoScript to 11.5.2
+   * Bug 32668: NoScript default whitelist re-appears on clicking NoScript Options / Reset [tor-browser]
+   * Bug 43257: NoScript-blocked content placeholders causing slow downs [tor-browser]
+   * Bug 43258: NoScript Lifecycle error on extension updates [tor-browser]
+   * Bug 43302: Rebase Tor Browser Legacy onto 115.18.0esr [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41286: Update the deploy update scripts to optinally take an override hash [tor-browser-build]
+     * Bug 41289: Fix single-browser in relprep.py [tor-browser-build]
+     * Bug 41290: Remove android signing in maint-13.5 branch [tor-browser-build]
+     * Bug 41300: Add bea, clairehurst, and jwilde to tb_builders [tor-browser-build]
+     * Bug 41303: Remove Android and Linux targets from browser-all and browser-all-desktop targets in release project [tor-browser-build]
+
 Tor Browser 13.5.9 - October 28 2024
   * Windows + macOS + Linux
    * Updated Tor to 0.4.8.13
