@@ -91,13 +91,10 @@ class ReleasePreparation:
         self.base_path = Path(repo_path)
         self.repo = Repo(self.base_path)
 
-        self.tor_browser = bool(kwargs.get("tor_browser", True))
-        self.mullvad_browser = bool(kwargs.get("mullvad_browser", True))
-        if not self.tor_browser and not self.mullvad_browser:
-            raise ValueError("Nothing to do")
-        self.android = kwargs.get("android", self.tor_browser)
-        if not self.tor_browser and self.android:
-            raise ValueError("Only Tor Browser supports Android")
+        # Legacy channel, always do Tor Browser desktop only.
+        self.tor_browser = True
+        self.mullvad_browser = False
+        self.android = False
 
         logger.debug(
             "Tor Browser: %s; Mullvad Browser: %s; Android: %s",
@@ -140,7 +137,8 @@ class ReleasePreparation:
             # Do not update Go anymore: 1.21.x is not listed anymore in
             # the download page as it is EOL as of August 13, 2024.
             # self.update_go()
-            self.update_manual()
+            # Freeze the manual to before 14.0.
+            # self.update_manual()
 
         self.update_changelogs()
         self.update_rbm_conf()
@@ -302,7 +300,6 @@ class ReleasePreparation:
         targets = ["base-browser"]
         if self.tor_browser:
             targets.append("tor-browser")
-            targets.append("fenix")
         if self.mullvad_browser:
             targets.append("mullvad-browser")
         for i in targets:
@@ -520,6 +517,10 @@ class ReleasePreparation:
                         self.build_number,
                     )
                 continue
+            if version.major > self.version.major:
+                # Ignore more recent version.
+                # E.g., for the legacy channel.
+                continue
             key = (project, version.channel)
             if key not in self.last_releases:
                 self.last_releases[key] = []
@@ -697,8 +698,6 @@ if __name__ == "__main__":
         default=Path(__file__).parent.parent,
         help="Path to a tor-browser-build.git clone",
     )
-    parser.add_argument("--tor-browser", action="store_true")
-    parser.add_argument("--mullvad-browser", action="store_true")
     parser.add_argument(
         "--date",
         help="Release date and optionally time for changelog purposes. "
@@ -739,12 +738,7 @@ if __name__ == "__main__":
     )
     logger.addHandler(ch)
 
-    tbb = bool(args.tor_browser)
-    mb = bool(args.mullvad_browser)
     kwargs = {}
-    if tbb or mb:
-        kwargs["tor_browser"] = tbb
-        kwargs["mullvad_browser"] = mb
     if args.date:
         try:
             kwargs["changelog_date"] = datetime.fromisoformat(args.date)

@@ -21,12 +21,10 @@ class EntryType(enum.IntFlag):
 
 
 class Platform(enum.IntFlag):
-    WINDOWS = 8
-    MACOS = 4
-    LINUX = 2
-    ANDROID = 1
-    DESKTOP = 8 | 4 | 2
-    ALL_PLATFORMS = 8 | 4 | 2 | 1
+    WINDOWS = 2
+    MACOS = 1
+    DESKTOP = 2 | 1
+    ALL_PLATFORMS = 2 | 1
 
 
 class ChangelogEntry:
@@ -52,10 +50,6 @@ class ChangelogEntry:
             platforms.append("Windows")
         if self.platform & Platform.MACOS:
             platforms.append("macOS")
-        if self.platform & Platform.LINUX:
-            platforms.append("Linux")
-        if self.platform & Platform.ANDROID:
-            platforms.append("Android")
         return " + ".join(platforms)
 
     def __lt__(self, other):
@@ -78,15 +72,8 @@ class ChangelogEntry:
 
 class UpdateEntry(ChangelogEntry):
     def __init__(self, name, version, is_mb):
-        if name == "Firefox" and not is_mb:
-            platform = Platform.DESKTOP
-            num_platforms = 3
-        elif name == "GeckoView" or name == "Zstandard":
-            platform = Platform.ANDROID
-            num_platforms = 1
-        else:
-            platform = Platform.ALL_PLATFORMS
-            num_platforms = 4
+        platform = Platform.ALL_PLATFORMS
+        num_platforms = 2
         super().__init__(
             EntryType.UPDATE, platform, num_platforms, name == "Go", is_mb
         )
@@ -107,8 +94,8 @@ class Issue(ChangelogEntry):
         platform = 0
         num_platforms = 0
         if "Desktop" in j["labels"]:
-            platform = Platform.DESKTOP
-            num_platforms += 3
+            platform = Platform.ALL_PLATFORMS
+            num_platforms += 2
         else:
             if "Windows" in j["labels"]:
                 platform |= Platform.WINDOWS
@@ -116,20 +103,13 @@ class Issue(ChangelogEntry):
             if "MacOS" in j["labels"]:
                 platform |= Platform.MACOS
                 num_platforms += 1
-            if "Linux" in j["labels"]:
-                platform |= Platform.LINUX
-                num_platforms += 1
-        if "Android" in j["labels"]:
-            if is_mb and num_platforms == 0:
+        if not platform:
+            if "Android" in j["labels"] or "Linux" in j["labels"]:
                 raise Exception(
-                    f"Android-only issue on Mullvad Browser: {j['references']['full']}!"
+                    f"The legacy channel should include only fixes for macOS and/or Windows, please check {self.project}#{self.number}."
                 )
-            elif not is_mb:
-                platform |= Platform.ANDROID
-                num_platforms += 1
-        if not platform or (is_mb and platform == Platform.DESKTOP):
             platform = Platform.ALL_PLATFORMS
-            num_platforms = 4
+            num_platforms = 2
         is_build = "Build System" in j["labels"]
         super().__init__(
             EntryType.ISSUE, platform, num_platforms, is_build, is_mb
