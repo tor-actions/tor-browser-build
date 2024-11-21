@@ -306,6 +306,7 @@ class ReleasePreparation:
         self.save_config("browser", config)
 
     def update_addon_amo(self, config, name, addon_id):
+        logger.debug("Checking updates for %s", name)
         r = requests.get(
             f"https://services.addons.mozilla.org/api/v4/addons/addon/{addon_id}"
         )
@@ -318,6 +319,7 @@ class ReleasePreparation:
         addon_input["sha256sum"] = addon["hash"][7:]
 
     def update_mullvad_addon(self, config):
+        logger.debug("Checking updates for the Mullvad addon")
         input_ = self.find_input(config, "mullvad-extension")
         r = requests.get(
             "https://cdn.mullvad.net/browser-extension/updates.json"
@@ -336,11 +338,11 @@ class ReleasePreparation:
 
         path = self.base_path / "out/browser" / url.split("/")[-1]
         # The extension should be small enough to easily fit in memory :)
-        if not path.exists:
+        if not path.exists():
             r = requests.get(url)
             r.raise_for_status()
             with path.open("wb") as f:
-                f.write(r.bytes)
+                f.write(r.content)
         with path.open("rb") as f:
             input_["sha256sum"] = sha256(f.read()).hexdigest()
         logger.debug("Mullvad extension downloaded and updated")
