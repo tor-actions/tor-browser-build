@@ -590,14 +590,9 @@ class ReleasePreparation:
         changelogs = cb.create(**kwargs)
 
         path = f"projects/browser/Bundle-Data/Docs-{tag_prefix.upper()}/ChangeLog.txt"
-        stable_tag = self.last_releases[(tag_prefix, "release")][0].tag
-        alpha_tag = self.last_releases[(tag_prefix, "alpha")][0].tag
-        if stable_tag.tagged_date > alpha_tag.tagged_date:
-            last_tag = stable_tag
-        else:
-            last_tag = alpha_tag
-        logger.debug("Using %s to add the new changelogs to.", last_tag.tag)
-        last_changelogs = self.repo.git.show(f"{last_tag.tag}:{path}")
+        # Take HEAD to reset any changes we might already have from a
+        # previous run.
+        last_changelogs = self.repo.git.show(f"HEAD:{path}")
         with (self.base_path / path).open("w") as f:
             f.write(changelogs + "\n" + last_changelogs + "\n")
 
