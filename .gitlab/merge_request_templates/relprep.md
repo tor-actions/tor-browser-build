@@ -39,7 +39,6 @@
   - [ ] [Go](https://go.dev/dl): avoid major updates, unless planned
 - [ ] Manual version update (Tor Browser only, optional)
 - [ ] Changelogs
-  - [ ] Changelogs must be in sync between stable and alpha
   - [ ] Check the browser name
   - [ ] Check the version
   - [ ] Check the release date
