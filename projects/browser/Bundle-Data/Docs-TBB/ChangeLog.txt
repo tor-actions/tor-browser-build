@@ -1,3 +1,58 @@
+Tor Browser 14.5a1 - November 25 2024
+ * All Platforms
+   * Updated NoScript to 11.5.2
+   * Updated Tor to 0.4.8.13
+   * Bug 41710: Refactor about:torconnects relation to TorConnectParent [tor-browser]
+   * Bug 42125: lock RFP part 2 [tor-browser]
+   * Bug 43307: Rebase Tor Browser alpha onto 128.5.0esr [tor-browser]
+   * Bug 43313: Backport security fixes from Firefox 133 [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 128.5.0esr
+   * Bug 42186: Drop about:tbupdate [tor-browser]
+   * Bug 42597: Lox.generateInvite does not convert JSON object to string [tor-browser]
+   * Bug 42739: Fix localization in the profile error dialog [tor-browser]
+   * Bug 42802: Make use of `:has` CSS selector [tor-browser]
+   * Bug 43237: Tweak Tor circuit display panel for screen readers [tor-browser]
+   * Bug 43262: Onion keys dialog. "Remove" removes all keys, "Remove all" does nothing. [tor-browser]
+   * Bug 43263: Onion site keys: add some alerts for screen readers [tor-browser]
+   * Bug 43294: Replace `Actor` `willDestroy` with `didDestroy` [tor-browser]
+   * Bug 43314: Tidy up connection preferences for screen readers and keyboard users [tor-browser]
+ * macOS
+   * Bug 43165: Disable Microsoft SSO on macOS [MozBug 1768724] [tor-browser]
+ * Linux
+   * Bug 41786: Remove old fontconfig stuff at the next watershed update [tor-browser]
+   * Bug 41799: Make lack of fonts.conf less of a footgun [tor-browser]
+   * Bug 41298: Remove `--detach` parameter from .desktop files [tor-browser-build]
+   * Bug 41312: Remove comment in start-browser about --class and --name parameters [tor-browser-build]
+   * Bug 41313: Show waiting cursor while app opens [tor-browser-build]
+ * Android
+   * Updated GeckoView to 128.5.0esr
+   * Bug 43232: Make the Android Meek transport easier to debug [tor-browser]
+   * Bug 43241: Improve hiding non-private tab features on Android [tor-browser]
+   * Bug 43251: Enable tab suggestions and autocomplete for private tabs on Android [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.22.9
+     * Bug 43272: Fix git fetch in translation CI [tor-browser]
+     * Bug 43295: Update MR templates [tor-browser]
+     * Bug 40996: Do not version the .nobackup files [tor-browser-build]
+     * Bug 41279: Add @pierov and @ma1 as new signers [tor-browser-build]
+     * Bug 41284: Update relprep.py script to not synchronise changelogs between channels [tor-browser-build]
+     * Bug 41288: Use exec_noco option when using exec [tor-browser-build]
+     * Bug 41289: Fix single-browser in relprep.py [tor-browser-build]
+     * Bug 41300: Add bea, clairehurst, and jwilde to tb_builders [tor-browser-build]
+     * Bug 41304: Add a browser commit tag+signing script [tor-browser-build]
+     * Bug 41306: Container dependencies are sorted before resolving templates [tor-browser-build]
+     * Bug 41307: Container dependencies are not filtered for duplicates [tor-browser-build]
+     * Bug 41321: Update PieroV's expired keys [tor-browser-build]
+     * Bug 40006: Add option to avoid doing a git checkout when using the exec template function [rbm]
+   * Windows + macOS + Linux
+     * Bug 41286: Update the deploy update scripts to optinally take an override hash [tor-browser-build]
+   * Linux
+     * Bug 41142: Complete the toolchain for linux-aarch64 [tor-browser-build]
+     * Bug 41266: Build the Tor and Mullvad Browsers for aarch64 Linux [tor-browser-build]
+     * Bug 41282: Add SSL to our custom Python for MozBug 1924022 [tor-browser-build]
+
 Tor Browser 14.0a9 - October 08 2024
  * All Platforms
    * Bug 43197: Disable automatic exception for HTTPS-First [tor-browser]

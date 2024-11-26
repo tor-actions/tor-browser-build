@@ -1,3 +1,40 @@
+Mullvad Browser 14.5a1 - November 25 2024
+ * All Platforms
+   * Updated Firefox to 128.5.0esr
+   * Updated NoScript to 11.5.2
+   * Updated Mullvad Browser Extension to 0.9.3
+   * Updated uBlock Origin to 1.61.2
+   * Bug 383: Rebase MB alpha onto 128.5.0esr [mullvad-browser]
+   * Bug 32668: NoScript default whitelist re-appears on clicking NoScript Options / Reset [tor-browser]
+   * Bug 42125: lock RFP part 2 [tor-browser]
+   * Bug 42739: Fix localization in the profile error dialog [tor-browser]
+   * Bug 43257: NoScript-blocked content placeholders causing slow downs [tor-browser]
+   * Bug 43258: NoScript Lifecycle error on extension updates [tor-browser]
+   * Bug 43313: Backport security fixes from Firefox 133 [tor-browser]
+ * macOS
+   * Bug 43165: Disable Microsoft SSO on macOS [MozBug 1768724] [tor-browser]
+ * Linux
+   * Bug 41799: Make lack of fonts.conf less of a footgun [tor-browser]
+   * Bug 43140: Ship our FontConfig configuration with the browser [tor-browser]
+   * Bug 41298: Remove `--detach` parameter from .desktop files [tor-browser-build]
+   * Bug 41312: Remove comment in start-browser about --class and --name parameters [tor-browser-build]
+   * Bug 41313: Show waiting cursor while app opens [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Bug 43295: Update MR templates [tor-browser]
+     * Bug 40996: Do not version the .nobackup files [tor-browser-build]
+     * Bug 41284: Update relprep.py script to not synchronise changelogs between channels [tor-browser-build]
+     * Bug 41288: Use exec_noco option when using exec [tor-browser-build]
+     * Bug 41300: Add bea, clairehurst, and jwilde to tb_builders [tor-browser-build]
+     * Bug 41304: Add a browser commit tag+signing script [tor-browser-build]
+     * Bug 41306: Container dependencies are sorted before resolving templates [tor-browser-build]
+     * Bug 41307: Container dependencies are not filtered for duplicates [tor-browser-build]
+     * Bug 41315: Fix the Mullvad Extension update in relprep.py [tor-browser-build]
+     * Bug 41321: Update PieroV's expired keys [tor-browser-build]
+     * Bug 40006: Add option to avoid doing a git checkout when using the exec template function [rbm]
+   * Linux
+     * Bug 41266: Build the Tor and Mullvad Browsers for aarch64 Linux [tor-browser-build]
+
 Mullvad Browser 14.0a9 - October 08 2024
  * All Platforms
    * Bug 43197: Disable automatic exception for HTTPS-First [tor-browser]
