@@ -68,6 +68,8 @@ Tor Browser Stable is on the `maint-${TOR_BROWSER_MAJOR}.${TOR_BROWSER_MINOR}` b
     - [ ] ***(Desktop Only)*** `var/torbrowser_incremental_from`: updated to previous Desktop version
       - **NOTE**: We try to build incrementals for the previous 3 desktop versions
       - **⚠️ WARNING**: Really *actually* make sure this is the previous Desktop version or else the `make torbrowser-incrementals-*` step will fail
+    - [ ] `var/torbrowser_legacy_version`: updated to latest legacy Tor Browser version
+    - [ ] `var/torbrowser_legacy_platform_version`: updated to latest legacy Tor Browser ESR version
   - [ ] `projects/firefox/config`
       - [ ] `browser_build`: updated to match `tor-browser` tag
       - [ ] ***(Optional)*** `var/firefox_platform_version`: updated to latest `${ESR_VERSION}` if rebased
