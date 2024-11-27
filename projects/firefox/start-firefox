@@ -17,9 +17,6 @@ add_LD_LIBRARY_PATH() {
 if [ $? -ne 0 ]; then
   add_LD_LIBRARY_PATH "$basedir/[% IF c("var/tor-browser") -%]TorBrowser/Tor/[% END -%]libstdc++/"
 fi
-[% IF c("var/tor-browser") -%]
-add_LD_LIBRARY_PATH "$basedir/TorBrowser/Tor/"
-[% END -%]
 export LD_LIBRARY_PATH
 
 exec "$basedir/[% c("var/exe_name") %].real" "$@"
