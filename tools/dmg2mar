@@ -132,6 +132,7 @@ sub convert_files {
         $pm->start($step_name) and next;
         my $tmpdir = File::Temp->newdir();
         my (undef, $err, $success) = capture_exec('7z', 'x', "-o$tmpdir",
+                                                        '-x!*/Applications',
                                                         $file->{filename});
         exit_error "Error extracting $file->{filename}: $err" unless $success;
 
