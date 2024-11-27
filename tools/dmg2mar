@@ -165,7 +165,7 @@ sub convert_files {
         (undef, $err, $success) =  capture_exec('make_full_update.sh', '-q',
                                         $output, $appdir);
         exit_error "Error updating $output: $err" unless $success;
-        exit_error "make_full_update.sh failed. $output does not exist."
+        exit_error "make_full_update.sh failed. $output was not created.\n$err"
             unless -f $output;
         $pm->finish;
     }
