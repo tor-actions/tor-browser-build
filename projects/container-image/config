@@ -64,8 +64,9 @@ pre: |
        res_deps = res_deps.sort.unique;
      END;
      IF res_deps.size;
+       SET no_install_recommends = pc(c('origin_project'), 'var/no_install_recommends', { step => c('origin_step') });
        FOREACH pkg IN res_deps;
-         GET c('install_package', { pkg_name => pkg });
+         GET c('install_package', { pkg_name => pkg, no_install_recommends => no_install_recommends });
          GET "\n";
        END;
      END;
