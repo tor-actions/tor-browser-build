@@ -146,6 +146,7 @@ targets:
 
   linux-aarch64:
     var:
+      no_install_recommends: 1
       arch_deps:
         - libgtk2.0-dev:arm64
         - libgtk-3-dev:arm64
