@@ -114,6 +114,8 @@ export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
 # Create .mozbuild to avoid interactive prompt in configure
 mkdir "$HOME/.mozbuild"
 
+branding_dir=browser/branding/[% c("var/branding_directory_prefix") %]-[% c("var/channel") %]
+
 [% IF c("var/has_l10n") -%]
   supported_locales="[% tmpl(c('var/locales').join(' ')) %]"
 
@@ -138,6 +140,11 @@ mkdir "$HOME/.mozbuild"
     ln -s ja ja-JP-mac
     for lang in $supported_locales; do
       mv $lang/tor-browser.ftl "$l10ncentral/$lang/toolkit/toolkit/global/"
+      # Branding. Currently all releases use the same branding.
+      l10n_branding_dir="$l10ncentral/$lang/$branding_dir/"
+      mkdir -p "$l10n_branding_dir"
+      mv $lang/branding/brand.ftl "$l10n_branding_dir"
+      mv $lang/brand.properties "$l10n_branding_dir"
     done
     popd
 
@@ -173,7 +180,7 @@ echo "Starting ./mach configure $(date)"
   --with-distribution-id=org.torproject \
   --with-base-browser-version=[% c("var/torbrowser_version") %] \
   [% IF c("var/updater_enabled") -%]--enable-update-channel=[% c("var/channel") %][% END %] \
-  [% IF !c("var/base-browser") -%]--with-branding=browser/branding/[% c("var/branding_directory_prefix") %]-[% c("var/channel") %][% END %] \
+  [% IF !c("var/base-browser") -%]--with-branding="$branding_dir"[% END %] \
   [% IF !c("var/rlbox") -%]--without-wasm-sandboxed-libraries[% END %]
 
 echo "Starting ./mach build $(date)"
