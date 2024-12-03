@@ -129,28 +129,25 @@ mkdir "$HOME/.mozbuild"
   for lang in $supported_locales; do
     # Fluent
     mv $lang/base-browser.ftl "$l10ncentral/$lang/toolkit/toolkit/global/"
-    # Properties (they use a different directory)
-    mv $lang/* "$l10ncentral/$lang/browser/chrome/browser/"
   done
   popd
 
   [% IF c("var/tor-browser") -%]
-    # We will have to keep the torbutton.jar until we stop using dtds, because
-    # if we move them to the browser locale directory, browser.xhtml is not
-    # loaded.
     tar -C "$rootdir" -xf "$rootdir/[% c('input_files_by_name/translation-tor-browser') %]"
-    transl_tor_browser="$rootdir/translation-tor-browser"
+    pushd "$rootdir/translation-tor-browser"
+    ln -s ja ja-JP-mac
+    for lang in $supported_locales; do
+      mv $lang/tor-browser.ftl "$l10ncentral/$lang/toolkit/toolkit/global/"
+    done
+    popd
+
+    # torbutton properties files.
+    # TODO: Remove once we no longer have torbutton locale files.
     torbutton_locales="toolkit/torbutton/chrome/locale/"
     torbutton_jar="toolkit/torbutton/jar.mn"
     for lang in $supported_locales; do
-      source_lang=$lang
-      [% IF c("var/macos") -%]
-        if [ "$lang" == "ja-JP-mac" ]; then
-          source_lang="ja"
-        fi
-      [% END -%]
-      mv "$transl_tor_browser/$source_lang/tor-browser.ftl" "$l10ncentral/$lang/toolkit/toolkit/global/"
-      mv "$transl_tor_browser/$source_lang" "$torbutton_locales/$lang"
+      mkdir -p "$torbutton_locales/$lang"
+      mv "$rootdir/translation-tor-browser/$lang"/*.properties "$torbutton_locales/$lang/"
       echo "% locale torbutton $lang %locale/$lang/" >> "$torbutton_jar"
       echo "    locale/$lang (chrome/locale/$lang/*)" >> "$torbutton_jar"
     done
