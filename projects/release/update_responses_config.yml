@@ -16,6 +16,7 @@ download:
     mars_url: 'https://cdn.mullvad.net/browser'
 [% END -%]
 build_targets:
+    linux-aarch64: Linux_aarch64-gcc3
     linux-i686: Linux_x86-gcc3
     linux-x86_64: Linux_x86_64-gcc3
     windows-i686:
