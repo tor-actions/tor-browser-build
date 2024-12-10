@@ -171,6 +171,10 @@ input_files:
     content: "[% INCLUDE 'debian/docs.in' %]"
     refresh_input: 1
     enable: '[% c("var/build_deb_pkg") %]'
+  - filename: debian/postinst
+    content: "[% INCLUDE 'debian/postinst.in' %]"
+    refresh_input: 1
+    enable: '[% c("var/build_deb_pkg") %]'
   - filename: debian/rules
     content: "[% INCLUDE 'debian/rules.in' %]"
     refresh_input: 1
