@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    install|upgrade|configure)
+        # If abi 4.0 is not present, then remove the apparmor profile config
+        if [ ! -e /etc/apparmor.d/abi/4.0 ]; then
+            rm -f /etc/apparmor.d/[% c("var/system_pkg/pkg_name") %]
+        fi
+        ;;
+esac
