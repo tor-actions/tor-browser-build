@@ -1,0 +1,49 @@
+#!/bin/bash
+set -e
+
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+localdir="$script_dir/local"
+test $# -eq 1 && localdir="$1"
+
+cd "$script_dir/.."
+
+function download_extract_martools {
+  make submodule-update > /dev/null
+  martools_version=$(./rbm/rbm showconf --step fetch_martools mar-tools version)
+  if test -h "$localdir/mar-tools"; then
+    test "$(readlink $localdir/mar-tools)" = "mar-tools-$martools_version" && return 0
+    rm -f "$localdir/mar-tools"
+  fi
+  if test -d "$localdir/mar-tools"; then
+    echo "Error: $localdir/mar-tools already exists and is not a symlink"
+    exit 1
+  fi
+  echo "Setting up mar-tools"
+  mkdir -p "$localdir"
+  cd "$localdir"
+  if ! test -d "mar-tools-$martools_version"; then
+    cd "$script_dir/.."
+    ./rbm/rbm build --step fetch_martools mar-tools
+    martools_zip="$(pwd)/out/mar-tools/mar-tools-linux64.zip"
+    cd "$localdir"
+    test -f "$martools_zip"
+    unzip -jd "mar-tools-$martools_version" "$martools_zip"
+  fi
+  ln -sf "mar-tools-$martools_version" mar-tools
+  echo "mar-tools have been set up in $localdir/mar-tools"
+}
+
+function print_martools_vars {
+  mardir="$localdir/mar-tools"
+  if test -z "$LD_LIBRARY_PATH"; then
+    echo "export LD_LIBRARY_PATH=$mardir"
+  else
+    echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$mardir"
+  fi
+  echo "export MARTOOLSDIR=$mardir"
+  echo "export MAR=$mardir/mar"
+}
+
+download_extract_martools >&2
+print_martools_vars
