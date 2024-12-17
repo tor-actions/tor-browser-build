@@ -33,8 +33,6 @@ my %htdocsfiles;
 my $releases_dir = $config->{releases_dir};
 $releases_dir = "$FindBin::Bin/$releases_dir" unless $releases_dir =~ m/^\//;
 my @check_errors;
-my $initPATH = $ENV{PATH};
-my $initLD_LIBRARY_PATH = $ENV{LD_LIBRARY_PATH};
 
 sub exit_error {
     print STDERR "Error: ", $_[0], "\n";
@@ -65,6 +63,20 @@ sub get_nbprocs {
         return scalar grep { m/^processor\s+:\s/ } read_file '/proc/cpuinfo';
     }
     return 4;
+}
+
+sub setup_martools {
+  my ($out, $err, $exit) = capture {
+    system("$FindBin::Bin/../setup-martools");
+  };
+  exit_error "Error setting up mar-tools: $err" if $exit;
+  my $martoolsdir = "$FindBin::Bin/../local/mar-tools";
+  if ($ENV{LD_LIBRARY_PATH}) {
+    $ENV{LD_LIBRARY_PATH} = "$ENV{LD_LIBRARY_PATH}:$martoolsdir";
+  } else {
+    $ENV{LD_LIBRARY_PATH} = "$martoolsdir/mar-tools";
+  }
+  $ENV{PATH} = "$martoolsdir:$ENV{PATH}";
 }
 
 sub write_htdocs {
@@ -318,7 +330,7 @@ sub version_dir {
 sub get_buildinfos {
     my ($config, $version) = @_;
     return if exists $config->{versions}{$version}{buildID};
-    extract_martools($config, $version);
+    setup_martools;
     my $files = $config->{versions}{$version}{files};
     foreach my $os (keys %$files) {
         foreach my $lang (keys %{$files->{$os}}) {
@@ -498,40 +510,6 @@ sub write_downloads_json {
     }
 }
 
-sub marzip_path {
-    my ($config, $version) = @_;
-    for my $osname (qw/linux-x86_64 linux-i686 linux-aarch64 macos-x86_64 windows-x86_64 windows-i686/) {
-        my $marzip = glob(version_dir($config, $version) . "/mar-tools-$osname-*.zip");
-        if ($marzip && -f $marzip) {
-          return $marzip;
-        }
-    }
-    exit_error 'Could not find mar-tools';
-}
-
-my $martools_tmpdir;
-my $extracted_martools;
-sub extract_martools {
-    my ($config, $version) = @_;
-    return if $extracted_martools;
-    my $marzip = marzip_path($config, $version);
-    $martools_tmpdir = get_tmpdir($config);
-    my $old_cwd = getcwd;
-    chdir $martools_tmpdir;
-    my (undef, undef, $exit) = capture {
-      system('unzip', $marzip);
-    };
-    chdir $old_cwd;
-    exit_error "Error extracting $marzip" if $exit;
-    $ENV{PATH} = "$martools_tmpdir/mar-tools:$initPATH";
-    if ($initLD_LIBRARY_PATH) {
-        $ENV{LD_LIBRARY_PATH} = "$initLD_LIBRARY_PATH:$martools_tmpdir/mar-tools";
-    } else {
-        $ENV{LD_LIBRARY_PATH} = "$martools_tmpdir/mar-tools";
-    }
-    $extracted_martools = 1;
-}
-
 sub log_step {
     my ($url, $step, $status, $details) = @_;
     state $u;
@@ -701,9 +679,9 @@ my %actions = (
         my $channel = $ARGV[0];
         exit_error "Unknown channel" unless $config->{channels}{$channel};
         my $versions = as_array($config->{channels}{$channel});
+        setup_martools;
         foreach my $version (@$versions) {
             next unless $config->{versions}{$version}{incremental_from};
-            extract_martools($config, $version);
             get_version_files($config, $version);
             create_incremental_mars_for_version($config, $version, $channel);
         }
