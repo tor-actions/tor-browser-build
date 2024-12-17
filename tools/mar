@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+cmdname=$(basename -- "${BASH_SOURCE[0]}")
+setupmt=$("$script_dir/setup-martools")
+eval "$setupmt"
+exec "$MARTOOLSDIR/$cmdname" "$@"
