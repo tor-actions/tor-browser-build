@@ -25,7 +25,7 @@ function download_extract_martools {
   if ! test -d "mar-tools-$martools_version"; then
     cd "$script_dir/.."
     ./rbm/rbm build --step fetch_martools mar-tools
-    martools_zip="$(pwd)/out/mar-tools/mar-tools-linux64.zip"
+    martools_zip="$(pwd)/out/mar-tools/mar-tools.zip"
     cd "$localdir"
     test -f "$martools_zip"
     unzip -jd "mar-tools-$martools_version" "$martools_zip"
