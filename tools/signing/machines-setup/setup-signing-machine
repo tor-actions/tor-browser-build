@@ -144,7 +144,7 @@ fi
 # install mar-tools
 if ! test -d /home/signing-mar/mar-tools; then
   tmpdir=$(mktemp -d)
-  unzip -d "$tmpdir" /signing/mar-tools-linux64.zip
+  unzip -d "$tmpdir" /signing/mar-tools.zip
   chown -R signing-mar:signing-mar "$tmpdir/mar-tools"
   chmod go+rX "$tmpdir/mar-tools"/*
   mv "$tmpdir/mar-tools" /home/signing-mar/mar-tools

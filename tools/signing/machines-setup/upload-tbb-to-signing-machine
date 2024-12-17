@@ -25,7 +25,7 @@ git archive --prefix=rbm/ --output="$tmpdir/rbm.tar" HEAD .
 echo "Created rbm.tar"
 cd ..
 
-martools_filename=mar-tools-linux64.zip
+martools_filename=mar-tools.zip
 if ! test -f "./out/mar-tools/$martools_filename"; then
   ./rbm/rbm build --step fetch_martools mar-tools
   echo "Downloaded $martools_filename"

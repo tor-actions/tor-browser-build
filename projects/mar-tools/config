@@ -4,18 +4,19 @@
 # to fetch mar-tools for signing machine setup, and by tools/setup-martools
 # to allow running `mar` as `tools/mar`.
 #
-version: 12.0.4
-filename: 'mar-tools-linux64.zip'
+version: 14.0.4
+filename: 'mar-tools.zip'
 container:
   use_container: 0
 gpg_keyring: torbrowser.gpg
 tag_gpg_id: 1
 input_files:
-  - URL: 'https://archive.torproject.org/tor-package-archive/torbrowser/[% c("version") %]/mar-tools-linux64.zip'
-    sha256sum: 726ec4192de61a9342b3262c7ac722cbd59eaba07879be9589c65599d2d69584
+  - URL: 'https://archive.torproject.org/tor-package-archive/torbrowser/[% c("version") %]/mar-tools-linux-x86_64-[% c("version") %].zip'
+    sha256sum: 414254d2471c7f0bcc25de955dbbe716c416d0b80e7688dc2dd48ac6e7fdbf0a
 
 steps:
   fetch_martools:
     fetch_martools: |
       #!/bin/bash
-      echo ok
+      mkdir -p '[% dest_dir %]'
+      cp -f mar-tools-linux-x86_64-[% c("version") %].zip '[% dest_dir %]/mar-tools.zip'
