@@ -1,3 +1,56 @@
+Tor Browser 14.5a2 - January 14 2025
+ * All Platforms
+   * Updated Tor to 0.4.9.1-alpha
+   * Updated NoScript to 12.1.1
+   * Bug 43176: noscript-marker CSP warnings in the console [tor-browser]
+   * Bug 43282: Unable to click/tap/select anything adjacent the WebGL placeholders [tor-browser]
+   * Bug 43296: NoScript-blocked video content placeholder is not centered [tor-browser]
+   * Bug 43334: Developer Tools lacks data for Responsive Design Mode and Compatibility [tor-browser]
+   * Bug 43336: Move branding files out of torbutton [tor-browser]
+   * Bug 43337: Add branding files to translation CI [tor-browser]
+   * Bug 43338: Custom zoom + "Zoom text only" breaks pdfjs [tor-browser]
+   * Bug 43343: Remove YEC 2024 [tor-browser]
+   * Bug 43345: Translation CI: Exclude android strings from the legacy branch [tor-browser]
+   * Bug 43352: Failing connection attempts to multicast IPv6 ff00:::443 logged during NoScript updates [tor-browser]
+   * Bug 43366: Do not use system accent color in inputs [tor-browser]
+   * Bug 43384: Backport security fixes from Firefox 134 [tor-browser]
+   * Bug 43387: Rebase Tor Browser alpha onto 128.6.0esr [tor-browser]
+   * Bug 41328: Exclude tor dependencies from LD_LIBRARY_PATH [tor-browser-build]
+   * Bug 41333: Update STUN servers in Snowflake builtin bridges [tor-browser-build]
+   * Bug 41338: Add CDN77 meek bridge [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 128.6.0esr
+   * Bug 43269: NoScript localization issue [tor-browser]
+   * Bug 43312: Download popup panel progress bar overflows [tor-browser]
+   * Bug 43320: Improve how bridge settings appear in search results [tor-browser]
+ * Linux
+   * Bug 43236: High refresh rate detectable by websites when Wayland (MOZ_ENABLE_WAYLAND=1) is used [tor-browser]
+   * Bug 43326: Launching tor-browser on gentoo fails with "version `OPENSSL_3.2.0' not found" [tor-browser]
+   * Bug 43330: System fonts leak when emptying the allow list on Linux [tor-browser]
+   * Bug 41311: AppArmor profile fails on Debian stable [tor-browser-build]
+ * Android
+   * Updated GeckoView to 128.6.0esr
+   * Bug 42651: Finishing bootstrapping kicks the user out of settings, interupting whatever they were doing [tor-browser]
+   * Bug 43024: firefox-android 128.1 rebase TODOs and patchset health work [tor-browser]
+   * Bug 43229: Buttons that open links can be accessed before torbrowser is bootstrapped, leaving the app in a bad state [tor-browser]
+   * Bug 43350: Remove all caps comment from android string [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.22.10
+     * Bug 43373: Do not run all CI jobs for scheduled jobs. [tor-browser]
+     * Bug 43374: Run the `update-translations` jobs independent of others [tor-browser]
+     * Bug 41326: Remove var/torbrowser_legacy_version from rbm.conf in alpha/nightly [tor-browser-build]
+     * Bug 41340: Update kick_devmole_build script with Mullvad's new GitHub workflow endpoint [tor-browser-build]
+     * Bug 40081: Support apt option for not installing recommended dependencies [rbm]
+   * macOS
+     * Bug 41325: Newer versions of 7z fail to extract our dmg files because of the /Applications symlink [tor-browser-build]
+     * Bug 41327: Print more logs when make_full_update.sh failed to generate mar file in dmg2mar [tor-browser-build]
+   * Linux
+     * Bug 41329: Do not install python2.7-minimal in the linux-aarch64 firefox container [tor-browser-build]
+     * Bug 41331: Make update_responses find linux-aarch64 mar files [tor-browser-build]
+   * Android
+     * Bug 42690: Add the commands to produce the APKs to tools/geckoview [tor-browser]
+
 Tor Browser 14.5a1 - November 25 2024
  * All Platforms
    * Updated NoScript to 11.5.2

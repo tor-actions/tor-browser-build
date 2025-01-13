@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-version: '1.22.9'
+version: '1.22.10'
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
@@ -126,7 +126,7 @@ input_files:
     enable: '[% ! c("var/linux") %]'
   - URL: 'https://go.dev/dl/go[% c("version") %].src.tar.gz'
     name: go
-    sha256sum: e81a362f51aee2125722b018e46714e6a055a1954283414c0f937e737013db22
+    sha256sum: 1e94fd48be750d1fafb4d9b3b6dd31a6e9d2735d339bf2462bc97b64ca4c1037
   - project: go-bootstrap
     name: go-bootstrap
     target_replace:

@@ -108,16 +108,16 @@ input_files:
     enable: '[% ! c("var/android") %]'
   - filename: Bundle-Data
     enable: '[% ! c("var/android") %]'
-  - URL: https://addons.mozilla.org/firefox/downloads/file/4379558/noscript-11.5.2.xpi
+  - URL: https://addons.mozilla.org/firefox/downloads/file/4411102/noscript-12.1.1.xpi
     name: noscript
-    sha256sum: 460aaa6484bf8422415dfe08260e8536866e3731ed5b8b7913cf4b7b1333493a
+    sha256sum: f9639e63ffcfc352036de00e4ff6694bb0ca65a0bb8fbd103bd08f32dc1ff31a
   - URL: https://addons.mozilla.org/firefox/downloads/file/4391011/ublock_origin-1.61.2.xpi
     name: ublock-origin
     sha256sum: ee3a724a46ff32c17d1723077fecc6ede7fdab742154020b51fb6253ddcbba14
     enable: '[% c("var/mullvad-browser") %]'
-  - URL: https://cdn.mullvad.net/browser-extension/0.9.3/mullvad-browser-extension-0.9.3.xpi
+  - URL: https://cdn.mullvad.net/browser-extension/0.9.4/mullvad-browser-extension-0.9.4.xpi
     name: mullvad-extension
-    sha256sum: fc6bc7c850adf8845fec15b7ea06324f65f843155e2cc5dbd8719e34436512af
+    sha256sum: c91fcf30fe9a998f45ddc92e083bca4cd7b6dbb24fc545391e155ed1ec13c8cb
     enable: '[% c("var/mullvad-browser") %]'
   - filename: 'gtk3-settings.ini'
     enable: '[% c("var/linux") %]'

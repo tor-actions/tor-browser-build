@@ -1,3 +1,35 @@
+Mullvad Browser 14.5a2 - January 14 2025
+ * All Platforms
+   * Updated Firefox to 128.6.0esr
+   * Updated NoScript to 12.1.1
+   * Bug 389: Rebase Mullvad Browser alpha onto 128.6.0esr [mullvad-browser]
+   * Bug 43176: noscript-marker CSP warnings in the console [tor-browser]
+   * Bug 43269: NoScript localization issue [tor-browser]
+   * Bug 43282: Unable to click/tap/select anything adjacent the WebGL placeholders [tor-browser]
+   * Bug 43296: NoScript-blocked video content placeholder is not centered [tor-browser]
+   * Bug 43334: Developer Tools lacks data for Responsive Design Mode and Compatibility [tor-browser]
+   * Bug 43338: Custom zoom + "Zoom text only" breaks pdfjs [tor-browser]
+   * Bug 43340: Support linux-aarch64 dev builds [tor-browser]
+   * Bug 43352: Failing connection attempts to multicast IPv6 ff00:::443 logged during NoScript updates [tor-browser]
+   * Bug 43366: Do not use system accent color in inputs [tor-browser]
+   * Bug 43384: Backport security fixes from Firefox 134 [tor-browser]
+ * Linux
+   * Bug 43236: High refresh rate detectable by websites when Wayland (MOZ_ENABLE_WAYLAND=1) is used [tor-browser]
+   * Bug 43330: System fonts leak when emptying the allow list on Linux [tor-browser]
+   * Bug 41311: AppArmor profile fails on Debian stable [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Bug 43373: Do not run all CI jobs for scheduled jobs. [tor-browser]
+     * Bug 41340: Update kick_devmole_build script with Mullvad's new GitHub workflow endpoint [tor-browser-build]
+     * Bug 40081: Support apt option for not installing recommended dependencies [rbm]
+   * macOS
+     * Bug 41325: Newer versions of 7z fail to extract our dmg files because of the /Applications symlink [tor-browser-build]
+     * Bug 41327: Print more logs when make_full_update.sh failed to generate mar file in dmg2mar [tor-browser-build]
+   * Linux
+     * Bug 41329: Do not install python2.7-minimal in the linux-aarch64 firefox container [tor-browser-build]
+     * Bug 41331: Make update_responses find linux-aarch64 mar files [tor-browser-build]
+     * Bug 41335: linux-package project is not getting the channel target in testbuilds [tor-browser-build]
+
 Mullvad Browser 14.5a1 - November 25 2024
  * All Platforms
    * Updated Firefox to 128.5.0esr
