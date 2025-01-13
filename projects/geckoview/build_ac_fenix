@@ -45,12 +45,24 @@ echo 'ext.gleanBuildDate = "0"' >> app/build.gradle
 variant='[% c("var/variant") %]'
 version_name="[% c('var/torbrowser_version') %] ([% c('var/geckoview_version') %])"
 
+echo "Building $variant Fenix APK"
 gradle $GRADLE_FLAGS -PversionName="$version_name" "assemble$variant"
 
 echo "Build finished, copying the APK(s) to the destination directory $(date)"
-
 mkdir $distdir/[% project %]
 cp app/build/outputs/apk/fenix/$variant/*.apk $distdir/[% project %]
+
+echo "Building non optimized $variant Fenix APK for testing"
+gradle $GRADLE_FLAGS -PversionName="$version_name" -PdisableOptimization "assemble$variant"
+
+echo "Building Fenix instrumentation tests"
+gradle $GRADLE_FLAGS -PversionName="$version_name" -PtestBuildType="$variant" -PdisableOptimization assembleAndroidTest
+
+echo "Test build finished, copying the APKs to the destination directory $(date)"
+
+mkdir $distdir/[% project %]/tests
+cp app/build/outputs/apk/fenix/$variant/*.apk $distdir/[% project %]/tests
+cp app/build/outputs/apk/androidTest/fenix/$variant/*.apk $distdir/[% project %]/tests
 
 popd
 

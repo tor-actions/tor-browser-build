@@ -4,19 +4,13 @@
 
 tar -xf $rootdir/[% c('input_files_by_name/fenix') %]
 
-assets_dir=assets
-ext_dir=$assets_dir/extensions
-qa_apk=[% dest_dir %]/[% c('filename') %]/[% c("var/project-name") %]-qa-[% c("var/osname") %]-[% c("version") %].apk
-apk=$rootdir/geckoview/*-[% c("var/abi") %]-*.apk
-
-# tor-browser-build#40920
-sorted_baseline_apk=$(basename $apk .apk)_sorted_baseline.apk
-$rootdir/sort-baseline.py --apk $apk $sorted_baseline_apk
-mv $sorted_baseline_apk $apk
-
 # Bundle our extension(s).
+#
 # NoScript will be copied over to the profile folder
 # as a "regular" browser extension receiving regular AMO updates.
+assets_dir=assets
+ext_dir=$assets_dir/extensions
+
 noscript_path="$ext_dir/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi"
 
 mkdir -p /var/tmp/build/$ext_dir [% dest_dir _ '/' _ c('filename') %]
@@ -34,43 +28,93 @@ popd
 [%IF c("var/tor-browser") -%]
   tar -xaf "$rootdir/[% c("input_files_by_name/tor-expert-bundle") %]/tor-expert-bundle.tar.gz" tor/pluggable_transports/pt_config.json
 [% END -%]
-unzip -j "$apk" assets/omni.ja
-mkdir omni
-pushd omni
-unzip ../omni.ja
-[%IF c("var/tor-browser") -%]
-  cp -a ../tor/pluggable_transports/pt_config.json chrome/toolkit/content/global/pt_config.json
-[% END -%]
-[% c('zip', {
+
+# This function generates a signed APK from a given APK file.
+#
+# Arguments:
+#   $1 - The final APK file name.
+#   $2 - The input APK file.
+#   $3 - [Optional] The patch file for the unsigned APK.
+#
+# Steps:
+# 1. Sort the baseline APK.
+# 2. Extract the omni.ja file from the APK and modify its contents.
+# 3. Repack the APK with the modified omni.ja file.
+# 4. Align the APK using zipalign.
+# 5. Sign the APK using apksigner.
+# 6. [Optional] Generate a patch file for the unsigned APK using bsdiff.
+function generate_apk {
+  local final_apk=$1
+  local apk=$2
+
+  # tor-browser-build#40920
+  sorted_baseline_apk=$(basename $apk .apk)_sorted_baseline.apk
+  $rootdir/sort-baseline.py --apk $apk $sorted_baseline_apk
+  mv $sorted_baseline_apk $apk
+
+  unzip -j "$apk" assets/omni.ja
+  mkdir omni
+  pushd omni
+  unzip ../omni.ja
+  [%IF c("var/tor-browser") -%]
+    cp -an ../tor/pluggable_transports/pt_config.json chrome/toolkit/content/global/pt_config.json
+  [% END -%]
+  [% c('zip', {
         zip_src   => [ '.' ],
         zip_args  => '-0 ../assets/omni.ja',
       }) %]
-popd
+  popd
 
-mkdir apk
-pushd apk
-7zz x "$apk"
-cp -R ../assets ./
-find -type f -exec touch -m -t '[% USE date; date.format(pc("geckoview", "timestamp"), format = "%Y%m%d%H%M") %]' {} \;
-find -type f ! -name resources.arsc -printf '%P\n' | sort > ../files.txt
-7zz a -tzip -mx9 -mtc- -spf ../repacked.apk @../files.txt
-# resources.arsc must not be compressed as per the APK specifications
-7zz a -tzip -mm=Copy -mtc- ../repacked.apk resources.arsc
-popd
+  mkdir apk
+  pushd apk
+  7zz x "$apk"
+  cp -Rn ../assets ./
+  find -type f -exec touch -m -t '[% USE date; date.format(pc("geckoview", "timestamp"), format = "%Y%m%d%H%M") %]' {} \;
+  find -type f ! -name resources.arsc -printf '%P\n' | sort > ../files.txt
+  7zz a -tzip -mx9 -mtc- -spf ../repacked.apk @../files.txt
+  # resources.arsc must not be compressed as per the APK specifications
+  7zz a -tzip -mm=Copy -mtc- ../repacked.apk resources.arsc
+  popd
 
-aligned_apk=$(basename $apk .apk)_aligned.apk
-zipalign -vp 4 repacked.apk $aligned_apk
+  aligned_apk=$(basename $apk .apk)_aligned.apk
+  zipalign -vp 4 repacked.apk $aligned_apk
 
-# Sign a QA build. This .apk is not a debug version and doesn't contain a debug
-# flag in the manifest.
-apksigner sign --verbose --min-sdk-version [% c("var/android_min_api") %] --ks $rootdir/android-qa.keystore --out $qa_apk --in $aligned_apk --ks-key-alias androidqakey --key-pass pass:android --ks-pass pass:android
+  # Sign a QA build. This .apk is not a debug version and doesn't contain a debug
+  # flag in the manifest.
+  apksigner sign --verbose --min-sdk-version [% c("var/android_min_api") %] --ks $rootdir/android-qa.keystore --out $final_apk --in $aligned_apk --ks-key-alias androidqakey --key-pass pass:android --ks-pass pass:android
 
-unsign_patch="[% dest_dir %]/[% c('filename') %]/[% c('var/project-name') %]-qa-unsign-[% c('var/osname') %]-[% c('version') %].bspatch"
-bsdiff $qa_apk $aligned_apk $unsign_patch
+  local unsign_patch=$3
+  if [ -n "$unsign_patch" ]; then
+    bsdiff $final_apk $aligned_apk $unsign_patch
+  fi
+
+  # Clean up
+  rm -rf omni
+  rm omni.ja
+  rm -rf apk
+  rm repacked.apk
+  rm $aligned_apk
+}
+
+# Generate the QA APK and unsign patch.
+qa_apk=[% dest_dir %]/[% c('filename') %]/[% c("var/project-name") %]-qa-[% c("var/osname") %]-[% c("version") %].apk
+qa_unsign_patch="[% dest_dir %]/[% c('filename') %]/[% c('var/project-name') %]-qa-unsign-[% c('var/osname') %]-[% c('version') %].bspatch"
+apk=$rootdir/geckoview/*-[% c("var/abi") %]-*.apk
+generate_apk $qa_apk $apk $qa_unsign_patch
+
+# Generate the non-optimized APK used for testing and its unsign patch.
+noopt_apk=[% dest_dir %]/[% c('filename') %]/[% c("var/project-name") %]-noopt-[% c("var/osname") %]-[% c("version") %].apk
+noopt_final_apk=$rootdir/geckoview/tests/*-[% c("var/abi") %]-*.apk
+generate_apk $noopt_apk $noopt_final_apk
+
+# Copy and sign the Android test APK.
+test_apk=[% dest_dir %]/[% c('filename') %]/[% c("var/project-name") %]-[% c("version") %]-androidTest.apk
+cp $rootdir/geckoview/tests/*-androidTest.apk $test_apk
+apksigner sign --verbose --min-sdk-version [% c("var/android_min_api") %] --ks $rootdir/android-qa.keystore --out $test_apk --in $test_apk --ks-key-alias androidqakey --key-pass pass:android --ks-pass pass:android
 
 [%IF c("var/tor-browser") -%]
-  tor_expert_bundle_src="[% c('input_files_by_name/tor-expert-bundle') %]"
-  # strip off trailing "$buildid.tar.gz"
-  tor_expert_bundle_dest=${tor_expert_bundle_src:0:-7}.tar.gz
-  cp "$rootdir/[% c("input_files_by_name/tor-expert-bundle") %]/tor-expert-bundle.tar.gz" [% dest_dir %]/[% c('filename') %]/$tor_expert_bundle_dest
+    tor_expert_bundle_src="[% c('input_files_by_name/tor-expert-bundle') %]"
+    # strip off trailing "$buildid.tar.gz"
+    tor_expert_bundle_dest=${tor_expert_bundle_src:0:-7}.tar.gz
+    cp "$rootdir/[% c("input_files_by_name/tor-expert-bundle") %]/tor-expert-bundle.tar.gz" [% dest_dir %]/[% c('filename') %]/$tor_expert_bundle_dest
 [% END -%]
