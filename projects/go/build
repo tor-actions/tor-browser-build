@@ -51,6 +51,10 @@ cd /var/tmp/dist/go/src
 # so remove it to preserve reproducibility of the output.
 rm -rf /var/tmp/dist/go/pkg/obj/go-build/
 
+# Disable go autoupdates (tor-browser-build#41345)
+# See https://go.dev/doc/toolchain
+sed -i -e 's/^GOTOOLCHAIN=.*/GOTOOLCHAIN=local/' /var/tmp/dist/go/go.env
+
 cd /var/tmp/dist
 [% c('tar', {
         tar_src => [ project ],
