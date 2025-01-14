@@ -34,6 +34,7 @@ use File::Slurp;
 use File::Find;
 use Parallel::ForkManager;
 use Cwd;
+use FindBin;
 
 # If the application is not TorBrowser (for instance, TorMessenger)
 # set the application name in the TOR_APPNAME_BUNDLE_OSX,
@@ -70,25 +71,18 @@ sub osname {
     exit_error 'Unknown OS';
 }
 
-my $martools_tmpdir;
-sub extract_martools {
-    my $osname = osname;
-    my $marzip = glob(getcwd . "/mar-tools-$osname-*.zip");
-    exit_error "Could not find mar-tools zip" unless $marzip;
-    $martools_tmpdir = File::Temp->newdir();
-    my $old_cwd = getcwd;
-    chdir $martools_tmpdir;
-    my (undef, undef, $success) = capture_exec('unzip', $marzip);
-    chdir $old_cwd;
-    exit_error "Error extracting $marzip" unless $success;
-    $ENV{PATH} = "$martools_tmpdir/mar-tools:$ENV{PATH}";
-    if ($ENV{LD_LIBRARY_PATH}) {
-        $ENV{LD_LIBRARY_PATH} .= ":$martools_tmpdir/mar-tools";
-    } else {
-        $ENV{LD_LIBRARY_PATH} = "$martools_tmpdir/mar-tools";
-    }
-    $ENV{MAR} = "$martools_tmpdir/mar-tools/mar";
-    $ENV{MSBDIFF} = "$martools_tmpdir/mar-tools/mbsdiff";
+sub setup_martools {
+  my ($out, $err, $exit) = capture {
+    system("$FindBin::Bin/setup-martools");
+  };
+  exit_error "Error setting up mar-tools: $err" if $exit;
+  my $martoolsdir = "$FindBin::Bin/local/mar-tools";
+  if ($ENV{LD_LIBRARY_PATH}) {
+    $ENV{LD_LIBRARY_PATH} = "$ENV{LD_LIBRARY_PATH}:$martoolsdir";
+  } else {
+    $ENV{LD_LIBRARY_PATH} = "$martoolsdir/mar-tools";
+  }
+  $ENV{PATH} = "$martoolsdir:$ENV{PATH}";
 }
 
 sub get_nbprocs {
@@ -192,6 +186,6 @@ $ENV{LC_ALL} = 'C';
 exit_error "Please specify the mar channel id" unless @ARGV == 1;
 my $mar_channel_id = $ARGV[0];
 
-extract_martools;
+setup_martools;
 convert_files $mar_channel_id;
 remove_incremental_mars;
