@@ -41,7 +41,10 @@ Tor Browser 14.5a2 - January 14 2025
      * Bug 43374: Run the `update-translations` jobs independent of others [tor-browser]
      * Bug 41326: Remove var/torbrowser_legacy_version from rbm.conf in alpha/nightly [tor-browser-build]
      * Bug 41340: Update kick_devmole_build script with Mullvad's new GitHub workflow endpoint [tor-browser-build]
+     * Bug 41343: Add signing step to clean some files such as test artifacts [tor-browser-build]
      * Bug 40081: Support apt option for not installing recommended dependencies [rbm]
+   * Windows + macOS
+     * Bug 41349: Wrong copyright year makes build non-reproducible [tor-browser-build]
    * macOS
      * Bug 41325: Newer versions of 7z fail to extract our dmg files because of the /Applications symlink [tor-browser-build]
      * Bug 41327: Print more logs when make_full_update.sh failed to generate mar file in dmg2mar [tor-browser-build]
