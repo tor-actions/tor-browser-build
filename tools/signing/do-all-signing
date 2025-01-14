@@ -42,6 +42,10 @@ function sync-builder-unsigned-to-local-signed {
   "$script_dir/sync-builder-unsigned-to-local-signed"
 }
 
+function clean-build-artifacts {
+  "$script_dir/clean-build-artifacts"
+}
+
 function sync-before-linux-signer-rcodesign-sign {
   "$script_dir/sync-local-to-linux-signer"
 }
@@ -179,6 +183,7 @@ export SIGNING_PROJECTNAME
 do_step set-time-on-signing-machine
 do_step wait-for-finished-build
 do_step sync-builder-unsigned-to-local-signed
+do_step clean-build-artifacts
 do_step sync-scripts-to-linux-signer
 do_step sync-before-linux-signer-rcodesign-sign
 do_step linux-signer-rcodesign-sign

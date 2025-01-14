@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# This script removes some files we don't need to publish on dist.tpo
+
+set -e
+
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source "$script_dir/functions"
+
+cd "$signed_version_dir"
+
+# Remove Android test artifacts (tor-browser-build#41342)
+rm -f -- *-androidTest.apk *-noopt-*.apk
