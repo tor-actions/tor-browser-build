@@ -208,7 +208,7 @@ Mullvad Browser Stable is on the `maint-${MULLVAD_BROWSER_MAJOR}.${MULLVAD_BROWS
     ```
   - **Subject**
     ```
-    New build: Mullvad Browser ${MULLVAD_BROWSER_VERION} (signed)
+    New build: Mullvad Browser ${MULLVAD_BROWSER_VERSION} (signed)
     ```
   - **Body**
     ```
@@ -217,7 +217,9 @@ Mullvad Browser Stable is on the `maint-${MULLVAD_BROWSER_MAJOR}.${MULLVAD_BROWS
     Branch+Tags have been pushed to Mullvad's GitHub repo.
 
     - signed builds: https://dist.torproject.org/mullvadbrowser/${MULLVAD_BROWSER_VERSION}
-    - update_response hashes: ${MULLVAD_UPDATE_RESPONSES_HASH}
+    - update_response hashes: ${MULLVAD_UPDATE_RESPONSES_HASH}*
+
+    * https://gitlab.torproject.org/tpo/applications/mullvad-browser-update-responses
 
     changelog:
     # paste changelog as quote here

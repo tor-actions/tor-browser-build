@@ -203,9 +203,9 @@ Tor Browser Legacy is on the `maint-13.5` branch
 
 ```bash
 # Point OSSLSIGNCODE to your osslsigncode binary
-pushd tor-browser-build/${channel}/signed/$TORBROWSER_VERSION
+pushd tor-browser-build/torbrowser/${channel}/signed/$TORBROWSER_VERSION
 OSSLSIGNCODE=/path/to/osslsigncode
-../../../tools/authenticode_check.sh
+../../../../tools/authenticode_check.sh
 popd
 ```
 
@@ -217,11 +217,11 @@ popd
 # Point NSSDB to your nssdb containing the mar signing certificate
 # Point SIGNMAR to your signmar binary
 # Point LD_LIBRARY_PATH to your mar-tools directory
-pushd tor-browser-build/${channel}/signed/$TORBROWSER_VERSION
+pushd tor-browser-build/torbrowser/${channel}/signed/$TORBROWSER_VERSION
 NSSDB=/path/to/nssdb
 SIGNMAR=/path/to/mar-tools/signmar
 LD_LIBRARY_PATH=/path/to/mar-tools/
-../../../tools/marsigning_check.sh
+../../../../tools/marsigning_check.sh
 popd
 ```
 

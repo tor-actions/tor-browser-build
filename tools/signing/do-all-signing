@@ -3,34 +3,59 @@ set -e
 script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "$script_dir/functions"
 source "$script_dir/set-config.update-responses"
-
 NON_INTERACTIVE=1
 steps_dir="$signed_version_dir.steps"
 test -d "$steps_dir" || mkdir -p "$steps_dir"
 
-test -f "$steps_dir/linux-signer-rcodesign-sign.done" ||
+function get_sekrit {
+  echo "$SEKRITS" | grep -A1 "$1:" | tail -n1
+}
+
+[ -f "$script_dir/set-config.passwords" ] && . "$script_dir/set-config.passwords" 2>/dev/null
+
+if [[ $1 = "-p" ]]; then
+  shift
+  passwords_gpg_file="$1"
+  shift
+fi
+
+is_project torbrowser && nssdb=torbrowser-nssdb7
+is_project mullvadbrowser && nssdb=mullvadbrowser-nssdb1
+
+if [ -f "$passwords_gpg_file" ]; then
+  echo "Reading passwords from $passwords_gpg_file"
+  SEKRITS=$(gpg --decrypt "$passwords_gpg_file")
+  RCODESIGN_PW=$(get_sekrit 'rcodesign')
+  NSSPASS=$(get_sekrit "$nssdb (mar signing)")
+  KSPASS=$(get_sekrit "android apk ($tbb_version_type)")
+  YUBIPASS=$(get_sekrit "windows authenticode")
+  GPG_PASS=$(get_sekrit "gpg")
+else
+  echo "Rather than entering all the password manually, you may want to provide a gpg-encrypted file either on the command line (-p <filepath>) or in set-config.passwords."
+fi
+
+test -f "$steps_dir/linux-signer-rcodesign-sign.done" || [ -n "$RCODESIGN_PW" ] ||
   read -sp "Enter rcodesign passphrase for key-1: " RCODESIGN_PW
 echo
-is_project torbrowser && nssdb=torbrowser-nssdb7
-is_project mullvadbrowser && nssdb=mullvadbrowser-nssdb-1
-test -f "$steps_dir/linux-signer-signmars.done" ||
+
+test -f "$steps_dir/linux-signer-signmars.done" || [ -n "$NSSPASS" ] ||
   read -sp "Enter $nssdb (mar signing) passphrase: " NSSPASS
 echo
 
 if is_project torbrowser; then
-  test -f "$steps_dir/linux-signer-sign-android-apks.done" ||
+  test -f "$steps_dir/linux-signer-sign-android-apks.done" || [ -n "$KSPASS" ] ||
     read -sp "Enter android apk signing password ($tbb_version_type): " KSPASS
   echo
 fi
-test -f "$steps_dir/linux-signer-authenticode-signing.done" ||
+test -f "$steps_dir/linux-signer-authenticode-signing.done" || [ -n "$YUBIPASS" ] ||
   read -sp "Enter windows authenticode passphrase: " YUBIPASS
 echo
-test -f "$steps_dir/linux-signer-gpg-sign.done" ||
+test -f "$steps_dir/linux-signer-gpg-sign.done" || [ -n "$GPG_PASS" ] ||
   read -sp "Enter gpg passphrase: " GPG_PASS
 echo
 
 function set-time-on-signing-machine {
-  local current_time=$(date -u)
+  local current_time=$(date -u -Iseconds)
   ssh "$ssh_host_linux_signer" sudo /usr/bin/date -s "'$current_time'"
 }
 
@@ -178,6 +203,10 @@ function do_step {
   echo "$(date -Iseconds) - Finished step: $1"
 }
 
+function is_legacy {
+  [[ "$tbb_version" = 13.* ]]
+}
+
 export SIGNING_PROJECTNAME
 
 do_step set-time-on-signing-machine
@@ -195,9 +224,9 @@ do_step sync-scripts-to-linux-signer
 do_step sync-before-linux-signer-signmars
 do_step linux-signer-signmars
 do_step sync-after-signmars
-is_project torbrowser && \
+is_project torbrowser && ! is_legacy && \
   do_step linux-signer-sign-android-apks
-is_project torbrowser && \
+is_project torbrowser && ! is_legacy && \
   do_step sync-after-sign-android-apks
 do_step linux-signer-authenticode-signing
 do_step sync-after-authenticode-signing
@@ -211,5 +240,6 @@ do_step download-unsigned-sha256sums-gpg-signatures-from-people-tpo
 do_step sync-local-to-staticiforme
 do_step sync-scripts-to-staticiforme
 do_step staticiforme-prepare-cdn-dist-upload
-do_step upload-update_responses-to-staticiforme
+! is_legacy &&
+  do_step upload-update_responses-to-staticiforme
 do_step finished-signing-clean-linux-signer

@@ -223,9 +223,9 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
 
 ```bash
 # Point OSSLSIGNCODE to your osslsigncode binary
-pushd tor-browser-build/${channel}/signed/$TORBROWSER_VERSION
+pushd tor-browser-build/torbrowser/${channel}/signed/$TORBROWSER_VERSION
 OSSLSIGNCODE=/path/to/osslsigncode
-../../../tools/authenticode_check.sh
+../../../../tools/authenticode_check.sh
 popd
 ```
 
@@ -234,14 +234,15 @@ popd
     <summary>Check whether the MAR files got properly signed</summary>
 
 ```bash
-# Point NSSDB to your nssdb containing the mar signing certificate
+# Point NSS_DB_DIR to your nssdb dir containing the mar signing certificate
+# (check tools/marsigning_check.sh source code for details)
 # Point SIGNMAR to your signmar binary
 # Point LD_LIBRARY_PATH to your mar-tools directory
-pushd tor-browser-build/${channel}/signed/$TORBROWSER_VERSION
+pushd tor-browser-build/torbrowser/${channel}/signed/$TORBROWSER_VERSION
 NSSDB=/path/to/nssdb
 SIGNMAR=/path/to/mar-tools/signmar
 LD_LIBRARY_PATH=/path/to/mar-tools/
-../../../tools/marsigning_check.sh
+../../../../tools/marsigning_check.sh
 popd
 ```
 
