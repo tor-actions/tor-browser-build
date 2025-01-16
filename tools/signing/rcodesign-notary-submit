@@ -21,7 +21,7 @@ display_name=$(display_name)
 
 tar -C "$tmpdir" -xf "$macos_rcodesign_signed_tar_dir/$(project-name)-macos-${tbb_version}-rcodesign-signed.tar.zst"
 
-"$script_dir/../local/rcodesign-128/rcodesign" notary-submit --api-key-path "$appstoreconnect_api_key_path" --staple "$tmpdir/$display_name.app"
+"$script_dir/../local/rcodesign-128/rcodesign" notary-submit --max-wait-seconds 6000 --api-key-path "$appstoreconnect_api_key_path" --staple "$tmpdir/$display_name.app"
 
 output_file="$(project-name)-${tbb_version}-notarized+stapled.tar.zst"
 tar -C "$tmpdir" -caf "$tmpdir/$output_file" "$display_name.app"
