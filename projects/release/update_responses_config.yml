@@ -89,6 +89,8 @@ htaccess_rewrite_rules:
         RewriteRule ^[^/]+/1[012]\..*/.* https://aus1.torproject.org/torbrowser/update_pre13.5a10/alpha/$0 [last]
         RewriteRule ^[^/]+/13\.0.*/.* https://aus1.torproject.org/torbrowser/update_pre13.5a10/alpha/$0 [last]
         RewriteRule ^[^/]+/13\.5a\d/.* https://aus1.torproject.org/torbrowser/update_pre13.5a10/alpha/$0 [last]
+        # tor-browser-build41356: Make 14.0a4 a watershed alpha release
+        RewriteRule ^[^/]+/14\.0a[123]/.* https://aus1.torproject.org/torbrowser/update_pre14.0a4/alpha/$0 [last]
     release: |
         # bug 26570: Redirect pre-8.0 stable users to a separate update directory
         RewriteRule ^[^/]+/[4567]\..*/.* https://aus1.torproject.org/torbrowser/update_pre8.0/release/$0 [last]
