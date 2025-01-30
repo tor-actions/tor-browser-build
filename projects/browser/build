@@ -120,12 +120,6 @@ mv [% c('input_files_by_name/noscript') %] "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b
   # Move tor and dependencies to where TB expects them
   mv_tbdir tor/* "$TORBINPATH"
 
-  # on linux, libstdc++ lives in it's own directory
-  [% IF c("var/linux") %]
-    mkdir -p "$TBDIR/$TORBINPATH/libstdc++"
-    mv "$TBDIR/$TORBINPATH"/libstdc++.so.* "$TBDIR/$TORBINPATH/libstdc++"
-  [% END %]
-
   # the expert bundle includes tor-gencert, which isn't needed for browser releases
   [% IF c("var/windows") %]
     rm "$TBDIR/$TORBINPATH/tor-gencert.exe"
@@ -189,6 +183,13 @@ tar -C "${TB_STAGE_DIR}" -xf [% c('input_files_by_name/firefox') %]/browser.tar.
   done
   popd
   rm -rf $TMP_MANUAL_PATH
+
+  # on linux, libstdc++ lives in it's own directory
+  [% IF c("var/linux") %]
+    # For legacy reasons, libstdc++ is with tor binaries in Tor Browser.
+    # We would have to test the updater to move it outside.
+    mv "$TBDIR/libstdc++" "$TBDIR/$TORBINPATH/libstdc++"
+  [% END %]
 [% END -%]
 
 [% IF c("var/namecoin") %]

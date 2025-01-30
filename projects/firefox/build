@@ -329,16 +329,20 @@ END;
 
 [% IF c("var/linux") -%]
   /var/tmp/dist/gcc/bin/g++ $rootdir/abicheck.cc -o Browser/abicheck -std=c++17
-  [% IF !c("var/tor-browser") -%]
-    libdest=Browser/libstdc++
-    mkdir -p "$libdest"
-    # FIXME: tor-browser-build#40749
-    cp /var/tmp/dist/gcc/[% c("var/libdir") %]/libstdc++.so.* "$libdest"
-    [% IF c("var/asan") -%]
-      cp /var/tmp/dist/gcc/[% c("var/libdir") %]/libasan.so.* "$libdest"
-      cp /var/tmp/dist/gcc/[% c("var/libdir") %]/libubsan.so.* "$libdest"
-    [% END -%]
+  libdest=Browser/libstdc++
+  mkdir -p "$libdest"
+  # Not copying libstdc++.so.* as that dups with the full libstdc++.so.6.0.xx the .6 links to
+  # and libstdc++.so.6.0.28-gdb.py which is also not needed
+  cp /var/tmp/dist/gcc/[% c("var/libdir") %]/libstdc++.so.* "$libdest"
+  [% IF c("var/asan") -%]
+    cp /var/tmp/dist/gcc/[% c("var/libdir") %]/libasan.so.* "$libdest"
+    cp /var/tmp/dist/gcc/[% c("var/libdir") %]/libubsan.so.* "$libdest"
   [% END -%]
+  # Strip and generate debuginfo for libs
+  for LIB in "$libdest"/*so*
+  do
+    "$STRIP" "$LIB"
+  done
 [% END -%]
 
 echo "Starting to package artifacts $(date)"

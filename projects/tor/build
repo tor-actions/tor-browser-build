@@ -52,22 +52,7 @@ openssldir=/var/tmp/dist/openssl
   cp $openssldir/lib/libssl.so.3 "$TORBINDIR"
   cp $openssldir/lib/libcrypto.so.3 "$TORBINDIR"
   cp $libeventdir/lib/libevent-2.1.so.7 "$TORBINDIR"
-  # We need to copy the libstdc++.so.6 for Tor Browser on older Linux distros.
-  # Copying it into /Browser, which feels more natural, and amending
-  # LD_LIBRARY_PATH breaks updates from a Tor Browser with the old
-  # LD_LIBRARY_PATH value to the Tor Browser with the newer one. Thus, we copy
-  # the libstdc++ into the directory with the libs tor depends on, too. See bug
-  # 13359 for further details.
-  libdir=[% c("var/libdir") %]
-  [% IF c("var/linux-cross") -%]
-    libdir="[% c("var/crosstarget") %]/$libdir"
-  [% END -%]
-  cp "/var/tmp/dist/gcc/$libdir/libstdc++.so.6" "$TORBINDIR"
-  [% IF c("var/asan") -%]
-    cp "/var/tmp/dist/gcc/$libdir/libasan.so.6" "$TORBINDIR"
-    cp "/var/tmp/dist/gcc/$libdir/libubsan.so.1" "$TORBINDIR"
-  [% END -%]
-  chmod 700 "$TORBINDIR"/*.so*
+
   # This is needed to make RPATH unavailable. See bug 9150.
   export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$TORBINDIR"
 [% END %]
@@ -136,17 +121,9 @@ cd $distdir
   do
       LIB=`basename $i`
 
-      if [ $LIB == 'libstdc++.so.6' ]; then
-        # keeping this separate to maintain reproducibility; we can probably
-        # treat this the same as the rest (though it seems libstdc++ doesn't come with
-        # any useful debug symbols since we don't build it, so maybe we should figure
-        # out how to package them
-        "$STRIP" "$TORBINDIR/$LIB"
-      else
-        "$OBJCOPY" --only-keep-debug "$TORBINDIR/$LIB" "$TORDEBUGDIR/$LIB"
-        "$STRIP" "$TORBINDIR/$LIB"
-        "$OBJCOPY" --add-gnu-debuglink="$TORDEBUGDIR/$LIB" "$TORBINDIR/$LIB"
-      fi
+      "$OBJCOPY" --only-keep-debug "$TORBINDIR/$LIB" "$TORDEBUGDIR/$LIB"
+      "$STRIP" "$TORBINDIR/$LIB"
+      "$OBJCOPY" --add-gnu-debuglink="$TORDEBUGDIR/$LIB" "$TORBINDIR/$LIB"
   done
 [% END %]
 
