@@ -38,8 +38,5 @@ We plan to do it also on desktop platforms, see
 
 ## Other Linux libraries
 
-For Linux we also include here libstdc++ (and the sanitizers, if enabled), even
-though they aren't needed by tor.
-
-Also, on we provide debug symbols, but only for Linux, and only in
+For Linux we provide debug symbols, but only for Linux, and only in
 `tor-expert-bundle`.
