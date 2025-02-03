@@ -1,3 +1,15 @@
+Tor Browser 13.5.12 - February 04 2025
+ * All Platforms
+   * Updated Firefox to 115.20.0esr
+   * Bug 43447: Backport stable and legacy: Some .tor.onion sites are not displaying the underlying V3 onion address in alpha [tor-browser]
+   * Bug 43450: Rebase Tor Browser legacy onto 115.20.0esr [tor-browser]
+   * Bug 43451: Backport security fixes from Firefox 135 [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41324: Improve build signing ergonomics [tor-browser-build]
+     * Bug 41350: Increase timeout in rcodesign-notary-submit [tor-browser-build]
+     * Bug 41357: keyring/anti-censorship.gpg is in `GPG keybox database version 1` format [tor-browser-build]
+
 Tor Browser 13.5.11 - July 01 2025
  * All Platforms
    * Updated Firefox to 115.19.0esr
