@@ -1,3 +1,28 @@
+Tor Browser 14.0.5 - February 04 2025
+ * All Platforms
+   * Bug 41065: navigator.storage "best effort" + "persistent" leak partitionSize/totalSpace entropy [tor-browser]
+   * Bug 43386: Extension requests expose Firefox's minor version and custom app name [tor-browser]
+   * Bug 43447: Backport stable and legacy: Some .tor.onion sites are not displaying the underlying V3 onion address in alpha [tor-browser]
+   * Bug 43448: Rebase Tor Browser release onto 128.7.0esr [tor-browser]
+   * Bug 43451: Backport security fixes from Firefox 135 [tor-browser]
+   * Bug 41328: Exclude tor dependencies from LD_LIBRARY_PATH [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 128.7.0esr
+   * Bug 43312: Download popup panel progress bar overflows [tor-browser]
+ * Linux
+   * Bug 43236: High refresh rate detectable by websites when Wayland (MOZ_ENABLE_WAYLAND=1) is used [tor-browser]
+   * Bug 43326: Launching tor-browser on gentoo fails with "version `OPENSSL_3.2.0' not found" [tor-browser]
+ * Android
+   * Updated GeckoView to 128.7.0esr
+ * Build System
+   * All Platforms
+     * Updated Go to 1.22.11
+     * Bug 41324: Improve build signing ergonomics [tor-browser-build]
+     * Bug 41343: Add signing step to clean some files such as test artifacts [tor-browser-build]
+     * Bug 41345: Go autoupdates in 1.23 so add env var to prevent it in any step that has network access [tor-browser-build]
+     * Bug 41350: Increase timeout in rcodesign-notary-submit [tor-browser-build]
+     * Bug 41357: keyring/anti-censorship.gpg is in `GPG keybox database version 1` format [tor-browser-build]
+
 Tor Browser 14.0.4 - January 07 2025
  * All Platforms
    * Updated NoScript to 12.1.1
