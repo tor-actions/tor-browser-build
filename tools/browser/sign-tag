@@ -34,11 +34,11 @@ esac
 #
 
 branch_name=$(git rev-parse --abbrev-ref HEAD)
-if [[ $branch_name =~ ^([a-z]+-browser)-([1-9][0-9]+\.[0-9]+\.[0-9]+esr)-([1-9][0-9]*\.[05])-([1-9]).*$ ]]; then
+if [[ $branch_name =~ ^([a-z]+-browser)-([1-9][0-9]+\.[0-9]+)(\.[0-9]+esr|a[1-9][0-9]*)-([1-9][0-9]*\.[05])-([1-9]).*$ ]]; then
     project="${BASH_REMATCH[1]}"
-    esr="${BASH_REMATCH[2]}"
-    version="${BASH_REMATCH[3]}"
-    branch_number="${BASH_REMATCH[4]}"
+    upstream="${BASH_REMATCH[2]}${BASH_REMATCH[3]}"
+    version="${BASH_REMATCH[4]}"
+    branch_number="${BASH_REMATCH[5]}"
 else
     echo "This script must be run from an official browser branch. For example 'base-browser-128.4.0esr-14.0-1'"
     exit 1
@@ -77,9 +77,9 @@ commit=$(git rev-parse --short ${3:-HEAD})
 
 # channel validation
 if [[ "${project}" == "mullvad-browser" ]]; then
-    valid_channels=("alpha" "stable")
+    valid_channels=("rapid" "alpha" "stable")
 else
-    valid_channels=("alpha" "stable" "legacy")
+    valid_channels=("rapid" "alpha" "stable" "legacy")
 fi
 channel_valid=false
 for value in "${valid_channels[@]}"; do
@@ -104,8 +104,8 @@ fi
 # Sign and tag the specified git commit
 #
 
-tag="${project}-${esr}-${version}-${branch_number}-${build_number}"
-message="Tagging ${build_number} for ${esr}-based ${channel}"
+tag="${project}-${upstream}-${version}-${branch_number}-${build_number}"
+message="Tagging ${build_number} for ${upstream}-based ${channel}"
 
 
 echo "Tag commit ${commit} in ${branch_name}"
