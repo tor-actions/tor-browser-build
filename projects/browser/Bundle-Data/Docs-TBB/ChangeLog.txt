@@ -1,3 +1,13 @@
+Tor Browser 14.0.6 - February 07 2025
+ * All Platforms
+   * Updated Tor to 0.4.8.14
+   * Bug 41362: Remove meek azure from the builtin bridges [tor-browser-build]
+ * macOS
+   * Bug 43468: ScreenCaptureKit framework should be a weak link [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.22.12
+
 Tor Browser 14.0.5 - February 04 2025
  * All Platforms
    * Bug 41065: navigator.storage "best effort" + "persistent" leak partitionSize/totalSpace entropy [tor-browser]

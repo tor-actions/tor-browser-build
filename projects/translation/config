@@ -32,7 +32,7 @@ steps:
     fenix: '[% INCLUDE build %]'
     # We need to bump the commit before releasing but just pointing to a branch
     # might cause too much rebuidling of the Firefox part.
-    git_hash: 9b5c720e96df3a54f65e5a4e86b162845971f725
+    git_hash: e4f5825b1125e2c8c2aa8d4fdaa7e002d8f2934a
     compress_tar: 'zst'
     targets:
       nightly:
