@@ -1,3 +1,29 @@
+Mullvad Browser 14.5a3 - February 10 2025
+ * All Platforms
+   * Updated Firefox to 128.7.0esr
+   * Updated uBlock Origin to 1.62.0
+   * Bug 312: Apply Alpha and Nightly branding to unstable release channels [mullvad-browser]
+   * Bug 324: Figure out how to handle string differences between mullvad release and mullvad tip [mullvad-browser]
+   * Bug 41065: navigator.storage "best effort" + "persistent" leak partitionSize/totalSpace entropy [tor-browser]
+   * Bug 43308: Only allow "about:" pages to have access to contentaccessible branding assets [tor-browser]
+   * Bug 43323: Expose a stable asset from chrome:// to identify Tor, Base, and Mullvad Browser [tor-browser]
+   * Bug 43386: Extension requests expose Firefox's minor version and custom app name [tor-browser]
+   * Bug 43451: Backport security fixes from Firefox 135 [tor-browser]
+ * Windows
+   * Bug 43402: set browser.startup.blankWindow false [tor-browser]
+ * macOS
+   * Bug 43468: ScreenCaptureKit framework should be a weak link [tor-browser]
+ * Linux
+   * Bug 41297: Add video codecs dependencies (recommends) on the Debian package [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Bug 41281: Better dev defaults for fetch variable [tor-browser-build]
+     * Bug 41324: Improve build signing ergonomics [tor-browser-build]
+     * Bug 41358: Update sign-tag script to handle rapid-release nightly branches [tor-browser-build]
+     * Bug 40079: Make `fetch: if_needed` fetch existing branches [rbm]
+   * macOS
+     * Bug 41350: Increase timeout in rcodesign-notary-submit [tor-browser-build]
+
 Mullvad Browser 14.5a2 - January 14 2025
  * All Platforms
    * Updated Firefox to 128.6.0esr

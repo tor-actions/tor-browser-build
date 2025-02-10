@@ -1,3 +1,51 @@
+Tor Browser 14.5a3 - February 10 2025
+ * All Platforms
+   * Bug 41065: navigator.storage "best effort" + "persistent" leak partitionSize/totalSpace entropy [tor-browser]
+   * Bug 41921: Clean up initialisation and bridges conflict between TorSettings and TorConnect [tor-browser]
+   * Bug 43308: Only allow "about:" pages to have access to contentaccessible branding assets [tor-browser]
+   * Bug 43323: Expose a stable asset from chrome:// to identify Tor, Base, and Mullvad Browser [tor-browser]
+   * Bug 43449: Rebase Tor Browser alpha onto 128.7.0esr [tor-browser]
+   * Bug 43451: Backport security fixes from Firefox 135 [tor-browser]
+   * Bug 41362: Remove meek azure from the builtin bridges [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 128.7.0esr
+   * Bug 41831: Some .tor.onion sites are not displaying the underlying V3 onion address in alpha [tor-browser]
+   * Bug 43254: Cancel Moat requests when no longer needed [tor-browser]
+   * Bug 43386: Extension requests expose Firefox's minor version and custom app name [tor-browser]
+   * Bug 43398: tor-urlbar-button-plain hover styling is overwritten by tor-button rule [tor-browser]
+   * Bug 43406: 2 buttons displayed onion-available and connect when Tor daemon killed [tor-browser]
+   * Bug 43461: Drop our wordmark padding [tor-browser]
+   * Bug 43462: Use NetworkLinkService instead of Moat for the internet test [tor-browser]
+   * Bug 43466: Drop unnecessary CSS rules in branding aboutDialog.css [tor-browser]
+ * Windows
+   * Bug 43402: set browser.startup.blankWindow false [tor-browser]
+ * macOS
+   * Bug 43468: ScreenCaptureKit framework should be a weak link [tor-browser]
+ * Linux
+   * Bug 41297: Add video codecs dependencies (recommends) on the Debian package [tor-browser-build]
+ * Android
+   * Updated GeckoView to 128.7.0esr
+   * Bug 43198: Remove "Learn more" link from Android's no-internet error [tor-browser]
+   * Bug 43199: Bootstrapping bar needs a little TLC on Android (Part 1) [tor-browser]
+   * Bug 43222: All tor logs timestamps reset to current time when opening screen [tor-browser]
+   * Bug 43351: Don't force ALL CAPS for the fenix snackbar action button text [tor-browser]
+   * Bug 43359: [Android] Improper handling of TorBootstrapChangeListener with respect to system onDestroy() calls for HomeActivity [tor-browser]
+   * Bug 43360: [Android] Replace custom variable isBeingRecreated with built-in isFinishing function [tor-browser]
+   * Bug 43368: Add @Suppress for incorrect linting error "Overriding method should call super. onNewIntent" [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.22.12
+     * Bug 41281: Better dev defaults for fetch variable [tor-browser-build]
+     * Bug 41324: Improve build signing ergonomics [tor-browser-build]
+     * Bug 41345: Go autoupdates in 1.23 so add env var to prevent it in any step that has network access [tor-browser-build]
+     * Bug 41357: keyring/anti-censorship.gpg is in `GPG keybox database version 1` format [tor-browser-build]
+     * Bug 41358: Update sign-tag script to handle rapid-release nightly branches [tor-browser-build]
+     * Bug 40079: Make `fetch: if_needed` fetch existing branches [rbm]
+   * Windows + macOS + Linux
+     * Bug 41356: Add redirects to make 14.0a4 a watershed [tor-browser-build]
+   * macOS
+     * Bug 41350: Increase timeout in rcodesign-notary-submit [tor-browser-build]
+
 Tor Browser 14.5a2 - January 14 2025
  * All Platforms
    * Updated Tor to 0.4.9.1-alpha
