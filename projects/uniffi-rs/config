@@ -1,0 +1,20 @@
+# vim: filetype=yaml sw=2
+version: 0.27.1
+git_hash: bfb52effb0292f16d4c030d622887781639cbd1f
+git_url: https://gitlab.torproject.org/tpo/applications/uniffi-rs.git
+container:
+  use_container: 1
+
+steps:
+  build:
+    filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
+    input_files:
+      - project: container-image
+        pkg_type: build
+      - project: rust
+        name: rust
+      - name: cargo_vendor
+        project: uniffi-rs
+        pkg_type: cargo_vendor
+        norec:
+          sha256sum: 12a61a3dbe65a3946ed58fff3d849d11c9ade5818e2ef5771d2a2a531e25f553
