@@ -1,6 +1,13 @@
 Application Services is a collection of Rust components to enable integration
 with Mozilla online services, such as the Mozilla account, sync, etc...
 
+Since all of the application-services features are disabled by the Tor Project browsers,
+we don't build or include these Rust libraries in them. Even though these libraries
+are written in Rust, they are consumed by Kotlin. Application Services uses uniffi
+to auto-generate the Kotlin code that communicates with Rust. We have developed a
+custom generator for uniffi (see `projects/uniffi-rs`) to generate no-op bindings,
+i.e., bindings that don't call the Rust code and are therefore a dead-end.
+
 We do not fork this project, because we apply a minimal set of patches mainly
 needed for offline builds.
 
@@ -13,8 +20,12 @@ References:
 
 ## Vendored Rust dependencies
 
-Application Services is written mainly in Rust and it mnanages external
+Application Services is written mainly in Rust and it manages external
 dependencies through cargo.
+
+Although most Rust libraries aren't built by this project, the `nimbus-fml`
+project -- a command line tool used by other projects -- is still built.
+
 Reproduciblity is guaranteed by the provided `Cargo.lock`.
 
 We run offline builds, so we create the dependency archive in a separate step
@@ -34,16 +45,6 @@ Since our builds happen offline, we need to download the needed artifact before.
 We keep the list of files to download in `gradle-dependencies-list.txt`.
 A procedure to create this file is documented in
 [tor-browser-build#40855](https://gitlab.torproject.org/tpo/applications/tor-browser-build/-/issues/40855#note_2906041).
-
-## Other dependencies
-
-Finally, Application Services depends on two C libraries:
-[NSS](https://firefox-source-docs.mozilla.org/security/nss/index.html) and
-[SQLCipher](https://www.zetetic.net/sqlcipher/).
-We used to have separate tor-browser-build projects for them, but they were
-almost an exact copy of the scripts included in this repository.
-Keeping them updated wasn't trivial, so we decided to run Mozilla's scripts
-instead.
 
 # Caveats
 

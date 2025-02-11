@@ -36,13 +36,13 @@ current='[% c("var/gradle_version") %]'
 check_update_needed gradle "$needed" "$current"
 
 
-# nss-nspr
+# uniffi
 read -d '' p << 'EOF' || true
-if (m/NSS_ARCHIVE="nss-(.*-with-nspr-.*)\\.tar\\.gz"/) {
+if (m/^\\s*uniffi\\s*=\\s*"([^"]*)"/) {
   print $1;
   exit;
 }
 EOF
-needed=$(cat libs/build-all.sh | perl -ne "$p")
-current='[% c("var/nss_version") %]-with-nspr-[% c("var/nspr_version") %]'
-check_update_needed nss-nspr "$needed" "$current"
+needed=$(cat Cargo.toml | perl -ne "$p")
+current='[% pc("uniffi-rs", "version") %]'
+check_update_needed uniffi "$needed" "$current"

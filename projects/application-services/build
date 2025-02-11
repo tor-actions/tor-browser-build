@@ -66,13 +66,21 @@ directory = "/var/tmp/build/application-services/vendor"
 offline=true
 EOF
 
-pushd libs
-ln -s $rootdir/[% c("input_files_by_name/nss") %] ./
-ln -s $rootdir/bug_13028.patch
-patch -p2 < $rootdir/apply-bug-13028.diff
-patch -p2 < $rootdir/no-ndk-lookup.diff
-./build-all.sh desktop
-./build-all.sh android
+tar -xf $rootdir/[% c('input_files_by_name/uniffi-rs') %]
+
+# We add a suffix to the version to make it super specific.
+# This is useful for developer builds, which seem to try to fetch
+# latest versions of dependencies sometimes.
+sed -i '$ s/$/-TORBROWSER/' version.txt
+
+cp $rootdir/cargo-no-build.sh megazords/full/android/
+chmod +x megazords/full/android/cargo-no-build.sh
+patch -p1 < $rootdir/a-s-noop.diff
+
+pushd components/external/glean
+cp $rootdir/cargo-no-build.sh glean-core/android-native/
+cp $builddir/uniffi-rs/uniffi-bindgen glean-core/android-native/
+patch -p1 < $rootdir/glean-noop.diff
 popd
 
 [% IF c('var/fetch_gradle_dependencies') %]
@@ -88,7 +96,7 @@ popd
   export LANG=C.UTF-8
   patch -p1 < $rootdir/local-repository.diff
   patch -p1 < $rootdir/ohttp-no-git.diff
-  patch -p1 < $rootdir/bug40485.diff
+  patch -p1 < $rootdir/bug40485-nimbus-fml-reproducibility.diff
   patch -p1 < $rootdir/offline-nimbus-fml.diff
   gradle_flags="--offline --no-daemon"
   gradle $gradle_flags assembleRelease

@@ -1,0 +1,26 @@
+diff --git a/glean-core/android-native/build.gradle b/glean-core/android-native/build.gradle
+index 48769651..ade00ec3 100644
+--- a/glean-core/android-native/build.gradle
++++ b/glean-core/android-native/build.gradle
+@@ -57,6 +57,8 @@ android {
+ }
+
+ cargo {
++    cargoCommand = "${rootDir}/glean-core/android-native/cargo-no-build.sh"
++
+     // The directory of the Cargo.toml to build.
+     module = '../bundle-android'
+
+diff --git a/glean-core/android/build.gradle b/glean-core/android/build.gradle
+index 3568e40b..05f28296 100644
+--- a/glean-core/android/build.gradle
++++ b/glean-core/android/build.gradle
+@@ -221,7 +221,7 @@ android.libraryVariants.all { variant ->
+     def udlFilePath = "../src/glean.udl"
+     def t = tasks.register("generate${variant.name.capitalize()}UniFFIBindings", Exec) {
+         workingDir project.rootDir
+-        commandLine 'cargo', 'uniffi-bindgen', 'generate', '--no-format', "${project.projectDir}/${udlFilePath}", '--language', 'kotlin', '--out-dir', "${buildDir}/${uniffiGeneratedPath}"
++        commandLine '${rootDir}/glean-core/android-native/uniffi-bindgen', 'generate', '--no-format', "${project.projectDir}/${udlFilePath}", '--language', 'kotlin', '--out-dir', "${buildDir}/${uniffiGeneratedPath}"
+         outputs.dir "${buildDir}/${uniffiGeneratedPath}"
+         // Re-generate if the interface definition changes.
+         inputs.file "${project.projectDir}/../src/glean.udl"

@@ -4,16 +4,16 @@ index 97d545672..249406a0c 100644
 +++ b/components/support/nimbus-fml/src/intermediate_representation.rs
 @@ -237,10 +237,10 @@ pub struct FeatureManifest {
      pub(crate) about: AboutBlock,
- 
+
      #[serde(default)]
 -    pub(crate) imported_features: HashMap<ModuleId, BTreeSet<String>>,
 +    pub(crate) imported_features: BTreeMap<ModuleId, BTreeSet<String>>,
- 
+
      #[serde(default)]
 -    pub(crate) all_imports: HashMap<ModuleId, FeatureManifest>,
 +    pub(crate) all_imports: BTreeMap<ModuleId, FeatureManifest>,
  }
- 
+
  impl TypeFinder for FeatureManifest {
 diff --git a/components/support/nimbus-fml/src/parser.rs b/components/support/nimbus-fml/src/parser.rs
 index 49cace525..cdf692b86 100644
@@ -34,7 +34,7 @@ index 49cace525..cdf692b86 100644
          // We associate only the feature ids with the manifest we're loading in this method.
 -        let mut imported_feature_id_map = HashMap::new();
 +        let mut imported_feature_id_map = BTreeMap::new();
- 
+
          for block in &frontend.imports {
              // 1. Load the imported manifests in to the hash map.
 @@ -328,7 +328,7 @@ impl Parser {

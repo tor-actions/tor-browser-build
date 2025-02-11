@@ -1,0 +1,61 @@
+diff --git a/components/fxa-client/android/src/main/java/mozilla/appservices/fxaclient/Config.kt b/components/fxa-client/android/src/main/java/mozilla/appservices/fxaclient/Config.kt
+index 78c16dd0..d2615fa7 100644
+--- a/components/fxa-client/android/src/main/java/mozilla/appservices/fxaclient/Config.kt
++++ b/components/fxa-client/android/src/main/java/mozilla/appservices/fxaclient/Config.kt
+@@ -13,4 +13,5 @@ fun FxaServer.contentUrl() = when (this) {
+     is FxaServer.China -> "https://accounts.firefox.com.cn"
+     is FxaServer.LocalDev -> "http://127.0.0.1:3030"
+     is FxaServer.Custom -> this.url
++    is FxaServer.__NOOP -> ""
+ }
+diff --git a/components/nimbus/android/src/main/java/org/mozilla/experiments/nimbus/Nimbus.kt b/components/nimbus/android/src/main/java/org/mozilla/experiments/nimbus/Nimbus.kt
+index 8c05be9c..6bf2ec15 100644
+--- a/components/nimbus/android/src/main/java/org/mozilla/experiments/nimbus/Nimbus.kt
++++ b/components/nimbus/android/src/main/java/org/mozilla/experiments/nimbus/Nimbus.kt
+@@ -532,6 +532,8 @@ open class Nimbus(
+                         ),
+                     )
+                 }
++
++                EnrollmentChangeEventType.__NOOP -> {}
+             }
+         }
+     }
+diff --git a/components/places/android/src/main/java/mozilla/appservices/places/PlacesConnection.kt b/components/places/android/src/main/java/mozilla/appservices/places/PlacesConnection.kt
+index 282f4e90..db8b00a3 100644
+--- a/components/places/android/src/main/java/mozilla/appservices/places/PlacesConnection.kt
++++ b/components/places/android/src/main/java/mozilla/appservices/places/PlacesConnection.kt
+@@ -289,6 +289,7 @@ internal fun VisitType.toInt(): Int {
+         VisitType.FRAMED_LINK -> 8
+         VisitType.RELOAD -> 9
+         VisitType.UPDATE_PLACE -> 10
++        VisitType.__NOOP -> -1
+     }
+ }
+
+diff --git a/megazords/full/android/build.gradle b/megazords/full/android/build.gradle
+index 822ce180..ccdc6c8a 100644
+--- a/megazords/full/android/build.gradle
++++ b/megazords/full/android/build.gradle
+@@ -54,6 +54,8 @@ configurations {
+ }
+
+ cargo {
++    cargoCommand = "${rootDir}/megazords/full/android/cargo-no-build.sh"
++
+     // The directory of the Cargo.toml to build.
+     module = '..'
+
+diff --git a/publish.gradle b/publish.gradle
+index 71f5d55b..027665ff 100644
+--- a/publish.gradle
++++ b/publish.gradle
+@@ -194,7 +194,7 @@ ext.configureUniFFIBindgen = { udlFilePath ->
+         def uniffiGeneratedPath = "generated/source/uniffi/${variant.name}/java"
+         def t = tasks.register("generate${variant.name.capitalize()}UniFFIBindings", Exec) {
+             workingDir project.rootDir
+-            commandLine '/usr/bin/env', 'cargo', 'uniffi-bindgen', 'generate', "${project.projectDir}/${udlFilePath}", '--language', 'kotlin', '--out-dir', "${buildDir}/${uniffiGeneratedPath}"
++            commandLine '/usr/bin/env', "${rootProject.projectDir}/uniffi-rs/uniffi-bindgen", 'generate', "${project.projectDir}/${udlFilePath}", '--language', 'kotlin', '--out-dir', "${buildDir}/${uniffiGeneratedPath}"
+             outputs.dir "${buildDir}/${uniffiGeneratedPath}"
+             // Re-generate if the interface definition changes.
+             inputs.file "${project.projectDir}/${udlFilePath}"
