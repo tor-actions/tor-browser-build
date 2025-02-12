@@ -54,6 +54,10 @@ var:
     rm -Rf "$rezip_tmpdir"
 
   l10n-changesets: '[% exec("git --no-pager show " _ c("git_hash") _ ":browser/locales/l10n-changesets.json", { exec_noco => 1 }) %]'
+  # The branding_string_suffix for the alpha and nightly should be
+  # '_alpha' and '_nightly', matching the "suffix" chosen in the
+  # tor-browser:update-translations.yml file.
+  branding_string_suffix: '_[% c("var/channel") %]'
 
 steps:
   src-tarballs:
@@ -93,6 +97,12 @@ targets:
   basebrowser:
     var:
       nightly_updates_publish_dir_prefix: basebrowser-
+
+  release:
+    var:
+      # For the stable release, the suffix is empty.
+      # I.e. we want to select `-brand-short-name` directly.
+      branding_string_suffix: ''
 
   nightly:
     git_hash: '[% c("var/project-name") %]-[% c("var/firefox_version") %]-[% c("var/browser_branch") %]'
@@ -183,6 +193,8 @@ input_files:
   - project: binutils
     name: binutils
     enable: '[% c("var/linux") && ! c("var/linux-cross") %]'
+  - filename: rename-branding-strings.py
+    enable: '[% c("var/has_l10n") && c("var/tor-browser") %]'
   - filename: fix-info-plist.py
     enable: '[% c("var/macos") %]'
   - filename: nsis-uninstall.patch
