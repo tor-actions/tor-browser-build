@@ -113,9 +113,9 @@ sub get_version_files {
     foreach my $file (readdir $d) {
         next unless -f "$vdir/$file";
         if ($file !~ m/incremental\.mar$/ &&
-            $file =~ m/^$appname-(.+)-${version}_(.+)\.mar$/) {
-            my ($os, $lang) = ($1, $2);
-            $files->{$os}{$lang}{complete} = {
+            $file =~ m/^$appname-(.+)-${version}_ALL\.mar$/) {
+            my $os = $1;
+            $files->{$os}{complete} = {
                 type => 'complete',
                 URL => "$download_url/$file",
                 size => -s "$vdir/$file",
@@ -126,9 +126,9 @@ sub get_version_files {
             };
             next;
         }
-        if ($file =~ m/^$appname-(.+)--(.+)-${version}_(.+)\.incremental\.mar$/) {
-            my ($os, $from_version, $lang) = ($1, $2, $3);
-            $files->{$os}{$lang}{partial}{$from_version} = {
+        if ($file =~ m/^$appname-(.+)--(.+)-${version}_ALL\.incremental\.mar$/) {
+            my ($os, $from_version) = ($1, $2);
+            $files->{$os}{partial}{$from_version} = {
                 type => 'partial',
                 URL => "$download_url/$file",
                 size => -s "$vdir/$file",
@@ -235,14 +235,14 @@ sub extract_mar {
 }
 
 sub mar_filename {
-    my ($config, $appname, $version, $os, $lang) = @_;
-    version_dir($config, $version) .  "/$appname-$os-${version}_$lang.mar";
+    my ($config, $appname, $version, $os) = @_;
+    version_dir($config, $version) .  "/$appname-$os-${version}_ALL.mar";
 }
 
 sub create_incremental_mar {
-    my ($config, $pm, $from_version, $new_version, $os, $lang, $channel) = @_;
+    my ($config, $pm, $from_version, $new_version, $os, $channel) = @_;
     my $appname = $config->{appname_marfile};
-    my $mar_file = "$appname-$os--${from_version}-${new_version}_$lang.incremental.mar";
+    my $mar_file = "$appname-$os--${from_version}-${new_version}_ALL.incremental.mar";
     my $mar_file_path = version_dir($config, $new_version) . '/' . $mar_file;
     if ($ENV{MAR_SKIP_EXISTING} && -f $mar_file_path) {
         print "Skipping $mar_file\n";
@@ -253,7 +253,7 @@ sub create_incremental_mar {
     my $finished_file = sub {
         exit_error "Error creating $mar_file" unless $_[1] == 0;
         print "Finished $mar_file\n";
-        $config->{versions}{$new_version}{files}{$os}{$lang}{partial}{$from_version} = {
+        $config->{versions}{$new_version}{files}{$os}{partial}{$from_version} = {
             type => 'partial',
             URL => "$download_url/$mar_file",
             size => -s $mar_file_path,
@@ -267,9 +267,9 @@ sub create_incremental_mar {
     my $tmpdir = get_tmpdir($config);
     my $mar_c_from = get_config($config, $from_version, $os, 'mar_compression');
     my $mar_c_new = get_config($config, $new_version, $os, 'mar_compression');
-    extract_mar(mar_filename($config, $appname, $from_version, $os, $lang),
+    extract_mar(mar_filename($config, $appname, $from_version, $os),
                 "$tmpdir/A", $mar_c_from);
-    extract_mar(mar_filename($config, $appname, $new_version, $os, $lang),
+    extract_mar(mar_filename($config, $appname, $new_version, $os),
                 "$tmpdir/B", $mar_c_new);
     # bug 26054: make sure previous macOS version is code signed
     if (!$ENV{NO_CODESIGNATURE} && ($os eq 'macos')
@@ -306,10 +306,8 @@ sub create_incremental_mars_for_version {
         get_version_files($config, $from_version);
         my $from_v = $config->{versions}{$from_version};
         foreach my $os (keys %{$v->{files}}) {
-            foreach my $lang (keys %{$v->{files}{$os}}) {
-                next unless defined $from_v->{files}{$os}{$lang}{complete};
-                create_incremental_mar($config, $pm, $from_version, $version, $os, $lang, $channel);
-            }
+            next unless defined $from_v->{files}{$os}{complete};
+            create_incremental_mar($config, $pm, $from_version, $version, $os, $channel);
         }
     }
     $pm->wait_all_children;
@@ -333,31 +331,29 @@ sub get_buildinfos {
     setup_martools;
     my $files = $config->{versions}{$version}{files};
     foreach my $os (keys %$files) {
-        foreach my $lang (keys %{$files->{$os}}) {
-            next unless $files->{$os}{$lang}{complete};
-            my $tmpdir = get_tmpdir($config);
-            my $mar_compression = get_config($config, $version, $os, 'mar_compression');
-            extract_mar(
-                mar_filename($config, $config->{appname_marfile}, $version, $os, $lang),
-                "$tmpdir",
-                $mar_compression);
-            my $appfile = "$tmpdir/application.ini" if -f "$tmpdir/application.ini";
-            $appfile = "$tmpdir/Contents/Resources/application.ini"
-                                if -f "$tmpdir/Contents/Resources/application.ini";
-            exit_error "Could not find application.ini" unless $appfile;
-            foreach my $line (read_file($appfile)) {
-                if ($line =~ m/^BuildID=(.*)$/) {
-                    $config->{versions}{$version}{buildID} = $1;
-                    return;
-                }
+        next unless $files->{$os}{complete};
+        my $tmpdir = get_tmpdir($config);
+        my $mar_compression = get_config($config, $version, $os, 'mar_compression');
+        extract_mar(
+            mar_filename($config, $config->{appname_marfile}, $version, $os),
+            "$tmpdir",
+            $mar_compression);
+        my $appfile = "$tmpdir/application.ini" if -f "$tmpdir/application.ini";
+        $appfile = "$tmpdir/Contents/Resources/application.ini"
+                if -f "$tmpdir/Contents/Resources/application.ini";
+        exit_error "Could not find application.ini" unless $appfile;
+        foreach my $line (read_file($appfile)) {
+            if ($line =~ m/^BuildID=(.*)$/) {
+                $config->{versions}{$version}{buildID} = $1;
+                return;
             }
-            exit_error "Could not extract buildID from application.ini";
         }
+        exit_error "Could not extract buildID from application.ini";
     }
 }
 
 sub get_response {
-    my ($config, $versions, $os, $lang, $from_version) = @_;
+    my ($config, $versions, $os, $from_version) = @_;
     my $res;
     my $writer = XML::Writer->new(OUTPUT => \$res, ENCODING => 'UTF-8');
     $writer->xmlDecl;
@@ -384,13 +380,13 @@ sub get_response {
             defined $minversion ? ( minSupportedOSVersion => $minversion ) : (),
             defined $mininstruc ? ( minSupportedInstructionSet => $mininstruc ) : (),
         );
-        if (my $patch = $config->{versions}{$version}{files}{$os}{$lang}{complete}) {
+        if (my $patch = $config->{versions}{$version}{files}{$os}{complete}) {
             my @sorted_patch = map { $_ => $patch->{$_} } sort keys %$patch;
             $writer->startTag('patch', @sorted_patch);
             $writer->endTag('patch');
         }
         if ($from_version) {
-            if (my $patch = $config->{versions}{$version}{files}{$os}{$lang}{partial}{$from_version}) {
+            if (my $patch = $config->{versions}{$version}{files}{$os}{partial}{$from_version}) {
                 my @sorted_patch = map { $_ => $patch->{$_} } sort keys %$patch;
                 $writer->startTag('patch', @sorted_patch);
                 $writer->endTag('patch');
@@ -407,30 +403,25 @@ sub get_response {
 sub write_responses {
     my ($config, $channel) = @_;
     my $versions = as_array($config->{channels}{$channel});
-    my (%oses, %langs, %from_versions);
+    my (%oses, %from_versions);
     foreach my $version (@$versions) {
         get_version_files($config, $version);
         get_buildinfos($config, $version);
         my $files = $config->{versions}{$version}{files};
         foreach my $os (keys %$files) {
             $oses{$os} = 1;
-            foreach my $lang (keys %{$files->{$os}}) {
-                $langs{$lang} = 1;
-                foreach my $from_version (keys %{$files->{$os}{$lang}{partial}}) {
-                    $from_versions{$from_version} = 1;
-                }
+            foreach my $from_version (keys %{$files->{$os}{partial}}) {
+                $from_versions{$from_version} = 1;
             }
         }
     }
     my $versions_str = join('+', @$versions);
     foreach my $os (keys %oses) {
-        foreach my $lang (keys %langs) {
-            my $resp = get_response($config, $versions, $os, $lang);
-            write_htdocs($channel, "$versions_str-$os-$lang.xml", $resp);
-            foreach my $from_version (keys %from_versions) {
-                $resp = get_response($config, $versions, $os, $lang, $from_version);
-                write_htdocs($channel, "$from_version-$versions_str-$os-$lang.xml", $resp);
-            }
+        my $resp = get_response($config, $versions, $os);
+        write_htdocs($channel, "$versions_str-$os.xml", $resp);
+        foreach my $from_version (keys %from_versions) {
+            $resp = get_response($config, $versions, $os, $from_version);
+            write_htdocs($channel, "$from_version-$versions_str-$os.xml", $resp);
         }
     }
     write_htdocs($channel, 'no-update.xml',
@@ -445,31 +436,26 @@ sub write_htaccess {
     $htaccess .= $config->{htaccess_rewrite_rules}{$channel} // '';
     my $versions = as_array($config->{channels}{$channel});
     my $versions_str = join('+', @$versions);
-    my (%oses, %langs, %from_versions);
+    my (%oses, %from_versions);
     foreach my $version (@$versions) {
         my $files = $config->{versions}{$version}{files};
         foreach my $os (keys %$files) {
             $oses{$os} = 1;
-            foreach my $lang (keys %{$files->{$os}}) {
-                $langs{$lang} = 1;
-                foreach my $from_version (keys %{$files->{$os}{$lang}{partial}}) {
-                    $from_versions{$from_version} = 1;
-                }
+            foreach my $from_version (keys %{$files->{$os}{partial}}) {
+                $from_versions{$from_version} = 1;
             }
         }
         $htaccess .= "RewriteRule ^[^\/]+/$version/ no-update.xml $flags\n";
     }
     foreach my $os (sort keys %oses) {
         foreach my $bt (build_targets_by_os($os)) {
-            foreach my $lang (sort keys %langs) {
-                foreach my $from_version (sort keys %from_versions) {
-                    $htaccess .= "RewriteRule ^$bt/$from_version/$lang "
-                              .  "$from_version-$versions_str-$os-$lang.xml $flags\n";
-                }
-                $htaccess .= "RewriteRule ^$bt/[^\/]+/$lang "
-                          .  "$versions_str-$os-$lang.xml $flags\n";
+            foreach my $from_version (sort keys %from_versions) {
+                $htaccess .= "RewriteRule ^$bt/$from_version/ALL "
+                          .  "$from_version-$versions_str-$os.xml $flags\n";
             }
-            $htaccess .= "RewriteRule ^$bt/ $versions_str-$os-ALL.xml $flags\n";
+            $htaccess .= "RewriteRule ^$bt/[^\/]+/ALL "
+                      .  "$versions_str-$os.xml $flags\n";
+            $htaccess .= "RewriteRule ^$bt/ $versions_str-$os.xml $flags\n";
         }
     }
     write_htdocs($channel, '.htaccess', $htaccess);
@@ -552,28 +538,26 @@ sub check_update_responses_channel {
     my $channel_versions = as_array($config->{channels}{$channel});
     my ($channel_version) = @$channel_versions;
     foreach my $build_target (build_targets_list()) {
-        foreach my $lang (qw(en-US de)) {
-            my $url = "$base_url/$channel/$build_target/1.0/$lang";
-            my $dom = get_remote_xml($url);
-            if ($dom) {
-                my $version = check_get_version($dom);
-                log_step($url, 'version', $version eq $channel_version,
-                         "expected: $channel_version received: $version");
-            }
-            $url = "$base_url/$channel/$build_target/$channel_version/$lang";
+        my $url = "$base_url/$channel/$build_target/1.0/ALL";
+        my $dom = get_remote_xml($url);
+        if ($dom) {
+            my $version = check_get_version($dom);
+            log_step($url, 'version', $version eq $channel_version,
+                "expected: $channel_version received: $version");
+        }
+        $url = "$base_url/$channel/$build_target/$channel_version/ALL";
+        $dom = get_remote_xml($url);
+        log_step($url, 'no_update', check_no_update($dom)) if $dom;
+        my @inc = @{$config->{versions}{$channel_version}{incremental_from}}
+                  if $config->{versions}{$channel_version}{incremental_from};
+        foreach my $inc_from (@inc) {
+            my $url = "$base_url/$channel/$build_target/$inc_from/ALL";
             $dom = get_remote_xml($url);
-            log_step($url, 'no_update', check_no_update($dom)) if $dom;
-            my @inc = @{$config->{versions}{$channel_version}{incremental_from}}
-                      if $config->{versions}{$channel_version}{incremental_from};
-            foreach my $inc_from (@inc) {
-                my $url = "$base_url/$channel/$build_target/$inc_from/$lang";
-                $dom = get_remote_xml($url);
-                next unless $dom;
-                my $version = check_get_version($dom);
-                log_step($url, 'version', $version eq $channel_version,
-                         "expected: $channel_version received: $version");
-                log_step($url, 'has_incremental', check_has_incremental($dom));
-            }
+            next unless $dom;
+            my $version = check_get_version($dom);
+            log_step($url, 'version', $version eq $channel_version,
+                     "expected: $channel_version received: $version");
+            log_step($url, 'has_incremental', check_has_incremental($dom));
         }
     }
 }
