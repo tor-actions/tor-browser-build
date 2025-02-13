@@ -102,7 +102,7 @@ sub get_dmg_files_from_sha256sums {
         next unless $filename;
         chomp $filename;
         next unless $filename =~ m/^$appname_dmg-macos-(.+)\.dmg$/;
-        push @files, { filename => $filename, version => $1, lang => 'ALL' };
+        push @files, { filename => $filename, version => $1 };
     }
     return @files;
 }
@@ -116,11 +116,7 @@ sub convert_files {
         print "Finished $_[2]\n";
       });
     foreach my $file (get_dmg_files_from_sha256sums) {
-        # The 'ja' locale is a special case: it is called 'ja-JP-mac'
-        # internally on OSX, but the dmg file still uses 'ja' to avoid
-        # confusing users.
-        my $mar_lang = $file->{lang} eq 'ja' ? 'ja-JP-mac' : $file->{lang};
-        my $output = "$appname_mar-macos-$file->{version}_$mar_lang.mar";
+        my $output = "$appname_mar-macos-$file->{version}_ALL.mar";
         my $step_name = "$file->{filename} -> $output";
         print "Starting $step_name\n";
         $pm->start($step_name) and next;
