@@ -412,14 +412,6 @@ sub write_responses {
         get_version_files($config, $version);
         get_buildinfos($config, $version);
         my $files = $config->{versions}{$version}{files};
-        my $migrate_archs = $config->{versions}{$version}{migrate_archs} // {};
-        foreach my $old_os (keys %$migrate_archs) {
-            my $new_os = $migrate_archs->{$old_os};
-            foreach my $lang (keys %{$files->{$new_os}}) {
-                $files->{$old_os}{$lang}{complete} =
-                    $files->{$new_os}{$lang}{complete};
-            }
-        }
         foreach my $os (keys %$files) {
             $oses{$os} = 1;
             foreach my $lang (keys %{$files->{$os}}) {
@@ -454,10 +446,7 @@ sub write_htaccess {
     my $versions = as_array($config->{channels}{$channel});
     my $versions_str = join('+', @$versions);
     my (%oses, %langs, %from_versions);
-    my $migrate_langs;
     foreach my $version (@$versions) {
-        $migrate_langs = $config->{versions}{$version}{migrate_langs}
-                                if $config->{versions}{$version}{migrate_langs};
         my $files = $config->{versions}{$version}{files};
         foreach my $os (keys %$files) {
             $oses{$os} = 1;
@@ -479,10 +468,6 @@ sub write_htaccess {
                 }
                 $htaccess .= "RewriteRule ^$bt/[^\/]+/$lang "
                           .  "$versions_str-$os-$lang.xml $flags\n";
-            }
-            foreach my $lang (sort keys %$migrate_langs) {
-                $htaccess .= "RewriteRule ^$bt/[^\/]+/$lang "
-                          .  "$versions_str-$os-$migrate_langs->{$lang}.xml $flags\n";
             }
             $htaccess .= "RewriteRule ^$bt/ $versions_str-$os-ALL.xml $flags\n";
         }
