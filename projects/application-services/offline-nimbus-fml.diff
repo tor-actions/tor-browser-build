@@ -14,7 +14,7 @@ index 67c9e66d0..6dd949c92 100644
  import javax.inject.Inject
  
  import groovy.transform.Immutable
-@@ -84,46 +89,13 @@ abstract class NimbusAssembleToolsTask extends DefaultTask {
+@@ -84,46 +89,17 @@ abstract class NimbusAssembleToolsTask extends DefaultTask {
  
      @TaskAction
      void assembleTools() {
@@ -48,8 +48,14 @@ index 67c9e66d0..6dd949c92 100644
 -                    fmlBinary.get().asFile.setExecutable(true)
 -                }
 -                visitedFilePaths.add(details.relativePath)
--            }
--        }
++        String nimbusFmlPath = System.getenv("NIMBUS_FML")
++        Path source
++        if (nimbusFmlPath == null) {
++            nimbusFmlPath = System.getProperty("nimbusFml")
++            if (nimbusFmlPath == null) {
++                throw new GradleException("NIMBUS_FML and property nimbusFml are not defined.")
+             }
+         }
 -
 -        if (visitedFilePaths.empty) {
 -            throw new GradleException("Couldn't find any files in archive matching unzip spec: (${unzipSpec.includePatterns.get().collect { "`$it`" }.join(' | ')})")
@@ -57,11 +63,8 @@ index 67c9e66d0..6dd949c92 100644
 -
 -        if (visitedFilePaths.size() > 1) {
 -            throw new GradleException("Ambiguous unzip spec matched ${visitedFilePaths.size()} files in archive: ${visitedFilePaths.collect { "`$it`" }.join(', ')}")
-+        String nimbusFmlPath = System.getenv("NIMBUS_FML");
-+        if (nimbusFmlPath == null) {
-+            throw new GradleException("NIMBUS_FML is not defined.")
-         }
-+        Path source = Paths.get(nimbusFmlPath)
+-        }
++        source = Paths.get(nimbusFmlPath)
 +        Path dest = fmlBinary.get().asFile.toPath()
 +        Files.copy(source, dest, StandardCopyOption.REPLACE_EXISTING)
      }
