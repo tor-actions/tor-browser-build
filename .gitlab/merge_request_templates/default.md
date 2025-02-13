@@ -42,6 +42,9 @@
 ### Issue Tracking
 - [ ] Link resolved issues with appropriate [Release Prep issue](https://gitlab.torproject.org/groups/tpo/applications/-/issues/?sort=updated_desc&state=opened&label_name%5B%5D=Release%20Prep&first_page_size=20) for changelog generation
 
+### Uplifting
+- [ ] Patchset is a candidate for uplift to upstream projects (e.g. mingw, clang, etc)
+
 ### Review
 
 #### Request Reviewer
