@@ -53,10 +53,6 @@ versions:
           - [% ver %]
 [%   END;
    END -%]
-        # for example, osx32: osx64
-        migrate_archs:
-        # for example, pt-PT: pt-BR
-        migrate_langs:
         # minSupportedOsVersion on macOS corresponds to the Darwin version ( https://en.wikipedia.org/wiki/Darwin_(operating_system) )
         macos:
             # macOS v10.15.0
