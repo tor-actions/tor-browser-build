@@ -32,6 +32,11 @@ targets:
         # some foreign-arch packages fail to install when /var/lib/dpkg/available
         # does not exist, so create it as an empty file
         echo > /var/lib/dpkg/available
+      post_pkginst: |
+        # Alter the symbols file for libgdk-pixbuf to handle the transition to libgdk-pixbuf-2.0-0
+        # This is only necessary until we upgrade to something newer than buster.
+        # See mullvad-browser#394 and https://bugzilla.mozilla.org/show_bug.cgi?id=1933835
+        find /var/lib/dpkg/info/ -name libgdk-pixbuf2.0-0*symbols | xargs sed -i "/libgdk-pixbuf2.0-0/s/libgdk-pixbuf2.0-0/libgdk-pixbuf2.0-0 #MINVER# | libgdk-pixbuf-2.0-0/"
       arch_deps:
         # Packages needed to build the deb package
         - dpkg-dev
@@ -67,6 +72,11 @@ targets:
         # some foreign-arch packages fail to install when /var/lib/dpkg/available
         # does not exist, so create it as an empty file
         echo > /var/lib/dpkg/available
+      post_pkginst: |
+        # Alter the symbols file for libgdk-pixbuf to handle the transition to libgdk-pixbuf-2.0-0
+        # This is only necessary until we upgrade to something newer than buster.
+        # See mullvad-browser#394 and https://bugzilla.mozilla.org/show_bug.cgi?id=1933835
+        find /var/lib/dpkg/info/ -name libgdk-pixbuf2.0-0*symbols | xargs sed -i "/libgdk-pixbuf2.0-0/s/libgdk-pixbuf2.0-0/libgdk-pixbuf2.0-0 #MINVER# | libgdk-pixbuf-2.0-0/"
       arch_deps:
         # Packages needed to build the deb package
         - dpkg-dev
