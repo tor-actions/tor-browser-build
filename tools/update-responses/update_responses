@@ -29,7 +29,6 @@ setlocale(LC_ALL, "C");
 
 my $htdocsdir = "$FindBin::Bin/htdocs";
 my $config = LoadFile("$FindBin::Bin/config.yml");
-my %htdocsfiles;
 my $releases_dir = $config->{releases_dir};
 $releases_dir = "$FindBin::Bin/$releases_dir" unless $releases_dir =~ m/^\//;
 my @check_errors;
@@ -49,12 +48,6 @@ sub get_tmpdir {
     return File::Temp->newdir($config->{tmp_dir} ?
                                 (DIR => $config->{tmp_dir})
                                 : ());
-}
-
-sub build_targets_by_os {
-    exit_error "Unknown build target for OS $_[0]" unless $config->{build_targets}{$_[0]};
-    my $r = $config->{build_targets}{$_[0]};
-    return ref $r eq 'ARRAY' ? @$r : ($r);
 }
 
 sub get_nbprocs {
@@ -80,19 +73,11 @@ sub setup_martools {
 }
 
 sub write_htdocs {
-    my ($channel, $file, $content) = @_;
+    my ($channel, $dir, $file, $content) = @_;
     mkdir $htdocsdir unless -d $htdocsdir;
     mkdir "$htdocsdir/$channel" unless -d "$htdocsdir/$channel";
-    write_file("$htdocsdir/$channel/$file", $content);
-    $htdocsfiles{$channel}->{$file} = 1;
-}
-
-sub clean_htdocs {
-    my ($channel) = @_;
-    opendir(my $d, "$htdocsdir/$channel");
-    my @files = grep { ! $htdocsfiles{$channel}->{$_} } readdir $d;
-    closedir $d;
-    unlink map { "$htdocsdir/$channel/$_" } @files;
+    mkdir "$htdocsdir/$channel/$dir" unless -d "$htdocsdir/$channel/$dir";
+    write_file("$htdocsdir/$channel/$dir/$file", $content);
 }
 
 sub get_sha512_hex_of_file {
@@ -418,24 +403,31 @@ sub write_responses {
     my $versions_str = join('+', @$versions);
     foreach my $os (keys %oses) {
         my $resp = get_response($config, $versions, $os);
-        write_htdocs($channel, "$versions_str-$os.xml", $resp);
+        write_htdocs($channel, $os, "$versions_str-$os.xml", $resp);
         foreach my $from_version (keys %from_versions) {
             $resp = get_response($config, $versions, $os, $from_version);
-            write_htdocs($channel, "$from_version-$versions_str-$os.xml", $resp);
+            write_htdocs($channel, $os, "$from_version-$versions_str-$os.xml", $resp);
         }
+        write_htdocs($channel, $os, 'no-update.xml',
+            '<?xml version="1.0" encoding="UTF-8"?>'
+            . "\n<updates></updates>\n");
     }
-    write_htdocs($channel, 'no-update.xml',
-        '<?xml version="1.0" encoding="UTF-8"?>'
-        . "\n<updates></updates>\n");
 }
 
 sub write_htaccess {
     my ($config, $channel) = @_;
-    my $flags = "[last]";
-    my $htaccess = "RewriteEngine On\n";
-    $htaccess .= $config->{htaccess_rewrite_rules}{$channel} // '';
+
+    my $htaccess_main = "RewriteEngine On\n";
+    $htaccess_main .= $config->{htaccess_rewrite_rules}{$channel} // '';
     my $versions = as_array($config->{channels}{$channel});
     my $versions_str = join('+', @$versions);
+    foreach my $os (sort keys %{$config->{build_targets}}) {
+        foreach my $bt (@{ as_array($config->{build_targets}{$os}) }) {
+            $htaccess_main .= "RewriteRule ^$bt/(.*) $os/\$1 [last]\n";
+        }
+    }
+    write_htdocs($channel, '.', '.htaccess', $htaccess_main);
+
     my (%oses, %from_versions);
     foreach my $version (@$versions) {
         my $files = $config->{versions}{$version}{files};
@@ -445,20 +437,20 @@ sub write_htaccess {
                 $from_versions{$from_version} = 1;
             }
         }
-        $htaccess .= "RewriteRule ^[^\/]+/$version/ no-update.xml $flags\n";
     }
-    foreach my $os (sort keys %oses) {
-        foreach my $bt (build_targets_by_os($os)) {
+    foreach my $version (@$versions) {
+        my $files = $config->{versions}{$version}{files};
+        foreach my $os (sort keys %oses) {
+            my $htaccess_os = "RewriteEngine On\n";
+            $htaccess_os .= "RewriteRule ^$version/ no-update.xml [last]\n";
             foreach my $from_version (sort keys %from_versions) {
-                $htaccess .= "RewriteRule ^$bt/$from_version/ALL "
-                          .  "$from_version-$versions_str-$os.xml $flags\n";
+                $htaccess_os .= "RewriteRule ^$from_version/ "
+                             .  "$from_version-$versions_str-$os.xml [last]\n";
             }
-            $htaccess .= "RewriteRule ^$bt/[^\/]+/ALL "
-                      .  "$versions_str-$os.xml $flags\n";
-            $htaccess .= "RewriteRule ^$bt/ $versions_str-$os.xml $flags\n";
+            $htaccess_os .= "RewriteRule ^[^\/]+/ $versions_str-$os.xml [last]\n";
+            write_htdocs($channel, $os, '.htaccess', $htaccess_os);
         }
     }
-    write_htdocs($channel, '.htaccess', $htaccess);
 }
 
 sub write_downloads_json {
@@ -472,11 +464,11 @@ sub write_downloads_json {
         tag => "$tag",
         downloads => get_version_downloads($config, $version),
     };
-    write_htdocs($channel, 'downloads.json',
+    write_htdocs($channel, '.', 'downloads.json',
         JSON->new->utf8->canonical->encode($data));
     my $pp_downloads = get_perplatform_downloads($config, $version, $tag);
     foreach my $os (keys %{$pp_downloads}) {
-        write_htdocs($channel, "download-$os.json",
+        write_htdocs($channel, '.', "download-$os.json",
             JSON->new->utf8->canonical->encode($pp_downloads->{$os}));
     }
 }
@@ -636,11 +628,9 @@ my %actions = (
         exit_error "Wrong arguments" unless @ARGV == 1;
         my $channel = $ARGV[0];
         exit_error "Unknown channel $channel" unless $config->{channels}{$channel};
-        $htdocsfiles{$channel} = { '.' => 1, '..' => 1 };
         write_responses($config, $channel);
         write_htaccess($config, $channel);
         write_downloads_json($config, $channel);
-        clean_htdocs($channel);
     },
     gen_incrementals => sub {
         my ($config) = @_;
