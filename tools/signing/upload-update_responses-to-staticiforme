@@ -39,8 +39,32 @@ do
   mv "$file" "$tbb_version_type/$fname"
 done
 
+# Keep directory from previous release if they are not in the new release.
+# This happens when a release does not include some platforms.
+for file in $(ls -1 "$old_ur/$tbb_version_type")
+do
+  test -d "$old_ur/$tbb_version_type/$file" || continue
+  test -d "$tbb_version_type/$file" && continue
+  mv -f "$old_ur/$tbb_version_type/$file" "$tbb_version_type/$file"
+done
+
+# Commit each sub-directory separately
+for file in $(ls -1 "$tbb_version_type")
+do
+  test -d "$tbb_version_type/$file" || continue
+  git add "$tbb_version_type/$file"
+  git add "$tbb_version_type/download-$file.json"
+  git diff --quiet  --cached --exit-code || \
+    git commit -m "$tbb_version_type: new version, $tbb_version ($file)"
+done
+
+git add "$tbb_version_type"/download-android-*.json
+git diff --quiet  --cached --exit-code || \
+  git commit -m "$tbb_version_type: new version, $tbb_version (android)"
+
 git add "$tbb_version_type"
-git commit -m "$tbb_version_type: new version, $tbb_version"
+git diff --quiet  --cached --exit-code || \
+  git commit -m "$tbb_version_type: new version, $tbb_version"
 git push
 
 # we just need to push mullvadbrowser's update responses to git, not deploy to staticiforme
