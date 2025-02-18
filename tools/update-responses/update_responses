@@ -465,11 +465,11 @@ sub write_downloads_json {
         downloads => get_version_downloads($config, $version),
     };
     write_htdocs($channel, '.', 'downloads.json',
-        JSON->new->utf8->canonical->encode($data));
+        JSON->new->utf8->canonical->pretty->encode($data));
     my $pp_downloads = get_perplatform_downloads($config, $version, $tag);
     foreach my $os (keys %{$pp_downloads}) {
         write_htdocs($channel, '.', "download-$os.json",
-            JSON->new->utf8->canonical->encode($pp_downloads->{$os}));
+            JSON->new->utf8->canonical->pretty->encode($pp_downloads->{$os}));
     }
 }
 
