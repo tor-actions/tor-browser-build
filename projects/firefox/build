@@ -178,8 +178,8 @@ branding_dir=browser/branding/[% c("var/branding_directory_prefix") %]-[% c("var
       mkdir -p "$l10n_branding_dir"
       # Convert the translations repository branding files into files that work
       # for this specific build.
-      python3 rename-branding-strings.py $lang/branding/brand.ftl "$brand_ftl_renames" > "$l10n_branding_dir/brand.ftl"
-      python3 rename-branding-strings.py $lang/brand.properties "$brand_properties_renames" > "$l10n_branding_dir/brand.properties"
+      python3 $rootdir/rename-branding-strings.py $lang/branding/brand.ftl "$brand_ftl_renames" > "$l10n_branding_dir/brand.ftl"
+      python3 $rootdir/rename-branding-strings.py $lang/brand.properties "$brand_properties_renames" > "$l10n_branding_dir/brand.properties"
     done
     popd
 
