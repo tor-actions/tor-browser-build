@@ -1,196 +1,180 @@
 rbm=./rbm/rbm
+browser_default_channel=$(shell $(rbm) showconf release var/browser_default_channel)
 
-all: torbrowser-release
+.PHONY: torbrowser mullvadbrowser
+all: torbrowser mullvadbrowser
 
 #######################
 # Tor Browser Targets #
 #######################
 
+torbrowser: submodule-update
+	@echo Building torbrowser-$(browser_default_channel)
+	$(MAKE) torbrowser-$(browser_default_channel)
+	@echo Building incrementals for torbrowser-$(browser_default_channel)
+	$(MAKE) torbrowser-incrementals-$(browser_default_channel)
+
 torbrowser-release: submodule-update
 	$(rbm) build release --target release --target browser-all --target torbrowser
 
-torbrowser-release-android: submodule-update
-	$(rbm) build release --target release --target browser-all-android --target torbrowser
-
 torbrowser-release-android-armv7: submodule-update
-	$(rbm) build release --target release --target browser-android-armv7 --target torbrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-android-armv7 --target torbrowser
 
 torbrowser-release-android-x86: submodule-update
-	$(rbm) build release --target release --target browser-android-x86 --target torbrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-android-x86 --target torbrowser
 
 torbrowser-release-android-x86_64: submodule-update
-	$(rbm) build release --target release --target browser-android-x86_64 --target torbrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-android-x86_64 --target torbrowser
 
 torbrowser-release-android-aarch64: submodule-update
-	$(rbm) build release --target release --target browser-android-aarch64 --target torbrowser
-
-torbrowser-release-desktop: submodule-update
-	$(rbm) build release --target release --target browser-all-desktop --target torbrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-android-aarch64 --target torbrowser
 
 torbrowser-release-linux-x86_64: submodule-update
-	$(rbm) build release --target release --target browser-linux-x86_64 --target torbrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-linux-x86_64 --target torbrowser
 
 torbrowser-release-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target release --target browser-linux-x86_64-asan --target torbrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-linux-x86_64-asan --target torbrowser
 
 torbrowser-release-linux-i686: submodule-update
-	$(rbm) build release --target release --target browser-linux-i686 --target torbrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-linux-i686 --target torbrowser
 
 torbrowser-release-linux-aarch64: submodule-update
-	$(rbm) build release --target release --target browser-linux-aarch64 --target torbrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-linux-aarch64 --target torbrowser
 
 torbrowser-release-windows-i686: submodule-update
-	$(rbm) build release --target release --target browser-windows-i686 --target torbrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-windows-i686 --target torbrowser
 
 torbrowser-release-windows-x86_64: submodule-update
-	$(rbm) build release --target release --target browser-windows-x86_64 --target torbrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-windows-x86_64 --target torbrowser
 
 torbrowser-release-macos: submodule-update
-	$(rbm) build release --target release --target browser-macos --target torbrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-macos --target torbrowser
 
 torbrowser-release-src: submodule-update
-	$(rbm) build release --target release --target browser-src --target torbrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-src --target torbrowser
 
 torbrowser-alpha: submodule-update
 	$(rbm) build release --target alpha --target browser-all --target torbrowser
 
-torbrowser-alpha-android: submodule-update
-	$(rbm) build release --target alpha --target browser-all-android --target torbrowser
-
 torbrowser-alpha-android-armv7: submodule-update
-	$(rbm) build release --target alpha --target browser-android-armv7 --target torbrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-android-armv7 --target torbrowser
 
 torbrowser-alpha-android-x86: submodule-update
-	$(rbm) build release --target alpha --target browser-android-x86 --target torbrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-android-x86 --target torbrowser
 
 torbrowser-alpha-android-x86_64: submodule-update
-	$(rbm) build release --target alpha --target browser-android-x86_64 --target torbrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-android-x86_64 --target torbrowser
 
 torbrowser-alpha-android-aarch64: submodule-update
-	$(rbm) build release --target alpha --target browser-android-aarch64 --target torbrowser
-
-torbrowser-alpha-desktop: submodule-update
-	$(rbm) build release --target alpha --target browser-all-desktop --target torbrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-android-aarch64 --target torbrowser
 
 torbrowser-alpha-linux-x86_64: submodule-update
-	$(rbm) build release --target alpha --target browser-linux-x86_64 --target torbrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-linux-x86_64 --target torbrowser
 
 torbrowser-alpha-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target alpha --target browser-linux-x86_64-asan --target torbrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-linux-x86_64-asan --target torbrowser
 
 torbrowser-alpha-linux-aarch64: submodule-update
-	$(rbm) build release --target alpha --target browser-linux-aarch64 --target torbrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-linux-aarch64 --target torbrowser
 
 torbrowser-alpha-linux-i686: submodule-update
-	$(rbm) build release --target alpha --target browser-linux-i686 --target torbrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-linux-i686 --target torbrowser
 
 torbrowser-alpha-windows-i686: submodule-update
-	$(rbm) build release --target alpha --target browser-windows-i686 --target torbrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-windows-i686 --target torbrowser
 
 torbrowser-alpha-windows-x86_64: submodule-update
-	$(rbm) build release --target alpha --target browser-windows-x86_64 --target torbrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-windows-x86_64 --target torbrowser
 
 torbrowser-alpha-macos: submodule-update
-	$(rbm) build release --target alpha --target browser-macos --target torbrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-macos --target torbrowser
 
 torbrowser-alpha-src: submodule-update
-	$(rbm) build release --target alpha --target browser-src --target torbrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-src --target torbrowser
 
 torbrowser-nightly: submodule-update
 	$(rbm) build release --target nightly --target browser-all --target torbrowser
 
-torbrowser-nightly-android: submodule-update
-	$(rbm) build release --target nightly --target browser-all-android --target torbrowser
-
 torbrowser-nightly-android-armv7: submodule-update
-	$(rbm) build release --target nightly --target browser-android-armv7 --target torbrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-android-armv7 --target torbrowser
 
 torbrowser-nightly-android-x86: submodule-update
-	$(rbm) build release --target nightly --target browser-android-x86 --target torbrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-android-x86 --target torbrowser
 
 torbrowser-nightly-android-x86_64: submodule-update
-	$(rbm) build release --target nightly --target browser-android-x86_64 --target torbrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-android-x86_64 --target torbrowser
 
 torbrowser-nightly-android-aarch64: submodule-update
-	$(rbm) build release --target nightly --target browser-android-aarch64 --target torbrowser
-
-torbrowser-nightly-desktop: submodule-update
-	$(rbm) build release --target nightly --target browser-all-desktop --target torbrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-android-aarch64 --target torbrowser
 
 torbrowser-nightly-linux-x86_64: submodule-update
-	$(rbm) build release --target nightly --target browser-linux-x86_64 --target torbrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-linux-x86_64 --target torbrowser
 
 torbrowser-nightly-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target nightly --target browser-linux-x86_64-asan --target torbrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-linux-x86_64-asan --target torbrowser
 
 torbrowser-nightly-linux-aarch64: submodule-update
-	$(rbm) build release --target nightly --target browser-linux-aarch64 --target torbrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-linux-aarch64 --target torbrowser
 
 torbrowser-nightly-linux-i686: submodule-update
-	$(rbm) build release --target nightly --target browser-linux-i686 --target torbrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-linux-i686 --target torbrowser
 
 torbrowser-nightly-windows-i686: submodule-update
-	$(rbm) build release --target nightly --target browser-windows-i686 --target torbrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-windows-i686 --target torbrowser
 
 torbrowser-nightly-windows-x86_64: submodule-update
-	$(rbm) build release --target nightly --target browser-windows-x86_64 --target torbrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-windows-x86_64 --target torbrowser
 
 torbrowser-nightly-macos: submodule-update
-	$(rbm) build release --target nightly --target browser-macos --target torbrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-macos --target torbrowser
 
 torbrowser-nightly-src: submodule-update
-	$(rbm) build release --target nightly --target browser-src --target torbrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-src --target torbrowser
 
 torbrowser-testbuild: submodule-update
 	$(rbm) build release --target testbuild --target browser-all --target torbrowser
 
-torbrowser-testbuild-android: submodule-update
-	$(rbm) build release --target testbuild --target browser-all-android --target torbrowser
-
 torbrowser-testbuild-android-armv7: submodule-update
-	$(rbm) build release --target testbuild --target browser-android-armv7 --target torbrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-android-armv7 --target torbrowser
 
 torbrowser-testbuild-android-x86: submodule-update
-	$(rbm) build release --target testbuild --target browser-android-x86 --target torbrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-android-x86 --target torbrowser
 
 torbrowser-testbuild-android-x86_64: submodule-update
-	$(rbm) build release --target testbuild --target browser-android-x86_64 --target torbrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-android-x86_64 --target torbrowser
 
 torbrowser-testbuild-android-aarch64: submodule-update
-	$(rbm) build release --target testbuild --target browser-android-aarch64 --target torbrowser
-
-torbrowser-testbuild-desktop: submodule-update
-	$(rbm) build release --target testbuild --target browser-all-desktop --target torbrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-android-aarch64 --target torbrowser
 
 torbrowser-testbuild-linux-x86_64: submodule-update
-	$(rbm) build release --target testbuild --target browser-linux-x86_64 --target torbrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-linux-x86_64 --target torbrowser
 
 torbrowser-testbuild-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target testbuild --target browser-linux-x86_64-asan --target torbrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-linux-x86_64-asan --target torbrowser
 
 torbrowser-testbuild-linux-i686: submodule-update
-	$(rbm) build release --target testbuild --target browser-linux-i686 --target torbrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-linux-i686 --target torbrowser
 
 torbrowser-testbuild-linux-aarch64: submodule-update
-	$(rbm) build release --target testbuild --target browser-linux-aarch64 --target torbrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-linux-aarch64 --target torbrowser
 
 torbrowser-testbuild-windows-x86_64: submodule-update
-	$(rbm) build release --target testbuild --target browser-windows-x86_64 --target torbrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-windows-x86_64 --target torbrowser
 
 torbrowser-testbuild-windows-i686: submodule-update
-	$(rbm) build release --target testbuild --target browser-windows-i686 --target torbrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-windows-i686 --target torbrowser
 
 torbrowser-testbuild-macos: submodule-update
-	$(rbm) build release --target testbuild --target browser-macos --target torbrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-macos --target torbrowser
 
 torbrowser-testbuild-macos-x86_64: submodule-update
-	$(rbm) build release --target testbuild --target browser-macos-x86_64 --target torbrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-macos-x86_64 --target torbrowser
 
 torbrowser-testbuild-macos-aarch64: submodule-update
-	$(rbm) build release --target testbuild --target browser-macos-aarch64 --target torbrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-macos-aarch64 --target torbrowser
 
 torbrowser-testbuild-src: submodule-update
-	$(rbm) build release --target testbuild --target browser-src-testbuild --target torbrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-src-testbuild --target torbrowser
 
 torbrowser-incrementals-release: submodule-update
 	$(rbm) build release --step update_responses_config --target release --target create_unsigned_incrementals --target torbrowser
@@ -259,188 +243,164 @@ torbrowser-compare-mar-signed-unsigned-alpha: submodule-update
 basebrowser-release: submodule-update
 	$(rbm) build release --target release --target browser-all --target basebrowser
 
-basebrowser-release-android: submodule-update
-	$(rbm) build release --target release --target browser-all-android --target basebrowser
-
 basebrowser-release-android-armv7: submodule-update
-	$(rbm) build release --target release --target browser-android-armv7 --target basebrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-android-armv7 --target basebrowser
 
 basebrowser-release-android-x86: submodule-update
-	$(rbm) build release --target release --target browser-android-x86 --target basebrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-android-x86 --target basebrowser
 
 basebrowser-release-android-x86_64: submodule-update
-	$(rbm) build release --target release --target browser-android-x86_64 --target basebrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-android-x86_64 --target basebrowser
 
 basebrowser-release-android-aarch64: submodule-update
-	$(rbm) build release --target release --target browser-android-aarch64 --target basebrowser
-
-basebrowser-release-desktop: submodule-update
-	$(rbm) build release --target release --target browser-all-desktop --target basebrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-android-aarch64 --target basebrowser
 
 basebrowser-release-linux-x86_64: submodule-update
-	$(rbm) build release --target release --target browser-linux-x86_64 --target basebrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-linux-x86_64 --target basebrowser
 
 basebrowser-release-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target release --target browser-linux-x86_64-asan --target basebrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-linux-x86_64-asan --target basebrowser
 
 basebrowser-release-linux-i686: submodule-update
-	$(rbm) build release --target release --target browser-linux-i686 --target basebrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-linux-i686 --target basebrowser
 
 basebrowser-release-linux-aarch64: submodule-update
-	$(rbm) build release --target release --target browser-linux-aarch64 --target basebrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-linux-aarch64 --target basebrowser
 
 basebrowser-release-windows-i686: submodule-update
-	$(rbm) build release --target release --target browser-windows-i686 --target basebrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-windows-i686 --target basebrowser
 
 basebrowser-release-windows-x86_64: submodule-update
-	$(rbm) build release --target release --target browser-windows-x86_64 --target basebrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-windows-x86_64 --target basebrowser
 
 basebrowser-release-macos: submodule-update
-	$(rbm) build release --target release --target browser-macos --target basebrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-macos --target basebrowser
 
 basebrowser-release-src: submodule-update
-	$(rbm) build release --target release --target browser-src --target basebrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-src --target basebrowser
 
 basebrowser-alpha: submodule-update
 	$(rbm) build release --target alpha --target browser-all --target basebrowser
 
-basebrowser-alpha-android: submodule-update
-	$(rbm) build release --target alpha --target browser-all-android --target basebrowser
-
 basebrowser-alpha-android-armv7: submodule-update
-	$(rbm) build release --target alpha --target browser-android-armv7 --target basebrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-android-armv7 --target basebrowser
 
 basebrowser-alpha-android-x86: submodule-update
-	$(rbm) build release --target alpha --target browser-android-x86 --target basebrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-android-x86 --target basebrowser
 
 basebrowser-alpha-android-x86_64: submodule-update
-	$(rbm) build release --target alpha --target browser-android-x86_64 --target basebrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-android-x86_64 --target basebrowser
 
 basebrowser-alpha-android-aarch64: submodule-update
-	$(rbm) build release --target alpha --target browser-android-aarch64 --target basebrowser
-
-basebrowser-alpha-desktop: submodule-update
-	$(rbm) build release --target alpha --target browser-all-desktop --target basebrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-android-aarch64 --target basebrowser
 
 basebrowser-alpha-linux-x86_64: submodule-update
-	$(rbm) build release --target alpha --target browser-linux-x86_64 --target basebrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-linux-x86_64 --target basebrowser
 
 basebrowser-alpha-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target alpha --target browser-linux-x86_64-asan --target basebrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-linux-x86_64-asan --target basebrowser
 
 basebrowser-alpha-linux-i686: submodule-update
-	$(rbm) build release --target alpha --target browser-linux-i686 --target basebrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-linux-i686 --target basebrowser
 
 basebrowser-alpha-linux-aarch64: submodule-update
-	$(rbm) build release --target alpha --target browser-linux-aarch64 --target basebrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-linux-aarch64 --target basebrowser
 
 basebrowser-alpha-windows-i686: submodule-update
-	$(rbm) build release --target alpha --target browser-windows-i686 --target basebrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-windows-i686 --target basebrowser
 
 basebrowser-alpha-windows-x86_64: submodule-update
-	$(rbm) build release --target alpha --target browser-windows-x86_64 --target basebrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-windows-x86_64 --target basebrowser
 
 basebrowser-alpha-macos: submodule-update
-	$(rbm) build release --target alpha --target browser-macos --target basebrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-macos --target basebrowser
 
 basebrowser-alpha-src: submodule-update
-	$(rbm) build release --target alpha --target browser-src --target basebrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-src --target basebrowser
 
 basebrowser-nightly: submodule-update
 	$(rbm) build release --target nightly --target browser-all --target basebrowser
 
-basebrowser-nightly-android: submodule-update
-	$(rbm) build release --target nightly --target browser-all-android --target basebrowser
-
 basebrowser-nightly-android-armv7: submodule-update
-	$(rbm) build release --target nightly --target browser-android-armv7 --target basebrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-android-armv7 --target basebrowser
 
 basebrowser-nightly-android-x86: submodule-update
-	$(rbm) build release --target nightly --target browser-android-x86 --target basebrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-android-x86 --target basebrowser
 
 basebrowser-nightly-android-x86_64: submodule-update
-	$(rbm) build release --target nightly --target browser-android-x86_64 --target basebrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-android-x86_64 --target basebrowser
 
 basebrowser-nightly-android-aarch64: submodule-update
-	$(rbm) build release --target nightly --target browser-android-aarch64 --target basebrowser
-
-basebrowser-nightly-desktop: submodule-update
-	$(rbm) build release --target nightly --target browser-all-desktop --target basebrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-android-aarch64 --target basebrowser
 
 basebrowser-nightly-linux-x86_64: submodule-update
-	$(rbm) build release --target nightly --target browser-linux-x86_64 --target basebrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-linux-x86_64 --target basebrowser
 
 basebrowser-nightly-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target nightly --target browser-linux-x86_64-asan --target basebrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-linux-x86_64-asan --target basebrowser
 
 basebrowser-nightly-linux-i686: submodule-update
-	$(rbm) build release --target nightly --target browser-linux-i686 --target basebrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-linux-i686 --target basebrowser
 
 basebrowser-nightly-linux-aarch64: submodule-update
-	$(rbm) build release --target nightly --target browser-linux-aarch64 --target basebrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-linux-aarch64 --target basebrowser
 
 basebrowser-nightly-windows-i686: submodule-update
-	$(rbm) build release --target nightly --target browser-windows-i686 --target basebrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-windows-i686 --target basebrowser
 
 basebrowser-nightly-windows-x86_64: submodule-update
-	$(rbm) build release --target nightly --target browser-windows-x86_64 --target basebrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-windows-x86_64 --target basebrowser
 
 basebrowser-nightly-macos: submodule-update
-	$(rbm) build release --target nightly --target browser-macos --target basebrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-macos --target basebrowser
 
 basebrowser-nightly-src: submodule-update
-	$(rbm) build release --target nightly --target browser-src --target basebrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-src --target basebrowser
 
 basebrowser-testbuild: submodule-update
 	$(rbm) build release --target testbuild --target browser-all --target basebrowser
 
-basebrowser-testbuild-android: submodule-update
-	$(rbm) build release --target testbuild --target browser-all-android --target basebrowser
-
 basebrowser-testbuild-android-armv7: submodule-update
-	$(rbm) build release --target testbuild --target browser-android-armv7 --target basebrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-android-armv7 --target basebrowser
 
 basebrowser-testbuild-android-x86: submodule-update
-	$(rbm) build release --target testbuild --target browser-android-x86 --target basebrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-android-x86 --target basebrowser
 
 basebrowser-testbuild-android-x86_64: submodule-update
-	$(rbm) build release --target testbuild --target browser-android-x86_64 --target basebrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-android-x86_64 --target basebrowser
 
 basebrowser-testbuild-android-aarch64: submodule-update
-	$(rbm) build release --target testbuild --target browser-android-aarch64 --target basebrowser
-
-basebrowser-testbuild-desktop: submodule-update
-	$(rbm) build release --target testbuild --target browser-all-desktop --target basebrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-android-aarch64 --target basebrowser
 
 basebrowser-testbuild-linux-x86_64: submodule-update
-	$(rbm) build release --target testbuild --target browser-linux-x86_64 --target basebrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-linux-x86_64 --target basebrowser
 
 basebrowser-testbuild-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target testbuild --target browser-linux-x86_64-asan --target basebrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-linux-x86_64-asan --target basebrowser
 
 basebrowser-testbuild-linux-i686: submodule-update
-	$(rbm) build release --target testbuild --target browser-linux-i686 --target basebrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-linux-i686 --target basebrowser
 
 basebrowser-testbuild-linux-aarch64: submodule-update
-	$(rbm) build release --target testbuild --target browser-linux-aarch64 --target basebrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-linux-aarch64 --target basebrowser
 
 basebrowser-testbuild-windows-x86_64: submodule-update
-	$(rbm) build release --target testbuild --target browser-windows-x86_64 --target basebrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-windows-x86_64 --target basebrowser
 
 basebrowser-testbuild-windows-i686: submodule-update
-	$(rbm) build release --target testbuild --target browser-windows-i686 --target basebrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-windows-i686 --target basebrowser
 
 basebrowser-testbuild-macos: submodule-update
-	$(rbm) build release --target testbuild --target browser-macos --target basebrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-macos --target basebrowser
 
 basebrowser-testbuild-macos-x86_64: submodule-update
-	$(rbm) build release --target testbuild --target browser-macos-x86_64 --target basebrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-macos-x86_64 --target basebrowser
 
 basebrowser-testbuild-macos-aarch64: submodule-update
-	$(rbm) build release --target testbuild --target browser-macos-aarch64 --target basebrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-macos-aarch64 --target basebrowser
 
 basebrowser-testbuild-src: submodule-update
-	$(rbm) build release --target testbuild --target browser-src-testbuild --target basebrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-src-testbuild --target basebrowser
 
 basebrowser-incrementals-nightly: submodule-update
 	$(rbm) build release --step update_responses_config --target nightly --target basebrowser
@@ -452,107 +412,101 @@ basebrowser-incrementals-nightly: submodule-update
 # Mullvad Browser Targets #
 ###########################
 
-mullvadbrowser-release: submodule-update
-	$(rbm) build release --target release --target browser-all-desktop --target mullvadbrowser
+mullvadbrowser: submodule-update
+	@echo Building mullvadbrowser-$(browser_default_channel)
+	$(MAKE) mullvadbrowser-$(browser_default_channel)
+	@echo Building incrementals for mullvadbrowser-$(browser_default_channel)
+	$(MAKE) mullvadbrowser-incrementals-$(browser_default_channel)
 
-mullvadbrowser-release-desktop: submodule-update
-	$(rbm) build release --target release --target browser-all-desktop --target mullvadbrowser
+mullvadbrowser-release: submodule-update
+	$(rbm) build release --target release --target browser-all --target mullvadbrowser
 
 mullvadbrowser-release-linux-x86_64: submodule-update
-	$(rbm) build release --target release --target browser-linux-x86_64 --target mullvadbrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-linux-x86_64 --target mullvadbrowser
 
 mullvadbrowser-release-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target release --target browser-linux-x86_64-asan --target mullvadbrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-linux-x86_64-asan --target mullvadbrowser
 
 mullvadbrowser-release-linux-aarch64: submodule-update
-	$(rbm) build release --target release --target browser-linux-aarch64 --target mullvadbrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-linux-aarch64 --target mullvadbrowser
 
 mullvadbrowser-release-windows-x86_64: submodule-update
-	$(rbm) build release --target release --target browser-windows-x86_64 --target mullvadbrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-windows-x86_64 --target mullvadbrowser
 
 mullvadbrowser-release-macos: submodule-update
-	$(rbm) build release --target release --target browser-macos --target mullvadbrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-macos --target mullvadbrowser
 
 mullvadbrowser-release-src: submodule-update
-	$(rbm) build release --target release --target browser-src --target mullvadbrowser
+	$(rbm) build release --target release --target browser-single-platform --target browser-src --target mullvadbrowser
 
 mullvadbrowser-alpha: submodule-update
-	$(rbm) build release --target alpha --target browser-all-desktop --target mullvadbrowser
-
-mullvadbrowser-alpha-desktop: submodule-update
-	$(rbm) build release --target alpha --target browser-all-desktop --target mullvadbrowser
+	$(rbm) build release --target alpha --target browser-all --target mullvadbrowser
 
 mullvadbrowser-alpha-linux-x86_64: submodule-update
-	$(rbm) build release --target alpha --target browser-linux-x86_64 --target mullvadbrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-linux-x86_64 --target mullvadbrowser
 
 mullvadbrowser-alpha-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target alpha --target browser-linux-x86_64-asan --target mullvadbrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-linux-x86_64-asan --target mullvadbrowser
 
 mullvadbrowser-alpha-linux-aarch64: submodule-update
-	$(rbm) build release --target alpha --target browser-linux-aarch64 --target mullvadbrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-linux-aarch64 --target mullvadbrowser
 
 mullvadbrowser-alpha-windows-x86_64: submodule-update
-	$(rbm) build release --target alpha --target browser-windows-x86_64 --target mullvadbrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-windows-x86_64 --target mullvadbrowser
 
 mullvadbrowser-alpha-macos: submodule-update
-	$(rbm) build release --target alpha --target browser-macos --target mullvadbrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-macos --target mullvadbrowser
 
 mullvadbrowser-alpha-src: submodule-update
-	$(rbm) build release --target alpha --target browser-src --target mullvadbrowser
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-src --target mullvadbrowser
 
 mullvadbrowser-nightly: submodule-update
-	$(rbm) build release --target nightly --target browser-all-desktop --target mullvadbrowser
-
-mullvadbrowser-nightly-desktop: submodule-update
-	$(rbm) build release --target nightly --target browser-all-desktop --target mullvadbrowser
+	$(rbm) build release --target nightly --target browser-all --target mullvadbrowser
 
 mullvadbrowser-nightly-linux-x86_64: submodule-update
-	$(rbm) build release --target nightly --target browser-linux-x86_64 --target mullvadbrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-linux-x86_64 --target mullvadbrowser
 
 mullvadbrowser-nightly-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target nightly --target browser-linux-x86_64-asan --target mullvadbrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-linux-x86_64-asan --target mullvadbrowser
 
 mullvadbrowser-nightly-linux-aarch64: submodule-update
-	$(rbm) build release --target nightly --target browser-linux-aarch64 --target mullvadbrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-linux-aarch64 --target mullvadbrowser
 
 mullvadbrowser-nightly-windows-x86_64: submodule-update
-	$(rbm) build release --target nightly --target browser-windows-x86_64 --target mullvadbrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-windows-x86_64 --target mullvadbrowser
 
 mullvadbrowser-nightly-macos: submodule-update
-	$(rbm) build release --target nightly --target browser-macos --target mullvadbrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-macos --target mullvadbrowser
 
 mullvadbrowser-nightly-src: submodule-update
-	$(rbm) build release --target nightly --target browser-src --target mullvadbrowser
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-src --target mullvadbrowser
 
 mullvadbrowser-testbuild: submodule-update
-	$(rbm) build release --target testbuild --target browser-all-desktop --target mullvadbrowser
-
-mullvadbrowser-testbuild-desktop: submodule-update
-	$(rbm) build release --target testbuild --target browser-all-desktop --target mullvadbrowser
+	$(rbm) build release --target testbuild --target browser-all --target mullvadbrowser
 
 mullvadbrowser-testbuild-linux-x86_64: submodule-update
-	$(rbm) build release --target testbuild --target browser-linux-x86_64 --target mullvadbrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-linux-x86_64 --target mullvadbrowser
 
 mullvadbrowser-testbuild-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target testbuild --target browser-linux-x86_64-asan --target mullvadbrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-linux-x86_64-asan --target mullvadbrowser
 
 mullvadbrowser-testbuild-linux-aarch64: submodule-update
-	$(rbm) build release --target testbuild --target browser-linux-aarch64 --target mullvadbrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-linux-aarch64 --target mullvadbrowser
 
 mullvadbrowser-testbuild-windows-x86_64: submodule-update
-	$(rbm) build release --target testbuild --target browser-windows-x86_64 --target mullvadbrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-windows-x86_64 --target mullvadbrowser
 
 mullvadbrowser-testbuild-macos: submodule-update
-	$(rbm) build release --target testbuild --target browser-macos --target mullvadbrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-macos --target mullvadbrowser
 
 mullvadbrowser-testbuild-macos-x86_64: submodule-update
-	$(rbm) build release --target testbuild --target browser-macos-x86_64 --target mullvadbrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-macos-x86_64 --target mullvadbrowser
 
 mullvadbrowser-testbuild-macos-aarch64: submodule-update
-	$(rbm) build release --target testbuild --target browser-macos-aarch64 --target mullvadbrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-macos-aarch64 --target mullvadbrowser
 
 mullvadbrowser-testbuild-src: submodule-update
-	$(rbm) build release --target testbuild --target browser-src-testbuild --target mullvadbrowser
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-src-testbuild --target mullvadbrowser
 
 mullvadbrowser-incrementals-release: submodule-update
 	$(rbm) build release --step update_responses_config --target release --target create_unsigned_incrementals --target mullvadbrowser
@@ -701,7 +655,7 @@ cargo_vendor-rcodesign: submodule-update
 ##################
 
 submodule-update:
-	git submodule update --init
+	@git submodule update --init
 
 # requires tpo_user variable be set in rbm.local.conf
 torbrowser-upload-sha256sums-release: submodule-update

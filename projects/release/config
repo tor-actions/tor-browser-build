@@ -10,75 +10,69 @@ var:
 
 targets:
   browser-all:
-    - browser-linux-x86_64
-    - browser-linux-i686
-    - browser-linux-aarch64
-    - browser-windows-i686
-    - browser-windows-x86_64
-    - browser-macos
-    - browser-android-armv7
-    - browser-android-x86
-    - browser-android-x86_64
-    - browser-android-aarch64
     - browser-src
     - browser-all-target
-  browser-all-desktop:
-    - browser-linux-x86_64
-    - browser-linux-i686
-    - browser-linux-aarch64
-    - browser-windows-i686
-    - browser-windows-x86_64
-    - browser-macos
-    - browser-src
-    - browser-all-target
-  browser-all-android:
-    - browser-android-armv7
-    - browser-android-x86
-    - browser-android-x86_64
-    - browser-android-aarch64
+  browser-single-platform:
+    var:
+      browser_platforms:
+        is_android_release: 0
+        is_desktop_release: 0
   browser-android-armv7:
     var:
-      browser-android-armv7: 1
+      browser_platforms:
+        android-armv7: 1
   browser-android-x86:
     var:
-      browser-android-x86: 1
+      browser_platforms:
+        android-x86: 1
   browser-android-x86_64:
     var:
-      browser-android-x86_64: 1
+      browser_platforms:
+        android-x86_64: 1
   browser-android-aarch64:
     var:
-      browser-android-aarch64: 1
+      browser_platforms:
+        android-aarch64: 1
   browser-linux-x86_64:
     var:
-      browser-linux-x86_64: 1
+      browser_platforms:
+        linux-x86_64: 1
       linux-packages: '[% c("var/mullvad-browser") || c("var/tor-browser-linux-packages") %]'
   browser-linux-x86_64-asan:
     var:
-      browser-linux-x86_64: 1
+      browser_platforms:
+        linux-x86_64: 1
       asan-build: '-asan'
   browser-linux-i686:
     var:
-      browser-linux-i686: '[% c("var/browser_type") != "mullvadbrowser" %]'
+      browser_platforms:
+        linux-i686: 1
       linux-packages: '[% c("var/mullvad-browser") || c("var/tor-browser-linux-packages") %]'
   browser-linux-aarch64:
     var:
-      browser-linux-aarch64: '[% ! c("var/browser-all-target") || c("var/testbuild") || c("var/nightly") %]'
+      browser_platforms:
+        linux-aarch64: 1
       linux-packages-aarch64: '[% (! c("var/browser-all-target") || c("var/testbuild") || c("var/nightly")) && (c("var/mullvad-browser") || c("var/tor-browser-linux-packages")) %]'
   browser-windows-i686:
     var:
-      browser-windows-i686: '[% c("var/browser_type") != "mullvadbrowser" %]'
+      browser_platforms:
+        windows-i686: '[% c("var/browser_type") != "mullvadbrowser" %]'
   browser-windows-x86_64:
     var:
-      browser-windows-x86_64: 1
+      browser_platforms:
+        windows-x86_64: 1
   browser-macos:
     var:
-      browser-macos: 1
+      browser_platforms:
+        macos: 1
   browser-macos-x86_64:
     var:
-      browser-macos-x86_64: 1
+      browser_platforms:
+        macos-x86_64: 1
   browser-macos-aarch64:
     var:
-      browser-macos-aarch64: 1
+      browser_platforms:
+        macos-aarch64: 1
   browser-src:
     var:
       browser-src: '[% ! c("var/testbuild") %]'
@@ -93,8 +87,6 @@ targets:
     - torbrowser
     - release
     - browser-all
-    - browser-all-android
-    - browser-all-desktop
 
   noversiondir:
     var:
@@ -156,7 +148,7 @@ input_files:
 # Release
   - name: android-armv7
     project: browser
-    enable: '[% c("var/browser-android-armv7") %]'
+    enable: '[% c("var/browser_platforms/android-armv7") %]'
     target:
       - '[% c("var/containers_target") %]'
       - '[% c("var/build_target") %]'
@@ -164,7 +156,7 @@ input_files:
 
   - name: android-x86
     project: browser
-    enable: '[% c("var/browser-android-x86") %]'
+    enable: '[% c("var/browser_platforms/android-x86") %]'
     target:
       - '[% c("var/containers_target") %]'
       - '[% c("var/build_target") %]'
@@ -172,7 +164,7 @@ input_files:
 
   - name: android-x86_64
     project: browser
-    enable: '[% c("var/browser-android-x86_64") %]'
+    enable: '[% c("var/browser_platforms/android-x86_64") %]'
     target:
       - '[% c("var/containers_target") %]'
       - '[% c("var/build_target") %]'
@@ -180,7 +172,7 @@ input_files:
 
   - name: android-aarch64
     project: browser
-    enable: '[% c("var/browser-android-aarch64") %]'
+    enable: '[% c("var/browser_platforms/android-aarch64") %]'
     target:
       - '[% c("var/containers_target") %]'
       - '[% c("var/build_target") %]'
@@ -188,28 +180,28 @@ input_files:
 
   - name: linux-x86_64
     project: browser
-    enable: '[% c("var/browser-linux-x86_64") %]'
+    enable: '[% c("var/browser_platforms/linux-x86_64") %]'
     target:
       - '[% c("var/build_target") %]'
       - '[% c("var/browser_type") %]-linux-x86_64[% c("var/asan-build") %]'
 
   - name: linux-i686
     project: browser
-    enable: '[% c("var/browser-linux-i686") %]'
+    enable: '[% c("var/browser_platforms/linux-i686") %]'
     target:
       - '[% c("var/build_target") %]'
       - '[% c("var/browser_type") %]-linux-i686'
 
   - name: linux-aarch64
     project: browser
-    enable: '[% c("var/browser-linux-aarch64") %]'
+    enable: '[% c("var/browser_platforms/linux-aarch64") %]'
     target:
       - '[% c("var/build_target") %]'
       - '[% c("var/browser_type") %]-linux-aarch64'
 
   - name: deb-packages
     project: linux-packages
-    enable: '[% c("var/linux-packages") %]'
+    enable: '[% c("var/browser_platforms/packages") %]'
     # Add $browser_type-linux-x86_64 target for container config
     target:
       - '[% IF c("var/testbuild") %]testbuild[% END %]'
@@ -247,21 +239,21 @@ input_files:
 
   - name: windows-i686
     project: browser
-    enable: '[% c("var/browser-windows-i686") %]'
+    enable: '[% c("var/browser_platforms/windows-i686") %]'
     target:
       - '[% c("var/build_target") %]'
       - '[% c("var/browser_type") %]-windows-i686'
 
   - name: windows-x86_64
     project: browser
-    enable: '[% c("var/browser-windows-x86_64") %]'
+    enable: '[% c("var/browser_platforms/windows-x86_64") %]'
     target:
       - '[% c("var/build_target") %]'
       - '[% c("var/browser_type") %]-windows-x86_64'
 
   - name: macos
     project: browser
-    enable: '[% c("var/browser-macos") %]'
+    enable: '[% c("var/browser_platforms/macos") %]'
     target:
       - '[% c("var/build_target") %]'
       - '[% c("var/browser_type") %]-macos'
@@ -269,7 +261,7 @@ input_files:
  # non-universal macos build
   - name: macos-x86_64
     project: browser
-    enable: '[% c("var/browser-macos-x86_64") %]'
+    enable: '[% c("var/browser_platforms/macos-x86_64") %]'
     target:
       - '[% c("var/build_target") %]'
       - '[% c("var/browser_type") %]-macos-x86_64'
@@ -277,7 +269,7 @@ input_files:
  # non-universal macos build
   - name: macos-aarch64
     project: browser
-    enable: '[% c("var/browser-macos-aarch64") %]'
+    enable: '[% c("var/browser_platforms/macos-aarch64") %]'
     target:
       - '[% c("var/build_target") %]'
       - '[% c("var/browser_type") %]-macos-aarch64'
