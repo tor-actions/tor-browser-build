@@ -151,7 +151,7 @@ class ChangelogBuilder:
         if issue_or_version[0] == "#":
             self._fetch_issue(issue_or_version[1:], is_mullvad)
             return
-        labels = "Release Prep"
+        labels = "Apps::Type::ReleasePreparation"
         if is_mullvad:
             labels += ",Sponsor 131"
         elif not is_mullvad and is_mullvad is not None:
