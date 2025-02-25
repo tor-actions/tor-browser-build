@@ -354,4 +354,4 @@ popd
 
 </details>
 
-/label ~"Release Prep"
+/label ~"Apps::Type::ReleasePreparation"

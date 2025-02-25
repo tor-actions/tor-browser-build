@@ -347,4 +347,4 @@ popd
   - [ ] Note any changes which may affect packaging/downstream integration
 </details>
 
-/label ~"Release Prep"
+/label ~"Apps::Type::ReleasePreparation"
