@@ -18,7 +18,9 @@ browser=$(echo "$script_name" | perl -pe 's/^[^\.]+\.//')
 case "${browser}" in
     basebrowser | torbrowser | mullvadbrowser)
         # go down to browser directory
-        pushd ${script_dir}/${browser} > /dev/null
+        browser_dir="$script_dir/$browser"
+        [ -e "$browser_dir" ] || ln -s "../../git_clones/firefox" "$browser_dir"
+        pushd "$browser_dir" > /dev/null
         # and exit on script termination
         trap "popd > /dev/null" EXIT
         ;;
@@ -33,7 +35,7 @@ esac
 # and message
 #
 
-branch_name=$(git rev-parse --abbrev-ref HEAD)
+branch_name=$(git log -n1 --oneline --decorate=short | grep -Eo '[a-z]+-browser-[1-9][0-9]+[^),]*-[1-9]' | head -n1)
 if [[ $branch_name =~ ^([a-z]+-browser)-([1-9][0-9]+\.[0-9]+)(\.[0-9]+esr|a[1-9][0-9]*)-([1-9][0-9]*\.[05])-([1-9]).*$ ]]; then
     project="${BASH_REMATCH[1]}"
     upstream="${BASH_REMATCH[2]}${BASH_REMATCH[3]}"
@@ -77,8 +79,10 @@ commit=$(git rev-parse --short ${3:-HEAD})
 
 # channel validation
 if [[ "${project}" == "mullvad-browser" ]]; then
+    repo="$project"
     valid_channels=("rapid" "alpha" "stable")
 else
+    repo="tor-browser"
     valid_channels=("rapid" "alpha" "stable" "legacy")
 fi
 channel_valid=false
@@ -113,3 +117,9 @@ echo " tag:     ${tag}"
 echo " message: ${message}"
 
 git tag -s "${tag}" "${commit}" -m "${message}"
+
+read -p "Do you want to push ${tag} to ${repo}.git? (y/N) " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    git push "git@gitlab.torproject.org:tpo/applications/${repo}.git" "${tag}"
+fi

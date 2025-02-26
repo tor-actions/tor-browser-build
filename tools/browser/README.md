@@ -37,11 +37,11 @@ This script gpg signs a git tag associated with a particular browser commit in t
 
 #### Prerequisites
 
-- The user must create the following soft-links:
+- The user may create the following soft-links (by default they are automatically pointed to ../../git_clones/firefox):
     - `/tools/browser/basebrowser` -> `/path/to/local/tor-browser.git`
     - `/tools/browser/mullvadbrowser` -> `/path/to/local/mullvad-browser.git`
     - `/tools/browser/torbrowser` -> `/path/to/local/tor-browser.git`
-- The user must first checkout the relevant branch of the commit we are tagging
+- The user must first checkout the relevant branch (local or remote-tracking) of the commit we are tagging
     - This is needed to extract the ESR version, branch-number, and browser name
 
 #### Usage
