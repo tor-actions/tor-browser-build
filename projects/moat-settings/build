@@ -1,0 +1,11 @@
+#!/bin/bash
+[% c("var/set_default_env") -%]
+
+tar -xf [% project %]-[% c("version") %].tar.[% c('compress_tar') %] [% project %]-[% c("version") %]/conf/circumvention.json
+jq -c keys [% project %]-[% c("version") %]/conf/circumvention.json > moat_countries.json
+
+[% c("touch") %] moat_countries.json
+[% c('tar', {
+        tar_src => 'moat_countries.json',
+        tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
+    }) %]

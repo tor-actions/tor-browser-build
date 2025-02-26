@@ -26,7 +26,8 @@ unzip $rootdir/[% c('input_files_by_name/noscript') %]
 popd
 
 [%IF c("var/tor-browser") -%]
-  tar -xaf "$rootdir/[% c("input_files_by_name/tor-expert-bundle") %]/tor-expert-bundle.tar.gz" tor/pluggable_transports/pt_config.json
+  tar -xaf "$rootdir/[% c('input_files_by_name/tor-expert-bundle') %]/tor-expert-bundle.tar.gz" tor/pluggable_transports/pt_config.json
+  tar -xf "$rootdir/[% c('input_files_by_name/moat-settings') %]"
 [% END -%]
 
 # This function generates a signed APK from a given APK file.
@@ -56,8 +57,8 @@ function generate_apk {
   mkdir omni
   pushd omni
   unzip ../omni.ja
-  [%IF c("var/tor-browser") -%]
-    cp -an ../tor/pluggable_transports/pt_config.json chrome/toolkit/content/global/pt_config.json
+  [% IF c("var/tor-browser") -%]
+    cp -a ../moat_countries.json ../tor/pluggable_transports/pt_config.json chrome/toolkit/content/global/
   [% END -%]
   [% c('zip', {
         zip_src   => [ '.' ],
@@ -68,7 +69,7 @@ function generate_apk {
   mkdir apk
   pushd apk
   7zz x "$apk"
-  cp -Rn ../assets ./
+  cp -R ../assets ./
   find -type f -exec touch -m -t '[% USE date; date.format(pc("geckoview", "timestamp"), format = "%Y%m%d%H%M") %]' {} \;
   find -type f ! -name resources.arsc -printf '%P\n' | sort > ../files.txt
   7zz a -tzip -mx9 -mtc- -spf ../repacked.apk @../files.txt

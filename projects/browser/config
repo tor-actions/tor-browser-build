@@ -103,6 +103,9 @@ input_files:
     enable: '[% c("var/macos_universal") && c("var/tor-browser") %]'
     target_replace:
       '^torbrowser-macos.*': torbrowser-macos-aarch64
+  - project: moat-settings
+    name: moat-settings
+    enable: '[% c("var/tor-browser") %]'
   - project: fonts
     name: fonts
     enable: '[% ! c("var/android") %]'
