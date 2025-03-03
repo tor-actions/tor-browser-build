@@ -392,7 +392,7 @@ class ReleasePreparation:
         hash_url = f"https://github.com/openssl/openssl/releases/download/openssl-{version}/openssl-{version}.tar.gz.sha256"
         r = requests.get(hash_url)
         r.raise_for_status()
-        source["sha256sum"] = r.text.strip()
+        source["sha256sum"] = r.text.strip()[:64]
         self.save_config("openssl", config)
         logger.debug("Updated OpenSSL to %s and config saved.", version)
 
