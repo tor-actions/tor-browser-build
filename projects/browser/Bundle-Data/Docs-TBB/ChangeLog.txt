@@ -1,3 +1,17 @@
+Tor Browser 14.0.7 - March 04 2025
+ * All Platforms
+   * Updated OpenSSL to 3.0.16
+   * Bug 43522: Rebase Tor Browser release onto 128.0.8esr [tor-browser]
+   * Bug 43536: Backport security fixes from Firefox 136 [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 128.8.0esr
+ * Android
+   * Updated GeckoView to 128.8.0esr
+   * Updated Zstandard to 1.5.7
+ * Build System
+   * All Platforms
+     * Bug 41380: Update kick-devmole script to use Mullvad's new GitHub action [tor-browser-build]
+
 Tor Browser 14.0.6 - February 07 2025
  * All Platforms
    * Updated Tor to 0.4.8.14
