@@ -333,7 +333,7 @@ END;
   mkdir -p "$libdest"
   # Not copying libstdc++.so.* as that dups with the full libstdc++.so.6.0.xx the .6 links to
   # and libstdc++.so.6.0.28-gdb.py which is also not needed
-  cp /var/tmp/dist/gcc/[% c("var/libdir") %]/libstdc++.so.* "$libdest"
+  cp /var/tmp/dist/gcc/[% c("var/libdir") %]/libstdc++.so.6 "$libdest"
   [% IF c("var/asan") -%]
     cp /var/tmp/dist/gcc/[% c("var/libdir") %]/libasan.so.* "$libdest"
     cp /var/tmp/dist/gcc/[% c("var/libdir") %]/libubsan.so.* "$libdest"
