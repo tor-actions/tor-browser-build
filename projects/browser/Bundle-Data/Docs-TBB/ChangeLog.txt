@@ -1,3 +1,18 @@
+Tor Browser 13.5.13 - March 04 2025
+ * All Platforms
+   * Updated Firefox to 115.21.0esr
+   * Updated Tor to 0.4.8.14
+   * Updated OpenSSL to 3.0.16
+   * Bug 43168: Review ESR 115 expiry date for legacy OS message [tor-browser]
+   * Bug 43530: Rebase Tor Browser legacy onto 115.21.0esr [tor-browser]
+   * Bug 41362: Remove meek azure from the builtin bridges [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Bug 41380: Update kick-devmole script to use Mullvad's new GitHub action [tor-browser-build]
+     * Bug 41384: OpenSSL hash files have changed format [tor-browser-build]
+   * macOS
+     * Bug 41367: Backport to legacy: Bug 41314: Add tools/setup-martools and use it in dmg2mar and update_response scripts [tor-browser-build]
+
 Tor Browser 13.5.12 - February 04 2025
  * All Platforms
    * Updated Firefox to 115.20.0esr
@@ -14,7 +29,6 @@ Tor Browser 13.5.11 - July 01 2025
  * All Platforms
    * Updated Firefox to 115.19.0esr
    * Updated NoScript to 12.1.1
-   * Updated GeckoView to 115.19.0esr
    * Bug 43176: noscript-marker CSP warnings in the console [tor-browser]
    * Bug 43269: NoScript localization issue [tor-browser]
    * Bug 43282: Unable to click/tap/select anything adjacent the WebGL placeholders [tor-browser]
