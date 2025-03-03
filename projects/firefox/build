@@ -341,7 +341,7 @@ END;
   # Strip and generate debuginfo for libs
   for LIB in "$libdest"/*so*
   do
-    "$STRIP" "$LIB"
+    strip "$LIB"
   done
 [% END -%]
 
