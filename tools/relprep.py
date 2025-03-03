@@ -135,7 +135,7 @@ class ReleasePreparation:
             self.update_zlib()
             if self.android:
                 self.update_zstd()
-            self.update_go()
+            # self.update_go()
             self.update_manual()
 
         self.update_changelogs()
