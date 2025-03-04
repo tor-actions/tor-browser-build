@@ -1,10 +1,11 @@
 # vim: filetype=yaml sw=2
-version: '1.22.12'
+version: '1.23.6'
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
 
 var:
+  source_sha256: 039c5b04e65279daceee8a6f71e70bd05cf5b801782b6f77c6e19e2ed0511222
   no_crosscompile: 1
   setup: |
     mkdir -p /var/tmp/dist
@@ -86,7 +87,9 @@ targets:
     var:
       GOARCH: arm64
   macos:
+    version: 1.22.12
     var:
+      source_sha256: 012a7e1f37f362c0918c1dfa3334458ac2da1628c4b9cf4d9ca02db986e17d71
       GOOS: darwin
   linux:
     var:
@@ -126,7 +129,7 @@ input_files:
     enable: '[% ! c("var/linux") %]'
   - URL: 'https://go.dev/dl/go[% c("version") %].src.tar.gz'
     name: go
-    sha256sum: 012a7e1f37f362c0918c1dfa3334458ac2da1628c4b9cf4d9ca02db986e17d71
+    sha256sum: '[% c("var/source_sha256") %]'
   - project: go-bootstrap
     name: go-bootstrap
     target_replace:

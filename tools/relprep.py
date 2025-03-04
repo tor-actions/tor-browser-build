@@ -459,7 +459,7 @@ class ReleasePreparation:
                 break
         if not sha256sum:
             raise KeyError("Go source package not found.")
-        self.find_input(config, "go")["sha256sum"] = sha256sum
+        config["var"]["source_sha256"] = sha256sum
         self.save_config("go", config)
 
     def update_manual(self):
