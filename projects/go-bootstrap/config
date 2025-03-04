@@ -1,20 +1,14 @@
 # vim: filetype=yaml sw=2
-version: 1.21.12
+# Make sure we can reproduce the official binaries before updating.
+# Check README.md for more information before updating this version.
+version: 1.23.6
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
-  use_container: 1
-
-var:
-  no_crosscompile: 1
+  use_container: 0
 
 input_files:
-  - project: container-image
-  - URL: 'https://go.dev/dl/go[% c("version") %].src.tar.gz'
+  - URL: 'https://go.dev/dl/go[% c("version") %].linux-amd64.tar.gz'
     name: go
-    sha256sum: 30e68af27bc1f1df231e3ab74f3d17d3b8d52a089c79bcaab573b4f1b807ed4f
-  - URL: https://go.dev/dl/go1.19.13.src.tar.gz
-    sha256sum: ccf36b53fb0024a017353c3ddb22c1f00bc7a8073c6aac79042da24ee34434d3
-    name: go119
-  - URL: https://dl.google.com/go/go1.4-bootstrap-20171003.tar.gz
-    name: go14
-    sha256sum: f4ff5b5eb3a3cae1c993723f3eab519c5bae18866b5e5f96fe1102f0cb5c3e52
+    # Make sure we can reproduce the official binaries before updating.
+    # Check README.md for more information before updating this hash.
+    sha256sum: 9379441ea310de000f33a4dc767bd966e72ab2826270e038e78b2c53c2e7802d

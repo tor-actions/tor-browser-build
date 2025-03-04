@@ -1,45 +1,15 @@
 #!/bin/bash
 [% c("var/set_default_env") -%]
 
-# This project is expected to be built only on Linux.
-# Then the actual Go compiler will be built for each platform.
+tar -xf $rootdir/[% c('input_files_by_name/go') %]
 
-distdir=/var/tmp/dist/[% project %]
-mkdir -p /var/tmp/build /var/tmp/dist
+pushd go
+# Disable go autoupdates (tor-browser-build#41345)
+# See https://go.dev/doc/toolchain
+sed -i -e 's/^GOTOOLCHAIN=.*/GOTOOLCHAIN=local/' go.env
+popd
+mv go [% project %]
 
-# Building go 1.4.x
-# This is needed to bootstrap the go that we actually use
-# https://golang.org/doc/install/source#go14
-tar -C /var/tmp/build --transform='s,^go\>,go1.4,' -xf $rootdir/[% c('input_files_by_name/go14') %]
-cd /var/tmp/build/go1.4/src
-# Disable cgo to avoid conflicts with newer GCC. cgo is not needed for the bootstrap go.
-# https://github.com/golang/go/issues/13114#issuecomment-186922245
-# Disable CC etc. that are set up for cross builds.
-CGO_ENABLED=0 CC= CFLAGS= LDFLAGS= ./make.bash
-export GOROOT_BOOTSTRAP="/var/tmp/build/go1.4"
-
-# Building go 1.19.X
-cd $rootdir
-tar -C /var/tmp/build --transform='s,^go\>,go1.19,' -xf $rootdir/[% c('input_files_by_name/go119') %]
-cd /var/tmp/build/go1.19/src
-
-./make.bash
-export GOROOT_BOOTSTRAP="/var/tmp/build/go1.19"
-
-# Building go 1.21.X
-cd $rootdir
-tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/go') %]
-export GOROOT="$distdir"
-mv /var/tmp/dist/go $distdir
-cd $distdir/src
-
-./make.bash
-
-# This directory is non-reproducible and doesn't exist in official Go releases,
-# so remove it to preserve reproducibility of the output.
-rm -rf $distdir/pkg/obj/go-build/
-
-cd /var/tmp/dist
 [% c('tar', {
         tar_src => [ project ],
         tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),

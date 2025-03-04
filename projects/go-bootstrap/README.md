@@ -1,16 +1,23 @@
-Go 1.4 was the last version written in C.
-All the later versions need a Go compiler, that we provide with this project.
+This project downloads the official Go binaries to use them for bootstrapping
+purposes.
 
-Also, starting from Go 1.20.x, Go introduced a new policy: Go 1.y.z needs at
-least Go 1.(y - 3) to build. E.g., Go 1.19 can build Go 1.20, 1.21 and 1.22, but
-no Go 1.23, which will need Go 1.20 or later.
+We used to start with Go 1.4 (the last version written in C) and build all the
+versions needed to then build the most recent Go toolchain.
 
-So, right now we build Go 1.4 with Debian's GCC, then we use it to build Go
-1.19.9, but at a certain point we will have to add another Go compiler.
+However, starting with Go 1.21,
+[the official binaries are reproducible](https://go.dev/blog/rebuild).
 
-Other alternatives are:
-- use Debian's Go compiler (but we use a very old version of Debian for wider
-  binary compatibility, so it's likely not to ship a recent enough compiler for
-  bootstrapping purposes)
-- use the [official binaries](https://go.dev/dl/) to bootstrap, like we do for
-  Rust
+So, we checked that the Go 1.23.6 binaries we produced with our old procedure
+at 80f16f97e7c2973e9aa4458606c9afd2c63c2d60 matched the official binaries.
+
+## How to update
+
+1. In `projects/go/config`, update version to the version we want to be the new
+   go-bootstrap version
+2. Build `go` with
+   `./rbm/rbm build --target torbrowser-linux-x86_64 --target alpha go` and
+   compare the result with the official build
+3. If it is matching or if we can explain the differences, update the
+   `go-bootstrap` version of the bin that we download.
+4. Build the same version of go again with the command from above and check the
+   two archives have the same exact hash.
