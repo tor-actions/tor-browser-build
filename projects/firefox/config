@@ -6,6 +6,7 @@ tag_gpg_id: 1
 git_url: https://gitlab.torproject.org/tpo/applications/tor-browser.git
 gpg_keyring:
   - boklm.gpg
+  - clairehurst.gpg
   - dan_b.gpg
   - ma1.gpg
   - morgan.gpg
