@@ -17,7 +17,7 @@ cd /var/tmp/build/[% project %]-[% c('version') %]
 
 tar -xf $rootdir/[% c('input_files_by_name/go_vendor') %]
 
-go build -mod=vendor -ldflags '-s' ./cmd/lyrebird
+go build -mod=vendor -ldflags '-s[% IF c("var/android") %] -checklinkname=0[% END %]' ./cmd/lyrebird
 cp -a lyrebird[% IF c("var/windows") %].exe[% END %] $distdir
 
 cd $distdir
