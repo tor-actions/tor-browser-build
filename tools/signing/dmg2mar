@@ -13,10 +13,6 @@ cd "$script_dir/../.."
 
 # some initial checks to make sure directories and file counts are as expected...
 
-version=$(./rbm/rbm showconf browser --target alpha --target $SIGNING_PROJECTNAME-linux-x86_64 var/torbrowser_version)
-test "$version" = "$tbb_version" || \
-  exit_error "Incorrect tor browser version: $version != $tbb_version"
-
 test -d "$signed_version_dir" || \
   exit_error "$signed_version_dir does not exist"
 

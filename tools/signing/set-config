@@ -26,8 +26,6 @@ test -z "$no_generate_config" && generate_config
 . "$script_dir/set-config.generated-config"
 export no_generate_config=1
 
-. "$script_dir/set-config.tbb-version"
-
 test "$tbb_version_type" = 'release' \
   || test "$tbb_version_type" = 'alpha' \
   || test "$tbb_version_type" = 'nightly' \

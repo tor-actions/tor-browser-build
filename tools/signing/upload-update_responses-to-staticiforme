@@ -4,8 +4,6 @@ script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "$script_dir/functions"
 source "$script_dir/set-config.update-responses"
 
-check_torbrowser_version_var
-
 update_responses_tar_filename="update-responses-$tbb_version_type-$tbb_version.tar"
 update_responses_tar="$script_dir/../../$SIGNING_PROJECTNAME/$tbb_version_type/update-responses/$update_responses_tar_filename"
 test -f "$update_responses_tar" && \

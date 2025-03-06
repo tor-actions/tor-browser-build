@@ -1,7 +1,0 @@
-# The following 3 lines should be uncommented and updated:
-
-#tbb_version=11.5a4
-#tbb_version_build=1
-#tbb_version_type=alpha
-
-var_is_defined tbb_version tbb_version_build tbb_version_type
