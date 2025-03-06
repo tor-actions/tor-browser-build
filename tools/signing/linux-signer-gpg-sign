@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+no_generate_config=1
 script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "$script_dir/functions"
 

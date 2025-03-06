@@ -1,9 +1,9 @@
 #!/bin/bash
 
 set -e
+no_generate_config=1
 script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "$script_dir/functions"
-source "$script_dir/set-config.generated-config"
 # tbb_version_type is used in wrappers/sign-rcodesign, so we export it
 export tbb_version_type
 

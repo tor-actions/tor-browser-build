@@ -20,7 +20,11 @@ test "$SIGNING_PROJECTNAME" = 'torbrowser' \
 
 export SIGNING_PROJECTNAME
 
-test -z "${rbm_not_available+x}" && rbm="$script_dir/../../rbm/rbm"
+rbm="$script_dir/../../rbm/rbm"
+
+test -z "$no_generate_config" && generate_config
+. "$script_dir/set-config.generated-config"
+export no_generate_config=1
 
 . "$script_dir/set-config.tbb-version"
 
