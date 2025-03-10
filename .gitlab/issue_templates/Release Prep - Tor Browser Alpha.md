@@ -65,6 +65,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
     - [ ] `var/torbrowser_build`: updated to `${TOR_BROWSER_BUILD_N}`
     - [ ] `var/browser_release_date`: updated to build date. For the build to be reproducible, the date should be in the past when building.
       - **⚠️ WARNING**: If we have updated `var/torbrowser_build` without updating the `firefox` or `geckoview` tags, then we can leave this unchanged to avoid forcing a firefox re-build (e.g. when bumping `var/torbrwoser_build` to build2, build3, etc due to non-firefox related build issues)
+    - [ ] `var/browser_platforms`: updated to enable the platforms included in this release
     - [ ] ***(Desktop Only)*** `var/torbrowser_incremental_from`: updated to previous Desktop version
       - **NOTE**: We try to build incrementals for the previous 3 desktop versions
       - **⚠️ WARNING**: Really *actually* make sure this is the previous Desktop version or else the `make torbrowser-incrementals-*` step will fail
@@ -135,7 +136,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
 - [ ] Build the tag:
   - Run:
     ```bash
-    make torbrowser-alpha && make torbrowser-incrementals-alpha
+    make torbrowser
     ```
     - [ ] Tor Project build machine
     - [ ] Local developer machine
