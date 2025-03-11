@@ -1,3 +1,59 @@
+Tor Browser 14.5a4 - March 12 2025
+ * All Platforms
+   * Updated OpenSSL to 3.0.16
+   * Bug 43446: Change the Tor Browser name between releases [tor-browser]
+   * Bug 43463: Include moat circumvention countries in the build (tor-browser part) [tor-browser]
+   * Bug 43487: Rebase Tor Browser Alpha onto 128.8.0esr [tor-browser]
+   * Bug 43529: AutoBootstrapAttempt cancel does not await BootstrapAttempt.cancel [tor-browser]
+   * Bug 43524: Enable new locales: be, bg and pt-PT [tor-browser]
+   * Bug 43551: Backport Mozilla Bug 1924070 - modify H.264 extradata to match sample conversion code.... [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 128.8.0esr
+   * Bug 40473: Tor logs do not update in about:preferences#tor as new logs come in [tor-browser]
+   * Bug 43205: newwin / letterboxing rounding with subpixels is off [tor-browser]
+   * Bug 43328: Improve tor log dialog [tor-browser]
+   * Bug 43465: Show the urlbar Connect button during a bootstrap or final error [tor-browser]
+   * Bug 43469: Rename "Quickstart" toggle as "Connect automatically" (Desktop) [tor-browser]
+   * Bug 43502: Move openTorConnect and getRedirectUrl to TorConnectParent [tor-browser]
+   * Bug 43504: Implement User Survey UX (Desktop) [tor-browser]
+   * Bug 43547: Cannot remove the final bridge [tor-browser]
+ * Linux
+   * Bug 30970: Different window borders in XFCE can lead to different, not rounded window sizes [tor-browser]
+ * Android
+   * Updated GeckoView to 128.8.0esr
+   * Updated Zstandard to 1.5.7
+   * Bug 43329: Remove remaining traces of the old Bootstrap on Android [tor-browser]
+   * Bug 43408: Access TorConnect.quickstart separately from TorSettings.getSettings on Android [tor-browser]
+   * Bug 43480: Split up TorConnectionAssistViewModel for better readibility and performance. [tor-browser]
+   * Bug 43498: Uplift tor-browser#43129: about:neterror cannot display SVG on Android with Security Level Safest [tor-browser]
+   * Bug 43528: Improper handling of TorBootstrapChangeListener in HomeActivity [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.23.7
+     * Bug 41040: Add configuration to rbm.conf to select channel and platforms [tor-browser-build]
+     * Bug 41121: Use the official Go binaries for bootstrapping [tor-browser-build]
+     * Bug 41372: Handle branding names in tor-browser-build [tor-browser-build]
+     * Bug 41379: Include moat circumvention countries in the build (tor-browser-build part) [tor-browser-build]
+     * Bug 41380: Update kick-devmole script to use Mullvad's new GitHub action [tor-browser-build]
+     * Bug 41381: Usability improvements for the browser commit tagging script [tor-browser-build]
+     * Bug 41382: Replace gitlab templates ReleasePrep label references with Apps::Type::ReleasePreparation [tor-browser-build]
+     * Bug 41383: Add clairehurst to list of accepted firefox/geckoview signers [tor-browser-build]
+     * Bug 41384: OpenSSL hash files have changed format [tor-browser-build]
+     * Bug 41389: Remove need to update set-config.tbb-version [tor-browser-build]
+     * Bug 40082: With `fetch: if_needed`, rbm is doing a git fetch when it shouldn't, when using a fixed commit [rbm]
+   * Windows + macOS + Linux
+     * Bug 40799: Remove legacy locale iteration in build and signing scripts [tor-browser-build]
+     * Bug 41363: Change update-response generation script to create one commit per OS+arch tuple [tor-browser-build]
+     * Bug 41374: Remove support for migrate_archs and migrate_langs in update_responses [tor-browser-build]
+   * Windows + Linux + Android
+     * Bug 41386: Upgrade Go to 1.23 for Windows, Linux, and Android [tor-browser-build]
+   * Linux
+     * Bug 41337: Remove libstdc++ from Linux tor-expert-bundle [tor-browser-build]
+   * Android
+     * Bug 42669: Remove dependency on Application-Services [tor-browser]
+     * Bug 43518: Verify existence of localProperties.dependencySubstitutions.geckoviewTopsrcdir before substituting [tor-browser]
+     * Bug 41387: Fix Golang toolchain breakage for lyrebird: linkname [tor-browser-build]
+
 Tor Browser 14.5a3 - February 10 2025
  * All Platforms
    * Bug 41065: navigator.storage "best effort" + "persistent" leak partitionSize/totalSpace entropy [tor-browser]
