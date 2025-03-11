@@ -27,6 +27,8 @@ args = parser.parse_args()
 # languages.nsh.
 languages = {
     "ar": "Arabic",
+    "be": "Belarusian",
+    "bg": "Bulgarian",
     "ca": "Catalan",
     "cs": "Czech",
     "da": "Danish",
@@ -54,6 +56,7 @@ languages = {
     "nl": "Dutch",
     "pl": "Polish",
     "pt-BR": "PortugueseBR",
+    "pt-PT": "Portuguese",
     "ro": "Romanian",
     "ru": "Russian",
     "sq": "Albanian",
@@ -64,10 +67,6 @@ languages = {
     "vi": "Vietnamese",
     "zh-CN": "SimpChinese",
     "zh-TW": "TradChinese",
-    # Nightly-only at the moment
-    "be": "Belarusian",
-    "bg": "Bulgarian",
-    "pt-PT": "Portuguese",
 }
 
 replacements = {
