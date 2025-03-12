@@ -58,9 +58,11 @@ do
     git commit -m "$tbb_version_type: new version, $tbb_version ($file)"
 done
 
-git add "$tbb_version_type"/download-android-*.json
-git diff --quiet  --cached --exit-code || \
-  git commit -m "$tbb_version_type: new version, $tbb_version (android)"
+if is_project torbrowser; then
+  git add "$tbb_version_type"/download-android-*.json
+  git diff --quiet  --cached --exit-code || \
+    git commit -m "$tbb_version_type: new version, $tbb_version (android)"
+fi
 
 git add "$tbb_version_type"
 git diff --quiet  --cached --exit-code || \
