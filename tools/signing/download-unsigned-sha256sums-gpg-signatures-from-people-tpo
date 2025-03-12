@@ -11,14 +11,14 @@ do
     chmod 644 "$tmpfile"
     if test "$builder" = 'jb'; then
       file="$file.gpg"
-      urls=("https://cdn.stagemole.eu/hashes/$SIGNING_PROJECTNAME/$tbb_version-build$tbb_version_build/$file")
+      urls=("https://cdn.stagemole.eu/hashes/$SIGNING_PROJECTNAME/$tbb_version-$tbb_version_build/$file")
     else
       file="$file.asc"
       urls=( \
-        "https://people.torproject.org/~$builder/builds/$SIGNING_PROJECTNAME/$tbb_version-build$tbb_version_build/$file" \
-        "https://people.torproject.org/~$builder/builds/$SIGNING_PROJECTNAME/$tbb_version_type/$tbb_version-build$tbb_version_build/$file" \
-        "https://tb-build-02.torproject.org/~$builder/builds/$SIGNING_PROJECTNAME/$tbb_version_type/unsigned/$tbb_version-build$tbb_version_build/$file" \
-        "https://tb-build-03.torproject.org/~$builder/builds/$SIGNING_PROJECTNAME/$tbb_version_type/unsigned/$tbb_version-build$tbb_version_build/$file" \
+        "https://people.torproject.org/~$builder/builds/$SIGNING_PROJECTNAME/$tbb_version-$tbb_version_build/$file" \
+        "https://people.torproject.org/~$builder/builds/$SIGNING_PROJECTNAME/$tbb_version_type/$tbb_version-$tbb_version_build/$file" \
+        "https://tb-build-02.torproject.org/~$builder/builds/$SIGNING_PROJECTNAME/$tbb_version_type/unsigned/$tbb_version-$tbb_version_build/$file" \
+        "https://tb-build-03.torproject.org/~$builder/builds/$SIGNING_PROJECTNAME/$tbb_version_type/unsigned/$tbb_version-$tbb_version_build/$file" \
       )
     fi
     for url in "${urls[@]}"
