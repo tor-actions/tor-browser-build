@@ -40,7 +40,7 @@ function generate_config {
        "$SIGNING_PROJECTNAME"  --target "$tbb_version_type")
   echo "SIGNING_PROJECTNAMES=(\"$p1\" \"$p2\" \"$p3\" \"$p4\")" > \
        "$script_dir/set-config.generated-config"
-  local tbb_version_type=$("$rbm" showconf browser \ var/browser_default_channel \
+  local tbb_version_type=$("$rbm" showconf browser var/browser_default_channel \
                            --target "$SIGNING_PROJECTNAME")
   local tbb_version=$("$rbm" showconf browser var/torbrowser_version \
                       --target "$SIGNING_PROJECTNAME" --target \
