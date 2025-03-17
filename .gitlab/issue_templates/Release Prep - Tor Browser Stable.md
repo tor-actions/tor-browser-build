@@ -148,6 +148,28 @@ Tor Browser Stable is on the `maint-${TOR_BROWSER_MAJOR}.${TOR_BROWSER_MINOR}` b
       ```bash
       make torbrowser-kick-devmole-build
       ```
+- [ ] Notify Tails of pending builds
+  - **Recipients**
+    ```
+    tails-dev@boum.org
+    ```
+  - **Subject**
+    ```
+    Tor Browser ${TOR_BROWSER_VERSION} Building
+    ```
+  - **Body**
+    ```
+    Hello,
+
+    Tor Browser Stable is being built and should be ready for Tails in the coming hours. Build artifacts and hashes will be available here:
+    - ${BUILD_ARTIFACTS_URL}
+    - ${BUIDL_HASHES_URL}
+
+    ⚠️ WARNING: We have not yet verified the builds match, so make sure you do so before prepping the Tails release!
+
+    Changelog:
+    # paste changelog as quote here
+    ```
 
 </details>
 
@@ -321,14 +343,13 @@ popd
 ### packagers
 - [ ] Email packagers:
   - **Recipients**
-    - Tails dev mailing list: tails-dev@boum.org
     - Guardian Project: nathan@guardianproject.info
     - FreeBSD port: freebsd@sysctl.cz <!-- Gitlab user maxfx -->
     - OpenBSD port: caspar@schutijser.com <!-- Gitlab user cschutijser -->
     - torbrowser-launcher: mail@asciiwolf.com <!-- Gitlab user asciiwolf -->
     - Anti-Censorship: meskio@torproject.org <!-- Gitlab user meskio -->
     ```
-    tails-dev@boum.org, nathan@guardianproject.info, freebsd@sysctl.cz, caspar@schutijser.com, mail@asciiwolf.com, meskio@torproject.org,
+    nathan@guardianproject.info, freebsd@sysctl.cz, caspar@schutijser.com, mail@asciiwolf.com, meskio@torproject.org,
     ```
   - **Subject**
     ```
