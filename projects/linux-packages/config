@@ -113,7 +113,7 @@ targets:
       browser-linux-x86_64: 1
   browser-linux-i686:
     var:
-      browser-linux-i686: '[% c("var/browser_type") != "mullvadbrowser" %]'
+      browser-linux-i686: 1
   browser-linux-aarch64:
     var:
       browser-linux-aarch64: 1
