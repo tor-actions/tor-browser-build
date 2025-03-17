@@ -113,11 +113,10 @@ Mullvad Browser Stable is on the `maint-${MULLVAD_BROWSER_MAJOR}.${MULLVAD_BROWS
     ```bash
     make mullvadbrowser-release && make mullvadbrowser-incrementals-release
     ```
-    - Tor Project build machine
-    - Local developer machine
+    - [ ] Tor Project build machine
+    - [ ] Local developer machine
   - [ ] Submit build request to Mullvad infrastructure:
-    - **NOTE** this requires a devmole authentication token
-    - **NOTE** this also requires you be connected to Gothenburg Mulvad VPN exit `se-got-wg-101`
+    - **NOTE** this requires a github authentication token
     - Run:
       ```bash
       make mullvadbrowser-kick-devmole-build
