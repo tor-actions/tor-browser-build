@@ -147,28 +147,6 @@ Tor Browser Stable is on the `maint-${TOR_BROWSER_MAJOR}.${TOR_BROWSER_MINOR}` b
       ```bash
       make torbrowser-kick-devmole-build
       ```
-- [ ] Notify Tails of pending builds
-  - **Recipients**
-    ```
-    tails-dev@boum.org
-    ```
-  - **Subject**
-    ```
-    Tor Browser ${TOR_BROWSER_VERSION} Building
-    ```
-  - **Body**
-    ```
-    Hello,
-
-    Tor Browser Stable is being built and should be ready for Tails in the coming hours. Build artifacts and hashes will be available here:
-    - ${BUILD_ARTIFACTS_URL}
-    - ${BUIDL_HASHES_URL}
-
-    ⚠️ WARNING: We have not yet verified the builds match, so make sure you do so before prepping the Tails release!
-
-    Changelog:
-    # paste changelog as quote here
-    ```
 
 </details>
 
@@ -213,6 +191,25 @@ Tor Browser Stable is on the `maint-${TOR_BROWSER_MAJOR}.${TOR_BROWSER_MINOR}` b
   - morgan
   - pierov
 - [ ] Ensure all builders have matching builds
+- [ ] Notify Tails
+  - **Recipients**
+    ```
+    tails-dev@boum.org
+    ```
+  - **Subject**
+    ```
+    Tor Browser ${TOR_BROWSER_VERSION} Ready
+    ```
+  - **Body**
+    ```
+    Hello,
+
+    Tor Browser Stable is ready for Tails. Build artifacts can be found here:
+    - ${BUILD_ARTIFACTS_URL}
+
+    Changelog:
+    # paste changelog as quote here
+    ```
 - [ ] Verify the associated legacy `maint-13.5` release has been signed and deployed
   - **⚠️ WARNING**: Do not continue if the legacy channel has not been fully signed and published yet; it is needed for update-response generation!
   - **NOTE** Stable releases without a corresponding legacy release may ignore this
