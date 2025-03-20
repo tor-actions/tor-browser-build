@@ -8,6 +8,17 @@ tag_gpg_id: 1
 container:
   use_container: 1
 
+var:
+  go_vendor_sha256sum: 4c21a75c2fd0997a13fc5bb99991ff2c7149fb2342b857b06c70a18c4cb2ac89
+
+targets:
+  nightly:
+    git_hash: main
+    version: '[% c("abbrev") %]'
+    tag_gpg_id: 0
+    var:
+      go_vendor_sha256sum: ''
+
 steps:
   build:
     filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
@@ -22,6 +33,6 @@ steps:
         pkg_type: go_vendor
         project: snowflake
         norec:
-          sha256sum: 4c21a75c2fd0997a13fc5bb99991ff2c7149fb2342b857b06c70a18c4cb2ac89
+          sha256sum: '[% c("var/go_vendor_sha256sum") %]'
         target_replace:
           '^torbrowser-(?!testbuild).*': 'torbrowser-linux-x86_64'
