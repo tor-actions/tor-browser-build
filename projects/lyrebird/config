@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-version: 0.3.0
+version: 0.6.0
 git_url: https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/lyrebird.git
 git_hash: 'lyrebird-[% c("version") %]'
 tag_gpg_id: 1
@@ -9,7 +9,7 @@ container:
   use_container: 1
 
 var:
-  go_vendor_sha256sum: 71abc8063f2913e74e87a2a5c9262c4fad6ce4ed98b28b7603b50382724baba4
+  go_vendor_sha256sum: 788d63f5cbe2b618f314df87d9f1b33bc26af44a1c7535e80b34400c2efb55d1
 
 targets:
   nightly:
