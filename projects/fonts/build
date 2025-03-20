@@ -31,6 +31,8 @@ mv noto-fonts-* noto-fonts
   cp Arimo-*/fonts/ttf/*.ttf Cousine-* Tinos-* NotoSans{JP,KR,SC,TC}-Regular.otf $distdir/
 [% END %]
 
+cp "$rootdir/[% c('input_files_by_name/Pyidaungsu') %]" $distdir/
+
 cp README.txt "$distdir/000_README.txt"
 cd $distdir/..
 [% c('tar', {

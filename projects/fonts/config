@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-version: '3'
+version: '4'
 filename: "[% project %]-[% c('version') %]-[% c('var/platform') %]-[% c('var/build_id') %].tar.[% c('compress_tar') %]"
 container:
   # We just copy files around, no need to use a container.
@@ -55,7 +55,6 @@ var:
     - NotoSansModi
     - NotoSansMongolian
     - NotoSansMro
-    - NotoSansMyanmar
     - NotoSansMultani
     - NotoSansNewa
     - NotoSansNewTaiLue
@@ -193,3 +192,6 @@ input_files:
     sha256sum: 3a5f3f26f40d5698b3c62dd085d48d6663696a3f80825aab8b553d5097518e8c
     name: stix
     enable: '[% c("var/have_stix") %]'
+  - URL: 'https://github.com/mcfnlp/Pyidaungsu/raw/refs/heads/master/Pyidaungsu2.5.3/Release/Pyidaungsu-2.5.3_Regular.ttf'
+    sha256sum: df7106c15da76f6a24c10821b43da51f54961f6bc6791fb1fcf21c6c60bb2e10
+    name: Pyidaungsu
