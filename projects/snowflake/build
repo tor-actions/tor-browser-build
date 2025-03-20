@@ -18,7 +18,7 @@ cd /var/tmp/build/[% project %]-[% c('version') %]
 tar -xf $rootdir/[% c('input_files_by_name/go_vendor') %]
 
 cd client
-go build -ldflags '-s' -tags 'nopshufb,noasm,packetioSizeHardlimit,purego,safe,appengine,disableunsafe'
+go build -ldflags '-s[% IF c("var/android") %] -checklinkname=0[% END %]' -tags 'nopshufb,noasm,packetioSizeHardlimit,purego,safe,appengine,disableunsafe'
 cp -a client[% IF c("var/windows") %].exe[% END %] $distdir/snowflake-client[% IF c("var/windows") %].exe[% END %]
 
 cd ..
