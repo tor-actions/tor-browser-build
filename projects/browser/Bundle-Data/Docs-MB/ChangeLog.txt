@@ -1,3 +1,17 @@
+Mullvad Browser 14.5a5 - March 21 2025
+ * All Platforms
+   * Updated uBlock Origin to 1.63.0
+   * Bug 412: Link the release page in the about dialog and clean brand-related preferences [mullvad-browser]
+   * Bug 41051: Replace Noto Sans Myanmar with Pyidaungsu [tor-browser]
+   * Bug 41755: Show the link to about:support in the help menu [tor-browser]
+   * Bug 42670: Letterboxing visible even if disable with tiled window managers [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41394: Fix upload-update_responses-to-staticiforme for mullvadbrowser [tor-browser-build]
+     * Bug 41401: Replace Noto Sans Myanmar with Pyidaungsu [tor-browser-build]
+   * Linux
+     * Bug 41397: Building mullvad-browser no longer generates .deb or .rpm packages [tor-browser-build]
+
 Mullvad Browser 14.5a4 - March 12 2025
  * All Platforms
    * Updated Firefox to 128.8.0esr

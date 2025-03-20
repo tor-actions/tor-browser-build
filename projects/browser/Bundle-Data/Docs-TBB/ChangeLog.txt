@@ -1,3 +1,38 @@
+Tor Browser 14.5a5 - March 21 2025
+ * All Platforms
+   * Updated Lyrebird to 0.6.0
+   * Updated Snowflake to 2.11.0
+   * Bug 42300: Do not store logs inside TorProvider [tor-browser]
+   * Bug 43488: Handle Moat connection errors and other non-bootstrapping errors in TorConnect [tor-browser]
+   * Bug 43490: Use lower case "n" for "Tor network" in the UI [tor-browser]
+   * Bug 43556: Update Desktop and Android survey dismissal string [tor-browser]
+   * Bug 43575: Cleanup channel preferences [tor-browser]
+ * Windows + macOS + Linux
+   * Bug 41051: Replace Noto Sans Myanmar with Pyidaungsu [tor-browser]
+   * Bug 41755: Show the link to about:support in the help menu [tor-browser]
+   * Bug 42550: Do not re-try auto-bootstrapping after the user selects a specific region in about:torconnect [tor-browser]
+   * Bug 42656: about:torconnect new url location override (maybeUpdateOpenLocationForTorConnect) mostly does nothing [tor-browser]
+   * Bug 42670: Letterboxing visible even if disable with tiled window managers [tor-browser]
+   * Bug 42720: Link to release notes missing from "About Tor Browser" window [tor-browser]
+   * Bug 43321: Do not focus the connect button if the user has never connected before [tor-browser]
+   * Bug 43405: Handle failing to apply tor settings [tor-browser]
+ * Android
+   * Bug 41188: Implement Android-native Connection Assist UI [tor-browser]
+   * Bug 42251: Expose TorConnect lifecycle events to fenix [tor-browser]
+   * Bug 43091: Delete unused android strings [tor-browser]
+   * Bug 43361: [Android] Move code relating to `onTerminate()` in `FenixApplication.kt` [tor-browser]
+   * Bug 43473: Rename "Quickstart" toggle as "Connect automatically" (Android) [tor-browser]
+   * Bug 43505: Implement User Survey UX (Android) [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41394: Fix upload-update_responses-to-staticiforme for mullvadbrowser [tor-browser-build]
+     * Bug 41398: Build snowflake from main on nightlies [tor-browser-build]
+     * Bug 41399: Update snowflake to 2.11.0 and lyrebird to 0.6.0 [tor-browser-build]
+   * Windows + macOS + Linux
+     * Bug 41401: Replace Noto Sans Myanmar with Pyidaungsu [tor-browser-build]
+   * Android
+     * Bug 41402: Fix Snowflake 2.11.0 on Android [tor-browser-build]
+
 Tor Browser 14.5a4 - March 12 2025
  * All Platforms
    * Updated OpenSSL to 3.0.16
