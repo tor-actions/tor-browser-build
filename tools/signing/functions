@@ -30,16 +30,6 @@ function is_project {
 }
 
 function generate_config {
-  local p1=$("$rbm" showconf browser var/project-name --target \
-       "$SIGNING_PROJECTNAME")
-  local p2=$("$rbm" showconf browser var/Project_Name --target \
-             "$SIGNING_PROJECTNAME")
-  local p3=$("$rbm" showconf browser var/ProjectName --target \
-             "$SIGNING_PROJECTNAME")
-  p4=$("$rbm" showconf browser var/display_name --target \
-       "$SIGNING_PROJECTNAME"  --target "$tbb_version_type")
-  echo "SIGNING_PROJECTNAMES=(\"$p1\" \"$p2\" \"$p3\" \"$p4\")" > \
-       "$script_dir/set-config.generated-config"
   local tbb_version_type=$("$rbm" showconf browser var/browser_default_channel \
                            --target "$SIGNING_PROJECTNAME")
   local tbb_version=$("$rbm" showconf browser var/torbrowser_version \
@@ -48,6 +38,16 @@ function generate_config {
   local tbb_version_build=$("$rbm" showconf browser var/torbrowser_build \
                             --target "$SIGNING_PROJECTNAME" --target \
                             "$tbb_version_type")
+  local p1=$("$rbm" showconf browser var/project-name --target \
+       "$SIGNING_PROJECTNAME")
+  local p2=$("$rbm" showconf browser var/Project_Name --target \
+             "$SIGNING_PROJECTNAME")
+  local p3=$("$rbm" showconf browser var/ProjectName --target \
+             "$SIGNING_PROJECTNAME")
+  local p4=$("$rbm" showconf browser var/display_name --target \
+       "$SIGNING_PROJECTNAME"  --target "$tbb_version_type")
+  echo "SIGNING_PROJECTNAMES=(\"$p1\" \"$p2\" \"$p3\" \"$p4\")" > \
+       "$script_dir/set-config.generated-config"
   for v in tbb_version_type tbb_version tbb_version_build; do
     echo "$v=$(shell-quote "${!v}")" >> "$script_dir/set-config.generated-config"
   done
