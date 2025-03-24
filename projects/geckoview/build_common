@@ -47,3 +47,5 @@ cp -rl oss-licenses-plugin/. $gradle_repo
 export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
 # Create .mozbuild to avoid interactive prompt in configure
 mkdir "$HOME/.mozbuild"
+
+[% INCLUDE 'browser-localization' %]

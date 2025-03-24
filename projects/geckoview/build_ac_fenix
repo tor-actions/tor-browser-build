@@ -1,15 +1,5 @@
 [% IF c('var/has_l10n') -%]
   echo "Injecting the Firefox's localization to GV $(date)"
-  supported_locales="[% tmpl(c('var/locales_mobile').join(' ')).replace('-r', '-').replace('in', 'id').replace('iw', 'he') %]"
-  l10ncentral="$HOME/.mozbuild/l10n-central"
-  mkdir "$l10ncentral"
-  for tarball in $rootdir/[% c('input_files_by_name/firefox-l10n') %]/*; do
-    tar -C "$l10ncentral" -xf "$tarball"
-  done
-
-  # Do not setup our localization files, as we do not provide any frontend
-  # through GeckoView.
-
   # No quotes on purpose, to pass each locale as an additional argument.
   ./mach package-multi-locale --locales en-US $supported_locales
 [% END -%]

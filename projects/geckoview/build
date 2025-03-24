@@ -33,6 +33,7 @@ export MOZ_SOURCE_CHANGESET=[% c("var/git_commit") %]
 
 ac_add_options --enable-update-channel=[% c("var/variant") %]
 MOZCONFIG_EOF
+echo "ac_add_options --with-branding=$branding_dir" >> .mozconfig
 
 echo "Starting ./mach configure $(date)"
 ./mach configure \
