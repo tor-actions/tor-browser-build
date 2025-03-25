@@ -14,7 +14,6 @@ cd tor
 mkdir pluggable_transports && cd pluggable_transports
 
 tar -xkf $rootdir/[% c('input_files_by_name/lyrebird') %]
-tar -xkf $rootdir/[% c('input_files_by_name/snowflake') %]
 [% IF c('input_files_by_name/conjure') -%]
   tar -xkf $rootdir/[% c('input_files_by_name/conjure') %]
 [% END -%]
@@ -36,7 +35,6 @@ cd $distdir
 
   cp -a tor/libTor.so aar/jni/$abi/
   cp -a tor/pluggable_transports/lyrebird aar/jni/$abi/libObfs4proxy.so
-  cp -a tor/pluggable_transports/snowflake-client aar/jni/$abi/libSnowflake.so
   [% IF c('input_files_by_name/conjure') -%]
     cp -a tor/pluggable_transports/conjure-client aar/jni/$abi/libConjure.so
   [% END -%]
