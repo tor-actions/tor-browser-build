@@ -14,6 +14,18 @@ var:
 targets:
   browser-all:
     - browser-src
+  browser-all-desktop:
+    var:
+      browser-src: '[% ! c("var/testbuild") %]'
+      browser_platforms:
+        is_android_release: 0
+        is_desktop_release: 1
+  browser-all-android:
+    var:
+      browser-src: '[% ! c("var/testbuild") %]'
+      browser_platforms:
+        is_android_release: 1
+        is_desktop_release: 0
   browser-single-platform:
     var:
       browser_platforms:

@@ -17,6 +17,12 @@ torbrowser: submodule-update
 torbrowser-release: submodule-update
 	$(rbm) build release --target release --target browser-all --target torbrowser
 
+torbrowser-release-desktop: submodule-update
+	$(rbm) build release --target release --target browser-all-desktop --target torbrowser
+
+torbrowser-release-android: submodule-update
+	$(rbm) build release --target release --target browser-all-android --target torbrowser
+
 torbrowser-release-android-armv7: submodule-update
 	$(rbm) build release --target release --target browser-single-platform --target browser-android-armv7 --target torbrowser
 
@@ -55,6 +61,12 @@ torbrowser-release-src: submodule-update
 
 torbrowser-alpha: submodule-update
 	$(rbm) build release --target alpha --target browser-all --target torbrowser
+
+torbrowser-alpha-desktop: submodule-update
+	$(rbm) build release --target alpha --target browser-all-desktop --target torbrowser
+
+torbrowser-alpha-android: submodule-update
+	$(rbm) build release --target alpha --target browser-all-android --target torbrowser
 
 torbrowser-alpha-android-armv7: submodule-update
 	$(rbm) build release --target alpha --target browser-single-platform --target browser-android-armv7 --target torbrowser
@@ -95,6 +107,12 @@ torbrowser-alpha-src: submodule-update
 torbrowser-nightly: submodule-update
 	$(rbm) build release --target nightly --target browser-all --target torbrowser
 
+torbrowser-nightly-desktop: submodule-update
+	$(rbm) build release --target nightly --target browser-all-desktop --target torbrowser
+
+torbrowser-nightly-android: submodule-update
+	$(rbm) build release --target nightly --target browser-all-android --target torbrowser
+
 torbrowser-nightly-android-armv7: submodule-update
 	$(rbm) build release --target nightly --target browser-single-platform --target browser-android-armv7 --target torbrowser
 
@@ -133,6 +151,12 @@ torbrowser-nightly-src: submodule-update
 
 torbrowser-testbuild: submodule-update
 	$(rbm) build release --target testbuild --target browser-all --target torbrowser
+
+torbrowser-testbuild-desktop: submodule-update
+	$(rbm) build release --target testbuild --target browser-all-desktop --target torbrowser
+
+torbrowser-testbuild-android: submodule-update
+	$(rbm) build release --target testbuild --target browser-all-android --target torbrowser
 
 torbrowser-testbuild-android-armv7: submodule-update
 	$(rbm) build release --target testbuild --target browser-single-platform --target browser-android-armv7 --target torbrowser
