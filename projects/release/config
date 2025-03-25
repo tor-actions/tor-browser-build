@@ -14,7 +14,6 @@ var:
 targets:
   browser-all:
     - browser-src
-    - browser-all-target
   browser-single-platform:
     var:
       browser_platforms:
@@ -79,9 +78,6 @@ targets:
   browser-src-testbuild:
     var:
       browser-src: 1
-  browser-all-target:
-    var:
-      browser-all-target: 1
 
   notarget:
     - torbrowser
