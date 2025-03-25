@@ -34,7 +34,7 @@ cd $distdir
   mkdir -p aar/assets/common
 
   cp -a tor/libTor.so aar/jni/$abi/
-  cp -a tor/pluggable_transports/lyrebird aar/jni/$abi/libObfs4proxy.so
+  cp -a tor/pluggable_transports/lyrebird aar/jni/$abi/libLyrebird.so
   [% IF c('input_files_by_name/conjure') -%]
     cp -a tor/pluggable_transports/conjure-client aar/jni/$abi/libConjure.so
   [% END -%]
