@@ -16,8 +16,6 @@ input_files:
     project: tor
   - name: lyrebird
     project: lyrebird
-  - name: snowflake
-    project: snowflake
   - name: conjure
     project: conjure
     enable: '[% !c("var/android-x86") && !c("var/android-x86_64") %]'
