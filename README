@@ -101,8 +101,14 @@ the subuid(5) and subgid(5) man pages.
 Starting a build
 ----------------
 
-To start a build, run one of the following commands, depending on the
-channel you want to build:
+To start a build, run the following command, to build the default
+channel (which should be `alpha` on the main branch, and `release` on
+the maint-* branches, as defined in var/browser_default_channel):
+
+  $ make torbrowser
+
+If you want to build an other channel, you can also use one of the
+following commands:
 
   $ make torbrowser-release
   $ make torbrowser-alpha
@@ -134,9 +140,9 @@ mar file will be created. If you want to base your testbuild on the latest
 nightly code insted, rename rbm.local.conf.example to rbm.local.conf
 and adapt the torbrowser-testbuild option accordingly.
 
-Similar makefile targets exist for building Base Browser and Privacy Browser
+Similar makefile targets exist for building Base Browser and Mullvad Browser
 instead of Tor Browser. To build Base Browser, replace `torbrowser` by
-`basebrowser` in the target name. For Privacy Browser, use `privacybrowser`.
+`basebrowser` in the target name. For Mullvad Browser, use `mullvadbrowser`.
 
 
 Updating git sources

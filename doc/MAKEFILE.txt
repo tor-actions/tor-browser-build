@@ -1,11 +1,18 @@
 Description of makefile rules
 =============================
 
+torbrowser
+----------
+Build Tor Browser for the default channel, defined in
+var/browser_default_channel, and platforms, defined in
+var/browser_platforms. After the build, this target also generates the
+incrementals.
 
 torbrowser-release
 ------------------
-Build Tor Browser for the release channel, for all supported platforms.
-The resulting build can be found in directory torbrowser/release/$version.
+Build Tor Browser for the release channel, for all supported platforms
+(defined in var/browser_platforms). The resulting build can be found in
+directory torbrowser/release/$version.
 
 torbrowser-release-{linux-x86_64,linux-i686,windows-i686,macos,
                     android-armv7, android-x86,android-x86_64,
@@ -78,7 +85,7 @@ Base Browser.
 mullvadbrowser-*
 ----------------
 The same rules for building Tor Browser also exist for building
-Privacy Browser.
+Mullvad Browser.
 
 fetch
 -----
