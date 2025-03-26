@@ -1,3 +1,15 @@
+Tor Browser 14.0.8 - March 27 2025
+ * Windows
+   * Bug 43553: Backport tor-browser#43504: Implement User Survey UX (Desktop) [tor-browser]
+   * Bug 43592: Backport security fixes from Firefox 128.8.1esr [tor-browser]
+ * Build System
+   * Windows
+     * Bug 41375: Backport Bug 41374+40799: Remove support for migrate_archs and migrate_langs in update_responses + Remove legacy locale iteration in update-responses and dmg2mar [tor-browser-build]
+     * Bug 41383: Add clairehurst to list of accepted firefox/geckoview signers [tor-browser-build]
+     * Bug 41384: OpenSSL hash files have changed format [tor-browser-build]
+     * Bug 41399: Update snowflake to 2.11.0 and lyrebird to 0.6.0 [tor-browser-build]
+     * Bug 41378: Backport Bug 41363: Make separate update_responses commit for each platform [tor-browser-build]
+
 Tor Browser 14.0.7 - March 04 2025
  * All Platforms
    * Updated OpenSSL to 3.0.16
