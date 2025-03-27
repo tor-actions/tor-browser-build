@@ -26,3 +26,5 @@ steps:
       # Remove this once the depdency is updated.
       - filename: conjure-pr-267.patch
         enable: '[% c("var/windows") %]'
+      - name: go-licenses
+        project: go-licenses

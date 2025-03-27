@@ -36,3 +36,5 @@ steps:
           sha256sum: '[% c("var/go_vendor_sha256sum") %]'
         target_replace:
           '^torbrowser-(?!testbuild).*': 'torbrowser-linux-x86_64'
+      - name: go-licenses
+        project: go-licenses

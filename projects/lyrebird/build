@@ -4,6 +4,9 @@
 distdir=/var/tmp/dist/[% project %]
 mkdir -p $distdir
 
+tar -C /var/tmp/dist -xf [% c('input_files_by_name/go-licenses') %]
+export PATH=$PATH:/var/tmp/dist/go-licenses
+
 [% IF c("var/android") -%]
   [% pc(c('var/compiler'), 'var/setup', { compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')) }) %]
   # We need to explicitly set CGO_ENABLED with Go 1.13.x as the Android build
@@ -19,6 +22,8 @@ tar -xf $rootdir/[% c('input_files_by_name/go_vendor') %]
 
 go build -mod=vendor -ldflags '-s[% IF c("var/android") %] -checklinkname=0[% END %]' ./cmd/lyrebird
 cp -a lyrebird[% IF c("var/windows") %].exe[% END %] $distdir
+
+go-licenses save ./cmd/lyrebird --save_path=$distdir/licenses
 
 cd $distdir
 [% c('tar', {
