@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
 git_url: https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/conjure.git
-git_hash: b7d485734c3ab09ef3da818abb4b39ec27ef3a73
+git_hash: 505cb48152e89e12a608ec6a0101af8a2d266fb1
 container:
   use_container: 1
 
@@ -19,6 +19,10 @@ steps:
         pkg_type: go_vendor
         project: conjure
         norec:
-          sha256sum: 2b403d6edf075777003bf2194a43fb178a28a4eaa7d23ec8f104563d9bbd7e53
+          sha256sum: 8f33624ebabec17e09d9aeae8eb0bfc08b78b6089986f3fe9b7fde03a692a22b
         target_replace:
           '^torbrowser-(?!testbuild).*': 'torbrowser-linux-x86_64'
+      # https://github.com/refraction-networking/conjure/pull/267
+      # Remove this once the depdency is updated.
+      - filename: conjure-pr-267.patch
+        enable: '[% c("var/windows") %]'

@@ -1,0 +1,79 @@
+From e5968e71e3ce40e24a5108d2dea7a9bc1d050559 Mon Sep 17 00:00:00 2001
+From: Rod Hynes <rod-hynes@users.noreply.github.com>
+Date: Mon, 29 Jan 2024 13:34:44 -0500
+Subject: [PATCH] Fix Windows build
+
+---
+ pkg/transports/connecting/dtls/nat.go                |  5 ++---
+ pkg/transports/connecting/dtls/setsockopt_other.go   | 12 ++++++++++++
+ pkg/transports/connecting/dtls/setsockopt_windows.go | 12 ++++++++++++
+ 3 files changed, 26 insertions(+), 3 deletions(-)
+ create mode 100644 pkg/transports/connecting/dtls/setsockopt_other.go
+ create mode 100644 pkg/transports/connecting/dtls/setsockopt_windows.go
+
+diff --git a/pkg/transports/connecting/dtls/nat.go b/pkg/transports/connecting/dtls/nat.go
+index 8860316b..ab3716b9 100644
+--- a/pkg/transports/connecting/dtls/nat.go
++++ b/pkg/transports/connecting/dtls/nat.go
+@@ -5,7 +5,6 @@ import (
+ 	"fmt"
+ 	"net"
+ 	"os"
+-	"syscall"
+ 	"time"
+ 
+ 	"github.com/pion/stun"
+@@ -58,7 +57,7 @@ func openUDPLimitTTL(ctx context.Context, laddr, addr string, dialer dialFunc) e
+ 	defer fd.Close()
+ 
+ 	// Set the TTL
+-	err = syscall.SetsockoptInt(int(fd.Fd()), syscall.IPPROTO_IP, syscall.IP_TTL, ttl)
++	err = setSocketTTL(fd, ttl)
+ 	if err != nil {
+ 		return err
+ 	}
+@@ -70,7 +69,7 @@ func openUDPLimitTTL(ctx context.Context, laddr, addr string, dialer dialFunc) e
+ 	}
+ 
+ 	// reset TTL
+-	err = syscall.SetsockoptInt(int(fd.Fd()), syscall.IPPROTO_IP, syscall.IP_TTL, defaultTTL)
++	err = setSocketTTL(fd, defaultTTL)
+ 	if err != nil {
+ 		return err
+ 	}
+diff --git a/pkg/transports/connecting/dtls/setsockopt_other.go b/pkg/transports/connecting/dtls/setsockopt_other.go
+new file mode 100644
+index 00000000..eeba1ed6
+--- /dev/null
++++ b/pkg/transports/connecting/dtls/setsockopt_other.go
+@@ -0,0 +1,12 @@
++//go:build !windows
++
++package dtls
++
++import (
++	"os"
++	"syscall"
++)
++
++func setSocketTTL(f *os.File, ttl int) error {
++	return syscall.SetsockoptInt(int(f.Fd()), syscall.IPPROTO_IP, syscall.IP_TTL, ttl)
++}
+diff --git a/pkg/transports/connecting/dtls/setsockopt_windows.go b/pkg/transports/connecting/dtls/setsockopt_windows.go
+new file mode 100644
+index 00000000..6ab835ea
+--- /dev/null
++++ b/pkg/transports/connecting/dtls/setsockopt_windows.go
+@@ -0,0 +1,12 @@
++//go:build windows
++
++package dtls
++
++import (
++	"os"
++	"syscall"
++)
++
++func setSocketTTL(f *os.File, ttl int) error {
++	return syscall.SetsockoptInt(syscall.Handle(f.Fd()), syscall.IPPROTO_IP, syscall.IP_TTL, ttl)
++}
