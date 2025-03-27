@@ -463,6 +463,7 @@ sub write_downloads_json {
         version => "$version",
         tag => "$tag",
         downloads => get_version_downloads($config, $version),
+        comment => 'This file is deprecated and should not be used. Please use the files download-$platform.json instead.',
     };
     write_htdocs($channel, '.', 'downloads.json',
         JSON->new->utf8->canonical->pretty->encode($data));
