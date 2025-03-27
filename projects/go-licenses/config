@@ -1,0 +1,27 @@
+# vim: filetype=yaml sw=2
+# The last stable release is not compatible with our go version, therefore use
+# the last available pre-release.
+version: 2.0.0-alpha.1
+git_url: https://github.com/google/go-licenses.git
+git_hash: d01822334fba5896920a060f762ea7ecdbd086e8
+
+container:
+  use_container: 1
+
+steps:
+  build:
+    filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
+    input_files:
+      - project: container-image
+      - name: go
+        project: go
+      - name: '[% c("var/compiler") %]'
+        project: '[% c("var/compiler") %]'
+        enable: '[% c("var/android") %]'
+      - name: go_vendor
+        pkg_type: go_vendor
+        project: go-licenses
+        norec:
+          sha256sum: b3799f5445ce9f1d48893227287846c689ab67bbdc76b607d5d228739b5c19a2
+        target_replace:
+          '^torbrowser-(?!testbuild).*': 'torbrowser-linux-x86_64'

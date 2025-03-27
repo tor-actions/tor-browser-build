@@ -656,6 +656,8 @@ go_vendor-conjure: submodule-update
 go_vendor-lyrebird: submodule-update
 	$(rbm) build lyrebird --step go_vendor --target alpha --target torbrowser-linux-x86_64
 
+go_vendor-go-licenses: submodule-update
+	$(rbm) build go-licenses --step go_vendor --target alpha --target torbrowser-linux-x86_64
 
 #############
 # rcodesign #
