@@ -20,6 +20,9 @@ input_files:
     name: cmake
   - project: llvm-project
     name: llvm-project
+  - project: wasi-sysroot
+    name: wasi-compiler-rt
+    pkg_type: build_compiler_rt
   # Wrapper from github.com/mstorsjo/llvm-mingw@b34e1cd82b9eff3dcedfac152f25e0ccb6da33aa.
   # This is the last commit at which windres-wrapper.c was modified.
   # Mozilla uses 9f8e5cebd6dbbb7546e8917e6c59284699a48d26 (see

@@ -7,6 +7,7 @@ mkdir -p "$distdir"
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/cmake') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/ninja') %]
 tar -C $distdir -xf [% c('input_files_by_name/clang') %]
+tar -C $distdir -xf $rootdir/[% c('input_files_by_name/wasi-compiler-rt') %]
 tar -C $distdir -xf [% c('input_files_by_name/cctools') %]
 tar -C $builddir -xf [% c('input_files_by_name/llvm-project') %]
 

@@ -1,0 +1,21 @@
+#!/bin/bash
+[% c("var/set_default_env") -%]
+distdir=/var/tmp/dist/[% project %]
+mkdir -p /var/tmp/dist
+
+tar -C /var/tmp/dist -xf [% c('input_files_by_name/clang') %]
+tar -C /var/tmp/dist -xf [% c('input_files_by_name/wasi-compiler-rt') %]
+
+[% IF c("var/android") -%]
+  tar -C /var/tmp/dist -xf [% c('input_files_by_name/llvm-runtimes') %]
+  cp -r /var/tmp/dist/llvm-runtimes/* /var/tmp/dist/clang
+[% END -%]
+
+mkdir $distdir
+mv /var/tmp/dist/clang/* $distdir/
+
+cd /var/tmp/dist
+[% c('tar', {
+    tar_src => [ project ],
+    tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
+  }) %]

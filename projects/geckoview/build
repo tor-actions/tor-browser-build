@@ -5,21 +5,12 @@ tar -C /var/tmp/dist -xf [% c('input_files_by_name/rust') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/cbindgen') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/nasm') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/clang') %]
-export LLVM_CONFIG="/var/tmp/dist/clang/bin/llvm-config"
-tar -C /var/tmp/dist -xf [% c('input_files_by_name/llvm-runtimes') %]
-cp -r /var/tmp/dist/llvm-runtimes/* /var/tmp/dist/clang/
-export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/nasm/bin:/var/tmp/dist/clang/bin:$PATH"
+export LLVM_CONFIG="/var/tmp/dist/clang-linux/bin/llvm-config"
+export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/nasm/bin:/var/tmp/dist/clang-linux/bin:$PATH"
 
 [% IF c("var/rlbox") -%]
   tar -C /var/tmp/dist -xf [% c('input_files_by_name/wasi-sysroot') %]
-  # XXX: We need the libclang_rt.builtins-wasm32.a in our clang lib directory.
-  # Copy it over.
-  # https://searchfox.org/mozilla-central/source/build/build-clang/build-clang.py#890,
-  # include it directly in our clang
-  rtdir="/var/tmp/dist/clang/lib/clang/[% pc('llvm-project', 'var/llvm_major') %]/lib/wasi"
-  mkdir -p "$rtdir"
-  cp /var/tmp/dist/wasi-sysroot/lib/clang/*/lib/wasi/libclang_rt.builtins-wasm32.a "$rtdir/"
-  export WASI_SYSROOT=/var/tmp/dist/wasi-sysroot/share/wasi-sysroot
+  export WASI_SYSROOT=/var/tmp/dist/wasi-sysroot/
 [% END -%]
 
 cd /var/tmp/build/[% project %]-[% c("version") %]

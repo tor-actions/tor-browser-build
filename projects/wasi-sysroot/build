@@ -1,85 +1,17 @@
 #!/bin/bash
-[% c("var/set_default_env") -%]
-distdir=/var/tmp/dist/[% project %]
-builddir=/var/tmp/build/[% project %]-[% c("abbrev") %]
-mkdir -p $distdir
-tar -C /var/tmp/dist -xf [% c('input_files_by_name/cmake') %]
-tar -C /var/tmp/dist -xf [% c('input_files_by_name/ninja') %]
-export PATH="/var/tmp/dist/ninja:/var/tmp/dist/cmake/bin:$PATH"
+[% INCLUDE 'build_common' %]
 
-[% IF c("var/linux") -%]
-  [% pc(c('var/compiler'), 'var/setup', { compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')) }) %]
-  [% pc('python', 'var/setup', { python_tarfile => c('input_files_by_name/python') }) %]
-[% END -%]
+# We already packed compiler-rt alongside clang.
+# Just let the build system know it's there.
+touch build/compiler-rt.BUILT
 
-mkdir -p /var/tmp/build
-tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
-
-cd /var/tmp/build
-tar -xf $rootdir/[% project %]-[% c('version') %].tar.[% c('compress_tar') %]
-cd $builddir
-
-pushd src
-rmdir config llvm-project wasi-libc
-tar -xf $rootdir/[% c('input_files_by_name/wasi-config') %]
-mv wasi-config-* config
-tar -xf $rootdir/[% c('input_files_by_name/clang-source') %]
-mv clang-source llvm-project
-export LLVM_HOME=$(pwd)/llvm-project
-tar -xf $rootdir/[% c('input_files_by_name/wasi-libc') %]
-mv wasi-libc-* wasi-libc
-popd
-
-# What follows has been copied from Firefox's
-# taskcluster/scripts/misc/build-sysroot-wasi.sh and adapted to
-# tor-browser-build.
-
-patch -p1 < $rootdir/wasi-sdk.patch
-
-mkdir -p build/install/wasi
-# The wasi-sdk build system wants to build clang itself. We trick it into
-# thinking it did, and put our own clang where it would have built its own.
-tar -C build -xf $rootdir/[% c('input_files_by_name/clang') %]
-mv build/clang build/llvm
-touch build/llvm.BUILT
-
-# The wasi-sdk build system wants a clang and an ar binary in
-# build/install/$PREFIX/bin
-ln -s $(pwd)/build/llvm/bin build/install/wasi/bin
-ln -s llvm-ar build/install/wasi/bin/ar
-
-# tor-browser-build: we have no .git in our tarball but the script version.sh
-# used by the Makefile depends on that. We replace the script.
-cat > 'version.sh' << EOF
-#!/bin/sh
-echo '[% c("abbrev") %]'
-EOF
-
-# Build wasi-libc, and re-pack it, to make sure we get a deterministic output.
-make PREFIX=/wasi build/wasi-libc.BUILT
-
-# We need to compile compiler-rt before building libc++ and libc++abi, because
-# we need to inject it to Clang.
-make \
-  LLVM_PROJ_DIR=$LLVM_HOME \
-  PREFIX=/wasi \
-  build/compiler-rt.BUILT \
-  NINJA_FLAGS='-j[% c("num_procs") %]'
-
-# Does Mozilla maybe do this when compiling Clang?
-rtdir="build/llvm/lib/clang/$(ls build/llvm/lib/clang)/lib/wasi"
-mkdir -p "$rtdir"
-cp build/compiler-rt/lib/wasi/libclang_rt.builtins-wasm32.a "$rtdir/"
-
-# Now we can finally build libc++ and libc++abi.
 make \
   LLVM_PROJ_DIR=$LLVM_HOME \
   PREFIX=/wasi \
   build/libcxx.BUILT \
   NINJA_FLAGS='-j[% c("num_procs") %]'
 
-mv build/install/wasi/share $distdir/
-mv build/install/wasi/lib $distdir/
+mv build/install/wasi/share/wasi-sysroot/* $distdir/
 
 cd /var/tmp/dist
 [% c('tar', {

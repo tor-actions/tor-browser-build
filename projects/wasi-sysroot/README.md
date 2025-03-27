@@ -30,13 +30,14 @@ We stick to the same version used by Firefox, that can be found in the usual
 
 # Mozilla's build script
 
-Our build script is an adaptation of Firefox's
-`taskcluster/scripts/misc/build-sysroot-wasi.sh`.
-After ESR updates, we should check if that script was updated.
+Similar to Firefox's build system, this project has two different build targets.
+The default `build` target builds the wasi-sysroot, while the `build_compiler_rt`
+target builds the wasm32 compiler-rt which gets injected into clang by the `clang-linux`,
+`mingw-w64-clang` and `macosx-toolchain` projects.
 
-The main difference is that Mozilla builds `libclang_rt.builtins-wasm32.a` with
-Clang, whereas we build it here and inject it only in the `firefox`/`geckoview`
-projects.
+These build scripts are adaptations of Firefox's `taskcluster/scripts/misc/build-sysroot-wasi.sh`
+and `taskcluster/scripts/misc/build-compiler-rt-wasi.sh`. **After ESR updates, we should
+check if that script was updated.**
 
 # Different build ids, same outputs
 

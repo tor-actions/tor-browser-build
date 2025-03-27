@@ -142,10 +142,8 @@ input_files:
     name: node
   - project: nasm
     name: nasm
-  - project: clang
+  - project: clang-linux
     name: clang
-  - project: llvm-runtimes
-    name: llvm-runtimes
   - project: wasi-sysroot
     name: wasi-sysroot
     enable: '[% c("var/rlbox") %]'

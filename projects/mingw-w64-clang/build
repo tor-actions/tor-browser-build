@@ -6,6 +6,7 @@ mkdir -p $distdir $builddir
 
 cd /var/tmp/dist
 tar -xf $rootdir/[% c('input_files_by_name/clang') %]
+tar -xf $rootdir/[% c('input_files_by_name/wasi-compiler-rt') %]
 mv clang/* mingw-w64-clang/
 tar -xf $rootdir/[% c('input_files_by_name/cmake') %]
 

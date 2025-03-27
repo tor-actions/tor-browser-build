@@ -1,7 +1,9 @@
 This is the Clang compiler.
 
-For Linux and Android, we use it only to build Firefox and GeckoView.
-For Windows and macOS, we use it to build everything, but we do not use this
+For Linux and Android, we use it only to build Firefox and GeckoView, but we do
+not use this project directly. Instead, we use `clang-linux`,
+that adds platform-specific libraries and tools.
+For Windows and macOS, we use it to build everything, but we also do not use this
 project directly. Instead, we use `mingw-w64-clang` and `macosx_toolchain`, that
 also add platform-specific libraries and tools.
 

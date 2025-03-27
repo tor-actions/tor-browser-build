@@ -15,27 +15,67 @@ container:
 var:
   no_crosscompile: 1
 
+targets:
+  linux:
+    var:
+      clang-project: clang-linux
+  android:
+    var:
+      clang-project: clang-linux
+  macos:
+    var:
+      clang-project: macosx-toolchain
+  windows:
+    var:
+      clang-project: mingw-w64-clang
+
+steps:
+  build_compiler_rt:
+    filename: 'wasi-compiler-rt-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
+    build_compiler_rt: '[% INCLUDE build_compiler_rt %]'
+    var:
+      is_compiler_rt: 1
+
 input_files:
   - project: container-image
+    pkg_type: build
   # We do not use GCC, but we need its libsdc++ to run Clang
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
     enable: '[% c("var/linux") %]'
+    pkg_type: build
   - name: clang
     project: clang
+    enable: '[% c("var/is_compiler_rt") %]'
+    pkg_type: build
+  - name: clang
+    project: clang-linux
+    enable: '[% !c("var/is_compiler_rt") && (c("var/linux") || c("var/android")) %]'
+  - name: clang
+    project: macosx-toolchain
+    enable: '[% !c("var/is_compiler_rt") && c("var/macos") %]'
+  - name: clang
+    project: mingw-w64-clang
+    enable: '[% !c("var/is_compiler_rt") && c("var/windows") %]'
   - project: llvm-project
     name: clang-source
+    pkg_type: build
   - name: cmake
     project: cmake
+    pkg_type: build
   - name: ninja
     project: ninja
+    pkg_type: build
   - name: python
     project: python
     enable: '[% c("var/linux") %]'
+    pkg_type: build
   - name: wasi-config
     project: wasi-config
+    pkg_type: build
   - name: wasi-libc
     project: wasi-libc
+    pkg_type: build
   # taskcluster/scripts/misc/wasi-sdk.patch from Firefox's source code.
   # Taken from gecko-dev@823106ac4295f822717f5a953047dc89074d632b
   - filename: wasi-sdk.patch

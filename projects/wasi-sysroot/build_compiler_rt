@@ -1,0 +1,20 @@
+#!/bin/bash
+[% INCLUDE 'build_common' %]
+
+make \
+  LLVM_PROJ_DIR=$LLVM_HOME \
+  PREFIX=/wasi \
+  build/compiler-rt.BUILT \
+  NINJA_FLAGS='-j[% c("num_procs") %]'
+
+# We are putting this file already in the folder it should be when moved into clang.
+# This way, consumers can just untar this project into a clang folder and be done.
+rtdir=/var/tmp/dist/clang/lib/clang/[% pc("llvm-project", "var/llvm_major") %]/lib/wasi
+mkdir -p $rtdir
+mv build/compiler-rt/lib/wasi/* $rtdir/
+
+cd /var/tmp/dist
+[% c('tar', {
+        tar_src => [ 'clang' ],
+        tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
+    }) %]

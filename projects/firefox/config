@@ -206,7 +206,7 @@ input_files:
   - project: python
     name: python
     enable: '[% c("var/linux") %]'
-  - project: clang
+  - project: clang-linux
     name: clang
     enable: '[% c("var/linux") %]'
   - project: fxc2
