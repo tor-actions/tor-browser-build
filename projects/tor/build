@@ -5,18 +5,11 @@ distdir=/var/tmp/dist/[% project %]
 mkdir -p $distdir
 mkdir -p /var/tmp/build
 
-[% IF c("var/android") %]
-  # We need to make sure our ZSTD dependencey is properly picked up.
-  # --enable-zstd is not enough.
-  export ZSTD_CFLAGS=-I/var/tmp/dist/zstd/include
-  export ZSTD_LIBS=/var/tmp/dist/zstd/lib/libzstd.a
-[% END %]
-
 TORDATADIR="$distdir/data"
 TORBINDIR="$distdir/tor"
+TORDOCSDIR="$distdir/docs"
 
-mkdir $TORDATADIR
-mkdir $TORBINDIR
+mkdir $TORDATADIR $TORBINDIR $TORDOCSDIR
 
 [% IF c("var/windows") || c("var/android") %]
   tar -C /var/tmp/dist -xf [% c('input_files_by_name/zlib') %]
@@ -38,6 +31,11 @@ mkdir $TORBINDIR
 [% END %]
 [% IF c("var/android") %]
   tar -C /var/tmp/dist -xf [% c('input_files_by_name/zstd') %]
+  zstddir=/var/tmp/dist/zstd
+  # We need to make sure our ZSTD dependencey is properly picked up.
+  # --enable-zstd is not enough.
+  export ZSTD_CFLAGS=-I$zstddir/include
+  export ZSTD_LIBS=$zstddir/lib/libzstd.a
 [% END %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/openssl') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/libevent') %]
@@ -90,6 +88,8 @@ make install
 cp $distdir/share/tor/geoip "$TORDATADIR"
 cp $distdir/share/tor/geoip6 "$TORDATADIR"
 
+cp LICENSE "$TORDOCSDIR/tor.txt"
+
 [% IF c("var/macos") %]
   LIBEVENT_FILE=`basename $libeventdir/lib/libevent-*.dylib`
   cd $distdir
@@ -131,8 +131,20 @@ cd $distdir
   install -s --strip-program=llvm-strip "$distdir/bin/tor" "$TORBINDIR/libTor.so"
 [% END %]
 
+pushd $TORDOCSDIR
+cp $libeventdir/LICENSE libevent.txt
+cp $openssldir/LICENSE.txt openssl.txt
+[% IF c("var/windows") || c("var/android") -%]
+  cp $zlibdir/LICENSE zlib.txt
+[% END -%]
+[% IF c("var/android") -%]
+  cp $zstddir/LICENSE zstd-bsd.txt
+  cp $zstddir/COPYING zstd-gpl2.txt
+[% END -%]
+popd
+
 [%
-  SET tar_src = [ "tor", "data" ];
+  SET tar_src = [ "tor", "data", "docs" ];
   IF c("var/linux");
    tar_src.push("debug");
   END;

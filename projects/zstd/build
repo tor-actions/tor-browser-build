@@ -11,6 +11,7 @@ export CC=[% c("var/CC") %]
 make -C lib -j[% c("num_procs") %] PREFIX=$distdir install
 # Only need static libraries
 rm $distdir/lib/libzstd.so*
+cp COPYING LICENSE $distdir/
 cd /var/tmp/dist
 [% c('tar', {
         tar_src => [ project ],

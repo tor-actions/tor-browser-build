@@ -13,9 +13,25 @@ tar -xkf $rootdir/[% c('input_files_by_name/tor') %]
 cd tor
 mkdir pluggable_transports && cd pluggable_transports
 
+function pt_licenses {
+  dest=$1
+  pushd licenses
+  find -type f -printf '%P\n' | sort | while read filename; do
+    echo $filename >> $dest
+    # https://stackoverflow.com/a/5349796
+    printf "%${#filename}s\n" |tr " " "=" >> $dest
+    cat $filename >> $dest
+    printf "\n\n" >> $dest
+  done
+  popd
+  rm -rf licenses
+}
+
 tar -xkf $rootdir/[% c('input_files_by_name/lyrebird') %]
+pt_licenses $distdir/docs/lyrebird.txt
 [% IF c('input_files_by_name/conjure') -%]
   tar -xkf $rootdir/[% c('input_files_by_name/conjure') %]
+  pt_licenses $distdir/docs/conjure.txt
 [% END -%]
 
 # add per-platform pt extension
@@ -53,7 +69,7 @@ cd $distdir
 [% END %]
 
 [%
-  SET tar_src = [ "tor", "data" ];
+  SET tar_src = [ "tor", "data", "docs" ];
   IF c("var/linux");
    tar_src.push("debug");
   END;

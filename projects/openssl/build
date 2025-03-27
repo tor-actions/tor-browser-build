@@ -3,8 +3,10 @@
 [% pc(c('var/compiler'), 'var/setup', { compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')) }) %]
 distdir=/var/tmp/dist/[% project %]
 mkdir -p /var/tmp/build
+
 tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
 cd /var/tmp/build/[% project %]-[% c('version') %]
+
 [% IF c("var/osname") == "linux-i686" -%]
 export CC='gcc -m32'
 [% END %]
@@ -19,13 +21,15 @@ export CC='gcc -m32'
   # from GCC to Clang and vice versa.
   export CC=cc
 [% END -%]
+
 # OpenSSL 3 uses lib64 on 64-bit systems, but tor looks for lib
 ./Configure --prefix="$distdir" --libdir=lib [% c('var/configure_opts') %]
 make -j[% c("num_procs") %]
 # https://github.com/openssl/openssl/issues/8170
 make -j[% c("num_procs") %] install
-cd /var/tmp/dist
+cp LICENSE.txt $distdir/
 
+cd /var/tmp/dist
 [% c('tar', {
         tar_src => [ project ],
         tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),

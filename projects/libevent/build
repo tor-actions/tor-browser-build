@@ -15,6 +15,7 @@ cd /var/tmp/build/[% project %]-[% c('version') %]
 [% END -%]
 make -j[% c("num_procs") %]
 make install
+cp LICENSE $distdir/
 cd /var/tmp/dist
 [% c('tar', {
         tar_src => [ project ],
