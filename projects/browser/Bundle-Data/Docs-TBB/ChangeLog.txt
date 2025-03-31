@@ -1,3 +1,15 @@
+Tor Browser 13.5.15 - April 01 2025
+ * All Platforms
+   * Updated Firefox to 115.22.0esr
+   * Updated Tor to 0.4.8.16
+   * Bug 43578: Backport tor-browser#43556 Add the "Dismiss" translations in the survey banner [tor-browser]
+   * Bug 43580: Backport tor-browser#43443: Drop effective top level domain for `au.securedrop.tor.onion` [tor-browser]
+   * Bug 43587: Rebase Tor Browser legacy onto 115.22.0esr [tor-browser]
+   * Bug 43601: Backport security fixes from Firefox 137 [tor-browser]
+ * Build System
+   * macOS
+     * Bug 41383: Add clairehurst to list of accepted firefox/geckoview signers [tor-browser-build]
+
 Tor Browser 13.5.14 - March 27 2025
  * Windows
    * Bug 43592: Backport security fixes from Firefox 128.8.1esr [tor-browser]
