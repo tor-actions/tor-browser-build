@@ -1,3 +1,35 @@
+Tor Browser 14.0.9 - April 01 2025
+ * All Platforms
+   * Updated Tor to 0.4.8.16
+   * Bug 43580: Backport tor-browser#43443: Drop effective top level domain for `au.securedrop.tor.onion` [tor-browser]
+   * Bug 43584: Rebase Tor Browser stable onto 128.9.0esr [tor-browser]
+   * Bug 43601: Backport security fixes from Firefox 137 [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 128.9.0esr
+ * macOS + Linux + Android
+   * Bug 43553: Backport tor-browser#43504: Implement User Survey UX (Desktop) [tor-browser]
+ * Android
+   * Updated GeckoView to 128.9.0esr
+   * Bug 43552: Backport tor-browser#43505: Impement User Survey UX (Android) [tor-browser]
+   * Bug 43578: Backport tor-browser#43556: Add the "Dismiss" translations in the survey banner [tor-browser]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.22.12
+     * Bug 41407: Use Lyrebird also for the Snowflake PT [tor-browser-build]
+     * Bug 41420: Update the changelog script for label updates [tor-browser-build]
+   * Windows + macOS + Linux
+     * Bug 41378: Backport Bug 41363: Make separate update_responses commit for each platform [tor-browser-build]
+   * macOS + Linux + Android
+     * Bug 41375: Backport Bug 41374+40799: Remove support for migrate_archs and migrate_langs in update_responses + Remove legacy locale iteration in update-responses and dmg2mar [tor-browser-build]
+     * Bug 41383: Add clairehurst to list of accepted firefox/geckoview signers [tor-browser-build]
+     * Bug 41384: OpenSSL hash files have changed format [tor-browser-build]
+     * Bug 41399: Update snowflake to 2.11.0 and lyrebird to 0.6.0 [tor-browser-build]
+     * Bug 41378: Backport Bug 41363: Make separate update_responses commit for each platform [tor-browser-build]
+   * Linux
+     * Bug 41337: Remove libstdc++ from Linux tor-expert-bundle [tor-browser-build]
+   * Android
+     * Bug 41410: Use the Lyrebird name on Android [tor-browser-build]
+
 Tor Browser 14.0.8 - March 27 2025
  * Windows
    * Bug 43553: Backport tor-browser#43504: Implement User Survey UX (Desktop) [tor-browser]
