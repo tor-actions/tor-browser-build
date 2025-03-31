@@ -13,6 +13,7 @@ GITLAB = "https://gitlab.torproject.org"
 API_URL = f"{GITLAB}/api/v4"
 PROJECT_ID = 473
 AUTH_HEADER = "PRIVATE-TOKEN"
+MB_LABEL = "Project 131"
 
 
 class EntryType(enum.IntFlag):
@@ -153,9 +154,9 @@ class ChangelogBuilder:
             return
         labels = "Apps::Type::ReleasePreparation"
         if is_mullvad:
-            labels += ",Sponsor 131"
+            labels += f",{MB_LABEL}"
         elif not is_mullvad and is_mullvad is not None:
-            labels += "&not[labels]=Sponsor 131"
+            labels += f"&not[labels]={MB_LABEL}"
         r = requests.get(
             f"{API_URL}/projects/{PROJECT_ID}/issues?labels={labels}&search={issue_or_version}&in=title&state=opened",
             headers=self.headers,
@@ -192,13 +193,13 @@ class ChangelogBuilder:
         self._set_issue(issues[0], is_mullvad)
 
     def _set_issue(self, issue, is_mullvad):
-        has_s131 = "Sponsor 131" in issue["labels"]
-        if is_mullvad is not None and is_mullvad != has_s131:
+        has_mb = MB_LABEL in issue["labels"]
+        if is_mullvad is not None and is_mullvad != has_mb:
             raise ValueError(
                 "Inconsistency detected: a browser was explicitly specified, but the issue does not have the correct labels."
             )
         self.relprep_issue = issue["iid"]
-        self.is_mullvad = has_s131
+        self.is_mullvad = has_mb
 
         if self.version is None:
             version_match = re.search(r"\b[0-9]+\.[.0-9a]+\b", issue["title"])
