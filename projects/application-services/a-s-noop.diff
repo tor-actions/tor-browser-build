@@ -1,5 +1,5 @@
 diff --git a/components/fxa-client/android/src/main/java/mozilla/appservices/fxaclient/Config.kt b/components/fxa-client/android/src/main/java/mozilla/appservices/fxaclient/Config.kt
-index 78c16dd0..d2615fa7 100644
+index 78c16dd0a..d2615fa74 100644
 --- a/components/fxa-client/android/src/main/java/mozilla/appservices/fxaclient/Config.kt
 +++ b/components/fxa-client/android/src/main/java/mozilla/appservices/fxaclient/Config.kt
 @@ -13,4 +13,5 @@ fun FxaServer.contentUrl() = when (this) {
@@ -9,7 +9,7 @@ index 78c16dd0..d2615fa7 100644
 +    is FxaServer.__NOOP -> ""
  }
 diff --git a/components/nimbus/android/src/main/java/org/mozilla/experiments/nimbus/Nimbus.kt b/components/nimbus/android/src/main/java/org/mozilla/experiments/nimbus/Nimbus.kt
-index 8c05be9c..6bf2ec15 100644
+index 8c05be9cf..6bf2ec15d 100644
 --- a/components/nimbus/android/src/main/java/org/mozilla/experiments/nimbus/Nimbus.kt
 +++ b/components/nimbus/android/src/main/java/org/mozilla/experiments/nimbus/Nimbus.kt
 @@ -532,6 +532,8 @@ open class Nimbus(
@@ -21,41 +21,97 @@ index 8c05be9c..6bf2ec15 100644
              }
          }
      }
-diff --git a/components/places/android/src/main/java/mozilla/appservices/places/PlacesConnection.kt b/components/places/android/src/main/java/mozilla/appservices/places/PlacesConnection.kt
-index 282f4e90..db8b00a3 100644
---- a/components/places/android/src/main/java/mozilla/appservices/places/PlacesConnection.kt
-+++ b/components/places/android/src/main/java/mozilla/appservices/places/PlacesConnection.kt
-@@ -289,6 +289,7 @@ internal fun VisitType.toInt(): Int {
-         VisitType.FRAMED_LINK -> 8
-         VisitType.RELOAD -> 9
-         VisitType.UPDATE_PLACE -> 10
-+        VisitType.__NOOP -> -1
-     }
- }
+diff --git a/megazords/full/Cargo.toml b/megazords/full/Cargo.toml
+index 75f44a812..a51c0643b 100644
+--- a/megazords/full/Cargo.toml
++++ b/megazords/full/Cargo.toml
+@@ -9,21 +9,21 @@ license = "MPL-2.0"9345a6ea
+ crate-type = ["cdylib"]
 
-diff --git a/megazords/full/android/build.gradle b/megazords/full/android/build.gradle
-index 822ce180..ccdc6c8a 100644
---- a/megazords/full/android/build.gradle
-+++ b/megazords/full/android/build.gradle
-@@ -54,6 +54,8 @@ configurations {
- }
+ [dependencies]
+-fxa-client = { path = "../../components/fxa-client" }
+-logins = { path = "../../components/logins" }
+-tabs = { path = "../../components/tabs/" }
+-sync_manager = { path = "../../components/sync_manager/" }
++# fxa-client = { path = "../../components/fxa-client" }
++# logins = { path = "../../components/logins" }
++# tabs = { path = "../../components/tabs/" }
++# sync_manager = { path = "../../components/sync_manager/" }
+ # TODO: Uncomment this code when webext-storage component is integrated in android
+ # webext-storage = { path = "../../components/webext-storage/" }
+ places = { path = "../../components/places" }
+-push = { path = "../../components/push" }
+-remote_settings = { path = "../../components/remote_settings" }
+-rust-log-forwarder = { path = "../../components/support/rust-log-forwarder" }
+-viaduct = { path = "../../components/viaduct" }
+-nimbus-sdk = { path = "../../components/nimbus" }
+-autofill = { path = "../../components/autofill" }
+-crashtest = { path = "../../components/crashtest" }
+-error-support = { path = "../../components/support/error" }
+-suggest = { path = "../../components/suggest" }
++# push = { path = "../../components/push" }
++# remote_settings = { path = "../../components/remote_settings" }
++# rust-log-forwarder = { path = "../../components/support/rust-log-forwarder" }
++# viaduct = { path = "../../components/viaduct" }
++# nimbus-sdk = { path = "../../components/nimbus" }
++# autofill = { path = "../../components/autofill" }
++# crashtest = { path = "../../components/crashtest" }
++# error-support = { path = "../../components/support/error" }
++# suggest = { path = "../../components/suggest" }
 
- cargo {
-+    cargoCommand = "${rootDir}/megazords/full/android/cargo-no-build.sh"
-+
-     // The directory of the Cargo.toml to build.
-     module = '..'
+ lazy_static = "1.4"
+diff --git a/megazords/full/src/lib.rs b/megazords/full/src/lib.rs
+index 01d1be98b..a68eb647f 100644
+--- a/megazords/full/src/lib.rs
++++ b/megazords/full/src/lib.rs
+@@ -8,20 +8,20 @@
+ use std::ffi::CString;
+ use std::os::raw::c_char;
+
+-pub use autofill;
+-pub use crashtest;
+-pub use error_support;
+-pub use fxa_client;
+-pub use logins;
+-pub use nimbus;
++// pub use autofill;
++// pub use crashtest;
++// pub use error_support;
++// pub use fxa_client;
++// pub use logins;
++// pub use nimbus;
+ pub use places;
+-pub use push;
+-pub use remote_settings;
+-pub use rust_log_forwarder;
+-pub use suggest;
+-pub use sync_manager;
+-pub use tabs;
+-pub use viaduct;
++// pub use push;
++// pub use remote_settings;
++// pub use rust_log_forwarder;
++// pub use suggest;
++// pub use sync_manager;
++// pub use tabs;
++// pub use viaduct;
+ // TODO: Uncomment this code when webext-storage component is integrated in android
+ // pub use webext_storage;
 
 diff --git a/publish.gradle b/publish.gradle
-index 71f5d55b..027665ff 100644
+index 71f5d55b9..659e26489 100644
 --- a/publish.gradle
 +++ b/publish.gradle
-@@ -194,7 +194,7 @@ ext.configureUniFFIBindgen = { udlFilePath ->
+@@ -194,7 +194,11 @@ ext.configureUniFFIBindgen = { udlFilePath ->
          def uniffiGeneratedPath = "generated/source/uniffi/${variant.name}/java"
          def t = tasks.register("generate${variant.name.capitalize()}UniFFIBindings", Exec) {
              workingDir project.rootDir
 -            commandLine '/usr/bin/env', 'cargo', 'uniffi-bindgen', 'generate', "${project.projectDir}/${udlFilePath}", '--language', 'kotlin', '--out-dir', "${buildDir}/${uniffiGeneratedPath}"
-+            commandLine '/usr/bin/env', "${rootProject.projectDir}/uniffi-rs/uniffi-bindgen", 'generate', "${project.projectDir}/${udlFilePath}", '--language', 'kotlin', '--out-dir', "${buildDir}/${uniffiGeneratedPath}"
++            if (udlFilePath.contains("places")) {
++                commandLine '/usr/bin/env', 'cargo', 'uniffi-bindgen', 'generate', "${project.projectDir}/${udlFilePath}", '--language', 'kotlin', '--out-dir', "${buildDir}/${uniffiGeneratedPath}"
++            } else {
++                commandLine '/usr/bin/env', "${rootProject.projectDir}/uniffi-rs/uniffi-bindgen", 'generate', "${project.projectDir}/${udlFilePath}", '--language', 'kotlin', '--out-dir', "${buildDir}/${uniffiGeneratedPath}"
++            }
              outputs.dir "${buildDir}/${uniffiGeneratedPath}"
              // Re-generate if the interface definition changes.
              inputs.file "${project.projectDir}/${udlFilePath}"
