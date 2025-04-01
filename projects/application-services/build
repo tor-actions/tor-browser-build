@@ -83,6 +83,15 @@ cp $builddir/uniffi-rs/uniffi-bindgen glean-core/android-native/
 patch -p1 < $rootdir/glean-noop.diff
 popd
 
+pushd libs
+ln -s $rootdir/[% c("input_files_by_name/nss") %] ./
+ln -s $rootdir/bug_13028.patch
+patch -p2 < $rootdir/apply-bug-13028.diff
+patch -p2 < $rootdir/no-ndk-lookup.diff
+./build-all.sh desktop
+./build-all.sh android
+popd
+
 [% IF c('var/fetch_gradle_dependencies') %]
   # XXX: `assemble` is still not enough to see all fetched dependencies via
   # Gradle's --debug. See: tor-browser-build#40056.

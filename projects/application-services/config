@@ -11,8 +11,8 @@ var:
   gradle_dependencies_version: 11
   gradle_version: 8.8
   glean_parser: 14.0.1
-  # This is the only project for which the rust lib will actually be built
-  cargo_vendor_subdir: components/support/nimbus-fml
+  nss_version: '3.101'
+  nspr_version: '4.35'
 
 steps:
   build:
@@ -22,6 +22,9 @@ steps:
       # builds when build time differ a lot, we need to do periodic rebuilds:
       # https://gitlab.torproject.org/tpo/applications/tor-browser-build/-/merge_requests/937#note_3009480
       rebuild_date: '2024-09-12'
+      arch_deps:
+        # Needed to build NSS
+        - gyp
     input_files:
       - project: container-image
         pkg_type: build
@@ -46,6 +49,10 @@ steps:
       - URL: 'https://dl.google.com/android/repository/build-tools_r30.0.3-linux.zip'
         name: build_tools_30
         sha256sum: 24593500aa95d2f99fb4f10658aae7e65cb519be6cd33fa164f15f27f3c4a2d6
+      # NSS version ans sha256 are in libs/build-all.sh.
+      - URL: 'https://ftp.mozilla.org/pub/security/nss/releases/NSS_[% c("var/nss_version") | replace("\\.", "_") %]_RTM/src/nss-[% c("var/nss_version") %]-with-nspr-[% c("var/nspr_version") %].tar.gz'
+        name: nss
+        sha256sum: 566faa9283ff3d9a7d6c44272df6e4330e3e06ca4e841a68840d31b27c9161c4
       - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
         name: gradle-dependencies
         exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
@@ -63,10 +70,11 @@ steps:
         enable: '[% !c("var/fetch_gradle_dependencies") %]'
       - filename: gen_gradle_deps_file.sh
         enable: '[% c("var/fetch_gradle_dependencies") %]'
-      # tor-browser-build#40485: Make sure the Kotlin output of nimbus-fml
-      # has deterministic order for reproducibility.
-      # Delete when this patch is included upstream.
+      - filename: bug_13028.patch
+      - filename: apply-bug-13028.diff
+      # Delete when this patch is included upstream
       - filename: bug40485-nimbus-fml-reproducibility.diff
+      - filename: no-ndk-lookup.diff
       # as-ohttp-client lists both the version for ohttp and a git repo + rev,
       # but this breaks the vendoring for offline builds.
       - filename: ohttp-no-git.diff

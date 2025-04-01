@@ -1,0 +1,18 @@
+diff --git a/libs/android_defaults.sh b/libs/android_defaults.sh
+index 2cfcc4206..9e3d3de97 100755
+--- a/libs/android_defaults.sh
++++ b/libs/android_defaults.sh
+@@ -1,11 +1,7 @@
+ #!/usr/bin/env bash
+ 
+-# Find the NDK.
+-pushd ..
+-NDK_VERSION=$(./gradlew -q printNdkVersion | tail -1)
+-export ANDROID_NDK_HOME="$ANDROID_HOME/ndk/$NDK_VERSION"
+-export ANDROID_NDK_ROOT="$ANDROID_NDK_HOME"
+-popd || exit
++# Do not try to find the NDK, as it does not work offline.
++# We already define the needed variables in our environment.
+ 
+ if [[ -z "${ANDROID_NDK_API_VERSION:-}" ]]; then
+     export ANDROID_NDK_API_VERSION=21

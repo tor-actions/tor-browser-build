@@ -46,6 +46,15 @@ We keep the list of files to download in `gradle-dependencies-list.txt`.
 A procedure to create this file is documented in
 [tor-browser-build#40855](https://gitlab.torproject.org/tpo/applications/tor-browser-build/-/issues/40855#note_2906041).
 
+## Other dependencies
+
+Finally, Application Services depends on
+[NSS](https://firefox-source-docs.mozilla.org/security/nss/index.html).
+We used to have a separate tor-browser-build project for it, but it was
+almost an exact copy of the script included in this repository.
+Keeping it updated wasn't trivial, so we decided to run Mozilla's scripts
+instead.
+
 # Caveats
 
 ## Git repository information
