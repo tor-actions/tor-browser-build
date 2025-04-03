@@ -82,6 +82,7 @@ steps:
       - filename: glean-noop.diff
       - filename: a-s-noop.diff
       - filename: cargo-no-build.sh
+      - filename: 41422-disable-viaduct.diff
 
   list_toolchain_updates:
     git_hash: 'v[% c("version") %]'

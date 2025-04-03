@@ -107,6 +107,7 @@ popd
   patch -p1 < $rootdir/ohttp-no-git.diff
   patch -p1 < $rootdir/bug40485-nimbus-fml-reproducibility.diff
   patch -p1 < $rootdir/offline-nimbus-fml.diff
+  patch -p1 < $rootdir/41422-disable-viaduct.diff
   gradle_flags="--offline --no-daemon"
   gradle $gradle_flags assembleRelease
   gradle $gradle_flags publish
