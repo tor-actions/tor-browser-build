@@ -4,6 +4,9 @@ filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("co
 container:
   use_container: 1
 
+var:
+  llvm_version: '[% pc("llvm-project", "version") %]'
+
 input_files:
   - project: container-image
   - name: clang
