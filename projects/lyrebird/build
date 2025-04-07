@@ -20,7 +20,7 @@ cd /var/tmp/build/[% project %]-[% c('version') %]
 
 tar -xf $rootdir/[% c('input_files_by_name/go_vendor') %]
 
-go build -mod=vendor -ldflags '-s[% IF c("var/android") %] -checklinkname=0[% END %]' ./cmd/lyrebird
+go build -mod=vendor -ldflags '-X main.lyrebirdVersion=[% c("version") %] -s[% IF c("var/android") %] -checklinkname=0[% END %]' ./cmd/lyrebird
 cp -a lyrebird[% IF c("var/windows") %].exe[% END %] $distdir
 
 go-licenses save ./cmd/lyrebird --save_path=$distdir/licenses
