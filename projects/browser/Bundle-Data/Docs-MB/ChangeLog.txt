@@ -1,3 +1,26 @@
+Mullvad Browser 14.5a6 - April 08 2025
+ * All Platforms
+   * Updated Firefox to 128.9.0esr
+   * Updated uBlock Origin to 1.63.2
+   * Bug 410: Update learn more link text in about:mullvad-browser [mullvad-browser]
+   * Bug 411: Use the same logic in about:mullvad-browser as the about dialog for the release notes [mullvad-browser]
+   * Bug 417: Rebase Mullvad Browser Alpha onto 128.9.0esr [mullvad-browser]
+   * Bug 419: Create a Mullvad Browser version of migrateUI [mullvad-browser]
+   * Bug 41919: Add temporarily visible web content-size overlay after resizing window when letterboxing is enabled [tor-browser]
+   * Bug 43322: Stop blocking all fonts in FontFace [tor-browser]
+   * Bug 43601: Backport security fixes from Firefox 137 [tor-browser]
+ * Linux
+   * Bug 415: Load apparmor profile when configuring deb package [mullvad-browser]
+ * Build System
+   * All Platforms
+     * Bug 41365: Indent download*.json files [tor-browser-build]
+     * Bug 41409: Create a script for quickly setting up protected branches [tor-browser-build]
+     * Bug 41419: Add comment in downloads.json to mention that the file is deprecated, and that download-$platform.json should be used instead [tor-browser-build]
+     * Bug 41420: Update the changelog script for label updates [tor-browser-build]
+     * Bug 40083: rbm creates out/$project directories with mode 0700 [rbm]
+   * macOS
+     * Bug 41403: The rcodesign step has a wrong dmg name in alpha [tor-browser-build]
+
 Mullvad Browser 14.5a5 - March 21 2025
  * All Platforms
    * Updated uBlock Origin to 1.63.0

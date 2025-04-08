@@ -1,3 +1,46 @@
+Tor Browser 14.5a6 - April 08 2025
+ * All Platforms
+   * Updated Tor to 0.4.9.2-alpha
+   * Bug 43322: Stop blocking all fonts in FontFace [tor-browser]
+   * Bug 43443: Drop effective top level domain for `au.securedrop.tor.onion` [tor-browser]
+   * Bug 43585: Rebase Tor Browser alpha onto 128.9.0esr [tor-browser]
+   * Bug 43601: Backport security fixes from Firefox 137 [tor-browser]
+   * Bug 43628: Handle unavailability of NetworkLinkService API in Tor Connect [tor-browser]
+   * Bug 41425: Snowflake needs to be listed separately on torrc-defaults [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 128.9.0esr
+   * Bug 41919: Add temporarily visible web content-size overlay after resizing window when letterboxing is enabled [tor-browser]
+   * Bug 43130: Adjust preferences for contrast theme or forced colors [tor-browser]
+   * Bug 43531: Use "label" attribute rather than textContent for the bridge dialog XUL buttons [tor-browser]
+   * Bug 43563: TorConnect country/region names should change based on the app language [tor-browser]
+ * Android
+   * Updated GeckoView to 128.9.0esr
+   * Bug 43464: TBA Alpha and Nightly cannot be debugged with about:debugging [tor-browser]
+   * Bug 43565: The quit button on Android doesn't actually exit [tor-browser]
+   * Bug 43576: Connection Assist on Android Polish [tor-browser]
+   * Bug 43581: Bookmarks are failing to load on Tor Browser Android Alpha 14.5a5 [tor-browser]
+   * Bug 43593: Use "region" instead of "country" in connect assist [tor-browser]
+   * Bug 43604: TorDomainIsolator routinely clears Android browser circuit data [tor-browser]
+   * Bug 41422: Patch viaduct in Application Services to always return a backend error [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Updated Go to 1.23.8
+     * Bug 41365: Indent download*.json files [tor-browser-build]
+     * Bug 41406: Restore -desktop and -android Makefile targets. [tor-browser-build]
+     * Bug 41407: Use Lyrebird also for the Snowflake PT [tor-browser-build]
+     * Bug 41409: Create a script for quickly setting up protected branches [tor-browser-build]
+     * Bug 41411: Update licenses for PTs [tor-browser-build]
+     * Bug 41417: Bump the conjure version we ship [tor-browser-build]
+     * Bug 41419: Add comment in downloads.json to mention that the file is deprecated, and that download-$platform.json should be used instead [tor-browser-build]
+     * Bug 41420: Update the changelog script for label updates [tor-browser-build]
+     * Bug 41426: Set the Lyrebird version [tor-browser-build]
+     * Bug 40083: rbm creates out/$project directories with mode 0700 [rbm]
+   * macOS
+     * Bug 41403: The rcodesign step has a wrong dmg name in alpha [tor-browser-build]
+   * Android
+     * Bug 41400: Add branding localization to GeckoView [tor-browser-build]
+     * Bug 41410: Use the Lyrebird name on Android [tor-browser-build]
+
 Tor Browser 14.5a5 - March 21 2025
  * All Platforms
    * Updated Lyrebird to 0.6.0
