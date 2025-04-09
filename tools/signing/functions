@@ -76,5 +76,17 @@ function display_name {
    fi
 }
 
+function rbm_showconf {
+  "$rbm" showconf release "$1" --target "$SIGNING_PROJECTNAME" \
+                   --target "$tbb_version_type"
+}
+
+function rbm_showconf_boolean {
+  local res=$(rbm_showconf "$1")
+  if [ -z "$res" ] || [ "a$res" = "a0" ]; then
+    return
+  fi
+  echo '1'
+}
 
 . "$script_dir/set-config"

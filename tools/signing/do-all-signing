@@ -19,38 +19,66 @@ if [[ $1 = "-p" ]]; then
   shift
 fi
 
+function is_legacy {
+  [[ "$tbb_version" = 13.* ]]
+}
+
+if is_legacy; then
+  platform_android=
+  platform_desktop=1
+  platform_macos=1
+  platform_windows=1
+else
+  platform_android=$(rbm_showconf_boolean var/browser_platforms/signing_android)
+  platform_desktop=$(rbm_showconf_boolean var/browser_platforms/signing_desktop)
+  platform_macos=$(rbm_showconf_boolean var/browser_platforms/macos)
+  platform_windows=$(rbm_showconf_boolean var/browser_platforms/signing_windows)
+fi
+
 is_project torbrowser && nssdb=torbrowser-nssdb7
 is_project mullvadbrowser && nssdb=mullvadbrowser-nssdb1
 
 if [ -f "$passwords_gpg_file" ]; then
   echo "Reading passwords from $passwords_gpg_file"
   SEKRITS=$(gpg --decrypt "$passwords_gpg_file")
-  RCODESIGN_PW=$(get_sekrit 'rcodesign')
-  NSSPASS=$(get_sekrit "$nssdb (mar signing)")
-  KSPASS=$(get_sekrit "android apk ($tbb_version_type)")
-  YUBIPASS=$(get_sekrit "windows authenticode")
+  [ -n "$platform_macos" ] && \
+    RCODESIGN_PW=$(get_sekrit 'rcodesign')
+  [ -n "$platform_desktop" ] && \
+    NSSPASS=$(get_sekrit "$nssdb (mar signing)")
+  [ -n "$platform_android" ] && \
+    KSPASS=$(get_sekrit "android apk ($tbb_version_type)")
+  [ -n "$platform_windows" ] && \
+    YUBIPASS=$(get_sekrit "windows authenticode")
   GPG_PASS=$(get_sekrit "gpg")
 else
   echo "Rather than entering all the password manually, you may want to provide a gpg-encrypted file either on the command line (-p <filepath>) or in set-config.passwords."
 fi
 
-test -f "$steps_dir/linux-signer-rcodesign-sign.done" || [ -n "$RCODESIGN_PW" ] ||
+[ -z "$platform_macos" ] || \
+  [ -f "$steps_dir/linux-signer-rcodesign-sign.done" ] || \
+  [ -n "$RCODESIGN_PW" ] || \
   read -sp "Enter rcodesign passphrase for key-1: " RCODESIGN_PW
 echo
 
-test -f "$steps_dir/linux-signer-signmars.done" || [ -n "$NSSPASS" ] ||
+[ -z "$platform_desktop" ] || \
+  [ -f "$steps_dir/linux-signer-signmars.done" ] || \
+  [ -n "$NSSPASS" ] || \
   read -sp "Enter $nssdb (mar signing) passphrase: " NSSPASS
 echo
 
-if is_project torbrowser; then
-  test -f "$steps_dir/linux-signer-sign-android-apks.done" || [ -n "$KSPASS" ] ||
-    read -sp "Enter android apk signing password ($tbb_version_type): " KSPASS
-  echo
-fi
-test -f "$steps_dir/linux-signer-authenticode-signing.done" || [ -n "$YUBIPASS" ] ||
+[ -z "$platform_android" ] || \
+  [ -f "$steps_dir/linux-signer-sign-android-apks.done" ] || \
+  [ -n "$KSPASS" ] || \
+  read -sp "Enter android apk signing password ($tbb_version_type): " KSPASS
+echo
+
+[ -z "$platform_windows" ] || \
+  [ -f "$steps_dir/linux-signer-authenticode-signing.done" ] || \
+  [ -n "$YUBIPASS" ] || \
   read -sp "Enter windows authenticode passphrase: " YUBIPASS
 echo
-test -f "$steps_dir/linux-signer-gpg-sign.done" || [ -n "$GPG_PASS" ] ||
+
+[ -f "$steps_dir/linux-signer-gpg-sign.done" ] || [ -n "$GPG_PASS" ] || \
   read -sp "Enter gpg passphrase: " GPG_PASS
 echo
 
@@ -199,10 +227,6 @@ function do_step {
   echo "$(date -Iseconds) - Finished step: $1"
 }
 
-function is_legacy {
-  [[ "$tbb_version" = 13.* ]]
-}
-
 export SIGNING_PROJECTNAME
 
 do_step set-time-on-signing-machine
@@ -210,23 +234,34 @@ do_step wait-for-finished-build
 do_step sync-builder-unsigned-to-local-signed
 do_step sync-scripts-to-linux-signer
 do_step sync-before-linux-signer-rcodesign-sign
-do_step linux-signer-rcodesign-sign
-do_step sync-linux-signer-macos-signed-tar-to-local
-do_step rcodesign-notary-submit
-do_step gatekeeper-bundling
-do_step dmg2mar
+[ -n "$platform_macos" ] && \
+  do_step linux-signer-rcodesign-sign
+[ -n "$platform_macos" ] && \
+  do_step sync-linux-signer-macos-signed-tar-to-local
+[ -n "$platform_macos" ] && \
+  do_step rcodesign-notary-submit
+[ -n "$platform_macos" ] && \
+  do_step gatekeeper-bundling
+[ -n "$platform_macos" ] && \
+  do_step dmg2mar
 do_step sync-scripts-to-linux-signer
 do_step sync-before-linux-signer-signmars
-do_step linux-signer-signmars
-do_step sync-after-signmars
-is_project torbrowser && ! is_legacy && \
+[ -n "$platform_desktop" ] && \
+  do_step linux-signer-signmars
+[ -n "$platform_desktop" ] && \
+  do_step sync-after-signmars
+[ -n "$platform_android" ] && \
   do_step linux-signer-sign-android-apks
-is_project torbrowser && ! is_legacy && \
+[ -n "$platform_android" ] && \
   do_step sync-after-sign-android-apks
-do_step linux-signer-authenticode-signing
-do_step sync-after-authenticode-signing
-do_step authenticode-timestamping
-do_step sync-after-authenticode-timestamping
+[ -n "$platform_windows" ] && \
+  do_step linux-signer-authenticode-signing
+[ -n "$platform_windows" ] && \
+  do_step sync-after-authenticode-signing
+[ -n "$platform_windows" ] && \
+  do_step authenticode-timestamping
+[ -n "$platform_windows" ] && \
+  do_step sync-after-authenticode-timestamping
 do_step hash_signed_bundles
 do_step sync-after-hash
 do_step linux-signer-gpg-sign
@@ -235,6 +270,6 @@ do_step download-unsigned-sha256sums-gpg-signatures-from-people-tpo
 do_step sync-local-to-staticiforme
 do_step sync-scripts-to-staticiforme
 do_step staticiforme-prepare-cdn-dist-upload
-! is_legacy &&
+! is_legacy && [ -n "$platform_desktop" ] && \
   do_step upload-update_responses-to-staticiforme
 do_step finished-signing-clean-linux-signer
