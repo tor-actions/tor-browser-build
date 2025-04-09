@@ -56,7 +56,8 @@ do
     git commit -m "$tbb_version_type: new version, $tbb_version ($file)"
 done
 
-if is_project torbrowser; then
+platform_android=$(rbm_showconf_boolean var/browser_platforms/signing_android)
+if [ -n "$platform_android" ]; then
   git add "$tbb_version_type"/download-android-*.json
   git diff --quiet  --cached --exit-code || \
     git commit -m "$tbb_version_type: new version, $tbb_version (android)"
