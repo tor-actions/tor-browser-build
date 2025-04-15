@@ -1,11 +1,8 @@
 # vim: filetype=yaml sw=2
-version: 3.0.16
+version: 3.5.0
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
-
-var:
-  openssldir: 'usr/local'
 
 targets:
   linux-x86_64:
@@ -36,5 +33,5 @@ input_files:
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
   - URL: 'https://github.com/openssl/openssl/releases/download/openssl-[% c("version") %]/openssl-[% c("version") %].tar.gz'
-    sha256sum: 57e03c50feab5d31b152af2b764f10379aecd8ee92f16c985983ce4a99f7ef86
+    sha256sum: 344d0a79f1a9b08029b0744e2cc401a43f9c90acd1044d09a530b4885a8e9fc0
     name: openssl
