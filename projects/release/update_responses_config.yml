@@ -30,6 +30,9 @@ build_targets:
 channels:
     [% c('var/channel') %]:
       - [% c("var/torbrowser_version") %]
+[% IF c("var/tor-browser") && c("var/torbrowser_legacy_version") -%]
+      - [% c("var/torbrowser_legacy_version") %]
+[% END -%]
 versions:
     [% c("var/torbrowser_version") %]:
 [% IF c("var/create_unsigned_incrementals") -%]
@@ -66,6 +69,25 @@ versions:
             minSupportedInstructionSet: SSE2
         linux-x86_64:
             minSupportedInstructionSet: SSE2
+[% IF c("var/tor-browser") && c("var/torbrowser_legacy_version") -%]
+    [% c("var/torbrowser_legacy_version") %]:
+        mar_channel_id: [% c('var/mar_channel_id') %]
+        platformVersion: [% c('var/torbrowser_legacy_platform_version') %]
+        detailsURL: https://blog.torproject.org/new[% IF c("var/alpha") %]-alpha[% END %]-release-tor-browser-[% c("var/torbrowser_legacy_version") FILTER remove('\.') %]
+        # minSupportedOsVersion on macOS corresponds to the Darwin version ( https://en.wikipedia.org/wiki/Darwin_(operating_system) )
+        macos:
+            # macOS v10.12.0
+            minSupportedOSVersion: 16.0.0
+        # minSupportedOsVersion on Windows corresponds to the operating system version ( https://docs.microsoft.com/en-us/windows/win32/sysinfo/operating-system-version )
+        windows-i686:
+            # Windows 7
+            minSupportedOSVersion: 6.1
+            minSupportedInstructionSet: SSE2
+        windows-x86_64:
+            # Windows 7
+            minSupportedOSVersion: 6.1
+            minSupportedInstructionSet: SSE2
+[% END -%]
 mar_compression: xz
 [% IF c("var/tor-browser") -%]
 tag: 'tbb-[% c("var/torbrowser_version") %]-[% c("var/torbrowser_build") %]'
