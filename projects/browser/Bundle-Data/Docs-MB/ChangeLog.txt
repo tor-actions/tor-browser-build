@@ -14,7 +14,6 @@ Mullvad Browser 14.5 - April 15 2025
    * Bug 43189: Remove privacy.resistFingerprinting.spoofOsInUserAgentHeader machinery entirely [tor-browser]
    * Bug 43205: newwin / letterboxing rounding with subpixels is off [tor-browser]
    * Bug 43257: NoScript-blocked content placeholders causing slow downs [tor-browser]
-   * Bug 43322: Stop blocking all fonts in FontFace [tor-browser]
    * Bug 43323: Expose a stable asset from chrome:// to identify Tor, Base, and Mullvad Browser [tor-browser]
    * Bug 43334: Developer Tools lacks data for Responsive Design Mode and Compatibility [tor-browser]
    * Bug 43340: Support linux-aarch64 dev builds [tor-browser]

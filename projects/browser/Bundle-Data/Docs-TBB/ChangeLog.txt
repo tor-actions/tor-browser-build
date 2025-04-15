@@ -4,7 +4,6 @@ Tor Browser 14.5 - April 15 2025
    * Bug 41921: Clean up initialisation and bridges conflict between TorSettings and TorConnect [tor-browser]
    * Bug 42300: Do not store logs inside TorProvider [tor-browser]
    * Bug 43308: Only allow "about:" pages to have access to contentaccessible branding assets [tor-browser]
-   * Bug 43322: Stop blocking all fonts in FontFace [tor-browser]
    * Bug 43323: Expose a stable asset from chrome:// to identify Tor, Base, and Mullvad Browser [tor-browser]
    * Bug 43334: Developer Tools lacks data for Responsive Design Mode and Compatibility [tor-browser]
    * Bug 43336: Move branding files out of torbutton [tor-browser]
