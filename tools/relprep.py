@@ -401,7 +401,7 @@ class ReleasePreparation:
     def update_openssl(self):
         logger.info("Updating OpenSSL")
         config = self.load_config("openssl")
-        version = get_github_release("openssl/openssl", r"openssl-(3.0.\d+)")
+        version = get_github_release("openssl/openssl", r"openssl-(3.5.\d+)")
         if version == config["version"]:
             logger.debug("No need to update OpenSSL, keeping %s.", version)
             return
