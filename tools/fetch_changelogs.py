@@ -86,6 +86,9 @@ class UpdateEntry(ChangelogEntry):
         elif name == "GeckoView" or name == "Zstandard":
             platform = Platform.ANDROID
             num_platforms = 1
+        elif name == "Go":
+            platform = Platform.ALL_PLATFORMS ^ Platform.MACOS
+            num_platforms = 1
         else:
             platform = Platform.ALL_PLATFORMS
             num_platforms = 4
