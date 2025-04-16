@@ -351,6 +351,11 @@ sub get_response {
             );
             goto CLOSETAGS;
         }
+        if (!$config->{versions}{$version}{files}{$os}{complete} &&
+          (!$from_version ||
+            !$config->{versions}{$version}{files}{$os}{partial}{$from_version})) {
+          next;
+        }
         my $minversion = get_config($config, $version, $os, 'minSupportedOSVersion');
         my $mininstruc = get_config($config, $version, $os, 'minSupportedInstructionSet');
         $writer->startTag('update',
