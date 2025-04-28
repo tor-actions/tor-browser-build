@@ -1,3 +1,18 @@
+Tor Browser 14.5.1 - April 29 2025
+ * All Platforms
+   * Bug 43670: Rebase stable onto 128.10.0esr [tor-browser]
+   * Bug 43691: Backport security fixes from Firefox 138 [tor-browser]
+   * Bug 41446: Update anti-censorship.gpg keyring with shelikhoo's latest public key [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 128.10.0esr
+   * Bug 43659: Set new tabs to default to Tor Browser Home (about:tor) on desktop [tor-browser]
+   * Bug 43672: Incorrect initial letterbox size when the interface font size is 13px. [tor-browser]
+ * Android
+   * Updated GeckoView to 128.10.0esr
+ * Build System
+   * All Platforms
+     * Bug 41435: Skip update-responses update entries for versions without incremental or full update mar [tor-browser-build]
+
 Tor Browser 14.5 - April 15 2025
  * All Platforms
    * Bug 41710: Refactor about:torconnects relation to TorConnectParent [tor-browser]

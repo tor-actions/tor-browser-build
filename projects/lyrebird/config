@@ -1,8 +1,8 @@
 # vim: filetype=yaml sw=2
-version: 0.6.0
+version: 0.6.1
 git_url: https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/lyrebird.git
-git_hash: 'lyrebird-[% c("version") %]'
-tag_gpg_id: 1
+git_hash: ad08585d979f72a1019470e4e2b18e9ed2550274
+tag_gpg_id: 0
 gpg_keyring: anti-censorship.gpg
 
 container:
