@@ -1,3 +1,9 @@
+Tor Browser 13.5.16 - April 29 2025
+ * All Platforms
+   * Updated Firefox to 115.23.0esr
+   * Bug 43673: Rebase Tor Browser 13.5.x onto Firefox 115.23.0esr [tor-browser]
+   * Bug 43691: Backport security fixes from Firefox 138 [tor-browser]
+
 Tor Browser 13.5.15 - April 01 2025
  * All Platforms
    * Updated Firefox to 115.22.0esr
