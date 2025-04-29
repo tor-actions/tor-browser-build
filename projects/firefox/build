@@ -194,7 +194,7 @@ RBM_TB_EOF
   popd
 [% END -%]
 
-cp -L obj-*/dist/bin/geckodriver* $distdir
+cp -L obj-*/dist/host/bin/geckodriver* $distdir
 
 [% IF c("var/updater_enabled") -%]
   # Make MAR-based update tools available for use during the bundle phase.
@@ -213,10 +213,10 @@ cp -L obj-*/dist/bin/geckodriver* $distdir
     cp -p obj-*/dist/bin/certutil $MARTOOLS/
     cp -p obj-*/dist/bin/pk12util $MARTOOLS/
     [% IF c("var/linux") -%]
-      NSS_LIBS="libfreeblpriv3.so libmozsqlite3.so libnss3.so libnssckbi.so libnssutil3.so libsmime3.so libsoftokn3.so libssl3.so"
+      NSS_LIBS="libfreeblpriv3.so libmozsqlite3.so libnss3.so libnssutil3.so libsmime3.so libsoftokn3.so libssl3.so"
       NSPR_LIBS="libnspr4.so libplc4.so libplds4.so"
     [% ELSE -%]
-      NSS_LIBS="libfreebl3.dylib libmozglue.dylib libnss3.dylib libnssckbi.dylib libsoftokn3.dylib"
+      NSS_LIBS="libfreebl3.dylib libmozglue.dylib libnss3.dylib libsoftokn3.dylib"
       # No NSPR_LIBS for macOS
       NSPR_LIBS=""
     [% END -%]
@@ -228,7 +228,7 @@ cp -L obj-*/dist/bin/geckodriver* $distdir
     cp -p obj-*/dist/bin/signmar.exe $MARTOOLS/
     cp -p obj-*/dist/bin/certutil.exe $MARTOOLS/
     cp -p obj-*/dist/bin/pk12util.exe $MARTOOLS/
-    NSS_LIBS="freebl3.dll mozglue.dll nss3.dll nssckbi.dll softokn3.dll"
+    NSS_LIBS="freebl3.dll mozglue.dll nss3.dll softokn3.dll"
     for LIB in $NSS_LIBS; do
         cp -p obj-*/dist/bin/$LIB $MARTOOLS/
     done

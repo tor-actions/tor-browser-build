@@ -14,6 +14,7 @@ sub as_array {
 }
 my $d = YAML::XS::LoadFile('taskcluster/kinds/toolchain/rust.yml');
 foreach my $t (keys %$d) {
+  next unless ref $d->{$t}{run}{'toolchain-alias'} eq 'HASH';
   my $talias = as_array($d->{$t}{run}{'toolchain-alias'}{'by-project'}{default});
   if (grep { $_ eq '[% toolchain_alias %]' } @$talias) {
     my $channel;
@@ -91,13 +92,11 @@ check_update_needed clang "$needed" "$current"
 
 # cbindgen
 read -d '' p << 'EOF' || true
-if (m/^\\s*cbindgen_min_version\\s*=\\s*Version\\("([^"]+)"\\)/) {
-  print $1;
-  exit;
-}
+my $fetch = YAML::XS::LoadFile('taskcluster/kinds/fetch/toolchains.yml');
+print $fetch->{cbindgen}{fetch}{revision};
 EOF
-needed=$(cat build/moz.configure/bindgen.configure | perl -ne "$p")
-current='[% pc("cbindgen", "version") %]'
+needed=$(perl -MYAML::XS -e "$p")
+current='[% pc("cbindgen", "git_hash") %]'
 check_update_needed cbindgen "$needed" "$current"
 
 
@@ -108,7 +107,7 @@ my $linux64 = 'linux64-nasm';
 print substr $nasm->{$linux64}{'fetches'}{'fetch'}[0], 5;
 EOF
 needed=$(perl -MYAML::XS -e "$p")
-current='2.15.05'
+current='[% pc("nasm", "version") %]'
 check_update_needed nasm "$needed" "$current"
 
 
@@ -152,5 +151,5 @@ if (m/^\\s*"Bootstrap currently only runs on Python ([^"]+)\\."/) {
 }
 EOF
 needed=$(cat python/mozboot/bin/bootstrap.py | perl -ne "$p")
-current="3.8+" # 3.11.x on Debian bookworm and on our python project
+current="3.8+" # 3.11.x on Debian bookworm, 3.9.20 on our python project
 check_update_needed python "$needed" "$current"

@@ -4,8 +4,8 @@ filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("co
 container:
   use_container: 1
 var:
-  node_version: 18.19.0
-  node_sha256: f52b41af20596a9abd8ed75241837ec43945468221448bbf841361e2091819b6
+  node_version: 22.11.0
+  node_sha256: bbf0297761d53aefda9d7855c57c7d2c272b83a7b5bad4fea9cb29006d8e1d35
   no_crosscompile: 1
 
 input_files:

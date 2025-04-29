@@ -22,9 +22,28 @@ export PATH="$distdir-rust-prebuilt/bin:$PATH"
   export LLVM_CONFIG="/var/tmp/dist/clang/bin/llvm-config"
   export CC=clang
   export CXX=clang++
-  export CFLAGS='--gcc-toolchain=/var/tmp/dist/gcc'
-  export CXXFLAGS='--gcc-toolchain=/var/tmp/dist/gcc'
   export RUSTFLAGS="-L/var/tmp/dist/gcc/lib64"
+
+  # The cc crate ignores CFLAGS/CXXFLAGS for some reason...
+  # So replace clang (usually a link to clang-VV) and clang++ (usually a link
+  # to clang) with helper scripts.
+  pushd /var/tmp/dist/clang/bin
+  # It will fail if clang is not a script anymore.
+  clang=$(readlink clang)
+  rm clang clang++
+  cat <<EOF >clang
+#!/bin/sh
+DIR="\$(cd "\$(dirname "\$0")" && pwd)"
+\$DIR/$clang --gcc-toolchain=/var/tmp/dist/gcc "\$@"
+EOF
+  chmod +x clang
+  cat <<EOF >clang++
+#!/bin/sh
+DIR="\$(cd "\$(dirname "\$0")" && pwd)"
+\$DIR/$clang --gcc-toolchain=/var/tmp/dist/gcc --driver-mode=g++ "\$@"
+EOF
+  chmod +x clang++
+  popd
 [% ELSIF c("var/macos") -%]
   # We need to clear `CC` and `LDFLAGS` as they are used for the host platform
   # (i.e. Linux).

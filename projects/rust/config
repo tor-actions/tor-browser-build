@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/filename_targets") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
-version: '1.78.0'
+version: '1.86.0'
 container:
   use_container: 1
 

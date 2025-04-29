@@ -77,5 +77,5 @@ input_files:
     project: wasi-libc
     pkg_type: build
   # taskcluster/scripts/misc/wasi-sdk.patch from Firefox's source code.
-  # Taken from gecko-dev@823106ac4295f822717f5a953047dc89074d632b
+  # Taken from gecko-dev@d1ed0165377c8d426ea0574194fecd37f167f313
   - filename: wasi-sdk.patch

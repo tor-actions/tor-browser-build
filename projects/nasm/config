@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-version: 2.15.05
+version: 2.16.03
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
@@ -10,4 +10,4 @@ input_files:
     name: '[% c("var/compiler") %]'
     enable: '[% c("var/linux") %]'
   - URL: 'https://www.nasm.us/pub/nasm/releasebuilds/[% c("version") %]/nasm-[% c("version") %].tar.xz'
-    sha256sum: 3caf6729c1073bf96629b57cee31eeb54f4f8129b01902c73428836550b30a3f
+    sha256sum: 1412a1c760bbd05db026b6c0d1657affd6631cd0a63cddb6f73cc6d4aa616148
