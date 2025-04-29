@@ -9,7 +9,7 @@ container:
   use_container: 1
 
 var:
-  go_vendor_sha256sum: 788d63f5cbe2b618f314df87d9f1b33bc26af44a1c7535e80b34400c2efb55d1
+  go_vendor_sha256sum: d2e1601e82ac702739d7cf80aba759762c0da88b0f5bd6c9d65d2e7234de201c
 
 targets:
   nightly:
