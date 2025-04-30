@@ -443,18 +443,17 @@ sub write_htaccess {
             }
         }
     }
-    foreach my $version (@$versions) {
-        my $files = $config->{versions}{$version}{files};
-        foreach my $os (sort keys %oses) {
-            my $htaccess_os = "RewriteEngine On\n";
+    foreach my $os (sort keys %oses) {
+        my $htaccess_os = "RewriteEngine On\n";
+        foreach my $version (@$versions) {
             $htaccess_os .= "RewriteRule ^$version/ no-update.xml [last]\n";
-            foreach my $from_version (sort keys %from_versions) {
-                $htaccess_os .= "RewriteRule ^$from_version/ "
-                             .  "update-$from_version-$versions_str-$os.xml [last]\n";
-            }
-            $htaccess_os .= "RewriteRule ^[^\/]+/ update-$versions_str-$os.xml [last]\n";
-            write_htdocs($channel, $os, '.htaccess', $htaccess_os);
         }
+        foreach my $from_version (sort keys %from_versions) {
+            $htaccess_os .= "RewriteRule ^$from_version/ "
+                         .  "update-$from_version-$versions_str-$os.xml [last]\n";
+        }
+        $htaccess_os .= "RewriteRule ^[^\/]+/ update-$versions_str-$os.xml [last]\n";
+        write_htdocs($channel, $os, '.htaccess', $htaccess_os);
     }
 }
 
