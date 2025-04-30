@@ -410,6 +410,8 @@ sub write_responses {
         my $resp = get_response($config, $versions, $os);
         write_htdocs($channel, $os, "update-$versions_str-$os.xml", $resp);
         foreach my $from_version (keys %from_versions) {
+            next unless grep {
+                $config->{versions}{$_}{files}{$os}{partial}{$from_version} } @$versions;
             $resp = get_response($config, $versions, $os, $from_version);
             write_htdocs($channel, $os, "update-$from_version-$versions_str-$os.xml", $resp);
         }
@@ -449,6 +451,8 @@ sub write_htaccess {
             $htaccess_os .= "RewriteRule ^$version/ no-update.xml [last]\n";
         }
         foreach my $from_version (sort keys %from_versions) {
+            next unless grep {
+                $config->{versions}{$_}{files}{$os}{partial}{$from_version} } @$versions;
             $htaccess_os .= "RewriteRule ^$from_version/ "
                          .  "update-$from_version-$versions_str-$os.xml [last]\n";
         }
