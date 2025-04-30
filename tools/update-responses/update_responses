@@ -408,10 +408,10 @@ sub write_responses {
     my $versions_str = join('+', @$versions);
     foreach my $os (keys %oses) {
         my $resp = get_response($config, $versions, $os);
-        write_htdocs($channel, $os, "$versions_str-$os.xml", $resp);
+        write_htdocs($channel, $os, "update-$versions_str-$os.xml", $resp);
         foreach my $from_version (keys %from_versions) {
             $resp = get_response($config, $versions, $os, $from_version);
-            write_htdocs($channel, $os, "$from_version-$versions_str-$os.xml", $resp);
+            write_htdocs($channel, $os, "update-$from_version-$versions_str-$os.xml", $resp);
         }
         write_htdocs($channel, $os, 'no-update.xml',
             '<?xml version="1.0" encoding="UTF-8"?>'
@@ -450,9 +450,9 @@ sub write_htaccess {
             $htaccess_os .= "RewriteRule ^$version/ no-update.xml [last]\n";
             foreach my $from_version (sort keys %from_versions) {
                 $htaccess_os .= "RewriteRule ^$from_version/ "
-                             .  "$from_version-$versions_str-$os.xml [last]\n";
+                             .  "update-$from_version-$versions_str-$os.xml [last]\n";
             }
-            $htaccess_os .= "RewriteRule ^[^\/]+/ $versions_str-$os.xml [last]\n";
+            $htaccess_os .= "RewriteRule ^[^\/]+/ update-$versions_str-$os.xml [last]\n";
             write_htdocs($channel, $os, '.htaccess', $htaccess_os);
         }
     }
