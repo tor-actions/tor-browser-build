@@ -65,5 +65,3 @@ input_files:
   - project: python
     name: python
     enable: '[% c("var/linux") %]'
-  - filename: chkstk.patch
-    enable: '[% c("var/windows") %]'

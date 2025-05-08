@@ -220,11 +220,11 @@ input_files:
     enable: '[% c("var/windows") %]'
     target_prepend:
       - torbrowser-windows-x86_64
-  - project: windows-rs
+  - URL: https://crates.io/api/v1/crates/windows/0.58.0/download
     name: windows-rs
+    filename: windows-rs-0.58.0.tar.zst
+    sha256sum: dd04d41d93c4992d421894c18c8b43496aa748dd4c081bac0dc93eb0489272b6
     enable: '[% c("var/windows") %]'
-    norec:
-      sha256sum: b26e710d553733cd1202bf932624d51a43d1f8679217c97bd05c0248e0c1c090
   - filename: abicheck.cc
     enable: '[% c("var/linux") %]'
   - project: translation

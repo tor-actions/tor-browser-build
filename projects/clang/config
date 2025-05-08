@@ -29,3 +29,8 @@ input_files:
   - project: python
     name: python
     enable: '[% c("var/linux") %]'
+  # Suppress the "version 'llvm' in target triple 'x86_64-pc-windows-gnullvm' is
+  # invalid" error.
+  # https://github.com/llvm/llvm-project/issues/137933
+  - filename: gnullvm-environment.diff
+    enable: '[% c("var/windows") %]'

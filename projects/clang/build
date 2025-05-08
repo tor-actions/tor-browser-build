@@ -1,10 +1,12 @@
 #!/bin/bash
 [% c("var/set_default_env") -%]
+
 distdir=/var/tmp/dist/[% project %]
 mkdir -p /var/tmp/dist
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/cmake') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/ninja') %]
 export PATH="/var/tmp/dist/ninja:/var/tmp/dist/cmake/bin:$PATH"
+
 [% IF c("var/linux") %]
   [% pc('gcc', 'var/setup', { compiler_tarfile => c('input_files_by_name/gcc'),
                               hardened_gcc => 0 }) %]
@@ -12,10 +14,16 @@ export PATH="/var/tmp/dist/ninja:/var/tmp/dist/cmake/bin:$PATH"
   tar -C /var/tmp/dist -xf [% c('input_files_by_name/binutils') %]
   export PATH="/var/tmp/dist/binutils/bin:$PATH"
 [% END -%]
+
 mkdir -p /var/tmp/build
 cd /var/tmp/build
 tar -xf $rootdir/[% c('input_files_by_name/clang-source') %]
 cd clang-source
+
+[% IF c("var/windows") -%]
+  patch -p1 < $rootdir/gnullvm-environment.diff
+[% END -%]
+
 export LLVM_HOME=$(pwd)
 mkdir build
 cd build

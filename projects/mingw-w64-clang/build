@@ -84,12 +84,11 @@ EOF
   # Apply the same patches as Firefox
   cd $builddir/mingw-w64-clang
   patch -p1 < "$rootdir/mingw-dwrite_3.patch"
-  patch -p1 < "$rootdir/mingw-unknown.patch"
   patch -p1 < "$rootdir/mingw-enum.patch"
   patch -p1 < "$rootdir/mingw-widl.patch"
   patch -p1 < "$rootdir/mingw-dispatchqueue.patch"
   patch -p1 < "$rootdir/mingw-ts_sd.patch"
-  patch -p1 < "$rootdir/mingw-composition.patch"
+  patch -p1 < "$rootdir/mingw-foundation_redef.patch"
   patch -p1 < "$rootdir/mingw-webrtc.patch"
 
   cd $builddir/mingw-w64-clang/mingw-w64-headers

@@ -1,0 +1,13 @@
+diff --git a/llvm/lib/TargetParser/Triple.cpp b/llvm/lib/TargetParser/Triple.cpp
+index 21d6c74b5956..f30388d976a4 100644
+--- a/llvm/lib/TargetParser/Triple.cpp
++++ b/llvm/lib/TargetParser/Triple.cpp
+@@ -1346,7 +1346,7 @@ StringRef Triple::getEnvironmentVersionString() const {
+ 
+   // none is a valid environment type - it basically amounts to a freestanding
+   // environment.
+-  if (EnvironmentName == "none")
++  if (EnvironmentName == "none" || EnvironmentName == "gnullvm")
+     return "";
+ 
+   StringRef EnvironmentTypeName = getEnvironmentTypeName(getEnvironment());

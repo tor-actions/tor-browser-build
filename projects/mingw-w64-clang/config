@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% pc("llvm-project", "version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 git_url: https://git.code.sf.net/p/mingw-w64/mingw-w64
-git_hash: 4ef04b0a7f7a20735de2f58b5c0496fcb4c7d191
+git_hash: 2ca6f1348cab58b5b994fd5916ff57445ade22f8
 version: '[% c("abbrev") %]'
 container:
   use_container: 1
@@ -32,10 +32,9 @@ input_files:
   - filename: windres-wrapper.c
   # Patches from Firefox's source code
   - filename: mingw-dwrite_3.patch
-  - filename: mingw-unknown.patch
   - filename: mingw-enum.patch
   - filename: mingw-widl.patch
   - filename: mingw-dispatchqueue.patch
   - filename: mingw-ts_sd.patch
-  - filename: mingw-composition.patch
+  - filename: mingw-foundation_redef.patch
   - filename: mingw-webrtc.patch

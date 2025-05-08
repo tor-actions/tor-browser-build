@@ -52,14 +52,14 @@ check_update_needed libtapi "$needed" "$current"
 
 
 [% IF c("var/windows") %]
-# mingw-w64
+# mingw-w64-clang
 read -d '' p << 'EOF' || true
 my $d = YAML::XS::LoadFile('taskcluster/kinds/fetch/toolchains.yml');
 print $d->{'mingw-w64'}{fetch}{revision};
 EOF
 needed=$(perl -MYAML::XS -e "$p")
-current='[% pc("mingw-w64", "git_hash") %]'
-check_update_needed mingw-w64 "$needed" "$current"
+current='[% pc("mingw-w64-clang", "git_hash") %]'
+check_update_needed mingw-w64-clang "$needed" "$current"
 
 
 # fxc2

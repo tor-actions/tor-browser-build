@@ -6,7 +6,7 @@ Subject: [PATCH] Bug 26205: Don't build the uninstaller for Windows during
 
 
 diff --git a/browser/Makefile.in b/browser/Makefile.in
-index 2eb9e708f68e..0c9442183942 100644
+index 364f590f5116d..6bda1c5aadaac 100644
 --- a/browser/Makefile.in
 +++ b/browser/Makefile.in
 @@ -6,10 +6,6 @@ include $(topsrcdir)/config/rules.mk
@@ -17,14 +17,14 @@ index 2eb9e708f68e..0c9442183942 100644
 -# uninstaller is included with the application for mar file generation.
 -libs::
 -	$(MAKE) -C installer/windows uninstaller
- ifdef MOZ_MAINTENANCE_SERVICE
- 	$(MAKE) -C installer/windows maintenanceservice_installer
- endif
+ ifdef ENABLE_TESTS
+ 	$(MAKE) -C installer/windows install_deps
+ endif #ENABLE_TESTS
 diff --git a/browser/installer/Makefile.in b/browser/installer/Makefile.in
-index 0325f0ffab9a..a5a9488623a3 100644
+index 3827c46cefa8e..f10451b8cada4 100644
 --- a/browser/installer/Makefile.in
 +++ b/browser/installer/Makefile.in
-@@ -98,10 +98,6 @@ ifdef NECKO_WIFI
+@@ -88,10 +88,6 @@ ifdef NECKO_WIFI
  DEFINES += -DNECKO_WIFI
  endif
  
