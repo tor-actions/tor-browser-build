@@ -35,6 +35,8 @@ var:
   # For testing purposes use override_updater_url, as it will also override the
   # certificate.
   updater_url: 'https://aus1.torproject.org/torbrowser/update_3/'
+  mar_id_prefix: 'torbrowser-torproject'
+  mar_channel_id: '[% c("var/mar_id_prefix") %]-[% c("var/channel") %]'
 
   # Uncomment this if you want to test the updater. You will need to provide a
   # marsigner.der in this directory, too. It will replace either the release
@@ -94,6 +96,7 @@ targets:
   basebrowser:
     var:
       nightly_updates_publish_dir_prefix: basebrowser-
+      mar_id_prefix: 'basebrowser-torproject'
 
   nightly:
     git_hash: '[% c("var/project-name") %]-[% c("var/firefox_version") %]-[% c("var/browser_branch") %]'
@@ -106,7 +109,9 @@ targets:
     var:
       gitlab_project: https://gitlab.torproject.org/tpo/applications/mullvad-browser
       updater_url: 'https://cdn.mullvad.net/browser/update_responses/update_1/'
+      mar_id_prefix: 'mullvadbrowser-mullvad'
       nightly_updates_publish_dir_prefix: mullvadbrowser-
+
   linux-x86_64:
     var:
       arch_deps:
