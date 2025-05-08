@@ -14,3 +14,6 @@ input_files:
     project: clang
   - name: libtapi
     project: libtapi
+  # taskcluster/scripts/misc/cctools.patch in Firefox.
+  # Taken from 4856fd3c1e927929217441bd256169485c8bc7d2.
+  - filename: cctools.patch
