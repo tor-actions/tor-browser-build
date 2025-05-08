@@ -178,6 +178,7 @@ echo "Starting ./mach build $(date)"
 [% INCLUDE 'start-firefox' -%]
 RBM_TB_EOF
   chmod 755 "$distdir/Browser/[% c('var/exe_name') %]"
+  cp -L obj-*/dist/host/bin/geckodriver $distdir
 [% END -%]
 
 [% IF c("var/windows") -%]
@@ -193,8 +194,6 @@ RBM_TB_EOF
   find . -path ./_tests -prune -o -name '*.pdb' -exec cp -l {} $distdir/Debug/Browser/ \;
   popd
 [% END -%]
-
-cp -L obj-*/dist/host/bin/geckodriver* $distdir
 
 [% IF c("var/updater_enabled") -%]
   # Make MAR-based update tools available for use during the bundle phase.
@@ -338,13 +337,8 @@ echo "Starting to package artifacts $(date)"
 [% END -%]
 
 # Geckodriver
-llvm-strip geckodriver*
-[% IF c("var/windows") -%]
-  [% c('zip', {
-      zip_src => [ 'geckodriver.exe' ],
-      zip_args => out_dir _ '/geckodriver.zip',
-    }) %]
-[% ELSE -%]
+[% IF c("var/linux") -%]
+  llvm-strip geckodriver
   [% c('tar', {
       tar_src => [ 'geckodriver' ],
       tar_args => '-cJf ' _ out_dir _ '/geckodriver.tar.xz',
