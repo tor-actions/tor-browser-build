@@ -1,6 +1,9 @@
 ---
 tmp_dir: '[% c("tmp_dir") %]'
 create_downloads_json: 1
+[% IF !c("var/browser_platforms/signing_desktop") -%]
+create_downloads_json_only: 1
+[% END -%]
 appname_marfile: '[% c("var/project-name") %]'
 appname_bundle: '[% c("var/project-name") %]'
 releases_dir: [% path(c('output_dir')) %][% IF ! c("var/nightly") %]/[% IF c("var/unsigned_releases_dir") -%]un[% END %]signed[% END %]

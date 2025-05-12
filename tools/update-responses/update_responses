@@ -464,14 +464,16 @@ sub write_downloads_json {
     my $versions = as_array($config->{channels}{$channel});
     my ($version) = @$versions;
     my $tag = get_config($config, $version, 'any', 'tag');
-    my $data = {
-        version => "$version",
-        tag => "$tag",
-        downloads => get_version_downloads($config, $version),
-        comment => 'This file is deprecated and should not be used. Please use the files download-$platform.json instead.',
-    };
-    write_htdocs($channel, '.', 'downloads.json',
-        JSON->new->utf8->canonical->pretty->encode($data));
+    if (!$config->{create_downloads_json_only}) {
+        my $data = {
+            version => "$version",
+            tag => "$tag",
+            downloads => get_version_downloads($config, $version),
+            comment => 'This file is deprecated and should not be used. Please use the files download-$platform.json instead.',
+        };
+        write_htdocs($channel, '.', 'downloads.json',
+            JSON->new->utf8->canonical->pretty->encode($data));
+    }
     my $pp_downloads = get_perplatform_downloads($config, $version, $tag);
     foreach my $os (keys %{$pp_downloads}) {
         write_htdocs($channel, '.', "download-$os.json",
@@ -634,8 +636,10 @@ my %actions = (
         exit_error "Wrong arguments" unless @ARGV == 1;
         my $channel = $ARGV[0];
         exit_error "Unknown channel $channel" unless $config->{channels}{$channel};
-        write_responses($config, $channel);
-        write_htaccess($config, $channel);
+        if (!$config->{create_downloads_json_only}) {
+          write_responses($config, $channel);
+          write_htaccess($config, $channel);
+        }
         write_downloads_json($config, $channel);
     },
     gen_incrementals => sub {
