@@ -119,3 +119,8 @@ apksigner sign --verbose --min-sdk-version [% c("var/android_min_api") %] --ks $
     tor_expert_bundle_dest=${tor_expert_bundle_src:0:-7}.tar.gz
     cp "$rootdir/[% c("input_files_by_name/tor-expert-bundle") %]/tor-expert-bundle.tar.gz" [% dest_dir %]/[% c('filename') %]/$tor_expert_bundle_dest
 [% END -%]
+
+[% IF c("var/nightly") -%]
+  mkdir -p "$OUTDIR"/artifacts
+  cp -r $rootdir/geckoview/artifacts "$OUTDIR"
+[% END %]

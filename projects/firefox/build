@@ -128,6 +128,19 @@ echo "Starting ./mach build $(date)"
   ./mach build stage-package
 [% END -%]
 
+[% IF c("var/nightly") -%]
+  echo "Building development artifacts"
+  ./mach package
+
+  artifactsdir=[% out_dir %]/artifacts
+  mkdir $artifactsdir
+  # Copy the artifacts to the target directory
+  # Naming convention is the same as Mozilla uses for their artifacts
+  cp -a obj-*/dist/*.tar.bz2 $artifactsdir/target.tar.bz2
+  cp -a obj-*/dist/*.zip $artifactsdir/target.xpt_artifacts.zip
+  ./mach python -m mozbuild.action.test_archive common $artifactsdir/target.common.tests.tar.gz
+[% END %]
+
 [% IF c("var/macos") -%]
   cp -a obj-*/dist/[% c('var/exe_name') %]/* $distdir
   [% IF c("var/base-browser") -%]

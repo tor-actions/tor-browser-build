@@ -428,3 +428,8 @@ cd $distdir
   [% END -%]
   popd
 [% END %]
+
+[% IF c("var/nightly") -%]
+  mkdir -p "$OUTDIR"/artifacts
+  cp -r $rootdir/[% c('input_files_by_name/firefox') %]/artifacts "$OUTDIR"
+[% END %]
