@@ -20,7 +20,7 @@
 
 #### Target Branches
   - [ ] **`main`**: esr128-14.5
-  - [ ] **`maint-14.0`**: esr128-14.0
+  - [ ] **`maint-14.5`**: esr128-14.5
   - [ ] **`maint-13.5`**: esr115-13.5
 
 ### Backporting

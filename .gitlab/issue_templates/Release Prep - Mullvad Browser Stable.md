@@ -94,7 +94,7 @@ Mullvad Browser Stable is on the `maint-${MULLVAD_BROWSER_MAJOR}.${MULLVAD_BROWS
     - ESR updates correct
     - Component updates correct
 - [ ] Open MR with above changes, using the template for release preparations
-  - **NOTE**: target the `maint-14.0` branch
+  - **NOTE**: target the `maint-14.5` branch
 - [ ] Merge
 - [ ] Sign+Tag
   - **NOTE** this must be done by one of:
@@ -135,7 +135,7 @@ Mullvad Browser Stable is on the `maint-${MULLVAD_BROWSER_MAJOR}.${MULLVAD_BROWS
   - pierov
 - [ ] Ensure all builders have matching builds
 - [ ] On `${STAGING_SERVER}`, ensure updated:
-  - **NOTE** Having a local git branch with `maint-14.0` as the upstream branch with these values saved means you only need to periodically `git pull --rebase` and update the `set-config.tbb-version` file
+  - **NOTE** Having a local git branch with `maint-14.5` as the upstream branch with these values saved means you only need to periodically `git pull --rebase` and update the `set-config.tbb-version` file
   - [ ] `tor-browser-build` is on the right commit: `git tag -v mb-${MULLVAD_BROWSER_VERSION}-${MULLVAD_BROWSER_BUILD_N} && git checkout mb-${MULLVAD_BROWSER_VERSION}-${MULLVAD_BROWSER_BUILD_N}`
   - [ ] `tor-browser-build/tools/signing/set-config.hosts`
     - `ssh_host_builder`: ssh hostname of machine with unsigned builds

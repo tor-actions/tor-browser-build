@@ -248,7 +248,7 @@ popd
 - [ ] **(Optional)** Generate and deploy new update responses
   - **NOTE**: This is only required if there will be no corresponding 14.0 release (i.e. this is an emergency legacy-only 13.5 release). Normally, legacy update responses are generated and deployed as part of the 14.0 release.
   - **⚠️ WARNING**: This is a little bit off the beaten track, ping boklm or morgan if you have any doubts
-  - From the `maint-14.0` branch:
+  - From the `maint-14.5` branch:
     - [ ] Update `rbm.conf`
       - [ ] `var/torbrowser_legacy_version`: update to `${TOR_BROWSER_VERSION}`
         - **NOTE** this is the browser version for the legacy branch, not the 14.0 branch
