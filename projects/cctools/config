@@ -2,7 +2,7 @@
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 version: '[% c("abbrev") %]'
 # This can be found in
-# taskcluster/ci/fetch/toolchains.yml
+# taskcluster/kinds/fetch/toolchains.yml
 git_hash: 30518813875aed656aa7f18b6d485feee25f8f87
 git_url: https://github.com/tpoechtrager/cctools-port
 container:

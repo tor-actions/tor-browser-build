@@ -4,8 +4,8 @@ libraries which expose a public C API.
 It is needed to build Firefox and GeckoView, therefore we adhere to the version
 that is known to work with their version.
 It can be found in Firefox's source tree by cross-referencing
-`taskcluster/ci/toolchain/cbindgen.yml` and
-`taskcluster/ci/fetch/toolchains.yml`.
+`taskcluster/kinds/toolchain/cbindgen.yml` and
+`taskcluster/kinds/fetch/toolchains.yml`.
 
 # Vendored dependencies
 

@@ -4,7 +4,7 @@ with Linux and other operating systems, therefore we build a
 [port](https://github.com/tpoechtrager/cctools-port).
 
 Firefox also builds this port, therefore we match the version you can find in
-`taskcluster/ci/fetch/toolchains.yml` in Firefox's source tree.
+`taskcluster/kinds/fetch/toolchains.yml` in Firefox's source tree.
 
 # Caveats
 

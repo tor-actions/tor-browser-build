@@ -12,8 +12,8 @@ also add platform-specific libraries and tools.
 ## Version
 
 We use the same version of LLVM as Firefox.
-You can cross-reference `taskcluster/ci/toolchain/clang.yml` and
-`taskcluster/ci/fetch/toolchains.yml` to get the exact git tree.
+You can cross-reference `taskcluster/kinds/toolchain/clang.yml` and
+`taskcluster/kinds/fetch/toolchains.yml` to get the exact git tree.
 However, since we need to use the LLVM source in several projects and its
 repository is quite big, we fetch it in the `llvm-project` project.
 

@@ -26,7 +26,7 @@ If you need to update the version of the WASI SDK, please be sure to update also
 the hashes of the submodules.
 
 We stick to the same version used by Firefox, that can be found in the usual
-`taskcluster/ci/fetch/toolchains.yml`.
+`taskcluster/kinds/fetch/toolchains.yml`.
 
 # Mozilla's build script
 

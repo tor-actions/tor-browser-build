@@ -13,7 +13,7 @@ without notice (the URL is probably the result of reverse engineering).
 
 Anyway, we do not change the file we mirror in any way, so users can verify the
 hash corresponds to the one that was at a certain point versioned in Firefox's
-source code (in `taskcluster/ci/toolchain/macos-sdk.yml`).
+source code (in `taskcluster/kinds/toolchain/macos-sdk.yml`).
 
 # LLVM Runtimes
 

@@ -15,7 +15,7 @@ This tool was written by Apple and released under an open source license, but
 like other macOS tools, the official source code is macOS-specific.
 So, we use a Linux port (that can be built only with Clang).
 We use the same version as Mozilla (it can be checked in
-`taskcluster/ci/fetch/toolchains.yml` on Firefox's source tree).
+`taskcluster/kinds/fetch/toolchains.yml` on Firefox's source tree).
 
 ## Reproducibility patches
 
