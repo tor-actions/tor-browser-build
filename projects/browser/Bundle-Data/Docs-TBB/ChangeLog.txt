@@ -1,3 +1,23 @@
+Tor Browser 14.5.2 - May 18 2025
+ * All Platforms
+   * Bug 43397: Click to play should override "Any capability blocked in the top document must be blocked in its subdocuments too" [tor-browser]
+   * Bug 43802: Rebase Tor Browser Stable onto Firefox 128.10.1esr [tor-browser]
+   * Bug 41460: Add brizental to the list of people who can sign Tor Browser and Mullvad Browser tags [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 128.10.1esr
+   * Bug 43635: Console noise due to the x-load capability not being localized [tor-browser]
+   * Bug 43738: Backport Bugzilla 1947157: Move linux security warning content into own page [tor-browser]
+ * Android
+   * Updated GeckoView to 128.10.1esr
+ * Build System
+   * All Platforms
+     * Bug 43777: Disable ./mach telemetry [tor-browser]
+     * Bug 41449: Add prefix to update-responses xml files [tor-browser-build]
+     * Bug 41451: When update-responses contains multiple versions, .htaccess only has one no-update.xml redirect [tor-browser-build]
+     * Bug 41452: Skip update-responses xml files for versions which don't have incrementals [tor-browser-build]
+   * Windows + Linux + Android
+     * Updated Go to 1.23.9
+
 Tor Browser 14.5.1 - April 29 2025
  * All Platforms
    * Bug 43670: Rebase stable onto 128.10.0esr [tor-browser]

@@ -171,7 +171,7 @@ class ChangelogBuilder:
             self._set_issue(issues[0], is_mullvad)
         elif len(issues) > 1:
             raise ValueError(
-                "Multiple issues found, try to specify the browser."
+                f"Multiple issues found for {issue_or_version}, try to specify the browser."
             )
         else:
             self._fetch_issue(issue_or_version, is_mullvad)
