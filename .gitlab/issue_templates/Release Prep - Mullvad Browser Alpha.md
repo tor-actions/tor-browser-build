@@ -250,4 +250,4 @@ Mullvad Browser Alpha (and Nightly) are on the `main` branch
 </details>
 
 /label ~"Apps::Type::ReleasePreparation"
-/label ~"Sponsor 131"
+/label ~"Project 131"

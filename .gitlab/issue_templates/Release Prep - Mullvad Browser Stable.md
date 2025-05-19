@@ -258,4 +258,4 @@ Mullvad Browser Stable is on the `maint-${MULLVAD_BROWSER_MAJOR}.${MULLVAD_BROWS
 </details>
 
 /label ~"Apps::Type::ReleasePreparation"
-/label ~"Sponsor 131"
+/label ~"Project 131"
