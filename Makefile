@@ -617,9 +617,6 @@ list_toolchain_updates-application-services: submodule-update
 list_toolchain_updates-geckoview: submodule-update
 	$(rbm) build geckoview --step list_toolchain_updates --target nightly --target torbrowser-android-armv7
 
-list_toolchain_updates-firefox-android: submodule-update
-	$(rbm) build firefox-android --step list_toolchain_updates --target nightly --target torbrowser-android-armv7
-
 create_glean_deps_tarball: submodule-update
 	 $(rbm) build glean --step create_glean_deps_tarball --target alpha --target torbrowser-android-armv7
 
