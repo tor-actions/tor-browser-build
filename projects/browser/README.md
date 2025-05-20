@@ -25,7 +25,7 @@ The Android script is much simpler.
 Tor and pluggable transports are already packaged in `tor-android-service` and
 `tor-onion-proxy-library`.
 The only missing piece is NoScript, so we add it to the APK produced by
-`firefox-android`.
+`geckoview`.
 
 This APK is unsigned, so we sign with a private key we ship in
 `android-qa.keystore`, so that the APK we ship can be installed for QA (Android
