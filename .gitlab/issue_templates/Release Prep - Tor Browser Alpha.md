@@ -351,3 +351,4 @@ popd
 </details>
 
 /label ~"Apps::Type::ReleasePreparation"
+/label ~"Apps::Product::TorBrowser"
