@@ -1,3 +1,10 @@
+Tor Browser 13.5.18 - May 27 2025
+ * All Platforms
+   * Updated Firefox to 115.24.0esr
+   * Updated NoScript to 13.0.6
+   * Bug 43810: Rebase Tor Browser Legacy onto Firefox 115.24.0esr [tor-browser]
+   * Bug 43811: Backport security fixes from Firefox 139 [tor-browser]
+
 Tor Browser 13.5.17 - May 18 2025
  * All Platforms
    * Updated Firefox to 115.23.1esr
