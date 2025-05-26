@@ -1,3 +1,16 @@
+Tor Browser 14.5.3 - May 26 2025
+ * All Platforms
+   * Updated NoScript to 13.0.6
+   * Bug 43811: Backport security fixes from Firefox 139 [tor-browser]
+   * Bug 439: Rebase Mullvad Browser stable onto 128.11.0esr [mullvad-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 128.11.0esr
+ * Android
+   * Updated GeckoView to 128.11.0esr
+ * Build System
+   * Android
+     * Bug 43809: Allow tba-fetch-deps.sh to fetch prebuilt artifacts from tor-browser-build from nightlies [tor-browser]
+
 Tor Browser 14.5.2 - May 18 2025
  * All Platforms
    * Bug 43397: Click to play should override "Any capability blocked in the top document must be blocked in its subdocuments too" [tor-browser]
