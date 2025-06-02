@@ -121,6 +121,6 @@ apksigner sign --verbose --min-sdk-version [% c("var/android_min_api") %] --ks $
 [% END -%]
 
 [% IF c("var/nightly") -%]
-  mkdir -p "[% dest_dir %]/[% c('filename') %]/artifacts
+  mkdir -p "[% dest_dir %]/[% c('filename') %]/artifacts"
   cp -r $rootdir/geckoview/artifacts [% dest_dir %]/[% c('filename') %]
 [% END %]
