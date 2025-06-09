@@ -41,8 +41,8 @@ echo "Building $variant Fenix APK"
 gradle $GRADLE_FLAGS -PversionName="$version_name" "assemble$variant"
 
 echo "Build finished, copying the APK(s) to the destination directory $(date)"
-mkdir $distdir/[% project %]
-cp $objdir/gradle/build/mobile/android/fenix/app/outputs/apk/fenix/$variant/*.apk $distdir/[% project %]
+mkdir -p $distdir/[% project %]
+mv $objdir/gradle/build/mobile/android/fenix/app/outputs/apk/fenix/$variant/*.apk $distdir/[% project %]
 
 echo "Building non optimized $variant Fenix APK for testing"
 gradle $GRADLE_FLAGS -PversionName="$version_name" -PdisableOptimization "assemble$variant"
@@ -52,9 +52,8 @@ gradle $GRADLE_FLAGS -PversionName="$version_name" -PtestBuildType="$variant" -P
 
 echo "Test build finished, copying the APKs to the destination directory $(date)"
 
-mkdir $distdir/[% project %]/tests
-cp $objdir/gradle/build/mobile/android/fenix/app/outputs/apk/fenix/$variant/*.apk $distdir/[% project %]/tests
-cp $objdir/gradle/build/mobile/android/fenix/app/outputs/apk/androidTest/fenix/$variant/*.apk $distdir/[% project %]/tests
+mkdir -p $distdir/[% project %]/tests
+mv $objdir/gradle/build/mobile/android/fenix/app/outputs/apk/fenix/$variant/*.apk $distdir/[% project %]/tests
+mv $objdir/gradle/build/mobile/android/fenix/app/outputs/apk/androidTest/fenix/$variant/*.apk $distdir/[% project %]/tests
 
 popd
-
