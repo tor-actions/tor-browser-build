@@ -111,6 +111,8 @@ input_files:
     enable: '[% ! c("var/android") %]'
   - filename: Bundle-Data
     enable: '[% ! c("var/android") %]'
+  - filename: dmg-root
+    enable: '[% ! c("var/android") %]'
   - URL: https://addons.mozilla.org/firefox/downloads/file/4411102/noscript-12.1.1.xpi
     name: noscript
     sha256sum: f9639e63ffcfc352036de00e4ff6694bb0ca65a0bb8fbd103bd08f32dc1ff31a

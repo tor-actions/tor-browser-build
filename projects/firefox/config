@@ -249,3 +249,11 @@ input_files:
     # TorButton patch authored by Arthur Edelstein, from https://github.com/arthuredelstein/torbutton/ branch 2.1.10-namecoin
   - filename: namecoin-etld.patch
     enable: '[% c("var/namecoin") %]'
+  - filename: dmg-root
+    enable: '[% c("var/macos") && c("var/nightly") %]'
+  - project: hfsplus-tools
+    name: hfsplus-tools
+    enable: '[% c("var/macos") && c("var/nightly") %]'
+  - project: libdmg-hfsplus
+    name: libdmg
+    enable: '[% c("var/macos") && c("var/nightly") %]'

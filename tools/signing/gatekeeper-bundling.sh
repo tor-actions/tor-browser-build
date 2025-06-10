@@ -64,7 +64,7 @@ test -d "$macos_signed_dir" || mkdir "$macos_signed_dir"
 tmpdir="$macos_stapled_dir/tmp"
 rm -Rf "$tmpdir"
 mkdir "$tmpdir"
-cp -rT "$script_dir/../../projects/browser/Bundle-Data/$ProjName.dmg" "$tmpdir/dmg"
+cp -rT "$script_dir/../../projects/common/dmg-root/$ProjName.dmg" "$tmpdir/dmg"
 
 tar -C "$tmpdir" -xf "$libdmg_file"
 tar -C "$tmpdir" -xf "$hfstools_file"

@@ -49,6 +49,11 @@ export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/node/bi
   [% END -%]
 [% END -%]
 
+[% IF c("var/macos") && c("var/nightly") %]
+  tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/hfsplus-tools') %]
+  tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/libdmg') %]
+[% END %]
+
 [% IF c("var/rlbox") -%]
   tar -C /var/tmp/dist -xf [% c('input_files_by_name/wasi-sysroot') %]
   export WASI_SYSROOT=/var/tmp/dist/wasi-sysroot
@@ -128,16 +133,36 @@ echo "Starting ./mach build $(date)"
   ./mach build stage-package
 [% END -%]
 
-[% IF c("var/nightly") && c("var/linux") -%]
+[% IF c("var/nightly") -%]
   echo "Building development artifacts"
+
+  [% IF c("var/macos") -%]
+    export MOZ_PKG_MAC_BACKGROUND=$rootdir/dmg-root/[% c('var/ProjectName') %].dmg/.background/background.tiff
+    export MOZ_PKG_MAC_DSSTORE=$rootdir/dmg-root/[% c('var/ProjectName') %].dmg/nightly.DS_Store
+    export MOZ_PKG_MAC_ICON=$rootdir/dmg-root/[% c('var/ProjectName') %].dmg/.VolumeIcon.icns
+  [% END -%]
   ./mach package
 
   artifactsdir=[% out_dir %]/artifacts
   mkdir $artifactsdir
+
   # Copy the artifacts to the target directory
   # Naming convention is the same as Mozilla uses for their artifacts
-  cp -a obj-*/dist/*.tar.xz $artifactsdir/target.tar.xz
-  cp -a obj-*/dist/*.zip $artifactsdir/target.xpt_artifacts.zip
+  mv obj-*/dist/*.xpt_artifacts.zip $artifactsdir/target.xpt_artifacts.zip
+
+  [% IF c("var/macos") -%]
+    mv obj-*/dist/*.dmg $artifactsdir/target.dmg
+    mv obj-*/dist/*.update_framework_artifacts.zip $artifactsdir/target.update_framework_artifacts.zip
+  [% END -%]
+
+  [% IF c("var/linux") -%]
+    mv obj-*/dist/*.tar.xz $artifactsdir/target.tar.xz
+  [% END -%]
+
+  [% IF c("var/windows") -%]
+    mv obj-*/dist/*.zip $artifactsdir/target.zip
+  [% END -%]
+
   ./mach python -m mozbuild.action.test_archive common $artifactsdir/target.common.tests.tar.gz
 [% END %]
 

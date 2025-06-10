@@ -56,6 +56,12 @@
   export TOOLCHAIN_PREFIX=$CROSS_CCTOOLS_PATH/bin/[% c('var/build_target') %]-
   export DSYMUTIL="$TOOLCHAIN_DIR/clang/bin/dsymutil"
 
+  [% IF c("var/nightly") -%]
+    export MKFSHFS=/var/tmp/dist/hfsplus-tools/newfs_hfs
+    export DMG_TOOL=/var/tmp/dist/libdmg-hfsplus/dmg
+    export HFS_TOOL=/var/tmp/dist/libdmg-hfsplus/hfsplus
+  [% END -%]
+
   export HOST_CFLAGS="-g"
   export HOST_CXXFLAGS="-g"
   export HOST_LDFLAGS="-g"
