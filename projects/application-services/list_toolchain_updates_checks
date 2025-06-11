@@ -8,7 +8,7 @@ if (m/^\\s*compileSdkVersion:\\s([^"]*),/) {
 }
 EOF
 needed=$(cat build.gradle | perl -ne "$p")
-current=34
+current='[% pc("android-toolchain", "version") %]'
 check_update_needed compileSdkVersion "$needed" "$current"
 
 
@@ -48,12 +48,12 @@ current='[% c("var/nss_version") %]-with-nspr-[% c("var/nspr_version") %]'
 check_update_needed nss-nspr "$needed" "$current"
 
 # uniffi
-read -d '' p << 'EOF' || true
-if (m/^\\s*uniffi\\s*=\\s*"([^"]*)"/) {
-  print $1;
-  exit;
-}
-EOF
-needed=$(cat Cargo.toml | perl -ne "$p")
+p='while (<>) {
+  if (m/^\s*uniffi\s*=\s*\{[^}]*version\s*=\s*"([^"]*)"/) {
+    print $1;
+    exit;
+  }
+}'
+needed=$(cat components/autofill/Cargo.toml | perl -ne "$p")
 current='[% pc("uniffi-rs", "version") %]'
 check_update_needed uniffi "$needed" "$current"

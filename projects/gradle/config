@@ -7,6 +7,7 @@ container:
 var:
   gradle_sha256sum:
     8.8: a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612
+    8.13: 20f1b1176237254a6fc204d8434196fa11a4cfb387567519c61556e8710aed78
 
 input_files:
   - project: container-image

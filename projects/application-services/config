@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
-version: 128.0.1
-git_hash: 0e4777f4133a98f44bca164fcf0406e8f706dbe4
+version: 140.0
+git_hash: 8ee6cb6a23f96ff8e2161926441aea72d6f09249
 git_url: https://github.com/mozilla/application-services
 git_submodule: 1
 container:
@@ -8,11 +8,11 @@ container:
 
 var:
   # This should be updated when the list of gradle dependencies is changed.
-  gradle_dependencies_version: 11
-  gradle_version: 8.8
-  glean_parser: 14.0.1
-  nss_version: '3.101'
-  nspr_version: '4.35'
+  gradle_dependencies_version: 12
+  gradle_version: 8.13
+  glean_parser: 17.1.0
+  nss_version: '3.110'
+  nspr_version: '4.36'
 
 steps:
   build:
@@ -21,7 +21,7 @@ steps:
       # Due to some issue in application-service causing non matching
       # builds when build time differ a lot, we need to do periodic rebuilds:
       # https://gitlab.torproject.org/tpo/applications/tor-browser-build/-/merge_requests/937#note_3009480
-      rebuild_date: '2024-09-12'
+      rebuild_date: '2025-06-12'
       arch_deps:
         # Needed to build NSS
         - gyp
@@ -43,16 +43,16 @@ steps:
       - project: uniffi-rs
         name: uniffi-rs
         pkg_type: build
-      # Only Application Services currently requires build tools 30.0.3.
+      # Only Application Services currently requires build tools 35.
       # So, download them only here, rather than adding them to the shared
       # toolchain.
-      - URL: 'https://dl.google.com/android/repository/build-tools_r30.0.3-linux.zip'
-        name: build_tools_30
-        sha256sum: 24593500aa95d2f99fb4f10658aae7e65cb519be6cd33fa164f15f27f3c4a2d6
+      - URL: 'https://dl.google.com/android/repository/build-tools_r35_linux.zip'
+        name: build_tools_35
+        sha256sum: bd3a4966912eb8b30ed0d00b0cda6b6543b949d5ffe00bea54c04c81e1561d88
       # NSS version ans sha256 are in libs/build-all.sh.
       - URL: 'https://ftp.mozilla.org/pub/security/nss/releases/NSS_[% c("var/nss_version") | replace("\\.", "_") %]_RTM/src/nss-[% c("var/nss_version") %]-with-nspr-[% c("var/nspr_version") %].tar.gz'
         name: nss
-        sha256sum: 566faa9283ff3d9a7d6c44272df6e4330e3e06ca4e841a68840d31b27c9161c4
+        sha256sum: 96114bef9e9692dda6e7793da26fedef0dc0449c3644ebe1122464e599a39dc0
       - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
         name: gradle-dependencies
         exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
@@ -65,19 +65,14 @@ steps:
         project: application-services
         pkg_type: cargo_vendor
         norec:
-          sha256sum: 92ce1131b35bf78d86362670ba7e4930ecdd1117694996d7cce850e4860f90b6
+          sha256sum: 4cf0235b525b5ce1d8bcc40e9763a13fd0e79c773749b900b4d7420551cf5114
       - filename: local-repository.diff
         enable: '[% !c("var/fetch_gradle_dependencies") %]'
       - filename: gen_gradle_deps_file.sh
         enable: '[% c("var/fetch_gradle_dependencies") %]'
       - filename: bug_13028.patch
       - filename: apply-bug-13028.diff
-      # Delete when this patch is included upstream
-      - filename: bug40485-nimbus-fml-reproducibility.diff
       - filename: no-ndk-lookup.diff
-      # as-ohttp-client lists both the version for ohttp and a git repo + rev,
-      # but this breaks the vendoring for offline builds.
-      - filename: ohttp-no-git.diff
       - filename: offline-nimbus-fml.diff
       - filename: glean-noop.diff
       - filename: a-s-noop.diff

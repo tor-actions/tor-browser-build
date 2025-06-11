@@ -1,3 +1,48 @@
+diff --git a/build-scripts/component-common.gradle b/build-scripts/component-common.gradle
+index a126341b0..3b3579290 100644
+--- a/build-scripts/component-common.gradle
++++ b/build-scripts/component-common.gradle
+@@ -111,16 +111,30 @@ ext.configureUniFFIBindgen = { crateName ->
+                     commandLine "${mozconfig.topobjdir}/dist/host/bin/embedded-uniffi-bindgen", 'generate', '--library', libraryPath, "--crate", crateName, '--language', 'kotlin', '--out-dir', uniffiOutDir.get(), '--no-format'
+                 }
+             } else {
+-                def libraryPath = megazordNative.asFileTree.matching {
+-                    include "${nativeRustTarget}/libmegazord.*"
+-                }.singleFile
+-
+-                if (libraryPath == null) {
+-                    throw new GradleException("libmegazord dynamic library path not found")
+-                }
+-                exec {
+-                    workingDir project.rootDir
+-                    commandLine '/usr/bin/env', 'cargo', 'uniffi-bindgen', 'generate', '--library', libraryPath, "--crate", crateName, '--language', 'kotlin', '--out-dir', uniffiOutDir.get(), '--no-format'
++                if (crateName.toString().contains("places")) {
++                     def libraryPath = megazordNative.asFileTree.matching {
++                        include "${nativeRustTarget}/libmegazord.*"
++                    }.singleFile
++
++                    if (libraryPath == null) {
++                        throw new GradleException("libmegazord dynamic library path not found")
++                    }
++                    exec {
++                        workingDir project.rootDir
++                        commandLine '/usr/bin/env', 'cargo', 'uniffi-bindgen', 'generate', '--library', libraryPath, "--crate", crateName, '--language', 'kotlin', '--out-dir', uniffiOutDir.get(), '--no-format'
++                    }
++                } else {
++                    def libraryPath = "${project.rootDir}/megazords/full/target/debug/libmegazord.so"
++                    exec {
++                        workingDir project.rootDir
++                        def command = ["${rootProject.projectDir}/uniffi-rs/uniffi-bindgen", 'generate', '--library', libraryPath, "--crate", crateName, '--language', 'kotlin', '--out-dir', uniffiOutDir.get(), '--no-format']
++                        println "Executing command: ${command.join(' ')}"
++                        commandLine command
++
++                        // Print both stdout and stderr to Gradle's console
++                        standardOutput = System.out
++                        errorOutput = System.err
++                    }
+                 }
+             }
+         }
 diff --git a/components/fxa-client/android/src/main/java/mozilla/appservices/fxaclient/Config.kt b/components/fxa-client/android/src/main/java/mozilla/appservices/fxaclient/Config.kt
 index 78c16dd0a..d2615fa74 100644
 --- a/components/fxa-client/android/src/main/java/mozilla/appservices/fxaclient/Config.kt
@@ -9,10 +54,10 @@ index 78c16dd0a..d2615fa74 100644
 +    is FxaServer.__NOOP -> ""
  }
 diff --git a/components/nimbus/android/src/main/java/org/mozilla/experiments/nimbus/Nimbus.kt b/components/nimbus/android/src/main/java/org/mozilla/experiments/nimbus/Nimbus.kt
-index 8c05be9cf..6bf2ec15d 100644
+index 376ef90d9..d80eea50f 100644
 --- a/components/nimbus/android/src/main/java/org/mozilla/experiments/nimbus/Nimbus.kt
 +++ b/components/nimbus/android/src/main/java/org/mozilla/experiments/nimbus/Nimbus.kt
-@@ -532,6 +532,8 @@ open class Nimbus(
+@@ -535,6 +535,8 @@ open class Nimbus(
                          ),
                      )
                  }
@@ -22,10 +67,10 @@ index 8c05be9cf..6bf2ec15d 100644
          }
      }
 diff --git a/megazords/full/Cargo.toml b/megazords/full/Cargo.toml
-index 75f44a812..a51c0643b 100644
+index c5e9eea19..ce899aac1 100644
 --- a/megazords/full/Cargo.toml
 +++ b/megazords/full/Cargo.toml
-@@ -9,21 +9,21 @@ license = "MPL-2.0"9345a6ea
+@@ -9,24 +9,24 @@ license = "MPL-2.0"
  crate-type = ["cdylib"]
 
  [dependencies]
@@ -49,6 +94,8 @@ index 75f44a812..a51c0643b 100644
 -crashtest = { path = "../../components/crashtest" }
 -error-support = { path = "../../components/support/error" }
 -suggest = { path = "../../components/suggest" }
+-search = { path = "../../components/search" }
+-tracing-support = { path = "../../components/support/tracing" }
 +# push = { path = "../../components/push" }
 +# remote_settings = { path = "../../components/remote_settings" }
 +# rust-log-forwarder = { path = "../../components/support/rust-log-forwarder" }
@@ -58,13 +105,16 @@ index 75f44a812..a51c0643b 100644
 +# crashtest = { path = "../../components/crashtest" }
 +# error-support = { path = "../../components/support/error" }
 +# suggest = { path = "../../components/suggest" }
++# search = { path = "../../components/search" }
++# tracing-support = { path = "../../components/support/tracing" }
 
  lazy_static = "1.4"
+ init_rust_components = { path = "../../components/init_rust_components" }
 diff --git a/megazords/full/src/lib.rs b/megazords/full/src/lib.rs
-index 01d1be98b..a68eb647f 100644
+index 4b6ba4499..e4fde58ae 100644
 --- a/megazords/full/src/lib.rs
 +++ b/megazords/full/src/lib.rs
-@@ -8,20 +8,20 @@
+@@ -8,24 +8,24 @@
  use std::ffi::CString;
  use std::os::raw::c_char;
 
@@ -72,46 +122,37 @@ index 01d1be98b..a68eb647f 100644
 -pub use crashtest;
 -pub use error_support;
 -pub use fxa_client;
+-pub use init_rust_components;
 -pub use logins;
+-pub use merino;
 -pub use nimbus;
 +// pub use autofill;
 +// pub use crashtest;
 +// pub use error_support;
 +// pub use fxa_client;
++// pub use init_rust_components;
 +// pub use logins;
++// pub use merino;
 +// pub use nimbus;
  pub use places;
 -pub use push;
 -pub use remote_settings;
 -pub use rust_log_forwarder;
+-pub use search;
 -pub use suggest;
 -pub use sync_manager;
 -pub use tabs;
+-pub use tracing_support;
 -pub use viaduct;
 +// pub use push;
 +// pub use remote_settings;
 +// pub use rust_log_forwarder;
++// pub use search;
 +// pub use suggest;
 +// pub use sync_manager;
 +// pub use tabs;
++// pub use tracing_support;
 +// pub use viaduct;
  // TODO: Uncomment this code when webext-storage component is integrated in android
  // pub use webext_storage;
 
-diff --git a/publish.gradle b/publish.gradle
-index 71f5d55b9..659e26489 100644
---- a/publish.gradle
-+++ b/publish.gradle
-@@ -194,7 +194,11 @@ ext.configureUniFFIBindgen = { udlFilePath ->
-         def uniffiGeneratedPath = "generated/source/uniffi/${variant.name}/java"
-         def t = tasks.register("generate${variant.name.capitalize()}UniFFIBindings", Exec) {
-             workingDir project.rootDir
--            commandLine '/usr/bin/env', 'cargo', 'uniffi-bindgen', 'generate', "${project.projectDir}/${udlFilePath}", '--language', 'kotlin', '--out-dir', "${buildDir}/${uniffiGeneratedPath}"
-+            if (udlFilePath.contains("places")) {
-+                commandLine '/usr/bin/env', 'cargo', 'uniffi-bindgen', 'generate', "${project.projectDir}/${udlFilePath}", '--language', 'kotlin', '--out-dir', "${buildDir}/${uniffiGeneratedPath}"
-+            } else {
-+                commandLine '/usr/bin/env', "${rootProject.projectDir}/uniffi-rs/uniffi-bindgen", 'generate', "${project.projectDir}/${udlFilePath}", '--language', 'kotlin', '--out-dir', "${buildDir}/${uniffiGeneratedPath}"
-+            }
-             outputs.dir "${buildDir}/${uniffiGeneratedPath}"
-             // Re-generate if the interface definition changes.
-             inputs.file "${project.projectDir}/${udlFilePath}"

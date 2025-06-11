@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
-version: 0.27.1
-git_hash: bfb52effb0292f16d4c030d622887781639cbd1f
-git_url: https://gitlab.torproject.org/tpo/applications/uniffi-rs.git
+version: 0.29.0
+git_hash: c69eba9eb08b16a66aab7b25df6c55d0b60541db
+git_url: https://gitlab.torproject.org/tpo/applications/uniffi-rs
 container:
   use_container: 1
 
@@ -17,4 +17,4 @@ steps:
         project: uniffi-rs
         pkg_type: cargo_vendor
         norec:
-          sha256sum: 12a61a3dbe65a3946ed58fff3d849d11c9ade5818e2ef5771d2a2a531e25f553
+          sha256sum: 23c79da9169064f42c34b9dadfee9dcf5ed251f9843615ca3e9a0e59a49f581d

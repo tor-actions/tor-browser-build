@@ -6,8 +6,8 @@
     gradle_tarfile => c("input_files_by_name/gradle"),
   }) %]
 pushd /var/tmp/dist/android-toolchain/android-sdk-linux/build-tools/
-unzip $rootdir/'[% c("input_files_by_name/build_tools_30") %]'
-mv android-11 30.0.3
+unzip $rootdir/'[% c("input_files_by_name/build_tools_35") %]'
+mv android-15 35.0
 popd
 
 distdir=/var/tmp/dist/[% project %]
@@ -73,6 +73,19 @@ tar -xf $rootdir/[% c('input_files_by_name/uniffi-rs') %]
 # latest versions of dependencies sometimes.
 sed -i '$ s/$/-TORBROWSER/' version.txt
 
+pushd libs
+ln -s $rootdir/[% c("input_files_by_name/nss") %] ./
+ln -s $rootdir/bug_13028.patch
+patch -p2 < $rootdir/apply-bug-13028.diff
+patch -p2 < $rootdir/no-ndk-lookup.diff
+./build-all.sh desktop
+./build-all.sh android
+popd
+
+pushd megazords/full
+NSS_DIR=$(pwd)/../../libs/desktop/linux-x86-64/nss cargo build --target-dir=$(pwd)/target
+popd
+
 cp $rootdir/cargo-no-build.sh megazords/full/android/
 chmod +x megazords/full/android/cargo-no-build.sh
 patch -p1 < $rootdir/a-s-noop.diff
@@ -81,15 +94,6 @@ pushd components/external/glean
 cp $rootdir/cargo-no-build.sh glean-core/android-native/
 cp $builddir/uniffi-rs/uniffi-bindgen glean-core/android-native/
 patch -p1 < $rootdir/glean-noop.diff
-popd
-
-pushd libs
-ln -s $rootdir/[% c("input_files_by_name/nss") %] ./
-ln -s $rootdir/bug_13028.patch
-patch -p2 < $rootdir/apply-bug-13028.diff
-patch -p2 < $rootdir/no-ndk-lookup.diff
-./build-all.sh desktop
-./build-all.sh android
 popd
 
 [% IF c('var/fetch_gradle_dependencies') %]
@@ -104,8 +108,6 @@ popd
   export LC_ALL=C.UTF-8
   export LANG=C.UTF-8
   patch -p1 < $rootdir/local-repository.diff
-  patch -p1 < $rootdir/ohttp-no-git.diff
-  patch -p1 < $rootdir/bug40485-nimbus-fml-reproducibility.diff
   patch -p1 < $rootdir/offline-nimbus-fml.diff
   patch -p1 < $rootdir/41422-disable-viaduct.diff
   gradle_flags="--offline --no-daemon"

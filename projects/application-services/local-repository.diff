@@ -1,10 +1,10 @@
 diff --git a/build.gradle b/build.gradle
-index b22a0737..d335aa5b 100644
+index bd516e58c..b30d552c9 100644
 --- a/build.gradle
 +++ b/build.gradle
-@@ -39,6 +39,13 @@ buildscript {
-     ]
- 
+@@ -14,6 +14,14 @@ buildscript {
+     }
+
      repositories {
 +        maven {
 +            url "file:///var/tmp/dist/gradle-dependencies"
@@ -13,11 +13,12 @@ index b22a0737..d335aa5b 100644
 +                mavenPom()
 +            }
 +        }
++
          mavenCentral()
          google()
-         jcenter()
-@@ -88,6 +95,13 @@ apply plugin: 'de.undercouch.download'
- 
+         maven {
+@@ -59,6 +67,14 @@ plugins {
+
  allprojects {
      repositories {
 +        maven {
@@ -27,11 +28,12 @@ index b22a0737..d335aa5b 100644
 +                mavenPom()
 +            }
 +        }
++
          google()
-         jcenter()
+         mavenCentral()
          maven {
 diff --git a/settings.gradle b/settings.gradle
-index f652bd02..8c30a368 100644
+index 4117bc0d3..f1b028dad 100644
 --- a/settings.gradle
 +++ b/settings.gradle
 @@ -1,6 +1,19 @@
@@ -52,37 +54,39 @@ index f652bd02..8c30a368 100644
 +}
 +
  import org.yaml.snakeyaml.Yaml
- 
- includeBuild('tools/nimbus-gradle-plugin') {
-@@ -14,6 +27,13 @@ buildscript {
-         classpath 'org.yaml:snakeyaml:2.0'
-     }
-     repositories {
-+        maven {
-+            url "file:///var/tmp/dist/gradle-dependencies"
-+            metadataSources {
-+                gradleMetadata()
-+                mavenPom()
+
+ // We prefer `appServicesRootDir` over `rootDir` to help us on the path to the monorepo.
+@@ -23,6 +36,14 @@ buildscript {
+     if (!gradle.root.hasProperty("mozconfig")) {
+         // in app-services
+         repositories {
++            maven {
++                url "file:///var/tmp/dist/gradle-dependencies"
++                metadataSources {
++                    gradleMetadata()
++                    mavenPom()
++                }
 +            }
-+        }
-         jcenter()
-     }
- }
++
+             mavenCentral()
+         }
+     } else {
 diff --git a/tools/nimbus-gradle-plugin/settings.gradle b/tools/nimbus-gradle-plugin/settings.gradle
-index 7db19be0..1f36b991 100644
+index 7d907f057..c0d213503 100644
 --- a/tools/nimbus-gradle-plugin/settings.gradle
 +++ b/tools/nimbus-gradle-plugin/settings.gradle
-@@ -8,6 +8,13 @@ buildscript {
-         classpath 'org.yaml:snakeyaml:2.0'
-     }
-     repositories {
-+        maven {
-+            url "file:///var/tmp/dist/gradle-dependencies"
-+            metadataSources {
-+                gradleMetadata()
-+                mavenPom()
+@@ -14,6 +14,14 @@ buildscript {
+     if (!gradle.root.hasProperty("mozconfig")) {
+         // in app-services
+         repositories {
++            maven {
++                url "file:///var/tmp/dist/gradle-dependencies"
++                metadataSources {
++                    gradleMetadata()
++                    mavenPom()
++                }
 +            }
-+        }
-         jcenter()
-     }
- }
++
+             mavenCentral()
+         }
+     } else {

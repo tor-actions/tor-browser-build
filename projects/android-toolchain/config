@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 # FIXME: Rework this whole mess
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
-version: '34.0.0'
+version: 36.0.0
 var:
   setup: |
     mkdir -p /var/tmp/dist
@@ -29,39 +29,39 @@ var:
       export PATH=$PATH:$GRADLE_HOME/bin
     [% END -%]
   google_repo: https://dl.google.com/android/repository
-  android_api_level: 34
-  android_release_dir: android-14
-  android_platform_revision: '03'
-  android_ndk_version: 26
-  android_ndk_revision: c
-  android_ndk_version_build: 26.2.11394342
+  android_api_level: 36
+  android_release_dir: android-16
+  android_platform_revision: '01'
+  android_ndk_version: 28
+  android_ndk_revision: b
+  android_ndk_version_build: 28.1.13356709
   # We need the following two variables for get_build_tools, used by signing
   # scripts.
-  build_tools_version: 34
-  build_tools_filename: 'build-tools_r[% c("var/build_tools_version") %]-linux.zip'
-  build_tools_sha512sum: c28dd52f8eca82996726905617f3cb4b0f0aee1334417b450d296991d7112cab1288f5fd42c48a079ba6788218079f81caa3e3e9108e4a6f27163a1eb7f32bd7
-  commandlinetools_version: 11076708
-  commandlinetools_version_string: 12.0
+  build_tools_version: 36
+  build_tools_filename: 'build-tools_r[% c("var/build_tools_version") %]_linux.zip'
+  build_tools_sha512sum: 277c08c2dcced3c1cc46ce0349e18adc6d6d4b8739868eab5d469f9fb4e9c6b79aa9d2a6592cfc5db0ccb8690fcc75a44db4b18b03dcf349efd0eb54025ef5ca
+  commandlinetools_version: 13114758
+  commandlinetools_version_string: 19.0
 input_files:
   # Hashes can be compared with https://gitlab.com/fdroid/android-sdk-transparency-log/-/blob/master/checksums.json
   - URL: '[% c("var/google_repo") %]/commandlinetools-linux-[% c("var/commandlinetools_version") %]_latest.zip'
     name: android_commandlinetools
-    sha256sum: 2d2d50857e4eb553af5a6dc3ad507a17adf43d115264b1afc116f95c92e5e258
+    sha256sum: 7ec965280a073311c339e571cd5de778b9975026cfcbe79f2b1cdcb1e15317ee
   - URL: '[% c("var/google_repo") %]/android-ndk-r[% c("var/android_ndk_version") %][% c("var/android_ndk_revision") %]-linux.zip'
     name: android_ndk_compiler
-    sha256sum: 6d6e659834d28bb24ba7ae66148ad05115ebbad7dabed1af9b3265674774fcf6
+    sha256sum: e9f2759862cecfd48c20bbb7d8cfedbb020f4d91b5f78d9a2fc106f7db3c27ed
   - URL: '[% c("var/google_repo") %]/[% c("var/build_tools_filename") %]'
     name: build_tools
     sha512sum: '[% c("var/build_tools_sha512sum") %]'
-  - URL: '[% c("var/google_repo") %]/platform-[% c("var/android_api_level") %]-ext7_r[% c("var/android_platform_revision") %].zip'
+  - URL: '[% c("var/google_repo") %]/platform-[% c("var/android_api_level") %]_r[% c("var/android_platform_revision") %].zip'
     name: platform
-    sha256sum: 16fdb74c55e59ae3ef52def135aec713508467bd56d7dabcd8c9be31fa8b20f3
+    sha256sum: a5273f7d68de0a6a58032b26c24965634bc14ed3839e70a3a9759369f3f6c02a
   # ./mach bootstrap is fetching the latest version, so it does not seem to
   # matter which particular version we are using. Pin to the one fitting best to
   # SDK version/build-tools version.
   - URL: '[% c("var/google_repo") %]/platform-tools_r[% c("version") %]-linux.zip'
     name: platform_tools
-    sha256sum: 8137c2834dea05cb64c1a8bc041ea00fcd43e3a8a29429ad4f25b8ee51efebf6
+    sha256sum: 0ead642c943ffe79701fccca8f5f1c69c4ce4f43df2eefee553f6ccb27cbfbe8
 steps:
   # The get_build_tools step is used by tools/signing/android-signing
   get_build_tools:
