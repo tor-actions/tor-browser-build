@@ -2,6 +2,30 @@
 
 [% INCLUDE 'list_toolchain_updates-common-firefox-geckoview' %]
 
+[% IF c("var/linux") %]
+read -d '' p << 'EOF' || true
+my $d = YAML::XS::LoadFile('taskcluster/kinds/toolchain/misc.yml');
+my $fetches = $d->{'linux64-binutils'}{fetches}{fetch};
+if (ref $fetches ne 'ARRAY') {
+  print STDERR "linux64-binutils/fetches/fetch is not an array\\n";
+  exit 1;
+}
+foreach my $fetch (@$fetches) {
+  if ($fetch =~ m/^binutils-(.+)$/) {
+    print $1;
+    exit 0;
+  }
+}
+print STDERR "binutils not found in fetches\\n";
+exit 1
+EOF
+needed=$(perl -MYAML::XS -e "$p")
+current='[% pc("binutils", "version") %]'
+check_update_needed binutils "$needed" "$current"
+
+# End of Linux checks
+[% END -%]
+
 [% IF c("var/macos") %]
 # macosx-sdk
 read -d '' p << 'EOF' || true
@@ -70,6 +94,30 @@ EOF
 needed=$(perl -MYAML::XS -e "$p")
 current='[% pc("fxc2", "git_hash") %]'
 check_update_needed fxc2 "$needed" "$current"
+
+read -d '' p << 'EOF' || true
+my $d = YAML::XS::LoadFile('taskcluster/kinds/fetch/toolchains.yml');
+my $url = $d->{'windows-rs'}{fetch}{url};
+if ($url =~ m|crates/windows/(.+)/download$|) {
+  print $1;
+  exit 0;
+}
+print STDERR "windows-rs url not found ($url)\\n";
+exit 1
+EOF
+needed=$(perl -MYAML::XS -e "$p")
+current='[% c("var/windows_rs_version") %]'
+check_update_needed windows-rs "$needed" "$current"
+
+read -d '' p << 'EOF' || true
+my $d = YAML::XS::LoadFile('taskcluster/kinds/fetch/toolchains.yml');
+my $sha256 = $d->{'windows-rs'}{fetch}{sha256};
+exit 1 unless $sha256;
+print $sha256;
+EOF
+needed=$(perl -MYAML::XS -e "$p")
+current='[% c("var/windows_rs_sha256sum") %]'
+check_update_needed windows-rs-sha256sum "$needed" "$current"
 
 # End of Windows checks
 [% END -%]
