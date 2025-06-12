@@ -11,6 +11,11 @@ distdir=/var/tmp/dist/[% project %]
 tar -xf [% c('input_files_by_name/node') %]
 cd node-v[% c('version') %]
 
+[% IF c("var/linux") -%]
+  # Same workaround as Mozilla. See taskcluster/scripts/misc/build-nodejs.sh.
+  sed -i '/HAVE_SYS_RANDOM_H/d;/HAVE_GETRANDOM/d' deps/cares/config/linux/ares_config.h
+[% END -%]
+
 ./configure --prefix=$distdir
 make -j[% c("num_procs") %]
 make install
