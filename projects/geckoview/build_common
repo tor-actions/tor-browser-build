@@ -48,4 +48,10 @@ export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
 # Create .mozbuild to avoid interactive prompt in configure
 mkdir "$HOME/.mozbuild"
 
+# mach looks for bundletool and avd only in ~/.mozbuild. Maybe an upstream bug?
+mv $rootdir/[% c("input_files_by_name/bundletool") %] $HOME/.mozbuild/bundletool.jar
+mkdir $HOME/.mozbuild/android-device
+touch $HOME/.mozbuild/android-device/avd
+chmod +x $HOME/.mozbuild/android-device/avd
+
 [% INCLUDE 'browser-localization' %]

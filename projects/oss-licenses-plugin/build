@@ -12,9 +12,10 @@ export PATH=/var/tmp/dist/gradle/bin:$PATH
 gradle_repo=/var/tmp/dist/gradle-dependencies
 mv $rootdir/[% c('input_files_by_name/gradle-dependencies') %] $gradle_repo
 cp -rl $gradle_repo/m2/* $gradle_repo || true
+cp -rl $gradle_repo/dl/android/maven2/* $gradle_repo || true
 
 cd $builddir
-patch -p2 < $rootdir/sort-dependencies.diff
+patch -p2 < $rootdir/sort-dependencies-pr-268.patch
 patch -p2 < $rootdir/build-customization.diff
 gradle --no-daemon --offline -Dmaven.repo.local=$gradle_repo assemble publish
 cd build/repo

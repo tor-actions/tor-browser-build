@@ -1,12 +1,12 @@
-version: 0.10.4
+version: 0.10.6
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 git_url: https://github.com/google/play-services-plugins.git
-git_hash: c9ed0e48abe2c55dd67f2c2224988d1d690cecc9 # oss-licenses-plugin-v0.10.4
+git_hash: 45ec9c690672f0ff6f86e6221ef64e204b10a228 # oss-licenses-plugin-v0.10.6
 
 var:
   # This should be updated when the list of gradle dependencies is changed.
-  gradle_dependencies_version: 1
-  gradle_version: 8.8
+  gradle_dependencies_version: 2
+  gradle_version: 8.13
 
 container:
   use_container: 1
@@ -18,5 +18,5 @@ input_files:
   - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
     name: gradle-dependencies
     exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
+  - filename: sort-dependencies-pr-268.patch
   - filename: build-customization.diff
-  - filename: sort-dependencies.diff

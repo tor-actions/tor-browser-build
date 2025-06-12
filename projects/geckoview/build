@@ -43,7 +43,7 @@ echo "Starting ./mach build $(date)"
   # Copy the artifacts to the target directory
   # Naming convention is the same as Mozilla uses for their artifacts
   cp -a obj-*/dist/*.zip $artifactsdir/target.xpt_artifacts.zip
-  cp -a obj-*/gradle/build/mobile/android/geckoview_example/outputs/apk/withGeckoBinaries/*/geckoview_example-withGeckoBinaries-*.apk $artifactsdir/geckoview_example.apk
+  cp -a obj-*/gradle/build/mobile/android/geckoview_example/outputs/apk/*/geckoview_example-*.apk $artifactsdir/geckoview_example.apk
   ./mach python -m mozbuild.action.test_archive common $artifactsdir/target.common.tests.tar.gz
 [% END %]
 

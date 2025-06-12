@@ -1,17 +1,17 @@
 diff --git a/oss-licenses-plugin/build.gradle b/oss-licenses-plugin/build.gradle
-index 2a7dd74..f9368e1 100644
+index 863625c..65ad088 100644
 --- a/oss-licenses-plugin/build.gradle
 +++ b/oss-licenses-plugin/build.gradle
-@@ -15,34 +15,25 @@ dependencies {
+@@ -20,34 +20,25 @@ dependencies {
  group = 'com.google.android.gms'
- version = '0.10.4'
+ version = '0.10.6'
  
 -apply plugin: 'maven'
 +apply plugin: 'maven-publish'
  
  repositories {
      google()
-     jcenter()
+     mavenCentral()
 +    mavenLocal()
  }
  
