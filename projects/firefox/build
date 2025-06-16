@@ -136,7 +136,7 @@ echo "Starting ./mach build $(date)"
   mkdir $artifactsdir
   # Copy the artifacts to the target directory
   # Naming convention is the same as Mozilla uses for their artifacts
-  cp -a obj-*/dist/*.tar.bz2 $artifactsdir/target.tar.bz2
+  cp -a obj-*/dist/*.tar.xz $artifactsdir/target.tar.xz
   cp -a obj-*/dist/*.zip $artifactsdir/target.xpt_artifacts.zip
   ./mach python -m mozbuild.action.test_archive common $artifactsdir/target.common.tests.tar.gz
 [% END %]
