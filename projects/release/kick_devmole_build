@@ -1,9 +1,9 @@
 #!/usr/bin/bash
 
-# This script triggers a build of Tor or Mullvad Browser on Mullvad Infrastructure
-# Hashes are saved here: https://cdn.stagemole.eu/hashes/
-# A Mullvad build server auth token (var/devmole_auth_token) is required to build
-# For now you have to be connecting from Sweden (ie via Malmö or Gothenburg exits using MullvadVPN) for your request to succeed
+# This script triggers a build of Tor or Mullvad Browser using on GitHub Actions:
+# - https://github.com/mullvad/browser-build-public/actions
+# Hashes are saved here: https://cdn.stagemole.eu/browser/hashes/
+# A GitHub Access Token (var/devmole_auth_token) is required to kick a build
 
 set -e
 
@@ -45,4 +45,4 @@ curl \
     -d "{\"ref\":\"main\",\"inputs\":{\"tag\":\"${TAG}\",\"release\":\"${RELEASE}\"}}"
 
 echo
-echo Hashes will appear in the appropriate workflow run here: https://github.com/mullvad/browser-build-public/actions/workflows/build.yml
+echo Hashes will appear here: https://cdn.stagemole.eu/browser/hashes/[% c("var/projectname") %]/[% c("var/torbrowser_version") %]-[% c("var/torbrowser_build") %]/
