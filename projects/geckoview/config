@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
-filename: 'geckoview-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
+filename: 'geckoview-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %]'
 git_hash: 'tor-browser-[% c("var/geckoview_version") %]-[% c("var/browser_branch") %]-build[% c("var/browser_build") %]'
 tag_gpg_id: 1
 git_url: https://gitlab.torproject.org/tpo/applications/tor-browser.git
@@ -59,7 +59,7 @@ targets:
 
 steps:
   build_apk:
-    filename: 'geckoview-[% c("version") %]-apks-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
+    filename: 'geckoview-[% c("version") %]-apks-[% c("var/build_id") %]'
     version: '[% c("abbrev") %]'
     build_apk: '[% INCLUDE build_apk %]'
     input_files:

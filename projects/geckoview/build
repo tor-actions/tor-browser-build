@@ -38,7 +38,7 @@ echo "Starting ./mach build $(date)"
   echo "Building development artifacts"
   ./mach package
 
-  artifactsdir=$distdir/[% project %]/artifacts
+  artifactsdir=$outdir/artifacts
   mkdir -p $artifactsdir
   # Copy the artifacts to the target directory
   # Naming convention is the same as Mozilla uses for their artifacts
@@ -50,16 +50,9 @@ echo "Starting ./mach build $(date)"
 echo "Build finished, copying the AAR to the to the destination directory $(date)"
 
 [% IF !c("var/android_single_arch") -%]
-  mkdir -p "$distdir/[% project %]"
+  mkdir -p "$outdir/[% project %]"
   # We don't want the debug or "exoplayer" .aars, but the .aar that has `omni` in its name.
-  find obj-* -type f -name geckoview*omni*.aar -exec cp {} $distdir/[% project %] \;
+  find obj-* -type f -name geckoview*omni*.aar -exec mv {} $outdir/[% project %] \;
 [% ELSE -%]
 [% INCLUDE 'build_ac_fenix' %]
 [% END -%]
-
-echo "Starting to package artifacts $(date)"
-cd $distdir
-[% c('tar', {
-    tar_src => [ project ],
-    tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
-  }) %]

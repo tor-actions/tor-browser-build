@@ -2,8 +2,6 @@
 [% c("var/set_default_env") -%]
 [% pc(c('var/compiler'), 'var/setup', { compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')) }) %]
 
-tar -xf $rootdir/[% c('input_files_by_name/fenix') %]
-
 # Bundle our extension(s).
 #
 # NoScript will be copied over to the profile folder
@@ -97,20 +95,22 @@ function generate_apk {
   rm $aligned_apk
 }
 
+geckoviewdir="$rootdir/[% c('input_files_by_name/fenix') %]/geckoview"
+
 # Generate the QA APK and unsign patch.
 qa_apk=[% dest_dir %]/[% c('filename') %]/[% c("var/project-name") %]-qa-[% c("var/osname") %]-[% c("version") %].apk
 qa_unsign_patch="[% dest_dir %]/[% c('filename') %]/[% c('var/project-name') %]-qa-unsign-[% c('var/osname') %]-[% c('version') %].bspatch"
-apk=$rootdir/geckoview/*-[% c("var/abi") %]-*.apk
+apk=$geckoviewdir/*-[% c("var/abi") %]-*.apk
 generate_apk $qa_apk $apk $qa_unsign_patch
 
 # Generate the non-optimized APK used for testing and its unsign patch.
 noopt_apk=[% dest_dir %]/[% c('filename') %]/[% c("var/project-name") %]-noopt-[% c("var/osname") %]-[% c("version") %].apk
-noopt_final_apk=$rootdir/geckoview/tests/*-[% c("var/abi") %]-*.apk
+noopt_final_apk=$geckoviewdir/tests/*-[% c("var/abi") %]-*.apk
 generate_apk $noopt_apk $noopt_final_apk
 
 # Copy and sign the Android test APK.
 test_apk=[% dest_dir %]/[% c('filename') %]/[% c("var/project-name") %]-[% c("version") %]-androidTest.apk
-cp $rootdir/geckoview/tests/*-androidTest.apk $test_apk
+cp $geckoviewdir/tests/*-androidTest.apk $test_apk
 apksigner sign --verbose --min-sdk-version [% c("var/android_min_api") %] --ks $rootdir/android-qa.keystore --out $test_apk --in $test_apk --ks-key-alias androidqakey --key-pass pass:android --ks-pass pass:android
 
 [%IF c("var/tor-browser") -%]
@@ -122,5 +122,5 @@ apksigner sign --verbose --min-sdk-version [% c("var/android_min_api") %] --ks $
 
 [% IF c("var/nightly") -%]
   mkdir -p "[% dest_dir %]/[% c('filename') %]/artifacts"
-  cp -r $rootdir/geckoview/artifacts [% dest_dir %]/[% c('filename') %]
+  cp -r $rootdir/[% c('input_files_by_name/fenix') %]/artifacts [% dest_dir %]/[% c('filename') %]
 [% END %]

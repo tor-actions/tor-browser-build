@@ -5,7 +5,8 @@
 }) %]
 distdir=/var/tmp/dist
 builddir=/var/tmp/build
-mkdir -p $builddir $distdir
+outdir="[%  dest_dir _ '/' _ c('filename') -%]"
+mkdir -p $builddir $distdir $outdir
 
 tar -C $distdir -xf [% c('input_files_by_name/node') %]
 export PATH="/var/tmp/dist/node/bin:$PATH"

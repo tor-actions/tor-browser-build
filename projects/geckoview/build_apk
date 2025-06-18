@@ -38,9 +38,3 @@ echo "ac_add_options --with-branding=$branding_dir" >> mozconfig-android-all
 ./mach build --verbose
 
 [% INCLUDE 'build_ac_fenix' %]
-
-cd $distdir/
-[% c('tar', {
-    tar_src => [ project ],
-    tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
-  }) %]

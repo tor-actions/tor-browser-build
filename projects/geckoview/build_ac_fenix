@@ -27,7 +27,7 @@ echo autoPublish.android-components.dir=../android-components > local.properties
   # Add our localized strings
   supported_locales="[% tmpl(c('var/locales_mobile').join(' ')) %]"
   for lang in $supported_locales; do
-    cp "/var/tmp/dist/translation-fenix/$lang/torbrowser_strings.xml" "app/src/main/res/values-$lang/"
+    cp "$distdir/translation-fenix/$lang/torbrowser_strings.xml" "app/src/main/res/values-$lang/"
   done
 [% END -%]
 
@@ -41,8 +41,8 @@ echo "Building $variant Fenix APK"
 gradle $GRADLE_FLAGS -PversionName="$version_name" "assemble$variant"
 
 echo "Build finished, copying the APK(s) to the destination directory $(date)"
-mkdir -p $distdir/[% project %]
-mv $objdir/gradle/build/mobile/android/fenix/app/outputs/apk/fenix/$variant/*.apk $distdir/[% project %]
+mkdir -p $outdir/[% project %]
+mv $objdir/gradle/build/mobile/android/fenix/app/outputs/apk/fenix/$variant/*.apk $outdir/[% project %]
 
 echo "Building non optimized $variant Fenix APK for testing"
 gradle $GRADLE_FLAGS -PversionName="$version_name" -PdisableOptimization "assemble$variant"
@@ -52,8 +52,8 @@ gradle $GRADLE_FLAGS -PversionName="$version_name" -PtestBuildType="$variant" -P
 
 echo "Test build finished, copying the APKs to the destination directory $(date)"
 
-mkdir -p $distdir/[% project %]/tests
-mv $objdir/gradle/build/mobile/android/fenix/app/outputs/apk/fenix/$variant/*.apk $distdir/[% project %]/tests
-mv $objdir/gradle/build/mobile/android/fenix/app/outputs/apk/androidTest/fenix/$variant/*.apk $distdir/[% project %]/tests
+mkdir -p $outdir/[% project %]/tests
+mv $objdir/gradle/build/mobile/android/fenix/app/outputs/apk/fenix/$variant/*.apk $outdir/[% project %]/tests
+mv $objdir/gradle/build/mobile/android/fenix/app/outputs/apk/androidTest/fenix/$variant/*.apk $outdir/[% project %]/tests
 
 popd
