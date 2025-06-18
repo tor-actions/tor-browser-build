@@ -26,18 +26,6 @@ current='[% pc("android-toolchain", "version") %]'
 check_update_needed build_tools "$needed" "$current"
 
 
-# target_sdk
-read -d '' p << 'EOF' || true
-if (m/target_sdk_version\\s*=\\s*"(.+)"/) {
-  print $1;
-  exit;
-}
-EOF
-needed=$(cat build/moz.configure/android-sdk.configure | perl -ne "$p")
-current='[% pc("android-toolchain", "var/android_api_level") %]'
-check_update_needed target_sdk "$needed" "$current"
-
-
 # cmdline-tools
 read -d '' p << 'EOF' || true
 my $v, $s;
