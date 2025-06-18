@@ -21,7 +21,7 @@ var:
   firefox_platform_version: '140.0a1'
   geckoview_version: '[% c("var/firefox_platform_version") %]'
   browser_series: '15.0'
-  browser_rebase: 1
+  browser_rebase: 2
   browser_branch: '[% c("var/browser_series") %]-[% c("var/browser_rebase") %]'
   browser_build: 1
   gitlab_project: https://gitlab.torproject.org/tpo/applications/tor-browser
