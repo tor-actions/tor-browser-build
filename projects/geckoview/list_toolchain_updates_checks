@@ -104,3 +104,27 @@ EOF
 needed=$(cat gradle/wrapper/gradle-wrapper.properties | perl -ne "$p")
 current='[% c("var/gradle_version") %]'
 check_update_needed gradle "$needed" "$current"
+
+
+# bundletool
+read -d '' p << 'EOF' || true
+if (m{^BUNDLETOOL_VERSION\\s*=\\s*"(.+)"}) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat python/mozboot/mozboot/android.py | perl -ne "$p")
+current='[% c("var/bundletool_version") %]'
+check_update_needed bundletool "$needed" "$current"
+
+
+# oss-licenses-plugin
+read -d '' p << 'EOF' || true
+if (m{^osslicenses-plugin\\s*=\\s*"(.+)"}) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat gradle/libs.versions.toml | perl -ne "$p")
+current='[% pc("oss-licenses-plugin", "version") %]'
+check_update_needed oss-licenses-plugin "$needed" "$current"
