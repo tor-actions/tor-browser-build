@@ -1,0 +1,24 @@
+This file is used by tools/list-unused-projects to find projects which
+are being used. The script is looking at which projects are being used
+when processing projects/release/build (recusively). However some
+projects are not being used in the build itself but are still being
+used or need to be kept. We are listing those projects here.
+
+- mmdebstrap ([% pc('mmdebstrap', 'version') %]) and mmdebstrap-image
+  ([% pc('mmdebstrap-image', 'version') %]) are used as part of the
+  build, but are not found as a dependency when no container needs to be
+  rebuilt (container-image filenames do not depend on mmdebstrap)
+
+- lox-wasm is ([% pc('lox-wasm', 'version') %]) is not yet used in the
+  build, but will be at some point
+
+- wasm-bindgen ([% pc('wasm-bindgen', 'version') %]) is a dependency of
+  lox-wasm
+
+- osslsigncode ([% pc('osslsigncode', 'version') %]), rcodesign
+  ([% pc('rcodesign', 'version') %]) and yubihsm-shell
+  ([% pc('yubihsm-shell', 'version') %]) are used by the
+  signing scripts
+
+- mar-tools ([% pc('mar-tools', 'version') %]) is used by
+  tools/setup-martools and the signing scripts.

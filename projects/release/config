@@ -10,6 +10,7 @@ var:
 
   linux-packages: '[% ( c("var/browser_platforms/linux-i686") || c("var/browser_platforms/linux-x86_64") ) && ( c("var/mullvad-browser") || c("var/nightly") ) %]'
   linux-packages-aarch64: '[% c("var/browser_platforms/linux-aarch64") && (c("var/mullvad-browser") || c("var/nightly")) %]'
+  list_used_projects: '[% INCLUDE list_used_projects %]'
 
 targets:
   browser-all:

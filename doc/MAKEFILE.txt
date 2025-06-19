@@ -95,7 +95,8 @@ build the nightly channel.
 list-unused-projects
 --------------------
 List which projects are not being used by projects/release/build with
-torbrowser and mullvadbrowser targets.
+torbrowser and mullvadbrowser targets. Projects that are used outside
+of normal builds can be added to projects/release/list_used_projects.
 
 clean
 -----

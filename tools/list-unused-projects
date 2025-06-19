@@ -15,13 +15,21 @@ my ($stdout, $stderr, $success, $exit_code) = capture_exec('./rbm/rbm',
         'show_used_projects', 'release', 'build', '--target', 'nightly',
         '--target', 'browser-all', '--target', 'torbrowser');
 exit_error("Failed to get tb used projects: $stderr") unless $success;
+
 my %used_projects_tb = map { $_ => 1 } split(/\n/, $stdout);
 ($stdout, $stderr, $success, $exit_code) = capture_exec('./rbm/rbm',
         'show_used_projects', 'release', 'build', '--target', 'nightly',
         '--target', 'browser-all', '--target', 'mullvadbrowser');
 exit_error("Failed to get mb used projects: $stderr") unless $success;
 my %used_projects_mb = map { $_ => 1 } split(/\n/, $stdout);
-my %used_projects = ( %used_projects_tb, %used_projects_mb );
+
+($stdout, $stderr, $success, $exit_code) = capture_exec('./rbm/rbm',
+        'show_used_projects', 'release', 'var/list_used_projects',
+        '--target', 'nightly', '--target', 'torbrowser-linux-x86_64');
+exit_error("Failed to get other used projects: $stderr") unless $success;
+my %used_projects_other = map { $_ => 1 } split(/\n/, $stdout);
+
+my %used_projects = ( %used_projects_tb, %used_projects_mb, %used_projects_other );
 $used_projects{common} = 1;
 
 my @unused_projects = sort grep { ! $used_projects{$_} }
