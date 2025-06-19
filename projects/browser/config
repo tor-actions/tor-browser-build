@@ -157,17 +157,6 @@ input_files:
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
     enable: '[% c("var/android") || c("var/macos") %]'
-  - name: electrum-nmc
-    project: electrum-nmc
-    enable: '[% c("var/namecoin") %]'
-  - name: ncprop279
-    project: ncprop279
-    enable: '[% c("var/namecoin") %]'
-  - name: stemns
-    project: stemns
-    enable: '[% c("var/namecoin") %]'
-  - filename: namecoin.patch
-    enable: '[% c("var/namecoin") %]'
   - project: manual
     name: manual
     enable: '[% ! c("var/android") && c("var/tor-browser") %]'

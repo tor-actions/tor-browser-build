@@ -154,11 +154,6 @@ RBM_TB_EOF
            "${TB_STAGE_DIR}/Browser/execdesktop"
   cp "${TB_STAGE_DIR}/start-[% c('var/project-name') %].desktop" \
      "${TB_STAGE_DIR}/Browser"
-  [% IF c("var/namecoin") %]
-    pushd "${TB_STAGE_DIR}/Browser/"
-    patch -p1 < $rootdir/namecoin.patch
-    popd
-  [% END %]
   # Make sure we get the desired scrollbar behavior with Gtk3, see bug 27546.
   GTK_SETTINGS_DIR="${TB_STAGE_DIR}/Browser/.config/gtk-3.0"
   mkdir -p $GTK_SETTINGS_DIR
@@ -196,18 +191,6 @@ tar -C "${TB_STAGE_DIR}" -xf [% c('input_files_by_name/firefox') %]/browser.tar.
   [% END %]
 [% END -%]
 
-[% IF c("var/namecoin") %]
-  # Extract Electrum-NMC
-  tar -C "$TBDIR/TorBrowser" -xf [% c('input_files_by_name/electrum-nmc') %]
-
-  # Extract ncprop279
-  mkdir "$TBDIR/TorBrowser/ncprop279"
-  tar -C "$TBDIR/TorBrowser/ncprop279" -xf [% c('input_files_by_name/ncprop279') %]
-
-  # Extract StemNS
-  tar -C "$TBDIR/TorBrowser" -xf [% c('input_files_by_name/stemns') %]
-[% END %]
-
 [% IF c("var/linux");
      SET bundledata_osname = 'linux';
    ELSIF c("var/macos");
@@ -231,7 +214,6 @@ do
   [% IF c("var/tor-browser") -%]
     cp -a Bundle-Data/Docs-TBB/* "$tbdir/$DOCSPATH"
     tar -C Bundle-Data/[% bundledata_osname %] \
-      [% IF ! c("var/namecoin") %]--exclude=*Electrum-NMC* --exclude=*ncprop279*[% END %] \
       -c . | tar -C "$tbdir[% IF ! c("var/macos") %]/[% c('var/ProjectName') %][% END %]" -x
   [% ELSIF c("var/mullvad-browser") -%]
     cp -a Bundle-Data/Docs-MB/* "$tbdir/$DOCSPATH"
