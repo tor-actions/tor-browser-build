@@ -1,0 +1,38 @@
+#!/usr/bin/perl -w
+use strict;
+use FindBin;
+use lib "$FindBin::Bin/../rbm/lib";
+use RBM::CaptureExec qw(capture_exec);
+use File::Slurp qw(read_dir);
+
+sub exit_error {
+  print STDERR "Error: ", $_[0], "\n";
+  exit (exists $_[1] ? $_[1] : 1);
+}
+
+chdir "$FindBin::Bin/..";
+my ($stdout, $stderr, $success, $exit_code) = capture_exec('./rbm/rbm',
+        'show_used_projects', 'release', 'build', '--target', 'nightly',
+        '--target', 'browser-all', '--target', 'torbrowser');
+exit_error("Failed to get tb used projects: $stderr") unless $success;
+my %used_projects_tb = map { $_ => 1 } split(/\n/, $stdout);
+($stdout, $stderr, $success, $exit_code) = capture_exec('./rbm/rbm',
+        'show_used_projects', 'release', 'build', '--target', 'nightly',
+        '--target', 'browser-all', '--target', 'mullvadbrowser');
+exit_error("Failed to get mb used projects: $stderr") unless $success;
+my %used_projects_mb = map { $_ => 1 } split(/\n/, $stdout);
+my %used_projects = ( %used_projects_tb, %used_projects_mb );
+$used_projects{common} = 1;
+
+my @unused_projects = sort grep { ! $used_projects{$_} }
+                        read_dir("$FindBin::Bin/../projects");
+
+if (!@unused_projects) {
+  print "No unused project was found.\n";
+  exit 0
+}
+
+print "The following projects do not appear to be used:\n";
+foreach my $project (@unused_projects) {
+  print "- $project\n";
+}

@@ -92,6 +92,11 @@ fetch
 Fetch new commits from all components. This is useful when you want to
 build the nightly channel.
 
+list-unused-projects
+--------------------
+List which projects are not being used by projects/release/build with
+torbrowser and mullvadbrowser targets.
+
 clean
 -----
 Clean files created during previous builds that are no longer used in

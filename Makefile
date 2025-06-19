@@ -717,6 +717,9 @@ fetch: submodule-update
 	$(rbm) fetch
 	$(rbm) fetch firefox --target mullvadbrowser
 
+list-unused-projects: submodule-update
+	./tools/list-unused-projects
+
 clean: submodule-update
 	./tools/clean-old
 
