@@ -19,7 +19,7 @@
 <!-- This block tells the merger where commits need to be merged and future code archaeologists where commits were *supposed* to be merged -->
 
 #### Target Branches
-  - [ ] **`main`**: esr128-14.5
+  - [ ] **`main`**: esr140-15.0
   - [ ] **`maint-14.5`**: esr128-14.5
   - [ ] **`maint-13.5`**: esr115-13.5
 
@@ -50,7 +50,7 @@
 #### Request Reviewer
 
 - [ ] Request review from an applications developer depending on modified system:
-  - **NOTE**: if the MR modifies multiple areas, please `/cc` all the relevant reviewers (since gitlab only allows 1 reviewer)
+  - **NOTE**: if the MR modifies multiple areas, please `/request_review` all the relevant reviewers
   - **accessibility** : henry
   - **android** : clairehurst, dan
   - **build system** : boklm
