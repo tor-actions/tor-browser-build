@@ -1,3 +1,14 @@
+Tor Browser 13.5.19 - June 24 2025
+ * All Platforms
+   * Updated NoScript to 13.0.8
+   * Bug 43835: Backport tor-browser#43782: Add new UX flow for changing security level (Desktop) [tor-browser]
+   * Bug 43910: Rebase Tor Browser 13.5.19 Legacy onto Firefox 115.25.0esr [tor-browser]
+   * Bug 43911: Backport security fixes from Firefox 140 [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41477: Update keyring/boklm.gpg for new subkeys (2025) [tor-browser-build]
+     * Bug 41498: Update keyring/morgan.gpg with updated public key [tor-browser-build]
+
 Tor Browser 13.5.18 - May 27 2025
  * All Platforms
    * Updated Firefox to 115.24.0esr
