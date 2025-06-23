@@ -137,7 +137,7 @@ echo "Starting ./mach build $(date)"
   echo "Building development artifacts"
 
   [% IF c("var/macos") -%]
-    export MOZ_PKG_MAC_BACKGROUND=$rootdir/dmg-root/[% c('var/ProjectName') %].dmg/.background/background.tiff
+    export MOZ_PKG_MAC_BACKGROUND=$(find $rootdir/dmg-root/[% c('var/ProjectName') %].dmg/.background  -type f)
     export MOZ_PKG_MAC_DSSTORE=$rootdir/dmg-root/[% c('var/ProjectName') %].dmg/nightly.DS_Store
     export MOZ_PKG_MAC_ICON=$rootdir/dmg-root/[% c('var/ProjectName') %].dmg/.VolumeIcon.icns
   [% END -%]
