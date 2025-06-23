@@ -3,19 +3,15 @@
 
 echo "Starting the creation of the fat AAR $(date)"
 
-tar -C $builddir -xf [% c('input_files_by_name/geckoview_armv7') %]
-tar -C $builddir -xf [% c('input_files_by_name/geckoview_aarch64') %]
-tar -C $builddir -xf [% c('input_files_by_name/geckoview_x86') %]
-tar -C $builddir -xf [% c('input_files_by_name/geckoview_x86_64') %]
 tar -C $builddir -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
 
 # Specify the architectures we want to merge
 export MOZ_ANDROID_FAT_AAR_ARCHITECTURES=armeabi-v7a,arm64-v8a,x86,x86_64
-export MOZ_ANDROID_FAT_AAR_ARMEABI_V7A=$builddir/geckoview/*armeabi-v7a*.aar
-export MOZ_ANDROID_FAT_AAR_ARM64_V8A=$builddir/geckoview/*arm64-v8a*.aar
+export MOZ_ANDROID_FAT_AAR_ARMEABI_V7A=$rootdir/[% c('input_files_by_name/geckoview_armv7') %]/geckoview/*.aar
+export MOZ_ANDROID_FAT_AAR_ARM64_V8A=$rootdir/[% c('input_files_by_name/geckoview_aarch64') %]/geckoview/*.aar
 # Specifying just "x86" is not differentiating enough
-export MOZ_ANDROID_FAT_AAR_X86=$builddir/geckoview/*x86-*.aar
-export MOZ_ANDROID_FAT_AAR_X86_64=$builddir/geckoview/*x86_64*.aar
+export MOZ_ANDROID_FAT_AAR_X86=$rootdir/[% c('input_files_by_name/geckoview_x86') %]/geckoview/*.aar
+export MOZ_ANDROID_FAT_AAR_X86_64=$rootdir/[% c('input_files_by_name/geckoview_x86_64') %]/geckoview/*.aar
 
 cd $builddir/[% project %]-[% c("version") %]
 ln -s mozconfig-android-all .mozconfig
