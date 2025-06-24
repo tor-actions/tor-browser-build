@@ -16,4 +16,4 @@ steps:
         project: rcodesign
         pkg_type: cargo_vendor
         norec:
-          sha256sum: c778deb784f68b48a51c6c54095c6cd45e37847d65e9db36ce39b4326874ae9c
+          sha256sum: c0215cfcfe255070f0d6aecba5be92d2266b30b91135153a1907b1cb164a133c

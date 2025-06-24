@@ -17,4 +17,4 @@ steps:
         project: uniffi-rs
         pkg_type: cargo_vendor
         norec:
-          sha256sum: 23c79da9169064f42c34b9dadfee9dcf5ed251f9843615ca3e9a0e59a49f581d
+          sha256sum: 13aa6d7c6efb3701cb40dfd110e35bcba70a388f6e18fd921229e5f22b06f8ce

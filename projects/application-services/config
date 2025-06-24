@@ -66,7 +66,7 @@ steps:
         project: application-services
         pkg_type: cargo_vendor
         norec:
-          sha256sum: 23b027cf546e34b57576ab88ef3ce8218cf1654cc44c4bde3c553aea98274f20
+          sha256sum: 40497b315d225ef9e0066f67e96b48b9848fa158268af2c3b4031e93dfb1790f
         enable: '[% !c("var/fetch_gradle_dependencies") %]'
       - filename: gen_gradle_deps_file.sh
         enable: '[% c("var/fetch_gradle_dependencies") %]'
