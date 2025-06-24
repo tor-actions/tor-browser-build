@@ -1,7 +1,8 @@
 # vim: filetype=yaml sw=2
 version: 140.0
-git_hash: 8ee6cb6a23f96ff8e2161926441aea72d6f09249
-git_url: https://github.com/mozilla/application-services
+git_hash: 'v[% c("version") %]-TORBROWSER'
+git_url: https://gitlab.torproject.org/tpo/applications/application-services.git
+tag_gpg_id: 1
 git_submodule: 1
 container:
   use_container: 1
@@ -65,19 +66,10 @@ steps:
         project: application-services
         pkg_type: cargo_vendor
         norec:
-          sha256sum: 4cf0235b525b5ce1d8bcc40e9763a13fd0e79c773749b900b4d7420551cf5114
-      - filename: local-repository.diff
+          sha256sum: 23b027cf546e34b57576ab88ef3ce8218cf1654cc44c4bde3c553aea98274f20
         enable: '[% !c("var/fetch_gradle_dependencies") %]'
       - filename: gen_gradle_deps_file.sh
         enable: '[% c("var/fetch_gradle_dependencies") %]'
-      - filename: bug_13028.patch
-      - filename: apply-bug-13028.diff
-      - filename: no-ndk-lookup.diff
-      - filename: offline-nimbus-fml.diff
-      - filename: glean-noop.diff
-      - filename: a-s-noop.diff
-      - filename: cargo-no-build.sh
-      - filename: 41422-disable-viaduct.diff
 
   list_toolchain_updates:
     git_hash: 'v[% c("version") %]'
