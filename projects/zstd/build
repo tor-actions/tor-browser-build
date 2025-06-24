@@ -8,6 +8,7 @@ tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_ta
 cd /var/tmp/build/[% project %]-[% c('version') %]
 export CPPFLAGS=-DZSTD_MULTITHREAD
 export CC=[% c("var/CC") %]
+export CFLAGS="-Oz"
 make -C lib -j[% c("num_procs") %] PREFIX=$distdir install
 # Only need static libraries
 rm $distdir/lib/libzstd.so*
