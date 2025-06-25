@@ -5,6 +5,19 @@ echo "Starting the creation of the fat AAR $(date)"
 
 tar -C $builddir -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
 
+mkdir -p $outdir/[% project %]/artifacts
+
+[% IF c("var/nightly") -%]
+  mkdir -p $outdir/[% project %]/artifacts/armeabi-v7a
+  mv $rootdir/[% c('input_files_by_name/geckoview_armv7') %]/artifacts/* $outdir/[% project %]/artifacts/armeabi-v7a
+  mkdir -p $outdir/[% project %]/artifacts/arm64-v8a
+  mv $rootdir/[% c('input_files_by_name/geckoview_aarch64') %]/artifacts/* $outdir/[% project %]/artifacts/arm64-v8a
+  mkdir -p $outdir/[% project %]/artifacts/x86
+  mv $rootdir/[% c('input_files_by_name/geckoview_x86') %]/artifacts/* $outdir/[% project %]/artifacts/x86
+  mkdir -p $outdir/[% project %]/artifacts/x86_64
+  mv $rootdir/[% c('input_files_by_name/geckoview_x86_64') %]/artifacts/* $outdir/[% project %]/artifacts/x86_64
+[% END -%]
+
 # Specify the architectures we want to merge
 export MOZ_ANDROID_FAT_AAR_ARCHITECTURES=armeabi-v7a,arm64-v8a,x86,x86_64
 export MOZ_ANDROID_FAT_AAR_ARMEABI_V7A=$rootdir/[% c('input_files_by_name/geckoview_armv7') %]/geckoview/*.aar
