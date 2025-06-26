@@ -3,6 +3,14 @@ version: 140.0
 git_hash: 'v[% c("version") %]-TORBROWSER'
 git_url: https://gitlab.torproject.org/tpo/applications/application-services.git
 tag_gpg_id: 1
+gpg_keyring:
+  - boklm.gpg
+  - brizental.gpg
+  - clairehurst.gpg
+  - dan_b.gpg
+  - ma1.gpg
+  - morgan.gpg
+  - pierov.gpg
 git_submodule: 1
 container:
   use_container: 1
