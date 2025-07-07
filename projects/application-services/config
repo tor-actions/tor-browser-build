@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 version: 140.0
-git_hash: 'v[% c("version") %]-TORBROWSER'
+git_hash: 'v[% c("version") %]-TORBROWSER-build[% c("var/build_number") %]'
 git_url: https://gitlab.torproject.org/tpo/applications/application-services.git
 tag_gpg_id: 1
 gpg_keyring:
@@ -16,6 +16,7 @@ container:
   use_container: 1
 
 var:
+  build_number: 2
   # This should be updated when the list of gradle dependencies is changed.
   gradle_dependencies_version: 12
   gradle_version: 8.13
