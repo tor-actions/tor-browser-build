@@ -65,6 +65,9 @@ var:
   ### upload the files to
   #tpo_user: username
 
+  ### This option enables generation of development artifacts
+  #dev_artifacts: '[% c("var/nightly") %]'
+
   ### The clean configuration is used by the cleaning script to find the
   ### branches and build targets you are using, to compute the list of
   ### files that should be kept.

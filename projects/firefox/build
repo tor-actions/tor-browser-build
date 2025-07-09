@@ -123,7 +123,7 @@ echo "Starting ./mach build $(date)"
   ./mach build stage-package
 [% END -%]
 
-[% IF c("var/nightly") -%]
+[% IF c("var/dev_artifacts") -%]
   echo "Building development artifacts"
 
   [% IF c("var/macos") -%]

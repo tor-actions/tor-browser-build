@@ -120,7 +120,7 @@ apksigner sign --verbose --min-sdk-version [% c("var/android_min_api") %] --ks $
     cp "$rootdir/[% c("input_files_by_name/tor-expert-bundle") %]/tor-expert-bundle.tar.gz" [% dest_dir %]/[% c('filename') %]/$tor_expert_bundle_dest
 [% END -%]
 
-[% IF c("var/nightly") -%]
+[% IF c("var/dev_artifacts") -%]
   mkdir -p "[% dest_dir %]/[% c('filename') %]/artifacts/"
   mv $rootdir/[% c('input_files_by_name/fenix') %]/artifacts[% IF !c('var/android_single_arch') %]/[% c("var/abi") %][% END %] [% dest_dir %]/[% c('filename') %]/artifacts
 [% END %]

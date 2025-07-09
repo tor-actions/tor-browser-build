@@ -5,9 +5,8 @@ echo "Starting the creation of the fat AAR $(date)"
 
 tar -C $builddir -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
 
-mkdir -p $outdir/[% project %]/artifacts
 
-[% IF c("var/nightly") -%]
+[% IF c("var/dev_artifacts") -%]
   mkdir -p $outdir/[% project %]/artifacts/armeabi-v7a
   mv $rootdir/[% c('input_files_by_name/geckoview_armv7') %]/artifacts/* $outdir/[% project %]/artifacts/armeabi-v7a
   mkdir -p $outdir/[% project %]/artifacts/arm64-v8a

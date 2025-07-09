@@ -411,7 +411,7 @@ cd $distdir
   popd
 [% END %]
 
-[% IF c("var/nightly") -%]
+[% IF c("var/dev_artifacts") -%]
   [% IF c("var/macos_universal") -%]
     mkdir -p "$OUTDIR"/artifacts/aarch64
     cp -a $rootdir/[% c('input_files_by_name/firefox-aarch64') %]/artifacts/. "$OUTDIR/artifacts/aarch64"

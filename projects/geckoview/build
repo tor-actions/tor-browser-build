@@ -34,7 +34,7 @@ echo "Starting ./mach configure $(date)"
 echo "Starting ./mach build $(date)"
 ./mach build --verbose
 
-[% IF c("var/nightly") -%]
+[% IF c("var/dev_artifacts") -%]
   echo "Building development artifacts"
   ./mach package
 
