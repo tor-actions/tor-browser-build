@@ -122,5 +122,5 @@ apksigner sign --verbose --min-sdk-version [% c("var/android_min_api") %] --ks $
 
 [% IF c("var/nightly") -%]
   mkdir -p "[% dest_dir %]/[% c('filename') %]/artifacts/"
-  mv $rootdir/[% c('input_files_by_name/fenix') %]/geckoview/artifacts/[% c("var/abi") %] [% dest_dir %]/[% c('filename') %]/artifacts
+  mv $rootdir/[% c('input_files_by_name/fenix') %]/artifacts[% IF !c('var/android_single_arch') %]/[% c("var/abi") %][% END %] [% dest_dir %]/[% c('filename') %]/artifacts
 [% END %]
