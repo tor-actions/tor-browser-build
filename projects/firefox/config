@@ -16,10 +16,10 @@ container:
   use_container: 1
 
 var:
-  firefox_platform_version: '140.0a1'
-  firefox_version: '[% c("var/firefox_platform_version") %]'
+  firefox_platform_version: '140.0'
+  firefox_version: '[% c("var/firefox_platform_version") %]esr'
   browser_series: '15.0'
-  browser_rebase: 2
+  browser_rebase: 1
   browser_branch: '[% c("var/browser_series") %]-[% c("var/browser_rebase") %]'
   browser_build: 1
   copyright_year: '[% exec("git show -s --format=%ci " _ c("git_hash") _ "^{commit}", { exec_noco => 1 }).remove("-.*") %]'
