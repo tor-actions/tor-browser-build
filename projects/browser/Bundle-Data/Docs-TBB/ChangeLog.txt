@@ -1,3 +1,12 @@
+Tor Browser 13.5.20 - July 22 2025
+ * All Platforms
+   * Updated Firefox to 115.26.0esr
+   * Updated Tor to 0.4.8.17
+   * Updated OpenSSL to 3.0.17
+   * Bug 43980: Rebase Tor Browser Legacy onto 115.26.0esr [tor-browser]
+   * Bug 43993: Backport Security Fixes from Firefox 141 [tor-browser]
+   * Bug 41508: Switch built-in meek bridge to meek-unredacted [tor-browser-build]
+
 Tor Browser 13.5.19 - June 24 2025
  * All Platforms
    * Updated NoScript to 13.0.8
