@@ -28,48 +28,6 @@ var:
     export GOTMPDIR=/var/tmp/build/go-tmp
     mkdir -p "$GOTMPDIR"
 
-  # Template build script for building a go library.
-  # This can be called as projects/go/var/build_go_lib.
-  # You need to define /var/go_lib, and optionally var/go_lib_install as
-  # a list of install targets.
-  build_go_lib: |
-    #!/bin/bash
-    [% c("var/set_default_env") -%]
-    [% pc('go', 'var/setup', { go_tarfile => c('input_files_by_name/go') }) %]
-    # Run in GOPATH mode: https://golang.org/cmd/go/#hdr-Module_support. (see:
-    # #32027)
-    export GO111MODULE=off
-    export GOPATH=/var/tmp/dist/gopath
-    distdir=/var/tmp/dist/[% project %]
-    mkdir -p /var/tmp/build
-    tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
-    [% FOREACH dep = c("var/go_lib_deps") -%]
-      tar -C /var/tmp/dist -xf [% c('input_files_by_name/' _ dep) %]
-    [% END -%]
-    mkdir -p $(dirname "$GOPATH/src/[% c("var/go_lib") %]")
-    mv /var/tmp/build/[% project %]-[% c('version') %] "$GOPATH/src/[% c("var/go_lib") %]"
-    cd "$GOPATH/src/[% c("var/go_lib") %]"
-    for p in $(ls -1 $rootdir/*.patch 2> /dev/null | sort)
-    do
-      patch -p1 < $p
-    done
-    # Run in GOPATH mode: https://golang.org/cmd/go/#hdr-Module_support. (see:
-    # #32027)
-    export GO111MODULE=off
-    [% IF c("var/build_go_lib_pre"); GET c("var/build_go_lib_pre"); END; -%]
-    [% IF c("var/go_lib_install") -%]
-      [% FOREACH inst IN c("var/go_lib_install") %]
-        go install [% inst %]
-      [% END %]
-    [% ELSE %]
-      go install [% c("var/go_lib") %]
-    [% END %]
-    cd /var/tmp/dist
-    [% c('tar', {
-            tar_src => [ 'gopath' ],
-            tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
-        }) %]
-
 targets:
   windows:
     var:
