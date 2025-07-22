@@ -1,3 +1,18 @@
+Tor Browser 14.5.5 - July 22 2025
+ * All Platforms
+   * Updated Tor to 0.4.8.17
+   * Updated OpenSSL to 3.0.17
+   * Bug 43979: Rebase Tor Browser Stable onto 128.13.0esr [tor-browser]
+   * Bug 43993: Backport Security Fixes from Firefox 141 [tor-browser]
+   * Bug 41508: Switch built-in meek bridge to meek-unredacted [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 128.13.0esr
+ * Android
+   * Updated GeckoView to 128.13.0esr
+ * Build System
+   * Windows + Linux + Android
+     * Updated Go to 1.23.11
+
 Tor Browser 14.5.4 - June 23 2025
  * All Platforms
    * Updated NoScript to 13.0.8
