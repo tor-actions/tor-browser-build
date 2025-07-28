@@ -19,11 +19,6 @@ tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_ta
 cd /var/tmp/build/[% project %]-[% c('version') %]
 
 tar -xf $rootdir/[% c('input_files_by_name/go_vendor') %]
-[% IF c("var/windows") -%]
-  pushd vendor/github.com/refraction-networking/conjure
-  patch -p1 < $rootdir/conjure-pr-267.patch
-  popd
-[% END -%]
 
 cd client
 go build -ldflags '-s[% IF c("var/android") %] -checklinkname=0[% END %]' -tags 'protoreflect'
