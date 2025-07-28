@@ -22,9 +22,5 @@ steps:
           sha256sum: d43631d17d8b6f78152bb4341f867bb22ad4444fec5573be1d34dac968202cda
         target_replace:
           '^torbrowser-(?!testbuild).*': 'torbrowser-linux-x86_64'
-      # https://github.com/refraction-networking/conjure/pull/267
-      # Remove this once the depdency is updated.
-      - filename: conjure-pr-267.patch
-        enable: '[% c("var/windows") %]'
       - name: go-licenses
         project: go-licenses
