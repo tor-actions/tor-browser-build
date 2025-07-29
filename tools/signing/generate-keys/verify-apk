@@ -1,0 +1,18 @@
+#!/bin/bash
+# This script takes no argument and will verify the signature of the
+# file signed.apk in the currenty directory, using the key config from
+# generate-android-signing-key
+
+set -e
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+set_config_only=1
+source "$script_dir/generate-android-signing-key"
+
+if test "$#" -ne 0; then
+  echo "Wrong number of arguments" >&2
+  exit 1
+fi
+
+jarsigner -keystore "$script_dir/android-key/${key_alias}-private.p12" \
+          -storepass "${key_password}" -verify -verbose -certs signed.apk \
+          -verbose "${key_alias}"

@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# This script generate a new Android signing key in the android-key directory
+# Before running it you should edit the key_* variables for setting the
+# key name, password, etc...
+
+set -e
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+test -n "$set_config_only" || cd "$script_dir"
+
+key_alias=tor-vpn
+key_password=123456
+key_dname='CN=Tor VPN, O=The Tor Project'
+
+test -n "$set_config_only" && return 0
+
+mkdir android-key
+cd android-key
+
+keytool -genkeypair -keysize 4096 -sigalg SHA512withRSA -keyalg RSA \
+        -storetype PKCS12 -alias "$key_alias" -dname "$key_dname" \
+        -validity 36500 -keystore "${key_alias}-private.p12" \
+        -storepass "$key_password" -v
+
+# Export the generated certificate into a PEM file
+keytool -exportcert -rfc -alias "$key_alias" -file "${key_alias}-public.pem" \
+        -keystore "${key_alias}-private.p12" -storepass "$key_password" -v

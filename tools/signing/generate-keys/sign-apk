@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# This script will sign the apk given as argument, as signed.apk in the
+# current directory, using the key config from generate-android-signing-key
+
+set -e
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+set_config_only=1
+source "$script_dir/generate-android-signing-key"
+
+if test "$#" -ne 1; then
+  echo "Wrong number of arguments" >&2
+  exit 1
+fi
+
+apksigner sign --ks "$script_dir/android-key/${key_alias}-private.p12" \
+               --ks-pass "pass:${key_password}" --out signed.apk "$1"
+echo "Signed $1 in signed.apk"
