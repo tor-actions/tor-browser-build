@@ -1,3 +1,57 @@
+Mullvad Browser 15.0a1 - July 29 2025
+ * All Platforms
+   * Updated Firefox to 140.1.0esr
+   * Updated NoScript to 13.0.8
+   * Updated uBlock Origin to 1.65.0
+   * Bug 457: Rebase Mullvad Browser Alpha onto 140.1esr [mullvad-browser]
+   * Bug 42738: Tidy up the commit structure for browser updates UI [tor-browser]
+   * Bug 43397: Click to play should override "Any capability blocked in the top document must be blocked in its subdocuments too" [tor-browser]
+   * Bug 43590: Move letterboxing rules out of browser/base/content/browser.css [tor-browser]
+   * Bug 43610: Use newer CSS variable names for ESR 140 [tor-browser]
+   * Bug 43629: All migrations in _migrateUIBB are run for new profiles [tor-browser]
+   * Bug 43635: Console noise due to the x-load capability not being localized [tor-browser]
+   * Bug 43638: Fix up our `<command>` elements [tor-browser]
+   * Bug 43772: Do not use official branding for BB/TB/MB [tor-browser]
+   * Bug 43776: Set branding files for l10n merging [tor-browser]
+   * Bug 43886: Fix new tab for ESR 140 [tor-browser]
+   * Bug 43905: base-browser.ftl missing from about:addons [tor-browser]
+   * Bug 43906: Extension.sys.mjs change in the wrong commit [tor-browser]
+   * Bug 43929: two about:tor pages opened after update [tor-browser]
+   * Bug 43947: Console error from ContentBlockingPrefs.init [tor-browser]
+   * Bug 43989: Switch off AI chatbot preference [tor-browser]
+   * Bug 43993: Backport Security Fixes from Firefox 141 [tor-browser]
+ * Windows
+   * Bug 440: Make abseil use win32 thread model on mingw [mullvad-browser]
+ * Build System
+   * All Platforms
+     * Bug 43777: Disable ./mach telemetry [tor-browser]
+     * Bug 43891: Update the translation CI to use the new mozilla versions [tor-browser]
+     * Bug 34434: Remove unused variables from rbm.conf [tor-browser-build]
+     * Bug 40994: Add support in do-all-signing to sign release for some archs only [tor-browser-build]
+     * Bug 41227: Update projects/common/list_toolchain_updates-common-firefox-geckoview to include check for binutils [tor-browser-build]
+     * Bug 41435: Skip update-responses update entries for versions without incremental or full update mar [tor-browser-build]
+     * Bug 41444: Build artifacts to support artifact builds of Tor/Muillvad/Base Browser [tor-browser-build]
+     * Bug 41448: Update toolchains for Firefox ESR 140 [tor-browser-build]
+     * Bug 41449: Add prefix to update-responses xml files [tor-browser-build]
+     * Bug 41451: When update-responses contains multiple versions, .htaccess only has one no-update.xml redirect [tor-browser-build]
+     * Bug 41452: Skip update-responses xml files for versions which don't have incrementals [tor-browser-build]
+     * Bug 41457: Set mar IDs as env variables in tor-browser-build [tor-browser-build]
+     * Bug 41459: Update taskcluster/ci paths in README and comments [tor-browser-build]
+     * Bug 41460: Add brizental to the list of people who can sign Tor Browser and Mullvad Browser tags [tor-browser-build]
+     * Bug 41465: Disable development artifacts generation by default, keep it enabled for nightly builds [tor-browser-build]
+     * Bug 41467: Remove list_toolchain_updates-firefox-android from Makefile [tor-browser-build]
+     * Bug 41477: Update keyring/boklm.gpg for new subkeys (2025) [tor-browser-build]
+     * Bug 41478: Add vim and others missing basic tools to base container image [tor-browser-build]
+     * Bug 41496: Clean up unused projects [tor-browser-build]
+     * Bug 41498: Update keyring/morgan.gpg with updated public key [tor-browser-build]
+     * Bug 41501: cargo_vendor generated archive maintains timestamps [tor-browser-build]
+     * Bug 40084: Always use bash for the debug terminal [rbm]
+   * macOS
+     * Bug 41503: Error 403 when downloading macOS SDK [tor-browser-build]
+   * Linux
+     * Bug 41458: Ship geckodriver only on Linux [tor-browser-build]
+     * Bug 41488: Disable sys/random.h for Node.js [tor-browser-build]
+
 Mullvad Browser 14.5a6 - April 08 2025
  * All Platforms
    * Updated Firefox to 128.9.0esr

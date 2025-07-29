@@ -113,12 +113,12 @@ input_files:
     enable: '[% ! c("var/android") %]'
   - filename: dmg-root
     enable: '[% ! c("var/android") %]'
-  - URL: https://addons.mozilla.org/firefox/downloads/file/4411102/noscript-12.1.1.xpi
+  - URL: https://addons.mozilla.org/firefox/downloads/file/4497468/noscript-13.0.8.xpi
     name: noscript
-    sha256sum: f9639e63ffcfc352036de00e4ff6694bb0ca65a0bb8fbd103bd08f32dc1ff31a
-  - URL: https://addons.mozilla.org/firefox/downloads/file/4458450/ublock_origin-1.63.2.xpi
+    sha256sum: 9d978cfe083cb9cce120b5ee41e8933d752d7ab4680bf517c5ec4b29c4cfd2dc
+  - URL: https://addons.mozilla.org/firefox/downloads/file/4531307/ublock_origin-1.65.0.xpi
     name: ublock-origin
-    sha256sum: d93176cef4dc042e41ba500aa2a90e5d57b5be77449cbd522111585e3a0cd158
+    sha256sum: 3e73c96a29a933866065f0756fe032984bf5b254af8dd1afd7a7f7e0668a33cf
     enable: '[% c("var/mullvad-browser") %]'
   - URL: https://cdn.mullvad.net/browser-extension/0.9.4/mullvad-browser-extension-0.9.4.xpi
     name: mullvad-extension

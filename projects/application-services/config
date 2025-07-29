@@ -16,7 +16,7 @@ container:
   use_container: 1
 
 var:
-  build_number: 2
+  build_number: 3
   # This should be updated when the list of gradle dependencies is changed.
   gradle_dependencies_version: 12
   gradle_version: 8.13
