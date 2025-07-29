@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 version: '[% c("abbrev") %]'
 git_url: https://github.com/mozilla/libdmg-hfsplus
-git_hash: a0a959bd25370c1c0a00c9ec525e3e78285adbf9
+git_hash: d6287b5afc2406b398de42f74eba432f2123b937
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
@@ -10,6 +10,7 @@ var:
     - build-essential
     - zlib1g-dev
     - libbz2-dev
+    - liblzma-dev
 input_files:
   - project: container-image
   - name: cmake

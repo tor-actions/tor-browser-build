@@ -37,7 +37,7 @@ hfsplus "$hfsfile" symlink /Applications /Applications
 # Show the volume icon
 hfsplus "$hfsfile" attr / C
 
-dmg dmg "$hfsfile" [% c('dmg_out', { error_if_undef => 1 }) %]
+dmg dmg --compression lzma --level 5 --run-sectors 2048 "$hfsfile" [% c('dmg_out', { error_if_undef => 1 }) %]
 popd
 
 rm -Rf "$dmg_tmpdir"

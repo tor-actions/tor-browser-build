@@ -57,7 +57,7 @@ hfsplus "$hfsfile" symlink /Applications /Applications
 # Show the volume icon
 hfsplus "$hfsfile" attr / C
 
-dmg dmg "$hfsfile" "$dest_file"
+dmg dmg --compression lzma --level 5 --run-sectors 2048 "$hfsfile" "$dest_file"
 
 echo "Finished: " $(basename $dest_file)
 
