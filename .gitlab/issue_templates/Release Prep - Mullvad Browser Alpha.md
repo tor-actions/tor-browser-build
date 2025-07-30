@@ -173,21 +173,10 @@ Mullvad Browser Alpha (and Nightly) are on the `main` branch
     - ma1
     - morgan
     - pierov
-- [ ] Sign+Tag additionally the `mullvad-browser.git` `firefox` commit used in build:
-  - **Tag**: `${MULLVAD_BROWSER_VERSION}`
-    - **example**: `12.5a7`
-  - **Message**: `${ESR_VERSION}esr-based ${MULLVAD_BROWSER_VERSION}`
-    - **example**: `102.12.0esr-based 12.5a7`
-- [ ] Push this release's associated `mullvad-browser.git` branch to github
-- [ ] Push this release's associated tags to github:
-  - [ ] Firefox ESR tag
-    - **example**: `FIREFOX_102_12_0esr_BUILD1`
-  - [ ] `base-browser` tag
-    - **example**: `base-browser-102.12.0esr-12.0-1-build1`
-  - [ ] `mullvad-browser` build tag
-    - **example**: `mullvad-browser-102.12.0esr-12.0-1-build1`
-  - [ ] `mullvad-browser` release tag
-    - **example**: `12.0.11`
+- [ ] Run:
+    ```bash
+    cd tor-browser-build/tools/signing/ && ./publish-github.mullvadbrowser
+    ```
 
 </details>
 
