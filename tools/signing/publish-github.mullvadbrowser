@@ -1,0 +1,39 @@
+#!/bin/bash
+SCRIPT_DIR=$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
+TBB_DIR="$SCRIPT_DIR/../.."
+function showconf {
+   "$TBB_DIR/rbm/rbm" showconf $@
+}
+GL_REMOTE=git@gitlab.torproject.org:tpo/applications/mullvad-browser.git
+GH_REMOTE=git@github.com:mullvad/mullvad-browser.git
+CLONE_DIR="$TBB_DIR/git_clones/firefox"
+CHANNEL=$(showconf release var/browser_default_channel)
+TARGET="--target $CHANNEL --target mullvadbrowser-linux-x86_64"
+MB_TAG=$(showconf firefox git_hash $TARGET)
+MB_BRANCH=${MB_TAG//-build[0-9]*/}
+BB_BRANCH=${MB_BRANCH//mullvad-/base-}
+ESR_VERSION=$(showconf firefox var/firefox_version $TARGET)
+RELEASE_VERSION=$(showconf release var/torbrowser_version $TARGET)
+pushd >/dev/null ../../git_clones/firefox
+echo "Fetching $MB_BRANCH and tags..."
+git fetch --tags "$GL_REMOTE" "$MB_BRANCH"
+BB_TAG=$(git tag -l "$BB_BRANCH-build*" | tail -n1)
+FX_TAG=$(git tag -l "FIREFOX_${ESR_VERSION//\./_}*" | tail -n1)
+echo "MB tag: $MB_TAG"
+echo "BB tag: $BB_TAG"
+echo "FX tag: $FX_TAG"
+echo "Mullvad release tag: $RELEASE_VERSION"
+read -p "Do you want to tag mullvad $RELEASE_VERSION and push everything to ${GH_REMOTE}? (y/N) " -n 1 -r
+echo
+if ! [[ $REPLY =~ ^[Yy]$ ]]; then
+   echo >&2 "Operation cancelled"
+   exit 1
+fi
+git checkout $MB_TAG
+git tag -s $RELEASE_VERSION -m"$ESR_VERSION-based $RELEASE_VERSION"
+git tag -n1 $RELEASE_VERSION
+git push "$GH_REMOTE" "HEAD:refs/heads/$MB_BRANCH"
+git push "$GH_REMOTE" "$FX_TAG"
+git push "$GH_REMOTE" "$BB_TAG"
+git push "$GH_REMOTE" "$RELEASE_VERSION"
+popd >/dev/null
