@@ -70,6 +70,7 @@ install_packages sudo vim tmux gnupg
 
 create_user setup
 authorized_keys setup boklm-yk1.pub
+authorized_keys setup morgan.pub
 mkdir -p /signing
 chmod 0755 /signing
 chown setup /signing
