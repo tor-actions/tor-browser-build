@@ -70,7 +70,7 @@ Mullvad Browser Alpha (and Nightly) are on the `main` branch
       - **NOTE**: We try to build incrementals for the previous 3 desktop versions
       - **⚠️ WARNING**: Really *actually* make sure this is the previous Desktop version or else the `make mullvadbrowser-incrementals-*` step will fail
   - [ ] `projects/firefox/config`
-    - [ ] `browser_build`: updated to match `mullvad-browser` tag
+    - [ ] `var/browser_build`: updated to match `mullvad-browser` tag
     - [ ] ***(Optional)*** `var/firefox_platform_version`: updated to latest `${ESR_VERSION}` if rebased
   - [ ] ***(Optional)*** `projects/translation/config`:
     - [ ] `steps/base-browser/git_hash`: updated with `HEAD` commit of project's `base-browser` branch

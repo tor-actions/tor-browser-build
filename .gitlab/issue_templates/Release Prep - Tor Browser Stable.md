@@ -71,10 +71,10 @@ Tor Browser Stable is on the `maint-${TOR_BROWSER_MAJOR}.${TOR_BROWSER_MINOR}` b
     - [ ] `var/torbrowser_legacy_version`: updated to latest legacy Tor Browser version
     - [ ] `var/torbrowser_legacy_platform_version`: updated to latest legacy Tor Browser ESR version
   - [ ] `projects/firefox/config`
-      - [ ] `browser_build`: updated to match `tor-browser` tag
+      - [ ] `var/browser_build`: updated to match `tor-browser` tag
       - [ ] ***(Optional)*** `var/firefox_platform_version`: updated to latest `${ESR_VERSION}` if rebased
   - [ ] `projects/geckoview/config`
-    - [ ] `browser_build`: updated to match `tor-browser` tag
+    - [ ] `var/browser_build`: updated to match `tor-browser` tag
     - [ ] ***(Optional)*** `var/firefox_platform_version`: updated to latest `${ESR_VERSION}` if rebased
   - [ ] ***(Optional)*** `projects/translation/config`:
     - [ ] `steps/base-browser/git_hash`: updated with `HEAD` commit of project's `base-browser` branch
@@ -101,7 +101,7 @@ Tor Browser Stable is on the `maint-${TOR_BROWSER_MAJOR}.${TOR_BROWSER_MINOR}` b
   - [ ] **(Optional)** `projects/go/config` https://go.dev/dl
     - **NOTE**: In general, Tor Browser Alpha uses the latest Stable major series Go version, but there are sometimes exceptions. Check with the anti-censorship team before doing a major version update in case there is incompatibilities.
     - [ ] `version`: updated go version
-    - [ ] `input_files/sha256sum` for `go`: update sha256sum of archive (sha256 sums are displayed on the go download page)
+    - [ ] `var/source_sha256sum for `go`: update sha256sum of archive (sha256 sums are displayed on the go download page)
   - [ ] **(Optional)** `projects/manual/config`
     - [ ] `version`: updated to latest pipeline id
     - [ ] `input_files/shasum` for `manual`: updated to manual hash
