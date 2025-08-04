@@ -126,6 +126,7 @@ class ReleasePreparation:
         self.branch_sanity_check()
 
         self.update_firefox()
+        self.update_application_services()
         self.update_translations()
         self.update_addons()
 
@@ -266,6 +267,50 @@ class ReleasePreparation:
                 t.tag,
             )
             tag_info[2] += 1
+        return tag_info
+
+    def update_application_services(self):
+        if not self.android:
+            return
+
+        logger.info("Updating application-services")
+        config = self.load_config("application-services")
+        tag = self._get_application_services_tag(config)
+        build_number = tag[0]
+
+        config["var"]["build_number"] = build_number
+        self.save_config("application-services", config)
+        logger.debug("application-services configuration saved")
+
+    def _get_application_services_tag(self, config):
+        version = config["version"]
+        branch = f"{version}-TORBROWSER"
+
+        repo = Repo(self.base_path / "git_clones/application-services")
+        logger.debug("About to fetch application-services")
+        repo.remotes["origin"].fetch()
+
+        tags = get_sorted_tags(repo)
+        tag_info = None
+        for t in tags:
+            logger.debug("tag: %s", t.tag)
+            m = re.match(
+                rf"v{branch}-build(\d+)", t.tag
+            )
+            if m:
+                logger.debug("Matched tag %s", t.tag)
+                tag_info = [int(m.group(1))]
+                break
+        if tag_info is None:
+            raise RuntimeError("No compatible tag found.")
+        logger.debug("Checking if tag %s is head of %s.", t.tag, branch)
+        if t.object != repo.remotes["origin"].refs[branch].commit:
+            logger.info(
+                "Found new commits after tag %s, bumping the build number preemptively.",
+                t.tag,
+            )
+            tag_info[0] += 1
+
         return tag_info
 
     def update_translations(self):
