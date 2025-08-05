@@ -91,6 +91,7 @@ sudoers_file sign-gpg
 sudoers_file sign-mar
 sudoers_file sign-exe
 sudoers_file sign-apk
+sudoers_file sign-aab
 sudoers_file sign-rcodesign
 sudoers_file sign-rcodesign-128
 sudoers_file set-date
@@ -104,6 +105,10 @@ create_user ma1 signing
 authorized_keys ma1 ma1.pub
 create_user pierov signing
 authorized_keys pierov pierov.pub
+
+mkdir -p /home/signing-apk/unsigned-files /home/signing-apk/signed-files
+chgrp signing /home/signing-apk/unsigned-files /home/signing-apk/signed-files
+chmod g+rwx /home/signing-apk/unsigned-files /home/signing-apk/signed-files
 
 # Install rbm deps
 install_packages libyaml-libyaml-perl libtemplate-perl libdatetime-perl \

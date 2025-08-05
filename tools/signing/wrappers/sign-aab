@@ -1,0 +1,41 @@
+#!/bin/bash
+set -e
+
+function exit_error {
+  for msg in "$@"
+  do
+    echo "$msg" >&2
+  done
+  exit 1
+}
+
+case "$SIGNING_PROJECTNAME" in
+  torbrowser | mullvadbrowser | torvpn)
+    ;;
+  *)
+    exit_error "Unexpected value for SIGNING_PROJECTNAME: $SIGNING_PROJECTNAME"
+    ;;
+esac
+
+case "$tbb_version_type" in
+  release | alpha)
+    ;;
+  *)
+    exit_error "Unexpected value for tbb_version_type: $tbb_version_type"
+    ;;
+esac
+
+android_signing_key_dir=/home/signing-apk/keys
+android_signing_key_path="$android_signing_key_dir/torvpn.p12"
+test -f "$android_signing_key_path" || exit_error "$android_signing_key_path is missing"
+
+tmpdir=$(mktemp -d)
+cd "$tmpdir"
+
+jarsigner -keystore "${android_signing_key_path}" -storepass:env KSPASS \
+  -signedjar /home/signing-apk/signed-files/"$SIGNING_PROJECTNAME-$tbb_version_type.aab" \
+  -verbose /home/signing-apk/unsigned-files/"$SIGNING_PROJECTNAME-$tbb_version_type.aab" \
+  tor-vpn
+
+cd -
+rm -Rf "$tmpdir"

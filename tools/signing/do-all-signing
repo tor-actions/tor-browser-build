@@ -67,7 +67,7 @@ echo
 echo
 
 [ -z "$platform_android" ] || \
-  [ -f "$steps_dir/linux-signer-sign-android-apks.done" ] || \
+  [ -f "$steps_dir/sync-after-sign-android-apks.done" ] || \
   [ -n "$KSPASS" ] || \
   read -sp "Enter android apk signing password ($tbb_version_type): " KSPASS
 echo
@@ -151,6 +151,14 @@ function linux-signer-sign-android-apks {
   ssh "$ssh_host_linux_signer" 'bash -s' << EOF
   export KSPASS=$KSPASS
   ~/signing-$SIGNING_PROJECTNAME-$tbb_version_type/linux-signer-sign-android-apks.$SIGNING_PROJECTNAME
+EOF
+  unset KSPASS
+}
+
+function linux-signer-sign-android-aab {
+  ssh "$ssh_host_linux_signer" 'bash -s' << EOF
+  export KSPASS=$KSPASS
+  ~/signing-$SIGNING_PROJECTNAME-$tbb_version_type/linux-signer-sign-android-aab.$SIGNING_PROJECTNAME
 EOF
   unset KSPASS
 }
@@ -257,6 +265,8 @@ do_step sync-before-linux-signer-signmars
   do_step sync-after-signmars
 [ -n "$platform_android" ] && \
   do_step linux-signer-sign-android-apks
+[ "$SIGNING_PROJECTNAME" = 'torvpn' ] && [ -n "$platform_android" ] && \
+  do_step linux-signer-sign-android-aab
 [ -n "$platform_android" ] && \
   do_step sync-after-sign-android-apks
 [ -n "$platform_windows" ] && \
@@ -275,6 +285,6 @@ do_step download-unsigned-sha256sums-gpg-signatures-from-people-tpo
 do_step sync-local-to-staticiforme
 do_step sync-scripts-to-staticiforme
 do_step staticiforme-prepare-cdn-dist-upload
-! is_legacy && \
+[ "$SIGNING_PROJECTNAME" != 'torvpn' ] && ! is_legacy \
   do_step upload-update_responses-to-staticiforme
 do_step finished-signing-clean-linux-signer

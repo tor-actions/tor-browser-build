@@ -7,9 +7,11 @@ source "$script_dir/functions"
 
 topdir="$script_dir/../.."
 ARCHS="armv7 aarch64 x86 x86_64"
+test "$SIGNING_PROJECTNAME" = 'torvpn' && ARCHS='multiarch'
 projname=$(project-name)
-# tbb_version_type is used in wrappers/sign-apk, so we export it
-export tbb_version_type
+# tbb_version_type, tbb_version and SIGNING_PROJECTNAME are used in
+# wrappers/sign-apk, so we export them
+export tbb_version tbb_version_type SIGNING_PROJECTNAME
 
 check_installed_packages() {
   local packages='unzip openjdk-11-jdk-headless openjdk-11-jre-headless'
@@ -21,10 +23,11 @@ check_installed_packages() {
 }
 
 setup_build_tools() {
+  abt_version=16
   build_tools_dir=/signing/android-build-tools
-  test -f "$build_tools_dir"/android-12/apksigner || \
-    exit_error "$build_tools_dir/android-12/apksigner is missing"
-  export PATH="$build_tools_dir/android-12:${PATH}"
+  test -f "$build_tools_dir"/android-$abt_version/apksigner || \
+    exit_error "$build_tools_dir/android-$abt_version/apksigner is missing"
+  export PATH="$build_tools_dir/android-$abt_version:${PATH}"
 }
 
 sign_apk() {
@@ -36,7 +39,6 @@ verify_apk() {
   scheme_v1="Verified using v1 scheme (JAR signing): true"
   scheme_v2="Verified using v2 scheme (APK Signature Scheme v2): true"
 
-  # Verify the expected signing key was used, Alpha verses Release based on the filename.
   if test "$tbb_version_type" = "alpha"; then
     cert_digest="Signer #1 certificate SHA-256 digest: 15f760b41acbe4783e667102c9f67119be2af62fab07763f9d57f01e5e1074e1"
     pubkey_digest="Signer #1 public key SHA-256 digest: 4e617e6516f81123ca58e718d617a704ac8365c575bd9e7a731ba5dd0476869d"
@@ -44,7 +46,14 @@ verify_apk() {
     cert_digest="Signer #1 certificate SHA-256 digest: 20061f045e737c67375c17794cfedb436a03cec6bacb7cb9f96642205ca2cec8"
     pubkey_digest="Signer #1 public key SHA-256 digest: 343ca8a2e5452670bdc335a181a4baed909f868937d68c4653e44ef84de8dfc6"
   fi
+  if test "$SIGNING_PROJECTNAME" = "torvpn"; then
+    # No v1 scheme signature on torvpn apk
+    scheme_v1=''
+    cert_digest="Signer #1 certificate SHA-256 digest: c2f6ffa30e56a7c53a226248ef908612ee539df2f52bede5a55037425b83331d"
+    pubkey_digest="Signer #1 public key SHA-256 digest: fddc5f93ae0bc971e951481b0b5e6b62e47040fe979ff535cf75daade2f13f3d"
+  fi
   for digest in "${scheme_v1}" "${scheme_v2}" "${cert_digest}" "${pubkey_digest}"; do
+    test -z "$digest" && continue
     if ! echo "${verified}" | grep -q "${digest}"; then
       echo "Expected digest not found:"
       echo ${digest}
@@ -69,8 +78,10 @@ mkdir -p ~/"$SIGNING_PROJECTNAME-$tbb_version-apks"
 chgrp signing ~/"$SIGNING_PROJECTNAME-$tbb_version-apks"
 chmod g+w ~/"$SIGNING_PROJECTNAME-$tbb_version-apks"
 cp -af ~/"$SIGNING_PROJECTNAME-$tbb_version"/*.apk \
-  ~/"$SIGNING_PROJECTNAME-$tbb_version"/*.bspatch \
   ~/"$SIGNING_PROJECTNAME-$tbb_version-apks"
+test "$SIGNING_PROJECTNAME" != 'torvpn' && \
+  cp -af ~/"$SIGNING_PROJECTNAME-$tbb_version"/*.bspatch \
+    ~/"$SIGNING_PROJECTNAME-$tbb_version-apks"
 cd ~/"$SIGNING_PROJECTNAME-$tbb_version-apks"
 
 # Sign all packages
@@ -79,7 +90,8 @@ for arch in ${ARCHS}; do
   unsigned_apk=${projname}-qa-unsigned-android-${arch}-${tbb_version}.apk
   unsigned_apk_bspatch=${projname}-qa-unsign-android-${arch}-${tbb_version}.bspatch
   signed_apk=${projname}-android-${arch}-${tbb_version}.apk
-  bspatch "$qa_apk" "$unsigned_apk" "$unsigned_apk_bspatch"
+  test -f "$unsigned_apk" || \
+    bspatch "$qa_apk" "$unsigned_apk" "$unsigned_apk_bspatch"
   sign_apk "$unsigned_apk" "$signed_apk"
   verify_apk "$signed_apk"
   cp -f "$signed_apk" ~/"$SIGNING_PROJECTNAME-$tbb_version"

@@ -1,0 +1,2 @@
+Defaults>signing-apk env_keep += "SIGNING_PROJECTNAME tbb_version tbb_version_type KSPASS"
+%signing ALL = (signing-apk) NOPASSWD: /signing/tor-browser-build/tools/signing/wrappers/sign-aab

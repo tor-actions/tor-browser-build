@@ -14,15 +14,30 @@ if test "$tbb_version_type" != 'release' \
   exit_error "Unexpected value for tbb_version_type: $tbb_version_type"
 fi
 
+case "$SIGNING_PROJECTNAME" in
+  torbrowser | mullvadbrowser | torvpn)
+    ;;
+  *)
+    exit_error "Unexpected value for SIGNING_PROJECTNAME: $SIGNING_PROJECTNAME"
+    ;;
+esac
+
 android_signing_key_dir=/home/signing-apk/keys
-android_signing_key_path="$android_signing_key_dir/tba_$tbb_version_type.p12"
+android_signing_key_path="$android_signing_key_dir/$pname_$tbb_version_type.p12"
+test -n "$SIGNING_PROJECTNAME" && test "$SIGNING_PROJECTNAME" = 'torvpn' && \
+  android_signing_key_path="$android_signing_key_dir/torvpn.p12"
 test -f "$android_signing_key_path" || exit_error "$android_signing_key_path is missing"
 
 setup_build_tools() {
+  abt_version=16
+  # If signing 14.5, keep using android-12 build tools
+  # (we can remove this when 15.0 is the stable release)
+  ( test -z "$tbb_version" || echo "$tbb_version" | grep -q '^14\.5' ) && \
+    abt_version=12
   build_tools_dir=/signing/android-build-tools
-  test -f "$build_tools_dir"/android-12/apksigner || \
-    exit_error "$build_tools_dir/android-12/apksigner is missing"
-  export PATH="$build_tools_dir/android-12:${PATH}"
+  test -f "$build_tools_dir"/android-$abt_version/apksigner || \
+    exit_error "$build_tools_dir/android-$abt_version/apksigner is missing"
+  export PATH="$build_tools_dir/android-$abt_version:${PATH}"
 }
 
 # Sign individual apk

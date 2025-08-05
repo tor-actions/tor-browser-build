@@ -14,6 +14,7 @@ function var_is_defined {
 }
 
 function check_update_responses_repository_dir {
+  test "$SIGNING_PROJECTNAME" = 'torvpn' && return 0
   if test -z "$update_responses_repository_dir" || ! test -d "$update_responses_repository_dir"
   then
     cat << 'EOF' > /dev/stderr

@@ -1,0 +1,46 @@
+#!/bin/bash
+
+set -e
+no_generate_config=1
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source "$script_dir/functions"
+
+topdir="$script_dir/../.."
+test "$SIGNING_PROJECTNAME" = 'torvpn'
+projname=$(project-name)
+# tbb_version_type, tbb_version and SIGNING_PROJECTNAME are used in
+# wrappers/sign-apk, so we export them
+export tbb_version tbb_version_type SIGNING_PROJECTNAME
+# (note: we should also export SIGNING_PROJECTNAME and tbb_version in
+# the maint-14.5 branch)
+
+check_installed_packages() {
+  local packages='unzip openjdk-11-jdk-headless openjdk-11-jre-headless'
+  for package in $packages
+  do
+    dpkg -s "$package" | grep -q '^Status: install ok installed$' || \
+      exit_error "package $package is missing"
+  done
+}
+
+sign_aab() {
+  sudo -u signing-apk -- /signing/tor-browser-build/tools/signing/wrappers/sign-aab
+}
+
+check_installed_packages
+
+if [ -z "$KSPASS" ]; then
+    echo "Enter keystore passphrase"
+    stty -echo; read KSPASS; stty echo
+    export KSPASS
+fi
+
+cp -af ~/"$SIGNING_PROJECTNAME-$tbb_version"/$projname-$tbb_version.aab \
+  /home/signing-apk/unsigned-files/"$SIGNING_PROJECTNAME-$tbb_version_type.aab"
+
+sign_aab
+
+cp /home/signing-apk/signed-files/"$SIGNING_PROJECTNAME-$tbb_version_type.aab" \
+  ~/"$SIGNING_PROJECTNAME-$tbb_version"/$projname-$tbb_version.aab
+rm /home/signing-apk/signed-files/"$SIGNING_PROJECTNAME-$tbb_version_type.aab"
+rm /home/signing-apk/unsigned-files/"$SIGNING_PROJECTNAME-$tbb_version_type.aab"
