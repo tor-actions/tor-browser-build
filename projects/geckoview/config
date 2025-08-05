@@ -115,9 +115,9 @@ steps:
         pkg_type: tor-browser
         enable: '[% c("var/has_l10n") %]'
       - filename: rename-branding-strings.py
-      - URL: '[% pc("glean", "var/glean_wheels_url/" _ c("var/glean_parser"), { error_if_undef => 1 }) %]'
+      - URL: '[% pc("glean", "var/glean_wheels_url") %]'
         name: glean-wheels
-        sha256sum: '[% pc("glean", "var/glean_wheels_sha256sum/" _ c("var/glean_parser"), { error_if_undef => 1 }) %]'
+        sha256sum: '[% pc("glean", "var/glean_wheels_sha256sum") %]'
       - name: tor-expert-bundle-aar
         project: tor-expert-bundle-aar
         pkg_type: build
@@ -159,9 +159,9 @@ input_files:
   - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
     name: gradle-dependencies
     exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
-  - URL: '[% pc("glean", "var/glean_wheels_url/" _ c("var/glean_parser"), { error_if_undef => 1 }) %]'
+  - URL: '[% pc("glean", "var/glean_wheels_url") %]'
     name: glean-wheels
-    sha256sum: '[% pc("glean", "var/glean_wheels_sha256sum/" _ c("var/glean_parser"), { error_if_undef => 1 }) %]'
+    sha256sum: '[% pc("glean", "var/glean_wheels_sha256sum") %]'
   - project: oss-licenses-plugin
     name: oss-licenses-plugin
   - name: tor-expert-bundle-aar

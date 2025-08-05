@@ -20,7 +20,6 @@ var:
   # This should be updated when the list of gradle dependencies is changed.
   gradle_dependencies_version: 12
   gradle_version: 8.13
-  glean_parser: 17.1.0
   nss_version: '3.110'
   nspr_version: '4.36'
 
@@ -72,9 +71,9 @@ steps:
         name: gradle-dependencies
         exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
         enable: '[% !c("var/fetch_gradle_dependencies") %]'
-      - URL: '[% pc("glean", "var/glean_wheels_url/" _ c("var/glean_parser"), { error_if_undef => 1 }) %]'
+      - URL: '[% pc("glean", "var/glean_wheels_url") %]'
         name: glean-wheels
-        sha256sum: '[% pc("glean", "var/glean_wheels_sha256sum/" _ c("var/glean_parser"), { error_if_undef => 1 }) %]'
+        sha256sum: '[% pc("glean", "var/glean_wheels_sha256sum") %]'
         enable: '[% !c("var/fetch_gradle_dependencies") %]'
       - name: cargo_vendor
         project: application-services
