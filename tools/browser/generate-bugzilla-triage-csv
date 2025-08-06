@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 
 # gitlab labels for review tickets
-browser_label="15.0 stable"
-esr_label="esr-140"
+browser_label="Apps::Product::TorBrowser"
+esr_label="esr-next"
+priority_label="Priority::Blocker"
+impact_label="Impact::Unknown"
+type_label="Apps::Type::Audit"
+
+# milestone for the next major Tor Browser release
+milestone="Tor Browser 16.0"
 
 # prints to stderr
 function echoerr() { echo "$@" 1>&2; }
@@ -10,18 +16,17 @@ function echoerr() { echo "$@" 1>&2; }
 script_dir=$(dirname "${BASH_ARGV0:-$0}")
 
 # help dialog
-if [ "$#" -lt 5 ]; then
-    echoerr "Usage: $0 <ff-version> <begin-commit> <end-commit> <gitlab-audit-issue> <reviewers...>"
+if [ "$#" -ne 4 ]; then
+    echoerr "Usage: $0 <ff-version> <begin-commit> <end-commit> <gitlab-audit-issue>"
     echoerr
     echoerr "ff-version             rapid-release Firefox version to audit"
-    echoerr "begin-commit           starting gecko-dev commit of this Firefox version"
-    echoerr "end-commit             ending gecko-dev commit of this Firefox version"
+    echoerr "begin-commit           starting firefox commit of this Firefox version"
+    echoerr "end-commit             ending firefox commit of this Firefox version"
     echoerr "gitlab-audit-issue     tor-browser GitLab issue number for this audit"
-    echoerr "reviewers...           space-separated list of reviewers responsible for this audit"
     echoerr ""
     echoerr "Example:"
     echoerr ""
-    echoerr "$0 129 FIREFOX_NIGHTLY_128_END FIREFOX_NIGHTLY_129_END 43303 morgan pierov henry"
+    echoerr "$0 129 FIREFOX_NIGHTLY_128_END FIREFOX_NIGHTLY_129_END 43303"
     exit 1
 fi
 
@@ -219,7 +224,8 @@ jq '. | sort_by([.component, .id])[] | "\(.id)|\(.component)|\(.summary)"' ${uni
         # review issue title
         new_issue_title=$(url_encode "Review Mozilla ${id}: ${summary_short}")
         # review issue description + labeling (14.0 stable, FF128-esr, Next)
-        new_issue_description=$(url_encode "### Bugzilla: ${bugzilla_url}")%0A$(url_encode "/label ~\"${browser_label}\" ~\"${esr_label}\" ~\"Bugzilla Review\" ~Next")%0A$(url_encode "/relate tpo/applications/tor-browser#${audit_issue}")%0A%0A$(url_encode "<!-- briefly describe why this issue needs further review -->")%0A
+        new_issue_description=$(url_encode "### Bugzilla: ${bugzilla_url}")%0A$(url_encode "/label ~\"${browser_label}\" ~\"${esr_label}\" ~\"${priority_label}\" ~\"${impact_label}\" ~\"${type_label}\"")%0A$(url_encode "/milestone %\"{milestone}\"")%0A$(url_encode "/relate tpo/applications/tor-browser#${audit_issue}")%0A%0A$(url_encode "<!-- briefly describe why this issue needs further review -->")%0A
+
         # url which create's new issue with title and description pre-populated
         new_issue_url="https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/new?issue[title]=${new_issue_title}&issue[description]=${new_issue_description}"
 
@@ -231,12 +237,6 @@ jq '. | sort_by([.component, .id])[] | "\(.id)|\(.component)|\(.summary)"' ${uni
     fi
 done
 
-echo
-echo "\"Triaged by:\""
-for reviewer in $reviewers; do
-    reviewer=$(csv_escape "${reviewer}")
-    echo "\"FALSE\",\"${reviewer}\""
-done
 echo
 
 bugzilla_query="=HYPERLINK(\"${bugzilla_query}\", \"Bugzilla query\")"
