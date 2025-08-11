@@ -193,6 +193,8 @@ echo "Starting ./mach build $(date)"
 [% INCLUDE 'start-firefox' -%]
 RBM_TB_EOF
   chmod 755 "$distdir/Browser/[% c('var/exe_name') %]"
+[% END -%]
+[% IF c("var/linux-x86_64") -%]
   cp -L obj-*/dist/host/bin/geckodriver $distdir
 [% END -%]
 
@@ -351,8 +353,8 @@ echo "Starting to package artifacts $(date)"
     }) %]
 [% END -%]
 
-# Geckodriver
-[% IF c("var/linux") -%]
+[% IF c("var/linux-x86_64") -%]
+  # Geckodriver
   llvm-strip geckodriver
   [% c('tar', {
       tar_src => [ 'geckodriver' ],
