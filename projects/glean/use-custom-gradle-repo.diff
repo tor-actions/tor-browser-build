@@ -1,0 +1,101 @@
+diff --git a/build.gradle b/build.gradle
+index 2b346ef57..bfbabb833 100644
+--- a/build.gradle
++++ b/build.gradle
+@@ -16,6 +16,17 @@ buildscript {
+     ]
+
+     repositories {
++        def customRepoUrl = project.findProperty("gradleDependenciesUrl")
++        if (customRepoUrl) {
++            maven {
++                url customRepoUrl
++                metadataSources {
++                    gradleMetadata()
++                    mavenPom()
++                }
++            }
++        }
++
+         google()
+         mavenCentral()
+         maven {
+@@ -43,6 +54,17 @@ plugins {
+
+ allprojects {
+     repositories {
++        def customRepoUrl = project.findProperty("gradleDependenciesUrl")
++        if (customRepoUrl) {
++            maven {
++                url customRepoUrl
++                metadataSources {
++                    gradleMetadata()
++                    mavenPom()
++                }
++            }
++        }
++
+         google()
+         mavenCentral()
+         maven {
+@@ -146,6 +168,17 @@ subprojects {
+     // `./gradlew publish`) and also `./gradlew publishToProjectBuildDir`.
+     publishing {
+         repositories {
++            def customRepoUrl = project.findProperty("gradleDependenciesUrl")
++            if (customRepoUrl) {
++                maven {
++                    url customRepoUrl
++                    metadataSources {
++                        gradleMetadata()
++                        mavenPom()
++                    }
++                }
++            }
++
+             maven {
+                 name = "rootProjectBuildDir"
+                 url = "file://${project.rootProject.buildDir}/maven"
+diff --git a/settings.gradle b/settings.gradle
+index 23a74d7ed..a0b90553a 100644
+--- a/settings.gradle
++++ b/settings.gradle
+@@ -2,12 +2,38 @@
+  * License, v. 2.0. If a copy of the MPL was not distributed with this
+  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
++pluginManagement {
++    repositories {
++        def customRepoUrl = settings.hasProperty("gradleDependenciesUrl") ? settings.gradleDependenciesUrl : null
++        if (customRepoUrl) {
++            maven {
++                url customRepoUrl
++                metadataSources {
++                    gradleMetadata()
++                    mavenPom()
++                }
++            }
++        }
++    }
++}
++
+ import org.yaml.snakeyaml.Yaml
+ buildscript {
+     dependencies {
+         classpath 'org.yaml:snakeyaml:2.2'
+     }
+     repositories {
++        def customRepoUrl = settings.hasProperty("gradleDependenciesUrl") ? settings.gradleDependenciesUrl : null
++        if (customRepoUrl) {
++            maven {
++                url customRepoUrl
++                metadataSources {
++                    gradleMetadata()
++                    mavenPom()
++                }
++            }
++        }
++
+         mavenCentral()
+     }
+ }

@@ -1,0 +1,46 @@
+diff --git a/glean-core/android/build.gradle b/glean-core/android/build.gradle
+index d2d114a19..9e4bc45b8 100644
+--- a/glean-core/android/build.gradle
++++ b/glean-core/android/build.gradle
+@@ -196,10 +196,22 @@ ext.configurePublish()
+
+ def generateUniffiBindings = tasks.register("generateUniffiBindings") {
+     def udlFilePath = "../src/glean.udl"
++
++    def uniffiBindgenNoop = project.findProperty("uniffiBindgenNoop")
++    if (!uniffiBindgenNoop) {
++        throw new GradleException("Gradle property 'uniffiBindgenNoop' is not set.")
++    }
++
+     doFirst {
+         exec {
+             workingDir project.rootDir
+-            commandLine 'cargo', 'uniffi-bindgen', 'generate', '--no-format', "${project.projectDir}/${udlFilePath}", '--language', 'kotlin', '--out-dir', UNIFFI_OUT_DIR.get()
++            commandLine uniffiBindgenNoop, 'generate',
++                '--no-format', "${project.projectDir}/${udlFilePath}",
++                '--language', 'kotlin',
++                '--out-dir', UNIFFI_OUT_DIR.get(),
++                '--config', "${project.projectDir}/../uniffi.toml",
++                '--lib-file', "${project.rootDir}/target/debug/libxul.so",
++                '--crate', 'glean_core'
+         }
+     }
+     outputs.dir UNIFFI_OUT_DIR
+diff --git a/glean-core/android/src/main/java/mozilla/telemetry/glean/scheduler/PingUploadWorker.kt b/glean-core/android/src/main/java/mozilla/telemetry/glean/scheduler/PingUploadWorker.kt
+index 9983002e7..4847a4f7e 100644
+--- a/glean-core/android/src/main/java/mozilla/telemetry/glean/scheduler/PingUploadWorker.kt
++++ b/glean-core/android/src/main/java/mozilla/telemetry/glean/scheduler/PingUploadWorker.kt
+@@ -108,11 +108,11 @@ class PingUploadWorker(context: Context, params: WorkerParameters) : Worker(cont
+                         // Process the upload response
+                         when (gleanProcessPingUploadResponse(action.request.documentId, result)) {
+                             UploadTaskAction.NEXT -> continue
+-                            UploadTaskAction.END -> break
++                            else -> break
+                         }
+                     }
+                     is PingUploadTask.Wait -> SystemClock.sleep(action.time.toLong())
+-                    is PingUploadTask.Done -> break
++                    else -> break
+                 }
+             } while (true)
+             // Limits are enforced by glean-core to avoid an inifinite loop here.
