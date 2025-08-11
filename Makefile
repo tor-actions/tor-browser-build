@@ -618,10 +618,10 @@ list_toolchain_updates-geckoview: submodule-update
 	$(rbm) build geckoview --step list_toolchain_updates --target nightly --target torbrowser-android-armv7
 
 create_glean_deps_tarball: submodule-update
-	 $(rbm) build glean --step create_glean_deps_tarball --target alpha --target torbrowser-android-armv7
+	 $(rbm) build glean-parser --target alpha --target torbrowser-android-armv7
 
 create_glean_deps_tarball-with_torsocks: submodule-update
-	$(rbm) build glean --step create_glean_deps_tarball --target alpha --target torbrowser-android-armv7 --target with_torsocks
+	$(rbm) build glean-parser --target alpha --target torbrowser-android-armv7 --target with_torsocks
 
 get_gradle_dependencies_list-fenix: submodule-update
 	$(rbm) build fenix --step get_gradle_dependencies_list --target nightly --target torbrowser-android-armv7

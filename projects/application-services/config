@@ -71,9 +71,9 @@ steps:
         name: gradle-dependencies
         exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
         enable: '[% !c("var/fetch_gradle_dependencies") %]'
-      - URL: '[% pc("glean", "var/glean_wheels_url") %]'
+      - URL: '[% pc("glean-parser", "var/glean_wheels_url") %]'
         name: glean-wheels
-        sha256sum: '[% pc("glean", "var/glean_wheels_sha256sum") %]'
+        sha256sum: '[% pc("glean-parser", "var/glean_wheels_sha256sum") %]'
         enable: '[% !c("var/fetch_gradle_dependencies") %]'
       - name: cargo_vendor
         project: application-services

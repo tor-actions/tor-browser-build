@@ -1,0 +1,14 @@
+# vim: filetype=yaml sw=2
+filename: 'glean-wheels-[% c("version") %].tar.xz'
+version: 17.1.0
+
+var:
+  glean_wheels_sha256sum: d96ef1995676fc3b838efb84283294befd5060ca64eea94fb67ae1f41d422664
+  glean_wheels_url: 'https://build-sources.tbb.torproject.org/glean-wheels-[% c("version") %].tar.xz'
+
+build_log: '-'
+
+targets:
+  with_torsocks:
+    var:
+      use_torsocks: 1

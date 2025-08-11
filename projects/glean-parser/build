@@ -1,0 +1,16 @@
+#!/bin/bash
+
+[% c("var/set_default_env") -%]
+mkdir glean-wheels
+cd glean-wheels
+[% IF c("var/use_torsocks") %]torsocks [% END%]python3 -m pip download glean_parser==[% c("version") %]
+# Get pyyaml, needed for building application-services
+[% IF c("var/use_torsocks") %]torsocks [% END%]python3 -m pip download pyyaml==5.3.1
+cd ..
+[% c('tar', {
+    tar_src => [ 'glean-wheels' ],
+    tar_args => '-cJf ' _ dest_dir _ '/' _ c('filename'),
+    }) %]
+cd '[% dest_dir %]'
+sha256sum [% c('filename') %]
+echo 'The file is ready to be uploaded: out/glean-parser/[% c("filename") %]'
