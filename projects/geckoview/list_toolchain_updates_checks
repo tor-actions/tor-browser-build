@@ -116,3 +116,27 @@ EOF
 needed=$(cat gradle/libs.versions.toml | perl -ne "$p")
 current='[% pc("oss-licenses-plugin", "version") %]'
 check_update_needed oss-licenses-plugin "$needed" "$current"
+
+
+# glean version
+read -d '' p << 'EOF' || true
+if (m{^mozilla-glean\\s*=\\s*"(.+)"}) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat gradle/libs.versions.toml | perl -ne "$p")
+current='[% pc("glean", "version") %]'
+check_update_needed glean "$needed" "$current"
+
+
+# glean-parser version
+read -d '' p << 'EOF' || true
+if (m{^glean_parser-(.+)\.dist-info}) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(ls third_party/python/glean_parser | perl -ne "$p")
+current='[% pc("glean-parser", "version") %]'
+check_update_needed glean-parser "$needed" "$current"

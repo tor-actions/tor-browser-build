@@ -8,13 +8,12 @@ There are three steps involved in the process:
 
 1)
 
-Running `make list_toolchain_updates-android-components` should tell
+Running `make list_toolchain_updates-geckoview` should tell
 you which version of `glean_parser` is needed.
 
 2)
 
-Update `steps/create_glean_deps_tarball/version` in `projects/glean/config`
-to the version from step 1 above.
+Update `version` in `projects/glean-parser/config` to the version from step 1 above.
 
 Run this command to generate the tarball:
 
