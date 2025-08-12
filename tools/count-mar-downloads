@@ -1,0 +1,122 @@
+#!/usr/bin/perl -w
+#
+# This script takes logs archive months as arguments.
+# Example: count-mar-downloads 2025-08 2025-07
+# Check which months are available on https://collector.torproject.org/archive/webstats/
+#
+# The script will dowload the log archives for the selected months,
+# extract them, parse the logs and print download numbers per version
+# numbers, OS, and incremental/full updates.
+#
+# The log files archives are stored in the tools/web-logs-count-mar-downloads
+# directory.
+#
+use strict;
+use FindBin;
+use lib "$FindBin::Bin/../rbm/lib";
+use RBM::CaptureExec qw(capture_exec);
+use File::Temp qw/tempdir/;
+use File::Copy qw/move/;
+use File::Find;
+
+if (!@ARGV) {
+  print "Usage: count-mar-downloads <month>\n";
+  print "Example: count-mar-downloads 2025-08 2025-07\n";
+  print "Check which months are available on https://collector.torproject.org/archive/webstats/\n";
+  exit 1;
+}
+
+my @months = @ARGV;
+
+my %downloads;
+
+my $weblogsdir = "$FindBin::Bin/web-logs-count-mar-downloads";
+mkdir $weblogsdir;
+chdir $weblogsdir;
+
+sub exit_error {
+  print STDERR "Error: ", $_[0], "\n";
+  exit (exists $_[1] ? $_[1] : 1);
+}
+
+sub download_log_files {
+  my $tmpdir = tempdir(CLEANUP => 1);
+  foreach my $month (@months) {
+    my $file = "webstats-$month.tar";
+    if (-f $file) {
+      print STDERR "Using existing file $file (remove it if you want to re-download it).\n";
+      next;
+    }
+    my $url = "https://collector.torproject.org/archive/webstats/$file";
+    exit_error "Error downloading $url" unless
+        system('wget', '-O', "$tmpdir/$file", $url) == 0;
+    move("$tmpdir/$file", "$weblogsdir/$file");
+  }
+}
+
+sub parse_log_file {
+  return unless -f $File::Find::name;
+  return unless $File::Find::name =~ m/\.xz$/;
+
+  print STDERR "Reading $_\n";
+
+  my ($stdout, undef, $success) = capture_exec('xzcat', $File::Find::name);
+  foreach my $line (split /\n/, $stdout) {
+    my ($version, $os) =
+      ($line =~ m|^[^\s]+ - - \[.+\] "GET /aus1/torbrowser/([^/]+)/tor-browser-(.*)-\d.*_ALL\.mar HTTP/|);
+    if ($version) {
+      $downloads{$version}{total} += 1;
+      $downloads{$version}{full_update} += 1;
+      $downloads{$version}{OS}{$os} += 1;
+      next;
+    }
+    my $incremental_from;
+    ($version, $os, $incremental_from) =
+      ($line =~ m|^[^\s]+ - - \[.+\] "GET /aus1/torbrowser/([^/]+)/tor-browser-(.*)--(\d[^-]+)-.*_ALL\.incremental\.mar HTTP/|);
+    if ($incremental_from) {
+      $downloads{$version}{total} += 1;
+      $downloads{$version}{OS}{$os} += 1;
+      $downloads{$version}{incremental_update_total} += 1;
+      $downloads{$version}{incremental_update}{$incremental_from} += 1;
+    }
+  }
+}
+
+sub parse_log_files {
+  my $tmpdir = tempdir(CLEANUP => 1);
+  foreach my $month (@months) {
+    my $file = "webstats-$month.tar";
+    print STDERR "Extracting $file\n";
+    my (undef, undef, $success) = capture_exec('tar', '-C', $tmpdir, '-xf',
+                                        $file, "webstats-$month/cdn.torproject.org");
+
+    find(\&parse_log_file, "$tmpdir/webstats-$month/cdn.torproject.org");
+  }
+}
+
+sub print_results {
+  print 'Download numbers for months ', join(' ', @months), ":\n\n";
+  my @versions = sort { $downloads{$b}{total} <=> $downloads{$a}{total} }
+        keys %downloads;
+  foreach my $version (@versions) {
+    print "Version: $version\n";
+    print "  Total: $downloads{$version}{total}\n";
+    print "  Per OS:\n";
+    foreach my $os (sort keys %{$downloads{$version}{OS}}) {
+      print "    $os: $downloads{$version}{OS}{$os}\n";
+    }
+    print "  Full updates: $downloads{$version}{full_update}\n"
+        if $downloads{$version}{full_update};
+    if ($downloads{$version}{incremental_update_total}) {
+      print "  Incremental updates (total): $downloads{$version}{incremental_update_total}\n";
+      foreach my $incremental_from (sort keys %{$downloads{$version}{incremental_update}}) {
+        print "  Incremental updates from $incremental_from: $downloads{$version}{incremental_update}{$incremental_from}\n";
+      }
+    }
+    print "\n";
+  }
+}
+
+download_log_files;
+parse_log_files;
+print_results;
