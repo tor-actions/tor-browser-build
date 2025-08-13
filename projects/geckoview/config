@@ -31,7 +31,6 @@ var:
     - autoconf
     - yasm
     - python3
-    - python3-distutils
     - python3-venv
     - python3-zstandard
     - pkg-config
