@@ -42,25 +42,18 @@ targets:
           "deb [signed-by=/usr/share/keyrings/debian-archive-keyring.gpg] http://archive.debian.org/debian-archive/debian/ stretch main"
           "deb [signed-by=/usr/share/keyrings/debian-archive-keyring.gpg] http://archive.debian.org/debian-archive/debian-security/ stretch/updates main"
 
-  buster-amd64:
-    var:
-      minimal_apt_version: 1.8.2
-      container:
-        suite: buster
-        arch: amd64
-
-  bullseye-amd64:
-    var:
-      minimal_apt_version: 2.2.4
-      container:
-        suite: bullseye
-        arch: amd64
-
   bookworm-amd64:
     var:
       minimal_apt_version: 2.6.1
       container:
         suite: bookworm
+        arch: amd64
+
+  trixie-amd64:
+    var:
+      minimal_apt_version: 3.0.3
+      container:
+        suite: trixie
         arch: amd64
 
 input_files:
