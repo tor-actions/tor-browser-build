@@ -135,7 +135,8 @@ class ReleasePreparation:
             self.update_zlib()
             if self.android:
                 self.update_zstd()
-            self.update_go()
+            # We use an EOL'ed go version. We will update it in 15.0.
+            # self.update_go()
             self.update_manual()
 
         self.update_changelogs()

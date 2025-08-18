@@ -1,3 +1,22 @@
+Tor Browser 14.5.6 - August 19 2025
+ * All Platforms
+   * Updated NoScript to 13.0.9
+   * Bug 44048: Backport Bug 1979608 [tor-browser]
+   * Bug 44093: Rebase Tor Browser stable onto 128.14.0esr [tor-browser]
+   * Bug 44100: Backport Security Fixes from Firefox 142 [tor-browser]
+   * Bug 41515: Bump version of Conjure to include P173 improvements [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 128.14.0esr
+   * Bug 44041: Letterboxing causes greyed out alert background to be mis-aligned [tor-browser]
+ * Android
+   * Updated GeckoView to 128.14.0esr
+   * Updated Zstandard to 1.5.7
+   * Bug 43346: Remove the "[android] Stop PrivateNotificationService" patch [tor-browser]
+   * Bug 43645: Swiping away doesn't always disconnect from tor [tor-browser]
+ * Build System
+   * Windows + Linux + Android
+     * Updated Go to 1.23.12
+
 Tor Browser 14.5.5 - July 22 2025
  * All Platforms
    * Updated Tor to 0.4.8.17

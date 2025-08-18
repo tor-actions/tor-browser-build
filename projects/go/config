@@ -1,11 +1,11 @@
 # vim: filetype=yaml sw=2
-version: '1.23.11'
+version: '1.23.12'
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
 
 var:
-  source_sha256: 296381607a483a8a8667d7695331752f94a1f231c204e2527d2f22e1e3d1247d
+  source_sha256: e1cce9379a24e895714a412c7ddd157d2614d9edbe83a84449b6e1840b4f1226
   no_crosscompile: 1
   setup: |
     mkdir -p /var/tmp/dist
