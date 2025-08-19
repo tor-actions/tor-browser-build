@@ -7,7 +7,5 @@ We use it to build the various pluggable transports.
   We have another project (`go-bootstrap`) to provide it, and we make all
   targets use the `linux-x86_64` bootstrapper, since we don't need to
   cross-compile anything with it.
-- On Android, we include a patch to fix a temporary directory whose path might
-  end up on binaries under some circumstances.
 - We create a compiler wrapper to include our custom arguments on macOS and on
   Windows because the `make.bash` script seems to lose our arguments.

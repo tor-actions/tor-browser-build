@@ -43,7 +43,6 @@ cd /var/tmp/dist/go/src
   chmod +x "$CC_FOR_TARGET"
   CGO_ENABLED=1 CC_FOR_TARGET="$CC_FOR_TARGET" CC= CFLAGS= LDFLAGS= ./make.bash
 [% ELSIF c("var/android") -%]
-  patch -p2 < $rootdir/0001-Use-fixed-go-build-tmp-directory.patch
   CGO_ENABLED=1 CC_FOR_TARGET=[% c("var/CC") %] CC= CFLAGS= LDFLAGS= ./make.bash
 [% END -%]
 
