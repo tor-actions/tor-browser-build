@@ -14,6 +14,7 @@ export PATH="/var/tmp/dist/node/bin:$PATH"
 export LC_ALL=C.UTF-8
 export LANG=C.UTF-8
 
+tar -xf [% c('input_files_by_name/glean') %]
 tar -xf [% c('input_files_by_name/application-services') %]
 export NIMBUS_FML=$rootdir/application-services/nimbus-fml
 
@@ -34,6 +35,7 @@ export GRADLE_FLAGS="--no-daemon --offline -Dmaven.repo.local=$distdir/[% projec
 # standardized for reproducibility.
 mv $rootdir/[% c('input_files_by_name/gradle-dependencies') %] $gradle_repo
 cp -rl $rootdir/application-services/maven/* $gradle_repo
+cp -rl $rootdir/glean/maven/* $gradle_repo
 cp -rl $gradle_repo/dl/android/maven2/* $gradle_repo || true
 cp -rl $gradle_repo/m2/* $gradle_repo || true
 cp -rl $gradle_repo/maven2/* $gradle_repo || true

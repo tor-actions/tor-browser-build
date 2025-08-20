@@ -1023,12 +1023,6 @@ dba74d6bf94647ee397bf7afb2ab07f6fe8d13157e56785fa540a2a13ed82c99 | https://maven
 d36f248782d4ab513d2ab2b6141799525211c37ba0941c4aa2e73ee00f1a14b2 | https://maven.google.com/com/google/firebase/firebase-messaging/24.1.1/firebase-messaging-24.1.1.pom
 d001eb0ccbbfc8cb9eaa193a358e63712974639775647be949ab232c2b29b407 | https://maven.google.com/com/google/testing/platform/core-proto/0.0.9-alpha03/core-proto-0.0.9-alpha03.jar
 3bb45280df1dd1c96b9a01724a614566b7d60d33453fcd52c2c741f9999c3a4e | https://maven.google.com/com/google/testing/platform/core-proto/0.0.9-alpha03/core-proto-0.0.9-alpha03.pom
-7d66a1b1e51592eda1e77c44d5692192dbffc828ea3899ff92ae0161b681a336 | https://maven.mozilla.org/maven2/org/mozilla/telemetry/glean-gradle-plugin/64.3.1/glean-gradle-plugin-64.3.1.jar
-07742881a447c577669139ed7548fc4a0e6c43c63aa28a6f4652ff2d163b94f6 | https://maven.mozilla.org/maven2/org/mozilla/telemetry/glean-gradle-plugin/64.3.1/glean-gradle-plugin-64.3.1.pom
-79aa542e883553436721d40af661beb9ac09dad323b89afde057631c54fdf83c | https://maven.mozilla.org/maven2/org/mozilla/telemetry/glean-native/64.3.1/glean-native-64.3.1.aar
-17ae368dcc12a965df8a9195e5d897fb70400159a87effcf65ee5c05790f814e | https://maven.mozilla.org/maven2/org/mozilla/telemetry/glean-native/64.3.1/glean-native-64.3.1.pom
-cb1c7a04874d97c6bb1d3ba4ce009e1fde5f46225b45f6bb87559328573b530b | https://maven.mozilla.org/maven2/org/mozilla/telemetry/glean/64.3.1/glean-64.3.1.aar
-5792a08566c294a46ea777939819154a945eeee8d5cb47d391f845d7c711013a | https://maven.mozilla.org/maven2/org/mozilla/telemetry/glean/64.3.1/glean-64.3.1.pom
 243a64470fda0e86a6fddeb0af4c7aa9426ce84e68cbfe18d75ee5da4b7e0b92 | https://plugins.gradle.org/m2/com/almworks/sqlite4java/sqlite4java/1.0.392/sqlite4java-1.0.392.jar
 139552c586a57bf6d98f87d6b7e23fef4db53cf74097be962f7868e3606c79d2 | https://plugins.gradle.org/m2/com/almworks/sqlite4java/sqlite4java/1.0.392/sqlite4java-1.0.392.pom
 02a5b08a2b35d2d58eb2eaca9d84ac00fb341da725fdbd653ea3ed130437e95a | https://plugins.gradle.org/m2/com/caverock/androidsvg-aar/1.4/androidsvg-aar-1.4.aar

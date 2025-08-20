@@ -647,6 +647,9 @@ cargo_vendor-lox: submodule-update
 cargo_vendor-uniffi-rs: submodule-update
 	$(rbm) build uniffi-rs --step cargo_vendor --target alpha --target torbrowser-linux-x86_64
 
+cargo_vendor-glean: submodule-update
+	$(rbm) build glean --step cargo_vendor --target alpha --target torbrowser-linux-x86_64
+
 go_vendor-conjure: submodule-update
 	$(rbm) build conjure --step go_vendor --target alpha --target torbrowser-linux-x86_64
 
