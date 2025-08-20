@@ -262,7 +262,7 @@ do
   rm -rf defaults
   # create tbb_version.json (torbrowser) or version.json (mullvadbrowser)
   # file for tor-browser#25020 and tor-browser-build#41044
-  echo '{"version":"[% c("var/torbrowser_version") %]","architecture":"[% c("var/mar_osname") %]","channel":"[% c("var/channel") %]","locale":"en-US"}' > ../[% c("var/version_json") %]
+  echo '{"version":"[% c("var/torbrowser_version") %]","architecture":"[% c("var/mar_osname") %]","channel":"[% c("var/channel") %]"}' > ../[% c("var/version_json") %]
   popd
 done
 
