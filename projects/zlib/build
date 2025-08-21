@@ -14,7 +14,7 @@ cd /var/tmp/build/[% project %]-[% c('version') %]
 [% IF c("var/android") -%]
   export CHOST=[% c("var/cross_prefix") %]
   export CC=[% c("var/CC") %]
-  export CFLAGS="-Oz"
+  export CFLAGS="[% c('var/CFLAGS') %]"
   ./configure --prefix=$distdir
   make -j[% c("num_procs") %]
   make -j[% c("num_procs") %] install

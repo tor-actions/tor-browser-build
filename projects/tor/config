@@ -43,7 +43,7 @@ targets:
 
   android:
     var:
-      configure_opt_project: '--enable-android --enable-static-openssl --enable-static-libevent --enable-zstd --disable-tool-name-check --disable-system-torrc CFLAGS=-Oz'
+      configure_opt_project: '--enable-android --enable-static-openssl --enable-static-libevent --enable-zstd --disable-tool-name-check --disable-system-torrc CFLAGS="[% c("var/CFLAGS") %]"'
 
 input_files:
   - project: container-image

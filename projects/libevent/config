@@ -17,7 +17,7 @@ targets:
       configure_opt_project: --disable-shared
   android:
     var:
-      configure_opt_project: --disable-shared CFLAGS="-Oz"
+      configure_opt_project: --disable-shared CFLAGS="[% c('var/CFLAGS') %]"
 
 input_files:
   - project: container-image

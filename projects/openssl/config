@@ -26,7 +26,7 @@ targets:
       configure_opts: '--cross-compile-prefix=[% c("var/build_target") %]- darwin64-[% c("var/macos_arch") %]-cc enable-ec_nistp_64_gcc_128'
   android:
     var:
-      configure_opts: 'CC=[% c("var/CC") %] android-[% c("var/toolchain_arch") %] -no-shared -D__ANDROID_API__=[% c("var/android_min_api") %] -Oz'
+      configure_opts: 'CC=[% c("var/CC") %] android-[% c("var/toolchain_arch") %] -no-shared -D__ANDROID_API__=[% c("var/android_min_api") %] [% c("var/CFLAGS") %]'
 
 input_files:
   - project: container-image
