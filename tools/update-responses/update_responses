@@ -261,11 +261,11 @@ sub create_incremental_mar {
                 && ! -f "$tmpdir/A/Contents/_CodeSignature/CodeResources") {
         exit_error "Missing code signature in $from_version while creating $mar_file";
     }
+    # Check that the version we update to is code signed (when re-generating
+    # incrementals for macos during the signing process)
     if ($ENV{CHECK_CODESIGNATURE_EXISTS}) {
-        unless (-f "$tmpdir/A/Contents/_CodeSignature/CodeResources"
-            && -f "$tmpdir/B/Contents/_CodeSignature/CodeResources") {
-            exit_error "Missing code signature while creating $mar_file";
-        }
+        exit_error "Missing code signature while creating $mar_file"
+            unless -f "$tmpdir/B/Contents/_CodeSignature/CodeResources";
     }
     local $ENV{MOZ_PRODUCT_VERSION} = $new_version;
     local $ENV{MAR_CHANNEL_ID} = get_config($config, $new_version, $os, 'mar_channel_id');
