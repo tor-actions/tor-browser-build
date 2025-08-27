@@ -310,4 +310,6 @@ popd
 </details>
 
 /label ~"Apps::Type::ReleasePreparation"
+/label ~"Apps::Impact::High"
+/label ~"Priority::Blocker"
 /label ~"Apps::Product::TorBrowser"
