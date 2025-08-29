@@ -1,3 +1,87 @@
+Tor Browser 15.0a2 - August 29 2025
+ * All Platforms
+   * Updated NoScript to 13.0.9
+   * Updated OpenSSL to 3.5.2
+   * Bug 43727: Update moz-toggle customisation for ESR 140 [tor-browser]
+   * Bug 43832: Drop eslint-env [tor-browser]
+   * Bug 43864: Remove features from the unified search button [tor-browser]
+   * Bug 44045: Drop AI and machine learning components [tor-browser]
+   * Bug 44048: Backport Bug 1979608 [tor-browser]
+   * Bug 44069: Update `meek-azure` related strings to `meek` [tor-browser]
+   * Bug 44094: Rebase Tor Browser alpha onto 140.2.0esr [tor-browser]
+   * Bug 44100: Backport Security Fixes from Firefox 142 [tor-browser]
+   * Bug 44140: Align PDF changes to 140esr [tor-browser]
+   * Bug 41442: Update our audit CSVs to use the new Audit template [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 140.2.0esr
+   * Bug 43111: Delete our webextensions for search engines when Bug 1885953 is fixed upstream [tor-browser]
+   * Bug 43519: Replace tor-loading.png with SVG [tor-browser]
+   * Bug 43525: Check if our search engine customization still works after ESR 140 transition [tor-browser]
+   * Bug 43728: Update search engine icon sizes [tor-browser]
+   * Bug 43795: Restore the URL classifier XPCOM components. [tor-browser]
+   * Bug 43817: Write e2e test for verifying if the browser is connected to the Tor network [tor-browser]
+   * Bug 43844: Security level shield icon should be flipped for RTL locales [tor-browser]
+   * Bug 43874: Incorporate our unified extension button hiding logic into mozilla's changes for ESR 140 [tor-browser]
+   * Bug 43901: Modify about:license for Tor Browser and drop about:rights [tor-browser]
+   * Bug 43902: Hide Sidebar buttons [tor-browser]
+   * Bug 43903: Report broken site is disabled rather than hidden [tor-browser]
+   * Bug 44030: Security Level selector does not get confirmation before restarting [tor-browser]
+   * Bug 44034: Update string used for checkbox on New Identity confirmation dialog [tor-browser]
+   * Bug 44040: Modify nsIPrompt and the commonDialog code to allow destructive buttons [tor-browser]
+   * Bug 44041: Letterboxing causes greyed out alert background to be mis-aligned [tor-browser]
+   * Bug 44090: Several of our XUL pages cause a crash because of missing CSP [tor-browser]
+   * Bug 44095: Rename connectionPane.xhtml and remove it from the jar [tor-browser]
+   * Bug 44106: Make sure background tasks are not used for shutdown cleanup [tor-browser]
+   * Bug 44115: Make remove all bridges dialog use a destructive red button [tor-browser]
+   * Bug 44125: Do not offer to save signatures by default in Private Browsing Mode [tor-browser]
+ * Windows + Android
+   * Bug 44062: Force touch enabled on Windows and Android [tor-browser]
+ * Windows
+   * Bug 44046: Replace BASE_BROWSER_UPDATE with BASE_BROWSER_VERSION in the font visibility list [tor-browser]
+ * macOS
+   * Bug 44127: Do not show macOS Privacy hint on network error pages [tor-browser]
+ * Android
+   * Updated GeckoView to 140.2.0esr
+   * Bug 43179: Make persistent 'private tabs' notification distinct from Firefox's [tor-browser]
+   * Bug 43346: Remove the "[android] Stop PrivateNotificationService" patch [tor-browser]
+   * Bug 43645: Swiping away doesn't always disconnect from tor [tor-browser]
+   * Bug 43699: Dummy "about:" pages are not cleared from recently closed tabs (and possibly elsewhere) because they are normal tabs, not private tabs. [tor-browser]
+   * Bug 43826: Review Mozilla 1960122: Use `MOZ_BUILD_DATE` in Fenix build configuration [tor-browser]
+   * Bug 44021: Android settings page colors are sometimes messed up (seems to be on the first launch) [tor-browser]
+   * Bug 44042: Debug crash when opening settings too quickly after launching app [tor-browser]
+   * Bug 44047: Tor Browser's home doesn't have the background at the first load on Android [tor-browser]
+   * Bug 44080: Further remove "Analytics data collection and usage" [tor-browser]
+   * Bug 44081: Swiping away the "private tabs" notification requires rebootstrapping. [tor-browser]
+   * Bug 44083: "snowflake" is lower case on Android [tor-browser]
+   * Bug 44098: Bookmarks offer a way to go to sync in 15.0a1 [tor-browser]
+   * Bug 44139: Restore the (inactive) YouTube and Reddit search plugins on Android [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 44061: "Contributing" link is broken [tor-browser]
+     * Bug 44067: Move --enable-geckodriver only to Linux-only mozconfigs [tor-browser]
+     * Bug 44103: git's export-subst is a reproducibility problem [tor-browser]
+     * Bug 44104: Don't run linter when there are no overall changes [tor-browser]
+     * Bug 26408: Make MAR signature checks clearer when creating incremental MAR files [tor-browser-build]
+     * Bug 40551: Drop go reproducibility patches [tor-browser-build]
+     * Bug 40697: Delete repackage_browser.sh [tor-browser-build]
+     * Bug 40698: Update locale in tbb_version.json [tor-browser-build]
+     * Bug 41517: Add morgan's key to the setup account on the signing machine [tor-browser-build]
+     * Bug 41522: Adapt our signing scripts to be able to sign the VPN app [tor-browser-build]
+     * Bug 41534: Copy geckodriver only for Linux x86-64 [tor-browser-build]
+     * Bug 41537: Add script to count mar downloads from web logs [tor-browser-build]
+     * Bug 41539: Update Ubuntu version used to run mmdebstrap to 24.04.3 [tor-browser-build]
+     * Bug 40087: Downloaded files getting stricter permissions than expected [rbm]
+   * Windows + Linux + Android
+     * Updated Go to 1.24.6
+   * macOS
+     * Bug 41527: Update libdmg-hfsplus and enable LZMA compression on dmgs [tor-browser-build]
+     * Bug 41538: Bump macOS SDK to 15.5 [tor-browser-build]
+   * Android
+     * Bug 44078: Modify ./autopublish-settings.gradle for building a-s and glean with uniffi-bindgen no-op [tor-browser]
+     * Bug 41523: Use custom built Glean package on Android [tor-browser-build]
+     * Bug 41531: Update relprep.py script to handle application-services updates [tor-browser-build]
+     * Bug 41548: Hide tor's symbols on Android and add other linker options to save space [tor-browser-build]
+
 Tor Browser 15.0a1 - July 29 2025
  * All Platforms
    * Updated NoScript to 13.0.8

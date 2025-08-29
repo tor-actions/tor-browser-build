@@ -1,3 +1,48 @@
+Mullvad Browser 15.0a2 - August 29 2025
+ * All Platforms
+   * Updated Firefox to 140.2.0esr
+   * Updated NoScript to 13.0.9
+   * Bug 451: The restart to apply button doesn't work [mullvad-browser]
+   * Bug 460: Rebase Mullvad Browser alpha onto 140.2.0esr [mullvad-browser]
+   * Bug 43111: Delete our webextensions for search engines when Bug 1885953 is fixed upstream [tor-browser]
+   * Bug 43728: Update search engine icon sizes [tor-browser]
+   * Bug 43795: Restore the URL classifier XPCOM components. [tor-browser]
+   * Bug 43844: Security level shield icon should be flipped for RTL locales [tor-browser]
+   * Bug 43864: Remove features from the unified search button [tor-browser]
+   * Bug 43874: Incorporate our unified extension button hiding logic into mozilla's changes for ESR 140 [tor-browser]
+   * Bug 43902: Hide Sidebar buttons [tor-browser]
+   * Bug 43903: Report broken site is disabled rather than hidden [tor-browser]
+   * Bug 44030: Security Level selector does not get confirmation before restarting [tor-browser]
+   * Bug 44034: Update string used for checkbox on New Identity confirmation dialog [tor-browser]
+   * Bug 44040: Modify nsIPrompt and the commonDialog code to allow destructive buttons [tor-browser]
+   * Bug 44041: Letterboxing causes greyed out alert background to be mis-aligned [tor-browser]
+   * Bug 44045: Drop AI and machine learning components [tor-browser]
+   * Bug 44048: Backport Bug 1979608 [tor-browser]
+   * Bug 44090: Several of our XUL pages cause a crash because of missing CSP [tor-browser]
+   * Bug 44100: Backport Security Fixes from Firefox 142 [tor-browser]
+   * Bug 44106: Make sure background tasks are not used for shutdown cleanup [tor-browser]
+   * Bug 44125: Do not offer to save signatures by default in Private Browsing Mode [tor-browser]
+   * Bug 44140: Align PDF changes to 140esr [tor-browser]
+ * Windows
+   * Bug 44046: Replace BASE_BROWSER_UPDATE with BASE_BROWSER_VERSION in the font visibility list [tor-browser]
+   * Bug 44062: Force touch enabled on Windows and Android [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 44067: Move --enable-geckodriver only to Linux-only mozconfigs [tor-browser]
+     * Bug 44103: git's export-subst is a reproducibility problem [tor-browser]
+     * Bug 44104: Don't run linter when there are no overall changes [tor-browser]
+     * Bug 26408: Make MAR signature checks clearer when creating incremental MAR files [tor-browser-build]
+     * Bug 40697: Delete repackage_browser.sh [tor-browser-build]
+     * Bug 40698: Update locale in tbb_version.json [tor-browser-build]
+     * Bug 41517: Add morgan's key to the setup account on the signing machine [tor-browser-build]
+     * Bug 41529: Automate publishing browser release branch and tags to Mullvad repository [tor-browser-build]
+     * Bug 41534: Copy geckodriver only for Linux x86-64 [tor-browser-build]
+     * Bug 41539: Update Ubuntu version used to run mmdebstrap to 24.04.3 [tor-browser-build]
+     * Bug 40087: Downloaded files getting stricter permissions than expected [rbm]
+   * macOS
+     * Bug 41527: Update libdmg-hfsplus and enable LZMA compression on dmgs [tor-browser-build]
+     * Bug 41538: Bump macOS SDK to 15.5 [tor-browser-build]
+
 Mullvad Browser 15.0a1 - July 29 2025
  * All Platforms
    * Updated Firefox to 140.1.0esr
