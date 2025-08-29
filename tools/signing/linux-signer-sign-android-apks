@@ -8,8 +8,9 @@ source "$script_dir/functions"
 topdir="$script_dir/../.."
 ARCHS="armv7 aarch64 x86 x86_64"
 projname=$(project-name)
-# tbb_version_type is used in wrappers/sign-apk, so we export it
-export tbb_version_type
+# tbb_version_type, tbb_version and SIGNING_PROJECTNAME are used in
+# wrappers/sign-apk, so we export them
+export tbb_version tbb_version_type SIGNING_PROJECTNAME
 
 check_installed_packages() {
   local packages='unzip openjdk-11-jdk-headless openjdk-11-jre-headless'
