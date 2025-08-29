@@ -11,8 +11,6 @@ projname=$(project-name)
 # tbb_version_type, tbb_version and SIGNING_PROJECTNAME are used in
 # wrappers/sign-apk, so we export them
 export tbb_version tbb_version_type SIGNING_PROJECTNAME
-# (note: we should also export SIGNING_PROJECTNAME and tbb_version in
-# the maint-14.5 branch)
 
 check_installed_packages() {
   local packages='unzip openjdk-11-jdk-headless openjdk-11-jre-headless'
