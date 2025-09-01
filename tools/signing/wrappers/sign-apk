@@ -23,7 +23,7 @@ case "$SIGNING_PROJECTNAME" in
 esac
 
 android_signing_key_dir=/home/signing-apk/keys
-android_signing_key_path="$android_signing_key_dir/$pname_$tbb_version_type.p12"
+android_signing_key_path="$android_signing_key_dir/tba_$tbb_version_type.p12"
 test -n "$SIGNING_PROJECTNAME" && test "$SIGNING_PROJECTNAME" = 'torvpn' && \
   android_signing_key_path="$android_signing_key_dir/torvpn.p12"
 test -f "$android_signing_key_path" || exit_error "$android_signing_key_path is missing"
