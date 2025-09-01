@@ -1,10 +1,11 @@
-The files in this directory are a large part of what we use when signing
-releases. The scripts are meant to be templates, though, at the moment
-omitting specific paths and credential information.
+This directory contains the scripts used to sign Tor Browser, Mullvad
+Browser and Tor VPN.
 
-Additionally, when starting to use them for your own signing setup don't forget
-to adapt the locale list if needed. The entitlement files, however, are kept
-up-to-date.
+For information about using those scripts, see the `Release Prep` gitlab
+issue templates in the `.gitlab/issue_templates` directory.
+
+The scripts in the machines-setup/ directory are used to setup the
+signing machines (see README.md file in that directory for more details).
 
 The scripts in the nightly/ directory are used to sign and publish the
 nightly updates.
