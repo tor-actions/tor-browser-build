@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source "$script_dir/functions"
+
+setup_dmg_tools
+
+# extract the hfs from the dmg archive preemptively to avoid an obsolete
+# 7z version to break the rcodesign step
+archive="$signed_version_dir/$(project-name)-macos-${tbb_version}"
+dmg extract "$archive.dmg" "$archive.hfs" 0
+rm -f "$archive.dmg"

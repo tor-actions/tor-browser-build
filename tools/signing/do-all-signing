@@ -99,6 +99,10 @@ function clean-build-artifacts {
   "$script_dir/clean-build-artifacts"
 }
 
+function extract-dmg {
+  "$script_dir/extract-dmg"
+}
+
 function sync-before-linux-signer-rcodesign-sign {
   "$script_dir/sync-local-to-linux-signer"
 }
@@ -245,6 +249,8 @@ do_step set-time-on-signing-machine
 do_step wait-for-finished-build
 do_step sync-builder-unsigned-to-local-signed
 do_step clean-build-artifacts
+[ -n "$platform_macos" ] && \
+  do_step extract-dmg
 do_step sync-scripts-to-linux-signer
 do_step sync-before-linux-signer-rcodesign-sign
 [ -n "$platform_macos" ] && \

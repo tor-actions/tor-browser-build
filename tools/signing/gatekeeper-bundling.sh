@@ -70,3 +70,5 @@ rm -Rf "$tmpdir"
 
 # move the signed+stapled dmgs to expected output directory for publishing and mar generation
 mv -vf "$macos_signed_dir"/"${proj_name}"-*.dmg "$signed_version_dir"/
+# Remove hfs file created in extract-dmg
+rm -f "$signed_version_dir"/"${proj_name}"-*.hfs
