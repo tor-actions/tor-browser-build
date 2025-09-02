@@ -15,6 +15,9 @@ be installed.
 Zstandard (zstd) is used to compress some tarballs and needs to be
 installed. You'll also need tar >= 1.31, for zstd support.
 
+The jq tool is required to process the json used to generate the country
+list used by the browser's censorship circumvention system.
+
 You also need a few perl modules installed:
 - YAML::XS
 - File::Basename
@@ -46,7 +49,7 @@ If you are running Debian or Ubuntu, you can install them with:
                   libparallel-forkmanager-perl libpath-tiny-perl \
                   libsort-versions-perl libstring-shellquote-perl \
                   libtemplate-perl libxml-libxml-perl libxml-writer-perl \
-                  libyaml-libyaml-perl git uidmap zstd
+                  libyaml-libyaml-perl git uidmap zstd jq
 
 If you are running Fedora, CentOS or RHEL, you can install them with:
 
@@ -57,7 +60,7 @@ If you are running Fedora, CentOS or RHEL, you can install them with:
               "perl(File::Copy::Recursive)" "perl(String::ShellQuote)" \
               "perl(Sort::Versions)" "perl(Digest::SHA)" "perl(Data::UUID)" \
               "perl(Data::Dump)" "perl(DateTime)" "perl(XML::Writer)" \
-              "perl(Parallel::ForkManager)" perl-ph git zstd
+              "perl(Parallel::ForkManager)" perl-ph git zstd jq
 
 If you are running an Arch based system, you should be able to install them with:
 
@@ -67,7 +70,7 @@ If you are running an Arch based system, you should be able to install them with
             perl-sort-versions perl-data-uuid perl-data-dump perl-json \
             perl-digest-sha1 perl-io-all perl-file-slurp perl-sys-syscall \
             perl-parallel-forkmanager perl-xml-libxml perl-lwp-protocol-https \
-            zstd
+            zstd jq
 
 On Arch based systems you also need to generate some .ph files RBM expects:
 
