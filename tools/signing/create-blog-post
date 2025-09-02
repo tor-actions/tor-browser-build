@@ -15,11 +15,13 @@ then
   lead=../../../assets/static/images/blog/tor-browser-stable.png
   title="New Release: Tor Browser $tbb_version"
   download_page='https://www.torproject.org/download/'
+  reminder=''
 else
   blog_dir_base="new-alpha-release-tor-browser"
   lead=../../../assets/static/images/blog/tor-browser-alpha.png
   title="New Alpha Release: Tor Browser $tbb_version"
   download_page='https://www.torproject.org/download/alpha/'
+  reminder="⚠️ **Reminder**: Tor Browser Alpha release channel is for [testing only](https://community.torproject.org/user-research/become-tester/). If you are at risk or need strong anonymity, stick with the [stable release channel](https://www.torproject.org/download/)."
 fi
 blog_dir="$content_dir/$blog_dir_base-"$(echo $tbb_version | sed 's/\.//g')
 
@@ -54,6 +56,8 @@ This version includes important [security updates](https://www.mozilla.org/en-US
 ## Send us your feedback
 
 If you find a bug or have a suggestion for how we could improve this release, [please let us know](https://support.torproject.org/misc/bug-or-feedback/).
+
+$reminder
 
 ## Full changelog
 
