@@ -10,6 +10,6 @@ Icon=[% c("var/system_pkg/pkg_name") %]
 StartupNotify=true
 StartupWMClass=[% c("var/display_name") %]
 [% IF ! c("var/tor-browser") -%]
-MimeType=text/html;text/xml;application/xhtml_xml;x-scheme-handler/http;x-scheme-handler/https;
+MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;
 [% END -%]
 Terminal=false
