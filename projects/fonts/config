@@ -188,6 +188,9 @@ input_files:
   - URL: https://github.com/googlefonts/noto-cjk/raw/523d033d6cb47f4a80c58a35753646f5c3608a78/Sans/SubsetOTF/TC/NotoSansTC-Regular.otf
     sha256sum: 5bab0cb3c1cf89dde07c4a95a4054b195afbcfe784d69d75c340780712237537
     enable: '[% c("var/linux") %]'
+  - URL: https://github.com/googlefonts/noto-emoji/raw/b3e3051a088047d19fd4d49b1c3ac42fb8c3aaf8/fonts/NotoColorEmoji.ttf
+    sha256sum: 3ed77810c203e1a67735dc19d395f32c23f2d7c0c3696690f4f78e15e57ab816
+    enable: '[% c("var/linux") || c("var/windows") %]'
   - URL: https://github.com/stipub/stixfonts/raw/v2.13b171/fonts/static_otf/STIXTwoMath-Regular.otf
     sha256sum: 3a5f3f26f40d5698b3c62dd085d48d6663696a3f80825aab8b553d5097518e8c
     name: stix
