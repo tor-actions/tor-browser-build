@@ -28,11 +28,10 @@ mv noto-fonts-* noto-fonts
 
 [% IF c("var/linux") %]
   unzip "$rootdir/[% c('input_files_by_name/arimo') %]"
-  cp Arimo-*/fonts/ttf/*.ttf Cousine-* Tinos-* NotoSans{JP,KR,SC,TC}-Regular.otf $distdir/
-[% END %]
-
-[% IF c("var/linux") || c("var/windows") %]
-  cp NotoColorEmoji.ttf $distdir/
+  cp Arimo-*/fonts/ttf/*.ttf Cousine-* Tinos-* \
+    NotoSans{JP,KR,SC,TC}-Regular.otf \
+    NotoColorEmoji.ttf \
+    $distdir/
 [% END %]
 
 cp "$rootdir/[% c('input_files_by_name/Pyidaungsu') %]" $distdir/
