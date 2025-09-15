@@ -1,3 +1,15 @@
+Tor Browser 14.5.7 - September 16 2025
+ * All Platforms
+   * Updated OpenSSL to 3.5.2
+   * Bug 44136: Backport tor-browser#44081: Swiping away the "private tabs" notification requires rebootstrapping [tor-browser]
+   * Bug 44199: Backport Security Fixes from Firefox 143 [tor-browser]
+   * Bug 41441: Backport tor-browser-build#41432: Bump OpenSSL to 3.5.0 [tor-browser-build]
+   * Bug 41462: Backport #40994 and #41280: Add support in signing scripts to sign release for some archs only & Update download-android-*.json files for android-only releases [tor-browser-build]
+   * Bug 41543: mmdebstrap-image fails to build bookworm images on maint-14.5 [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Bug 41554: Export SIGNING_PROJECTNAME and tbb_version in linux-signer-sign-android-apks, in maint-14.5 [tor-browser-build]
+
 Tor Browser 14.5.6 - August 19 2025
  * All Platforms
    * Updated NoScript to 13.0.9

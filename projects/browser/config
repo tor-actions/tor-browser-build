@@ -114,9 +114,9 @@ input_files:
   - URL: https://addons.mozilla.org/firefox/downloads/file/4551629/noscript-13.0.9.xpi
     name: noscript
     sha256sum: 525ab61aff21f67d10c3e20965a86ed479631549908a658f54692adc47d771f5
-  - URL: https://addons.mozilla.org/firefox/downloads/file/4531307/ublock_origin-1.65.0.xpi
+  - URL: https://addons.mozilla.org/firefox/downloads/file/4573289/ublock_origin-1.66.0.xpi
     name: ublock-origin
-    sha256sum: 3e73c96a29a933866065f0756fe032984bf5b254af8dd1afd7a7f7e0668a33cf
+    sha256sum: 155820bace5bf7c8ba547e27678a4a25251131c54904f02f5bf340996f6fdbdc
     enable: '[% c("var/mullvad-browser") %]'
   - URL: https://cdn.mullvad.net/browser-extension/0.9.4/mullvad-browser-extension-0.9.4.xpi
     name: mullvad-extension
