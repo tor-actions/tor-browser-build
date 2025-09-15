@@ -1,3 +1,13 @@
+Tor Browser 13.5.22 - September 16 2025
+ * All Platforms
+   * Updated Firefox to 115.28.0esr
+   * Updated OpenSSL to 3.5.2
+   * Bug 44198: Rebase Tor Browser Legacy onto 115.28 [tor-browser]
+   * Bug 44199: Backport Security Fixes from Firefox 143 [tor-browser]
+   * Bug 41441: Backport tor-browser-build#41432: Bump OpenSSL to 3.5.0 [tor-browser-build]
+   * Bug 41462: Backport #40994 and #41280: Add support in signing scripts to sign release for some archs only & Update download-android-*.json files for android-only releases [tor-browser-build]
+   * Bug 41543: mmdebstrap-image fails to build bookworm images on maint-14.5 [tor-browser-build]
+
 Tor Browser 13.5.21 - August 19 2025
  * All Platforms
    * Updated Firefox to 115.27.0esr
