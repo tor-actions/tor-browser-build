@@ -1,3 +1,40 @@
+Tor Browser 15.0a3 - September 18 2025
+ * All Platforms
+   * Updated Tor to 0.4.9.3-alpha
+   * Updated OpenSSL to 3.5.3
+   * Bug 43009: Backport Bug 1973265 - Put WebCodecs API behind RFP Target [tor-browser]
+   * Bug 43093: Refactor the patch to disable LaterRun [tor-browser]
+   * Bug 43745: Review Mozilla 1842838:  [meta] HEVC (H265) playback related bugs. See the support status on the User Story. [tor-browser]
+   * Bug 44032: Implement YEC 2025 Takeover for Desktop Stable [tor-browser]
+   * Bug 44199: Backport Security Fixes from Firefox 143 [tor-browser]
+   * Bug 41429: Add a note about user safety to Tor Browser Alpha blog posts [tor-browser-build]
+   * Bug 41563: Do not copy Noto Color Emoji on Windows [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 140.3.0esr
+   * Bug 42025: Purple elements (e.g. Tor buttons) need dark theme variants [tor-browser]
+   * Bug 43664: Review Mozilla 1842832: Move the private browsing toggle to initial install dialog [tor-browser]
+   * Bug 43770: Bugzilla 1958070: More BrowserGlue simplification/splitting [tor-browser]
+   * Bug 43966: Notify the user when they are in a custom security level (desktop) [tor-browser]
+   * Bug 44142: Missing document_pdf.svg from our branding directories [tor-browser]
+   * Bug 44145: Switch onion connection icons to use --icon-color-critical and --icon-color [tor-browser]
+   * Bug 44180: Clear YEC 2024 preference [tor-browser]
+ * Linux
+   * Bug 43950: Review Mozilla 1894818: Support HEVC playback on Linux [tor-browser]
+   * Bug 43959: Make Noto Color Emoji the default emoji font on Linux [tor-browser]
+ * Android
+   * Updated GeckoView to 140.3.0esr
+   * Bug 43755: Restore functionality of "switch to tab" urlbar suggestion [tor-browser]
+   * Bug 43943: Review Mozilla 1928705: Ship Android Font Restrictions as part of FPP [tor-browser]
+   * Bug 44172: Fix crash in TorAndroidIntegration.handleMessage() [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41064: Update tools/signing/README and add a tools/signing/machines-setup/README [tor-browser-build]
+     * Bug 41474: update README to explain moat-settings project requires `jq` to be installed [tor-browser-build]
+   * Windows + Linux + Android
+     * Updated Go to 1.24.7
+   * Linux
+     * Bug 41561: Ship Noto Color Emoji on Linux [tor-browser-build]
+
 Tor Browser 15.0a2 - August 29 2025
  * All Platforms
    * Updated NoScript to 13.0.9

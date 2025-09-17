@@ -1,3 +1,28 @@
+Mullvad Browser 15.0a3 - September 18 2025
+ * All Platforms
+   * Updated Firefox to 140.3.0esr
+   * Updated uBlock Origin to 1.66.0
+   * Bug 463: Fix typo in MimeType entry in .desktop file included in deb/rpm package (application/xhtml_xml instead of application/xhtml+xml) [mullvad-browser]
+   * Bug 468: Drop the Metager search engine [mullvad-browser]
+   * Bug 43009: Backport Bug 1973265 - Put WebCodecs API behind RFP Target [tor-browser]
+   * Bug 43093: Refactor the patch to disable LaterRun [tor-browser]
+   * Bug 43525: Check if our search engine customization still works after ESR 140 transition [tor-browser]
+   * Bug 43664: Review Mozilla 1842832: Move the private browsing toggle to initial install dialog [tor-browser]
+   * Bug 43745: Review Mozilla 1842838:  [meta] HEVC (H265) playback related bugs. See the support status on the User Story. [tor-browser]
+   * Bug 43770: Bugzilla 1958070: More BrowserGlue simplification/splitting [tor-browser]
+   * Bug 43966: Notify the user when they are in a custom security level (desktop) [tor-browser]
+   * Bug 44142: Missing document_pdf.svg from our branding directories [tor-browser]
+   * Bug 44199: Backport Security Fixes from Firefox 143 [tor-browser]
+   * Bug 41563: Do not copy Noto Color Emoji on Windows [tor-browser-build]
+ * Linux
+   * Bug 43950: Review Mozilla 1894818: Support HEVC playback on Linux [tor-browser]
+   * Bug 43959: Make Noto Color Emoji the default emoji font on Linux [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41064: Update tools/signing/README and add a tools/signing/machines-setup/README [tor-browser-build]
+   * Linux
+     * Bug 41561: Ship Noto Color Emoji on Linux [tor-browser-build]
+
 Mullvad Browser 15.0a2 - August 29 2025
  * All Platforms
    * Updated Firefox to 140.2.0esr
