@@ -195,8 +195,6 @@ input_files:
     enable: '[% c("var/has_l10n") && c("var/tor-browser") %]'
   - filename: fix-info-plist.py
     enable: '[% c("var/macos") %]'
-  - filename: nsis-uninstall.patch
-    enable: '[% c("var/windows") %]'
   - project: rust
     name: rust
   - project: cbindgen
