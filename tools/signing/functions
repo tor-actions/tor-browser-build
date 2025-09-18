@@ -83,4 +83,24 @@ function rbm_showconf_boolean {
   echo '1'
 }
 
+function setup_dmg_tools {
+  dmgtools_dir=$(mktemp -d)
+  trap "rm -Rf $dmgtools_dir" EXIT
+  local libdmg_file="$script_dir/../../out/libdmg-hfsplus/libdmg-hfsplus-d6287b5afc24-6f206c.tar.zst"
+  test -f "$libdmg_file" || \
+    exit_error "$libdmg_file is missing." \
+      "You can build it with:" \
+      "  ./rbm/rbm build --target no_containers libdmg-hfsplus" \
+      "See var/deps in projects/libdmg-hfsplus/config for the list of build dependencies"
+  local hfstools_file="$script_dir/../../out/hfsplus-tools/hfsplus-tools-540.1.linux3-2acaa4.tar.zst"
+  test -f "$hfstools_file" || \
+    exit_error "$hfstools_file is missing." \
+      "You can build it with:" \
+      "  ./rbm/rbm build --target no_containers hfsplus-tools" \
+      "You will need the clang and uuid-dev packages installed"
+  tar -C "$dmgtools_dir" -xf "$libdmg_file"
+  tar -C "$dmgtools_dir" -xf "$hfstools_file"
+  export PATH="$PATH:$dmgtools_dir/libdmg-hfsplus:$dmgtools_dir/hfsplus-tools"
+}
+
 . "$script_dir/set-config"

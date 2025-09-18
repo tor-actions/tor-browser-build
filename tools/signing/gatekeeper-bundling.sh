@@ -39,18 +39,8 @@ test -f $faketime_path || \
   exit_error "$faketime_path is missing"
 test -d $macos_stapled_dir || \
   exit_error "The stapled macos zip files should be placed in directory $macos_stapled_dir"
-libdmg_file="$script_dir/../../out/libdmg-hfsplus/libdmg-hfsplus-d6287b5afc24-6f206c.tar.zst"
-test -f "$libdmg_file" || \
-  exit_error "$libdmg_file is missing." \
-             "You can build it with:" \
-             "  ./rbm/rbm build --target no_containers libdmg-hfsplus" \
-             "See var/deps in projects/libdmg-hfsplus/config for the list of build dependencies"
-hfstools_file="$script_dir/../../out/hfsplus-tools/hfsplus-tools-540.1.linux3-2acaa4.tar.zst"
-test -f "$hfstools_file" || \
-  exit_error "$hfstools_file is missing." \
-             "You can build it with:" \
-             "  ./rbm/rbm build --target no_containers hfsplus-tools" \
-             "You will need the clang and uuid-dev packages installed"
+
+setup_dmg_tools
 
 ProjName=$(ProjectName)
 Proj_Name=$(Project_Name)
@@ -65,10 +55,6 @@ tmpdir="$macos_stapled_dir/tmp"
 rm -Rf "$tmpdir"
 mkdir "$tmpdir"
 cp -rT "$script_dir/../../projects/common/dmg-root/$ProjName.dmg" "$tmpdir/dmg"
-
-tar -C "$tmpdir" -xf "$libdmg_file"
-tar -C "$tmpdir" -xf "$hfstools_file"
-export PATH="$PATH:$tmpdir/libdmg-hfsplus:$tmpdir/hfsplus-tools"
 
 cd $tmpdir/dmg
 
