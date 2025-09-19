@@ -5,28 +5,29 @@
 # mar files. After code signing the dmg files, this script can be used
 # to update the mar files.
 #
-# A recent version of p7zip is required to extract the dmg files, such
-# as 15.14. The version in Debian Jessie (9.20) is not recent enough.
-# It is possible to install the p7zip-full package from Debian testing,
-# or build p7zip from sources:
-#  $ p7zipdir=/some_directory/p7zip
+# A recent version of 7zip is required to extract the dmg files
+# compressed with lzma, such as 24.09. If your distribution does not
+# provide a recent version of 7zip, it is possible to build it from
+# sources:
+#  $ p7zipdir=/some_directory/7zip
 #  $ mkdir $p7zipdir
 #  $ cd $p7zipdir
-#  $ wget http://snapshot.debian.org/archive/debian/20160417T044336Z/pool/main/p/p7zip/p7zip_15.14.1%2Bdfsg.orig.tar.xz
-#  $ echo 'e9e696e2fa77b00445a4d85fa07506debeae01943fdc1bee1472152d7d1386af p7zip_15.14.1+dfsg.orig.tar.xz' | sha256sum -c
-#  $ wget http://snapshot.debian.org/archive/debian/20160515T161830Z/pool/main/p/p7zip/p7zip_15.14.1%2Bdfsg-2.debian.tar.xz
-#  $ echo 'f4db6803535fc30b6ae9db5aabfd9f57a851c6773d72073847ec5e3731b7af37  p7zip_15.14.1+dfsg-2.debian.tar.xz' | sha256sum -c
-#  $ tar xvf p7zip_15.14.1+dfsg-2.debian.tar.xz
-#  $ tar xvf p7zip_15.14.1+dfsg.orig.tar.xz
-#  $ cd p7zip_15.14.1/
-#  $ for patch in $(cat ../debian/patches/series ); do patch -p1 < ../debian/patches/$patch; done
-#  $ make 7z
-#  $ mkdir $p7zipdir/bin
-#  $ echo '#!/bin/sh' > $p7zipdir/bin/7z
-#  $ echo "export LD_LIBRARY_PATH=$PWD/bin" >> $p7zipdir/bin/7z
-#  $ echo "exec $PWD/bin/7z "'"$@"' >> $p7zipdir/bin/7z
-#  $ chmod +x $p7zipdir/bin/7z
-#  $ export "PATH=$p7zipdir/bin:$PATH"
+#  $ wget http://deb.debian.org/debian/pool/main/7/7zip/7zip_24.09+dfsg.orig.tar.xz
+#  $ echo 'bd5c61a206a83a5950410608df204550cab97e8609b62f9d7c368aaa682d649b  7zip_24.09+dfsg.orig.tar.xz' | sha256sum -c
+#  $ wget http://deb.debian.org/debian/pool/main/7/7zip/7zip_24.09+dfsg-8.debian.tar.xz
+#  $ echo '1615b151dcddc861fbebc2fd418fd857d0704b1951a6f01384066756ae0ef25b  7zip_24.09+dfsg-8.debian.tar.xz' | sha256sum -c
+#  $ mkdir 7zip
+#  $ cd 7zip
+#  $ tar xvf ../7zip_24.09+dfsg.orig.tar.xz
+#  $ tar xvf ../7zip_24.09+dfsg-8.debian.tar.xz
+#  $ for patch in $(cat debian/patches/series ); do patch -p1 < debian/patches/$patch; done
+#  $ make -C CPP/7zip/Bundles/Alone2 -j 2 -f makefile.gcc DISABLE_RAR=1
+#  $ bindir=~/mbin
+#  $ mkdir -p $bindir
+#  $ echo '#!/bin/sh' > $bindir/7z
+#  $ echo "exec $PWD/CPP/7zip/Bundles/Alone2/_o/7zz "'"$@"' >> $bindir/7z
+#  $ chmod +x $bindir/7z
+#  $ export "PATH=$bindir:$PATH"
 
 use strict;
 use Capture::Tiny qw(capture);
