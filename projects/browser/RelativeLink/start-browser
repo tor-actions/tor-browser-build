@@ -241,7 +241,7 @@ if test -z "$system_install"; then
   # Fix up .desktop Icon and Exec Paths, and update the .desktop file from the
   # canonical version if it was changed by the updater.
   cp start-[% c('var/project-name') %].desktop ../
-  sed -i -e "s,^Name=.*,Name=[% c('var/Project_Name') %],g" ../start-[% c('var/project-name') %].desktop
+  sed -i -e "s,^Name=.*,Name=[% c('var/display_name') %],g" ../start-[% c('var/project-name') %].desktop
   sed -i -e "s,^Icon=.*,Icon=$PWD/browser/chrome/icons/default/default128.png,g" ../start-[% c('var/project-name') %].desktop
   sed -i -e "s,^Icon=.*,Icon=$PWD/browser/chrome/icons/default/default128.png,g" start-[% c('var/project-name') %].desktop
   sed -i -e "s,^Exec=.*,Exec=sh -c '\"$PWD/start-[% c('var/project-name') %]\" || ([ !  -x \"$PWD/start-[% c('var/project-name') %]\" ] \&\& \"\$(dirname \"\$*\")\"/Browser/start-[% c('var/project-name') %])' dummy %k,g" ../start-[% c('var/project-name') %].desktop

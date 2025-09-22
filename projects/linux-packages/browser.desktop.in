@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=[% c("var/Project_Name") %]
+Name=[% c("var/display_name") %]
 GenericName=Web Browser
 Comment=[% c("var/system_pkg/pkg_description") %]
 Categories=Network;WebBrowser;

@@ -24,7 +24,7 @@
 
 [Desktop Entry]
 Type=Application
-Name=[% c("var/Project_Name") %] Setup
+Name=[% c("var/display_name") %] Setup
 GenericName=Web Browser
 Comment=[% c("var/Project_Name") %]  is +1 for privacy and −1 for mass surveillance
 Categories=Network;WebBrowser;Security;
