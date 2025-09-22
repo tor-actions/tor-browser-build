@@ -11,7 +11,7 @@ var:
     pkg_name: '[% c("var/project-name") %]-[% c("var/channel") %]'
     pkg_version: '[% c("var/torbrowser_version") %]'
     pkg_revision: '1'
-    pkg_description: '[% c("var/display_name") %]'
+    pkg_description: '[% c("var/project_description") %]'
     deb_release_date: '[% USE date; date.format(c("timestamp"), format = "%a, %d %b %Y 01:02:03 +0000", locale = "en_US") %]'
     # https://spdx.github.io/spdx-spec/v2.3/SPDX-license-expressions/
     spdx_license: 'MPL-2.0 AND GPL-3.0-or-later AND OFL-1.1 AND Apache-2.0[% IF c("var/tor-browser") %] AND BSD-3-Clause AND CC0-1.0 AND MIT[% END %]'
@@ -122,7 +122,6 @@ targets:
     var:
       browser_type: torbrowser
       system_pkg:
-        pkg_description: 'Tor Browser is a privacy-focused web browser designed to minimize tracking and fingerprinting, using the Tor network to protect your privacy and anonymity.'
         pkg_url: 'https://torproject.org/'
   basebrowser:
     var:
@@ -131,7 +130,6 @@ targets:
     var:
       browser_type: mullvadbrowser
       system_pkg:
-        pkg_description: 'Mullvad Browser is a privacy-focused web browser designed to minimize tracking and fingerprinting.'
         pkg_url: 'https://mullvad.net/browser'
 
   release:
