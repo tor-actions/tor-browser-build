@@ -3,8 +3,15 @@ filename: '[% project %]-[% c("var/osname") %]-[% c("version") %]-[% c("var/buil
 version: '[% c("var/torbrowser_version") %]'
 
 targets:
+  linux:
+    var:
+      pt_path: ./TorBrowser/Tor/PluggableTransports/
+  macos:
+    var:
+      pt_path: PluggableTransports/
   windows:
     var:
+      pt_path: TorBrowser\Tor\PluggableTransports\
       pt_extension: .exe
 
 input_files:
@@ -16,6 +23,8 @@ input_files:
     project: conjure
     enable: '[% !c("var/android-x86") && !c("var/android-x86_64") %]'
   - filename: pt_config.json
+  - filename: torrc-defaults
+    enable: '[% !c("var/android") %]'
   - filename: AndroidManifest.xml
     enable: '[% c("var/android") %]'
   - filename: MANIFEST.MF

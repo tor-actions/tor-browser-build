@@ -99,7 +99,13 @@ mv [% c('input_files_by_name/noscript') %] "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b
 
   # geoip(6) and anything else that belongs in the data dir from the expert bundle
   mkdir -p "$TBDIR/$TORCONFIGPATH" [% IF c("var/macos_universal") %]"$TBDIR_AARCH64/$TORCONFIGPATH"[% END %]
-  mv_tbdir data/{geoip,geoip6} "$TORCONFIGPATH"
+  mv_tbdir data/{geoip,geoip6,torrc-defaults} "$TORCONFIGPATH"
+  [% IF ! c("var/macos") %]
+    # Create an empty torrc file for user configurations.
+    #
+    # In MacOS this file is usually in the user directory, so we skip it there.
+    touch "$TBDIR/$TORCONFIGPATH"/torrc
+  [% END %]
 
   # pt_config.json will be consumed later in `bridges_conf`
   mv tor/pluggable_transports/pt_config.json $rootdir
@@ -219,20 +225,6 @@ do
     cp -a Bundle-Data/Docs-MB/* "$tbdir/$DOCSPATH"
   [% END -%]
 done
-
-[% IF c("var/tor-browser") -%]
-  PT_CONFIG="$rootdir/pt_config.json"
-
-  # Write our ClientTransportPlugin lines to torrc-defults
-  for tbdir in "${TBDIRS[@]}"
-  do
-    PT_PATH='[% c("var/pt_path") %]'
-    TORRC_DEFAULTS="$tbdir/$TORCONFIGPATH/torrc-defaults"
-    jq --raw-output .pluggableTransports[] "${PT_CONFIG}" | while read -r line; do
-      echo "${line/\$\{pt_path\}/${PT_PATH}}" >> "$TORRC_DEFAULTS"
-    done
-  done
-[% END -%]
 
 [% IF c("var/linux") && c("var/tor-browser") %]
   chmod 700 "${TB_STAGE_DIR}/Browser/[% c('var/ProjectName') %]/Data/Browser"

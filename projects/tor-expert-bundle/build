@@ -71,6 +71,12 @@ cd $distdir
   cd ..
 [% END %]
 
+# Write our ClientTransportPlugin lines to torrc-defults
+jq --raw-output .pluggableTransports[] "tor/pluggable_transports/pt_config.json" | while read -r line; do
+  echo "${line/\$\{pt_path\}/[% c("var/pt_path") %]}" >> "$rootdir/torrc-defaults"
+done
+mv "$rootdir/torrc-defaults" data
+
 [%
   SET tar_src = [ "tor", "data", "docs" ];
   IF c("var/linux");
