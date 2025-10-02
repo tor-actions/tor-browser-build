@@ -98,7 +98,7 @@ sub get_version_files {
     foreach my $file (readdir $d) {
         next unless -f "$vdir/$file";
         if ($file !~ m/incremental\.mar$/ &&
-            $file =~ m/^$appname-(.+)-${version}_ALL\.mar$/) {
+            $file =~ m/^$appname-(.+)-${version}\.mar$/) {
             my $os = $1;
             $files->{$os}{complete} = {
                 type => 'complete',
@@ -111,7 +111,7 @@ sub get_version_files {
             };
             next;
         }
-        if ($file =~ m/^$appname-(.+)--(.+)-${version}_ALL\.incremental\.mar$/) {
+        if ($file =~ m/^$appname-(.+)--(.+)-${version}\.incremental\.mar$/) {
             my ($os, $from_version) = ($1, $2);
             $files->{$os}{partial}{$from_version} = {
                 type => 'partial',
@@ -221,13 +221,13 @@ sub extract_mar {
 
 sub mar_filename {
     my ($config, $appname, $version, $os) = @_;
-    version_dir($config, $version) .  "/$appname-$os-${version}_ALL.mar";
+    version_dir($config, $version) .  "/$appname-$os-${version}.mar";
 }
 
 sub create_incremental_mar {
     my ($config, $pm, $from_version, $new_version, $os, $channel) = @_;
     my $appname = $config->{appname_marfile};
-    my $mar_file = "$appname-$os--${from_version}-${new_version}_ALL.incremental.mar";
+    my $mar_file = "$appname-$os--${from_version}-${new_version}.incremental.mar";
     my $mar_file_path = version_dir($config, $new_version) . '/' . $mar_file;
     if ($ENV{MAR_SKIP_EXISTING} && -f $mar_file_path) {
         print "Skipping $mar_file\n";

@@ -372,7 +372,7 @@ cd $distdir
 
 [% IF c("var/build_mar") && c("var/updater_enabled") -%]
   # Create full MAR file and compressed package.
-  [% SET mar_file = c("var/project-name") _ '-' _ c("var/mar_osname") _ '-' _ c("var/torbrowser_version") _ '_ALL.mar' %]
+  [% SET mar_file = c("var/project-name") _ '-' _ c("var/mar_osname") _ '-' _ c("var/torbrowser_version") _ '.mar' %]
   MAR=$MARTOOLS/mar \
   MOZ_PRODUCT_VERSION=[% c("var/torbrowser_version") %] \
   MAR_CHANNEL_ID=[% c("var/mar_channel_id") %] \

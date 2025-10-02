@@ -117,7 +117,7 @@ sub convert_files {
         print "Finished $_[2]\n";
       });
     foreach my $file (get_dmg_files_from_sha256sums) {
-        my $output = "$appname_mar-macos-$file->{version}_ALL.mar";
+        my $output = "$appname_mar-macos-$file->{version}.mar";
         my $step_name = "$file->{filename} -> $output";
         print "Starting $step_name\n";
         $pm->start($step_name) and next;
