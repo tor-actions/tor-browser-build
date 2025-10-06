@@ -163,3 +163,9 @@ input_files:
     # tor-browser-build#40920
   - filename: sort-baseline.py
     enable: '[% c("var/android") %]'
+  - project: node
+    name: node
+    enable: '[% c("var/android-x86") %]'
+  - project: uglifyjs
+    name: uglifyjs
+    enable: '[% c("var/android-x86") %]'
