@@ -1,6 +1,6 @@
 #!/bin/bash
 [% c("var/set_default_env") -%]
-distdir=/var/tmp/dist/[% project %]
+distdir=$rootdir/[% project %]
 mkdir -p $distdir
 
 output_dir=[% dest_dir %]/[% c('filename') %]
@@ -41,11 +41,9 @@ cd $distdir
 
 # package a .aar on android
 [% IF c("var/android") -%]
-  aar_file=torExpertBundle-[% c('arch') %].aar
-
   abi=[% c('var/abi') %]
 
-  mkdir aar
+  mkdir -p aar/META-INF
   mkdir -p aar/jni/$abi
   mkdir -p aar/assets/common
 
@@ -61,10 +59,15 @@ cd $distdir
 
   cp -a tor/pluggable_transports/pt_config.json aar/assets/common/
 
-  cp -a $rootdir/AndroidManifest.xml aar/
+  cp $rootdir/AndroidManifest.xml aar/
+  cp $rootdir/MANIFEST.MF aar/META-INF/
+  [% c("touch") %] aar/AndroidManifest.xml aar/META-INF/MANIFEST.MF
 
   cd aar
-  jar -cvf $output_dir/tor-expert-bundle-[% c('arch') %].aar *
+  [% c('zip', {
+      zip_src => [ '*' ],
+      zip_args => '$output_dir/tor-expert-bundle-' _ c('arch') _ '.aar'
+    }) %]
   cd ..
 [% END %]
 

@@ -2,16 +2,12 @@
 filename: '[% project %]-[% c("var/osname") %]-[% c("version") %]-[% c("var/build_id") %]'
 version: '[% c("var/torbrowser_version") %]'
 
-container:
-  use_container: 1
-
 targets:
   windows:
     var:
       pt_extension: .exe
 
 input_files:
-  - project: container-image
   - name: tor
     project: tor
   - name: lyrebird
@@ -21,4 +17,6 @@ input_files:
     enable: '[% !c("var/android-x86") && !c("var/android-x86_64") %]'
   - filename: pt_config.json
   - filename: AndroidManifest.xml
+    enable: '[% c("var/android") %]'
+  - filename: MANIFEST.MF
     enable: '[% c("var/android") %]'
