@@ -1,3 +1,16 @@
+Tor Browser 14.5.8 - October 08 2025
+ * All Platforms
+   * Updated Tor to 0.4.8.19
+   * Updated OpenSSL to 3.5.4
+   * Bug 44239: DDG HTML page and search results displayed incorrectly with Safest security setting [tor-browser]
+   * Bug 44240: Typo on dom.security.https_first_add_exception_on_failure [tor-browser]
+   * Bug 44244: Backport Security Fixes from Firefox 144 [tor-browser]
+   * Bug 41574: Update Snowflake builtin bridge lines [tor-browser-build]
+ * Windows + macOS + Linux
+   * Bug 44032: Implement YEC 2025 Takeover for Desktop Stable [tor-browser]
+ * Android
+   * Bug 44031: Implement YEC 2025 Takeover for Android Stable [tor-browser]
+
 Tor Browser 14.5.7 - September 16 2025
  * All Platforms
    * Updated OpenSSL to 3.5.2
