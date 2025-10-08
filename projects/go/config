@@ -22,6 +22,10 @@ var:
       export CGO_LDFLAGS_ALLOW="-z|noexecstack"
       export CGO_LDFLAGS="-z noexecstack"
     [% END -%]
+    [% IF c("var/android") -%]
+      export CGO_LDFLAGS_ALLOW="-z|max-page-size"
+      export CGO_LDFLAGS="-z max-page-size=16384"
+    [% END -%]
     [% IF c("var/cgo") -%]
       export CGO_ENABLED=1
     [% END -%]
