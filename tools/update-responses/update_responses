@@ -87,6 +87,33 @@ sub get_sha512_hex_of_file {
     return $sha->hexdigest;
 }
 
+# With release 15.0 _ALL is being removed from mar file names.
+# However we need to be able to generate incrementals from versions
+# using the old filenames. As a workaround, if the old filename is
+# found we create a symlink to the new file name.
+# The symlinks are used in `create_incremental_mar` and `get_buildinfos`,
+# where supporting both file names would complexify things. The symlinks
+# are ignored in `get_version_files` where the regexp used support both
+# old and new filenames.
+# We can remove this once we don't need to generate incrementals from
+# versions with the old file names.
+sub symlink_ALL {
+    my ($config, $version) = @_;
+    my $vdir = version_dir($config, $version);
+    opendir(my $d, $vdir) or exit_error "Error opening directory $vdir";
+    foreach my $file (readdir $d) {
+        next unless -f "$vdir/$file";
+        if ($file =~ m/^(.+)_ALL\.mar$/) {
+            next if -f "$vdir/$1.mar";
+            symlink $file, "$vdir/$1.mar";
+        }
+        if ($file =~ m/^(.+)_ALL\.incremental\.mar$/) {
+            next if -f "$vdir/$1.incremental.mar";
+            symlink $file, "$vdir/$1.incremental.mar";
+        }
+    }
+}
+
 sub get_version_files {
     my ($config, $version) = @_;
     return if $config->{versions}{$version}{files};
@@ -97,8 +124,13 @@ sub get_version_files {
     opendir(my $d, $vdir) or exit_error "Error opening directory $vdir";
     foreach my $file (readdir $d) {
         next unless -f "$vdir/$file";
+        # Ignore the symlinks created by `symlink_ALL` to avoid adding the files
+        # twice.
+        # We can remove this line once we don't need to support the legacy channel with
+        # with the old file names.
+        next if -l "$vdir/$file";
         if ($file !~ m/incremental\.mar$/ &&
-            $file =~ m/^$appname-(.+)-${version}\.mar$/) {
+            $file =~ m/^$appname-(.+)-${version}(_ALL)?\.mar$/) {
             my $os = $1;
             $files->{$os}{complete} = {
                 type => 'complete',
@@ -111,7 +143,7 @@ sub get_version_files {
             };
             next;
         }
-        if ($file =~ m/^$appname-(.+)--(.+)-${version}\.incremental\.mar$/) {
+        if ($file =~ m/^$appname-(.+)--(.+)-${version}(_ALL)?\.incremental\.mar$/) {
             my ($os, $from_version) = ($1, $2);
             $files->{$os}{partial}{$from_version} = {
                 type => 'partial',
@@ -288,6 +320,7 @@ sub create_incremental_mars_for_version {
     my $v = $config->{versions}{$version};
     foreach my $from_version (@{$v->{incremental_from}}) {
         $config->{versions}{$from_version} //= {};
+        symlink_ALL($config, $from_version);
         get_version_files($config, $from_version);
         my $from_v = $config->{versions}{$from_version};
         foreach my $os (keys %{$v->{files}}) {
@@ -396,6 +429,7 @@ sub write_responses {
     my (%oses, %from_versions);
     foreach my $version (@$versions) {
         get_version_files($config, $version);
+        symlink_ALL($config, $version);
         get_buildinfos($config, $version);
         my $files = $config->{versions}{$version}{files};
         foreach my $os (keys %$files) {
