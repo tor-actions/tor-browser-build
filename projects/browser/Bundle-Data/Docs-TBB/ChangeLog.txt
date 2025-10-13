@@ -1,3 +1,11 @@
+Tor Browser 13.5.23 - October 14 2025
+ * All Platforms
+   * Updated Firefox to 115.29.0esr
+   * Updated Tor to 0.4.8.19
+   * Updated NoScript to 13.2.1
+   * Updated OpenSSL to 3.5.4
+   * Bug 44255: Rebase Tor Browser legacy onto 115.29.0esr [tor-browser]
+
 Tor Browser 13.5.22 - September 16 2025
  * All Platforms
    * Updated Firefox to 115.28.0esr
