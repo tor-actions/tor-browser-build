@@ -23,7 +23,7 @@ var:
   browser_series: '14.5'
   browser_rebase: 1
   browser_branch: '[% c("var/browser_series") %]-[% c("var/browser_rebase") %]'
-  browser_build: 6
+  browser_build: 7
   gitlab_project: https://gitlab.torproject.org/tpo/applications/tor-browser
   git_commit: '[% exec("git rev-parse " _ c("git_hash") _ "^{commit}", { exec_noco => 1 }) %]'
   deps:
