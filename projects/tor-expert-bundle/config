@@ -11,7 +11,8 @@ targets:
       pt_path: PluggableTransports/
   windows:
     var:
-      pt_path: TorBrowser\Tor\PluggableTransports\
+      # Backlashes need to be escaped here.
+      pt_path: TorBrowser\\Tor\\PluggableTransports\\
       pt_extension: .exe
 
 input_files:
