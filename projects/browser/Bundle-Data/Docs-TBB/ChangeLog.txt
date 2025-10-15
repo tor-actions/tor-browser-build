@@ -1,3 +1,73 @@
+Tor Browser 15.0a4 - October 16 2025
+ * All Platforms
+   * Updated NoScript to 13.2.1
+   * Updated OpenSSL to 3.5.4
+   * Bug 19741: Opensearch (contextual search) does not obey FPI [tor-browser]
+   * Bug 43850: Modify the Contrast Control settings for RFP [tor-browser]
+   * Bug 43869: Hide pens with RFP [tor-browser]
+   * Bug 44068: Handle migration from meek-azure to meek built-in bridge type [tor-browser]
+   * Bug 44234: No images in PDF [tor-browser]
+   * Bug 44240: Typo on dom.security.https_first_add_exception_on_failure [tor-browser]
+   * Bug 44242: Hand over Security Level's WebAssembly controls  to NoScript [tor-browser]
+   * Bug 44250: Rebase Tor Browser Alpha onto 140.4esr [tor-browser]
+   * Bug 41574: Update Snowflake builtin bridge lines [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 140.4.0esr
+   * Bug 43900: Open newtab rather than firefoxview when unloading the last tab [tor-browser]
+   * Bug 44101: Toolbar connection status is not visible when using vertical tabs [tor-browser]
+   * Bug 44107: Switch tab search action is missing an icon [tor-browser]
+   * Bug 44108: Fix the new history sidebar [tor-browser]
+   * Bug 44123: Do not trim protocol off of URLs ever [tor-browser]
+   * Bug 44153: Test search engines [tor-browser]
+   * Bug 44159: Change or hide the sidebar settings description [tor-browser]
+   * Bug 44177: Remove more urlbar actions [tor-browser]
+   * Bug 44178: Search preservation does not work with duckduckgo in safest security level [tor-browser]
+   * Bug 44184: Duckduckgo Onion Lite search does not work properly in safest when added as a search engine [tor-browser]
+   * Bug 44187: TLS session tickets leak Private Browsing mode [tor-browser]
+   * Bug 44192: Hovering unloaded tab causes console error [tor-browser]
+   * Bug 44213: Reduce linkability concerns of the "Search with" contextual search action [tor-browser]
+   * Bug 44214: Update letterboxing to reflect changes in ESR 140 [tor-browser]
+   * Bug 44215: Hide Firefox home settings in about:preferences [tor-browser]
+   * Bug 44221: Backport MozBug 1984333 Bump Spoofed Processor Count [tor-browser]
+   * Bug 44239: DDG HTML page and search results displayed incorrectly with Safest security setting [tor-browser]
+   * Bug 44262: Disable adding search engines from HTML forms [tor-browser]
+ * Linux
+   * Bug 44227: Some CJK characters cannot be rendered by Tor which uses the Noto font family [tor-browser]
+   * Bug 41586: Replace Noto CJK with Jigmo on Linux [tor-browser-build]
+ * Android
+   * Updated GeckoView to 140.4.0esr
+   * Bug 43401: Replace the constructor of Locale with a builder [tor-browser]
+   * Bug 43643: Clean out unused tor connect strings [tor-browser]
+   * Bug 43650: Survey banner behaves like a dialog on Android, rather than a card [tor-browser]
+   * Bug 43676: Preemptively disable unified trust panel by default so we are tracking for next ESR [tor-browser]
+   * Bug 44031: Implement YEC 2025 Takeover for Android Stable [tor-browser]
+   * Bug 44218: Tor Browser Alpha for Android (15.0a2) doesn't work on Huawei devices P20 and P30 [tor-browser]
+   * Bug 44237: Revoke access to all advertising ids available in Android [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41568: Update instructions for manually building 7zip [tor-browser-build]
+     * Bug 41576: Build expert bundles outside containers [tor-browser-build]
+     * Bug 41579: Add zip to the list of Tor Browser Build dependencies [tor-browser-build]
+     * Bug 41588: Restore legacy channel support in projects/release/update_responses_config.yml [tor-browser-build]
+     * Bug 41589: Backport tor-browser-build-browser#41270: Add updater rewriterules to make 13.5.7 a watershed [tor-browser-build]
+   * Windows + macOS + Linux
+     * Bug 41373: Remove `_ALL` from mar filenames [tor-browser-build]
+     * Bug 44131: Generate torrc-defaults and put it in objdir post-build [tor-browser]
+   * Windows + Linux + Android
+     * Updated Go to 1.24.9
+   * Windows
+     * Bug 44167: Move the nsis-uninstall.patch to tor-browser repository [tor-browser]
+   * macOS
+     * Bug 41571: Work-around to prevent older 7z versions to break rcodesign. [tor-browser-build]
+   * Linux
+     * Bug 41558: Share descriptions between Linux packages and archives [tor-browser-build]
+     * Bug 41569: Use var/display_name in .desktop files [tor-browser-build]
+   * Android
+     * Bug 44220: Disable the JS minifier as it produces invalid JS [tor-browser]
+     * Bug 41577: Minify JS with UglifyJS on Android x86 [tor-browser-build]
+     * Bug 41582: Drop --pack-dyn-relocs=relr [tor-browser-build]
+     * Bug 41583: Align tor and PTs to 16kB on Android [tor-browser-build]
+
 Tor Browser 15.0a3 - September 18 2025
  * All Platforms
    * Updated Tor to 0.4.9.3-alpha

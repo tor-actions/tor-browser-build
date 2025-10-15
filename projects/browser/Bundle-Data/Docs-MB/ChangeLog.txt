@@ -1,3 +1,49 @@
+Mullvad Browser 15.0a4 - October 16 2025
+ * All Platforms
+   * Updated Firefox to 140.4.0esr
+   * Updated NoScript to 13.2.1
+   * Updated Mullvad Browser Extension to 0.9.5
+   * Updated uBlock Origin to 1.66.4
+   * Bug 477: Rebase Mullvad Browser Alpha onto 140.4.0esr [mullvad-browser]
+   * Bug 478: Update to the Mullvad Browser extension to 0.9.5 [mullvad-browser]
+   * Bug 19741: Opensearch (contextual search) does not obey FPI [tor-browser]
+   * Bug 43850: Modify the Contrast Control settings for RFP [tor-browser]
+   * Bug 43869: Hide pens with RFP [tor-browser]
+   * Bug 43900: Open newtab rather than firefoxview when unloading the last tab [tor-browser]
+   * Bug 44107: Switch tab search action is missing an icon [tor-browser]
+   * Bug 44108: Fix the new history sidebar [tor-browser]
+   * Bug 44123: Do not trim protocol off of URLs ever [tor-browser]
+   * Bug 44153: Test search engines [tor-browser]
+   * Bug 44159: Change or hide the sidebar settings description [tor-browser]
+   * Bug 44177: Remove more urlbar actions [tor-browser]
+   * Bug 44178: Search preservation does not work with duckduckgo in safest security level [tor-browser]
+   * Bug 44187: TLS session tickets leak Private Browsing mode [tor-browser]
+   * Bug 44213: Reduce linkability concerns of the "Search with" contextual search action [tor-browser]
+   * Bug 44214: Update letterboxing to reflect changes in ESR 140 [tor-browser]
+   * Bug 44215: Hide Firefox home settings in about:preferences [tor-browser]
+   * Bug 44221: Backport MozBug 1984333 Bump Spoofed Processor Count [tor-browser]
+   * Bug 44234: No images in PDF [tor-browser]
+   * Bug 44240: Typo on dom.security.https_first_add_exception_on_failure [tor-browser]
+   * Bug 44242: Hand over Security Level's WebAssembly controls  to NoScript [tor-browser]
+   * Bug 44262: Disable adding search engines from HTML forms [tor-browser]
+ * Linux
+   * Bug 44227: Some CJK characters cannot be rendered by Tor which uses the Noto font family [tor-browser]
+   * Bug 41586: Replace Noto CJK with Jigmo on Linux [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Bug 41373: Remove `_ALL` from mar filenames [tor-browser-build]
+     * Bug 41568: Update instructions for manually building 7zip [tor-browser-build]
+     * Bug 41579: Add zip to the list of Tor Browser Build dependencies [tor-browser-build]
+     * Bug 41588: Restore legacy channel support in projects/release/update_responses_config.yml [tor-browser-build]
+     * Bug 41589: Backport tor-browser-build-browser#41270: Add updater rewriterules to make 13.5.7 a watershed [tor-browser-build]
+   * Windows
+     * Bug 44167: Move the nsis-uninstall.patch to tor-browser repository [tor-browser]
+   * macOS
+     * Bug 41571: Work-around to prevent older 7z versions to break rcodesign. [tor-browser-build]
+   * Linux
+     * Bug 41558: Share descriptions between Linux packages and archives [tor-browser-build]
+     * Bug 41569: Use var/display_name in .desktop files [tor-browser-build]
+
 Mullvad Browser 15.0a3 - September 18 2025
  * All Platforms
    * Updated Firefox to 140.3.0esr
