@@ -219,8 +219,10 @@ do
   cp -a Bundle-Data/Docs/* "$tbdir/$DOCSPATH"
   [% IF c("var/tor-browser") -%]
     cp -a Bundle-Data/Docs-TBB/* "$tbdir/$DOCSPATH"
-    tar -C Bundle-Data/[% bundledata_osname %] \
-      -c . | tar -C "$tbdir[% IF ! c("var/macos") %]/[% c('var/ProjectName') %][% END %]" -x
+    [% IF ! c("var/macos") %]
+      tar -C Bundle-Data/[% bundledata_osname %] \
+        -c . | tar -C "$tbdir/[% c('var/ProjectName') %]" -x
+    [% END %]
   [% ELSIF c("var/mullvad-browser") -%]
     cp -a Bundle-Data/Docs-MB/* "$tbdir/$DOCSPATH"
   [% END -%]
