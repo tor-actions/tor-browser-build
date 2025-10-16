@@ -26,23 +26,13 @@ trap "rm -Rf $old_ur" EXIT
 mv "$tbb_version_type" "$old_ur/$tbb_version_type"
 tar -xf "$update_responses_tar"
 
-# Keep download-*.json files from previous release if they are not in
-# the new release. This happens when a release does not include some
-# platforms. See tor-browser-build#41039.
-IFS=$'\n'
-for file in $(ls -1 "$old_ur/$tbb_version_type"/download-*.json)
-do
-  fname=$(basename "$file")
-  test -f "$tbb_version_type/$fname" && continue
-  mv "$file" "$tbb_version_type/$fname"
-done
-
-# Keep directory from previous release if they are not in the new release.
+# Keep files and directories from previous release if they are not in
+# the new release.
 # This happens when a release does not include some platforms.
-for file in $(ls -1 "$old_ur/$tbb_version_type")
+IFS=$'\n'
+for file in $(ls -a1 "$old_ur/$tbb_version_type")
 do
-  test -d "$old_ur/$tbb_version_type/$file" || continue
-  test -d "$tbb_version_type/$file" && continue
+  test -e "$tbb_version_type/$file" && continue
   mv -f "$old_ur/$tbb_version_type/$file" "$tbb_version_type/$file"
 done
 
