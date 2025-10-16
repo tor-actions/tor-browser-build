@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 version: '[% c("var/torbrowser_version") %]'
-filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %]'
+filename: '[% project %]-[% c("var/build_id") %]'
 
 var:
 
