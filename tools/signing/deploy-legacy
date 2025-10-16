@@ -1,0 +1,48 @@
+#!/bin/bash
+set -e
+SIGNING_PROJECTNAME=torbrowser
+script_dir=$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
+TBB_DIR="$script_dir/../.."
+source "$script_dir/functions"
+source "$script_dir/set-config.update-responses"
+TOR_BROWSER_VERSION=$(rbm_showconf var/torbrowser_version)
+TOR_BROWSER_LEGACY_VERSION=$(rbm_showconf var/torbrowser_legacy_version)
+ESR_LEGACY_VERSION=$(rbm_showconf var/torbrowser_legacy_platform_version)
+echo "TOR_BROWSER_VERSION ${TOR_BROWSER_VERSION}"
+echo "TOR_BROWSER_LEGACY_VERSION ${TOR_BROWSER_LEGACY_VERSION}"
+echo "ESR_LEGACY_VERSION: ${ESR_LEGACY_VERSION}"
+read -p "Continue with update response for these versions (y/N) " -n 1 -r
+
+echo
+if ! [[ $REPLY =~ ^[Yy]$ ]]; then
+   echo >&2 "Operation cancelled"
+   exit 1
+fi
+
+pushd "$TBB_DIR"
+
+"tools/download-torbrowser ${TOR_BROWSER_VERSION}"
+make torbrowser-update_responses-release
+
+cp torbrowser/release/update-responses/update-responses-release-${TOR_BROWSER_VERSION}.tar "$update_responses_repository_dir"
+
+popd
+
+pushd "$update_responses_repository_dir"
+git pull
+rm -Rf update_3/release
+tar -C update_3 -xf update-responses-release-${TOR_BROWSER_VERSION}.tar
+rm update-responses-release-${TOR_BROWSER_VERSION}.tar
+git add update_3/release
+git commit -m "release: new version, ${TOR_BROWSER_LEGACY_VERSION}"
+git push
+
+echo "Update responses commit, for you to review:"
+git show
+
+commit=$(git show -s --format=%H)
+echo
+echo "On staticiforme.torproject.org now deploy new update responses:"
+echo "sudo -u tb-release ./deploy_update_responses-release.sh $commit"
+
+popd

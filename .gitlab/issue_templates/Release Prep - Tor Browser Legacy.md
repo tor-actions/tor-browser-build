@@ -246,34 +246,18 @@ popd
     static-update-component cdn.torproject.org && static-update-component dist.torproject.org
     ```
 - [ ] **(Optional)** Generate and deploy new update responses
-  - **NOTE**: This is only required if there will be no corresponding 14.0 release (i.e. this is an emergency legacy-only 13.5 release). Normally, legacy update responses are generated and deployed as part of the 14.0 release.
+  - **NOTE**: This is only required if there will be no corresponding 15.0 release (i.e. this is an emergency legacy-only 13.5 release). Normally, legacy update responses are generated and deployed as part of the 15.0 release.
   - **⚠️ WARNING**: This is a little bit off the beaten track, ping boklm or morgan if you have any doubts
-  - From the `maint-14.5` branch:
+  - From the `maint-15.0` branch:
     - [ ] Update `rbm.conf`
       - [ ] `var/torbrowser_legacy_version`: update to `${TOR_BROWSER_VERSION}`
-        - **NOTE** this is the browser version for the legacy branch, not the 14.0 branch
+        - **NOTE** this is the browser version for the legacy branch, not this stable branch we've switched to
       - [ ] `var/torbrowser_legacy_platform_version`: update to `${ESR_VERSION}`
-        - **NOTE** this is ESR version for the legacy branch, not the 14.0 branch
-    - [ ] Generate update responses:
+        - **NOTE** this is ESR version for the legacy branch, not this stable branch we've switched to
+    - [ ] Generate update responses and commit them to tor-browser-update-responses.git:
       - Run:
         ```bash
-        make torbrowser-update_responses-release
-        ```
-    - [ ] Commit new update responses to tor-browser-update-responses.git:
-      - Run:
-        ```bash
-        updaterespdir=/path/to/tor-browser-update-responses.git
-        cp torbrowser/release/update-responses/update-responses-release-${TOR_BROWSER_VERSION}.tar "$updaterespdir"
-        cd "$updaterespdir"
-        git pull
-        rm -Rf update_3/release
-        tar -C update_3 update-responses-release-${TOR_BROWSER_VERSION}.tar
-        rm update-responses-release-${TOR_BROWSER_VERSION}.tar
-        git add update_3/release
-        git commit -m "release: new version, ${TOR_BROWSER_VERSION}"
-        git push
-        # print the commit hash and copy past it for the next step
-        git show -s --format=%H
+        cd tor-browser-build/tools/signing/ && ./deploy-legacy
         ```
   - On `staticiforme.torproject.org`, deploy new update responses:
     - [ ] Enable update responses, passing the commit hash as argument (replace $commit):
