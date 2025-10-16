@@ -28,7 +28,7 @@ chmod 775 "$dist_dir"
 chmod 664 "$dist_dir"/*
 chmod 664 "$dist_dir/.htaccess"
 
-if is_project torbrowser; then
+if is_project torbrowser && ls "$dist_dir"/*.mar > /dev/null 2>&1; then
   cdn_dir="/srv/cdn-master.torproject.org/htdocs/aus1/torbrowser/$tbb_version"
   if test -d "$cdn_dir"
   then
