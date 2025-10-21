@@ -81,6 +81,7 @@ sub parse_log_file {
       $downloads{$version}{OS}{$os} += 1;
       $downloads{$version}{incremental_update_total} += 1;
       $downloads{$version}{incremental_update}{$incremental_from} += 1;
+      $downloads{$version}{incremental_update_by_OS}{$os} += 1;
     }
   }
 }
@@ -114,6 +115,9 @@ sub print_results {
       print "  Incremental updates (total): $downloads{$version}{incremental_update_total}\n";
       foreach my $incremental_from (sort keys %{$downloads{$version}{incremental_update}}) {
         print "  Incremental updates from $incremental_from: $downloads{$version}{incremental_update}{$incremental_from}\n";
+      }
+      foreach my $os (sort keys %{$downloads{$version}{incremental_update_by_OS}}) {
+        print "  Incremental updates on $os: $downloads{$version}{incremental_update_by_OS}{$os}\n";
       }
     }
     print "\n";
