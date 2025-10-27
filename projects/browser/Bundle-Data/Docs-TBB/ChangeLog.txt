@@ -20,9 +20,12 @@ Tor Browser 15.0 - October 28 2025
    * Bug 44069: Update `meek-azure` related strings to `meek` [tor-browser]
    * Bug 44140: Refactored patch to prevent writing temp PDF files to disk [tor-browser]
    * Bug 44234: No images in PDF [tor-browser]
+   * Bug 44275: Reduce console noise on security level guess [tor-browser]
+   * Bug 44280: Test stream isolation [tor-browser]
    * Bug 41429: Add a note about user safety to Tor Browser Alpha blog posts [tor-browser-build]
    * Bug 41442: Update our audit CSVs to use the new Audit template [tor-browser-build]
    * Bug 41502: Application services build is failing on isNetworkAllowed() [tor-browser-build]
+   * Bug 41609: Use new CDN77 fronts for snowflake [tor-browser-build]
  * Windows + macOS + Linux
    * Updated Firefox to 140.4.0esr
    * Bug 42025: Purple elements (e.g. Tor buttons) need dark theme variants [tor-browser]
@@ -88,6 +91,7 @@ Tor Browser 15.0 - October 28 2025
    * Bug 44221: Backport MozBug 1984333 Bump Spoofed Processor Count [tor-browser]
    * Bug 44239: DDG HTML page and search results displayed incorrectly with Safest security setting [tor-browser]
    * Bug 44262: Disable adding search engines from HTML forms [tor-browser]
+   * Bug 44270: Match Firefox's TLS fingerprint [tor-browser]
    * Bug 44279: Disable contextual search install prompt [tor-browser]
  * Windows + Android
    * Bug 44062: Force touch enabled on Windows and Android [tor-browser]
@@ -99,6 +103,7 @@ Tor Browser 15.0 - October 28 2025
    * Bug 43950: Review Mozilla 1894818: Support HEVC playback on Linux [tor-browser]
    * Bug 43959: Make Noto Color Emoji the default emoji font on Linux [tor-browser]
    * Bug 44227: Some CJK characters cannot be rendered by Tor which uses the Noto font family [tor-browser]
+   * Bug 44286: Hardcode GTK system font [tor-browser]
    * Bug 41586: Replace Noto CJK with Jigmo on Linux [tor-browser-build]
  * Android
    * Updated GeckoView to 140.4.0esr
@@ -110,6 +115,7 @@ Tor Browser 15.0 - October 28 2025
    * Bug 43676: Preemptively disable unified trust panel by default so we are tracking for next ESR [tor-browser]
    * Bug 43699: Dummy "about:" pages are not cleared from recently closed tabs (and possibly elsewhere) because they are normal tabs, not private tabs. [tor-browser]
    * Bug 43755: Restore functionality of "switch to tab" urlbar suggestion [tor-browser]
+   * Bug 43757: Disable setting for trending search [tor-browser]
    * Bug 43826: Review Mozilla 1960122: Use `MOZ_BUILD_DATE` in Fenix build configuration [tor-browser]
    * Bug 43855: brand.properties merging on Android is broken in 140 [tor-browser]
    * Bug 43943: Review Mozilla 1928705: Ship Android Font Restrictions as part of FPP [tor-browser]
@@ -124,7 +130,9 @@ Tor Browser 15.0 - October 28 2025
    * Bug 44133: Hide the "Allow in private browsing" checkboxes from WebExtension management UI [tor-browser]
    * Bug 44139: Restore the (inactive) YouTube and Reddit search plugins on Android [tor-browser]
    * Bug 44172: Fix crash in TorAndroidIntegration.handleMessage() [tor-browser]
+   * Bug 44196: Persistent notification sometimes does not clear [tor-browser]
    * Bug 44237: Revoke access to all advertising ids available in Android [tor-browser]
+   * Bug 44293: Force immediate NoScript update checks after bootstrap [tor-browser]
    * Bug 41494: Update GeckoView build scripts for ESR140 [tor-browser-build]
  * Build System
    * All Platforms

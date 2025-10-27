@@ -1,4 +1,4 @@
-Mullvad Browser 15.0 - October 28
+Mullvad Browser 15.0 - October 28 2025
  * All Platforms
    * Updated Firefox to 140.4.0esr
    * Updated NoScript to 13.2.2
@@ -64,6 +64,8 @@ Mullvad Browser 15.0 - October 28
    * Bug 44234: No images in PDF [tor-browser]
    * Bug 44242: Hand over Security Level's WebAssembly controls to NoScript [tor-browser]
    * Bug 44262: Disable adding search engines from HTML forms [tor-browser]
+   * Bug 44270: Match Firefox's TLS fingerprint [tor-browser]
+   * Bug 44275: Reduce console noise on security level guess [tor-browser]
    * Bug 44279: Disable contextual search install prompt [tor-browser]
  * Windows
    * Bug 440: Make abseil use win32 thread model on mingw [mullvad-browser]
@@ -73,9 +75,11 @@ Mullvad Browser 15.0 - October 28
    * Bug 43950: Review Mozilla 1894818: Support HEVC playback on Linux [tor-browser]
    * Bug 43959: Make Noto Color Emoji the default emoji font on Linux [tor-browser]
    * Bug 44227: Some CJK characters cannot be rendered by Tor which uses the Noto font family [tor-browser]
+   * Bug 44286: Hardcode GTK system font [tor-browser]
    * Bug 41586: Replace Noto CJK with Jigmo on Linux [tor-browser-build]
  * Build System
    * All Platforms
+     * Bug 466: Automate the release process / replace the new build email [mullvad-browser]
      * Bug 43891: Update the translation CI to use the new mozilla versions [tor-browser]
      * Bug 44067: Move --enable-geckodriver only to Linux-only mozconfigs [tor-browser]
      * Bug 44103: git's export-subst is a reproducibility problem [tor-browser]
