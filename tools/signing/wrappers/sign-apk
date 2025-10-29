@@ -30,10 +30,6 @@ test -f "$android_signing_key_path" || exit_error "$android_signing_key_path is 
 
 setup_build_tools() {
   abt_version=16
-  # If signing 14.5, keep using android-12 build tools
-  # (we can remove this when 15.0 is the stable release)
-  ( test -z "$tbb_version" || echo "$tbb_version" | grep -q '^14\.5' ) && \
-    abt_version=12
   build_tools_dir=/signing/android-build-tools
   test -f "$build_tools_dir"/android-$abt_version/apksigner || \
     exit_error "$build_tools_dir/android-$abt_version/apksigner is missing"
