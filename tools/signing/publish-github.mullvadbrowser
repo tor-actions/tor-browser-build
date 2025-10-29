@@ -7,9 +7,10 @@ function showconf {
 
 # we may want to add a suffix to the release tag, e.g. rc1
 mbrtag_suffix="$1"
-github_token=$(showconf release buildconf/devmole_auth_token2 2>/dev/null)
+token_var="buildconf/devmole_auth_token"
+github_token=$(showconf release $token_var 2>/dev/null)
 if ! [[ $github_token ]]; then
-  echo >&2 "Github token (buildconf/devmole_auth_token) missing!"
+  echo >&2 "Github token ($token_var) missing!"
   exit 1
 fi
 
