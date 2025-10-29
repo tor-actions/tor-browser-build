@@ -47,7 +47,7 @@ sign_apk() {
     # APKs have various requirements for being published on the Play Store.
     # The input APKs should be ready before starting this process.
     echo Verifying ${INPUTAPK}
-    zipalign -vc 4 "${INPUTAPK}"
+    zipalign -c -P 16 4 "${INPUTAPK}"
     if [ ! $? = 0 ]; then
         echo "zipalign verify failed"
         exit 1

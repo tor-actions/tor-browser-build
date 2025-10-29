@@ -87,7 +87,7 @@ function generate_apk {
   popd
 
   aligned_apk=$(basename $apk .apk)_aligned.apk
-  zipalign -vp 4 repacked.apk $aligned_apk
+  zipalign -P 16 4 repacked.apk $aligned_apk
 
   # Sign a QA build. This .apk is not a debug version and doesn't contain a debug
   # flag in the manifest.
