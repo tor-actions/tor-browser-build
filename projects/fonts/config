@@ -175,9 +175,18 @@ input_files:
   - URL: https://github.com/notofonts/noto-fonts/raw/71d0a9e78ae4257499cabd4a8ad3e5e976c5c352/hinted/ttf/Tinos/Tinos-Regular.ttf
     sha256sum: cf264a22292950ca1679b2ade07e9e6ecb26c649ab70975d0e113f979efa827a
     enable: '[% c("var/linux") %]'
-  - URL: https://kamichikoichi.github.io/jigmo/Jigmo-20250912.zip
-    sha256sum: 5744c7386d129475d87607ca66d043c8793c65448adeaedc921b6931890e5d0b
-    name: jigmo
+  # Noto Sans CJK Version 2.004
+  - URL: https://github.com/googlefonts/noto-cjk/raw/523d033d6cb47f4a80c58a35753646f5c3608a78/Sans/SubsetOTF/JP/NotoSansJP-Regular.otf
+    sha256sum: dff723ba59d57d136764a04b9b2d03205544f7cd785a711442d6d2d085ac5073
+    enable: '[% c("var/linux") %]'
+  - URL: https://github.com/googlefonts/noto-cjk/raw/523d033d6cb47f4a80c58a35753646f5c3608a78/Sans/SubsetOTF/KR/NotoSansKR-Regular.otf
+    sha256sum: 69975a0ac8472717870aefeab0a4d52739308d90856b9955313b2ad5e0148d68
+    enable: '[% c("var/linux") %]'
+  - URL: https://github.com/googlefonts/noto-cjk/raw/523d033d6cb47f4a80c58a35753646f5c3608a78/Sans/SubsetOTF/SC/NotoSansSC-Regular.otf
+    sha256sum: faa6c9df652116dde789d351359f3d7e5d2285a2b2a1f04a2d7244df706d5ea9
+    enable: '[% c("var/linux") %]'
+  - URL: https://github.com/googlefonts/noto-cjk/raw/523d033d6cb47f4a80c58a35753646f5c3608a78/Sans/SubsetOTF/TC/NotoSansTC-Regular.otf
+    sha256sum: 5bab0cb3c1cf89dde07c4a95a4054b195afbcfe784d69d75c340780712237537
     enable: '[% c("var/linux") %]'
   - URL: https://github.com/googlefonts/noto-emoji/raw/b3e3051a088047d19fd4d49b1c3ac42fb8c3aaf8/fonts/NotoColorEmoji.ttf
     sha256sum: 3ed77810c203e1a67735dc19d395f32c23f2d7c0c3696690f4f78e15e57ab816
