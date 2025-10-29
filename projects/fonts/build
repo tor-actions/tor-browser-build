@@ -28,14 +28,8 @@ mv noto-fonts-* noto-fonts
 
 [% IF c("var/linux") %]
   unzip "$rootdir/[% c('input_files_by_name/arimo') %]"
-
-  mkdir jigmo
-  pushd jigmo
-  unzip "$rootdir/[% c('input_files_by_name/jigmo') %]"
-  popd
-
   cp Arimo-*/fonts/ttf/*.ttf Cousine-* Tinos-* \
-    jigmo/Jigmo*.ttf \
+    NotoSans{JP,KR,SC,TC}-Regular.otf \
     NotoColorEmoji.ttf \
     $distdir/
 [% END %]
