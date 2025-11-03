@@ -246,8 +246,10 @@ function do_step {
 export SIGNING_PROJECTNAME
 
 do_step set-time-on-signing-machine
-do_step wait-for-finished-build
-do_step sync-builder-unsigned-to-local-signed
+[ "$SIGNING_PROJECTNAME" != 'torvpn' ] && \
+  do_step wait-for-finished-build
+[ "$SIGNING_PROJECTNAME" != 'torvpn' ] && \
+  do_step sync-builder-unsigned-to-local-signed
 do_step clean-build-artifacts
 [ -n "$platform_macos" ] && \
   do_step extract-dmg
