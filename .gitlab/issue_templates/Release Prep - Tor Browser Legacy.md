@@ -8,7 +8,7 @@
 - `${BUILD_SERVER}`: the server the main builder is using to build a browser release
 - `${BUILDER}`: whomever is building the release on the ${BUILD_SERVER}
   - **example**: `pierov`
-- `${STAGING_SERVER}`: the server the signer is using to to run the signing process
+- `${STAGING_SERVER}`: the server the signer is using to run the signing process
 - `${ESR_VERSION}`: the Mozilla defined ESR version, used in various places for building browser tags, labels, etc
   - **example**: `91.6.0`
 - `${TOR_BROWSER_MAJOR}`: the Tor Browser major version
