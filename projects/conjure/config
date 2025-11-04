@@ -24,3 +24,5 @@ steps:
           '^torbrowser-(?!testbuild).*': 'torbrowser-linux-x86_64'
       - name: go-licenses
         project: go-licenses
+        target_replace:
+          '^torbrowser-(?!testbuild).*': 'torbrowser-linux-x86_64'

@@ -1,9 +1,9 @@
 # vim: filetype=yaml sw=2
 # The last stable release is not compatible with our go version, therefore use
 # the last available pre-release.
-version: 2.0.0-alpha.1
+version: 2.0.1
 git_url: https://github.com/google/go-licenses.git
-git_hash: d01822334fba5896920a060f762ea7ecdbd086e8
+git_hash: 3e084b0caf710f7bfead967567539214f598c0a2
 
 container:
   use_container: 1
@@ -22,6 +22,6 @@ steps:
         pkg_type: go_vendor
         project: go-licenses
         norec:
-          sha256sum: b3799f5445ce9f1d48893227287846c689ab67bbdc76b607d5d228739b5c19a2
+          sha256sum: 924d0e45d1ec723b29f667547ac43444ff5c432862317b5e5a246de3871ec9a5
         target_replace:
           '^torbrowser-(?!testbuild).*': 'torbrowser-linux-x86_64'
