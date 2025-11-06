@@ -65,7 +65,12 @@ var:
   ### upload the files to
   #tpo_user: username
 
-  ### This option enables generation of development artifacts
+  ### This option enables generation of browser artifacts
+  ###
+  ### Artifacts is a saturated term in this project, but in this case it
+  ### refers to Firefox artifacts e.g. for artifact builds.
+  ###
+  ### See: https://firefox-source-docs.mozilla.org/contributing/build/artifact_builds.html
   #dev_artifacts: '[% c("var/nightly") %]'
 
   ### The clean configuration is used by the cleaning script to find the

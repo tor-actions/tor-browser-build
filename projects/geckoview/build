@@ -23,6 +23,13 @@ export MOZ_SOURCE_REPO="[% c('var/gitlab_project') %]"
 export MOZ_SOURCE_CHANGESET=[% c("var/git_commit") %]
 
 ac_add_options --enable-update-channel=[% c("var/variant") %]
+
+[% IF c("var/dev_artifacts") -%]
+  ac_add_options --enable-tests
+  # Necessary for package-tests step which expects dist/bin/jsapi-tests to exist.
+  ac_add_options --enable-js-shell
+[% END -%]
+
 MOZCONFIG_EOF
 echo "ac_add_options --with-branding=$branding_dir" >> .mozconfig
 
@@ -36,15 +43,22 @@ echo "Starting ./mach build $(date)"
 
 [% IF c("var/dev_artifacts") -%]
   echo "Building development artifacts"
-  ./mach package
 
-  artifactsdir=$outdir/artifacts
+  # Package the browser and also create all the test artifacts.
+  #
+  # MOZ_SIMPLE_PACKAGE_NAME will force all artifact files to start with "target",
+  # instead of the name of the package, which would be something like: firefox-140.4.0.en-US.linux-x86_64.
+  # This is the same convention used by upstream
+  MOZ_SIMPLE_PACKAGE_NAME="target" ./mach build package package-tests
+
+  artifactsdir=$outdir/[% IF !c("var/android_single_arch") -%]artifacts[% ELSE -%]geckoview/artifacts/[% c("var/abi") %][% END -%]
+
   mkdir -p $artifactsdir
+
   # Copy the artifacts to the target directory
   # Naming convention is the same as Mozilla uses for their artifacts
-  cp -a obj-*/dist/*.zip $artifactsdir/target.xpt_artifacts.zip
-  cp -a obj-*/gradle/build/mobile/android/geckoview_example/outputs/apk/*/geckoview_example-*.apk $artifactsdir/geckoview_example.apk
-  ./mach python -m mozbuild.action.test_archive common $artifactsdir/target.common.tests.tar.gz
+  mv obj-*/gradle/build/mobile/android/geckoview_example/outputs/apk/*/geckoview_example-*.apk $artifactsdir/geckoview_example.apk
+  mv obj-*/dist/target.* $artifactsdir
 [% END %]
 
 echo "Build finished, copying the AAR to the to the destination directory $(date)"

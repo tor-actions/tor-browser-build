@@ -56,7 +56,7 @@
   export TOOLCHAIN_PREFIX=$CROSS_CCTOOLS_PATH/bin/[% c('var/build_target') %]-
   export DSYMUTIL="$TOOLCHAIN_DIR/clang/bin/dsymutil"
 
-  [% IF c("var/nightly") -%]
+  [% IF c("var/dev_artifacts") -%]
     export MKFSHFS=/var/tmp/dist/hfsplus-tools/newfs_hfs
     export DMG_TOOL=/var/tmp/dist/libdmg-hfsplus/dmg
     export HFS_TOOL=/var/tmp/dist/libdmg-hfsplus/hfsplus
@@ -86,6 +86,14 @@ ac_add_options --[% IF c("var/updater_enabled") %]enable[% ELSE %]disable[% END 
 [% ELSIF c("var/updater_url")  -%]
   ac_add_options --with-updater-url=[% c("var/updater_url") %]
 [% END -%]
+
+[% IF c("var/dev_artifacts") -%]
+  ac_add_options --enable-tests
+[% END -%]
+
+# Necessary for package-tests step which expects dist/bin/jsapi-tests to exist.
+# This is added regardless of --enable-tests, because it's also a useful debugging tool.
+ac_add_options --enable-js-shell
 
 mk_add_options MOZ_PARALLEL_BUILD=[% c("num_procs") %]
 

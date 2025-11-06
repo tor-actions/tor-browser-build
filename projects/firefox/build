@@ -128,29 +128,27 @@ echo "Starting ./mach build $(date)"
     export MOZ_PKG_MAC_DSSTORE=$rootdir/dmg-root/[% c('var/ProjectName') %].dmg/nightly.DS_Store
     export MOZ_PKG_MAC_ICON=$rootdir/dmg-root/[% c('var/ProjectName') %].dmg/.VolumeIcon.icns
   [% END -%]
-  ./mach package
-
-  artifactsdir=[% out_dir %]/artifacts
-  mkdir $artifactsdir
-
-  # Copy the artifacts to the target directory
-  # Naming convention is the same as Mozilla uses for their artifacts
-  mv obj-*/dist/*.xpt_artifacts.zip $artifactsdir/target.xpt_artifacts.zip
-
-  [% IF c("var/macos") -%]
-    mv obj-*/dist/*.dmg $artifactsdir/target.dmg
-    mv obj-*/dist/*.update_framework_artifacts.zip $artifactsdir/target.update_framework_artifacts.zip
-  [% END -%]
 
   [% IF c("var/linux") -%]
-    mv obj-*/dist/*.tar.xz $artifactsdir/target.tar.xz
+    # Compression differs with 1 or 2+ threads,
+    # so we'll want to have at least 2 threads, but otherwise respect num_procs.
+    #
+    # Without this, compression takes 20min+
+    export XZ_DEFAULTS="-T[% c("num_procs") > 1 ? c("num_procs") : '2' %]"
   [% END -%]
 
-  [% IF c("var/windows") -%]
-    mv obj-*/dist/*.zip $artifactsdir/target.zip
-  [% END -%]
+  # Package the browser and also create all the test artifacts.
+  #
+  # MOZ_SIMPLE_PACKAGE_NAME will force all artifact files to start with "target",
+  # instead of the name of the package, which would be something like: firefox-140.4.0.en-US.linux-x86_64.
+  # This is the same convention used by upstream.
+  #
+  # Also it just makes it easier to copy all artifacts over in the next step.
+  MOZ_SIMPLE_PACKAGE_NAME="target" ./mach build package package-tests
 
-  ./mach python -m mozbuild.action.test_archive common $artifactsdir/target.common.tests.tar.gz
+  artifactsdir=[% out_dir %]/artifacts/[% c("var/osname") %]
+  mkdir -p $artifactsdir
+  mv obj-*/dist/target.* $artifactsdir
 [% END %]
 
 [% IF c("var/macos") -%]

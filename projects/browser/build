@@ -406,13 +406,9 @@ cd $distdir
 [% END %]
 
 [% IF c("var/dev_artifacts") -%]
+  mkdir -p "$OUTDIR"/artifacts
   [% IF c("var/macos_universal") -%]
-    mkdir -p "$OUTDIR"/artifacts/aarch64
-    cp -a $rootdir/[% c('input_files_by_name/firefox-aarch64') %]/artifacts/. "$OUTDIR/artifacts/aarch64"
-    mkdir -p "$OUTDIR"/artifacts/x86_64
-    cp -a $rootdir/[% c('input_files_by_name/firefox') %]/artifacts/. "$OUTDIR/artifacts/x86_64"
-  [% ELSE -%]
-    mkdir -p "$OUTDIR"/artifacts
-    cp -a $rootdir/[% c('input_files_by_name/firefox') %]/artifacts "$OUTDIR"
+    cp -a $rootdir/[% c('input_files_by_name/firefox-aarch64') %]/artifacts "$OUTDIR"
   [% END -%]
+  cp -a $rootdir/[% c('input_files_by_name/firefox') %]/artifacts "$OUTDIR"
 [% END %]

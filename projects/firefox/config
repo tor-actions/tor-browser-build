@@ -223,10 +223,10 @@ input_files:
   - filename: marsigner.der
     enable: '[% c("var/override_updater_url") %]'
   - filename: dmg-root
-    enable: '[% c("var/macos") && c("var/nightly") %]'
+    enable: '[% c("var/macos") && c("var/dev_artifacts") %]'
   - project: hfsplus-tools
     name: hfsplus-tools
-    enable: '[% c("var/macos") && c("var/nightly") %]'
+    enable: '[% c("var/macos") && c("var/dev_artifacts") %]'
   - project: libdmg-hfsplus
     name: libdmg
-    enable: '[% c("var/macos") && c("var/nightly") %]'
+    enable: '[% c("var/macos") && c("var/dev_artifacts") %]'
