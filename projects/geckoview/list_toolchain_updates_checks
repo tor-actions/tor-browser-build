@@ -10,8 +10,8 @@ if (m/^\\s*NDK_VERSION\\s*=\\s*"(.+)"/) {
 }
 EOF
 needed=$(cat python/mozboot/mozboot/android.py | perl -ne "$p")
-current='r[% pc("android-toolchain", "var/android_ndk_version") %][% pc("android-toolchain", "var/android_ndk_revision") %]'
-check_update_needed ndk_version "$needed" "$current"
+current='r[% pc("android-toolchain", "var/android_ndk_release_name") %]
+check_update_needed ndk_release_name "$needed" "$current"
 
 
 # build_tools

@@ -14,10 +14,10 @@ var:
     # But an NDK is more than 1.5GB, so it does not make sense to copy one that
     # is not even used in all containers. Instead, we download the additional
     # NDK only in application-services, and adjust the other variables here.
-    [% IF c("ndk_version") -%]
-      export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/android-ndk-r[% c("ndk_version") %]
+    [% IF c("ndk_release") -%]
+      export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/android-ndk-r[% c("ndk_release") %]
     [% ELSE -%]
-      export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/android-ndk-r[% c("var/android_ndk_version") %][% c('var/android_ndk_revision') %]
+      export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/android-ndk-r[% c("var/android_ndk_release_name") %]
     [% END -%]
     export ANDROID_NDK_ROOT=$ANDROID_NDK_HOME
     export NDK_HOST_TAG=linux-x86_64
@@ -32,9 +32,8 @@ var:
   android_api_level: 36
   android_release_dir: android-16
   android_platform_revision: '01'
-  android_ndk_version: 28
-  android_ndk_revision: b
-  android_ndk_version_build: 28.1.13356709
+  android_ndk_release_name: 28b
+  android_ndk_revision: 28.1.13356709
   # We need the following two variables for get_build_tools, used by signing
   # scripts.
   build_tools_version: 36
@@ -47,7 +46,7 @@ input_files:
   - URL: '[% c("var/google_repo") %]/commandlinetools-linux-[% c("var/commandlinetools_version") %]_latest.zip'
     name: android_commandlinetools
     sha256sum: 7ec965280a073311c339e571cd5de778b9975026cfcbe79f2b1cdcb1e15317ee
-  - URL: '[% c("var/google_repo") %]/android-ndk-r[% c("var/android_ndk_version") %][% c("var/android_ndk_revision") %]-linux.zip'
+  - URL: '[% c("var/google_repo") %]/android-ndk-r[% c("var/android_ndk_release_name") %]-linux.zip'
     name: android_ndk_compiler
     sha256sum: e9f2759862cecfd48c20bbb7d8cfedbb020f4d91b5f78d9a2fc106f7db3c27ed
   - URL: '[% c("var/google_repo") %]/[% c("var/build_tools_filename") %]'

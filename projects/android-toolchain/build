@@ -15,7 +15,7 @@ mv cmdline-tools/cmdline-tools cmdline-tools/[% c("var/commandlinetools_version_
 # NDK
 mkdir ndk
 unzip -qq $rootdir/[% c("input_files_by_name/android_ndk_compiler")%] -d ndk
-ln -s android-ndk-r[% c("var/android_ndk_version") %][% c("var/android_ndk_revision") %] ndk/[% c("var/android_ndk_version_build") %]
+ln -s android-ndk-r[% c("var/android_ndk_release_name") %] ndk/[% c("var/android_ndk_revision") %]
 
 # Build tools
 mkdir build-tools
