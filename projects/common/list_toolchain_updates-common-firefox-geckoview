@@ -93,7 +93,15 @@ check_update_needed clang "$needed" "$current"
 # cbindgen
 read -d '' p << 'EOF' || true
 my $fetch = YAML::XS::LoadFile('taskcluster/kinds/fetch/toolchains.yml');
-print $fetch->{cbindgen}{fetch}{revision};
+my $revision;
+T: foreach my $t (keys %$fetch) {
+  if ($fetch->{$t}{'fetch-alias'} eq 'cbindgen') {
+    $revision = $fetch->{$t}{fetch}{revision};
+    last T;
+  }
+}
+exit 1 unless $revision;
+print $revision;
 EOF
 needed=$(perl -MYAML::XS -e "$p")
 current='[% pc("cbindgen", "git_hash") %]'
@@ -145,13 +153,13 @@ check_update_needed node "$needed" "$current"
 
 # Python
 read -d '' p << 'EOF' || true
-if (m/^\\s*"Bootstrap currently only runs on Python ([^"]+)\\."/) {
+if (m/^\\s*MINIMUM_MINOR_VERSION = ([0-9]+)/) {
   print $1;
   exit;
 }
 EOF
-needed=$(cat python/mozboot/bin/bootstrap.py | perl -ne "$p")
-current="3.8+" # 3.11.x on Debian bookworm, 3.9.20 on our python project
+needed=3.$(cat python/mozboot/bin/bootstrap.py | perl -ne "$p")
+current="3.9" # 3.11.x on Debian bookworm, 3.9.20 on our python project
 check_update_needed python "$needed" "$current"
 
 
@@ -167,4 +175,4 @@ EOF
 
 needed=$(perl -MYAML::XS -e "$p")
 current='[% pc("binutils", "version") %]'
-check_update_needed node "$needed" "$current"
+check_update_needed binutils "$needed" "$current"

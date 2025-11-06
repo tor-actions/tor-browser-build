@@ -16,9 +16,9 @@ container:
   use_container: 1
 
 var:
-  firefox_platform_version: '140.5.0'
-  firefox_version: '[% c("var/firefox_platform_version") %]esr'
-  browser_series: '15.0'
+  firefox_platform_version: '146.0a1'
+  firefox_version: '[% c("var/firefox_platform_version") %]'
+  browser_series: '16.0'
   browser_rebase: 1
   browser_branch: '[% c("var/browser_series") %]-[% c("var/browser_rebase") %]'
   browser_build: 1
@@ -89,8 +89,8 @@ steps:
         version: '[% c("abbrev") %]'
 
   list_toolchain_updates:
-    git_hash: FIREFOX_NIGHTLY_140_END
-    tag_gpg_id: 1
+    git_hash: FIREFOX_NIGHTLY_146_END
+    tag_gpg_id: 0
     input_files: []
     container:
       use_container: 0
