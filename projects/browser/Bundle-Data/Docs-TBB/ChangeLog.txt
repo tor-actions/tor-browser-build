@@ -1,3 +1,14 @@
+Tor Browser 13.5.24 - November 11 2025
+ * All Platforms
+   * Updated NoScript to 13.4
+   * Bug 44270: Re-enable SHA1 for signing to match Firefox's TLS fingerprint [tor-browser]
+   * Bug 44320: Rebase Tor Browser legacy onto 115.30.0esr [tor-browser]
+   * Bug 44325: Backport Security Fixes from Firefox 145 [tor-browser]
+   * Bug 41609: Move back to CDN77 for default snowflake bridge [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Bug 41603: Automate stand-alone legacy release deployment [tor-browser-build]
+
 Tor Browser 13.5.23 - October 14 2025
  * All Platforms
    * Updated Firefox to 115.29.0esr
