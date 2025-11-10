@@ -1,3 +1,30 @@
+Tor Browser 15.0.1 - November 11 2025
+ * All Platforms
+   * Updated NoScript to 13.4
+   * Bug 44319: Rebase Tor Browser onto 140.5.0esr [tor-browser]
+   * Bug 44325: Backport Security Fixes from Firefox 145 [tor-browser]
+   * Bug 44333: Add the "No AI" version of DuckDuckGo to available search engines [tor-browser]
+   * Bug 487: Search engines are sorted alphabetically rather than the desired order [mullvad-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 140.5.0esr
+   * Bug 44310: Default zoom always resets to 100% [tor-browser]
+   * Bug 44314: Upgrade message not shown in about:tor [tor-browser]
+ * Linux
+   * Bug 44273: Restore Noto CJK as Jigmo has a too low readability [tor-browser]
+   * Bug 44315: Font/text issue with self-upgrade window [tor-browser]
+ * Android
+   * Updated GeckoView to 140.5.0esr
+   * Bug 44303: Extension update job might never work on Android [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41618: Restore the expert bundle's version in the final release directory [tor-browser-build]
+   * Windows + Linux + Android
+     * Updated Go to 1.24.10
+   * Android
+     * Bug 41617: Pass page size to zipalign [tor-browser-build]
+     * Bug 41620: Do not rerun zipalign when signing [tor-browser-build]
+     * Bug 41621: Remove support using older android build tools when signing 14.5 releases in tools/signing/wrappers/sign-apk [tor-browser-build]
+
 Tor Browser 15.0 - October 28 2025
  * All Platforms
    * Updated NoScript to 13.2.2
