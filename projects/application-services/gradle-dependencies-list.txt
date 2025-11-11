@@ -109,7 +109,6 @@ febb30a5cf238237d075a3923e893992183daf171a1eb434acf132114a5f7f8a | https://repo.
 6de29bceab25a1bd0be11eea8468d0e3f1c0c476d0a533215b4fde1c8284b570 | https://repo.maven.apache.org/maven2/io/grpc/grpc-context/1.69.1/grpc-context-1.69.1.pom
 45ef95b8c158a8b5bdd3acb67b9e682ef25414bb148f488ec847438ab64715d4 | https://repo.maven.apache.org/maven2/io/grpc/grpc-context/1.69.1/grpc-context-1.69.1.jar
 51717bb7471141950390c6713a449fdb1054d07e60737ee7dda7083796cdee48 | https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-unix-common/4.1.110.Final/netty-transport-native-unix-common-4.1.110.Final.jar
-e04e25951501df25adc7b1dcdb6c53373c94897b84d3e14921292763ee07ae3d | https://repo.maven.apache.org/maven2/net/java/dev/jna/jna/5.14.0/jna-5.14.0.pom
 9ecea8bf2b1b39963939d18b70464eef60c508fed8820f9dcaba0c35518eabf7 | https://repo.maven.apache.org/maven2/net/java/dev/jna/jna-platform/5.6.0/jna-platform-5.6.0.jar
 0fc55e4d215f4b021d881172acef82464061d962dfebb113a0540dc7045928e5 | https://dl.google.com/dl/android/maven2/com/android/tools/analytics-library/tracker/31.10.0/tracker-31.10.0.jar
 8273692ccc17094d746cafd04b679f259cbf501b2ea8475e349fba24ed3976b9 | https://dl.google.com/dl/android/maven2/androidx/work/work-runtime-ktx/2.10.0/work-runtime-ktx-2.10.0.aar
@@ -268,7 +267,6 @@ fc15b14fc550ab81a61a36ef1f21b8fd1df843f584099b081bde0cc7fb952e74 | https://plugi
 e147d258ab6e6691f70599a952400e6e6c7558f8c9c028dbe1be23178308e830 | https://repo.maven.apache.org/maven2/com/sun/xml/fastinfoset/FastInfoset/1.2.16/FastInfoset-1.2.16.pom
 51b731e5cff121efd6d320f4a801cd616869c5bed4e9c0e353b29060b1d2355f | https://repo.maven.apache.org/maven2/org/codehaus/groovy/groovy/3.0.22/groovy-3.0.22.pom
 b24f8d51f184a68bc1b86d48c0e3cfefeb21a44ede1c5f7303c58ae0488533ec | https://repo.maven.apache.org/maven2/com/sun/xml/bind/mvn/jaxb-runtime-parent/2.3.2/jaxb-runtime-parent-2.3.2.pom
-81a8b9afc65f9d6b205338c25908af8de0ff8411a00985104c9d83fffdfab380 | https://repo.maven.apache.org/maven2/net/java/dev/jna/jna/5.14.0/jna-5.14.0.aar
 821a8f101caca6381ada36f233b9c91fcc0886b3584f5eaa5cf3044849bab6a2 | https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-scripting-jvm/2.1.21/kotlin-scripting-jvm-2.1.21.pom
 7ab526b9f479533055b844c52aae0bf53ee9a2a27882f29c4e9acf46faf25d29 | https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-device-provider-gradle-proto/31.10.0/android-device-provider-gradle-proto-31.10.0.pom
 b48b04ddba40e8ac33bf036f06fc43995fc5084bd94bdaace807ce27d3bea3fb | https://repo.maven.apache.org/maven2/com/google/auto/value/auto-value-annotations/1.6.2/auto-value-annotations-1.6.2.jar
@@ -419,7 +417,6 @@ d324cb785134d419757709118f86e2a88f3cc0b222bd8c23495ddbcb7a800cac | https://dl.go
 36c25576b19993df360170528cc62b7246c37776d6158154a67cdf8fc2d58e13 | https://dl.google.com/dl/android/maven2/com/android/tools/build/jetifier/jetifier-processor/1.0.0-beta10/jetifier-processor-1.0.0-beta10.module
 e982eadc788c69cf2e4de50a9f632b182c31dba50612830d348fc4b4ba8dd7d6 | https://repo.maven.apache.org/maven2/org/yaml/snakeyaml/2.2/snakeyaml-2.2.pom
 fc0905810309a5ad3ea15dfbbe129a47e90db11215232364841b72044124e7b0 | https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/fus-statistics-gradle-plugin/2.1.21/fus-statistics-gradle-plugin-2.1.21-gradle85.jar
-34ed1e1f27fa896bca50dbc4e99cf3732967cec387a7a0d5e3486c09673fe8c6 | https://repo.maven.apache.org/maven2/net/java/dev/jna/jna/5.14.0/jna-5.14.0.jar
 984ce9bd780055eafb8a105aca3f514686bf7b1b6272ec7c645a98ce40fc7db4 | https://dl.google.com/dl/android/maven2/androidx/collection/collection-jvm/1.4.2/collection-jvm-1.4.2.jar
 4505b9a5e30a9418b59a9ad6702c3e4193aea6e691a3d03cf220c7640ad083e2 | https://dl.google.com/dl/android/maven2/androidx/concurrent/concurrent-futures/1.0.0/concurrent-futures-1.0.0.pom
 8fc84f36ce6da6ce8c893b6538199a7f69a69a0706d9b17a3ee6a3a09452eed6 | https://repo.maven.apache.org/maven2/org/jvnet/staxex/stax-ex/1.8.1/stax-ex-1.8.1.pom
@@ -598,3 +595,6 @@ ea0131846abe1fe9dea59ac6dfe1f0fb9d8b6d600c9eff9a1fd4ad5ee5e7cbc7 | https://dl.go
 edf4200cfdc2d946232252c99e5dcb9c61bb909eb5450b2613d1d4fdc974b981 | https://dl.google.com/dl/android/maven2/androidx/arch/core/core-common/2.2.0/core-common-2.2.0.module
 22c175c2c1823667630c84e73225767f5970492d8e6cbffb81a6575dba472d26 | https://repo.maven.apache.org/maven2/io/perfmark/perfmark-api/0.27.0/perfmark-api-0.27.0.pom
 578649d9034e92d887286f9b2966e53721b66c714e53258fcc3387eb59b6b84b | https://repo.maven.apache.org/maven2/de/undercouch/download/de.undercouch.download.gradle.plugin/5.6.0/de.undercouch.download.gradle.plugin-5.6.0.pom
+9551ea53f638143064a94c9beed20a02e69c908d43fb84e3ad4b19416a5d3b1d | https://plugins.gradle.org/m2/net/java/dev/jna/jna/5.16.0/jna-5.16.0.aar
+3f5233589a799eb66dc2969afa3433fb56859d3d787c58b9bc7dd9e86f0a250c | https://plugins.gradle.org/m2/net/java/dev/jna/jna/5.16.0/jna-5.16.0.jar
+f61fd2c44aa583f2a2cbc5fc67b0f19a9203ca87d5f0e18d3d5030cbe3908083 | https://plugins.gradle.org/m2/net/java/dev/jna/jna/5.16.0/jna-5.16.0.pom

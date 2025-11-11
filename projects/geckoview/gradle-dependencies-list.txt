@@ -1453,8 +1453,8 @@ fa08998aae1e7bdae83bde0712c50e8444d71c0e0c196bb2247ade8d4ad0eb90 | https://plugi
 205b8b254196717e81dad672bb869a719afc96df297f97d811effe1f43653dae | https://plugins.gradle.org/m2/net/bytebuddy/byte-buddy/1.15.11/byte-buddy-1.15.11.pom
 9ecea8bf2b1b39963939d18b70464eef60c508fed8820f9dcaba0c35518eabf7 | https://plugins.gradle.org/m2/net/java/dev/jna/jna-platform/5.6.0/jna-platform-5.6.0.jar
 1beb35cb4184e6c906a7e32eaebd852dd3da0a263962e99134ab945832394e28 | https://plugins.gradle.org/m2/net/java/dev/jna/jna-platform/5.6.0/jna-platform-5.6.0.pom
-81a8b9afc65f9d6b205338c25908af8de0ff8411a00985104c9d83fffdfab380 | https://plugins.gradle.org/m2/net/java/dev/jna/jna/5.14.0/jna-5.14.0.aar
-e04e25951501df25adc7b1dcdb6c53373c94897b84d3e14921292763ee07ae3d | https://plugins.gradle.org/m2/net/java/dev/jna/jna/5.14.0/jna-5.14.0.pom
+9551ea53f638143064a94c9beed20a02e69c908d43fb84e3ad4b19416a5d3b1d | https://plugins.gradle.org/m2/net/java/dev/jna/jna/5.16.0/jna-5.16.0.aar
+f61fd2c44aa583f2a2cbc5fc67b0f19a9203ca87d5f0e18d3d5030cbe3908083 | https://plugins.gradle.org/m2/net/java/dev/jna/jna/5.16.0/jna-5.16.0.pom
 5557e235a8aa2f9766d5dc609d67948f2a8832c2d796cea9ef1d6cbe0b3b7eaf | https://plugins.gradle.org/m2/net/java/dev/jna/jna/5.6.0/jna-5.6.0.jar
 5fe81b0255978f24616d37b10608b79498a5f3073e1d9b2038d8736a831f2608 | https://plugins.gradle.org/m2/net/java/dev/jna/jna/5.6.0/jna-5.6.0.pom
 281440811268e65d9e266b3cc898297e214e04f09740d0386ceeb4a8923d63bf | https://plugins.gradle.org/m2/net/java/jvnet-parent/1/jvnet-parent-1.pom

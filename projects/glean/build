@@ -74,6 +74,7 @@ tar -xf $rootdir/[% c('input_files_by_name/uniffi-rs') %]
 
 patch -p1 < $rootdir/use-custom-gradle-repo.diff
 patch -p1 < $rootdir/use-uniffi-noop.diff
+patch -p1 < $rootdir/jna-5.16.0.diff
 
 gradle_flags="--offline --no-daemon -PuniffiBindgenNoop=$builddir/uniffi-rs/uniffi-bindgen -PgradleDependenciesUrl=file:///var/tmp/dist/gradle-dependencies"
 gradle $gradle_flags :glean:assembleRelease
