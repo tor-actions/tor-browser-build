@@ -16,7 +16,8 @@ fi
 
 set -e
 
-GL_REMOTE=git@gitlab.torproject.org:tpo/applications/mullvad-browser.git
+GL_REMOTE_TOR=git@gitlab.torproject.org:tpo/applications/tor-browser.git
+GL_REMOTE_MULLVAD=git@gitlab.torproject.org:tpo/applications/mullvad-browser.git
 GH_REMOTE=git@github.com:mullvad/mullvad-browser.git
 CLONE_DIR="$TBB_DIR/git_clones/firefox"
 CHANNEL=$(showconf release var/browser_default_channel)
@@ -29,7 +30,8 @@ BASE_VERSION=$(showconf release var/torbrowser_version $TARGET)
 RELEASE_VERSION="${BASE_VERSION}${mbrtag_suffix}"
 pushd >/dev/null ../../git_clones/firefox
 echo "Fetching $MB_BRANCH and tags..."
-git fetch --tags "$GL_REMOTE" "$MB_BRANCH"
+git fetch --tags "$GL_REMOTE_MULLVAD" "$MB_BRANCH"
+git fetch --tags "$GL_REMOTE_TOR" "$BB_BRANCH"
 BB_TAG=$(git tag -l "$BB_BRANCH-build*" | tail -n1)
 FX_TAG=$(git tag -l "FIREFOX_${ESR_VERSION//\./_}*" | tail -n1)
 echo "QA build version: $BASE_VERSION"
@@ -43,13 +45,15 @@ if ! [[ $REPLY =~ ^[Yy]$ ]]; then
    echo >&2 "Operation cancelled"
    exit 1
 fi
+
 git checkout $MB_TAG
-git tag -s $RELEASE_VERSION -m"$ESR_VERSION-based $RELEASE_VERSION"
+[[ $(git tag -l $RELEASE_VERSION) ]] || git tag -s $RELEASE_VERSION -m"$ESR_VERSION-based $RELEASE_VERSION"
 git tag -n1 $RELEASE_VERSION
 git push "$GH_REMOTE" "HEAD:refs/heads/$MB_BRANCH"
 git push "$GH_REMOTE" "$FX_TAG"
 git push "$GH_REMOTE" "$BB_TAG"
 git push "$GH_REMOTE" "$RELEASE_VERSION"
+
 popd >/dev/null
 
 # Call Mullvad's github workflow for new releases (mullvad-browser#466)
