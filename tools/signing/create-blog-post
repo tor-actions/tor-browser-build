@@ -57,6 +57,11 @@ Tor Browser $tbb_version is now available from the [Tor Browser download page]($
 
 This version includes important [security updates](https://www.mozilla.org/en-US/security/advisories/) to Firefox.
 
+__Important__: this release is part of the legacy channel, meant to extend the support for Windows 7/8/8.1 and macOS 10.12-10.14.
+If your OS is not one of these, you should download the latest stable from the 15.0 series instead.
+
+__Further updates to this 13.5.x legacy channel are not guaranteed: please upgrade to 15.0.x as soon as possible.__
+
 ## Send us your feedback
 
 If you find a bug or have a suggestion for how we could improve this release, [please let us know](https://support.torproject.org/misc/bug-or-feedback/).
