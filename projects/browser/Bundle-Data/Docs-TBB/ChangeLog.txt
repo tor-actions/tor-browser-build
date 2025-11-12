@@ -1,3 +1,10 @@
+Tor Browser 15.0.2 - November 13 2025
+ * All Platforms
+   * Updated Tor to 0.4.8.20
+ * Build System
+   * Android
+     * Bug 41629: Bump JNA to 5.16.0 [tor-browser-build]
+
 Tor Browser 15.0.1 - November 11 2025
  * All Platforms
    * Updated NoScript to 13.4
