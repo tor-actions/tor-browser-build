@@ -57,6 +57,10 @@ steps:
       - project: uniffi-rs
         name: uniffi-rs
         pkg_type: build
+      - project: glean
+        name: glean
+        pkg_type: build
+        enable: '[% !c("var/fetch_gradle_dependencies") %]'
       # Only Application Services currently requires build tools 35.
       # So, download them only here, rather than adding them to the shared
       # toolchain.
