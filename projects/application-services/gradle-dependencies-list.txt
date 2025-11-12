@@ -11,7 +11,6 @@ c03f813195e7a80e3608d0ddd8da80b21696a4c92a6a2298865bf149071551c7 | https://repo.
 06fbc14ecb14a0af47b5a3f8d34763f4933d5cba5a3d245045bfe2f2bdb91b1e | https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk7/2.1.0/kotlin-stdlib-jdk7-2.1.0.pom
 a8b17513949e5db6c9601c30be19df953762dd877512f1e2cfcfae81d2440944 | https://dl.google.com/dl/android/maven2/androidx/arch/core/core-runtime/2.2.0/core-runtime-2.2.0.module
 8769e5647557e3700919c32d508f5c5dad53c5d8234cd10846354fbcff14aa24 | https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-serialization-json-jvm/1.8.1/kotlinx-serialization-json-jvm-1.8.1.jar
-5792a08566c294a46ea777939819154a945eeee8d5cb47d391f845d7c711013a | https://maven.mozilla.org/maven2/org/mozilla/telemetry/glean/64.3.1/glean-64.3.1.pom
 5bad1de4f101447659f89d089868ccbad64a68cc503d2d65410b51f6904aa061 | https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcomponents-client/4.5.14/httpcomponents-client-4.5.14.pom
 e6c7f18a3228f56ca91400a54ddad21e1d789a9f9a07263b560c8c95347c63cd | https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-build-tools-impl/2.1.21/kotlin-build-tools-impl-2.1.21.jar
 29091c9457252f997ddfeafb33dd65a373ad45840128f945832d8eafd9118561 | https://dl.google.com/dl/android/maven2/com/android/tools/build/apkzlib/8.10.0/apkzlib-8.10.0.jar
@@ -51,7 +50,6 @@ c5fd725bffab51846bf3c77db1383c60aaaebfe1b7fe2f00d23fe1b7df0a439d | https://repo.
 c4828e28d7c0a930af9387510b3bada7daa5c04d7c25a75c7b8b081f1c257ddd | https://repo.maven.apache.org/maven2/com/google/jimfs/jimfs/1.1/jimfs-1.1.jar
 8362004b686681cdc2b022ee1c86d2582c95c2f7a988b21ee5facc4a979312ca | https://dl.google.com/dl/android/maven2/com/android/tools/external/com-intellij/intellij-core/31.10.0/intellij-core-31.10.0.jar
 555d0c9eaa69c042aff924927b9381e8f8174136d355eead445224452e6291cc | https://repo.maven.apache.org/maven2/org/apache/apache/31/apache-31.pom
-17ae368dcc12a965df8a9195e5d897fb70400159a87effcf65ee5c05790f814e | https://maven.mozilla.org/maven2/org/mozilla/telemetry/glean-native/64.3.1/glean-native-64.3.1.pom
 c720e6e5bcbe6b2f48ded75a47bccdb763eede79d14330102e0d352e3d89ed92 | https://repo.maven.apache.org/maven2/org/codehaus/mojo/animal-sniffer-annotations/1.24/animal-sniffer-annotations-1.24.jar
 11386cfa46cbbfddb6a4059f14354c00691cf65d3d63c3618818a83326ef3c7f | https://dl.google.com/dl/android/maven2/androidx/core/core-viewtree/1.0.0/core-viewtree-1.0.0.module
 2aee3523715f8f2cd10b2603c8d19e561ac758310b7e2c9853946d2c5e7b4bf7 | https://repo.maven.apache.org/maven2/com/google/crypto/tink/tink/1.7.0/tink-1.7.0.pom
@@ -212,7 +210,6 @@ d327e8a93f65fca90cd2c188da83883e50ca3e3689da7dfafe4797c718c939b6 | https://dl.go
 c8bc7e1c51a6d4ce72f40d2ebbabf1c4b68bfe76e732104b04381b493478e9d6 | https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpclient/4.5.14/httpclient-4.5.14.jar
 1aecc515671afc84b5ff5b28d5895efb443dddab49dd5cc7400976a1cfc510c9 | https://dl.google.com/dl/android/maven2/androidx/work/work-runtime/2.10.0/work-runtime-2.10.0.pom
 57e8d93260d18d5b9007c9eed3c64ad159de90c8609ebfc74a347cbd514535a4 | https://dl.google.com/dl/android/maven2/androidx/versionedparcelable/versionedparcelable/1.1.1/versionedparcelable-1.1.1.aar
-79aa542e883553436721d40af661beb9ac09dad323b89afde057631c54fdf83c | https://maven.mozilla.org/maven2/org/mozilla/telemetry/glean-native/64.3.1/glean-native-64.3.1.aar
 8460c950127ca3598766161e38b4ff8d63b4d69fb8310a16e00b351350010c11 | https://plugins.gradle.org/m2/com/google/gradle/osdetector-gradle-plugin/1.7.3/osdetector-gradle-plugin-1.7.3.pom
 943e12b100627804638fa285805a0ab788a680266531e650921ebfe4621a8bfa | https://repo.maven.apache.org/maven2/javax/inject/javax.inject/1/javax.inject-1.pom
 6804cd5f05d77fa954ac7b7a930e7b57fae08caf024e2291880a3c28a49fc075 | https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-gradle-plugin-model/2.1.21/kotlin-gradle-plugin-model-2.1.21.jar
@@ -238,7 +235,6 @@ c733881c2e17d5f7c8661cc02a9159cb160b7b2094a27d593916c87d3e250636 | https://dl.go
 0de78fc06ee5045d68fc7e81c313a2a3d53ac7d127f79f9bc95abf7be49e5764 | https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-common/2.8.7/lifecycle-common-2.8.7.module
 c5067a7b928237a1271a5e9cb5710e9f80b4973293945bc51e3a4c864ea4bfed | https://dl.google.com/dl/android/maven2/com/android/tools/build/jetifier/jetifier-processor/1.0.0-beta10/jetifier-processor-1.0.0-beta10.jar
 91c77044a50c481636c32d916fd89c9118a72195390452c81065080f957de7ff | https://repo.maven.apache.org/maven2/javax/inject/javax.inject/1/javax.inject-1.jar
-07742881a447c577669139ed7548fc4a0e6c43c63aa28a6f4652ff2d163b94f6 | https://maven.mozilla.org/maven2/org/mozilla/telemetry/glean-gradle-plugin/64.3.1/glean-gradle-plugin-64.3.1.pom
 88970a456a08ba4c66b01b23e5846ca1095cc14e54cb48363e5d2e15a1307308 | https://repo.maven.apache.org/maven2/com/google/crypto/tink/tink/1.7.0/tink-1.7.0.jar
 9851ec66548b9e0d41164ce98943cdd4bbe305f68ddbd24eae52e4501a0d7b1a | https://repo.maven.apache.org/maven2/io/netty/netty-common/4.1.110.Final/netty-common-4.1.110.Final.jar
 cb00e5cb9283b75948dcc0d27234fb6d72a80c34dcb7b3b8d493185e4316bf85 | https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-runtime/2.8.7/lifecycle-runtime-2.8.7.module
@@ -338,7 +334,6 @@ cc7eed0ed4b669de84b852f78797a50018a4f30002e1e38aaa668af22ca5b460 | https://dl.go
 748a34eb5d13d19d187adecaea82667fded5f1b0b98a655e13ed2e4a8b3d8ae6 | https://dl.google.com/dl/android/maven2/androidx/concurrent/concurrent-futures/1.1.0/concurrent-futures-1.1.0.pom
 55441db27e8869dfefe053059bdf478bdc7e95585642bf391f0023345fd56287 | https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/33.3.1-jre/guava-parent-33.3.1-jre.pom
 7e120e4dfca08edd4890afe0b68bba5aa89f27fba11d8fe68f6b6da0b2129358 | https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-gradle-plugin/2.1.21/kotlin-gradle-plugin-2.1.21.module
-cb1c7a04874d97c6bb1d3ba4ce009e1fde5f46225b45f6bb87559328573b530b | https://maven.mozilla.org/maven2/org/mozilla/telemetry/glean/64.3.1/glean-64.3.1.aar
 e713f1f874244115a07571065cffa0f24f5e78300e9720fea16de3af1d75fd41 | https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-android/1.10.2/kotlinx-coroutines-android-1.10.2.jar
 5777d292251c7895c04a4c57015683ec3b353a12486c9b3e7178e9b0b3c38fff | https://repo.maven.apache.org/maven2/commons-io/commons-io/2.16.1/commons-io-2.16.1.pom
 e9f18b8a41f017e9033cb0ed85c8a2ba2307292cdfe25eae365923e7a31d2a70 | https://repo.maven.apache.org/maven2/org/tensorflow/tensorflow-lite-metadata/0.2.0/tensorflow-lite-metadata-0.2.0.jar
@@ -475,7 +470,6 @@ b537b388dbab4cc0690b9d2fb0c74124d672531734567acf6e53130eab131ad6 | https://repo.
 9a579b54d292ad9be171d4313fd4739c635592c2b5ac3a459bbd1049cddec6a0 | https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/9.7.1/asm-commons-9.7.1.jar
 6260c875066300987319d9006786db7a6b6b46f1c4072adc5aedc9c617845bb2 | https://dl.google.com/dl/android/maven2/com/android/tools/build/aapt2-proto/8.10.0-12782657/aapt2-proto-8.10.0-12782657.pom
 20522549056e9e50aa35ef0b445a2e47a53d06be0b0a9467d704e2483ffb049a | https://repo.maven.apache.org/maven2/org/jvnet/staxex/stax-ex/1.8.1/stax-ex-1.8.1.jar
-7d66a1b1e51592eda1e77c44d5692192dbffc828ea3899ff92ae0161b681a336 | https://maven.mozilla.org/maven2/org/mozilla/telemetry/glean-gradle-plugin/64.3.1/glean-gradle-plugin-64.3.1.jar
 637b7a7ecb20533b6d2d5401bed07e20549eb700019c6257f137eca73a0cb419 | https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle/8.10.0/gradle-8.10.0.jar
 b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454 | https://plugins.gradle.org/m2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom
 7e0747751e9b67e19dcb5206f04ea22cc03d250c422426402eadd03513f2c314 | https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.pom

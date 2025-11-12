@@ -25,8 +25,11 @@ export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64
 [% INCLUDE 'fake-git' %]
 
 [% IF !c('var/fetch_gradle_dependencies') %]
+  tar -xf [% c('input_files_by_name/glean') %]
+
   gradle_repo=/var/tmp/dist/gradle-dependencies
   mv $rootdir/[% c('input_files_by_name/gradle-dependencies') %] $gradle_repo
+  cp -rl $rootdir/glean/maven/* $gradle_repo
   cp -rl $gradle_repo/dl/android/maven2/* $gradle_repo || true
   cp -rl $gradle_repo/m2/* $gradle_repo || true
   cp -rl $gradle_repo/maven2/* $gradle_repo || true
