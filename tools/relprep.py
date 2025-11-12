@@ -626,32 +626,10 @@ class ReleasePreparation:
     def update_rbm_conf(self):
         logger.info("Updating rbm.conf.")
         releases = {}
-        browsers = {
-            "tbb": '[% IF c("var/tor-browser") %]{}[% END %]',
-            "mb": '[% IF c("var/mullvad-browser") %]{}[% END %]',
-        }
-        incremental_from = []
-        for b in ["tbb", "mb"]:
-            for rel in self.last_releases[(b, self.version.channel)]:
-                if rel.version not in releases:
-                    releases[rel.version] = {}
-                releases[rel.version][b] = str(rel.version)
-        for version in sorted(releases.keys(), reverse=True):
-            if len(releases[version]) == 2:
-                incremental_from.append(releases[version]["tbb"])
-                logger.debug(
-                    "Building incremental from %s for both browsers.", version
-                )
-            else:
-                for b, template in browsers.items():
-                    maybe_rel = releases[version].get(b)
-                    if maybe_rel:
-                        logger.debug(
-                            "Building incremental from %s only for %s.",
-                            version,
-                            b,
-                        )
-                        incremental_from.append(template.format(maybe_rel))
+        incremental_from = [
+            str(r.version)
+            for r in self.last_releases[("tbb", self.version.channel)]
+        ]
 
         separator = "\n--- |\n"
         path = self.base_path / "rbm.conf"

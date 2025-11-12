@@ -1,3 +1,8 @@
+Tor Browser 13.5.25 - November 13 2025
+ * All Platforms
+   * Updated Tor to 0.4.8.20
+   * Bug 44335: Additional Security Fix Backport from Firefox 145 to esr115 [tor-browser]
+
 Tor Browser 13.5.24 - November 11 2025
  * All Platforms
    * Updated NoScript to 13.4
