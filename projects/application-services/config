@@ -14,6 +14,8 @@ gpg_keyring:
 git_submodule: 1
 container:
   use_container: 1
+  disable_network:
+    build: '[% !c("var/generate_gradle_dependencies_list") %]'
 
 var:
   build_number: 1
@@ -23,6 +25,9 @@ var:
   nss_version: '3.117'
   nspr_version: '4.37'
   cargo_vendor_include_config: 1
+  # Uncomment this to run an online build to grab an updated
+  # gradle-dependencies-list.txt.
+  # generate_gradle_dependencies_list: 1
 
 targets:
   nightly:
@@ -61,7 +66,7 @@ steps:
       - project: glean
         name: glean
         pkg_type: build
-        enable: '[% !c("var/fetch_gradle_dependencies") %]'
+        enable: '[% !c("var/generate_gradle_dependencies_list") %]'
       # Only Application Services currently requires build tools 35.
       # So, download them only here, rather than adding them to the shared
       # toolchain.
@@ -75,28 +80,22 @@ steps:
       - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
         name: gradle-dependencies
         exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
-        enable: '[% !c("var/fetch_gradle_dependencies") %]'
+        enable: '[% !c("var/generate_gradle_dependencies_list") %]'
       - URL: '[% pc("glean-parser", "var/glean_wheels_url") %]'
         name: glean-wheels
         sha256sum: '[% pc("glean-parser", "var/glean_wheels_sha256sum") %]'
-        enable: '[% !c("var/fetch_gradle_dependencies") %]'
+        enable: '[% !c("var/generate_gradle_dependencies_list") %]'
       - name: cargo_vendor
         project: application-services
         pkg_type: cargo_vendor
         norec:
           sha256sum: 8a93a189985ad28c334970dc5ab386c81d4a415f3777c2941248f836f4af44fd
-        enable: '[% !c("var/fetch_gradle_dependencies") %]'
-      - filename: gen_gradle_deps_file.sh
-        enable: '[% c("var/fetch_gradle_dependencies") %]'
+        enable: '[% !c("var/generate_gradle_dependencies_list") %]'
+      - filename: gen-gradle-deps-file.py
+        enable: '[% c("var/generate_gradle_dependencies_list") %]'
 
   list_toolchain_updates:
     git_hash: 'v[% c("version") %]'
     input_files: []
     container:
       use_container: 0
-
-  get_gradle_dependencies_list:
-    filename: 'gradle-dependencies-list-[% c("version") %].txt'
-    get_gradle_dependencies_list: '[% INCLUDE build %]'
-    var:
-      fetch_gradle_dependencies: 1

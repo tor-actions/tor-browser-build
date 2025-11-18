@@ -24,7 +24,7 @@ export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64
 
 [% INCLUDE 'fake-git' %]
 
-[% IF !c('var/fetch_gradle_dependencies') %]
+[% IF !c('var/generate_gradle_dependencies_list') -%]
   tar -xf [% c('input_files_by_name/glean') %]
 
   gradle_repo=/var/tmp/dist/gradle-dependencies
@@ -33,7 +33,7 @@ export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64
   cp -rl $gradle_repo/dl/android/maven2/* $gradle_repo || true
   cp -rl $gradle_repo/m2/* $gradle_repo || true
   cp -rl $gradle_repo/maven2/* $gradle_repo || true
-[% END %]
+[% END -%]
 
 tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
 
@@ -41,24 +41,26 @@ mv /var/tmp/build/[% project %]-[% c('version') %] $builddir
 
 cd $builddir
 
-# Prepare the offline build.
+[% IF !c('var/generate_gradle_dependencies_list') -%]
+  # Prepare the offline build.
 
-tar -xf $rootdir/[% c('input_files_by_name/glean-wheels') %]
-export GLEAN_PYTHON_WHEELS_DIR=$builddir/glean-wheels
-# Setting GLEAN_PYTHON_WHEELS_DIR is not enough: a Rust build script will still
-# try to install Glean with pip.
-cat > $rootdir/pip.conf << 'EOF'
+  tar -xf $rootdir/[% c('input_files_by_name/glean-wheels') %]
+  export GLEAN_PYTHON_WHEELS_DIR=$builddir/glean-wheels
+  # Setting GLEAN_PYTHON_WHEELS_DIR is not enough: a Rust build script will
+  # still try to install Glean with pip.
+  cat > $rootdir/pip.conf << 'EOF'
 [global]
 find-links = /var/tmp/build/application-services/glean-wheels
 index-url =
 no-index = yes
 EOF
-export PIP_CONFIG_FILE=$rootdir/pip.conf
-# Move the directory for hardcoding the path in .cargo/config.
-tar -C $builddir -xf $rootdir/[% c('input_files_by_name/cargo_vendor') %]
-# Make sure our vendored crates are used for offline builds.
-cat vendor/cargo-config.toml >> .cargo/config.toml
-rm vendor/cargo-config.toml
+  export PIP_CONFIG_FILE=$rootdir/pip.conf
+  # Move the directory for hardcoding the path in .cargo/config.
+  tar -C $builddir -xf $rootdir/[% c('input_files_by_name/cargo_vendor') %]
+  # Make sure our vendored crates are used for offline builds.
+  cat vendor/cargo-config.toml >> .cargo/config.toml
+  rm vendor/cargo-config.toml
+[% END -%]
 
 tar -xf $rootdir/[% c('input_files_by_name/uniffi-rs') %]
 
@@ -68,30 +70,33 @@ ln -s $rootdir/[% c("input_files_by_name/nss") %] ./
 ./build-all.sh android
 popd
 
-[% IF c('var/fetch_gradle_dependencies') %]
-  # XXX: `assemble` is still not enough to see all fetched dependencies via
-  # Gradle's --debug. See: tor-browser-build#40056.
-  gradle --debug --no-daemon assemble > gradle.log 2>&1 || ( cat gradle.log; exit 1 )
-  $rootdir/gen_gradle_deps_file.sh gradle.log
-  mv gradle-dependencies-list.txt '[% dest_dir _ "/" _ c("filename") %]'
-[% ELSE %]
-  # We need to set `LC_ALL` and `LANG` to something that is not ASCII as encoding
-  # otherwise `click` barfs. See: https://click.palletsprojects.com/python3/
-  export LC_ALL=C.UTF-8
-  export LANG=C.UTF-8
-  gradle_flags="--offline --no-daemon -PuniffiBindgenNoop=$builddir/uniffi-rs/uniffi-bindgen -PgradleDependenciesUrl=file:///var/tmp/dist/gradle-dependencies"
-  gradle $gradle_flags assembleRelease
-  gradle $gradle_flags publish
-  mv build/maven $distdir
+# We need to set `LC_ALL` and `LANG` to something that is not ASCII as encoding
+# otherwise `click` barfs. See: https://click.palletsprojects.com/python3/
+export LC_ALL=C.UTF-8
+export LANG=C.UTF-8
+[% IF !c('var/generate_gradle_dependencies_list') -%]
+  deps_flags="--offline -PgradleDependenciesUrl=file:///var/tmp/dist/gradle-dependencies"
+[% ELSE -%]
+  deps_flags="--info"
+  gradle_logs=/var/tmp/build/gradle-logs.log
+[% END -%]
+gradle_flags="$deps_flags --no-daemon -PuniffiBindgenNoop=$builddir/uniffi-rs/uniffi-bindgen"
+gradle $gradle_flags assembleRelease [% IF c('var/generate_gradle_dependencies_list') %]2>&1 | tee -a $gradle_logs[% END %]
+gradle $gradle_flags publish
+mv build/maven $distdir
 
-  pushd components/support/nimbus-fml
-  cargo build --release
-  popd
-  cp target/release/nimbus-fml $distdir
+pushd components/support/nimbus-fml
+cargo build --release
+popd
+cp target/release/nimbus-fml $distdir
 
-  cd /var/tmp/dist
-  [% c('tar', {
-      tar_src => [ project ],
-      tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
+[% IF c('var/generate_gradle_dependencies_list') -%]
+  cd $distdir
+  $rootdir/gen-gradle-deps-file.py $gradle_logs
+[% END -%]
+
+cd /var/tmp/dist
+[% c('tar', {
+    tar_src => [ project ],
+    tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
   }) %]
-[% END %]
