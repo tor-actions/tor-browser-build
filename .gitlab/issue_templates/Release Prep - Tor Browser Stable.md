@@ -214,7 +214,7 @@ Tor Browser Stable is on the `maint-${TOR_BROWSER_MAJOR}.${TOR_BROWSER_MINOR}` b
   - **⚠️ WARNING**: Do not continue if the legacy channel has not been fully signed and published yet; it is needed for update-response generation!
   - **NOTE** Stable releases without a corresponding legacy release may ignore this
 - [ ] On `${STAGING_SERVER}`, ensure updated:
-  - **NOTE** Having a local git branch with `maint-15.0` as the upstream branch with these values saved means you only need to periodically `git pull --rebase` and update the `set-config.tbb-version` file
+  - **NOTE** Having a local git branch with `maint-15.0` as the upstream branch with these values saved means you only need to periodically `git pull --rebase`
   - [ ] `tor-browser-build` is on the right commit: `git tag -v tbb-${TOR_BROWSER_VERSION}-${TOR_BROWSER_BUILD_N} && git checkout tbb-${TOR_BROWSER_VERSION}-${TOR_BROWSER_BUILD_N}`
   - [ ] `tor-browser-build/tools/signing/set-config.hosts`
     - `ssh_host_builder`: ssh hostname of machine with unsigned builds
@@ -224,10 +224,6 @@ Tor Browser Stable is on the `maint-${TOR_BROWSER_MAJOR}.${TOR_BROWSER_MINOR}` b
     - `appstoreconnect_api_key_path`: path to json file containing appstoreconnect api key infos
   - [ ] `set-config.update-responses`
     - `update_responses_repository_dir`: directory where you cloned `git@gitlab.torproject.org:tpo/applications/tor-browser-update-responses.git`
-  - [ ] `tor-browser-build/tools/signing/set-config.tbb-version`
-    - `tbb_version`: tor browser version string, same as `var/torbrowser_version` in `rbm.conf` (examples: `11.5a12`, `11.0.13`)
-    - `tbb_version_build`: the tor-browser-build build number (if `var/torbrowser_build` in `rbm.conf` is `buildN` then this value is `N`)
-    - `tbb_version_type`: either `alpha` for alpha releases or `release` for stable releases
 - [ ] On `${STAGING_SERVER}` in a separate `screen` session, ensure tor daemon is running with SOCKS5 proxy on the default port 9050
 - [ ] On `${STAGING_SERVER}` in a separate `screen` session, run do-all-signing script:
   - Run:
