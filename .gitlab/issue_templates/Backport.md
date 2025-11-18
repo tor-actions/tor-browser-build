@@ -2,7 +2,7 @@
 Title:
     Backport tor-browser-build-browser#12345: Title of Issue
 
-This is an issue for tracking back-porting a patch-set (e.g. from main to maint-14.5)
+This is an issue for tracking back-porting a patch-set (e.g. from main to maint-15.0)
 -->
 
 ## Backport Patchset
@@ -19,7 +19,7 @@ This is an issue for tracking back-porting a patch-set (e.g. from main to maint-
 
 #### Target Channels
 
-- [ ] maint-14.5
+- [ ] maint-15.0
 - [ ] maint-13.5
 
 ### Notes
