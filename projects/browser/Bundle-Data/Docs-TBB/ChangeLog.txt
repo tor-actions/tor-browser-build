@@ -1,9 +1,10 @@
-Tor Browser 15.0.2 - November 13 2025
+Tor Browser 15.0.2 - November 19 2025
  * All Platforms
-   * Updated Tor to 0.4.8.20
+   * Updated Tor to 0.4.8.21
  * Build System
    * Android
      * Bug 41629: Bump JNA to 5.16.0 [tor-browser-build]
+     * Bug 41633: Investigate non-matching baseline.profm and baseline.prof files in android builds [tor-browser-build]
 
 Tor Browser 15.0.1 - November 11 2025
  * All Platforms
