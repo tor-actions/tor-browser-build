@@ -79,6 +79,9 @@ function generate_apk {
   pushd apk
   7zz x "$apk"
   cp -R ../assets ./
+  # tor-browser-build#41633: Baseline profiles sometimes are not reproducible.
+  # Dropping them as a workaround for now.
+  rm -rf assets/dexopt 
   find -type f -exec touch -m -t '[% USE date; date.format(pc("geckoview", "timestamp"), format = "%Y%m%d%H%M") %]' {} \;
   find -type f ! -name resources.arsc -printf '%P\n' | sort > ../files.txt
   7zz a -tzip -mx9 -mtc- -spf ../repacked.apk @../files.txt
