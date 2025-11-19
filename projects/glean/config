@@ -6,11 +6,16 @@ filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("co
 version: 66.1.1
 container:
   use_container: 1
+  disable_network:
+    build: '[% !c("var/generate_gradle_dependencies_list") %]'
 
 var:
   # This should be updated when the list of gradle dependencies is changed.
   gradle_dependencies_version: 66.1.1-1
   gradle_version: 8.14.3
+  # Uncomment this to run an online build to grab an updated
+  # gradle-dependencies-list.txt.
+  # generate_gradle_dependencies_list: 1
 
 steps:
   build:
@@ -36,6 +41,7 @@ steps:
       - URL: '[% pc("glean-parser", "var/glean_wheels_url") %]'
         name: glean-wheels
         sha256sum: '[% pc("glean-parser", "var/glean_wheels_sha256sum") %]'
+        enable: '[% !c("var/generate_gradle_dependencies_list") %]'
       - name: cargo_vendor
         project: glean
         pkg_type: cargo_vendor
@@ -44,5 +50,8 @@ steps:
       - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
         name: gradle-dependencies
         exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
+        enable: '[% !c("var/generate_gradle_dependencies_list") %]'
+      - filename: gen-gradle-deps-file.py
+        enable: '[% c("var/generate_gradle_dependencies_list") %]'
       - filename: use-custom-gradle-repo.diff
       - filename: use-uniffi-noop.diff

@@ -28,7 +28,7 @@ export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64
 
 [% INCLUDE 'fake-git' %]
 
-[% IF !c('var/fetch_gradle_dependencies') %]
+[% IF !c('var/generate_gradle_dependencies_list') -%]
   gradle_repo=/var/tmp/dist/gradle-dependencies
   mv $rootdir/[% c('input_files_by_name/gradle-dependencies') %] $gradle_repo
   cp -rl $gradle_repo/dl/android/maven2/* $gradle_repo || true
@@ -42,23 +42,24 @@ mv /var/tmp/build/[% project %]-[% c('version') %] $builddir
 
 cd $builddir
 
-# Prepare the offline build.
-
-tar -xf $rootdir/[% c('input_files_by_name/glean-wheels') %]
-export GLEAN_PYTHON_WHEELS_DIR=$builddir/glean-wheels
-# Setting GLEAN_PYTHON_WHEELS_DIR is not enough: a Rust build script will still
-# try to install Glean with pip.
+[% IF !c('var/generate_gradle_dependencies_list') -%]
+  # Prepare the offline build.
+  tar -xf $rootdir/[% c('input_files_by_name/glean-wheels') %]
+  export GLEAN_PYTHON_WHEELS_DIR=$builddir/glean-wheels
+  # Setting GLEAN_PYTHON_WHEELS_DIR is not enough: a Rust build script will still
+  # try to install Glean with pip.
 cat > $rootdir/pip.conf << 'EOF'
 [global]
 find-links = /var/tmp/build/glean/glean-wheels
 index-url =
 no-index = yes
 EOF
-export PIP_CONFIG_FILE=$rootdir/pip.conf
-# Move the directory for hardcoding the path in .cargo/config.
-tar -C $builddir -xf $rootdir/[% c('input_files_by_name/cargo_vendor') %]
-# Make sure our vendored crates are used for offline builds.
-cat >> .cargo/config.toml << 'EOF'
+
+  export PIP_CONFIG_FILE=$rootdir/pip.conf
+  # Move the directory for hardcoding the path in .cargo/config.
+  tar -C $builddir -xf $rootdir/[% c('input_files_by_name/cargo_vendor') %]
+  # Make sure our vendored crates are used for offline builds.
+  cat >> .cargo/config.toml << 'EOF'
 
 [source.crates-io]
 replace-with = "vendored-sources"
@@ -70,15 +71,26 @@ directory = "/var/tmp/build/glean/vendor"
 offline=true
 EOF
 
+  deps_flags="--offline -PgradleDependenciesUrl=file:///var/tmp/dist/gradle-dependencies"
+[% ELSE -%]
+  deps_flags="--info"
+  gradle_logs=/var/tmp/build/gradle-logs.log
+[% END -%]
+
 tar -xf $rootdir/[% c('input_files_by_name/uniffi-rs') %]
 
 patch -p1 < $rootdir/use-custom-gradle-repo.diff
 patch -p1 < $rootdir/use-uniffi-noop.diff
 
-gradle_flags="--offline --no-daemon -PuniffiBindgenNoop=$builddir/uniffi-rs/uniffi-bindgen -PgradleDependenciesUrl=file:///var/tmp/dist/gradle-dependencies"
-gradle $gradle_flags :glean:assembleRelease
+gradle_flags="--no-daemon -PuniffiBindgenNoop=$builddir/uniffi-rs/uniffi-bindgen $deps_flags"
+gradle $gradle_flags :glean:assembleRelease [% IF c('var/generate_gradle_dependencies_list') %]2>&1 | tee -a $gradle_logs[% END %]
 gradle $gradle_flags publish
 mv build/maven $distdir
+
+[% IF c('var/generate_gradle_dependencies_list') -%]
+  cd $distdir
+  $rootdir/gen-gradle-deps-file.py $gradle_logs
+[% END -%]
 
 cd /var/tmp/dist
 [% c('tar', {
