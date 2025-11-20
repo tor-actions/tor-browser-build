@@ -3,9 +3,8 @@ filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("co
 version: '[% c("abbrev") %]'
 # This can be found in
 # taskcluster/kinds/fetch/toolchains.yml
-git_hash: aed9334283e3e290bba622ee980bde2322e4d516
-git_url: https://github.com/tpoechtrager/apple-libtapi
-
+git_hash: 323b9b4e0ca05d6c56a0c2f2d7d8d47363e612b7
+git_url: https://github.com/tpoechtrager/apple-libdispatch
 container:
   use_container: 1
 
@@ -17,5 +16,3 @@ input_files:
     project: cmake
   - name: ninja
     project: ninja
-  # Firefox's taskcluster/scripts/misc/libtapi.patch.
-  - filename: libtapi.patch

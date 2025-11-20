@@ -38,6 +38,15 @@ needed=$(perl -MYAML::XS -e "$p")
 current='[% pc("cctools", "git_hash") %]'
 check_update_needed cctools "$needed" "$current"
 
+# libdispatch
+read -d '' p << 'EOF' || true
+my $d = YAML::XS::LoadFile('taskcluster/kinds/fetch/toolchains.yml');
+print $d->{'libdispatch'}{fetch}{revision};
+EOF
+needed=$(perl -MYAML::XS -e "$p")
+current='[% pc("libdispatch", "git_hash") %]'
+check_update_needed libtapi "$needed" "$current"
+
 # libtapi
 read -d '' p << 'EOF' || true
 my $d = YAML::XS::LoadFile('taskcluster/kinds/fetch/toolchains.yml');

@@ -2,48 +2,58 @@
 [% c("var/set_default_env") -%]
 builddir=/var/tmp/build/[% project %]-[% c('version') %]
 distdir=/var/tmp/dist/[% project %]
-mkdir -p /var/tmp/dist
+mkdir -p $distdir /var/tmp/build
+
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/clang') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/cmake') %]
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/ninja') %]
+export PATH=/var/tmp/dist/clang/bin:/var/tmp/dist/cmake/bin:/var/tmp/dist/ninja:$PATH
 
-# We don't export the path to clang here to follow Mozilla's build script at
-# taskcluster/scripts/misc/build-cctools-port.sh more closely.
-export PATH="/var/tmp/dist/cmake/bin:/var/tmp/dist/ninja:$PATH"
-export CLANG_DIR=/var/tmp/dist/clang
-mkdir -p /var/tmp/build
 tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
+
+# What follows is mostly based on Firefox's
+# taskcluster/scripts/misc/build-cctools-port.sh.
+
+LIBTAPI_SOURCE_DIR=/var/tmp/build/[% project %]-[% c('version') %]
+LIBTAPI_BUILD_DIR=/var/tmp/build/libtapi-build
+CLANG_DIR=/var/tmp/dist/clang
+
+# Create our directories
+mkdir -p $LIBTAPI_BUILD_DIR
+
+# Apply a minor libtapi tweak so cmake from outside of the srcdir works.
+cd $LIBTAPI_SOURCE_DIR
+patch -p1 < $rootdir/libtapi.patch
+
+# Build libtapi; the included build.sh is not sufficient for our purposes.
+cd $LIBTAPI_BUILD_DIR
+# Common setup for libtapi and cctools
 export CC=$CLANG_DIR/bin/clang
 export CXX=$CLANG_DIR/bin/clang++
 # We also need this LD_LIBRARY_PATH at build time, since tapi builds bits of
 # clang build tools, and then executes those tools.
 export LD_LIBRARY_PATH=$CLANG_DIR/lib
 
-cd $builddir
-mkdir build
-cd build
-# Values taken from build.sh
-TAPI_REPOSITORY=tapi-1000.10.8
-TAPI_VERSION=10.0.0
+# Value taken from build.sh
+TAPI_VERSION=1600.0.11.8
 
-INCLUDE_FIX="-I $builddir/src/llvm/projects/clang/include -I $PWD/projects/clang/include"
-
-cmake $builddir/src/llvm \
-      -GNinja \
-      -DCMAKE_CXX_FLAGS="$INCLUDE_FIX" \
+cmake -G Ninja $LIBTAPI_SOURCE_DIR/src/llvm \
       -DLLVM_INCLUDE_TESTS=OFF \
       -DCMAKE_BUILD_TYPE=RELEASE \
+      -DLLVM_ENABLE_PROJECTS="tapi;clang" \
+      -DLLVM_ENABLE_ZSTD=OFF \
       -DCMAKE_INSTALL_PREFIX=$distdir \
+      -DCMAKE_EXE_LINKER_FLAGS=-fuse-ld=lld \
+      -DCMAKE_SHARED_LINKER_FLAGS=-fuse-ld=lld \
       -DLLVM_TARGETS_TO_BUILD="X86;ARM;AArch64" \
-      -DTAPI_REPOSITORY_STRING=$TAPI_REPOSITORY \
-      -DTAPI_FULL_VERSION=$TAPI_VERSION \
-      -DPYTHON_EXECUTABLE=/usr/bin/python3
+      -DTAPI_REPOSITORY_STRING=$TAPI_VERSION \
+      -DTAPI_FULL_VERSION=$TAPI_VERSION
 
-ninja clangBasic
-ninja libtapi install-libtapi install-tapi-headers
+ninja -j[% c("num_procs") %] clangBasic vt_gen -v
+ninja -j[% c("num_procs") %] libtapi install-libtapi install-tapi-headers -v
 
 cd /var/tmp/dist
 [% c('tar', {
-        tar_src => [ project ],
-        tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
-    }) %]
+    tar_src => [ project ],
+    tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
+  }) %]

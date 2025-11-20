@@ -1,47 +1,55 @@
 #!/bin/bash
 [% c("var/set_default_env") -%]
+builddir=/var/tmp/build/[% project %]-[% c('version') %]
 distdir=/var/tmp/dist/[% project %]
-mkdir -p $distdir
+mkdir -p $distdir /var/tmp/build
+
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/clang') %]
+export PATH=/var/tmp/dist/clang/bin:$PATH
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/libtapi') %]
-mv /var/tmp/dist/libtapi/* $distdir
-export CLANG_DIR=/var/tmp/dist/clang
-mkdir -p /var/tmp/build
+cp -rl /var/tmp/dist/libtapi/* $distdir
+tar -C /var/tmp/dist -xf [% c('input_files_by_name/libdispatch') %]
+cp -rl /var/tmp/dist/libdispatch/* $distdir
+
 tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
-cd /var/tmp/build/[% project %]-[% c('version') %]/cctools
 
-patch -p2 < $rootdir/cctools.patch
+# What follows is mostly based on Firefox's
+# taskcluster/scripts/misc/build-cctools-port.sh.
 
-export CC=$CLANG_DIR/bin/clang
-export CXX=$CLANG_DIR/bin/clang++
-export LDFLAGS="-lpthread -Wl,-rpath-link,$CLANG_DIR/lib -Wl,-rpath,\\\$\$ORIGIN/../lib,-rpath,\\\$\$ORIGIN/../../clang/lib"
+CROSSTOOLS_SOURCE_DIR=/var/tmp/build/[% project %]-[% c('version') %]
+CROSSTOOLS_CCTOOLS_DIR=$CROSSTOOLS_SOURCE_DIR/cctools
+CROSSTOOLS_BUILD_DIR=$distdir
+CLANG_DIR=/var/tmp/dist/clang
+
+# Configure crosstools-port
+cd $CROSSTOOLS_CCTOOLS_DIR
+
 # Force re-libtoolization to overwrite files with the new libtool bits.
 perl -pi -e 's/(LIBTOOLIZE -c)/\1 -f/' autogen.sh
 ./autogen.sh
 ./configure \
-    --prefix=$distdir \
+    --prefix=$CROSSTOOLS_BUILD_DIR \
     --target=x86_64-apple-darwin \
     --with-llvm-config=$CLANG_DIR/bin/llvm-config \
     --enable-lto-support \
     --enable-tapi-support \
-    --with-libtapi=$distdir
+    --with-libtapi=$CROSSTOOLS_BUILD_DIR \
+    --with-libdispatch=$CROSSTOOLS_BUILD_DIR \
+    --with-libblocksruntime=$CROSSTOOLS_BUILD_DIR
 
+# Build cctools
 make -j[% c("num_procs") %] install
-strip $distdir/bin/*
-# cctools doesn't include dsymutil but clang will need to find it.
-cp $CLANG_DIR/bin/dsymutil $distdir/bin/x86_64-apple-darwin-dsymutil
-# various build scripts based on cmake want to find `lipo` without a prefix
-cp $distdir/bin/x86_64-apple-darwin-lipo $distdir/bin/lipo
 
-# We build cctools for x86_64 and add aarch64 symlinks, following what
-# Mozilla is doing in taskcluster/scripts/misc/build-cctools-port.sh
-(cd $distdir/bin/; for i in x86_64-apple-darwin-*; do
+strip $CROSSTOOLS_BUILD_DIR/bin/*
+# various build scripts based on cmake want to find `lipo` without a prefix
+cp $CROSSTOOLS_BUILD_DIR/bin/x86_64-apple-darwin-lipo $CROSSTOOLS_BUILD_DIR/bin/lipo
+
+(cd $CROSSTOOLS_BUILD_DIR/bin/; for i in x86_64-apple-darwin-*; do
     ln $i aarch64${i#x86_64}
 done)
 
 cd /var/tmp/dist
 [% c('tar', {
-        tar_src => [ project ],
-        tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
-    }) %]
-
+    tar_src => [ project ],
+    tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
+  }) %]

@@ -3,7 +3,7 @@ filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("co
 version: '[% c("abbrev") %]'
 # This can be found in
 # taskcluster/kinds/fetch/toolchains.yml
-git_hash: 30518813875aed656aa7f18b6d485feee25f8f87
+git_hash: 55943b0c68c0eaf8b8ad2f51f63738bbc7b0c86b
 git_url: https://github.com/tpoechtrager/cctools-port
 container:
   use_container: 1
@@ -14,6 +14,5 @@ input_files:
     project: clang
   - name: libtapi
     project: libtapi
-  # taskcluster/scripts/misc/cctools.patch in Firefox.
-  # Taken from 4856fd3c1e927929217441bd256169485c8bc7d2.
-  - filename: cctools.patch
+  - name: libdispatch
+    project: libdispatch

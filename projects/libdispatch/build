@@ -1,0 +1,38 @@
+#!/bin/bash
+[% c("var/set_default_env") -%]
+builddir=/var/tmp/build/[% project %]-[% c('version') %]
+distdir=/var/tmp/dist/[% project %]
+mkdir -p $distdir /var/tmp/build
+
+tar -C /var/tmp/dist -xf [% c('input_files_by_name/clang') %]
+tar -C /var/tmp/dist -xf [% c('input_files_by_name/cmake') %]
+tar -C /var/tmp/dist -xf [% c('input_files_by_name/ninja') %]
+export PATH=/var/tmp/dist/clang/bin:/var/tmp/dist/cmake/bin:/var/tmp/dist/ninja:$PATH
+
+tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
+
+# What follows is mostly based on Firefox's
+# taskcluster/scripts/misc/build-cctools-port.sh.
+
+LIBDISPATCH_SOURCE_DIR=/var/tmp/build/[% project %]-[% c('version') %]
+LIBDISPATCH_BUILD_DIR=/var/tmp/build/libdispatch-build
+CLANG_DIR=/var/tmp/dist/clang
+
+mkdir -p $LIBDISPATCH_BUILD_DIR
+cd $LIBDISPATCH_BUILD_DIR
+export CC=$CLANG_DIR/bin/clang
+export CXX=$CLANG_DIR/bin/clang++
+cmake -G Ninja $LIBDISPATCH_SOURCE_DIR \
+      -DCMAKE_BUILD_TYPE=RELEASE \
+      -DCMAKE_INSTALL_PREFIX=$distdir \
+      -DCMAKE_EXE_LINKER_FLAGS=-fuse-ld=lld \
+      -DCMAKE_SHARED_LINKER_FLAGS=-fuse-ld=lld
+
+ninja -j[% c("num_procs") %] -v
+ninja -j[% c("num_procs") %] install -v
+
+cd /var/tmp/dist
+[% c('tar', {
+    tar_src => [ project ],
+    tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
+  }) %]

@@ -57,6 +57,9 @@ openssldir=/var/tmp/dist/openssl
 
 [% IF c("var/macos") %]
   cp $libeventdir/lib/libevent-*.dylib "$TORBINDIR"
+
+  export AR=llvm-ar
+  export RANLIB=llvm-ranlib
 [% END %]
 
 [% IF c("var/windows") %]
