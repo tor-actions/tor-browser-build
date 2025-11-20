@@ -48,6 +48,9 @@ var:
   has_l10n: '[% !c("var/testbuild") && !c("var/locales").empty %]'
   l10n-changesets: '[% exec("git --no-pager show " _ c("git_hash") _ ":browser/locales/l10n-changesets.json", { exec_noco => 1 }) %]'
   mozconfig_file: 'mozconfig-[% c("var/osname") %]'
+  # Uncomment this to run an online build to grab an updated
+  # gradle-dependencies-list.txt.
+  # generate_gradle_dependencies_list: 1
 
 targets:
   release:
@@ -87,9 +90,11 @@ steps:
       - project: glean
         name: glean
         pkg_type: build
+        enable: '[% !c("var/generate_gradle_dependencies_list") %]'
       - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
         name: gradle-dependencies
         exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
+        enable: '[% !c("var/generate_gradle_dependencies_list") %]'
       - name: geckoview_armv7
         project: geckoview
         pkg_type: build
@@ -123,15 +128,19 @@ steps:
       - URL: '[% pc("glean-parser", "var/glean_wheels_url") %]'
         name: glean-wheels
         sha256sum: '[% pc("glean-parser", "var/glean_wheels_sha256sum") %]'
+        enable: '[% !c("var/generate_gradle_dependencies_list") %]'
       - name: tor-expert-bundle-aar
         project: tor-expert-bundle-aar
         pkg_type: build
       - project: oss-licenses-plugin
         name: oss-licenses-plugin
         pkg_type: build
+        enable: '[% !c("var/generate_gradle_dependencies_list") %]'
       - URL: 'https://github.com/google/bundletool/releases/download/[% c("var/bundletool_version") %]/bundletool-all-[% c("var/bundletool_version") %].jar'
         name: bundletool
         sha256sum: '[% c("var/bundletool_hash") %]'
+      - filename: gen-gradle-deps-file.py
+        enable: '[% c("var/generate_gradle_dependencies_list") %]'
 
   list_toolchain_updates:
     git_hash: FIREFOX_NIGHTLY_146_END
@@ -167,14 +176,15 @@ input_files:
   - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
     name: gradle-dependencies
     exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
+    enable: '[% !c("var/generate_gradle_dependencies_list") %]'
   - URL: '[% pc("glean-parser", "var/glean_wheels_url") %]'
     name: glean-wheels
     sha256sum: '[% pc("glean-parser", "var/glean_wheels_sha256sum") %]'
   - project: glean
     name: glean
-    pkg_type: build
   - project: oss-licenses-plugin
     name: oss-licenses-plugin
+    enable: '[% !c("var/generate_gradle_dependencies_list") %]'
   - name: tor-expert-bundle-aar
     project: tor-expert-bundle-aar
   - project: firefox-l10n
@@ -192,3 +202,5 @@ input_files:
   - URL: 'https://github.com/google/bundletool/releases/download/[% c("var/bundletool_version") %]/bundletool-all-[% c("var/bundletool_version") %].jar'
     name: bundletool
     sha256sum: '[% c("var/bundletool_hash") %]'
+  - filename: gen-gradle-deps-file.py
+    enable: '[% c("var/generate_gradle_dependencies_list") %]'

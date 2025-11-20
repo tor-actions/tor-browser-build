@@ -8,7 +8,7 @@ objdir=$(cd obj-* && pwd)
 
 echo "Building Android Components $(date)"
 pushd mobile/android/android-components
-gradle $GRADLE_FLAGS assembleGecko -x lint
+gradle $GRADLE_FLAGS assembleGecko -x lint [% IF c('var/generate_gradle_dependencies_list') %]2>&1 | tee -a $gradle_logs[% END %]
 popd
 
 # The build might fail with "file exists" otherwise.
@@ -36,7 +36,7 @@ variant='[% c("var/variant") %]'
 version_name="[% c('var/torbrowser_version') %] ([% c('var/geckoview_version') %])"
 
 echo "Building $variant Fenix APK"
-gradle $GRADLE_FLAGS -PversionName="$version_name" "assemble$variant"
+gradle $GRADLE_FLAGS -PversionName="$version_name" "assemble$variant" [% IF c('var/generate_gradle_dependencies_list') %]2>&1 | tee -a $gradle_logs[% END %]
 
 echo "Build finished, copying the APK(s) to the destination directory $(date)"
 mkdir -p $outdir/[% project %]
@@ -46,7 +46,7 @@ echo "Building non optimized $variant Fenix APK for testing"
 gradle $GRADLE_FLAGS -PversionName="$version_name" -PdisableOptimization "assemble$variant"
 
 echo "Building Fenix instrumentation tests"
-gradle $GRADLE_FLAGS -PversionName="$version_name" -PtestBuildType="$variant" -PdisableOptimization assembleAndroidTest
+gradle $GRADLE_FLAGS -PversionName="$version_name" -PtestBuildType="$variant" -PdisableOptimization assembleAndroidTest [% IF c('var/generate_gradle_dependencies_list') %]2>&1 | tee -a $gradle_logs[% END %]
 
 echo "Test build finished, copying the APKs to the destination directory $(date)"
 
@@ -55,3 +55,8 @@ mv $objdir/gradle/build/mobile/android/fenix/app/outputs/apk/fenix/$variant/*.ap
 mv $objdir/gradle/build/mobile/android/fenix/app/outputs/apk/androidTest/fenix/$variant/*.apk $outdir/[% project %]/tests
 
 popd
+
+[% IF c('var/generate_gradle_dependencies_list') -%]
+  cd $outdir/[% project %]
+  $rootdir/gen-gradle-deps-file.py $gradle_logs
+[% END -%]

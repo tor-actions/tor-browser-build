@@ -23,7 +23,7 @@ echo "Starting ./mach configure $(date)"
   [% IF !c("var/rlbox") -%]--without-wasm-sandboxed-libraries[% END %]
 
 echo "Starting ./mach build $(date)"
-./mach build --verbose
+./mach build --verbose [% IF c('var/generate_gradle_dependencies_list') %]2>&1 | tee -a $gradle_logs[% END %]
 
 [% IF c("var/dev_artifacts") -%]
   echo "Building development artifacts"
@@ -50,6 +50,11 @@ echo "Build finished, copying the AAR to the to the destination directory $(date
 [% IF !c("var/android_single_arch") -%]
   mkdir -p "$outdir/[% project %]"
   cp obj-*/gradle/target.maven.zip $outdir/[% project %]/
+
+  [% IF c('var/generate_gradle_dependencies_list') -%]
+    cd $outdir/[% project %]
+    $rootdir/gen-gradle-deps-file.py $gradle_logs
+  [% END -%]
 [% ELSE -%]
 [% INCLUDE 'build_ac_fenix' %]
 [% END -%]
