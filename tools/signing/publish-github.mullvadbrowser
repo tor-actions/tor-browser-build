@@ -28,6 +28,12 @@ BB_BRANCH=${MB_BRANCH//mullvad-/base-}
 ESR_VERSION=$(showconf firefox var/firefox_version $TARGET)
 BASE_VERSION=$(showconf release var/torbrowser_version $TARGET)
 RELEASE_VERSION="${BASE_VERSION}${mbrtag_suffix}"
+RELEASE_URL="https://dist.torproject.org/mullvadbrowser/${RELEASE_VERSION}/"
+if ! curl -f "$RELEASE_URL" >/dev/null 2>&1 ; then
+  echo >&2 "$RELEASE_URL not found! Maybe you need to run:"
+  echo >&2 "ssh staticiforme.torproject.org 'cd /srv/dist-master.torproject.org/htdocs/mullvadbrowser && static-update-component dist.torproject.org'"
+  exit 2
+fi
 pushd >/dev/null ../../git_clones/firefox
 echo "Fetching $MB_BRANCH and tags..."
 git fetch --tags "$GL_REMOTE_MULLVAD" "$MB_BRANCH"
@@ -39,7 +45,7 @@ echo "MB tag: $MB_TAG"
 echo "BB tag: $BB_TAG"
 echo "FX tag: $FX_TAG"
 echo "Mullvad release tag: $RELEASE_VERSION"
-read -p "Do you want to tag mullvad $RELEASE_VERSION and push tags/branches/QA build to ${GH_REMOTE}? (y/N) " -n 1 -r
+read -p "Do you want to tag mullvad $RELEASE_VERSION & push tags/branches/QA build to ${GH_REMOTE}? (y/N) " -n 1 -r
 echo
 if ! [[ $REPLY =~ ^[Yy]$ ]]; then
    echo >&2 "Operation cancelled"

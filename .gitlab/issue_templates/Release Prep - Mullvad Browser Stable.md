@@ -185,7 +185,9 @@ This step will send the relevant branches, tags (including a tag named after the
 
 <details>
   <summary>Communications</summary>
+
 ### packagers
+
 - [ ] **(Once Packages are pushed to GitHub)**
   - **Recipients**
     - flathub package maintainer: proletarius101@protonmail.com
