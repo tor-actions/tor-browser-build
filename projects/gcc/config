@@ -16,7 +16,7 @@ var:
     mkdir -p /var/tmp/dist
     tar -C /var/tmp/dist -xf $rootdir/[% c("compiler_tarfile") %]
     export PATH="/var/tmp/dist/[% c("var/distdir") %]/bin:$PATH"
-    export LD_LIBRARY_PATH=/var/tmp/dist/[% c("var/distdir") %]/lib64:/var/tmp/dist/[% c("var/distdir") %]/lib32
+    export LD_LIBRARY_PATH=/var/tmp/dist/[% c("var/distdir") %]/lib64
     [% IF c("hardened_gcc"); GET c("var/set_hardened_build_flags"); END %]
 
 targets:
@@ -29,9 +29,7 @@ targets:
   linux:
     hardened_gcc: 1
     var:
-      configure_opt: --enable-multilib --enable-languages=c,c++ --with-arch_32=i686
-      arch_deps:
-        - libc6-dev-i386
+      configure_opt: --enable-multilib --enable-languages=c,c++
 
 input_files:
   - project: container-image

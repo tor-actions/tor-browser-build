@@ -87,13 +87,6 @@ if [ "`id -u`" -eq 0 ]; then
   exit 1
 fi
 
-[% IF c('var/linux-i686') || c('var/linux-x86_64') -%]
-if test -r /proc/cpuinfo && ! grep -q '^flags\s*:.* sse2' /proc/cpuinfo; then
-  complain "[% c('var/Project_Name') %] requires a CPU with SSE2 support.  Exiting."
-  exit 1
-fi
-[% END -%]
-
 print_usage () {
   printf "\n[% c('var/Project_Name') %] Script Options\n"
   printf "  --verbose         Display [% IF c("var/tor-browser") -%]Tor and [% END -%]the browser output in the terminal\n"

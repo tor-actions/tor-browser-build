@@ -5,7 +5,7 @@ Section: web
 Build-Depends: debhelper (>= 9), dh-apparmor
 
 Package: [% c("var/system_pkg/pkg_name") %]
-Architecture: amd64 i386 arm64
+Architecture: amd64 arm64
 Depends: ${shlibs:Depends},
 Recommends: libavcodec61 | libavcodec-extra61 | libavcodec60 | libavcodec-extra60 | libavcodec59 | libavcodec-extra59 | libavcodec58 | libavcodec-extra58 | libavcodec57 | libavcodec-extra57 | libavcodec56 | libavcodec-extra56 | libavcodec55 | libavcodec-extra55 | libavcodec54 | libavcodec-extra54 | libavcodec53 | libavcodec-extra53
 Description: [% c('var/display_name') %]

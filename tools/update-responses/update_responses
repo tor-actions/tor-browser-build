@@ -171,7 +171,7 @@ sub get_version_downloads {
         my $os;
         if ($file =~ m/^$config->{appname_bundle}-macos-$version.dmg$/) {
             $os = 'macos';
-        } elsif ($file =~ m/^$config->{appname_bundle}-(linux-i686|linux-x86_64)-${version}.tar.xz$/) {
+        } elsif ($file =~ m/^$config->{appname_bundle}-(linux-x86_64|linux-aarch64)-${version}.tar.xz$/) {
             $os = $1;
         } elsif ($file =~ m/^$config->{appname_bundle}-windows-x86_64-(portable-|)${version}.exe$/) {
             $os = 'win64';
@@ -200,7 +200,7 @@ sub get_perplatform_downloads {
         my $os;
         if ($file =~ m/^$config->{appname_bundle}-macos-$version.dmg$/) {
           $os = 'macos';
-        } elsif ($file =~ m/^$config->{appname_bundle}-(linux-i686|linux-x86_64)-${version}.tar.xz$/) {
+        } elsif ($file =~ m/^$config->{appname_bundle}-(linux-x86_64|linux-aarch64)-${version}.tar.xz$/) {
           $os = $1;
         } elsif ($file =~ m/^$config->{appname_bundle}-(windows-i686|windows-x86_64)-(portable-|)${version}.exe$/) {
           $os = $1;

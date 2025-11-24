@@ -19,11 +19,6 @@ targets:
 
   linux:
     var:
-      arch_deps:
-        # Install libc6-i386 to be able to run 32bit mar tools in linux-i686
-        # builds (bug 29812). We don't need it in x86_64 builds, but we
-        # share the container to reduce space used.
-        - libc6-i386
       pt_path: ./TorBrowser/Tor/PluggableTransports/
 
   macos:

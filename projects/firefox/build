@@ -39,12 +39,10 @@ export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/node/bi
   [% IF ! c("var/asan") -%]
     export PATH="/var/tmp/dist/clang-linux/bin:$PATH"
   [% END -%]
-  [% IF c("var/linux-i686") -%]
+  [% IF c("var/linux-cross") -%]
     # Exporting `PKG_CONFIG_PATH` in the mozconfig file is causing build
     # breakage in Rust code. It seems that environment variable is not passed
     # down properly in that case. Thus, we set it here in the build script.
-    export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:/usr/lib/i386-linux-gnu/pkgconfig"
-  [% ELSIF c("var/linux-cross") -%]
     export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:/usr/lib/[% c("var/crosstarget") %]/pkgconfig"
   [% END -%]
 [% END -%]
@@ -309,7 +307,7 @@ END;
   /var/tmp/dist/gcc/bin/"${CROSS_PREFIX}g++" $rootdir/abicheck.cc -o Browser/abicheck -std=c++17
   libdest=Browser/libstdc++
   mkdir -p "$libdest"
-  libdir=[% c("var/libdir") %]
+  libdir=lib64
   [% IF c("var/linux-cross") -%]
     libdir="[% c("var/crosstarget") %]/$libdir"
   [% END -%]

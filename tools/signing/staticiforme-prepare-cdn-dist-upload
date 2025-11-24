@@ -18,8 +18,6 @@ if is_project torbrowser; then
   cat >> "$dist_dir/.htaccess" << 'EOF'
 RewriteRule ^tor-browser-linux64-(.*)_ALL.tar.xz.asc$ tor-browser-linux-x86_64-$1.tar.xz.asc
 RewriteRule ^tor-browser-linux64-(.*)_ALL.tar.xz$ tor-browser-linux-x86_64-$1.tar.xz
-RewriteRule ^tor-browser-linux32-(.*)_ALL.tar.xz.asc$ tor-browser-linux-i686-$1.tar.xz.asc
-RewriteRule ^tor-browser-linux32-(.*)_ALL.tar.xz$ tor-browser-linux-i686-$1.tar.xz
 EOF
 fi
 

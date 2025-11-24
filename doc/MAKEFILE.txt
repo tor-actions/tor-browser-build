@@ -14,7 +14,7 @@ Build Tor Browser for the release channel, for all supported platforms
 (defined in var/browser_platforms). The resulting build can be found in
 directory torbrowser/release/$version.
 
-torbrowser-release-{linux-x86_64,linux-i686,windows-i686,macos,
+torbrowser-release-{linux-x86_64,linux-aarch64,windows-i686,macos,
                     android-armv7, android-x86,android-x86_64,
                     android-aarch64,desktop,android}
 --------------------------------------------------------------------
@@ -27,7 +27,7 @@ torbrowser-alpha
 Build Tor Browser for the alpha channel, for all supported platforms.
 The resulting build can be found in directory torbrowser/alpha/$version.
 
-torbrowser-alpha-{linux-x86_64,linux-i686,windows-i686,macos,
+torbrowser-alpha-{linux-x86_64,linux-aarch64,windows-i686,macos,
                   android-armv7,android-x86,android-x86_64,
                   android-aarch64,desktop,android}
 ------------------------------------------------------------------
@@ -42,7 +42,7 @@ components.
 
 The resulting build can be found in directory torbrowser/nightly/$date
 
-torbrowser-nightly-{linux-x86_64,linux-i686,windows-i686,macos,
+torbrowser-nightly-{linux-x86_64,linux-aarch64,windows-i686,macos,
                     android-armv7,android-x86,android-x86_64,
                     android-aarch64,desktop,android}
 --------------------------------------------------------------------
@@ -56,7 +56,7 @@ By default it is based on the alpha channel, but you can change that by
 editing rbm.local.conf. The resulting build can be found in directory
 testbuild.
 
-torbrowser-testbuild-{linux-x86_64,linux-i686,windows-i686,macos,
+torbrowser-testbuild-{linux-x86_64,linux-aarch64,windows-i686,macos,
                     android-armv7,android-x86,android-x86_64,
                     android-aarch64,desktop,android}
 -----------------------------------------------------------------

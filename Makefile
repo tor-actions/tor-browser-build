@@ -41,9 +41,6 @@ torbrowser-release-linux-x86_64: submodule-update
 torbrowser-release-linux-x86_64-asan: submodule-update
 	$(rbm) build release --target release --target browser-single-platform --target browser-linux-x86_64-asan --target torbrowser
 
-torbrowser-release-linux-i686: submodule-update
-	$(rbm) build release --target release --target browser-single-platform --target browser-linux-i686 --target torbrowser
-
 torbrowser-release-linux-aarch64: submodule-update
 	$(rbm) build release --target release --target browser-single-platform --target browser-linux-aarch64 --target torbrowser
 
@@ -89,9 +86,6 @@ torbrowser-alpha-linux-x86_64-asan: submodule-update
 torbrowser-alpha-linux-aarch64: submodule-update
 	$(rbm) build release --target alpha --target browser-single-platform --target browser-linux-aarch64 --target torbrowser
 
-torbrowser-alpha-linux-i686: submodule-update
-	$(rbm) build release --target alpha --target browser-single-platform --target browser-linux-i686 --target torbrowser
-
 torbrowser-alpha-windows-i686: submodule-update
 	$(rbm) build release --target alpha --target browser-single-platform --target browser-windows-i686 --target torbrowser
 
@@ -134,9 +128,6 @@ torbrowser-nightly-linux-x86_64-asan: submodule-update
 torbrowser-nightly-linux-aarch64: submodule-update
 	$(rbm) build release --target nightly --target browser-single-platform --target browser-linux-aarch64 --target torbrowser
 
-torbrowser-nightly-linux-i686: submodule-update
-	$(rbm) build release --target nightly --target browser-single-platform --target browser-linux-i686 --target torbrowser
-
 torbrowser-nightly-windows-i686: submodule-update
 	$(rbm) build release --target nightly --target browser-single-platform --target browser-windows-i686 --target torbrowser
 
@@ -175,9 +166,6 @@ torbrowser-testbuild-linux-x86_64: submodule-update
 
 torbrowser-testbuild-linux-x86_64-asan: submodule-update
 	$(rbm) build release --target testbuild --target browser-single-platform --target browser-linux-x86_64-asan --target torbrowser
-
-torbrowser-testbuild-linux-i686: submodule-update
-	$(rbm) build release --target testbuild --target browser-single-platform --target browser-linux-i686 --target torbrowser
 
 torbrowser-testbuild-linux-aarch64: submodule-update
 	$(rbm) build release --target testbuild --target browser-single-platform --target browser-linux-aarch64 --target torbrowser
@@ -285,9 +273,6 @@ basebrowser-release-linux-x86_64: submodule-update
 basebrowser-release-linux-x86_64-asan: submodule-update
 	$(rbm) build release --target release --target browser-single-platform --target browser-linux-x86_64-asan --target basebrowser
 
-basebrowser-release-linux-i686: submodule-update
-	$(rbm) build release --target release --target browser-single-platform --target browser-linux-i686 --target basebrowser
-
 basebrowser-release-linux-aarch64: submodule-update
 	$(rbm) build release --target release --target browser-single-platform --target browser-linux-aarch64 --target basebrowser
 
@@ -323,9 +308,6 @@ basebrowser-alpha-linux-x86_64: submodule-update
 
 basebrowser-alpha-linux-x86_64-asan: submodule-update
 	$(rbm) build release --target alpha --target browser-single-platform --target browser-linux-x86_64-asan --target basebrowser
-
-basebrowser-alpha-linux-i686: submodule-update
-	$(rbm) build release --target alpha --target browser-single-platform --target browser-linux-i686 --target basebrowser
 
 basebrowser-alpha-linux-aarch64: submodule-update
 	$(rbm) build release --target alpha --target browser-single-platform --target browser-linux-aarch64 --target basebrowser
@@ -363,9 +345,6 @@ basebrowser-nightly-linux-x86_64: submodule-update
 basebrowser-nightly-linux-x86_64-asan: submodule-update
 	$(rbm) build release --target nightly --target browser-single-platform --target browser-linux-x86_64-asan --target basebrowser
 
-basebrowser-nightly-linux-i686: submodule-update
-	$(rbm) build release --target nightly --target browser-single-platform --target browser-linux-i686 --target basebrowser
-
 basebrowser-nightly-linux-aarch64: submodule-update
 	$(rbm) build release --target nightly --target browser-single-platform --target browser-linux-aarch64 --target basebrowser
 
@@ -401,9 +380,6 @@ basebrowser-testbuild-linux-x86_64: submodule-update
 
 basebrowser-testbuild-linux-x86_64-asan: submodule-update
 	$(rbm) build release --target testbuild --target browser-single-platform --target browser-linux-x86_64-asan --target basebrowser
-
-basebrowser-testbuild-linux-i686: submodule-update
-	$(rbm) build release --target testbuild --target browser-single-platform --target browser-linux-i686 --target basebrowser
 
 basebrowser-testbuild-linux-aarch64: submodule-update
 	$(rbm) build release --target testbuild --target browser-single-platform --target browser-linux-aarch64 --target basebrowser

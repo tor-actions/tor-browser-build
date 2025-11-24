@@ -59,19 +59,6 @@ sub capture_exec {
   return $stdout;
 }
 
-sub osname {
-    my ($osname) = capture_exec('uname', '-s');
-    my ($arch) = capture_exec('uname', '-m');
-    chomp($osname, $arch);
-    if ($osname eq 'Linux' && $arch eq 'x86_64') {
-        return 'linux-x86_64';
-    }
-    if ($osname eq 'Linux' && $arch =~ m/^i.86$/) {
-        return 'linux-i686';
-    }
-    exit_error 'Unknown OS';
-}
-
 sub setup_martools {
   my ($out, $err, $exit) = capture {
     system("$FindBin::Bin/setup-martools");

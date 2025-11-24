@@ -43,13 +43,13 @@ In each of those places, an option can be defined:
 
 The targets are usually used to select:
 
-- the platform: torbrowser-linux-x86_64, torbrowser-linux-i686,
+- the platform: torbrowser-linux-x86_64, torbrowser-linux-aarch64,
   torbrowser-windows-i686, torbrowser-windows-x86_64, torbrowser-macos,
   torbrowser-android-armv7, torbrowser-android-aarch64, torbrowser-android-x86,
   torbrowser-android-x86_64
 - the channel: release, nightly, alpha
 
-The targets torbrowser-linux-x86_64, torbrowser-linux-i686,
+The targets torbrowser-linux-x86_64, torbrowser-linux-aarch64,
 torbrowser-windows-i686, torbrowser-windows-x86_64, torbrowser-macos,
 torbrowser-android-armv7, torbrowser-android-x86, torbrowser-android-aarch64,
 torbrowser-android-x86_64 are special cases. They do not contain options
@@ -103,8 +103,8 @@ You can use the following template syntax in the build scripts:
     # do something for macOS
   [% END -%]
 
-You can also use var/linux-x86_64 and var/linux-i686 for things that
-only apply to x86_64 and i686 linux builds. You can use the var/release,
+You can also use var/linux-x86_64 and var/linux-aarch64 for things that
+only apply to x86_64 and aarch64 linux builds. You can use the var/release,
 var/alpha and var/nightly options to do things depending on the channel.
 
 As an alternative you can define an option with a different value
@@ -148,7 +148,7 @@ $platform should be one of the following:
 
  - torbrowser-linux-x86_64
 
- - torbrowser-linux-i686
+ - torbrowser-linux-aarch64
 
  - torbrowser-windows-i686
 

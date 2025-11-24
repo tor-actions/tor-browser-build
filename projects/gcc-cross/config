@@ -16,14 +16,13 @@ var:
     mkdir -p /var/tmp/dist
     tar -C /var/tmp/dist -xf $rootdir/[% c("compiler_tarfile") %]
     export PATH="/var/tmp/dist/[% c("var/distdir") %]/bin:$PATH"
-    export LD_LIBRARY_PATH=/var/tmp/dist/[% c("var/distdir") %]/lib64:/var/tmp/dist/[% c("var/distdir") %]/lib32
+    export LD_LIBRARY_PATH=/var/tmp/dist/[% c("var/distdir") %]/lib64
     [% IF c("hardened_gcc"); GET c("var/set_hardened_build_flags"); END %]
   configure_opt: '--target=[% c("var/crosstarget") %] --disable-multilib --enable-languages=c,c++ --with-glibc-version=[% c("var/glibc_version") %]'
   # Use stretch's glibc and stretch-security's linux
   glibc_version: 2.24
   linux_version: 4.19.232
   arch_deps:
-    - libc6-dev-i386
     - gawk
     - rsync
 

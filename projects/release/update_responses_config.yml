@@ -20,7 +20,6 @@ download:
 [% END -%]
 build_targets:
     linux-aarch64: Linux_aarch64-gcc3
-    linux-i686: Linux_x86-gcc3
     linux-x86_64: Linux_x86_64-gcc3
     windows-i686:
         - WINNT_x86-gcc3
@@ -68,8 +67,6 @@ versions:
         windows-x86_64:
             # Windows 10
             minSupportedOSVersion: 10.0
-        linux-i686:
-            minSupportedInstructionSet: SSE2
         linux-x86_64:
             minSupportedInstructionSet: SSE2
 [% IF c("var/tor-browser") && c("var/torbrowser_legacy_version") -%]

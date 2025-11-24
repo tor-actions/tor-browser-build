@@ -43,9 +43,6 @@ function mv_files {
 [% IF c("var/browser_platforms/macos-aarch64") -%]
   mv_files "[% c('input_files_by_name/macos-aarch64') %]"
 [% END -%]
-[% IF c("var/browser_platforms/linux-i686") -%]
-  mv_files "[% c('input_files_by_name/linux-i686') %]"
-[% END -%]
 [% IF c("var/browser_platforms/linux-x86_64") -%]
   mv_files "[% c('input_files_by_name/linux-x86_64') %]"
 [% END -%]
@@ -75,8 +72,6 @@ RewriteRule ^sha256sums.incrementals.txt.asc$ sha256sums-unsigned-build.incremen
 [% IF c("var/tor-browser") -%]
 RewriteRule ^tor-browser-linux64-(.*)_ALL.tar.xz.asc$ tor-browser-linux-x86_64-$1.tar.xz.asc
 RewriteRule ^tor-browser-linux64-(.*)_ALL.tar.xz$ tor-browser-linux-x86_64-$1.tar.xz
-RewriteRule ^tor-browser-linux32-(.*)_ALL.tar.xz.asc$ tor-browser-linux-i686-$1.tar.xz.asc
-RewriteRule ^tor-browser-linux32-(.*)_ALL.tar.xz$ tor-browser-linux-i686-$1.tar.xz
 [% END -%]
 EOF
 

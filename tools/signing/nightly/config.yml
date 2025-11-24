@@ -7,7 +7,6 @@ builds_url: /srv/tbb-nightlies-master.torproject.org/htdocs/nightly-builds/tor-b
 torbrowser:
   publish_dirs:
     - nightly-linux-x86_64
-    - nightly-linux-i686
     - nightly-linux-aarch64
     - nightly-windows-x86_64
     - nightly-windows-i686

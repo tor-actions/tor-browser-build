@@ -8,7 +8,7 @@ var:
   publish_dir: '[% c("var/signed_status") %]/[% c("version") %]-[% c("var/torbrowser_build") %]'
   containers_target: with_containers
 
-  linux-packages: '[% ( c("var/browser_platforms/linux-i686") || c("var/browser_platforms/linux-x86_64") ) && ( c("var/mullvad-browser") || c("var/nightly") ) %]'
+  linux-packages: '[% c("var/browser_platforms/linux-x86_64") && ( c("var/mullvad-browser") || c("var/nightly") ) %]'
   linux-packages-aarch64: '[% c("var/browser_platforms/linux-aarch64") && (c("var/mullvad-browser") || c("var/nightly")) %]'
   list_used_projects: '[% INCLUDE list_used_projects %]'
 
@@ -57,10 +57,6 @@ targets:
       browser_platforms:
         linux-x86_64: 1
       asan-build: '-asan'
-  browser-linux-i686:
-    var:
-      browser_platforms:
-        linux-i686: 1
   browser-linux-aarch64:
     var:
       browser_platforms:
@@ -193,13 +189,6 @@ input_files:
       - '[% c("var/build_target") %]'
       - '[% c("var/browser_type") %]-linux-x86_64[% c("var/asan-build") %]'
 
-  - name: linux-i686
-    project: browser
-    enable: '[% c("var/browser_platforms/linux-i686") %]'
-    target:
-      - '[% c("var/build_target") %]'
-      - '[% c("var/browser_type") %]-linux-i686'
-
   - name: linux-aarch64
     project: browser
     enable: '[% c("var/browser_platforms/linux-aarch64") %]'
@@ -214,7 +203,6 @@ input_files:
     target:
       - '[% IF c("var/testbuild") %]testbuild[% END %]'
       - '[% c("var/build_target") %]'
-      - '[% IF c("var/browser_platforms/linux-i686") %]browser-linux-i686[% END %]'
       - '[% IF c("var/browser_platforms/linux-x86_64") %]browser-linux-x86_64[% END %]'
       - deb
       - '[% c("var/browser_type") %]-linux-x86_64'
@@ -239,7 +227,6 @@ input_files:
     target:
       - '[% IF c("var/testbuild") %]testbuild[% END %]'
       - '[% c("var/build_target") %]'
-      - '[% IF c("var/browser_platforms/linux-i686") %]browser-linux-i686[% END %]'
       - '[% IF c("var/browser_platforms/linux-x86_64") %]browser-linux-x86_64[% END %]'
       - '[% IF c("var/linux-packages-aarch64") %]browser-linux-aarch64[% END %]'
       - rpm
