@@ -104,6 +104,17 @@ needed=$(perl -MYAML::XS -e "$p")
 current='[% c("var/windows_rs_sha256sum") %]'
 check_update_needed windows-rs-sha256sum "$needed" "$current"
 
+# windows-app-sdk
+read -d '' p << 'EOF' || true
+my $d = YAML::XS::LoadFile('taskcluster/kinds/fetch/toolchains.yml');
+my $sha256 = $d->{'windowsappsdk-redist'}{fetch}{sha256};
+exit 1 unless $sha256;
+print $sha256;
+EOF
+needed=$(perl -MYAML::XS -e "$p")
+current='[% pc("windows-app-sdk", "var/windowsappsdk_sha256sum") %]'
+check_update_needed windowsappsdk_sha256sum "$needed" "$current"
+
 # End of Windows checks
 [% END -%]
 

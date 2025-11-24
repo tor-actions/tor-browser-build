@@ -15,7 +15,10 @@ mkdir -p [% out_dir %]
   export PATH="/var/tmp/dist/fxc2/bin:$PATH"
 
   tar -C /var/tmp/dist -xf [% c('input_files_by_name/windows-rs') %]
-  export MOZ_WINDOWS_RS_DIR="$(realpath /var/tmp/dist/windows-*)"
+  export MOZ_WINDOWS_RS_DIR="$(dirname $(find /var/tmp/dist/windows-* -name 'Cargo.toml' -print -quit))"
+
+  tar -C /var/tmp/dist -xf [% c('input_files_by_name/windows-app-sdk') %]
+  export MOZ_WINDOWS_APP_SDK_DIR=/var/tmp/dist/windows-app-sdk
 [% END -%]
 
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/rust') %]

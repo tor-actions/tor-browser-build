@@ -209,6 +209,9 @@ input_files:
     filename: 'windows-rs-[% c("var/windows_rs_version") %].tar.zst'
     sha256sum: '[% c("var/windows_rs_sha256sum") %]'
     enable: '[% c("var/windows") %]'
+  - project: windows-app-sdk
+    name: windows-app-sdk
+    enable: '[% c("var/windows") %]'
   - filename: abicheck.cc
     enable: '[% c("var/linux") %]'
   - project: translation

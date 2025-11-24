@@ -1,0 +1,33 @@
+#!/bin/bash
+[% c("var/set_default_env") -%]
+distdir=$rootdir/[% project %]
+
+mkdir sdk
+cd sdk
+unzip $rootdir/[% c('input_files_by_name/windowsappsdk-redist') %]
+
+# Based on taskcluster/scripts/misc/build-WindowsAppSDK.sh
+
+target_folder_name=$distdir
+ARCH_SUFFIX=[% c("var/zip_arch") %]
+SHORT_VERSION=[% c("version") %]
+
+unzip MSIX/win10-${ARCH_SUFFIX}/Microsoft.WindowsAppRuntime.${SHORT_VERSION}.msix
+
+mkdir $target_folder_name
+# We just extract the few DLLs that Firefox needs instead of the
+# whole SDK.
+cp CoreMessagingXP.dll $target_folder_name
+cp marshal.dll $target_folder_name
+cp Microsoft.InputStateManager.dll $target_folder_name
+cp Microsoft.Internal.FrameworkUdk.dll $target_folder_name
+cp Microsoft.UI.Composition.OSSupport.dll $target_folder_name
+cp Microsoft.UI.Input.dll $target_folder_name
+cp Microsoft.UI.Windowing.Core.dll $target_folder_name
+cp Microsoft.UI.Windowing.dll $target_folder_name
+
+cd $rootdir
+[% c('tar', {
+    tar_src => [ project ],
+    tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
+  }) %]
