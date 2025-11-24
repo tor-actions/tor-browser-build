@@ -26,7 +26,8 @@
   HOST_CXX="clang++"
   CC="[% c('arch') %]-w64-mingw32-clang"
   CXX="[% c('arch') %]-w64-mingw32-clang++"
-  CXXFLAGS="-fms-extensions"
+  CFLAGS="-include _mingw.h"
+  CXXFLAGS="-fms-extensions -include _mingw.h"
   AR=llvm-ar
   RANLIB=llvm-ranlib
 
