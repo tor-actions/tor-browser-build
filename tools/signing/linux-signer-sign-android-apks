@@ -6,7 +6,7 @@ script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "$script_dir/functions"
 
 topdir="$script_dir/../.."
-ARCHS="armv7 aarch64 x86 x86_64"
+ARCHS="armv7 aarch64 x86_64"
 test "$SIGNING_PROJECTNAME" = 'torvpn' && ARCHS='multiarch'
 projname=$(project-name)
 # tbb_version_type, tbb_version and SIGNING_PROJECTNAME are used in

@@ -93,11 +93,6 @@ steps:
         pkg_type: build
         target_prepend:
           - torbrowser-android-aarch64
-      - name: geckoview_x86
-        project: geckoview
-        pkg_type: build
-        target_prepend:
-          - torbrowser-android-x86
       - name: geckoview_x86_64
         project: geckoview
         pkg_type: build

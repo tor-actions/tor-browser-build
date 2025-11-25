@@ -134,7 +134,6 @@ name to the makefile target:
   $ make torbrowser-nightly-macos
   $ make torbrowser-nightly-android-armv7
   $ make torbrowser-nightly-android-aarch64
-  $ make torbrowser-nightly-android-x86
   $ make torbrowser-nightly-android-x86_64
 
 When you want to quickly do a build to test a change, you can use the

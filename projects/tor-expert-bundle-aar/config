@@ -16,11 +16,6 @@ input_files:
       '^torbrowser-(?!testbuild).*': 'torbrowser-android-aarch64'
     enable: '[% !c("var/android_single_arch") %]'
   - project: tor-expert-bundle
-    name: tor-expert-bundle-x86
-    target_replace:
-      '^torbrowser-(?!testbuild).*': 'torbrowser-android-x86'
-    enable: '[% !c("var/android_single_arch") %]'
-  - project: tor-expert-bundle
     name: tor-expert-bundle-x86_64
     target_replace:
       '^torbrowser-(?!testbuild).*': 'torbrowser-android-x86_64'

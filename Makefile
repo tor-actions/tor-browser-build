@@ -26,14 +26,11 @@ torbrowser-release-android: submodule-update
 torbrowser-release-android-armv7: submodule-update
 	$(rbm) build release --target release --target browser-single-platform --target browser-android-armv7 --target torbrowser
 
-torbrowser-release-android-x86: submodule-update
-	$(rbm) build release --target release --target browser-single-platform --target browser-android-x86 --target torbrowser
+torbrowser-release-android-aarch64: submodule-update
+	$(rbm) build release --target release --target browser-single-platform --target browser-android-aarch64 --target torbrowser
 
 torbrowser-release-android-x86_64: submodule-update
 	$(rbm) build release --target release --target browser-single-platform --target browser-android-x86_64 --target torbrowser
-
-torbrowser-release-android-aarch64: submodule-update
-	$(rbm) build release --target release --target browser-single-platform --target browser-android-aarch64 --target torbrowser
 
 torbrowser-release-linux-x86_64: submodule-update
 	$(rbm) build release --target release --target browser-single-platform --target browser-linux-x86_64 --target torbrowser
@@ -68,14 +65,11 @@ torbrowser-alpha-android: submodule-update
 torbrowser-alpha-android-armv7: submodule-update
 	$(rbm) build release --target alpha --target browser-single-platform --target browser-android-armv7 --target torbrowser
 
-torbrowser-alpha-android-x86: submodule-update
-	$(rbm) build release --target alpha --target browser-single-platform --target browser-android-x86 --target torbrowser
+torbrowser-alpha-android-aarch64: submodule-update
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-android-aarch64 --target torbrowser
 
 torbrowser-alpha-android-x86_64: submodule-update
 	$(rbm) build release --target alpha --target browser-single-platform --target browser-android-x86_64 --target torbrowser
-
-torbrowser-alpha-android-aarch64: submodule-update
-	$(rbm) build release --target alpha --target browser-single-platform --target browser-android-aarch64 --target torbrowser
 
 torbrowser-alpha-linux-x86_64: submodule-update
 	$(rbm) build release --target alpha --target browser-single-platform --target browser-linux-x86_64 --target torbrowser
@@ -110,14 +104,11 @@ torbrowser-nightly-android: submodule-update
 torbrowser-nightly-android-armv7: submodule-update
 	$(rbm) build release --target nightly --target browser-single-platform --target browser-android-armv7 --target torbrowser
 
-torbrowser-nightly-android-x86: submodule-update
-	$(rbm) build release --target nightly --target browser-single-platform --target browser-android-x86 --target torbrowser
+torbrowser-nightly-android-aarch64: submodule-update
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-android-aarch64 --target torbrowser
 
 torbrowser-nightly-android-x86_64: submodule-update
 	$(rbm) build release --target nightly --target browser-single-platform --target browser-android-x86_64 --target torbrowser
-
-torbrowser-nightly-android-aarch64: submodule-update
-	$(rbm) build release --target nightly --target browser-single-platform --target browser-android-aarch64 --target torbrowser
 
 torbrowser-nightly-linux-x86_64: submodule-update
 	$(rbm) build release --target nightly --target browser-single-platform --target browser-linux-x86_64 --target torbrowser
@@ -152,14 +143,11 @@ torbrowser-testbuild-android: submodule-update
 torbrowser-testbuild-android-armv7: submodule-update
 	$(rbm) build release --target testbuild --target browser-single-platform --target browser-android-armv7 --target torbrowser
 
-torbrowser-testbuild-android-x86: submodule-update
-	$(rbm) build release --target testbuild --target browser-single-platform --target browser-android-x86 --target torbrowser
+torbrowser-testbuild-android-aarch64: submodule-update
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-android-aarch64 --target torbrowser
 
 torbrowser-testbuild-android-x86_64: submodule-update
 	$(rbm) build release --target testbuild --target browser-single-platform --target browser-android-x86_64 --target torbrowser
-
-torbrowser-testbuild-android-aarch64: submodule-update
-	$(rbm) build release --target testbuild --target browser-single-platform --target browser-android-aarch64 --target torbrowser
 
 torbrowser-testbuild-linux-x86_64: submodule-update
 	$(rbm) build release --target testbuild --target browser-single-platform --target browser-linux-x86_64 --target torbrowser
@@ -258,14 +246,11 @@ basebrowser-release: submodule-update
 basebrowser-release-android-armv7: submodule-update
 	$(rbm) build release --target release --target browser-single-platform --target browser-android-armv7 --target basebrowser
 
-basebrowser-release-android-x86: submodule-update
-	$(rbm) build release --target release --target browser-single-platform --target browser-android-x86 --target basebrowser
+basebrowser-release-android-aarch64: submodule-update
+	$(rbm) build release --target release --target browser-single-platform --target browser-android-aarch64 --target basebrowser
 
 basebrowser-release-android-x86_64: submodule-update
 	$(rbm) build release --target release --target browser-single-platform --target browser-android-x86_64 --target basebrowser
-
-basebrowser-release-android-aarch64: submodule-update
-	$(rbm) build release --target release --target browser-single-platform --target browser-android-aarch64 --target basebrowser
 
 basebrowser-release-linux-x86_64: submodule-update
 	$(rbm) build release --target release --target browser-single-platform --target browser-linux-x86_64 --target basebrowser
@@ -294,14 +279,11 @@ basebrowser-alpha: submodule-update
 basebrowser-alpha-android-armv7: submodule-update
 	$(rbm) build release --target alpha --target browser-single-platform --target browser-android-armv7 --target basebrowser
 
-basebrowser-alpha-android-x86: submodule-update
-	$(rbm) build release --target alpha --target browser-single-platform --target browser-android-x86 --target basebrowser
+basebrowser-alpha-android-aarch64: submodule-update
+	$(rbm) build release --target alpha --target browser-single-platform --target browser-android-aarch64 --target basebrowser
 
 basebrowser-alpha-android-x86_64: submodule-update
 	$(rbm) build release --target alpha --target browser-single-platform --target browser-android-x86_64 --target basebrowser
-
-basebrowser-alpha-android-aarch64: submodule-update
-	$(rbm) build release --target alpha --target browser-single-platform --target browser-android-aarch64 --target basebrowser
 
 basebrowser-alpha-linux-x86_64: submodule-update
 	$(rbm) build release --target alpha --target browser-single-platform --target browser-linux-x86_64 --target basebrowser
@@ -330,14 +312,11 @@ basebrowser-nightly: submodule-update
 basebrowser-nightly-android-armv7: submodule-update
 	$(rbm) build release --target nightly --target browser-single-platform --target browser-android-armv7 --target basebrowser
 
-basebrowser-nightly-android-x86: submodule-update
-	$(rbm) build release --target nightly --target browser-single-platform --target browser-android-x86 --target basebrowser
+basebrowser-nightly-android-aarch64: submodule-update
+	$(rbm) build release --target nightly --target browser-single-platform --target browser-android-aarch64 --target basebrowser
 
 basebrowser-nightly-android-x86_64: submodule-update
 	$(rbm) build release --target nightly --target browser-single-platform --target browser-android-x86_64 --target basebrowser
-
-basebrowser-nightly-android-aarch64: submodule-update
-	$(rbm) build release --target nightly --target browser-single-platform --target browser-android-aarch64 --target basebrowser
 
 basebrowser-nightly-linux-x86_64: submodule-update
 	$(rbm) build release --target nightly --target browser-single-platform --target browser-linux-x86_64 --target basebrowser
@@ -366,14 +345,11 @@ basebrowser-testbuild: submodule-update
 basebrowser-testbuild-android-armv7: submodule-update
 	$(rbm) build release --target testbuild --target browser-single-platform --target browser-android-armv7 --target basebrowser
 
-basebrowser-testbuild-android-x86: submodule-update
-	$(rbm) build release --target testbuild --target browser-single-platform --target browser-android-x86 --target basebrowser
+basebrowser-testbuild-android-aarch64: submodule-update
+	$(rbm) build release --target testbuild --target browser-single-platform --target browser-android-aarch64 --target basebrowser
 
 basebrowser-testbuild-android-x86_64: submodule-update
 	$(rbm) build release --target testbuild --target browser-single-platform --target browser-android-x86_64 --target basebrowser
-
-basebrowser-testbuild-android-aarch64: submodule-update
-	$(rbm) build release --target testbuild --target browser-single-platform --target browser-android-aarch64 --target basebrowser
 
 basebrowser-testbuild-linux-x86_64: submodule-update
 	$(rbm) build release --target testbuild --target browser-single-platform --target browser-linux-x86_64 --target basebrowser

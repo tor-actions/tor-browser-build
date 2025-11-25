@@ -19,9 +19,6 @@ function mv_files {
 [% IF c("var/browser_platforms/android-armv7") -%]
   mv_files "[% c('input_files_by_name/android-armv7') %]"
 [% END -%]
-[% IF c("var/browser_platforms/android-x86") -%]
-  mv_files "[% c('input_files_by_name/android-x86') %]"
-[% END -%]
 [% IF c("var/browser_platforms/android-x86_64") -%]
   mv_files "[% c('input_files_by_name/android-x86_64') %]"
 [% END -%]

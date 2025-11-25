@@ -15,8 +15,8 @@ Build Tor Browser for the release channel, for all supported platforms
 directory torbrowser/release/$version.
 
 torbrowser-release-{linux-x86_64,linux-aarch64,windows-i686,macos,
-                    android-armv7, android-x86,android-x86_64,
-                    android-aarch64,desktop,android}
+                    android-armv7,android-aarch64,android-x86_64,
+                    desktop,android}
 --------------------------------------------------------------------
 Same as torbrowser-release, for the selected platform only. The "desktop"
 platform means Linux, Windows and macOS. The "android" platform means
@@ -28,8 +28,8 @@ Build Tor Browser for the alpha channel, for all supported platforms.
 The resulting build can be found in directory torbrowser/alpha/$version.
 
 torbrowser-alpha-{linux-x86_64,linux-aarch64,windows-i686,macos,
-                  android-armv7,android-x86,android-x86_64,
-                  android-aarch64,desktop,android}
+                  android-armv7,android-aarch64,android-x86_64,
+                  desktop,android}
 ------------------------------------------------------------------
 Same as torbrowser-alpha, for the selected platform only.
 
@@ -43,8 +43,8 @@ components.
 The resulting build can be found in directory torbrowser/nightly/$date
 
 torbrowser-nightly-{linux-x86_64,linux-aarch64,windows-i686,macos,
-                    android-armv7,android-x86,android-x86_64,
-                    android-aarch64,desktop,android}
+                    android-armv7,android-aarch64,android-x86_64,
+                    desktop,android}
 --------------------------------------------------------------------
 Same as torbrowser-nightly, for the selected platform only.
 
@@ -57,8 +57,8 @@ editing rbm.local.conf. The resulting build can be found in directory
 testbuild.
 
 torbrowser-testbuild-{linux-x86_64,linux-aarch64,windows-i686,macos,
-                    android-armv7,android-x86,android-x86_64,
-                    android-aarch64,desktop,android}
+                    android-armv7,android-aarch64,android-x86_64,
+                    desktop,android}
 -----------------------------------------------------------------
 Same as torbrowser-testbuild, for the selected platform only.
 

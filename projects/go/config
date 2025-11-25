@@ -68,18 +68,15 @@ targets:
   android:
     var:
       GOOS: android
-  android-x86:
-    var:
-      GOARCH: 386
-  android-x86_64:
-    var:
-      GOARCH: amd64
   android-armv7:
     var:
       GOARCH: arm
   android-aarch64:
     var:
       GOARCH: arm64
+  android-x86_64:
+    var:
+      GOARCH: amd64
 
 input_files:
   - project: container-image

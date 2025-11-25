@@ -32,7 +32,7 @@ Instead, we've
 in tor-browser.git.
 
 Notice that it isn't necessary to include all the architectures Mozilla and us
-support (currently, aarch64, armv7, x86_64 and x86).
+support (currently, aarch64, armv7 and x86_64).
 The merge automation also supports "merging" one architecture.
 We use this hack when `var/android_single_arch` is defined, which is the default
 only in testbuilds.

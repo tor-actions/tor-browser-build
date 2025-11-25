@@ -12,7 +12,7 @@ mkdir -p $distdir
 
   # We take for granted that we can take the manifests from any of the bundles
   # without having to change it.
-  [% FOREACH arch = ['armv7', 'aarch64', 'x86', 'x86_64'] -%]
+  [% FOREACH arch = ['armv7', 'aarch64', 'x86_64'] -%]
     unzip -o $rootdir/[% c('input_files_by_name/tor-expert-bundle-' _ arch) %]/tor-expert-bundle-[% arch %].aar
   [% END -%]
   [% c('zip', {

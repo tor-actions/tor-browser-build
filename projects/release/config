@@ -36,18 +36,14 @@ targets:
     var:
       browser_platforms:
         android-armv7: 1
-  browser-android-x86:
-    var:
-      browser_platforms:
-        android-x86: 1
-  browser-android-x86_64:
-    var:
-      browser_platforms:
-        android-x86_64: 1
   browser-android-aarch64:
     var:
       browser_platforms:
         android-aarch64: 1
+  browser-android-x86_64:
+    var:
+      browser_platforms:
+        android-x86_64: 1
   browser-linux-x86_64:
     var:
       browser_platforms:
@@ -158,13 +154,13 @@ input_files:
       - '[% c("var/build_target") %]'
       - '[% c("var/browser_type") %]-android-armv7'
 
-  - name: android-x86
+  - name: android-aarch64
     project: browser
-    enable: '[% c("var/browser_platforms/android-x86") %]'
+    enable: '[% c("var/browser_platforms/android-aarch64") %]'
     target:
       - '[% c("var/containers_target") %]'
       - '[% c("var/build_target") %]'
-      - '[% c("var/browser_type") %]-android-x86'
+      - '[% c("var/browser_type") %]-android-aarch64'
 
   - name: android-x86_64
     project: browser
@@ -173,14 +169,6 @@ input_files:
       - '[% c("var/containers_target") %]'
       - '[% c("var/build_target") %]'
       - '[% c("var/browser_type") %]-android-x86_64'
-
-  - name: android-aarch64
-    project: browser
-    enable: '[% c("var/browser_platforms/android-aarch64") %]'
-    target:
-      - '[% c("var/containers_target") %]'
-      - '[% c("var/build_target") %]'
-      - '[% c("var/browser_type") %]-android-aarch64'
 
   - name: linux-x86_64
     project: browser

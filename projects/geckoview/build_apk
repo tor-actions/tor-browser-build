@@ -11,18 +11,14 @@ tar -C $builddir -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %
   mv $rootdir/[% c('input_files_by_name/geckoview_armv7') %]/artifacts/* $outdir/[% project %]/artifacts/armeabi-v7a
   mkdir -p $outdir/[% project %]/artifacts/arm64-v8a
   mv $rootdir/[% c('input_files_by_name/geckoview_aarch64') %]/artifacts/* $outdir/[% project %]/artifacts/arm64-v8a
-  mkdir -p $outdir/[% project %]/artifacts/x86
-  mv $rootdir/[% c('input_files_by_name/geckoview_x86') %]/artifacts/* $outdir/[% project %]/artifacts/x86
   mkdir -p $outdir/[% project %]/artifacts/x86_64
   mv $rootdir/[% c('input_files_by_name/geckoview_x86_64') %]/artifacts/* $outdir/[% project %]/artifacts/x86_64
 [% END -%]
 
 # Specify the architectures we want to merge
-export MOZ_ANDROID_FAT_AAR_ARCHITECTURES=armeabi-v7a,arm64-v8a,x86,x86_64
+export MOZ_ANDROID_FAT_AAR_ARCHITECTURES=armeabi-v7a,arm64-v8a,x86_64
 export MOZ_ANDROID_FAT_AAR_ARMEABI_V7A=$rootdir/[% c('input_files_by_name/geckoview_armv7') %]/geckoview/*.aar
 export MOZ_ANDROID_FAT_AAR_ARM64_V8A=$rootdir/[% c('input_files_by_name/geckoview_aarch64') %]/geckoview/*.aar
-# Specifying just "x86" is not differentiating enough
-export MOZ_ANDROID_FAT_AAR_X86=$rootdir/[% c('input_files_by_name/geckoview_x86') %]/geckoview/*.aar
 export MOZ_ANDROID_FAT_AAR_X86_64=$rootdir/[% c('input_files_by_name/geckoview_x86_64') %]/geckoview/*.aar
 
 cd $builddir/[% project %]-[% c("version") %]

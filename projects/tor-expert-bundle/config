@@ -22,7 +22,7 @@ input_files:
     project: lyrebird
   - name: conjure
     project: conjure
-    enable: '[% !c("var/android-x86") && !c("var/android-x86_64") %]'
+    enable: '[% !c("var/android-x86_64") %]'
   - filename: pt_config.json
   - filename: torrc-defaults
     enable: '[% !c("var/android") %]'
