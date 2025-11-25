@@ -18,9 +18,9 @@ container:
     build_apk: 1
 
 var:
-  firefox_platform_version: '140.5.0'
-  geckoview_version: '[% c("var/firefox_platform_version") %]esr'
-  browser_series: '15.0'
+  firefox_platform_version: '146.0a1'
+  geckoview_version: '[% c("var/firefox_platform_version") %]'
+  browser_series: '16.0'
   browser_rebase: 1
   browser_branch: '[% c("var/browser_series") %]-[% c("var/browser_rebase") %]'
   browser_build: 1
@@ -38,12 +38,12 @@ var:
     - openjdk-17-jdk-headless
   # this should be updated when the list of gradle dependencies is changed
   # see doc/how-to-create-gradle-dependencies-list.txt
-  gradle_dependencies_version: 19
-  gradle_version: 8.13
+  gradle_dependencies_version: 146-1
+  gradle_version: 8.14.3
   glean_parser: 14.0.1
   # python/mozboot/mozboot/android.py
-  bundletool_version: 1.18.1
-  bundletool_hash: 675786493983787ffa11550bdb7c0715679a44e1643f3ff980a529e9c822595c
+  bundletool_version: 1.18.2
+  bundletool_hash: 378b5434cd1378bef6b2bc527b8c7f0ff2584b273830335bce54d6d0813c8584
   variant: beta
   has_l10n: '[% !c("var/testbuild") && !c("var/locales").empty %]'
   l10n-changesets: '[% exec("git --no-pager show " _ c("git_hash") _ ":browser/locales/l10n-changesets.json", { exec_noco => 1 }) %]'
@@ -134,7 +134,7 @@ steps:
         sha256sum: '[% c("var/bundletool_hash") %]'
 
   list_toolchain_updates:
-    git_hash: tor-browser-140.0a1-15.0-1
+    git_hash: FIREFOX_NIGHTLY_146_END
     tag_gpg_id: 0
     input_files: []
     container:
@@ -177,7 +177,6 @@ input_files:
     name: oss-licenses-plugin
   - name: tor-expert-bundle-aar
     project: tor-expert-bundle-aar
-    enable: '[% c("var/android_single_arch") %]'
   - project: firefox-l10n
     name: firefox-l10n
     enable: '[% c("var/android_single_arch") && c("var/has_l10n") %]'

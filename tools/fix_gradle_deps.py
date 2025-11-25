@@ -20,7 +20,7 @@ if len(sys.argv) < 3:
     )
     sys.exit(1)
 target = sys.argv[1]
-target_num = int(sys.argv[2])
+target_ver = sys.argv[2]
 # We assume the script is in tor-browser-build/tools
 tbbuild = Path(__file__).parent.parent
 
@@ -46,7 +46,7 @@ with open(tbbuild / "projects" / target / "gradle-dependencies-list.txt") as f:
         m = parser.match(line)
         pairs.append((m.group(2), m.group(1)))
 
-dest_dir = tbbuild / "out" / target / f"gradle-dependencies-{target_num}"
+dest_dir = tbbuild / "out" / target / f"gradle-dependencies-{target_ver}"
 dest_dir.mkdir(parents=True, exist_ok=True)
 os.chdir(str(dest_dir))
 

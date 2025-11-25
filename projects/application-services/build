@@ -57,17 +57,8 @@ export PIP_CONFIG_FILE=$rootdir/pip.conf
 # Move the directory for hardcoding the path in .cargo/config.
 tar -C $builddir -xf $rootdir/[% c('input_files_by_name/cargo_vendor') %]
 # Make sure our vendored crates are used for offline builds.
-cat >> .cargo/config.toml << 'EOF'
-
-[source.crates-io]
-replace-with = "vendored-sources"
-
-[source.vendored-sources]
-directory = "/var/tmp/build/application-services/vendor"
-
-[net]
-offline=true
-EOF
+cat vendor/cargo-config.toml >> .cargo/config.toml
+rm vendor/cargo-config.toml
 
 tar -xf $rootdir/[% c('input_files_by_name/uniffi-rs') %]
 

@@ -4,8 +4,13 @@
 mkdir glean-wheels
 cd glean-wheels
 [% IF c("var/use_torsocks") %]torsocks [% END%]python3 -m pip download glean_parser==[% c("version") %]
-# Get pyyaml, needed for building application-services
+# tor-browser-build#41635: Some dependencies are requested as >=x.y.z.
+# pip download will download the latest avilable version, but that does not
+# work with offline builds. Instead, we need to explicitly download ==x.y.z.
 [% IF c("var/use_torsocks") %]torsocks [% END%]python3 -m pip download pyyaml==5.3.1
+[% IF c("var/use_torsocks") %]torsocks [% END%]python3 -m pip download MarkupSafe==2.0
+[% IF c("var/use_torsocks") %]torsocks [% END%]python3 -m pip download rpds-py==0.7.1
+[% IF c("var/use_torsocks") %]torsocks [% END%]python3 -m pip download typing-extensions==4.4.0
 cd ..
 [% c('tar', {
     tar_src => [ 'glean-wheels' ],

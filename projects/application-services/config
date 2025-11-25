@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-version: 140.0
+version: 146.0
 git_hash: 'v[% c("version") %]-TORBROWSER-build[% c("var/build_number") %]'
 git_url: https://gitlab.torproject.org/tpo/applications/application-services.git
 tag_gpg_id: 1
@@ -16,12 +16,13 @@ container:
   use_container: 1
 
 var:
-  build_number: 7
+  build_number: 1
   # This should be updated when the list of gradle dependencies is changed.
-  gradle_dependencies_version: 13
-  gradle_version: 8.13
-  nss_version: '3.110'
-  nspr_version: '4.36'
+  gradle_dependencies_version: 146.0-1
+  gradle_version: 8.14.3
+  nss_version: '3.117'
+  nspr_version: '4.37'
+  cargo_vendor_include_config: 1
 
 targets:
   nightly:
@@ -70,7 +71,7 @@ steps:
       # NSS version ans sha256 are in libs/build-all.sh.
       - URL: 'https://ftp.mozilla.org/pub/security/nss/releases/NSS_[% c("var/nss_version") | replace("\\.", "_") %]_RTM/src/nss-[% c("var/nss_version") %]-with-nspr-[% c("var/nspr_version") %].tar.gz'
         name: nss
-        sha256sum: 96114bef9e9692dda6e7793da26fedef0dc0449c3644ebe1122464e599a39dc0
+        sha256sum: cda19ca82e3f4839b0cb72fc633545a83b3f73dd3385a24a176860c461773a70
       - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
         name: gradle-dependencies
         exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
@@ -83,7 +84,7 @@ steps:
         project: application-services
         pkg_type: cargo_vendor
         norec:
-          sha256sum: 40497b315d225ef9e0066f67e96b48b9848fa158268af2c3b4031e93dfb1790f
+          sha256sum: 8a93a189985ad28c334970dc5ab386c81d4a415f3777c2941248f836f4af44fd
         enable: '[% !c("var/fetch_gradle_dependencies") %]'
       - filename: gen_gradle_deps_file.sh
         enable: '[% c("var/fetch_gradle_dependencies") %]'

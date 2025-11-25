@@ -1,16 +1,16 @@
 # vim: filetype=yaml sw=2
-git_hash: 'f626cf8e218b8fd6c201d80c9453735733b422d7'
+git_hash: '137221b113282e3300e1c9eae874891eb1c2ebc2' # v66.1.1
 git_url: https://github.com/mozilla/glean.git
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 # Check for mozilla-glean in gradle/libs.versions.toml in the tor-browser repository
-version: 64.3.1
+version: 66.1.1
 container:
-    use_container: 1
+  use_container: 1
 
 var:
   # This should be updated when the list of gradle dependencies is changed.
-  gradle_dependencies_version: 2
-  gradle_version: 8.13
+  gradle_dependencies_version: 66.1.1-1
+  gradle_version: 8.14.3
 
 steps:
   build:
@@ -40,10 +40,9 @@ steps:
         project: glean
         pkg_type: cargo_vendor
         norec:
-          sha256sum: 0cb6a7093b93ecc8d8e13f02e5ec46a538b5eaf55ab027b46754bfbdeec2152e
+          sha256sum: 14942534989f8bb3124653167a729534a93fb61e7c5b3d71389f8c3833e2ca93
       - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
         name: gradle-dependencies
         exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
       - filename: use-custom-gradle-repo.diff
       - filename: use-uniffi-noop.diff
-      - filename: jna-5.16.0.diff

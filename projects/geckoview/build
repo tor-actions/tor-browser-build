@@ -49,8 +49,7 @@ echo "Build finished, copying the AAR to the to the destination directory $(date
 
 [% IF !c("var/android_single_arch") -%]
   mkdir -p "$outdir/[% project %]"
-  # We don't want the debug or "exoplayer" .aars, but the .aar that has `omni` in its name.
-  find obj-* -type f -name geckoview*omni*.aar -exec mv {} $outdir/[% project %] \;
+  cp obj-*/gradle/target.maven.zip $outdir/[% project %]/
 [% ELSE -%]
 [% INCLUDE 'build_ac_fenix' %]
 [% END -%]

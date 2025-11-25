@@ -17,8 +17,6 @@ rm -rf /var/tmp/dist/android-toolchain/gradle/glean/pythonenv
 echo "Building Fenix $(date)"
 pushd mobile/android/fenix
 
-cp -a $rootdir/[% c('input_files_by_name/tor-expert-bundle-aar') %]/tor-expert-bundle.aar app/
-
 # Use the Android Components we have just built
 echo autoPublish.android-components.dir=../android-components > local.properties
 

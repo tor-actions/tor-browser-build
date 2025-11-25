@@ -8,20 +8,8 @@ if (m/^\\s*compileSdkVersion:\\s([^"]*),/) {
 }
 EOF
 needed=$(cat build.gradle | perl -ne "$p")
-current='[% pc("android-toolchain", "version") %]'
+current='[% pc("android-toolchain", "var/android_api_level") %]'
 check_update_needed compileSdkVersion "$needed" "$current"
-
-
-# minSdkVersion
-read -d '' p << 'EOF' || true
-if (m/^\\s*minSdkVersion:\\s([^"]*),/) {
-  print $1;
-  exit;
-}
-EOF
-needed=$(cat build.gradle | perl -ne "$p")
-current=21
-check_update_needed minSdkVersion "$needed" "$current"
 
 
 # gradle

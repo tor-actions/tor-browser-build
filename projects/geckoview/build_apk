@@ -17,9 +17,9 @@ tar -C $builddir -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %
 
 # Specify the architectures we want to merge
 export MOZ_ANDROID_FAT_AAR_ARCHITECTURES=armeabi-v7a,arm64-v8a,x86_64
-export MOZ_ANDROID_FAT_AAR_ARMEABI_V7A=$rootdir/[% c('input_files_by_name/geckoview_armv7') %]/geckoview/*.aar
-export MOZ_ANDROID_FAT_AAR_ARM64_V8A=$rootdir/[% c('input_files_by_name/geckoview_aarch64') %]/geckoview/*.aar
-export MOZ_ANDROID_FAT_AAR_X86_64=$rootdir/[% c('input_files_by_name/geckoview_x86_64') %]/geckoview/*.aar
+export MOZ_ANDROID_FAT_AAR_ARMEABI_V7A=$rootdir/[% c('input_files_by_name/geckoview_armv7') %]/geckoview/target.maven.zip
+export MOZ_ANDROID_FAT_AAR_ARM64_V8A=$rootdir/[% c('input_files_by_name/geckoview_aarch64') %]/geckoview/target.maven.zip
+export MOZ_ANDROID_FAT_AAR_X86_64=$rootdir/[% c('input_files_by_name/geckoview_x86_64') %]/geckoview/target.maven.zip
 
 cd $builddir/[% project %]-[% c("version") %]
 cp $rootdir/mozconfig ./

@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 version: 0.29.0
-git_hash: c69eba9eb08b16a66aab7b25df6c55d0b60541db
+git_hash: 9f392cbaa07aaf83160e94ece2a32d3e9fef22e4
 git_url: https://gitlab.torproject.org/tpo/applications/uniffi-rs
 container:
   use_container: 1

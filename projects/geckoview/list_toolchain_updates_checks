@@ -10,7 +10,7 @@ if (m/^\\s*NDK_VERSION\\s*=\\s*"(.+)"/) {
 }
 EOF
 needed=$(cat python/mozboot/mozboot/android.py | perl -ne "$p")
-current='r[% pc("android-toolchain", "var/android_ndk_release_name") %]
+current='r[% pc("android-toolchain", "var/android_ndk_release_name") %]'
 check_update_needed ndk_release_name "$needed" "$current"
 
 
@@ -70,18 +70,6 @@ current='[% c("var/android_min_api") %]'
 check_update_needed min-android "$needed" "$current"
 
 
-# min_sdk
-read -d '' p << 'EOF' || true
-if (m/^\\s*min_sdk_version="([^"]+)"/) {
-  print $1;
-  exit;
-}
-EOF
-needed=$(perl -ne "$p" < build/moz.configure/android-sdk.configure)
-current=21
-check_update_needed min_sdk "$needed" "$current"
-
-
 # gradle
 read -d '' p << 'EOF' || true
 if (m{distributionUrl=https\\\\://services.gradle.org/distributions/gradle-(.*)-(bin|all).zip}) {
@@ -120,7 +108,7 @@ check_update_needed oss-licenses-plugin "$needed" "$current"
 
 # glean version
 read -d '' p << 'EOF' || true
-if (m{^mozilla-glean\\s*=\\s*"(.+)"}) {
+if (m{^glean\\s*=\\s*"(.+)"}) {
   print $1;
   exit;
 }
