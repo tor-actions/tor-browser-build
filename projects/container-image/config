@@ -34,11 +34,14 @@ pre: |
   apt-get update -y -q
   [% IF pc(c('origin_project'), 'var/pre_pkginst', { step => c('origin_step') }) -%]
     [% pc(c('origin_project'), 'var/pre_pkginst', { step => c('origin_step') }) %]
-    [% IF c("var/linux-cross") && ! pc(c('origin_project'), 'var/no_crosscompile', { step => c('origin_step') }) -%]
-      dpkg --add-architecture [% c("var/arch_debian") %]
-    [% END -%]
-    # Update the package cache again because `pre_pkginst` may change the
-    # package manager configuration.
+  [% END -%]
+  [% IF c("var/linux-cross") && ! pc(c('origin_project'), 'var/no_crosscompile', { step => c('origin_step') }) -%]
+    dpkg --add-architecture [% c("var/arch_debian") %]
+  [% END -%]
+  [% IF pc(c('origin_project'), 'var/pre_pkginst', { step => c('origin_step') }) ||
+     ( c("var/linux-cross") && ! pc(c('origin_project'), 'var/no_crosscompile', { step => c('origin_step') }) ) -%]
+    # Update the package cache again because `pre_pkginst` or
+    # `dpkg --add-architecture` may change the package manager configuration.
     apt-get update -y -q
   [% END -%]
   apt-get upgrade -y -q
