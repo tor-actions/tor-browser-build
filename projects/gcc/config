@@ -20,16 +20,10 @@ var:
     [% IF c("hardened_gcc"); GET c("var/set_hardened_build_flags"); END %]
 
 targets:
-  windows:
-    var:
-      configure_opt: --disable-multilib --enable-languages=c,c++
-      arch_deps:
-        - libc6-dev
-        - zlib1g-dev
   linux:
     hardened_gcc: 1
     var:
-      configure_opt: --enable-multilib --enable-languages=c,c++
+      configure_opt: --disable-multilib --enable-languages=c,c++
 
 input_files:
   - project: container-image
