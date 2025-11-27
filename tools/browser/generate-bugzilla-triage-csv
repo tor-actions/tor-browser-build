@@ -150,7 +150,11 @@ git log --format='%s' $git_begin..$git_end  \
     fi
 
     product="Unknown"
-    if [[ "${summary}" =~ webcompat ]]; then
+    # Bugs that include webcompat-reviewers and no other additional -reviewers
+    # from other teams are *likely* in the Web Compatibility component. But they
+    # won't show in the bugzilla query because the component doesn't tend to
+    # have any set milestones.
+    if [[ "${summary}" =~ r=.*webcompat-reviewers && ! "${summary}" =~ r=.*-reviewers.*-reviewers ]]; then
         product="Web Compatibility"
     fi
 
