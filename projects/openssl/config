@@ -11,9 +11,6 @@ targets:
   linux-aarch64:
     var:
       configure_opts: -shared --cross-compile-prefix=[% c("var/crosstarget") %]- enable-ec_nistp_64_gcc_128 linux-aarch64
-  linux-arm:
-    var:
-      configure_opts: -shared --cross-compile-prefix=[% c("var/crosstarget") %]- linux-armv4
   windows:
     var:
       flag_mwindows: ''

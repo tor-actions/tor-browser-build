@@ -29,11 +29,6 @@ targets:
       libdir: lib64
       arch_deps:
         - zlib1g-dev:arm64
-  linux-arm:
-    var:
-      libdir: lib
-      arch_deps:
-        - zlib1g-dev:armhf
 
   android:
     var:

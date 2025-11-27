@@ -26,11 +26,6 @@ var:
     - gawk
     - rsync
 
-targets:
-  linux-arm:
-    var:
-      configure_opt: '--target=[% c("var/crosstarget") %] --disable-multilib --enable-languages=c,c++ --with-glibc-version=[% c("var/glibc_version") %] --with-arch=armv7-a --with-fpu=vfpv3-d16 --with-float=hard --with-mode=thumb'
-
 input_files:
   - project: container-image
   - project: gcc-source
