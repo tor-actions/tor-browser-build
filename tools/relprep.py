@@ -12,6 +12,7 @@ import sys
 import xml.etree.ElementTree as ET
 
 from git import Repo
+from git.exc import GitCommandError
 import requests
 import ruamel.yaml
 
@@ -155,8 +156,11 @@ class ReleasePreparation:
                 break
         if remote is None:
             raise RuntimeError("Cannot find the tpo/applications remote.")
-        remote.fetch()
-        remote.fetch(tags=True)
+        try:
+            remote.fetch()
+            remote.fetch(tags=True)
+        except GitCommandError:
+            logger.warning(f"Cannot fetch tags from {rem.url}, skipping.")
 
         branch_name = (
             "main" if self.version.is_alpha else f"maint-{self.version.major}"
@@ -314,59 +318,50 @@ class ReleasePreparation:
         logger.info("Updating addons")
         config = self.load_config("browser")
 
-        logger.debug("Updating NoScript")
-        self.update_addon_amo(
+        self.update_addon_tpo(
             config, "noscript", "{73a6fe31-595d-460b-a920-fcc0f8843232}"
         )
-        if self.mullvad_browser:
-            logger.debug("Updating uBlock Origin")
-            self.update_addon_amo(
-                config, "ublock-origin", "uBlock0@raymondhill.net"
-            )
-            logger.debug("Updating the Mullvad Browser extension")
-            self.update_mullvad_addon(config)
 
         self.save_config("browser", config)
 
-    def update_addon_amo(self, config, name, addon_id):
-        r = requests.get(
-            f"https://services.addons.mozilla.org/api/v4/addons/addon/{addon_id}"
+    def update_addon_tpo(self, config, name, addon_id):
+        channel = "pre" if self.version.is_alpha else "stable"
+        self.update_addon_any(
+            config,
+            name,
+            addon_id,
+            f"https://dist.torproject.org/torbrowser/{name}/update-{channel}.json",
         )
-        r.raise_for_status()
-        amo_data = r.json()
-        addon = amo_data["current_version"]["files"][0]
-        assert addon["hash"].startswith("sha256:")
-        addon_input = self.find_input(config, name)
-        addon_input["URL"] = addon["url"]
-        addon_input["sha256sum"] = addon["hash"][7:]
 
-    def update_mullvad_addon(self, config):
-        input_ = self.find_input(config, "mullvad-extension")
-        r = requests.get(
-            "https://cdn.mullvad.net/browser-extension/updates.json"
-        )
+    def update_addon_any(self, config, name, addon_id, updates_url):
+        logger.debug("Checking updates for addon %s", name)
+        r = requests.get(updates_url)
         r.raise_for_status()
-
         data = r.json()
-        updates = data["addons"]["{d19a89b9-76c1-4a61-bcd4-49e8de916403}"][
-            "updates"
-        ]
-        url = updates[-1]["update_link"]
+        input_ = self.find_input(config, name)
+        if "current_version" in data:
+            # AMO matadata
+            addon = data["current_version"]["files"][0]
+            assert addon["hash"].startswith("sha256:")
+            input_["URL"] = addon["url"]
+            input_["sha256sum"] = addon["hash"][7:]
+            return
+        # self-hosted standalone updates.json
+        url = data["addons"][addon_id]["updates"][-1]["update_link"]
         if input_["URL"] == url:
-            logger.debug("No need to update the Mullvad extension.")
+            logger.debug("No need to update the %s extension.", name)
             return
         input_["URL"] = url
-
         path = self.base_path / "out/browser" / url.split("/")[-1]
         # The extension should be small enough to easily fit in memory :)
-        if not path.exists:
+        if not path.exists():
             r = requests.get(url)
             r.raise_for_status()
             with path.open("wb") as f:
-                f.write(r.bytes)
+                f.write(r.content)
         with path.open("rb") as f:
             input_["sha256sum"] = sha256(f.read()).hexdigest()
-        logger.debug("Mullvad extension downloaded and updated")
+        logger.debug("%s extension downloaded and updated.", name)
 
     def update_tor(self):
         logger.info("Updating Tor")
