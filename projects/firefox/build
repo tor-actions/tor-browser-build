@@ -129,14 +129,6 @@ echo "Starting ./mach build $(date)"
     export MOZ_PKG_MAC_ICON=$rootdir/dmg-root/[% c('var/ProjectName') %].dmg/.VolumeIcon.icns
   [% END -%]
 
-  [% IF c("var/linux") -%]
-    # Compression differs with 1 or 2+ threads,
-    # so we'll want to have at least 2 threads, but otherwise respect num_procs.
-    #
-    # Without this, compression takes 20min+
-    export XZ_DEFAULTS="-T[% c("num_procs") > 1 ? c("num_procs") : '2' %]"
-  [% END -%]
-
   # Package the browser and also create all the test artifacts.
   #
   # MOZ_SIMPLE_PACKAGE_NAME will force all artifact files to start with "target",
