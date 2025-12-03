@@ -47,7 +47,7 @@ export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/node/bi
   [% END -%]
 [% END -%]
 
-[% IF c("var/macos") && c("var/nightly") %]
+[% IF c("var/macos") && c("var/dev_artifacts") %]
   tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/hfsplus-tools') %]
   tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/libdmg') %]
 [% END %]
