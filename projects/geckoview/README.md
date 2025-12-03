@@ -4,41 +4,38 @@ tor-browser.git.
 
 # Custom ESR
 
-Mozilla doesn't provide an ESR version for Firefox for Android, so it doesn't
+Mozilla doesn't provide an ESR version of Firefox for Android, so it doesn't
 provide one for GeckoView as well.
 However, we decided to stay on the same version as desktop Firefox, and to
 backport the Android security bugs from the rapid release.
 Therefore, `geckoview` and `firefox` should always build from the same tree.
 
-# "Fat" AARs
+# Build steps
 
-Theoretically, GeckoView is designed to be available also to products different
-from Mozilla's browsers.
-Therefore, Mozilla decided to
-[provide a single AAR](https://bugzilla.mozilla.org/show_bug.cgi?id=1508976)
-that targets all architectures, instead of one AAR for each architecture.
+At a certain point, Mozilla migrated Android frontend code (_Fenix_) to
+mozilla-central. Therefore, we now use only tor-browser.git.
 
-Unifying AARs is a separate step, with its own `mozconfig`.
-Therefore, we do it in a separate step, that runs the `merge_aars` script.
+The build steps are:
 
-Before Firefox 99, it was possible to use external AARs with the compile
-environment turned off.
-This configuration was not used by Mozilla and at a certain point they
-[broke it](https://bugzilla.mozilla.org/show_bug.cgi?id=1763770).
-The workaround is to use artifact builds, but we've never setup for our build
-environment.
-Instead, we've
-[patched the build system](https://gitlab.torproject.org/tpo/applications/tor-browser/-/merge_requests/271/diffs?commit_id=b620f9a965b2030ccb3e45015867326a18eb9c33)
-in tor-browser.git.
+1. Build GeckoView for each architecture
+2. Merge the various architecture into a single "fat" AAR
+3. Build Android Components
+4. Build Fenix
+
+We run 1. in a dedicated step (`build`), since it's architecture-specific, then
+we run the rest in a single RBM step (`build_apk`).
+
+We had to
+[patch the build system](https://gitlab.torproject.org/tpo/applications/tor-browser/-/merge_requests/271/diffs?commit_id=b620f9a965b2030ccb3e45015867326a18eb9c33)
+in tor-browser.git to make this possible, as upstream relies on artifact builds
+for this.
+Instead, we disable the compile environment.
 
 Notice that it isn't necessary to include all the architectures Mozilla and us
 support (currently, aarch64, armv7 and x86_64).
-The merge automation also supports "merging" one architecture.
-We use this hack when `var/android_single_arch` is defined, which is the default
-only in testbuilds.
-The rationale is that we stay as close as possible to Mozilla for builds we
-release to users, but we don't need to wait for all the architectures to build
-for developer testbuilds.
+We do it to stay as close as possible to Mozilla for builds we release to users,
+but we do single-architecture builds in testbuilds, to reduce the time to make
+them.
 
 # Java dependencies
 

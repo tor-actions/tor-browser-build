@@ -47,6 +47,7 @@ var:
   variant: beta
   has_l10n: '[% !c("var/testbuild") && !c("var/locales").empty %]'
   l10n-changesets: '[% exec("git --no-pager show " _ c("git_hash") _ ":browser/locales/l10n-changesets.json", { exec_noco => 1 }) %]'
+  mozconfig_file: 'mozconfig-[% c("var/osname") %]'
 
 targets:
   release:
@@ -63,9 +64,14 @@ steps:
     filename: 'geckoview-[% c("version") %]-apks-[% c("var/build_id") %]'
     version: '[% c("abbrev") %]'
     build_apk: '[% INCLUDE build_apk %]'
+    var:
+      mozconfig_file: 'mozconfig-all'
     input_files:
       - project: container-image
         pkg_type: build
+      - filename: 'mozconfig'
+        content: '[% INCLUDE "mozconfig.in" %]'
+        refresh_input: 1
       - name: '[% c("var/compiler") %]'
         project: '[% c("var/compiler") %]'
         pkg_type: build
@@ -136,6 +142,9 @@ steps:
 
 input_files:
   - project: container-image
+  - filename: 'mozconfig'
+    content: '[% INCLUDE "mozconfig.in" %]'
+    refresh_input: 1
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
   - project: gradle

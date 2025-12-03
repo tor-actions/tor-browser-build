@@ -1,0 +1,14 @@
+. $topsrcdir/[% c("var/mozconfig_file") %]
+
+mk_add_options MOZ_PARALLEL_BUILD=[% c("num_procs") %]
+export MOZ_INCLUDE_SOURCE_INFO=1
+export MOZ_SOURCE_REPO="[% c('var/gitlab_project') %]"
+export MOZ_SOURCE_CHANGESET=[% c("var/git_commit") %]
+
+ac_add_options --enable-update-channel=[% c("var/variant") %]
+
+[% IF c("var/dev_artifacts") -%]
+  ac_add_options --enable-tests
+  # Necessary for package-tests step which expects dist/bin/jsapi-tests to exist.
+  ac_add_options --enable-js-shell
+[% END -%]

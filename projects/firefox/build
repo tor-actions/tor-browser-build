@@ -62,9 +62,8 @@ tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_ta
 mkdir -p $distdir/[% IF ! c("var/macos") %]Browser[% END %]
 
 cd /var/tmp/build/[% project %]-[% c("version") %]
-cat > .mozconfig << 'MOZCONFIG_EOF'
-[% INCLUDE mozconfig %]
-MOZCONFIG_EOF
+cp $rootdir/mozconfig ./
+
 [% IF c("var/asan") -%]
   # Without disabling LSan our build is blowing up:
   # https://bugs.torproject.org/10599#comment:52

@@ -165,6 +165,9 @@ targets:
 
 input_files:
   - project: container-image
+  - filename: 'mozconfig'
+    content: '[% INCLUDE "mozconfig.in" %]'
+    refresh_input: 1
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
     # Cross-binutils are already included in the cross-compiler
