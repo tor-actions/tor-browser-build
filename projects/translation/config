@@ -12,13 +12,13 @@ compress_tar: 'gz'
 steps:
   base-browser:
     base-browser: '[% INCLUDE build %]'
-    git_hash: df313475cfd9eba31009edca530803dd991264d7
+    git_hash: d366318349af0977ff23b492fa87e436e8672fdd
     targets:
       nightly:
         git_hash: 'base-browser'
   tor-browser:
     tor-browser: '[% INCLUDE build %]'
-    git_hash: 4fcb19da2c6b62bdd96828172162bea89ee3231e
+    git_hash: 45b67d3be52f79e8a4b361fd04ab12f342ab0016
     targets:
       nightly:
         git_hash: 'tor-browser'

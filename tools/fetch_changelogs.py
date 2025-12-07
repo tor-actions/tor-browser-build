@@ -271,7 +271,6 @@ class ChangelogBuilder:
         if not self.is_mullvad:
             names.update(
                 {
-                    "GeckoView": "firefox",
                     "Tor": "tor",
                     "OpenSSL": "openssl",
                     "zlib": "zlib",

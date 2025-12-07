@@ -1,3 +1,28 @@
+Tor Browser 13.5.26 - December 09 2025
+ * All Platforms
+   * Updated Firefox to 115.31.0esr
+   * Updated NoScript to 13.5.2.1984
+   * Updated Tor to 0.4.8.21
+   * Bug 22974: Self-host NoScript Updates [tor-browser]
+   * Bug 44391: Restrictions cascade blocks every capability in subframes (e.g. captchas) [tor-browser]
+   * Bug 44397: Rebase Tor Browser legacy onto 115.31.0esr [tor-browser]
+   * Bug 44409: Backport Security Fixes from Firefox 146 [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41644: Self-hosted browser extensions support in relprep.py [tor-browser-build]
+
+Tor Browser 13.5.26 - December 09 2025
+ * All Platforms
+   * Updated Firefox to 115.31.0esr
+   * Updated NoScript to 13.5.2.1984
+   * Updated Tor to 0.4.8.21
+   * Bug 22974: Self-host NoScript Updates [tor-browser]
+   * Bug 44397: Rebase Tor Browser legacy onto 115.31.0esr [tor-browser]
+   * Bug 44409: Backport Security Fixes from Firefox 146 [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41644: Self-hosted browser extensions support in relprep.py [tor-browser-build]
+
 Tor Browser 13.5.25 - November 13 2025
  * All Platforms
    * Updated Tor to 0.4.8.20
