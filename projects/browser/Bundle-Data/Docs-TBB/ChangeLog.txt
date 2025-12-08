@@ -1,26 +1,5 @@
 Tor Browser 15.0.3 - December 09 2025
  * All Platforms
-   * Bug 22974: Self-host NoScript Updates [tor-browser]
-   * Bug 44334: TB does not render image in PDF file [tor-browser]
-   * Bug 44348: Backport Bugzilla 1999126: Protect whether PDF.js is enabled/disabled to improve fingerprinting protection [tor-browser]
-   * Bug 44391: Restrictions cascade blocks every capability in subframes (e.g. captchas) [tor-browser]
-   * Bug 44399: Rebase Tor Browser 15.0 stable onto 140.6.0esr [tor-browser]
-   * Bug 44409: Backport Security Fixes from Firefox 146 [tor-browser]
-   * Bug 41646: Update lyrebird version to v0.7.0 [tor-browser-build]
- * Windows + macOS + Linux
-   * Updated Firefox to 140.6.0esr
- * Android
-   * Updated GeckoView to 140.6.0esr
-   * Updated Zstandard to 1.5.7
-   * Bug 44346: Webrender broken on Adreno 510 devices with esr140 [tor-browser]
- * Build System
-   * All Platforms
-     * Bug 41644: Self-hosted browser extensions support in relprep.py [tor-browser-build]
-   * Windows + Linux + Android
-     * Updated Go to 1.24.11
-
-Tor Browser 15.0.3 - December 09 2025
- * All Platforms
    * Updated NoScript to 13.5.2.1984
    * Bug 22974: Self-host NoScript Updates [tor-browser]
    * Bug 44348: Backport Bugzilla 1999126: Protect whether PDF.js is enabled/disabled to improve fingerprinting protection [tor-browser]
