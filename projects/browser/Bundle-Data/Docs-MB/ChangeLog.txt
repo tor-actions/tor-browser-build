@@ -8,6 +8,7 @@ Mullvad Browser 15.0.3 - December 09 2025
    * Bug 44348: Backport Bugzilla 1999126: Protect whether PDF.js is enabled/disabled to improve fingerprinting protection [tor-browser]
    * Bug 44391: Restrictions cascade blocks every capability in subframes (e.g. captchas) [tor-browser]
    * Bug 44409: Backport Security Fixes from Firefox 146 [tor-browser]
+   * Bug 44414: Disable Zucchini for the 15.0 series. [tor-browser]
  * Build System
    * All Platforms
      * Bug 493: Automatically check whether the signed build is avaliable on dist.torproject.org before notifying Mullvad for QA [mullvad-browser]

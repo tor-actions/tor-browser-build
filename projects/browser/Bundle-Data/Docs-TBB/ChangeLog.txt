@@ -9,6 +9,7 @@ Tor Browser 15.0.3 - December 09 2025
    * Bug 41646: Update lyrebird version to v0.7.0 [tor-browser-build]
  * Windows + macOS + Linux
    * Updated Firefox to 140.6.0esr
+   * Bug 44414: Disable Zucchini for the 15.0 series. [tor-browser]
  * Android
    * Updated GeckoView to 140.6.0esr
    * Bug 44346: Webrender broken on Adreno 510 devices with esr140 [tor-browser]
