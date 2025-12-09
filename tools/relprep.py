@@ -139,6 +139,7 @@ class ReleasePreparation:
                 self.update_zstd()
             self.update_go()
             self.update_manual()
+            self.update_moat_settings()
 
         self.update_changelogs()
         self.update_rbm_conf()
@@ -520,6 +521,18 @@ class ReleasePreparation:
     def update_manual(self):
         logger.info("Updating the manual")
         update_manual(self.gitlab_token, self.base_path)
+
+    def update_moat_settings(self):
+        proj = "moat-settings"
+
+        repo = Repo(self.base_path / "git_clones" / proj)
+        origin = repo.remotes["origin"]
+        origin.fetch()
+        commit = origin.refs["main"].commit.hexsha
+
+        config = self.load_config(proj)
+        config["git_hash"] = commit
+        self.save_config(proj, config)
 
     def get_last_releases(self):
         logger.info("Finding the previous releases.")
