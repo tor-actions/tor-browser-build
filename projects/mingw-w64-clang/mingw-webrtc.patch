@@ -189,16 +189,16 @@ index 07cedbe4e..4adf5772c 100644
 --- a/mingw-w64-headers/include/wrl/client.h
 +++ b/mingw-w64-headers/include/wrl/client.h
 @@ -9,12 +9,15 @@
- 
+
  #include <cstddef>
  #include <unknwn.h>
 -/* #include <weakreference.h> */
 +#include <weakreference.h>
  #include <roapi.h>
- 
+
  /* #include <wrl/def.h> */
  #include <wrl/internal.h>
- 
+
 +#define WrlFinal final
 +#define WrlSealed sealed
 +
@@ -581,10 +581,10 @@ index 000000000..2e883e241
 +#endif
 diff --git a/mingw-w64-headers/include/wrl/implements.h b/mingw-w64-headers/include/wrl/implements.h
 new file mode 100644
-index 000000000..9d5fe962f
+index 000000000..c8261e55a
 --- /dev/null
 +++ b/mingw-w64-headers/include/wrl/implements.h
-@@ -0,0 +1,619 @@
+@@ -0,0 +1,627 @@
 +#ifndef _WRL_IMPLEMENTS_H_
 +#define _WRL_IMPLEMENTS_H_
 +
@@ -630,6 +630,11 @@ index 000000000..9d5fe962f
 +        namespace Details {
 +
 +            class Nil {};
++
++            template <typename T, typename ...TArgs>
++            ComPtr<T> Make(TArgs&&... args) {
++              return nullptr;
++            }
 +
 +            class DontUseNewUseMake {
 +            private:
@@ -1198,6 +1203,9 @@ index 000000000..9d5fe962f
 +
 +            typedef RuntimeClass RuntimeClassT;
 +        };
++
++        using Details::Make;
++
 +    }
 +}
 +
@@ -1211,11 +1219,11 @@ index 715ef74e3..dffa7153d 100644
 @@ -7,6 +7,8 @@
  #ifndef _WRL_INTERNAL_H_
  #define _WRL_INTERNAL_H_
- 
+
 +#define __WRL_IMPLEMENTS_FTM_BASE__(flags) (false)
 +
  #include <windows.h>
- 
+
  namespace Microsoft {
 @@ -29,6 +31,26 @@ namespace Microsoft {
              struct EnableIf<true, T> {
@@ -1250,7 +1258,7 @@ index 182d4b063..6d42fb341 100644
 +++ b/mingw-w64-headers/include/wrl/wrappers/corewrappers.h
 @@ -24,6 +24,129 @@ namespace Microsoft {
          }
- 
+
          namespace Wrappers {
 +            namespace HandleTraits {
 +                struct SRWLockSharedTraits {

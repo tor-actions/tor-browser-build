@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% pc("llvm-project", "version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 git_url: https://git.code.sf.net/p/mingw-w64/mingw-w64
-git_hash: 287a0d4d478e3575d082ba37ce4dcba86524fc9e
+git_hash: 59830ec1d93be038ffe883b69229753bb18ff59e
 version: '[% c("abbrev") %]'
 container:
   use_container: 1
