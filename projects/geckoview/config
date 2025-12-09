@@ -65,7 +65,7 @@ steps:
     version: '[% c("abbrev") %]'
     build_apk: '[% INCLUDE build_apk %]'
     var:
-      mozconfig_file: 'mozconfig-all'
+      mozconfig_file: 'mozconfig-android-all'
     input_files:
       - project: container-image
         pkg_type: build
