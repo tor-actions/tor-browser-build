@@ -1,5 +1,4 @@
 # On how to update dependencies see doc/how-to-create-gradle-dependencies-list.txt
-# Don't forget to update var/gradle_dependencies_version when modifying this file
 sha256sum | url
 33c839e4236eabde3896c154d120d651e72064f393e456297c92041d00cc058e | https://dl.google.com/dl/android/maven2/com/android/tools/build/apksig/7.1.0/apksig-7.1.0.jar
 67a8f20626121a8e4f48fc63a392c0459173a9992eb35cc9c9c3ec82b882862c | https://dl.google.com/dl/android/maven2/com/android/tools/build/apksig/7.1.0/apksig-7.1.0.module

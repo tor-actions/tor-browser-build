@@ -14,13 +14,12 @@ import requests
 # See https://gitlab.torproject.org/tpo/tpa/team/-/issues/41654.
 requests.packages.urllib3.util.connection.HAS_IPV6 = False
 
-if len(sys.argv) < 3:
+if len(sys.argv) < 2:
     print(
-        f"Usage: {sys.argv[0]} project-name gradle-dep-num"
+        f"Usage: {sys.argv[0]} project-name"
     )
     sys.exit(1)
 target = sys.argv[1]
-target_ver = sys.argv[2]
 # We assume the script is in tor-browser-build/tools
 tbbuild = Path(__file__).parent.parent
 
@@ -38,13 +37,17 @@ for p in java_projects:
 
 parser = re.compile(r"^([0-9a-fA-F]+)\s+\|\s+(\S+)\s*$")
 pairs = []
+h = hashlib.sha256()
 with open(tbbuild / "projects" / target / "gradle-dependencies-list.txt") as f:
     for line in f.readlines():
+        h.update(line.encode("utf-8"))
         line = line.strip()
         if line[0] == '#' or line == 'sha256sum | url':
             continue
         m = parser.match(line)
         pairs.append((m.group(2), m.group(1)))
+
+target_ver = h.hexdigest()[:15]
 
 dest_dir = tbbuild / "out" / target / f"gradle-dependencies-{target_ver}"
 dest_dir.mkdir(parents=True, exist_ok=True)

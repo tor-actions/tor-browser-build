@@ -20,8 +20,6 @@ container:
 
 var:
   build_number: 1
-  # This should be updated when the list of gradle dependencies is changed.
-  gradle_dependencies_version: 147.0-1
   gradle_version: 8.14.3
   nss_version: '3.118.1'
   nspr_version: '4.37'
@@ -73,6 +71,8 @@ steps:
       - URL: 'https://ftp.mozilla.org/pub/security/nss/releases/NSS_[% c("var/nss_version") | replace("\\.", "_") %]_RTM/src/nss-[% c("var/nss_version") %]-with-nspr-[% c("var/nspr_version") %].tar.gz'
         name: nss
         sha256sum: 9e1f7da9f4e5e3bdfd73f7dc2c618d6125a12354aadaeedbb35af3699bc03e15
+      - filename: gradle-dependencies-list.txt
+        name: gradle-dependencies-list
       - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
         name: gradle-dependencies
         exec: '[% INCLUDE "fetch-gradle-dependencies" %]'

@@ -13,8 +13,6 @@
 5. Extract it.
 6. Move the `gradle-dependencies-list.txt` you just extracted to
    `projects/<project name>/`. 
-7. Bump `var/gradle_dependencies_version`.
-   The preferred format is `<project version>-<list version>`. 
 
 Theoretically, it should be also possible to set
 `generate_gradle_dependencies_list: 1` in `rbm.local.conf`, run a full build and
@@ -68,13 +66,8 @@ from the output artifact.
 
 New Android projects should be setup to do this.
 
-> **Important**: dependencies are keyed and cached. So, after updating the list,
-> you must also bump `var/gradle_dependencies_version`.
-
-This used to be an integer, but to avoid clashes between the main and
-maintenance branches, we decided to switch to a
-`<project version>-<list version>` format.
-Usually, the list version will be `1`.
+Dependencies are keyed and cached. The key is a checksum of the
+gradle-dependencies-list.txt file.
 
 ## Consuming the list
 
@@ -86,6 +79,8 @@ hashes of all the other artifacts.
 You can wire it in your project with code that looks like this:
 
 ```yaml
+- filename: gradle-dependencies-list.txt
+  name: gradle-dependencies-list
 - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
   name: gradle-dependencies
   exec: '[% INCLUDE "fetch-gradle-dependencies" %]'

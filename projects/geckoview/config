@@ -36,9 +36,6 @@ var:
     - python3-zstandard
     - pkg-config
     - openjdk-17-jdk-headless
-  # this should be updated when the list of gradle dependencies is changed
-  # see doc/how-to-create-gradle-dependencies-list.txt
-  gradle_dependencies_version: 147-1
   gradle_version: 8.14.3
   glean_parser: 14.0.1
   # python/mozboot/mozboot/android.py
@@ -181,6 +178,8 @@ input_files:
     enable: '[% c("var/rlbox") %]'
   - project: application-services
     name: application-services
+  - filename: gradle-dependencies-list.txt
+    name: gradle-dependencies-list
   - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
     name: gradle-dependencies
     exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
