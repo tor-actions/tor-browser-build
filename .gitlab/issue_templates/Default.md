@@ -10,6 +10,7 @@ Please select the appropriate issue template from the **Description** drop-down.
 *NOTE*: the following issue types are intended for internal use
 
 - ⬅️ **Backport** - cherry-pick change to other release channels
+- ❌ **Revert** - revert a change
 - ⬆️ **Uplift** - uplift change to upstream project
 - 🧅 **Release Prep - Tor Browser Alpha** - prepare a new Tor Browser Alpha Release
 - 🧅 **Release Prep - Tor Browser Stable** - prepare a new Tor Browser Stable Release
