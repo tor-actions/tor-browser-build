@@ -159,7 +159,7 @@ if (m/^\\s*MINIMUM_MINOR_VERSION = ([0-9]+)/) {
 }
 EOF
 needed=3.$(cat python/mozboot/bin/bootstrap.py | perl -ne "$p")
-current="3.9" # 3.11.x on Debian bookworm, 3.9.20 on our python project
+current="3.9" # 3.11.x on Debian bookworm, 3.13.11 on our python project
 check_update_needed python "$needed" "$current"
 
 

@@ -17,3 +17,17 @@ image.
 
 `browser` is a notable exception: we redefine `var/deps` for all platforms and
 already add `python3` there.
+
+## OpenSSL
+
+Some Python module complain about the OpenSSL version of the container being
+too old. Therefore, we also build OpenSSL in this project, and other projects
+needing it must add `/var/tmp/dist/python/lib` to `LD_LIBRARY_PATH`.
+
+We do it here instead of using the `openssl` project because we do not want to
+rebuild a big part of the toolchain for each OpenSSL update (the module would
+be used mostly for HTTP requests, which will not go through in our builds,
+since they happen offline).
+
+When updating to a newever version of Debian for Linux containers, we might
+stop building OpenSSL and go back to using the system library.

@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
-version: 3.9.20
-filename: 'python-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
+version: 3.13.11
+filename: 'python-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
 var:
@@ -12,7 +12,6 @@ var:
     - libffi-dev
     - libncurses-dev
     - libsqlite3-dev
-    - libssl-dev
     - zlib1g-dev
 
   setup: |
@@ -24,7 +23,14 @@ input_files:
   - project: container-image
   - name: python
     URL: 'https://www.python.org/ftp/python/[% c("version") %]/Python-[% c("version") %].tar.xz'
-    sha256sum: 6b281279efd85294d2d6993e173983a57464c0133956fbbb5536ec9646beaf0c
+    sha256sum: 16ede7bb7cdbfa895d11b0642fa0e523f291e6487194d53cf6d3b338c3a17ea2
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
     enable: '[% c("var/linux") %]'
+  # We do not use the same we use as tor dependency because we do not want to
+  # rebuild Clang, Rust and other projects at each OpenSSL update.
+  # FWIW, these OpenSSL would be used for requests that will not go through,
+  # as our builds run offline.
+  - name: openssl
+    URL: 'https://github.com/openssl/openssl/releases/download/openssl-3.5.4/openssl-3.5.4.tar.gz'
+    sha256sum: 967311f84955316969bdb1d8d4b983718ef42338639c621ec4c34fddef355e99

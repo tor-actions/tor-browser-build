@@ -6,14 +6,28 @@
 [% END -%]
 
 distdir=/var/tmp/dist/[% project %]
-mkdir -p $distdir
+openssldir=/var/tmp/dist/openssl
+mkdir -p $distdir $openssldir
+
+tar -xf $rootdir/[% c('input_files_by_name/openssl') %]
+pushd openssl-3.5.4
+./Configure --prefix=$openssldir --libdir=lib
+make -j[% c("num_procs") %]
+make -j[% c("num_procs") %] install
+# Python will try to load OpenSSL during its build process.
+export LD_LIBRARY_PATH=$openssldir/lib:$LD_LIBRARY_PATH
+popd
+
 tar xf [% c('input_files_by_name/python') %]
 cd Python-[% c('version') %]
-./configure --prefix=$distdir --enable-optimizations
+./configure --prefix=$distdir --enable-optimizations --with-openssl=$openssldir
 make -j[% c("num_procs") %]
 make prefix=$distdir install
+
+cp -a $openssldir/lib/lib*.so* $distdir/lib/
+
 cd /var/tmp/dist
 [% c('tar', {
-	tar_src => 'python',
-	tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
-    }) %]
+    tar_src => 'python',
+    tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
+  }) %]

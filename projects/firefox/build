@@ -34,6 +34,8 @@ export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/node/bi
   tar -C /var/tmp/dist -xf [% c('input_files_by_name/clang') %]
   tar -C /var/tmp/dist -xf [% c('input_files_by_name/python') %]
   export PATH="/var/tmp/dist/python/bin:$PATH"
+  # For OpenSSL, see Python's README.md.
+  export LD_LIBRARY_PATH=/var/tmp/dist/python/lib:$LD_LIBRARY_PATH
   [% IF ! c("var/linux-cross") -%]
     tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/binutils') %]
     export PATH="/var/tmp/dist/binutils/bin:$PATH"
