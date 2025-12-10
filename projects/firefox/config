@@ -154,6 +154,7 @@ targets:
       arch_deps:
         - python3
         - python3-distutils
+        - python3-zstandard
         - rsync
 
   windows:
@@ -161,6 +162,7 @@ targets:
       arch_deps:
         - python3
         - python3-distutils
+        - python3-zstandard
         - wine
 
 input_files:
@@ -228,6 +230,9 @@ input_files:
     enable: '[% c("var/mullvad-browser") && c("var/has_l10n") %]'
   - filename: marsigner.der
     enable: '[% c("var/override_updater_url") %]'
+  - project: python-zstandard
+    enable: '[% c("var/linux") && c("var/dev_artifacts") %]'
+    name: python-zstandard
   - filename: dmg-root
     enable: '[% c("var/macos") && c("var/dev_artifacts") %]'
   - project: hfsplus-tools

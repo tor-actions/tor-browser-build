@@ -1,0 +1,14 @@
+#!/bin/bash
+[% c("var/set_default_env") -%]
+outdir=[%  dest_dir _ '/' _ c('filename') %]
+mkdir -p /var/tmp/dist $outdir
+
+tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/python') %]
+export PATH=/var/tmp/dist/python/bin:$PATH
+
+python3 -m pip install *.whl
+
+tar -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
+cd [% project %]-[% c('version') %]
+python3 setup.py bdist_wheel
+mv dist/*.whl $outdir/

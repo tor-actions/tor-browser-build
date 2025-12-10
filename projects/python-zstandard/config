@@ -1,0 +1,19 @@
+version: 0.24.0
+filename: 'python-zstandard-[% c("version") %]-[% c("var/build_id") %]'
+git_url: https://github.com/indygreg/python-zstandard.git
+git_hash: 9223924b1db8f36cf1c7c2dcd55232093890d145  # 0.24.0
+container:
+  use_container: 1
+
+input_files:
+  - project: container-image
+  - project: python
+    name: python
+  # This contains only binaries for Windows.
+  - name: setuptools
+    URL: https://files.pythonhosted.org/packages/a3/dc/17031897dae0efacfea57dfd3a82fdd2a2aeb58e0ff71b77b87e44edc772/setuptools-80.9.0-py3-none-any.whl
+    sha256sum: 062d34222ad13e0cc312a4c02d73f059e86a4acbfbdea8f8f76b28c99f306922
+  # This contains only Python.
+  - name: packaging
+    URL: https://files.pythonhosted.org/packages/20/12/38679034af332785aac8774540895e234f4d07f7545804097de4b666afd8/packaging-25.0-py3-none-any.whl
+    sha256sum: 29572ef2b1f17581046b3a2227d5c611fb25ec70ca1ba8554b24b0e69331a484

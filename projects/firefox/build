@@ -50,6 +50,9 @@ export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/node/bi
     # down properly in that case. Thus, we set it here in the build script.
     export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:/usr/lib/[% c("var/crosstarget") %]/pkgconfig"
   [% END -%]
+  [% IF c("var/dev_artifacts") -%]
+    python3 -m pip install $rootdir/[% c('input_files_by_name/python-zstandard') %]/*.whl
+  [% END -%]
 [% END -%]
 
 [% IF c("var/macos") && c("var/dev_artifacts") %]
