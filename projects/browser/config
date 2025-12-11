@@ -108,16 +108,16 @@ input_files:
     enable: '[% ! c("var/android") %]'
   - filename: dmg-root
     enable: '[% ! c("var/android") %]'
-  - URL: https://addons.mozilla.org/firefox/downloads/file/4593796/noscript-13.2.1.xpi
+  - URL: https://dist.torproject.org/torbrowser/noscript/noscript-13.5.1.90101984.xpi
     name: noscript
-    sha256sum: 190297f3d1e55db0c65f9bc00460bea9b753939d428ea593d6cef27fde1ce69a
-  - URL: https://addons.mozilla.org/firefox/downloads/file/4578681/ublock_origin-1.66.4.xpi
+    sha256sum: 4731db06df1e433f843cd0d3d449241c9f143ff9d5bbf787c8162bfa63c8ab6c
+  - URL: https://addons.mozilla.org/firefox/downloads/file/4629131/ublock_origin-1.68.0.xpi
     name: ublock-origin
-    sha256sum: bc62cd930601212f1568964389352bbd4b1808466f2c9ac1198c754338077fb0
+    sha256sum: 5caf4abda494018841222a12156919bbdd8cad82a783c38c36b22dd642704315
     enable: '[% c("var/mullvad-browser") %]'
-  - URL: https://cdn.mullvad.net/browser-extension/0.9.5/mullvad-browser-extension-0.9.5.xpi
+  - URL: https://cdn.mullvad.net/browser-extension/0.9.7/mullvad-browser-extension-0.9.7.xpi
     name: mullvad-extension
-    sha256sum: c36f8d5447300621579f7f1408a25f25dac3929c867e7ae5db9fc8b82e80a4e9
+    sha256sum: 4597ee6fff6a2f19cbf78a6149d38d12ad8a9d6029b7e36f6c639dc3e07dd2c3
     enable: '[% c("var/mullvad-browser") %]'
   - filename: 'gtk3-settings.ini'
     enable: '[% c("var/linux") %]'

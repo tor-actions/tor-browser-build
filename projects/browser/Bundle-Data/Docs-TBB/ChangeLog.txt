@@ -1,3 +1,66 @@
+Tor Browser 16.0a1 - December 11 2025
+ * All Platforms
+   * Updated NoScript to 13.5.1.90101984
+   * Bug 43792: Determine whether noscript_persist users need to have their NoScript settings migrated [tor-browser]
+   * Bug 43998: Rebase Tor Browser Alpha onto 141.0 [tor-browser]
+   * Bug 44118: Decide how to deal with upstream feature gates in a RR world [tor-browser]
+   * Bug 44280: Test stream isolation [tor-browser]
+   * Bug 44333: Add the "No AI" version of DuckDuckGo to available search engines [tor-browser]
+   * Bug 44365: Fix CSS linting errors introduced for firefox 145 [tor-browser]
+   * Bug 44391: Restrictions cascade blocks every capability in subframes (e.g. captchas) [tor-browser]
+   * Bug 44408: Fix TorDomainIsolator in 146 [tor-browser]
+   * Bug 44418: Update built-in obfs4 bridges [tor-browser]
+   * Bug 41609: Move back to CDN77 for default snowflake bridge [tor-browser-build]
+   * Bug 41646: Update lyrebird version to v0.7.0 [tor-browser-build]
+   * Bug 483: Add the "No AI" version of DuckDuckGo to available search engines [mullvad-browser]
+   * Bug 487: Search engines are sorted alphabetically rather than the desired order [mullvad-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 146.0a1esr
+   * Bug 44302: Fix the flags of some about pages [tor-browser]
+   * Bug 44310: Default zoom always resets to 100% [tor-browser]
+   * Bug 44411: DownloadsTorWarning.sys.mjs fails to load [tor-browser]
+   * Bug 44419: Re-add the moz-toggle title attribute patch [tor-browser]
+ * Linux
+   * Bug 44273: Restore Noto CJK as Jigmo has a too low readability [tor-browser]
+   * Bug 44315: Font/text issue with self-upgrade window [tor-browser]
+ * Android
+   * Updated GeckoView to 146.0a1esr
+   * Bug 44303: Extension update job might never work on Android [tor-browser]
+   * Bug 44324: Refactor the NSS no proxy-bypass patch on A-S to avoid -Wunreachable-code [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 43951: Include product with the component in triage CSVs [tor-browser]
+     * Bug 40903: Make xz multi-threaded [tor-browser-build]
+     * Bug 41445: Better handle bugzilla "Web Compatibility" issues in generate-bugzilla-triage-csv [tor-browser-build]
+     * Bug 41607: Fix regression from #41373 in tools/count-mar-downloads [tor-browser-build]
+     * Bug 41608: Add per-platform numbers for incrementals in count-mar-downloads [tor-browser-build]
+     * Bug 41643: Update toolchains for Firefox 146 [tor-browser-build]
+     * Bug 41644: Self-hosted browser extensions support in relprep.py [tor-browser-build]
+     * Bug 41647: Add a XZ_DEFAULTS to set_default_env [tor-browser-build]
+     * Bug 41648: Add a mozconfig to projects/geckoview [tor-browser-build]
+     * Bug 41654: Make relprep.py update Moat settings [tor-browser-build]
+   * Windows + macOS + Linux
+     * Bug 41662: Add python-zstandard to desktop containers [tor-browser-build]
+   * Windows + Linux + Android
+     * Bug 41580: Update Go major to 1.25.x [tor-browser-build]
+     * Updated Go to 1.25.5
+   * Linux
+     * Bug 41601: Upstream droppped Linux i686 support [tor-browser-build]
+     * Bug 41627: Firefox build system needs a more recent version of OpenSSL on Linux [tor-browser-build]
+     * Bug 41632: Ship Linux aarch64 builds in Alpha Release Channel [tor-browser-build]
+     * Bug 41639: Remove linux-arm target [tor-browser-build]
+     * Bug 41640: Clean the GCC config file [tor-browser-build]
+   * Android
+     * Bug 44360: Patch the vendored Gradle Nimbus plugin [tor-browser]
+     * Bug 44370: Always produce target.maven.zip [tor-browser]
+     * Bug 41485: Retire get_gradle_dependencies_list and create a simple way to update gradle deps [tor-browser-build]
+     * Bug 41573: Remove Android x86 support [tor-browser-build]
+     * Bug 41617: Pass page size to zipalign [tor-browser-build]
+     * Bug 41620: Do not rerun zipalign when signing [tor-browser-build]
+     * Bug 41621: Remove support using older android build tools when signing 14.5 releases in tools/signing/wrappers/sign-apk [tor-browser-build]
+     * Bug 41628: android_ndk_version and revision can be grouped together [tor-browser-build]
+     * Bug 41636: Update the scripts to manage Gradle dependencies [tor-browser-build]
+
 Tor Browser 15.0a4 - October 16 2025
  * All Platforms
    * Updated NoScript to 13.2.1
