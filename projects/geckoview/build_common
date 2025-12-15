@@ -14,7 +14,9 @@ export PATH="/var/tmp/dist/node/bin:$PATH"
 export LC_ALL=C.UTF-8
 export LANG=C.UTF-8
 
-export TOR_EXPERT_BUNDLE_AAR=$rootdir/[% c('input_files_by_name/tor-expert-bundle-aar') %]/tor-expert-bundle.aar
+# Normalize this path, as it will end up in buildconfig.html.
+export TOR_EXPERT_BUNDLE_AAR=/var/tmp/dist/tor-expert-bundle.aar
+mv $rootdir/[% c('input_files_by_name/tor-expert-bundle-aar') %]/tor-expert-bundle.aar $TOR_EXPERT_BUNDLE_AAR
 
 tar -C /var/tmp/dist -xf [% c('input_files_by_name/application-services') %]
 export APPLICATION_SERVICES=/var/tmp/dist/application-services/maven
