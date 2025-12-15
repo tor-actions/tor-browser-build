@@ -44,6 +44,8 @@ Tor Browser 16.0a1 - December 11 2025
    * Windows + Linux + Android
      * Bug 41580: Update Go major to 1.25.x [tor-browser-build]
      * Updated Go to 1.25.5
+   * macOS
+     * Bug 41665: Update macos signing wrapper for new executable gpu-helper.app [tor-browser-build]
    * Linux
      * Bug 41601: Upstream droppped Linux i686 support [tor-browser-build]
      * Bug 41627: Firefox build system needs a more recent version of OpenSSL on Linux [tor-browser-build]
@@ -60,6 +62,7 @@ Tor Browser 16.0a1 - December 11 2025
      * Bug 41621: Remove support using older android build tools when signing 14.5 releases in tools/signing/wrappers/sign-apk [tor-browser-build]
      * Bug 41628: android_ndk_version and revision can be grouped together [tor-browser-build]
      * Bug 41636: Update the scripts to manage Gradle dependencies [tor-browser-build]
+     * Bug 41666: Normalize the path to tor-expert-bundle.aar [tor-browser-build]
 
 Tor Browser 15.0a4 - October 16 2025
  * All Platforms

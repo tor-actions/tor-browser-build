@@ -29,6 +29,8 @@ Mullvad Browser 16.0a1 - December 11 2025
      * Bug 41644: Self-hosted browser extensions support in relprep.py [tor-browser-build]
      * Bug 41647: Add a XZ_DEFAULTS to set_default_env [tor-browser-build]
      * Bug 41662: Add python-zstandard to desktop containers [tor-browser-build]
+   * macOS
+     * Bug 41665: Update macos signing wrapper for new executable gpu-helper.app [tor-browser-build]
    * Linux
      * Bug 41627: Firefox build system needs a more recent version of OpenSSL on Linux [tor-browser-build]
      * Bug 41632: Ship Linux aarch64 builds in Alpha Release Channel [tor-browser-build]
