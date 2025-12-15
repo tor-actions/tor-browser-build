@@ -1,0 +1,98 @@
+#!/bin/bash
+set -e
+
+function exit_error {
+  for msg in "$@"
+  do
+    echo "$msg" >&2
+  done
+  exit 1
+}
+
+test $# -eq 2 || exit_error "Wrong number of arguments"
+dmg_file="$1"
+display_name="$2"
+
+output_file="/home/signing-macos/last-signed-$display_name.tar.zst"
+rm -f "$output_file"
+
+rcodesign=/signing/rcodesign-128/rcodesign
+rcodesign_signing_p12_file=/home/signing-macos/keys/key-1.p12
+test -f "$rcodesign_signing_p12_file" || exit_error "$rcodesign_signing_p12_file is missing"
+
+tmpdir=$(mktemp -d)
+trap "rm -Rf $tmpdir" EXIT
+cd "$tmpdir"
+7z x "$dmg_file"
+
+# Fix permission on files:
+# https://gitlab.torproject.org/tpo/applications/tor-browser-build/-/issues/29815#note_2957050
+# FIXME: Maybe we should extract the .mar file instead of the .dmg to
+# preserve permissions
+chmod ugo+x "$display_name/$display_name.app/Contents/MacOS"/* \
+            "$display_name/$display_name.app/Contents/MacOS/updater.app/Contents/MacOS"/* \
+            "$display_name/$display_name.app/Contents/MacOS/plugin-container.app/Contents/MacOS"/* \
+            "$display_name/$display_name.app/Contents/MacOS/media-plugin-helper.app/Contents/MacOS"/* \
+            "$display_name/$display_name.app/Contents/MacOS/gpu-helper.app/Contents/MacOS"/* \
+            "$display_name/$display_name.app/Contents/Frameworks/ChannelPrefs.framework/ChannelPrefs" \
+            "$display_name/$display_name.app/Contents/MacOS/updater.app/Contents/Frameworks/UpdateSettings.framework/UpdateSettings"
+test -d "$display_name/$display_name.app/Contents/MacOS/Tor" && \
+  chmod -R ugo+x "$display_name/$display_name.app/Contents/MacOS/Tor"
+
+pwdir=/run/lock/rcodesign-pw
+trap "rm -Rf $pwdir" EXIT
+rm -Rf "$pwdir"
+mkdir "$pwdir"
+chmod 700 "$pwdir"
+cat > "$pwdir/rcodesign-pw-2" << EOF
+$RCODESIGN_PW
+EOF
+tr -d '\n' < "$pwdir/rcodesign-pw-2" > "$pwdir/rcodesign-pw"
+rm "$pwdir/rcodesign-pw-2"
+
+# unset RCODESIGN_PW since it conflicts with rcodesign config
+unset RCODESIGN_PW
+rcodesign_opts="
+  --code-signature-flags runtime
+  --timestamp-url http://timestamp.apple.com:8080/ts01
+  --p12-file $rcodesign_signing_p12_file
+  --p12-password-file $pwdir/rcodesign-pw
+  "
+
+flags=()
+for dir in Contents/MacOS Contents/MacOS/Tor Contents/MacOS/Tor/PluggableTransports
+do
+  d="$display_name/$display_name.app/$dir"
+  test -d "$d" || continue
+  pushd "$d"
+  for file in *
+  do
+    test -f "$file" || continue
+    flags+=('--code-signature-flags' "$dir/$file:runtime")
+  done
+  popd
+done
+echo "code-signature-flags: ${flags[@]}"
+
+echo "**** Signing main bundle ($display_name.app) ****"
+$rcodesign sign \
+  $rcodesign_opts \
+  "${flags[@]}" \
+  --code-signature-flags Contents/MacOS/updater.app/Contents/Frameworks/UpdateSettings.framework:runtime \
+  --code-signature-flags Contents/MacOS/updater.app:runtime \
+  --code-signature-flags Contents/Frameworks/ChannelPrefs.framework:runtime \
+  --code-signature-flags Contents/MacOS/plugin-container.app:runtime \
+  --code-signature-flags Contents/MacOS/media-plugin-helper.app:runtime \
+  --code-signature-flags Contents/MacOS/gpu-helper.app:runtime \
+  --entitlements-xml-path Contents/MacOS/Tor/tor:/signing/tor-browser-build/tools/signing/macos-entitlements/tor.xml \
+  --entitlements-xml-path Contents/MacOS/plugin-container.app:/signing/tor-browser-build/tools/signing/macos-entitlements/plugin-container.xml \
+  --entitlements-xml-path Contents/MacOS/media-plugin-helper.app:/signing/tor-browser-build/tools/signing/macos-entitlements/media-plugin-helper.xml \
+  --entitlements-xml-path /signing/tor-browser-build/tools/signing/macos-entitlements/firefox.browser.xml \
+  -- \
+  "$display_name/$display_name.app"
+
+rm -f "$pwdir/rcodesign-pw"
+rmdir "$pwdir"
+tar -C "$display_name" -caf "$output_file" "$display_name.app"
+cd -
+rm -Rf "$tmpdir"

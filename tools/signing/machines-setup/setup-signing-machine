@@ -93,6 +93,7 @@ sudoers_file sign-apk
 sudoers_file sign-aab
 sudoers_file sign-rcodesign
 sudoers_file sign-rcodesign-128
+sudoers_file sign-rcodesign-146
 sudoers_file set-date
 
 authorized_keys boklm boklm-tb-release.pub boklm-yk1.pub
