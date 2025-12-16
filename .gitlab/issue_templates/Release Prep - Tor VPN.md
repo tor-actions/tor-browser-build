@@ -41,12 +41,7 @@ Tor VPN is on the `main` branch
   - pierov
 - [ ] Ensure all builders have matching builds
 - Place the Tor VPN release to be signed in directory `torvpn/alpha/signed/${TOR_VPN_VERSION}`:
-  - [ ] `mkdir torvpn/alpha/signed/${TOR_VPN_VERSION} && cd torvpn/alpha/signed/${TOR_VPN_VERSION}`
-  - [ ] `wget https://${URL_PATH}/app-release.aab` (replacing `${URL_PATH}` with the location where the unsigned build has been published)
-  - [ ] `mv app-release.aab tor-vpn-${TOR_VPN_VERSION}.aab`
-  - [ ] `wget https://${URL_PATH}/app-release-unsigned.apk` (replacing `${URL_PATH}` with the location where the unsigned build has been published)
-  - [ ] `mv app-release-unsigned.apk tor-vpn-qa-unsigned-android-multiarch-${TOR_VPN_VERSION}.apk`
-  - [ ] `sha256sum tor-vpn-* > sha256sums-unsigned-build.txt`
+  - [ ] `./tools/signing/download-torvpn-release.torvpn ${URL_PATH}` (replacing `${URL_PATH}` with the location where the unsigned build has been published, for example https://tb-build-03.torproject.org/~dan/vpn/1.4.0Beta/)
   - [ ] Compare checksums from `sha256sums-unsigned-build.txt` with expected checksums
 - [ ] On `${STAGING_SERVER}`, ensure updated:
   - [ ] `tor-browser-build` is on the right commit

@@ -1,0 +1,54 @@
+#!/bin/bash
+#
+# This script downloads a Tor VPN release from the given URL and will
+# rename the files and put them in torvpn/alpha/signed/$version (where
+# $version is the torvpn version defined in rbm.conf).
+#
+# Usage: download-torvpn-release.torvpn <base_url>
+#
+# base_url: URL directory where the release can be downloaded. For
+# example https://tb-build-03.torproject.org/~dan/vpn/1.4.0Beta/.
+#
+set -e
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source "$script_dir/functions"
+
+base_url="$1"
+
+test -d "$signed_version_dir" && \
+  exit_error "Directory already exist: $signed_version_dir"
+
+test $# -ne 1 && \
+  exit_error "Wrong number of arguments"
+
+tmpdir=$(mktemp -p "$script_dir/../../tmp" -d)
+trap "rm -Rf $tmpdir" EXIT
+cd $tmpdir
+for arch in arm64v8a armeabiv7a universal x86 x86_64
+do
+  case "$arch" in
+    arm64v8a)
+      dest_arch=aarch64
+      ;;
+    armeabiv7a)
+      dest_arch=armv7
+      ;;
+    universal)
+      dest_arch=multiarch
+      ;;
+    *)
+      dest_arch="$arch"
+      ;;
+  esac
+  dl_filename="app-$arch-release-unsigned.apk"
+  wget -O "$dl_filename" "$base_url/$dl_filename"
+  mv "$dl_filename" "tor-vpn-qa-unsigned-android-${dest_arch}-${tbb_version}.apk"
+done
+
+wget -O app-universal-release.aab "$base_url/app-universal-release.aab"
+mv app-universal-release.aab "tor-vpn-${tbb_version}.aab"
+sha256sum $(ls -1 *.apk *.aab | sort) > sha256sums-unsigned-build.txt
+cat sha256sums-unsigned-build.txt
+
+mkdir -p "$signed_version_dir"
+mv -f *.aab *.apk *.txt "$signed_version_dir"
