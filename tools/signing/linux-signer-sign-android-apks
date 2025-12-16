@@ -7,7 +7,7 @@ source "$script_dir/functions"
 
 topdir="$script_dir/../.."
 ARCHS="armv7 aarch64 x86_64"
-test "$SIGNING_PROJECTNAME" = 'torvpn' && ARCHS='multiarch'
+test "$SIGNING_PROJECTNAME" = 'torvpn' && ARCHS="$ARCHS x86 multiarch"
 projname=$(project-name)
 # tbb_version_type, tbb_version and SIGNING_PROJECTNAME are used in
 # wrappers/sign-apk, so we export them
