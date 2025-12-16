@@ -1,0 +1,4 @@
+version: 3.19.3
+filename: 'uglifyjs-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
+git_hash: 3ea33afc72462a470466473208a33379b7204765
+git_url: https://github.com/mishoo/UglifyJS.git

@@ -1,0 +1,4 @@
+#!/bin/bash
+tar -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
+mv [% project %]-[% c('version') %] [% project %]
+tar -caf [% dest_dir %]/[% c("filename") %] [% project %]
