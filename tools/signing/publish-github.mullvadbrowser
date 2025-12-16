@@ -25,13 +25,13 @@ TARGET="--target $CHANNEL --target mullvadbrowser-linux-x86_64"
 MB_TAG=$(showconf firefox git_hash $TARGET)
 MB_BRANCH=${MB_TAG//-build[0-9]*/}
 BB_BRANCH=${MB_BRANCH//mullvad-/base-}
-ESR_VERSION=$(showconf firefox var/firefox_version $TARGET)
+FX_VERSION=$(showconf firefox var/firefox_version $TARGET)
 BASE_VERSION=$(showconf release var/torbrowser_version $TARGET)
 RELEASE_VERSION="${BASE_VERSION}${mbrtag_suffix}"
 RELEASE_URL="https://dist.torproject.org/mullvadbrowser/${RELEASE_VERSION}/"
 if ! curl -f "$RELEASE_URL" >/dev/null 2>&1 ; then
   echo >&2 "$RELEASE_URL not found! Maybe you need to run:"
-  echo >&2 "ssh staticiforme.torproject.org 'cd /srv/dist-master.torproject.org/htdocs/mullvadbrowser && static-update-component dist.torproject.org'"
+  echo >&2 "ssh staticiforme.torproject.org 'static-update-component dist.torproject.org' && $0"
   exit 2
 fi
 pushd >/dev/null ../../git_clones/firefox
@@ -39,8 +39,9 @@ echo "Fetching $MB_BRANCH and tags..."
 git fetch --tags "$GL_REMOTE_MULLVAD" "$MB_BRANCH"
 git fetch --tags "$GL_REMOTE_TOR" "$BB_BRANCH"
 BB_TAG=$(git tag -l "$BB_BRANCH-build*" | tail -n1)
-FX_TAG=$(git tag -l "FIREFOX_${ESR_VERSION//\./_}*" | tail -n1)
+FX_TAG=$(git tag -l "FIREFOX_*${FX_VERSION//\./_}*" "FIREFOX_NIGHTLY_${FX_VERSION//\.0a[0-9]*/}*" | tail -n1)
 echo "QA build version: $BASE_VERSION"
+echo "Firefox version: $FX_VERSION"
 echo "MB tag: $MB_TAG"
 echo "BB tag: $BB_TAG"
 echo "FX tag: $FX_TAG"
@@ -53,7 +54,7 @@ if ! [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 git checkout $MB_TAG
-[[ $(git tag -l $RELEASE_VERSION) ]] || git tag -s $RELEASE_VERSION -m"$ESR_VERSION-based $RELEASE_VERSION"
+[[ $(git tag -l $RELEASE_VERSION) ]] || git tag -s $RELEASE_VERSION -m"$FX_VERSION-based $RELEASE_VERSION"
 git tag -n1 $RELEASE_VERSION
 git push "$GH_REMOTE" "HEAD:refs/heads/$MB_BRANCH"
 git push "$GH_REMOTE" "$FX_TAG"
