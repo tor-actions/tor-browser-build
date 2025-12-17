@@ -148,6 +148,9 @@ echo "Starting ./mach build $(date)"
   artifactsdir=[% out_dir %]/artifacts/[% c("var/osname") %]
   mkdir -p $artifactsdir
   mv obj-*/dist/target.* $artifactsdir
+
+  ./mach python -m mozbuild.action.test_archive mozharness mozharness.zip
+  mv mozharness.zip $artifactsdir
 [% END %]
 
 [% IF c("var/macos") -%]
