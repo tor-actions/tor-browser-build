@@ -151,6 +151,8 @@ echo "Starting ./mach build $(date)"
 
   ./mach python -m mozbuild.action.test_archive mozharness mozharness.zip
   mv mozharness.zip $artifactsdir
+
+  echo -n '[% c("var/firefox_platform_version") %]' > "$artifactsdir/firefox_platform_version.txt"
 [% END %]
 
 [% IF c("var/macos") -%]
