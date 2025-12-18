@@ -6,7 +6,6 @@ container:
 
 var:
   filename_targets: "[% c('var/platform') %]"
-  llvm_root: "/var/tmp/dist/clang"
 
 targets:
   android:
@@ -23,7 +22,6 @@ targets:
     var:
       target: '[% c("var/build_target") %]'
       target_flags: --set=target.[% c("var/build_target") %].cc=[% c("var/build_target") %]-clang
-      llvm_root: "/var/tmp/dist/macosx-toolchain/clang"
       filename_targets: "[% c('var/osname') %]"
       arch_deps:
         - pkg-config
@@ -32,7 +30,6 @@ targets:
     var:
       target: x86_64-pc-windows-gnullvm,i686-pc-windows-gnullvm
       target_flags: --set target.x86_64-pc-windows-gnullvm.linker=x86_64-w64-mingw32-clang --set target.i686-pc-windows-gnullvm.linker=i686-w64-mingw32-clang
-      llvm_root: "/var/tmp/dist/mingw-w64-clang"
       arch_deps:
         - pkg-config
 

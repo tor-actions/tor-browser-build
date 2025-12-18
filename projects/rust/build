@@ -13,7 +13,6 @@ export PATH="$distdir-rust-prebuilt/bin:$PATH"
 
 [% pc(c('var/compiler'), 'var/setup', { compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')) }) %]
 [% IF c("var/linux") || c("var/android") -%]
-  # See the config file for more details on why we do that also on Windows
   tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/clang') %]
   export PATH=/var/tmp/dist/clang/bin:$PATH
 [% END -%]
@@ -83,8 +82,10 @@ mkdir build
 cd build
 
 # We use
+#
 # `--enable-local-rust` to avoid downloading the required compiler during build
 # time
+#
 # `--enable-vendor` to avoid downloading crates during build time and just use
 # the ones which are shipped with the source
 #
@@ -94,8 +95,6 @@ cd build
 #
 # `--sysconfdir=etc` to avoid install failures as |make install| wants to write
 # to /etc otherwise
-#
-# `--llvm-root=$llvm_root` to avoid building LLVM again while building Rust
 #
 # `--target`: x86-64 Linux and WASM are always enabled. Additional targets are
 # enabled on the configuration file.
@@ -121,7 +120,6 @@ cd build
   --enable-extended \
   --release-channel=stable \
   --sysconfdir=etc \
-  --llvm-root=[% c('var/llvm_root') %] \
   --set rust.jemalloc \
   --target=x86_64-unknown-linux-gnu,wasm32-unknown-unknown,[% c("var/target") %] \
   --set target.x86_64-unknown-linux-gnu.linker=clang \
@@ -146,6 +144,6 @@ cd /var/tmp/dist
 [% END -%]
 
 [% c('tar', {
-        tar_src => [ project ],
-        tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
-        }) %]
+    tar_src => [ project ],
+    tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
+  }) %]
