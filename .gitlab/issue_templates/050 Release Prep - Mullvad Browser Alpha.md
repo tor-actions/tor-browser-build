@@ -1,4 +1,4 @@
-# Release Prep Mullvad Browser Alpha
+# 🌐 Release Prep Mullvad Browser Alpha
 
 - **NOTE** It is assumed the `mullvad-browser` alpha rebase and security backport tasks have been completed
 - **NOTE** This can/is often done in conjunction with the equivalent Tor Browser release prep issue

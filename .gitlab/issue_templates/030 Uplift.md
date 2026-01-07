@@ -1,3 +1,5 @@
+# ⬆️ Uplift Patchset
+
 <!--
 Title:
     Uplift tor-browser-build#12345: Title of Issue
@@ -6,20 +8,18 @@ This is an issue for tracking uplift of a patch-set to an upstream build-depende
 
 -->
 
-## Uplift Patchset
+## Book-keeping
 
-### Book-keeping
-
-#### Gitlab Issue(s)
+### Gitlab Issue(s)
 - tor-browser-build#12345
 
-#### Merge Request(s)
+### Merge Request(s)
 - tor-browser-build!1234
 
-#### Upstream Project Issue(s):
+### Upstream Project Issue(s):
 
 
-### Notes
+## Notes
 
 <!-- whatever additional info, context, etc that would be helpful for uplifting -->
 

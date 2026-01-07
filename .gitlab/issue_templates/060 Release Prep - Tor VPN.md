@@ -1,4 +1,4 @@
-# Release Prep Tor VPN
+# 🔑 Release Prep Tor VPN
 
 - **NOTE** It is assumed the `vpn` release has been tagged in the `vpn.git` repository
 

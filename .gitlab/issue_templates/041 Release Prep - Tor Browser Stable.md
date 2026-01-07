@@ -1,4 +1,4 @@
-# Release Prep Tor Browser Stable
+# 🧅 Release Prep Tor Browser Stable
 
 - **NOTE** It is assumed the `tor-browser` release rebase and security backport tasks have been completed
 - **NOTE** This can/is often done in conjunction with the equivalent Mullvad Browser release prep issue

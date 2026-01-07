@@ -1,4 +1,4 @@
-# Release Prep Tor Browser Legacy
+# 🧅 Release Prep Tor Browser Legacy
 
 - **NOTE** It is assumed the `tor-browser` release rebase and security backport tasks have been completed
 
