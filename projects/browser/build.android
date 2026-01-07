@@ -127,7 +127,7 @@ apksigner sign --verbose --min-sdk-version [% c("var/android_min_api") %] --ks $
 [%IF c("var/tor-browser") -%]
     tor_expert_bundle_src="[% c('input_files_by_name/tor-expert-bundle') %]"
     # strip off trailing "$buildid.tar.gz"
-    tor_expert_bundle_dest=${tor_expert_bundle_src:0:-7}.tar.gz
+    tor_expert_bundle_dest=${tor_expert_bundle_src:0:-7}-[% c('version') %].tar.gz
     cp "$rootdir/[% c("input_files_by_name/tor-expert-bundle") %]/tor-expert-bundle.tar.gz" [% dest_dir %]/[% c('filename') %]/$tor_expert_bundle_dest
 [% END -%]
 
