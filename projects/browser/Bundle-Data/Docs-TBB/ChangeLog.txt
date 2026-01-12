@@ -1,3 +1,16 @@
+Tor Browser 13.5.27 - January 13 2026
+ * All Platforms
+   * Updated Firefox to 115.32.0esr
+   * Updated NoScript to 13.5.7.1984
+   * Bug 44418: Update built-in obfs4 bridges [tor-browser]
+   * Bug 44433: Weird §:domain.com label in the Blocked Objects window [tor-browser]
+   * Bug 44471: Rebase Tor Browser legacy onto 115.32.0esr [tor-browser]
+   * Bug 44474: Backport Security Fixes from Firefox 147 [tor-browser]
+   * Bug 44482: (H1) Script execution in Safest mode via data URI navigation [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41682: relprep.py should fail when a GitHub release is not found [tor-browser-build]
+
 Tor Browser 13.5.26 - December 09 2025
  * All Platforms
    * Updated Firefox to 115.31.0esr
