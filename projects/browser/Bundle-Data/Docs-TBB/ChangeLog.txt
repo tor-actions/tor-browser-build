@@ -1,3 +1,24 @@
+Tor Browser 15.0.4 - January 13 2025
+ * All Platforms
+   * Bug 44418: Update built-in obfs4 bridges [tor-browser]
+   * Bug 44433: Weird §:domain.com label in the Blocked Objects window [tor-browser]
+   * Bug 44470: Rebase Tor Browser stable onto 140.7.0esr [tor-browser]
+   * Bug 44474: Backport Security Fixes from Firefox 147 [tor-browser]
+   * Bug 44482: (H1) Script execution in Safest mode via data URI navigation [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 140.7.0esr
+ * Android
+   * Updated GeckoView to 140.7.0esr
+   * Bug 41681: Keep public suffixes up-to-date on 140esr-based Tor Browser for Android [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Bug 41654: Make relprep.py update Moat settings [tor-browser-build]
+     * Bug 41682: relprep.py should fail when a GitHub release is not found [tor-browser-build]
+     * Bug 40090: Make the cleanup faster [rbm]
+     * Bug 40095: cached checksums should not be used for input files when refresh_input is enabled [rbm]
+   * Android
+     * Bug 41679: Android tor-expert-bundle archives missing version in filename [tor-browser-build]
+
 Tor Browser 15.0.3 - December 09 2025
  * All Platforms
    * Updated NoScript to 13.5.2.1984

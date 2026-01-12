@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 git_url: https://gitlab.torproject.org/tpo/anti-censorship/rdsys-admin.git
-git_hash: c13a8e5909d78abbabf5b853e20e63e38fcc4808
+git_hash: 365b0e65b27e053bece37b70bca0bd5fdb02099f
 version: '[% c("abbrev") %]'
 # Use gz for now, since we do not support Zstandard on Linux containers.
 compress_tar: 'gz'
