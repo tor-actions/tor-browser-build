@@ -18,7 +18,7 @@ import ruamel.yaml
 
 import fetch_changelogs
 from update_manual import update_manual
-
+from update_fenix_nightly_apk import update_fenix_nightly_apk
 
 logger = logging.getLogger(__name__)
 
@@ -140,6 +140,7 @@ class ReleasePreparation:
             self.update_zlib()
             if self.android:
                 self.update_zstd()
+                update_fenix_nightly_apk(self.base_path)
             self.update_go()
             self.update_manual()
             self.update_moat_settings()

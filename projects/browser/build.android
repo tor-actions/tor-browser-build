@@ -29,6 +29,8 @@ unzip $rootdir/[% c('input_files_by_name/noscript') %]
   }) %]
 popd
 
+unzip -o "$rootdir"/[% c('input_files_by_name/fenix-nightly-apk') %] assets/publicsuffixes
+
 [%IF c("var/tor-browser") -%]
   tar -xaf "$rootdir/[% c('input_files_by_name/tor-expert-bundle') %]/tor-expert-bundle.tar.gz" tor/pluggable_transports/pt_config.json
   tar -xf "$rootdir/[% c('input_files_by_name/moat-settings') %]"
