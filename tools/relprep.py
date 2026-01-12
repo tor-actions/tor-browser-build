@@ -79,6 +79,9 @@ def get_github_release(project, regex=""):
                 return m.group(1)
         else:
             return tag
+    raise RuntimeError(
+        f"Could find a release for {project} that matches the regex."
+    )
 
 
 class ReleasePreparation:
