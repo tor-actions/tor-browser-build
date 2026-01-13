@@ -12,7 +12,7 @@ gradle $GRADLE_FLAGS assembleGecko -x lint [% IF c('var/generate_gradle_dependen
 popd
 
 # The build might fail with "file exists" otherwise.
-rm -rf /var/tmp/dist/android-toolchain/gradle/glean/pythonenv
+rm -rf $GRADLE_HOME/glean/pythonenv
 
 echo "Building Fenix $(date)"
 pushd mobile/android/fenix

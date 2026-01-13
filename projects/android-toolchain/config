@@ -22,12 +22,6 @@ var:
     export ANDROID_NDK_ROOT=$ANDROID_NDK_HOME
     export NDK_HOST_TAG=linux-x86_64
     export PATH=$PATH:$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin
-    [% IF c("gradle_tarfile") -%]
-      tar -C /var/tmp/dist/[% project %] -xf $rootdir/[% c("gradle_tarfile") %]
-      export GRADLE_HOME=/var/tmp/dist/[% project %]/gradle
-      export GRADLE_USER_HOME=$GRADLE_HOME
-      export PATH=$PATH:$GRADLE_HOME/bin
-    [% END -%]
   google_repo: https://dl.google.com/android/repository
   android_release_dir: android-16
   android_ndk_release_name: '29'

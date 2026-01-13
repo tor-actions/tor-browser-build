@@ -1,8 +1,8 @@
 [% c("var/set_default_env") -%]
 [% pc(c('var/compiler'), 'var/setup', {
   compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')),
-  gradle_tarfile => c("input_files_by_name/gradle"),
 }) %]
+[% pc('gradle', 'var/setup', { gradle_tarfile => c("input_files_by_name/gradle") }) %]
 distdir=/var/tmp/dist
 builddir=/var/tmp/build
 outdir="[%  dest_dir _ '/' _ c('filename') -%]"

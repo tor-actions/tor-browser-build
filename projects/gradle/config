@@ -5,6 +5,11 @@ container:
   use_container: 1
 
 var:
+  setup: |
+    tar -C /var/tmp/dist -xf $rootdir/[% c("gradle_tarfile") %]
+    export GRADLE_HOME=/var/tmp/dist/gradle
+    export GRADLE_USER_HOME=$GRADLE_HOME
+    export PATH=$PATH:$GRADLE_HOME/bin
   gradle_sha256sum:
     8.14.3: bd71102213493060956ec229d946beee57158dbd89d0e62b91bca0fa2c5f3531
 
