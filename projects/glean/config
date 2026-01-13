@@ -23,9 +23,11 @@ steps:
       - project: container-image
       - project: '[% c("var/compiler") %]'
         name: '[% c("var/compiler") %]'
+      - project: android-sdk
+        name: android-sdk
       # These versions of build tools and platform are not the same version needed
       # by our other projects, therefore we download it only here instead of modifying
-      # the android-toolchain project.
+      # the android-sdk project.
       - URL: 'https://dl.google.com/android/repository/build-tools_r35_linux.zip'
         name: build_tools_35
         sha256sum: bd3a4966912eb8b30ed0d00b0cda6b6543b949d5ffe00bea54c04c81e1561d88

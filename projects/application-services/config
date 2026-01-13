@@ -50,6 +50,8 @@ steps:
       - project: container-image
       - project: '[% c("var/compiler") %]'
         name: '[% c("var/compiler") %]'
+      - project: android-sdk
+        name: android-sdk
       - project: gradle
         name: gradle
       - project: rust

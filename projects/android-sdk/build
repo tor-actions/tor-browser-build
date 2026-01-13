@@ -3,19 +3,12 @@
 
 distdir=$rootdir/[% project %]
 mkdir -p $distdir
-
-mkdir $distdir/android-sdk-linux
-cd $distdir/android-sdk-linux
+cd $distdir
 
 # Command line tools
 mkdir -p cmdline-tools
 unzip -qq $rootdir/[% c("input_files_by_name/android_commandlinetools") %] -d cmdline-tools
 mv cmdline-tools/cmdline-tools cmdline-tools/[% c("var/commandlinetools_version_string") %]
-
-# NDK
-mkdir ndk
-unzip -qq $rootdir/[% c("input_files_by_name/android_ndk_compiler")%] -d ndk
-ln -s android-ndk-r[% c("var/android_ndk_release_name") %] ndk/[% c("var/android_ndk_revision") %]
 
 # Build tools
 mkdir build-tools
@@ -37,6 +30,11 @@ mv $rootdir/platform-36.1-package.xml platforms/android-36.1/package.xml
 
 # Platform tools
 unzip -qq $rootdir/[% c("input_files_by_name/platform_tools") %]
+
+# Placeholder for the NDK, as some projects expect the NDK to be in
+# $ANDROID_HOME/ndk/<ndk-version>.
+# We will add a symlink to the actual NDK in the setup when available.
+mkdir ndk
 
 # That's a quirk required by GeckoView but let's have it here instead of in the
 # project's build script

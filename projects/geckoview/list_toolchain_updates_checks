@@ -10,7 +10,7 @@ if (m/^\\s*NDK_VERSION\\s*=\\s*"(.+)"/) {
 }
 EOF
 needed=$(cat python/mozboot/mozboot/android.py | perl -ne "$p")
-current='r[% pc("android-toolchain", "var/android_ndk_release_name") %]'
+current='r[% pc("android-ndk", "var/release") %]'
 check_update_needed ndk_release_name "$needed" "$current"
 
 
@@ -22,7 +22,7 @@ if (m/build-tools;(.+)$/) {
 }
 EOF
 needed=$(cat python/mozboot/mozboot/android-packages.txt | perl -ne "$p")
-current='[% pc("android-toolchain", "version") %]'
+current='[% pc("android-sdk", "version") %]'
 check_update_needed build_tools "$needed" "$current"
 
 
@@ -43,7 +43,7 @@ while (<>) {
 }
 EOF
 needed=$(cat python/mozboot/mozboot/android.py | perl -e "$p")
-current='[% pc("android-toolchain", "var/commandlinetools_version_string") %]-[% pc("android-toolchain", "var/commandlinetools_version") %]'
+current='[% pc("android-sdk", "var/commandlinetools_version_string") %]-[% pc("android-sdk", "var/commandlinetools_version") %]'
 check_update_needed cmdline-tools "$needed" "$current"
 
 

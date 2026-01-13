@@ -4,8 +4,9 @@
 [% pc(c('var/compiler'), 'var/setup', {
     compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')),
   }) %]
+[% pc('android-sdk', 'var/setup', { sdk_tarfile => c("input_files_by_name/android-sdk") }) %]
 [% pc('gradle', 'var/setup', { gradle_tarfile => c("input_files_by_name/gradle") }) %]
-pushd /var/tmp/dist/android-toolchain/android-sdk-linux/build-tools/
+pushd /var/tmp/dist/android-sdk/build-tools/
 unzip $rootdir/'[% c("input_files_by_name/build_tools_35") %]'
 mv android-15 35.0
 popd

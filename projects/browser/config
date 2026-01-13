@@ -71,7 +71,7 @@ input_files:
   - project: container-image
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
-    enable: '[% c("var/android") || c("var/macos") %]'
+    enable: '[% c("var/macos") %]'
   - project: firefox
     name: firefox
     enable: '[% !c("var/android") %]'
@@ -153,6 +153,9 @@ input_files:
     enable: '[% c("var/android") && c("var/android_single_arch") %]'
   # To generate a new keystore, see how-to-generate-keystore.txt
   - filename: android-qa.keystore
+    enable: '[% c("var/android") %]'
+  - project: android-sdk
+    name: android-sdk
     enable: '[% c("var/android") %]'
     # tor-browser-build#40920
   - filename: sort-baseline.py

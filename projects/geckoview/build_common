@@ -2,6 +2,7 @@
 [% pc(c('var/compiler'), 'var/setup', {
   compiler_tarfile => c('input_files_by_name/' _ c('var/compiler')),
 }) %]
+[% pc('android-sdk', 'var/setup', { sdk_tarfile => c("input_files_by_name/android-sdk") }) %]
 [% pc('gradle', 'var/setup', { gradle_tarfile => c("input_files_by_name/gradle") }) %]
 distdir=/var/tmp/dist
 builddir=/var/tmp/build

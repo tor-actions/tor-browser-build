@@ -78,6 +78,9 @@ steps:
       - name: '[% c("var/compiler") %]'
         project: '[% c("var/compiler") %]'
         pkg_type: build
+      - project: android-sdk
+        name: android-sdk
+        pkg_type: build
       - project: gradle
         name: gradle
         pkg_type: build
@@ -156,6 +159,8 @@ input_files:
     refresh_input: 1
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
+  - project: android-sdk
+    name: android-sdk
   - project: gradle
     name: gradle
   - project: rust

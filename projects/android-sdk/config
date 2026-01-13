@@ -5,27 +5,12 @@ version: 36.1.0
 var:
   setup: |
     mkdir -p /var/tmp/dist
-    tar -C /var/tmp/dist -xf $rootdir/[% c("compiler_tarfile") %]
-    export ANDROID_HOME=/var/tmp/dist/[% project %]/android-sdk-linux
+    tar -C /var/tmp/dist -xf $rootdir/[% c("sdk_tarfile") %]
+    export ANDROID_HOME=/var/tmp/dist/[% project %]
+    [[ -n "${ANDROID_NDK_HOME}" ]] && ln -s $ANDROID_NDK_HOME $ANDROID_HOME/ndk/[% pc("android-ndk", "version") %]
     export PATH=$PATH:$ANDROID_HOME/build-tools/[% c("version") %]
-    # By default we use the old NDK which is the one GeckoView is using.
-    # However, we can overwrite that per project if needed (e.g.
-    # application-services is currently on a newer NDK).
-    # But an NDK is more than 1.5GB, so it does not make sense to copy one that
-    # is not even used in all containers. Instead, we download the additional
-    # NDK only in application-services, and adjust the other variables here.
-    [% IF c("ndk_release") -%]
-      export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/android-ndk-r[% c("ndk_release") %]
-    [% ELSE -%]
-      export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/android-ndk-r[% c("var/android_ndk_release_name") %]
-    [% END -%]
-    export ANDROID_NDK_ROOT=$ANDROID_NDK_HOME
-    export NDK_HOST_TAG=linux-x86_64
-    export PATH=$PATH:$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin
   google_repo: https://dl.google.com/android/repository
   android_release_dir: android-16
-  android_ndk_release_name: '29'
-  android_ndk_revision: 29.0.14206865
   # We need the following two variables for get_build_tools, used by signing
   # scripts.
   build_tools_version: 36.1
@@ -39,9 +24,6 @@ input_files:
   - URL: '[% c("var/google_repo") %]/commandlinetools-linux-[% c("var/commandlinetools_version") %]_latest.zip'
     name: android_commandlinetools
     sha256sum: 7ec965280a073311c339e571cd5de778b9975026cfcbe79f2b1cdcb1e15317ee
-  - URL: '[% c("var/google_repo") %]/android-ndk-r[% c("var/android_ndk_release_name") %]-linux.zip'
-    name: android_ndk_compiler
-    sha256sum: 4abbbcdc842f3d4879206e9695d52709603e52dd68d3c1fff04b3b5e7a308ecf
   - URL: '[% c("var/google_repo") %]/[% c("var/build_tools_filename") %]'
     name: build_tools
     sha256sum: '[% c("var/build_tools_sha256sum") %]'

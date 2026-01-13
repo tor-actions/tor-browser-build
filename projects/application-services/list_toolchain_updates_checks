@@ -8,7 +8,7 @@ if (m/^\\s*compileSdkVersion:\\s([^"]*),/) {
 }
 EOF
 needed=$(cat build.gradle | perl -ne "$p")
-current='[% pc("android-toolchain", "var/android_api_level") %]'
+current=$(echo [% pc("android-sdk", "version") %] | cut -f 1 -d '.')
 check_update_needed compileSdkVersion "$needed" "$current"
 
 

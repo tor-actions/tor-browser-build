@@ -1,0 +1,9 @@
+#!/bin/bash
+[% c("var/set_default_env") -%]
+
+unzip -qq $rootdir/[% c("input_files_by_name/ndk")%]
+mv android-ndk-r[% c("var/release") %] [% project %]
+[% c('tar', {
+    tar_src => [ project ],
+    tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
+  }) %]

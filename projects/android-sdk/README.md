@@ -1,14 +1,14 @@
-This project is configured as `var/compiler` for Android.
-
-It contains a few versions of the Android SDK, build tools and the NDK.
+This project contains some packages that would normally be installed with
+`sdkmanager`, such as the build tools, platform tools and platforms.
 
 It defines several environment variables that various build systems look for,
 such as `ANDROID_HOME`.
-Optionally, it also prepares gradle.
 
-The output artifact includes only one version of the NDK, because of its huge
-size, but the setup commands can use a custom version of the NDK, since some
-projects need different versions (e.g., GeckoView and Application Services).
+We used to have a single package for the SDK and the NDK.
+However, most of native binaries need only the NDK.
+Therefore, we decided to split the project, to possibly reduce the iteration
+time when updating the toolchains, as it is much easier to get the NDK right at
+the first attempt.
 
 # Known issues
 

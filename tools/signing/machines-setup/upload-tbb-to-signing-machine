@@ -37,9 +37,9 @@ if ! test -f "./out/yubihsm-shell/$yubihsm_filename"; then
   echo "Fetched $yubihsm_filename"
 fi
 
-android_build_tools_filename=$(./rbm/rbm showconf --step get_build_tools android-toolchain filename)
-if ! test -f "./out/android-toolchain/$android_build_tools_filename"; then
-  ./rbm/rbm build --step get_build_tools android-toolchain
+android_build_tools_filename=$(./rbm/rbm showconf --step get_build_tools android-sdk filename)
+if ! test -f "./out/android-sdk/$android_build_tools_filename"; then
+  ./rbm/rbm build --step get_build_tools android-sdk
   echo "Fetched $android_build_tools_filename"
 fi
 
@@ -63,8 +63,8 @@ chmod go+r "./out/yubihsm-shell/$yubihsm_filename"
 rsync -v "./out/yubihsm-shell/$yubihsm_filename" "$setup_user@$signing_machine:$signing_dir/$yubihsm_filename"
 
 echo "Uploading $android_build_tools_filename"
-chmod go+r "./out/android-toolchain/$android_build_tools_filename"
-rsync -v "./out/android-toolchain/$android_build_tools_filename" "$setup_user@$signing_machine:$signing_dir/$android_build_tools_filename"
+chmod go+r "./out/android-sdk/$android_build_tools_filename"
+rsync -v "./out/android-sdk/$android_build_tools_filename" "$setup_user@$signing_machine:$signing_dir/$android_build_tools_filename"
 echo "Extracting $android_build_tools_filename"
 ssh "$setup_user@$signing_machine" mkdir -p $signing_dir/android-build-tools
 ssh "$setup_user@$signing_machine" unzip -qo -d $signing_dir/android-build-tools "$signing_dir/$android_build_tools_filename"
