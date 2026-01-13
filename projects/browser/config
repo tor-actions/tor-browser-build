@@ -69,9 +69,12 @@ targets:
 
 input_files:
   - project: container-image
+  - name: '[% c("var/compiler") %]'
+    project: '[% c("var/compiler") %]'
+    enable: '[% c("var/android") || c("var/macos") %]'
   - project: firefox
     name: firefox
-    enable: '[% ! c("var/android") %]'
+    enable: '[% !c("var/android") %]'
   - project: firefox
     name: firefox-aarch64
     enable: '[% c("var/macos_universal") %]'
@@ -81,30 +84,11 @@ input_files:
     name: src-firefox
     pkg_type: src-tarballs
     enable: '[% c("var/macos") %]'
-  - project: geckoview
-    name: fenix
-    pkg_type: build_apk
-    enable: '[% c("var/android") && !c("var/android_single_arch") %]'
-  - project: geckoview
-    name: fenix
-    pkg_type: build
-    enable: '[% c("var/android") && c("var/android_single_arch") %]'
-  - project: tor-expert-bundle
-    name: tor-expert-bundle
-    enable: '[% c("var/tor-browser") %]'
-  - project: tor-expert-bundle
-    name: tor-expert-bundle-aarch64
-    enable: '[% c("var/macos_universal") && c("var/tor-browser") %]'
-    target_replace:
-      '^torbrowser-macos.*': torbrowser-macos-aarch64
-  - project: moat-settings
-    name: moat-settings
-    enable: '[% c("var/tor-browser") %]'
   - project: fonts
     name: fonts
-    enable: '[% ! c("var/android") %]'
+    enable: '[% !c("var/android") %]'
   - filename: Bundle-Data
-    enable: '[% ! c("var/android") %]'
+    enable: '[% !c("var/android") %]'
   - filename: dmg-root
     enable: '[% c("var/macos") %]'
   - URL: https://dist.torproject.org/torbrowser/noscript/noscript-13.5.1.90101984.xpi
@@ -118,6 +102,20 @@ input_files:
     name: mullvad-extension
     sha256sum: 4597ee6fff6a2f19cbf78a6149d38d12ad8a9d6029b7e36f6c639dc3e07dd2c3
     enable: '[% c("var/mullvad-browser") %]'
+  - project: manual
+    name: manual
+    enable: '[% !c("var/android") && c("var/tor-browser") %]'
+  - project: tor-expert-bundle
+    name: tor-expert-bundle
+    enable: '[% c("var/tor-browser") %]'
+  - project: tor-expert-bundle
+    name: tor-expert-bundle-aarch64
+    enable: '[% c("var/macos_universal") && c("var/tor-browser") %]'
+    target_replace:
+      '^torbrowser-macos.*': torbrowser-macos-aarch64
+  - project: moat-settings
+    name: moat-settings
+    enable: '[% c("var/tor-browser") %]'
   - filename: 'gtk3-settings.ini'
     enable: '[% c("var/linux") %]'
   - project: hfsplus-tools
@@ -145,15 +143,17 @@ input_files:
     name: translation-mullvad-browser
     pkg_type: mullvad-browser
     enable: '[% c("var/mullvad-browser") && c("var/windows") && !c("var/testbuild") %]'
+  - project: geckoview
+    name: fenix
+    pkg_type: build_apk
+    enable: '[% c("var/android") && !c("var/android_single_arch") %]'
+  - project: geckoview
+    name: fenix
+    pkg_type: build
+    enable: '[% c("var/android") && c("var/android_single_arch") %]'
   # To generate a new keystore, see how-to-generate-keystore.txt
   - filename: android-qa.keystore
     enable: '[% c("var/android") %]'
-  - name: '[% c("var/compiler") %]'
-    project: '[% c("var/compiler") %]'
-    enable: '[% c("var/android") || c("var/macos") %]'
-  - project: manual
-    name: manual
-    enable: '[% ! c("var/android") && c("var/tor-browser") %]'
     # tor-browser-build#40920
   - filename: sort-baseline.py
     enable: '[% c("var/android") %]'

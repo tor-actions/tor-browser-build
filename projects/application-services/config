@@ -48,25 +48,18 @@ steps:
         - gyp
     input_files:
       - project: container-image
-        pkg_type: build
       - project: '[% c("var/compiler") %]'
         name: '[% c("var/compiler") %]'
-        pkg_type: build
       - project: gradle
         name: gradle
-        pkg_type: build
       - project: rust
         name: rust
-        pkg_type: build
       - project: ninja
         name: ninja
-        pkg_type: build
       - project: uniffi-rs
         name: uniffi-rs
-        pkg_type: build
       - project: glean
         name: glean
-        pkg_type: build
         enable: '[% !c("var/generate_gradle_dependencies_list") %]'
       # Only Application Services currently requires build tools 35.
       # So, download them only here, rather than adding them to the shared
