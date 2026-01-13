@@ -17,10 +17,10 @@ container:
   use_container: 1
 
 var:
-  firefox_platform_version: '146.0a1'
+  firefox_platform_version: '147.0a1'
   firefox_version: '[% c("var/firefox_platform_version") %]'
   browser_series: '16.0'
-  browser_rebase: 2
+  browser_rebase: 1
   browser_branch: '[% c("var/browser_series") %]-[% c("var/browser_rebase") %]'
   browser_build: 2
   copyright_year: '[% exec("git show -s --format=%ci " _ c("git_hash") _ "^{commit}", { exec_noco => 1 }).remove("-.*") %]'
@@ -59,8 +59,8 @@ var:
 
   l10n-changesets: '[% exec("git --no-pager show " _ c("git_hash") _ ":browser/locales/l10n-changesets.json", { exec_noco => 1 }) %]'
 
-  windows_rs_version: '0.58.0'
-  windows_rs_sha256sum: dd04d41d93c4992d421894c18c8b43496aa748dd4c081bac0dc93eb0489272b6
+  windows_rs_version: '0.62.2'
+  windows_rs_sha256sum: 527fadee13e0c05939a6a05d5bd6eec6cd2e3dbd648b9f8e447c6518133d8580
 
 steps:
   src-tarballs:
@@ -90,7 +90,7 @@ steps:
         version: '[% c("abbrev") %]'
 
   list_toolchain_updates:
-    git_hash: FIREFOX_NIGHTLY_146_END
+    git_hash: FIREFOX_NIGHTLY_147_END
     tag_gpg_id: 0
     input_files: []
     container:

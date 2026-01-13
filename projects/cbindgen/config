@@ -16,4 +16,4 @@ steps:
         project: cbindgen
         pkg_type: cargo_vendor
         norec:
-          sha256sum: 359841c6485839e92d9c8c719496b0c9c50685609204a9810e736d56d4855f16
+          sha256sum: 3c39d456d74b53ffe044fd624d2c72c7bcbf2c5ff3de54d39f8ca89ce539cdb1

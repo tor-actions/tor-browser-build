@@ -19,10 +19,10 @@ container:
     build_apk: 1
 
 var:
-  firefox_platform_version: '146.0a1'
+  firefox_platform_version: '147.0a1'
   geckoview_version: '[% c("var/firefox_platform_version") %]'
   browser_series: '16.0'
-  browser_rebase: 2
+  browser_rebase: 1
   browser_branch: '[% c("var/browser_series") %]-[% c("var/browser_rebase") %]'
   browser_build: 2
   gitlab_project: https://gitlab.torproject.org/tpo/applications/tor-browser
@@ -38,7 +38,7 @@ var:
     - openjdk-17-jdk-headless
   # this should be updated when the list of gradle dependencies is changed
   # see doc/how-to-create-gradle-dependencies-list.txt
-  gradle_dependencies_version: 146-1
+  gradle_dependencies_version: 147-1
   gradle_version: 8.14.3
   glean_parser: 14.0.1
   # python/mozboot/mozboot/android.py
@@ -143,7 +143,7 @@ steps:
         enable: '[% c("var/generate_gradle_dependencies_list") %]'
 
   list_toolchain_updates:
-    git_hash: FIREFOX_NIGHTLY_146_END
+    git_hash: FIREFOX_NIGHTLY_147_END
     tag_gpg_id: 0
     input_files: []
     container:

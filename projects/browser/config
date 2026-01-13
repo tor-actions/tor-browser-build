@@ -106,7 +106,7 @@ input_files:
   - filename: Bundle-Data
     enable: '[% ! c("var/android") %]'
   - filename: dmg-root
-    enable: '[% ! c("var/android") %]'
+    enable: '[% c("var/macos") %]'
   - URL: https://dist.torproject.org/torbrowser/noscript/noscript-13.5.1.90101984.xpi
     name: noscript
     sha256sum: 4731db06df1e433f843cd0d3d449241c9f143ff9d5bbf787c8162bfa63c8ab6c

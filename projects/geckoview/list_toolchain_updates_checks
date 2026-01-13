@@ -16,12 +16,12 @@ check_update_needed ndk_release_name "$needed" "$current"
 
 # build_tools
 read -d '' p << 'EOF' || true
-if (m/build_tools_version\\s*=\\s*"([^"]+)"/) {
+if (m/build-tools;(.+)$/) {
   print $1;
   exit;
 }
 EOF
-needed=$(cat build/moz.configure/android-sdk.configure | perl -ne "$p")
+needed=$(cat python/mozboot/mozboot/android-packages.txt | perl -ne "$p")
 current='[% pc("android-toolchain", "version") %]'
 check_update_needed build_tools "$needed" "$current"
 

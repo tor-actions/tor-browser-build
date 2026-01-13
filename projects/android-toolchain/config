@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
-# FIXME: Rework this whole mess
+# FIXME: Rework this whole mess (tor-browser-build#41677)
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
-version: 36.0.0
+version: 36.1.0
 var:
   setup: |
     mkdir -p /var/tmp/dist
@@ -29,18 +29,17 @@ var:
       export PATH=$PATH:$GRADLE_HOME/bin
     [% END -%]
   google_repo: https://dl.google.com/android/repository
-  android_api_level: 36
   android_release_dir: android-16
-  android_platform_revision: '01'
   android_ndk_release_name: '29'
   android_ndk_revision: 29.0.14206865
   # We need the following two variables for get_build_tools, used by signing
   # scripts.
-  build_tools_version: 36
+  build_tools_version: 36.1
   build_tools_filename: 'build-tools_r[% c("var/build_tools_version") %]_linux.zip'
-  build_tools_sha512sum: 277c08c2dcced3c1cc46ce0349e18adc6d6d4b8739868eab5d469f9fb4e9c6b79aa9d2a6592cfc5db0ccb8690fcc75a44db4b18b03dcf349efd0eb54025ef5ca
+  build_tools_sha256sum: a7b5889e4a79fcf3b0976bef40d401f4240fb1eed891d9d91169da1111e11d78
   commandlinetools_version: 13114758
   commandlinetools_version_string: 19.0
+  platform_tools_version: 36.0.0
 input_files:
   # Hashes can be compared with https://gitlab.com/fdroid/android-sdk-transparency-log/-/blob/master/checksums.json
   - URL: '[% c("var/google_repo") %]/commandlinetools-linux-[% c("var/commandlinetools_version") %]_latest.zip'
@@ -51,14 +50,18 @@ input_files:
     sha256sum: 4abbbcdc842f3d4879206e9695d52709603e52dd68d3c1fff04b3b5e7a308ecf
   - URL: '[% c("var/google_repo") %]/[% c("var/build_tools_filename") %]'
     name: build_tools
-    sha512sum: '[% c("var/build_tools_sha512sum") %]'
-  - URL: '[% c("var/google_repo") %]/platform-[% c("var/android_api_level") %]_r[% c("var/android_platform_revision") %].zip'
-    name: platform
+    sha256sum: '[% c("var/build_tools_sha256sum") %]'
+  - URL: '[% c("var/google_repo") %]/platform-36_r01.zip'
+    name: platform-36
     sha256sum: a5273f7d68de0a6a58032b26c24965634bc14ed3839e70a3a9759369f3f6c02a
+  - URL: '[% c("var/google_repo") %]/platform-36.1_r01.zip'
+    name: platform-36.1
+    sha256sum: 265e9aa7d8db6abe7ad1696085d5d62784b341084c625de46db530970b1e806d
+  - filename: platform-36.1-package.xml
   # ./mach bootstrap is fetching the latest version, so it does not seem to
   # matter which particular version we are using. Pin to the one fitting best to
   # SDK version/build-tools version.
-  - URL: '[% c("var/google_repo") %]/platform-tools_r[% c("version") %]-linux.zip'
+  - URL: '[% c("var/google_repo") %]/platform-tools_r[% c("var/platform_tools_version") %]-linux.zip'
     name: platform_tools
     sha256sum: 0ead642c943ffe79701fccca8f5f1c69c4ce4f43df2eefee553f6ccb27cbfbe8
 steps:
@@ -74,4 +77,4 @@ steps:
     input_files:
       - URL: '[% c("var/google_repo") %]/[% c("var/build_tools_filename") %]'
         name: build_tools
-        sha512sum: '[% c("var/build_tools_sha512sum") %]'
+        sha256sum: '[% c("var/build_tools_sha256sum") %]'

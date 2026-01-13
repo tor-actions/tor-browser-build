@@ -22,9 +22,18 @@ mkdir build-tools
 unzip -qq $rootdir/[% c("input_files_by_name/build_tools") %] -d build-tools
 mv build-tools/[% c("var/android_release_dir") %] build-tools/[% c("version") %]
 
-# Platform
+# Platforms
 mkdir platforms
-unzip -qq $rootdir/[% c("input_files_by_name/platform") %] -d platforms
+unzip -qq $rootdir/[% c("input_files_by_name/platform-36") %] -d platforms
+unzip -qq $rootdir/[% c("input_files_by_name/platform-36.1") %] -d platforms
+# This platform version is not detected without this file for some reason.
+# Even `sdkmanager --list` fails without it.
+# My hypothesis is that some tools expect the API level to be an integer.
+# After installing this platform package with sdkmanager, we found this was the
+# only file we were missing, and adding it fixes the build errors.
+# Normally, it should not be needed. So, when upgrading, do not add its
+# package.xml, unless you encounter the same bug.
+mv $rootdir/platform-36.1-package.xml platforms/android-36.1/package.xml
 
 # Platform tools
 unzip -qq $rootdir/[% c("input_files_by_name/platform_tools") %]

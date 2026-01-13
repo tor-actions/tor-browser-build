@@ -1,9 +1,9 @@
 # vim: filetype=yaml sw=2
-git_hash: '137221b113282e3300e1c9eae874891eb1c2ebc2' # v66.1.1
+git_hash: '19729353fa93916067c155b9e293c00836a6948a' # v66.1.2
 git_url: https://github.com/mozilla/glean.git
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 # Check for mozilla-glean in gradle/libs.versions.toml in the tor-browser repository
-version: 66.1.1
+version: 66.1.2
 container:
   use_container: 1
   disable_network:
@@ -46,7 +46,7 @@ steps:
         project: glean
         pkg_type: cargo_vendor
         norec:
-          sha256sum: 14942534989f8bb3124653167a729534a93fb61e7c5b3d71389f8c3833e2ca93
+          sha256sum: 417e8e09a7fbe3205827dfa518bfc4a7a08f1869e6d4fd9edf5d8f3f1f48061a
       - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
         name: gradle-dependencies
         exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
