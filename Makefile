@@ -554,6 +554,9 @@ list_translation_updates-release:
 list_translation_updates-alpha:
 	$(rbm) showconf --target alpha --step list_updates translation list_updates
 
+list_toolchain_updates:
+	tools/list_toolchain_updates
+
 list_toolchain_updates-firefox-linux: submodule-update
 	$(rbm) build firefox --step list_toolchain_updates --target nightly --target torbrowser-linux-x86_64
 

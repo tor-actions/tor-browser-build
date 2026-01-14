@@ -1,0 +1,35 @@
+#!/bin/bash
+#
+# This script runs all `make list_toolchain_updates-*` commands, save
+# their outputs to a file (tmp/toolchain_updates.txt) and print it
+# (again) at the end.
+#
+set -e
+
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+cd "$script_dir"/..
+
+output_file="$script_dir/../tmp/toolchain_updates.txt"
+
+rm -f "$output_file"
+
+function list_toolchain_updates {
+  for cmd in \
+    list_toolchain_updates-firefox-linux \
+    list_toolchain_updates-firefox-windows \
+    list_toolchain_updates-firefox-macos \
+    list_toolchain_updates-application-services \
+    list_toolchain_updates-geckoview
+  do
+    line_title="** $cmd **"
+    line_size=$(echo "$line_title" | wc -m)
+    line_line=$(perl -e 'print "*" x ('$line_size' - 1), "\n"')
+    echo "$line_line"; echo "$line_title"; echo "$line_line"; echo
+    make -s $cmd
+    echo; echo; echo "$line_line"; echo "$line_line"; echo; echo
+  done
+}
+
+list_toolchain_updates | tee -a "$output_file"
+
+echo "See also tmp/toolchain_updates.txt"
