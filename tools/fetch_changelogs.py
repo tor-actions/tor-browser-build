@@ -13,7 +13,7 @@ GITLAB = "https://gitlab.torproject.org"
 API_URL = f"{GITLAB}/api/v4"
 PROJECT_ID = 473
 AUTH_HEADER = "PRIVATE-TOKEN"
-MB_LABEL = "Project 131"
+MB_LABEL = "Project 196"
 
 
 class EntryType(enum.IntFlag):
