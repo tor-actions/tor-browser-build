@@ -543,6 +543,31 @@ mullvadbrowser-compare-mar-signed-unsigned-release: submodule-update
 mullvadbrowser-compare-mar-signed-unsigned-alpha: submodule-update
 	$(rbm) build release --step compare_mar_signed_unsigned --target alpha --target signed --target mullvadbrowser
 
+#############################
+# Building upstream firefox #
+#############################
+
+firefox-linux-x86_64: submodule-update
+	$(rbm) build firefox --target alpha --target firefoxbrowser-linux-x86_64
+
+firefox-linux-aarch64: submodule-update
+	$(rbm) build firefox --target alpha --target firefoxbrowser-linux-arch64
+
+firefox-windows-x86_64: submodule-update
+	$(rbm) build firefox --target alpha --target firefoxbrowser-windows-x86_64
+
+firefox-windows-i686: submodule-update
+	$(rbm) build firefox --target alpha --target firefoxbrowser-windows-i686
+
+firefox-macos-aarch64: submodule-update
+	$(rbm) build firefox --target alpha --target firefoxbrowser-macos-aarch64
+
+firefox-macos-x86_64: submodule-update
+	$(rbm) build firefox --target alpha --target firefoxbrowser-macos-x86_64
+
+geckoview-android-aarch64: submodule-update
+	$(rbm) build geckoview --target testbuild --target alpha --target firefoxbrowser-android-aarch64
+
 
 ############################
 # Toolchain Update Targets #

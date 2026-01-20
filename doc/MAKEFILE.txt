@@ -178,3 +178,26 @@ torbrowser-compare-mar-signed-unsigned-{release,alpha}
 ----------------------------------------------------------
 Unsign mar files from directory torbrowser/{release,alpha}/signed/$version
 and compare them with the checksum from sha256sums-unsigned-build.txt.
+
+
+*********************
+* Toolchain updates *
+*********************
+
+list_toolchain_updates-{application-services,firefox-linux,firefox-macos,
+                        firefox-windows,geckoview}
+-------------------------------------------------------------------------
+List toolchain updates required for building selected component/platform.
+
+
+firefox-{linux-x86_64,linux-aarch64,windows-x86_64,windows-i686,
+         macos-aarch64,macos-x86_64}
+----------------------------------------------------------------
+Building upstream firefox commit for selected platform. This is useful
+for testing toolchain updates for a new firefox version.
+
+geckoview-android-aarch64
+-------------------------
+Building upstream firefox commit for android (aarch64 only). We currently
+don't support the `build_apk` builds with all architectures, but the
+single arch build should be enough for testing toolchain updates.

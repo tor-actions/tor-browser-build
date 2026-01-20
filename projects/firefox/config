@@ -23,6 +23,7 @@ var:
   browser_rebase: 2
   browser_branch: '[% c("var/browser_series") %]-[% c("var/browser_rebase") %]'
   browser_build: 2
+  upstream_firefox_commit: FIREFOX_NIGHTLY_147_END
   copyright_year: '[% exec("git show -s --format=%ci " _ c("git_hash") _ "^{commit}", { exec_noco => 1 }).remove("-.*") %]'
   nightly_updates_publish_dir: '[% c("var/nightly_updates_publish_dir_prefix") %]nightly-[% c("var/osname") %]'
   gitlab_project: https://gitlab.torproject.org/tpo/applications/tor-browser
@@ -90,13 +91,20 @@ steps:
         version: '[% c("abbrev") %]'
 
   list_toolchain_updates:
-    git_hash: FIREFOX_NIGHTLY_147_END
+    git_hash: '[% c("var/upstream_firefox_commit") %]'
     tag_gpg_id: 0
     input_files: []
     container:
       use_container: 0
 
 targets:
+  firefoxbrowser:
+    git_hash: '[% c("var/upstream_firefox_commit") %]'
+    tag_gpg_id: 0
+    var:
+      updater_url: ''
+      has_l10n: 0
+
   basebrowser:
     var:
       nightly_updates_publish_dir_prefix: basebrowser-
@@ -240,3 +248,7 @@ input_files:
   - project: libdmg-hfsplus
     name: libdmg
     enable: '[% c("var/macos") && c("var/dev_artifacts") %]'
+  # When building upstream firefox we need this patch to be able to
+  # build for Windows
+  - filename: firefoxbrowser-BB-29320.patch
+    enable: '[% c("var/firefox-browser") && c("var/windows") %]'

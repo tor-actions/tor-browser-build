@@ -1,4 +1,8 @@
-. $topsrcdir/mozconfig-[% IF c("var/macos"); GET 'macos'; ELSE; GET c("var/osname"); END; %][% IF c("var/asan") %]-asan[% END %]
+[% IF !c("var/firefox-browser") -%]
+  . $topsrcdir/mozconfig-[% IF c("var/macos"); GET 'macos'; ELSE; GET c("var/osname"); END; %][% IF c("var/asan") %]-asan[% END %]
+[% ELSE;
+     INCLUDE 'mozconfig-upstream-firefox.in';
+   END -%]
 
 [% IF c("var/linux") -%]
   # We want to build with clang now and point to the GCC toolchain until #29041 is
@@ -81,7 +85,9 @@
 [% END -%]
 
 ac_add_options --[% IF c("var/updater_enabled") %]enable[% ELSE %]disable[% END %]-updater
-ac_add_options --[% IF c("var/updater_enabled") %]enable[% ELSE %]disable[% END %]-base-browser-update
+[% IF !c("var/firefox-browser") -%]
+  ac_add_options --[% IF c("var/updater_enabled") %]enable[% ELSE %]disable[% END %]-base-browser-update
+[% END -%]
 [% IF c("var/override_updater_url") -%]
   ac_add_options --with-updater-url=[% c("var/override_updater_url") %]
 [% ELSIF c("var/updater_url")  -%]

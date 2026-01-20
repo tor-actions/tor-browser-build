@@ -58,6 +58,12 @@ targets:
     tag_gpg_id: 0
     var:
       variant: nightly
+  firefoxbrowser:
+    git_hash: '[% pc("firefox", "var/upstream_firefox_commit") %]'
+    tag_gpg_id: 0
+    var:
+      generate_gradle_dependencies_list: 1
+      has_l10n: 0
 
 steps:
   build_apk:
@@ -146,7 +152,7 @@ steps:
         enable: '[% c("var/generate_gradle_dependencies_list") %]'
 
   list_toolchain_updates:
-    git_hash: FIREFOX_NIGHTLY_147_END
+    git_hash: '[% pc("firefox", "var/upstream_firefox_commit") %]'
     tag_gpg_id: 0
     input_files: []
     container:
@@ -178,6 +184,7 @@ input_files:
     enable: '[% c("var/rlbox") %]'
   - project: application-services
     name: application-services
+    enable: '[% !c("var/firefox-browser") %]'
   - filename: gradle-dependencies-list.txt
     name: gradle-dependencies-list
   - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
@@ -189,13 +196,16 @@ input_files:
     sha256sum: '[% pc("glean-parser", "var/glean_wheels_sha256sum") %]'
   - project: glean
     name: glean
+    enable: '[% !c("var/generate_gradle_dependencies_list") %]'
   - project: oss-licenses-plugin
     name: oss-licenses-plugin
     enable: '[% !c("var/generate_gradle_dependencies_list") %]'
   - project: terser
     name: terser
+    enable: '[% !c("var/firefox-browser") %]'
   - name: tor-expert-bundle-aar
     project: tor-expert-bundle-aar
+    enable: '[% c("var/tor-browser") %]'
   - project: firefox-l10n
     name: firefox-l10n
     enable: '[% c("var/android_single_arch") && c("var/has_l10n") %]'

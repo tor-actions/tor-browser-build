@@ -18,8 +18,8 @@ cp $rootdir/mozconfig ./
 
 echo "Starting ./mach configure $(date)"
 ./mach configure \
-  --with-base-browser-version=[% c("var/torbrowser_version") %] \
-  --with-branding=$branding_dir \
+  [% IF !c("var/firefox-browser") %]--with-base-browser-version=[% c("var/torbrowser_version") %][% END %] \
+  [% IF !c("var/firefox-browser") %]--with-branding=$branding_dir[% END %] \
   [% IF !c("var/rlbox") -%]--without-wasm-sandboxed-libraries[% END %]
 
 echo "Starting ./mach build $(date)"

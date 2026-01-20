@@ -1,0 +1,17 @@
+# The file mozconfig-upstream-firefox.in is used to set some options
+# needed to build upstream firefox. In Tor Browser, those options are
+# set in the specific mozconfig files in tor-browser.git.
+
+ac_add_options --enable-application=mobile/android
+
+# Make sure to disable bootstrap also when running online builds for dependency
+# updates.
+ac_add_options --disable-bootstrap
+
+CC="clang"
+CXX="clang++"
+ac_add_options --enable-linker=lld
+
+ac_add_options --with-android-sdk=$ANDROID_HOME
+ac_add_options --with-android-ndk=$ANDROID_NDK_HOME
+ac_add_options --with-gradle=$GRADLE_HOME/bin/gradle

@@ -1,4 +1,8 @@
+[% IF !c("var/firefox-browser") -%]
 . $topsrcdir/[% c("var/mozconfig_file") %]
+[% ELSE;
+     INCLUDE 'mozconfig-upstream-firefox.in';
+   END -%]
 
 ac_add_options --with-java-bin-path=/usr/lib/jvm/java-1.17.0-openjdk-amd64/bin
 

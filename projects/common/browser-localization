@@ -1,4 +1,6 @@
-branding_dir=[% IF c('var/android') %]mobile/android[% ELSE %]browser[% END %]/branding/[% c("var/project_initials") %]-[% c("var/channel") %]
+[% IF !c("var/firefox-browser") -%]
+  branding_dir=[% IF c('var/android') %]mobile/android[% ELSE %]browser[% END %]/branding/[% c("var/project_initials") %]-[% c("var/channel") %]
+[% END -%]
 
 [% IF c("var/has_l10n") -%]
   [% IF !c("var/android") -%]

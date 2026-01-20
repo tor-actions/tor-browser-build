@@ -15,19 +15,28 @@ export PATH="/var/tmp/dist/node/bin:$PATH"
 export LC_ALL=C.UTF-8
 export LANG=C.UTF-8
 
-# Normalize this path, as it will end up in buildconfig.html.
-export TOR_EXPERT_BUNDLE_AAR=/var/tmp/dist/tor-expert-bundle.aar
-mv $rootdir/[% c('input_files_by_name/tor-expert-bundle-aar') %]/tor-expert-bundle.aar $TOR_EXPERT_BUNDLE_AAR
+[% IF c("var/tor-browser") -%]
+  # Normalize this path, as it will end up in buildconfig.html.
+  export TOR_EXPERT_BUNDLE_AAR=/var/tmp/dist/tor-expert-bundle.aar
+  mv $rootdir/[% c('input_files_by_name/tor-expert-bundle-aar') %]/tor-expert-bundle.aar $TOR_EXPERT_BUNDLE_AAR
+[% END -%]
 
-tar -C /var/tmp/dist -xf [% c('input_files_by_name/application-services') %]
-export APPLICATION_SERVICES=/var/tmp/dist/application-services/maven
-export NIMBUS_FML=/var/tmp/dist/application-services/nimbus-fml
+[% IF !c("var/firefox-browser") -%]
+  tar -C /var/tmp/dist -xf [% c('input_files_by_name/application-services') %]
+  export APPLICATION_SERVICES=/var/tmp/dist/application-services/maven
+  export NIMBUS_FML=/var/tmp/dist/application-services/nimbus-fml
+[% END -%]
 
 [% INCLUDE 'fake-git' %]
 
 tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
 
-tar -C /var/tmp/build/[% project %]-*/tools/terser -xf [% c("input_files_by_name/terser") %]
+# We disable terser for unpatched firefox since the directory
+# tools/terser does not exist in 147. It will probably be needed for
+# 148.
+[% IF !c("var/firefox-browser") -%]
+  tar -C /var/tmp/build/[% project %]-*/tools/terser -xf [% c("input_files_by_name/terser") %]
+[% END -%]
 
 [% c("var/set_MOZ_BUILD_DATE") %]
 
