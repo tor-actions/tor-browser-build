@@ -1,6 +1,11 @@
 Description of makefile rules
 =============================
 
+
+************************************
+* Building Tor and Mullvad Browser *
+************************************
+
 torbrowser
 ----------
 Build Tor Browser for the default channel, defined in
@@ -92,11 +97,27 @@ fetch
 Fetch new commits from all components. This is useful when you want to
 build the nightly channel.
 
-list-unused-projects
---------------------
-List which projects are not being used by projects/release/build with
-torbrowser and mullvadbrowser targets. Projects that are used outside
-of normal builds can be added to projects/release/list_used_projects.
+torbrowser-incrementals-{release,alpha}
+---------------------------------------
+Create incremental mar files for an unsigned build in the release or
+alpha channel. The list of versions we create incrementals from is
+defined as var/torbrowser_incremental_from in rbm.conf.
+
+torbrowser-incrementals-nightly
+-------------------------------
+Create incremental mar files for the current nightly build. The number
+of previous versions we should generate incremental mars from is defined
+as var/max_torbrowser_incremental_from in rbm.conf.
+
+If you want to create incremental mars for a version that is not the
+current one, you can define the environment variable
+TORBROWSER_NIGHTLY_VERSION to the version you want to generate
+incremental mars for.
+
+
+************
+* Cleaning *
+************
 
 clean
 -----
@@ -115,27 +136,21 @@ clean-dry-run
 -------------
 Print the files that would be removed when running 'make clean'.
 
+list-unused-projects
+--------------------
+List which projects are not being used by projects/release/build with
+torbrowser and mullvadbrowser targets. Projects that are used outside
+of normal builds can be added to projects/release/list_used_projects.
+
+
+***********************************
+* Publishing and signing releases *
+***********************************
+
 torbrowser-signtag-{release,alpha}
 ----------------------------------
 Create a git signed tag for the selected channel, using the version and
 build number defined as var/torbrowser_version and var/torbrowser_build.
-
-torbrowser-incrementals-{release,alpha}
----------------------------------------
-Create incremental mar files for an unsigned build in the release or
-alpha channel. The list of versions we create incrementals from is
-defined as var/torbrowser_incremental_from in rbm.conf.
-
-torbrowser-incrementals-nightly
--------------------------------
-Create incremental mar files for the current nightly build. The number
-of previous versions we should generate incremental mars from is defined
-as var/max_torbrowser_incremental_from in rbm.conf.
-
-If you want to create incremental mars for a version that is not the
-current one, you can define the environment variable
-TORBROWSER_NIGHTLY_VERSION to the version you want to generate
-incremental mars for.
 
 torbrowser-dmg2mar-{release,alpha)
 ----------------------------------
@@ -149,6 +164,11 @@ Create update responses xml files for a signed build in the release or
 alpha channel. The files can be found in a tar in the directory
 torbrowser/{release,alpha}/update-responses.
 
+
+****************************************
+* Comparing signed and unsigned builds *
+****************************************
+
 torbrowser-compare-windows-signed-unsigned-{release,alpha}
 ----------------------------------------------------------
 Unsign exe files from directory torbrowser/{release,alpha}/signed/$version
@@ -158,4 +178,3 @@ torbrowser-compare-mar-signed-unsigned-{release,alpha}
 ----------------------------------------------------------
 Unsign mar files from directory torbrowser/{release,alpha}/signed/$version
 and compare them with the checksum from sha256sums-unsigned-build.txt.
-
