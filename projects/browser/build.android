@@ -70,6 +70,17 @@ function generate_apk {
       -name '*.js' -or -name '*.mjs' \
       -exec /var/tmp/dist/uglifyjs/bin/uglifyjs --in-situ {} \;
   [% END -%]
+  [% IF !c("var/android-armv7") -%]
+    rm -rf armeabi-v7a
+  [% END -%]
+  [% IF !c("var/android-aarch64") -%]
+    rm -rf arm64-v8a
+  [% END -%]
+  [% IF !c("var/android-x86_64") -%]
+    rm -rf x86_64
+  [% END -%]
+  # Notice: we take for granted we never rewrite on the source archive!
+  # Be sure to change any `rm` with the appropriate command, shall this change.
   [% c('zip', {
         zip_src   => [ '.' ],
         zip_args  => '-0 ../assets/omni.ja',
