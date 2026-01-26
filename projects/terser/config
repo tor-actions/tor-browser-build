@@ -1,0 +1,14 @@
+version: '5.44.0'
+filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
+container:
+  use_container: 1
+  disable_network:
+    build: 0
+input_files:
+  - project: container-image
+    name: container-image
+  - project: node
+    name: node
+  # These files are in tools/terser in Firefox's source tree
+  - filename: 'package.json'
+  - filename: 'package-lock.json'

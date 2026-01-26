@@ -1,0 +1,18 @@
+#!/bin/bash
+[% c("var/set_default_env") -%]
+
+mkdir -p /var/tmp/dist
+tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/node') %]
+export PATH=/var/tmp/dist/node/bin:$PATH
+
+# See also taskcluster/scripts/misc/terser.sh.
+
+mkdir terser
+mv package*.json terser
+cd terser
+npm ci --loglevel=error
+
+[% c('tar', {
+    tar_src => [ 'node_modules' ],
+    tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
+  }) %]

@@ -128,3 +128,9 @@ EOF
 needed=$(ls third_party/python/glean_parser | perl -ne "$p")
 current='[% pc("glean-parser", "version") %]'
 check_update_needed glean-parser "$needed" "$current"
+
+# terser
+
+needed=$(jq -r '.dependencies.terser' tools/terser/package.json)
+current='[% pc("terser", "version") %]'
+check_update_needed terser "$needed" "$current"

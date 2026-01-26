@@ -3,12 +3,6 @@
 
 [% pc('android-sdk', 'var/setup', { sdk_tarfile => c("input_files_by_name/android-sdk") }) %]
 
-[% IF c("var/android-x86_64") -%]
-  tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/node') %]
-  export PATH=/var/tmp/dist/node/bin:$PATH
-  tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/uglifyjs') %]
-[% END -%]
-
 # Bundle our extension(s).
 #
 # NoScript will be copied over to the profile folder
@@ -64,11 +58,6 @@ function generate_apk {
   unzip ../omni.ja
   [% IF c("var/tor-browser") -%]
     cp -a ../moat_countries.json ../tor/pluggable_transports/pt_config.json chrome/toolkit/content/global/
-  [% END -%]
-  [% IF c("var/android-x86_64") -%]
-    find actors chrome modules moz-src \
-      -name '*.js' -or -name '*.mjs' \
-      -exec /var/tmp/dist/uglifyjs/bin/uglifyjs --in-situ {} \;
   [% END -%]
   [% IF !c("var/android-armv7") -%]
     rm -rf armeabi-v7a

@@ -27,6 +27,8 @@ export NIMBUS_FML=/var/tmp/dist/application-services/nimbus-fml
 
 tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
 
+tar -C /var/tmp/build/[% project %]-*/tools/terser -xf [% c("input_files_by_name/terser") %]
+
 [% c("var/set_MOZ_BUILD_DATE") %]
 
 export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64

@@ -132,6 +132,9 @@ steps:
         name: glean-wheels
         sha256sum: '[% pc("glean-parser", "var/glean_wheels_sha256sum") %]'
         enable: '[% !c("var/generate_gradle_dependencies_list") %]'
+      - project: terser
+        name: terser
+        pkg_type: build
       - name: tor-expert-bundle-aar
         project: tor-expert-bundle-aar
         pkg_type: build
@@ -190,6 +193,8 @@ input_files:
   - project: oss-licenses-plugin
     name: oss-licenses-plugin
     enable: '[% !c("var/generate_gradle_dependencies_list") %]'
+  - project: terser
+    name: terser
   - name: tor-expert-bundle-aar
     project: tor-expert-bundle-aar
   - project: firefox-l10n
