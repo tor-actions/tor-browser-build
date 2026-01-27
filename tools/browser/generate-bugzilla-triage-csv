@@ -3,12 +3,12 @@
 # gitlab labels for review tickets
 browser_label="Apps::Product::TorBrowser"
 esr_label="esr-next"
-priority_label="Priority::Blocker"
+priority_label="Priority::Medium"
 impact_label="Apps::Impact::Unknown"
 type_label="Apps::Type::Audit"
 
 # milestone for the next major Tor Browser release
-milestone="Tor Browser 16.0"
+milestone="Browser 16.0"
 
 # prints to stderr
 function echoerr() { echo "$@" 1>&2; }
