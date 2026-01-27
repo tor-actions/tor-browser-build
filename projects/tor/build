@@ -109,10 +109,7 @@ cd $distdir
 [% END %]
 
 [% IF c("var/linux") %]
-  [% IF c("var/linux-cross") -%]
-    CROSS_PREFIX=[% c("var/crosstarget") %]-
-  [% END -%]
-
+  CROSS_PREFIX=[% IF c("var/linux-cross") %][% c("var/crosstarget") %]-[% END %]
   OBJCOPY="${CROSS_PREFIX}objcopy"
   STRIP="${CROSS_PREFIX}strip"
 

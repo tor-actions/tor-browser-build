@@ -48,7 +48,7 @@ export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/node/bi
     # Exporting `PKG_CONFIG_PATH` in the mozconfig file is causing build
     # breakage in Rust code. It seems that environment variable is not passed
     # down properly in that case. Thus, we set it here in the build script.
-    export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:/usr/lib/[% c("var/crosstarget") %]/pkgconfig"
+    export PKG_CONFIG_PATH="/usr/lib/[% c('var/crosstarget') %]/pkgconfig:${PKG_CONFIG_PATH:-}"
   [% END -%]
   [% IF c("var/dev_artifacts") -%]
     python3 -m pip install $rootdir/[% c('input_files_by_name/python-zstandard') %]/*.whl
@@ -267,10 +267,7 @@ RBM_TB_EOF
 cd $distdir
 
 [% IF c("var/linux") -%]
-  [% IF c("var/linux-cross") -%]
-    CROSS_PREFIX=[% c("var/crosstarget") %]-
-  [% END -%]
-
+  CROSS_PREFIX=[% IF c("var/linux-cross") %][% c("var/crosstarget") %]-[% END %]
   OBJCOPY="${CROSS_PREFIX}objcopy"
   STRIP="${CROSS_PREFIX}strip"
 

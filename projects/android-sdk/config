@@ -7,7 +7,7 @@ var:
     mkdir -p /var/tmp/dist
     tar -C /var/tmp/dist -xf $rootdir/[% c("sdk_tarfile") %]
     export ANDROID_HOME=/var/tmp/dist/[% project %]
-    [[ -n "${ANDROID_NDK_HOME}" ]] && ln -s $ANDROID_NDK_HOME $ANDROID_HOME/ndk/[% pc("android-ndk", "version") %]
+    [[ -n "${ANDROID_NDK_HOME:-}" ]] && ln -s "${ANDROID_NDK_HOME:-}" "$ANDROID_HOME/ndk/[% pc('android-ndk', 'version') %]"
     export PATH=$PATH:$ANDROID_HOME/build-tools/[% c("version") %]
   google_repo: https://dl.google.com/android/repository
   android_release_dir: android-16

@@ -94,7 +94,7 @@ function generate_apk {
   # flag in the manifest.
   apksigner sign --verbose --min-sdk-version [% c("var/android_min_api") %] --ks $rootdir/android-qa.keystore --out $final_apk --in $aligned_apk --ks-key-alias androidqakey --key-pass pass:android --ks-pass pass:android
 
-  local unsign_patch=$3
+  local unsign_patch=${3:-}
   if [ -n "$unsign_patch" ]; then
     bsdiff $final_apk $aligned_apk $unsign_patch
   fi
