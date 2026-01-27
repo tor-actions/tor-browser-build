@@ -399,7 +399,6 @@ sub get_response {
             buildID => get_config($config, $version, $os, 'buildID'),
             detailsURL => get_config($config, $version, $os, 'detailsURL'),
             actions => 'showURL',
-            openURL => get_config($config, $version, $os, 'detailsURL'),
             defined $minversion ? ( minSupportedOSVersion => $minversion ) : (),
             defined $mininstruc ? ( minSupportedInstructionSet => $mininstruc ) : (),
         );
