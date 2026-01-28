@@ -395,7 +395,9 @@ class ReleasePreparation:
             logger.debug("No need to update the %s extension.", name)
             return
         input_["URL"] = url
-        path = self.base_path / "out/browser" / url.split("/")[-1]
+        path = self.base_path / "out/browser"
+        path.mkdir(parents=True, exist_ok=True)
+        path /= url.split("/")[-1]
         # The extension should be small enough to easily fit in memory :)
         if not path.exists():
             r = requests.get(url)
