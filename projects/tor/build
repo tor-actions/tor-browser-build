@@ -11,23 +11,9 @@ TORDOCSDIR="$distdir/docs"
 
 mkdir $TORDATADIR $TORBINDIR $TORDOCSDIR
 
-[% IF c("var/windows") || c("var/android") %]
+[% IF c("var/windows") || c("var/android") || c("var/linux-cross") %]
   tar -C /var/tmp/dist -xf [% c('input_files_by_name/zlib') %]
   zlibdir=/var/tmp/dist/zlib
-[% ELSIF c("var/linux-cross") %]
-  # Since 1. we are using Debian's zlib1g-dev:$arch_debian, 2. our
-  # cross-toolchain's default paths (i.e. -I and -L) are not the same
-  # as those of Debian's cross-toolchain, and 3. tor's configure does
-  # not support separate header and library directories for zlib, we
-  # need to make the headers and $arch_debian library available to
-  # configure manually.
-  # DO NOT use CPPFLAGS="-I/usr/include" to include the headers, the
-  # build will fail (probably because some of our cross-$arch_debian
-  # headers get masked by the native ones).
-  CROSS_INCLUDEDIR=/var/tmp/dist/gcc/[% c("var/crosstarget") %]/include
-  ln -s /usr/include/zconf.h $CROSS_INCLUDEDIR
-  ln -s /usr/include/zlib.h $CROSS_INCLUDEDIR
-  export LDFLAGS="-L/usr/lib/[% c("var/crosstarget") %] $LDFLAGS"
 [% END %]
 [% IF c("var/android") %]
   tar -C /var/tmp/dist -xf [% c('input_files_by_name/zstd') %]
@@ -74,7 +60,7 @@ echo '"[% c("abbrev", { abbrev_length => 16 }) %]"' > micro-revision.i
 find -type f -print0 | xargs -0 [% c("touch") %]
 ./configure --disable-asciidoc --with-libevent-dir="$libeventdir" --with-openssl-dir="$openssldir" \
     [% IF c("var/asan") %]--enable-fragile-hardening[% END %] \
-    [% IF c("var/windows") || c("var/android") %]--with-zlib-dir="$zlibdir"[% END %] \
+    [% IF c("var/windows") || c("var/android") || c("var/linux-cross") %]--with-zlib-dir="$zlibdir"[% END %] \
     [% IF c("var/macos") %]--enable-static-openssl[% END %] \
     [% IF c("var/windows") %]--enable-static-libevent --enable-static-openssl --enable-static-zlib[% END %] \
     [% IF c("var/linux-cross") %]--build=x86_64-linux-gnu[% END %] \
@@ -134,7 +120,7 @@ cd $distdir
 pushd $TORDOCSDIR
 cp $libeventdir/LICENSE libevent.txt
 cp $openssldir/LICENSE.txt openssl.txt
-[% IF c("var/windows") || c("var/android") -%]
+[% IF c("var/windows") || c("var/android") || c("var/linux-cross") -%]
   cp $zlibdir/LICENSE zlib.txt
 [% END -%]
 [% IF c("var/android") -%]

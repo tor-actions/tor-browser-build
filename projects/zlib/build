@@ -14,6 +14,10 @@ cd /var/tmp/build/[% project %]-[% c('version') %]
 [% IF c("var/android") -%]
   export CHOST=[% c("var/cross_prefix") %]
   export CC=[% c("var/CC") %]
+[% ELSIF c("var/linux-cross") -%]
+  export CHOST=[% c("var/crosstarget") %]
+[% END -%]
+[% IF c("var/android") || c("var/linux-cross") -%]
   export CFLAGS="[% c('var/CFLAGS') %]"
   ./configure --prefix=$distdir
   make -j[% c("num_procs") %]

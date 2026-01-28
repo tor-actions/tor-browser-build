@@ -27,8 +27,6 @@ targets:
   linux-aarch64:
     var:
       libdir: lib64
-      arch_deps:
-        - zlib1g-dev:arm64
 
   android:
     var:
@@ -42,7 +40,7 @@ input_files:
     project: libevent
   - name: zlib
     project: zlib
-    enable: '[% c("var/windows") || c("var/android") %]'
+    enable: '[% c("var/windows") || c("var/android") || c("var/linux-cross") %]'
   - name: '[% c("var/compiler") %]'
     project: '[% c("var/compiler") %]'
   - name: zstd
