@@ -22,26 +22,12 @@ cd /var/tmp/dist/go/src
 [% IF c("var/linux") -%]
   ./make.bash
 [% ELSIF c("var/macos") -%]
-  unset LDFLAGS
   rm -Rf $clangdir/helpers
-  export CC="$clangdir/bin/clang [% c('var/FLAGS') %]"
-  # Create a cc-for-target script that closes over CC, CFLAGS, and LDFLAGS.
-  # Go's CC_FOR_TARGET only allows a command name, not a command with arguments.
-  # https://github.com/golang/go/issues/15457
-  CC_FOR_TARGET="$(pwd)/cc-for-target"
-  echo "#!/bin/sh" > "$CC_FOR_TARGET"
-  echo "exec $CC \"\$@\"" >> "$CC_FOR_TARGET"
-  chmod +x "$CC_FOR_TARGET"
-  CGO_ENABLED=1 CC_FOR_TARGET="$CC_FOR_TARGET" CC= CFLAGS= LDFLAGS= ./make.bash
+  CGO_ENABLED=1 CC_FOR_TARGET="$clangdir/bin/clang [% c('var/FLAGS') %]" \
+    CC= CFLAGS= LDFLAGS= ./make.bash
 [% ELSIF c("var/windows") -%]
-  # Create a cc-for-target script that closes over CC, CFLAGS, and LDFLAGS.
-  # Go's CC_FOR_TARGET only allows a command name, not a command with arguments.
-  # https://github.com/golang/go/issues/15457
-  CC_FOR_TARGET="$(pwd)/cc-for-target"
-  echo "#!/bin/sh" > "$CC_FOR_TARGET"
-  echo "exec [% c("arch") %]-w64-mingw32-cc [% c("var/CFLAGS") %] [% c("var/LDFLAGS") %] \"\$@\"" >> "$CC_FOR_TARGET"
-  chmod +x "$CC_FOR_TARGET"
-  CGO_ENABLED=1 CC_FOR_TARGET="$CC_FOR_TARGET" CC= CFLAGS= LDFLAGS= ./make.bash
+  CC_FOR_TARGET='[% c("arch") %]-w64-mingw32-cc [% c("var/CFLAGS") %] [% c("var/LDFLAGS") %]' \
+    CGO_ENABLED=1 CC= CFLAGS= LDFLAGS= ./make.bash
 [% ELSIF c("var/android") -%]
   CGO_ENABLED=1 CC_FOR_TARGET=[% c("var/CC") %] CC= CFLAGS= LDFLAGS= ./make.bash
 [% END -%]
