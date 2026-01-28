@@ -50,13 +50,6 @@ cd /var/tmp/build
 mkdir glibc
 cd glibc
 tar -xJf $rootdir/glibc-[% c("var/glibc_version") %].tar.xz
-[% IF c("var/linux-aarch64") -%]
-  # Avoid linking issues by backporting glibc patches
-  cd glibc-[% c("var/glibc_version") %]
-  patch -p1 <$rootdir/glibc-cross-linux-aarch64.patch
-  patch -p1 <$rootdir/glibc-cross-linux-aarch64-2.patch
-  cd /var/tmp/build/glibc
-[% END -%]
 
 # TODO: Remove --disable-werror once glibc is upgraded to a version that's
 # designed to work with the GCC version we're using.

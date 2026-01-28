@@ -10,6 +10,7 @@ hardened_gcc: 1
 var:
   distdir: gcc
   deps:
+    - bison
     - build-essential
     - libmpc-dev
   setup: |
@@ -19,8 +20,8 @@ var:
     export LD_LIBRARY_PATH=/var/tmp/dist/[% c("var/distdir") %]/lib64
     [% IF c("hardened_gcc"); GET c("var/set_hardened_build_flags"); END %]
   configure_opt: '--target=[% c("var/crosstarget") %] --disable-multilib --enable-languages=c,c++ --with-glibc-version=[% c("var/glibc_version") %]'
-  # Use stretch's glibc and stretch-security's linux
-  glibc_version: 2.24
+  # Use glibc 2.28 as per Mozilla's requirements for aarch64, and stretch-security's linux
+  glibc_version: 2.28
   linux_version: 4.19.232
   arch_deps:
     - gawk
@@ -37,11 +38,7 @@ input_files:
   - name: gcc-native
     project: gcc
   - URL: 'https://ftp.gnu.org/gnu/glibc/glibc-[% c("var/glibc_version") %].tar.xz'
-    sha256sum: 99d4a3e8efd144d71488e478f62587578c0f4e1fa0b4eed47ee3d4975ebeb5d3
+    sha256sum: b1900051afad76f7a4f73e71413df4826dce085ef8ddb785a945b66d7d513082
   - URL: 'https://www.kernel.org/pub/linux/kernel/v4.x/linux-[% c("var/linux_version") %].tar.xz'
     sha256sum: 4fcfe814780d63dc56e907bf41596ff162e9601978bdc1a60eab64cc3903a22c
   - filename: 'gcc-cross.patch'
-  - filename: 'glibc-cross-linux-aarch64.patch'
-    enable: '[% c("var/linux-aarch64") -%]'
-  - filename: 'glibc-cross-linux-aarch64-2.patch'
-    enable: '[% c("var/linux-aarch64") -%]'
