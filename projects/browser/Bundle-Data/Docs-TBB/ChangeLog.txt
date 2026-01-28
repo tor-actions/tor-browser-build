@@ -1,3 +1,16 @@
+Tor Browser 15.0.5 - January 29 2026
+ * All Platforms
+   * Updated Tor to 0.4.8.22
+   * Updated NoScript to 13.5.12.1984
+   * Updated OpenSSL to 3.5.5
+ * Android
+   * Bug 44533: Update NoScript to the version bundled with the browser on Android [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41691: Update Lyrebird to v0.8.1 [tor-browser-build]
+   * Windows + Linux + Android
+     * Updated Go to 1.24.12
+
 Tor Browser 15.0.4 - January 13 2025
  * All Platforms
    * Bug 44418: Update built-in obfs4 bridges [tor-browser]
