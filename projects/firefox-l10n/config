@@ -15,6 +15,7 @@ steps:
     filename: 'l10n-[% c("input_file_var/locale") %]-[% c("abbrev") %]-[% c("var/build_id") %].tar.xz'
     version: '[% c("git_hash") %]'
     fetch_locale: |
+      #!/bin/bash
       [% c("var/set_default_env") -%]
       tar xf '[% project %]-[% c("version") %].tar.[% c("compress_tar") %]'
       cd [% project %]-[% c("version") %]
