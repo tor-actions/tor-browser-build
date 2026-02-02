@@ -16,7 +16,8 @@ gpg_keyring:
 container:
   use_container: 1
   disable_network:
-    build_apk: 1
+    build: '[% !c("var/generate_gradle_dependencies_list") %]'
+    build_apk: '[% !c("var/generate_gradle_dependencies_list") %]'
 
 var:
   firefox_platform_version: '147.0a1'
