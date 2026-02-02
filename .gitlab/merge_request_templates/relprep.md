@@ -33,7 +33,7 @@
   - ⚠️ **IMPORTANT**: For AMO extension (NoScript and uBlock), updating the version in the URL is not enough, check that also a numeric ID from the URL has changed
 - [ ] Tor and dependencies updates (Tor Browser only)
   - [ ] [Tor](https://gitlab.torproject.org/tpo/core/tor/-/tags)
-  - [ ] [OpenSSL](https://www.openssl.org/source/): we stay on the latest LTS channel (currently 3.0.x)
+  - [ ] [OpenSSL](https://www.openssl.org/source/): we stay on the latest LTS channel (currently 3.5.x)
   - [ ] [zlib](https://github.com/madler/zlib/releases)
   - [ ] [Zstandard](https://github.com/facebook/zstd/releases) (Android only, at least for now)
   - [ ] [Go](https://go.dev/dl): avoid major updates, unless planned
