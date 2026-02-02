@@ -1,3 +1,42 @@
+Mullvad Browser 16.0a2 - February 03 2026
+ * All Platforms
+   * Updated Firefox to 147.0a1
+   * Updated NoScript to 13.5.11.90301984
+   * Updated uBlock Origin to 1.69.0
+   * Bug 489: Drop about:rights [mullvad-browser]
+   * Bug 502: Some bugs in the about popup [mullvad-browser]
+   * Bug 504: Rebase Mullvad Browser alpha onto 147 [mullvad-browser]
+   * Bug 44289: RFPHelper console error when `--toolbar-field-color` is set to `inherit` [tor-browser]
+   * Bug 44460: Payment methods and addresses setting headings are visible in settings [tor-browser]
+   * Bug 44482: Script execution in Safest mode via data URI navigation [tor-browser]
+   * Bug 44522: Move common changes to about dialog to base-browser [tor-browser]
+   * Bug 44535: Letterboxing background colour is no longer used [tor-browser]
+   * Bug 44554: Unlabeled AI item in tab context menu in 147 [tor-browser]
+   * Bug 41676: Update toolchains for Firefox 147 [tor-browser-build]
+ * Linux
+   * Bug 44410: Use system's size for UI font on Linux [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 501: Support Firefox nightly tags in publishing automation for RR-based alphas [mullvad-browser]
+     * Bug 44452: Improve tb-dev range-diff and diff-diff [tor-browser]
+     * Bug 44498: Update translations CI to account for 1.0 version gap between alpha and stable [tor-browser]
+     * Bug 41427: Drop the openURL property from the update [tor-browser-build]
+     * Bug 41535: Update macOS and Windows containers to Debian trixie [tor-browser-build]
+     * Bug 41664: Investigate and fix issue with unexpected build_id changes [tor-browser-build]
+     * Bug 41668: Build mozharness.zip when building dev artifacts [tor-browser-build]
+     * Bug 41678: Consider set -u and maybe set -o pipefail [tor-browser-build]
+     * Bug 41682: relprep.py should fail when a GitHub release is not found [tor-browser-build]
+     * Bug 41685: Add henry to list of taggers in relevant projects. [tor-browser-build]
+     * Bug 41687: Add single `make list_toolchain_updates` command to list all toolchain updates [tor-browser-build]
+     * Bug 41705: Remove unnecessary workaround in projects/go/build [tor-browser-build]
+     * Bug 41707: firefox-l10n fails to build with `fetch_locale: 1: set: Illegal option -o pipefail` [tor-browser-build]
+     * Bug 41708: relprep.py fails to update extensions when out/browser does not exist [tor-browser-build]
+     * Bug 40095: cached checksums should not be used for input files when refresh_input is enabled [rbm]
+     * Bug 40096: `container extract` is showing confusing error when target directory already exists [rbm]
+     * Bug 40100: The GZIP variable makes set -u fail [rbm]
+   * Linux
+     * Bug 41706: Bump glibc to v2.28 in the linux cross-toolchain (aarch64) [tor-browser-build]
+
 Mullvad Browser 16.0a1 - December 11 2025
  * All Platforms
    * Updated Firefox to 146.0a1esr

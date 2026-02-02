@@ -1,3 +1,67 @@
+Tor Browser 16.0a2 - February 03 2026
+ * All Platforms
+   * Updated NoScript to 13.5.11.90301984
+   * Updated Tor to 0.4.9.4-rc
+   * Updated OpenSSL to 3.5.5
+   * Bug 44303: Extension update job might never work on Android [tor-browser]
+   * Bug 44416: Rebase alpha onto 147 [tor-browser]
+   * Bug 44420: Drop "rights" from components.conf [tor-browser]
+   * Bug 44482: Script execution in Safest mode via data URI navigation [tor-browser]
+   * Bug 44492: Fix python linting warnings in our test files [tor-browser]
+   * Bug 44580: Registers noscript to check for updates on first run [tor-browser]
+   * Bug 41676: Update toolchains for Firefox 147 [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 147.0a1
+   * Bug 44289: RFPHelper console error when `--toolbar-field-color` is set to `inherit` [tor-browser]
+   * Bug 44343: Hide the default browser settings again after MozBug 1969949 [tor-browser]
+   * Bug 44460: Payment methods and addresses setting headings are visible in settings [tor-browser]
+   * Bug 44522: Move common changes to about dialog to base-browser [tor-browser]
+   * Bug 44535: Letterboxing background colour is no longer used [tor-browser]
+   * Bug 44554: Unlabeled AI item in tab context menu in 147 [tor-browser]
+ * Linux
+   * Bug 44410: Use system's size for UI font on Linux [tor-browser]
+ * Android
+   * Updated GeckoView to 147.0a1
+   * Bug 44398: Unable to load websites after a short amount of time on Android [tor-browser]
+   * Bug 44469: Fix branding on Android RR [tor-browser]
+   * Bug 44507: Drop the dependency on Sentry [tor-browser]
+   * Bug 44523: New circuit seems to have disappeared from 147 on Android [tor-browser]
+   * Bug 44532: Backport Bug 1967968: Minify the pdf.js code in order to improve the loading performance [tor-browser]
+   * Bug 44533: Update NoScript to the version bundled with the browser on Android [tor-browser]
+   * Bug 32200: only include required bits of OpenSSL in Android builds [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Bug 44452: Improve tb-dev range-diff and diff-diff [tor-browser]
+     * Bug 44498: Update translations CI to account for 1.0 version gap between alpha and stable [tor-browser]
+     * Bug 41535: Update macOS and Windows containers to Debian trixie [tor-browser-build]
+     * Bug 41664: Investigate and fix issue with unexpected build_id changes [tor-browser-build]
+     * Bug 41668: Build mozharness.zip when building dev artifacts [tor-browser-build]
+     * Bug 41671: Update tools/signing/linux-signer-sign-android-apks to check for v3 signatures instead of v1 [tor-browser-build]
+     * Bug 41678: Consider set -u and maybe set -o pipefail [tor-browser-build]
+     * Bug 41682: relprep.py should fail when a GitHub release is not found [tor-browser-build]
+     * Bug 41685: Add henry to list of taggers in relevant projects. [tor-browser-build]
+     * Bug 41687: Add single `make list_toolchain_updates` command to list all toolchain updates [tor-browser-build]
+     * Bug 41691: Update Lyrebird to v0.8.1 [tor-browser-build]
+     * Bug 41705: Remove unnecessary workaround in projects/go/build [tor-browser-build]
+     * Bug 41707: firefox-l10n fails to build with `fetch_locale: 1: set: Illegal option -o pipefail` [tor-browser-build]
+     * Bug 41708: relprep.py fails to update extensions when out/browser does not exist [tor-browser-build]
+     * Bug 40095: cached checksums should not be used for input files when refresh_input is enabled [rbm]
+     * Bug 40096: `container extract` is showing confusing error when target directory already exists [rbm]
+     * Bug 40100: The GZIP variable makes set -u fail [rbm]
+   * Windows + macOS + Linux
+     * Bug 41427: Drop the openURL property from the update [tor-browser-build]
+   * Windows + Linux + Android
+     * Updated Go to 1.25.6
+   * Linux
+     * Bug 41706: Bump glibc to v2.28 in the linux cross-toolchain (aarch64) [tor-browser-build]
+   * Android
+     * Bug 44508: Drop clearkey also on Android [tor-browser]
+     * Bug 41679: Android tor-expert-bundle archives missing version in filename [tor-browser-build]
+     * Bug 41684: Use only the NDK as var/compiler on Android [tor-browser-build]
+     * Bug 41688: 147 nightlies exceed the Play Store threshold [tor-browser-build]
+     * Bug 41699: Delete prefs specific to other architectures in omni.ja [tor-browser-build]
+     * Bug 41702: Replace uglifyjs with terser [tor-browser-build]
+
 Tor Browser 16.0a1 - December 11 2025
  * All Platforms
    * Updated NoScript to 13.5.1.90101984

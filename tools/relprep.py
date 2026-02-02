@@ -604,7 +604,9 @@ class ReleasePreparation:
         self.check_update(
             kwargs, prev_tag, "firefox", ["var", "firefox_platform_version"]
         )
-        if "firefox" in kwargs:
+        if "firefox" in kwargs and not (
+            "a" in kwargs["firefox"] or "b" in kwargs["firefox"]
+        ):
             # Sometimes this might be incorrect for alphas, but let's
             # keep it for now.
             kwargs["firefox"] += "esr"
