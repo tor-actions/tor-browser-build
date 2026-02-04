@@ -1,4 +1,4 @@
-Tor Browser 16.0a2 - February 03 2026
+Tor Browser 16.0a2 - February 04 2026
  * All Platforms
    * Updated NoScript to 13.5.11.90301984
    * Updated Tor to 0.4.9.4-rc
@@ -28,7 +28,7 @@ Tor Browser 16.0a2 - February 03 2026
    * Bug 44523: New circuit seems to have disappeared from 147 on Android [tor-browser]
    * Bug 44532: Backport Bug 1967968: Minify the pdf.js code in order to improve the loading performance [tor-browser]
    * Bug 44533: Update NoScript to the version bundled with the browser on Android [tor-browser]
-   * Bug 32200: only include required bits of OpenSSL in Android builds [tor-browser-build]
+   * Bug 44591: TBA Alpha fails to initialize WebExtensions [tor-browser]
  * Build System
    * All Platforms
      * Bug 44452: Improve tb-dev range-diff and diff-diff [tor-browser]
@@ -56,6 +56,7 @@ Tor Browser 16.0a2 - February 03 2026
      * Bug 41706: Bump glibc to v2.28 in the linux cross-toolchain (aarch64) [tor-browser-build]
    * Android
      * Bug 44508: Drop clearkey also on Android [tor-browser]
+     * Bug 32200: only include required bits of OpenSSL in Android builds [tor-browser-build]
      * Bug 41679: Android tor-expert-bundle archives missing version in filename [tor-browser-build]
      * Bug 41684: Use only the NDK as var/compiler on Android [tor-browser-build]
      * Bug 41688: 147 nightlies exceed the Play Store threshold [tor-browser-build]
