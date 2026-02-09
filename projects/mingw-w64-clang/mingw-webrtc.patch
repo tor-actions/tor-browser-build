@@ -184,33 +184,12 @@ index 000000000..51e2845ea
 +        HRESULT GetInterface([in] REFIID iid, [out, iid_is(iid)] void **object);
 +    };
 +}
-diff --git a/mingw-w64-headers/include/wrl/client.h b/mingw-w64-headers/include/wrl/client.h
-index 07cedbe4e..4adf5772c 100644
---- a/mingw-w64-headers/include/wrl/client.h
-+++ b/mingw-w64-headers/include/wrl/client.h
-@@ -9,12 +9,15 @@
-
- #include <cstddef>
- #include <unknwn.h>
--/* #include <weakreference.h> */
-+#include <weakreference.h>
- #include <roapi.h>
-
- /* #include <wrl/def.h> */
- #include <wrl/internal.h>
-
-+#define WrlFinal final
-+#define WrlSealed sealed
-+
- namespace Microsoft {
-     namespace WRL {
-         namespace Details {
 diff --git a/mingw-w64-headers/include/wrl/event.h b/mingw-w64-headers/include/wrl/event.h
 new file mode 100644
-index 000000000..2e883e241
+index 000000000..f3ad2826c
 --- /dev/null
 +++ b/mingw-w64-headers/include/wrl/event.h
-@@ -0,0 +1,368 @@
+@@ -0,0 +1,52 @@
 +#ifndef _WRL_EVENT_H_
 +#define _WRL_EVENT_H_
 +
@@ -226,183 +205,9 @@ index 000000000..2e883e241
 +
 +namespace Microsoft {
 +    namespace WRL {
-+        enum DelegateCheckMode {
-+            NoCheck = 1
-+        };
-+
-+        template<DelegateCheckMode delegateCheckMode> struct DelegateTraits;
-+
-+        template<> struct DelegateTraits<NoCheck> {
-+            static HRESULT CheckReturn(HRESULT hr) {
-+                return 0;
-+            }
-+        };
-+
-+        extern __declspec(selectany) const DelegateCheckMode DefaultDelegateCheckMode = NoCheck;
-+
-+        enum InvokeMode {
-+            StopOnFirstError = 1,
-+            FireAll = 2,
-+        };
-+
-+        template<InvokeMode invokeModeValue> struct InvokeModeOptions {
-+            static const InvokeMode invokeMode = invokeModeValue;
-+        };
-+
-+        template<InvokeMode invokeMode> struct InvokeTraits;
-+
-+        template<typename TDelegateInterface, typename EventSourceOptions>
-+        class EventSource;
-+
 +        namespace Details {
 +            template<typename TDelegateInterface>
-+            void* GetDelegateBucketAssist(TDelegateInterface *pDelegate) {
-+                return nullptr;
-+            }
-+
-+            template<typename TMemberFunction> struct ArgTraits {
-+                static const int args = -1;
-+            };
-+
-+            template<typename TDelegateInterface>
-+            struct ArgTraits<HRESULT(STDMETHODCALLTYPE TDelegateInterface::*)(void)> {
-+                static const int args = 0;
-+            };
-+
-+            template<typename TDelegateInterface, typename TArg1>
-+            struct ArgTraits<HRESULT(STDMETHODCALLTYPE TDelegateInterface::*)(TArg1)> {
-+                static const int args = 1;
-+                typedef TArg1 Arg1Type;
-+            };
-+
-+            template<typename TDelegateInterface, typename TArg1, typename TArg2>
-+            struct ArgTraits<HRESULT(STDMETHODCALLTYPE TDelegateInterface::*)(TArg1, TArg2)>
-+            {
-+                static const int args = 2;
-+                typedef TArg1 Arg1Type;
-+                typedef TArg2 Arg2Type;
-+            };
-+
-+            template<typename TDelegateInterface, typename TArg1, typename TArg2, typename TArg3>
-+            struct ArgTraits<HRESULT(STDMETHODCALLTYPE TDelegateInterface::*)(TArg1, TArg2, TArg3)>
-+            {
-+                static const int args = 3;
-+                typedef TArg1 Arg1Type;
-+                typedef TArg2 Arg2Type;
-+                typedef TArg3 Arg3Type;
-+            };
-+
-+            template<typename TDelegateInterface, typename TArg1, typename TArg2, typename TArg3, typename TArg4>
-+            struct ArgTraits<HRESULT(STDMETHODCALLTYPE TDelegateInterface::*)(TArg1, TArg2, TArg3, TArg4)>
-+            {
-+                static const int args = 4;
-+                typedef TArg1 Arg1Type;
-+                typedef TArg2 Arg2Type;
-+                typedef TArg3 Arg3Type;
-+                typedef TArg4 Arg4Type;
-+            };
-+
-+            template<typename TDelegateInterface, typename TArg1, typename TArg2, typename TArg3, typename TArg4, typename TArg5>
-+            struct ArgTraits<HRESULT(STDMETHODCALLTYPE TDelegateInterface::*)(TArg1, TArg2, TArg3, TArg4, TArg5)>
-+            {
-+                static const int args = 5;
-+                typedef TArg1 Arg1Type;
-+                typedef TArg2 Arg2Type;
-+                typedef TArg3 Arg3Type;
-+                typedef TArg4 Arg4Type;
-+                typedef TArg5 Arg5Type;
-+            };
-+
-+            template<typename TDelegateInterface, typename TArg1, typename TArg2, typename TArg3, typename TArg4, typename TArg5, typename TArg6>
-+            struct ArgTraits<HRESULT(STDMETHODCALLTYPE TDelegateInterface::*)(TArg1, TArg2, TArg3, TArg4, TArg5, TArg6)>
-+            {
-+                static const int args = 6;
-+                typedef TArg1 Arg1Type;
-+                typedef TArg2 Arg2Type;
-+                typedef TArg3 Arg3Type;
-+                typedef TArg4 Arg4Type;
-+                typedef TArg5 Arg5Type;
-+                typedef TArg6 Arg6Type;
-+            };
-+
-+            template<typename TDelegateInterface, typename TArg1, typename TArg2, typename TArg3, typename TArg4, typename TArg5, typename TArg6, typename TArg7>
-+            struct ArgTraits<HRESULT(STDMETHODCALLTYPE TDelegateInterface::*)(TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7)>
-+            {
-+                static const int args = 7;
-+                typedef TArg1 Arg1Type;
-+                typedef TArg2 Arg2Type;
-+                typedef TArg3 Arg3Type;
-+                typedef TArg4 Arg4Type;
-+                typedef TArg5 Arg5Type;
-+                typedef TArg6 Arg6Type;
-+                typedef TArg7 Arg7Type;
-+            };
-+
-+            template<typename TDelegateInterface, typename TArg1, typename TArg2, typename TArg3, typename TArg4, typename TArg5, typename TArg6, typename TArg7, typename TArg8>
-+            struct ArgTraits<HRESULT(STDMETHODCALLTYPE TDelegateInterface::*)(TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8)>
-+            {
-+                static const int args = 8;
-+                typedef TArg1 Arg1Type;
-+                typedef TArg2 Arg2Type;
-+                typedef TArg3 Arg3Type;
-+                typedef TArg4 Arg4Type;
-+                typedef TArg5 Arg5Type;
-+                typedef TArg6 Arg6Type;
-+                typedef TArg7 Arg7Type;
-+                typedef TArg8 Arg8Type;
-+            };
-+
-+            template<typename TDelegateInterface, typename TArg1, typename TArg2, typename TArg3, typename TArg4, typename TArg5, typename TArg6, typename TArg7, typename TArg8, typename TArg9>
-+            struct ArgTraits<HRESULT(STDMETHODCALLTYPE TDelegateInterface::*)(TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9)>
-+            {
-+                static const int args = 9;
-+                typedef TArg1 Arg1Type;
-+                typedef TArg2 Arg2Type;
-+                typedef TArg3 Arg3Type;
-+                typedef TArg4 Arg4Type;
-+                typedef TArg5 Arg5Type;
-+                typedef TArg6 Arg6Type;
-+                typedef TArg7 Arg7Type;
-+                typedef TArg8 Arg8Type;
-+                typedef TArg9 Arg9Type;
-+            };
-+
-+            template<typename TDelegateInterface, bool isImplements = __is_base_of(ImplementsBase, TDelegateInterface)>
-+            struct ArgTraitsHelper;
-+
-+            template<typename TDelegateInterface>
-+            struct ArgTraitsHelper<TDelegateInterface, false>
-+            {
-+                typedef decltype(&TDelegateInterface::Invoke) methodType;
-+                typedef ArgTraits<methodType> Traits;
-+                static const int args = Traits::args;
-+                typedef TDelegateInterface Interface;
-+            };
-+
-+            template<typename TDelegateInterface>
-+            struct ArgTraitsHelper<TDelegateInterface, true> {};
-+
-+            template<typename TDelegateInterface> class DelegateArgTraits {};
-+
-+            template<typename TDelegateInterface, typename ...TArgs>
-+            class DelegateArgTraits<HRESULT (STDMETHODCALLTYPE TDelegateInterface::*)(TArgs...)>
-+            {
-+                template<typename TCallback, DelegateCheckMode checkMode>
-+                struct DelegateInvokeHelper WrlSealed : public ::Microsoft::WRL::RuntimeClass<RuntimeClassFlags<Delegate>, TDelegateInterface>, RemoveReference<TCallback>::Type {
-+                    DelegateInvokeHelper(TCallback&& callback) noexcept {}
-+
-+                    HRESULT STDMETHODCALLTYPE Invoke(TArgs... args) noexcept override {
-+                        return 0;
-+                    }
-+                };
-+
-+            public:
-+                template<typename TImplements, DelegateCheckMode checkMode = DefaultDelegateCheckMode, typename TLambda>
-+                static ComPtr<TImplements> Callback(TLambda&& callback) noexcept {
-+                    ComPtr<TImplements> empty;
-+                    return empty;
-+                }
-+            };
++            class DelegateArgTraits {};
 +
 +            template<typename TDelegateInterface, bool isImplements = __is_base_of(ImplementsBase, TDelegateInterface)>
 +            struct DelegateArgTraitsHelper;
@@ -415,11 +220,6 @@ index 000000000..2e883e241
 +
 +            template<typename TDelegateInterface>
 +            struct DelegateArgTraitsHelper<TDelegateInterface, true> {};
-+
-+            template<typename TDelegateInterface>
-+            HRESULT CreateAgileHelper(TDelegateInterface* delegateInterface, TDelegateInterface** wrapper) {
-+                return 0;
-+            }
 +        }
 +
 +        template<typename TDelegateInterface, typename TLambda>
@@ -436,143 +236,6 @@ index 000000000..2e883e241
 +        ComPtr<typename Details::DelegateArgTraitsHelper<TDelegateInterface>::Interface> Callback(TCallbackObject *object, HRESULT(TCallbackObject::* method)(TArgs...)) noexcept {
 +            return 0;
 +        }
-+
-+        template<typename TDelegateInterface>
-+        HRESULT WeakReferenceCallback(IWeakReferenceSource* innerCallback, TDelegateInterface** callback) {
-+            return 0;
-+        }
-+
-+        template<typename TDelegateInterface>
-+        HRESULT WeakReferenceCallback(TDelegateInterface* innerCallback, TDelegateInterface** callback) {
-+            return 0;
-+        }
-+
-+        template<typename T, typename TDelegateInterface, typename ...TArgs>
-+        HRESULT WeakReferenceCallback(T* targetObject, HRESULT (T::*targetMethod)(TArgs... args), TDelegateInterface** callback) {
-+            return 0;
-+        }
-+
-+        template<typename T, typename TDelegateInterface, typename ...TArgs>
-+        HRESULT WeakReferenceCallback(T* targetObject, HRESULT(T::*targetMethod)(TArgs... args), ::Microsoft::WRL::Details::ComPtrRef< ::Microsoft::WRL::ComPtr<TDelegateInterface>> callback) {
-+            return 0;
-+        }
-+
-+        namespace Details {
-+
-+            class EventTargetArray WrlSealed : public ::Microsoft::WRL::RuntimeClass< ::Microsoft::WRL::RuntimeClassFlags<ClassicCom>, IUnknown > {
-+            public:
-+                EventTargetArray() noexcept {}
-+
-+                HRESULT RuntimeClassInitialize(size_t items) noexcept {
-+                    return 0;
-+                }
-+
-+                ~EventTargetArray() noexcept
-+                {
-+                    delete[] begin_;
-+                    delete[] bucketAssists_;
-+                }
-+
-+                ComPtr<IUnknown>* Begin() noexcept {
-+                    return nullptr;
-+                }
-+
-+                ComPtr<IUnknown>* End() noexcept {
-+                    return nullptr;
-+                }
-+
-+                void AddTail(IUnknown* element) noexcept {
-+                }
-+
-+                void AddTail(IUnknown* element, void *bucketAssist) noexcept {
-+                }
-+
-+                size_t Length() noexcept {
-+                    return 0;
-+                }
-+
-+                void **Begin_BucketAssists() {
-+                    return nullptr;
-+                }
-+
-+                void **End_BucketAssists() {
-+                    return nullptr;
-+                }
-+
-+            private:
-+                ComPtr<IUnknown>* begin_;
-+
-+                ComPtr<IUnknown>* end_;
-+
-+                void **bucketAssists_;
-+            };
-+        }
-+
-+        template<>
-+        struct InvokeTraits<FireAll>
-+        {
-+            template<typename TInvokeMethod, typename TDelegateInterface>
-+            static HRESULT InvokeDelegates(TInvokeMethod invokeOne, Details::EventTargetArray *targetArray, EventSource<TDelegateInterface, InvokeModeOptions<FireAll>>* pEvent) {
-+                return 0;
-+            }
-+        };
-+
-+        template<>
-+        struct InvokeTraits<StopOnFirstError>
-+        {
-+            template<typename TInvokeMethod, typename TDelegateInterface>
-+            static HRESULT InvokeDelegates(TInvokeMethod invokeOne, Details::EventTargetArray *targetArray, EventSource<TDelegateInterface, InvokeModeOptions<StopOnFirstError>>* pEvent) {
-+                return 0;
-+            }
-+        };
-+
-+        template<typename TDelegateInterface, typename TEventSourceOptions>
-+        class EventSource {
-+        public:
-+            EventSource() noexcept {}
-+
-+            HRESULT Add(TDelegateInterface* delegateInterface, EventRegistrationToken* token) noexcept {
-+                return 0;
-+            }
-+
-+            HRESULT Remove(EventRegistrationToken token) noexcept {
-+                return 0;
-+            }
-+
-+        protected:
-+
-+            HRESULT Add(TDelegateInterface* delegateInterface, void *bucketAssist, EventRegistrationToken* token) noexcept {
-+                return 0;
-+            }
-+
-+        private:
-+
-+            HRESULT AddInternal(TDelegateInterface* delegateInterface, void *bucketAssist, EventRegistrationToken* token) noexcept {
-+                return 0;
-+            }
-+
-+            template <typename TInvokeMethod>
-+            HRESULT DoInvoke(TInvokeMethod invokeOne) noexcept {
-+                return 0;
-+            }
-+
-+        public:
-+            template<typename ...TArgs>
-+            HRESULT InvokeAll(TArgs... args) noexcept {
-+                return 0;
-+            }
-+
-+            size_t GetSize() const noexcept {
-+                return 0;
-+            }
-+
-+        protected:
-+            ComPtr<Details::EventTargetArray> targets_;
-+
-+            mutable Wrappers::SRWLock targetsPointerLock_;
-+
-+            Wrappers::SRWLock addRemoveLock_;
-+        };
 +    }
 +}
 +
@@ -581,10 +244,10 @@ index 000000000..2e883e241
 +#endif
 diff --git a/mingw-w64-headers/include/wrl/implements.h b/mingw-w64-headers/include/wrl/implements.h
 new file mode 100644
-index 000000000..c8261e55a
+index 000000000..b6ef5cdd1
 --- /dev/null
 +++ b/mingw-w64-headers/include/wrl/implements.h
-@@ -0,0 +1,627 @@
+@@ -0,0 +1,394 @@
 +#ifndef _WRL_IMPLEMENTS_H_
 +#define _WRL_IMPLEMENTS_H_
 +
@@ -625,10 +288,7 @@ index 000000000..c8261e55a
 +        template <typename FactoryInterface>
 +        class ComposableBase {};
 +
-+        typedef RuntimeClassFlags<WinRt | InhibitWeakReference> InhibitWeakReferencePolicy;
-+
 +        namespace Details {
-+
 +            class Nil {};
 +
 +            template <typename T, typename ...TArgs>
@@ -648,10 +308,8 @@ index 000000000..c8261e55a
 +                }
 +            };
 +
-+            class RuntimeClassBase {};
-+
 +            template <unsigned int RuntimeClassTypeT>
-+            class RuntimeClassBaseT : private RuntimeClassBase {
++            class RuntimeClassBaseT {
 +            protected:
 +                template<typename T>
 +                static HRESULT AsIID(T* implements, REFIID riid, void **ppvObject) throw() {
@@ -667,18 +325,6 @@ index 000000000..c8261e55a
 +                HRESULT RuntimeClassInitialize() throw() {
 +                    return 0;
 +                }
-+            };
-+
-+            class FtmBaseMarker {};
-+
-+            template <typename I, typename Base>
-+            struct VerifyInheritanceHelper {
-+                static void Verify() throw() {}
-+            };
-+
-+            template <typename I>
-+            struct VerifyInheritanceHelper<I, Nil> {
-+                static void Verify() throw() {}
 +            };
 +        }
 +
@@ -882,21 +528,6 @@ index 000000000..c8261e55a
 +                void FillArrayWithIid(unsigned long *index, IID* iids) throw() {}
 +            };
 +
-+            template <typename I0, typename ...>
-+            struct AreAllNil {
-+                static const bool value = false;
-+            };
-+
-+            template <typename ...TInterfaces>
-+            struct AreAllNil<Microsoft::WRL::Details::Nil, TInterfaces...> {
-+                static const bool value = AreAllNil<TInterfaces...>::value;
-+            };
-+
-+            template <>
-+            struct AreAllNil<Microsoft::WRL::Details::Nil> {
-+                static const bool value = true;
-+            };
-+
 +            template <typename RuntimeClassFlagsT, typename FactoryInterface, bool doStrictCheck, typename ...TInterfaces>
 +            struct __declspec(novtable) ImplementsHelper<RuntimeClassFlagsT, doStrictCheck, ComposableBase<FactoryInterface>, TInterfaces...> : ImplementsHelper<RuntimeClassFlagsT, true, ComposableBase<FactoryInterface>> {
 +            protected:
@@ -918,205 +549,11 @@ index 000000000..c8261e55a
 +
 +                void FillArrayWithIid(unsigned long *index, IID* iids) throw() {}
 +            };
-+
-+            template <typename RuntimeClassFlagsT, typename FactoryInterface, bool doStrictCheck>
-+            struct __declspec(novtable) ImplementsHelper<RuntimeClassFlagsT, doStrictCheck, ComposableBase<FactoryInterface>> {
-+            protected:
-+                template <unsigned int RuntimeClassTypeT> friend class Details::RuntimeClassBaseT;
-+
-+                HRESULT CanCastTo(REFIID riid, void **ppv, bool *pRefDelegated) throw() {
-+                    return 0;
-+                }
-+
-+                IUnknown* CastToUnknown() throw() {
-+                    return nullptr;
-+                }
-+
-+                unsigned long GetIidCount() throw() {
-+                    return 0;
-+                }
-+
-+                void FillArrayWithIid(unsigned long *index, IID* iids) throw() {}
-+
-+                ImplementsHelper() throw() {}
-+
-+                ~ImplementsHelper() throw() {}
-+
-+            public:
-+                HRESULT SetComposableBasePointers(IInspectable* base, FactoryInterface* baseFactory) throw() {
-+                    return 0;
-+                }
-+
-+                ComPtr<IInspectable> GetComposableBase() throw() {
-+                    return composableBase_;
-+                }
-+
-+                ComPtr<FactoryInterface> GetComposableBaseFactory() throw() {
-+                    return composableBaseFactory_;
-+                }
-+
-+            private:
-+                ComPtr<IInspectable> composableBase_;
-+
-+                ComPtr<FactoryInterface> composableBaseFactory_;
-+
-+                IID *iidsCached_;
-+
-+                unsigned long iidCount_;
-+            };
-+
 +        }
 +
-+        template <typename I0, typename ...TInterfaces>
-+        struct __declspec(novtable) Implements : Details::ImplementsHelper<RuntimeClassFlags<WinRt>, true, I0, TInterfaces...>, Details::ImplementsBase {
-+        public:
-+            typedef RuntimeClassFlags<WinRt> ClassFlags;
-+
-+            typedef I0 FirstInterface;
-+
-+        protected:
-+            HRESULT CanCastTo(REFIID riid, void **ppv) throw() {
-+                return 0;
-+            }
-+
-+            IUnknown* CastToUnknown() throw() {
-+                return nullptr;
-+            }
-+
-+            unsigned long GetIidCount() throw() {
-+                return 0;
-+            }
-+
-+            void FillArrayWithIid(unsigned long *index, IID* iids) throw() {}
-+        };
-+
-+        template <int flags, typename I0, typename ...TInterfaces>
-+        struct __declspec(novtable) Implements<RuntimeClassFlags<flags>, I0, TInterfaces...> : Details::ImplementsHelper<RuntimeClassFlags<flags>, true, I0, TInterfaces...>, Details::ImplementsBase {
-+        public:
-+            typedef RuntimeClassFlags<flags> ClassFlags;
-+
-+            typedef I0 FirstInterface;
-+
-+        protected:
-+            HRESULT CanCastTo(REFIID riid, void **ppv) throw() {
-+                return 0;
-+            }
-+
-+            IUnknown* CastToUnknown() throw() {
-+                return nullptr;
-+            }
-+
-+            unsigned long GetIidCount() throw() {
-+                return 0;
-+            }
-+
-+            void FillArrayWithIid(unsigned long *index, IID* iids) throw() {}
-+        };
-+
-+        class FtmBase : public Implements< ::Microsoft::WRL::RuntimeClassFlags<WinRtClassicComMix>, ::Microsoft::WRL::CloakedIid< ::IMarshal> >, private ::Microsoft::WRL::Details::FtmBaseMarker {
-+        protected:
-+            template <typename RuntimeClassFlagsT, bool doStrictCheck, typename ...TInterfaces> friend struct Details::ImplementsHelper;
-+
-+            HRESULT CanCastTo(REFIID riid, void **ppv) throw() {
-+                return 0;
-+            }
-+
-+        public:
-+            FtmBase() throw() {}
-+
-+            STDMETHOD(GetUnmarshalClass)(REFIID riid, void *pv, DWORD dwDestContext, void *pvDestContext, DWORD mshlflags, CLSID *pCid) override {
-+                return 0;
-+            }
-+
-+            STDMETHOD(GetMarshalSizeMax)(REFIID riid, void *pv, DWORD dwDestContext, void *pvDestContext, DWORD mshlflags, DWORD *pSize) override {
-+                return 0;
-+            }
-+
-+            STDMETHOD(MarshalInterface)(IStream *pStm, REFIID riid, void *pv, DWORD dwDestContext, void *pvDestContext, DWORD mshlflags) override {
-+                return 0;
-+            }
-+
-+            STDMETHOD(UnmarshalInterface)(IStream *pStm, REFIID riid, void **ppv) override {
-+                return 0;
-+            }
-+
-+            STDMETHOD(ReleaseMarshalData)(IStream *pStm) override {
-+                return 0;
-+            }
-+
-+            STDMETHOD(DisconnectObject)(DWORD dwReserved) override {
-+                return 0;
-+            }
-+
-+            static HRESULT CreateGlobalInterfaceTable(IGlobalInterfaceTable **git) throw() {
-+                return 0;
-+            }
-+
-+            ::Microsoft::WRL::ComPtr<IMarshal> marshaller_;
-+        };
-+
 +        namespace Details {
-+            #define DETAILS_RTCLASS_FLAGS_ARGUMENTS(RuntimeClassFlagsT) \
-+                RuntimeClassFlagsT, \
-+                (RuntimeClassFlagsT::value & InhibitWeakReference) == 0, \
-+                (RuntimeClassFlagsT::value & WinRt) == WinRt, \
-+                __WRL_IMPLEMENTS_FTM_BASE__(RuntimeClassFlagsT::value) \
-+
 +            template <class RuntimeClassFlagsT, bool implementsWeakReferenceSource, bool implementsInspectable, bool implementsFtmBase, typename ...TInterfaces>
 +            class __declspec(novtable) RuntimeClassImpl;
-+
-+            template <class RuntimeClassFlagsT, bool implementsWeakReferenceSource, bool implementsFtmBase, typename ...TInterfaces>
-+            class __declspec(novtable) RuntimeClassImpl<RuntimeClassFlagsT, implementsWeakReferenceSource, false, implementsFtmBase, TInterfaces...> : public Details::ImplementsHelper<RuntimeClassFlagsT, false, TInterfaces...>, public RuntimeClassBaseT<RuntimeClassFlagsT::value>, protected RuntimeClassFlags<InhibitWeakReference>, public DontUseNewUseMake {
-+            public:
-+                typedef RuntimeClassFlagsT ClassFlags;
-+
-+                STDMETHOD(QueryInterface)(REFIID riid, void **ppvObject) {
-+                    return 0;
-+                }
-+
-+                STDMETHOD_(ULONG, AddRef)() {
-+                    return 0;
-+                }
-+
-+                STDMETHOD_(ULONG, Release)() {
-+                    return 0;
-+                }
-+
-+            protected:
-+                RuntimeClassImpl() throw() {}
-+
-+                virtual ~RuntimeClassImpl() throw() {}
-+
-+                unsigned long InternalAddRef() throw() {
-+                    return 0;
-+                }
-+
-+                unsigned long InternalRelease() throw() {
-+                    return 0;
-+                }
-+
-+                unsigned long GetRefCount() const throw() {
-+                    return 0;
-+                }
-+
-+                friend class WeakReferenceImpl;
-+
-+            private:
-+                volatile long refcount_;
-+            };
-+
-+            template<typename I, bool isImplementsBased = __is_base_of(ImplementsBase, I)>
-+            struct HasIInspectable;
-+
-+            template<typename I>
-+            struct HasIInspectable<I, false> {
-+                static const bool isIInspectable;
-+            };
-+
-+            template<typename I>
-+            struct HasIInspectable<I, true> {
-+                static const bool isIInspectable;
-+            };
 +
 +            template<typename I0, bool isIInspectable = true>
 +            struct IInspectableInjector;
@@ -1172,16 +609,10 @@ index 000000000..c8261e55a
 +            private:
 +                volatile long refcount_;
 +            };
-+
-+            template <class RuntimeClassFlagsT, typename I0, typename ...TInterfaces>
-+            class __declspec(novtable) RuntimeClassImpl<RuntimeClassFlagsT, false, true, true, I0, TInterfaces...> : public RuntimeClassImpl<RuntimeClassFlagsT, false, true, false, I0, TInterfaces...> {};
-+
-+            template <class RuntimeClassFlagsT, typename I0, typename ...TInterfaces>
-+            class __declspec(novtable) RuntimeClassImpl<RuntimeClassFlagsT, true, true, true, I0, TInterfaces...> : public RuntimeClassImpl<RuntimeClassFlagsT, true, true, false, I0, FtmBase, TInterfaces...> {};
 +        }
 +
 +        template <typename ...TInterfaces>
-+        class RuntimeClass : public Details::RuntimeClassImpl<DETAILS_RTCLASS_FLAGS_ARGUMENTS(RuntimeClassFlags<WinRt>), TInterfaces...> {
++        class RuntimeClass : public Details::RuntimeClassImpl<RuntimeClassFlags<WinRt>, false, true, false, TInterfaces...> {
 +            RuntimeClass(const RuntimeClass&);
 +
 +            RuntimeClass& operator=(const RuntimeClass&);
@@ -1193,7 +624,7 @@ index 000000000..c8261e55a
 +        };
 +
 +        template <unsigned int classFlags, typename ...TInterfaces>
-+        class RuntimeClass<RuntimeClassFlags<classFlags>, TInterfaces...> : public Details::RuntimeClassImpl<DETAILS_RTCLASS_FLAGS_ARGUMENTS(RuntimeClassFlags<classFlags>), TInterfaces...> {
++        class RuntimeClass<RuntimeClassFlags<classFlags>, TInterfaces...> : public Details::RuntimeClassImpl<RuntimeClassFlags<classFlags>, false, true, false, TInterfaces...> {
 +            RuntimeClass(const RuntimeClass&);
 +
 +            RuntimeClass& operator=(const RuntimeClass&);
@@ -1205,184 +636,9 @@ index 000000000..c8261e55a
 +        };
 +
 +        using Details::Make;
-+
 +    }
 +}
 +
 +#include <poppack.h>
 +
 +#endif
-diff --git a/mingw-w64-headers/include/wrl/internal.h b/mingw-w64-headers/include/wrl/internal.h
-index 715ef74e3..dffa7153d 100644
---- a/mingw-w64-headers/include/wrl/internal.h
-+++ b/mingw-w64-headers/include/wrl/internal.h
-@@ -7,6 +7,8 @@
- #ifndef _WRL_INTERNAL_H_
- #define _WRL_INTERNAL_H_
-
-+#define __WRL_IMPLEMENTS_FTM_BASE__(flags) (false)
-+
- #include <windows.h>
-
- namespace Microsoft {
-@@ -29,6 +31,26 @@ namespace Microsoft {
-             struct EnableIf<true, T> {
-                 typedef T type;
-             };
-+
-+            template<class T>
-+            struct RemoveReference {
-+                typedef T Type;
-+            };
-+
-+            template<class T>
-+            struct RemoveReference<T&> {
-+                typedef T Type;
-+            };
-+
-+            template<class T>
-+            struct RemoveReference<T&&> {
-+                typedef T Type;
-+            };
-+
-+            template<class T>
-+            inline typename RemoveReference<T>::Type&& Move(T&& arg) throw() {
-+                return nullptr;
-+            }
-         }
-     }
- }
-diff --git a/mingw-w64-headers/include/wrl/wrappers/corewrappers.h b/mingw-w64-headers/include/wrl/wrappers/corewrappers.h
-index 182d4b063..6d42fb341 100644
---- a/mingw-w64-headers/include/wrl/wrappers/corewrappers.h
-+++ b/mingw-w64-headers/include/wrl/wrappers/corewrappers.h
-@@ -24,6 +24,129 @@ namespace Microsoft {
-         }
-
-         namespace Wrappers {
-+            namespace HandleTraits {
-+                struct SRWLockSharedTraits {
-+                    typedef SRWLOCK* Type;
-+
-+                    inline static Type GetInvalidValue() throw() {
-+                        return nullptr;
-+                    }
-+
-+                    inline static void Unlock(Type srwlock) throw() {}
-+                };
-+
-+                struct SRWLockExclusiveTraits {
-+                    typedef SRWLOCK* Type;
-+
-+                    inline static Type GetInvalidValue() throw() {
-+                        return nullptr;
-+                    }
-+
-+                    inline static void Unlock(Type srwlock) throw() {}
-+                };
-+            }
-+
-+            class SRWLock;
-+
-+            namespace Details {
-+                class SyncLockExclusive {
-+                public:
-+                    SyncLockExclusive(SyncLockExclusive&& other) throw() {}
-+
-+                    SyncLockExclusive(const SyncLockExclusive&);
-+                    SyncLockExclusive& operator=(const SyncLockExclusive&);
-+
-+                    ~SyncLockExclusive() throw() {}
-+
-+                    void Unlock() throw() {}
-+
-+                    bool IsLocked() const throw() {
-+                        return 0;
-+                    }
-+
-+                    friend class Wrappers::SRWLock;
-+
-+                protected:
-+                    explicit SyncLockExclusive(SRWLOCK* sync) throw() {}
-+
-+                    SRWLOCK* sync_;
-+
-+                private:
-+                    void InternalUnlock() throw() {}
-+                };
-+
-+                class SyncLockShared {
-+                    public:
-+                    SyncLockShared(SyncLockShared&& other) throw() {}
-+
-+                    SyncLockShared(const SyncLockShared&);
-+                    SyncLockShared& operator=(const SyncLockShared&);
-+
-+                    ~SyncLockShared() throw() {}
-+
-+                    void Unlock() throw() {}
-+
-+                    bool IsLocked() const throw() {
-+                        return 0;
-+                    }
-+
-+                    friend class Wrappers::SRWLock;
-+
-+                protected:
-+                    explicit SyncLockShared(SRWLOCK* sync) throw() {}
-+
-+                    SRWLOCK* sync_;
-+
-+                private:
-+                    void InternalUnlock() throw() {}
-+                };
-+            }
-+
-+            class SRWLock {
-+                public:
-+                    SRWLock() throw() {}
-+
-+                    SRWLock(const SRWLock&) = delete;
-+                    SRWLock& operator=(const SRWLock&) = delete;
-+
-+                    ~SRWLock() throw() {}
-+
-+                    Details::SyncLockExclusive LockExclusive() throw() {
-+                        return Details::SyncLockExclusive(nullptr);
-+                    }
-+
-+                    static Details::SyncLockExclusive LockExclusive(SRWLOCK* lock) throw() {
-+                        return Details::SyncLockExclusive(nullptr);
-+                    }
-+
-+                    Details::SyncLockExclusive TryLockExclusive() throw() {
-+                        return Details::SyncLockExclusive(nullptr);
-+                    }
-+
-+                    static Details::SyncLockExclusive TryLockExclusive(SRWLOCK* lock) throw() {
-+                        return Details::SyncLockExclusive(nullptr);
-+                    }
-+
-+                    Details::SyncLockShared LockShared() throw() {
-+                        return Details::SyncLockShared(nullptr);
-+                    }
-+
-+                    static Details::SyncLockShared LockShared(SRWLOCK* lock) throw() {
-+                        return Details::SyncLockShared(nullptr);
-+                    }
-+
-+                    Details::SyncLockShared TryLockShared() throw() {
-+                        return Details::SyncLockShared(nullptr);
-+                    }
-+
-+                    static Details::SyncLockShared TryLockShared(SRWLOCK* lock) throw() {
-+                        return Details::SyncLockShared(nullptr);
-+                    }
-+
-+                protected:
-+                    SRWLOCK SRWLock_;
-+            };
-+
-             class HStringReference;
-
-             class HString {
