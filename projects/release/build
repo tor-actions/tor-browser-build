@@ -5,47 +5,58 @@
 destdir="[% dest_dir _ '/' _ c("var/publish_dir") %]"
 mkdir -p "$destdir"
 
+function merge_directory {
+  pushd $1
+  find -type d -exec mkdir -p $destdir/{} \;
+  # tor-browser-build#40338: Try to remove any existing destination, as it might
+  # be the same inode when re-running this script, which makes mv fail.
+  find -type f -exec rm -f $destdir/{} \;
+  find -type f -exec mv {} $destdir/{} \;
+  popd
+}
+
 [% IF c("var/browser_platforms/android-armv7") -%]
-  cp -alf "[% c('input_files_by_name/android-armv7') %]"/* "$destdir"/
+  merge_directory "[% c('input_files_by_name/android-armv7') %]"
 [% END -%]
 [% IF c("var/browser_platforms/android-x86_64") -%]
-  cp -alf "[% c('input_files_by_name/android-x86_64') %]"/* "$destdir"/
+  merge_directory "[% c('input_files_by_name/android-x86_64') %]"
 [% END -%]
 [% IF c("var/browser_platforms/android-aarch64") -%]
-  cp -alf "[% c('input_files_by_name/android-aarch64') %]"/* "$destdir"/
+  merge_directory "[% c('input_files_by_name/android-aarch64') %]"
 [% END -%]
 [% IF c("var/browser_platforms/windows-i686") -%]
-  cp -alf "[% c('input_files_by_name/windows-i686') %]"/* "$destdir"/
+  merge_directory "[% c('input_files_by_name/windows-i686') %]"
 [% END -%]
 [% IF c("var/browser_platforms/windows-x86_64") -%]
-  cp -alf "[% c('input_files_by_name/windows-x86_64') %]"/* "$destdir"/
+  merge_directory "[% c('input_files_by_name/windows-x86_64') %]"
 [% END -%]
 [% IF c("var/browser_platforms/macos") -%]
-  cp -alf "[% c('input_files_by_name/macos') %]"/* "$destdir"/
+  merge_directory "[% c('input_files_by_name/macos') %]"
 [% END -%]
 [% IF c("var/browser_platforms/macos-x86_64") -%]
-  cp -alf "[% c('input_files_by_name/macos-x86_64') %]"/* "$destdir"/
+  merge_directory "[% c('input_files_by_name/macos-x86_64') %]"
 [% END -%]
 [% IF c("var/browser_platforms/macos-aarch64") -%]
-  cp -alf "[% c('input_files_by_name/macos-aarch64') %]"/* "$destdir"/
+  merge_directory "[% c('input_files_by_name/macos-aarch64') %]"
 [% END -%]
 [% IF c("var/browser_platforms/linux-x86_64") -%]
-  cp -alf "[% c('input_files_by_name/linux-x86_64') %]"/* "$destdir"/
+  merge_directory "[% c('input_files_by_name/linux-x86_64') %]"
 [% END -%]
 [% IF c("var/browser_platforms/linux-aarch64") -%]
-  cp -alf "[% c('input_files_by_name/linux-aarch64') %]"/* "$destdir"/
+  merge_directory "[% c('input_files_by_name/linux-aarch64') %]"
 [% END -%]
 [% IF c("var/linux-packages") || c("var/linux-packages-aarch64") -%]
   [% IF c("var/linux-packages") -%]
-    cp -alf "[% c('input_files_by_name/deb-packages') %]"/* "$destdir"/
+    merge_directory "[% c('input_files_by_name/deb-packages') %]"
   [% END -%]
   [% IF c("var/linux-packages-aarch64") -%]
-    cp -alf "[% c('input_files_by_name/deb-packages-aarch64') %]"/* "$destdir"/
+    merge_directory "[% c('input_files_by_name/deb-packages-aarch64') %]"
   [% END -%]
-  cp -alf "[% c('input_files_by_name/rpm-packages') %]"/* "$destdir"/
+  merge_directory "[% c('input_files_by_name/rpm-packages') %]"
 [% END -%]
 [% IF c("var/browser-src") -%]
-  cp -alf "[% c('input_files_by_name/src-firefox') %]" "$destdir"/
+  rm -f "$destdir/[% c('input_files_by_name/src-firefox') %]"
+  mv [% c('input_files_by_name/src-firefox') %] "$destdir"/
 [% END -%]
 cd "$destdir"
 cat > .htaccess <<'EOF'
