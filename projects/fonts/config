@@ -196,6 +196,6 @@ input_files:
     sha256sum: 3a5f3f26f40d5698b3c62dd085d48d6663696a3f80825aab8b553d5097518e8c
     name: stix
     enable: '[% c("var/have_stix") %]'
-  - URL: 'https://github.com/mcfnlp/Pyidaungsu/raw/refs/heads/ff1cd8dfe8c451244329d7a6181c83e769226cac/Pyidaungsu2.5.3/Release/Pyidaungsu-2.5.3_Regular.ttf'
+  - URL: 'https://github.com/mcfnlp/Pyidaungsu/raw/ff1cd8dfe8c451244329d7a6181c83e769226cac/Pyidaungsu2.5.3/Release/Pyidaungsu-2.5.3_Regular.ttf'
     sha256sum: df7106c15da76f6a24c10821b43da51f54961f6bc6791fb1fcf21c6c60bb2e10
     name: Pyidaungsu
