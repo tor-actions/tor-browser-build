@@ -175,6 +175,7 @@ Tor Browser Stable is on the `maint-${TOR_BROWSER_MAJOR}.${TOR_BROWSER_MINOR}` b
     - [ ] **(Optional)** Thank any users which have contributed patches
     - [ ] **(Optional)** Draft any additional sections for new features which need testing, known issues, etc
   - [ ] Push to origin as new branch and open MR
+    - [ ] **(Optional)** Request review from pavel for non-trivial custom messaging
   - [ ] Review
   - [ ] Merge
     - **⚠️ WARNING**: Do not deploy yet!

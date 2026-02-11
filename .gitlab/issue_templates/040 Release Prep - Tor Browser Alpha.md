@@ -176,6 +176,7 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
     - [ ] **(Optional)** Thank any users which have contributed patches
     - [ ] **(Optional)** Draft any additional sections for new features which need testing, known issues, etc
   - [ ] Push to origin as new branch and open MR
+    - [ ] **(Optional)** Request review from pavel for non-trivial custom messaging
   - [ ] Review
   - [ ] Merge
     - **⚠️ WARNING**: Do not deploy yet!
