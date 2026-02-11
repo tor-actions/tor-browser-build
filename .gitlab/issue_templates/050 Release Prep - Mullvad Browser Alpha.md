@@ -183,6 +183,7 @@ This step will send the relevant branches, tags (including a tag named after the
 <details>
   <summary>Communications</summary>
 ### packagers
+
 - [ ] **(Optional, Once Packages are pushed to GitHub)**
   - **NOTE**: This is an optional step and only necessary close a major release/transition from alpha to stable, or if there are major packing changes these developers need to be aware of
   - **Recipients**
