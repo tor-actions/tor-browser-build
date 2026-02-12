@@ -97,9 +97,6 @@ targets:
     var:
       browser_type: torbrowser
       git_tag_prefix: tbb
-  basebrowser:
-    var:
-      browser_type: basebrowser
   mullvadbrowser:
     var:
       browser_type: mullvadbrowser

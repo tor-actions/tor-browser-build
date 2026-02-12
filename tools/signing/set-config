@@ -14,7 +14,6 @@ test -n "${SIGNING_PROJECTNAME+x}" \
   || exit_error 'SIGNING_PROJECTNAME is not set'
 
 test "$SIGNING_PROJECTNAME" = 'torbrowser' \
-  || test "$SIGNING_PROJECTNAME" = 'basebrowser' \
   || test "$SIGNING_PROJECTNAME" = 'mullvadbrowser' \
   || test "$SIGNING_PROJECTNAME" = 'torvpn' \
   || exit_error "Unknown SIGNING_PROJECTNAME $SIGNING_PROJECTNAME"

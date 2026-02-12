@@ -3,7 +3,6 @@
 /gclient
 /out
 /torbrowser
-/basebrowser
 /mullvadbrowser
 /testbuild
 /rbm.local.conf

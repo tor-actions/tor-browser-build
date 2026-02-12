@@ -105,11 +105,6 @@ targets:
       updater_url: ''
       has_l10n: 0
 
-  basebrowser:
-    var:
-      nightly_updates_publish_dir_prefix: basebrowser-
-      mar_id_prefix: 'basebrowser-torproject'
-
   nightly:
     git_hash: '[% c("var/project-name") %]-[% c("var/firefox_version") %]-[% c("var/browser_branch") %]'
     tag_gpg_id: 0

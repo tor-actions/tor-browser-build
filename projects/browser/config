@@ -58,10 +58,6 @@ targets:
       prefs_file: 000-tor-browser.js
       version_json: tbb_version.json
 
-  basebrowser:
-    var:
-      prefs_file: 001-base-profile.js
-
   mullvadbrowser:
     var:
       prefs_file: 001-base-profile.js

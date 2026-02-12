@@ -144,9 +144,9 @@ mar file will be created. If you want to base your testbuild on the latest
 nightly code insted, rename rbm.local.conf.example to rbm.local.conf
 and adapt the torbrowser-testbuild option accordingly.
 
-Similar makefile targets exist for building Base Browser and Mullvad Browser
-instead of Tor Browser. To build Base Browser, replace `torbrowser` by
-`basebrowser` in the target name. For Mullvad Browser, use `mullvadbrowser`.
+Similar makefile targets exist for building Mullvad Browser instead of
+Tor Browser. To build Mullvad Browser, replace `torbrowser` by
+`mullvadbrowser` in the target name.
 
 
 Updating git sources

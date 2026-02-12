@@ -86,4 +86,4 @@ input_files:
   - project: go-bootstrap
     name: go-bootstrap
     target_replace:
-      '^.*browser-(?!testbuild).*': 'basebrowser-linux-x86_64'
+      '^.*browser-(?!testbuild).*': 'torbrowser-linux-x86_64'

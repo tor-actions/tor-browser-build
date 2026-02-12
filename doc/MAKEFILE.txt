@@ -82,11 +82,6 @@ torbrowser-{release,alpha,nightly,testbuild}-src
 ------------------------------------------------
 Create source tarballs for firefox and torbutton.
 
-basebrowser-*
--------------
-The same rules for building Tor Browser also exist for building
-Base Browser.
-
 mullvadbrowser-*
 ----------------
 The same rules for building Tor Browser also exist for building

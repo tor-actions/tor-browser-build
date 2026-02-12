@@ -108,9 +108,6 @@ targets:
       browser_type: torbrowser
       system_pkg:
         pkg_url: 'https://torproject.org/'
-  basebrowser:
-    var:
-      browser_type: basebrowser
   mullvadbrowser:
     var:
       browser_type: mullvadbrowser

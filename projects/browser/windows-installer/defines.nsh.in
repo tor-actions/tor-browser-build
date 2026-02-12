@@ -17,11 +17,7 @@
 
   !define DEFAULT_PORTABLE_DIR "$DESKTOP\${DISPLAY_NAME}"
   !define EXE_NAME "[% c('var/exe_name') %].exe"
-[% IF !c("var/base-browser") -%]
   !define ICON_NAME "[% c('var/projectname') %]-[% c('var/channel') %].ico"
-[% ELSE -%]
-  !define ICON_NAME "[% c('var/projectname') %].ico"
-[% END -%]
   !define WELCOME_IMAGE "[% c('var/projectname') %]-[% c('var/channel') %].bmp"
 
 [% IF c('var/mullvad-browser') -%]
