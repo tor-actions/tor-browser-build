@@ -40,7 +40,7 @@ gradle $GRADLE_FLAGS -PversionName="$version_name" "assemble$variant" [% IF c('v
 
 echo "Build finished, copying the APK(s) to the destination directory $(date)"
 mkdir -p $outdir/[% project %]
-mv $objdir/gradle/build/mobile/android/fenix/app/outputs/apk/fenix/$variant/*.apk $outdir/[% project %]
+mv $objdir/gradle/build/mobile/android/fenix/app/outputs/apk/$variant/*.apk $outdir/[% project %]
 
 echo "Building non optimized $variant Fenix APK for testing"
 gradle $GRADLE_FLAGS -PversionName="$version_name" -PdisableOptimization "assemble$variant"
@@ -51,8 +51,8 @@ gradle $GRADLE_FLAGS -PversionName="$version_name" -PtestBuildType="$variant" -P
 echo "Test build finished, copying the APKs to the destination directory $(date)"
 
 mkdir -p $outdir/[% project %]/tests
-mv $objdir/gradle/build/mobile/android/fenix/app/outputs/apk/fenix/$variant/*.apk $outdir/[% project %]/tests
-mv $objdir/gradle/build/mobile/android/fenix/app/outputs/apk/androidTest/fenix/$variant/*.apk $outdir/[% project %]/tests
+mv $objdir/gradle/build/mobile/android/fenix/app/outputs/apk/$variant/*.apk $outdir/[% project %]/tests
+mv $objdir/gradle/build/mobile/android/fenix/app/outputs/apk/androidTest/$variant/*.apk $outdir/[% project %]/tests
 
 popd
 

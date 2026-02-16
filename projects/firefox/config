@@ -23,7 +23,7 @@ var:
   browser_rebase: 2
   browser_branch: '[% c("var/browser_series") %]-[% c("var/browser_rebase") %]'
   browser_build: 4
-  upstream_firefox_commit: FIREFOX_NIGHTLY_147_END
+  upstream_firefox_commit: FIREFOX_NIGHTLY_148_END
   copyright_year: '[% exec("git show -s --format=%ci " _ c("git_hash") _ "^{commit}", { exec_noco => 1 }).remove("-.*") %]'
   nightly_updates_publish_dir: '[% c("var/nightly_updates_publish_dir_prefix") %]nightly-[% c("var/osname") %]'
   gitlab_project: https://gitlab.torproject.org/tpo/applications/tor-browser

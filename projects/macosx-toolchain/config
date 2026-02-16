@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("arch") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
-version: 26.1
+version: 26.2
 container:
   use_container: 1
 var:
@@ -27,9 +27,9 @@ input_files:
   - name: ninja
     project: ninja
   - name: SDK
-    # Original URL: https://swcdn.apple.com/content/downloads/22/09/093-00219-A_WIA1LP39TY/evbam2mb02xqr05ju9ddb95y8qil8kz9tm/CLTools_macOSNMOS_SDK.pkg
-    URL: https://build-sources.tbb.torproject.org/CLTools_macOSNMOS_SDK-26.1.pkg
-    sha512sum: f6a5f44b3652f5abdf7ad2602f54ad38774404f45264a4e70cfccc58b8b39aed2a89f74ef22c44bf932d0a55b062ebc3651f73fa06ff755ee5da53b9dcc62fba
+    # Original URL: https://swcdn.apple.com/content/downloads/60/22/089-71960-A_W8BL1RUJJ6/5zkyplomhk1cm7z6xja2ktgapnhhti6wwd/CLTools_macOSNMOS_SDK.pkg
+    URL: https://build-sources.tbb.torproject.org/CLTools_macOSNMOS_SDK-26.2.pkg
+    sha512sum: f3785f1bbc3b8323121b66fc28ef59083b4f508c7bdabb9d8d916f142ee89b01cb8030eba469eb9107b416d1c9d523a1d2e009cddb83536a819a3704a5d3ce17
   - name: llvm-project
     project: llvm-project
   - project: wasi-sysroot

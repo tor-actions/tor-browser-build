@@ -2,13 +2,19 @@
 
 # compileSdkVersion
 read -d '' p << 'EOF' || true
-if (m/^\\s*compileSdkVersion:\\s([^"]*),/) {
-  print $1;
-  exit;
+if (m/^\\s*compileSdkMajorVersion:\\s([^"]*),/) {
+  $major = $1;
+}
+if (m/^\\s*compileSdkMinorVersion:\\s([^"]*),/) {
+  $minor = $1;
+}
+if ($major && $minor) {
+  print "$major.$minor.0";
+  exit 0;
 }
 EOF
 needed=$(cat build.gradle | perl -ne "$p")
-current=$(echo [% pc("android-sdk", "version") %] | cut -f 1 -d '.')
+current=[% pc("android-sdk", "version") %]
 check_update_needed compileSdkVersion "$needed" "$current"
 
 

@@ -30,12 +30,7 @@ export LANG=C.UTF-8
 
 tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
 
-# We disable terser for unpatched firefox since the directory
-# tools/terser does not exist in 147. It will probably be needed for
-# 148.
-[% IF !c("var/firefox-browser") -%]
-  tar -C /var/tmp/build/[% project %]-*/tools/terser -xf [% c("input_files_by_name/terser") %]
-[% END -%]
+tar -C /var/tmp/build/[% project %]-*/tools/terser -xf [% c("input_files_by_name/terser") %]
 
 [% c("var/set_MOZ_BUILD_DATE") %]
 
@@ -84,6 +79,11 @@ chmod +x $HOME/.mozbuild/android-device/avd
 
 cd $builddir/[% project %]-[% c("version") %]
 cp $rootdir/mozconfig ./
+
+# We need this to avoid a `java.lang.OutOfMemoryError: GC overhead limit exceeded`
+sed -i -e 's/-Xmx7g/-Xmx32g/' gradle.properties \
+  mobile/android/android-components/gradle.properties \
+  mobile/android/fenix/gradle.properties
 
 echo "Starting ./mach configure $(date)"
 # We still need to specify --base-browser-version due to bug 34005.
