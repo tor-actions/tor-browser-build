@@ -19,7 +19,7 @@ function merge_directory {
   merge_directory "[% c('input_files_by_name/android-armv7') %]"
 [% END -%]
 [% IF c("var/browser_platforms/android-x86") -%]
-  mv_files "[% c('input_files_by_name/android-x86') %]"
+  merge_directory "[% c('input_files_by_name/android-x86') %]"
 [% END -%]
 [% IF c("var/browser_platforms/android-x86_64") -%]
   merge_directory "[% c('input_files_by_name/android-x86_64') %]"
@@ -43,7 +43,7 @@ function merge_directory {
   merge_directory "[% c('input_files_by_name/macos-aarch64') %]"
 [% END -%]
 [% IF c("var/browser_platforms/linux-i686") -%]
-  mv_files "[% c('input_files_by_name/linux-i686') %]"
+  merge_directory "[% c('input_files_by_name/linux-i686') %]"
 [% END -%]
 [% IF c("var/browser_platforms/linux-x86_64") -%]
   merge_directory "[% c('input_files_by_name/linux-x86_64') %]"
