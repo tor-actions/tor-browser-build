@@ -1,3 +1,41 @@
+Tor Browser 16.0a3 - February 17 2026
+ * All Platforms
+   * Updated Tor to 0.4.9.5
+   * Updated NoScript to 13.5.12.90301984
+   * Bug 44562: Set the new online Suggest prefs to false [tor-browser]
+   * Bug 44571: Disable restrict_to_adults for potential fingerprintability [tor-browser]
+   * Bug 44619: Add custom logs to Tor logs [tor-browser]
+   * Bug 44625: metamask.io won't load on Safer security level [tor-browser]
+   * Bug 44626: Propagate WASM blocking to workers [tor-browser]
+   * Bug 44647: Clean up patch for `SearchEngineSelector.sys.mjs`. [tor-browser]
+   * Bug 44652: Backport fix for Firefox Bug 2014390 [tor-browser]
+   * Bug 41713: Try to find a component for bugs found with commits in triage spreadsheets [tor-browser-build]
+ * Windows + macOS + Linux
+   * Bug 43560: Add "UTC" to the end of the timestamp on tor logs (Desktop) [tor-browser]
+   * Bug 44459: Letterboxing content alignment setting is missing styling [tor-browser]
+   * Bug 44520: Make sure "Firefox labs" is hidden by default [tor-browser]
+ * Windows
+   * Bug 44623: 16.0a2: about:preferences#privacy is empty [tor-browser]
+ * Linux
+   * Bug 44050: Consider changing the domain in DBus interfaces [tor-browser]
+ * Android
+   * Bug 43403: Add "UTC" to the end of the timestamp on tor logs (Android) [tor-browser]
+   * Bug 44057: Drop about:torconnect from android [tor-browser]
+   * Bug 44620: Move the Android IPC directory [tor-browser]
+   * Bug 28595: Remove the need to update var/gradle_dependencies_version [tor-browser-build]
+ * Build System
+   * All Platforms
+     * Bug 40338: Running `make release` multiple times fails [tor-browser-build]
+     * Bug 41660: Add a Firefox target to build unpatched Firefox in tor-browser-build [tor-browser-build]
+     * Bug 41693: Drop base-browser targets [tor-browser-build]
+     * Bug 41720: cp -l in release/build fails when crossing file systems [tor-browser-build]
+     * Bug 40093: Make it easy to get the sha256sum of an input_files file [rbm]
+     * Bug 40103: Allow having multiple tmp_dir values [rbm]
+   * Windows + Linux + Android
+     * Updated Go to 1.25.7
+   * Android
+     * Bug 41719: Enable network when var/generate_gradle_dependencies_list is set in geckoview [tor-browser-build]
+
 Tor Browser 16.0a2 - February 04 2026
  * All Platforms
    * Updated NoScript to 13.5.11.90301984
