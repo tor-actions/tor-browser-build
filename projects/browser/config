@@ -103,9 +103,9 @@ input_files:
     enable: '[% ! c("var/android") %]'
   - filename: Bundle-Data
     enable: '[% ! c("var/android") %]'
-  - URL: https://dist.torproject.org/torbrowser/noscript/noscript-13.5.7.1984.xpi
+  - URL: https://dist.torproject.org/torbrowser/noscript/noscript-13.5.13.1984.xpi
     name: noscript
-    sha256sum: 502cba045cc36f813adce8931e13d7f8f3962f8ba855173f4ba19bc82a6cfb59
+    sha256sum: 2d6a316846f113bad3720789477bc7d0633c88eeafbe7e109f2eaac642c0a408
   - URL: https://addons.mozilla.org/firefox/downloads/file/4359936/ublock_origin-1.60.0.xpi
     name: ublock-origin
     sha256sum: e2cda9b2a1b0a7f6e5ef0da9f87f28df52f8560587ba2e51a3003121cfb81600

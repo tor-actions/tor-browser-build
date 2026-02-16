@@ -1,3 +1,13 @@
+Tor Browser 13.5.28 - February 17 2026
+ * All Platforms
+   * Updated Firefox to 115.32.1esr
+   * Updated NoScript to 13.5.13.1984
+   * Updated Tor to 0.4.9.5
+   * Updated OpenSSL to 3.5.5
+   * Bug 44625: metamask.io won't load on Safer security level [tor-browser]
+   * Bug 44626: Propagate WASM blocking to workers [tor-browser]
+   * Bug 44649: Rebase Tor Browser legacy onto 13.5.32.1esr [tor-browser]
+
 Tor Browser 13.5.27 - January 13 2026
  * All Platforms
    * Updated Firefox to 115.32.0esr
