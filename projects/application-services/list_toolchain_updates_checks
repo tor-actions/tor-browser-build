@@ -41,6 +41,17 @@ needed=$(cat libs/build-all.sh | perl -ne "$p")
 current='[% c("var/nss_version") %]-with-nspr-[% c("var/nspr_version") %]'
 check_update_needed nss-nspr "$needed" "$current"
 
+# nss-sha256sum
+read -d '' p << 'EOF' || true
+if (m/NSS_SHA256="([^"]+)"/) {
+  print $1;
+  exit;
+}
+EOF
+needed=$(cat libs/build-all.sh | perl -ne "$p")
+current='[% c("var/nss_sha256sum") %]'
+check_update_needed nss-sha256sum "$needed" "$current"
+
 # uniffi
 p='while (<>) {
   if (m/^\s*uniffi\s*=\s*\{[^}]*version\s*=\s*"([^"]*)"/) {

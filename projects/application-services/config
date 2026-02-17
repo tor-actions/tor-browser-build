@@ -21,8 +21,10 @@ container:
 var:
   build_number: 1
   gradle_version: 8.14.3
+  # NSS version ans sha256 are in libs/build-all.sh.
   nss_version: '3.120'
   nspr_version: '4.38.2'
+  nss_sha256sum: fb5aa56fa35d963d4c65278328e2e9c99c2484c86f0e41537412477739dcf997
   cargo_vendor_include_config: 1
   # Uncomment this to run an online build to grab an updated
   # gradle-dependencies-list.txt.
@@ -67,10 +69,9 @@ steps:
       - URL: 'https://dl.google.com/android/repository/build-tools_r35_linux.zip'
         name: build_tools_35
         sha256sum: bd3a4966912eb8b30ed0d00b0cda6b6543b949d5ffe00bea54c04c81e1561d88
-      # NSS version ans sha256 are in libs/build-all.sh.
       - URL: 'https://ftp.mozilla.org/pub/security/nss/releases/NSS_[% c("var/nss_version") | replace("\\.", "_") %]_RTM/src/nss-[% c("var/nss_version") %]-with-nspr-[% c("var/nspr_version") %].tar.gz'
         name: nss
-        sha256sum: fb5aa56fa35d963d4c65278328e2e9c99c2484c86f0e41537412477739dcf997
+        sha256sum: '[% c("var/nss_sha256sum") %]'
       - filename: gradle-dependencies-list.txt
         name: gradle-dependencies-list
       - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
