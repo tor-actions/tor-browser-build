@@ -4,6 +4,7 @@ version: 26.2
 container:
   use_container: 1
 var:
+  sdk_sha512sum: f3785f1bbc3b8323121b66fc28ef59083b4f508c7bdabb9d8d916f142ee89b01cb8030eba469eb9107b416d1c9d523a1d2e009cddb83536a819a3704a5d3ce17
   setup: |
     mkdir -p /var/tmp/dist
     tar -C /var/tmp/dist -xf $rootdir/[% c("compiler_tarfile") %]
@@ -28,8 +29,8 @@ input_files:
     project: ninja
   - name: SDK
     # Original URL: https://swcdn.apple.com/content/downloads/60/22/089-71960-A_W8BL1RUJJ6/5zkyplomhk1cm7z6xja2ktgapnhhti6wwd/CLTools_macOSNMOS_SDK.pkg
-    URL: https://build-sources.tbb.torproject.org/CLTools_macOSNMOS_SDK-26.2.pkg
-    sha512sum: f3785f1bbc3b8323121b66fc28ef59083b4f508c7bdabb9d8d916f142ee89b01cb8030eba469eb9107b416d1c9d523a1d2e009cddb83536a819a3704a5d3ce17
+    URL: 'https://build-sources.tbb.torproject.org/CLTools_macOSNMOS_SDK-[% c("version") %].pkg'
+    sha512sum: '[% c("var/sdk_sha512sum") %]'
   - name: llvm-project
     project: llvm-project
   - project: wasi-sysroot

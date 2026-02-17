@@ -3,7 +3,7 @@
 [% INCLUDE 'list_toolchain_updates-common-firefox-geckoview' %]
 
 [% IF c("var/macos") %]
-# macosx-sdk
+# macosx-sdk-version
 read -d '' p << 'EOF' || true
 sub l {
   ref $_[0] eq 'ARRAY' ? $_[0] : [ $_[0] ];
@@ -11,7 +11,6 @@ sub l {
 
 my $d = YAML::XS::LoadFile('taskcluster/kinds/toolchain/macos-sdk.yml');
 
-my $sdk_version;
 foreach my $t (keys %$d) {
   foreach my $alias (@{l($d->{$t}{run}{'toolchain-alias'})}) {
     if ($alias eq 'macosx64-sdk') {
@@ -27,7 +26,32 @@ exit 1;
 EOF
 needed=$(perl -MYAML::XS -e "$p")
 current='[% pc("macosx-toolchain", "version") %]'
-check_update_needed macos-sdk "$needed" "$current"
+check_update_needed macos-sdk-version "$needed" "$current"
+
+# macos-sdk-sha512sum
+read -d '' p << 'EOF' || true
+sub l {
+  ref $_[0] eq 'ARRAY' ? $_[0] : [ $_[0] ];
+}
+
+my $d = YAML::XS::LoadFile('taskcluster/kinds/toolchain/macos-sdk.yml');
+
+foreach my $t (keys %$d) {
+  foreach my $alias (@{l($d->{$t}{run}{'toolchain-alias'})}) {
+    if ($alias eq 'macosx64-sdk') {
+      if ($t =~ m/^macosx64-sdk-(.*)/) {
+        print $d->{$t}{run}{'arguments'}[1];
+        exit 0;
+      }
+    }
+  }
+}
+
+exit 1;
+EOF
+needed=$(perl -MYAML::XS -e "$p")
+current='[% pc("macosx-toolchain", "var/sdk_sha512sum") %]'
+check_update_needed macos-sdk-sha512sum "$needed" "$current"
 
 # cctools
 read -d '' p << 'EOF' || true
