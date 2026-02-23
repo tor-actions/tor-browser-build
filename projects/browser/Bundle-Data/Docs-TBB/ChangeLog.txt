@@ -1,3 +1,15 @@
+Tor Browser 15.0.7 - February 24 2026
+ * All Platforms
+   * Updated NoScript to 13.5.14.1984
+   * Updated zlib to 1.3.2
+   * Bug 44656: Rebase Tor Browser release onto 140.8.0esr [tor-browser]
+   * Bug 44681: Backport Security Fixes from Firefox 148 [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 140.8.0esr
+ * Android
+   * Updated GeckoView to 140.8.0esr
+   * Bug 44620: Move the Android IPC directory [tor-browser]
+
 Tor Browser 15.0.6 - February 17 2026
  * All Platforms
    * Updated NoScript to 13.5.13.1984
