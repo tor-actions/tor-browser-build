@@ -223,4 +223,5 @@ This step will send the relevant branches, tags (including a tag named after the
 /label ~"Apps::Product::MullvadBrowser"
 /label ~"Apps::Impact::High"
 /label ~"Priority::Blocker"
+/label ~"All Platforms"
 /label ~"Project 196"

@@ -357,3 +357,4 @@ popd
 /label ~"Apps::Impact::High"
 /label ~"Priority::Blocker"
 /label ~"Apps::Product::TorBrowser"
+/label ~"All Platforms"
