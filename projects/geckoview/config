@@ -16,8 +16,8 @@ gpg_keyring:
 container:
   use_container: 1
   disable_network:
-    build: '[% !c("var/generate_gradle_dependencies_list") %]'
-    build_apk: '[% !c("var/generate_gradle_dependencies_list") %]'
+    build: '[% !c("var/online_build") %]'
+    build_apk: '[% !c("var/online_build") %]'
 
 var:
   firefox_platform_version: '148.0a1'
@@ -46,9 +46,6 @@ var:
   has_l10n: '[% !c("var/testbuild") && !c("var/locales").empty %]'
   l10n-changesets: '[% exec("git --no-pager show " _ c("git_hash") _ ":browser/locales/l10n-changesets.json", { exec_noco => 1 }) %]'
   mozconfig_file: 'mozconfig-[% c("var/osname") %]'
-  # Uncomment this to run an online build to grab an updated
-  # gradle-dependencies-list.txt.
-  # generate_gradle_dependencies_list: 1
 
 targets:
   release:
@@ -63,8 +60,18 @@ targets:
     git_hash: '[% pc("firefox", "var/upstream_firefox_commit") %]'
     tag_gpg_id: 0
     var:
-      generate_gradle_dependencies_list: 1
+      online_build: 1
       has_l10n: 0
+
+  # Run `make get_gradle_dependencies_list-geckoview` to
+  # generate the gradle dependencies file. You can them move the file
+  # `out/geckoview/gradle-dependencies-list-$version.txt`
+  # to `projects/geckoview/gradle-dependencies-list.txt`.
+  generate_gradle_dependencies_list:
+    filename: 'gradle-dependencies-list-[% IF c("var/firefox-browser"); GET c("git_hash"); ELSE; GET c("var/firefox_platform_version"); END; %].txt'
+    var:
+      online_build: 1
+      generate_gradle_dependencies_list: 1
 
 steps:
   build_apk:
@@ -97,13 +104,13 @@ steps:
       - project: glean
         name: glean
         pkg_type: build
-        enable: '[% !c("var/generate_gradle_dependencies_list") %]'
+        enable: '[% !c("var/online_build") %]'
       - filename: gradle-dependencies-list.txt
         name: gradle-dependencies-list
       - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
         name: gradle-dependencies
         exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
-        enable: '[% !c("var/generate_gradle_dependencies_list") %]'
+        enable: '[% !c("var/online_build") %]'
       - name: geckoview_armv7
         project: geckoview
         pkg_type: build
@@ -137,7 +144,7 @@ steps:
       - URL: '[% pc("glean-parser", "var/glean_wheels_url") %]'
         name: glean-wheels
         sha256sum: '[% pc("glean-parser", "var/glean_wheels_sha256sum") %]'
-        enable: '[% !c("var/generate_gradle_dependencies_list") %]'
+        enable: '[% !c("var/online_build") %]'
       - project: terser
         name: terser
         pkg_type: build
@@ -147,8 +154,6 @@ steps:
       - URL: 'https://github.com/google/bundletool/releases/download/[% c("var/bundletool_version") %]/bundletool-all-[% c("var/bundletool_version") %].jar'
         name: bundletool
         sha256sum: '[% c("var/bundletool_hash") %]'
-      - filename: gen-gradle-deps-file.py
-        enable: '[% c("var/generate_gradle_dependencies_list") %]'
 
   list_toolchain_updates:
     git_hash: '[% pc("firefox", "var/upstream_firefox_commit") %]'
@@ -189,13 +194,13 @@ input_files:
   - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
     name: gradle-dependencies
     exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
-    enable: '[% !c("var/generate_gradle_dependencies_list") %]'
+    enable: '[% !c("var/online_build") %]'
   - URL: '[% pc("glean-parser", "var/glean_wheels_url") %]'
     name: glean-wheels
     sha256sum: '[% pc("glean-parser", "var/glean_wheels_sha256sum") %]'
   - project: glean
     name: glean
-    enable: '[% !c("var/generate_gradle_dependencies_list") %]'
+    enable: '[% !c("var/online_build") %]'
   - project: terser
     name: terser
   - name: tor-expert-bundle-aar
@@ -217,4 +222,4 @@ input_files:
     name: bundletool
     sha256sum: '[% c("var/bundletool_hash") %]'
   - filename: gen-gradle-deps-file.py
-    enable: '[% c("var/generate_gradle_dependencies_list") %]'
+    enable: '[% c("var/online_build") %]'

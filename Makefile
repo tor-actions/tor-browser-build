@@ -455,8 +455,17 @@ create_glean_deps_tarball: submodule-update
 create_glean_deps_tarball-with_torsocks: submodule-update
 	$(rbm) build glean-parser --target alpha --target torbrowser-android-armv7 --target with_torsocks
 
-get_gradle_dependencies_list-application-services: submodule-update
-	$(rbm) build application-services --step get_gradle_dependencies_list --target nightly --target torbrowser-android-armv7
+generate_gradle_dependencies_list-application-services: submodule-update
+	$(rbm) build application-services --target generate_gradle_dependencies_list --target nightly --target torbrowser-android-armv7
+
+generate_gradle_dependencies_list-geckoview: submodule-update
+	$(rbm) build geckoview --target geckoview:generate_gradle_dependencies_list --target nightly --target torbrowser-android-armv7
+
+generate_gradle_dependencies_list-geckoview-firefoxbrowser: submodule-update
+	$(rbm) build geckoview --target geckoview:generate_gradle_dependencies_list --target alpha --target firefoxbrowser-android-aarch64
+
+generate_gradle_dependencies_list-glean: submodule-update
+	$(rbm) build glean --target generate_gradle_dependencies_list --target nightly --target torbrowser-android-armv7
 
 cargo_vendor-application-services: submodule-update
 	$(rbm) build application-services --step cargo_vendor --target nightly --target torbrowser-android-armv7

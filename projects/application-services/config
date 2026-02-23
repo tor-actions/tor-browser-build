@@ -26,9 +26,6 @@ var:
   nspr_version: '4.38.2'
   nss_sha256sum: fb5aa56fa35d963d4c65278328e2e9c99c2484c86f0e41537412477739dcf997
   cargo_vendor_include_config: 1
-  # Uncomment this to run an online build to grab an updated
-  # gradle-dependencies-list.txt.
-  # generate_gradle_dependencies_list: 1
 
 targets:
   nightly:
@@ -90,6 +87,16 @@ steps:
         enable: '[% !c("var/generate_gradle_dependencies_list") %]'
       - filename: gen-gradle-deps-file.py
         enable: '[% c("var/generate_gradle_dependencies_list") %]'
+
+    targets:
+      # Run `make get_gradle_dependencies_list-application-services` to
+      # generate the gradle dependencies file. You can them move the file
+      # `out/application-services/gradle-dependencies-list-$version.txt`
+      # to `projects/application-services/gradle-dependencies-list.txt`.
+      generate_gradle_dependencies_list:
+        filename: 'gradle-dependencies-list-[% c("version") %].txt'
+        var:
+          generate_gradle_dependencies_list: 1
 
   list_toolchain_updates:
     git_hash: 'v[% c("version") %]'

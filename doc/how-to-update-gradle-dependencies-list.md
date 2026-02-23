@@ -2,21 +2,16 @@
 
 ## TL; DR
 
-1. Open `projects/<project name>/config`.
-2. Look for `# generate_gradle_dependencies_list: 1` and uncomment it.
-3. Run `rbm/rbm build <project name> --target nightly --target torbrowser-android-<arch>`.
-   For GeckoView, make sure to run a single-arch build to catch all dependencies
-   at once.
-   Testbuilds (i.e., `make torbrowser-testbuild-android-<arch>`) are single-arch
-   by default, but you can also set `var/android_single_arch`.
-4. Find the corresponding output: `ls -lt out/<project name> | head`.
-5. Extract it.
-6. Move the `gradle-dependencies-list.txt` you just extracted to
-   `projects/<project name>/`. 
+For `application-services`, 'geckoview', `geckoview-firefoxbrowser`,
+`glean`:
 
-Theoretically, it should be also possible to set
-`generate_gradle_dependencies_list: 1` in `rbm.local.conf`, run a full build and
-update all dependencies at once.
+1. Run `make generate_gradle_dependencies_list-$project`
+2. Copy `out/$project/gradle-dependencies-list-$version.txt`
+   to `projects/$project/gradle-dependencies-list.txt`.
+
+Note: The `generate_gradle_dependencies_list-geckoview-firefoxbrowser`
+target is doing the same as the `generate_gradle_dependencies_list-geckoview-firefoxbrowser`
+target, except that it is using unpatched upstream branch.
 
 ## Rationale
 

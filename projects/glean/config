@@ -11,9 +11,6 @@ container:
 
 var:
   gradle_version: 8.14.3
-  # Uncomment this to run an online build to grab an updated
-  # gradle-dependencies-list.txt.
-  # generate_gradle_dependencies_list: 1
 
 steps:
   build:
@@ -57,3 +54,13 @@ steps:
         enable: '[% c("var/generate_gradle_dependencies_list") %]'
       - filename: use-custom-gradle-repo.diff
       - filename: use-uniffi-noop.diff
+
+    targets:
+      # Run `make get_gradle_dependencies_list-glean` to
+      # generate the gradle dependencies file. You can them move the file
+      # `out/glean/gradle-dependencies-list-$version.txt`
+      # to `projects/glean/gradle-dependencies-list.txt`.
+      generate_gradle_dependencies_list:
+        filename: 'gradle-dependencies-list-[% c("version") %].txt'
+        var:
+          generate_gradle_dependencies_list: 1

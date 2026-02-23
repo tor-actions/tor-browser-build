@@ -94,6 +94,8 @@ cp target/release/nimbus-fml $distdir
 [% IF c('var/generate_gradle_dependencies_list') -%]
   cd $distdir
   $rootdir/gen-gradle-deps-file.py $gradle_logs
+  cp gradle-dependencies-list.txt [% dest_dir _ '/' _ c('filename') %]
+  [% RETURN -%]
 [% END -%]
 
 cd /var/tmp/dist
