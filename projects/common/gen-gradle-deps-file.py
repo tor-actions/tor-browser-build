@@ -111,9 +111,6 @@ def main():
 
     if results:
         with open(args.output, "w") as out_file:
-            out_file.write(
-                "# Don't forget to update var/gradle_dependencies_version when modifying this file\n"
-            )
             out_file.write("sha256sum | url\n")
             for sha256, url in sorted(results, key=lambda x: x[1]):
                 out_file.write(f"{sha256} | {url}\n")
