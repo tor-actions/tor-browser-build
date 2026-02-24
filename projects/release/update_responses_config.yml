@@ -45,6 +45,7 @@ versions:
         platformVersion: [% pc('firefox', 'var/firefox_platform_version') %]
 [% IF c("var/tor-browser") -%]
         detailsURL: https://blog.torproject.org/new[% IF c("var/alpha") %]-alpha[% END %]-release-tor-browser-[% c("var/torbrowser_version") FILTER remove('\.') %]
+        unsupportedURL: https://support.torproject.org/tor-browser/security/legacy-os/
 [% END -%]
 [% IF c("var/mullvad-browser") -%]
         detailsURL: https://github.com/mullvad/mullvad-browser/releases/[% c("var/torbrowser_version") %]
