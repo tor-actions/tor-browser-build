@@ -391,6 +391,7 @@ sub get_response {
         }
         my $minversion = get_config($config, $version, $os, 'minSupportedOSVersion');
         my $mininstruc = get_config($config, $version, $os, 'minSupportedInstructionSet');
+        my $unsupportedurl = get_config($config, $version, $os, 'unsupportedURL');
         $writer->startTag('update',
             type => 'minor',
             displayVersion => $version,
@@ -401,6 +402,7 @@ sub get_response {
             actions => 'showURL',
             defined $minversion ? ( minSupportedOSVersion => $minversion ) : (),
             defined $mininstruc ? ( minSupportedInstructionSet => $mininstruc ) : (),
+            defined $unsupportedurl ? ( unsupportedURL => $unsupportedurl ) : (),
         );
         if (my $patch = $config->{versions}{$version}{files}{$os}{complete}) {
             my @sorted_patch = map { $_ => $patch->{$_} } sort keys %$patch;
