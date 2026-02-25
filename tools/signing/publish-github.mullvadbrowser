@@ -37,7 +37,7 @@ fi
 pushd >/dev/null ../../git_clones/firefox
 echo "Fetching $MB_BRANCH and tags..."
 git fetch --tags "$GL_REMOTE_MULLVAD" "$MB_BRANCH"
-git fetch --tags "$GL_REMOTE_TOR" "$BB_BRANCH"
+git fetch --tags "$GL_REMOTE_TOR"
 BB_TAG=$(git tag -l "$BB_BRANCH-build*" | tail -n1)
 FX_TAG=$(git tag -l "FIREFOX_*${FX_VERSION//\./_}*" "FIREFOX_NIGHTLY_${FX_VERSION//\.0a[0-9]*/}*" | tail -n1)
 echo "QA build version: $BASE_VERSION"
