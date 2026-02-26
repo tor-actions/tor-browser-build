@@ -44,7 +44,7 @@ touch "$GENERATEDPREFSPATH"
   DOCSPATH=[% c('var/ProjectName') %]/Docs
   EXTSPATH=distribution/extensions
   TORBINPATH=TorBrowser/Tor
-  TORCONFIGPATH=TorBrowser/Data/Tor
+  TORCONFIGPATH=$TORBINPATH
 
   [% IF c("var/tor-browser") -%]
     PROFILEPATH=[% c('var/ProjectName') %]/Data/Browser/profile.default/extensions
@@ -230,6 +230,8 @@ done
 
 [% IF c("var/linux") && c("var/tor-browser") %]
   chmod 700 "${TB_STAGE_DIR}/Browser/[% c('var/ProjectName') %]/Data/Browser"
+  # Pre-create the data directory to make sure it gets restrictive permissions.
+  mkdir -p "${TB_STAGE_DIR}/Browser/TorBrowser/Data/Tor"
   chmod 700 "${TB_STAGE_DIR}/Browser/TorBrowser/Data/Tor"
 [% END %]
 
