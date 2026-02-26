@@ -98,6 +98,8 @@ steps:
         name: glean
         pkg_type: build
         enable: '[% !c("var/generate_gradle_dependencies_list") %]'
+      - filename: gradle-dependencies-list.txt
+        name: gradle-dependencies-list
       - filename: 'gradle-dependencies-[% c("var/gradle_dependencies_version") %]'
         name: gradle-dependencies
         exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
