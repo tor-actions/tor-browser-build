@@ -1,26 +1,20 @@
 #!/bin/bash
-[% INCLUDE 'build_common' %]
+[% c("var/set_default_env") -%]
 
-tar -C /var/tmp/dist -xf [% c('input_files_by_name/rust') %]
-tar -C /var/tmp/dist -xf [% c('input_files_by_name/cbindgen') %]
-tar -C /var/tmp/dist -xf [% c('input_files_by_name/nasm') %]
-tar -C /var/tmp/dist -xf [% c('input_files_by_name/clang') %]
+mkdir -p /var/tmp/dist
+tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/rust') %]
+tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/cbindgen') %]
+tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/nasm') %]
+tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/clang') %]
 export LLVM_CONFIG="/var/tmp/dist/clang-linux/bin/llvm-config"
 export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/nasm/bin:/var/tmp/dist/clang-linux/bin:$PATH"
 
 [% IF c("var/rlbox") -%]
-  tar -C /var/tmp/dist -xf [% c('input_files_by_name/wasi-sysroot') %]
+  tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/wasi-sysroot') %]
   export WASI_SYSROOT=/var/tmp/dist/wasi-sysroot/
 [% END -%]
 
-cd /var/tmp/build/[% project %]-[% c("version") %]
-cp $rootdir/mozconfig ./
-
-echo "Starting ./mach configure $(date)"
-./mach configure \
-  [% IF !c("var/firefox-browser") %]--with-base-browser-version=[% c("var/torbrowser_version") %][% END %] \
-  [% IF !c("var/firefox-browser") %]--with-branding=$branding_dir[% END %] \
-  [% IF !c("var/rlbox") -%]--without-wasm-sandboxed-libraries[% END %]
+[% INCLUDE 'build_common' %]
 
 echo "Starting ./mach build $(date)"
 ./mach build --verbose [% IF c('var/generate_gradle_dependencies_list') %]2>&1 | tee -a $gradle_logs[% END %]
