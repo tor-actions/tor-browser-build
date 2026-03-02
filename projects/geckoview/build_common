@@ -56,9 +56,6 @@ export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64
 
   tar -xf [% c('input_files_by_name/glean-wheels') %]
   export GLEAN_PYTHON_WHEELS_DIR=$rootdir/glean-wheels
-
-  tar -xf [% c('input_files_by_name/oss-licenses-plugin') %]
-  cp -rl oss-licenses-plugin/. $gradle_repo
 [% ELSE -%]
   gradle_logs=/var/tmp/build/gradle-logs.log
   export GRADLE_FLAGS="--no-daemon --info"

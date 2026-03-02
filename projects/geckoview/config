@@ -144,10 +144,6 @@ steps:
       - name: tor-expert-bundle-aar
         project: tor-expert-bundle-aar
         pkg_type: build
-      - project: oss-licenses-plugin
-        name: oss-licenses-plugin
-        pkg_type: build
-        enable: '[% !c("var/generate_gradle_dependencies_list") %]'
       - URL: 'https://github.com/google/bundletool/releases/download/[% c("var/bundletool_version") %]/bundletool-all-[% c("var/bundletool_version") %].jar'
         name: bundletool
         sha256sum: '[% c("var/bundletool_hash") %]'
@@ -199,9 +195,6 @@ input_files:
     sha256sum: '[% pc("glean-parser", "var/glean_wheels_sha256sum") %]'
   - project: glean
     name: glean
-    enable: '[% !c("var/generate_gradle_dependencies_list") %]'
-  - project: oss-licenses-plugin
-    name: oss-licenses-plugin
     enable: '[% !c("var/generate_gradle_dependencies_list") %]'
   - project: terser
     name: terser

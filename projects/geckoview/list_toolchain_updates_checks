@@ -94,18 +94,6 @@ current='[% c("var/bundletool_version") %]'
 check_update_needed bundletool "$needed" "$current"
 
 
-# oss-licenses-plugin
-read -d '' p << 'EOF' || true
-if (m{^osslicenses-plugin\\s*=\\s*"(.+)"}) {
-  print $1;
-  exit;
-}
-EOF
-needed=$(cat gradle/libs.versions.toml | perl -ne "$p")
-current='[% pc("oss-licenses-plugin", "version") %]'
-check_update_needed oss-licenses-plugin "$needed" "$current"
-
-
 # glean version
 read -d '' p << 'EOF' || true
 if (m{^glean\\s*=\\s*"(.+)"}) {
