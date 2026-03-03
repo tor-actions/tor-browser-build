@@ -7,7 +7,7 @@ export MOZ_ANDROID_FAT_AAR_ARMEABI_V7A=$rootdir/[% c('input_files_by_name/geckov
 export MOZ_ANDROID_FAT_AAR_ARM64_V8A=$rootdir/[% c('input_files_by_name/geckoview_aarch64') %]/geckoview/target.maven.zip
 export MOZ_ANDROID_FAT_AAR_X86_64=$rootdir/[% c('input_files_by_name/geckoview_x86_64') %]/geckoview/target.maven.zip
 
-[% INCLUDE 'build_common' %]
+[% INCLUDE 'build_common.sh' %]
 
 ./mach build --verbose
 
@@ -20,4 +20,4 @@ export MOZ_ANDROID_FAT_AAR_X86_64=$rootdir/[% c('input_files_by_name/geckoview_x
   mv $rootdir/[% c('input_files_by_name/geckoview_x86_64') %]/artifacts/* $outdir/[% project %]/artifacts/x86_64
 [% END -%]
 
-[% INCLUDE 'build_ac_fenix' %]
+[% INCLUDE 'build_ac_fenix.sh' %]

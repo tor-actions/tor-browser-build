@@ -14,7 +14,7 @@ export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/nasm/bi
   export WASI_SYSROOT=/var/tmp/dist/wasi-sysroot/
 [% END -%]
 
-[% INCLUDE 'build_common' %]
+[% INCLUDE 'build_common.sh' %]
 
 echo "Starting ./mach build $(date)"
 ./mach build --verbose [% IF c('var/generate_gradle_dependencies_list') %]2>&1 | tee -a $gradle_logs[% END %]
@@ -45,5 +45,5 @@ echo "Build finished, copying the AAR to the to the destination directory $(date
   mkdir -p "$outdir/[% project %]"
   cp obj-*/gradle/target.maven.zip $outdir/[% project %]/
 [% ELSE -%]
-[% INCLUDE 'build_ac_fenix' %]
+[% INCLUDE 'build_ac_fenix.sh' %]
 [% END -%]
