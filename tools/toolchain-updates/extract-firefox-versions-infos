@@ -1,0 +1,481 @@
+#!/usr/bin/perl -w
+#
+# This script extracts version informations from a firefox tree. It will
+# output on stdout a json file containing version information found in
+# the firefox tree. The json file also include information about which
+# rbm project, option and targets can be used to query (and later update)
+# the current value in `tor-browser-build` (this part is done by the
+# `check-versions` script).
+#
+# This script should be run from the root of a firefox tree, without
+# argument.
+#
+#
+# == How to add extraction of a new version information ==
+#
+# - Copy the `get_glean_info` function (as an example of basic extraction
+#   function) and rename it with the name of the new component
+# - Add the new function to the list of functions being called, at the
+#   end of the file
+# - Update `$component` with the name of the component
+# - Update the `set_rbm_info` call with the rbm project, option and
+#   target (optional) used query the current version in `tor-browser-build`.
+# - Update the file path in the `my @lines = ...` line to the path in
+#   the source tree where the information can be found
+# - Update the regexp to match the line containing the information we
+#   want to extract. The part between parenthesis will be stored as `$1`,
+#   which we can use in the `set_version_info` call to save the
+#   information we extracted. If the information was not found,
+#   `set_error` is used to register an error.
+#
+# Alternatively it should be possible to write an additional script to
+# extract some informations from the sources, and output them in the
+# same json format as this script.
+
+use strict;
+use English;
+use YAML::XS qw(LoadFile);
+use Path::Tiny;
+use JSON qw/decode_json/;
+use FindBin;
+use lib $FindBin::Bin;
+use ExtractVersionsInfos;
+
+# taskcluster/kinds/toolchain/rust.yml
+#
+## Rust ##
+sub get_rust_info {
+  my $infos = YAML::XS::LoadFile('taskcluster/kinds/toolchain/rust.yml');
+  my %toolchain_aliases = (
+    linux   => 'linux64-rust',
+    windows => 'mingw32-rust',
+    macos   => 'linux64-rust-macos',
+  );
+  foreach my $os (keys %toolchain_aliases) {
+    TOOLCHAIN_ALIAS: foreach my $t (keys %$infos) {
+      next unless ref $infos->{$t}{run}{'toolchain-alias'} eq 'HASH';
+      my $talias = as_array($infos->{$t}{run}{'toolchain-alias'}{'by-project'}{default});
+      if (grep { $_ eq $toolchain_aliases{$os} } @$talias) {
+        my $channel;
+        foreach my $arg (@{$infos->{$t}{run}{arguments}}) {
+          if ($arg eq '--channel') {
+            $channel = 1;
+            next;
+          }
+          if ($channel) {
+            set_version_info("rust-$os", $arg);
+            last TOOLCHAIN_ALIAS;
+          }
+        }
+      }
+    }
+
+    set_error("rust-$os") unless get_version_info("rust-$os");
+    set_rbm_info("rust-$os", {
+        project => 'rust',
+        option  => 'version',
+        targets => [ $rbm_os_target{$os} ],
+      });
+  }
+}
+
+
+# taskcluster/kinds/toolchain/clang.yml
+#
+## clang ##
+sub get_clang_info {
+  my %toolchain_aliases = (
+    linux   => 'linux64-clang',
+    windows => 'linux64-clang-mingw-x64',
+    macos   => 'macosx64-clang',
+  );
+  my $infos = YAML::XS::LoadFile('taskcluster/kinds/toolchain/clang.yml');
+  OS: foreach my $os (keys %toolchain_aliases) {
+    my $clang_toolchain;
+    my $clang_fetch;
+    TOOLCHAIN: foreach my $t (keys %$infos) {
+      next unless ref $infos->{$t}{run}{'toolchain-alias'} eq 'HASH';
+      next unless $infos->{$t}{run}{'toolchain-alias'}{'by-project'}{default};
+      my $aliases = as_array($infos->{$t}{run}{'toolchain-alias'}{'by-project'}{default});
+      foreach my $alias (@$aliases) {
+        if ($alias eq $toolchain_aliases{$os}) {
+          foreach my $fetch (@{$infos->{$t}{fetches}{toolchain}}) {
+            $clang_toolchain = $fetch if $fetch =~ m/^.*-clang-.*/;
+          }
+          foreach my $fetch (@{$infos->{$t}{fetches}{fetch}}) {
+            $clang_fetch = $fetch if $fetch =~ m/^clang-.*/;
+          }
+          last TOOLCHAIN;
+        }
+      }
+    }
+
+    if (!$clang_toolchain && !$clang_fetch) {
+      print STDERR "Error: could not find clang toolchain for $toolchain_aliases{$os}\n";
+      set_error("clang-$os");
+      next OS;
+    }
+
+    if (!$clang_fetch) {
+      foreach my $fetch (@{$infos->{$clang_toolchain}{fetches}{fetch}}) {
+        $clang_fetch = $fetch if $fetch =~ m/^clang-.*/;
+      }
+    }
+
+    if (!$clang_fetch) {
+      print STDERR "Error: could not find clang fetch for $toolchain_aliases{$os}\n";
+      set_error("clang-$os");
+      next OS;
+    }
+
+    my $fetch = YAML::XS::LoadFile('taskcluster/kinds/fetch/toolchains.yml');
+    set_version_info("clang-$os", $fetch->{$clang_fetch}{fetch}{revision});
+
+    set_rbm_info("clang-$os", {
+        project => 'llvm-project',
+        option  => 'git_hash',
+        targets => [ $rbm_os_target{$os} ],
+      });
+  }
+}
+
+## cbindgen
+sub get_cbindgen_info {
+  my $fetch = YAML::XS::LoadFile('taskcluster/kinds/fetch/toolchains.yml');
+  my $revision;
+  T: foreach my $t (keys %$fetch) {
+    next unless $fetch->{$t}{'fetch-alias'};
+    if ($fetch->{$t}{'fetch-alias'} eq 'cbindgen') {
+      $revision = $fetch->{$t}{fetch}{revision};
+      last T;
+    }
+  }
+  return 0 unless $revision;
+  set_version_info('cbindgen', $revision);
+  set_rbm_info('cbindgen', {
+      project => 'cbindgen',
+      option  => 'git_hash',
+    });
+}
+
+## nasm
+sub get_nasm_info {
+  my $nasm = YAML::XS::LoadFile('taskcluster/kinds/toolchain/nasm.yml');
+  my $fetch = $nasm->{'linux64-nasm'}{'fetches'}{'fetch'}[0];
+  return set_error('nasm') unless $fetch;
+  set_version_info('nasm', substr $fetch, 5);
+  set_rbm_info('nasm', {
+    project => 'nasm',
+    option  => 'version',
+  });
+}
+
+## node
+sub get_node_info {
+  my $d = YAML::XS::LoadFile('taskcluster/kinds/toolchain/node.yml');
+  my $node_toolchain;
+  T: foreach my $t (keys %$d) {
+    foreach my $alias (@{as_array($d->{$t}{run}{'toolchain-alias'})}) {
+      if ($alias eq 'linux64-node') {
+        foreach my $fetch (@{$d->{$t}{fetches}{fetch}}) {
+          if ($fetch =~ m/^nodejs-.*/) {
+            $node_toolchain = $fetch;
+            last T;
+          }
+        }
+      }
+    }
+  }
+
+  return set_error('node') unless $node_toolchain;
+
+  my $fetch = YAML::XS::LoadFile('taskcluster/kinds/fetch/toolchains.yml');
+  my ($version) = $fetch->{$node_toolchain}{fetch}{url} =~ m|^https://nodejs.org/dist/v([^/]+)/|;
+  return set_error('node') unless $version;
+  set_version_info('node', $version);
+  set_rbm_info('node', {
+    project => 'node',
+    option  => 'version',
+  });
+}
+
+## Python
+sub get_python_info {
+  my $component = 'minimum_python';
+  set_rbm_info($component, {
+      project => 'python',
+      option  => 'var/firefox_minimum_python_version',
+    });
+  my @lines = path('python/mozboot/bin/bootstrap.py')->lines_utf8;
+  foreach my $line (@lines) {
+    if ($line =~ m/^\s*MINIMUM_MINOR_VERSION = ([0-9]+)/) {
+      set_version_info($component, "3.$1");
+      return;
+    }
+  }
+  set_error($component);
+}
+
+## binutils
+sub get_binutils_info {
+  my $component = 'binutils';
+  set_rbm_info($component, {
+      project => 'binutils',
+      option  => 'version',
+    });
+  my $d = YAML::XS::LoadFile('taskcluster/kinds/toolchain/misc.yml');
+  my $f = $d->{'linux64-binutils'}{fetches}{fetch}[0];
+  my ($version) = $f =~ m|^binutils-([0-9\\.]+)|;
+  return set_error($component) unless $version;
+  set_version_info($component, $version);
+}
+
+## macosx-sdk
+sub get_macosx_sdk_info {
+  set_rbm_info('macosx-sdk-version', {
+      project => 'macosx-toolchain',
+      option  => 'version',
+      targets => [ $rbm_os_target{macos} ],
+    });
+  set_rbm_info('macosx-sdk-sha512sum', {
+      project => 'macosx-toolchain',
+      option  => 'var/sdk_sha512sum',
+      targets => [ $rbm_os_target{macos} ],
+    });
+  my $d = YAML::XS::LoadFile('taskcluster/kinds/toolchain/macos-sdk.yml');
+
+  foreach my $t (keys %$d) {
+    foreach my $alias (@{as_array($d->{$t}{run}{'toolchain-alias'})}) {
+      if ($alias eq 'macosx64-sdk') {
+        if ($t =~ m/^macosx64-sdk-(.*)/) {
+          set_version_info('macosx-sdk-version', $1);
+          set_version_info('macosx-sdk-sha512sum', $d->{$t}{run}{'arguments'}[1]);
+          return;
+        }
+      }
+    }
+  }
+
+  set_error('macosx-sdk-version');
+  set_error('macosx-sdk-sha512sum');
+}
+
+## taskcluster/kinds/fetch/toolchains.yml
+sub get_toolchains_fetch_info {
+  my @projects = qw/cctools libdispatch libtapi mingw-w64-clang fxc2 wasi-sysroot/;
+  # projects which have a different name in toolchains.yml
+  my %toolchain_names = (
+    cctools           => 'cctools-port',
+    'wasi-sysroot'    => 'wasi-sdk',
+    'mingw-w64-clang' => 'mingw-w64',
+  );
+  # projects which have an different rbm option than git_hash
+  my %rbm_option = (
+    'windows-app-sdk' => 'var/windowsappsdk_sha256sum',
+  );
+  my $d = YAML::XS::LoadFile('taskcluster/kinds/fetch/toolchains.yml');
+  foreach my $name (@projects) {
+    set_rbm_info($name,
+      {
+        project => $name,
+        option  => ($rbm_option{$name} ? $rbm_option{$name} : 'git_hash'),
+      });
+    my $toolchain_name = $toolchain_names{$name} ? $toolchain_names{$name} : $name;
+    my $revision = $d->{$toolchain_name}{fetch}{revision};
+    if ($revision) {
+      set_version_info($name, $revision);
+    } else {
+      set_error($name);
+    }
+  }
+
+  set_rbm_info('windows-rs', {
+      project => 'firefox',
+      option  => 'var/windows_rs_version',
+    });
+  my $winrs_url = $d->{'windows-rs'}{fetch}{url};
+  if ($winrs_url =~ m|crates/windows/(.+)/download$|) {
+    set_version_info('windows-rs', $1);
+  } else {
+    set_error('windows-rs');
+  }
+
+  set_rbm_info('windows-rs-sha256sum', {
+      project => 'firefox',
+      option  => 'var/windows_rs_sha256sum',
+    });
+  my $winrs_sha256 = $d->{'windows-rs'}{fetch}{sha256};
+  if ($winrs_sha256) {
+    set_version_info('windows-rs-sha256sum', $winrs_sha256);
+  } else {
+    set_error('windows-rs-sha256sum');
+  }
+}
+
+## Extract infos from python/mozboot/mozboot/android.py
+sub get_mozboot_android_info {
+  my %component_project = (
+    ndk                             => 'android-ndk',
+    commandlinetools_version_string => 'android-sdk',
+    commandlinetools_version        => 'android-sdk',
+    bundletool                      => 'geckoview',
+  );
+  my %component_option = (
+    ndk                             => 'var/release',
+    commandlinetools_version_string => 'var/commandlinetools_version_string',
+    commandlinetools_version        => 'var/commandlinetools_version',
+    bundletool                      => 'var/bundletool_version',
+  );
+  my %component_NAME = (
+    ndk                             => 'NDK_VERSION',
+    commandlinetools_version_string => 'CMDLINE_TOOLS_VERSION_STRING',
+    commandlinetools_version        => 'CMDLINE_TOOLS_VERSION',
+    bundletool                      => 'BUNDLETOOL_VERSION',
+  );
+  foreach my $component (keys %component_project) {
+    set_rbm_info($component, {
+        project => $component_project{$component},
+        option  => $component_option{$component},
+        targets => [ $rbm_os_target{android} ],
+      });
+  }
+  my %versions;
+  my @lines = path('python/mozboot/mozboot/android.py')->lines_utf8;
+  foreach my $line (@lines) {
+    foreach my $component (keys %component_NAME) {
+      if ($line =~ m/^\s*$component_NAME{$component}\s*=\s*"(.+)"/) {
+        $versions{$component} = $1;
+      }
+    }
+  }
+  foreach my $component (keys %component_NAME) {
+    if ($versions{$component}) {
+      set_version_info($component, $versions{$component});
+    } else {
+      set_error($component);
+    }
+  }
+}
+
+sub get_build_tools_info {
+  my $component = 'build_tools';
+  set_rbm_info($component, {
+      project => 'android-sdk',
+      option  => 'version',
+      targets => [ $rbm_os_target{android} ],
+    });
+  my @lines = path('python/mozboot/mozboot/android-packages.txt')->lines_utf8;
+  foreach my $line (@lines) {
+    if ($line =~ m/build-tools;(.+)$/) {
+      set_version_info($component, $1);
+      return;
+    }
+  }
+  set_error($component);
+}
+
+sub get_min_android_info {
+  my $component = 'min-android';
+  set_rbm_info($component, {
+      project => 'geckoview',
+      option  => 'var/android_min_api',
+      targets => [ $rbm_os_target{android} ],
+    });
+  my @lines = path('build/moz.configure/android-ndk.configure')->lines_utf8;
+  my $f;
+  foreach my $line (@lines) {
+    if ($line eq "def min_android_version():\n") {
+      $f = $line;
+      next;
+    }
+    next unless $f;
+    if ($line =~ m/return "([0-9]+)"/) {
+      set_version_info($component, $1);
+      return;
+    }
+  }
+  set_error($component);
+}
+
+sub get_gradle_info {
+  my $component = 'geckoview/gradle';
+  set_rbm_info($component, {
+      project => 'geckoview',
+      option  => 'var/gradle_version',
+      targets => [ $rbm_os_target{android} ],
+    });
+  my @lines = path('gradle/wrapper/gradle-wrapper.properties')->lines_utf8;
+  foreach my $line (@lines) {
+    if ($line =~ m{distributionUrl=https\\://services.gradle.org/distributions/gradle-(.*)-(bin|all).zip}) {
+      set_version_info($component, $1);
+      return;
+    }
+  }
+  set_error($component);
+}
+
+sub get_glean_info {
+  my $component = 'glean';
+  set_rbm_info($component, {
+      project => 'glean',
+      option  => 'version',
+      targets => [ $rbm_os_target{android} ],
+    });
+  my @lines = path('gradle/libs.versions.toml')->lines_utf8;
+  foreach my $line (@lines) {
+    if ($line =~ m{^glean\s*=\s*"(.+)"}) {
+      set_version_info($component, $1);
+      return;
+    }
+  }
+  set_error($component);
+}
+
+sub get_glean_parser_info {
+  my $component = 'glean-parser';
+  set_rbm_info($component, {
+      project => 'glean-parser',
+      option  => 'version',
+      targets => [ $rbm_os_target{android} ],
+    });
+  my $files = path('third_party/python/glean_parser');
+  foreach my $file ($files->children) {
+    if ($file->basename =~ m{^glean_parser-(.+)\.dist-info}) {
+      set_version_info($component, $1);
+      return;
+    }
+  }
+  set_error($component);
+}
+
+sub get_terser_info {
+  my $component = 'terser';
+  set_rbm_info($component, {
+      project => 'terser',
+      option  => 'version',
+      targets => [ $rbm_os_target{android} ],
+    });
+  my $version_infos = decode_json path('tools/terser/package.json')->slurp_utf8;
+  if ($version_infos->{dependencies}{terser}) {
+    set_version_info($component, $version_infos->{dependencies}{terser});
+  } else {
+    set_error($component);
+  }
+}
+
+get_rust_info;
+get_clang_info;
+get_cbindgen_info;
+get_nasm_info;
+get_node_info;
+get_python_info;
+get_macosx_sdk_info;
+get_toolchains_fetch_info;
+get_mozboot_android_info;
+get_build_tools_info;
+get_min_android_info;
+get_gradle_info;
+get_glean_info;
+get_glean_parser_info;
+get_terser_info;
+print JSON->new->utf8->canonical->pretty->encode(\%version_infos);

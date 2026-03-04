@@ -155,13 +155,6 @@ steps:
         name: bundletool
         sha256sum: '[% c("var/bundletool_hash") %]'
 
-  list_toolchain_updates:
-    git_hash: '[% pc("firefox", "var/upstream_firefox_commit") %]'
-    tag_gpg_id: 0
-    input_files: []
-    container:
-      use_container: 0
-
 input_files:
   - project: container-image
   - filename: 'mozconfig'

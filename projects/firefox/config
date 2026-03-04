@@ -63,6 +63,8 @@ var:
   windows_rs_version: '0.62.2'
   windows_rs_sha256sum: 527fadee13e0c05939a6a05d5bd6eec6cd2e3dbd648b9f8e447c6518133d8580
 
+  firefox_versions_infos: '[% exec(c("basedir") _ "/tools/toolchain-updates/extract-firefox-versions-infos") %]'
+
 steps:
   src-tarballs:
     filename: 'src-[% project %]-[% c("version") %].tar.xz'
@@ -89,13 +91,6 @@ steps:
     targets:
       nightly:
         version: '[% c("abbrev") %]'
-
-  list_toolchain_updates:
-    git_hash: '[% c("var/upstream_firefox_commit") %]'
-    tag_gpg_id: 0
-    input_files: []
-    container:
-      use_container: 0
 
 targets:
   firefoxbrowser:
@@ -167,6 +162,10 @@ targets:
         - python3
         - python3-zstandard
         - wine
+
+  list_toolchain_updates:
+    git_hash: '[% c("var/upstream_firefox_commit") %]'
+    tag_gpg_id: 0
 
 input_files:
   - project: container-image

@@ -1,0 +1,117 @@
+#!/usr/bin/perl -w
+#
+# This script takes one or more json file as command line arguments, as
+# created by the `extract-*-versions-infos` files. For each component
+# defined in the json this script checks the expected value and compares
+# it with the current value in the rbm config. It then lists all
+# components that are up-to-date, components that need an update, and
+# components where there was an error (error when extracting the value
+# from the sources tree, or getting the value from the rbm config).
+
+use strict;
+
+use English;
+use FindBin;
+use YAML::XS qw(LoadFile);
+use JSON qw/decode_json/;
+use Path::Tiny;
+use Capture::Tiny qw(capture);
+
+my @base_targets = qw/nightly/;
+my @default_targets = qw/torbrowser-linux-x86_64/;
+my $rbm = "$FindBin::Bin/../../rbm/rbm";
+
+sub exit_error {
+  print STDERR "Error: ", $_[0], "\n";
+  exit (exists $_[1] ? $_[1] : 1);
+}
+
+sub capture_exec {
+  my @cmd = @_;
+  my ($stdout, $stderr, $exit) = capture {
+    system(@cmd);
+  };
+  return ($stdout, $stderr, $exit == 0, $exit) if wantarray();
+  return $stdout;
+}
+
+if (!@ARGV) {
+  exit_error "usage: $0 <json-file...>";
+}
+
+my %version_infos;
+foreach my $input_file (@ARGV) {
+  my $infos = decode_json path($input_file)->slurp_utf8;
+  exit_error "Error reading $input_file" unless $infos;
+  %version_infos = ( %version_infos, %$infos );
+}
+
+my %component_need_update;
+my %component_ok;
+my %component_error_extract;
+my %component_error_rbm;
+
+foreach my $component (keys %version_infos) {
+  print "Checking $component\n";
+  my $rbm_info = $version_infos{$component}{rbm_info};
+  my @targets = ( @base_targets,
+    $rbm_info->{targets} ? @{$rbm_info->{targets}} : @default_targets );
+  @targets = map { ('--target', $_ ) } @targets;
+  my @cmd = ($rbm, 'showconf', $rbm_info->{project}, $rbm_info->{option},
+    @targets);
+  if ($version_infos{$component}{error}) {
+    $component_error_extract{$component} = 1;
+    next;
+  }
+  my ($stdout, $stderr, $success) = capture_exec(@cmd);
+  if (!$success) {
+    $component_error_rbm{$component} = $stderr;
+    next;
+  }
+  chomp $stdout;
+  if ($stdout eq $version_infos{$component}{expected_value}) {
+    $component_ok{$component} = $stdout;
+    next;
+  }
+  $component_need_update{$component}{expected_value} =
+        $version_infos{$component}->{expected_value};
+  $component_need_update{$component}{current_value} = $stdout;
+}
+
+if (!%component_need_update && !%component_error_extract && !%component_error_rbm) {
+  print "Everything is up-to-date\n";
+  exit 0;
+}
+
+if (%component_ok) {
+  print "The following components are up-to-date:\n";
+  foreach my $component (sort keys %component_ok) {
+    print "- $component ($component_ok{$component})\n";
+  }
+  print "\n";
+}
+
+if (%component_error_extract) {
+  print "There was an error extracting the following components info from source tree:\n";
+  foreach my $component (sort keys %component_error_extract) {
+    print "- $component\n";
+  }
+  print "\n";
+}
+
+if (%component_error_rbm) {
+  print "There was an error extracting the following components from rbm config:\n";
+  foreach my $component (sort keys %component_error_rbm) {
+    print "- $component\n";
+  }
+  print "\n";
+}
+
+if (%component_need_update) {
+  print "The following components need an update:\n";
+  foreach my $component (sort keys %component_need_update) {
+    print "- $component\n";
+    print "    current: $component_need_update{$component}{current_value}\n";
+    print "    expected: $component_need_update{$component}{expected_value}\n";
+  }
+}

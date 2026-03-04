@@ -432,22 +432,7 @@ list_translation_updates-alpha:
 	$(rbm) showconf --target alpha --step list_updates translation list_updates
 
 list_toolchain_updates:
-	tools/list_toolchain_updates
-
-list_toolchain_updates-firefox-linux: submodule-update
-	$(rbm) build firefox --step list_toolchain_updates --target nightly --target torbrowser-linux-x86_64
-
-list_toolchain_updates-firefox-windows: submodule-update
-	$(rbm) build firefox --step list_toolchain_updates --target nightly --target torbrowser-windows-x86_64
-
-list_toolchain_updates-firefox-macos: submodule-update
-	$(rbm) build firefox --step list_toolchain_updates --target nightly --target torbrowser-macos
-
-list_toolchain_updates-application-services: submodule-update
-	$(rbm) build application-services --step list_toolchain_updates --target nightly --target torbrowser-android-armv7
-
-list_toolchain_updates-geckoview: submodule-update
-	$(rbm) build geckoview --step list_toolchain_updates --target nightly --target torbrowser-android-armv7
+	@tools/toolchain-updates/list-toolchain-updates
 
 create_glean_deps_tarball: submodule-update
 	 $(rbm) build glean-parser --target alpha --target torbrowser-android-armv7

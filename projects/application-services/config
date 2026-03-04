@@ -27,10 +27,15 @@ var:
   nss_sha256sum: fb5aa56fa35d963d4c65278328e2e9c99c2484c86f0e41537412477739dcf997
   cargo_vendor_include_config: 1
 
+  application-services_versions_infos: '[% exec(c("basedir") _ "/tools/toolchain-updates/extract-application-services-versions-infos") %]'
+
 targets:
   nightly:
     git_hash: '[% c("version") %]-TORBROWSER'
     tag_gpg_id: 0
+
+  list_toolchain_updates:
+    git_hash: 'v[% c("version") %]'
 
 steps:
   build:
@@ -97,9 +102,3 @@ steps:
         filename: 'gradle-dependencies-list-[% c("version") %].txt'
         var:
           generate_gradle_dependencies_list: 1
-
-  list_toolchain_updates:
-    git_hash: 'v[% c("version") %]'
-    input_files: []
-    container:
-      use_container: 0

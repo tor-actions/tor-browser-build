@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+# Run this script to check which toolchain updates are needed.
+#
+# It can be run with `make list_toolchain_updates`.
+
+set -e
+
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+tbb_dir="$script_dir/../.."
+tmpdir=$(mktemp -d)
+trap "rm -Rf $tmpdir" EXIT
+
+firefox_infos="$tmpdir/firefox-infos.json"
+appservices_infos="$tmpdir/application-services-infos.json"
+
+echo "Extracting firefox versions infos"
+"$tbb_dir"/rbm/rbm showconf --target list_toolchain_updates --target torbrowser-linux-x86_64 \
+  firefox var/firefox_versions_infos > "$firefox_infos"
+
+echo "Extracting application-services versions infos"
+"$tbb_dir"/rbm/rbm showconf --target list_toolchain_updates --target torbrowser-android-aarch64 \
+  application-services var/application-services_versions_infos > "$appservices_infos"
+
+echo "Checking needed updates"
+"$script_dir"/check-versions "$firefox_infos" "$appservices_infos"

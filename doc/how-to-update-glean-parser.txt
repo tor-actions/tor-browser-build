@@ -8,8 +8,8 @@ There are three steps involved in the process:
 
 1)
 
-Running `make list_toolchain_updates-geckoview` should tell
-you which version of `glean_parser` is needed.
+Running `make list_toolchain_updates` should tell you which version of
+`glean_parser` is needed.
 
 2)
 

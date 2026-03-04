@@ -19,6 +19,17 @@ var:
     tar -C /var/tmp/dist -xf $rootdir/[% c("python_tarfile") %]
     export PATH=/var/tmp/dist/python/bin:"$PATH"
 
+  # This variable is used by tools/toolchain-updates/extract-firefox-versions-infos
+  # to notice when the minimum python version required by firefox is
+  # changing, so that we can review if we need to update python.
+  #
+  # Currently this custom python build is used on Linux only.
+  #
+  # Debian includes the following python versions:
+  # bookworm (used for Android): 3.11.2
+  # trixie (windows, macos): 3.13.5
+  firefox_minimum_python_version: 3.9
+
 input_files:
   - project: container-image
   - name: python

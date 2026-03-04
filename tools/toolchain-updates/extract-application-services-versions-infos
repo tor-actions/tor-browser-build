@@ -1,0 +1,119 @@
+#!/usr/bin/perl -w
+#
+# This script extract version informations from an application-services
+# tree. It will output on stdout a json file containing version
+# information found in the firefox tree. The json file also include
+# information about which rbm project, option and targets can be used
+# to query (and later update) the current value in `tor-browser-build`
+# (this part is done by the `check-versions` script).
+#
+# This script should be run from the root of an application-services
+# tree, without argument.
+
+use strict;
+use English;
+use YAML::XS qw(LoadFile);
+use Path::Tiny;
+use JSON qw/decode_json/;
+use FindBin;
+use lib $FindBin::Bin;
+use ExtractVersionsInfos;
+
+## compileSdkVersion
+sub get_compilesdk_info {
+  my $component = 'appservices/android-sdk';
+  set_rbm_info($component, {
+      project => 'android-sdk',
+      option  => 'version',
+    });
+  my @lines = path('build.gradle')->lines_utf8;
+  my ($major, $minor);
+  foreach my $line (@lines) {
+    if ($line =~ m/^\s*MINIMUM_MINOR_VERSION = ([0-9]+)/) {
+      set_version_info('python', "3.$1");
+      return;
+    }
+    if ($line =~ m/^\s*compileSdkMajorVersion:\s([^"]*),/) {
+      $major = $1;
+    } elsif ($line =~ m/^\s*compileSdkMinorVersion:\s([^"]*),/) {
+      $minor = $1;
+    }
+    if ($major && $minor) {
+      set_version_info($component, "$major.$minor.0");
+      return;
+    }
+  }
+  set_error($component);
+}
+
+## gradle
+sub get_gradle_info {
+  my $component = 'appservices/gradle';
+  set_rbm_info($component, {
+      project => 'application-services',
+      option  => 'var/gradle_version',
+    });
+  my @lines = path('gradle/wrapper/gradle-wrapper.properties')->lines_utf8;
+  foreach my $line (@lines) {
+    if ($line =~ m|distributionUrl=https\\://services.gradle.org/distributions/gradle-(.*)-.*.zip|) {
+      set_version_info($component, $1);
+      return;
+    }
+  }
+  set_error($component);
+}
+
+# nss-nspr
+sub get_nss_info {
+  my %component_option = (
+    nss             => 'var/nss_version',
+    nspr            => 'var/nspr_version',
+    'nss-sha256sum' => 'var/nss_sha256sum',
+  );
+  foreach my $component (keys %component_option) {
+    set_rbm_info($component, {
+        project => 'application-services',
+        option  => $component_option{$component},
+      });
+  }
+  my ($nss, $sha256sum);
+  my @lines = path('libs/build-all.sh')->lines_utf8;
+  foreach my $line (@lines) {
+    if ($line =~ m/NSS_ARCHIVE="nss-(.*)-with-nspr-(.*)\.tar\.gz"/) {
+      set_version_info('nss', $1);
+      set_version_info('nspr', $2);
+      $nss = 1;
+    }
+    if ($line =~ m/NSS_SHA256="([^"]+)"/) {
+      set_version_info('nss-sha256sum', $1);
+      $sha256sum = 1;
+    }
+    return if ($nss && $sha256sum);
+  }
+  set_error('nss') unless $nss;
+  set_error('nspr') unless $nss;
+  set_error('nss-sha256sum') unless $sha256sum;
+}
+
+## uniffi
+sub get_uniffi_info {
+  my $component = 'uniffi';
+  set_rbm_info($component, {
+      project => 'uniffi-rs',
+      option  => 'version',
+    });
+  my @lines = path('components/autofill/Cargo.toml')->lines_utf8;
+  foreach my $line (@lines) {
+    if ($line =~ m/^\s*uniffi\s*=\s*\{[^}]*version\s*=\s*"([^"]*)"/) {
+      set_version_info($component, $1);
+      return;
+    }
+  }
+  set_error($component);
+}
+
+get_compilesdk_info;
+get_gradle_info;
+get_nss_info;
+get_uniffi_info;
+print JSON->new->utf8->canonical->pretty->encode(\%version_infos);
