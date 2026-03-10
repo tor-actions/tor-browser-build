@@ -3,7 +3,7 @@ filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("co
 version: '[% c("abbrev") %]'
 # This can be found in
 # taskcluster/kinds/fetch/toolchains.yml
-git_hash: 55943b0c68c0eaf8b8ad2f51f63738bbc7b0c86b
+git_hash: 1cce4a06877992f708b2e0e2ab217a0cfb923a4f
 git_url: https://github.com/tpoechtrager/cctools-port
 container:
   use_container: 1

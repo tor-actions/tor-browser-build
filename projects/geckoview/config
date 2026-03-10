@@ -20,12 +20,12 @@ container:
     build_apk: '[% !c("var/online_build") %]'
 
 var:
-  firefox_platform_version: '148.0a1'
+  firefox_platform_version: '149.0a1'
   geckoview_version: '[% c("var/firefox_platform_version") %]'
   browser_series: '16.0'
   browser_rebase: 2
   browser_branch: '[% c("var/browser_series") %]-[% c("var/browser_rebase") %]'
-  browser_build: 2
+  browser_build: 1
   gitlab_project: https://gitlab.torproject.org/tpo/applications/tor-browser
   git_commit: '[% exec("git rev-parse " _ c("git_hash") _ "^{commit}", { exec_noco => 1 }) %]'
   deps:
