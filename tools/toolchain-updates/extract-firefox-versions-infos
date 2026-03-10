@@ -321,7 +321,7 @@ sub get_mozboot_android_info {
     bundletool                      => 'geckoview',
   );
   my %component_option = (
-    ndk                             => 'var/release',
+    ndk                             => 'var/ndk_release',
     commandlinetools_version_string => 'var/commandlinetools_version_string',
     commandlinetools_version        => 'var/commandlinetools_version',
     bundletool                      => 'var/bundletool_version',
