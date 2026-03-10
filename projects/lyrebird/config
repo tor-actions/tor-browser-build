@@ -16,8 +16,13 @@ targets:
     git_hash: main
     version: '[% c("abbrev") %]'
     tag_gpg_id: 0
+  macos:
     var:
-      go_vendor_sha256sum: ''
+      go_vendor_sha256sum: 6a054acb7793becdbcb9a08ce7781f3d331f15e85242b399fcef96fb89941f4d
+      pre_go_vendor: |
+        if [ -e "/var/tmp/build/[% project %]-[% c('version') %]/go-1.22.patch" ]; then
+          patch -p1 < "/var/tmp/build/[% project %]-[% c('version') %]/go-1.22.patch"
+        fi
 
 steps:
   build:
@@ -33,9 +38,7 @@ steps:
         pkg_type: go_vendor
         project: lyrebird
         norec:
-          sha256sum: '[% c("var/go_vendor_sha256sum") %]'
-        target_replace:
-          '^torbrowser-(?!testbuild).*': 'torbrowser-linux-x86_64'
+          sha256sum: '[% IF !c("var/nightly") %][% c("var/go_vendor_sha256sum") %][% END %]'
       - name: go-licenses
         project: go-licenses
         target_replace:
