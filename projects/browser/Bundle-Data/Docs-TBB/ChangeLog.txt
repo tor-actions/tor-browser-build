@@ -1,3 +1,63 @@
+Tor Browser 16.0a4 - March 11 2026
+ * All Platforms
+   * Updated NoScript to 13.6.6.90401984
+   * Updated zlib to 1.3.2
+   * Bug 44663: NoScript behavior on “Safer” security level prevents integrity checks for dynamically loaded javascript [tor-browser]
+   * Bug 44675: Restore "BB 43850: Modify the Contrast Control settings for RFP" dropped during the 148.0a1 rebase [tor-browser]
+   * Bug 44679: Review Mozilla 2006066: Credit cards autofill settings are not visible [tor-browser]
+   * Bug 44680: Properly handle subdocuments created by data: URLs [tor-browser]
+   * Bug 44687: Security level requires a restart in a new profile after 148 update [tor-browser]
+   * Bug 44689: Forwardport tor-browser#44668 from legacy to alpha: Set detailsURL in update XML to be useful for 13.5 users [tor-browser]
+   * Bug 44701: Unexpected change to `netwerk/url-classifier/components.conf` [tor-browser]
+   * Bug 44706: creating a new profiles causes crash ENOTTY [tor-browser]
+   * Bug 41738: Allow to specify an unsupportedURL on update responses [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 148.0a1
+   * Bug 42664: Use mozilla token sizes in CSS [tor-browser]
+   * Bug 44634: Review Mozilla 2006250: add ai window about:preferences section within ai features [tor-browser]
+   * Bug 44682: Wrong pid in the exit log [tor-browser]
+   * Bug 44709: Hide the AI settings panel [tor-browser]
+   * Bug 44710: Hide about:preferences#translations [tor-browser]
+   * Bug 44713: The about dialog is missing some padding in 148.0a1 [tor-browser]
+   * Bug 44717: Search suggestion settings are visible in 148 [tor-browser]
+ * Windows + Linux
+   * Bug 40892: Move torrc-defaults, geoip and geoip6 on Windows and Linux [tor-browser-build]
+ * Windows
+   * Bug 44461: Window controls are missing on Windows [tor-browser]
+   * Bug 44633: Move D3D11 function from local webrtc changes to tbb webrtc patches [tor-browser]
+ * Linux
+   * Bug 44394: Do not read default prefs from /etc/firefox [tor-browser]
+ * Android
+   * Updated GeckoView to 148.0a1
+   * Bug 43349: Add user feedback for when Tor connects (Android) [tor-browser]
+   * Bug 43909: Review Mozilla: TBD: new Android tab-strip feature [tor-browser]
+   * Bug 44226: Disable all link sharing functionality [tor-browser]
+   * Bug 44274: Review Mozilla 1986534: Disable screenshots in PBM [tor-browser]
+   * Bug 44469: Fix branding on Android RR [tor-browser]
+   * Bug 44506: Remove more sync from 147 [tor-browser]
+   * Bug 44582: Fix or remove new settings search functionality on Android [tor-browser]
+   * Bug 44661: Restore or fix new rebase-148 uses of moz assets instead of TB ones [tor-browser]
+   * Bug 44718: Fix splash screen branding and other issues in RR [tor-browser]
+   * Bug 44721: Android build failure in nightlyOssLicensesTask: missing dependencies.json file [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41690: Merge list_toolchain_updates-firefox-* commands into one [tor-browser-build]
+     * Bug 41725: Update toolchains for Firefox 148 [tor-browser-build]
+     * Bug 41726: Check in list_toolchain_updates that the sha512sum we have for the macOS SDK is the same as Mozilla [tor-browser-build]
+     * Bug 41727: Split the list_toolchain_updates_checks script in two [tor-browser-build]
+     * Bug 41728: Update projects/application-services/list_toolchain_updates_checks to check nss sha256sum [tor-browser-build]
+   * Windows + macOS + Linux
+     * Bug 44406: Fix CSS linting issues introduced by 146 [tor-browser]
+   * Windows + Linux + Android
+     * Updated Go to 1.25.8
+   * Android
+     * Bug 41736: Add generate_gradle_dependencies_list-$project makefile targets [tor-browser-build]
+     * Bug 41737: Remove comment from gen-gradle-deps-file.py saying var/gradle_dependencies_version should be updated [tor-browser-build]
+     * Bug 41743: Make an error if gradle-dependencies-list is missing in the input files [tor-browser-build]
+     * Bug 41744: Reduce duplication between projects/geckoview/build and projects/geckoview/build_apk [tor-browser-build]
+     * Bug 41745: Add .sh file extension to included build_* scripts in projects/geckoview [tor-browser-build]
+     * Bug 41751: Fix the NDK path [tor-browser-build]
+
 Tor Browser 16.0a3 - February 17 2026
  * All Platforms
    * Updated Tor to 0.4.9.5

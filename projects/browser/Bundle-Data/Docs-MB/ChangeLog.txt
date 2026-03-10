@@ -1,3 +1,35 @@
+Mullvad Browser 16.0a4 - March 11 2026
+ * All Platforms
+   * Updated Firefox to 148.0a1
+   * Updated NoScript to 13.6.6.90401984
+   * Bug 515: Fix mullvad browser about dialog for 148 [mullvad-browser]
+   * Bug 516: Use CSS size and space tokens in mullvad-browser [mullvad-browser]
+   * Bug 44663: NoScript behavior on “Safer” security level prevents integrity checks for dynamically loaded javascript [tor-browser]
+   * Bug 44675: Restore "BB 43850: Modify the Contrast Control settings for RFP" dropped during the 148.0a1 rebase [tor-browser]
+   * Bug 44679: Review Mozilla 2006066: Credit cards autofill settings are not visible [tor-browser]
+   * Bug 44680: Properly handle subdocuments created by data: URLs [tor-browser]
+   * Bug 44687: Security level requires a restart in a new profile after 148 update [tor-browser]
+   * Bug 44689: Forwardport tor-browser#44668 from legacy to alpha: Set detailsURL in update XML to be useful for 13.5 users [tor-browser]
+   * Bug 44701: Unexpected change to `netwerk/url-classifier/components.conf` [tor-browser]
+   * Bug 44706: creating a new profiles causes crash ENOTTY [tor-browser]
+   * Bug 44709: Hide the AI settings panel [tor-browser]
+   * Bug 44710: Hide about:preferences#translations [tor-browser]
+   * Bug 44717: Search suggestion settings are visible in 148 [tor-browser]
+   * Bug 41738: Allow to specify an unsupportedURL on update responses [tor-browser-build]
+   * Bug 41742: Make the Mullvad Browser publishing script work even if the BB branch being missing [tor-browser-build]
+ * Windows
+   * Bug 44461: Window controls are missing on Windows [tor-browser]
+   * Bug 44633: Move D3D11 function from local webrtc changes to tbb webrtc patches [tor-browser]
+ * Linux
+   * Bug 44394: Do not read default prefs from /etc/firefox [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41690: Merge list_toolchain_updates-firefox-* commands into one [tor-browser-build]
+     * Bug 41725: Update toolchains for Firefox 148 [tor-browser-build]
+     * Bug 41726: Check in list_toolchain_updates that the sha512sum we have for the macOS SDK is the same as Mozilla [tor-browser-build]
+     * Bug 41727: Split the list_toolchain_updates_checks script in two [tor-browser-build]
+     * Bug 41728: Update projects/application-services/list_toolchain_updates_checks to check nss sha256sum [tor-browser-build]
+
 Mullvad Browser 16.0a3 - February 17 2026
  * All Platforms
    * Updated NoScript to 13.5.12.90301984
