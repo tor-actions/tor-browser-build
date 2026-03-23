@@ -114,15 +114,15 @@ input_files:
   - filename: dmg-root
     enable: '[% ! c("var/android") %]'
   - name: fenix-nightly-apk
-    URL: https://ftp.mozilla.org/pub/fenix/nightly/2026/02/2026-02-22-21-34-44-fenix-149.0a1-android-arm64-v8a/fenix-149.0a1.multi.android-arm64-v8a.apk
+    URL: https://ftp.mozilla.org/pub/fenix/nightly/2026/03/2026-03-21-20-51-52-fenix-150.0a1-android-arm64-v8a/fenix-150.0a1.multi.android-arm64-v8a.apk
     enable: '[% c("var/android") %]'
-    sha256sum: 029f2f48f7ec2e58e06ccc0caba7d69578b3e1fa9cb85447f7c3fa63e11bf26e
-  - URL: https://dist.torproject.org/torbrowser/noscript/noscript-13.5.14.1984.xpi
+    sha256sum: 84932e0e1288bfd0678d39d96e89530cce4d5f2c4ad37126338e060b0b89204e
+  - URL: https://dist.torproject.org/torbrowser/noscript/noscript-13.6.12.1984.xpi
     name: noscript
-    sha256sum: ba55c6ad73f048468f14fb3da7acb5a8e8ffd822aa1a26ae8850933acbc92cfa
-  - URL: https://addons.mozilla.org/firefox/downloads/file/4675310/ublock_origin-1.69.0.xpi
+    sha256sum: fe0fe0b582723ba2187def77746aab6b8f5f884729465de746f846ed00a87201
+  - URL: https://addons.mozilla.org/firefox/downloads/file/4721638/ublock_origin-1.70.0.xpi
     name: ublock-origin
-    sha256sum: 785bcde68a25faa8a0949964ec5ffe9bdcb85d3f0ae21c23f607c6c8f91472cf
+    sha256sum: f2730d2877005763a45d765749892e936f49cae713d28f7aa6ea314454b89cf1
     enable: '[% c("var/mullvad-browser") %]'
   - URL: https://cdn.mullvad.net/browser-extension/0.9.7/mullvad-browser-extension-0.9.7.xpi
     name: mullvad-extension

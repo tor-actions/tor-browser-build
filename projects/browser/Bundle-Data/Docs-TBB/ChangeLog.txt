@@ -1,3 +1,25 @@
+Tor Browser 15.0.8 - March 24 2026
+ * All Platforms
+   * Updated NoScript to 13.6.12.1984
+   * Bug 44663: NoScript behavior on “Safer” security level prevents integrity checks for dynamically loaded javascript [tor-browser]
+   * Bug 44680: Properly handle subdocuments created by data: URLs [tor-browser]
+   * Bug 44761: Safer Level's worker patching filters out Worker constructor options [tor-browser]
+   * Bug 44771: Rebase Tor Browser stable onto 140.9.0esr [tor-browser]
+   * Bug 44784: Backport Security Fixes from Firefox 149 [tor-browser]
+   * Bug 41738: Allow to specify an unsupportedURL on update responses [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 140.9.0esr
+   * Bug 44327: ERROR: Your Tor Browser profile cannot be loaded. It may be missing or inaccessible [tor-browser]
+   * Bug 44386: Firefox profiles no longer work in Tor Browser 15.0 [tor-browser]
+ * Linux
+   * Bug 44657: Backport tor-browser#44394: Do not read default prefs from /etc/firefox [tor-browser]
+ * Android
+   * Updated GeckoView to 140.9.0esr
+ * Build System
+   * Windows + Linux + Android
+     * Updated Go to 1.25.8
+     * Bug 44249: Backport tor-browser-build#41580: Update Go major to 1.25.x [tor-browser]
+
 Tor Browser 15.0.7 - February 24 2026
  * All Platforms
    * Updated NoScript to 13.5.14.1984
