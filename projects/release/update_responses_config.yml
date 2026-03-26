@@ -124,4 +124,8 @@ htaccess_rewrite_rules:
         RewriteRule ^[^/]+/13\.0.*/.* https://aus1.torproject.org/torbrowser/update_pre14.0/release/$0 [last]
         RewriteRule ^[^/]+/13\.5/.* https://aus1.torproject.org/torbrowser/update_pre14.0/release/$0 [last]
         RewriteRule ^[^/]+/13\.5\.[0123456]/.* https://aus1.torproject.org/torbrowser/update_pre14.0/release/$0 [last]
+        # tor-browser-build#41741: Create a 13.5-specific update path
+        RewriteRule ^[^/]+/13\.5\.[789]/.* https://aus1.torproject.org/torbrowser/update_legacy13.5/release/$0 [last]
+        RewriteRule ^[^/]+/13\.5\.1\d/.* https://aus1.torproject.org/torbrowser/update_legacy13.5/release/$0 [last]
+        RewriteRule ^[^/]+/13\.5\.2[012345678]/.* https://aus1.torproject.org/torbrowser/update_legacy13.5/release/$0 [last]
 [% END -%]
