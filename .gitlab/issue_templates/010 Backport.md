@@ -20,7 +20,6 @@ This is an issue for tracking back-porting a patch-set (e.g. from main to maint-
 ### Target Channels
 
 - [ ] maint-15.0
-- [ ] maint-13.5
 
 ## Notes
 

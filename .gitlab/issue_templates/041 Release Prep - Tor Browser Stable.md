@@ -68,8 +68,6 @@ Tor Browser Stable is on the `maint-${TOR_BROWSER_MAJOR}.${TOR_BROWSER_MINOR}` b
     - [ ] ***(Desktop Only)*** `var/torbrowser_incremental_from`: updated to previous Desktop version
       - **NOTE**: We try to build incrementals for the previous 3 desktop versions
       - **⚠️ WARNING**: Really *actually* make sure this is the previous Desktop version or else the `make torbrowser-incrementals-*` step will fail
-    - [ ] `var/torbrowser_legacy_version`: updated to latest legacy Tor Browser version
-    - [ ] `var/torbrowser_legacy_platform_version`: updated to latest legacy Tor Browser ESR version
   - [ ] `projects/firefox/config`
       - [ ] `var/browser_build`: updated to match `tor-browser` tag
       - [ ] ***(Optional)*** `var/firefox_platform_version`: updated to latest `${ESR_VERSION}` if rebased
@@ -211,9 +209,6 @@ Tor Browser Stable is on the `maint-${TOR_BROWSER_MAJOR}.${TOR_BROWSER_MINOR}` b
     Changelog:
     # paste changelog as quote here
     ```
-- [ ] Verify the associated legacy `maint-13.5` release has been signed and deployed
-  - **⚠️ WARNING**: Do not continue if the legacy channel has not been fully signed and published yet; it is needed for update-response generation!
-  - **NOTE** Stable releases without a corresponding legacy release may ignore this
 - [ ] On `${STAGING_SERVER}`, ensure updated:
   - **NOTE** Having a local git branch with `maint-15.0` as the upstream branch with these values saved means you only need to periodically `git pull --rebase`
   - [ ] `tor-browser-build` is on the right commit: `git tag -v tbb-${TOR_BROWSER_VERSION}-${TOR_BROWSER_BUILD_N} && git checkout tbb-${TOR_BROWSER_VERSION}-${TOR_BROWSER_BUILD_N}`

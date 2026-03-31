@@ -20,8 +20,6 @@
   - [ ] `var/torbrowser_build`: should be `build1`, unless bumping a previous release preparation
   - [ ] `var/browser_release_date`: must not be in the future when we start building
   - [ ] `var/torbrowser_incremental_from` (not needed for Android-only releases)
-  - [ ] `var/torbrowser_legacy_version` (For Tor Browser 14.0.x stable releases only)
-  - [ ] `var/torbrowser_legacy_platform_version` (For Tor Browser 14.0.x stable releases only)
 - [ ] Tag updates:
   - [ ] [Firefox](https://gitlab.torproject.org/tpo/applications/tor-browser/-/tags)
   - [ ] Geckoview - should match Firefox
