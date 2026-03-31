@@ -41,6 +41,12 @@ function authorized_keys {
   chmod 600 "$authkeysfile"
 }
 
+function remove_sudoers_file {
+  # Remove a sudoers file that previously existed but is no longer used
+  sfile="$1"
+  rm -f "/etc/sudoers.d/$sfile"
+}
+
 function sudoers_file {
   sfile="$1"
   cp "$script_dir/sudoers.d/$sfile" "/etc/sudoers.d/$sfile"
@@ -91,7 +97,8 @@ sudoers_file sign-mar
 sudoers_file sign-exe
 sudoers_file sign-apk
 sudoers_file sign-aab
-sudoers_file sign-rcodesign
+# sign-rcodesign is removed - tor-browser-build#41476
+remove_sudoers_file sign-rcodesign
 sudoers_file sign-rcodesign-128
 sudoers_file sign-rcodesign-146
 sudoers_file set-date
