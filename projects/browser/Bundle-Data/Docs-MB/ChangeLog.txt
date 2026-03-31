@@ -1,3 +1,31 @@
+Mullvad Browser 16.0a5 - April 01 2026
+ * All Platforms
+   * Updated Firefox to 149.0a1
+   * Updated NoScript to 13.6.14.90101984
+   * Updated uBlock Origin to 1.70.0
+   * Bug 514: Revert New Identity commit [mullvad-browser]
+   * Bug 522: Rebase Mullvad Browser onto 149 [mullvad-browser]
+   * Bug 44546: Rename `appearance-chooser-item` to `setting-chooser-item` after we reach nightly 149 [tor-browser]
+   * Bug 44702: Rebase alpha onto 149.0a1 [tor-browser]
+   * Bug 44714: The browser opens a new about:blank tab in 148 [tor-browser]
+   * Bug 44755: Trusted Types (Firefox 148 and above) + Web Workers broken on Safer Level [tor-browser]
+   * Bug 44757: Update tests for removed Services.search [rebase-149] [tor-browser]
+   * Bug 44761: Safer Level's worker patching filters out Worker constructor options [tor-browser]
+   * Bug 44763: Disable WebGPU until audited [tor-browser]
+   * Bug 44764: Review Mozilla 2012344: Hide main AI settings when the feature is blocked [tor-browser]
+   * Bug 44765: Review Mozilla 1972073: Convert Sidebar to config-based prefs [tor-browser]
+   * Bug 44767: Safer Level's worker patching throws on new about:blank frames with Trusted Types [tor-browser]
+   * Bug 44772: Review Mozilla 1980264: Canvas randomization is too slow [tor-browser]
+   * Bug 44778: Safer Level: xray causes patched TrustedTypePolicy instances to be unusable by content. [tor-browser]
+   * Bug 44780: AIFeature.sys.mjs failures in 149 desktop builds [tor-browser]
+   * Bug 44793: `privacy.spoof_english` console error in about:preferences [tor-browser]
+   * Bug 44801: Redact onion origins from Location.ancestorOrigins. [tor-browser]
+   * Bug 44814: Disable trustpanel until our new designs are ready [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 43180: Remove translation CI 13.5 legacy extension [tor-browser]
+     * Bug 41758: Rename `tools/signing/deploy-legacy` to `tools/signing/redeploy-update_responses-release` [tor-browser-build]
+
 Mullvad Browser 16.0a4 - March 11 2026
  * All Platforms
    * Updated Firefox to 148.0a1
