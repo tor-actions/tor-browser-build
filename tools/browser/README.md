@@ -50,8 +50,7 @@ This script gpg signs a git tag associated with a particular browser commit in t
 usage: ./tools/browser/sign-tag.<browser> <channel> <build-number> [commit]
 
 browser         one of basebrowser, torbrowser, or mullvadbrowser
-channel         the release channel of the commit to sign (e.g. alpha, stable,
-                or legacy)
+channel         the release channel of the commit to sign (e.g. alpha, or stable)
 build-number    the build number portion of a browser build tag (e.g. build2)
 commit          optional git commit, HEAD is used if argument not present
 ```
@@ -69,18 +68,6 @@ Invoke the relevant soft-link'd version of this script to sign a particular brow
     Tag commit 24e628c1fd3f in base-browser-128.4.0esr-14.5-1
      tag:     base-browser-128.4.0esr-14.5-1-build1
      message: Tagging build1 for 128.4.0esr-based alpha
-    ```
-
-  - ##### `tor-browser-115.17.0esr-13.5-1-build2`
-    After checking out `tor-browser-115.17.0esr-13.5-1` branch in linked tor-browser.git
-    ```bash
-    ./sign-tag.torbrowser legacy build2 8e9e58fe400291f20be5712d057ad0b5fc4d70c1
-    ```
-    **output**:
-    ```
-    Tag commit 8e9e58fe4002 in tor-browser-115.17.0esr-13.5-1
-     tag:     tor-browser-115.17.0esr-13.5-1-build2
-     message: Tagging build2 for 115.17.0esr-based legacy
     ```
 
   - ##### `mullvad-browser-128.4.0esr-14.0-1-build2`
