@@ -108,6 +108,7 @@ export LANG=C.UTF-8
 
 [% IF c("var/firefox-browser") && c("var/windows") -%]
   patch -p1 < $rootdir/firefoxbrowser-BB-29320.patch
+  patch -p1 < $rootdir/firefoxbrowser-0001-Bug-2024724-Fix-PowerCounters.h-because-we-do-not-co.patch
 [% END -%]
 
 echo "Starting ./mach configure $(date)"

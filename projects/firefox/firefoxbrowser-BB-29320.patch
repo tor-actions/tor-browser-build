@@ -1,37 +1,32 @@
-commit df53f566fa75408c95f3f619e1eee30417449642
+commit 14f983a3309fccc6dc5f4a2377fe2b4a0b80be0c
 Author: Pier Angelo Vendrame <pierov@torproject.org>
 Date:   Thu Jun 13 09:22:53 2024 +0200
 
     BB 29320: Replace the gnu target with gnullvm for Rust.
 
 diff --git a/build/moz.configure/init.configure b/build/moz.configure/init.configure
-index d71d2fbe33b77..62ceec58677a2 100644
+index 69051c7d8eb25..8618c0faf771a 100644
 --- a/build/moz.configure/init.configure
 +++ b/build/moz.configure/init.configure
-@@ -490,12 +490,16 @@ def split_triplet(triplet, allow_wasi=False):
+@@ -493,11 +493,11 @@ def split_triplet(triplet, allow_wasi=False):
          canonical_kernel = "kFreeBSD"
      elif os.startswith("gnu"):
          canonical_os = canonical_kernel = "GNU"
--    elif os.startswith("mingw") or os in ("windows-msvc", "windows-gnu"):
-+    elif os.startswith("mingw") or os in (
-+        "windows-msvc",
-+        "windows-gnu",
-+        "windows-gnullvm",
-+    ):
+-    elif os in ("windows-msvc", "windows-gnu"):
++    elif os in ("windows-msvc", "windows-gnu", "windows-gnullvm"):
          canonical_os = canonical_kernel = "WINNT"
-         if not os.startswith("mingw"):
-             if os == "windows-msvc":
-                 abi = "msvc"
--            elif os == "windows-gnu":
-+            elif os == "windows-gnu" or os == "windows-gnullvm":
-                 abi = "mingw"
-             # Many things down the line are looking for the string "mingw32"
-             # until they are all fixed, we pretend that's the raw os we had
+         if os == "windows-msvc":
+             abi = "msvc"
+-        elif os == "windows-gnu":
++        elif os == "windows-gnu" or os == "windows-gnullvm":
+             abi = "mingw"
+         # Many things down the line are looking for the string "mingw32"
+         # until they are all fixed, we pretend that's the raw os we had
 diff --git a/build/moz.configure/rust.configure b/build/moz.configure/rust.configure
-index 6c1c891817133..ee836b6060756 100644
+index e40d71d9f5b35..d26fca7beac5f 100644
 --- a/build/moz.configure/rust.configure
 +++ b/build/moz.configure/rust.configure
-@@ -310,9 +310,9 @@ def detect_rustc_target(
+@@ -308,9 +308,9 @@ def detect_rustc_target(
                  if host_or_target.abi == "msvc":
                      suffix = "windows-msvc"
                  elif host_or_target.abi == "mingw":

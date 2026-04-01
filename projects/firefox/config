@@ -18,13 +18,13 @@ container:
   use_container: 1
 
 var:
-  firefox_platform_version: '149.0a1'
+  firefox_platform_version: '150.0a1'
   firefox_version: '[% c("var/firefox_platform_version") %]'
   browser_series: '16.0'
-  browser_rebase: 2
+  browser_rebase: 1
   browser_branch: '[% c("var/browser_series") %]-[% c("var/browser_rebase") %]'
   browser_build: 3
-  upstream_firefox_commit: FIREFOX_NIGHTLY_149_END
+  upstream_firefox_commit: FIREFOX_NIGHTLY_150_END
   copyright_year: '[% exec("git show -s --format=%ci " _ c("git_hash") _ "^{commit}", { exec_noco => 1 }).remove("-.*") %]'
   nightly_updates_publish_dir: '[% c("var/nightly_updates_publish_dir_prefix") %]nightly-[% c("var/osname") %]'
   gitlab_project: https://gitlab.torproject.org/tpo/applications/tor-browser
@@ -245,4 +245,11 @@ input_files:
   # When building upstream firefox we need this patch to be able to
   # build for Windows
   - filename: firefoxbrowser-BB-29320.patch
+    enable: '[% c("var/firefox-browser") && c("var/windows") %]'
+  # Patch added in the 151 branch to fix MinGW build:
+  # https://bugzilla.mozilla.org/show_bug.cgi?id=2024724
+  # Later reverted as part of:
+  # https://bugzilla.mozilla.org/show_bug.cgi?id=2026031
+  # We should drop this patch when updating to Firefox 151.
+  - filename: firefoxbrowser-0001-Bug-2024724-Fix-PowerCounters.h-because-we-do-not-co.patch
     enable: '[% c("var/firefox-browser") && c("var/windows") %]'

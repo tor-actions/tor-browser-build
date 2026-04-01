@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-version: '149.0'
+version: '150.0'
 git_hash: 'v[% c("version") %]-TORBROWSER-build[% c("var/build_number") %]'
 git_url: https://gitlab.torproject.org/tpo/applications/application-services.git
 tag_gpg_id: 1
@@ -45,7 +45,7 @@ steps:
       # Due to some issue in application-service causing non matching
       # builds when build time differ a lot, we need to do periodic rebuilds:
       # https://gitlab.torproject.org/tpo/applications/tor-browser-build/-/merge_requests/937#note_3009480
-      rebuild_date: '2026-02-23'
+      rebuild_date: '2026-04-08'
       arch_deps:
         # Needed to build NSS
         - gyp
@@ -89,7 +89,7 @@ steps:
         project: application-services
         pkg_type: cargo_vendor
         norec:
-          sha256sum: 65ab6bc3d784881a10da1f3897ff4ad94d468cfd3915f0cc7287814529d1ba24
+          sha256sum: df94ed5a82c6abb1d7fe49658753d2d3746bf9a2c1ba8faf555fe3a41ae67edb
         enable: '[% !c("var/generate_gradle_dependencies_list") %]'
       - filename: gen-gradle-deps-file.py
         enable: '[% c("var/generate_gradle_dependencies_list") %]'

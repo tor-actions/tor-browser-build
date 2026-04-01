@@ -3,7 +3,7 @@ git_hash: 'a793015bad500379ec5480e280ac2631178a2013' # v67.0.0
 git_url: https://github.com/mozilla/glean.git
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 # Check for mozilla-glean in gradle/libs.versions.toml in the tor-browser repository
-version: 67.0.0
+version: 67.1.0
 container:
   use_container: 1
   disable_network:

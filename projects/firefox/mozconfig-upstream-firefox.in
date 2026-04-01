@@ -3,11 +3,11 @@
 # options are set in the specific mozconfig files in tor-browser.git.
 
 [% IF c("var/windows-x86_64") -%]
-  ac_add_options --target=x86_64-w64-mingw32
+  ac_add_options --target=x86_64-pc-windows-gnu
   ac_add_options --with-toolchain-prefix=x86_64-w64-mingw32-
 [% END -%]
 [% IF c("var/windows-i686") -%]
-  ac_add_options --target=i686-w64-mingw32
+  ac_add_options --target=i686-pc-windows-gnu
   ac_add_options --with-toolchain-prefix=i686-w64-mingw32-
 [% END -%]
 [% IF c("var/windows") -%]

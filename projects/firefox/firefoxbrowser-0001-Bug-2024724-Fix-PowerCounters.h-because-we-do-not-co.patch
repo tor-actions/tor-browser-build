@@ -1,0 +1,100 @@
+From 138c33ea964b2e0a4875aadc39d8a948e0c2aace Mon Sep 17 00:00:00 2001
+From: Damien Carver <dcarver@mozilla.com>
+Date: Mon, 23 Mar 2026 15:40:58 +0000
+Subject: [PATCH] Bug 2024724 - Fix PowerCounters.h because we do not compile
+ PowerCounters-win.cpp against __MINGW32__ r=canaltinova,profiler-reviewers
+
+Differential Revision: https://phabricator.services.mozilla.com/D288844
+---
+ mozglue/baseprofiler/public/BaseProfilerState.h |  2 +-
+ tools/profiler/core/PowerCounters.h             | 14 +++++++-------
+ tools/profiler/moz.build                        |  1 +
+ tools/profiler/public/ProfilerState.h           |  2 +-
+ 4 files changed, 10 insertions(+), 9 deletions(-)
+
+diff --git a/mozglue/baseprofiler/public/BaseProfilerState.h b/mozglue/baseprofiler/public/BaseProfilerState.h
+index 608bf26826ff9..9b2a4e9381f13 100644
+--- a/mozglue/baseprofiler/public/BaseProfilerState.h
++++ b/mozglue/baseprofiler/public/BaseProfilerState.h
+@@ -136,7 +136,7 @@ class MOZ_RAII AutoProfilerStats {
+     "Record the power used by the entire system with each sample. " \
+     "Only available with Intel CPUs and requires setting "          \
+     "the sysctl kernel.perf_event_paranoid to 0."
+-#elif defined(GP_OS_windows)
++#elif defined(GP_OS_windows) && defined(_MSC_VER)
+ #  define POWER_HELP                                                       \
+     "Record the value of every energy meter available on the system with " \
+     "each sample. Only available on Windows 11 with Intel CPUs."
+diff --git a/tools/profiler/core/PowerCounters.h b/tools/profiler/core/PowerCounters.h
+index 896a2398b646f..e2ae294c8b65b 100644
+--- a/tools/profiler/core/PowerCounters.h
++++ b/tools/profiler/core/PowerCounters.h
+@@ -10,7 +10,7 @@
+ #include "mozilla/UniquePtr.h"
+ #include "mozilla/Vector.h"
+ 
+-#if defined(GP_OS_windows)
++#if defined(GP_OS_windows) && defined(_MSC_VER)
+ class PowerMeterDevice;
+ #endif
+ #if defined(GP_PLAT_arm64_darwin)
+@@ -50,20 +50,20 @@ bool GetRailEnergyData(RailEnergyData*, size_t* size_of_arr);
+ 
+ class PowerCounters {
+  public:
+-#if defined(GP_OS_windows) || defined(GP_OS_darwin) || \
++#if (defined(GP_OS_windows) && defined(_MSC_VER)) || defined(GP_OS_darwin) || \
+     defined(GP_PLAT_amd64_linux) || defined(GP_PLAT_arm64_android)
+   explicit PowerCounters();
+ #else
+   explicit PowerCounters() {};
+ #endif
+-#if defined(GP_OS_windows) || defined(GP_PLAT_amd64_darwin) || \
+-    defined(GP_PLAT_arm64_android)
++#if (defined(GP_OS_windows) && defined(_MSC_VER)) || \
++    defined(GP_PLAT_amd64_darwin) || defined(GP_PLAT_arm64_android)
+   ~PowerCounters();
+ #else
+   ~PowerCounters() = default;
+ #endif
+-#if defined(GP_OS_windows) || defined(GP_PLAT_amd64_darwin) || \
+-    defined(GP_PLAT_arm64_android)
++#if (defined(GP_OS_windows) && defined(_MSC_VER)) || \
++    defined(GP_PLAT_amd64_darwin) || defined(GP_PLAT_arm64_android)
+   void Sample();
+ #else
+   void Sample() {};
+@@ -75,7 +75,7 @@ class PowerCounters {
+  private:
+   CountVector mCounters;
+ 
+-#if defined(GP_OS_windows)
++#if defined(GP_OS_windows) && defined(_MSC_VER)
+   mozilla::Vector<mozilla::UniquePtr<PowerMeterDevice>> mPowerMeterDevices;
+ #endif
+ #if defined(GP_PLAT_amd64_darwin)
+diff --git a/tools/profiler/moz.build b/tools/profiler/moz.build
+index e5fcb8f1c136f..fdd8a36c67672 100644
+--- a/tools/profiler/moz.build
++++ b/tools/profiler/moz.build
+@@ -167,6 +167,7 @@ elif CONFIG["OS_TARGET"] == "WINNT" and CONFIG["TARGET_CPU"] in (
+     UNIFIED_SOURCES += [
+         "gecko/nsProfiler.cpp",
+     ]
++    # Keep in sync with PowerCounters.h, BaseProfilerState.h and ProfilerState.h (see __MINGW32__)
+     if CONFIG["CC_TYPE"] == "clang-cl":
+         UNIFIED_SOURCES += [
+             "core/PowerCounters-win.cpp",
+diff --git a/tools/profiler/public/ProfilerState.h b/tools/profiler/public/ProfilerState.h
+index 444ee7fd5043c..d44cef710440f 100644
+--- a/tools/profiler/public/ProfilerState.h
++++ b/tools/profiler/public/ProfilerState.h
+@@ -31,7 +31,7 @@
+     "Only available with Intel CPUs and requires setting "          \
+     "the sysctl kernel.perf_event_paranoid to 0."
+ 
+-#elif defined(GP_OS_windows)
++#elif defined(GP_OS_windows) && defined(_MSC_VER)
+ #  define POWER_HELP                                                       \
+     "Record the value of every energy meter available on the system with " \
+     "each sample. Only available on Windows 11 with Intel CPUs."

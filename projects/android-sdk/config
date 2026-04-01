@@ -16,14 +16,14 @@ var:
   build_tools_version: 36.1
   build_tools_filename: 'build-tools_r[% c("var/build_tools_version") %]_linux.zip'
   build_tools_sha256sum: a7b5889e4a79fcf3b0976bef40d401f4240fb1eed891d9d91169da1111e11d78
-  commandlinetools_version: 13114758
-  commandlinetools_version_string: 19.0
+  commandlinetools_version: 14742923
+  commandlinetools_version_string: 20.0
   platform_tools_version: 36.0.0
 input_files:
   # Hashes can be compared with https://gitlab.com/fdroid/android-sdk-transparency-log/-/blob/master/checksums.json
   - URL: '[% c("var/google_repo") %]/commandlinetools-linux-[% c("var/commandlinetools_version") %]_latest.zip'
     name: android_commandlinetools
-    sha256sum: 7ec965280a073311c339e571cd5de778b9975026cfcbe79f2b1cdcb1e15317ee
+    sha256sum: 04453066b540409d975c676d781da1477479dde3761310f1a7eb92a1dfb15af7
   - URL: '[% c("var/google_repo") %]/[% c("var/build_tools_filename") %]'
     name: build_tools
     sha256sum: '[% c("var/build_tools_sha256sum") %]'
