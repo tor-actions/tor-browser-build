@@ -10,6 +10,10 @@ However, starting with Go 1.21,
 So, we checked that the Go 1.23.6 binaries we produced with our old procedure
 at 80f16f97e7c2973e9aa4458606c9afd2c63c2d60 matched the official binaries.
 
+Then, we checked that the Go 1.25.8 binaries produced in tor-browser-build at
+7760e4679974e64d1087a98ec34324faf02bcf35 matched the official binaries, except
+for the known `go.env`, which we are changing in the build script.
+
 ## How to update
 
 1. In `projects/go/config`, update version to the version we want to be the new
