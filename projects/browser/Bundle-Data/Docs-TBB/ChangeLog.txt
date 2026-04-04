@@ -1,3 +1,18 @@
+Tor Browser 15.0.9 - April 07 2026
+ * All Platforms
+   * Updated Tor to 0.4.9.6
+   * Updated NoScript to 13.6.15.1984
+   * Bug 44837: Rebase Tor Browser stable onto 140.9.1esr [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 140.9.1esr
+ * Android
+   * Updated GeckoView to 140.9.1esr
+ * Build System
+   * All Platforms
+     * Bug 41758: Rename `tools/signing/deploy-legacy` to `tools/signing/redeploy-update_responses-release` [tor-browser-build]
+   * Windows + macOS
+     * Bug 41741: Create a 13.5-specific update path [tor-browser-build]
+
 Tor Browser 15.0.8 - March 24 2026
  * All Platforms
    * Updated NoScript to 13.6.12.1984

@@ -114,12 +114,12 @@ input_files:
   - filename: dmg-root
     enable: '[% ! c("var/android") %]'
   - name: fenix-nightly-apk
-    URL: https://ftp.mozilla.org/pub/fenix/nightly/2026/03/2026-03-21-20-51-52-fenix-150.0a1-android-arm64-v8a/fenix-150.0a1.multi.android-arm64-v8a.apk
+    URL: https://ftp.mozilla.org/pub/fenix/nightly/2026/04/2026-04-03-21-20-07-fenix-151.0a1-android-arm64-v8a/fenix-151.0a1.multi.android-arm64-v8a.apk
     enable: '[% c("var/android") %]'
-    sha256sum: 84932e0e1288bfd0678d39d96e89530cce4d5f2c4ad37126338e060b0b89204e
-  - URL: https://dist.torproject.org/torbrowser/noscript/noscript-13.6.12.1984.xpi
+    sha256sum: 761ac1b0576638ace97ffe9e4aed6a881cebde1ce1d4d1961f593c84f67f5b88
+  - URL: https://dist.torproject.org/torbrowser/noscript/noscript-13.6.15.1984.xpi
     name: noscript
-    sha256sum: fe0fe0b582723ba2187def77746aab6b8f5f884729465de746f846ed00a87201
+    sha256sum: acf9509922b298b4529a434587dc04f5ff82dcb00b035f7efec90fb1ef8a09f3
   - URL: https://addons.mozilla.org/firefox/downloads/file/4721638/ublock_origin-1.70.0.xpi
     name: ublock-origin
     sha256sum: f2730d2877005763a45d765749892e936f49cae713d28f7aa6ea314454b89cf1
