@@ -24,7 +24,7 @@ newfs_hfs -v "[% c('var/display_name') %]" "$hfsfile"
 
 pushd [% src %]
 
-find -type d -mindepth 1 | sed -e 's/^\.\///' | sort | while read dirname; do
+find -mindepth 1 -type d | sed -e 's/^\.\///' | sort | while read dirname; do
   hfsplus "$hfsfile" mkdir "/$dirname"
   hfsplus "$hfsfile" chmod 0755 "/$dirname"
 done

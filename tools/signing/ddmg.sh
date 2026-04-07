@@ -45,7 +45,7 @@ cd $src_dir
 # add it back again with the special command to do so.
 rm -f Applications
 
-find -type d -mindepth 1 | sed -e 's/^\.\///' | sort | while read dirname; do
+find -mindepth 1 -type d | sed -e 's/^\.\///' | sort | while read dirname; do
   hfsplus "$hfsfile" mkdir "/$dirname"
   hfsplus "$hfsfile" chmod 0755 "/$dirname"
 done
