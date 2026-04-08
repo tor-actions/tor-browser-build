@@ -56,7 +56,7 @@ steps:
       - filename: use-uniffi-noop.diff
 
     targets:
-      # Run `make get_gradle_dependencies_list-glean` to
+      # Run `make generate_gradle_dependencies_list-glean` to
       # generate the gradle dependencies file. You can them move the file
       # `out/glean/gradle-dependencies-list-$version.txt`
       # to `projects/glean/gradle-dependencies-list.txt`.

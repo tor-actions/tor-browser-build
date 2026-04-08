@@ -64,7 +64,7 @@ targets:
       online_build: 1
       has_l10n: 0
 
-  # Run `make get_gradle_dependencies_list-geckoview` to
+  # Run `make generate_gradle_dependencies_list-geckoview` to
   # generate the gradle dependencies file. You can them move the file
   # `out/geckoview/gradle-dependencies-list-$version.txt`
   # to `projects/geckoview/gradle-dependencies-list.txt`.

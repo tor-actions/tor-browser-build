@@ -95,7 +95,7 @@ steps:
         enable: '[% c("var/generate_gradle_dependencies_list") %]'
 
     targets:
-      # Run `make get_gradle_dependencies_list-application-services` to
+      # Run `make generate_gradle_dependencies_list-application-services` to
       # generate the gradle dependencies file. You can them move the file
       # `out/application-services/gradle-dependencies-list-$version.txt`
       # to `projects/application-services/gradle-dependencies-list.txt`.
