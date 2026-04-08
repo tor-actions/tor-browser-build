@@ -99,6 +99,10 @@ steps:
       # generate the gradle dependencies file. You can them move the file
       # `out/application-services/gradle-dependencies-list-$version.txt`
       # to `projects/application-services/gradle-dependencies-list.txt`.
+      #
+      # If you want to build from upstream applications-services (for example
+      # if the rebase has not been done yet), you can use `make
+      # generate_gradle_dependencies_list-application-services-unpatched`.
       generate_gradle_dependencies_list:
         filename: 'gradle-dependencies-list-[% c("version") %].txt'
         var:

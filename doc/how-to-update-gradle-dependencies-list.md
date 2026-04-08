@@ -2,16 +2,14 @@
 
 ## TL; DR
 
-For `application-services`, 'geckoview', `geckoview-firefoxbrowser`,
-`glean`:
+For `application-services`, `geckoview`, `glean`:
 
 1. Run `make generate_gradle_dependencies_list-$project`
 2. Copy `out/$project/gradle-dependencies-list-$version.txt`
    to `projects/$project/gradle-dependencies-list.txt`.
 
-Note: The `generate_gradle_dependencies_list-geckoview-firefoxbrowser`
-target is doing the same as the `generate_gradle_dependencies_list-geckoview-firefoxbrowser`
-target, except that it is using unpatched upstream branch.
+Note: For `geckoview` and `application-services` you can append
+`-unpatched` to the makefile target to use the unpatched upstream branch.
 
 ## Rationale
 

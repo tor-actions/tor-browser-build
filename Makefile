@@ -443,10 +443,13 @@ create_glean_deps_tarball-with_torsocks: submodule-update
 generate_gradle_dependencies_list-application-services: submodule-update
 	$(rbm) build application-services --target generate_gradle_dependencies_list --target nightly --target torbrowser-android-armv7
 
+generate_gradle_dependencies_list-application-services-unpatched: submodule-update
+	$(rbm) build application-services --target list_toolchain_updates --target generate_gradle_dependencies_list --target nightly --target torbrowser-android-armv7
+
 generate_gradle_dependencies_list-geckoview: submodule-update
 	$(rbm) build geckoview --target geckoview:generate_gradle_dependencies_list --target nightly --target torbrowser-android-armv7
 
-generate_gradle_dependencies_list-geckoview-firefoxbrowser: submodule-update
+generate_gradle_dependencies_list-geckoview-unpatched: submodule-update
 	$(rbm) build geckoview --target geckoview:generate_gradle_dependencies_list --target alpha --target firefoxbrowser-android-aarch64
 
 generate_gradle_dependencies_list-glean: submodule-update
