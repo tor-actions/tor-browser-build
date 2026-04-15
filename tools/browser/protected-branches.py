@@ -50,5 +50,3 @@ def protect_branch(product):
 
 
 protect_branch(args.browser)
-if args.browser == "tor-browser":
-    protect_branch("base-browser")
