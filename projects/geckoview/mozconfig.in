@@ -6,8 +6,10 @@
 
 ac_add_options --with-java-bin-path=/usr/lib/jvm/java-1.17.0-openjdk-amd64/bin
 ac_add_options --with-android-sdk=$ANDROID_HOME
-ac_add_options --with-android-ndk=$ANDROID_NDK_HOME
 ac_add_options --with-gradle=$GRADLE_HOME/bin/gradle
+[% IF c("step") != "build_apk" -%]
+  ac_add_options --with-android-ndk=$ANDROID_NDK_HOME
+[% END -%]
 
 mk_add_options MOZ_PARALLEL_BUILD=[% c("num_procs") %]
 export MOZ_INCLUDE_SOURCE_INFO=1
