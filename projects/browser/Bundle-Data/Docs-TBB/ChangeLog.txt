@@ -1,3 +1,22 @@
+Tor Browser 15.0.10 - April 21 2026
+ * All Platforms
+   * Updated OpenSSL to 3.5.6
+   * Bug 44749: Check search engines parameter replacements [tor-browser]
+   * Bug 44852: Rebase Tor Browser stable onto 140.10.0esr [tor-browser]
+   * Bug 44859: Backport Bugzilla 1666613: Display XML error pages in the browser directionality while force LTRing the XML code itself, without the use of intl.css [tor-browser]
+   * Bug 44863: Backport Security Fixes from Firefox 150 [tor-browser]
+   * Bug 41775: Update list of Snowflake STUN servers in default bridge line, 2026 edition [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 140.10.0esr
+   * Bug 44288: New identity fails to block loading a custom home page [tor-browser]
+ * Android
+   * Updated GeckoView to 140.10.0esr
+ * Build System
+   * All Platforms
+     * Bug 41767: Add jwilde to allowed signer for browser projects [tor-browser-build]
+   * Windows + Linux + Android
+     * Updated Go to 1.25.9
+
 Tor Browser 15.0.9 - April 07 2026
  * All Platforms
    * Updated Tor to 0.4.9.6

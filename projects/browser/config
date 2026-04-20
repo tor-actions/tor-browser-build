@@ -114,9 +114,9 @@ input_files:
   - filename: dmg-root
     enable: '[% ! c("var/android") %]'
   - name: fenix-nightly-apk
-    URL: https://ftp.mozilla.org/pub/fenix/nightly/2026/04/2026-04-03-21-20-07-fenix-151.0a1-android-arm64-v8a/fenix-151.0a1.multi.android-arm64-v8a.apk
+    URL: https://ftp.mozilla.org/pub/fenix/nightly/2026/04/2026-04-20-09-14-06-fenix-151.0a1-android-arm64-v8a/fenix-151.0a1.multi.android-arm64-v8a.apk
     enable: '[% c("var/android") %]'
-    sha256sum: 761ac1b0576638ace97ffe9e4aed6a881cebde1ce1d4d1961f593c84f67f5b88
+    sha256sum: 8e7e85644f275ab89b81b070e339a638bb28640c614ef2b14323d87b108e9115
   - URL: https://dist.torproject.org/torbrowser/noscript/noscript-13.6.15.1984.xpi
     name: noscript
     sha256sum: acf9509922b298b4529a434587dc04f5ff82dcb00b035f7efec90fb1ef8a09f3
@@ -124,9 +124,9 @@ input_files:
     name: ublock-origin
     sha256sum: f2730d2877005763a45d765749892e936f49cae713d28f7aa6ea314454b89cf1
     enable: '[% c("var/mullvad-browser") %]'
-  - URL: https://cdn.mullvad.net/browser-extension/0.9.7/mullvad-browser-extension-0.9.7.xpi
+  - URL: https://cdn.mullvad.net/browser-extension/0.9.10/mullvad-browser-extension-0.9.10.xpi
     name: mullvad-extension
-    sha256sum: 4597ee6fff6a2f19cbf78a6149d38d12ad8a9d6029b7e36f6c639dc3e07dd2c3
+    sha256sum: d8adfd5d83c67d8d50d9466c6564755de79a8a0825f5c67a151919506d411b30
     enable: '[% c("var/mullvad-browser") %]'
   - filename: 'gtk3-settings.ini'
     enable: '[% c("var/linux") %]'
