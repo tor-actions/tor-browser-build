@@ -71,15 +71,22 @@ RewriteRule ^tor-browser-linux64-(.*)_ALL.tar.xz$ tor-browser-linux-x86_64-$1.ta
 [% END -%]
 EOF
 
-# empty any existing sh256sums file
-echo -n > sha256sums-unsigned-build.txt
-# concat sha256sum entry for each file in set
-for i in $(ls -1 *.exe *.tar.xz *.dmg *.mar *.zip *.tar.bz2 *.tar.gz *.apk *.bspatch *.json *.deb *.rpm | grep -v '\.incremental\.mar$' | sort)
+for dir in . [% IF c("var/dev_artifacts") %]artifacts/*[% END %]
 do
-  sha256sum $i >> sha256sums-unsigned-build.txt
+  [ -d "$dir" ] || continue
+  pushd "$dir" > /dev/null
+  # empty any existing sh256sums file
+  echo -n > sha256sums-unsigned-build.txt
+  # concat sha256sum entry for each file in set
+  for i in $(ls -1 *.exe *.tar.xz *.tar.zst *.dmg *.mar *.zip *.tar.bz2 *.tar.gz *.apk *.bspatch *.json *.deb *.rpm *.xpi | grep -v '\.incremental\.mar$' | sort)
+  do
+    sha256sum $i >> sha256sums-unsigned-build.txt
+  done
+
+  [% IF c("var/sign_build") -%]
+    gpg -abs [% c("var/sign_build_gpg_opts") %] sha256sums-unsigned-build.txt
+  [% END -%]
+  popd > /dev/null
 done
 
-[% IF c("var/sign_build") -%]
-  gpg -abs [% c("var/sign_build_gpg_opts") %] sha256sums-unsigned-build.txt
-[% END -%]
 cat sha256sums-unsigned-build.txt
