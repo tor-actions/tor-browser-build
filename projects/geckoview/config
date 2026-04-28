@@ -24,9 +24,9 @@ var:
   firefox_platform_version: '150.0a1'
   geckoview_version: '[% c("var/firefox_platform_version") %]'
   browser_series: '16.0'
-  browser_rebase: 2
+  browser_rebase: 1
   browser_branch: '[% c("var/browser_series") %]-[% c("var/browser_rebase") %]'
-  browser_build: 3
+  browser_build: 1
   gitlab_project: https://gitlab.torproject.org/tpo/applications/tor-browser
   git_commit: '[% exec("git rev-parse " _ c("git_hash") _ "^{commit}", { exec_noco => 1 }) %]'
   deps:
@@ -39,7 +39,7 @@ var:
     - pkg-config
     - openjdk-17-jdk-headless
   gradle_version: 9.4.1
-  glean_parser: 14.0.1
+  glean_parser: 19.0.0
   # python/mozboot/mozboot/android.py
   bundletool_version: 1.18.3
   bundletool_hash: a099cfa1543f55593bc2ed16a70a7c67fe54b1747bb7301f37fdfd6d91028e29
@@ -142,10 +142,10 @@ steps:
         pkg_type: tor-browser
         enable: '[% c("var/has_l10n") %]'
       - filename: rename-branding-strings.py
-      - URL: '[% pc("glean-parser", "var/glean_wheels_url") %]'
+      - URL: 'https://build-sources.tbb.torproject.org/glean-wheels-[% c("var/glean_parser") %].tar.xz'
         name: glean-wheels
-        sha256sum: '[% pc("glean-parser", "var/glean_wheels_sha256sum") %]'
-        enable: '[% !c("var/online_build") %]'
+        sha256sum: '[% pc("glean-parser", "var/glean_wheels_sha256sum/" _ c("var/glean_parser"), { error_if_undef => 1 }) %]'
+        enable: '[% !c("var/generate_gradle_dependencies_list") %]'
       - project: terser
         name: terser
         pkg_type: build
@@ -189,9 +189,9 @@ input_files:
     name: gradle-dependencies
     exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
     enable: '[% !c("var/online_build") %]'
-  - URL: '[% pc("glean-parser", "var/glean_wheels_url") %]'
+  - URL: 'https://build-sources.tbb.torproject.org/glean-wheels-[% c("var/glean_parser") %].tar.xz'
     name: glean-wheels
-    sha256sum: '[% pc("glean-parser", "var/glean_wheels_sha256sum") %]'
+    sha256sum: '[% pc("glean-parser", "var/glean_wheels_sha256sum/" _ c("var/glean_parser"), { error_if_undef => 1 }) %]'
   - project: glean
     name: glean
     enable: '[% !c("var/online_build") %]'

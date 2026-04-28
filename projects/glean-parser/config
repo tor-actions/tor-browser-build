@@ -1,14 +1,21 @@
 # vim: filetype=yaml sw=2
 filename: 'glean-wheels-[% c("version") %].tar.xz'
-version: 18.2.0
+version: 19.0.0
+container:
+  # We need to use the same Python version as the container.
+  use_container: 1
+  disable_network:
+    # We need to run `pip download`.
+    build: 0
 
 var:
-  glean_wheels_sha256sum: 4f8343a462834f8e27960de0783e83b514ebda0673c55a5fb384826083e4a0c9
-  glean_wheels_url: 'https://build-sources.tbb.torproject.org/glean-wheels-[% c("version") %].tar.xz'
+  glean_wheels_sha256sum:
+    18.2.0: 4f8343a462834f8e27960de0783e83b514ebda0673c55a5fb384826083e4a0c9
+    19.0.0: 5566967acf912f4f93ecd8385661d07505b6bb004583da460e9118ca6b86a798
+  deps:
+    - python3
+    - python3-pip
 
-build_log: '-'
-
-targets:
-  with_torsocks:
-    var:
-      use_torsocks: 1
+input_files:
+  - project: container-image
+    name: container-image

@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-version: '150.0'
+version: '151.0'
 git_hash: 'v[% c("version") %]-TORBROWSER-build[% c("var/build_number") %]'
 git_url: https://gitlab.torproject.org/tpo/applications/application-services.git
 tag_gpg_id: 1
@@ -20,12 +20,13 @@ container:
     build: '[% !c("var/generate_gradle_dependencies_list") %]'
 
 var:
-  build_number: 2
+  build_number: 1
   gradle_version: 8.14.3
+  glean_parser: 19.0.0
   # NSS version ans sha256 are in libs/build-all.sh.
-  nss_version: '3.121'
+  nss_version: '3.123'
   nspr_version: '4.38.2'
-  nss_sha256sum: 76b9a1364bc4522abc652c4d676498d5062f502f64e38b32e9e2c7a3fff530f1
+  nss_sha256sum: 4108c1467923b0dfbcc373da986792439a3c12cb1c294b646c31c55424717bfe
   cargo_vendor_include_config: 1
 
   application-services_versions_infos: '[% exec(c("basedir") _ "/tools/toolchain-updates/extract-application-services-versions-infos") %]'
@@ -81,15 +82,15 @@ steps:
         name: gradle-dependencies
         exec: '[% INCLUDE "fetch-gradle-dependencies" %]'
         enable: '[% !c("var/generate_gradle_dependencies_list") %]'
-      - URL: '[% pc("glean-parser", "var/glean_wheels_url") %]'
+      - URL: 'https://build-sources.tbb.torproject.org/glean-wheels-[% c("var/glean_parser") %].tar.xz'
         name: glean-wheels
-        sha256sum: '[% pc("glean-parser", "var/glean_wheels_sha256sum") %]'
+        sha256sum: '[% pc("glean-parser", "var/glean_wheels_sha256sum/" _ c("var/glean_parser"), { error_if_undef => 1 }) %]'
         enable: '[% !c("var/generate_gradle_dependencies_list") %]'
       - name: cargo_vendor
         project: application-services
         pkg_type: cargo_vendor
         norec:
-          sha256sum: df94ed5a82c6abb1d7fe49658753d2d3746bf9a2c1ba8faf555fe3a41ae67edb
+          sha256sum: 8462d6b10cfc242fc1c39f8dd924eced3b16f9090cbb16131a4e62b3c0ccff63
         enable: '[% !c("var/generate_gradle_dependencies_list") %]'
       - filename: gen-gradle-deps-file.py
         enable: '[% c("var/generate_gradle_dependencies_list") %]'

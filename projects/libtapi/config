@@ -3,7 +3,7 @@ filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("co
 version: '[% c("abbrev") %]'
 # This can be found in
 # taskcluster/kinds/fetch/toolchains.yml
-git_hash: aed9334283e3e290bba622ee980bde2322e4d516
+git_hash: 593d29141bf176d24021208c75af54a2ef23c38b
 git_url: https://github.com/tpoechtrager/apple-libtapi
 
 container:

@@ -437,9 +437,6 @@ list_toolchain_updates:
 create_glean_deps_tarball: submodule-update
 	 $(rbm) build glean-parser --target alpha --target torbrowser-android-armv7
 
-create_glean_deps_tarball-with_torsocks: submodule-update
-	$(rbm) build glean-parser --target alpha --target torbrowser-android-armv7 --target with_torsocks
-
 generate_gradle_dependencies_list-application-services: submodule-update
 	$(rbm) build application-services --target generate_gradle_dependencies_list --target nightly --target torbrowser-android-armv7
 

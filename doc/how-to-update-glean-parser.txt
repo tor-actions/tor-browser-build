@@ -20,13 +20,13 @@ Run this command to generate the tarball:
   make create_glean_deps_tarball
 
 There is no really good way (yet) to verify that `pip` gave us actually what we
-wanted. We can download `glean_parser` and its dependencies using a different
-network path, though, e.g. by using `torsocks`. Comparing the results of both
-downloads should yield the exact same binaries.
-
-If you want to use torsocks, you can use this command:
-
-  make create_glean_deps_tarball-with_torsocks
+wanted.
+We can download `glean_parser` and its dependencies using a different
+network path.
+Comparing the results of both downloads should yield the exact same binaries.
+Notice that pip installs the most recent version of a dependency by default, so
+verification may fail if it is run sometime after the archive was created the
+first time.
 
 3)
 

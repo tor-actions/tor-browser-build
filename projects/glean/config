@@ -3,7 +3,7 @@ git_hash: 'a793015bad500379ec5480e280ac2631178a2013' # v67.0.0
 git_url: https://github.com/mozilla/glean.git
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 # Check for mozilla-glean in gradle/libs.versions.toml in the tor-browser repository
-version: 67.1.0
+version: 67.2.0
 container:
   use_container: 1
   disable_network:
@@ -11,6 +11,7 @@ container:
 
 var:
   gradle_version: 8.14.3
+  glean_parser: 18.2.0
 
 steps:
   build:
@@ -35,9 +36,9 @@ steps:
         name: rust
       - project: uniffi-rs
         name: uniffi-rs
-      - URL: '[% pc("glean-parser", "var/glean_wheels_url") %]'
+      - URL: 'https://build-sources.tbb.torproject.org/glean-wheels-[% c("var/glean_parser") %].tar.xz'
         name: glean-wheels
-        sha256sum: '[% pc("glean-parser", "var/glean_wheels_sha256sum") %]'
+        sha256sum: '[% pc("glean-parser", "var/glean_wheels_sha256sum/" _ c("var/glean_parser"), { error_if_undef => 1 }) %]'
         enable: '[% !c("var/generate_gradle_dependencies_list") %]'
       - name: cargo_vendor
         project: glean

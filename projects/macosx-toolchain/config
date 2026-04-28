@@ -1,10 +1,10 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("arch") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
-version: 26.2
+version: 26.4
 container:
   use_container: 1
 var:
-  sdk_sha512sum: f3785f1bbc3b8323121b66fc28ef59083b4f508c7bdabb9d8d916f142ee89b01cb8030eba469eb9107b416d1c9d523a1d2e009cddb83536a819a3704a5d3ce17
+  sdk_sha512sum: 8c0571820cbf6eb977610a08922a2158ff3ed86389d4faa7eba34288f467047c6bacccc23aa6991f0d18450e393dd56cf581b08010fac45254db2c649610e9fc
   setup: |
     mkdir -p /var/tmp/dist
     tar -C /var/tmp/dist -xf $rootdir/[% c("compiler_tarfile") %]
