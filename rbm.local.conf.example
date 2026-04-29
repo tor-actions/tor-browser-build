@@ -9,7 +9,15 @@
 ### The tmp_dir option defines where temporary files are stored. The
 ### builds are made from this directory, so using a directory on a fast
 ### disk can improve build time. By default we are using a tmp directory
-### under the tor-browser-build directory.
+### under the tor-browser-build directory. Using templating in the
+### definition of this option is possible, however you should make sure
+### to avoid a recursive definition as the evaluation of some options
+### depend on tmp_dir (this is for example the case with the
+### `link_input_files` option). If you want to use an option that
+### depends on tmp_dir you may set a static value for tmp_dir in the
+### options argument to avoid a recursive loop, assuming that the actual
+### value of tmp_dir doesn't really matter for this option (you can use
+### for example `c("link_input_files", { tmp_dir => "/tmp" })`).
 #tmp_dir: /tmp
 
 ### The debug option defines whether a debugging shell should be opened
