@@ -87,16 +87,16 @@ input_files:
     enable: '[% !c("var/android") %]'
   - filename: dmg-root
     enable: '[% c("var/macos") %]'
-  - URL: https://dist.torproject.org/torbrowser/noscript/noscript-13.6.14.90101984.xpi
+  - URL: https://dist.torproject.org/torbrowser/noscript/noscript-13.6.17.90101984.xpi
     name: noscript
-    sha256sum: e02bcdecaa47512a116ae7367f70c327aaa084817fe64e66ac6fbb52dc2c492a
+    sha256sum: 625cac7e3a275398c2cdb38667b20ad57fde9015a9ab2c39f1b77bb42c32c639
   - URL: https://addons.mozilla.org/firefox/downloads/file/4721638/ublock_origin-1.70.0.xpi
     name: ublock-origin
     sha256sum: f2730d2877005763a45d765749892e936f49cae713d28f7aa6ea314454b89cf1
     enable: '[% c("var/mullvad-browser") %]'
-  - URL: https://cdn.mullvad.net/browser-extension/0.9.7/mullvad-browser-extension-0.9.7.xpi
+  - URL: https://cdn.mullvad.net/browser-extension/0.9.10/mullvad-browser-extension-0.9.10.xpi
     name: mullvad-extension
-    sha256sum: 4597ee6fff6a2f19cbf78a6149d38d12ad8a9d6029b7e36f6c639dc3e07dd2c3
+    sha256sum: d8adfd5d83c67d8d50d9466c6564755de79a8a0825f5c67a151919506d411b30
     enable: '[% c("var/mullvad-browser") %]'
   - project: manual
     name: manual

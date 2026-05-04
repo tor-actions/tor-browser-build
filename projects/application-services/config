@@ -20,7 +20,7 @@ container:
     build: '[% !c("var/generate_gradle_dependencies_list") %]'
 
 var:
-  build_number: 1
+  build_number: 2
   gradle_version: 8.14.3
   # NSS version ans sha256 are in libs/build-all.sh.
   nss_version: '3.121'

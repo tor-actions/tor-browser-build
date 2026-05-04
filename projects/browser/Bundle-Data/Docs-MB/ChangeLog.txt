@@ -1,3 +1,39 @@
+Mullvad Browser 16.0a6 - May 05 2026
+ * All Platforms
+   * Updated Firefox to 150.0a1
+   * Updated NoScript to 13.6.17.90101984
+   * Updated Mullvad Browser Extension to 0.9.10
+   * Bug 528: Rebase Mullvad Browser alpha onto 150.0a1 [mullvad-browser]
+   * Bug 44402: Re-enable ESLint rule mozilla/no-browser-refs-in-toolkit as an error
+   * Bug 44560: Customize the flags for alternate 'Application Data' directories [tor-browser]
+   * Bug 44685: Use border radius for letterboxing [tor-browser]
+   * Bug 44749: Check search engines parameter replacements [tor-browser]
+   * Bug 44828: Remove browser module references from toolkit/modules/ActorManagerParent.sys.mjs [tor-browser]
+   * Bug 44832: Hide the Firefox mascot in about:neterror [tor-browser]
+   * Bug 44847: Drop letterboxing sidebar rounded corner logic [tor-browser]
+   * Bug 44865: Block chrome://*/locale/* to content [tor-browser]
+   * Bug 44870: Remove legacy branch from gitlab templates [tor-browser]
+   * Bug 44895: Undo the patch for #44772 [tor-browser]
+   * Bug 44902: Error in privacy preference initialisation due to missing `dataCollectionViewProfilesMultiProfileBackupWarning` [tor-browser]
+   * Bug 31860: Start using LTO for firefox project [tor-browser-build]
+ * Windows
+   * Bug 44862: Fontvis is missing Segoe MDL2 Assets [tor-browser]
+   * Bug 44868: Backport 138c33ea964b2e0a4875aadc39d8a948e0c2aace to 150 to fix Windows builds [tor-browser]
+ * Linux
+   * Bug 44521: Disable widget.wayland.fractional-scale.enabled [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41764: Update toolchains for Firefox 150 [tor-browser-build]
+     * Bug 41767: Add jwilde to allowed signer for browser projects [tor-browser-build]
+     * Bug 41778: Remove base-browser from protected-branches.py [tor-browser-build]
+     * Bug 41780: Create sha256sums-unsigned-build.txt in artifacts/$platform directories [tor-browser-build]
+     * Bug 41786: Add comment to rbm.local.conf.example warning about potential recursive loops in tmp_dir definition [tor-browser-build]
+     * Bug 40106: Improve error message in case of recursive definition [rbm]
+   * Windows
+     * Bug 44853: Update target in mozconfig-windows-x86_64 and mozconfig-windows-i686 [tor-browser]
+   * macOS
+     * Bug 41773: Change the position of -mindepth when creating the dmg [tor-browser-build]
+
 Mullvad Browser 16.0a5 - April 01 2026
  * All Platforms
    * Updated Firefox to 149.0a1
