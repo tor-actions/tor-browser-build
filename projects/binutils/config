@@ -19,7 +19,7 @@ targets:
       configure_opt: '--target=[% c("var/crosstarget") %] --disable-multilib --enable-deterministic-archives --enable-plugins'
 
 input_files:
-  - URL: https://ftp.gnu.org/gnu/binutils/binutils-[% c("version") %].tar.xz
+  - URL: https://ftpmirror.gnu.org/gnu/binutils/binutils-[% c("version") %].tar.xz
     sig_ext: sig
     file_gpg_id: 1
     gpg_keyring: binutils.gpg

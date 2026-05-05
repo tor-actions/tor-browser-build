@@ -37,7 +37,7 @@ input_files:
       - linux-cross
   - name: gcc-native
     project: gcc
-  - URL: 'https://ftp.gnu.org/gnu/glibc/glibc-[% c("var/glibc_version") %].tar.xz'
+  - URL: 'https://ftpmirror.gnu.org/gnu/glibc/glibc-[% c("var/glibc_version") %].tar.xz'
     sha256sum: b1900051afad76f7a4f73e71413df4826dce085ef8ddb785a945b66d7d513082
   - URL: 'https://www.kernel.org/pub/linux/kernel/v4.x/linux-[% c("var/linux_version") %].tar.xz'
     sha256sum: 4fcfe814780d63dc56e907bf41596ff162e9601978bdc1a60eab64cc3903a22c
