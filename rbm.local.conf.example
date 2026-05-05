@@ -85,29 +85,43 @@ var:
   ### branches and build targets you are using, to compute the list of
   ### files that should be kept.
   ###
-  ### If you only do alpha builds for all platforms, you can use the
-  ### following configuration:
+  ### If you only do Tor Browser and Mullvad Browser alpha builds for all
+  ### platforms, you can use the following configuration:
   #clean:
   #  HEAD:
   #    - project: release
   #      target:
   #        - alpha
-  #        - torbrowser-all
+  #        - browser-all
+  #        - torbrowser
+  #    - project: release
+  #      target:
+  #        - alpha
+  #        - browser-all
+  #        - mullvadbrowser
   #
-  ### If you are doing 'release' builds in the maint-7.0 branch and
-  ### 'alpha' builds in the main branch, you can use the following
-  ### configuration:
+  ### If you are doing Tor Browser 'release' builds in the maint-15.0
+  ### branch and 'alpha' builds in the main branch, you can use the
+  ### following configuration:
   #clean:
   #  main:
   #    - project: release
   #      target:
   #        - alpha
-  #        - torbrowser-all
-  #  maint-7.0:
+  #        - browser-all
+  #        - torbrowser
+  #  maint-15.0:
   #    - project: release
   #      target:
   #        - release
-  #        - torbrowser-all
+  #        - browser-all
+  #        - torbrowser
+  #
+  ### If you are doing Tor Browser and Mullvad Browser builds, you can
+  ### duplicate the projects listed, replacing the `torbrowser` target
+  ### with `mullvadbrowser`, in order to avoid removal of files specific
+  ### to Mullvad Browser. This will however duplicate the time to run the
+  ### cleaning script.
 
 targets:
 
