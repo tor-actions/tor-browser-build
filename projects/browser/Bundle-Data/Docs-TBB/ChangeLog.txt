@@ -1,25 +1,33 @@
-Tor Browser 16.0a6 - May 05 2026
+Tor Browser 16.0a6 - May 07 2026
  * All Platforms
-   * Updated NoScript to 13.6.17.90101984
+   * Updated tor to 0.4.9.7
+   * Updated NoScript to 13.6.18.90101984
    * Updated OpenSSL to 3.5.6
    * Bug 43857: Review in-source TODOs [tor-browser]
-   * Bug 44402: Re-enable ESLint rule mozilla/no-browser-refs-in-toolkit as an error
+   * Bug 44402: Re-enable ESLint rule mozilla/no-browser-refs-in-toolkit as an error [tor-browser]
    * Bug 44749: Check search engines parameter replacements [tor-browser]
    * Bug 44792: Rebase alpha onto 150.0a1 [tor-browser]
    * Bug 44796: Adjust TorProviderBuilder to report the provider state to consumers [tor-browser]
    * Bug 44828: Remove browser module references from toolkit/modules/ActorManagerParent.sys.mjs [tor-browser]
    * Bug 44841: TorDomainIsolator proxy filter returns null on exception instead of preserving SOCKS proxy [tor-browser]
    * Bug 44865: Block chrome://*/locale/* to content [tor-browser]
+   * Bug 44868: Backport 138c33ea964b2e0a4875aadc39d8a948e0c2aace to 150 to fix Windows builds [tor-browser]
    * Bug 44870: Remove legacy branch from gitlab templates [tor-browser]
    * Bug 44895: Undo the patch for #44772 [tor-browser]
    * Bug 41775: Update list of Snowflake STUN servers in default bridge line, 2026 edition [tor-browser-build]
+   * Bug 41778: Remove base-browser from protected-branches.py [tor-browser-build]
+   * Bug 41780: Create sha256sums-unsigned-build.txt in artifacts/$platform directories [tor-browser-build]
  * Windows + macOS + Linux
    * Updated Firefox to 150.0a1
+   * Bug 43824: Switch resource:// modules to use moz-src: [tor-browser]
    * Bug 44288: New identity fails to block loading a custom home page [tor-browser]
+   * Bug 44458: Fix the "Connect" and ".onion available" button height [tor-browser]
    * Bug 44560: Customize the flags for alternate 'Application Data' directories [tor-browser]
+   * Bug 44630: Use settings config to hide settings, rather than data-hidden-from-search or commenting out [tor-browser]
    * Bug 44648: Unexpected changes to SearchService.sys.mjs [tor-browser]
    * Bug 44685: Use border radius for letterboxing [tor-browser]
    * Bug 44798: Don't load `about:torconnect` into iframes [tor-browser]
+   * Bug 44829: Hide the settings privacy card [tor-browser]
    * Bug 44832: Hide the Firefox mascot in about:neterror [tor-browser]
    * Bug 44846: about:torconnect redirect doesn't work with the new neterror page [tor-browser]
    * Bug 44847: Drop letterboxing sidebar rounded corner logic [tor-browser]
@@ -29,6 +37,7 @@ Tor Browser 16.0a6 - May 05 2026
    * Bug 44862: Fontvis is missing Segoe MDL2 Assets [tor-browser]
    * Bug 44868: Backport 138c33ea964b2e0a4875aadc39d8a948e0c2aace to 150 to fix Windows builds [tor-browser]
  * macOS
+   * Bug 44850: Wrong path for bootstrapped tor daemon on macOS [tor-browser]
    * Bug 41476: Since 13.5-legacy is not longer supported, remove tools/signing/wrappers/sign-rcodesign [tor-browser-build]
  * Linux
    * Bug 44361: Notify Linux i686 users that they won't receive updates anymore [tor-browser]
@@ -41,6 +50,7 @@ Tor Browser 16.0a6 - May 05 2026
    * Bug 44848: Do not overwrite Android toolchains on default mozconfigs [tor-browser]
    * Bug 44880: Fix edgeToEdge display issue presented in 150 android rebase [tor-browser]
    * Bug 44925: Fix bootstrap screen color styling for light mode presented in one of the rebases between 140 and 150 [tor-browser]
+   * Bug 44935: Remove incorrectly shown "open in app" notification dot on settings button [tor-browser]
  * Build System
    * All Platforms
      * Bug 41591: Remove support for old mar filenames when 13.5 legacy branch is EOL [tor-browser-build]
@@ -61,6 +71,8 @@ Tor Browser 16.0a6 - May 05 2026
      * Bug 41773: Change the position of -mindepth when creating the dmg [tor-browser-build]
    * Linux
      * Bug 44555: Remove mozconfig-linux-i686 [tor-browser]
+   * Android
+     * Bug 44848: Do not overwrite Android toolchains on default mozconfigs [tor-browser]
 
 Tor Browser 16.0a5 - April 01 2026
  * All Platforms
