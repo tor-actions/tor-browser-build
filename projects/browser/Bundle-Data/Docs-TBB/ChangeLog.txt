@@ -1,3 +1,17 @@
+Tor Browser 15.0.12 - May 07 2026
+ * All Platforms
+   * Updated tor to 0.4.9.7
+   * Bug 44940: Rebase Tor Browser stable onto 140.10.2esr [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 140.10.2esr
+   * Bug 44746: Funding the Commons Implementation (Desktop) [tor-browser]
+ * Android
+   * Updated GeckoView to 140.10.2esr
+   * Bug 44747: Funding the Commons Implementation (Android) [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41781: Fix clean section in rbm.local.conf.example [tor-browser-build]
+
 Tor Browser 15.0.11 - April 28 2026
  * All Platforms
    * Updated NoScript to 13.6.18.1984
