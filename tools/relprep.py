@@ -412,9 +412,7 @@ class ReleasePreparation:
     def update_tor(self):
         logger.info("Updating Tor")
         databag = configparser.ConfigParser()
-        r = requests.get(
-            "https://gitlab.torproject.org/tpo/web/tpo/-/raw/main/databags/versions.ini"
-        )
+        r = requests.get("https://www.torproject.org/download/versions.ini")
         r.raise_for_status()
         databag.read_string(r.text)
         tor_stable = databag["tor-stable"]["version"]
