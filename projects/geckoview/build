@@ -40,6 +40,12 @@ echo "Starting ./mach build $(date)"
 
   ./mach python -m mozbuild.action.test_archive mozharness mozharness.zip
   mv mozharness.zip $artifactsdir
+
+  cp -a \
+    [% IF !c("var/firefox-browser") %]$rootdir/[% c('input_files_by_name/application-services') %][% END %] \
+    $rootdir/[% c('input_files_by_name/cbindgen') %] \
+    $rootdir/[% c('input_files_by_name/node') %] \
+    $artifactsdir
 [% END %]
 
 echo "Build finished, copying the AAR to the to the destination directory $(date)"

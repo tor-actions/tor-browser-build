@@ -68,7 +68,7 @@ done
   MARTOOLS=$rootdir/mar-tools
 [% END -%]
 
-mv [% c('input_files_by_name/noscript') %] "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi"
+cp -a [% c('input_files_by_name/noscript') %] "$TBDIR/$EXTSPATH/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi"
 [% IF c("var/mullvad-browser") -%]
   mv [% c('input_files_by_name/ublock-origin') %] "$TBDIR/$EXTSPATH/uBlock0@raymondhill.net.xpi"
   mv [% c('input_files_by_name/mullvad-extension') %] "$TBDIR/$EXTSPATH/{d19a89b9-76c1-4a61-bcd4-49e8de916403}.xpi"
@@ -413,4 +413,20 @@ cd $distdir
     cp -a $rootdir/[% c('input_files_by_name/firefox-aarch64') %]/artifacts "$OUTDIR"
   [% END -%]
   cp -a $rootdir/[% c('input_files_by_name/firefox') %]/artifacts "$OUTDIR"
+  [%
+     SET artifacts_archs = [ c("var/osname") ];
+     IF c("var/macos_universal");
+       SET artifacts_archs = [ 'macos-aarch64', 'macos-x86_64' ];
+     END;
+
+     FOREACH artifacts_arch = artifacts_archs;
+     SET arch_ext = artifacts_arch == 'macos-aarch64' ? '-aarch64' : '';
+  %]
+    cp -a $rootdir/[% c('input_files_by_name/noscript') %] \
+          $rootdir/[% c('input_files_by_name/fonts') %] \
+          [% IF c("var/tor-browser") -%]
+            $rootdir/[% c('input_files_by_name/tor-expert-bundle' _ arch_ext) %]/tor-expert-bundle.tar.gz \
+          [% END -%]
+          "$OUTDIR/artifacts/[% artifacts_arch %]/"
+  [% END %]
 [% END %]

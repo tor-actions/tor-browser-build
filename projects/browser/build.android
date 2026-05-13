@@ -133,7 +133,11 @@ apksigner sign --verbose --min-sdk-version [% c("var/android_min_api") %] --ks $
 [% END -%]
 
 [% IF c("var/dev_artifacts") -%]
-  mkdir -p "[% dest_dir %]/[% c('filename') %]/artifacts/android-[% c('var/abi') %]"
+  artifacts_dir="[% dest_dir %]/[% c('filename') %]/artifacts/android-[% c('var/abi') %]"
+  mkdir -p "$artifacts_dir"
   mv $rootdir/[% c('input_files_by_name/fenix') %]/geckoview/artifacts/[% c('var/abi') %]/* \
-     "[% dest_dir %]/[% c('filename') %]/artifacts/android-[% c('var/abi') %]"
+    [% IF c("var/tor-browser") -%]
+      "$rootdir/[% c("input_files_by_name/tor-expert-bundle") %]/tor-expert-bundle.tar.gz" \
+    [% END -%]
+    "$artifacts_dir"
 [% END %]
