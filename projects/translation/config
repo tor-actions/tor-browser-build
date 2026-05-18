@@ -12,13 +12,13 @@ compress_tar: 'gz'
 steps:
   base-browser:
     base-browser: '[% INCLUDE build %]'
-    git_hash: bca639ef183dba065e6f9dc0bab86aedb03f9335
+    git_hash: 6749f7ce29126312167aee8e07cd45a4aa4acb9d
     targets:
       nightly:
         git_hash: 'base-browser'
   tor-browser:
     tor-browser: '[% INCLUDE build %]'
-    git_hash: 56f475a6c10e509aaff0657b9d864463d387cea7
+    git_hash: a2e92e2c255377898a72be2fc0d073766a7ee4ed
     targets:
       nightly:
         git_hash: 'tor-browser'
@@ -32,7 +32,7 @@ steps:
     fenix: '[% INCLUDE build %]'
     # We need to bump the commit before releasing but just pointing to a branch
     # might cause too much rebuidling of the Firefox part.
-    git_hash: 2c08eef67c3e6d720b23b9766d12807e25fb805e
+    git_hash: 5cc66c03e5c3d4f35dd48fc5a5a721e5ea1fc384
     compress_tar: 'zst'
     targets:
       nightly:

@@ -1,3 +1,17 @@
+Tor Browser 15.0.14 - May 19 2026
+ * All Platforms
+   * Bug 44958: Backport Security Fixes from Firefox 151 [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 140.11.0esr
+ * Android
+   * Updated GeckoView to 140.11.0esr
+ * Build System
+   * All Platforms
+     * Bug 41781: Fix clean section in rbm.local.conf.example [tor-browser-build]
+     * Bug 41798: Update the URL to versions.ini in relprep.py [tor-browser-build]
+   * Windows + Linux + Android
+     * Updated Go to 1.25.10
+
 Tor Browser 15.0.13 - May 08 2026
  * All Platforms
    * Updated tor to 0.4.9.8

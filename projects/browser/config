@@ -114,9 +114,9 @@ input_files:
   - filename: dmg-root
     enable: '[% ! c("var/android") %]'
   - name: fenix-nightly-apk
-    URL: https://ftp.mozilla.org/pub/fenix/nightly/2026/05/2026-05-07-08-37-59-fenix-152.0a1-android-arm64-v8a/fenix-152.0a1.multi.android-arm64-v8a.apk
+    URL: https://ftp.mozilla.org/pub/fenix/nightly/2026/05/2026-05-18-09-37-36-fenix-152.0a1-android-arm64-v8a/fenix-152.0a1.multi.android-arm64-v8a.apk
     enable: '[% c("var/android") %]'
-    sha256sum: 02c00cffa9b3fd3614f5c074d67c64b8eae7e1cab40899a5a6e243ab9bb88479
+    sha256sum: 6dc4e01fa2cea881d54f00e62e8e063fc5b27db4aa10c126952cbd28c959256a
   - URL: https://dist.torproject.org/torbrowser/noscript/noscript-13.6.19.1984.xpi
     name: noscript
     sha256sum: e4280bb2ae87b7dce2c43e416dab60f15a791d439bf9dde2d15b91c14b4163d1
