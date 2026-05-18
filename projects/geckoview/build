@@ -37,6 +37,9 @@ echo "Starting ./mach build $(date)"
   # Naming convention is the same as Mozilla uses for their artifacts
   mv obj-*/gradle/build/mobile/android/geckoview_example/outputs/apk/*/geckoview_example-*.apk $artifactsdir/geckoview_example.apk
   mv obj-*/dist/target.* $artifactsdir
+
+  ./mach python -m mozbuild.action.test_archive mozharness mozharness.zip
+  mv mozharness.zip $artifactsdir
 [% END %]
 
 echo "Build finished, copying the AAR to the to the destination directory $(date)"
