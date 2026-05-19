@@ -61,8 +61,11 @@ for u, h in pairs:
     if not p.exists():
         p.parent.mkdir(parents=True, exist_ok=True)
         if p in existing:
-            print(f"Copying {p} from {existing[p]}")
-            shutil.copyfile(existing[p], p)
+            print(f"Copying/linking {p} from {existing[p]}")
+            try:
+                os.link(existing[p], p)
+            except OSError:
+                shutil.copyfile(existing[p], p)
         else:
             print(f"Downloading {u}")
             r = requests.get(u)
