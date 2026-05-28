@@ -20,9 +20,9 @@ GITLAB_LABELS = [
 GITLAB_MILESTONE = "Browser 16.0"
 
 
-def download_bugs(url):
-    url += "&" if "?" in url else "?"
-    url += "include_fields=id,product,component,summary"
+def download_bugs(query):
+    url = f"https://bugzilla.mozilla.org/rest/bug?{query}&include_fields=id,product,component,summary"
+
     r = requests.get(url)
     r.raise_for_status()
     # {"bugs": [ {...}, ... ]}
@@ -76,9 +76,9 @@ def extract_from_git(repo_path, ff_version, bugs):
     # So, we expect this number to be quite low and that it will be
     # possible to fetch all these bugs in a single pass.
     if seen_ids:
-        url = "https://bugzilla.mozilla.org/rest/bug?id="
-        url += ",".join([str(i) for i in seen_ids])
-        results.update(download_bugs(url))
+        query = "id="
+        query += ",".join([str(i) for i in seen_ids])
+        results.update(download_bugs(query))
     bugs.update(results)
 
 
@@ -147,7 +147,7 @@ def generate_csv(bugs, audit_issue, query, output_path):
             writer.writerow(["FALSE", create_link, component, bugzilla_link])
 
         writer.writerow([])
-        writer.writerow([make_hyperlink(query, "Bugzilla query")])
+        writer.writerow([make_hyperlink(f"https://bugzilla.mozilla.org/buglist.cgi?{query}", "Bugzilla query")])
 
 
 def main():
@@ -191,7 +191,7 @@ def main():
         sys.exit(1)
 
     excluded_products = "Thunderbird,Calendar,Chat%20Core,MailNews%20Core"
-    query = f"https://bugzilla.mozilla.org/rest/bug?f1=product&n1=1&o1=anyexact&v1={excluded_products}&f2=target_milestone&o2=substring&v2={args.ff_version}&limit=0"
+    query = f"f1=product&n1=1&o1=anyexact&v1={excluded_products}&f2=target_milestone&o2=substring&v2={args.ff_version}&limit=0"
     bugs = download_bugs(query)
     extract_from_git(args.repo_path, args.ff_version, bugs)
 
