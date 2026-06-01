@@ -463,6 +463,23 @@ sub get_terser_info {
   }
 }
 
+# browser/config/version.txt
+sub get_firefox_platform_version {
+  my $version = path('browser/config/version.txt')->slurp_utf8;
+  chomp $version;
+  foreach my $project (qw/firefox geckoview/) {
+    set_rbm_info("$project/firefox_platform_version", {
+        project => $project,
+        option  => 'var/firefox_platform_version',
+      });
+    if ($version) {
+      set_version_info("$project/firefox_platform_version", $version);
+    } else {
+      set_error("$project/firefox_platform_version");
+    }
+  }
+}
+
 get_rust_info;
 get_clang_info;
 get_cbindgen_info;
@@ -478,4 +495,5 @@ get_gradle_info;
 get_glean_info;
 get_glean_parser_info;
 get_terser_info;
+get_firefox_platform_version;
 print JSON->new->utf8->canonical->pretty->encode(\%version_infos);
