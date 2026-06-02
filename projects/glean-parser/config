@@ -11,7 +11,7 @@ container:
 var:
   glean_wheels_sha256sum:
     18.2.0: 4f8343a462834f8e27960de0783e83b514ebda0673c55a5fb384826083e4a0c9
-    19.0.0: 5566967acf912f4f93ecd8385661d07505b6bb004583da460e9118ca6b86a798
+    19.0.0: e57f9f7a73a70ae4a78d4ce3d3c0c11288fef730f0747c5c3c8a42815e0c4625
   deps:
     - python3
     - python3-pip
