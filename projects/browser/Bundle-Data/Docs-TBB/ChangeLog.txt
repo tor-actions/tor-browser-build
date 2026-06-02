@@ -1,3 +1,13 @@
+Tor Browser 15.0.15 - June 02 2026
+ * All Platforms
+   * Updated NoScript to 13.6.20.1984
+   * Updated Tor to 0.4.9.9
+   * Bug 42436: Allow for multiple configured (front, reflector) domain fronting pairs in Moat module [tor-browser]
+ * Windows + macOS + Linux
+   * Bug 44997: Captcha doesn't work in TB desktop [tor-browser]
+ * Linux
+   * Bug 44886: Backport tor-browser#44361: Notify Linux i686 users that they won't receive updates anymore [tor-browser]
+
 Tor Browser 15.0.14 - May 19 2026
  * All Platforms
    * Bug 44958: Backport Security Fixes from Firefox 151 [tor-browser]
