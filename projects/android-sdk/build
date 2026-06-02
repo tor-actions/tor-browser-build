@@ -27,6 +27,8 @@ unzip -qq $rootdir/[% c("input_files_by_name/platform-36.1") %] -d platforms
 # Normally, it should not be needed. So, when upgrading, do not add its
 # package.xml, unless you encounter the same bug.
 mv $rootdir/platform-36.1-package.xml platforms/android-36.1/package.xml
+unzip -qq $rootdir/[% c("input_files_by_name/platform-37") %] -d platforms
+mv $rootdir/platform-37.0-package.xml platforms/android-37.0/package.xml
 
 # Platform tools
 unzip -qq $rootdir/[% c("input_files_by_name/platform_tools") %]
