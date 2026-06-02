@@ -1,3 +1,45 @@
+Tor Browser 16.0a7 - June 03 2026
+ * All Platforms
+   * Updated NoScript to 13.6.19.90401984
+   * Updated Tor to 0.4.9.9
+   * Bug 42436: Allow for multiple configured (front, reflector) domain fronting pairs in Moat module [tor-browser]
+   * Bug 44869: Rebase alpha onto 151 [tor-browser]
+   * Bug 44952: TOR_PROVIDER=none throws an error at launch [tor-browser]
+   * Bug 44989: Backport Bug 2040704: Fix date format leak in Firefox 151 [tor-browser]
+   * Bug 44990: CI failing due to dubious ownership of cached repo [tor-browser]
+   * Bug 44999: Privacy settings are broken in 151 [tor-browser]
+   * Bug 41686: Copy more build artifacts to the artifacts directory [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 151.0a1
+   * Bug 44903: Use the `support-page` instead of `tor-manual-page` in `moz-support-link` [tor-browser]
+   * Bug 44904: Use settings config for onion site settings [tor-browser]
+   * Bug 44991: Improve the no-authentication handling on the control port [tor-browser]
+   * Bug 44997: Captcha doesn't work in TB desktop [tor-browser]
+   * Bug 45005: Rename arrowpanel CSS variable [tor-browser]
+ * Windows
+   * Bug 44745: Change how we hide SSO setting for windows [tor-browser]
+ * Android
+   * Updated GeckoView to 151.0a1
+   * Bug 43543: Make the dev icon distinct from the nightly one [tor-browser]
+   * Bug 44211: Disable "Shake it up. Skip the scroll." [tor-browser]
+   * Bug 44323: Audit Android Settings changes from 128 to 140 [tor-browser]
+   * Bug 44917: Disable Ads client for all channels [tor-browser]
+   * Bug 45031: Disable AI features for Android [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41779: Update toolchains for Firefox 151 [tor-browser-build]
+     * Bug 41781: Fix clean section in rbm.local.conf.example [tor-browser-build]
+     * Bug 41792: Switch from ftp.gnu.org to ftpmirror.gnu.org [tor-browser-build]
+     * Bug 41798: Update the URL to versions.ini in relprep.py [tor-browser-build]
+     * Bug 41806: `make list_toolchain_updates` should check var/firefox_platform_version [tor-browser-build]
+     * Bug 41807: Incorrectly generated Bugzilla query link in generate-bugzilla-triage-csv.py [tor-browser-build]
+   * Windows + Linux + Android
+     * Updated Go to 1.26.3
+   * macOS
+     * Bug 41793: Stop copying permissions from .mar in dmg2mar [tor-browser-build]
+   * Android
+     * Bug 41801: Hardlink artifacts in fix_gradle_deps.py [tor-browser-build]
+
 Tor Browser 16.0a6 - May 07 2026
  * All Platforms
    * Updated tor to 0.4.9.7
