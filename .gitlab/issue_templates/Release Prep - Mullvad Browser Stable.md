@@ -145,11 +145,6 @@ Mullvad Browser Stable is on the `maint-${MULLVAD_BROWSER_MAJOR}.${MULLVAD_BROWS
     - `appstoreconnect_api_key_path`: path to json file containing appstoreconnect api key infos
   - [ ] `set-config.update-responses`
     - `update_responses_repository_dir`: directory where you cloned `git@gitlab.torproject.org:tpo/applications/mullvad-browser-update-responses.git`
-  - [ ] `tor-browser-build/tools/signing/set-config.tbb-version`
-    - `tbb_version`: mullvad browser version string, same as `var/torbrowser_version` in `rbm.conf` (examples: `11.5a12`, `11.0.13`)
-    - `tbb_version_build`: the tor-browser-build build number (if `var/torbrowser_build` in `rbm.conf` is `buildN` then this value is `N`)
-    - `tbb_version_type`: either `alpha` for alpha releases or `release` for stable releases
-- [ ] On `${STAGING_SERVER}` in a separate `screen` session, ensure tor daemon is running with SOCKS5 proxy on the default port 9050
 - [ ] On `${STAGING_SERVER}` in a separate `screen` session, run do-all-signing script:
   - Run:
     ```bash
