@@ -456,3 +456,16 @@ index 000000000..b6ef5cdd1
 +#include <poppack.h>
 +
 +#endif
+diff --git a/mingw-w64-headers/include/ws2tcpip.h b/mingw-w64-headers/include/ws2tcpip.h
+index 75ff1fc00..4d4c1cc52 100644
+--- a/mingw-w64-headers/include/ws2tcpip.h
++++ b/mingw-w64-headers/include/ws2tcpip.h
+@@ -334,6 +334,8 @@ WINSOCK_API_LINKAGE int WSAAPI GetAddrInfoExW(PCWSTR pName,PCWSTR pServiceName,D
+                                              LPLOOKUPSERVICE_COMPLETION_ROUTINE lpCompletionRoutine,
+                                              LPHANDLE lpNameHandle);
+ 
++WINSOCK_API_LINKAGE int WSAAPI GetAddrInfoExCancel(LPHANDLE lpHandle);
++
+ WINSOCK_API_LINKAGE int WSAAPI SetAddrInfoExA(PCSTR pName, PCSTR pServiceName, SOCKET_ADDRESS *pAddresses,
+                                              DWORD dwAddressCount,LPBLOB lpBlob,DWORD dwFlags,DWORD dwNameSpace,
+                                              LPGUID lpNspId,PTIMEVAL timeout,LPOVERLAPPED lpOverlapped,
