@@ -20,6 +20,8 @@ Mullvad Browser 16.0a7 - June 03 2026
      * Bug 41792: Switch from ftp.gnu.org to ftpmirror.gnu.org [tor-browser-build]
      * Bug 41806: `make list_toolchain_updates` should check var/firefox_platform_version [tor-browser-build]
      * Bug 41807: Incorrectly generated Bugzilla query link in generate-bugzilla-triage-csv.py [tor-browser-build]
+   * Windows
+     * Bug 41810: Define GetAddrInfoExCancel on mingw [tor-browser-build]
    * macOS
      * Bug 41793: Stop copying permissions from .mar in dmg2mar [tor-browser-build]
 
