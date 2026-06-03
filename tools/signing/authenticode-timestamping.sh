@@ -57,7 +57,6 @@ for i in `find . -name "*.exe" -print`
 do
   osslsigncode add \
                  -t http://timestamp.digicert.com \
-                 -p socks://127.0.0.1:9050 \
                  $i $i-timestamped
   COUNT=$((COUNT + 1))
 

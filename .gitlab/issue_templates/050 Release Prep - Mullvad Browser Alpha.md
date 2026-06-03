@@ -146,7 +146,6 @@ Mullvad Browser Alpha (and Nightly) are on the `main` branch
     - `appstoreconnect_api_key_path`: path to json file containing appstoreconnect api key infos
   - [ ] `set-config.update-responses`
     - `update_responses_repository_dir`: directory where you cloned `git@gitlab.torproject.org:tpo/applications/mullvad-browser-update-responses.git`
-- [ ] On `${STAGING_SERVER}` in a separate `screen` session, ensure tor daemon is running with SOCKS5 proxy on the default port 9050
 - [ ] On `${STAGING_SERVER}` in a separate `screen` session, run do-all-signing script:
   - Run:
     ```bash
