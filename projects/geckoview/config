@@ -73,6 +73,7 @@ targets:
     var:
       online_build: 1
       generate_gradle_dependencies_list: 1
+      dev_artifacts: 0
 
 steps:
   build_apk:
