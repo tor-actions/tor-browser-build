@@ -1,19 +1,26 @@
 #!/bin/bash
 [% c("var/set_default_env") -%]
 
-mkdir -p chrome/browser/content/browser/manual
-unzip $rootdir/[% c('input_files_by_name/manual') %]
-python3 $rootdir/[% c('input_files_by_name/package_script') %] public chrome/browser/content/browser/manual
+manual_dir='chrome/browser/content/browser/aboutmanual'
+mkdir -p "$manual_dir" manual-src
+unzip -d manual-src $rootdir/[% c('input_files_by_name/manual') %]
+python3 $rootdir/[% c('input_files_by_name/package_script') %] \
+	--in-dir manual-src/public --out-dir "$manual_dir" \
+	--out-locales "$rootdir/supported-locales.txt"
 
-pushd chrome/browser/content/browser/manual/static
-find -name '*.map' -delete
-rm -rf fonts
-rm -rf css/digital-climate-strike css/images
-# We prune unused images in the Python script, but empty directories remain
-find images -type d -empty -delete
-popd
+# Check for the expected characters, which will also ensure this can
+# form a valid javascript string literal.
+# Note that $() will strip any trailing newlines, if any.
+supported_locales="$(cat "$rootdir/supported-locales.txt")"
+if [[ ! "$supported_locales" =~ ^[a-zA-Z,-]*$ ]]; then
+  echo 'Error: unexpected characters in supported-locales.txt' >&2
+  exit 1
+fi
+
+mkdir -p defaults/preferences
+echo 'pref("torbrowser.manual.available-locales", "'"$supported_locales"'");' > defaults/preferences/tor-browser-manual.js
 
 [% c('tar', {
-    tar_src => [ 'chrome' ],
+    tar_src => [ 'chrome', 'defaults' ],
     tar_args => '-caf ' _ dest_dir _ '/' _ c('filename'),
   }) %]

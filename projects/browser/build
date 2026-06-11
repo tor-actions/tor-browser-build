@@ -184,7 +184,7 @@ tar -C "${TB_STAGE_DIR}" -xf [% c('input_files_by_name/firefox') %]/browser.tar.
   find . -exec [% c("touch") %] {} \;
   for tbdir in "${TBDIRS[@]}"
   do
-    find chrome/ | sort | zip -X -@ "$tbdir[% IF c('var/macos') %]/Contents/Resources[% END %]/browser/omni.ja"
+    find chrome/ defaults/preferences/tor-browser-manual.js | sort | zip -X -@ "$tbdir[% IF c('var/macos') %]/Contents/Resources[% END %]/browser/omni.ja"
   done
   popd
   rm -rf $TMP_MANUAL_PATH

@@ -10,7 +10,7 @@ from fetch_changelogs import load_token, AUTH_HEADER
 
 GITLAB = "https://gitlab.torproject.org"
 API_URL = f"{GITLAB}/api/v4"
-PROJECT_ID = 23
+PROJECT_ID = 3354
 REF_NAME = "main"
 
 
@@ -66,7 +66,7 @@ def update_manual(auth_token, base_path):
         raise RuntimeError("No usable job found")
     pipeline_id = int(job["pipeline"]["id"])
 
-    manual_fname = f"manual_{pipeline_id}.zip"
+    manual_fname = f"marble-support_{pipeline_id}.zip"
     url = f"https://build-sources.tbb.torproject.org/{manual_fname}"
     r = requests.head(url)
     needs_upload = r.status_code != 200
