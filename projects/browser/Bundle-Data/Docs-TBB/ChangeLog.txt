@@ -1,3 +1,37 @@
+Tor Browser 15.0.16 - June 16 2026
+ * All Platforms
+   * Updated NoScript to 13.6.24.1984
+   * Updated OpenSSL to 3.5.7
+   * Bug 45044: NS 13.6.19.902 DocStartInjection regressed [tor-browser]
+   * Bug 45046: Rebase Tor Browser stable onto 140.12.0esr [tor-browser]
+   * Bug 45054: Backport Security Fixes from Firefox 152 [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 140.12.0esr
+ * Android
+   * Updated GeckoView to 140.12.0esr
+ * Build System
+   * All Platforms
+     * Bug 41802: Remove the tor daemon requirement for signing [tor-browser-build]
+   * Windows + Linux + Android
+     * Updated Go to 1.25.11
+
+Tor Browser 15.0.16 - June 15 2026
+ * All Platforms
+   * Updated NoScript to 13.6.23.1984
+   * Updated OpenSSL to 3.5.7
+   * Bug 45044: NS 13.6.19.902 DocStartInjection regressed [tor-browser]
+   * Bug 45046: Rebase Tor Browser stable onto 140.12.0esr [tor-browser]
+   * Bug 45054: Backport Security Fixes from Firefox 152 [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 140.12.0esr
+ * Android
+   * Updated GeckoView to 140.12.0esr
+ * Build System
+   * All Platforms
+     * Bug 41802: Remove the tor daemon requirement for signing [tor-browser-build]
+   * Windows + Linux + Android
+     * Updated Go to 1.25.11
+
 Tor Browser 15.0.15 - June 02 2026
  * All Platforms
    * Updated NoScript to 13.6.20.1984

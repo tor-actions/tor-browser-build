@@ -18,12 +18,12 @@ container:
   use_container: 1
 
 var:
-  firefox_platform_version: '140.11.0'
+  firefox_platform_version: '140.12.0'
   firefox_version: '[% c("var/firefox_platform_version") %]esr'
   browser_series: '15.0'
   browser_rebase: 1
   browser_branch: '[% c("var/browser_series") %]-[% c("var/browser_rebase") %]'
-  browser_build: 4
+  browser_build: 2
   copyright_year: '[% exec("git show -s --format=%ci " _ c("git_hash") _ "^{commit}", { exec_noco => 1 }).remove("-.*") %]'
   nightly_updates_publish_dir: '[% c("var/nightly_updates_publish_dir_prefix") %]nightly-[% c("var/osname") %]'
   gitlab_project: https://gitlab.torproject.org/tpo/applications/tor-browser
@@ -112,7 +112,6 @@ targets:
   mullvadbrowser:
     git_url: https://gitlab.torproject.org/tpo/applications/mullvad-browser.git
     var:
-      browser_build: 2
       gitlab_project: https://gitlab.torproject.org/tpo/applications/mullvad-browser
       updater_url: 'https://cdn.mullvad.net/browser/update_responses/update_1/'
       mar_id_prefix: 'mullvadbrowser-mullvad'
