@@ -38,6 +38,10 @@ echo "Starting ./mach build $(date)"
   mv obj-*/gradle/build/mobile/android/geckoview_example/outputs/apk/*/geckoview_example-*.apk $artifactsdir/geckoview_example.apk
   mv obj-*/dist/target.* $artifactsdir
 
+  # Copy the test runner to the target directory
+  # This test runner is used for running XPCShell tests, Browser test, gTests and so on.
+  mv obj-*/gradle/build/mobile/android/test_runner/outputs/apk/*/test_runner-*.apk $artifactsdir/test_runner.apk
+
   ./mach python -m mozbuild.action.test_archive mozharness mozharness.zip
   mv mozharness.zip $artifactsdir
 
