@@ -129,9 +129,16 @@ sub get_clang_info {
     }
 
     my $fetch = YAML::XS::LoadFile('taskcluster/kinds/fetch/toolchains.yml');
-    set_version_info("clang-$os", $fetch->{$clang_fetch}{fetch}{revision});
+    my ($clang_version) = $fetch->{$clang_fetch}{description} =~ m/^clang (.+) source code$/;
+    set_version_info("clang-${os}_version", $clang_version);
+    set_version_info("clang-${os}_revision", $fetch->{$clang_fetch}{fetch}{revision});
 
-    set_rbm_info("clang-$os", {
+    set_rbm_info("clang-${os}_version", {
+        project => 'llvm-project',
+        option  => 'version',
+        targets => [ $rbm_os_target{$os} ],
+      });
+    set_rbm_info("clang-${os}_revision", {
         project => 'llvm-project',
         option  => 'git_hash',
         targets => [ $rbm_os_target{$os} ],
@@ -142,17 +149,23 @@ sub get_clang_info {
 ## cbindgen
 sub get_cbindgen_info {
   my $fetch = YAML::XS::LoadFile('taskcluster/kinds/fetch/toolchains.yml');
-  my $revision;
+  my ($revision, $version);
   T: foreach my $t (keys %$fetch) {
     next unless $fetch->{$t}{'fetch-alias'};
     if ($fetch->{$t}{'fetch-alias'} eq 'cbindgen') {
       $revision = $fetch->{$t}{fetch}{revision};
+      ($version) = $t =~ m/^cbindgen-(.+)/;
       last T;
     }
   }
   return 0 unless $revision;
-  set_version_info('cbindgen', $revision);
-  set_rbm_info('cbindgen', {
+  set_version_info('cbindgen_version', $version);
+  set_rbm_info('cbindgen_version', {
+      project => 'cbindgen',
+      option  => 'version',
+    });
+  set_version_info('cbindgen_revision', $revision);
+  set_rbm_info('cbindgen_revision', {
       project => 'cbindgen',
       option  => 'git_hash',
     });
