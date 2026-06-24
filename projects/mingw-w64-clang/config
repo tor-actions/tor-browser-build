@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% pc("llvm-project", "version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 git_url: https://git.code.sf.net/p/mingw-w64/mingw-w64
-git_hash: cd1afb6649aafbd5b36e0cf71815d533ada461f8
+git_hash: 00349888007fef589c2604bf60d0ea14c0e2d606
 version: '[% c("abbrev") %]'
 container:
   use_container: 1
@@ -38,3 +38,6 @@ input_files:
   - filename: mingw-ts_sd.patch
   - filename: mingw-foundation_redef.patch
   - filename: mingw-webrtc.patch
+  # Remove when switching to Clang 22.
+  # See Firefox's 9c6b4642907950bd9e3f663fbb7fcb0a16218232
+  - filename: mingw-libunwind-seh.patch

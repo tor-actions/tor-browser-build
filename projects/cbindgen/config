@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
-version: 0.29.1
+version: 0.29.4
 git_url: https://github.com/mozilla/cbindgen
-git_hash: eef17769e2739ebb425fee0bbd88e6a52ac2a4e1
+git_hash: b826cb8911488fe8a209d2b693492c0c673e8cca
 container:
   use_container: 1
 
@@ -16,4 +16,4 @@ steps:
         project: cbindgen
         pkg_type: cargo_vendor
         norec:
-          sha256sum: 3c39d456d74b53ffe044fd624d2c72c7bcbf2c5ff3de54d39f8ca89ce539cdb1
+          sha256sum: 8dd9f7767d51e26204b3315fc4f3ea2103f15a408aff0c778200bf15a023a543

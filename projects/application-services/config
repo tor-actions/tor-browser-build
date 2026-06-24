@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-version: '152.0'
+version: '153.0'
 git_hash: 'v[% c("version") %]-TORBROWSER-build[% c("var/build_number") %]'
 git_url: https://gitlab.torproject.org/tpo/applications/application-services.git
 tag_gpg_id: 1
@@ -22,11 +22,11 @@ container:
 var:
   build_number: 1
   gradle_version: 8.14.3
-  glean_parser: 19.0.0
+  glean_parser: 19.1.0
   # NSS version ans sha256 are in libs/build-all.sh.
-  nss_version: '3.124'
+  nss_version: '3.125'
   nspr_version: '4.39'
-  nss_sha256sum: 362de77e31a16e64be500a22980448c7f08e98dd8ab85c29d0c5e41d4df68d1c
+  nss_sha256sum: fa3e7dcd151a7f3331a2dbf4cc57bcf4444e4c9c2b67ac00363409a7c4ecfa9d
   cargo_vendor_include_config: 1
 
   application-services_versions_infos: '[% exec(c("basedir") _ "/tools/toolchain-updates/extract-application-services-versions-infos") %]'
@@ -90,7 +90,7 @@ steps:
         project: application-services
         pkg_type: cargo_vendor
         norec:
-          sha256sum: b983d8dbde7f15e9249e04b36862a5a3cc17ab334294a00195ac5812c7ef5485
+          sha256sum: 763db021613aca6bfc33f22dcb287e7041aa435b06a75815214fcb9a02d1dc2f
         enable: '[% !c("var/generate_gradle_dependencies_list") %]'
       - filename: gen-gradle-deps-file.py
         enable: '[% c("var/generate_gradle_dependencies_list") %]'

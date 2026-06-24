@@ -13,6 +13,9 @@ tar -xf $rootdir/[% c('input_files_by_name/cmake') %]
 cd $builddir
 tar -xf $rootdir/[% c('input_files_by_name/llvm-project') %]
 
+cd $builddir/clang-source
+patch -p1 < "$rootdir/mingw-libunwind-seh.patch"
+
 # libc++.a depends on libunwind.a. While the linker will automatically link to
 # libc++.a in C++ mode, it won't pick libunwind.a, requiring the caller to
 # explicitly pass -lunwind. To work around that, we merge libunwind.a into
