@@ -1365,6 +1365,8 @@ cc8caa4101a35d0cf0433a63e8ad38911a4c848073fcc94f43ae0251f33e4daf | https://plugi
 10d6bd66abb088eca5be360ff72550c96154d2676efedd74af31c450017c3909 | https://plugins.gradle.org/m2/org/gradle/kotlin/gradle-kotlin-dsl-plugins/6.5.7/gradle-kotlin-dsl-plugins-6.5.7.module
 abe9f3960fa7359722a8752e61bfc496761e15d14735e4c6422079707606abbe | https://plugins.gradle.org/m2/org/gradle/kotlin/gradle-kotlin-dsl-plugins/6.5.7/gradle-kotlin-dsl-plugins-6.5.7.pom
 2dd836cc09712cdaddfeefc680d2ea66eb43d8dc63386bd595265813497f472d | https://plugins.gradle.org/m2/org/gradle/kotlin/kotlin-dsl/org.gradle.kotlin.kotlin-dsl.gradle.plugin/6.5.7/org.gradle.kotlin.kotlin-dsl.gradle.plugin-6.5.7.pom
+937b44d869c059c39f07ae194d8cd6219f5aebf2200ef9707f0b50b7837da281 | https://plugins.gradle.org/m2/org/tukaani/xz/1.12/xz-1.12.pom
+3e158a87bd73d8afb4b6e8239c013b7d049c48563f45860ce99cd2e448cf4a6b | https://plugins.gradle.org/m2/org/tukaani/xz/1.12/xz-1.12.jar
 243a64470fda0e86a6fddeb0af4c7aa9426ce84e68cbfe18d75ee5da4b7e0b92 | https://repo.maven.apache.org/maven2/com/almworks/sqlite4java/sqlite4java/1.0.392/sqlite4java-1.0.392.jar
 139552c586a57bf6d98f87d6b7e23fef4db53cf74097be962f7868e3606c79d2 | https://repo.maven.apache.org/maven2/com/almworks/sqlite4java/sqlite4java/1.0.392/sqlite4java-1.0.392.pom
 348924b116b7b251113af50c1bf1b57c0df7c89b8f56406c1ff1be2d5b469fbd | https://repo.maven.apache.org/maven2/com/autonomousapps/antlr/4.13.2.0/antlr-4.13.2.0.jar

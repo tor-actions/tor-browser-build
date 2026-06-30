@@ -52,7 +52,8 @@ function generate_apk {
   $rootdir/sort-baseline.py --apk $apk $sorted_baseline_apk
   mv $sorted_baseline_apk $apk
 
-  unzip -j "$apk" assets/omni.ja
+  unzip -j "$apk" assets/omni.ja.xz
+  xz -d omni.ja.xz
   mkdir omni
   pushd omni
   unzip ../omni.ja
@@ -72,9 +73,12 @@ function generate_apk {
   # Be sure to change any `rm` with the appropriate command, shall this change.
   [% c('zip', {
         zip_src   => [ '.' ],
-        zip_args  => '-0 ../assets/omni.ja',
+        zip_args  => '-0 ../omni.ja',
       }) %]
   popd
+  sha256sum omni.ja | awk '{ print $1 }' > assets/omni.ja.sha256
+  xz -9e omni.ja
+  mv omni.ja.xz assets/
 
   mkdir apk
   pushd apk
@@ -101,7 +105,6 @@ function generate_apk {
 
   # Clean up
   rm -rf omni
-  rm omni.ja
   rm -rf apk
   rm repacked.apk
   rm $aligned_apk
