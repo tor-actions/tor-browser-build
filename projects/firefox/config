@@ -114,7 +114,6 @@ targets:
       updater_url: 'https://cdn.mullvad.net/browser/update_responses/update_1/'
       mar_id_prefix: 'mullvadbrowser-mullvad'
       nightly_updates_publish_dir_prefix: mullvadbrowser-
-      browser_build: 2
   linux-x86_64:
     var:
       arch_deps:

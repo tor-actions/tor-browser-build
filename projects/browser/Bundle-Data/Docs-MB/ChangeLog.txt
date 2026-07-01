@@ -1,7 +1,7 @@
-Mullvad Browser 16.0a8 - June 25 2026
+Mullvad Browser 16.0a8 - July 01 2026
  * All Platforms
    * Updated Firefox to 152.0a1
-   * Updated NoScript to 13.6.24.90101984
+   * Updated NoScript to 13.6.25.90301984
    * Bug 44528: Make sure desktop IP Protection is disabled on desktop [tor-browser]
    * Bug 44795: Revert BB 27604 patch as not needed anymore [tor-browser]
    * Bug 44857: Drop `browser.display.use_system_colors` from our preference list [tor-browser]
@@ -16,7 +16,7 @@ Mullvad Browser 16.0a8 - June 25 2026
    * Bug 45043: Re-add missing changes to settings after 151/152 rebase [tor-browser]
    * Bug 45047: Cross-site oracle via worklet rejection error in Safer Mode [tor-browser]
    * Bug 45072: Disable XSLT already for 16.0 [tor-browser]
-   * Bug 41821: Update gpg subkeys for boklm [tor-browser-build]
+   * Bug 45083: Error in about:preferences due to ipprotection missing [tor-browser]
  * Windows
    * Bug 552: ABI::Windows::Graphics::Capture::IID_IGraphicsCaptureSession2 is used again in wgc_capture_session.cc [mullvad-browser]
  * macOS
@@ -28,6 +28,8 @@ Mullvad Browser 16.0a8 - June 25 2026
      * Bug 41802: Remove the tor daemon requirement for signing [tor-browser-build]
      * Bug 41809: Update toolchains for Firefox 152 [tor-browser-build]
      * Bug 41813: Disable build artifacts in `make generate_gradle_dependencies_list-geckoview` [tor-browser-build]
+     * Bug 41821: Update gpg subkeys for boklm [tor-browser-build]
+     * Bug 41823: Add versions information to the toolchain list update [tor-browser-build]
      * Bug 41827: Update morgan's keychain with renewed key [tor-browser-build]
 
 Mullvad Browser 16.0a7 - June 03 2026

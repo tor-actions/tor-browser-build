@@ -1,7 +1,7 @@
-Tor Browser 16.0a8 - June 25 2026
+Tor Browser 16.0a8 - July 01 2026
  * All Platforms
-   * Updated Tor to 0.4.9.10
-   * Updated NoScript to 13.6.24.90101984
+   * Updated NoScript to 13.6.25.90301984
+   * Updated Tor to 0.4.9.11
    * Updated OpenSSL to 3.5.7
    * Bug 44857: Drop `browser.display.use_system_colors` from our preference list [tor-browser]
    * Bug 44896: Review Mozilla 2030929: Remove unused pref privacy.partition.network_state [tor-browser]
@@ -9,7 +9,6 @@ Tor Browser 16.0a8 - June 25 2026
    * Bug 45019: ReportBrokenSite startup error in 152 [tor-browser]
    * Bug 45047: Cross-site oracle via worklet rejection error in Safer Mode [tor-browser]
    * Bug 45072: Disable XSLT already for 16.0 [tor-browser]
-   * Bug 41821: Update gpg subkeys for boklm [tor-browser-build]
  * Windows + macOS + Linux
    * Updated Firefox to 152.0a1
    * Bug 44528: Make sure desktop IP Protection is disabled on desktop [tor-browser]
@@ -22,6 +21,7 @@ Tor Browser 16.0a8 - June 25 2026
    * Bug 45017: Wrong letterboxing background in 152 [tor-browser]
    * Bug 45037: Potential runtime errors in the search service when changing JS status [tor-browser]
    * Bug 45043: Re-add missing changes to settings after 151/152 rebase [tor-browser]
+   * Bug 45083: Error in about:preferences due to ipprotection missing [tor-browser]
  * macOS
    * Bug 44728: Bundled fonts are broken on macOS when the GPU process is enabled [tor-browser]
  * Linux
@@ -32,16 +32,22 @@ Tor Browser 16.0a8 - June 25 2026
    * Bug 44091: Add frequent regions to tor connection assist for android [tor-browser]
    * Bug 44175: Remove all default browser functionality (Android) [tor-browser]
    * Bug 44769: TBA crash screen has firefox asset as well as a "Send crash report" button [tor-browser]
+   * Bug 45052: Initialise Tor modules on android in the same order as desktop [tor-browser]
  * Build System
    * All Platforms
      * Bug 41802: Remove the tor daemon requirement for signing [tor-browser-build]
      * Bug 41809: Update toolchains for Firefox 152 [tor-browser-build]
      * Bug 41813: Disable build artifacts in `make generate_gradle_dependencies_list-geckoview` [tor-browser-build]
+     * Bug 41821: Update gpg subkeys for boklm [tor-browser-build]
+     * Bug 41823: Add versions information to the toolchain list update [tor-browser-build]
      * Bug 41827: Update morgan's keychain with renewed key [tor-browser-build]
    * Windows + Linux + Android
      * Updated Go to 1.26.4
    * Windows
      * Bug 41810: Define GetAddrInfoExCancel on mingw [tor-browser-build]
+   * Android
+     * Bug 45086: Compress omni.ja with xz on Android [tor-browser]
+     * Bug 41830: Update the browser project to change omni.ja.xz [tor-browser-build]
 
 Tor Browser 16.0a7 - June 03 2026
  * All Platforms
