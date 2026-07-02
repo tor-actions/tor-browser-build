@@ -69,8 +69,7 @@ function generate_apk {
   [% IF !c("var/android-x86_64") -%]
     rm -rf x86_64
   [% END -%]
-  # Notice: we take for granted we never rewrite on the source archive!
-  # Be sure to change any `rm` with the appropriate command, shall this change.
+  rm ../omni.ja
   [% c('zip', {
         zip_src   => [ '.' ],
         zip_args  => '-0 ../omni.ja',
