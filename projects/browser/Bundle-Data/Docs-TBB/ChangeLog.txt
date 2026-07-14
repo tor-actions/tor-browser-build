@@ -1,3 +1,13 @@
+Tor Browser 15.0.18 - July 14 2026
+ * All Platforms
+   * Updated NoScript to 13.6.30.1984
+   * Bug 45111: Cherry-pick latest firefox/esr140 commits on 140.12.0esr [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41821: Update gpg subkeys for boklm [tor-browser-build]
+   * Windows + Linux + Android
+     * Updated Go to 1.25.12
+
 Tor Browser 15.0.17 - June 29 2026
  * All Platforms
    * Updated Tor to 0.4.9.11
