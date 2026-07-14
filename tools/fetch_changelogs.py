@@ -334,7 +334,7 @@ def load_token(test=True, interactive=True):
             f"Please add your personal GitLab token (with 'read_api' scope) to {token_path}"
         )
         print(
-            f"Please go to {GITLAB}/-/profile/personal_access_tokens and generate it."
+            f"Please go to {GITLAB}/-/user_settings/personal_access_tokens and generate it."
         )
         token = input("Please enter the new token: ").strip()
         if not token:
