@@ -207,9 +207,9 @@ input_files:
     enable: '[% c("var/windows") %]'
     target_prepend:
       - torbrowser-windows-x86_64
-  - URL: 'https://crates.io/api/v1/crates/windows/[% c("var/windows_rs_version") %]/download'
+  - URL: 'https://static.crates.io/crates/windows/windows-[% c("var/windows_rs_version") %].crate'
     name: windows-rs
-    filename: 'windows-rs-[% c("var/windows_rs_version") %].tar.zst'
+    filename: 'windows-rs-[% c("var/windows_rs_version") %].tar.gz'
     sha256sum: '[% c("var/windows_rs_sha256sum") %]'
     enable: '[% c("var/windows") %]'
   - project: windows-app-sdk
