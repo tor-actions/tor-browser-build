@@ -110,6 +110,14 @@ export LANG=C.UTF-8
   patch -p1 < $rootdir/firefoxbrowser-BB-29320.patch
 [% END -%]
 
+[% IF c("var/dev_artifacts") -%]
+  [% IF c("var/macos") -%]
+    export MOZ_PKG_MAC_BACKGROUND=$(find $rootdir/dmg-root/[% c('var/ProjectName') %].dmg/.background  -type f)
+    export MOZ_PKG_MAC_DSSTORE=$rootdir/dmg-root/[% c('var/ProjectName') %].dmg/nightly.DS_Store
+    export MOZ_PKG_MAC_ICON=$rootdir/dmg-root/[% c('var/ProjectName') %].dmg/.VolumeIcon.icns
+  [% END -%]
+[% END -%]
+
 echo "Starting ./mach configure $(date)"
 ./mach configure \
   --with-distribution-id=org.torproject \
@@ -136,12 +144,6 @@ echo "Starting ./mach build $(date)"
 
 [% IF c("var/dev_artifacts") -%]
   echo "Building development artifacts"
-
-  [% IF c("var/macos") -%]
-    export MOZ_PKG_MAC_BACKGROUND=$(find $rootdir/dmg-root/[% c('var/ProjectName') %].dmg/.background  -type f)
-    export MOZ_PKG_MAC_DSSTORE=$rootdir/dmg-root/[% c('var/ProjectName') %].dmg/nightly.DS_Store
-    export MOZ_PKG_MAC_ICON=$rootdir/dmg-root/[% c('var/ProjectName') %].dmg/.VolumeIcon.icns
-  [% END -%]
 
   # Package the browser and also create all the test artifacts.
   #
