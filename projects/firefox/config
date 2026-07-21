@@ -18,10 +18,10 @@ container:
   use_container: 1
 
 var:
-  firefox_platform_version: '153.0a1'
-  firefox_version: '[% c("var/firefox_platform_version") %]'
+  firefox_platform_version: '153.0'
+  firefox_version: '[% c("var/firefox_platform_version") %]esr'
   browser_series: '16.0'
-  browser_rebase: 2
+  browser_rebase: 1
   browser_branch: '[% c("var/browser_series") %]-[% c("var/browser_rebase") %]'
   browser_build: 1
   upstream_firefox_commit: FIREFOX_NIGHTLY_153_END
