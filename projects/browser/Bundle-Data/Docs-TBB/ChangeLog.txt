@@ -1,3 +1,42 @@
+Tor Browser 16.0a9 - July 23 2026
+ * All Platforms
+   * Updated NoScript to 13.6.30.90201984
+   * Bug 43819: Show custom security level on android [tor-browser]
+   * Bug 44748: Revert Funding the Commons Implementations [tor-browser]
+   * Bug 44811: Remove the lock on pdfjs.disable. [tor-browser]
+   * Bug 45101: Rebase Tor Browser onto 153.0esr [tor-browser]
+   * Bug 45131: Security level is using an unsafe getBoolPref [tor-browser]
+   * Bug 41831: Update libevent to 2.1.13 [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 153.0esr
+   * Bug 44439: Remove translate action from urlbar [tor-browser]
+   * Bug 44883: Remove urlbar quick action for labs [tor-browser]
+   * Bug 45029: Convert connection status settings to new design and config approach [tor-browser]
+   * Bug 45055: Rename --color-gray-05 to --color-gray-0 [tor-browser]
+   * Bug 45081: Use the new "Acorn" icons on desktop [tor-browser]
+   * Bug 45110: Disable the settings redesign until ready for us [tor-browser]
+   * Bug 45112: Missing CSS border tokens in 153 [tor-browser]
+   * Bug 45132: nsAppFileLocationProvider.cpp: use of undeclared identifier 'XRE_EXECUTABLE_FILE' [tor-browser]
+   * Bug 41800: Create a script that adapts the Tor Browser manual HTMLs to work in Tor Browser [tor-browser-build]
+ * macOS
+   * Bug 45108: Artifact generation fails due to missing .DS_Store in the branding directories [tor-browser]
+ * Android
+   * Updated GeckoView to 153.0esr
+   * Bug 43820: Use SecurityLevel integration on android [tor-browser]
+   * Bug 44157: Remove secret setting toggle for Tab Management Redesign [tor-browser]
+   * Bug 45045: Remove moz asset in Downloads screen [tor-browser]
+   * Bug 45103: Disable broken "tab management" [tor-browser]
+   * Bug 45109: No value passed for parameter 'jsEnabled' [tor-browser]
+   * Bug 45118: Audit and disable Mozilla VPN promo [tor-browser]
+   * Bug 45130: Clean up TorHomePage padding [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41838: Update personal_access_tokens URL in tools/fetch_changelogs.py [tor-browser-build]
+   * Windows + Linux + Android
+     * Updated Go to 1.26.5
+   * Windows
+     * Bug 41819: Fix windows-rs URL in projects/firefox/config [tor-browser-build]
+
 Tor Browser 16.0a8 - July 01 2026
  * All Platforms
    * Updated NoScript to 13.6.25.90301984

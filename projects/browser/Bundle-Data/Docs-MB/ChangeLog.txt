@@ -1,3 +1,25 @@
+Mullvad Browser 16.0a9 - July 23 2026
+ * All Platforms
+   * Updated Firefox to 153.0esr
+   * Updated NoScript to 13.6.30.90201984
+   * Updated uBlock Origin to 1.72.2
+   * Bug 559: about:preferences is broken in 153 nightlies [mullvad-browser]
+   * Bug 561: Rebase Mullvad Browser onto 153.0esr [mullvad-browser]
+   * Bug 44439: Remove translate action from urlbar [tor-browser]
+   * Bug 44811: Remove the lock on pdfjs.disable. [tor-browser]
+   * Bug 45110: Disable the settings redesign until ready for us [tor-browser]
+   * Bug 45131: Security level is using an unsafe getBoolPref [tor-browser]
+   * Bug 45132: nsAppFileLocationProvider.cpp: use of undeclared identifier 'XRE_EXECUTABLE_FILE' [tor-browser]
+ * Windows
+   * Bug 555: Fix our wchar_t to char conversion in desktop_capture_utils.cc [mullvad-browser]
+ * macOS
+   * Bug 45108: Artifact generation fails due to missing .DS_Store in the branding directories [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41838: Update personal_access_tokens URL in tools/fetch_changelogs.py [tor-browser-build]
+   * Windows
+     * Bug 41819: Fix windows-rs URL in projects/firefox/config [tor-browser-build]
+
 Mullvad Browser 16.0a8 - July 01 2026
  * All Platforms
    * Updated Firefox to 152.0a1
