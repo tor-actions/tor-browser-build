@@ -63,3 +63,6 @@ mv $objdir/gradle/build/mobile/android/fenix/app/outputs/apk/$variant/*.apk $out
 mv $objdir/gradle/build/mobile/android/fenix/app/outputs/apk/androidTest/$variant/*.apk $outdir/[% project %]/tests
 
 popd
+
+# Remove universal apk files, since we don't use them (tor-browser-build#41843)
+find $outdir/[% project %] -name 'app-universal-*.apk' -delete
