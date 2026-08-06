@@ -1,0 +1,200 @@
+#!/bin/perl -w
+
+# This script is used to backup and deploy signing keys from/to a signing machine.
+#
+# The script takes as argument the ssh hostname of the signing machine.
+#
+# Use `--dry-run` to show what would be done without applying the changes.
+#
+# See README.md for more details.
+
+use strict;
+use English;
+use FindBin;
+use File::Basename;
+use File::Path qw(make_path);
+use Getopt::Long;
+use Capture::Tiny qw/tee/;
+
+my %signing_keys = (
+
+  gpg => {
+    'private-keys-v1.d' => {
+      path  => '/home/signing-gpg/.gnupg/private-keys-v1.d',
+      owner => 'signing-gpg',
+    },
+    pubring => {
+      path  => '/home/signing-gpg/.gnupg/pubring.kbx',
+      owner => 'signing-gpg',
+    },
+  },
+
+  win => {
+    tpo_cert => {
+      path  => '/home/signing-win/keys/key-1/the_tor_project_inc.crt',
+      owner => 'signing-win',
+    },
+    tpo_key => {
+      path  => '/home/signing-win/keys/key-1/private.pem',
+      owner => 'signing-win',
+    },
+  },
+
+  mar => {
+    torbrowser_nssdb7 => {
+      path  => '/home/signing-mar/nssdb/torbrowser-nssdb7',
+      owner => 'signing-mar',
+    },
+    mullvadbrowser_nssdb_1 => {
+      path  => '/home/signing-mar/nssdb/mullvadbrowser-nssdb-1',
+      owner => 'signing-mar',
+    },
+  },
+
+  macos => {
+    key_1 => {
+      path  => '/home/signing-macos/keys/key-1.p12',
+      owner => 'signing-macos',
+    },
+  },
+
+  aab => {
+    torvpn => {
+      path  => '/home/signing-apk/keys/torvpn.p12',
+      owner => 'signing-apk',
+    },
+  },
+
+  apk => {
+    tba_release => {
+      path => '/home/signing-apk/keys/tba_release.p12',
+      owner => 'signing-apk',
+    },
+    tba_alpha => {
+      path => '/home/signing-apk/keys/tba_alpha.p12',
+      owner => 'signing-apk',
+    },
+    torvpn => {
+      path => '/home/signing-apk/keys/torvpn.p12',
+      owner => 'signing-apk',
+    },
+  },
+
+);
+
+my $backup_dir = "$FindBin::Bin/signing-keys";
+my $signing_machine;
+my $dry_run;
+
+sub exit_error {
+  print STDERR "Error: ", $_[0], "\n";
+  chdir '/';
+  exit (exists $_[1] ? $_[1] : 1);
+}
+
+my @errors;
+sub set_error {
+  my $error = join("\n", @_);
+  print STDERR $error, "\n";
+  push @errors, $error;
+}
+
+sub print_errors {
+  return unless @errors;
+  my $nb_errors = @errors;
+  print STDERR "There was $nb_errors errors:\n";
+  my $i = 1;
+  for my $error (@errors) {
+    print STDERR "*** Error $i:\n$error\n";
+    $i += 1;
+  }
+  print STDERR "\n";
+}
+
+sub run_cmd {
+  my (@cmd) = @_;
+  my $txt_cmd = join(' ', @cmd);
+  print "Running $txt_cmd\n";
+  my $exit_code;
+  my ($stdout, $stderr) = tee {
+    $exit_code = system(@cmd);
+  };
+  return if $exit_code == 0;
+  set_error("Error running $txt_cmd:\n$stderr");
+}
+
+sub backup_key {
+  my ($dir, $keyname) = @_;
+  print "Backing up $signing_keys{$dir}{$keyname}{path}\n";
+  make_path("$backup_dir/$dir") unless -d "$backup_dir/$dir";
+  my @cmd = ('rsync', '-avi', '--chmod=F0600,D0700', $dry_run ? ($dry_run) : (),
+    "root\@$signing_machine:$signing_keys{$dir}{$keyname}{path}",
+    "$backup_dir/$dir/$keyname");
+  run_cmd(@cmd);
+}
+
+sub backup_signing_keys {
+  foreach my $dir (keys %signing_keys) {
+    foreach my $keyname (keys %{$signing_keys{$dir}}) {
+      backup_key($dir, $keyname);
+    }
+  }
+}
+
+sub deploy_key {
+  my ($dir, $keyname) = @_;
+  print "Deploying $signing_keys{$dir}{$keyname}{path}\n";
+  my @cmd = ('rsync', '-avi', '--no-owner', '--no-group', $dry_run ? ($dry_run) : (),
+    '--chmod=F0600,D0700', "--chown=$signing_keys{$dir}{$keyname}{owner}",
+    "$backup_dir/$dir/$keyname", "root\@$signing_machine:$signing_keys{$dir}{$keyname}{path}");
+  if (!-e "$backup_dir/$dir/$keyname") {
+    set_error("Missing file or directory $backup_dir/$dir/$keyname",
+              "Cannot deploy $signing_keys{$dir}{$keyname}{path}");
+    return;
+  }
+  run_cmd(@cmd);
+}
+
+sub confirm_deploy {
+  return if $dry_run;
+  print "Are you sure you want to deploy keys to $signing_machine?\n";
+  print "This will overwrite existing files.\n";
+  print "You can check the changes before applying them with '--dry-run'\n";
+  print "Enter 'yes' to validate.\n";
+  my $word = <STDIN>;
+  chomp $word;
+  return if lc($word) eq 'yes';
+  print STDERR "Not doing anything.\n";
+  exit 1;
+}
+
+sub deploy_signing_keys {
+  confirm_deploy;
+  foreach my $dir (keys %signing_keys) {
+    foreach my $keyname (keys %{$signing_keys{$dir}}) {
+      deploy_key($dir, $keyname);
+    }
+  }
+}
+
+sub set_options {
+  my @options = qw(dry-run);
+  my %val;
+  Getopt::Long::GetOptionsFromArray(\@_, \%val, @options) || exit 1;
+  $dry_run = '--dry-run' if $val{'dry-run'};
+  exit_error "Usage: $PROGRAM_NAME [--dry-run] <signing-machine>" unless @_ == 1;
+  $signing_machine = $_[0];
+}
+
+my %actions = (
+  'deploy-signing-keys' => \&deploy_signing_keys,
+  'backup-signing-keys' => \&backup_signing_keys,
+);
+
+set_options(@ARGV);
+
+my $action = fileparse($PROGRAM_NAME);
+exit_error "Unknown action $action" unless $actions{$action};
+$actions{$action}->($signing_machine);
+
+print_errors;

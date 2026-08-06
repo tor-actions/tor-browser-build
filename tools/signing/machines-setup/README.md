@@ -1,7 +1,8 @@
 This directory contains the scripts used to setup the signing machines.
 
-It handles everything in the setup, except installation of the signing
-keys, which is done manually.
+It handles everything in the setup. Installation (and backup) of the
+signing keys, is handled separately, using the `deploy-signing-keys` /
+`backup-signing-keys` script.
 
 # Deploying changes on the signing machines
 
@@ -35,3 +36,20 @@ required packages, create user accounts and setup signing tools.
 After running `upload-tbb-to-signing-machine`, open a root shell on the
 signing machine and run
 `/signing/tor-browser-build/tools/signing/machines-setup/setup-signing-machine`.
+
+## backup-signing-keys & deploy-signing-keys
+
+Those two scripts takes as argument the ssh hostname of the signing
+machine you want to backup keys from, or deploy keys on. You need to be
+able to connect as root the the signing machine with ssh.
+
+When doing backup of the signing keys it will store the signing keys in
+directory local directory `signing-keys` (relative to the script).
+
+When deploying signing keys, it will take the keys from directory
+`signing-keys`. If deploying a new machine, you should have run
+`setup-signing-machine` on it before deploying keys.
+
+Both scripts can take the `--dry-run` argument to run rsync with
+`--dry-run` to show the files that would be transfered without storing
+the changes.
