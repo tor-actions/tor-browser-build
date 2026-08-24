@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-version: '153.0'
+version: '154.0'
 git_hash: 'v[% c("version") %]-TORBROWSER-build[% c("var/build_number") %]'
 git_url: https://gitlab.torproject.org/tpo/applications/application-services.git
 tag_gpg_id: 1
@@ -22,7 +22,7 @@ container:
 var:
   build_number: 1
   gradle_version: 8.14.3
-  glean_parser: 19.1.0
+  glean_parser: 20.0.0
   # NSS version ans sha256 are in libs/build-all.sh.
   nss_version: '3.125'
   nspr_version: '4.39'
@@ -90,7 +90,7 @@ steps:
         project: application-services
         pkg_type: cargo_vendor
         norec:
-          sha256sum: 763db021613aca6bfc33f22dcb287e7041aa435b06a75815214fcb9a02d1dc2f
+          sha256sum: ba2178de5ac6ad5873c469bbd4309c8c59535e764d35a721786bb2239c8a59b0
         enable: '[% !c("var/generate_gradle_dependencies_list") %]'
       - filename: gen-gradle-deps-file.py
         enable: '[% c("var/generate_gradle_dependencies_list") %]'

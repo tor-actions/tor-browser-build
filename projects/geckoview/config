@@ -21,9 +21,9 @@ container:
     build_apk: '[% !c("var/online_build") %]'
 
 var:
-  firefox_platform_version: '153.6.0'
-  geckoview_version: '[% c("var/firefox_platform_version") %]esr'
-  browser_series: '16.0'
+  firefox_platform_version: '154.0a1'
+  geckoview_version: '[% c("var/firefox_platform_version") %]'
+  browser_series: '17.0'
   browser_rebase: 1
   browser_branch: '[% c("var/browser_series") %]-[% c("var/browser_rebase") %]'
   browser_build: 1
@@ -38,8 +38,8 @@ var:
     - python3-zstandard
     - pkg-config
     - openjdk-17-jdk-headless
-  gradle_version: 9.5.1
-  glean_parser: 19.0.0
+  gradle_version: 9.6.1
+  glean_parser: 20.0.1
   # python/mozboot/mozboot/android.py
   bundletool_version: 1.18.3
   bundletool_hash: a099cfa1543f55593bc2ed16a70a7c67fe54b1747bb7301f37fdfd6d91028e29
