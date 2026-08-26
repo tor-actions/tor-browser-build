@@ -1,3 +1,105 @@
+Tor Browser 16.0a10 - August 27 2026
+ * All Platforms
+   * Updated NoScript to 13.6.31.90301984
+   * Updated OpenSSL to 3.5.8
+   * Bug 44257: Disable locale-based font rules as a defense-in-depth [tor-browser]
+   * Bug 45161: Drop TorProviderBuilder.firstWindowLoaded [tor-browser]
+   * Bug 45205: Rebase Tor Browser onto 153.1.0esr [tor-browser]
+   * Bug 45219: Backport Security Fixes from Firefox 154 [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 153.1.0esr
+   * Bug 43570: Report errors in about:torconnect when tor daemon crashes (Desktop) [tor-browser]
+   * Bug 43640: Poor screen reader experience when opening preferences and scrolling to element [tor-browser]
+   * Bug 43939: Update Bridge settings when connection failed [tor-browser]
+   * Bug 44247: Adapt Tor Browser manual to use the new support pages [tor-browser]
+   * Bug 44511: Make sure new search suggest features are disabled for 16.0 [tor-browser]
+   * Bug 44629: Add a search suggestion warning in the settings [tor-browser]
+   * Bug 44699: Amend commit message for "BB 43322: Customize the font visibility lists" [tor-browser]
+   * Bug 44802: Hide the "safe browsing" settings [tor-browser]
+   * Bug 44830: Migrate our home page adjustments to the settings config [tor-browser]
+   * Bug 44831: Misleading banner in "Search engine suggestions" settings [tor-browser]
+   * Bug 44855: Use `ariaNotify` for bridge updates [tor-browser]
+   * Bug 44959: Integrate the new Tor Browser manual into Tor Browser [tor-browser]
+   * Bug 44998: Remove Firefox branding from about:preferences [tor-browser]
+   * Bug 45039: Make it easier to test ProfileDataUpgrader customization [tor-browser]
+   * Bug 45051: Show a separate Tor error prompt for users who do not see about:torconnect (desktop) [tor-browser]
+   * Bug 45058: Convert bridge settings to new design and config approach [tor-browser]
+   * Bug 45059: Convert advanced connection settings to new design and config approach [tor-browser]
+   * Bug 45079: Move letterboxing to the appearance setting pane [tor-browser]
+   * Bug 45123: Disable profile backup for 16.0 [tor-browser]
+   * Bug 45125: Tidy up bridge emoji widget [tor-browser]
+   * Bug 45143: Modify moz-fieldset to allow focusing the heading [tor-browser]
+   * Bug 45156: Remove "Firefox Home" from the appearance settings [tor-browser]
+   * Bug 45157: Grant "access local files" permission to NoScript (Firefox 153 and above) [tor-browser]
+   * Bug 45168: Hide the history search option, again [tor-browser]
+   * Bug 45169: Cannot open history sidebar in private browsing window [tor-browser]
+   * Bug 45171: Disable split view for 16.0 [tor-browser]
+   * Bug 45176: Add "Request English" to the website language config [tor-browser]
+   * Bug 45178: Change support URLs in new settings [tor-browser]
+   * Bug 45179: Update the feedback URL to point to the new support page. [tor-browser]
+   * Bug 45180: Also show download warning in download settings [tor-browser]
+   * Bug 45185: Disable network also in the Rust implementation of the remote settings client [tor-browser]
+   * Bug 45186: Remove duplicate alert roles in moz-message-bar [tor-browser]
+   * Bug 45187: Disable private browsing "delete downloaded files" feature [tor-browser]
+   * Bug 45190: New circuit urlbar icon button is squished [tor-browser]
+   * Bug 45192: Some URLs trigger `The proxy server is refusing connections` rather than about:torconnect prior to bootstrap [tor-browser]
+   * Bug 45194: "Your bridges" background color [tor-browser]
+   * Bug 45195: Modify our calls to openPreferences to work with the new settings [tor-browser]
+   * Bug 45196: Replace old connection settings with setting-group widgets [tor-browser]
+   * Bug 45197: Hide password settings by default [tor-browser]
+   * Bug 45200: Include onion authentication in the new password settings [tor-browser]
+   * Bug 45201: Convert security level settings to the new config [tor-browser]
+   * Bug 45208: Switch on the setting redesign [tor-browser]
+   * Bug 45209: Remove mention of "sync" from new settings [tor-browser]
+   * Bug 45211: Add settings for protections from third party applications [tor-browser]
+   * Bug 45214: Keep megalist (contextual password manager) disabled for 16.0 [tor-browser]
+   * Bug 45220: about:torconnect doesn't show when launching the browser in non-PBM [tor-browser]
+   * Bug 45226: Stylelint issues on browser/components/torpreferences/content/torPreferences.css [tor-browser]
+   * Bug 45228: Drop browser.urlbar.update2.engineAliasRefresh [tor-browser]
+   * Bug 45232: Spoof picture-in-picture sizes under RFP [tor-browser]
+   * Bug 45236: Resolve miscellaneus accessibility issues in about:torconnect [tor-browser]
+   * Bug 45245: Fix a ML file inclusion that creates an error [tor-browser]
+ * Windows + Android
+   * Bug 44513: Backport Bugzilla 2059471: Do not spoof screen orientation when it is locked [tor-browser]
+ * Windows
+   * Bug 45144: Do not offer to make the browser a PDF viewer when in portable mode [tor-browser]
+   * Bug 45243: Disable taskbar tabs [tor-browser]
+ * macOS
+   * Bug 45163: Consistently do not disable app group container support [tor-browser]
+ * Android
+   * Updated GeckoView to 153.1.0esr
+   * Bug 41758: Don't allow PDFs to be opened by 3rd party apps [tor-browser]
+   * Bug 43571: Implement improved error handling and tor restart flow (Android) [tor-browser]
+   * Bug 44054: Review Mozilla 1970806: [Download v2] Implement new UI for External Download Manager dialog [tor-browser]
+   * Bug 44210: Consider dropping shouldDisableNormalMode setting [tor-browser]
+   * Bug 44448: Trivialise assets rather than delete them in "[android] Delete unused media" [tor-browser]
+   * Bug 44758: Disable email mask feature [tor-browser]
+   * Bug 44881: Remove link sharing setting on android [tor-browser]
+   * Bug 44921: Disable Google Lens feature [tor-browser]
+   * Bug 45049: Opening a pdf from outside TBA crashes TBA after bootstrapping it not already bootstrapped [tor-browser]
+   * Bug 45085: Disable GooglePlay Integrity [tor-browser]
+   * Bug 45098: Share link button shows in landscape mode on android despite being removed elsewhere [tor-browser]
+   * Bug 45115: Padlock always shows insecure even for HTTPS and Onion sites [tor-browser]
+   * Bug 45159: Fix Android Padlock security pane colors [tor-browser]
+   * Bug 45170: Tab Switcher shows Firefox's private browsing mask badge on tab switcher icon [tor-browser]
+   * Bug 45173: Disable Search Optimizations for android [tor-browser]
+   * Bug 45203: Rebase error with: TB 40041: [android] Implement Tor Network Settings [tor-browser]
+   * Bug 45221: Remove "Manage downloads with another app" setting from TBA download settings [tor-browser]
+   * Bug 45227: Remove "Default search engine for Standard Mode" [tor-browser]
+   * Bug 45234: Do not spoof secondary screen orientations if they were requested by a lock [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 45224: Enable Rust linter in CI [tor-browser]
+     * Bug 45231: Backport Bugzilla 2053518: Rust target detection fails to translate the host triple with rustc nightly >= 2026-07-02 (new *-oe-linux-* targets) [tor-browser]
+     * Bug 41844: Add scripts to backup/deploy signing keys on signing machines [tor-browser-build]
+     * Bug 41850: Update keyring/torbrowser.gpg for new subkey and updated expiration date of the main key [tor-browser-build]
+   * Windows + macOS + Linux
+     * Bug 41711: Update our manual machinery for its new home [tor-browser-build]
+   * Windows + Linux + Android
+     * Updated Go to 1.26.7
+   * Android
+     * Bug 41843: Remove unused universal apk from geckoview [tor-browser-build]
+
 Tor Browser 16.0a9 - July 23 2026
  * All Platforms
    * Updated NoScript to 13.6.30.90201984

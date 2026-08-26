@@ -1,3 +1,53 @@
+Mullvad Browser 16.0a10 - August 27 2026
+ * All Platforms
+   * Updated Firefox to 153.1.0esr
+   * Updated NoScript to 13.6.31.90301984
+   * Updated uBlock Origin to 1.74.0
+   * Bug 446: Implement persistent-mode backend [mullvad-browser]
+   * Bug 535: Use config to hide settings in mullvad browser [mullvad-browser]
+   * Bug 565: Update the selector to hide the help button in about:addons [mullvad-browser]
+   * Bug 566: The security level learn mode link is wrong in Mullvad Browser [mullvad-browser]
+   * Bug 571: Rebase Mullvad Browser alpha onto 153.1.0esr [mullvad-browser]
+   * Bug 572: Websites can initiate a WebSocket connection to a lan/localhost port [mullvad-browser]
+   * Bug 43640: Poor screen reader experience when opening preferences and scrolling to element [tor-browser]
+   * Bug 44257: Disable locale-based font rules as a defense-in-depth [tor-browser]
+   * Bug 44511: Make sure new search suggest features are disabled for 16.0 [tor-browser]
+   * Bug 44629: Add a search suggestion warning in the settings [tor-browser]
+   * Bug 44699: Amend commit message for "BB 43322: Customize the font visibility lists" [tor-browser]
+   * Bug 44802: Hide the "safe browsing" settings [tor-browser]
+   * Bug 44830: Migrate our home page adjustments to the settings config [tor-browser]
+   * Bug 45039: Make it easier to test ProfileDataUpgrader customization [tor-browser]
+   * Bug 45079: Move letterboxing to the appearance setting pane [tor-browser]
+   * Bug 45123: Disable profile backup for 16.0 [tor-browser]
+   * Bug 45157: Grant "access local files" permission to NoScript (Firefox 153 and above) [tor-browser]
+   * Bug 45168: Hide the history search option, again [tor-browser]
+   * Bug 45169: Cannot open history sidebar in private browsing window [tor-browser]
+   * Bug 45171: Disable split view for 16.0 [tor-browser]
+   * Bug 45176: Add "Request English" to the website language config [tor-browser]
+   * Bug 45185: Disable network also in the Rust implementation of the remote settings client [tor-browser]
+   * Bug 45186: Remove duplicate alert roles in moz-message-bar [tor-browser]
+   * Bug 45187: Disable private browsing "delete downloaded files" feature [tor-browser]
+   * Bug 45195: Modify our calls to openPreferences to work with the new settings [tor-browser]
+   * Bug 45201: Convert security level settings to the new config [tor-browser]
+   * Bug 45208: Switch on the setting redesign [tor-browser]
+   * Bug 45209: Remove mention of "sync" from new settings [tor-browser]
+   * Bug 45211: Add settings for protections from third party applications [tor-browser]
+   * Bug 45219: Backport Security Fixes from Firefox 154 [tor-browser]
+   * Bug 45228: Drop browser.urlbar.update2.engineAliasRefresh [tor-browser]
+   * Bug 45232: Spoof picture-in-picture sizes under RFP [tor-browser]
+   * Bug 45245: Fix a ML file inclusion that creates an error [tor-browser]
+ * Windows
+   * Bug 563: Hide the fox icon in about:pdf [mullvad-browser]
+   * Bug 44513: Backport Bugzilla 2059471: Do not spoof screen orientation when it is locked [tor-browser]
+   * Bug 45144: Do not offer to make the browser a PDF viewer when in portable mode [tor-browser]
+   * Bug 45243: Disable taskbar tabs [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 45224: Enable Rust linter in CI [tor-browser]
+     * Bug 45231: Backport Bugzilla 2053518: Rust target detection fails to translate the host triple with rustc nightly >= 2026-07-02 (new *-oe-linux-* targets) [tor-browser]
+     * Bug 41844: Add scripts to backup/deploy signing keys on signing machines [tor-browser-build]
+     * Bug 41850: Update keyring/torbrowser.gpg for new subkey and updated expiration date of the main key [tor-browser-build]
+
 Mullvad Browser 16.0a9 - July 23 2026
  * All Platforms
    * Updated Firefox to 153.0esr
