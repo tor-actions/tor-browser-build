@@ -141,7 +141,8 @@ class ReleasePreparation:
             if self.android:
                 self.update_zstd()
                 update_fenix_nightly_apk(self.base_path)
-            self.update_go()
+            # Our version of go is EOL, stick with it.
+            # self.update_go()
             self.update_manual()
             self.update_moat_settings()
 

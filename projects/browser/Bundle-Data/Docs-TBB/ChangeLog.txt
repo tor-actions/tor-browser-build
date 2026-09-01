@@ -1,3 +1,20 @@
+Tor Browser 15.0.21 - September 01 2026
+ * All Platforms
+   * Updated NoScript to 13.6.32.1984
+   * Updated OpenSSL to 3.5.8
+   * Bug 45223: Backport tor-browser#45220 - about:torconnect doesn't show when launching the browser in non-PBM [tor-browser]
+   * Bug 45253: Rebase Tor Browser stable onto 140.15.0esr [tor-browser]
+   * Bug 45259: Backport Security Fixes from Firefox 155 [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 140.15.0esr
+   * Bug 44996: Change the 32-bit linux message to the expired version for the final 15.0 release [tor-browser]
+   * Bug 45264: Use parent process for TorConnect redirections [tor-browser]
+ * Android
+   * Updated GeckoView to 140.15.0esr
+ * Build System
+   * Windows + Linux + Android
+     * Updated Go to 1.25.14
+
 Tor Browser 15.0.20 - August 18 2026
  * All Platforms
    * Bug 45204: Rebase Tor Browser stable onto 140.14.0esr [tor-browser]
