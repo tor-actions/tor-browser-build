@@ -12,7 +12,7 @@ var:
     export PATH=$PATH:$GRADLE_HOME/bin
   gradle_sha256sum:
     8.14.3: bd71102213493060956ec229d946beee57158dbd89d0e62b91bca0fa2c5f3531
-    9.6.1: 9c0f7faeeb306cb14e4279a3e084ca6b596894089a0638e68a07c945a32c9e14
+    9.7.0: 84fbba45c7f4c64abc77460e1c00f541e9f960e3c7ed2538f1ede19eacd873ae
 
 input_files:
   - project: container-image

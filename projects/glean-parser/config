@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 filename: 'glean-wheels-[% c("version") %].tar.xz'
-version: 20.0.1
+version: 20.1.0
 container:
   # We need to use the same Python version as the container.
   use_container: 1
@@ -11,7 +11,7 @@ container:
 var:
   glean_wheels_sha256sum:
     20.0.0: 1cd7af27973dc32eb98ca294d71d8730034da5425e376f5ec28c10fb2d72a9f8
-    20.0.1: d4e410538378cd5d9ab6f0236646871114a6ef5f3d5dd3cf51c19a4804218135
+    20.1.0: 07f6cc35be669d9b3caad77b32813244ef453bd22e8883084aef762a074ad148
   deps:
     - python3
     - python3-pip

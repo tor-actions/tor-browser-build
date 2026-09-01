@@ -1,5 +1,5 @@
 # vim: filetype=yaml sw=2
-version: '154.0'
+version: '155.0'
 git_hash: 'v[% c("version") %]-TORBROWSER-build[% c("var/build_number") %]'
 git_url: https://gitlab.torproject.org/tpo/applications/application-services.git
 tag_gpg_id: 1
@@ -90,7 +90,7 @@ steps:
         project: application-services
         pkg_type: cargo_vendor
         norec:
-          sha256sum: ba2178de5ac6ad5873c469bbd4309c8c59535e764d35a721786bb2239c8a59b0
+          sha256sum: 30006ba4109a8011c951757235209ddf3b40aff92f793312c7ee84e8f03ca1bf
         enable: '[% !c("var/generate_gradle_dependencies_list") %]'
       - filename: gen-gradle-deps-file.py
         enable: '[% c("var/generate_gradle_dependencies_list") %]'
