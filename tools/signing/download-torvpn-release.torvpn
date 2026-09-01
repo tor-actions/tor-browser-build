@@ -24,7 +24,7 @@ test $# -ne 1 && \
 tmpdir=$(mktemp -p "$script_dir/../../tmp" -d)
 trap "rm -Rf $tmpdir" EXIT
 cd $tmpdir
-for arch in arm64v8a armeabiv7a universal x86 x86_64
+for arch in arm64v8a armeabiv7a universal x86_64
 do
   case "$arch" in
     arm64v8a)
