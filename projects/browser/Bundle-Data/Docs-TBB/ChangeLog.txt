@@ -1,3 +1,19 @@
+Tor Browser 16.0a11 - September 02 2026
+ * All Platforms
+   * Bug 45254: Rebase Tor Browser alpha onto 153.2.0esr [tor-browser]
+   * Bug 45259: Backport Security Fixes from Firefox 155 [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 153.2.0esr
+   * Bug 45264: Use parent process for TorConnect redirections [tor-browser]
+ * Android
+   * Updated GeckoView to 153.2.0esr
+   * Bug 44155: Always enable LNA on Android as a defense-in-depth [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41860: Change GCC sources mirror to https://gcc.gnu.org [tor-browser-build]
+   * Windows + Linux + Android
+     * Updated Go to 1.26.8
+
 Tor Browser 16.0a10 - August 27 2026
  * All Platforms
    * Updated NoScript to 13.6.31.90301984
