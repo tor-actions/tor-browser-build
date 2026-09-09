@@ -154,12 +154,11 @@ Tor Browser Alpha (and Nightly) are on the `main` branch
 <details>
   <summary>Website</summary>
 
-  ### downloads: https://gitlab.torproject.org/tpo/web/tpo.git
+  ### downloads: https://gitlab.torproject.org/tpo/web/marble/download.git
   - [ ] `databags/versions.ini`: Update the downloads versions
-      - `torbrowser-stable/version`: catch-all for latest stable version
-      - `torbrowser-alpha/version`: catch-all for latest alpha version
-      - `torbrowser-*-stable/version`: platform-specific stable versions
-      - `torbrowser-*-alpha/version`: platform-specific alpha versions
+    - `[tor-browser]`: stable version numbers for each platform (`windows`, `macos`, `linux`, `android`) and for the bundled `tor`
+    - `[tor-browser-alpha]`: alpha versions for each platform (`windows`, `macos`, `linux`, `android`) and for the bundled `tor`
+    - `[tor]`: set by tor devs, **do not touch!**
   - [ ] Push to origin as new branch and create MR
   - [ ] Review
   - [ ] Merge
