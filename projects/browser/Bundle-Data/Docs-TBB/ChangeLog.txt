@@ -1,3 +1,21 @@
+Tor Browser 15.0.23 - September 15 2026
+ * All Platforms
+   * Updated NoScript to 13.6.33.1984
+   * Bug 45296: (H1) SharedWorker Identity Mismatch allows WebAssembly execution at Safer [tor-browser]
+   * Bug 45297: (H1) Missing setHTMLUnsafe hook leaves a permanent WebAssembly-capable child realm at Safer [tor-browser]
+   * Bug 45299: Backport Security Fixes from Firefox 156 [tor-browser]
+   * Bug 45303: Rebase Tor Browser stable onto 140.16.0esr [tor-browser]
+   * Bug 41875: Update relprep.py for the new versions.ini URL [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 140.16.0esr
+ * Linux
+   * Bug 44996: Change the 32-bit linux message to the expired version for the final 15.0 release [tor-browser]
+ * Android
+   * Updated GeckoView to 140.16.0esr
+ * Build System
+   * All Platforms
+     * Bug 41871: Update downloads repository references in relprep templates [tor-browser-build]
+
 Tor Browser 15.0.22 - September 09 2026
  * All Platforms
    * Updated Tor to 0.4.9.12
