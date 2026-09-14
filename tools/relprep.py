@@ -121,13 +121,16 @@ class ReleasePreparation:
         self.changelog_date = kwargs.get("changelog_date", self.build_date)
         self.num_incrementals = kwargs.get("num_incrementals", 3)
 
+        self.disable_fetching = kwargs.get("no_fetch", False)
+
         self.get_last_releases()
 
         logger.info("Checking you have a working GitLab token.")
         self.gitlab_token = fetch_changelogs.load_token()
 
     def run(self):
-        self.branch_sanity_check()
+        if not self.disable_fetching:
+            self.branch_sanity_check()
 
         self.update_firefox()
         self.update_application_services()
@@ -250,9 +253,10 @@ class ReleasePreparation:
         else:
             remote = config["git_url"]
         repo = Repo(self.base_path / "git_clones/firefox")
-        repo.remotes["origin"].set_url(remote)
-        logger.debug("About to fetch Firefox from %s.", remote)
-        repo.remotes["origin"].fetch()
+        if not self.disable_fetching:
+            repo.remotes["origin"].set_url(remote)
+            logger.debug("About to fetch Firefox from %s.", remote)
+            repo.remotes["origin"].fetch()
         tags = get_sorted_tags(repo)
         tag_info = None
         for t in tags:
@@ -298,8 +302,9 @@ class ReleasePreparation:
         branch = f"{version}-TORBROWSER"
 
         repo = Repo(self.base_path / "git_clones/application-services")
-        logger.debug("About to fetch application-services")
-        repo.remotes["origin"].fetch()
+        if not self.disable_fetching:
+            logger.debug("About to fetch application-services")
+            repo.remotes["origin"].fetch()
 
         tags = get_sorted_tags(repo)
         tag_info = None
@@ -325,7 +330,8 @@ class ReleasePreparation:
     def update_translations(self):
         logger.info("Updating translations")
         repo = Repo(self.base_path / "git_clones/translation")
-        repo.remotes["origin"].fetch()
+        if not self.disable_fetching:
+            repo.remotes["origin"].fetch()
         config = self.load_config("translation")
         targets = ["base-browser"]
         if self.tor_browser:
@@ -413,11 +419,11 @@ class ReleasePreparation:
     def update_tor(self):
         logger.info("Updating Tor")
         databag = configparser.ConfigParser()
-        r = requests.get("https://www.torproject.org/download/versions.ini")
+        r = requests.get("https://download.torproject.org/versions.ini")
         r.raise_for_status()
         databag.read_string(r.text)
-        tor_stable = databag["tor-stable"]["version"]
-        tor_alpha = databag["tor-alpha"]["version"]
+        tor_stable = databag["tor"]["stable"]
+        tor_alpha = databag["tor"].get("alpha")
         logger.debug(
             "Found tor stable: %s, alpha: %s",
             tor_stable,
@@ -477,7 +483,8 @@ class ReleasePreparation:
             return
 
         repo = Repo(self.base_path / "git_clones/zstd")
-        repo.remotes["origin"].fetch()
+        if not self.disable_fetching:
+            repo.remotes["origin"].fetch()
         tag = repo.rev_parse(f"v{version}")
 
         config["version"] = version
@@ -532,7 +539,8 @@ class ReleasePreparation:
 
         repo = Repo(self.base_path / "git_clones" / proj)
         origin = repo.remotes["origin"]
-        origin.fetch()
+        if not self.disable_fetching:
+            origin.fetch()
         commit = origin.refs["main"].commit.hexsha
 
         config = self.load_config(proj)
@@ -748,6 +756,11 @@ if __name__ == "__main__":
         help="Only update the changelogs",
     )
     parser.add_argument(
+        "--no-fetch",
+        action="store_true",
+        help="Do not fetch over git",
+    )
+    parser.add_argument(
         "--log-level",
         choices=["debug", "info", "warning", "error"],
         default="info",
@@ -790,6 +803,8 @@ if __name__ == "__main__":
             sys.exit(1)
     if args.incrementals:
         kwargs["incrementals"] = args.incrementals
+    if args.no_fetch:
+        kwargs["no_fetch"] = True
     rp = ReleasePreparation(args.repository, args.version, **kwargs)
     if args.only_changelogs:
         logger.info("Updating only the changelogs")
