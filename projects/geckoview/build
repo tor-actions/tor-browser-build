@@ -50,6 +50,8 @@ echo "Starting ./mach build $(date)"
     $rootdir/[% c('input_files_by_name/cbindgen') %] \
     $rootdir/[% c('input_files_by_name/node') %] \
     $artifactsdir
+
+  echo -n '[% c("var/firefox_platform_version") %]' > "$artifactsdir/firefox_platform_version.txt"
 [% END %]
 
 echo "Build finished, copying the AAR to the to the destination directory $(date)"
