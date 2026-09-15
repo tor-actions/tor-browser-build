@@ -314,14 +314,14 @@ popd
 ### packagers
 - [ ] ***(Optional, only around build/packaging changes)*** Email packagers:
   - **Recipients**
-    - Tails dev mailing list: tails-dev@boum.org
+    - Tails dev mailing list: tails-dev@lists.torproject.org
     - Guardian Project: nathan@guardianproject.info
     - FreeBSD port: freebsd@sysctl.cz <!-- Gitlab user maxfx -->
     - OpenBSD port: caspar@schutijser.com <!-- Gitlab user cschutijser -->
     - torbrowser-launcher: mail@asciiwolf.com <!-- Gitlab user asciiwolf -->
     - Anti-Censorship: meskio@torproject.org <!-- Gitlab user meskio -->
     ```
-    tails-dev@boum.org, nathan@guardianproject.info, freebsd@sysctl.cz, caspar@schutijser.com, mail@asciiwolf.com, meskio@torproject.org,
+    tails-dev@lists.torproject.org, nathan@guardianproject.info, freebsd@sysctl.cz, caspar@schutijser.com, mail@asciiwolf.com, meskio@torproject.org,
     ```
   - **Subject**
     ```

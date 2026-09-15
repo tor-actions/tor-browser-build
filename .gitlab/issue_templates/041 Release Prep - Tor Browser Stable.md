@@ -192,7 +192,7 @@ Tor Browser Stable is on the `maint-${TOR_BROWSER_MAJOR}.${TOR_BROWSER_MINOR}` b
 - [ ] Notify Tails
   - **Recipients**
     ```
-    tails-dev@boum.org
+    tails-dev@lists.torproject.org
     ```
   - **Subject**
     ```
