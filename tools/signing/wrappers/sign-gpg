@@ -12,4 +12,5 @@ if test $(whoami) != 'signing-gpg'; then
 fi
 
 gpg_subkey='0x157432CF78A65729!'
+test "$tbb_version_type" = 'alpha' && gpg_subkey='0x316C1FACD62D07D9!'
 exec gpg --homedir /home/signing-gpg/.gnupg -absu "$gpg_subkey" --batch --no-tty -o- --passphrase-fd 0 -- "$1"
