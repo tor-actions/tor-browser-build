@@ -282,16 +282,12 @@ sub get_toolchains_fetch_info {
     'wasi-sysroot'    => 'wasi-sdk',
     'mingw-w64-clang' => 'mingw-w64',
   );
-  # projects which have an different rbm option than git_hash
-  my %rbm_option = (
-    'windows-app-sdk' => 'var/windowsappsdk_sha256sum',
-  );
   my $d = YAML::XS::LoadFile('taskcluster/kinds/fetch/toolchains.yml');
   foreach my $name (@projects) {
     set_rbm_info($name,
       {
         project => $name,
-        option  => ($rbm_option{$name} ? $rbm_option{$name} : 'git_hash'),
+        option  => 'git_hash',
       });
     my $toolchain_name = $toolchain_names{$name} ? $toolchain_names{$name} : $name;
     my $revision = $d->{$toolchain_name}{fetch}{revision};
@@ -322,6 +318,33 @@ sub get_toolchains_fetch_info {
     set_version_info('windows-rs-sha256sum', $winrs_sha256);
   } else {
     set_error('windows-rs-sha256sum');
+  }
+
+  my %winappsdk_rbm_opt = (
+    sha256sum       => "var/windowsappsdk_sha256sum",
+    url             => "var/windowsappsdk_url",
+    version         => "version",
+    short_version   => "var/short_version",
+  );
+  my %winappsdk_vals = (
+    sha256sum => $d->{'windowsappsdk-redist'}{fetch}{sha256},
+    url       => $d->{'windowsappsdk-redist'}{fetch}{url},
+  );
+  ($winappsdk_vals{version}) =
+        $winappsdk_vals{url} =~ m|windowsappsdk/[^/]+/([^/]+)/Microsoft\.WindowsAppRuntime\.Redist|;
+  my $toolchain_misc = YAML::XS::LoadFile('taskcluster/kinds/toolchain/misc.yml');
+  (undef, $winappsdk_vals{short_version}) =
+        @{$toolchain_misc->{'win64-WindowsAppSDK'}{run}{arguments}};
+  foreach my $name (sort keys %winappsdk_rbm_opt) {
+    set_rbm_info("windows-app-sdk-$name", {
+        project => 'windows-app-sdk',
+        option  => $winappsdk_rbm_opt{$name},
+      });
+    if ($winappsdk_vals{$name}) {
+      set_version_info("windows-app-sdk-$name", $winappsdk_vals{$name});
+    } else {
+      set_error("windows-app-sdk-$name");
+    }
   }
 }
 

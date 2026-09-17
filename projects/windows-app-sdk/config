@@ -3,6 +3,7 @@ filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("co
 version: '2.2.0'
 
 var:
+  windowsappsdk_url: https://aka.ms/windowsappsdk/2.2/2.2.0/Microsoft.WindowsAppRuntime.Redist.2.2.zip
   windowsappsdk_sha256sum: ab078d5b1d730f093ed4e1a33d0e709d1dbca85fa4a10f546cc6824e3b48057f
   short_version: 2
 
@@ -16,5 +17,5 @@ targets:
 
 input_files:
   - name: windowsappsdk-redist
-    URL: https://aka.ms/windowsappsdk/2.2/2.2.0/Microsoft.WindowsAppRuntime.Redist.2.2.zip
+    URL: '[% c("var/windowsappsdk_url") %]'
     sha256sum: '[% c("var/windowsappsdk_sha256sum") %]'
