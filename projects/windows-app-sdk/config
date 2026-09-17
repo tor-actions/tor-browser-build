@@ -1,9 +1,10 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
-version: '1.8'
+version: '2.2.0'
 
 var:
-  windowsappsdk_sha256sum: a2dccd1d4d3b47857e1f4c36a140b976ff2da61fff8dc9fcf029cd8e829a61fc
+  windowsappsdk_sha256sum: ab078d5b1d730f093ed4e1a33d0e709d1dbca85fa4a10f546cc6824e3b48057f
+  short_version: 2
 
 targets:
   windows-i686:
@@ -15,5 +16,5 @@ targets:
 
 input_files:
   - name: windowsappsdk-redist
-    URL: https://aka.ms/windowsappsdk/1.8/1.8.250916003/Microsoft.WindowsAppRuntime.Redist.1.8.zip
+    URL: https://aka.ms/windowsappsdk/2.2/2.2.0/Microsoft.WindowsAppRuntime.Redist.2.2.zip
     sha256sum: '[% c("var/windowsappsdk_sha256sum") %]'

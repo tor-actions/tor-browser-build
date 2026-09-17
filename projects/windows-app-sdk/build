@@ -10,7 +10,7 @@ unzip $rootdir/[% c('input_files_by_name/windowsappsdk-redist') %]
 
 target_folder_name=$distdir
 ARCH_SUFFIX=[% c("var/zip_arch") %]
-SHORT_VERSION=[% c("version") %]
+SHORT_VERSION=[% c("var/short_version") %]
 
 unzip MSIX/win10-${ARCH_SUFFIX}/Microsoft.WindowsAppRuntime.${SHORT_VERSION}.msix
 
@@ -25,6 +25,8 @@ cp Microsoft.UI.Composition.OSSupport.dll $target_folder_name
 cp Microsoft.UI.Input.dll $target_folder_name
 cp Microsoft.UI.Windowing.Core.dll $target_folder_name
 cp Microsoft.UI.Windowing.dll $target_folder_name
+cp Microsoft.WindowsAppRuntime.dll $target_folder_name
+cp Microsoft.WindowsAppRuntime.Insights.Resource.dll $target_folder_name
 
 cd $rootdir
 [% c('tar', {
