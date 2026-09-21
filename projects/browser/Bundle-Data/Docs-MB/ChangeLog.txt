@@ -1,3 +1,25 @@
+Mullvad Browser 16.0a12 - September 22 2026
+ * All Platforms
+   * Updated Firefox to 153.3.0esr
+   * Updated NoScript to 13.6.33.90101984
+   * Updated uBlock Origin to 1.75.0
+   * Bug 534: Migrate DoH DNS to Quad9 provider [mullvad-browser]
+   * Bug 537: Automatically migrate Mullvad DoH provider to Quad9 [mullvad-browser]
+   * Bug 538: Notify user of DoH provider migration in message bar [mullvad-browser]
+   * Bug 549: Update DoH UI in about:settings [mullvad-browser]
+   * Bug 578: Rebase Mullvad Browser alpha onto 153.3.0esr [mullvad-browser]
+   * Bug 45133: Disable `browser.toolbars.share-button.enabled` [tor-browser]
+   * Bug 45177: Remove websiteSpoofEnglishControl [tor-browser]
+   * Bug 45249: Remove the duplicate "Verified by" from the old site identity panel [tor-browser]
+   * Bug 45278: Explicitly disable WebXR [tor-browser]
+   * Bug 45299: Backport Security Fixes from Firefox 156 [tor-browser]
+   * Bug 45336: Pass --disable-proxy-direct-failover in our mozconfigs [tor-browser]
+   * Bug 41846: Sign alpha releases using new gpg subkey [tor-browser-build]
+ * Build System
+   * Windows
+     * Bug 41877: `make list_toolchain_updates` is not checking windows-app-sdk [tor-browser-build]
+     * Bug 41878: Update the Windows app SDK and add some additional DLLs [tor-browser-build]
+
 Mullvad Browser 16.0a11 - September 02 2026
  * All Platforms
    * Updated Firefox to 153.2.0esr

@@ -1,3 +1,51 @@
+Tor Browser 16.0a12 - September 22 2026
+ * All Platforms
+   * Updated Tor to 0.4.9.12
+   * Updated NoScript to 13.6.33.90101984
+   * Bug 45304: Rebase Tor Browser alpha onto 153.3.0esr [tor-browser]
+   * Bug 45336: Pass --disable-proxy-direct-failover in our mozconfigs [tor-browser]
+   * Bug 45299: Backport Security Fixes from Firefox 156 [tor-browser]
+   * Bug 41846: Sign alpha releases using new gpg subkey [tor-browser-build]
+   * Bug 41875: Update relprep.py for the new versions.ini URL [tor-browser-build]
+ * Windows + macOS + Linux
+   * Updated Firefox to 153.3.0esr
+   * Bug 42065: Security exception warning and button for Onion Services with self-signed certificates [tor-browser]
+   * Bug 45133: Disable `browser.toolbars.share-button.enabled` [tor-browser]
+   * Bug 45177: Remove websiteSpoofEnglishControl [tor-browser]
+   * Bug 45249: Remove the duplicate "Verified by" from the old site identity panel [tor-browser]
+   * Bug 45255: Add YEC 2026 Strings (Desktop) [tor-browser]
+   * Bug 45262: Disable reset PBM burn button and related UI migration [tor-browser]
+   * Bug 45277: Change setting icon for About Tor Browser [tor-browser]
+   * Bug 45278: Explicitly disable WebXR [tor-browser]
+ * Linux
+   * Bug 44887: Drop Linux 32-bit deprecation notice [tor-browser]
+ * Android
+   * Updated GeckoView to 153.3.0esr
+   * Bug 44548: Remove "Passwords" UI from Android [tor-browser]
+   * Bug 44936: Search widget icon is too small on android alpha [tor-browser]
+   * Bug 45100: Regression in #43229 "Buttons that open links can be accessed before torbrowser is bootstrapped, leaving the app in a bad state" [tor-browser]
+   * Bug 45172: Move our "Connect to Tor before opening links" code from the deprecated openToBrowserAndLoad to the recommended loadUrlOrSearch [tor-browser]
+   * Bug 45217: Implement YEC 2026 Takeover for Android Stable [tor-browser]
+   * Bug 45225: Remove "Share" and "Translate" options from "Settings" -> "Customize" -> "Toolbar shortcut" [tor-browser]
+   * Bug 45250: Remove "Privacy report" in tabs settings in Android [tor-browser]
+   * Bug 45251: Turn off and hide the remote improvements UI [tor-browser]
+   * Bug 45252: Remove the change wallpaper menu item [tor-browser]
+   * Bug 45256: Add YEC 2026 Strings (Android) [tor-browser]
+   * Bug 45261: Add linter check: only `MAIN+LAUNCHER` components may be exported="true" [tor-browser]
+   * Bug 45269: Completely disable search suggestion feature [tor-browser]
+   * Bug 45275: Drop clearOnShutdown on Android-specific profile [tor-browser]
+   * Bug 45280: about:config broken on Android [tor-browser]
+   * Bug 45281: Fix or remove broken "Use screen lock to hide Tor Browser tabs" feature [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41867: Update tails-dev email address in release prep templates [tor-browser-build]
+     * Bug 41871: Update downloads repository references in relprep templates [tor-browser-build]
+   * Windows
+     * Bug 41877: `make list_toolchain_updates` is not checking windows-app-sdk [tor-browser-build]
+     * Bug 41878: Update the Windows app SDK and add some additional DLLs [tor-browser-build]
+   * Android
+     * Bug 41876: Add missing firefox_platform_version.txt file in android artifacts directories [tor-browser-build]
+
 Tor Browser 16.0a11 - September 02 2026
  * All Platforms
    * Bug 45254: Rebase Tor Browser alpha onto 153.2.0esr [tor-browser]
