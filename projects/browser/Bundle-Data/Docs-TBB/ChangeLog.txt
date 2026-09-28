@@ -1,3 +1,25 @@
+Tor Browser 15.0.24 - September 29 2026
+ * All Platforms
+   * Updated NoScript to 13.6.35.1984
+   * Updated Tor to 0.4.9.13
+   * Bug 45358: Rebase Tor Browser stable onto 140.17.0esr [tor-browser]
+   * Bug 45366: Backport Security Fixes from Firefox 157 [tor-browser]
+   * Bug 45368: Account for onion aliases in NoScript site parsing [tor-browser]
+   * Bug 45371: Hook CharacterData/Range insertion sinks for content patches propagation [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 140.17.0esr
+   * Bug 45218: Implement YEC 2026 Takeover for Desktop Stable [tor-browser]
+ * Linux
+   * Bug 44996: Change the 32-bit linux message to the expired version for the final 15.0 release [tor-browser]
+ * Android
+   * Updated GeckoView to 140.17.0esr
+   * Bug 45217: Implement YEC 2026 Takeover for Android Stable [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41847: Sign all releases using new gpg subkey [tor-browser-build]
+   * macOS
+     * Bug 41883: Fix sha256sum definition in projects/hfsplus-tools/config [tor-browser-build]
+
 Tor Browser 15.0.23 - September 15 2026
  * All Platforms
    * Updated NoScript to 13.6.33.1984
