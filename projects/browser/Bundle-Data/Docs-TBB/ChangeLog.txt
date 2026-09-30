@@ -1,3 +1,39 @@
+Tor Browser 16.0a13 - September 30 2026
+ * All Platforms
+   * Updated NoScript to 13.6.34.90101984
+   * Updated Tor to 0.4.9.13
+   * Updated OpenSSL to 3.5.9
+   * Bug 44815: Disable harmful addon URL blocking [tor-browser]
+   * Bug 45073: Review preference changes between Firefox 141 and 153 [tor-browser]
+   * Bug 45080: Keep the Reporting API disabled. [tor-browser]
+   * Bug 45333: Disable the fast-path to skip proxy resolution [tor-browser]
+   * Bug 45359: Rebase alpha onto 153.4.0esr [tor-browser]
+   * Bug 45366: Backport Security Fixes from Firefox 157 [tor-browser]
+   * Bug 45368: Account for onion aliases in NoScript site parsing [tor-browser]
+   * Bug 45371: Hook CharacterData/Range insertion sinks for content patches propagation [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 153.4.0esr
+   * Bug 45218: Implement YEC 2026 Takeover for Desktop Stable [tor-browser]
+   * Bug 45343: Hide verifier and the related error for self-signed onion cert case [tor-browser]
+   * Bug 45346: Crash when clicking "Learn more…" in onion site error page [tor-browser]
+   * Bug 45360: Port our language preference customization to the new settings design [tor-browser]
+ * Windows
+   * Bug 45293: Set widget.windows.tablet_detection_override to -1 [tor-browser]
+ * Android
+   * Updated GeckoView to 153.4.0esr
+   * Bug 40627: [Android] "share" selected text only works once [tor-browser]
+   * Bug 44913: Review Mozilla 2019009: Enable Download location Settings on Nightly [tor-browser]
+   * Bug 45363: Disable import bookmarks in Android until stable [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 45334: Update marionette harness to accept multiple tags [tor-browser]
+     * Bug 45367: Backport Bugzilla 2075120: mach lint fails to create the lint virtualenv because rumdl 0.1.91 is no longer available on PyPI [tor-browser]
+     * Bug 41847: Sign all releases using new gpg subkey [tor-browser-build]
+   * Windows
+     * Bug 41890: Update sign-exe wrapper to use new Windows signing cert [tor-browser-build]
+   * macOS
+     * Bug 41883: Fix sha256sum definition in projects/hfsplus-tools/config [tor-browser-build]
+
 Tor Browser 16.0a12 - September 22 2026
  * All Platforms
    * Updated Tor to 0.4.9.12
