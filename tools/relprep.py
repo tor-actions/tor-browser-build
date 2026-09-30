@@ -146,8 +146,11 @@ class ReleasePreparation:
             self.update_manual()
             self.update_moat_settings()
 
-        self.update_changelogs()
         self.update_rbm_conf()
+
+        # Keep changelogs as a last step, as it has its own dedicated
+        # flag if it fails.
+        self.update_changelogs()
 
         logger.info("Release preparation complete!")
 
