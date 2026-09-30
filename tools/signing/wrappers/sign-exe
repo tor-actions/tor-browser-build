@@ -14,7 +14,7 @@ fi
 pass="$1"
 to_sign_exe="$2"
 
-key_dir=/home/signing-win/keys/key-1
+key_dir=/home/signing-win/keys/key-2
 tpo_cert=$key_dir/the_tor_project_inc.crt
 tpo_key=$key_dir/private.pem
 
