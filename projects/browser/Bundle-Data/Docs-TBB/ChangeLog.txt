@@ -1,3 +1,16 @@
+Tor Browser 15.0.25 - October 13 2026
+ * All Platforms
+   * Updated Tor to 0.4.9.14
+   * Updated NoScript to 13.6.36.1984
+   * Updated OpenSSL to 3.5.9
+   * Bug 45377: Remove alt text from YEC 2026 [tor-browser]
+   * Bug 45382: Backport Security Fixes from 158 [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41885: Update changelogs as a last step in relprep.py [tor-browser-build]
+   * Windows
+     * Bug 41890: Update sign-exe wrapper to use new Windows signing cert [tor-browser-build]
+
 Tor Browser 15.0.24 - September 29 2026
  * All Platforms
    * Updated NoScript to 13.6.35.1984
