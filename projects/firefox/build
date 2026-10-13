@@ -161,7 +161,11 @@ echo "Starting ./mach build $(date)"
   ./mach python -m mozbuild.action.test_archive mozharness mozharness.zip
   mv mozharness.zip $artifactsdir
 
-  echo -n '[% c("var/firefox_platform_version") %]' > "$artifactsdir/firefox_platform_version.txt"
+  # The firefox_platform_version.txt file is used to archive the artifacts
+  # in https://nightlies.tbb.torproject.org/nightly-builds/toolchains/.
+  # We also include the project initials to separate MB and TB build
+  # artifacts.
+  echo -n '[% c("var/project_initials") %]-[% c("var/firefox_platform_version") %]' > "$artifactsdir/firefox_platform_version.txt"
 [% END %]
 
 [% IF c("var/macos") -%]
