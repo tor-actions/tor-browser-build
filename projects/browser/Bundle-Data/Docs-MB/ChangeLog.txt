@@ -1,3 +1,14 @@
+Mullvad Browser 16.0a14 - October 13 2026
+ * All Platforms
+   * Updated Firefox to 153.5.0esr
+   * Updated NoScript to 13.6.36.90201984
+   * Bug 585: Rebase Mullvad Browser onto 153.5.0esr [mullvad-browser]
+   * Bug 45382: Backport Security Fixes from 158 [tor-browser]
+ * Build System
+   * All Platforms
+     * Bug 41885: Update changelogs as a last step in relprep.py [tor-browser-build]
+     * Bug 41898: Separate MB and TB toolchain archives in https://nightlies.tbb.torproject.org/nightly-builds/toolchains/ [tor-browser-build]
+
 Mullvad Browser 16.0a13 - September 30 2026
  * All Platforms
    * Updated Firefox to 153.4.0esr

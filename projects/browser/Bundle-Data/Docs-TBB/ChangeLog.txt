@@ -1,3 +1,21 @@
+Tor Browser 16.0a14 - October 13 2026
+ * All Platforms
+   * Updated NoScript to 13.6.36.90201984
+   * Updated Tor to 0.4.9.14
+   * Bug 45380: Rebase Tor Browser alpha onto 153.5.0esr [tor-browser]
+   * Bug 45382: Backport Security Fixes from 158 [tor-browser]
+ * Windows + macOS + Linux
+   * Updated Firefox to 153.5.0esr
+ * Android
+   * Updated GeckoView to 153.5.0esr
+ * Build System
+   * All Platforms
+     * Bug 41885: Update changelogs as a last step in relprep.py [tor-browser-build]
+     * Bug 41896: Update Lyrebird to 0.9.0 [tor-browser-build]
+     * Bug 41898: Separate MB and TB toolchain archives in https://nightlies.tbb.torproject.org/nightly-builds/toolchains/ [tor-browser-build]
+   * Windows + Linux + Android
+     * Updated Go to 1.26.9
+
 Tor Browser 16.0a13 - September 30 2026
  * All Platforms
    * Updated NoScript to 13.6.34.90101984
