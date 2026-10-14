@@ -4,6 +4,10 @@
      INCLUDE 'mozconfig-upstream-firefox.in';
    END -%]
 
+ac_add_options --enable-optimize
+ac_add_options --enable-rust-simd
+ac_add_options --enable-lto=cross
+
 [% IF c("var/linux") -%]
   # We want to build with clang now and point to the GCC toolchain until #29041 is
   # fixed. We explicitly need to define the host compiler as well as for some
@@ -36,6 +40,9 @@
   RANLIB=llvm-ranlib
 
   clang_path=/var/tmp/dist/mingw-w64-clang
+
+  ac_add_options --with-toolchain-prefix[% c('arch') %]-w64-mingw32-
+  ac_add_options --enable-strip
 
   # For Stylo
   BINDGEN_CFLAGS="-I$clang_path/[% c('arch') %]-w64-mingw32/include/c++/v1 -I$clang_path/[% c('arch') %]-w64-mingw32/include"
@@ -82,6 +89,8 @@
     export CFLAGS="$CFLAGS -mcpu=apple-m1"
     export CXXFLAGS="$CXXFLAGS -mcpu=apple-m1"
   [% END -%]
+
+  ac_add_options --enable-strip
 [% END -%]
 
 ac_add_options --[% IF c("var/updater_enabled") %]enable[% ELSE %]disable[% END %]-updater
