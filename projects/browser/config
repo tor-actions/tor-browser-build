@@ -87,9 +87,9 @@ input_files:
     enable: '[% !c("var/android") %]'
   - filename: dmg-root
     enable: '[% c("var/macos") %]'
-  - URL: https://dist.torproject.org/torbrowser/noscript/noscript-13.6.36.90201984.xpi
+  - URL: https://dist.torproject.org/torbrowser/noscript/noscript-13.6.37.1984.xpi
     name: noscript
-    sha256sum: 4d0c4c0daaaf253075e9af297151676dafdd985b2103e8948518f9d7192b1e1e
+    sha256sum: 6b8196358119ad3841c31d800f7643e24e204ee8c502ad4d7374c610a321b3d3
   - URL: https://addons.mozilla.org/firefox/downloads/file/5034826/ublock_origin-1.75.0.xpi
     name: ublock-origin
     sha256sum: 5b74415860456370644bd80f16125e865b0e6c356bb5dfcfb84069967eaa5287

@@ -1,7 +1,7 @@
 # vim: filetype=yaml sw=2
 # To update, see doc/how-to-update-the-manual.txt
 # Remember to update also the package's hash, with the version!
-version: 425413
+version: 427777
 filename: 'manual-[% c("version") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
 container:
   use_container: 1
@@ -23,6 +23,6 @@ input_files:
   - project: container-image
   - URL: 'https://build-sources.tbb.torproject.org/marble-support_[% c("version") %].zip'
     name: manual
-    sha256sum: 1412c8a087bbe5ca579c45c124806ef214546d05301f68b8e3f3caca1226cb60
+    sha256sum: 3a854b69f11e025719292d80897717aeac5e6b9c4a7892062f4e6afcc269d675
   - filename: package_marble_build_artifacts.py
     name: package_script
