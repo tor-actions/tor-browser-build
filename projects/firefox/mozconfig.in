@@ -41,7 +41,7 @@ ac_add_options --enable-lto=cross
 
   clang_path=/var/tmp/dist/mingw-w64-clang
 
-  ac_add_options --with-toolchain-prefix[% c('arch') %]-w64-mingw32-
+  ac_add_options --with-toolchain-prefix=[% c('arch') %]-w64-mingw32-
   ac_add_options --enable-strip
 
   # For Stylo
