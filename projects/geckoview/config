@@ -21,10 +21,10 @@ container:
     build_apk: '[% !c("var/online_build") %]'
 
 var:
-  firefox_platform_version: '155.0a1'
+  firefox_platform_version: '156.0a1'
   geckoview_version: '[% c("var/firefox_platform_version") %]'
   browser_series: '17.0'
-  browser_rebase: 1
+  browser_rebase: 2
   browser_branch: '[% c("var/browser_series") %]-[% c("var/browser_rebase") %]'
   browser_build: 1
   gitlab_project: https://gitlab.torproject.org/tpo/applications/tor-browser
@@ -38,7 +38,7 @@ var:
     - python3-zstandard
     - pkg-config
     - openjdk-17-jdk-headless
-  gradle_version: 9.7.0
+  gradle_version: 9.7.1
   glean_parser: 20.1.0
   # python/mozboot/mozboot/android.py
   bundletool_version: 1.18.3

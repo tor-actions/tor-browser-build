@@ -38,6 +38,3 @@ input_files:
   - filename: mingw-ts_sd.patch
   - filename: mingw-foundation_redef.patch
   - filename: mingw-webrtc.patch
-  # Remove when switching to Clang 22.
-  # See Firefox's 9c6b4642907950bd9e3f663fbb7fcb0a16218232
-  - filename: mingw-libunwind-seh.patch

@@ -12,6 +12,9 @@ make \
   NINJA_FLAGS='-j[% c("num_procs") %]'
 
 mv build/install/wasi/share/wasi-sysroot/* $distdir/
+# Add wasip1 directories to wasi sysroot and compiler-rt.
+# See firefox commit 630a929dcf8de5f46d3affe52607ed588276393a
+cp -r $distdir/lib/wasm32-wasi $distdir/lib/wasm32-wasip1
 
 cd /var/tmp/dist
 [% c('tar', {

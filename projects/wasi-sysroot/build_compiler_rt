@@ -12,6 +12,9 @@ make \
 rtdir=/var/tmp/dist/clang/lib/clang/[% pc("llvm-project", "var/llvm_major") %]/lib/wasi
 mkdir -p $rtdir
 mv build/compiler-rt/lib/wasi/* $rtdir/
+# Add wasip1 directories to wasi sysroot and compiler-rt.
+# See firefox commit 630a929dcf8de5f46d3affe52607ed588276393a
+cp -r $rtdir "$rtdir/../wasip1"
 
 cd /var/tmp/dist
 [% c('tar', {
