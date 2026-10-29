@@ -182,6 +182,10 @@ Mullvad Browser 16.0 - October 28 2026
      * Bug 41639: Remove linux-arm target [tor-browser-build]
      * Bug 41640: Clean the GCC config file [tor-browser-build]
 
+Mullvad Browser 15.0.26 - October 20 2026
+ * All Platforms
+   * Bug 45397: Update CA intermediates and other settings dumps [tor-browser]
+
 Mullvad Browser 15.0.25 - October 13 2026
  * All Platforms
    * Updated NoScript to 13.6.36.1984

@@ -375,6 +375,10 @@ Tor Browser 16.0 - October 28 2026
      * Bug 41843: Remove unused universal apk from geckoview [tor-browser-build]
      * Bug 41876: Add missing firefox_platform_version.txt file in android artifacts directories [tor-browser-build]
 
+Tor Browser 15.0.26 - October 20 2026
+ * All Platforms
+   * Bug 45397: Update CA intermediates and other settings dumps [tor-browser]
+
 Tor Browser 15.0.25 - October 13 2026
  * All Platforms
    * Updated Tor to 0.4.9.14
