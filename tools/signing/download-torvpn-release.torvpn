@@ -24,13 +24,13 @@ test $# -ne 1 && \
 tmpdir=$(mktemp -p "$script_dir/../../tmp" -d)
 trap "rm -Rf $tmpdir" EXIT
 cd $tmpdir
-for arch in arm64v8a armeabiv7a universal x86_64
+for arch in arm64-v8a armeabi-v7a universal x86_64
 do
   case "$arch" in
-    arm64v8a)
+    arm64-v8a)
       dest_arch=aarch64
       ;;
-    armeabiv7a)
+    armeabi-v7a)
       dest_arch=armv7
       ;;
     universal)
@@ -45,8 +45,8 @@ do
   mv "$dl_filename" "tor-vpn-qa-unsigned-android-${dest_arch}-${tbb_version}.apk"
 done
 
-wget -O app-universal-release.aab "$base_url/app-universal-release.aab"
-mv app-universal-release.aab "tor-vpn-${tbb_version}.aab"
+wget -O app-release.aab "$base_url/app-release.aab"
+mv app-release.aab "tor-vpn-${tbb_version}.aab"
 sha256sum $(ls -1 *.apk *.aab | sort) > sha256sums-unsigned-build.txt
 cat sha256sums-unsigned-build.txt
 
