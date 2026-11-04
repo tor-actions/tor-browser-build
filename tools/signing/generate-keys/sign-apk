@@ -14,5 +14,5 @@ if test "$#" -ne 1; then
 fi
 
 apksigner sign --ks "$script_dir/android-key/${key_alias}-private.p12" \
-               --ks-pass "pass:${key_password}" --out signed.apk "$1"
+               --ks-pass "pass:${key_password}" --alignment-preserved true --out signed.apk "$1"
 echo "Signed $1 in signed.apk"

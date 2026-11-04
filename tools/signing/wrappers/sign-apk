@@ -58,7 +58,7 @@ sign_apk() {
     echo Signing ${INPUTAPK}
 
     # Use this command if reading key from file
-    apksigner sign --verbose -ks ${android_signing_key_path} --ks-type pkcs12 --ks-pass env:KSPASS --debuggable-apk-permitted=false --out "${SIGNEDAPK}" "${INPUTAPK}"
+    apksigner sign --verbose -ks ${android_signing_key_path} --ks-type pkcs12 --ks-pass env:KSPASS --debuggable-apk-permitted=false --alignment-preserved true --out "${SIGNEDAPK}" "${INPUTAPK}"
 
     # Or, use below command if using a hardware token
     # apksigner sign --verbose --provider-class sun.security.pkcs11.SunPKCS11 --provider-arg pkcs11_java.cfg --ks NONE --ks-type PKCS11 --debuggable-apk-permitted=false --out "${SIGNEDAPK}" "${INPUTAPK}"
