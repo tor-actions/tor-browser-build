@@ -22,7 +22,7 @@ targets:
         if [ -e "/var/tmp/build/[% project %]-[% c('version') %]/go-1.22.patch" ]; then
           patch -p1 < "/var/tmp/build/[% project %]-[% c('version') %]/go-1.22.patch"
         fi
-      go_vendor_sha256sum: f2fe261401c75100b54ba2a4c3b37a4e3a42611d416e86ce71554d1780d1bf63
+      go_vendor_sha256sum: 7ead3933bccf9a239b49ad16234a9e9ed17558af2362e81de1c723c272170fcb
 
 steps:
   build:
