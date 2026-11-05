@@ -23,7 +23,7 @@ check_installed_packages() {
 }
 
 setup_build_tools() {
-  abt_version=16
+  abt_version='37.0'
   build_tools_dir=/signing/android-build-tools
   test -f "$build_tools_dir"/android-$abt_version/apksigner || \
     exit_error "$build_tools_dir/android-$abt_version/apksigner is missing"
