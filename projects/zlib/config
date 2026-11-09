@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 filename: '[% project %]-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %].tar.[% c("compress_tar") %]'
-version: '1.3.2'
+version: '1.4'
 git_hash: 'v[% c("version") %]'
 git_url: https://github.com/madler/zlib.git
 gpg_keyring: zlib.gpg
@@ -10,6 +10,11 @@ container:
 
 var:
   flag_mwindows: ''
+
+targets:
+  android:
+    var:
+      CFLAGS: '-Oz'
 
 input_files:
   - project: container-image
