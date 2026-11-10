@@ -62,7 +62,7 @@ find -type f -print0 | xargs -0 [% c("touch") %]
     [% IF c("var/asan") %]--enable-fragile-hardening[% END %] \
     [% IF c("var/windows") || c("var/android") || c("var/linux-cross") %]--with-zlib-dir="$zlibdir"[% END %] \
     [% IF c("var/macos") %]--enable-static-openssl[% END %] \
-    [% IF c("var/windows") %]--enable-static-libevent --enable-static-openssl --enable-static-zlib[% END %] \
+    [% IF c("var/windows") || c("var/android") %]--enable-static-libevent --enable-static-openssl --enable-static-zlib[% END %] \
     [% IF c("var/linux-cross") %]--build=x86_64-linux-gnu[% END %] \
     --enable-gpl --prefix="$distdir" [% c("var/configure_opt") %]
 [% IF c("var/macos") -%]
