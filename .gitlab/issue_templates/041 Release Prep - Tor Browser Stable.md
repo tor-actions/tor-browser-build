@@ -118,7 +118,7 @@ Tor Browser Stable is on the `maint-${TOR_BROWSER_MAJOR}.${TOR_BROWSER_MINOR}` b
     - ESR updates correct
     - Component updates correct
 - [ ] Open MR with above changes, using the template for release preparations
-  - **NOTE**: target the `maint-15.0` branch
+  - **NOTE**: target the `maint-16.0` branch
 - [ ] Merge
 - [ ] Sign+Tag
   - **NOTE** this must be done by one of:
@@ -209,7 +209,7 @@ Tor Browser Stable is on the `maint-${TOR_BROWSER_MAJOR}.${TOR_BROWSER_MINOR}` b
     # paste changelog as quote here
     ```
 - [ ] On `${STAGING_SERVER}`, ensure updated:
-  - **NOTE** Having a local git branch with `maint-15.0` as the upstream branch with these values saved means you only need to periodically `git pull --rebase`
+  - **NOTE** Having a local git branch with `maint-16.0` as the upstream branch with these values saved means you only need to periodically `git pull --rebase`
   - [ ] `tor-browser-build` is on the right commit: `git tag -v tbb-${TOR_BROWSER_VERSION}-${TOR_BROWSER_BUILD_N} && git checkout tbb-${TOR_BROWSER_VERSION}-${TOR_BROWSER_BUILD_N}`
   - [ ] `tor-browser-build/tools/signing/set-config.hosts`
     - `ssh_host_builder`: ssh hostname of machine with unsigned builds

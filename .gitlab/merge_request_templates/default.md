@@ -19,8 +19,8 @@
 <!-- This block tells the merger where commits need to be merged and future code archaeologists where commits were *supposed* to be merged -->
 
 #### Target Branches
-  - [ ] **`main`**: rapid release, 16.0
-  - [ ] **`maint-15.0`**: esr140-15.0
+  - [ ] **`main`**: rapid release, 17.0
+  - [ ] **`maint-16.0`**: esr153-16.0
 
 ### Backporting
 

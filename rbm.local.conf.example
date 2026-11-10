@@ -100,7 +100,7 @@ var:
   #        - browser-all
   #        - mullvadbrowser
   #
-  ### If you are doing Tor Browser 'release' builds in the maint-15.0
+  ### If you are doing Tor Browser 'release' builds in the maint-16.0
   ### branch and 'alpha' builds in the main branch, you can use the
   ### following configuration:
   #clean:
@@ -110,7 +110,7 @@ var:
   #        - alpha
   #        - browser-all
   #        - torbrowser
-  #  maint-15.0:
+  #  maint-16.0:
   #    - project: release
   #      target:
   #        - release

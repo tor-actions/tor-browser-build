@@ -31,7 +31,7 @@ When should this patchset be reverted?
 ### Target Channels
 <!-- Which channel has the commits we need to revert? -->
 - [ ] main
-- [ ] maint-15.0
+- [ ] maint-16.0
 
 ## Notes
 
