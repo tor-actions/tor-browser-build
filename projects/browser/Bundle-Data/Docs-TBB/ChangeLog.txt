@@ -1,3 +1,7 @@
+Tor Browser 16.0.2 - November 10 2026
+ * All Platforms
+   * Bug 41919: Android 16.0.1's tor picked up the dynamic zlib [tor-browser-build]
+
 Tor Browser 16.0.1 - November 10 2026
  * All Platforms
    * Updated Tor to 0.4.9.16
