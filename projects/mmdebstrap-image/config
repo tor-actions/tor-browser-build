@@ -51,14 +51,14 @@ targets:
 
   bookworm-amd64:
     var:
-      minimal_apt_version: 2.6.1
+      minimal_apt_version: 2.6.2
       container:
         suite: bookworm
         arch: amd64
 
   trixie-amd64:
     var:
-      minimal_apt_version: 3.0.3
+      minimal_apt_version: 3.0.4
       container:
         suite: trixie
         arch: amd64
