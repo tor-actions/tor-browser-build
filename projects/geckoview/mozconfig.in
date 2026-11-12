@@ -4,9 +4,6 @@ ac_add_options --enable-minify=properties,js
 # Make sure to disable bootstrap also when running online builds for
 # dependency updates.
 ac_add_options --disable-bootstrap
-[% IF !c("var/rlbox") -%]
-  ac_add_options --without-wasm-sandboxed-libraries
-[% END -%]
 
 [% IF !c("var/firefox-browser") -%]
   export MOZILLA_OFFICIAL=1

@@ -191,7 +191,6 @@ input_files:
     enable: '[% c("var/has_l10n") %]'
   - project: wasi-sysroot
     name: wasi-sysroot
-    enable: '[% c("var/rlbox") %]'
   - project: node
     name: node
   - project: nasm

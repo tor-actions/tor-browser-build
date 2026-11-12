@@ -74,10 +74,6 @@ By default, macos builds are universal (targeting x86_64 and aarch64).
 With this special testbuild target, you can do a build for a specific
 arch only.
 
-torbrowser-{release,alpha,nightly,testbuild}-linux-x86_64-asan
---------------------------------------------------------------
-Create a build for Linux x86_64 with Address Sanitizer enabled.
-
 torbrowser-{release,alpha,nightly,testbuild}-src
 ------------------------------------------------
 Create source tarballs for firefox and torbutton.

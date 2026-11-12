@@ -301,13 +301,6 @@ if [ $SYSARCHITECTURE -ne $TORARCHITECTURE ]; then
 fi
 [% END -%]
 
-[% IF c("var/asan") -%]
-# We need to disable LSan which is enabled by default now. Otherwise we'll get
-# a crash during shutdown: https://bugs.torproject.org/10599#comment:59
-ASAN_OPTIONS="detect_leaks=0"
-export ASAN_OPTIONS
-[% END -%]
-
 [% IF c("var/tor-browser") -%]
 function setControlPortPasswd() {
   local ctrlPasswd=$1

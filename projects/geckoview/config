@@ -177,7 +177,6 @@ input_files:
     name: clang
   - project: wasi-sysroot
     name: wasi-sysroot
-    enable: '[% c("var/rlbox") %]'
   - project: application-services
     name: application-services
     enable: '[% !c("var/firefox-browser") %]'

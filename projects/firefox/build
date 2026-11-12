@@ -40,10 +40,8 @@ export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/node/bi
     tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/binutils') %]
     export PATH="/var/tmp/dist/binutils/bin:$PATH"
   [% END -%]
-  # Use clang for everything on Linux now if we don't build with ASan.
-  [% IF ! c("var/asan") -%]
-    export PATH="/var/tmp/dist/clang-linux/bin:$PATH"
-  [% END -%]
+  # Use clang for everything on Linux.
+  export PATH="/var/tmp/dist/clang-linux/bin:$PATH"
   [% IF c("var/linux-cross") -%]
     # Exporting `PKG_CONFIG_PATH` in the mozconfig file is causing build
     # breakage in Rust code. It seems that environment variable is not passed
@@ -60,10 +58,8 @@ export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/node/bi
   tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/libdmg') %]
 [% END %]
 
-[% IF c("var/rlbox") -%]
-  tar -C /var/tmp/dist -xf [% c('input_files_by_name/wasi-sysroot') %]
-  export WASI_SYSROOT=/var/tmp/dist/wasi-sysroot
-[% END -%]
+tar -C /var/tmp/dist -xf [% c('input_files_by_name/wasi-sysroot') %]
+export WASI_SYSROOT=/var/tmp/dist/wasi-sysroot
 
 tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.[% c('compress_tar') %]
 
@@ -71,12 +67,6 @@ mkdir -p $distdir/[% IF ! c("var/macos") %]Browser[% END %]
 
 cd /var/tmp/build/[% project %]-[% c("version") %]
 cp $rootdir/mozconfig ./
-
-[% IF c("var/asan") -%]
-  # Without disabling LSan our build is blowing up:
-  # https://bugs.torproject.org/10599#comment:52
-  export ASAN_OPTIONS="detect_leaks=0"
-[% END -%]
 
 [% c("var/set_MOZ_BUILD_DATE") %]
 
@@ -321,10 +311,6 @@ END;
   # Not copying libstdc++.so.* as that dups with the full libstdc++.so.6.0.xx the .6 links to
   # and libstdc++.so.6.0.28-gdb.py which is also not needed
   cp "/var/tmp/dist/gcc/$libdir/libstdc++.so.6" "$libdest"
-  [% IF c("var/asan") -%]
-    cp "/var/tmp/dist/gcc/$libdir/libasan.so."* "$libdest"
-    cp "/var/tmp/dist/gcc/$libdir/libubsan.so."* "$libdest"
-  [% END -%]
   # Strip and generate debuginfo for libs
   for LIB in "$libdest"/*so*
   do

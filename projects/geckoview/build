@@ -9,10 +9,8 @@ tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/clang') %]
 export LLVM_CONFIG="/var/tmp/dist/clang-linux/bin/llvm-config"
 export PATH="/var/tmp/dist/rust/bin:/var/tmp/dist/cbindgen:/var/tmp/dist/nasm/bin:/var/tmp/dist/clang-linux/bin:$PATH"
 
-[% IF c("var/rlbox") -%]
-  tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/wasi-sysroot') %]
-  export WASI_SYSROOT=/var/tmp/dist/wasi-sysroot/
-[% END -%]
+tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/wasi-sysroot') %]
+export WASI_SYSROOT=/var/tmp/dist/wasi-sysroot/
 
 [% INCLUDE 'build_common.sh' %]
 

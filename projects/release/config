@@ -48,11 +48,6 @@ targets:
     var:
       browser_platforms:
         linux-x86_64: 1
-  browser-linux-x86_64-asan:
-    var:
-      browser_platforms:
-        linux-x86_64: 1
-      asan-build: '-asan'
   browser-linux-aarch64:
     var:
       browser_platforms:
@@ -172,7 +167,7 @@ input_files:
     enable: '[% c("var/browser_platforms/linux-x86_64") %]'
     target:
       - '[% c("var/build_target") %]'
-      - '[% c("var/browser_type") %]-linux-x86_64[% c("var/asan-build") %]'
+      - '[% c("var/browser_type") %]-linux-x86_64'
 
   - name: linux-aarch64
     project: browser

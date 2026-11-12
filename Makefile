@@ -35,9 +35,6 @@ torbrowser-release-android-x86_64: submodule-update
 torbrowser-release-linux-x86_64: submodule-update
 	$(rbm) build release --target release --target browser-single-platform --target browser-linux-x86_64 --target torbrowser
 
-torbrowser-release-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target release --target browser-single-platform --target browser-linux-x86_64-asan --target torbrowser
-
 torbrowser-release-linux-aarch64: submodule-update
 	$(rbm) build release --target release --target browser-single-platform --target browser-linux-aarch64 --target torbrowser
 
@@ -73,9 +70,6 @@ torbrowser-alpha-android-x86_64: submodule-update
 
 torbrowser-alpha-linux-x86_64: submodule-update
 	$(rbm) build release --target alpha --target browser-single-platform --target browser-linux-x86_64 --target torbrowser
-
-torbrowser-alpha-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target alpha --target browser-single-platform --target browser-linux-x86_64-asan --target torbrowser
 
 torbrowser-alpha-linux-aarch64: submodule-update
 	$(rbm) build release --target alpha --target browser-single-platform --target browser-linux-aarch64 --target torbrowser
@@ -113,9 +107,6 @@ torbrowser-nightly-android-x86_64: submodule-update
 torbrowser-nightly-linux-x86_64: submodule-update
 	$(rbm) build release --target nightly --target browser-single-platform --target browser-linux-x86_64 --target torbrowser
 
-torbrowser-nightly-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target nightly --target browser-single-platform --target browser-linux-x86_64-asan --target torbrowser
-
 torbrowser-nightly-linux-aarch64: submodule-update
 	$(rbm) build release --target nightly --target browser-single-platform --target browser-linux-aarch64 --target torbrowser
 
@@ -151,9 +142,6 @@ torbrowser-testbuild-android-x86_64: submodule-update
 
 torbrowser-testbuild-linux-x86_64: submodule-update
 	$(rbm) build release --target testbuild --target browser-single-platform --target browser-linux-x86_64 --target torbrowser
-
-torbrowser-testbuild-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target testbuild --target browser-single-platform --target browser-linux-x86_64-asan --target torbrowser
 
 torbrowser-testbuild-linux-aarch64: submodule-update
 	$(rbm) build release --target testbuild --target browser-single-platform --target browser-linux-aarch64 --target torbrowser
@@ -252,9 +240,6 @@ mullvadbrowser-release: submodule-update
 mullvadbrowser-release-linux-x86_64: submodule-update
 	$(rbm) build release --target release --target browser-single-platform --target browser-linux-x86_64 --target mullvadbrowser
 
-mullvadbrowser-release-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target release --target browser-single-platform --target browser-linux-x86_64-asan --target mullvadbrowser
-
 mullvadbrowser-release-linux-aarch64: submodule-update
 	$(rbm) build release --target release --target browser-single-platform --target browser-linux-aarch64 --target mullvadbrowser
 
@@ -272,9 +257,6 @@ mullvadbrowser-alpha: submodule-update
 
 mullvadbrowser-alpha-linux-x86_64: submodule-update
 	$(rbm) build release --target alpha --target browser-single-platform --target browser-linux-x86_64 --target mullvadbrowser
-
-mullvadbrowser-alpha-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target alpha --target browser-single-platform --target browser-linux-x86_64-asan --target mullvadbrowser
 
 mullvadbrowser-alpha-linux-aarch64: submodule-update
 	$(rbm) build release --target alpha --target browser-single-platform --target browser-linux-aarch64 --target mullvadbrowser
@@ -294,9 +276,6 @@ mullvadbrowser-nightly: submodule-update
 mullvadbrowser-nightly-linux-x86_64: submodule-update
 	$(rbm) build release --target nightly --target browser-single-platform --target browser-linux-x86_64 --target mullvadbrowser
 
-mullvadbrowser-nightly-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target nightly --target browser-single-platform --target browser-linux-x86_64-asan --target mullvadbrowser
-
 mullvadbrowser-nightly-linux-aarch64: submodule-update
 	$(rbm) build release --target nightly --target browser-single-platform --target browser-linux-aarch64 --target mullvadbrowser
 
@@ -314,9 +293,6 @@ mullvadbrowser-testbuild: submodule-update
 
 mullvadbrowser-testbuild-linux-x86_64: submodule-update
 	$(rbm) build release --target testbuild --target browser-single-platform --target browser-linux-x86_64 --target mullvadbrowser
-
-mullvadbrowser-testbuild-linux-x86_64-asan: submodule-update
-	$(rbm) build release --target testbuild --target browser-single-platform --target browser-linux-x86_64-asan --target mullvadbrowser
 
 mullvadbrowser-testbuild-linux-aarch64: submodule-update
 	$(rbm) build release --target testbuild --target browser-single-platform --target browser-linux-aarch64 --target mullvadbrowser
