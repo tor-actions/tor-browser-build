@@ -14,6 +14,13 @@ pre: |
   set -e
   rootdir=$(pwd)
   export DEBIAN_FRONTEND=noninteractive
+
+  # Install critical apt security update before using it:
+  # https://lists.debian.org/deity/2026/11/msg00005.html
+  # We can remove this when a new Ubuntu image containing the fixed
+  # package is available
+  dpkg -i libapt-pkg6.0t64_2.8.4ubuntu0.1_amd64.deb apt_2.8.4ubuntu0.1_amd64.deb
+
   apt-get update -y -q
   apt-get install -y -q debian-archive-keyring ubuntu-keyring mmdebstrap gnupg zstd
 
@@ -62,3 +69,9 @@ input_files:
   - URL: 'https://cdimage.ubuntu.com/ubuntu-base/releases/[% c("var/ubuntu_version") %]/release/ubuntu-base-[% c("var/ubuntu_version") %]-base-amd64.tar.gz'
     filename: 'container-image_ubuntu-base-[% c("var/ubuntu_version") %]-base-amd64.tar.gz'
     sha256sum: e77b6f10c2590cef872b33ee9f635a0e3fd1f57fb074c0e52b5c7f56147a0c86
+    # https://packages.ubuntu.com/noble/amd64/apt/download
+  - URL: http://security.ubuntu.com/ubuntu/pool/main/a/apt/apt_2.8.4ubuntu0.1_amd64.deb
+    sha256sum: ad2ea7f107f250ba88b0bfdba31812a341e3247589647aa2b03b9dc4e8abf8ed
+    # https://packages.ubuntu.com/noble/libapt-pkg6.0t64
+  - URL: http://security.ubuntu.com/ubuntu/pool/main/a/apt/libapt-pkg6.0t64_2.8.4ubuntu0.1_amd64.deb
+    sha256sum: a50f3e68a793f90b05f44a4b5f2f59f3ec7687e39b5d8bbd1da44c84671fa3d6
