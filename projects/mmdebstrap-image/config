@@ -1,6 +1,6 @@
 # vim: filetype=yaml sw=2
 filename: 'container-image_[% c("var/container/suite") %]-[% c("var/container/arch") %]-[% c("version") %].tar.[% c("compress_tar") %]'
-version: 1
+version: 2
 pkg_type: build
 compress_tar: zst
 container:
