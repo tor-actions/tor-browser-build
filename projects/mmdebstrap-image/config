@@ -45,9 +45,10 @@ targets:
       container:
         suite: stretch
         arch: amd64
+        mmdebstrap_opt: --include=apt-transport-https,ca-certificates
         debian_mirror: >
-          "deb [signed-by=/usr/share/keyrings/debian-archive-keyring.gpg] http://archive.debian.org/debian-archive/debian/ stretch main"
-          "deb [signed-by=/usr/share/keyrings/debian-archive-keyring.gpg] http://archive.debian.org/debian-archive/debian-security/ stretch/updates main"
+          "deb [signed-by=/usr/share/keyrings/debian-archive-keyring.gpg] https://archive.debian.org/debian-archive/debian/ stretch main"
+          "deb [signed-by=/usr/share/keyrings/debian-archive-keyring.gpg] https://archive.debian.org/debian-archive/debian-security/ stretch/updates main"
 
   bookworm-amd64:
     var:
