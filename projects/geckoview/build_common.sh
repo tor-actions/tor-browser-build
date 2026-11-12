@@ -83,8 +83,4 @@ sed -i -e 's/-Xmx7g/-Xmx32g/' gradle.properties \
   mobile/android/fenix/gradle.properties
 
 echo "Starting ./mach configure $(date)"
-# We still need to specify --base-browser-version due to bug 34005.
-./mach configure \
-  [% IF !c("var/firefox-browser") %]--with-base-browser-version=[% c("var/torbrowser_version") %][% END %] \
-  [% IF !c("var/firefox-browser") %]--with-branding=$branding_dir[% END %] \
-  [% IF !c("var/rlbox") -%]--without-wasm-sandboxed-libraries[% END %]
+./mach configure

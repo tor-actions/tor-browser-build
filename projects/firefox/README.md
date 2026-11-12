@@ -50,8 +50,12 @@ References:
 
 ## Firefox configuration
 
-We use `mozconfig`s from `tor-browser.git`, however we need to customize them to
-include the paths to our toolchain.
+The settings shared by every build, including development builds, are the
+defaults of the configure scripts in `tor-browser.git`.
+
+`mozconfig.in` adds the settings that are specific to official builds, such as
+the target, the linker and the stripping options.
+Also, we need to customize them to include the paths to our toolchain.
 
 Also, we set a few other settings, that depend on the build we're running
 (update channel, branding, source commit hash to display in `about:buildconfig`,

@@ -1,8 +1,42 @@
+ac_add_options --enable-project=mobile/android
+ac_add_options --disable-tests
+ac_add_options --enable-minify=properties,js
+# Make sure to disable bootstrap also when running online builds for
+# dependency updates.
+ac_add_options --disable-bootstrap
+[% IF !c("var/rlbox") -%]
+  ac_add_options --without-wasm-sandboxed-libraries
+[% END -%]
+
 [% IF !c("var/firefox-browser") -%]
-. $topsrcdir/[% c("var/mozconfig_file") %]
-[% ELSE;
-     INCLUDE 'mozconfig-upstream-firefox.in';
-   END -%]
+  export MOZILLA_OFFICIAL=1
+
+  ac_add_options --with-base-browser-version=[% c("var/torbrowser_version") %]
+  ac_add_options --with-branding=mobile/android/branding/[% c("var/project_initials") %]-[% c("var/channel") %]
+[% END -%]
+
+[% IF c("step") == "build_apk" -%]
+  ac_add_options --disable-compile-environment
+[% ELSE -%]
+  CC="clang"
+  CXX="clang++"
+  ac_add_options --enable-linker=lld
+
+  ac_add_options --enable-optimize
+  ac_add_options --enable-rust-simd
+  ac_add_options --enable-lto=cross
+
+  ac_add_options --enable-strip
+  ac_add_options --enable-install-strip
+
+  [% IF c("var/android-aarch64") -%]
+    ac_add_options --target=aarch64-linux-android
+  [% ELSIF c("var/android-armv7") -%]
+    ac_add_options --target=arm-linux-androideabi
+  [% ELSIF c("var/android-x86_64") -%]
+    ac_add_options --target=x86_64-linux-android
+  [% END -%]
+[% END -%]
 
 ac_add_options --with-java-bin-path=/usr/lib/jvm/java-1.17.0-openjdk-amd64/bin
 ac_add_options --with-android-sdk=$ANDROID_HOME

@@ -1,14 +1,60 @@
-[% IF !c("var/firefox-browser") -%]
-  . $topsrcdir/mozconfig-[% IF c("var/macos"); GET 'macos'; ELSE; GET c("var/osname"); END; %][% IF c("var/asan") %]-asan[% END %]
-[% ELSE;
-     INCLUDE 'mozconfig-upstream-firefox.in';
-   END -%]
+[% IF c("var/firefox-browser") -%]
+  # Tor Browser and Mullvad Browser set their own distribution ID as the
+  # default in tor-browser.git, so we only need to pass it for upstream
+  # Firefox, which would otherwise use org.mozilla.
+  ac_add_options --with-distribution-id=org.torproject
+[% ELSE -%]
+  export MOZILLA_OFFICIAL=1
 
+  ac_add_options --with-base-browser-version=[% c("var/torbrowser_version") %]
+  ac_add_options --with-branding=browser/branding/[% c("var/project_initials") %]-[% c("var/channel") %]
+[% END -%]
+
+ac_add_options --disable-tests
+ac_add_options --disable-bootstrap
 ac_add_options --enable-optimize
 ac_add_options --enable-rust-simd
 ac_add_options --enable-lto=cross
+[% IF !c("var/rlbox") -%]
+  ac_add_options --without-wasm-sandboxed-libraries
+[% END -%]
 
 [% IF c("var/linux") -%]
+  ac_add_options --enable-default-toolkit=cairo-gtk3
+
+  ac_add_options --disable-strip
+  ac_add_options --disable-install-strip
+
+  [% IF c("var/asan") -%]
+    export CFLAGS="-fsanitize=address -Dxmalloc=myxmalloc"
+    export CXXFLAGS="-fsanitize=address -Dxmalloc=myxmalloc"
+    # We need to add -ldl explicitely due to bug 1213698
+    export LDFLAGS="-fsanitize=address -ldl"
+
+    # Define HOST_CFLAGS, etc. to avoid compiling programs such as mbsdiff
+    # (which is part of mar-tools and is not distributed to end-users) with
+    # ASan. See bug 17858.
+    export HOST_CFLAGS=""
+    export HOST_CXXFLAGS=""
+    export HOST_LDFLAGS="-ldl"
+
+    ac_add_options --enable-address-sanitizer
+    ac_add_options --disable-jemalloc
+    ac_add_options --disable-elf-hack
+  [% ELSE -%]
+    # Moz switched to lld for all Linux targets in Bug 1839739.
+    ac_add_options --enable-linker=lld
+  [% END -%]
+
+  [% IF c("var/linux-x86_64") && !c("var/asan") -%]
+    # tor-browser#44067: geckodriver has become a host-only tool
+    ac_add_options --enable-geckodriver
+  [% END -%]
+
+  [% IF c("var/linux-aarch64") -%]
+    ac_add_options --target=aarch64-unknown-linux-gnu
+  [% END -%]
+
   # We want to build with clang now and point to the GCC toolchain until #29041 is
   # fixed. We explicitly need to define the host compiler as well as for some
   # reason the gcc-toolchain argument does not get passed along otherwise.
@@ -41,8 +87,20 @@ ac_add_options --enable-lto=cross
 
   clang_path=/var/tmp/dist/mingw-w64-clang
 
+  ac_add_options --target=[% c('arch') %]-pc-windows-gnu
   ac_add_options --with-toolchain-prefix=[% c('arch') %]-w64-mingw32-
   ac_add_options --enable-strip
+
+  # Bug 1782837: Not supported because Mozilla (and therefore also us) build
+  # libc++ with LIBCXX_ENABLE_FILESYSTEM disabled.
+  ac_add_options --disable-notification-server
+
+  # tor-browser#44028: Disable zucchini for now, as it needs SEH.
+  ac_add_options --disable-zucchini
+
+  [% IF c("var/firefox-browser") -%]
+    ac_add_options --disable-webrtc
+  [% END -%]
 
   # For Stylo
   BINDGEN_CFLAGS="-I$clang_path/[% c('arch') %]-w64-mingw32/include/c++/v1 -I$clang_path/[% c('arch') %]-w64-mingw32/include"
@@ -93,7 +151,12 @@ ac_add_options --enable-lto=cross
   ac_add_options --enable-strip
 [% END -%]
 
-ac_add_options --[% IF c("var/updater_enabled") %]enable[% ELSE %]disable[% END %]-updater
+[% IF c("var/updater_enabled") -%]
+  ac_add_options --enable-updater
+  ac_add_options --enable-update-channel=[% c("var/channel") %]
+[% ELSE -%]
+  ac_add_options --disable-updater
+[% END -%]
 [% IF !c("var/firefox-browser") -%]
   ac_add_options --[% IF c("var/updater_enabled") %]enable[% ELSE %]disable[% END %]-base-browser-update
 [% END -%]

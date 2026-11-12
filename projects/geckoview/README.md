@@ -57,9 +57,10 @@ More details on a way to do it are documented in
 
 # Mozconfig customization
 
-For Android, the majority of `mozconfig` customization is versioned in
-`tor-browser.git`.
+For Android, the majority of the settings are the defaults of the configure
+scripts in `tor-browser.git`.
 
-The only additional information we add in the build scripts are the commit hash
-we used for the build (to make it appear in `about:buildconfig`) and the channel
-of the build.
+`mozconfig.in` adds the settings that are specific to official builds, such as
+the target, optimization, LTO and stripping options.
+Apart from that, we only add the commit hash we used for the build (to make it
+appear in `about:buildconfig`) and the channel of the build.
