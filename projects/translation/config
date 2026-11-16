@@ -12,7 +12,7 @@ compress_tar: 'gz'
 steps:
   base-browser:
     base-browser: '[% INCLUDE build %]'
-    git_hash: 9166a373a2edb5b54c4b6829e87348ebcd724110
+    git_hash: ec65d92c2ee636e7e2d7b93018bf1209a69775fc
     targets:
       nightly:
         git_hash: 'base-browser'

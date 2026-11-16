@@ -90,13 +90,13 @@ input_files:
   - URL: https://dist.torproject.org/torbrowser/noscript/noscript-13.6.38.1984.xpi
     name: noscript
     sha256sum: bbd764d65017d88df18ea65eb9981c6c97b79a39df7378e9e01fcfd71a564ab6
-  - URL: https://addons.mozilla.org/firefox/downloads/file/5225273/ublock_origin-1.76.0.xpi
+  - URL: https://addons.mozilla.org/firefox/downloads/file/5257481/ublock_origin-1.76.4.xpi
     name: ublock-origin
-    sha256sum: 6f20ff6749193599548770539103069c20948dfcd3e61c3089a67da7bfc3be39
+    sha256sum: 66d0e3f21ce3b32b1bc0a9399b93cb2c9aa598ef18805d92118c76f66e266c1e
     enable: '[% c("var/mullvad-browser") %]'
-  - URL: https://cdn.mullvad.net/browser-extension/0.9.10/mullvad-browser-extension-0.9.10.xpi
+  - URL: https://cdn.mullvad.net/browser-extension/0.9.11/mullvad-browser-extension-0.9.11.xpi
     name: mullvad-extension
-    sha256sum: d8adfd5d83c67d8d50d9466c6564755de79a8a0825f5c67a151919506d411b30
+    sha256sum: 462cb43b7e87bbae6ea377538c96866dccc193d657f9f430062fdbbab87881fd
     enable: '[% c("var/mullvad-browser") %]'
   - project: manual
     name: manual
