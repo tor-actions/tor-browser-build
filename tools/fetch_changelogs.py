@@ -88,7 +88,13 @@ class UpdateEntry(ChangelogEntry):
             num_platforms = 1
         elif name == "Go":
             platform = Platform.ALL_PLATFORMS ^ Platform.MACOS
-            num_platforms = 1
+            num_platforms = 3
+        elif name == "zlib":
+            # For cross-compilation issues, we use our zlib to build
+            # also on Linux aarch64, but then we do not ship it.
+            # So, do not include it in the changelogs.
+            platform = Platform.WINDOWS | Platform.ANDROID
+            num_platforms = 2
         else:
             platform = Platform.ALL_PLATFORMS
             num_platforms = 4
