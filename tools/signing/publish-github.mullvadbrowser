@@ -46,25 +46,27 @@ echo "MB tag: $MB_TAG"
 echo "BB tag: $BB_TAG"
 echo "FX tag: $FX_TAG"
 echo "Mullvad release tag: $RELEASE_VERSION"
-read -p "Do you want to tag mullvad $RELEASE_VERSION & push tags/branches/QA build to ${GH_REMOTE}? (y/N) " -n 1 -r
 echo
-if ! [[ $REPLY =~ ^[Yy]$ ]]; then
+echo "Do you want to tag mullvad $RELEASE_VERSION, push to ${GH_REMOTE} and submit the build for QA?"
+read -p '(y[es]/N[o]/S[ubmit only]) ' -n 1 -r
+echo
+if ! [[ $REPLY =~ ^[YySs] ]]; then
    echo >&2 "Operation cancelled"
    exit 1
 fi
-
-git checkout $MB_TAG
-[[ $(git tag -l $RELEASE_VERSION) ]] || git tag -s $RELEASE_VERSION -m"$FX_VERSION-based $RELEASE_VERSION"
-git tag -n1 $RELEASE_VERSION
-git push "$GH_REMOTE" "HEAD:refs/heads/$MB_BRANCH"
-git push "$GH_REMOTE" "$FX_TAG"
-git push "$GH_REMOTE" "$BB_TAG"
-git push "$GH_REMOTE" "$RELEASE_VERSION"
-
+if ! [[ $REPLY =~ ^[Ss] ]] ; then
+  git checkout $MB_TAG
+  [[ $(git tag -l $RELEASE_VERSION) ]] || \
+    git tag -s $RELEASE_VERSION -m"$FX_VERSION-based $RELEASE_VERSION"
+  git tag -n1 $RELEASE_VERSION
+  git push "$GH_REMOTE" "HEAD:refs/heads/$MB_BRANCH"
+  git push "$GH_REMOTE" "$FX_TAG"
+  git push "$GH_REMOTE" "$BB_TAG"
+  git push "$GH_REMOTE" "$RELEASE_VERSION"
+fi
 popd >/dev/null
 
 # Call Mullvad's github workflow for new releases (mullvad-browser#466)
-
 version=$BASE_VERSION
 response=$(curl -L \
   -X POST \
@@ -74,10 +76,11 @@ response=$(curl -L \
   "https://api.github.com/repos/mullvad/mullvad-browser/actions/workflows/new_browser_release.yml/dispatches" \
   -d "{\"ref\":\"main\",\"inputs\":{\"version\":\"$version\"}}")
 
-if ! [ $response ]; then
-  echo "Build $BASE_VERSION submitted."
+if !  [[ $response ]]; then
+  echo "Build $BASE_VERSION submitted and ready for QA \\o/."
 else
+  echo >&2 "!!! ERROR !!!"
   echo >&2 "Something went wrong with build submission:"
-  echo >&2 $response
+  echo >&2 "$response"
   exit 3
 fi
