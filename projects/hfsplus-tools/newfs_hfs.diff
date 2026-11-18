@@ -23,16 +23,64 @@ diff '--color=auto' -Naur diskdev_cmds-540.1.linux3_orig/newfs_hfs.tproj/makehfs
  #include <sys/vmmeter.h>
  #endif
  
-@@ -571,8 +571,10 @@
- 	/* Adjust free blocks to reflect everything we have allocated. */
+@@ -572,7 +572,18 @@ InitVH(hfsparams_t *defaults, UInt64 sec
  	hp->freeBlocks -= blocksUsed;
  
--	/* Generate and write UUID for the HFS+ disk */
+ 	/* Generate and write UUID for the HFS+ disk */
 -	GenerateVolumeUUID(&newVolumeUUID);
-+	/* Use a deterministic UUID for reproducibility */
-+	memset(&newVolumeUUID, 0, sizeof(newVolumeUUID));
-+	strncpy(&newVolumeUUID, defaults->volumeName, sizeof(newVolumeUUID));
-+
++	/*
++	 * createDate is a 32-bit integer, so spread its value around with
++	 * https://rosettacode.org/wiki/Pseudo-random_numbers/Splitmix64
++	 */
++	{
++		uint64_t z = defaults->createDate + 0x9e3779b97f4a7c15;
++		z = (z ^ (z >> 30)) * 0xbf58476d1ce4e5b9;
++		z = (z ^ (z >> 27)) * 0x94d049bb133111eb;
++		z = z ^ (z >> 31);
++		newVolumeUUID.value[0] = (uint32_t)(z >> 32);
++		newVolumeUUID.value[1] = (uint32_t)z;
++	}
  	finderInfoUUIDPtr = (VolumeUUID *)(&hp->finderInfo[24]);
  	finderInfoUUIDPtr->v.high = OSSwapHostToBigInt32(newVolumeUUID.v.high); 
  	finderInfoUUIDPtr->v.low = OSSwapHostToBigInt32(newVolumeUUID.v.low); 
+diff '--color=auto' -rupN diskdev_cmds-540.1.linux3.orig/newfs_hfs.tproj/newfs_hfs.c diskdev_cmds-540.1.linux3/newfs_hfs.tproj/newfs_hfs.c
+--- diskdev_cmds-540.1.linux3_orig/newfs_hfs.tproj/newfs_hfs.c	2026-11-18 09:58:18.436848140 +0100
++++ diskdev_cmds-540.1.linux3/newfs_hfs.tproj/newfs_hfs.c	2026-11-18 10:21:37.246871550 +0100
+@@ -191,7 +191,7 @@ main(argc, argv)
+ 		progname = *argv;
+ 
+ 
+-	while ((ch = getopt(argc, argv, "G:J:D:M:N:PU:hsb:c:i:n:v:")) != EOF)
++	while ((ch = getopt(argc, argv, "G:J:D:M:N:PU:hsb:c:i:n:v:t:")) != EOF)
+ 		switch (ch) {
+ 		case 'G':
+ 			gGroupID = a_gid(optarg);
+@@ -286,6 +286,10 @@ main(argc, argv)
+ #endif
+ 			break;
+ 
++		case 't':
++			createtime = (time_t)strtoull(optarg, NULL, 10);
++			break;
++
+ 		case '?':
+ 		default:
+ 			usage();
+@@ -763,7 +767,8 @@ hfs_newfs(char *device)
+ #endif
+ 
+ 	dip.sectorOffset = 0;
+-	time(&createtime);
++	if (!createtime)
++		time(&createtime);
+ 	
+ 	/* Check to see if the disk is too big */
+ 	u_int64_t secsize = (u_int64_t) dip.sectorSize;
+@@ -1270,6 +1275,7 @@ void usage()
+ 	fprintf(stderr, "\t\tc=size (catalog b-tree)\n");
+ 	fprintf(stderr, "\t\ta=size (attributes b-tree)\n");
+ 	fprintf(stderr, "\t-v volume name (in ascii or UTF-8)\n");
++	fprintf(stderr, "\t-t creation time (UNIX timestamp)\n");
+ 
+ 	fprintf(stderr, "  examples:\n");
+ 	fprintf(stderr, "\t%s -v Untitled /dev/rdisk0s7 \n", progname);

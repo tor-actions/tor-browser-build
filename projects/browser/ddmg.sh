@@ -20,7 +20,7 @@ directories=$(find "$src_dir" -type d | wc -l)
 # Give some room to breathe
 size=$(echo $(($fileblocks + $directories)) | awk '{print int($1 * 1.1)}')
 dd if=/dev/zero of="$hfsfile" bs=4096 count=$size
-newfs_hfs -v "[% c('var/display_name') %]" "$hfsfile"
+newfs_hfs -v "[% c('var/display_name') %]" -t [% c('timestamp') %] "$hfsfile"
 
 pushd [% src %]
 

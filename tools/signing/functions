@@ -92,7 +92,7 @@ function setup_dmg_tools {
       "You can build it with:" \
       "  ./rbm/rbm build --target no_containers libdmg-hfsplus" \
       "See var/deps in projects/libdmg-hfsplus/config for the list of build dependencies"
-  local hfstools_file="$script_dir/../../out/hfsplus-tools/hfsplus-tools-540.1.linux3-2acaa4.tar.zst"
+  local hfstools_file="$script_dir/../../out/hfsplus-tools/hfsplus-tools-540.1.linux3-722a62.tar.zst"
   test -f "$hfstools_file" || \
     exit_error "$hfstools_file is missing." \
       "You can build it with:" \

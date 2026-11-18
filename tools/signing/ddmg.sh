@@ -28,6 +28,7 @@ hfsfile="$dmg_tmpdir/tbb-uncompressed.dmg"
 
 export LD_PRELOAD=$faketime_path
 export FAKETIME="$browser_release_date"
+release_timestamp=$(date -u -d "$browser_release_date" +%s)
 
 echo "Starting: " $(basename $dest_file)
 
@@ -37,7 +38,7 @@ directories=$(find "$src_dir" -type d | wc -l)
 # Give some room to breathe
 size=$(echo $(($fileblocks + $directories)) | awk '{print int($1 * 1.1)}')
 dd if=/dev/zero of="$hfsfile" bs=4096 count=$size
-newfs_hfs -v "$volume_label" "$hfsfile"
+newfs_hfs -v "$volume_label" -t "$release_timestamp" "$hfsfile"
 
 cd $src_dir
 
