@@ -6,9 +6,13 @@ mkdir -p $distdir
 output_dir=[% dest_dir %]/[% c('filename') %]
 mkdir -p $output_dir
 
+tar -xf $rootdir/[% c('input_files_by_name/moat-settings') %]
+
 cd $distdir
 
 tar -xkf $rootdir/[% c('input_files_by_name/tor') %]
+
+mv "$rootdir/torrc-defaults" data
 
 cd tor
 mkdir pluggable_transports && cd pluggable_transports
@@ -34,8 +38,8 @@ pt_licenses $distdir/docs/lyrebird.txt
   pt_licenses $distdir/docs/conjure.txt
 [% END -%]
 
-# add per-platform pt extension
-awk '{gsub(/\$\{pt_extension\}/, "[% c("var/pt_extension") %]"); print}' $rootdir/pt_config.json > pt_config.json
+cd $rootdir
+python3 make_pt_config.py [% c('var/recommended_transport') %] [% c('var/platform') %] $distdir
 
 cd $distdir
 
@@ -70,12 +74,6 @@ cd $distdir
     }) %]
   cd ..
 [% END %]
-
-# Write our ClientTransportPlugin lines to torrc-defults
-jq --raw-output .pluggableTransports[] "tor/pluggable_transports/pt_config.json" | while read -r line; do
-  echo "${line/\$\{pt_path\}/[% c("var/pt_path") %]}" >> "$rootdir/torrc-defaults"
-done
-mv "$rootdir/torrc-defaults" data
 
 [%
   SET tar_src = [ "tor", "data", "docs" ];

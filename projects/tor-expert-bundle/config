@@ -2,18 +2,8 @@
 filename: '[% project %]-[% c("var/osname") %]-[% c("var/build_id") %]'
 version: '[% c("var/torbrowser_version") %]'
 
-targets:
-  linux:
-    var:
-      pt_path: ./TorBrowser/Tor/PluggableTransports/
-  macos:
-    var:
-      pt_path: PluggableTransports/
-  windows:
-    var:
-      # Backlashes need to be escaped here.
-      pt_path: TorBrowser\\Tor\\PluggableTransports\\
-      pt_extension: .exe
+var:
+  recommended_transport: obfs4
 
 input_files:
   - name: tor
@@ -23,7 +13,10 @@ input_files:
   - name: conjure
     project: conjure
     enable: '[% !c("var/android-x86_64") %]'
-  - filename: pt_config.json
+  - filename: make_pt_config.py
+  - filename: transports.json
+  - name: moat-settings
+    project: moat-settings
   - filename: torrc-defaults
     enable: '[% !c("var/android") %]'
   - filename: AndroidManifest.xml

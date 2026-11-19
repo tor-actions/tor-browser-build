@@ -1,0 +1,22 @@
+{
+  "lyrebird": {
+    "protocols": [
+      "meek_lite",
+      "obfs2",
+      "obfs3",
+      "obfs4",
+      "scramblesuit",
+      "webtunnel"
+    ],
+    "path": "${pt_path}lyrebird${pt_extension}"
+  },
+  "snowflake": {
+    "protocols": ["snowflake"],
+    "path": "${pt_path}lyrebird${pt_extension}"
+  },
+  "conjure": {
+    "protocols": ["conjure"],
+    "path": "${pt_path}conjure-client${pt_extension}",
+    "arguments": ["-registerURL", "https://registration.refraction.network/api"]
+  }
+}
