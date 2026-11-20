@@ -2,9 +2,7 @@
 [% c("var/set_default_env") -%]
 distdir=$rootdir/[% project %]
 mkdir -p $distdir
-
-output_dir=[% dest_dir %]/[% c('filename') %]
-mkdir -p $output_dir
+mkdir -p $rootdir/out
 
 tar -xf $rootdir/[% c('input_files_by_name/moat-settings') %]
 
@@ -70,7 +68,7 @@ cd $distdir
   cd aar
   [% c('zip', {
       zip_src => [ '*' ],
-      zip_args => '$output_dir/tor-expert-bundle-' _ c('arch') _ '.aar'
+      zip_args => '$rootdir/out/tor-expert-bundle-' _ c('arch') _ '.aar'
     }) %]
   cd ..
 [% END %]
@@ -82,6 +80,11 @@ cd $distdir
   END;
   c('tar', {
     tar_src => tar_src,
-    tar_args => '-czvf' _ dest_dir _ '/' _ c('filename') _ '/tor-expert-bundle.tar.gz',
+    tar_args => '-czvf ' _ '$rootdir/out/tor-expert-bundle.tar.gz',
   });
 %]
+
+
+output_dir="[% dest_dir %]/[% c('filename') %]"
+rm -Rf "$output_dir"
+mv "$rootdir/out" "$output_dir"

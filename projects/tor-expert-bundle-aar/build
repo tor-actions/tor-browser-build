@@ -1,11 +1,10 @@
 #!/bin/bash
 [% c("var/set_default_env") -%]
-distdir=[% dest_dir %]/[% c('filename') %]
 
-mkdir -p $distdir
+mkdir -p $rootdir/out
 
 [% IF c("var/android_single_arch") -%]
-  mv $rootdir/[% c('input_files_by_name/tor-expert-bundle') %]/tor-expert-bundle-[% c("arch") %].aar $distdir/tor-expert-bundle.aar
+  mv $rootdir/[% c('input_files_by_name/tor-expert-bundle') %]/tor-expert-bundle-[% c("arch") %].aar $rootdir/out/tor-expert-bundle.aar
 [% ELSE -%]
   mkdir aar
   cd aar
@@ -17,6 +16,10 @@ mkdir -p $distdir
   [% END -%]
   [% c('zip', {
       zip_src => [ '*' ],
-      zip_args => '$distdir/tor-expert-bundle.aar'
+      zip_args => '$rootdir/out/tor-expert-bundle.aar'
     }) %]
 [% END -%]
+
+output_dir="[% dest_dir %]/[% c('filename') %]"
+rm -Rf "$output_dir"
+mv "$rootdir/out" "$output_dir"
