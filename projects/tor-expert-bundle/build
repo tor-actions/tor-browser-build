@@ -10,7 +10,7 @@ cd $distdir
 
 tar -xkf $rootdir/[% c('input_files_by_name/tor') %]
 
-mv "$rootdir/torrc-defaults" data
+test -f "$rootdir/torrc-defaults" && mv "$rootdir/torrc-defaults" data
 
 cd tor
 mkdir pluggable_transports && cd pluggable_transports
