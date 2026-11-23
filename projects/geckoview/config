@@ -21,7 +21,7 @@ container:
     build_apk: '[% !c("var/online_build") %]'
 
 var:
-  firefox_platform_version: '153.7.0'
+  firefox_platform_version: '153.8.0'
   geckoview_version: '[% c("var/firefox_platform_version") %]esr'
   browser_series: '16.0'
   browser_rebase: 1
