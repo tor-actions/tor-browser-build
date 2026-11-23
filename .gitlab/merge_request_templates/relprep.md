@@ -28,7 +28,7 @@
   - [ ] [NoScript](https://addons.mozilla.org/en-US/firefox/addon/noscript/)
   - [ ] [uBlock Origin](https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/) (Mullvad Browser only)
   - [ ] [Mullvad Browser Extension](https://github.com/mullvad/browser-extension/releases) (Mullvad Browser only)
-  - ⚠️ **IMPORTANT**: For AMO extension (NoScript and uBlock), updating the version in the URL is not enough, check that also a numeric ID from the URL has changed
+  - ⚠️ **IMPORTANT**: For AMO extension (uBlock), updating the version in the URL is not enough, check that also a numeric ID from the URL has changed
 - [ ] Tor and dependencies updates (Tor Browser only)
   - [ ] [Tor](https://gitlab.torproject.org/tpo/core/tor/-/tags)
   - [ ] [OpenSSL](https://www.openssl.org/source/): we stay on the latest LTS channel (currently 3.5.x)
