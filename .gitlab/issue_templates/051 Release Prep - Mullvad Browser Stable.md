@@ -65,7 +65,7 @@ Mullvad Browser Stable is on the `maint-${MULLVAD_BROWSER_MAJOR}.${MULLVAD_BROWS
     - [ ] `var/torbrowser_build`: updated to `${MULLVAD_BROWSER_BUILD_N}`
     - [ ] `var/browser_release_date`: updated to build date. For the build to be reproducible, the date should be in the past when building.
       - **⚠️ WARNING**: If we have updated `var/torbrowser_build` without updating the `firefox` tag, then we can leave this unchanged to avoid forcing a firefox re-build (e.g. when bumping `var/torbrowser_build` to build2, build3, etc due to non-firefox related build issues)
-    - [ ] `var/browser_platforms`: updated to enable the platforms included in this release
+    - [ ] `var/browser_platforms`: updated to enable the platforms included in this release. To disable all desktop platforms or all Android platforms, `var/browser_platforms/is_desktop_release` or `var/browser_platforms/is_android_release` can be updated.
     - [ ] `var/torbrowser_incremental_from`: updated to previous Desktop version
       - **NOTE**: We try to build incrementals for the previous 3 desktop versions
       - **⚠️ WARNING**: Really *actually* make sure this is the previous Desktop version or else the `make mullvadbrowser-incrementals-*` step will fail
